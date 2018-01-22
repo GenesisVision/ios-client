@@ -1,0 +1,31 @@
+PODS:
+  - Alamofire (4.5.1)
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
+  - IQKeyboardManagerSwift (5.0.4)
+  - PKHUD (5.0.0)
+  - Realm (3.0.1):
+    - Realm/Headers (= 3.0.1)
+  - Realm/Headers (3.0.1)
+  - RealmSwift (3.0.1):
+    - Realm (= 3.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Charts
+  - IQKeyboardManagerSwift
+  - PKHUD
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
+  IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
+  Realm: ba6144c74f835f7497791f6599d63a7755377b83
+  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
+
+PODFILE CHECKSUM: d1341216b26ee5101d44366a9fe7364aa184cf55
+
+COCOAPODS: 1.2.0

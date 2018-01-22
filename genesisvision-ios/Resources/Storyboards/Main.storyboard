@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g05-ly-iYt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome View Controller-->
+        <scene sceneID="YAK-qb-668">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeViewController" id="g05-ly-iYt" customClass="WelcomeViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8aW-I1-q2Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="F55-qF-WB7"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PAe-QJ-fzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1288" y="528"/>
+        </scene>
+        <!--Base Tab Bar Controller-->
+        <scene sceneID="snu-zr-HKL">
+            <objects>
+                <tabBarController storyboardIdentifier="BaseTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="oWh-o1-TY9" customClass="BaseTabBarController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SNv-s0-jPc">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="f9S-th-drK" kind="relationship" relationship="viewControllers" id="J0P-fh-KdK"/>
+                        <segue destination="I5o-8M-o5V" kind="relationship" relationship="viewControllers" id="xjU-gn-ZC3"/>
+                        <segue destination="2hf-Xs-m4j" kind="relationship" relationship="viewControllers" id="2gJ-fT-koH"/>
+                        <segue destination="Tex-3E-5kW" kind="relationship" relationship="viewControllers" id="vhf-3q-bXl"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qip-9o-ZaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-313" y="535"/>
+        </scene>
+        <!--ProfileNavigationController-->
+        <scene sceneID="GcZ-ef-92p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileNavigationController" id="I5o-8M-o5V" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="wkF-Fg-FDK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9n-i2-NRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="365" y="515"/>
+        </scene>
+        <!--TraderListNavigationController-->
+        <scene sceneID="TTq-Wi-xqp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Traders" referencedIdentifier="TraderListNavigationController" id="f9S-th-drK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Invest" id="Nk1-jS-tVe"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKY-6L-Yrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="365" y="476"/>
+        </scene>
+        <!--DashboardNavigationController-->
+        <scene sceneID="Zpy-lK-NUD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" referencedIdentifier="DashboardNavigationController" id="2hf-Xs-m4j" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dashboard" id="THP-46-zvF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3MA-uy-6vG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="365" y="553"/>
+        </scene>
+        <!--WalletNavigationController-->
+        <scene sceneID="kbX-yS-yji">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wallet" referencedIdentifier="WalletNavigationController" id="Tex-3E-5kW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" id="sn8-jv-PYH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="moh-YL-0l9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="365" y="593"/>
+        </scene>
+    </scenes>
+</document>

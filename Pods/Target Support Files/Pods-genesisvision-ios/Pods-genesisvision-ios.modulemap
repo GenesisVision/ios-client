@@ -1,0 +1,6 @@
+framework module Pods_genesisvision_ios {
+  umbrella header "Pods-genesisvision-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}

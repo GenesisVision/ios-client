@@ -1,0 +1,24 @@
+# Xcode
+
+## Build generated
+build/
+DerivedData/
+.DS_Store
+.idea/
+
+## Constants 
+Constants.swift
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# Pods/

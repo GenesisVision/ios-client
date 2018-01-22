@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="foF-nh-fhL">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Trader List View Controller-->
+        <scene sceneID="WAz-Ri-w7k">
+            <objects>
+                <viewController storyboardIdentifier="TraderListViewController" id="4qn-RU-Ufu" customClass="TraderListViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nZd-JI-9hr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wb8-gJ-vWJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="4qn-RU-Ufu" id="vv8-Nx-FKJ"/>
+                                    <outlet property="delegate" destination="4qn-RU-Ufu" id="wQZ-cu-ubr"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="926-WY-PMI">
+                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="genesisvision_ios" customModuleProvider="target">
+                                        <rect key="frame" x="32" y="0.0" width="311" height="60"/>
+                                        <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Sign in">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signInButtonAction:" destination="4qn-RU-Ufu" eventType="touchUpInside" id="gyk-oD-Hb4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cvZ-bk-mvw" secondAttribute="trailing" constant="32" id="Ti7-T9-2YF"/>
+                                    <constraint firstItem="cvZ-bk-mvw" firstAttribute="leading" secondItem="926-WY-PMI" secondAttribute="leading" constant="32" id="afP-eH-xLw"/>
+                                    <constraint firstAttribute="bottom" secondItem="cvZ-bk-mvw" secondAttribute="bottom" constant="16" id="krV-ec-gba"/>
+                                    <constraint firstAttribute="height" constant="76" id="sZi-Pb-Unm"/>
+                                    <constraint firstItem="cvZ-bk-mvw" firstAttribute="top" secondItem="926-WY-PMI" secondAttribute="top" id="uwD-EM-fq0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="926-WY-PMI" secondAttribute="bottom" id="AHa-ak-2hI"/>
+                            <constraint firstItem="926-WY-PMI" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="DgQ-7W-ys2"/>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="926-WY-PMI" secondAttribute="trailing" id="QNJ-1a-enb"/>
+                            <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="FoC-GU-UBn" secondAttribute="top" id="qLg-52-Tdt"/>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="xFX-ZF-tfV"/>
+                            <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FoC-GU-UBn"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
+                    <connections>
+                        <outlet property="signInButton" destination="cvZ-bk-mvw" id="laf-Wh-Kd5"/>
+                        <outlet property="signInButtonViewHeightConstraint" destination="sZi-Pb-Unm" id="u0q-Vt-Kko"/>
+                        <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f6g-4y-p9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1537" y="906"/>
+        </scene>
+        <!--Trader View Controller-->
+        <scene sceneID="3mF-C7-1tJ">
+            <objects>
+                <viewController storyboardIdentifier="TraderViewController" id="1tc-CA-jr8" customClass="TraderViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="45y-LA-dTh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="wCW-GM-tTm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1po-Om-DdH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50I-f0-5XA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1537" y="1638"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="C9v-3m-Oyx">
+            <objects>
+                <navigationController storyboardIdentifier="TraderListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foF-nh-fhL" customClass="BaseNavigationController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="hzw-qX-vom"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qyW-Jf-Br9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4qn-RU-Ufu" kind="relationship" relationship="rootViewController" id="wwC-aH-9YJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dzc-Vp-H1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="772.79999999999995" y="906.74662668665678"/>
+        </scene>
+    </scenes>
+</document>
