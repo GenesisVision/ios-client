@@ -25,8 +25,6 @@ open class ProfileFullViewModel: Codable {
     public var avatar: String?
     public var email: String?
     public var balance: Double?
-
-
     
     public init(firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, email: String?, balance: Double?) {
         self.firstName = firstName

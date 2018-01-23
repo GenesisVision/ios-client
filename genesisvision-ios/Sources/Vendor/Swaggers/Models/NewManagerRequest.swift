@@ -19,8 +19,6 @@ open class NewManagerRequest: Codable {
     public var currency: String?
     public var tokenName: String?
     public var tokenSymbol: String?
-
-
     
     public init(brokerTradeServerId: UUID?, userId: UUID?, requestId: UUID?, name: String?, description: String?, currency: String?, tokenName: String?, tokenSymbol: String?) {
         self.brokerTradeServerId = brokerTradeServerId

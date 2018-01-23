@@ -8,13 +8,19 @@
 
 import UIKit
 
-class SignInViewController: BaseViewController {
+class SignInViewController: BaseViewController, ValidableFields {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
+    
+    //Fields for validate
+    var validateFields: [Validation.ValidateField] {
+        return [Validation.ValidateField(text: emailTextField.text ?? "", type: .email),
+                Validation.ValidateField(text: passwordTextField.text ?? "", type: .password)]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,57 +32,56 @@ class SignInViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         #if DEBUG
-            emailTextField.text = "qqq@qqq.com"
+            emailTextField.text = "qqq@qqsq.com"
             passwordTextField.text = "qwerty"
         #endif
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
+    // MARK: - Private methods
 
-    // MARK: - Actions
-    
-    @IBAction func signInButtonAction(_ sender: UIButton) {
-        let email = emailTextField.text!
-        let password = passwordTextField.text!
-        //TODO: add verification email and password
-        let loginViewModel = LoginViewModel(email: email, password: password)
+    private func sighInMethod() {
+        //Hide keyboard
+        view.endEditing(true)
+        
+        //If fields are valid then signIn
+        guard isValid(with: validateFields) else {
+            return
+        }
         
         showProgressHUD()
-        
-        AccountAPI.apiInvestorAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { [weak self] (response, error) in
-            guard response != nil && response?.statusCode == 200 else {
-                guard let err = error as? ErrorResponse else { return }
-                
-                switch err {
-                case .error(_, let data, _):
-                    guard let data = data else {
-                        self?.hideHUD()
-                        return
-                    }
-                    let errorViewModel = try! JSONDecoder().decode(ErrorViewModel.self, from: data)
-                    //TODO: get not only first message
-                    guard let message = errorViewModel.errors?.first?.message else {
-                        self?.hideHUD()
-                        return
-                    }
-                    
-                    self?.showErrorHUD(subtitle: message)
+        //SighIn with fields
+        AuthController.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
+            self?.hideHUD()
+            
+            switch result {
+            case .success:
+                self?.showSuccessHUD(completion: { (finish) in
+                    AuthController.signInWithTransition()
+                })
+            case .failure(let reason):
+                if reason != nil {
+                    self?.showErrorHUD(subtitle: reason)
                 }
-                
-                return
             }
-
-            self?.showSuccessHUD(completion: { (finish) in
-                LoginProcessController.login()
-            })
         }
     }
     
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
+    private func showSignUpVC() {
+        //TODO: Move to Router
         guard let viewController = SignUpViewController.storyboardInstance(name: .auth) else { return }
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func signInButtonAction(_ sender: UIButton) {
+        sighInMethod()
+    }
+    
+    @IBAction func signUpButtonAction(_ sender: UIButton) {
+        //Hide keyboard
+        view.endEditing(true)
+        
+        showSignUpVC()
     }
 }

@@ -10,6 +10,14 @@ import UIKit
 
 class ProfileViewController: BaseViewController {
 
+    var profile: ProfileEntity {
+        guard let profileEntity = UserEntity.value.currentProfile else {
+            fatalError("Authorization error")
+        }
+        
+        return profileEntity
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,13 +26,11 @@ class ProfileViewController: BaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Actions
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
-        LoginProcessController.logout()
+        AuthController.signOutWithTransition()
     }
-
 }

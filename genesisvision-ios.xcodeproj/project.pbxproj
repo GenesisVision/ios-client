@@ -31,9 +31,8 @@
 		FCB8DFC92010F67300698D18 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFC82010F67300698D18 /* ConfirmationViewController.swift */; };
 		FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */; };
 		FCB8DFCD2010F8BA00698D18 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCC2010F8BA00698D18 /* AuthViewController.swift */; };
-		FCB8DFCF2010F99200698D18 /* LoginProcessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCE2010F99200698D18 /* LoginProcessController.swift */; };
-		FCB8DFD12010F9E000698D18 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD02010F9E000698D18 /* UserEntity.swift */; };
-		FCB8DFD32010FBC800698D18 /* UserPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD22010FBC800698D18 /* UserPlainObject.swift */; };
+		FCB8DFCF2010F99200698D18 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCE2010F99200698D18 /* AuthController.swift */; };
+		FCB8DFD32010FBC800698D18 /* ProfileObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD22010FBC800698D18 /* ProfileObject.swift */; };
 		FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD27200DF2C3008825EC /* AppDelegate.swift */; };
 		FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD3B200DFA5E008825EC /* Assets.xcassets */; };
 		FCC9DD54200DFA5E008825EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD3D200DFA5E008825EC /* Info.plist */; };
@@ -117,6 +116,11 @@
 		FCE823CC201637DD000061E8 /* TradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8239D201637DC000061E8 /* TradesViewModel.swift */; };
 		FCE823CD201637DD000061E8 /* UpdateManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8239E201637DC000061E8 /* UpdateManagerAccount.swift */; };
 		FCE823CE201637DD000061E8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8239F201637DC000061E8 /* Models.swift */; };
+		FCF105FC2017345200E3F481 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FB2017345200E3F481 /* Validation.swift */; };
+		FCF105FE20178A4300E3F481 /* ValidableFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FD20178A4300E3F481 /* ValidableFields.swift */; };
+		FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */; };
+		FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */; };
+		FCF1060720179F5A00E3F481 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1060620179F5A00E3F481 /* UserEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,9 +150,9 @@
 		FCB8DFC82010F67300698D18 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithTableView.swift; sourceTree = "<group>"; };
 		FCB8DFCC2010F8BA00698D18 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		FCB8DFCE2010F99200698D18 /* LoginProcessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProcessController.swift; sourceTree = "<group>"; };
-		FCB8DFD02010F9E000698D18 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
-		FCB8DFD22010FBC800698D18 /* UserPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlainObject.swift; sourceTree = "<group>"; };
+		FCB8DFCE2010F99200698D18 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
+		FCB8DFD22010FBC800698D18 /* ProfileObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObject.swift; sourceTree = "<group>"; };
 		FCC9DD24200DF2C3008825EC /* genesisvision-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "genesisvision-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC9DD27200DF2C3008825EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC9DD3B200DFA5E008825EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -233,6 +237,10 @@
 		FCE8239D201637DC000061E8 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
 		FCE8239E201637DC000061E8 /* UpdateManagerAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateManagerAccount.swift; sourceTree = "<group>"; };
 		FCE8239F201637DC000061E8 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FCF105FB2017345200E3F481 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		FCF105FD20178A4300E3F481 /* ValidableFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidableFields.swift; sourceTree = "<group>"; };
+		FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Singletone.swift"; sourceTree = "<group>"; };
+		FCF1060620179F5A00E3F481 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,7 +331,7 @@
 		FCB8DFD42010FBE500698D18 /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
-				FCB8DFD22010FBC800698D18 /* UserPlainObject.swift */,
+				FCB8DFD22010FBC800698D18 /* ProfileObject.swift */,
 			);
 			path = PlainObjects;
 			sourceTree = "<group>";
@@ -452,6 +460,8 @@
 				FCC9DD62200E2246008825EC /* CellViewModel.swift */,
 				FCC9DD6B200E47B2008825EC /* Money.swift */,
 				FCC9DDA8200F9AF8008825EC /* DisplayCollection */,
+				FCF105FB2017345200E3F481 /* Validation.swift */,
+				FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -468,7 +478,7 @@
 		FCC9DD48200DFA5E008825EC /* Other Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FCB8DFCE2010F99200698D18 /* LoginProcessController.swift */,
+				FCB8DFCE2010F99200698D18 /* AuthController.swift */,
 				FC496421201558AD00104CEB /* AppearanceController.swift */,
 			);
 			path = "Other Controllers";
@@ -502,7 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				FCC9DD67200E3E2F008825EC /* TraderEntity.swift */,
-				FCB8DFD02010F9E000698D18 /* UserEntity.swift */,
+				FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */,
+				FCF1060620179F5A00E3F481 /* UserEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -575,6 +586,7 @@
 			children = (
 				FCC9DD8B200E658E008825EC /* ReusableCell.swift */,
 				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
+				FCF105FD20178A4300E3F481 /* ValidableFields.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -816,11 +828,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				FCE823B1201637DD000061E8 /* BrokerTradeServer.swift in Sources */,
 				FCE823B2201637DD000061E8 /* ClosePeriodData.swift in Sources */,
-				FCB8DFD12010F9E000698D18 /* UserEntity.swift in Sources */,
 				FCE823CA201637DD000061E8 /* RegisterInvestorViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -834,7 +846,9 @@
 				FCE823BC201637DD000061E8 /* InvestmentRequest.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCE823B6201637DD000061E8 /* Invest.swift in Sources */,
+				FCF105FE20178A4300E3F481 /* ValidableFields.swift in Sources */,
 				FCC9DDA3200F9A11008825EC /* TraderListDisplayCollection.swift in Sources */,
+				FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */,
 				FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */,
 				FCE823BE201637DD000061E8 /* LoginViewModel.swift in Sources */,
 				FCE8236920162862000061E8 /* UIImageViewExtension.swift in Sources */,
@@ -847,6 +861,7 @@
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
 				FCB2C4E82010AABA0012AA58 /* TemplateModelCollection.swift in Sources */,
 				FCB2C4E220109AA10012AA58 /* Realm+Notifications.swift in Sources */,
+				FCF1060720179F5A00E3F481 /* UserEntity.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* TraderViewController.swift in Sources */,
 				FCC9DD68200E3E2F008825EC /* TraderEntity.swift in Sources */,
 				FCB2C4DC2010997A0012AA58 /* DataModelCollection.swift in Sources */,
@@ -854,6 +869,7 @@
 				FCE823C0201637DD000061E8 /* ManagerRequest.swift in Sources */,
 				FCE823A2201637DC000061E8 /* AccountAPI.swift in Sources */,
 				FCE823AA201637DD000061E8 /* Extensions.swift in Sources */,
+				FCF105FC2017345200E3F481 /* Validation.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				FCE823C8201637DD000061E8 /* ProfileFullViewModel.swift in Sources */,
 				FCE823B0201637DD000061E8 /* BrokersViewModel.swift in Sources */,
@@ -869,7 +885,7 @@
 				FCE823B4201637DD000061E8 /* ErrorMessage.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,
 				FCE823CB201637DD000061E8 /* RegisterManagerViewModel.swift in Sources */,
-				FCB8DFCF2010F99200698D18 /* LoginProcessController.swift in Sources */,
+				FCB8DFCF2010F99200698D18 /* AuthController.swift in Sources */,
 				FCE823C2201637DD000061E8 /* ManagerToken.swift in Sources */,
 				FCE823CC201637DD000061E8 /* TradesViewModel.swift in Sources */,
 				FCE823C4201637DD000061E8 /* NewInvestmentRequest.swift in Sources */,
@@ -900,7 +916,7 @@
 				FCE823BB201637DD000061E8 /* InvestmentProgramViewModel.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
 				FCE823A8201637DD000061E8 /* CodableHelper.swift in Sources */,
-				FCB8DFD32010FBC800698D18 /* UserPlainObject.swift in Sources */,
+				FCB8DFD32010FBC800698D18 /* ProfileObject.swift in Sources */,
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellModel.swift in Sources */,
 				FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */,
 				FCE823B8201637DD000061E8 /* InvestmentProgram.swift in Sources */,
@@ -1038,6 +1054,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1055,6 +1072,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

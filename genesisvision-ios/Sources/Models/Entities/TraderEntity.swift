@@ -31,8 +31,6 @@ final class TraderEntity: TemplatableObject, TemplateEntityProtocol {
     @objc dynamic var phoneNumber: String?
     @objc dynamic var email: String = ""
     
-    @objc dynamic var token: String?
-    
     override static func primaryKey() -> String? {
         return "id"
     }
@@ -77,7 +75,6 @@ extension TraderEntity {
         entity.currency = currency.rand!.rawValue
         entity.phoneNumber = phones.rand!
         entity.email = emails.rand!
-        entity.token = "qwe23rffesfw"
         
         return entity
     }

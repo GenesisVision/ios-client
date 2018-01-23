@@ -34,7 +34,7 @@ extension UIViewController {
     
     
     // MARK: - Alerts
-    func presentAlertWithTitle(title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+    func showAlertWithTitle(title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         if actionTitle != nil {
@@ -139,5 +139,18 @@ extension UIViewController {
             HUD.flash(type, delay: 1.0)
         }
     }
+    
+    // MARK: - Validation Fields
+    
+    func isValid(with validateFields: [Validation.ValidateField]) -> Bool {
+        //Error message if at least one fields not valid
+        let errorMessage = Validation.isValidError(with: validateFields)
+        
+        if errorMessage != nil {
+            showAlertWithTitle(title: "Error", message: errorMessage!, actionTitle: nil, cancelTitle: "OK", handler: nil, cancelHandler: nil)
+        }
+        
+        //If errorMessage is equal nil then fields are valid
+        return errorMessage == nil
+    }
 }
-

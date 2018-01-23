@@ -27,7 +27,7 @@ class ConfirmationViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func confirmationButtonAction(_ sender: UIButton) {
-        LoginProcessController.login()
+        navigationController?.popToRootViewController(animated: true)
     }
 
 }

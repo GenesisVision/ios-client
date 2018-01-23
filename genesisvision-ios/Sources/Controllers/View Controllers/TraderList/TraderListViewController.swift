@@ -15,7 +15,7 @@ class TraderListViewController: BaseViewController {
     
     @IBOutlet var tableView: UITableView! {
         didSet {
-            let authorizedValue = LoginProcessController.isLogin
+            let authorizedValue = AuthController.isLogin()
             
             signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
             signInButton.isHidden = authorizedValue

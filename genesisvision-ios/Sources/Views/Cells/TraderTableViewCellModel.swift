@@ -18,7 +18,7 @@ extension TraderTableViewCellModel: CellViewModel {
         cell.userNameLabel.text = traderEntity.userName
         cell.currencyLabel.text = traderEntity.currency.uppercased()
         
-        cell.levelLabel.text = "\(traderEntity.level)"
+        cell.profileImageView.levelLabel.text = "\(traderEntity.level)"
         
         cell.depositLabel.text = "\(traderEntity.deposit)" + " " + traderEntity.currency.uppercased()
         cell.tradesLabel.text = "\(traderEntity.trades)"

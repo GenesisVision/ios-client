@@ -8,20 +8,31 @@
 
 import UIKit
 
-class TraderTableViewCell: UITableViewCell {
-    
+class ProfileImageView: UIView {
     @IBOutlet var profilePhotoImageView: RoundedImageView! {
         didSet {
             profilePhotoImageView.roundCorners()
-            profilePhotoImageView.image = #imageLiteral(resourceName: "gv_logo")
+            profilePhotoImageView.image = #imageLiteral(resourceName: "gv_logo") //placeholder
+        }
+    }
+    
+    @IBOutlet var flagImageView: RoundedImageView! {
+        didSet {
+            guard let _ = flagImageView.image else { return }
+            flagImageView.addBorder(withBorderWidth: 1.0)
         }
     }
     
     @IBOutlet var levelLabel: UILabel! {
         didSet {
-            levelLabel.roundWithBorder(1.0, color: .white)
+            levelLabel.roundWithBorder(1.0)
         }
     }
+}
+
+class TraderTableViewCell: UITableViewCell {
+    
+    @IBOutlet var profileImageView: ProfileImageView!
     
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel! {
@@ -41,6 +52,6 @@ class TraderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        profilePhotoImageView.cornerSize = profilePhotoImageView.frame.size.height / 2
+        backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
     }
 }

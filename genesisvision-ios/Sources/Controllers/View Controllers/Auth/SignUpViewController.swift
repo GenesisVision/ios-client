@@ -8,13 +8,20 @@
 
 import UIKit
 
-class SignUpViewController: BaseViewController {
+class SignUpViewController: BaseViewController, ValidableFields {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmPasswordTextField: UITextField!
     
     @IBOutlet var signUpButton: UIButton!
+    
+    //Fields for validate
+    var validateFields: [Validation.ValidateField] {
+        return [Validation.ValidateField(text: emailTextField.text ?? "", type: .email),
+                Validation.ValidateField(text: passwordTextField.text ?? "", type: .password),
+                Validation.ValidateField(text: confirmPasswordTextField.text ?? "", type: .confirmPassword)]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,54 +39,46 @@ class SignUpViewController: BaseViewController {
         #endif
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Private methods
     
-
-    // MARK: - Actions
-    
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
-        let email = emailTextField.text!
-        let password = passwordTextField.text!
-        let confirmPassword = confirmPasswordTextField.text
-        //TODO: add verification email and password
-        let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
+    private func sighUpMethod() {
+        //Hide keyboard
+        view.endEditing(true)
         
-        registerInvestorViewModel.confirmPassword = confirmPasswordTextField.text
+        //If fields are valid then signUp
+        guard isValid(with: validateFields) else {
+            return
+        }
         
         showProgressHUD()
         
-        AccountAPI.apiInvestorAuthSignUpPostWithRequestBuilder(model: registerInvestorViewModel).execute { [weak self] (response, error) in
-            guard response != nil && response?.statusCode == 200 else {
-                guard let err = error as? ErrorResponse else { return }
-                
-                switch err {
-                case .error(_, let data, _):
-                    guard let data = data else {
-                        self?.hideHUD()
-                        return
-                    }
-                    let errorViewModel = try! JSONDecoder().decode(ErrorViewModel.self, from: data)
-                    //TODO: get not only first message
-                    guard let message = errorViewModel.errors?.first?.message else {
-                        self?.hideHUD()
-                        return
-                    }
-                    
-                    self?.showErrorHUD(subtitle: message)
-                }
-                
-                return
-            }
-        
+        //SighUp with fields
+        AuthController.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+            self?.hideHUD()
             
-            self?.showSuccessHUD(completion: { (finish) in
-                guard let viewController = ConfirmationViewController.storyboardInstance(name: .auth) else { return }
-                self?.navigationController?.pushViewController(viewController, animated: true)
-            })
+            switch result {
+            case .success:
+                self?.showSuccessHUD(completion: { (finish) in
+                    self?.showConfirmationVC()
+                })
+            case .failure(let reason):
+                if reason != nil {
+                    self?.showErrorHUD(subtitle: reason)
+                }
+            }
         }
+    }
+    
+    private func showConfirmationVC() {
+        //TODO: Move to Router
+        guard let viewController = ConfirmationViewController.storyboardInstance(name: .auth) else { return }
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func signUpButtonAction(_ sender: UIButton) {
+        sighUpMethod()
     }
 
 }
