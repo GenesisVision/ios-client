@@ -8,19 +8,13 @@
 
 import UIKit
 
-class SignInViewController: BaseViewController, ValidableFields {
+class SignInViewController: BaseViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
-    
-    //Fields for validate
-    var validateFields: [Validation.ValidateField] {
-        return [Validation.ValidateField(text: emailTextField.text ?? "", type: .email),
-                Validation.ValidateField(text: passwordTextField.text ?? "", type: .password)]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +26,7 @@ class SignInViewController: BaseViewController, ValidableFields {
         super.viewWillAppear(animated)
 
         #if DEBUG
-            emailTextField.text = "qqq@qqsq.com"
+            emailTextField.text = "qqq@qqq.com"
             passwordTextField.text = "qwerty"
         #endif
     }
@@ -43,12 +37,8 @@ class SignInViewController: BaseViewController, ValidableFields {
         //Hide keyboard
         view.endEditing(true)
         
-        //If fields are valid then signIn
-        guard isValid(with: validateFields) else {
-            return
-        }
-        
         showProgressHUD()
+        
         //SighIn with fields
         AuthController.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()

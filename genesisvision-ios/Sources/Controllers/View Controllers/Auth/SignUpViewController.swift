@@ -8,20 +8,13 @@
 
 import UIKit
 
-class SignUpViewController: BaseViewController, ValidableFields {
+class SignUpViewController: BaseViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmPasswordTextField: UITextField!
     
     @IBOutlet var signUpButton: UIButton!
-    
-    //Fields for validate
-    var validateFields: [Validation.ValidateField] {
-        return [Validation.ValidateField(text: emailTextField.text ?? "", type: .email),
-                Validation.ValidateField(text: passwordTextField.text ?? "", type: .password),
-                Validation.ValidateField(text: confirmPasswordTextField.text ?? "", type: .confirmPassword)]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +37,6 @@ class SignUpViewController: BaseViewController, ValidableFields {
     private func sighUpMethod() {
         //Hide keyboard
         view.endEditing(true)
-        
-        //If fields are valid then signUp
-        guard isValid(with: validateFields) else {
-            return
-        }
         
         showProgressHUD()
         

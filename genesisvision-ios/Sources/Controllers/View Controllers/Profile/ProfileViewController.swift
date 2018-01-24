@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileViewController: BaseViewController {
 
+    var signOutButton: UIBarButtonItem?
+    
     var profile: ProfileEntity {
         guard let profileEntity = UserEntity.value.currentProfile else {
             fatalError("Authorization error")
@@ -21,7 +23,12 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Profile"
+        signOutButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
+        navigationItem.rightBarButtonItem = signOutButton
+        
+        title = isInvestorApp
+            ? "Investor Profile"
+            : "Manager Profile"
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +37,7 @@ class ProfileViewController: BaseViewController {
     
     // MARK: - Actions
     
-    @IBAction func logoutButtonAction(_ sender: UIButton) {
+    @IBAction func signOutButtonAction(_ sender: UIButton) {
         AuthController.signOutWithTransition()
     }
 }

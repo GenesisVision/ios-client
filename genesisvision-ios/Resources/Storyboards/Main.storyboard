@@ -35,12 +35,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="f9S-th-drK" kind="relationship" relationship="viewControllers" id="J0P-fh-KdK"/>
-                        <segue destination="I5o-8M-o5V" kind="relationship" relationship="viewControllers" id="xjU-gn-ZC3"/>
-                        <segue destination="2hf-Xs-m4j" kind="relationship" relationship="viewControllers" id="2gJ-fT-koH"/>
-                        <segue destination="Tex-3E-5kW" kind="relationship" relationship="viewControllers" id="vhf-3q-bXl"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qip-9o-ZaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
