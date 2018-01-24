@@ -16,16 +16,18 @@ open class ManagerAccount: Codable {
     public var currency: String?
     public var ipfsHash: String?
     public var isConfirmed: Bool?
+    public var registrationDate: Date?
     public var brokerTradeServer: BrokerTradeServer?
 
 
     
-    public init(id: UUID?, login: String?, currency: String?, ipfsHash: String?, isConfirmed: Bool?, brokerTradeServer: BrokerTradeServer?) {
+    public init(id: UUID?, login: String?, currency: String?, ipfsHash: String?, isConfirmed: Bool?, registrationDate: Date?, brokerTradeServer: BrokerTradeServer?) {
         self.id = id
         self.login = login
         self.currency = currency
         self.ipfsHash = ipfsHash
         self.isConfirmed = isConfirmed
+        self.registrationDate = registrationDate
         self.brokerTradeServer = brokerTradeServer
     }
     
@@ -41,6 +43,7 @@ open class ManagerAccount: Codable {
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
         try container.encodeIfPresent(isConfirmed, forKey: "isConfirmed")
+        try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
         try container.encodeIfPresent(brokerTradeServer, forKey: "brokerTradeServer")
     }
 
@@ -54,6 +57,7 @@ open class ManagerAccount: Codable {
         currency = try container.decodeIfPresent(String.self, forKey: "currency")
         ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
         isConfirmed = try container.decodeIfPresent(Bool.self, forKey: "isConfirmed")
+        registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
         brokerTradeServer = try container.decodeIfPresent(BrokerTradeServer.self, forKey: "brokerTradeServer")
     }
 }

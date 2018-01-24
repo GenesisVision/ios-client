@@ -11,13 +11,13 @@ import Foundation
 
 open class InvestmentRequest: Codable {
 
-    public enum ModelType: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
+    public enum ModelType: String, Codable { 
+        case invest = "Invest"
+        case withdrawal = "Withdrawal"
     }
-    public enum Status: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
+    public enum Status: String, Codable { 
+        case new = "New"
+        case executed = "Executed"
     }
     public var id: UUID?
     public var date: Date?

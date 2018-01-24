@@ -11,43 +11,43 @@ import Foundation
 
 open class Investment: Codable {
 
-    public var id: UUID?
-    public var managerAccountId: UUID?
-    public var managerTokensId: UUID?
-    public var logo: String?
     public var dateFrom: Date?
     public var dateTo: Date?
-    public var description: String?
-    public var isEnabled: Bool?
+    public var lastPeriod: Period?
     public var period: Int?
     public var feeSuccess: Double?
     public var feeManagement: Double?
     public var feeEntrance: Double?
     public var investMinAmount: Double?
     public var investMaxAmount: Double?
-    public var lastPeriod: Period?
+    public var id: UUID?
+    public var managerAccountId: UUID?
+    public var managerTokensId: UUID?
+    public var logo: String?
+    public var description: String?
+    public var isEnabled: Bool?
     public var rating: Double?
     public var ordersCount: Int?
     public var totalProfit: Double?
 
 
     
-    public init(id: UUID?, managerAccountId: UUID?, managerTokensId: UUID?, logo: String?, dateFrom: Date?, dateTo: Date?, description: String?, isEnabled: Bool?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, lastPeriod: Period?, rating: Double?, ordersCount: Int?, totalProfit: Double?) {
-        self.id = id
-        self.managerAccountId = managerAccountId
-        self.managerTokensId = managerTokensId
-        self.logo = logo
+    public init(dateFrom: Date?, dateTo: Date?, lastPeriod: Period?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, id: UUID?, managerAccountId: UUID?, managerTokensId: UUID?, logo: String?, description: String?, isEnabled: Bool?, rating: Double?, ordersCount: Int?, totalProfit: Double?) {
         self.dateFrom = dateFrom
         self.dateTo = dateTo
-        self.description = description
-        self.isEnabled = isEnabled
+        self.lastPeriod = lastPeriod
         self.period = period
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
         self.feeEntrance = feeEntrance
         self.investMinAmount = investMinAmount
         self.investMaxAmount = investMaxAmount
-        self.lastPeriod = lastPeriod
+        self.id = id
+        self.managerAccountId = managerAccountId
+        self.managerTokensId = managerTokensId
+        self.logo = logo
+        self.description = description
+        self.isEnabled = isEnabled
         self.rating = rating
         self.ordersCount = ordersCount
         self.totalProfit = totalProfit
@@ -60,21 +60,21 @@ open class Investment: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(managerAccountId, forKey: "managerAccountId")
-        try container.encodeIfPresent(managerTokensId, forKey: "managerTokensId")
-        try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
         try container.encodeIfPresent(dateTo, forKey: "dateTo")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
+        try container.encodeIfPresent(lastPeriod, forKey: "lastPeriod")
         try container.encodeIfPresent(period, forKey: "period")
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(feeEntrance, forKey: "feeEntrance")
         try container.encodeIfPresent(investMinAmount, forKey: "investMinAmount")
         try container.encodeIfPresent(investMaxAmount, forKey: "investMaxAmount")
-        try container.encodeIfPresent(lastPeriod, forKey: "lastPeriod")
+        try container.encodeIfPresent(id, forKey: "id")
+        try container.encodeIfPresent(managerAccountId, forKey: "managerAccountId")
+        try container.encodeIfPresent(managerTokensId, forKey: "managerTokensId")
+        try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(description, forKey: "description")
+        try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(ordersCount, forKey: "ordersCount")
         try container.encodeIfPresent(totalProfit, forKey: "totalProfit")
@@ -85,21 +85,21 @@ open class Investment: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        managerAccountId = try container.decodeIfPresent(UUID.self, forKey: "managerAccountId")
-        managerTokensId = try container.decodeIfPresent(UUID.self, forKey: "managerTokensId")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
         dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
         dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
+        lastPeriod = try container.decodeIfPresent(Period.self, forKey: "lastPeriod")
         period = try container.decodeIfPresent(Int.self, forKey: "period")
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         feeEntrance = try container.decodeIfPresent(Double.self, forKey: "feeEntrance")
         investMinAmount = try container.decodeIfPresent(Double.self, forKey: "investMinAmount")
         investMaxAmount = try container.decodeIfPresent(Double.self, forKey: "investMaxAmount")
-        lastPeriod = try container.decodeIfPresent(Period.self, forKey: "lastPeriod")
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
+        managerAccountId = try container.decodeIfPresent(UUID.self, forKey: "managerAccountId")
+        managerTokensId = try container.decodeIfPresent(UUID.self, forKey: "managerTokensId")
+        logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        description = try container.decodeIfPresent(String.self, forKey: "description")
+        isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         rating = try container.decodeIfPresent(Double.self, forKey: "rating")
         ordersCount = try container.decodeIfPresent(Int.self, forKey: "ordersCount")
         totalProfit = try container.decodeIfPresent(Double.self, forKey: "totalProfit")

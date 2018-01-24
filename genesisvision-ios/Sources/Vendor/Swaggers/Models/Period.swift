@@ -11,10 +11,10 @@ import Foundation
 
 open class Period: Codable {
 
-    public enum Status: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
-        case _2 = 2
+    public enum Status: String, Codable { 
+        case planned = "Planned"
+        case inProccess = "InProccess"
+        case closed = "Closed"
     }
     public var id: UUID?
     public var number: Int?

@@ -234,6 +234,7 @@ open class AccountAPI {
   "balance" : 0.8008281904610115,
   "phone" : "phone",
   "middleName" : "middleName",
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "email" : "email"
 }}]
 
@@ -267,6 +268,7 @@ open class AccountAPI {
      - GET /api/investor/profile
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "email" : "email"
 }}]
 
@@ -477,6 +479,7 @@ open class AccountAPI {
   "balance" : 0.8008281904610115,
   "phone" : "phone",
   "middleName" : "middleName",
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "email" : "email"
 }}]
 
@@ -510,6 +513,7 @@ open class AccountAPI {
      - GET /api/manager/profile
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "email" : "email"
 }}]
 

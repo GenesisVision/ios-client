@@ -11,9 +11,9 @@ import Foundation
 
 open class ErrorViewModel: Codable {
 
-    public enum Code: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
+    public enum Code: String, Codable { 
+        case internalServerError = "InternalServerError"
+        case validationError = "ValidationError"
     }
     public var errors: [ErrorMessage]?
     public var code: Code?

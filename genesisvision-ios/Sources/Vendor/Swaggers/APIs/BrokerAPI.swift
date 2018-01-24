@@ -13,6 +13,39 @@ import Alamofire
 open class BrokerAPI {
     /**
 
+     - parameter request: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAccountCreatePost(request: NewManager? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+        apiBrokerAccountCreatePostWithRequestBuilder(request: request).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - POST /api/broker/account/create
+     - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
+     
+     - parameter request: (body)  (optional)
+
+     - returns: RequestBuilder<UUID> 
+     */
+    open class func apiBrokerAccountCreatePostWithRequestBuilder(request: NewManager? = nil) -> RequestBuilder<UUID> {
+        let path = "/api/broker/account/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+
      - parameter brokerTradeServerId: (query)  
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -43,43 +76,43 @@ open class BrokerAPI {
   } ],
   "investments" : [ {
     "investment" : {
-      "feeEntrance" : 5.962133916683182,
-      "period" : 0,
-      "feeManagement" : 1.4658129805029452,
-      "totalProfit" : 1.4894159098541704,
-      "rating" : 1.2315135367772556,
+      "feeEntrance" : 7.061401241503109,
+      "period" : 5,
+      "feeManagement" : 2.3021358869347655,
+      "totalProfit" : 7.386281948385884,
+      "rating" : 2.027123023002322,
       "description" : "description",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-      "investMinAmount" : 5.637376656633329,
-      "ordersCount" : 1,
+      "investMinAmount" : 9.301444243932576,
+      "ordersCount" : 4,
       "isEnabled" : true,
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "logo" : "logo",
-      "feeSuccess" : 6.027456183070403,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerTokensId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "investMaxAmount" : 2.3021358869347655,
+      "feeSuccess" : 5.637376656633329,
       "lastPeriod" : {
-        "number" : 7,
+        "number" : 0,
         "investmentRequest" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
-          "amount" : 2.027123023002322,
+          "amount" : 1.4658129805029452,
           "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "type" : 4,
-          "status" : 7
+          "type" : "Invest",
+          "status" : "New"
         }, {
           "date" : "2000-01-23T04:56:07.000+00:00",
-          "amount" : 2.027123023002322,
+          "amount" : 1.4658129805029452,
           "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "type" : 4,
-          "status" : 7
+          "type" : "Invest",
+          "status" : "New"
         } ],
         "dateTo" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-        "startBalance" : 3.616076749251911,
-        "status" : 9
+        "startBalance" : 6.027456183070403,
+        "status" : "Planned"
       },
+      "investMaxAmount" : 3.616076749251911,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerTokensId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "account" : {
@@ -89,7 +122,7 @@ open class BrokerAPI {
         "host" : "host",
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "type" : 6,
+        "type" : "Undefined",
         "broker" : {
           "name" : "name",
           "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -99,6 +132,7 @@ open class BrokerAPI {
         }
       },
       "ipfsHash" : "ipfsHash",
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "currency" : "currency",
       "isConfirmed" : true,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -112,43 +146,43 @@ open class BrokerAPI {
     }
   }, {
     "investment" : {
-      "feeEntrance" : 5.962133916683182,
-      "period" : 0,
-      "feeManagement" : 1.4658129805029452,
-      "totalProfit" : 1.4894159098541704,
-      "rating" : 1.2315135367772556,
+      "feeEntrance" : 7.061401241503109,
+      "period" : 5,
+      "feeManagement" : 2.3021358869347655,
+      "totalProfit" : 7.386281948385884,
+      "rating" : 2.027123023002322,
       "description" : "description",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-      "investMinAmount" : 5.637376656633329,
-      "ordersCount" : 1,
+      "investMinAmount" : 9.301444243932576,
+      "ordersCount" : 4,
       "isEnabled" : true,
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "logo" : "logo",
-      "feeSuccess" : 6.027456183070403,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerTokensId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "investMaxAmount" : 2.3021358869347655,
+      "feeSuccess" : 5.637376656633329,
       "lastPeriod" : {
-        "number" : 7,
+        "number" : 0,
         "investmentRequest" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
-          "amount" : 2.027123023002322,
+          "amount" : 1.4658129805029452,
           "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "type" : 4,
-          "status" : 7
+          "type" : "Invest",
+          "status" : "New"
         }, {
           "date" : "2000-01-23T04:56:07.000+00:00",
-          "amount" : 2.027123023002322,
+          "amount" : 1.4658129805029452,
           "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "type" : 4,
-          "status" : 7
+          "type" : "Invest",
+          "status" : "New"
         } ],
         "dateTo" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-        "startBalance" : 3.616076749251911,
-        "status" : 9
+        "startBalance" : 6.027456183070403,
+        "status" : "Planned"
       },
+      "investMaxAmount" : 3.616076749251911,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerTokensId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "account" : {
@@ -158,7 +192,7 @@ open class BrokerAPI {
         "host" : "host",
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "type" : 6,
+        "type" : "Undefined",
         "broker" : {
           "name" : "name",
           "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -168,6 +202,7 @@ open class BrokerAPI {
         }
       },
       "ipfsHash" : "ipfsHash",
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "currency" : "currency",
       "isConfirmed" : true,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -291,47 +326,47 @@ open class BrokerAPI {
      - GET /api/broker/period/сlosingData
      - examples: [{contentType=application/json, example={
   "nextPeriod" : {
-    "number" : 7,
+    "number" : 0,
     "investmentRequest" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 2.027123023002322,
+      "amount" : 1.4658129805029452,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : 4,
-      "status" : 7
+      "type" : "Invest",
+      "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 2.027123023002322,
+      "amount" : 1.4658129805029452,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : 4,
-      "status" : 7
+      "type" : "Invest",
+      "status" : "New"
     } ],
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 3.616076749251911,
-    "status" : 9
+    "startBalance" : 6.027456183070403,
+    "status" : "Planned"
   },
   "canCloseCurrentPeriod" : true,
   "currentPeriod" : {
-    "number" : 7,
+    "number" : 0,
     "investmentRequest" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 2.027123023002322,
+      "amount" : 1.4658129805029452,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : 4,
-      "status" : 7
+      "type" : "Invest",
+      "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 2.027123023002322,
+      "amount" : 1.4658129805029452,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : 4,
-      "status" : 7
+      "type" : "Invest",
+      "status" : "New"
     } ],
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 3.616076749251911,
-    "status" : 9
+    "startBalance" : 6.027456183070403,
+    "status" : "Planned"
   }
 }}]
      
@@ -377,7 +412,7 @@ open class BrokerAPI {
     "host" : "host",
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : 6,
+    "type" : "Undefined",
     "broker" : {
       "name" : "name",
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -391,7 +426,7 @@ open class BrokerAPI {
     "host" : "host",
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : 6,
+    "type" : "Undefined",
     "broker" : {
       "name" : "name",
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",

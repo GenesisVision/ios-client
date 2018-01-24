@@ -11,9 +11,9 @@ import Foundation
 
 open class MetaTraderOrder: Codable {
 
-    public enum Direction: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
+    public enum Direction: String, Codable { 
+        case buy = "Buy"
+        case sell = "Sell"
     }
     public var login: Int64?
     public var ticket: Int64?

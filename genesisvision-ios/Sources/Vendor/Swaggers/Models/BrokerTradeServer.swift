@@ -11,14 +11,14 @@ import Foundation
 
 open class BrokerTradeServer: Codable {
 
-    public enum ModelType: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
-        case _2 = 2
-        case _3 = 3
-        case _4 = 4
-        case _5 = 5
-        case _6 = 6
+    public enum ModelType: String, Codable { 
+        case undefined = "Undefined"
+        case metaTrader4 = "MetaTrader4"
+        case metaTrader5 = "MetaTrader5"
+        case ninjaTrader = "NinjaTrader"
+        case ctrader = "cTrader"
+        case rumus = "Rumus"
+        case metastock = "Metastock"
     }
     public var id: UUID?
     public var brokerId: UUID?

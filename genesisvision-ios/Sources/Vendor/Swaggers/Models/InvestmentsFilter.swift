@@ -11,13 +11,13 @@ import Foundation
 
 open class InvestmentsFilter: Codable {
 
-    public enum Sorting: Int, Codable { 
-        case _0 = 0
-        case _1 = 1
-        case _2 = 2
-        case _3 = 3
-        case _4 = 4
-        case _5 = 5
+    public enum Sorting: String, Codable { 
+        case byRatingAsc = "ByRatingAsc"
+        case byRatingDesc = "ByRatingDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+        case byOrdersAsc = "ByOrdersAsc"
+        case byOrdersDesc = "ByOrdersDesc"
     }
     public var managerId: UUID?
     public var brokerId: UUID?

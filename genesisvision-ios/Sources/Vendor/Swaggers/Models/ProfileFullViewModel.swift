@@ -23,10 +23,13 @@ open class ProfileFullViewModel: Codable {
     public var birthday: Date?
     public var gender: Bool?
     public var avatar: String?
+    public var id: UUID?
     public var email: String?
     public var balance: Double?
+
+
     
-    public init(firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, email: String?, balance: Double?) {
+    public init(firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, id: UUID?, email: String?, balance: Double?) {
         self.firstName = firstName
         self.middleName = middleName
         self.lastName = lastName
@@ -39,6 +42,7 @@ open class ProfileFullViewModel: Codable {
         self.birthday = birthday
         self.gender = gender
         self.avatar = avatar
+        self.id = id
         self.email = email
         self.balance = balance
     }
@@ -62,6 +66,7 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(gender, forKey: "gender")
         try container.encodeIfPresent(avatar, forKey: "avatar")
+        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(email, forKey: "email")
         try container.encodeIfPresent(balance, forKey: "balance")
     }
@@ -83,6 +88,7 @@ open class ProfileFullViewModel: Codable {
         birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
         gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         email = try container.decodeIfPresent(String.self, forKey: "email")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
     }

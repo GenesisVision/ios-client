@@ -11,12 +11,14 @@ import Foundation
 
 open class ProfileShortViewModel: Codable {
 
+    public var id: UUID?
     public var email: String?
     public var balance: Double?
 
 
     
-    public init(email: String?, balance: Double?) {
+    public init(id: UUID?, email: String?, balance: Double?) {
+        self.id = id
         self.email = email
         self.balance = balance
     }
@@ -28,6 +30,7 @@ open class ProfileShortViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(email, forKey: "email")
         try container.encodeIfPresent(balance, forKey: "balance")
     }
@@ -37,6 +40,7 @@ open class ProfileShortViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         email = try container.decodeIfPresent(String.self, forKey: "email")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
     }

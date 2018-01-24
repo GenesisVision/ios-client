@@ -16,38 +16,38 @@ open class TradesAPI {
      - parameter ipfsHashId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiTradesIpfsGetGet(ipfsHashId: String? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        apiTradesIpfsGetGetWithRequestBuilder(ipfsHashId: ipfsHashId).execute { (response, error) -> Void in
+    open class func apiTradesIpfsHistoryGet(ipfsHashId: String? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        apiTradesIpfsHistoryGetWithRequestBuilder(ipfsHashId: ipfsHashId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     - GET /api/trades/ipfsGet
+     - GET /api/trades/ipfsHistory
      - examples: [{contentType=application/json, example={
   "trades" : [ {
-    "volume" : 7.061401241503109,
+    "volume" : 2.3021358869347655,
     "symbol" : "symbol",
     "dateOpen" : "2000-01-23T04:56:07.000+00:00",
     "ticket" : 6,
-    "priceClose" : 5.637376656633329,
+    "priceClose" : 5.962133916683182,
     "dateClose" : "2000-01-23T04:56:07.000+00:00",
-    "priceOpen" : 5.962133916683182,
+    "priceOpen" : 1.4658129805029452,
     "login" : 0,
-    "profit" : 2.3021358869347655,
-    "direction" : 1
+    "profit" : 5.637376656633329,
+    "direction" : "Buy"
   }, {
-    "volume" : 7.061401241503109,
+    "volume" : 2.3021358869347655,
     "symbol" : "symbol",
     "dateOpen" : "2000-01-23T04:56:07.000+00:00",
     "ticket" : 6,
-    "priceClose" : 5.637376656633329,
+    "priceClose" : 5.962133916683182,
     "dateClose" : "2000-01-23T04:56:07.000+00:00",
-    "priceOpen" : 5.962133916683182,
+    "priceOpen" : 1.4658129805029452,
     "login" : 0,
-    "profit" : 2.3021358869347655,
-    "direction" : 1
+    "profit" : 5.637376656633329,
+    "direction" : "Buy"
   } ]
 }}]
      
@@ -55,8 +55,8 @@ open class TradesAPI {
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func apiTradesIpfsGetGetWithRequestBuilder(ipfsHashId: String? = nil) -> RequestBuilder<TradesViewModel> {
-        let path = "/api/trades/ipfsGet"
+    open class func apiTradesIpfsHistoryGetWithRequestBuilder(ipfsHashId: String? = nil) -> RequestBuilder<TradesViewModel> {
+        let path = "/api/trades/ipfsHistory"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
