@@ -30,10 +30,6 @@ class ProfileViewController: BaseViewController {
             ? "Investor Profile"
             : "Manager Profile"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     // MARK: - Actions
     

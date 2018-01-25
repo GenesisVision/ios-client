@@ -10,10 +10,6 @@ import Foundation
 import RealmSwift
 
 final class TraderEntity: TemplatableObject, TemplateEntityProtocol {
-    
-    @objc dynamic var id: Int = 0
-    @objc dynamic var remoteId: Int = 0
-    
     @objc dynamic var photoURL: String?
     @objc dynamic var level: Int = 1
     
@@ -30,10 +26,6 @@ final class TraderEntity: TemplatableObject, TemplateEntityProtocol {
 
     @objc dynamic var phoneNumber: String?
     @objc dynamic var email: String = ""
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
     
     func getCurrency() -> Currency {
         return Currency(rawValue: currency)!
@@ -78,4 +70,5 @@ extension TraderEntity {
         
         return entity
     }
+    
 }

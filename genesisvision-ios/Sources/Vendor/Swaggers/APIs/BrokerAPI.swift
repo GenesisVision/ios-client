@@ -13,11 +13,12 @@ import Alamofire
 open class BrokerAPI {
     /**
 
+     - parameter authorization: (header) JWT access token 
      - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerAccountCreatePost(request: NewManager? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
-        apiBrokerAccountCreatePostWithRequestBuilder(request: request).execute { (response, error) -> Void in
+    open class func apiBrokerAccountCreatePost(authorization: String, request: NewManager? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+        apiBrokerAccountCreatePostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -27,30 +28,106 @@ open class BrokerAPI {
      - POST /api/broker/account/create
      - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
+     - parameter authorization: (header) JWT access token 
      - parameter request: (body)  (optional)
 
      - returns: RequestBuilder<UUID> 
      */
-    open class func apiBrokerAccountCreatePostWithRequestBuilder(request: NewManager? = nil) -> RequestBuilder<UUID> {
+    open class func apiBrokerAccountCreatePostWithRequestBuilder(authorization: String, request: NewManager? = nil) -> RequestBuilder<UUID> {
         let path = "/api/broker/account/create"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAuthSignInPost(model: LoginViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiBrokerAuthSignInPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - POST /api/broker/auth/signIn
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiBrokerAuthSignInPostWithRequestBuilder(model: LoginViewModel? = nil) -> RequestBuilder<String> {
+        let path = "/api/broker/auth/signIn"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
 
-     - parameter brokerTradeServerId: (query)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerInitDataGet(brokerTradeServerId: UUID, completion: @escaping ((_ data: BrokerInitData?,_ error: Error?) -> Void)) {
-        apiBrokerInitDataGetWithRequestBuilder(brokerTradeServerId: brokerTradeServerId).execute { (response, error) -> Void in
+    open class func apiBrokerAuthUpdateTokenGet(authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiBrokerAuthUpdateTokenGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - GET /api/broker/auth/updateToken
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiBrokerAuthUpdateTokenGetWithRequestBuilder(authorization: String) -> RequestBuilder<String> {
+        let path = "/api/broker/auth/updateToken"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter brokerTradeServerId: (query)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerInitDataGet(brokerTradeServerId: UUID, authorization: String, completion: @escaping ((_ data: BrokerInitData?,_ error: Error?) -> Void)) {
+        apiBrokerInitDataGetWithRequestBuilder(brokerTradeServerId: brokerTradeServerId, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -218,10 +295,11 @@ open class BrokerAPI {
 }}]
      
      - parameter brokerTradeServerId: (query)  
+     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<BrokerInitData> 
      */
-    open class func apiBrokerInitDataGetWithRequestBuilder(brokerTradeServerId: UUID) -> RequestBuilder<BrokerInitData> {
+    open class func apiBrokerInitDataGetWithRequestBuilder(brokerTradeServerId: UUID, authorization: String) -> RequestBuilder<BrokerInitData> {
         let path = "/api/broker/initData"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -231,19 +309,24 @@ open class BrokerAPI {
             "brokerTradeServerId": brokerTradeServerId
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<BrokerInitData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
 
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodCloseGet(investmentProgramId: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerPeriodCloseGetWithRequestBuilder(investmentProgramId: investmentProgramId).execute { (response, error) -> Void in
+    open class func apiBrokerPeriodCloseGet(investmentProgramId: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodCloseGetWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -253,10 +336,11 @@ open class BrokerAPI {
      - GET /api/broker/period/close
      
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiBrokerPeriodCloseGetWithRequestBuilder(investmentProgramId: UUID) -> RequestBuilder<Void> {
+    open class func apiBrokerPeriodCloseGetWithRequestBuilder(investmentProgramId: UUID, authorization: String) -> RequestBuilder<Void> {
         let path = "/api/broker/period/close"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -266,20 +350,25 @@ open class BrokerAPI {
             "investmentProgramId": investmentProgramId
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
 
      - parameter periodId: (query)  
      - parameter balance: (query)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodSetStartBalanceGet(periodId: UUID, balance: Double, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerPeriodSetStartBalanceGetWithRequestBuilder(periodId: periodId, balance: balance).execute { (response, error) -> Void in
+    open class func apiBrokerPeriodSetStartBalanceGet(periodId: UUID, balance: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodSetStartBalanceGetWithRequestBuilder(periodId: periodId, balance: balance, authorization: authorization).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -290,10 +379,11 @@ open class BrokerAPI {
      
      - parameter periodId: (query)  
      - parameter balance: (query)  
+     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiBrokerPeriodSetStartBalanceGetWithRequestBuilder(periodId: UUID, balance: Double) -> RequestBuilder<Void> {
+    open class func apiBrokerPeriodSetStartBalanceGetWithRequestBuilder(periodId: UUID, balance: Double, authorization: String) -> RequestBuilder<Void> {
         let path = "/api/broker/period/setStartBalance"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -304,19 +394,24 @@ open class BrokerAPI {
             "balance": balance
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
 
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodlosingDataGet(investmentProgramId: UUID, completion: @escaping ((_ data: ClosePeriodData?,_ error: Error?) -> Void)) {
-        apiBrokerPeriodlosingDataGetWithRequestBuilder(investmentProgramId: investmentProgramId).execute { (response, error) -> Void in
+    open class func apiBrokerPeriodlosingDataGet(investmentProgramId: UUID, authorization: String, completion: @escaping ((_ data: ClosePeriodData?,_ error: Error?) -> Void)) {
+        apiBrokerPeriodlosingDataGetWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -371,10 +466,11 @@ open class BrokerAPI {
 }}]
      
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<ClosePeriodData> 
      */
-    open class func apiBrokerPeriodlosingDataGetWithRequestBuilder(investmentProgramId: UUID) -> RequestBuilder<ClosePeriodData> {
+    open class func apiBrokerPeriodlosingDataGetWithRequestBuilder(investmentProgramId: UUID, authorization: String) -> RequestBuilder<ClosePeriodData> {
         let path = "/api/broker/period/сlosingData"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -384,74 +480,14 @@ open class BrokerAPI {
             "investmentProgramId": investmentProgramId
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ClosePeriodData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-
-     - parameter filter: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func apiManagerBrokersPost(filter: BrokersFilter? = nil, completion: @escaping ((_ data: BrokersViewModel?,_ error: Error?) -> Void)) {
-        apiManagerBrokersPostWithRequestBuilder(filter: filter).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     - POST /api/manager/brokers
-     - examples: [{contentType=application/json, example={
-  "total" : 0,
-  "brokers" : [ {
-    "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "name" : "name",
-    "host" : "host",
-    "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Undefined",
-    "broker" : {
-      "name" : "name",
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "description" : "description",
-      "logo" : "logo",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }
-  }, {
-    "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "name" : "name",
-    "host" : "host",
-    "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Undefined",
-    "broker" : {
-      "name" : "name",
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "description" : "description",
-      "logo" : "logo",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }
-  } ]
-}}]
-     
-     - parameter filter: (body)  (optional)
-
-     - returns: RequestBuilder<BrokersViewModel> 
-     */
-    open class func apiManagerBrokersPostWithRequestBuilder(filter: BrokersFilter? = nil) -> RequestBuilder<BrokersViewModel> {
-        let path = "/api/manager/brokers"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<BrokersViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }

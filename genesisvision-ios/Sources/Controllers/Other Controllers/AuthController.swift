@@ -25,14 +25,19 @@ class AuthController {
     
     static var authorizedToken: String? {
         set(newToken) {
-            if let authToken = newToken {
-                SwaggerClientAPI.customHeaders = ["Authorization" : "Bearer \(authToken)"]
-            }
             UserDefaults.standard.set(newToken, forKey: Constants.UserDefaults.authorizedToken)
         }
         get {
             return UserDefaults.standard.string(forKey: Constants.UserDefaults.authorizedToken)
         }
+    }
+    
+    static func authorizedTokenWithBearer() -> String? {
+        guard let token = authorizedToken else {
+            return nil
+        }
+        
+        return "Bearer " + token
     }
     
     static func isLogin() -> Bool {
@@ -45,6 +50,7 @@ class AuthController {
         var viewControllers: [UIViewController] = []
         
         if let traderListViewController = TraderListViewController.storyboardInstance(name: .traders) {
+            traderListViewController.programsViewModel = TraderListViewModel()
             viewControllers.append(BaseNavigationController(rootViewController: traderListViewController))
         }
         
@@ -74,10 +80,11 @@ class AuthController {
     static func signOutWithTransition() {
         AuthController.authorizedToken = nil
         
-        guard let viewController = TraderListViewController.storyboardInstance(name: .traders) else { return }
+        guard let traderListViewController = TraderListViewController.storyboardInstance(name: .traders) else { return }
+        traderListViewController.programsViewModel = TraderListViewModel()
         
         let window = UIApplication.shared.windows[0] as UIWindow
-        let navigationController = BaseNavigationController(rootViewController: viewController)
+        let navigationController = BaseNavigationController(rootViewController: traderListViewController)
         window.rootViewController = navigationController
     }
     
@@ -101,7 +108,7 @@ class AuthController {
     private static func investorSignIn(email: String, password: String, completion: @escaping ApiCompletionBlock) {
         let loginViewModel = LoginViewModel(email: email, password: password)
         
-        AccountAPI.apiInvestorAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { (response, error) in
+        InvestorAPI.apiInvestorAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { (response, error) in
             signInResponseHandler(response, error: error, completion: completion)
         }
     }
@@ -109,7 +116,7 @@ class AuthController {
     private static func investorSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
         let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
         
-        AccountAPI.apiInvestorAuthSignUpPostWithRequestBuilder(model: registerInvestorViewModel).execute { (response, error) in
+        InvestorAPI.apiInvestorAuthSignUpPostWithRequestBuilder(model: registerInvestorViewModel).execute { (response, error) in
             signUpResponseHandler(response, error: error, completion: completion)
         }
     }
@@ -117,14 +124,14 @@ class AuthController {
     private static func managerSignIn(email: String, password: String, completion: @escaping ApiCompletionBlock) {
         let loginViewModel = LoginViewModel(email: email, password: password)
         
-        AccountAPI.apiManagerAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { (response, error) in
+        ManagerAPI.apiManagerAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { (response, error) in
             signInResponseHandler(response, error: error, completion: completion)
         }
     }
     
     private static func managerSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
         let registerManagerViewModel = RegisterManagerViewModel(email: email, password: password, confirmPassword: confirmPassword)
-        AccountAPI.apiManagerAuthSignUpPostWithRequestBuilder(model: registerManagerViewModel).execute { (response, error) in
+        ManagerAPI.apiManagerAuthSignUpPostWithRequestBuilder(model: registerManagerViewModel).execute { (response, error) in
             signUpResponseHandler(response, error: error, completion: completion)
         }
     }
@@ -133,7 +140,7 @@ class AuthController {
     
     private static func signInResponseHandler(_ response: Response<String>?, error: Error?, completion: @escaping ApiCompletionBlock) {
         guard response != nil && response?.statusCode == 200 else {
-            errorResponseHandler(error: error, completion: completion)
+            ErrorHandler.handleApiError(error: error, completion: completion)
             return
         }
         
@@ -148,37 +155,6 @@ class AuthController {
     private static func signUpResponseHandler(_ response: Response<Void>?, error: Error?, completion: @escaping ApiCompletionBlock) {
         response != nil && response?.statusCode == 200
             ? completion(ApiCompletionResult.success)
-            : errorResponseHandler(error: error, completion: completion)
-    }
-    
-    private static func errorResponseHandler(error: Error?, completion: @escaping ApiCompletionBlock) {
-        guard let errorResponse = error as? ErrorResponse else {
-            completion(ApiCompletionResult.failure(reason: nil))
-            return
-        }
-        
-        switch errorResponse {
-        case .error(let code, let data, let properties):
-            print("API ERROR with \(code) code\n Properties: \(properties)")
-            
-            guard let jsonData = data else {
-                completion(ApiCompletionResult.failure(reason: nil))
-                return
-            }
-            
-            var errorViewModel: ErrorViewModel?
-            
-            do {
-                errorViewModel = try JSONDecoder().decode(ErrorViewModel.self, from: jsonData)
-            } catch {}
-            
-            guard let errorsText = errorViewModel?.errors?.flatMap({$0.message}).joined(separator: "\n") else {
-                completion(ApiCompletionResult.failure(reason: nil))
-                return
-            }
-            
-            print("API ERROR text \(errorsText)")
-            completion(ApiCompletionResult.failure(reason: errorsText))
-        }
+            : ErrorHandler.handleApiError(error: error, completion: completion)
     }
 }

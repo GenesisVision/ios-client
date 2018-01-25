@@ -2,4 +2,182 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+            timestampString = "538579011.369004"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "processRequest(request:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+            timestampString = "538579011.369343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "processRequest(request:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.822835"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "324"
+                  endingLineNumber = "324"
+                  offsetFromSymbolStart = "493">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.827379"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "626">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+            timestampString = "538579011.369417"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "processRequest(request:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.8443069"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "344"
+                  endingLineNumber = "344"
+                  offsetFromSymbolStart = "750">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Alamofire.DataResponse&lt;Foundation.Data&gt;) -&gt; () in GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.848961"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "345"
+                  endingLineNumber = "345"
+                  offsetFromSymbolStart = "626">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+            timestampString = "538579011.3694839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "processRequest(request:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.858689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "978">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Alamofire.DataResponse&lt;Foundation.Data&gt;) -&gt; () in GV_Investor.AlamofireDecodableRequestBuilder.(processRequest in _36B1101000D0A0FB1C49AF00469C2C94)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Investor.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GV Investor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+                  timestampString = "538580831.862625"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "364"
+                  endingLineNumber = "364"
+                  offsetFromSymbolStart = "626">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
+            timestampString = "538579011.36955"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
+            landmarkName = "processRequest(request:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

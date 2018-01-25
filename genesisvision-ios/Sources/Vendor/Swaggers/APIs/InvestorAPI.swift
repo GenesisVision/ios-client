@@ -13,10 +13,151 @@ import Alamofire
 open class InvestorAPI {
     /**
 
+     - parameter userId: (query)  (optional)
+     - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorDashboardGet(completion: @escaping ((_ data: InvestorDashboard?,_ error: Error?) -> Void)) {
-        apiInvestorDashboardGetWithRequestBuilder().execute { (response, error) -> Void in
+    open class func apiInvestorAuthConfirmEmailGet(userId: String? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorAuthConfirmEmailGetWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - GET /api/investor/auth/confirmEmail
+     
+     - parameter userId: (query)  (optional)
+     - parameter code: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorAuthConfirmEmailGetWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/auth/confirmEmail"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "userId": userId, 
+            "code": code
+        ])
+        
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthSignInPost(model: LoginViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiInvestorAuthSignInPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/auth/signIn
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiInvestorAuthSignInPostWithRequestBuilder(model: LoginViewModel? = nil) -> RequestBuilder<String> {
+        let path = "/api/investor/auth/signIn"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthSignUpPost(model: RegisterInvestorViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorAuthSignUpPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/auth/signUp
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorAuthSignUpPostWithRequestBuilder(model: RegisterInvestorViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/auth/signUp"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthUpdateTokenGet(authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiInvestorAuthUpdateTokenGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - GET /api/investor/auth/updateToken
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiInvestorAuthUpdateTokenGetWithRequestBuilder(authorization: String) -> RequestBuilder<String> {
+        let path = "/api/investor/auth/updateToken"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorDashboardGet(authorization: String, completion: @escaping ((_ data: InvestorDashboard?,_ error: Error?) -> Void)) {
+        apiInvestorDashboardGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -81,29 +222,36 @@ open class InvestorAPI {
     "totalOut" : 5.637376656633329
   } ]
 }}]
+     
+     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<InvestorDashboard> 
      */
-    open class func apiInvestorDashboardGetWithRequestBuilder() -> RequestBuilder<InvestorDashboard> {
+    open class func apiInvestorDashboardGetWithRequestBuilder(authorization: String) -> RequestBuilder<InvestorDashboard> {
         let path = "/api/investor/dashboard"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<InvestorDashboard>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
 
+     - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentsInvestPost(model: InvestViewModel? = nil, completion: @escaping ((_ data: ProfileShortViewModel?,_ error: Error?) -> Void)) {
-        apiInvestorInvestmentsInvestPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+    open class func apiInvestorInvestmentsInvestPost(authorization: String, model: InvestViewModel? = nil, completion: @escaping ((_ data: ProfileShortViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentsInvestPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -117,21 +265,26 @@ open class InvestorAPI {
   "email" : "email"
 }}]
      
+     - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
 
      - returns: RequestBuilder<ProfileShortViewModel> 
      */
-    open class func apiInvestorInvestmentsInvestPostWithRequestBuilder(model: InvestViewModel? = nil) -> RequestBuilder<ProfileShortViewModel> {
+    open class func apiInvestorInvestmentsInvestPostWithRequestBuilder(authorization: String, model: InvestViewModel? = nil) -> RequestBuilder<ProfileShortViewModel> {
         let path = "/api/investor/investments/invest"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ProfileShortViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
@@ -312,11 +465,12 @@ open class InvestorAPI {
 
     /**
 
+     - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentsWithdrawPost(model: InvestViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiInvestorInvestmentsWithdrawPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+    open class func apiInvestorInvestmentsWithdrawPost(authorization: String, model: InvestViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorInvestmentsWithdrawPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -325,21 +479,282 @@ open class InvestorAPI {
     /**
      - POST /api/investor/investments/withdraw
      
+     - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiInvestorInvestmentsWithdrawPostWithRequestBuilder(model: InvestViewModel? = nil) -> RequestBuilder<Void> {
+    open class func apiInvestorInvestmentsWithdrawPostWithRequestBuilder(authorization: String, model: InvestViewModel? = nil) -> RequestBuilder<Void> {
         let path = "/api/investor/investments/withdraw"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorProfileFullGet(authorization: String, completion: @escaping ((_ data: ProfileFullViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorProfileFullGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - GET /api/investor/profile/full
+     - examples: [{contentType=application/json, example={
+  "birthday" : "2000-01-23T04:56:07.000+00:00",
+  "lastName" : "lastName",
+  "country" : "country",
+  "address" : "address",
+  "gender" : true,
+  "documentType" : "documentType",
+  "city" : "city",
+  "documentNumber" : "documentNumber",
+  "avatar" : "avatar",
+  "firstName" : "firstName",
+  "balance" : 0.8008281904610115,
+  "phone" : "phone",
+  "middleName" : "middleName",
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "email" : "email"
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ProfileFullViewModel> 
+     */
+    open class func apiInvestorProfileFullGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileFullViewModel> {
+        let path = "/api/investor/profile/full"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ProfileFullViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorProfileGet(authorization: String, completion: @escaping ((_ data: ProfileShortViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorProfileGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - GET /api/investor/profile
+     - examples: [{contentType=application/json, example={
+  "balance" : 0.8008281904610115,
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "email" : "email"
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ProfileShortViewModel> 
+     */
+    open class func apiInvestorProfileGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileShortViewModel> {
+        let path = "/api/investor/profile"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ProfileShortViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorProfileUpdatePost(authorization: String, model: ProfileFullViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorProfileUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/profile/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorProfileUpdatePostWithRequestBuilder(authorization: String, model: ProfileFullViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/profile/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorWalletDepositPost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorWalletDepositPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/wallet/deposit
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorWalletDepositPostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/api/investor/wallet/deposit"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorWalletTransactionsPost(authorization: String, filter: TransactionsFilter? = nil, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorWalletTransactionsPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/wallet/transactions
+     - examples: [{contentType=application/json, example={
+  "total" : 6,
+  "transactions" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Deposit"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Deposit"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<WalletTransactionsViewModel> 
+     */
+    open class func apiInvestorWalletTransactionsPostWithRequestBuilder(authorization: String, filter: TransactionsFilter? = nil) -> RequestBuilder<WalletTransactionsViewModel> {
+        let path = "/api/investor/wallet/transactions"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorWalletWithdrawPost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorWalletWithdrawPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /api/investor/wallet/withdraw
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorWalletWithdrawPostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/api/investor/wallet/withdraw"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }
