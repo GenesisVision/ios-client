@@ -13,7 +13,7 @@ class WelcomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        AuthController.isLogin() ? AuthController.signInWithTransition() : AuthController.signOutWithTransition()
+        AuthManager.isLogin() ? AuthManager.signInWithTransition() : AuthManager.signOutWithTransition()
     }
 
     override func didReceiveMemoryWarning() {

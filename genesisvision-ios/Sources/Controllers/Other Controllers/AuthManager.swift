@@ -8,7 +8,7 @@
 
 import UIKit.UIApplication
 
-class AuthController {
+class AuthManager {
     
     static func setCurrentProfile(_ profileObject: ProfileObject) {
         realmWrite {
@@ -41,7 +41,7 @@ class AuthController {
     }
     
     static func isLogin() -> Bool {
-        return AuthController.authorizedToken != nil
+        return AuthManager.authorizedToken != nil
     }
     
     // MARK: - Navigation
@@ -78,7 +78,7 @@ class AuthController {
     }
     
     static func signOutWithTransition() {
-        AuthController.authorizedToken = nil
+        AuthManager.authorizedToken = nil
         
         guard let traderListViewController = TraderListViewController.storyboardInstance(name: .traders) else { return }
         traderListViewController.programsViewModel = TraderListViewModel()
@@ -146,7 +146,7 @@ class AuthController {
         
         //save token
         if let token = response?.body {
-            AuthController.authorizedToken = token
+            AuthManager.authorizedToken = token
         }
         
         completion(ApiCompletionResult.success)

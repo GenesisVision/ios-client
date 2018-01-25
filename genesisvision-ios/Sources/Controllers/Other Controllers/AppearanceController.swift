@@ -12,19 +12,21 @@ import IQKeyboardManagerSwift
 struct AppearanceController {
     static func setupAppearance() {
         setupNavigationBar()
+        setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
     }
     
+    // NavigationBar
     private static func setupNavigationBar() {
-        // NavigationBar
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
         UINavigationBar.appearance().tintColor = UIColor(.blue)
-
-        // TabBar
+    }
+    
+    // TabBar
+    private static func setupTabBar() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.black], for: .selected)
         UITabBar.appearance().tintColor = .black
     }
-    
     
     // MARK: - IQKeyboardManager
     private static func turnIQKeyboardManager(enable: Bool, enableAutoToolbar: Bool, shouldResignOnTouchOutside: Bool) {

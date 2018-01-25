@@ -17,6 +17,9 @@ class TraderListViewModel {
     
     var dataType: DataType = .fake
     
+    var skip = 0    //offset
+    var take = 10   //count of programs
+    
     var programViewModels = [TraderTableViewCellModel]()
     
     func fetch(completion:@escaping () -> Void) {
@@ -40,8 +43,22 @@ class TraderListViewModel {
         }
     }
     
+    func fetchMore(completion:@escaping () -> Void) {
+        skip += take
+        fetch(completion: completion)
+    }
+    
+    func refresh(completion:@escaping () -> Void) {
+        skip = 0
+        fetch(completion: completion)
+    }
+    
     func programsCount() -> Int {
         return programViewModels.count
+    }
+    
+    func getProgram(atIndex index: Int) -> TraderTableViewCellModel {
+        return programViewModels[index]
     }
     
     // MARK: - Private methods

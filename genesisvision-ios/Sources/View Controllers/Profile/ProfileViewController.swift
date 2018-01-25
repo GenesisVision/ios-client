@@ -34,6 +34,6 @@ class ProfileViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {
-        AuthController.signOutWithTransition()
+        AuthManager.signOutWithTransition()
     }
 }

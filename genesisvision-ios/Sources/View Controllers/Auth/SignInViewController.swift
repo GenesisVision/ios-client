@@ -40,13 +40,13 @@ class SignInViewController: BaseViewController {
         showProgressHUD()
         
         //SighIn with fields
-        AuthController.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
+        AuthManager.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (finish) in
-                    AuthController.signInWithTransition()
+                    AuthManager.signInWithTransition()
                 })
             case .failure(let reason):
                 if reason != nil {

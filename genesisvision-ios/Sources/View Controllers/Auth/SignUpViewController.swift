@@ -41,7 +41,7 @@ class SignUpViewController: BaseViewController {
         showProgressHUD()
         
         //SighUp with fields
-        AuthController.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+        AuthManager.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
             switch result {

@@ -70,5 +70,4 @@ extension TraderEntity {
         
         return entity
     }
-    
 }
