@@ -27,8 +27,10 @@ class TraderListViewController: BaseViewController {
             
             signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
             signInButton.isHidden = authorizedValue
-            
-            tableView.configure(with: .defaultConfiguration)
+            var tableViewConfiguration: TableViewConfiguration = .defaultConfig
+            tableViewConfiguration.bottomInset = authorizedValue ? 76.0 + 16.0 : 0.0
+            tableViewConfiguration.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+            tableView.configure(with: .custom(tableViewConfiguration))
         }
     }
     
@@ -47,9 +49,10 @@ class TraderListViewController: BaseViewController {
         tableView.registerNibs(for: [TraderTableViewCell.self])
     }
 
-    func showTraderVC(with traderEntity: TraderEntity) {
+    func showTraderVC(with traderEntity: InvestmentProgramEntity) {
         guard let viewController = TraderViewController.storyboardInstance(name: .traders) else { return }
         viewController.traderEntity = traderEntity
+        viewController.hidesBottomBarWhenPushed = true
         push(viewController: viewController)
     }
     
@@ -71,14 +74,14 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let traderEntity = programsViewModel.programViewModels[indexPath.row].traderEntity
+        let traderEntity = programsViewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
         
         showTraderVC(with: traderEntity)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let model = programsViewModel.programViewModels[indexPath.row]
+        let model = programsViewModel.getProgram(atIndex: indexPath.row)
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
         
@@ -102,7 +105,7 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
         guard let vc = TraderViewController.storyboardInstance(name: .traders) else { return nil }
-        vc.traderEntity = programsViewModel.programViewModels[indexPath.row].traderEntity
+        vc.traderEntity = programsViewModel.investmentProgramViewModels[indexPath.row].investmentProgramEntity
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
         previewingContext.sourceRect = cell.frame

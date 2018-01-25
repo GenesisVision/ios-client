@@ -42,12 +42,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538587569.234519"
+                  timestampString = "538598712.774991"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "344"
                   endingLineNumber = "344"
-                  offsetFromSymbolStart = "750">
+                  offsetFromSymbolStart = "620">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +57,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538587569.239208"
+                  timestampString = "538598712.784055"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "345"
                   endingLineNumber = "345"
-                  offsetFromSymbolStart = "626">
+                  offsetFromSymbolStart = "424">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -90,12 +90,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538587569.275722"
+                  timestampString = "538598712.79425"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "363"
                   endingLineNumber = "363"
-                  offsetFromSymbolStart = "978">
+                  offsetFromSymbolStart = "788">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,12 +105,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538587569.2794729"
+                  timestampString = "538598712.798236"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "364"
                   endingLineNumber = "364"
-                  offsetFromSymbolStart = "626">
+                  offsetFromSymbolStart = "424">
                </Location>
             </Locations>
          </BreakpointContent>

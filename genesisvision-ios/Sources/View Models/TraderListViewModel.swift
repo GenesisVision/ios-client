@@ -15,29 +15,33 @@ enum DataType {
 
 class TraderListViewModel {
     
-    var dataType: DataType = .fake
+    var dataType: DataType = .api
     
     var skip = 0    //offset
     var take = 10   //count of programs
     
-    var programViewModels = [TraderTableViewCellModel]()
+    var investmentProgramViewModels = [InvestmentProgramTableViewCellModel]()
     
     func fetch(completion:@escaping () -> Void) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: nil, skip: nil, take: nil)
-            apiInvestmentPrograms(withFilter: filter, completion: { [weak self] (cellModels) in
-                guard let programs = cellModels else {
-                    return
+            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byRatingAsc, skip: skip, take: take)
+            apiInvestmentPrograms(withFilter: filter, completion: { [weak self] (investmentPrograms) in
+                var investmentProgramViewModels = [InvestmentProgramTableViewCellModel]()
+                
+                for investmentProgram in investmentPrograms {
+                    let entity = InvestmentProgramEntity()
+                    entity.traslation(fromInvestmentProgram: investmentProgram)
+                    let traderTableViewCellModel = InvestmentProgramTableViewCellModel(investmentProgramEntity: entity)
+                    investmentProgramViewModels.append(traderTableViewCellModel)
                 }
                 
-                self?.programViewModels = programs
-                
+                self?.investmentProgramViewModels = investmentProgramViewModels
                 completion()
             })
         case .fake:
-            fakeInvestmentPrograms { [weak self] (cellModels) in
-                self?.programViewModels = cellModels
+            fakeInvestmentPrograms { [weak self] (investmentProgramViewModels) in
+                self?.investmentProgramViewModels = investmentProgramViewModels
                 completion()
             }
         }
@@ -54,43 +58,34 @@ class TraderListViewModel {
     }
     
     func programsCount() -> Int {
-        return programViewModels.count
+        return investmentProgramViewModels.count
     }
     
-    func getProgram(atIndex index: Int) -> TraderTableViewCellModel {
-        return programViewModels[index]
+    func getProgram(atIndex index: Int) -> InvestmentProgramTableViewCellModel {
+        return investmentProgramViewModels[index]
     }
     
     // MARK: - Private methods
     
-    private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ traderCellModels: [TraderTableViewCellModel]?) -> Void) {
+    private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ traderCellModels: [InvestmentProgram]) -> Void) {
         InvestorAPI.apiInvestorInvestmentsPostWithRequestBuilder(filter: filter).execute { (response, error) in
             guard response != nil && response?.statusCode == 200 else {
                 return ErrorHandler.handleApiError(error: error, completion: { (result) in print(result) })
             }
 
             guard let investmentProgramViewModels = response?.body?.investments else {
-                return completion(nil)
+                return completion([])
             }
             
-            print(investmentProgramViewModels)
-            
-            var cellModels = [TraderTableViewCellModel]()
-            
-            for investmentProgramViewModel in investmentProgramViewModels {
-                print(investmentProgramViewModel)
-                cellModels.append(TraderTableViewCellModel(traderEntity: TraderEntity.templateEntity, index: 0)) //TODO: add binding
-            }
-            
-            completion(cellModels)
+            completion(investmentProgramViewModels)
         }
     }
     
-    private func fakeInvestmentPrograms(completion: (_ traderCellModels: [TraderTableViewCellModel]) -> Void) {
-        var cellModels = [TraderTableViewCellModel]()
+    private func fakeInvestmentPrograms(completion: (_ traderCellModels: [InvestmentProgramTableViewCellModel]) -> Void) {
+        var cellModels = [InvestmentProgramTableViewCellModel]()
         
-        for index in 0..<Constants.TemplatesCounts.traders {
-            cellModels.append(TraderTableViewCellModel(traderEntity: TraderEntity.templateEntity, index: index))
+        for _ in 0..<Constants.TemplatesCounts.traders {
+            cellModels.append(InvestmentProgramTableViewCellModel(investmentProgramEntity: InvestmentProgramEntity.templateEntity))
         }
         
         completion(cellModels)

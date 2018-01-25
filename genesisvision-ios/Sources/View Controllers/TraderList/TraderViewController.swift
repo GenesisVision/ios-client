@@ -11,12 +11,12 @@ import UIKit
 
 class TraderViewController: BaseViewController {
 
-    var traderEntity: TraderEntity?
+    var traderEntity: InvestmentProgramEntity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Trader"
+        title = traderEntity?.nickname
     }
 
     override func didReceiveMemoryWarning() {
