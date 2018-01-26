@@ -13,7 +13,7 @@
         <!--Trader List View Controller-->
         <scene sceneID="WAz-Ri-w7k">
             <objects>
-                <viewController storyboardIdentifier="TraderListViewController" id="4qn-RU-Ufu" customClass="TraderListViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TraderListViewController" id="4qn-RU-Ufu" customClass="TraderListViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZd-JI-9hr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,6 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wb8-gJ-vWJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="4qn-RU-Ufu" id="vv8-Nx-FKJ"/>
@@ -30,7 +31,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="926-WY-PMI">
                                 <rect key="frame" x="0.0" y="591" width="375" height="76"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="genesisvision_ios" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
                                         <rect key="frame" x="32" y="0.0" width="311" height="60"/>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -83,7 +84,7 @@
         <!--Trader View Controller-->
         <scene sceneID="3mF-C7-1tJ">
             <objects>
-                <viewController storyboardIdentifier="TraderViewController" id="1tc-CA-jr8" customClass="TraderViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TraderViewController" id="1tc-CA-jr8" customClass="TraderViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="45y-LA-dTh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +100,7 @@
         <!--Item-->
         <scene sceneID="C9v-3m-Oyx">
             <objects>
-                <navigationController storyboardIdentifier="TraderListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foF-nh-fhL" customClass="BaseNavigationController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TraderListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foF-nh-fhL" customClass="BaseNavigationController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="hzw-qX-vom"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qyW-Jf-Br9">

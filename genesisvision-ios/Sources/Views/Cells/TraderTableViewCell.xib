@@ -28,6 +28,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="248.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhC-FL-XlQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="248.5"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zN4-IX-FiD">
                         <rect key="frame" x="16" y="19" width="288" height="211"/>
                         <subviews>
@@ -115,12 +119,13 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nWX-0p-63W">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JvI-96-Xpf" customClass="ChartView" customModule="GV_Investor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="58" width="288" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="LEU-HH-zlw"/>
+                                    <constraint firstAttribute="height" constant="100" id="7dv-DC-7pc"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAA-Hq-M11">
                                 <rect key="frame" x="0.0" y="166" width="288" height="45"/>
                                 <subviews>
@@ -250,10 +255,14 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.92156862745098034" green="0.9206315279006958" blue="0.9457707405090332" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstItem="nhC-FL-XlQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0s2-7f-Ldi"/>
+                    <constraint firstAttribute="bottom" secondItem="nhC-FL-XlQ" secondAttribute="bottom" id="FmV-DE-016"/>
                     <constraint firstItem="zN4-IX-FiD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="LHK-Nk-R0a"/>
                     <constraint firstItem="zN4-IX-FiD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="RRa-Yn-lPY"/>
+                    <constraint firstItem="nhC-FL-XlQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="diW-oY-dzf"/>
+                    <constraint firstAttribute="trailing" secondItem="nhC-FL-XlQ" secondAttribute="trailing" id="eZi-Gk-hPz"/>
                     <constraint firstItem="zN4-IX-FiD" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ve0-Xe-mBT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="zN4-IX-FiD" secondAttribute="bottom" constant="8" id="zrx-sR-tGe"/>
                 </constraints>
@@ -261,8 +270,8 @@
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="backgroundView" destination="H2p-sc-9uM" id="Rhd-re-hFg"/>
-                <outlet property="chartImageView" destination="nWX-0p-63W" id="ibS-8L-2aX"/>
+                <outlet property="backgroundView" destination="nhC-FL-XlQ" id="bB4-eN-6pX"/>
+                <outlet property="chartView" destination="JvI-96-Xpf" id="ZE9-TV-gL2"/>
                 <outlet property="currencyLabel" destination="D4c-6r-Frk" id="fGR-ia-QAs"/>
                 <outlet property="depositLabel" destination="fdS-z0-kKE" id="ekL-mu-8Sd"/>
                 <outlet property="profileImageView" destination="iG3-wO-Vm5" id="zUC-ZO-eYZ"/>

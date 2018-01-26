@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Charts
 
 class TraderTableViewCell: UITableViewCell {
     
     // MARK: - Views
     @IBOutlet var profileImageView: ProfileImageView!
-    @IBOutlet var chartImageView: UIImageView! //TODO: change on Chart View
+    @IBOutlet var chartView: ChartView! {
+        didSet {
+            chartView.isUserInteractionEnabled = false
+        }
+    }
     
     // MARK: - Labels
     @IBOutlet var userNameLabel: UILabel!

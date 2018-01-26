@@ -8,7 +8,7 @@ import Foundation
 
 class APIHelper {
     static func rejectNil(_ source: [String:Any?]) -> [String:Any]? {
-        var destinatмion = [String:Any]()
+        var destination = [String:Any]()
         for (key, nillableValue) in source {
             if let value: Any = nillableValue {
                 destination[key] = value

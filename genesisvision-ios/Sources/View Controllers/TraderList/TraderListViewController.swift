@@ -34,7 +34,7 @@ class TraderListViewController: BaseViewController {
             signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
             signInButton.isHidden = authorizedValue
             var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-            tableViewConfiguration.bottomInset = authorizedValue ? 76.0 + 16.0 : 0.0
+            tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
             tableViewConfiguration.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
             tableView.configure(with: .custom(tableViewConfiguration))
         }

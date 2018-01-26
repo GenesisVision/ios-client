@@ -36,6 +36,7 @@
 		FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A44201AE86900157AD6 /* WalletRouter.swift */; };
 		FCA19A47201AF8D600157AD6 /* ProgramDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */; };
 		FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */; };
+		FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A4B201B83E900157AD6 /* ChartView.swift */; };
 		FCB2C4DC2010997A0012AA58 /* DataModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DB2010997A0012AA58 /* DataModelCollection.swift */; };
 		FCB2C4DE20109A0C0012AA58 /* RealmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DD20109A0C0012AA58 /* RealmController.swift */; };
 		FCB2C4E020109A950012AA58 /* Realm+WriteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DF20109A950012AA58 /* Realm+WriteFunctions.swift */; };
@@ -136,10 +137,7 @@
 		FCE8236320161339000061E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236220161339000061E8 /* Constants.swift */; };
 		FCE82365201622BD000061E8 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE82364201622BD000061E8 /* ActionButton.swift */; };
 		FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE823662016239C000061E8 /* RoundedImageView.swift */; };
-		FCE8236920162862000061E8 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236820162862000061E8 /* UIImageViewExtension.swift */; };
-		FCE8236B2016293C000061E8 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236A2016293C000061E8 /* UILabelExtension.swift */; };
 		FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236C201631B3000061E8 /* UIViewExtension.swift */; };
-		FCF105FC2017345200E3F481 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FB2017345200E3F481 /* Validation.swift */; };
 		FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */; };
 		FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */; };
 		FCF1060720179F5A00E3F481 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1060620179F5A00E3F481 /* UserEntity.swift */; };
@@ -179,6 +177,7 @@
 		FCA19A44201AE86900157AD6 /* WalletRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouter.swift; sourceTree = "<group>"; };
 		FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewModel.swift; sourceTree = "<group>"; };
 		FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailRouter.swift; sourceTree = "<group>"; };
+		FCA19A4B201B83E900157AD6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		FCB2C4DB2010997A0012AA58 /* DataModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelCollection.swift; sourceTree = "<group>"; };
 		FCB2C4DD20109A0C0012AA58 /* RealmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmController.swift; sourceTree = "<group>"; };
 		FCB2C4DF20109A950012AA58 /* Realm+WriteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+WriteFunctions.swift"; sourceTree = "<group>"; };
@@ -281,10 +280,7 @@
 		FCE8236220161339000061E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FCE82364201622BD000061E8 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		FCE823662016239C000061E8 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
-		FCE8236820162862000061E8 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		FCE8236A2016293C000061E8 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		FCE8236C201631B3000061E8 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		FCF105FB2017345200E3F481 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Singletone.swift"; sourceTree = "<group>"; };
 		FCF1060620179F5A00E3F481 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -584,8 +580,6 @@
 				FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */,
 				FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */,
 				FC4964272015598E00104CEB /* UIColor */,
-				FCE8236820162862000061E8 /* UIImageViewExtension.swift */,
-				FCE8236A2016293C000061E8 /* UILabelExtension.swift */,
 				FCE8236C201631B3000061E8 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
@@ -597,7 +591,6 @@
 				FCC9DD62200E2246008825EC /* CellViewModel.swift */,
 				FCC9DD6B200E47B2008825EC /* Money.swift */,
 				FCC9DDA8200F9AF8008825EC /* DisplayCollection */,
-				FCF105FB2017345200E3F481 /* Validation.swift */,
 				FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */,
 				FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */,
 				FC431D93201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift */,
@@ -716,6 +709,7 @@
 				FCC9DD52200DFA5E008825EC /* Cells */,
 				FCE82364201622BD000061E8 /* ActionButton.swift */,
 				FCA19A22201AA07700157AD6 /* ProfileImageView.swift */,
+				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -934,7 +928,6 @@
 				FCBD2319201A050E000B8E38 /* MetaTraderOrder.swift in Sources */,
 				FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */,
 				FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */,
-				FCE8236920162862000061E8 /* UIImageViewExtension.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
@@ -945,6 +938,7 @@
 				FCBD2313201A050E000B8E38 /* InvestorProgram.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
+				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				FCBD2312201A050E000B8E38 /* InvestorDashboard.swift in Sources */,
 				FCB2C4E82010AABA0012AA58 /* TemplateModelCollection.swift in Sources */,
@@ -961,7 +955,6 @@
 				FCBD22FF201A050E000B8E38 /* Extensions.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
-				FCF105FC2017345200E3F481 /* Validation.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,
@@ -998,7 +991,6 @@
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FCBD230F201A050E000B8E38 /* InvestmentRequest.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
-				FCE8236B2016293C000061E8 /* UILabelExtension.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
 				FCBD2320201A050E000B8E38 /* RegisterManagerViewModel.swift in Sources */,
 				FCBD230A201A050E000B8E38 /* Investment.swift in Sources */,
