@@ -10,22 +10,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-            timestampString = "538581108.363881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "processRequest(request:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
             timestampString = "538581108.364364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -42,12 +26,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538598712.774991"
+                  timestampString = "538639916.198634"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "344"
                   endingLineNumber = "344"
-                  offsetFromSymbolStart = "620">
+                  offsetFromSymbolStart = "750">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +41,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538598712.784055"
+                  timestampString = "538639916.202504"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "345"
                   endingLineNumber = "345"
-                  offsetFromSymbolStart = "424">
+                  offsetFromSymbolStart = "626">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -90,12 +74,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538598712.79425"
+                  timestampString = "538639916.2199301"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "363"
                   endingLineNumber = "363"
-                  offsetFromSymbolStart = "788">
+                  offsetFromSymbolStart = "978">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,12 +89,12 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "538598712.798236"
+                  timestampString = "538639916.224251"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "364"
                   endingLineNumber = "364"
-                  offsetFromSymbolStart = "424">
+                  offsetFromSymbolStart = "626">
                </Location>
             </Locations>
          </BreakpointContent>

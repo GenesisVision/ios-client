@@ -13,7 +13,7 @@
         <!--Auth View Controller-->
         <scene sceneID="UGV-MD-Bhd">
             <objects>
-                <viewController storyboardIdentifier="AuthViewController" id="miw-rZ-sr3" customClass="AuthViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="miw-rZ-sr3" customClass="AuthViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n2q-PK-B2c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,6 @@
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="0E8-FB-aWk"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="bcK-rM-ouH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Login">
@@ -50,13 +49,12 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Nzd-D2-Ekw" firstAttribute="leading" secondItem="MSU-hX-n4K" secondAttribute="leading" id="2PY-5U-3rl"/>
-                            <constraint firstItem="Nzd-D2-Ekw" firstAttribute="centerX" secondItem="n2q-PK-B2c" secondAttribute="centerX" id="M05-MV-qeI"/>
+                            <constraint firstItem="Nzd-D2-Ekw" firstAttribute="trailing" secondItem="yla-J6-BQz" secondAttribute="trailing" id="Eg3-2Y-QOx"/>
                             <constraint firstItem="yla-J6-BQz" firstAttribute="leading" secondItem="MSU-hX-n4K" secondAttribute="leading" id="MKX-wt-I3Y"/>
                             <constraint firstItem="Nzd-D2-Ekw" firstAttribute="top" secondItem="yla-J6-BQz" secondAttribute="bottom" constant="65" id="TPY-mr-v0d"/>
                             <constraint firstAttribute="trailing" secondItem="yla-J6-BQz" secondAttribute="trailing" id="ZMq-yq-sBS"/>
                             <constraint firstItem="yla-J6-BQz" firstAttribute="centerY" secondItem="n2q-PK-B2c" secondAttribute="centerY" id="ezU-k3-lPT"/>
-                            <constraint firstItem="MSU-hX-n4K" firstAttribute="trailing" secondItem="Nzd-D2-Ekw" secondAttribute="trailing" id="uuw-wY-rja"/>
+                            <constraint firstItem="Nzd-D2-Ekw" firstAttribute="leading" secondItem="yla-J6-BQz" secondAttribute="leading" id="ztv-p9-qVd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MSU-hX-n4K"/>
                     </view>
@@ -73,7 +71,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="6YI-xi-42Q">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" id="Rxy-to-pCF" customClass="SignInViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="Rxy-to-pCF" customClass="SignInViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zFD-qq-hEj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +119,7 @@
                                     <action selector="signUpButtonAction:" destination="Rxy-to-pCF" eventType="touchUpInside" id="vP2-nY-g0J"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKV-bX-ykN" customClass="ActionButton" customModule="genesisvision_ios" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKV-bX-ykN" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
                                 <rect key="frame" x="32" y="457.5" width="311" height="60"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -180,7 +178,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="6Ha-B9-Nk3">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" id="slI-BT-uSG" customClass="SignUpViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="slI-BT-uSG" customClass="SignUpViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LFK-s9-qee">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +192,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-Gj-GVf" customClass="ActionButton" customModule="genesisvision_ios" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-Gj-GVf" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
                                 <rect key="frame" x="32" y="529.5" width="311" height="60"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -292,7 +290,7 @@
         <!--Confirmation View Controller-->
         <scene sceneID="TQx-gk-8PY">
             <objects>
-                <viewController storyboardIdentifier="ConfirmationViewController" id="mw0-FA-4TT" customClass="ConfirmationViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmationViewController" id="mw0-FA-4TT" customClass="ConfirmationViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yka-2F-3uf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -303,7 +301,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHf-TP-2d2" customClass="ActionButton" customModule="genesisvision_ios" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHf-TP-2d2" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
                                 <rect key="frame" x="32" y="575" width="311" height="60"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

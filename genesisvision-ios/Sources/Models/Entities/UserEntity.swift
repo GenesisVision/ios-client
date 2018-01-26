@@ -13,7 +13,7 @@ class UserEntity: Object, ObjectSingletone {
     @objc dynamic var isLoggedIn: Bool = false
     @objc dynamic var token: String = ""
     
-    func updateProfileser(currentProfile: ProfileEntity?) {
+    func updateProfile(currentProfile: ProfileEntity?) {
         self.currentProfile = currentProfile
     }
     

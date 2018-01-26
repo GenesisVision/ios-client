@@ -140,17 +140,9 @@ extension UIViewController {
         }
     }
     
-    // MARK: - Validation Fields
+    // MARK: - Other
     
-    func isValid(with validateFields: [Validation.ValidateField]) -> Bool {
-        //Error message if at least one fields not valid
-        let errorMessage = Validation.isValidError(with: validateFields)
-        
-        if errorMessage != nil {
-            showAlertWithTitle(title: "Error", message: errorMessage!, actionTitle: nil, cancelTitle: "OK", handler: nil, cancelHandler: nil)
-        }
-        
-        //If errorMessage is equal nil then fields are valid
-        return errorMessage == nil
+    func hideKeyboard() {
+        view.endEditing(true)
     }
 }

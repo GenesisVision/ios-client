@@ -9,9 +9,9 @@
 import Foundation
 
 class ErrorHandler {
-    static func handleApiError(error: Error?, completion: @escaping ApiCompletionBlock) {guard let errorResponse = error as? ErrorResponse else {
-            completion(ApiCompletionResult.failure(reason: nil))
-            return
+    static func handleApiError(error: Error?, completion: @escaping ApiCompletionBlock) {
+        guard let errorResponse = error as? ErrorResponse else {
+            return completion(ApiCompletionResult.failure(reason: nil))
         }
         
         switch errorResponse {
@@ -19,8 +19,7 @@ class ErrorHandler {
             print("API ERROR with \(code) code\n Properties: \(properties)")
             
             guard let jsonData = data else {
-                completion(ApiCompletionResult.failure(reason: nil))
-                return
+                return completion(ApiCompletionResult.failure(reason: nil))
             }
             
             var errorViewModel: ErrorViewModel?
@@ -30,8 +29,7 @@ class ErrorHandler {
             } catch {}
             
             guard let errorsText = errorViewModel?.errors?.flatMap({$0.message}).joined(separator: "\n") else {
-                completion(ApiCompletionResult.failure(reason: nil))
-                return
+                return completion(ApiCompletionResult.failure(reason: nil))
             }
             
             print("API ERROR text \(errorsText)")

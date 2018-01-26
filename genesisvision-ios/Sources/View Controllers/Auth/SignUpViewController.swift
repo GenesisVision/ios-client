@@ -10,12 +10,17 @@ import UIKit
 
 class SignUpViewController: BaseViewController {
 
+    var viewModel: SignUpViewModel!
+    
+    // MARK: - TextFields
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmPasswordTextField: UITextField!
     
+    // MARK: - Buttons
     @IBOutlet var signUpButton: UIButton!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,21 +38,16 @@ class SignUpViewController: BaseViewController {
     }
 
     // MARK: - Private methods
-    
     private func sighUpMethod() {
-        //Hide keyboard
-        view.endEditing(true)
-        
+        hideKeyboard()
         showProgressHUD()
-        
-        //SighUp with fields
-        AuthManager.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+        viewModel.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { (finish) in
-                    self?.showConfirmationVC()
+                self?.showSuccessHUD(completion: { [weak self] (finish) in
+                    self?.viewModel.showConfirmationVC()
                 })
             case .failure(let reason):
                 if reason != nil {
@@ -58,15 +58,11 @@ class SignUpViewController: BaseViewController {
     }
     
     private func showConfirmationVC() {
-        //TODO: Move to Router
-        guard let viewController = ConfirmationViewController.storyboardInstance(name: .auth) else { return }
-        self.navigationController?.pushViewController(viewController, animated: true)
+        viewModel.showConfirmationVC()
     }
     
     // MARK: - Actions
-    
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         sighUpMethod()
     }
-
 }

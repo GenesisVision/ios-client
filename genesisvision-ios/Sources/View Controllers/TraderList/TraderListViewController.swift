@@ -10,16 +10,22 @@ import UIKit
 
 class TraderListViewController: BaseViewController {
 
-    @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var signInButton: UIButton!
-    
-    var programsViewModel: TraderListViewModel! {
+    // MARK: - View Model
+    var viewModel: InvestmentProgramListViewModel! {
         didSet {
-            programsViewModel.fetch { [weak self] in
-                self?.tableView?.reloadData()
+            viewModel.fetch { [weak self] in
+                DispatchQueue.main.async {
+                    self?.tableView?.reloadData()
+                }
             }
         }
     }
+    
+    // MARK: - Buttons
+    @IBOutlet var signInButton: UIButton!
+    
+    // MARK: - Variables
+    @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet var tableView: UITableView! {
         didSet {
@@ -33,6 +39,8 @@ class TraderListViewController: BaseViewController {
             tableView.configure(with: .custom(tableViewConfiguration))
         }
     }
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +56,11 @@ class TraderListViewController: BaseViewController {
     private func setupTableView() {
         tableView.registerNibs(for: [TraderTableViewCell.self])
     }
-
-    func showTraderVC(with traderEntity: InvestmentProgramEntity) {
-        guard let viewController = TraderViewController.storyboardInstance(name: .traders) else { return }
-        viewController.traderEntity = traderEntity
-        viewController.hidesBottomBarWhenPushed = true
-        push(viewController: viewController)
-    }
     
     // MARK: - Actions
     
     @IBAction func signInButtonAction(_ sender: UIButton) {
-        guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
-        navigationController?.pushViewController(viewController, animated: true)
+        viewModel.showSignInVC()
     }
 }
 
@@ -70,28 +70,26 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard programsViewModel.programsCount() >= indexPath.row else {
+        guard viewModel.programsCount() >= indexPath.row else {
             return
         }
         
-        let traderEntity = programsViewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
-        
-        showTraderVC(with: traderEntity)
+        let traderEntity = viewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
+
+        viewModel.showProgramDetail(with: traderEntity)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let model = programsViewModel.getProgram(atIndex: indexPath.row)
+        let model = viewModel.getProgram(atIndex: indexPath.row)
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-        
     }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return programsViewModel.programsCount()
+        return viewModel.numberOfRowsIn(section: section)
     }
-    
 }
 
 
@@ -105,7 +103,8 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
         guard let vc = TraderViewController.storyboardInstance(name: .traders) else { return nil }
-        vc.traderEntity = programsViewModel.investmentProgramViewModels[indexPath.row].investmentProgramEntity
+        vc.viewModel = ProgramDetailViewModel(withRouter: ProgramDetailRouter(navigationController: navigationController))
+        vc.traderEntity = viewModel.investmentProgramViewModels[indexPath.row].investmentProgramEntity
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
         previewingContext.sourceRect = cell.frame

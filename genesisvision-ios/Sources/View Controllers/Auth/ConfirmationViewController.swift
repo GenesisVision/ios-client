@@ -10,8 +10,12 @@ import UIKit
 
 class ConfirmationViewController: BaseViewController {
 
+    var viewModel: ConfirmationViewModel!
+    
+    // MARK: - Buttons
     @IBOutlet var confirmationButton: UIButton!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,9 +29,8 @@ class ConfirmationViewController: BaseViewController {
     
 
     // MARK: - Actions
-    
     @IBAction func confirmationButtonAction(_ sender: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
+        viewModel.confirmationButtonAction()
     }
 
 }

@@ -16,12 +16,6 @@ class BaseTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        if let items = self.tabBar.items {
-//            for tabBarItem in items {
-//                tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-//            }
-//        }
     }
     
     override func didReceiveMemoryWarning() {

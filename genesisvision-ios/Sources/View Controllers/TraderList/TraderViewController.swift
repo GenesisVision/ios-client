@@ -11,6 +11,8 @@ import UIKit
 
 class TraderViewController: BaseViewController {
 
+    var viewModel: ProgramDetailViewModel!
+    
     var traderEntity: InvestmentProgramEntity?
     
     override func viewDidLoad() {

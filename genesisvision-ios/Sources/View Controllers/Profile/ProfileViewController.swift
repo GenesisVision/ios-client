@@ -10,6 +10,9 @@ import UIKit
 
 class ProfileViewController: BaseViewController {
 
+    var viewModel: ProfileViewModel!
+    
+    // MARK: - Variables
     var signOutButton: UIBarButtonItem?
     
     var profile: ProfileEntity {
@@ -20,6 +23,7 @@ class ProfileViewController: BaseViewController {
         return profileEntity
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,8 +36,7 @@ class ProfileViewController: BaseViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func signOutButtonAction(_ sender: UIButton) {
-        AuthManager.signOutWithTransition()
+        viewModel.signOut()
     }
 }

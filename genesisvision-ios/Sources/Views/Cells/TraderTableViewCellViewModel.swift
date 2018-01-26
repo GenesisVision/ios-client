@@ -8,11 +8,11 @@
 
 import UIKit
 
-struct InvestmentProgramTableViewCellModel {
+struct TraderTableViewCellViewModel {
     let investmentProgramEntity: InvestmentProgramEntity
 }
 
-extension InvestmentProgramTableViewCellModel: CellViewModel {
+extension TraderTableViewCellViewModel: CellViewModel {
     func setup(on cell: TraderTableViewCell) {
         cell.userNameLabel.text = investmentProgramEntity.nickname
         cell.currencyLabel.text = investmentProgramEntity.currency.uppercased()

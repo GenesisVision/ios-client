@@ -26,18 +26,6 @@ final class Validation {
         return (enableCharacters(value), type.rawValue)
     }
     
-    static func isValidError(with validateFields: [ValidateField]) -> String? {
-        for validateField in validateFields {
-            let validation = Validation.isValid(value: validateField.text, type: validateField.type)
-            
-            if !validation.0 {
-                return validation.1
-            }
-        }
-        
-        return nil
-    }
-    
     // MARK: - Private
     
     private static func isMail(_ string: String) -> Bool {

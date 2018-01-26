@@ -10,12 +10,17 @@ import UIKit
 
 class SignInViewController: BaseViewController {
 
+    var viewModel: SignInViewModel!
+    
+    // MARK: - TextFields
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
+    // MARK: - Buttons
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,21 +37,16 @@ class SignInViewController: BaseViewController {
     }
     
     // MARK: - Private methods
-
     private func sighInMethod() {
-        //Hide keyboard
-        view.endEditing(true)
-        
+        hideKeyboard()
         showProgressHUD()
-        
-        //SighIn with fields
-        AuthManager.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
+        viewModel.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { (finish) in
-                    AuthManager.signInWithTransition()
+                self?.showSuccessHUD(completion: { [weak self] (finish) in
+                    self?.viewModel.startAsAuthorized()
                 })
             case .failure(let reason):
                 if reason != nil {
@@ -57,21 +57,16 @@ class SignInViewController: BaseViewController {
     }
     
     private func showSignUpVC() {
-        //TODO: Move to Router
-        guard let viewController = SignUpViewController.storyboardInstance(name: .auth) else { return }
-        navigationController?.pushViewController(viewController, animated: true)
+        hideKeyboard()
+        viewModel.showSignUpVC()
     }
     
     // MARK: - Actions
-    
     @IBAction func signInButtonAction(_ sender: UIButton) {
         sighInMethod()
     }
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        //Hide keyboard
-        view.endEditing(true)
-        
         showSignUpVC()
     }
 }

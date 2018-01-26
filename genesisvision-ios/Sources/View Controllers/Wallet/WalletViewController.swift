@@ -10,6 +10,8 @@ import UIKit
 
 class WalletViewController: BaseViewController {
 
+    var viewModel: WalletViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
