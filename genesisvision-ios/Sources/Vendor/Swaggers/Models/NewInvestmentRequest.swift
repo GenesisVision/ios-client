@@ -11,7 +11,6 @@ import Foundation
 
 open class NewInvestmentRequest: Codable {
 
-    public var userId: UUID?
     public var brokerTradeServerId: UUID?
     public var tradePlatformPassword: String?
     public var depositAmount: Double?
@@ -30,8 +29,7 @@ open class NewInvestmentRequest: Codable {
 
 
     
-    public init(userId: UUID?, brokerTradeServerId: UUID?, tradePlatformPassword: String?, depositAmount: Double?, tokenName: String?, tokenSymbol: String?, dateFrom: Date?, dateTo: Date?, logo: String?, description: String?, feeEntrance: Double?, feeManagement: Double?, feeSuccess: Double?, investMinAmount: Double?, investMaxAmount: Double?, period: Int?) {
-        self.userId = userId
+    public init(brokerTradeServerId: UUID?, tradePlatformPassword: String?, depositAmount: Double?, tokenName: String?, tokenSymbol: String?, dateFrom: Date?, dateTo: Date?, logo: String?, description: String?, feeEntrance: Double?, feeManagement: Double?, feeSuccess: Double?, investMinAmount: Double?, investMaxAmount: Double?, period: Int?) {
         self.brokerTradeServerId = brokerTradeServerId
         self.tradePlatformPassword = tradePlatformPassword
         self.depositAmount = depositAmount
@@ -56,7 +54,6 @@ open class NewInvestmentRequest: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(userId, forKey: "userId")
         try container.encodeIfPresent(brokerTradeServerId, forKey: "brokerTradeServerId")
         try container.encodeIfPresent(tradePlatformPassword, forKey: "tradePlatformPassword")
         try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
@@ -79,7 +76,6 @@ open class NewInvestmentRequest: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        userId = try container.decodeIfPresent(UUID.self, forKey: "userId")
         brokerTradeServerId = try container.decodeIfPresent(UUID.self, forKey: "brokerTradeServerId")
         tradePlatformPassword = try container.decodeIfPresent(String.self, forKey: "tradePlatformPassword")
         depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")

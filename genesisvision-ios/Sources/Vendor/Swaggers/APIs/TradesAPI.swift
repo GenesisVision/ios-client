@@ -12,7 +12,8 @@ import Alamofire
 
 open class TradesAPI {
     /**
-
+     Get trades by IPFS hash id
+     
      - parameter ipfsHashId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -24,6 +25,7 @@ open class TradesAPI {
 
 
     /**
+     Get trades by IPFS hash id
      - GET /api/trades/ipfsHistory
      - examples: [{contentType=application/json, example={
   "trades" : [ {

@@ -12,7 +12,8 @@ import Alamofire
 
 open class ManagerAPI {
     /**
-
+     Create new investment request
+     
      - parameter authorization: (header) JWT access token 
      - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,6 +26,7 @@ open class ManagerAPI {
 
 
     /**
+     Create new investment request
      - POST /api/manager/account/newInvestmentRequest
      - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
@@ -51,7 +53,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Confirm email after registration
+     
      - parameter userId: (query)  (optional)
      - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -64,6 +67,7 @@ open class ManagerAPI {
 
 
     /**
+     Confirm email after registration
      - GET /api/manager/auth/confirmEmail
      
      - parameter userId: (query)  (optional)
@@ -89,7 +93,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Authorize
+     
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -101,6 +106,7 @@ open class ManagerAPI {
 
 
     /**
+     Authorize
      - POST /api/manager/auth/signIn
      - examples: [{contentType=application/json, example=""}]
      
@@ -122,7 +128,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Register new manager
+     
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -134,6 +141,7 @@ open class ManagerAPI {
 
 
     /**
+     Register new manager
      - POST /api/manager/auth/signUp
      
      - parameter model: (body)  (optional)
@@ -154,7 +162,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Update auth token
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -166,6 +175,7 @@ open class ManagerAPI {
 
 
     /**
+     Update auth token
      - GET /api/manager/auth/updateToken
      - examples: [{contentType=application/json, example=""}]
      
@@ -191,7 +201,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Get all enabled trade servers
+     
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -203,6 +214,7 @@ open class ManagerAPI {
 
 
     /**
+     Get all enabled trade servers
      - POST /api/manager/brokers
      - examples: [{contentType=application/json, example={
   "total" : 0,
@@ -255,7 +267,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Close existing investment program
+     
      - parameter investmentProgramId: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -268,6 +281,7 @@ open class ManagerAPI {
 
 
     /**
+     Close existing investment program
      - GET /api/manager/investment/close
      
      - parameter investmentProgramId: (query)  
@@ -296,7 +310,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Get investment program with statistic by id
+     
      - parameter investmentProgramId: (query)  
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -308,6 +323,7 @@ open class ManagerAPI {
 
 
     /**
+     Get investment program with statistic by id
      - GET /api/manager/investment
      - examples: [{contentType=application/json, example={
   "statistic" : [ {
@@ -413,7 +429,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Get full profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -425,6 +442,7 @@ open class ManagerAPI {
 
 
     /**
+     Get full profile
      - GET /api/manager/profile/full
      - examples: [{contentType=application/json, example={
   "birthday" : "2000-01-23T04:56:07.000+00:00",
@@ -466,7 +484,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Get short profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -478,6 +497,7 @@ open class ManagerAPI {
 
 
     /**
+     Get short profile
      - GET /api/manager/profile
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
@@ -507,7 +527,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Update profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -520,6 +541,7 @@ open class ManagerAPI {
 
 
     /**
+     Update profile
      - POST /api/manager/profile/update
      
      - parameter authorization: (header) JWT access token 
@@ -545,7 +567,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Deposit
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -557,6 +580,7 @@ open class ManagerAPI {
 
 
     /**
+     Deposit
      - POST /api/manager/wallet/deposit
      
      - parameter authorization: (header) JWT access token 
@@ -581,7 +605,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Get user wallet transactions
+     
      - parameter authorization: (header) JWT access token 
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -594,6 +619,7 @@ open class ManagerAPI {
 
 
     /**
+     Get user wallet transactions
      - POST /api/manager/wallet/transactions
      - examples: [{contentType=application/json, example={
   "total" : 6,
@@ -633,7 +659,8 @@ open class ManagerAPI {
     }
 
     /**
-
+     Withdraw
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -645,6 +672,7 @@ open class ManagerAPI {
 
 
     /**
+     Withdraw
      - POST /api/manager/wallet/withdraw
      
      - parameter authorization: (header) JWT access token 

@@ -12,7 +12,8 @@ import Alamofire
 
 open class BrokerAPI {
     /**
-
+     Create manager
+     
      - parameter authorization: (header) JWT access token 
      - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,6 +26,7 @@ open class BrokerAPI {
 
 
     /**
+     Create manager
      - POST /api/broker/account/create
      - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
@@ -51,7 +53,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Authorize
+     
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -63,6 +66,7 @@ open class BrokerAPI {
 
 
     /**
+     Authorize
      - POST /api/broker/auth/signIn
      - examples: [{contentType=application/json, example=""}]
      
@@ -84,7 +88,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Update auth token
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -96,6 +101,7 @@ open class BrokerAPI {
 
 
     /**
+     Update auth token
      - GET /api/broker/auth/updateToken
      - examples: [{contentType=application/json, example=""}]
      
@@ -121,7 +127,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Get broker initial data
+     
      - parameter brokerTradeServerId: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -134,6 +141,7 @@ open class BrokerAPI {
 
 
     /**
+     Get broker initial data
      - GET /api/broker/initData
      - examples: [{contentType=application/json, example={
   "newManagerRequest" : [ {
@@ -320,7 +328,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Close investment period
+     
      - parameter investmentProgramId: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -333,6 +342,7 @@ open class BrokerAPI {
 
 
     /**
+     Close investment period
      - GET /api/broker/period/close
      
      - parameter investmentProgramId: (query)  
@@ -361,7 +371,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Set investment period start balance
+     
      - parameter periodId: (query)  
      - parameter balance: (query)  
      - parameter authorization: (header) JWT access token 
@@ -375,6 +386,7 @@ open class BrokerAPI {
 
 
     /**
+     Set investment period start balance
      - GET /api/broker/period/setStartBalance
      
      - parameter periodId: (query)  
@@ -405,7 +417,8 @@ open class BrokerAPI {
     }
 
     /**
-
+     Get data for closing investment period
+     
      - parameter investmentProgramId: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -418,6 +431,7 @@ open class BrokerAPI {
 
 
     /**
+     Get data for closing investment period
      - GET /api/broker/period/сlosingData
      - examples: [{contentType=application/json, example={
   "nextPeriod" : {

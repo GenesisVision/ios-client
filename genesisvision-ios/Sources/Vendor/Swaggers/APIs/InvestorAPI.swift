@@ -12,7 +12,8 @@ import Alamofire
 
 open class InvestorAPI {
     /**
-
+     Confirm email after registration
+     
      - parameter userId: (query)  (optional)
      - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,6 +26,7 @@ open class InvestorAPI {
 
 
     /**
+     Confirm email after registration
      - GET /api/investor/auth/confirmEmail
      
      - parameter userId: (query)  (optional)
@@ -50,7 +52,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Authorize
+     
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -62,6 +65,7 @@ open class InvestorAPI {
 
 
     /**
+     Authorize
      - POST /api/investor/auth/signIn
      - examples: [{contentType=application/json, example=""}]
      
@@ -83,7 +87,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Register new investor
+     
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -95,6 +100,7 @@ open class InvestorAPI {
 
 
     /**
+     Register new investor
      - POST /api/investor/auth/signUp
      
      - parameter model: (body)  (optional)
@@ -115,7 +121,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Update auth token
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -127,6 +134,7 @@ open class InvestorAPI {
 
 
     /**
+     Update auth token
      - GET /api/investor/auth/updateToken
      - examples: [{contentType=application/json, example=""}]
      
@@ -152,7 +160,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Get investor dashboard
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -164,6 +173,7 @@ open class InvestorAPI {
 
 
     /**
+     Get investor dashboard
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
   "programs" : [ {
@@ -250,7 +260,7 @@ open class InvestorAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentsInvestPost(authorization: String, model: InvestViewModel? = nil, completion: @escaping ((_ data: ProfileShortViewModel?,_ error: Error?) -> Void)) {
+    open class func apiInvestorInvestmentsInvestPost(authorization: String, model: Invest? = nil, completion: @escaping ((_ data: ProfileShortViewModel?,_ error: Error?) -> Void)) {
         apiInvestorInvestmentsInvestPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -270,7 +280,7 @@ open class InvestorAPI {
 
      - returns: RequestBuilder<ProfileShortViewModel> 
      */
-    open class func apiInvestorInvestmentsInvestPostWithRequestBuilder(authorization: String, model: InvestViewModel? = nil) -> RequestBuilder<ProfileShortViewModel> {
+    open class func apiInvestorInvestmentsInvestPostWithRequestBuilder(authorization: String, model: Invest? = nil) -> RequestBuilder<ProfileShortViewModel> {
         let path = "/api/investor/investments/invest"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -288,7 +298,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Get investments by filter
+     
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -300,6 +311,7 @@ open class InvestorAPI {
 
 
     /**
+     Get investments by filter
      - POST /api/investor/investments
      - examples: [{contentType=application/json, example={
   "total" : 0,
@@ -469,7 +481,7 @@ open class InvestorAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentsWithdrawPost(authorization: String, model: InvestViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func apiInvestorInvestmentsWithdrawPost(authorization: String, model: Invest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiInvestorInvestmentsWithdrawPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
@@ -484,7 +496,7 @@ open class InvestorAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiInvestorInvestmentsWithdrawPostWithRequestBuilder(authorization: String, model: InvestViewModel? = nil) -> RequestBuilder<Void> {
+    open class func apiInvestorInvestmentsWithdrawPostWithRequestBuilder(authorization: String, model: Invest? = nil) -> RequestBuilder<Void> {
         let path = "/api/investor/investments/withdraw"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -502,7 +514,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Get full profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -514,6 +527,7 @@ open class InvestorAPI {
 
 
     /**
+     Get full profile
      - GET /api/investor/profile/full
      - examples: [{contentType=application/json, example={
   "birthday" : "2000-01-23T04:56:07.000+00:00",
@@ -555,7 +569,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Get short profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -567,6 +582,7 @@ open class InvestorAPI {
 
 
     /**
+     Get short profile
      - GET /api/investor/profile
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
@@ -596,7 +612,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Update profile
+     
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -609,6 +626,7 @@ open class InvestorAPI {
 
 
     /**
+     Update profile
      - POST /api/investor/profile/update
      
      - parameter authorization: (header) JWT access token 
@@ -634,7 +652,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Deposit
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -646,6 +665,7 @@ open class InvestorAPI {
 
 
     /**
+     Deposit
      - POST /api/investor/wallet/deposit
      
      - parameter authorization: (header) JWT access token 
@@ -670,7 +690,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Get user wallet transactions
+     
      - parameter authorization: (header) JWT access token 
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -683,6 +704,7 @@ open class InvestorAPI {
 
 
     /**
+     Get user wallet transactions
      - POST /api/investor/wallet/transactions
      - examples: [{contentType=application/json, example={
   "total" : 6,
@@ -722,7 +744,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Withdraw
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -734,6 +757,7 @@ open class InvestorAPI {
 
 
     /**
+     Withdraw
      - POST /api/investor/wallet/withdraw
      
      - parameter authorization: (header) JWT access token 
