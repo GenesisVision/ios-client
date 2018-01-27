@@ -8,80 +8,100 @@
 
 import UIKit.UIViewController
 
+protocol RouterProtocol {
+    func popToRootViewController(animated: Bool)
+    func popToViewController(viewController: UIViewController, animated: Bool)
+    func popViewController(animated: Bool)
+    func push(viewController: UIViewController)
+    //Model
+    func present(viewController: UIViewController, from currentViewController: UIViewController)
+}
+
 class Router {
     
     // MARK: - Variables
-    fileprivate var parentRouter: Router?
-    private var childRouter: Router?
-    private var childRouters: [Router] = []
+    private var traidersViewController: TraderListViewController!
+    
+    var parentRouter: Router?
+    var childRouters: [Router] = []
+    
+    //for authorized user
+    weak var rootTabBarController: UITabBarController?
     
     weak var navigationController: UINavigationController?
-    weak var tabBarController: UITabBarController?
     
-    var tabBarControllers: [UIViewController] {
+    private var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
         
-        if let controller = getTraiderListVC() {
-            viewControllers.append(controller)
+        if let navigationController = getTraidersNavigationController() {
+            viewControllers.append(navigationController)
         }
         
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
-            dashboardViewController.viewModel = DashboardViewModel(withRouter: DashboardRouter())
-            viewControllers.append(BaseNavigationController(rootViewController: dashboardViewController))
+            let navigationController = BaseNavigationController(rootViewController: dashboardViewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
+            childRouters.append(router)
+            dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
+            viewControllers.append(navigationController)
         }
         
         if let walletViewController = WalletViewController.storyboardInstance(name: .wallet) {
-            walletViewController.viewModel = WalletViewModel(withRouter: WalletRouter())
-            viewControllers.append(BaseNavigationController(rootViewController: walletViewController))
+            let navigationController = BaseNavigationController(rootViewController: walletViewController)
+            let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+            childRouters.append(router)
+            walletViewController.viewModel = WalletViewModel(withRouter: router)
+            viewControllers.append(navigationController)
         }
         
         if let profileViewController = ProfileViewController.storyboardInstance(name: .profile) {
-            profileViewController.viewModel = ProfileViewModel(withRouter: ProfileRouter())
-            viewControllers.append(BaseNavigationController(rootViewController: profileViewController))
+            let navigationController = BaseNavigationController(rootViewController: profileViewController)
+            let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
+            childRouters.append(router)
+            profileViewController.viewModel = ProfileViewModel(withRouter: router)
+            viewControllers.append(navigationController)
         }
         
         return viewControllers
     }
     
-    var traderListViewController: TraderListViewController!
-    
     // MARK: - Init
-    init(parentRouter: Router?) {
+    init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
+        self.traidersViewController = parentRouter?.traidersViewController
+        self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
     }
     
-    init(navigationController: UINavigationController? = nil) {
-        self.navigationController = navigationController
+    // MARK: - Private methods
+    private func createTraidersNavigationController() {
+        guard let viewController = TraderListViewController.storyboardInstance(name: .traders) else { return }
+        traidersViewController = viewController
+        let router = InvestmentProgramListRouter(parentRouter: self)
+        childRouters.append(router)
+        traidersViewController.viewModel = InvestmentProgramListViewModel(withRouter: router)
+    }
+}
+
+//Protocol methods
+extension Router: RouterProtocol {
+    func popToRootViewController(animated: Bool) {
+        navigationController?.popToRootViewController(animated: animated)
     }
     
-    // MARK: - Public methods
-    
-    func getTraiderListVC() -> UIViewController? {
-        if traderListViewController != nil {
-            return traderListViewController
-        }
-        
-        guard let viewController = TraderListViewController.storyboardInstance(name: .traders) else { return nil }
-        traderListViewController = viewController
-        
-        let navigationController = BaseNavigationController(rootViewController: traderListViewController)
-        traderListViewController.viewModel = InvestmentProgramListViewModel(withRouter: InvestmentProgramListRouter(navigationController: navigationController))
-        
-        return navigationController
+    func popToViewController(viewController: UIViewController, animated: Bool) {
+        navigationController?.popToViewController(viewController, animated: animated)
     }
     
-    func startAsUnauthorized() {
-        guard let controller = getTraiderListVC() else { return }
-        setWindowRoot(viewController: controller)
+    func popViewController(animated: Bool) {
+        navigationController?.popViewController(animated: animated)
     }
     
-    func startAsAuthorized() {
-        let tabBarController = BaseTabBarController()
-        tabBarController.viewControllers = self.tabBarControllers
-        
-        self.tabBarController = tabBarController
-        
-        setWindowRoot(viewController: self.tabBarController)
+    func push(viewController: UIViewController) {
+        navigationController?.push(viewController: viewController)
+    }
+    
+    //Modal
+    func present(viewController: UIViewController, from currentViewController: UIViewController) {
+        currentViewController.present(viewController: viewController)
     }
     
     func setWindowRoot(viewController: UIViewController?) {
@@ -90,8 +110,30 @@ class Router {
     }
 }
 
+//Common methods
 extension Router {
-    func popToRootViewController() {
-        navigationController?.popToRootViewController(animated: true)
+    func getTraidersNavigationController() -> UINavigationController? {
+        if traidersViewController == nil {
+            createTraidersNavigationController()
+        }
+        
+        let navigationController = BaseNavigationController(rootViewController: traidersViewController)
+        traidersViewController.viewModel.router.navigationController = navigationController
+        
+        return navigationController
+    }
+    
+    func startAsUnauthorized() {
+        guard let navigationController = getTraidersNavigationController() else { return }
+        setWindowRoot(viewController: navigationController)
+    }
+    
+    func startAsAuthorized() {
+        let tabBarController = BaseTabBarController()
+        tabBarController.viewControllers = tabBarControllers
+        
+        rootTabBarController = tabBarController
+        
+        setWindowRoot(viewController: rootTabBarController)
     }
 }

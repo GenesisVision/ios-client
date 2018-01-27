@@ -107,9 +107,8 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYD-sE-MAU">
-                                <rect key="frame" x="88" y="549.5" width="200" height="30"/>
+                                <rect key="frame" x="32.5" y="549.5" width="311" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="FRv-5g-zZk"/>
                                     <constraint firstAttribute="height" constant="30" id="WXq-gw-b5l"/>
                                 </constraints>
                                 <state key="normal" title="Create new account">
@@ -143,8 +142,8 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="MYD-sE-MAU" firstAttribute="leading" secondItem="IKV-bX-ykN" secondAttribute="leading" id="2Zq-VF-KxU"/>
                             <constraint firstItem="VNX-Cg-TzZ" firstAttribute="leading" secondItem="G6D-1M-bzU" secondAttribute="leading" id="2mV-OE-Y5z"/>
-                            <constraint firstItem="MYD-sE-MAU" firstAttribute="centerX" secondItem="IKV-bX-ykN" secondAttribute="centerX" id="ACK-6p-dec"/>
                             <constraint firstItem="G6D-1M-bzU" firstAttribute="centerY" secondItem="zFD-qq-hEj" secondAttribute="centerY" id="C4Z-Iq-u9L"/>
                             <constraint firstItem="BQV-GE-ydP" firstAttribute="trailing" secondItem="G6D-1M-bzU" secondAttribute="trailing" constant="32" id="CHG-rB-2Db"/>
                             <constraint firstItem="VNX-Cg-TzZ" firstAttribute="top" secondItem="G6D-1M-bzU" secondAttribute="bottom" constant="32" id="GmX-GS-cMj"/>
@@ -152,6 +151,7 @@
                             <constraint firstItem="VNX-Cg-TzZ" firstAttribute="trailing" secondItem="G6D-1M-bzU" secondAttribute="trailing" id="M23-vo-zR0"/>
                             <constraint firstItem="UXO-NA-abz" firstAttribute="leading" secondItem="G6D-1M-bzU" secondAttribute="leading" id="OYc-Ca-EeN"/>
                             <constraint firstItem="IKV-bX-ykN" firstAttribute="leading" secondItem="VNX-Cg-TzZ" secondAttribute="leading" id="Qky-CJ-nWj"/>
+                            <constraint firstItem="MYD-sE-MAU" firstAttribute="trailing" secondItem="IKV-bX-ykN" secondAttribute="trailing" id="Qux-XD-QY4"/>
                             <constraint firstItem="G6D-1M-bzU" firstAttribute="top" secondItem="UXO-NA-abz" secondAttribute="bottom" constant="3" id="fdo-Oh-PPw"/>
                             <constraint firstItem="IKV-bX-ykN" firstAttribute="trailing" secondItem="VNX-Cg-TzZ" secondAttribute="trailing" id="gGS-LI-tqd"/>
                             <constraint firstItem="G6D-1M-bzU" firstAttribute="leading" secondItem="BQV-GE-ydP" secondAttribute="leading" constant="32" id="odJ-L5-Ypo"/>

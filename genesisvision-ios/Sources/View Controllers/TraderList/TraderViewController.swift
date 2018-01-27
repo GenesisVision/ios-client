@@ -13,12 +13,12 @@ class TraderViewController: BaseViewController {
 
     var viewModel: ProgramDetailViewModel!
     
-    var traderEntity: InvestmentProgramEntity?
+    var investmentProgramEntity: InvestmentProgramEntity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = traderEntity?.nickname
+        title = viewModel.getNickname()
     }
 
     override func didReceiveMemoryWarning() {

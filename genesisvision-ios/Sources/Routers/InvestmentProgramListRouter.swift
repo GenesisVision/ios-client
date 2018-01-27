@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case openProgram(programModel: InvestmentProgramViewModel), signIn, showProgramDetail(traderEntity: InvestmentProgramEntity)
+    case openProgram(programModel: InvestmentProgramViewModel), signIn, showProgramDetail(programEntity: InvestmentProgramEntity)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -24,6 +24,15 @@ class InvestmentProgramListRouter: Router {
         }
     }
     
+    func getProgramDetailViewController(withEntity entity: InvestmentProgramEntity) -> TraderViewController? {
+        guard let traderViewController = TraderViewController.storyboardInstance(name: .traders) else { return nil }
+        let router = ProgramDetailRouter(parentRouter: self)
+        let viewModel = ProgramDetailViewModel(withRouter: router, withEntity: entity)
+        traderViewController.viewModel = viewModel
+        
+        return traderViewController
+    }
+    
     // MARK: - Private methods
     private func openProgram(programModel: InvestmentProgramViewModel) {
         print(programModel)
@@ -31,14 +40,17 @@ class InvestmentProgramListRouter: Router {
     
     private func signInAction() {
         guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
-        viewController.viewModel = SignInViewModel(withRouter: SignInRouter(navigationController: navigationController))
+        let router = SignInRouter(parentRouter: self, navigationController: navigationController)
+        childRouters.append(router)
+        viewController.viewModel = SignInViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showProgramDetail(with traderEntity: InvestmentProgramEntity) {
+    private func showProgramDetail(with programEntity: InvestmentProgramEntity) {
         guard let viewController = TraderViewController.storyboardInstance(name: .traders) else { return }
-        viewController.viewModel = ProgramDetailViewModel(withRouter: ProgramDetailRouter(navigationController: navigationController))
-        viewController.traderEntity = traderEntity
+        let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, withEntity: programEntity)
+        viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }

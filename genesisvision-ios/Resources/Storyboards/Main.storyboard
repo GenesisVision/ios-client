@@ -13,7 +13,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="YAK-qb-668">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="g05-ly-iYt" customClass="WelcomeViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" id="g05-ly-iYt" customClass="WelcomeViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8aW-I1-q2Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
         <!--Base Tab Bar Controller-->
         <scene sceneID="snu-zr-HKL">
             <objects>
-                <tabBarController storyboardIdentifier="BaseTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="oWh-o1-TY9" customClass="BaseTabBarController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="BaseTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="oWh-o1-TY9" customClass="BaseTabBarController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SNv-s0-jPc">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -38,47 +38,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qip-9o-ZaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="535"/>
-        </scene>
-        <!--ProfileNavigationController-->
-        <scene sceneID="GcZ-ef-92p">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileNavigationController" id="I5o-8M-o5V" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="wkF-Fg-FDK"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b9n-i2-NRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="515"/>
-        </scene>
-        <!--TraderListNavigationController-->
-        <scene sceneID="TTq-Wi-xqp">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Traders" referencedIdentifier="TraderListNavigationController" id="f9S-th-drK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Invest" id="Nk1-jS-tVe"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pKY-6L-Yrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="476"/>
-        </scene>
-        <!--DashboardNavigationController-->
-        <scene sceneID="Zpy-lK-NUD">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Dashboard" referencedIdentifier="DashboardNavigationController" id="2hf-Xs-m4j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" id="THP-46-zvF"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3MA-uy-6vG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="553"/>
-        </scene>
-        <!--WalletNavigationController-->
-        <scene sceneID="kbX-yS-yji">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Wallet" referencedIdentifier="WalletNavigationController" id="Tex-3E-5kW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Wallet" id="sn8-jv-PYH"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="moh-YL-0l9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="593"/>
+            <point key="canvasLocation" x="-620" y="528"/>
         </scene>
     </scenes>
 </document>

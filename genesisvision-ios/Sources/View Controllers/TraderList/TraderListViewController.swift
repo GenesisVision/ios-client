@@ -10,6 +10,8 @@ import UIKit
 
 class TraderListViewController: BaseViewController {
 
+    var authorizedValue: Bool = false
+    
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel! {
         didSet {
@@ -29,14 +31,7 @@ class TraderListViewController: BaseViewController {
     
     @IBOutlet var tableView: UITableView! {
         didSet {
-            let authorizedValue = AuthManager.isLogin()
-            
-            signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
-            signInButton.isHidden = authorizedValue
-            var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-            tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
-            tableViewConfiguration.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
-            tableView.configure(with: .custom(tableViewConfiguration))
+            setupSignInButton()
         }
     }
     
@@ -51,7 +46,28 @@ class TraderListViewController: BaseViewController {
         registerForPreviewing()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupSignInButton()
+    }
+    
     // MARK: - Private methods
+    private func setupSignInButton() {
+        //if authorize status not change then return
+        guard authorizedValue != viewModel.isLogin() || signInButton.isHidden != authorizedValue else {
+            return
+        }
+        
+        authorizedValue = viewModel.isLogin()
+        
+        signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
+        signInButton.isHidden = authorizedValue
+        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
+        tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
+        tableViewConfiguration.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+        tableView.configure(with: .custom(tableViewConfiguration))
+    }
     
     private func setupTableView() {
         tableView.registerNibs(for: [TraderTableViewCell.self])
@@ -74,9 +90,9 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let traderEntity = viewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
+        let programEntity = viewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
 
-        viewModel.showProgramDetail(with: traderEntity)
+        viewModel.showProgramDetail(with: programEntity)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,9 +118,7 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         guard let indexPath = tableView.indexPathForRow(at: cellPosition) else { return nil }
         guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
-        guard let vc = TraderViewController.storyboardInstance(name: .traders) else { return nil }
-        vc.viewModel = ProgramDetailViewModel(withRouter: ProgramDetailRouter(navigationController: navigationController))
-        vc.traderEntity = viewModel.investmentProgramViewModels[indexPath.row].investmentProgramEntity
+        guard let vc = viewModel.getProgramDetailViewController(withIndex: indexPath.row) else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
         previewingContext.sourceRect = cell.frame

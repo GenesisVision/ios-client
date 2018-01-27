@@ -35,7 +35,6 @@ class ChartView: LineChartView {
     private func setDataCount(_ count: Int, range: UInt32) {
         let values = (0..<count).map { (i) -> ChartDataEntry in
             let val = Double(arc4random_uniform(range)) - Double(range / 2)
-            print(val)
             return ChartDataEntry(x: Double(i), y: val)
         }
         

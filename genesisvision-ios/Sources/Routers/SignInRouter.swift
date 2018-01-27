@@ -26,7 +26,10 @@ class SignInRouter: Router {
     // MARK: - Navigation
     private func signUpAction() {
         guard let viewController = SignUpViewController.storyboardInstance(name: .auth) else { return }
-        viewController.viewModel = SignUpViewModel(withRouter: SignUpRouter(navigationController: navigationController))
+        let router = SignUpRouter(parentRouter: self)
+        router.navigationController = navigationController
+        childRouters.append(router)
+        viewController.viewModel = SignUpViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

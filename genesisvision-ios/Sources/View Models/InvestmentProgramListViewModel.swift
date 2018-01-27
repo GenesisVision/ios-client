@@ -31,6 +31,11 @@ class InvestmentProgramListViewModel {
     var investmentProgramViewModels = [TraderTableViewCellViewModel]()
     
     // MARK: - Public methods
+    
+    func isLogin() -> Bool {
+        return AuthManager.isLogin()
+    }
+    
     func fetch(completion:@escaping () -> Void?) {
         switch dataType {
         case .api:
@@ -86,17 +91,22 @@ class InvestmentProgramListViewModel {
         return investmentProgramViewModels[index]
     }
     
+    func getProgramDetailViewController(withIndex index: Int) -> TraderViewController? {
+        let program = getProgram(atIndex: index)
+        let entity = program.investmentProgramEntity
+        return router.getProgramDetailViewController(withEntity: entity)
+    }
+    
     // MARK: - Navigation
     func showSignInVC() {
         router.show(routeType: .signIn)
     }
     
-    func showProgramDetail(with traderEntity: InvestmentProgramEntity) {
-        router.show(routeType: .showProgramDetail(traderEntity: traderEntity))
+    func showProgramDetail(with programEntity: InvestmentProgramEntity) {
+        router.show(routeType: .showProgramDetail(programEntity: programEntity))
     }
     
     // MARK: - Private methods
-    
     private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
         InvestorAPI.apiInvestorInvestmentsPostWithRequestBuilder(filter: filter).execute { (response, error) in
             guard response != nil && response?.statusCode == 200 else {

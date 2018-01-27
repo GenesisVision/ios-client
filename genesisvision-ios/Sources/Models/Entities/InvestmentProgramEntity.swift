@@ -1,5 +1,5 @@
 //
-//  TraderEntity.swift
+//  InvestmentProgramEntity.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 16.01.18.

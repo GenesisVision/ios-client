@@ -22,6 +22,6 @@ class ConfirmationRouter: Router {
     
     // MARK: - Private methods
     private func popToTraderList() {
-        popToRootViewController()
+        popToRootViewController(animated: true)
     }
 }

@@ -106,7 +106,6 @@
 		FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */; };
 		FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD27200DF2C3008825EC /* AppDelegate.swift */; };
 		FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD3B200DFA5E008825EC /* Assets.xcassets */; };
-		FCC9DD54200DFA5E008825EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD3D200DFA5E008825EC /* Info.plist */; };
 		FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */; };
 		FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD42200DFA5E008825EC /* Main.storyboard */; };
 		FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5A200DFFB8008825EC /* Profile.storyboard */; };
@@ -159,6 +158,7 @@
 		FC496421201558AD00104CEB /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PaletteColors.swift"; sourceTree = "<group>"; };
 		FC4964252015598300104CEB /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
@@ -249,7 +249,6 @@
 		FCC9DD24200DF2C3008825EC /* genesisvision-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "genesisvision-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC9DD27200DF2C3008825EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC9DD3B200DFA5E008825EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FCC9DD3D200DFA5E008825EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCC9DD42200DFA5E008825EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FCC9DD5A200DFFB8008825EC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -517,7 +516,7 @@
 		FCC9DD3C200DFA5E008825EC /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				FCC9DD3D200DFA5E008825EC /* Info.plist */,
+				FC7CAE14201C310E00163A53 /* Info.plist */,
 				FCE8236220161339000061E8 /* Constants.swift */,
 			);
 			path = Config;
@@ -838,7 +837,6 @@
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Traders.storyboard in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
-				FCC9DD54200DFA5E008825EC /* Info.plist in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,

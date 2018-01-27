@@ -9,10 +9,20 @@
 class ProgramDetailViewModel {
     
     private var router: ProgramDetailRouter!
+    private var investmentProgramEntity: InvestmentProgramEntity!
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter) {
+    init(withRouter router: ProgramDetailRouter, withEntity entity: InvestmentProgramEntity) {
         self.router = router
+        investmentProgramEntity = entity
+    }
+    
+    func getNickname() -> String {
+        return investmentProgramEntity.nickname
+    }
+    
+    func getEntity() -> InvestmentProgramEntity {
+        return investmentProgramEntity
     }
     
     // MARK: - Public methods

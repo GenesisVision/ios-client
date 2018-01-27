@@ -34,6 +34,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
                                         <rect key="frame" x="32" y="0.0" width="311" height="60"/>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Enz-0z-ufT"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Sign in">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,8 +54,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cvZ-bk-mvw" secondAttribute="trailing" constant="32" id="Ti7-T9-2YF"/>
+                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="cvZ-bk-mvw" secondAttribute="bottom" constant="16" id="VXV-Sz-PAh"/>
                                     <constraint firstItem="cvZ-bk-mvw" firstAttribute="leading" secondItem="926-WY-PMI" secondAttribute="leading" constant="32" id="afP-eH-xLw"/>
-                                    <constraint firstAttribute="bottom" secondItem="cvZ-bk-mvw" secondAttribute="bottom" constant="16" id="krV-ec-gba"/>
                                     <constraint firstAttribute="height" constant="76" id="sZi-Pb-Unm"/>
                                     <constraint firstItem="cvZ-bk-mvw" firstAttribute="top" secondItem="926-WY-PMI" secondAttribute="top" id="uwD-EM-fq0"/>
                                 </constraints>
@@ -73,7 +76,7 @@
                     <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
                     <connections>
                         <outlet property="signInButton" destination="cvZ-bk-mvw" id="laf-Wh-Kd5"/>
-                        <outlet property="signInButtonViewHeightConstraint" destination="sZi-Pb-Unm" id="u0q-Vt-Kko"/>
+                        <outlet property="signInButtonViewHeightConstraint" destination="sZi-Pb-Unm" id="4ea-vu-MBj"/>
                         <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
                     </connections>
                 </viewController>

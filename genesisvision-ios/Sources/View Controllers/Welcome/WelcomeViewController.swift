@@ -17,7 +17,7 @@ class WelcomeViewController: BaseViewController {
         super.viewDidLoad()
 
         let navigationController = BaseNavigationController()
-        let router = WelcomeRouter(navigationController: navigationController)
+        let router = WelcomeRouter(parentRouter: nil, navigationController: navigationController)
         viewModel = WelcomeViewModel(withRouter: router)
         viewModel.start()
     }
