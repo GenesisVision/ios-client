@@ -14,15 +14,7 @@ class ProfileViewController: BaseViewController {
     
     // MARK: - Variables
     var signOutButton: UIBarButtonItem?
-    
-    var profile: ProfileEntity {
-        guard let profileEntity = UserEntity.value.currentProfile else {
-            fatalError("Authorization error")
-        }
-        
-        return profileEntity
-    }
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

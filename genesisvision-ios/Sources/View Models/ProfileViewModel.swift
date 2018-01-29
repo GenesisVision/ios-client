@@ -8,6 +8,7 @@
 
 class ProfileViewModel {
     
+    private var profileViewModel: ProfileFullViewModel?
     private var router: ProfileRouter!
     
     // MARK: - Init
@@ -21,4 +22,15 @@ class ProfileViewModel {
         AuthManager.authorizedToken = nil
         router.show(routeType: .signOut)
     }
+    
+    func getProfile(completion: @escaping ApiCompletionBlock) {
+        AuthManager.getProfile { [weak self] (viewModel) in
+            self?.profileViewModel = viewModel
+            completion(.success)
+        }
+    }
+    
+    
+    // MARK: - Private methods
+    
 }

@@ -24,7 +24,7 @@ class InvestmentProgramListViewModel {
     var dataType: DataType = .api
     
     var skip = 0            //offset
-    var take = 10           //count of programs
+    var take = 3            //count of programs
     
     var totalCount = 0      //total count of programs
     
@@ -108,17 +108,22 @@ class InvestmentProgramListViewModel {
     
     // MARK: - Private methods
     private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        InvestorAPI.apiInvestorInvestmentsPostWithRequestBuilder(filter: filter).execute { (response, error) in
-            guard response != nil && response?.statusCode == 200 else {
-                return ErrorHandler.handleApiError(error: error, completion: { (result) in print(result) })
-            }
-
-            guard let investmentProgramsViewModel = response?.body else {
-                return completion(nil)
-            }
-            
-            completion(investmentProgramsViewModel)
+        InvestorAPI.apiInvestorInvestmentsPost(filter: filter) { [weak self] (viewModel, error) in
+            self?.responseHandler(viewModel, error: error, successCompletion: { (programs) in
+                completion(programs)
+            }, errorCompletion: { (error) in
+                completion(nil)
+            })
         }
+    }
+    
+    private func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping ApiCompletionBlock) {
+        
+        guard viewModel != nil else {
+            return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
+        }
+        
+        successCompletion(viewModel)
     }
     
     private func fakeInvestmentPrograms(completion: (_ traderCellModels: [TraderTableViewCellViewModel]) -> Void) {

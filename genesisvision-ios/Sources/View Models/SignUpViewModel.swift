@@ -33,20 +33,21 @@ class SignUpViewModel {
     private func investorSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
         let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
         
-        InvestorAPI.apiInvestorAuthSignUpPostWithRequestBuilder(model: registerInvestorViewModel).execute { [weak self] (response, error) in
-            self?.signUpResponseHandler(response, error: error, completion: completion)
+        InvestorAPI.apiInvestorAuthSignUpPost(model: registerInvestorViewModel) { [weak self] (error) in
+            self?.responseHandler(error: error, completion: completion)
         }
     }
     
     private func managerSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
         let registerManagerViewModel = RegisterManagerViewModel(email: email, password: password, confirmPassword: confirmPassword)
-        ManagerAPI.apiManagerAuthSignUpPostWithRequestBuilder(model: registerManagerViewModel).execute { [weak self] (response, error) in
-            self?.signUpResponseHandler(response, error: error, completion: completion)
+        
+        ManagerAPI.apiManagerAuthSignUpPost(model: registerManagerViewModel) { [weak self] (error) in
+            self?.responseHandler(error: error, completion: completion)
         }
     }
     
-    private func signUpResponseHandler(_ response: Response<Void>?, error: Error?, completion: @escaping ApiCompletionBlock) {
-        response != nil && response?.statusCode == 200
+    private func responseHandler(error: Error?, completion: @escaping ApiCompletionBlock) {
+        error == nil
             ? completion(ApiCompletionResult.success)
             : ErrorHandler.handleApiError(error: error, completion: completion)
     }

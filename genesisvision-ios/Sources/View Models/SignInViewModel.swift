@@ -37,30 +37,25 @@ class SignInViewModel {
     // MARK: - API
     private func investorSignIn(email: String, password: String, completion: @escaping ApiCompletionBlock) {
         let loginViewModel = LoginViewModel(email: email, password: password)
-        
-        InvestorAPI.apiInvestorAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { [weak self] (response, error) in
-            self?.signInResponseHandler(response, error: error, completion: completion)
+        InvestorAPI.apiInvestorAuthSignInPost(model: loginViewModel) { [weak self] (token, error) in
+            self?.responseHandler(token, error: error, completion: completion)
         }
     }
     
     private func managerSignIn(email: String, password: String, completion: @escaping ApiCompletionBlock) {
         let loginViewModel = LoginViewModel(email: email, password: password)
-        
-        ManagerAPI.apiManagerAuthSignInPostWithRequestBuilder(model: loginViewModel).execute { [weak self] (response, error) in
-            self?.signInResponseHandler(response, error: error, completion: completion)
+        ManagerAPI.apiManagerAuthSignInPost(model: loginViewModel) { [weak self] (token, error) in
+            self?.responseHandler(token, error: error, completion: completion)
         }
     }
     
-    private func signInResponseHandler(_ response: Response<String>?, error: Error?, completion: @escaping ApiCompletionBlock) {
-        guard response != nil && response?.statusCode == 200 else {
+    private func responseHandler(_ token: String?, error: Error?, completion: @escaping ApiCompletionBlock) {
+        guard token != nil else {
             return ErrorHandler.handleApiError(error: error, completion: completion)
         }
         
-        //save token
-        if let token = response?.body {
-            AuthManager.authorizedToken = token
-        }
+        AuthManager.authorizedToken = token
         
-        completion(ApiCompletionResult.success)
+        completion(.success)
     }
 }

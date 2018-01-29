@@ -255,7 +255,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Invest in manager
+     
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -268,6 +269,7 @@ open class InvestorAPI {
 
 
     /**
+     Invest in manager
      - POST /api/investor/investments/invest
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
@@ -476,7 +478,8 @@ open class InvestorAPI {
     }
 
     /**
-
+     Withdraw from investment program
+     
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -489,6 +492,7 @@ open class InvestorAPI {
 
 
     /**
+     Withdraw from investment program
      - POST /api/investor/investments/withdraw
      
      - parameter authorization: (header) JWT access token 
