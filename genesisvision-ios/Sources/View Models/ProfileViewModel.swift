@@ -8,6 +8,7 @@
 
 class ProfileViewModel {
     
+    // MARK: - Variables
     private var profileViewModel: ProfileFullViewModel?
     private var router: ProfileRouter!
     

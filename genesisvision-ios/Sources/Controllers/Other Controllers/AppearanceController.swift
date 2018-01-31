@@ -19,6 +19,10 @@ struct AppearanceController {
     // NavigationBar
     private static func setupNavigationBar() {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
+        }
+        
         UINavigationBar.appearance().tintColor = UIColor(.blue)
     }
     

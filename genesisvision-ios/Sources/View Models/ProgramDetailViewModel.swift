@@ -8,6 +8,7 @@
 
 class ProgramDetailViewModel {
     
+    // MARK: - Variables
     private var router: ProgramDetailRouter!
     private var investmentProgramEntity: InvestmentProgramEntity!
     

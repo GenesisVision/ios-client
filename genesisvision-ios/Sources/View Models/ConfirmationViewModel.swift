@@ -8,6 +8,7 @@
 
 class ConfirmationViewModel {
     
+    // MARK: - Variables
     private var router: ConfirmationRouter!
     
     // MARK: - Init

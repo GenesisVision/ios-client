@@ -71,6 +71,10 @@
 		FC5E90B920221C24000E4A90 /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E908820221C23000E4A90 /* WalletTransaction.swift */; };
 		FC5E90BA20221C24000E4A90 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E908920221C23000E4A90 /* WalletTransactionsViewModel.swift */; };
 		FC5E90BB20221C24000E4A90 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E908A20221C23000E4A90 /* Models.swift */; };
+		FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */; };
+		FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */; };
+		FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */; };
+		FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */; };
 		FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A22201AA07700157AD6 /* ProfileImageView.swift */; };
 		FCA19A25201AA8C000157AD6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A24201AA8C000157AD6 /* Router.swift */; };
 		FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */; };
@@ -215,6 +219,10 @@
 		FC5E908820221C23000E4A90 /* WalletTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
 		FC5E908920221C23000E4A90 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
 		FC5E908A20221C23000E4A90 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAmountTableViewCell.swift; sourceTree = "<group>"; };
+		FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterAmountTableViewCell.xib; sourceTree = "<group>"; };
+		FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCell.swift; sourceTree = "<group>"; };
+		FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSortTableViewCell.xib; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -731,6 +739,10 @@
 				FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */,
 				FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */,
 				FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */,
+				FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */,
+				FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */,
+				FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */,
+				FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -843,6 +855,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
@@ -852,6 +865,7 @@
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
+				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,6 +952,7 @@
 				FC5E90A520221C23000E4A90 /* InvestmentRequest.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
+				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				FC5E909C20221C23000E4A90 /* ClosePeriodData.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -1021,6 +1036,7 @@
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FC5E9048202167CF000E4A90 /* RouterViewModel.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
+				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
 				FCA19A43201AE85C00157AD6 /* DashboardRouter.swift in Sources */,

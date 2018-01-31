@@ -15,6 +15,9 @@ class FilterViewController: BaseViewController {
     var viewModel: FilterViewModel!
     
     // MARK: - Variables
+    private var applyBarButtonItem: UIBarButtonItem?
+    private var resetBarButtonItem: UIBarButtonItem?
+    
     @IBOutlet var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -41,6 +44,15 @@ class FilterViewController: BaseViewController {
         tableView.tableFooterView = UIView()
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
+    }
+    
+    // MARK: - IBAction
+    @IBAction func applyButtonAction(_ sender: UIButton) {
+        viewModel.apply()
+    }
+    
+    @IBAction func resetButtonAction(_ sender: UIButton) {
+        viewModel.reset()
     }
 }
 

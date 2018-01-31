@@ -8,6 +8,7 @@
 
 class SignUpViewModel {
     
+    // MARK: - Variables
     private var router: SignUpRouter!
     
     // MARK: - Init
