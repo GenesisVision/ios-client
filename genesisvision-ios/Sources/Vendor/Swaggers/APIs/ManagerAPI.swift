@@ -533,7 +533,7 @@ open class ManagerAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiManagerProfileUpdatePost(authorization: String, model: ProfileFullViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func apiManagerProfileUpdatePost(authorization: String, model: UpdateProfileViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiManagerProfileUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
@@ -549,7 +549,7 @@ open class ManagerAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiManagerProfileUpdatePostWithRequestBuilder(authorization: String, model: ProfileFullViewModel? = nil) -> RequestBuilder<Void> {
+    open class func apiManagerProfileUpdatePostWithRequestBuilder(authorization: String, model: UpdateProfileViewModel? = nil) -> RequestBuilder<Void> {
         let path = "/api/manager/profile/update"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)

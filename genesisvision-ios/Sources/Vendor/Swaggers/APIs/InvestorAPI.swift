@@ -622,7 +622,7 @@ open class InvestorAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorProfileUpdatePost(authorization: String, model: ProfileFullViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func apiInvestorProfileUpdatePost(authorization: String, model: UpdateProfileViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiInvestorProfileUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
@@ -638,7 +638,7 @@ open class InvestorAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiInvestorProfileUpdatePostWithRequestBuilder(authorization: String, model: ProfileFullViewModel? = nil) -> RequestBuilder<Void> {
+    open class func apiInvestorProfileUpdatePostWithRequestBuilder(authorization: String, model: UpdateProfileViewModel? = nil) -> RequestBuilder<Void> {
         let path = "/api/investor/profile/update"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
