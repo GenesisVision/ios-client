@@ -14,6 +14,7 @@ PODS:
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
+  - TextFieldEffects (1.4.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
+  - TextFieldEffects
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -35,7 +37,8 @@ SPEC CHECKSUMS:
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
-PODFILE CHECKSUM: e3a64b6bf39def16f253f89ac6996651cb969158
+PODFILE CHECKSUM: 41cea9210144be78f91ca24fdcb411f2cbfb1f64
 
 COCOAPODS: 1.4.0

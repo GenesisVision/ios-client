@@ -11,4 +11,5 @@ target 'genesisvision-ios' do
     pod 'DZNEmptyDataSet'
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
+    pod 'TextFieldEffects'
 end

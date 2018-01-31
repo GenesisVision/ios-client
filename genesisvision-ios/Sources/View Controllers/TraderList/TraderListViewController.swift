@@ -76,7 +76,7 @@ class TraderListViewController: BaseViewController {
     private func setupTableConfiguration() {
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
         tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
-        tableViewConfiguration.backgroundColor = UIColor(.gray)
+        tableViewConfiguration.backgroundColor = UIColor(.lightGray)
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.tableFooterView = UIView()
@@ -201,9 +201,10 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
 extension TraderListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     //DZNEmptyDataSetSource
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No programs"
+        let text = "No data"
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.darkGray)]
         
-        return NSAttributedString(string: text)
+        return NSAttributedString(string: text, attributes: attributes)
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
@@ -214,7 +215,7 @@ extension TraderListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelega
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor(.gray)
+        return UIColor(.lightGray)
     }
     
     //DZNEmptyDataSetDelegate

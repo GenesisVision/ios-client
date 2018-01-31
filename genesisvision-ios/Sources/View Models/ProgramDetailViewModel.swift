@@ -31,5 +31,3 @@ class ProgramDetailViewModel {
         router.show(routeType: .invest)
     }
 }
-
-

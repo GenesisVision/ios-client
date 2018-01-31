@@ -8,7 +8,9 @@
 
 class DashboardViewModel {
     
+    // MARK: - Variables
     private var router: DashboardRouter!
+    private var dashboard: InvestorDashboard?
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -19,6 +21,20 @@ class DashboardViewModel {
     // MARK: - Navigation
     func invest() {
         router.show(routeType: .invest)
+    }
+    
+    // MARK: - Data methods
+    func loadDashboards(completion: @escaping ApiCompletionBlock) {
+        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
+        
+        InvestorAPI.apiInvestorDashboardGet(authorization: token) { [weak self] (dashboard, error) in
+            guard error == nil else {
+                return ErrorHandler.handleApiError(error: error, completion: completion)
+            }
+            
+            self?.dashboard = dashboard
+            completion(.success)
+        }
     }
 }
 

@@ -61,8 +61,9 @@ extension ProfileViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate 
     //DZNEmptyDataSetSource
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.darkGray)]
         
-        return NSAttributedString(string: text)
+        return NSAttributedString(string: text, attributes: attributes)
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
@@ -73,7 +74,7 @@ extension ProfileViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate 
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor(.gray)
+        return UIColor(.lightGray)
     }
     
     //DZNEmptyDataSetDelegate

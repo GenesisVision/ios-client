@@ -18,7 +18,7 @@ struct AppearanceController {
     
     // NavigationBar
     private static func setupNavigationBar() {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
         UINavigationBar.appearance().tintColor = UIColor(.blue)
     }
     
