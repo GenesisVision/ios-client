@@ -26,7 +26,7 @@ extension AppDelegate {
     private func setup() {
         RealmController.shared.setup()
         AppearanceController.setupAppearance()
-        SwaggerClientAPI.basePath = Constants.apiBasePath
+        SwaggerClientAPI.basePath = Constants.Api.basePath
     }
 }
 

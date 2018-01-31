@@ -66,6 +66,7 @@
 		FC5E903D201F4487000E4A90 /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E900D201F4487000E4A90 /* WalletTransaction.swift */; };
 		FC5E903E201F4487000E4A90 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E900E201F4487000E4A90 /* WalletTransactionsViewModel.swift */; };
 		FC5E903F201F4487000E4A90 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E900F201F4487000E4A90 /* Models.swift */; };
+		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
 		FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A22201AA07700157AD6 /* ProfileImageView.swift */; };
 		FCA19A25201AA8C000157AD6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A24201AA8C000157AD6 /* Router.swift */; };
 		FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */; };
@@ -206,6 +207,7 @@
 		FC5E900D201F4487000E4A90 /* WalletTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
 		FC5E900E201F4487000E4A90 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
 		FC5E900F201F4487000E4A90 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */,
 				FC4964272015598E00104CEB /* UIColor */,
 				FCE8236C201631B3000061E8 /* UIViewExtension.swift */,
+				FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -971,6 +974,7 @@
 				FC5E9029201F4487000E4A90 /* InvestmentProgramViewModel.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,
 				FC5E9015201F4487000E4A90 /* TradesAPI.swift in Sources */,
+				FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
 				FC5E9036201F4487000E4A90 /* Period.swift in Sources */,

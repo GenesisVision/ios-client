@@ -10,14 +10,21 @@ import UIKit
 
 class TraderListViewController: BaseViewController {
 
-    var authorizedValue: Bool = false
+    private var authorizedValue: Bool = false
+    private var canFetchMoreResults = true
+    private var activityIndicator: UIActivityIndicatorView!
+    
+    private var refreshControl: UIRefreshControl!
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel! {
         didSet {
-            viewModel.fetch { [weak self] in
-                DispatchQueue.main.async {
-                    self?.tableView?.reloadData()
+            viewModel.fetch { [weak self] (result) in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async { self?.tableView?.reloadData() }
+                case .failure:
+                    break
                 }
             }
         }
@@ -70,11 +77,45 @@ class TraderListViewController: BaseViewController {
     }
     
     private func setupTableView() {
+        let tintColor = UIColor(.blue)
+        let attributedStringColour: NSDictionary = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributedStringColour as? [NSAttributedStringKey : Any])
+        refreshControl.tintColor = tintColor
+        refreshControl.addTarget(self, action: #selector(TraderListViewController.pullToRefresh(sender:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+
         tableView.registerNibs(for: [TraderTableViewCell.self])
     }
     
-    // MARK: - Actions
+    private func fetchMore() {
+        self.canFetchMoreResults = false
+        
+        self.viewModel.fetchMore { [weak self] (result) in
+            self?.canFetchMoreResults = true
+            switch result {
+            case .success:
+                self?.tableView.reloadData()
+            case .failure:
+                break
+            }
+        }
+    }
     
+    @objc private func pullToRefresh(sender: AnyObject) {
+        self.viewModel.refresh { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            case .failure:
+                break
+            }
+        }
+    }
+
+    // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
         viewModel.showSignInVC()
     }
@@ -90,17 +131,27 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let programEntity = viewModel.getProgram(atIndex: indexPath.row).investmentProgramEntity
+        guard let programEntity = viewModel.getProgram(atIndex: indexPath.row)?.investmentProgramEntity else {
+            return
+        }
 
         viewModel.showProgramDetail(with: programEntity)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let model = viewModel.getProgram(atIndex: indexPath.row)
+        guard let model = viewModel.getProgram(atIndex: indexPath.row) else {
+            return UITableViewCell()
+        }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (viewModel.programsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
+            fetchMore()
+        }
+    }
+
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
