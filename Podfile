@@ -8,4 +8,7 @@ target 'genesisvision-ios' do
     pod 'Alamofire'
     pod 'PKHUD'
     pod 'IQKeyboardManagerSwift'
+    pod 'DZNEmptyDataSet'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
 end
