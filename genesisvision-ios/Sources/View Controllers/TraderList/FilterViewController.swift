@@ -1,18 +1,18 @@
 //
-//  WalletViewController.swift
+//  FilterViewController.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 22.01.18.
+//  Created by George Shaginyan on 31.01.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 import DZNEmptyDataSet
 
-class WalletViewController: BaseViewController {
+class FilterViewController: BaseViewController {
 
     // MARK: - View Model
-    var viewModel: WalletViewModel!
+    var viewModel: FilterViewModel!
     
     // MARK: - Variables
     @IBOutlet var tableView: UITableView! {
@@ -27,22 +27,14 @@ class WalletViewController: BaseViewController {
 
         setup()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let balance = viewModel.getBalance()
-        navigationItem.title = String(describing: balance) + " GVT"
-    }
     
     // MARK: - Private methods
     private func setup() {
         setupUI()
-        fetch()
     }
     
     private func setupUI() {
-        title = "Wallet"
+        title = "Filter"
     }
     
     private func setupTableConfiguration() {
@@ -50,22 +42,9 @@ class WalletViewController: BaseViewController {
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
     }
-    
-    private func fetch() {
-        viewModel.fetch { [weak self] (result) in
-            switch result {
-            case .success:
-                let balance = self?.viewModel.getBalance()
-                self?.navigationItem.title = String(describing: balance) + " GVT"
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
-            }
-        }
-    }
 }
 
-extension WalletViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+extension FilterViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     //DZNEmptyDataSetSource
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"

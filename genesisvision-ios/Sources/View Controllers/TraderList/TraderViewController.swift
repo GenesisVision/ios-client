@@ -8,22 +8,64 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class TraderViewController: BaseViewController {
 
+    // MARK: - View Model
     var viewModel: ProgramDetailViewModel!
     
-    var investmentProgramEntity: InvestmentProgramEntity?
+    // MARK: - Variables
+    @IBOutlet var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setup()
+    }
+    
+    // MARK: - Private methods
+    private func setup() {
+        setupUI()
+    }
+    
+    private func setupUI() {
         title = viewModel.getNickname()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func setupTableConfiguration() {
+        tableView.tableFooterView = UIView()
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
     }
+}
 
+extension TraderViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    //DZNEmptyDataSetSource
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No data"
+        
+        return NSAttributedString(string: text)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = "Update"
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.blue)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(.gray)
+    }
+    
+    //DZNEmptyDataSetDelegate
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        //TODO: showProgressHUD()
+        //TODO: pullToRefresh()
+    }
 }

@@ -91,6 +91,10 @@ class InvestmentProgramListViewModel {
         router.show(routeType: .signIn)
     }
     
+    func showFilterVC() {
+        router.show(routeType: .showFilterVC)
+    }
+    
     func showProgramDetail(with programEntity: InvestmentProgramEntity) {
         router.show(routeType: .showProgramDetail(programEntity: programEntity))
     }

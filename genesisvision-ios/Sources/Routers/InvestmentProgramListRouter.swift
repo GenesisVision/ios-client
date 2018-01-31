@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case openProgram(programModel: InvestmentProgramViewModel), signIn, showProgramDetail(programEntity: InvestmentProgramEntity)
+    case openProgram(programModel: InvestmentProgramViewModel), signIn, showProgramDetail(programEntity: InvestmentProgramEntity), showFilterVC
 }
 
 class InvestmentProgramListRouter: Router {
@@ -21,6 +21,8 @@ class InvestmentProgramListRouter: Router {
             signInAction()
         case .showProgramDetail(let investmentProgramEntity):
             showProgramDetail(with: investmentProgramEntity)
+        case .showFilterVC:
+            showFilterVC()
         }
     }
     
@@ -50,6 +52,15 @@ class InvestmentProgramListRouter: Router {
         guard let viewController = TraderViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramDetailViewModel(withRouter: router, withEntity: programEntity)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showFilterVC() {
+        guard let viewController = FilterViewController.storyboardInstance(name: .traders) else { return }
+        let router = FilterRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = FilterViewModel(withRouter: router)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

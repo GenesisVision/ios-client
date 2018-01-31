@@ -84,6 +84,36 @@
             </objects>
             <point key="canvasLocation" x="1537" y="906"/>
         </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="1ZW-ud-iiu">
+            <objects>
+                <viewController storyboardIdentifier="FilterViewController" id="Jkr-qa-duU" customClass="FilterViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3sG-FT-NvN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-Ka-Ja5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="3sG-FT-NvN" secondAttribute="top" id="0fk-7x-n71"/>
+                            <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Oxo-lc-AeP"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="oh9-Ka-Ja5" id="1jZ-aY-nyb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mFZ-YF-8K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2389.5999999999999" y="904.49775112443785"/>
+        </scene>
         <!--Trader View Controller-->
         <scene sceneID="3mF-C7-1tJ">
             <objects>
@@ -91,14 +121,29 @@
                     <view key="view" contentMode="scaleToFill" id="45y-LA-dTh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Okg-0k-2HX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wCW-GM-tTm" firstAttribute="bottom" secondItem="Okg-0k-2HX" secondAttribute="bottom" id="LSd-M7-b2d"/>
+                            <constraint firstItem="wCW-GM-tTm" firstAttribute="trailing" secondItem="Okg-0k-2HX" secondAttribute="trailing" id="aeM-IV-L5G"/>
+                            <constraint firstItem="Okg-0k-2HX" firstAttribute="leading" secondItem="wCW-GM-tTm" secondAttribute="leading" id="naG-7t-j70"/>
+                            <constraint firstItem="Okg-0k-2HX" firstAttribute="top" secondItem="45y-LA-dTh" secondAttribute="top" id="vo7-Qt-3CI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wCW-GM-tTm"/>
                     </view>
                     <navigationItem key="navigationItem" id="1po-Om-DdH"/>
+                    <connections>
+                        <outlet property="tableView" destination="Okg-0k-2HX" id="rmu-N2-vmJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50I-f0-5XA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537" y="1638"/>
+            <point key="canvasLocation" x="1536.8" y="1637.6311844077961"/>
         </scene>
         <!--Item-->
         <scene sceneID="C9v-3m-Oyx">

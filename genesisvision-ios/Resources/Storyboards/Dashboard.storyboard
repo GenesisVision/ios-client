@@ -13,14 +13,29 @@
         <!--Dashboard View Controller-->
         <scene sceneID="A4w-nA-Z8l">
             <objects>
-                <viewController storyboardIdentifier="DashboardViewController" id="4Iy-NG-MEA" customClass="DashboardViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardViewController" id="4Iy-NG-MEA" customClass="DashboardViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cJF-Gy-plB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EU9-8d-Mr6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EU9-8d-Mr6" firstAttribute="top" secondItem="W5q-Oc-p9n" secondAttribute="top" id="9md-yh-STr"/>
+                            <constraint firstItem="W5q-Oc-p9n" firstAttribute="trailing" secondItem="EU9-8d-Mr6" secondAttribute="trailing" id="G12-Vs-I7e"/>
+                            <constraint firstItem="EU9-8d-Mr6" firstAttribute="leading" secondItem="W5q-Oc-p9n" secondAttribute="leading" id="s9a-w1-zbm"/>
+                            <constraint firstItem="W5q-Oc-p9n" firstAttribute="bottom" secondItem="EU9-8d-Mr6" secondAttribute="bottom" id="ySa-Rw-wvz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="W5q-Oc-p9n"/>
                     </view>
                     <navigationItem key="navigationItem" id="6XZ-lt-BbI"/>
+                    <connections>
+                        <outlet property="tableView" destination="EU9-8d-Mr6" id="hc1-RT-sSv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9f-Hh-prd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,7 +44,7 @@
         <!--Item-->
         <scene sceneID="kat-G4-F9S">
             <objects>
-                <navigationController storyboardIdentifier="DashboardNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bAe-Og-WCk" customClass="BaseNavigationController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DashboardNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bAe-Og-WCk" customClass="BaseNavigationController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="6xV-Y5-ViH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p4i-nc-yhW">

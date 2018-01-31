@@ -67,6 +67,9 @@
 		FC5E903E201F4487000E4A90 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E900E201F4487000E4A90 /* WalletTransactionsViewModel.swift */; };
 		FC5E903F201F4487000E4A90 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E900F201F4487000E4A90 /* Models.swift */; };
 		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
+		FC5E904620216769000E4A90 /* FilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E904520216769000E4A90 /* FilterRouter.swift */; };
+		FC5E9048202167CF000E4A90 /* RouterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* RouterViewModel.swift */; };
+		FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9049202169DC000E4A90 /* FilterViewController.swift */; };
 		FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A22201AA07700157AD6 /* ProfileImageView.swift */; };
 		FCA19A25201AA8C000157AD6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A24201AA8C000157AD6 /* Router.swift */; };
 		FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */; };
@@ -131,7 +134,6 @@
 		FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD89200E63D2008825EC /* UIViewControllerExtensions.swift */; };
 		FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD8B200E658E008825EC /* ReusableCell.swift */; };
 		FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */; };
-		FCC9DDA3200F9A11008825EC /* TraderListDisplayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA2200F9A11008825EC /* TraderListDisplayCollection.swift */; };
 		FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */; };
 		FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */; };
 		FCE8236320161339000061E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236220161339000061E8 /* Constants.swift */; };
@@ -208,6 +210,9 @@
 		FC5E900E201F4487000E4A90 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
 		FC5E900F201F4487000E4A90 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
+		FC5E904520216769000E4A90 /* FilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRouter.swift; sourceTree = "<group>"; };
+		FC5E9047202167CF000E4A90 /* RouterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewModel.swift; sourceTree = "<group>"; };
+		FC5E9049202169DC000E4A90 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -275,7 +280,6 @@
 		FCC9DD89200E63D2008825EC /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		FCC9DD8B200E658E008825EC /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellViewModel.swift"; sourceTree = "<group>"; };
-		FCC9DDA2200F9A11008825EC /* TraderListDisplayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraderListDisplayCollection.swift; sourceTree = "<group>"; };
 		FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollection.swift; sourceTree = "<group>"; };
 		FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollectionDelegate.swift; sourceTree = "<group>"; };
 		FCE8236220161339000061E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -464,6 +468,7 @@
 				FCA19A3E201AE83100157AD6 /* WalletViewModel.swift */,
 				FCA19A40201AE83F00157AD6 /* DashboardViewModel.swift */,
 				FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */,
+				FC5E9047202167CF000E4A90 /* RouterViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -685,6 +690,7 @@
 				FCA19A42201AE85C00157AD6 /* DashboardRouter.swift */,
 				FCA19A44201AE86900157AD6 /* WalletRouter.swift */,
 				FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */,
+				FC5E904520216769000E4A90 /* FilterRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -740,7 +746,7 @@
 			children = (
 				FCC9DD70200E4C7E008825EC /* TraderListViewController.swift */,
 				FCC9DD87200E61C0008825EC /* TraderViewController.swift */,
-				FCC9DDA2200F9A11008825EC /* TraderListDisplayCollection.swift */,
+				FC5E9049202169DC000E4A90 /* FilterViewController.swift */,
 			);
 			path = TraderList;
 			sourceTree = "<group>";
@@ -948,7 +954,6 @@
 				FCA19A33201ADFAD00157AD6 /* ConfirmationViewModel.swift in Sources */,
 				FC5E9039201F4487000E4A90 /* RegisterInvestorViewModel.swift in Sources */,
 				FC5E901A201F4487000E4A90 /* JSONEncodableEncoding.swift in Sources */,
-				FCC9DDA3200F9A11008825EC /* TraderListDisplayCollection.swift in Sources */,
 				FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */,
 				FC5E9026201F4487000E4A90 /* InvestmentProgram.swift in Sources */,
 				FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */,
@@ -1000,6 +1005,7 @@
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
 				FC5E9036201F4487000E4A90 /* Period.swift in Sources */,
+				FC5E904620216769000E4A90 /* FilterRouter.swift in Sources */,
 				FC5E901B201F4487000E4A90 /* JSONEncodingHelper.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* SignUpViewModel.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramDetailViewModel.swift in Sources */,
@@ -1007,6 +1013,7 @@
 				FCC9DD73200E4C7E008825EC /* TraderListViewController.swift in Sources */,
 				FCB2C4E020109A950012AA58 /* Realm+WriteFunctions.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
+				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
 				FC5E902A201F4487000E4A90 /* InvestmentRequest.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				FC5E903E201F4487000E4A90 /* WalletTransactionsViewModel.swift in Sources */,
@@ -1014,6 +1021,7 @@
 				FC5E901E201F4487000E4A90 /* BrokersFilter.swift in Sources */,
 				FC5E9037201F4487000E4A90 /* ProfileFullViewModel.swift in Sources */,
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
+				FC5E9048202167CF000E4A90 /* RouterViewModel.swift in Sources */,
 				FC5E9028201F4487000E4A90 /* InvestmentProgramsViewModel.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,

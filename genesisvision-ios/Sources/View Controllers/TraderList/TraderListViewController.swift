@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class TraderListViewController: BaseViewController {
 
+    // MARK: - Variables
     private var authorizedValue: Bool = false
     private var canFetchMoreResults = true
-    private var activityIndicator: UIActivityIndicatorView!
-    
     private var refreshControl: UIRefreshControl!
+    private var filterBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel! {
@@ -33,23 +34,23 @@ class TraderListViewController: BaseViewController {
     // MARK: - Buttons
     @IBOutlet var signInButton: UIButton!
     
-    // MARK: - Variables
+    // MARK: - Outlets
     @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet var tableView: UITableView! {
         didSet {
             setupSignInButton()
+            setupTableConfiguration()
         }
     }
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Invest"
         
-        setupTableView()
+        setupUI()
         registerForPreviewing()
     }
     
@@ -70,22 +71,32 @@ class TraderListViewController: BaseViewController {
         
         signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
         signInButton.isHidden = authorizedValue
-        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
-        tableViewConfiguration.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
-        tableView.configure(with: .custom(tableViewConfiguration))
     }
     
-    private func setupTableView() {
+    private func setupTableConfiguration() {
+        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
+        tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
+        tableViewConfiguration.backgroundColor = UIColor(.gray)
+        tableView.configure(with: .custom(tableViewConfiguration))
+        
+        tableView.tableFooterView = UIView()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        
         let tintColor = UIColor(.blue)
-        let attributedStringColour: NSDictionary = [NSAttributedStringKey.foregroundColor : tintColor]
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributedStringColour as? [NSAttributedStringKey : Any])
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
         refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(TraderListViewController.pullToRefresh(sender:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(TraderListViewController.pullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-
+    }
+    
+    private func setupUI() {
+        filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
+        navigationItem.rightBarButtonItem = filterBarButtonItem
+        
         tableView.registerNibs(for: [TraderTableViewCell.self])
     }
     
@@ -103,8 +114,9 @@ class TraderListViewController: BaseViewController {
         }
     }
     
-    @objc private func pullToRefresh(sender: AnyObject) {
+    @objc private func pullToRefresh() {
         self.viewModel.refresh { [weak self] (result) in
+            self?.hideHUD()
             switch result {
             case .success:
                 self?.refreshControl?.endRefreshing()
@@ -118,6 +130,10 @@ class TraderListViewController: BaseViewController {
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
         viewModel.showSignInVC()
+    }
+    
+    @IBAction func filterButtonAction(_ sender: UIButton) {
+        viewModel.showFilterVC()
     }
 }
 
@@ -179,5 +195,31 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         push(viewController: viewControllerToCommit)
+    }
+}
+
+extension TraderListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    //DZNEmptyDataSetSource
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No programs"
+        
+        return NSAttributedString(string: text)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = "Update"
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.blue)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(.gray)
+    }
+    
+    //DZNEmptyDataSetDelegate
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        showProgressHUD()
+        pullToRefresh()
     }
 }

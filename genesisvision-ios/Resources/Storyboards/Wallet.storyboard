@@ -13,14 +13,29 @@
         <!--Wallet View Controller-->
         <scene sceneID="H7x-PK-XKm">
             <objects>
-                <viewController storyboardIdentifier="WalletViewController" id="hYK-hm-a1t" customClass="WalletViewController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletViewController" id="hYK-hm-a1t" customClass="WalletViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RpL-oe-0nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEW-FT-LL7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BEW-FT-LL7" firstAttribute="top" secondItem="gyN-Ia-4Bd" secondAttribute="top" id="IvW-pV-SfN"/>
+                            <constraint firstItem="gyN-Ia-4Bd" firstAttribute="trailing" secondItem="BEW-FT-LL7" secondAttribute="trailing" id="KSG-Q6-RAY"/>
+                            <constraint firstItem="BEW-FT-LL7" firstAttribute="leading" secondItem="gyN-Ia-4Bd" secondAttribute="leading" id="vzZ-Hw-H4I"/>
+                            <constraint firstItem="gyN-Ia-4Bd" firstAttribute="bottom" secondItem="BEW-FT-LL7" secondAttribute="bottom" id="zXF-6j-3hm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gyN-Ia-4Bd"/>
                     </view>
                     <navigationItem key="navigationItem" id="GId-k5-S3w"/>
+                    <connections>
+                        <outlet property="tableView" destination="BEW-FT-LL7" id="irp-29-tQO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YP-B0-IaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,7 +44,7 @@
         <!--Item-->
         <scene sceneID="9pb-YA-GcZ">
             <objects>
-                <navigationController storyboardIdentifier="WalletNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Lz7-x1-Z6i" customClass="BaseNavigationController" customModule="genesisvision_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WalletNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Lz7-x1-Z6i" customClass="BaseNavigationController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="vx9-J6-MAd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mHd-zw-3T4">
