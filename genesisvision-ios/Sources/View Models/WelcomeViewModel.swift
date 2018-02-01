@@ -8,6 +8,9 @@
 
 class WelcomeViewModel {
     
+    // MARK: - Variables
+    var title: String = "Invest"
+    
     private var router: WelcomeRouter!
     
     // MARK: - Init

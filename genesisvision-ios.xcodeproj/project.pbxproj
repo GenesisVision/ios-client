@@ -18,9 +18,12 @@
 		FC496422201558AD00104CEB /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC496421201558AD00104CEB /* AppearanceController.swift */; };
 		FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */; };
 		FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964252015598300104CEB /* UIColor+Hex.swift */; };
+		FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */; };
+		FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */; };
+		FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD67202267910044C3EC /* EnumExtension.swift */; };
 		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
 		FC5E904620216769000E4A90 /* FilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E904520216769000E4A90 /* FilterRouter.swift */; };
-		FC5E9048202167CF000E4A90 /* RouterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* RouterViewModel.swift */; };
+		FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* FilterViewModel.swift */; };
 		FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9049202169DC000E4A90 /* FilterViewController.swift */; };
 		FC5E908B20221C23000E4A90 /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E905820221C23000E4A90 /* AlamofireImplementations.swift */; };
 		FC5E908C20221C23000E4A90 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E905920221C23000E4A90 /* APIHelper.swift */; };
@@ -166,9 +169,12 @@
 		FC496421201558AD00104CEB /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PaletteColors.swift"; sourceTree = "<group>"; };
 		FC4964252015598300104CEB /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAmountTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC4BFD67202267910044C3EC /* EnumExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtension.swift; sourceTree = "<group>"; };
 		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
 		FC5E904520216769000E4A90 /* FilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRouter.swift; sourceTree = "<group>"; };
-		FC5E9047202167CF000E4A90 /* RouterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewModel.swift; sourceTree = "<group>"; };
+		FC5E9047202167CF000E4A90 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		FC5E9049202169DC000E4A90 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC5E905820221C23000E4A90 /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		FC5E905920221C23000E4A90 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
@@ -479,7 +485,7 @@
 				FCA19A3E201AE83100157AD6 /* WalletViewModel.swift */,
 				FCA19A40201AE83F00157AD6 /* DashboardViewModel.swift */,
 				FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */,
-				FC5E9047202167CF000E4A90 /* RouterViewModel.swift */,
+				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				FC4964272015598E00104CEB /* UIColor */,
 				FCE8236C201631B3000061E8 /* UIViewExtension.swift */,
 				FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */,
+				FC4BFD67202267910044C3EC /* EnumExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,8 +746,10 @@
 				FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */,
 				FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */,
 				FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */,
+				FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */,
 				FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */,
 				FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */,
+				FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */,
 				FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */,
 				FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */,
 			);
@@ -901,11 +910,13 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -914,11 +925,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -977,6 +990,7 @@
 				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
 				FCB8DFC92010F67300698D18 /* ConfirmationViewController.swift in Sources */,
 				FC5E90B520221C24000E4A90 /* RegisterManagerViewModel.swift in Sources */,
+				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
 				FC5E90BA20221C24000E4A90 /* WalletTransactionsViewModel.swift in Sources */,
@@ -1034,7 +1048,7 @@
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				FC5E90AF20221C23000E4A90 /* NewInvestmentRequest.swift in Sources */,
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
-				FC5E9048202167CF000E4A90 /* RouterViewModel.swift in Sources */,
+				FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
 				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
@@ -1055,11 +1069,13 @@
 				FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */,
 				FC5E90A820221C23000E4A90 /* InvestorDashboard.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
+				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				FC5E908C20221C23000E4A90 /* APIHelper.swift in Sources */,
 				FC5E909020221C23000E4A90 /* TradesAPI.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				FC5E90B720221C24000E4A90 /* TransactionsFilter.swift in Sources */,
 				FC5E909420221C23000E4A90 /* Extensions.swift in Sources */,
+				FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */,
 				FC5E908D20221C23000E4A90 /* BrokerAPI.swift in Sources */,
 				FC5E90A120221C23000E4A90 /* InvestmentProgram.swift in Sources */,
 				FCE82365201622BD000061E8 /* ActionButton.swift in Sources */,

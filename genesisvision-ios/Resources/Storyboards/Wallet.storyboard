@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEW-FT-LL7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BEW-FT-LL7" firstAttribute="top" secondItem="gyN-Ia-4Bd" secondAttribute="top" id="IvW-pV-SfN"/>
+                            <constraint firstItem="BEW-FT-LL7" firstAttribute="top" secondItem="RpL-oe-0nZ" secondAttribute="top" id="IvW-pV-SfN"/>
                             <constraint firstItem="gyN-Ia-4Bd" firstAttribute="trailing" secondItem="BEW-FT-LL7" secondAttribute="trailing" id="KSG-Q6-RAY"/>
                             <constraint firstItem="BEW-FT-LL7" firstAttribute="leading" secondItem="gyN-Ia-4Bd" secondAttribute="leading" id="vzZ-Hw-H4I"/>
                             <constraint firstItem="gyN-Ia-4Bd" firstAttribute="bottom" secondItem="BEW-FT-LL7" secondAttribute="bottom" id="zXF-6j-3hm"/>
@@ -40,25 +40,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YP-B0-IaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1582" y="1756"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="9pb-YA-GcZ">
-            <objects>
-                <navigationController storyboardIdentifier="WalletNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Lz7-x1-Z6i" customClass="BaseNavigationController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="vx9-J6-MAd"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mHd-zw-3T4">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="hYK-hm-a1t" kind="relationship" relationship="rootViewController" id="2fG-fA-jwY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bTl-lu-hk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="777.60000000000002" y="1756.8215892053975"/>
         </scene>
     </scenes>
 </document>

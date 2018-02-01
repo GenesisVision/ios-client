@@ -19,7 +19,7 @@ class ConfirmationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Confirmation"
+        title = viewModel.title
     }
 
     override func didReceiveMemoryWarning() {

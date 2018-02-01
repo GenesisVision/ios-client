@@ -32,9 +32,10 @@ class TraderTableViewCell: UITableViewCell {
     @IBOutlet var weeksLabel: UILabel!
     @IBOutlet var profitLabel: UILabel!
     
+    // MARK: - Lifecycler
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.9372549057, blue: 0.9568627477, alpha: 1)
+        backgroundColor = UIColor(.lightGray)
     }
 }

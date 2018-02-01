@@ -7,18 +7,18 @@
 //
 
 import UIKit
+import TTRangeSlider
 
 class FilterAmountTableViewCell: UITableViewCell {
 
+    // MARK: - Views
+    @IBOutlet var sliderView: TTRangeSlider!
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        backgroundColor = UIColor(.lightGray)
+        selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

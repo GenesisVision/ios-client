@@ -9,6 +9,8 @@
 class ConfirmationViewModel {
     
     // MARK: - Variables
+    var title: String = "Confirmation"
+    
     private var router: ConfirmationRouter!
     
     // MARK: - Init

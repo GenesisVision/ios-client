@@ -9,6 +9,8 @@
 class SignInViewModel {
     
     // MARK: - Variables
+    var title: String = "Sign In"
+    
     private var router: SignInRouter!
     
     // MARK: - Init

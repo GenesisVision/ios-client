@@ -24,7 +24,7 @@ class SignInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "SignIn"
+        title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {

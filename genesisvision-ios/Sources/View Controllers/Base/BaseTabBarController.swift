@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  BaseTabBarController.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 16.01.18.
@@ -16,9 +16,5 @@ class BaseTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }

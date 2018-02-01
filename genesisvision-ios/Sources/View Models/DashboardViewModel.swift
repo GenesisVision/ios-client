@@ -9,6 +9,8 @@
 class DashboardViewModel {
     
     // MARK: - Variables
+    var title: String = "Dashboard"
+    
     private var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
     

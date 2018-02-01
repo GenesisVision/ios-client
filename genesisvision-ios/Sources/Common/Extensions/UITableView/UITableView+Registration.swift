@@ -15,6 +15,14 @@ extension UITableView {
         }
     }
     
+    func registerNibs(for types: [CellViewAnyModel.Type]) {
+        types.forEach { (type) in
+            if let tableCellClass = type.cellAnyType as? UITableViewCell.Type {
+                registerNib(for: tableCellClass)
+            }
+        }
+    }
+    
     func registerNib(for cellClass: UITableViewCell.Type) {
         register(cellClass.nib, forCellReuseIdentifier: cellClass.identifier)
     }

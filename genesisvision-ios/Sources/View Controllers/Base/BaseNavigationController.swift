@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  BaseNavigationController.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 16.01.18.
@@ -15,12 +15,7 @@ class BaseNavigationController: UINavigationController {
         
         if #available(iOS 11.0, *) {
             navigationBar.prefersLargeTitles = true
-            // navigationItem.largeTitleDisplayMode = .never //for hide
+            navigationItem.largeTitleDisplayMode = .always
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

@@ -24,7 +24,7 @@ class SignUpViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "SignUp"
+        title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {

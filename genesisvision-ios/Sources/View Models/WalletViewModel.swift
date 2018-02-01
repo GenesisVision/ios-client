@@ -9,6 +9,8 @@
 class WalletViewModel {
     
     // MARK: - Variables
+    var title: String = "Wallet"
+    
     private var router: WalletRouter!
     private var transactions: WalletTransactionsViewModel?
     private var profileViewModel: ProfileShortViewModel? {

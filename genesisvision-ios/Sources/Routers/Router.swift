@@ -37,8 +37,10 @@ class Router {
             viewControllers.append(navigationController)
         }
         
+        var navigationController = BaseNavigationController()
+        
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
-            let navigationController = BaseNavigationController(rootViewController: dashboardViewController)
+            navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
@@ -46,7 +48,7 @@ class Router {
         }
         
         if let walletViewController = WalletViewController.storyboardInstance(name: .wallet) {
-            let navigationController = BaseNavigationController(rootViewController: walletViewController)
+            navigationController = BaseNavigationController(rootViewController: walletViewController)
             let router = WalletRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             walletViewController.viewModel = WalletViewModel(withRouter: router)
@@ -54,7 +56,7 @@ class Router {
         }
         
         if let profileViewController = ProfileViewController.storyboardInstance(name: .profile) {
-            let navigationController = BaseNavigationController(rootViewController: profileViewController)
+            navigationController = BaseNavigationController(rootViewController: profileViewController)
             let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             profileViewController.viewModel = ProfileViewModel(withRouter: router)
@@ -113,9 +115,9 @@ extension Router: RouterProtocol {
 //Common methods
 extension Router {
     func getTraidersNavigationController() -> UINavigationController? {
-        if traidersViewController == nil {
+//        if traidersViewController == nil {
             createTraidersNavigationController()
-        }
+//        }
         
         let navigationController = BaseNavigationController(rootViewController: traidersViewController)
         traidersViewController.viewModel.router.navigationController = navigationController

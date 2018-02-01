@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 struct TraderTableViewCellViewModel {
     let investmentProgramEntity: InvestmentProgramEntity
@@ -18,6 +19,12 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.currencyLabel.text = investmentProgramEntity.currency.uppercased()
         
         cell.profileImageView.levelLabel.text = "\(investmentProgramEntity.rating)"
+        if let logo = investmentProgramEntity.logo {
+            let url = URL(string: logo)
+            let placeholder = #imageLiteral(resourceName: "gv_logo")
+            cell.profileImageView.profilePhotoImageView.kf.indicatorType = .activity
+            cell.profileImageView.profilePhotoImageView.kf.setImage(with: url, placeholder: placeholder)
+        }
         
         cell.depositLabel.text = "" + investmentProgramEntity.currency.uppercased()
         cell.tradesLabel.text = "\(investmentProgramEntity.ordersCount)"

@@ -15,7 +15,6 @@ class FilterViewController: BaseViewController {
     var viewModel: FilterViewModel!
     
     // MARK: - Variables
-    private var applyBarButtonItem: UIBarButtonItem?
     private var resetBarButtonItem: UIBarButtonItem?
     
     @IBOutlet var tableView: UITableView! {
@@ -37,13 +36,20 @@ class FilterViewController: BaseViewController {
     }
     
     private func setupUI() {
-        title = "Filter"
+        title = viewModel.title
+        view.backgroundColor = UIColor(.lightGray)
+        
+        resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
+        navigationItem.rightBarButtonItem = resetBarButtonItem
     }
     
     private func setupTableConfiguration() {
         tableView.tableFooterView = UIView()
-        tableView.emptyDataSetDelegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.registerNibs(for: viewModel.registerNibs())
     }
     
     // MARK: - IBAction
@@ -53,6 +59,28 @@ class FilterViewController: BaseViewController {
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
         viewModel.reset()
+    }
+}
+
+extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = viewModel.model(for: indexPath)
+        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRowsIn(section: section)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
     }
 }
 

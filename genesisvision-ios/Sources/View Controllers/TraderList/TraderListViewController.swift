@@ -20,14 +20,7 @@ class TraderListViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel! {
         didSet {
-            viewModel.fetch { [weak self] (result) in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async { self?.tableView?.reloadData() }
-                case .failure:
-                    break
-                }
-            }
+            pullToRefresh()
         }
     }
     
@@ -48,7 +41,7 @@ class TraderListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Invest"
+        title = viewModel.title
         
         setupUI()
         registerForPreviewing()
@@ -74,15 +67,20 @@ class TraderListViewController: BaseViewController {
     }
     
     private func setupTableConfiguration() {
+        //Config
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
         tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
         tableViewConfiguration.backgroundColor = UIColor(.lightGray)
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.tableFooterView = UIView()
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        tableView.registerNibs(for: viewModel.registerNibs())
         
+        //Pull to refresh
         let tintColor = UIColor(.blue)
         let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
         
@@ -94,10 +92,10 @@ class TraderListViewController: BaseViewController {
     }
     
     private func setupUI() {
+        showProgressHUD()
+        
         filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
         navigationItem.rightBarButtonItem = filterBarButtonItem
-        
-        tableView.registerNibs(for: [TraderTableViewCell.self])
     }
     
     private func fetchMore() {
@@ -115,12 +113,12 @@ class TraderListViewController: BaseViewController {
     }
     
     @objc private func pullToRefresh() {
-        self.viewModel.refresh { [weak self] (result) in
+        viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {
             case .success:
                 self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
+                self?.tableView?.reloadData()
             case .failure:
                 break
             }

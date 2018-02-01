@@ -12,7 +12,6 @@ class ProfileImageView: UIView {
     @IBOutlet var profilePhotoImageView: RoundedImageView! {
         didSet {
             profilePhotoImageView.roundCorners()
-            profilePhotoImageView.image = #imageLiteral(resourceName: "gv_logo") //TODO: change on placeholder
         }
     }
     

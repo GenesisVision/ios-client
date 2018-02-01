@@ -42,7 +42,7 @@ class WalletViewController: BaseViewController {
     }
     
     private func setupUI() {
-        title = "Wallet"
+        title = viewModel.title
     }
     
     private func setupTableConfiguration() {

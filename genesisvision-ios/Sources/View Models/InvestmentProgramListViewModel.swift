@@ -13,16 +13,17 @@ enum DataType {
 
 class InvestmentProgramListViewModel {
     
-    var router: InvestmentProgramListRouter!
-    
     // MARK: - Init
     init(withRouter router: InvestmentProgramListRouter) {
         self.router = router
     }
     
     // MARK: - Variables
-    var dataType: DataType = .api
+    var title: String = "Invest"
     
+    var router: InvestmentProgramListRouter!
+    
+    var dataType: DataType = .api
     var skip = 0            //offset
     var totalCount = 0      //total count of programs
     
@@ -84,6 +85,10 @@ class InvestmentProgramListViewModel {
         
         let entity = program.investmentProgramEntity
         return router.getProgramDetailViewController(withEntity: entity)
+    }
+    
+    func registerNibs() -> [CellViewAnyModel.Type] {
+        return [TraderTableViewCellViewModel.self]
     }
     
     // MARK: - Navigation

@@ -33,7 +33,7 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setupUI() {
-        title = "Dashboard"
+        title = viewModel.title
     }
     
     private func setupTableConfiguration() {
