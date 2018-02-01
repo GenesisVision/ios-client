@@ -9,7 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 
-class WalletViewController: BaseViewController {
+class WalletViewController: BaseViewControllerWithTableView {
 
     // MARK: - View Model
     var viewModel: WalletViewModel!
@@ -65,29 +65,8 @@ class WalletViewController: BaseViewController {
     }
 }
 
-extension WalletViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    //DZNEmptyDataSetSource
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.darkGray)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = "Update"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.blue)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor(.lightGray)
-    }
-    
-    //DZNEmptyDataSetDelegate
+extension WalletViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        //TODO: showProgressHUD()
-        //TODO: pullToRefresh()
+        
     }
 }
