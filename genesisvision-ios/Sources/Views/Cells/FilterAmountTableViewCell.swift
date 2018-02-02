@@ -18,7 +18,7 @@ class FilterAmountTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor(.lightGray)
+        backgroundColor = UIColor.colorGrayBackground
         selectionStyle = .none
     }
 }

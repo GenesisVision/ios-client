@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(.lightGray)
+        view.backgroundColor = UIColor.colorFontDark
     }
 }
 
@@ -22,26 +22,26 @@ class BaseViewControllerWithTableView: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(.lightGray)
+        view.backgroundColor = UIColor.colorFontDark
     }
 }
 
 extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.darkGray)]
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.colorFontDark]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = "Update"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor(.blue)]
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.colorPrimary]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor(.lightGray)
+        return UIColor.colorFontDark
     }
 }

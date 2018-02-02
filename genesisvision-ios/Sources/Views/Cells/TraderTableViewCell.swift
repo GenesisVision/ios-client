@@ -23,7 +23,7 @@ class TraderTableViewCell: UITableViewCell {
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel! {
         didSet {
-            currencyLabel.addBorder(withBorderWidth: 1.0, color: UIColor(.blue))
+            currencyLabel.addBorder(withBorderWidth: 1.0, color: UIColor.colorPrimary)
         }
     }
     
@@ -36,6 +36,6 @@ class TraderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor(.lightGray)
+        backgroundColor = UIColor.colorGrayBackground
     }
 }

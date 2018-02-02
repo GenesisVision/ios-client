@@ -70,7 +70,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
         //Config
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
         tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
-        tableViewConfiguration.backgroundColor = UIColor(.lightGray)
+        tableViewConfiguration.backgroundColor = UIColor.colorGrayBackground
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.tableFooterView = UIView()
@@ -81,7 +81,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
         tableView.registerNibs(for: viewModel.registerNibs())
         
         //Pull to refresh
-        let tintColor = UIColor(.blue)
+        let tintColor = UIColor.colorPrimary
         let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()

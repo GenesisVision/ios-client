@@ -23,7 +23,7 @@ struct AppearanceController {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
         }
         
-        UINavigationBar.appearance().tintColor = UIColor(.blue)
+        UINavigationBar.appearance().tintColor = UIColor.colorPrimary
     }
     
     // TabBar
