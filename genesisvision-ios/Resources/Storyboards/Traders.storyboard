@@ -96,13 +96,49 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <sections/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSz-ej-GYD">
+                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-S8-rLI" customClass="ActionButton" customModule="GV_Investor" customModuleProvider="target">
+                                        <rect key="frame" x="32" y="0.0" width="311" height="60"/>
+                                        <color key="backgroundColor" red="0.01176470588" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="pey-Fb-Efi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Apply">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="applyButtonAction:" destination="Jkr-qa-duU" eventType="touchUpInside" id="bjM-rj-gum"/>
+                                            <action selector="signInButtonAction:" destination="4qn-RU-Ufu" eventType="touchUpInside" id="YL9-Oe-WbY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="top" secondItem="BSz-ej-GYD" secondAttribute="top" id="DFS-aj-KtT"/>
+                                    <constraint firstAttribute="trailing" secondItem="tpj-S8-rLI" secondAttribute="trailing" constant="32" id="N1c-sa-V6L"/>
+                                    <constraint firstAttribute="height" constant="76" id="mUW-JC-Nyz"/>
+                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="leading" secondItem="BSz-ej-GYD" secondAttribute="leading" constant="32" id="nm6-6x-UVr"/>
+                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="tpj-S8-rLI" secondAttribute="bottom" constant="16" id="yQj-ul-qlJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="3sG-FT-NvN" secondAttribute="top" id="0fk-7x-n71"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="BSz-ej-GYD" secondAttribute="bottom" id="K2J-rx-S9Z"/>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
+                            <constraint firstItem="BSz-ej-GYD" firstAttribute="trailing" secondItem="Oxo-lc-AeP" secondAttribute="trailing" id="beh-7L-Kx1"/>
+                            <constraint firstItem="BSz-ej-GYD" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="cNm-0C-2TE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oxo-lc-AeP"/>
                     </view>

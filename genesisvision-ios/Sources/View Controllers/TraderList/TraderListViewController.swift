@@ -74,7 +74,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        tableView.registerNibs(for: viewModel.registerNibs())
+        tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -161,7 +161,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let model = viewModel.program(forIndex: indexPath.row) else {
             return UITableViewCell()
         }
-        
+
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
@@ -174,7 +174,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsIn(section: section)
+        return viewModel.numberOfRows(in: section)
     }
 }
 

@@ -9,11 +9,13 @@
 import UIKit
 
 struct FilterSortTableViewCellViewModel {
-    var sorting: [String]
+    var sorting: String
+    var selected: Bool
 }
 
 extension FilterSortTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterSortTableViewCell) {
-        cell.textLabel?.text = sorting[0]
+        cell.textLabel?.text = sorting
+        cell.accessoryType = selected ? .disclosureIndicator : .none
     }
 }

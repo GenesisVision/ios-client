@@ -56,17 +56,6 @@ class ProfileViewModel {
     }
     
     // MARK: - TableView
-    /// Return view models for registration cell Nib files
-    func registerNibs() -> [CellViewAnyModel.Type] {
-        return [WalletHeaderTableViewCellViewModel.self,
-                WalletTransactionTableViewCellViewModel.self]
-    }
-    
-    /// Return view models for registration header Nib files
-    func registerHeaderNibs() -> [UITableViewHeaderFooterView.Type] {
-        return [DefaultTableHeaderView.self]
-    }
-    
     func numberOfSections() -> Int {
         return profileEntity != nil ? sections.count : 0
     }

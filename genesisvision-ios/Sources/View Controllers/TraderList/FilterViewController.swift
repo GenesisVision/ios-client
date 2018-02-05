@@ -48,7 +48,7 @@ class FilterViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        tableView.registerNibs(for: viewModel.registerNibs())
+        tableView.registerNibs(for: FilterViewModel.cellModelsForRegistration)
     }
     
     // MARK: - IBAction
@@ -66,6 +66,8 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    
+        viewModel.select(for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,7 +77,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsIn(section: section)
+        return viewModel.numberOfRows(in: section)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,7 +87,6 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FilterViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        //TODO: showProgressHUD()
-        //TODO: pullToRefresh()
+
     }
 }

@@ -19,13 +19,21 @@ class InvestmentProgramListViewModel {
     var router: InvestmentProgramListRouter!
     
     var dataType: DataType = .api
-    var skip = 0            //offset
-    var totalCount = 0      //total count of programs
+
+    var skip = 0                            //offset
+    var totalCount = 0                      //total count of programs
+    var sorting: InvestmentsFilter.Sorting?
+    var investMaxAmountFrom: Double?
+    var investMaxAmountTo: Double?
     
     var investmentProgramViewModels = [TraderTableViewCellViewModel]()
     
-    // MARK: - Public methods
+    /// Return view models for registration cell Nib files
+    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [TraderTableViewCellViewModel.self]
+    }
     
+    // MARK: - Public methods
     func isLogin() -> Bool {
         return AuthManager.isLogin()
     }
@@ -65,7 +73,7 @@ class InvestmentProgramListViewModel {
         return investmentProgramViewModels.count
     }
     
-    func numberOfRowsIn(section: Int) -> Int {
+    func numberOfRows(in section: Int) -> Int {
         return programsCount()
     }
     
@@ -83,17 +91,13 @@ class InvestmentProgramListViewModel {
         return router.getProgramDetailViewController(withEntity: entity)
     }
     
-    func registerNibs() -> [CellViewAnyModel.Type] {
-        return [TraderTableViewCellViewModel.self]
-    }
-    
     // MARK: - Navigation
     func showSignInVC() {
         router.show(routeType: .signIn)
     }
     
     func showFilterVC() {
-        router.show(routeType: .showFilterVC)
+        router.show(routeType: .showFilterVC(investmentProgramListViewModel: self))
     }
     
     func showProgramDetail(with programEntity: InvestmentProgramEntity) {
@@ -138,7 +142,8 @@ class InvestmentProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byRatingAsc, skip: skip, take: Constants.Api.Take.programs)
+            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: investMaxAmountFrom, investMaxAmountTo: investMaxAmountTo, sorting: sorting, skip: skip, take: Constants.Api.Take.programs)
+            
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
                 

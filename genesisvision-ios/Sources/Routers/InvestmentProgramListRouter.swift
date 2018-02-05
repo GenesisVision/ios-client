@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case openProgram(programModel: InvestmentProgramViewModel), signIn, showProgramDetail(programEntity: InvestmentProgramEntity), showFilterVC
+    case signIn, showProgramDetail(programEntity: InvestmentProgramEntity), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -15,14 +15,12 @@ class InvestmentProgramListRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramRouteType) {
         switch routeType {
-        case .openProgram(let programModel):
-            openProgram(programModel: programModel)
         case .signIn:
             signInAction()
-        case .showProgramDetail(let investmentProgramEntity):
-            showProgramDetail(with: investmentProgramEntity)
-        case .showFilterVC:
-            showFilterVC()
+        case .showProgramDetail(let programEntity):
+            showProgramDetail(with: programEntity)
+        case .showFilterVC(let investmentProgramListViewModel):
+            showFilterVC(with: investmentProgramListViewModel)
         }
     }
     
@@ -36,10 +34,6 @@ class InvestmentProgramListRouter: Router {
     }
     
     // MARK: - Private methods
-    private func openProgram(programModel: InvestmentProgramViewModel) {
-        print(programModel)
-    }
-    
     private func signInAction() {
         guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
         let router = SignInRouter(parentRouter: self, navigationController: navigationController)
@@ -57,10 +51,10 @@ class InvestmentProgramListRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showFilterVC() {
+    private func showFilterVC(with investmentProgramListViewModel: InvestmentProgramListViewModel) {
         guard let viewController = FilterViewController.storyboardInstance(name: .traders) else { return }
         let router = FilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = FilterViewModel(withRouter: router)
+        let viewModel = FilterViewModel(withRouter: router, investmentProgramListViewModel: investmentProgramListViewModel)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

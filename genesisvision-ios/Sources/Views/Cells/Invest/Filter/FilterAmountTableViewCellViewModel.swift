@@ -9,19 +9,19 @@
 import UIKit
 
 struct FilterAmountTableViewCellViewModel {
-    var minValue: Float
-    var maxValue: Float
-    var selectedMinimum: Float
-    var selectedMaximum: Float
+    var minValue: Double
+    var maxValue: Double
+    var selectedMinimum: Double?
+    var selectedMaximum: Double?
     var step: Float
 }
 
 extension FilterAmountTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterAmountTableViewCell) {
-        cell.sliderView.minValue = minValue
-        cell.sliderView.maxValue = maxValue
-        cell.sliderView.selectedMinimum = selectedMinimum
-        cell.sliderView.selectedMaximum = selectedMaximum
+        cell.sliderView.minValue = Float(minValue)
+        cell.sliderView.maxValue = Float(maxValue)
+        cell.sliderView.selectedMinimum = Float(selectedMinimum ?? minValue)
+        cell.sliderView.selectedMaximum = Float(selectedMaximum ?? maxValue)
         cell.sliderView.step = step
     }
 }

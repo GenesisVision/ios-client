@@ -13,7 +13,7 @@ protocol RouterProtocol {
     func popToViewController(viewController: UIViewController, animated: Bool)
     func popViewController(animated: Bool)
     func push(viewController: UIViewController)
-    //Model
+    //Modal
     func present(viewController: UIViewController, from currentViewController: UIViewController)
 }
 

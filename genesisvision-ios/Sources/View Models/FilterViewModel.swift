@@ -10,6 +10,9 @@ import Foundation
 
 class FilterViewModel {
     
+    // MARK: - View Model
+    private weak var investmentProgramListViewModel: InvestmentProgramListViewModel?
+    
     enum SectionType {
         case amount
         case sort
@@ -20,13 +23,36 @@ class FilterViewModel {
     
     private var sections: [SectionType] = []
     private var router: FilterRouter!
-    private var filterModel: InvestmentsFilter?
-    private var sorting: [String] = []
+    private var sortingList: [String : InvestmentsFilter.Sorting] = ["Rating asc" : .byRatingAsc,
+                                                                     "Rating desc" : .byRatingDesc,
+                                                                     "Orders asc" : .byOrdersAsc,
+                                                                     "Orders desc" : .byOrdersDesc,
+                                                                     "Profit asc" : .byProfitAsc,
+                                                                     "Profit desc" : .byProfitDesc]
+    
+    var sorting: InvestmentsFilter.Sorting?
+    var investMaxAmountFrom: Double?
+    var investMaxAmountTo: Double?
+    
+    /// Return view models for registration cell Nib files
+    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FilterAmountTableViewCellViewModel.self,
+                FilterSortTableViewCellViewModel.self]
+    }
     
     // MARK: - Init
-    init(withRouter router: FilterRouter, withSorting sorting: [String]? = nil) {
+    init(withRouter router: FilterRouter,
+         investmentProgramListViewModel: InvestmentProgramListViewModel,
+         sorting: InvestmentsFilter.Sorting? = nil,
+         investMaxAmountFrom: Double? = nil,
+         investMaxAmountTo: Double? = nil) {
+        
         self.router = router
-        self.sorting = sorting ?? []
+        self.investmentProgramListViewModel = investmentProgramListViewModel
+        
+        self.sorting = sorting
+        self.investMaxAmountFrom = investMaxAmountFrom
+        self.investMaxAmountTo = investMaxAmountTo
         
         setup()
     }
@@ -38,56 +64,49 @@ class FilterViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .amount:
-            return FilterAmountTableViewCellViewModel(minValue: 0.0, maxValue: 1000.0, selectedMinimum: 0.0, selectedMaximum: 1000.0, step: 50.0)
+            return FilterAmountTableViewCellViewModel(minValue: 0.0, maxValue: 1000.0, selectedMinimum: investMaxAmountFrom, selectedMaximum: investMaxAmountTo, step: 50.0)
         case .sort:
-            var sorting: [String] = []
-            InvestmentsFilter.Sorting.cases().forEach({ (sort) in
-                sorting.append(sort.rawValue)
-            })
-            
-            return FilterSortTableViewCellViewModel(sorting: sorting)
+            let sortingValue = sortingListKeys()[indexPath.row]
+            let selected = false
+            return FilterSortTableViewCellViewModel(sorting: sortingValue, selected: selected)
         }
     }
     
-    func registerNibs() -> [CellViewAnyModel.Type] {
-        return [FilterAmountTableViewCellViewModel.self, FilterSortTableViewCellViewModel.self]
+    func select(for indexPath: IndexPath) {
+        let sortingValue = sortingListKeys()[indexPath.row]
+        let selected = true
+        _ = FilterSortTableViewCellViewModel(sorting: sortingValue, selected: selected)
+        // TODO: get model and update values
+    }
+    
+    private func sortingListKeys() -> [String] {
+        return Array(sortingList.keys.sorted())
     }
     
     func numberOfSections() -> Int {
         return sections.count
     }
     
-    func numberOfRowsIn(section: Int) -> Int {
+    func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
-        case .amount, .sort:
+        case .amount:
             return 1
+        case .sort:
+            return sortingList.count
         }
     }
     
     func reset() {
-        
+        investmentProgramListViewModel?.sorting = nil
+        investmentProgramListViewModel?.investMaxAmountFrom = nil
+        investmentProgramListViewModel?.investMaxAmountTo = nil
     }
     
     func apply() {
-        
-    }
-    
-    func updateFilter(managerId: UUID? = nil,
-                      brokerId: UUID? = nil,
-                      brokerTradeServerId: UUID? = nil,
-                      investMaxAmountFrom: Double? = nil,
-                      investMaxAmountTo: Double? = nil,
-                      sorting: InvestmentsFilter.Sorting? = nil,
-                      skip: Int? = nil,
-                      take: Int? = nil) {
-        filterModel = InvestmentsFilter(managerId: managerId,
-                                        brokerId: brokerId,
-                                        brokerTradeServerId: brokerTradeServerId,
-                                        investMaxAmountFrom: investMaxAmountFrom,
-                                        investMaxAmountTo: investMaxAmountTo,
-                                        sorting: sorting,
-                                        skip: skip,
-                                        take: take)
+        investmentProgramListViewModel?.sorting = sorting
+        investmentProgramListViewModel?.investMaxAmountFrom = investMaxAmountFrom
+        investmentProgramListViewModel?.investMaxAmountTo = investMaxAmountTo
+        router.popViewController(animated: true)
     }
     
     // MARK: - Private methods
