@@ -25,7 +25,7 @@ class SignUpViewModel {
     }
     
     // MARK: - API
-    func signUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
+    func signUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         isInvestorApp
             ? investorSignUp(email: email, password: password, confirmPassword: confirmPassword, completion: completion)
             : managerSignUp(email: email, password: password, confirmPassword: confirmPassword, completion: completion)
@@ -33,7 +33,7 @@ class SignUpViewModel {
     
     // MARK: - Private methods
     // MARK: - API Methods
-    private func investorSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
+    private func investorSignUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
         
         InvestorAPI.apiInvestorAuthSignUpPost(model: registerInvestorViewModel) { [weak self] (error) in
@@ -41,7 +41,7 @@ class SignUpViewModel {
         }
     }
     
-    private func managerSignUp(email: String, password: String, confirmPassword: String, completion: @escaping ApiCompletionBlock) {
+    private func managerSignUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         let registerManagerViewModel = RegisterManagerViewModel(email: email, password: password, confirmPassword: confirmPassword)
         
         ManagerAPI.apiManagerAuthSignUpPost(model: registerManagerViewModel) { [weak self] (error) in
@@ -49,9 +49,9 @@ class SignUpViewModel {
         }
     }
     
-    private func responseHandler(error: Error?, completion: @escaping ApiCompletionBlock) {
+    private func responseHandler(error: Error?, completion: @escaping CompletionBlock) {
         error == nil
-            ? completion(ApiCompletionResult.success)
+            ? completion(CompletionResult.success)
             : ErrorHandler.handleApiError(error: error, completion: completion)
     }
 }

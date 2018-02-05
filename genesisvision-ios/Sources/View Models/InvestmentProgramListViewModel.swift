@@ -6,11 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum DataType {
-    case api
-    case fake
-}
-
 class InvestmentProgramListViewModel {
     
     // MARK: - Init
@@ -35,18 +30,18 @@ class InvestmentProgramListViewModel {
         return AuthManager.isLogin()
     }
     
-    func fetch(completion: @escaping ApiCompletionBlock) {
+    func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
     }
     
-    func fetchMore(completion: @escaping ApiCompletionBlock) {
+    func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += Constants.Api.Take.programs
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.investmentProgramViewModels ?? [TraderTableViewCellViewModel]()
 
@@ -58,12 +53,12 @@ class InvestmentProgramListViewModel {
             }, completionError: completion)
     }
     
-    func refresh(completion: @escaping ApiCompletionBlock) {
+    func refresh(completion: @escaping CompletionBlock) {
         skip = 0
         
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
-        }, completionError: completion)
+            }, completionError: completion)
     }
     
     func programsCount() -> Int {
@@ -74,12 +69,13 @@ class InvestmentProgramListViewModel {
         return programsCount()
     }
     
-    func getProgram(atIndex index: Int) -> TraderTableViewCellViewModel? {
+    /// Get TableViewCellViewModel for IndexPath
+    func program(forIndex index: Int) -> TraderTableViewCellViewModel? {
         return investmentProgramViewModels[index]
     }
     
     func getProgramDetailViewController(withIndex index: Int) -> TraderViewController? {
-        guard let program = getProgram(atIndex: index) else {
+        guard let program = program(forIndex: index) else {
             return nil
         }
         
@@ -115,7 +111,7 @@ class InvestmentProgramListViewModel {
         }
     }
     
-    private func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping ApiCompletionBlock) {
+    private func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard viewModel != nil else {
             return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
@@ -139,10 +135,10 @@ class InvestmentProgramListViewModel {
         self.totalCount = totalCount
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping ApiCompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byRatingAsc, skip: skip, take: Constants.Api.take)
+            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byRatingAsc, skip: skip, take: Constants.Api.Take.programs)
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
                 

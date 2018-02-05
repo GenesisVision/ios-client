@@ -10,13 +10,7 @@ import Foundation
 import RealmSwift
 
 final class ProfileEntity: Object {
-    
-    enum UserStatus: String {
-        case complete
-        case requiresCompletion
-        case unknown
-    }
-    
+
     @objc dynamic var firstName: String?
     @objc dynamic var middleName: String?
     @objc dynamic var lastName: String?
@@ -33,22 +27,78 @@ final class ProfileEntity: Object {
     @objc dynamic var balance: Double = 0.0
     
     @objc dynamic var statusValue: String = ""
-    
-    var status: UserStatus {
-        get {
-            return UserStatus(rawValue: statusValue) ?? .unknown
-        }
-        set {
-            realmWrite {
-                statusValue = newValue.rawValue
-            }
-        }
+
+    var fullName: String {
+        guard let firstName = firstName, let lastName = lastName else { return String.placeholder }
+        return firstName + " " + lastName
     }
     
-    var fullName: String {
-        return firstName! + " " + lastName!
+    func getFields() -> [String : String] {
+        return ["firstName" : firstName ?? "",
+                "middleName" : middleName ?? "",
+                "lastName" : lastName ?? "",
+                "documentType" : lastName ?? "",
+                "documentNumber" : documentNumber ?? "",
+                "country" : country ?? "",
+                "city" : city ?? "",
+                "address" : address ?? "",
+                "phone" : phone ?? "",
+                "birthday" : getBirthday(),
+                "gender" : getGender(),
+                "email" : email ?? ""]
+    }
+    
+    func getBirthday() -> String {
+        guard let date = birthday else { return "" }
+        
+        return date.defaultFormatString
+    }
+    
+    func getGender() -> String {
+        return gender ? "Male" : "Female"
     }
 }
 
 extension ProfileEntity {
+    static var templateEntity: ProfileEntity {
+        
+        let templates = ["Tamplate1", "Template2", "Template3"]
+        
+        let logos = ["https://goo.gl/images/tR9X4d", nil]
+        
+        let entity = ProfileEntity()
+        entity.firstName = templates.rand!
+        entity.middleName = templates.rand!
+        entity.lastName = templates.rand!
+        entity.documentType = templates.rand!
+        entity.documentNumber = templates.rand!
+        entity.country = templates.rand!
+        entity.city = templates.rand!
+        entity.address = templates.rand!
+        entity.phone = templates.rand!
+        entity.birthday = Date()
+        entity.gender = true
+        entity.avatar = logos.rand!
+        entity.email = templates.rand!
+        entity.balance = [0.0, 20.0, 30.0, 1.0].rand!
+        
+        return entity
+    }
+    
+    func traslation(fromProfileModel profileModel: ProfileFullViewModel) {
+        self.firstName = profileModel.firstName ?? nil
+        self.middleName = profileModel.middleName ?? nil
+        self.lastName = profileModel.lastName ?? nil
+        self.documentType = profileModel.documentType ?? nil
+        self.documentNumber = profileModel.documentNumber ?? nil
+        self.country = profileModel.country ?? nil
+        self.city = profileModel.city ?? nil
+        self.address = profileModel.address ?? nil
+        self.phone = profileModel.phone ?? nil
+        self.birthday = profileModel.birthday ?? nil
+        self.gender = profileModel.gender ?? true
+        self.avatar = profileModel.avatar ?? nil
+        self.email = profileModel.email ?? nil
+        self.balance = profileModel.balance ?? 0.0
+    }
 }

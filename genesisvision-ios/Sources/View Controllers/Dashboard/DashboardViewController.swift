@@ -15,7 +15,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     var viewModel: DashboardViewModel!
 
     // MARK: - Variables
-     @IBOutlet var tableView: UITableView! {
+     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
         }
@@ -37,7 +37,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        tableView.tableFooterView = UIView()
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
     }

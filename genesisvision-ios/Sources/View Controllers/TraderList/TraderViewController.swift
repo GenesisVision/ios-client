@@ -16,7 +16,7 @@ class TraderViewController: BaseViewControllerWithTableView {
     var viewModel: ProgramDetailViewModel!
     
     // MARK: - Variables
-    @IBOutlet var tableView: UITableView! {
+    @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
         }
@@ -38,7 +38,6 @@ class TraderViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        tableView.tableFooterView = UIView()
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
     }

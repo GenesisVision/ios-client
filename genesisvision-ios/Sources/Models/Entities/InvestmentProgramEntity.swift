@@ -35,6 +35,10 @@ final class InvestmentProgramEntity: TemplatableObject, TemplateEntityProtocol {
     func getCurrency() -> Currency {
         return Currency(rawValue: currency)!
     }
+    
+    func getRating() -> Int {
+        return Int(rating)
+    }
 }
 
 extension InvestmentProgramEntity {

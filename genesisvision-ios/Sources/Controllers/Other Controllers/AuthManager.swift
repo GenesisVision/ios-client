@@ -88,7 +88,7 @@ class AuthManager {
         }
     }
 
-    private func responseHandler(_ viewModel: ProfileFullViewModel?, error: Error?, successCompletion: @escaping (_ viewModel: ProfileFullViewModel?) -> Void, errorCompletion: @escaping ApiCompletionBlock) {
+    private func responseHandler(_ viewModel: ProfileFullViewModel?, error: Error?, successCompletion: @escaping (_ viewModel: ProfileFullViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard viewModel != nil else {
             return ErrorHandler.handleApiError(error: error, completion: errorCompletion)

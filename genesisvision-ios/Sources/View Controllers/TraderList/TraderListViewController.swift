@@ -30,7 +30,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
     // MARK: - Outlets
     @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet var tableView: UITableView! {
+    @IBOutlet override var tableView: UITableView! {
         didSet {
             setupSignInButton()
             setupTableConfiguration()
@@ -43,8 +43,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
 
         title = viewModel.title
         
-        setupUI()
-        registerForPreviewing()
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,33 +66,38 @@ class TraderListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        //Config
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
         tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
-        tableViewConfiguration.backgroundColor = UIColor.colorGrayBackground
         tableView.configure(with: .custom(tableViewConfiguration))
         
-        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: viewModel.registerNibs())
         
-        //Pull to refresh
-        let tintColor = UIColor.colorPrimary
+        setupPullToRefresh()
+    }
+    
+    private func setupPullToRefresh() {
+        let tintColor = UIColor.primary
         let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
         refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(TraderListViewController.pullToRefresh), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     
-    private func setupUI() {
-        showProgressHUD()
+    private func setup() {
+        registerForPreviewing()
         
+        showProgressHUD()
+        setupUI()
+    }
+    
+    private func setupUI() {
         filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
         navigationItem.rightBarButtonItem = filterBarButtonItem
     }
@@ -118,9 +122,10 @@ class TraderListViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 self?.refreshControl?.endRefreshing()
-                self?.tableView?.reloadData()
-            case .failure:
-                break
+                self?.tableView.reloadData()
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
             }
         }
     }
@@ -145,7 +150,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        guard let programEntity = viewModel.getProgram(atIndex: indexPath.row)?.investmentProgramEntity else {
+        guard let programEntity = viewModel.program(forIndex: indexPath.row)?.investmentProgramEntity else {
             return
         }
 
@@ -153,7 +158,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.getProgram(atIndex: indexPath.row) else {
+        guard let model = viewModel.program(forIndex: indexPath.row) else {
             return UITableViewCell()
         }
         
@@ -186,7 +191,9 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         guard let vc = viewModel.getProgramDetailViewController(withIndex: indexPath.row) else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = cell.frame
+        let viewRectInTableView = tableView.convert(cell.frame, from: tableView)
+
+        previewingContext.sourceRect = viewRectInTableView//tableView.rectForRow(at: indexPath)
         
         return vc
     }

@@ -26,7 +26,7 @@ class DashboardViewModel {
     }
     
     // MARK: - Data methods
-    func loadDashboards(completion: @escaping ApiCompletionBlock) {
+    func loadDashboards(completion: @escaping CompletionBlock) {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
         
         InvestorAPI.apiInvestorDashboardGet(authorization: token) { [weak self] (dashboard, error) in

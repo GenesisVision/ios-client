@@ -18,18 +18,19 @@ struct AppearanceController {
     
     // NavigationBar
     private static func setupNavigationBar() {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(.darkGray)]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
         }
         
-        UINavigationBar.appearance().tintColor = UIColor.colorPrimary
+        UINavigationBar.appearance().tintColor = UIColor.primary
     }
     
     // TabBar
     private static func setupTabBar() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.black], for: .selected)
         UITabBar.appearance().tintColor = .black
+        UITabBar.appearance().backgroundColor = .white
     }
     
     // MARK: - IQKeyboardManager

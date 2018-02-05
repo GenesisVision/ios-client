@@ -17,14 +17,16 @@ class ProfileImageView: UIView {
     
     @IBOutlet var flagImageView: RoundedImageView! {
         didSet {
+            flagImageView.image = UIImage.placeholder
             guard let _ = flagImageView.image else { return }
-            flagImageView.addBorder(withBorderWidth: 1.0)
+            flagImageView.addBorder(withBorderWidth: 2.0)
         }
     }
     
     @IBOutlet var levelLabel: UILabel! {
         didSet {
-            levelLabel.roundWithBorder(1.0)
+            levelLabel.backgroundColor = UIColor.darkPrimary
+            levelLabel.roundWithBorder(2.0)
         }
     }
 }

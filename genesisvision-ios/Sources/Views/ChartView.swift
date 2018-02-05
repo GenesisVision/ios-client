@@ -40,7 +40,7 @@ class ChartView: LineChartView {
         
         let chartDataSet = LineChartDataSet(values: values, label: "DataSet")
         
-        chartDataSet.setColor(UIColor.colorPrimary)
+        chartDataSet.setColor(UIColor.primary)
         chartDataSet.lineWidth = 1
         
         chartDataSet.drawFilledEnabled = false
