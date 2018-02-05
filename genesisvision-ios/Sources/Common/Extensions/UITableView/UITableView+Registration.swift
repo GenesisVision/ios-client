@@ -27,6 +27,12 @@ extension UITableView {
         register(cellClass.nib, forCellReuseIdentifier: cellClass.identifier)
     }
     
+    func registerHeaderNib(for headerClass: [UITableViewHeaderFooterView.Type]) {
+        headerClass.forEach { (headerType) in
+            registerHeaderNib(for: headerType)
+        }
+    }
+    
     func registerHeaderNib(for headerClass: UITableViewHeaderFooterView.Type) {
         register(headerClass.nib, forHeaderFooterViewReuseIdentifier: headerClass.identifier)
     }

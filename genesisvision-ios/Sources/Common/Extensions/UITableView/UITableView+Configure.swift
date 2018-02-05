@@ -15,6 +15,10 @@ struct TableViewConfiguration {
     var estimatedRowHeight: CGFloat
     var rowHeight: CGFloat
     var backgroundColor: UIColor
+    var separatorInsetLeft: CGFloat
+    var separatorInsetRight: CGFloat
+    var separatorInsetTop: CGFloat
+    var separatorInsetBottom: CGFloat
     
     init(
         topInset: CGFloat? = nil,
@@ -22,7 +26,11 @@ struct TableViewConfiguration {
         bottomIndicatorInset: CGFloat? = nil,
         estimatedRowHeight: CGFloat = 0,
         rowHeight: CGFloat = UITableViewAutomaticDimension,
-        backgroundColor: UIColor = UIColor.lightGray
+        backgroundColor: UIColor = UIColor.background,
+        separatorInsetLeft: CGFloat = 16.0,
+        separatorInsetRight: CGFloat = 16.0,
+        separatorInsetTop: CGFloat = 16.0,
+        separatorInsetBottom: CGFloat = 16.0
         ) {
         self.topInset = topInset
         self.bottomInset = bottomInset
@@ -30,6 +38,10 @@ struct TableViewConfiguration {
         self.bottomIndicatorInset = bottomIndicatorInset
         self.rowHeight = rowHeight
         self.backgroundColor = backgroundColor
+        self.separatorInsetLeft = separatorInsetLeft
+        self.separatorInsetRight = separatorInsetRight
+        self.separatorInsetTop = separatorInsetTop
+        self.separatorInsetBottom = separatorInsetBottom
     }
     
     static var defaultConfig = defaultConfiguration
@@ -40,7 +52,9 @@ private var defaultConfiguration: TableViewConfiguration {
         topInset: 0,
         bottomInset: 0,
         estimatedRowHeight: 140,
-        rowHeight: UITableViewAutomaticDimension
+        rowHeight: UITableViewAutomaticDimension,
+        separatorInsetLeft: 16.0,
+        separatorInsetRight: 16.0
     )
 }
 
@@ -75,6 +89,11 @@ extension UITableView {
         self.rowHeight = configuration.rowHeight
         
         self.backgroundColor = configuration.backgroundColor
+        
+        self.separatorInset.left = configuration.separatorInsetLeft
+        self.separatorInset.right = configuration.separatorInsetRight
+        self.separatorInset.top = configuration.separatorInsetTop
+        self.separatorInset.bottom = configuration.separatorInsetBottom
     }
     
 }

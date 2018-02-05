@@ -12,4 +12,8 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
+    
+    static var placeholder: String {
+        return "No data"
+    }
 }
