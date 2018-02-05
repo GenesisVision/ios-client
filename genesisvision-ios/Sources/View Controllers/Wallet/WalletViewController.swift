@@ -11,11 +11,16 @@ import DZNEmptyDataSet
 
 class WalletViewController: BaseViewControllerWithTableView {
 
+    // MARK: - Variables
+    private var canFetchMoreResults = true
+    private var refreshControl: UIRefreshControl!
+    private var withdrawBarButtonItem: UIBarButtonItem?
+    
     // MARK: - View Model
     var viewModel: WalletViewModel!
     
-    // MARK: - Variables
-    @IBOutlet var tableView: UITableView! {
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
         }
@@ -31,8 +36,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let balance = viewModel.getBalance()
-        navigationItem.title = String(describing: balance) + " GVT"
+        title = viewModel.title
     }
     
     // MARK: - Private methods
@@ -42,31 +46,129 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
+        withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction(_:)))
+        navigationItem.rightBarButtonItem = withdrawBarButtonItem
     }
     
     private func setupTableConfiguration() {
-        tableView.tableFooterView = UIView()
-        tableView.emptyDataSetDelegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.registerNibs(for: WalletViewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: WalletViewModel.viewModelsForRegistration)
+        
+        setupPullToRefresh()
     }
     
+    private func setupPullToRefresh() {
+        let tintColor = UIColor.primary
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
+        refreshControl.tintColor = tintColor
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc private func pullToRefresh() {
+        fetchBalance()
+        fetchTransactions()
+    }
+
     private func fetch() {
-        viewModel.fetch { [weak self] (result) in
+        showProgressHUD()
+        fetchBalance()
+        fetchTransactions()
+    }
+    
+    private func fetchBalance() {
+        viewModel.fetchBalance { [weak self] (result) in
+            self?.hideHUD()
             switch result {
             case .success:
                 let balance = self?.viewModel.getBalance()
-                self?.navigationItem.title = String(describing: balance) + " GVT"
+                self?.navigationItem.title = String(describing: balance) + " " + Constants.currency
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
             }
         }
     }
+    
+    private func fetchTransactions() {
+        viewModel.fetchTransactions { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
+            }
+        }
+    }
+    
+    private func fetchMoreTransactions() {
+        self.canFetchMoreResults = false
+        
+        self.viewModel.fetchMoreTransactions { [weak self] (result) in
+            self?.canFetchMoreResults = true
+            switch result {
+            case .success:
+                self?.tableView.reloadData()
+            case .failure:
+                break
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func withdrawButtonAction(_ sender: UIButton) {
+        viewModel.withdraw()
+    }
+}
+
+extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let model = viewModel.model(at: indexPath) else {
+            return UITableViewCell()
+        }
+        
+        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows(in: section)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = viewModel.headerTitle(for: section) else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+        header.headerLabel.text = title
+        return header
+    }
 }
 
 extension WalletViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        
+        showProgressHUD()
+        pullToRefresh()
     }
 }
