@@ -17,7 +17,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var resetBarButtonItem: UIBarButtonItem?
     
-    @IBOutlet var tableView: UITableView! {
+    @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
         }
@@ -37,14 +37,13 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         title = viewModel.title
-        view.backgroundColor = UIColor.colorGrayBackground
+        view.backgroundColor = UIColor.background
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
         navigationItem.rightBarButtonItem = resetBarButtonItem
     }
     
     private func setupTableConfiguration() {
-        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.emptyDataSetSource = self

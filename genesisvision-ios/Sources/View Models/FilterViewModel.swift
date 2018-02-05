@@ -32,6 +32,8 @@ class FilterViewModel {
     }
     
     // MARK: - Public methods
+    
+    /// Get TableViewCellViewModel for IndexPath
     func model(for indexPath: IndexPath) -> CellViewAnyModel {
         let type = sections[indexPath.section]
         switch type {
@@ -89,9 +91,8 @@ class FilterViewModel {
     }
     
     // MARK: - Private methods
-    
     private func setup() {
-        sections.append(contentsOf: [.amount, .sort])
+        sections = [.amount, .sort]
     }
 }
 
