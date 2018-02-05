@@ -36,6 +36,18 @@ class AuthManager {
         }
     }
     
+    static func updateToken() {
+        AuthManager().updateApiToken { (result) in
+            switch result {
+            case .success:
+                print("Token updated")
+            case .failure(let reason):
+                print("Token not updated")
+                print(reason ?? "Fail with no reason")
+            }
+        }
+    }
+    
     static func isLogin() -> Bool {
         return AuthManager.authorizedToken != nil
     }
@@ -95,5 +107,18 @@ class AuthManager {
         }
         
         successCompletion(viewModel)
+    }
+    
+    private func updateApiToken(completion: @escaping CompletionBlock)  {
+        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
+        
+        InvestorAPI.apiInvestorAuthUpdateTokenGet(authorization: token) { (token, error) in
+            guard token != nil else {
+                return ErrorHandler.handleApiError(error: error, completion: completion)
+            }
+            
+            AuthManager.authorizedToken = token
+            completion(.success)
+        }
     }
 }

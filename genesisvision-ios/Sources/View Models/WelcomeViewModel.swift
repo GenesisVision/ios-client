@@ -22,7 +22,18 @@ class WelcomeViewModel {
     // MARK: - Navigation
     func start() {
         AuthManager.isLogin()
-            ? router.show(routeType: .startAsAuthorized)
-            : router.show(routeType: .startAsUnauthorized)
+            ? startAsAuthorized()
+            : startAsUnauthorized()
+    }
+    
+    // MARK: - Private methods
+    
+    private func startAsAuthorized() {
+        AuthManager.updateToken()
+        router.show(routeType: .startAsAuthorized)
+    }
+    
+    private func startAsUnauthorized() {
+        router.show(routeType: .startAsUnauthorized)
     }
 }

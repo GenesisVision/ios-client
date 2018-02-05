@@ -115,9 +115,7 @@ extension Router: RouterProtocol {
 //Common methods
 extension Router {
     func getTraidersNavigationController() -> UINavigationController? {
-//        if traidersViewController == nil {
-            createTraidersNavigationController()
-//        }
+        createTraidersNavigationController()
         
         let navigationController = BaseNavigationController(rootViewController: traidersViewController)
         traidersViewController.viewModel.router.navigationController = navigationController
