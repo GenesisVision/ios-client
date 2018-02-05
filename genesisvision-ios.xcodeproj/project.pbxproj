@@ -164,6 +164,7 @@
 		FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */; };
 		FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */; };
 		FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */; };
+		FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */; };
 		FCE8236320161339000061E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236220161339000061E8 /* Constants.swift */; };
 		FCE82365201622BD000061E8 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE82364201622BD000061E8 /* ActionButton.swift */; };
 		FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE823662016239C000061E8 /* RoundedImageView.swift */; };
@@ -338,6 +339,7 @@
 		FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellViewModel.swift"; sourceTree = "<group>"; };
 		FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollection.swift; sourceTree = "<group>"; };
 		FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollectionDelegate.swift; sourceTree = "<group>"; };
+		FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		FCE8236220161339000061E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FCE82364201622BD000061E8 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		FCE823662016239C000061E8 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
@@ -701,6 +703,7 @@
 				FCA5707120274AC1001942F3 /* Date+DefaultFormat.swift */,
 				FCA5707320274BD0001942F3 /* Bundle+Locale.swift */,
 				FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */,
+				FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
 				FCA570642027358F001942F3 /* ProfileHeaderTableViewCellViewModel.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
+				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
 				FC5E90B920221C24000E4A90 /* WalletTransaction.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				FCA5705520273528001942F3 /* ProfileFieldTableViewCell.swift in Sources */,

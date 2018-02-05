@@ -11,15 +11,20 @@ import Foundation
 class ErrorHandler {
     static func handleApiError(error: Error?, completion: @escaping CompletionBlock) {
         guard let errorResponse = error as? ErrorResponse else {
-            return completion(CompletionResult.failure(reason: nil))
+            return completion(.failure(reason: nil))
         }
         
         switch errorResponse {
         case .error(let code, let data, let properties):
             print("API ERROR with \(code) code\n Properties: \(properties)")
             
+            guard code != 401 else {
+                NotificationCenter.default.post(name: .signOut, object: nil)
+                return completion(.failure(reason: nil))
+            }
+            
             guard let jsonData = data else {
-                return completion(CompletionResult.failure(reason: nil))
+                return completion(.failure(reason: nil))
             }
             
             var errorViewModel: ErrorViewModel?
@@ -29,11 +34,11 @@ class ErrorHandler {
             } catch {}
             
             guard let errorsText = errorViewModel?.errors?.flatMap({$0.message}).joined(separator: "\n") else {
-                return completion(CompletionResult.failure(reason: nil))
+                return completion(.failure(reason: nil))
             }
             
             print("API ERROR text \(errorsText)")
-            completion(CompletionResult.failure(reason: errorsText))
+            completion(.failure(reason: errorsText))
         }
     }
 }

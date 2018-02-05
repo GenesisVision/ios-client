@@ -34,6 +34,12 @@ class ProfileViewModel {
     // MARK: - Init
     init(withRouter router: ProfileRouter) {
         self.router = router
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
     }
     
     // MARK: - Public methods
@@ -96,8 +102,7 @@ class ProfileViewModel {
     
     // MARK: - Navigation
     func editProfile() {
-        AuthManager.authorizedToken = nil
-        router.show(routeType: .signOut)
+
     }
     
     func signOut() {
@@ -105,4 +110,8 @@ class ProfileViewModel {
         router.show(routeType: .signOut)
     }
     
+    @objc private func signOutNotification(notification: Notification) {
+        NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
+        signOut()
+    }
 }

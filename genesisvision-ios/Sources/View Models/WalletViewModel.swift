@@ -96,21 +96,7 @@ class WalletViewModel {
         
         completion(cellModels)
     }
-    
-    /// Fetch transactions from API -> Save fetched data
-    func fetchTransactions() {
-        fetchTransactions({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-        }) { (result) in
-            switch result {
-            case .failure(let reason):
-                print(reason ?? "Fail with no reason")
-            case .success:
-                print("SUCCESS????")
-            }
-        }
-    }
-    
+
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchTransactions(completion: @escaping CompletionBlock) {
         switch dataType {
@@ -124,33 +110,6 @@ class WalletViewModel {
             })
         }
         
-    }
-    
-    /// Fetch more transactions from API -> Save fetched data
-    func fetchMoreTransactions() {
-        if skip >= totalCount {
-            print("Fail skip >= totalCount")
-            return
-        }
-        
-        skip += Constants.Api.Take.transactions
-        
-        fetchTransactions({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.transactions ?? [WalletTransactionTableViewCellViewModel]()
-            
-            viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
-            })
-            
-            self?.updateFetchedData(totalCount: totalCount, allViewModels)
-        }) { (result) in
-            switch result {
-            case .failure(let reason):
-                print(reason ?? "Fail with no reason")
-            case .success:
-                print("SUCCESS????")
-            }
-        }
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
@@ -170,22 +129,6 @@ class WalletViewModel {
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
             }, completionError: completion)
-    }
-    
-    /// Fetch transactions from API -> Save fetched data
-    func refresh() {
-        skip = 0
-        
-        fetchTransactions({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-        }) { (result) in
-            switch result {
-            case .failure(let reason):
-                print(reason ?? "Fail with no reason")
-            case .success:
-                print("SUCCESS????")
-            }
-        }
     }
     
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
