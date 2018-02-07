@@ -25,7 +25,8 @@ class ProfileImageView: UIView {
     
     @IBOutlet var levelLabel: UILabel! {
         didSet {
-            levelLabel.backgroundColor = UIColor.darkPrimary
+            levelLabel.backgroundColor = .clear
+            levelLabel.layer.backgroundColor = UIColor.darkPrimary.cgColor
             levelLabel.roundWithBorder(2.0)
         }
     }

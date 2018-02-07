@@ -117,20 +117,21 @@ class FilterViewModel {
         sortCellModels[0].selected = true
     }
     
-    func apply() {
+    func apply(completion: @escaping CompletionBlock) {
         investmentProgramListViewModel?.sorting = selectedSorting
         investmentProgramListViewModel?.investMaxAmountFrom = investMaxAmountFrom
         investmentProgramListViewModel?.investMaxAmountTo = investMaxAmountTo
         
-        investmentProgramListViewModel?.refresh(completion: { (result) in
-            
-        })
+        investmentProgramListViewModel?.refresh(completion: completion)
+    }
+    
+    func popToInvestVC() {
         router.popViewController(animated: true)
     }
     
     // MARK: - Private methods
     private func setup() {
-        amountCellModel = FilterAmountTableViewCellViewModel(minValue: 0.0, maxValue: 1000.0, selectedMaxAmountFrom: investMaxAmountFrom, selectedMaxAmountTo: investMaxAmountTo, step: 50.0, delegate: nil)
+        amountCellModel = FilterAmountTableViewCellViewModel(minValue: 0.0, maxValue: 1100.0, selectedMaxAmountFrom: investMaxAmountFrom, selectedMaxAmountTo: investMaxAmountTo, step: 50.0, delegate: nil)
         
         sortingList.forEach { (dict) in
             sortCellModels.append(FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), selected: dict.key == selectedSorting))
