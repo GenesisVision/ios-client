@@ -28,6 +28,6 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.depositLabel.text = "" + investmentProgramEntity.currency.uppercased()
         cell.tradesLabel.text = "\(investmentProgramEntity.ordersCount)"
         cell.weeksLabel.text = "\(investmentProgramEntity.period)"
-        cell.profitLabel.text = "\(investmentProgramEntity.totalProfit)"
+        cell.profitLabel.text = "\(investmentProgramEntity.totalProfit)%"
     }
 }

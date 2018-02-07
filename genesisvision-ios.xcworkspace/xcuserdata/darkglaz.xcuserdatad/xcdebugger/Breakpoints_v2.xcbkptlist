@@ -26,7 +26,7 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "539667239.342181"
+                  timestampString = "539706350.402202"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "344"
@@ -41,7 +41,7 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "539667239.35567"
+                  timestampString = "539706350.405749"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "345"
@@ -74,7 +74,7 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "539667239.384323"
+                  timestampString = "539706350.418854"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "363"
@@ -89,7 +89,7 @@
                   moduleName = "GV Investor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "539667239.3891129"
+                  timestampString = "539706350.421214"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "364"
@@ -145,118 +145,6 @@
             endingLineNumber = "46"
             landmarkName = "buttonDefaultState()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/InvestmentProgramListViewModel.swift"
-            timestampString = "539667238.906147"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "fetch(completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GV_Investor.InvestmentProgramListViewModel.fetch(completion: (GV_Investor.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Investor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/View%20Models/InvestmentProgramListViewModel.swift"
-                  timestampString = "539667239.424727"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Int, Swift.Array&lt;GV_Investor.TraderTableViewCellViewModel&gt;) -&gt; () in GV_Investor.InvestmentProgramListViewModel.fetch(completion: (GV_Investor.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Investor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/View%20Models/InvestmentProgramListViewModel.swift"
-                  timestampString = "539667239.4295239"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/InvestmentProgramListViewModel.swift"
-            timestampString = "539667238.906243"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "fetchMore(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/InvestmentProgramListViewModel.swift"
-            timestampString = "539667238.9063179"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "fetch(_:completionError:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GV_Investor.InvestmentProgramListViewModel.(fetch in _D875659B0D5A999C7C76011D74AD5D2B)((Swift.Int, Swift.Array&lt;GV_Investor.TraderTableViewCellViewModel&gt;) -&gt; (), completionError: (GV_Investor.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Investor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/View%20Models/InvestmentProgramListViewModel.swift"
-                  timestampString = "539667239.4507461"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
-                  offsetFromSymbolStart = "448">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;GV_Investor.InvestmentProgramsViewModel&gt;) -&gt; () in GV_Investor.InvestmentProgramListViewModel.(fetch in _D875659B0D5A999C7C76011D74AD5D2B)((Swift.Int, Swift.Array&lt;GV_Investor.TraderTableViewCellViewModel&gt;) -&gt; (), completionError: (GV_Investor.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Investor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/View%20Models/InvestmentProgramListViewModel.swift"
-                  timestampString = "539667239.455302"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

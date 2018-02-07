@@ -87,26 +87,18 @@ class WalletViewModel {
             }
     }
     
-    private func fakeTransactions(completion: (_ transactionCellModels: [WalletTransactionTableViewCellViewModel]) -> Void) {
-        var cellModels = [WalletTransactionTableViewCellViewModel]()
-        
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            cellModels.append(WalletTransactionTableViewCellViewModel(walletTransaction: WalletTransaction.templateModel))
-        }
-        
-        completion(cellModels)
-    }
-
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchTransactions(completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
             fetchTransactions({ [weak self] (totalCount, viewModels) in
                 self?.updateFetchedData(totalCount: totalCount, viewModels)
+                completion(.success)
                 }, completionError: completion)
         case .fake:
             fakeTransactions(completion: { [weak self] (viewModels) in
                 self?.updateFetchedData(totalCount: viewModels.count, viewModels)
+                completion(.success)
             })
         }
         
@@ -189,6 +181,16 @@ class WalletViewModel {
         }
     }
     
+    private func fakeTransactions(completion: (_ transactionCellModels: [WalletTransactionTableViewCellViewModel]) -> Void) {
+        var cellModels = [WalletTransactionTableViewCellViewModel]()
+        
+        for _ in 0..<Constants.TemplatesCounts.traders {
+            cellModels.append(WalletTransactionTableViewCellViewModel(walletTransaction: WalletTransaction.templateModel))
+        }
+        
+        completion(cellModels)
+    }
+    
     /// Update saved transactions (WalletTransactionTableViewCellViewModel)
     private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.transactions = viewModels
@@ -218,6 +220,7 @@ class WalletViewModel {
             completionError(.success)
         }
     }
+    
     
     /// Return WalletTransactionsViewModel from API
     private func fetchTransactions(authorization: String, filter: TransactionsFilter, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {

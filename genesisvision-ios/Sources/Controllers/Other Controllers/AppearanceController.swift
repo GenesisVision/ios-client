@@ -28,8 +28,8 @@ struct AppearanceController {
     
     // TabBar
     private static func setupTabBar() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.black], for: .selected)
-        UITabBar.appearance().tintColor = .black
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.primary], for: .selected)
+        UITabBar.appearance().tintColor = UIColor.primary
         UITabBar.appearance().backgroundColor = .white
     }
     

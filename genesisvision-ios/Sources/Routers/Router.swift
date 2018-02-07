@@ -34,6 +34,8 @@ class Router {
         var viewControllers: [UIViewController] = []
         
         if let navigationController = getTraidersNavigationController() {
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_program_list")
+            navigationController.tabBarItem.title = "Invest"
             viewControllers.append(navigationController)
         }
         
@@ -44,6 +46,8 @@ class Router {
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_dashboard")
+            navigationController.tabBarItem.title = "Dashboard"
             viewControllers.append(navigationController)
         }
         
@@ -52,6 +56,8 @@ class Router {
             let router = WalletRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             walletViewController.viewModel = WalletViewModel(withRouter: router)
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_wallet")
+            navigationController.tabBarItem.title = "Wallet"
             viewControllers.append(navigationController)
         }
         
@@ -60,6 +66,8 @@ class Router {
             let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             profileViewController.viewModel = ProfileViewModel(withRouter: router)
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_profile")
+            navigationController.tabBarItem.title = "Profile"
             viewControllers.append(navigationController)
         }
         

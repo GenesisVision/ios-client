@@ -187,14 +187,10 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         let cellPosition = self.tableView.convert(location, from: self.view)
         
         guard let indexPath = tableView.indexPathForRow(at: cellPosition) else { return nil }
-        guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
         guard let vc = viewModel.getProgramDetailViewController(with: indexPath.row) else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-        let viewRectInTableView = tableView.convert(cell.frame, from: tableView)
-
-        previewingContext.sourceRect = viewRectInTableView//tableView.rectForRow(at: indexPath)
         
         return vc
     }

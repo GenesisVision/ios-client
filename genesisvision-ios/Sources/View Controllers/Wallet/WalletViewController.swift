@@ -84,16 +84,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchBalance() {
-        viewModel.fetchBalance { [weak self] (result) in
-            self?.hideHUD()
-            switch result {
-            case .success:
-                let balance = self?.viewModel.getBalance()
-                self?.navigationItem.title = String(describing: balance) + " " + Constants.currency
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
-            }
+        viewModel.fetchBalance { (result) in
         }
     }
     
