@@ -50,6 +50,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
         super.viewWillAppear(animated)
         
         setupSignInButton()
+        tableView.reloadData()
     }
     
     // MARK: - Private methods
@@ -117,7 +118,7 @@ class TraderListViewController: BaseViewControllerWithTableView {
     }
     
     @objc private func pullToRefresh() {
-        viewModel.fetch { [weak self] (result) in
+        viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {
             case .success:
@@ -150,7 +151,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        guard let programEntity = viewModel.program(forIndex: indexPath.row)?.investmentProgramEntity else {
+        guard let programEntity = viewModel.program(for: indexPath.row)?.investmentProgramEntity else {
             return
         }
 
@@ -158,7 +159,7 @@ extension TraderListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.program(forIndex: indexPath.row) else {
+        guard let model = viewModel.program(for: indexPath.row) else {
             return UITableViewCell()
         }
 
@@ -188,7 +189,7 @@ extension TraderListViewController: UIViewControllerPreviewingDelegate {
         guard let indexPath = tableView.indexPathForRow(at: cellPosition) else { return nil }
         guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
-        guard let vc = viewModel.getProgramDetailViewController(withIndex: indexPath.row) else { return nil }
+        guard let vc = viewModel.getProgramDetailViewController(with: indexPath.row) else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
         let viewRectInTableView = tableView.convert(cell.frame, from: tableView)

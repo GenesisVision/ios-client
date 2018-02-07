@@ -19,10 +19,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gv_logo" translatesAutoresizingMaskIntoConstraints="NO" id="yqS-vd-Jy8">
-                                <rect key="frame" x="141.5" y="288" width="91" height="90"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_full_logo" translatesAutoresizingMaskIntoConstraints="NO" id="yqS-vd-Jy8">
+                                <rect key="frame" x="137" y="283.5" width="101" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="QoT-Rs-fGT"/>
+                                    <constraint firstAttribute="height" constant="100" id="QoT-Rs-fGT"/>
                                     <constraint firstAttribute="width" secondItem="yqS-vd-Jy8" secondAttribute="height" multiplier="1:1" constant="1" id="Ysk-Q6-bNF"/>
                                 </constraints>
                             </imageView>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gv_logo" width="96" height="96"/>
+        <image name="img_full_logo" width="100" height="100"/>
     </resources>
 </document>

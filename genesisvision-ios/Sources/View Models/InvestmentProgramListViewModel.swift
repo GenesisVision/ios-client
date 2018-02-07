@@ -22,7 +22,8 @@ class InvestmentProgramListViewModel {
 
     var skip = 0                            //offset
     var totalCount = 0                      //total count of programs
-    var sorting: InvestmentsFilter.Sorting?
+    
+    var sorting: InvestmentsFilter.Sorting = .byOrdersAsc
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     
@@ -78,12 +79,12 @@ class InvestmentProgramListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func program(forIndex index: Int) -> TraderTableViewCellViewModel? {
+    func program(for index: Int) -> TraderTableViewCellViewModel? {
         return investmentProgramViewModels[index]
     }
     
-    func getProgramDetailViewController(withIndex index: Int) -> TraderViewController? {
-        guard let program = program(forIndex: index) else {
+    func getProgramDetailViewController(with index: Int) -> TraderViewController? {
+        guard let program = program(for: index) else {
             return nil
         }
         

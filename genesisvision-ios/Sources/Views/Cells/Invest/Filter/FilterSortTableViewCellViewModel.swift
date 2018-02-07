@@ -8,14 +8,19 @@
 
 import UIKit
 
+struct SortField {
+    var type: String
+    var text: String
+}
+
 struct FilterSortTableViewCellViewModel {
-    var sorting: String
+    var sorting: SortField
     var selected: Bool
 }
 
 extension FilterSortTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterSortTableViewCell) {
-        cell.textLabel?.text = sorting
-        cell.accessoryType = selected ? .disclosureIndicator : .none
+        cell.textLabel?.text = sorting.text
+        cell.accessoryType = selected ? .checkmark : .none
     }
 }

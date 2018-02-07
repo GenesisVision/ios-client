@@ -8,11 +8,16 @@
 
 import UIKit
 import DZNEmptyDataSet
+import TTRangeSlider
 
 class FilterViewController: BaseViewControllerWithTableView {
 
     // MARK: - View Model
-    var viewModel: FilterViewModel!
+    var viewModel: FilterViewModel! {
+        didSet {
+            viewModel.sliderDelegate = self
+        }
+    }
     
     // MARK: - Variables
     private var resetBarButtonItem: UIBarButtonItem?
@@ -58,6 +63,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
         viewModel.reset()
+        tableView.reloadData()
     }
 }
 
@@ -68,6 +74,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     
         viewModel.select(for: indexPath)
+        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,5 +95,12 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
 extension FilterViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
 
+    }
+}
+
+extension FilterViewController: TTRangeSliderDelegate {
+    func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
+        viewModel.investMaxAmountFrom = Double(selectedMinimum)
+        viewModel.investMaxAmountTo = Double(selectedMaximum)
     }
 }
