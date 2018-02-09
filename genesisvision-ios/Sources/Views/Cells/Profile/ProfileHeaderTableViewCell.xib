@@ -33,12 +33,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEw-jQ-hKZ" customClass="ChooseProfilePhotoButton">
                         <rect key="frame" x="120.5" y="16" width="79.5" height="80"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lfh-Or-yMO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lfh-Or-yMO">
                                 <rect key="frame" x="0.0" y="0.0" width="79.5" height="80"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_icon_add" translatesAutoresizingMaskIntoConstraints="NO" id="eaz-t2-rHi">
                                 <rect key="frame" x="51.5" y="52" width="28" height="28"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eaz-t2-rHi" secondAttribute="height" multiplier="1:1" id="2gY-Aq-f6m"/>
                                 </constraints>
@@ -82,5 +82,6 @@
     </objects>
     <resources>
         <image name="img_icon_add" width="60" height="60"/>
+        <image name="img_logo" width="100" height="100"/>
     </resources>
 </document>

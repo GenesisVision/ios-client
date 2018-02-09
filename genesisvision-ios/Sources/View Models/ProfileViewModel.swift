@@ -49,7 +49,7 @@ class ProfileViewModel {
         }
     }
     
-    var sections: [SectionType] = [.header, .fields]
+    var sections: [SectionType] = [.fields]
     var profileState: ProfileState = .show {
         didSet {
             for idx in 1...editableFields.count - 1 {
@@ -58,15 +58,17 @@ class ProfileViewModel {
         }
     }
     
-    weak var delegate: ProfileHeaderTableViewCellDelegate?
+    weak var tableCellDelegate: ProfileHeaderTableViewCellDelegate?
+    weak var delegate: ProfileHeaderViewDelegate?
+    
     
     var profileHeaderTableViewCellViewModel: ProfileHeaderTableViewCellViewModel?
-//    var profileFieldTableViewCellViewModels = [ProfileFieldTableViewCellViewModel]()
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProfileHeaderTableViewCellViewModel.self,
-                ProfileFieldTableViewCellViewModel.self]
+//        return [ProfileHeaderTableViewCellViewModel.self,
+//                ProfileFieldTableViewCellViewModel.self]
+        return [ProfileFieldTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -111,7 +113,7 @@ class ProfileViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return profileHeaderTableViewCellViewModel
+            return nil
         case .fields:
             let field = editableFields[indexPath.row]
             return ProfileFieldTableViewCellViewModel(text: field.text, placeholder: field.placeholder, editable: field.editable, keyboardType: field.keyboardType, textContentType: field.textContentType, valueChanged: { [weak self] (text) in
@@ -149,7 +151,7 @@ class ProfileViewModel {
                     break
                 }
             })
-                
+            
         }
     }
     

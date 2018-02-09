@@ -193,3 +193,9 @@ extension ProfileViewController: ProfileHeaderTableViewCellDelegate {
         //take photo
     }
 }
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func chooseProfilePhotoDidPressOnPhoto(_ cell: ProfileHeaderView) {
+        //take photo
+    }
+}

@@ -12,20 +12,20 @@ import Kingfisher
 struct ProfileHeaderTableViewCellViewModel {
     let profileEntity: ProfileEntity
     var editable: Bool
-    weak var delegate: ProfileHeaderTableViewCellDelegate?
+    weak var delegate: ProfileHeaderViewDelegate?
 }
 
-extension ProfileHeaderTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProfileHeaderTableViewCell) {
+extension ProfileHeaderTableViewCellViewModel {
+    func setup(on view: ProfileHeaderView) {
         if let avatar = profileEntity.avatar {
             let avatarURL = URL(string: avatar)
-            cell.chooseProfilePhotoButton.photoImageView.kf.indicatorType = .activity
-            cell.chooseProfilePhotoButton.photoImageView.kf.setImage(with: avatarURL, placeholder: UIImage.placeholder)
+            view.chooseProfilePhotoButton.photoImageView.kf.indicatorType = .activity
+            view.chooseProfilePhotoButton.photoImageView.kf.setImage(with: avatarURL, placeholder: UIImage.placeholder)
         }
         
-        cell.hideLabel(value: editable)
-        cell.nameLabel.text = editable ? nil : profileEntity.fullName
+        view.hideLabel(value: editable)
+        view.nameLabel.text = editable ? nil : profileEntity.fullName
         
-        cell.delegate = delegate
+        view.delegate = delegate
     }
 }
