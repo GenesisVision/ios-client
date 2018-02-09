@@ -38,6 +38,9 @@
                                 <color key="value" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="descriptionTextViewChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="AbH-Q5-i8A"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

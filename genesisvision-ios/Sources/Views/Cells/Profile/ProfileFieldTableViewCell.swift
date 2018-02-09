@@ -11,10 +11,11 @@ import TextFieldEffects
 
 class ProfileFieldTableViewCell: UITableViewCell {
 
+    var valueChanged: ((String) -> Void)?
+    
     // MARK: - Views
     @IBOutlet var textField: HoshiTextField! {
         didSet {
-            textField.borderActiveColor = UIColor.primary
             textField.borderInactiveColor = UIColor.black
             textField.placeholderColor = UIColor.Font.dark
         }
@@ -25,6 +26,10 @@ class ProfileFieldTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor.background
         selectionStyle = .none
+    }
+    
+    @IBAction func descriptionTextViewChanged(_ sender: UITextField) {
+        valueChanged?(sender.text ?? "")
     }
     
 }

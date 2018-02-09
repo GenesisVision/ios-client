@@ -9,6 +9,26 @@
 import Foundation
 import RealmSwift
 
+enum FieldType: String, EnumCollection {
+    case firstName = "First Name"
+    case middleName = "Middle Name"
+    case lastName = "Last Name"
+    
+    case documentType = "Document Type"
+    case documentNumber = "Document Number"
+    
+    case country = "Country"
+    case city = "City"
+    case address = "Address"
+    
+    case phone = "Phone"
+    case birthday = "Birthday"
+    case gender = "Gender"
+    case avatar = "Avatar"
+    case email = "Email"
+    case balance = "Balance"
+}
+
 final class ProfileEntity: Object {
 
     @objc dynamic var firstName: String?
@@ -33,19 +53,55 @@ final class ProfileEntity: Object {
         return firstName + " " + lastName
     }
     
-    func getFields() -> [String : String] {
-        return ["firstName" : firstName ?? "",
-                "middleName" : middleName ?? "",
-                "lastName" : lastName ?? "",
-                "documentType" : lastName ?? "",
-                "documentNumber" : documentNumber ?? "",
-                "country" : country ?? "",
-                "city" : city ?? "",
-                "address" : address ?? "",
-                "phone" : phone ?? "",
-                "birthday" : getBirthday(),
-                "gender" : getGender(),
-                "email" : email ?? ""]
+    func getFieldsCount() -> Int {
+        return getFields().count
+    }
+    
+    func getFields() -> [FieldType : String] {
+        return [.firstName : firstName ?? "",
+                .middleName : middleName ?? "",
+                .lastName : lastName ?? "",
+                .documentType : lastName ?? "",
+                .documentNumber : documentNumber ?? "",
+                .country : country ?? "",
+                .city : city ?? "",
+                .address : address ?? "",
+                .phone : phone ?? "",
+                .birthday : getBirthday(),
+                .gender : getGender(),
+                .email : email ?? ""]
+    }
+    
+    func getKeyboardTypes(for fieldType: FieldType) -> UIKeyboardType {
+        switch fieldType {
+        case .email:
+            return .emailAddress
+        case .gender:
+            return .asciiCapableNumberPad
+        default:
+            return .default
+        }
+    }
+    
+    func getTextContentTypes(for fieldType: FieldType) -> UITextContentType? {
+        switch fieldType {
+        case .address:
+            return .fullStreetAddress
+        case .country:
+            return .countryName
+        case .city:
+            return .addressCity
+        case .firstName:
+            return .name
+        case .middleName:
+            return .middleName
+        case .lastName:
+            return .familyName
+        case .phone:
+            return .telephoneNumber
+        default:
+            return nil
+        }
     }
     
     func getBirthday() -> String {

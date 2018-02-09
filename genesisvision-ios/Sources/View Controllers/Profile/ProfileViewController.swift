@@ -27,8 +27,19 @@ class ProfileViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var refreshControl: UIRefreshControl!
-    private var editProfileButton: UIBarButtonItem?
-    private var signOutButton: UIBarButtonItem?
+    
+    private var editProfileButton: UIBarButtonItem! {
+        return UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
+    }
+    private var cancelEditProfileButton: UIBarButtonItem! {
+        return UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
+    }
+    private var saveProfileButton: UIBarButtonItem! {
+        return UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
+    }
+    private var signOutButton: UIBarButtonItem! {
+        return UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,10 +73,7 @@ class ProfileViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        signOutButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
-        navigationItem.rightBarButtonItem = signOutButton
-        editProfileButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
-        navigationItem.leftBarButtonItem = editProfileButton
+        showProfileStateAction()
         
         title = viewModel.title
     }
@@ -96,9 +104,55 @@ class ProfileViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
+    private func editProfileStateAction() {
+        navigationItem.leftBarButtonItem = saveProfileButton
+        navigationItem.rightBarButtonItem = cancelEditProfileButton
+    }
+    
+    private func showProfileStateAction() {
+        navigationItem.leftBarButtonItem = editProfileButton
+        navigationItem.rightBarButtonItem = signOutButton
+    }
+    
     // MARK: - Actions
     @IBAction func editProfileButtonAction(_ sender: UIButton) {
-        viewModel.editProfile()
+        showProgressHUD()
+        viewModel.editProfile { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.editProfileStateAction()
+                self?.tableView.reloadData()
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+    
+    @IBAction func cancelEditProfileButtonAction(_ sender: UIButton) {
+        viewModel.cancelEditProfile { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.showProfileStateAction()
+                self?.tableView.reloadData()
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+    
+    @IBAction func saveProfileButtonAction(_ sender: UIButton) {
+        showProgressHUD()
+        viewModel.saveProfile { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.showProfileStateAction()
+                self?.tableView.reloadData()
+            case .failure(let reason):
+                self?.showErrorHUD(subtitle: reason)
+            }
+        }
     }
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {

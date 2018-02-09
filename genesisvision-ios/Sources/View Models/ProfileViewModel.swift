@@ -15,15 +15,53 @@ class ProfileViewModel {
         case fields
     }
     
+    
+    enum ProfileState {
+        case show
+        case edit
+    }
+    
     // MARK: - Variables
     var title: String = isInvestorApp ? "Investor Profile" : "Manager Profile"
     
     private var router: ProfileRouter!
     private var profileEntity: ProfileEntity?
+    private var editProfileEntity: ProfileEntity?
+    
+    var editableFields: [EditableField]!
+    
+    class EditableField {
+        var text: String
+        var placeholder: String
+        var editable: Bool
+        var keyboardType: UIKeyboardType?
+        var textContentType: UITextContentType?
+        
+        var isValid: (String) -> Bool
+        
+        init(text: String, placeholder: String, editable: Bool, keyboardType: UIKeyboardType?, textContentType: UITextContentType?, isValid: @escaping (String) -> Bool) {
+            self.text = text
+            self.placeholder = placeholder
+            self.editable = editable
+            self.keyboardType = keyboardType
+            self.textContentType = textContentType
+            self.isValid = isValid
+        }
+    }
     
     var sections: [SectionType] = [.header, .fields]
+    var profileState: ProfileState = .show {
+        didSet {
+            for idx in 1...editableFields.count - 1 {
+                editableFields[idx].editable = profileState == .edit
+            }
+        }
+    }
     
     weak var delegate: ProfileHeaderTableViewCellDelegate?
+    
+    var profileHeaderTableViewCellViewModel: ProfileHeaderTableViewCellViewModel?
+//    var profileFieldTableViewCellViewModels = [ProfileFieldTableViewCellViewModel]()
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -35,7 +73,7 @@ class ProfileViewModel {
     init(withRouter router: ProfileRouter) {
         self.router = router
         
-        NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
+        setup()
     }
     
     deinit {
@@ -65,7 +103,7 @@ class ProfileViewModel {
         case .header:
             return 1
         case .fields:
-            return profileEntity?.getFields().count ?? 0
+            return editableFields.count
         }
     }
     
@@ -73,27 +111,65 @@ class ProfileViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return ProfileHeaderTableViewCellViewModel(profileEntity: profileEntity ?? ProfileEntity.templateEntity, editable: false, delegate: delegate)
+            return profileHeaderTableViewCellViewModel
         case .fields:
-            if let fields = profileEntity?.getFields() {
-                let keys = Array(fields.keys)
-                let placeholder = keys[indexPath.row]
-                let value = fields[placeholder]
+            let field = editableFields[indexPath.row]
+            return ProfileFieldTableViewCellViewModel(text: field.text, placeholder: field.placeholder, editable: field.editable, keyboardType: field.keyboardType, textContentType: field.textContentType, valueChanged: { [weak self] (text) in
+                let type: FieldType = FieldType(rawValue: field.placeholder)!
+                switch type {
+                case .firstName:
+                    self?.profileEntity?.firstName = text
+                case .middleName:
+                    self?.profileEntity?.middleName = text
+                case .lastName:
+                    self?.profileEntity?.lastName = text
+                    
+                case .country:
+                    self?.profileEntity?.country = text
+                case .city:
+                    self?.profileEntity?.city = text
+                case .address:
+                    self?.profileEntity?.address = text
+                    
+                case .documentNumber:
+                    self?.profileEntity?.documentNumber = text
+                case .documentType:
+                    self?.profileEntity?.documentType = text
+                    
+                case .phone:
+                    self?.profileEntity?.phone = text
+                case .birthday:
+                    self?.profileEntity?.birthday = Date() //TODO:
+                case .gender:
+                    self?.profileEntity?.gender = text == "Male" ? true : false
+                case .email:
+                    self?.profileEntity?.email = text
+                    
+                default:
+                    break
+                }
+            })
                 
-                let viewModel = ProfileFieldTableViewCellViewModel(text: value ?? "", placeholder: placeholder.capitalized, editable: false)
-                
-                return viewModel
-            }
-            
-            return ProfileFieldTableViewCellViewModel(text: "", placeholder: "", editable: false)
         }
     }
     
-    // MARK: - Navigation
-    func editProfile() {
-
+    func editProfile(completion: @escaping CompletionBlock) {
+        profileState = .edit
+        completion(.success)
     }
     
+    
+    func cancelEditProfile(completion: @escaping CompletionBlock) {
+        profileState = .show
+        completion(.success)
+    }
+    
+    func saveProfile(completion: @escaping CompletionBlock) {
+        profileState = .show
+        saveProfileApi(completion: completion)
+    }
+    
+    // MARK: - Navigation
     func signOut() {
         AuthManager.authorizedToken = nil
         router.show(routeType: .signOut)
@@ -102,5 +178,72 @@ class ProfileViewModel {
     @objc private func signOutNotification(notification: Notification) {
         NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
         signOut()
+    }
+    
+    
+    // MARK: -  Private methods
+    private func setup() {
+        NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
+        
+        getProfile { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.setupCellViewModel()
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+    
+    private func setupCellViewModel() {
+        profileHeaderTableViewCellViewModel = ProfileHeaderTableViewCellViewModel(profileEntity: profileEntity ?? ProfileEntity.templateEntity, editable: false, delegate: delegate)
+        
+        if let profileEntity = profileEntity {
+            var editableFields: [EditableField] = []
+            
+            FieldType.allValues.forEach { (type) in
+                let fields = profileEntity.getFields()
+                let key = type.rawValue
+                
+                let text = fields[type] ?? ""
+                let placeholder = key.capitalized
+                let editable = profileState == .edit
+                let keyboardType = profileEntity.getKeyboardTypes(for: type)
+                let textContentType = profileEntity.getTextContentTypes(for: type)
+                
+                let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, keyboardType: keyboardType, textContentType: textContentType, isValid: { (text) -> Bool in
+                    return text.count > 1
+                })
+                
+                editableFields.append(editableField)
+            }
+            
+            self.editableFields = editableFields
+        }
+    }
+    
+    private func saveProfileApi(completion: @escaping CompletionBlock) {
+        let model = UpdateProfileViewModel(firstName: profileEntity?.firstName,
+                                           middleName: profileEntity?.middleName,
+                                           lastName: profileEntity?.lastName,
+                                           documentType: profileEntity?.documentType,
+                                           documentNumber: profileEntity?.documentNumber,
+                                           country: profileEntity?.country,
+                                           city: profileEntity?.city,
+                                           address: profileEntity?.address,
+                                           phone: profileEntity?.phone,
+                                           birthday: profileEntity?.birthday,
+                                           gender: profileEntity?.gender,
+                                           avatar: profileEntity?.avatar)
+        
+        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
+        
+        isInvestorApp
+            ? InvestorAPI.apiInvestorProfileUpdatePost(authorization: token, model: model) { (error) in
+                ResponseHandler.handleApi(error: error, completion: completion)
+                }
+            : ManagerAPI.apiManagerProfileUpdatePost(authorization: token, model: model) { (error) in
+                ResponseHandler.handleApi(error: error, completion: completion)
+        }
     }
 }

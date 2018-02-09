@@ -42,3 +42,11 @@ class ErrorHandler {
         }
     }
 }
+
+class ResponseHandler {
+    static func handleApi(error: Error?, completion: @escaping CompletionBlock) {
+        error == nil
+            ? completion(CompletionResult.success)
+            : ErrorHandler.handleApiError(error: error, completion: completion)
+    }
+}
