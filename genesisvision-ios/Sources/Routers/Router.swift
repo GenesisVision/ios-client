@@ -20,7 +20,8 @@ protocol RouterProtocol {
 class Router {
     
     // MARK: - Variables
-    private var traidersViewController: TraderListViewController!
+    private var tournamentViewController: TournamentListViewController!
+    private var programsViewController: ProgramListViewController!
     
     var parentRouter: Router?
     var childRouters: [Router] = []
@@ -33,7 +34,7 @@ class Router {
     private var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
         
-        if let navigationController = getTraidersNavigationController() {
+        if let navigationController = getProgramsNavigationController() {
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_program_list")
             navigationController.tabBarItem.title = "Invest"
             viewControllers.append(navigationController)
@@ -77,18 +78,31 @@ class Router {
     // MARK: - Init
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
-        self.traidersViewController = parentRouter?.traidersViewController
+        if isTournamentApp {
+            self.tournamentViewController = parentRouter?.tournamentViewController
+        } else {
+            self.programsViewController = parentRouter?.programsViewController
+        }
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
     }
     
     // MARK: - Private methods
-    private func createTraidersNavigationController() {
-        guard let viewController = TraderListViewController.storyboardInstance(name: .traders) else { return }
-        traidersViewController = viewController
+    private func createProgramsNavigationController() {
+        guard let viewController = ProgramListViewController.storyboardInstance(name: .traders) else { return }
+        programsViewController = viewController
         let router = InvestmentProgramListRouter(parentRouter: self)
         childRouters.append(router)
-        traidersViewController.viewModel = InvestmentProgramListViewModel(withRouter: router)
+        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router)
     }
+    
+    private func createTournamentNavigationController() {
+        guard let viewController = TournamentListViewController.storyboardInstance(name: .traders) else { return }
+        tournamentViewController = viewController
+        let router = TournamentRouter(parentRouter: self)
+        childRouters.append(router)
+        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router)
+    }
+    
 }
 
 //Protocol methods
@@ -122,22 +136,32 @@ extension Router: RouterProtocol {
  
 //Common methods
 extension Router {
-    func getTraidersNavigationController() -> UINavigationController? {
-        createTraidersNavigationController()
+    func getProgramsNavigationController() -> UINavigationController? {
+        createProgramsNavigationController()
         
-        let navigationController = BaseNavigationController(rootViewController: traidersViewController)
-        traidersViewController.viewModel.router.navigationController = navigationController
+        let navigationController = BaseNavigationController(rootViewController: programsViewController)
+        programsViewController.viewModel.router.navigationController = navigationController
+        
+        return navigationController
+    }
+    
+    func getTournamentNavigationController() -> UINavigationController? {
+        createTournamentNavigationController()
+        
+        let navigationController = BaseNavigationController(rootViewController: tournamentViewController)
+        tournamentViewController.viewModel.router.navigationController = navigationController
         
         return navigationController
     }
     
     func startAsUnauthorized() {
-        guard let navigationController = getTraidersNavigationController() else { return }
+        guard let navigationController = getProgramsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
     }
     
     func startTournament() {
-        startAsUnauthorized()
+        guard let navigationController = getTournamentNavigationController() else { return }
+        setWindowRoot(viewController: navigationController)
     }
     
     func startAsAuthorized() {

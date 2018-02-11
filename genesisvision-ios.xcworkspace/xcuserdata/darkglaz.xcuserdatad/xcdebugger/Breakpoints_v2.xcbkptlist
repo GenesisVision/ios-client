@@ -17,38 +17,6 @@
             endingLineNumber = "344"
             landmarkName = "processRequest(request:_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GV_Tournament.AlamofireDecodableRequestBuilder.(processRequest in _D291CCDF401FF543E6569F9B0B15F70A)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Tournament.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Tournament"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "540007943.628635"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "344"
-                  endingLineNumber = "344"
-                  offsetFromSymbolStart = "620">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (Alamofire.DataResponse&lt;Foundation.Data&gt;) -&gt; () in GV_Tournament.AlamofireDecodableRequestBuilder.(processRequest in _D291CCDF401FF543E6569F9B0B15F70A)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Tournament.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Tournament"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "540007943.6329139"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "345"
-                  endingLineNumber = "345"
-                  offsetFromSymbolStart = "424">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -65,38 +33,6 @@
             endingLineNumber = "363"
             landmarkName = "processRequest(request:_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GV_Tournament.AlamofireDecodableRequestBuilder.(processRequest in _D291CCDF401FF543E6569F9B0B15F70A)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Tournament.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Tournament"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "540007943.645864"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "363"
-                  endingLineNumber = "363"
-                  offsetFromSymbolStart = "788">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 (Alamofire.DataResponse&lt;Foundation.Data&gt;) -&gt; () in GV_Tournament.AlamofireDecodableRequestBuilder.(processRequest in _D291CCDF401FF543E6569F9B0B15F70A)(request: Alamofire.DataRequest, Swift.String, (Swift.Optional&lt;GV_Tournament.Response&lt;A&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "GV Tournament"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Other/Projects/GenesisVision/ios-client/genesisvision-ios/Sources/Vendor/Swaggers/AlamofireImplementations.swift"
-                  timestampString = "540007943.650041"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "364"
-                  endingLineNumber = "364"
-                  offsetFromSymbolStart = "424">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -160,22 +96,6 @@
             startingLineNumber = "22"
             endingLineNumber = "22"
             landmarkName = "handleApiError(error:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Controllers/Other Controllers/AuthManager.swift"
-            timestampString = "539883803.538402"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "isLogin()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

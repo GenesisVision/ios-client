@@ -32,6 +32,11 @@ class TraderTableViewCell: UITableViewCell {
     @IBOutlet var weeksLabel: UILabel!
     @IBOutlet var profitLabel: UILabel!
     
+    @IBOutlet var depositValueLabel: UILabel!
+    @IBOutlet var tradesValueLabel: UILabel!
+    @IBOutlet var weeksValueLabel: UILabel!
+    @IBOutlet var profitValueLabel: UILabel!
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

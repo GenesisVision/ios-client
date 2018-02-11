@@ -273,12 +273,16 @@
                 <outlet property="backgroundView" destination="nhC-FL-XlQ" id="bB4-eN-6pX"/>
                 <outlet property="chartView" destination="JvI-96-Xpf" id="ZE9-TV-gL2"/>
                 <outlet property="currencyLabel" destination="D4c-6r-Frk" id="fGR-ia-QAs"/>
-                <outlet property="depositLabel" destination="fdS-z0-kKE" id="ekL-mu-8Sd"/>
+                <outlet property="depositLabel" destination="Eae-11-waz" id="wuw-x9-jos"/>
+                <outlet property="depositValueLabel" destination="fdS-z0-kKE" id="hV4-x6-WSX"/>
                 <outlet property="profileImageView" destination="iG3-wO-Vm5" id="zUC-ZO-eYZ"/>
-                <outlet property="profitLabel" destination="6La-9R-G6F" id="eyK-CS-8w8"/>
-                <outlet property="tradesLabel" destination="mG4-1A-68B" id="I0Y-fx-4NU"/>
+                <outlet property="profitLabel" destination="cqc-PZ-HEg" id="RUk-SU-mnc"/>
+                <outlet property="profitValueLabel" destination="6La-9R-G6F" id="ckO-ka-lG0"/>
+                <outlet property="tradesLabel" destination="A6T-0p-Bgc" id="nco-Gd-IYX"/>
+                <outlet property="tradesValueLabel" destination="mG4-1A-68B" id="nCQ-V9-KbU"/>
                 <outlet property="userNameLabel" destination="anu-t6-JHG" id="Li6-pC-4vl"/>
-                <outlet property="weeksLabel" destination="iI1-K9-S9y" id="Jy8-IS-P6q"/>
+                <outlet property="weeksLabel" destination="KSu-cy-Uns" id="Jk9-mM-wl0"/>
+                <outlet property="weeksValueLabel" destination="iI1-K9-S9y" id="7KI-Fp-Tna"/>
             </connections>
             <point key="canvasLocation" x="34" y="-44.5"/>
         </tableViewCell>
