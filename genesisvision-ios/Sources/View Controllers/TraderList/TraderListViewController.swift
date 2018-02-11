@@ -12,7 +12,7 @@ import DZNEmptyDataSet
 class TraderListViewController: BaseViewControllerWithTableView {
 
     // MARK: - Variables
-    private var authorizedValue: Bool = false
+    private var signInButtonEnable: Bool = false
     private var canFetchMoreResults = true
     private var refreshControl: UIRefreshControl!
     private var filterBarButtonItem: UIBarButtonItem?
@@ -56,19 +56,19 @@ class TraderListViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupSignInButton() {
         //if authorize status not change then return
-        guard authorizedValue != viewModel.isLogin() || signInButton.isHidden != authorizedValue else {
+        guard signInButtonEnable != viewModel.signInButtonEnable() || signInButton.isHidden != signInButtonEnable else {
             return
         }
         
-        authorizedValue = viewModel.isLogin()
+        signInButtonEnable = viewModel.signInButtonEnable()
         
-        signInButtonViewHeightConstraint.constant = authorizedValue ? 0.0 : 76.0
-        signInButton.isHidden = authorizedValue
+        signInButtonViewHeightConstraint.constant = signInButtonEnable ? 0.0 : 76.0
+        signInButton.isHidden = signInButtonEnable
     }
     
     private func setupTableConfiguration() {
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        tableViewConfiguration.bottomInset = authorizedValue ? 0.0 : 76.0 + 16.0
+        tableViewConfiguration.bottomInset = signInButtonEnable ? 0.0 : 76.0 + 16.0
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.delegate = self

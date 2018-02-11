@@ -119,7 +119,7 @@ extension Router: RouterProtocol {
         window.rootViewController = viewController
     }
 }
-
+ 
 //Common methods
 extension Router {
     func getTraidersNavigationController() -> UINavigationController? {
@@ -134,6 +134,10 @@ extension Router {
     func startAsUnauthorized() {
         guard let navigationController = getTraidersNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
+    }
+    
+    func startTournament() {
+        startAsUnauthorized()
     }
     
     func startAsAuthorized() {

@@ -6,11 +6,17 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+enum ListState {
+    case tournament, programList, programListWithSignIn
+}
+
 class InvestmentProgramListViewModel {
     
     // MARK: - Init
     init(withRouter router: InvestmentProgramListRouter) {
         self.router = router
+        
+        state = isTournamentApp ? .tournament : isLogin() ? .programList : .programListWithSignIn
     }
     
     // MARK: - Variables
@@ -19,7 +25,8 @@ class InvestmentProgramListViewModel {
     var router: InvestmentProgramListRouter!
     
     var dataType: DataType = .api
-
+    var state: ListState?
+    
     var skip = 0                            //offset
     var totalCount = 0                      //total count of programs
     
@@ -37,6 +44,10 @@ class InvestmentProgramListViewModel {
     // MARK: - Public methods
     func isLogin() -> Bool {
         return AuthManager.isLogin()
+    }
+    
+    func signInButtonEnable() -> Bool {
+        return state == .programListWithSignIn && state != .tournament
     }
     
     func fetch(completion: @escaping CompletionBlock) {
