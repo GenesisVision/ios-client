@@ -48,27 +48,19 @@ class TraderListViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupSignInButton()
-        tableView.reloadData()
     }
     
     // MARK: - Private methods
     private func setupSignInButton() {
-        //if authorize status not change then return
-        guard signInButtonEnable != viewModel.signInButtonEnable() || signInButton.isHidden != signInButtonEnable else {
-            return
-        }
-        
         signInButtonEnable = viewModel.signInButtonEnable()
         
-        signInButtonViewHeightConstraint.constant = signInButtonEnable ? 0.0 : 76.0
-        signInButton.isHidden = signInButtonEnable
+        signInButtonViewHeightConstraint.constant = !signInButtonEnable ? 0.0 : 76.0
+        signInButton.isHidden = !signInButtonEnable
     }
     
     private func setupTableConfiguration() {
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        tableViewConfiguration.bottomInset = signInButtonEnable ? 0.0 : 76.0 + 16.0
+        tableViewConfiguration.bottomInset = !signInButtonEnable ? 0.0 : 76.0 + 16.0
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.delegate = self

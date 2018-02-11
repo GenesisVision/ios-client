@@ -178,6 +178,7 @@
 		1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug investor.xcconfig"; sourceTree = "<group>"; };
 		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
+		9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug tournament.xcconfig"; sourceTree = "<group>"; };
 		C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_genesisvision_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		FC431D93201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationPlainObjectProtocol.swift; sourceTree = "<group>"; };
@@ -367,6 +368,7 @@
 				382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */,
 				96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */,
 				1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */,
+				9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1426,7 +1428,7 @@
 		};
 		FCA5FB1D202DF4C3001E3725 /* Debug Tournament */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */;
+			baseConfigurationReference = 9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
