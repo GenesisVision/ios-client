@@ -82,12 +82,12 @@ class TournamentListViewModel {
             return nil
         }
         
-        return router.getDetail(with: model.participantViewModel)
+        return router.getDetail(with: model.participantViewModel.id?.uuidString ?? "")
     }
     
     // MARK: - Navigation
     func showDetail(with model: ParticipantViewModel) {
-        router.show(routeType: .showDetail(participantViewModel: model))
+        router.show(routeType: .showDetail(participantID: model.id?.uuidString ?? ""))
     }
     
     // MARK: - Private methods

@@ -67,7 +67,7 @@
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="nZd-JI-9hr" secondAttribute="top" id="GaM-cJ-3Ou"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="926-WY-PMI" secondAttribute="trailing" id="QNJ-1a-enb"/>
-                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="xFX-ZF-tfV"/>
+                            <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FoC-GU-UBn"/>
@@ -135,7 +135,7 @@
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="3sG-FT-NvN" secondAttribute="top" id="0fk-7x-n71"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="BSz-ej-GYD" secondAttribute="bottom" id="K2J-rx-S9Z"/>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
-                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
+                            <constraint firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
                             <constraint firstItem="BSz-ej-GYD" firstAttribute="trailing" secondItem="Oxo-lc-AeP" secondAttribute="trailing" id="beh-7L-Kx1"/>
                             <constraint firstItem="BSz-ej-GYD" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="cNm-0C-2TE"/>
@@ -232,9 +232,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0KB-fL-CNR" secondAttribute="bottom" id="4PW-W5-Qg0"/>
                             <constraint firstItem="zbn-fA-wrw" firstAttribute="trailing" secondItem="0KB-fL-CNR" secondAttribute="trailing" id="CdU-Wi-shV"/>
                             <constraint firstItem="0KB-fL-CNR" firstAttribute="leading" secondItem="zbn-fA-wrw" secondAttribute="leading" id="Xfe-tQ-ZdC"/>
-                            <constraint firstItem="zbn-fA-wrw" firstAttribute="bottom" secondItem="0KB-fL-CNR" secondAttribute="bottom" id="k1O-Id-Xqv"/>
                             <constraint firstItem="0KB-fL-CNR" firstAttribute="top" secondItem="5nY-UN-A0m" secondAttribute="top" id="qRR-Rc-Byc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zbn-fA-wrw"/>

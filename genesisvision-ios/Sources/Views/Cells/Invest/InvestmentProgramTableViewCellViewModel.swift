@@ -22,7 +22,7 @@ extension InvestmentProgramTableViewCellViewModel: CellViewModel {
         cell.profileImageView.flagImageView.isHidden = true
         
         if let logo = investmentProgramEntity.logo {
-            let logoURL = URL(string: logo)
+            let logoURL = getFileURL(fileName: logo)
             cell.profileImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.profileImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }

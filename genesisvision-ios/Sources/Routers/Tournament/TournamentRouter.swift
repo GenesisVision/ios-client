@@ -7,7 +7,7 @@
 //
 
 enum TournamentRouterType {
-    case showDetail(participantViewModel: ParticipantViewModel), getDetail(participantViewModel: ParticipantViewModel)
+    case showDetail(participantID: String), getDetail(participantID: String)
 }
 
 class TournamentRouter: Router {
@@ -15,27 +15,27 @@ class TournamentRouter: Router {
     // MARK: - Public methods
     func show(routeType: TournamentRouterType) {
         switch routeType {
-        case .getDetail(let participantViewModel):
-            getDetail(with: participantViewModel)
-        case .showDetail(let participantViewModel):
-            showDetail(with: participantViewModel)
+        case .getDetail(let participantID):
+            _ = getDetail(with: participantID)
+        case .showDetail(let participantID):
+            showDetail(with: participantID)
         }
     }
     
-    func getDetail(with participantViewModel: ParticipantViewModel) -> TournamentDetailViewController? {
+    func getDetail(with participantID: String) -> TournamentDetailViewController? {
         guard let viewController = TournamentDetailViewController.storyboardInstance(name: .traders) else { return nil }
         let router = TournamentDetailRouter(parentRouter: self)
-        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantViewModel)
+        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantID)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
     // MARK: - Private methods
-    private func showDetail(with participantViewModel: ParticipantViewModel) {
+    private func showDetail(with participantID: String) {
         guard let viewController = TournamentDetailViewController.storyboardInstance(name: .traders) else { return }
         let router = TournamentDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantViewModel)
+        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantID)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

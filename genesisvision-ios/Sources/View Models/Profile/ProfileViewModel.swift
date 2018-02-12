@@ -66,8 +66,6 @@ class ProfileViewModel {
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-//        return [ProfileHeaderTableViewCellViewModel.self,
-//                ProfileFieldTableViewCellViewModel.self]
         return [ProfileFieldTableViewCellViewModel.self]
     }
     

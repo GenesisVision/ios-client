@@ -1,29 +1,22 @@
 //
-//  TraderTableViewCellViewModel.swift
+//  DetailHeaderTableViewCellViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 16.01.18.
+//  Created by George Shaginyan on 11.02.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Kingfisher
 
-struct TraderTableViewCellViewModel {
+struct DetailHeaderTableViewCellViewModel {
     let participantViewModel: ParticipantViewModel
 }
 
-extension TraderTableViewCellViewModel: CellViewModel {
-    func setup(on cell: TraderTableViewCell) {
-        if let chart = participantViewModel.chart {
-            cell.chartView.dataSet = chart
-        }
-        
-        if let name = participantViewModel.name {
-            cell.userNameLabel.text = name
-        }
-        
-        cell.currencyLabel.isHidden = true
+extension DetailHeaderTableViewCellViewModel: CellViewModel {
+    func setup(on cell: DetailHeaderTableViewCell) {
+        cell.userNameLabel.text = participantViewModel.name
+
         cell.profileImageView.levelLabel.isHidden = true
         cell.profileImageView.flagImageView.isHidden = true
         

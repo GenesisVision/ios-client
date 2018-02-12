@@ -18,7 +18,7 @@ struct ProfileHeaderTableViewCellViewModel {
 extension ProfileHeaderTableViewCellViewModel {
     func setup(on view: ProfileHeaderView) {
         if let avatar = profileEntity.avatar {
-            let avatarURL = URL(string: avatar)
+            let avatarURL = getFileURL(fileName: avatar)
             view.chooseProfilePhotoButton.photoImageView.kf.indicatorType = .activity
             view.chooseProfilePhotoButton.photoImageView.kf.setImage(with: avatarURL, placeholder: UIImage.placeholder)
         }
