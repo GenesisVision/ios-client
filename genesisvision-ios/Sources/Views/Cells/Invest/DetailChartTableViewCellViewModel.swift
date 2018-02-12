@@ -10,11 +10,22 @@ import Foundation
 
 struct DetailChartTableViewCellViewModel {
     let chart: [Double]
+    let name: String
 }
 
 
 extension DetailChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailChartTableViewCell) {
-        cell.chartView.dataSet = chart
+        cell.noDataLabel.text = "Not enough data"
+        
+        guard chart.count > 0 else {
+            cell.chartView.isHidden = true
+            cell.noDataLabel.isHidden = false
+            return
+        }
+        
+        cell.chartView.isHidden = false
+        cell.noDataLabel.isHidden = true
+        cell.chartView.setup(chartType: .detail, dataSet: chart, name: name)
     }
 }

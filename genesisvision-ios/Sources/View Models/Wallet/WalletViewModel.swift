@@ -160,7 +160,7 @@ class WalletViewModel {
         case .transactions:
             return 70.0
         case .header:
-            return 1.0
+            return 0.0
         }
     }
     

@@ -28,6 +28,12 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        hideHUD()
+    }
+    
     // MARK: - Private methods
     private func setup() {
         setupUI()

@@ -12,9 +12,12 @@ import Charts
 class DetailChartTableViewCell: UITableViewCell {
 
     // MARK: - Views
-    @IBOutlet var chartView: ChartView! {
+    @IBOutlet var chartView: ChartView!
+    
+    // MARK: - Labels
+    @IBOutlet var noDataLabel: UILabel! {
         didSet {
-            chartView.isUserInteractionEnabled = false
+            noDataLabel.textColor = UIColor.Font.dark
         }
     }
     

@@ -73,6 +73,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     @objc private func pullToRefresh() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         fetchBalance()
         fetchTransactions()
     }
@@ -104,9 +105,10 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     private func fetchMoreTransactions() {
         self.canFetchMoreResults = false
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMoreTransactions { [weak self] (result) in
             self?.canFetchMoreResults = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.tableView.reloadData()

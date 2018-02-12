@@ -14,6 +14,8 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: TournamentDetailViewModel! {
         didSet {
+            title = viewModel.getNickname()
+            showProgressHUD()
             pullToRefresh()
         }
     }
@@ -30,29 +32,22 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        title = viewModel.title
-        
-        setup()
+        hideHUD()
     }
     
     // MARK: - Private methods
-    private func setup() {
-        showProgressHUD()
-        
-        setupUI()
-    }
-    
-    private func setupUI() {
-        title = viewModel.getNickname()
-    }
-    
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -70,6 +65,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     
     
     @objc private func pullToRefresh() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -89,7 +85,7 @@ extension TournamentDetailViewController: UITableViewDelegate, UITableViewDataSo
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(at: indexPath) else {
             return UITableViewCell()
         }
         
@@ -99,6 +95,24 @@ extension TournamentDetailViewController: UITableViewDelegate, UITableViewDataSo
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = viewModel.headerTitle(for: section) else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+        header.headerLabel.text = title
+        return header
     }
 }
 

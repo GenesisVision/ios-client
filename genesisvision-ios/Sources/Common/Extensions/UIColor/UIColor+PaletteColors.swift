@@ -10,10 +10,11 @@ import UIKit.UIColor
 
 extension UIColor {
     private struct Common {
-        static var blue: UIColor  { return #colorLiteral(red: 0.01176470588, green: 0.7411764706, blue: 0.6862745098, alpha: 1) }                                    //03bdaf
+        static var blue: UIColor  { return #colorLiteral(red: 0, green: 0.7411764706, blue: 0.6862745098, alpha: 1) }                                    //03bdaf
         static var dark: UIColor  { return  #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                   //546e7a
         static var green: UIColor  { return #colorLiteral(red: 0.2980392157, green: 0.6862745098, blue: 0.3137254902, alpha: 1) }                                   //4caf50
         static var red: UIColor  { return #colorLiteral(red: 0.9568627451, green: 0.262745098, blue: 0.2117647059, alpha: 1) }                                     //f44336
+        static var black: UIColor  { return #colorLiteral(red: 0.1254901961, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                     //f44336
     }
     
     static var lightGray: UIColor  { return #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1) }                                   //efeff4

@@ -15,13 +15,18 @@ struct TraderTableViewCellViewModel {
 
 extension TraderTableViewCellViewModel: CellViewModel {
     func setup(on cell: TraderTableViewCell) {
-        if let chart = participantViewModel.chart {
-            cell.chartView.dataSet = chart
+        cell.chartView.isHidden = true
+        cell.noDataLabel.isHidden = false
+        
+        cell.noDataLabel.text = "Not enough data"
+        
+        if let chart = participantViewModel.chart, chart.count > 0 {
+            cell.chartView.isHidden = false
+            cell.noDataLabel.isHidden = true
+            cell.chartView.setup(dataSet: participantViewModel.chart, name: participantViewModel.name)
         }
         
-        if let name = participantViewModel.name {
-            cell.userNameLabel.text = name
-        }
+        cell.userNameLabel.text = participantViewModel.name ?? ""
         
         cell.currencyLabel.isHidden = true
         cell.profileImageView.levelLabel.isHidden = true

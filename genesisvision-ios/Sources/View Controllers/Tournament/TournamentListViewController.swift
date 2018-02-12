@@ -73,9 +73,10 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     
     private func fetchMore() {
         self.canFetchMoreResults = false
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
             self?.canFetchMoreResults = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.tableView.reloadData()
@@ -86,6 +87,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     }
     
     @objc private func pullToRefresh() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {

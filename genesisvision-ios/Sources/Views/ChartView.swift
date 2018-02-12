@@ -8,33 +8,73 @@
 
 import Charts
 
+enum ChartType {
+    case `default`, detail
+}
+
 class ChartView: LineChartView {
 
     // MARK: - Variables
-    var dataSet: [Double] = [] {
+    private var dataSet: [Double]? = [] {
         didSet {
-            setData(dataSet)
+            updateData()
         }
     }
     
+    private var name: String?
+    
+    private var chartType: ChartType = .default
+    
+    private var chartDataSet: LineChartDataSet! {
+        didSet {
+            dragEnabled = chartType == .detail
+            pinchZoomEnabled = chartType == .detail
+            
+            rightAxis.enabled = chartType == .detail
+            rightAxis.drawGridLinesEnabled = false
+            
+            chartDescription?.enabled = false
+            leftAxis.enabled = false
+            legend.enabled = false
+            drawGridBackgroundEnabled = false
+            autoScaleMinMaxEnabled = true
+            
+            xAxis.enabled = false
+            
+            chartDataSet.setColor(UIColor.primary)
+            chartDataSet.fillColor = UIColor.primary
+            
+            chartDataSet.lineWidth = 1
+            
+            chartDataSet.drawFilledEnabled = true
+            chartDataSet.drawCirclesEnabled = false
+            chartDataSet.drawIconsEnabled = false
+            
+            chartDataSet.highlightEnabled = false
+            
+            chartDataSet.drawValuesEnabled = false
+            chartDataSet.drawCircleHoleEnabled = false
+            
+            chartDataSet.mode = .cubicBezier
+        }
+    }
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        chartDescription?.enabled = false
-        leftAxis.enabled = false
-        rightAxis.enabled = false
-        legend.enabled = false
-        drawGridBackgroundEnabled = false
-        
-        xAxis.enabled = false
-        
-        animate(xAxisDuration: 1.0)
+        setup()
     }
     
     // MARK: - Public methods
+    func setup(chartType: ChartType = .default, dataSet: [Double]?, name: String? = "DataSet") {
+        self.chartType = chartType
+        self.name = name
+        self.dataSet = dataSet
+    }
+    
     func fakeData() {
-        let values = setFakeData(50, range: 26)
-        setData(values)
+        dataSet = setFakeData(50, range: 26)
     }
     
     func updateData() {
@@ -48,29 +88,24 @@ class ChartView: LineChartView {
         
         return values
     }
-
+    
     // MARK: - Private methods
-    private func setData(_ values: [Double]) {
+    private func setup() {
+        backgroundColor = UIColor.background
+        
+        animate(xAxisDuration: 1.0)
+    }
+    
+    private func setData(_ values: [Double]?) {
+        guard let values = values, values.count > 0 else {
+            return
+        }
+        
         let chartDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: Double(i), y: values[i])
         }
         
-        let chartDataSet = LineChartDataSet(values: chartDataEntry, label: "DataSet")
-        
-        chartDataSet.setColor(UIColor.primary)
-        chartDataSet.lineWidth = 1
-        
-        chartDataSet.drawFilledEnabled = false
-        chartDataSet.drawCirclesEnabled = false
-        chartDataSet.drawIconsEnabled = false
-        chartDataSet.highlightEnabled = false
-        chartDataSet.drawValuesEnabled = false
-        chartDataSet.drawCircleHoleEnabled = false
-        
-        chartDataSet.mode = .cubicBezier
-        
-        let chartData = LineChartData(dataSet: chartDataSet)
-        
-        data = chartData
+        chartDataSet = LineChartDataSet(values: chartDataEntry, label: name ?? "")
+        data = LineChartData(dataSet: chartDataSet)
     }
 }

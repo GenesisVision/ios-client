@@ -20,6 +20,12 @@ class TraderTableViewCell: UITableViewCell {
     }
     
     // MARK: - Labels
+    @IBOutlet var noDataLabel: UILabel! {
+        didSet {
+            noDataLabel.textColor = UIColor.Font.dark
+        }
+    }
+    
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel! {
         didSet {

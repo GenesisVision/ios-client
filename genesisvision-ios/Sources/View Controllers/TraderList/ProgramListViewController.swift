@@ -97,8 +97,9 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     private func fetchMore() {
         self.canFetchMoreResults = false
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self?.canFetchMoreResults = true
             switch result {
             case .success:

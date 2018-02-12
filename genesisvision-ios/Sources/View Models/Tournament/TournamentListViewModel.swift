@@ -68,6 +68,7 @@ class TournamentListViewModel {
         return traderTableViewCellViewModels.count
     }
     
+    // MARK: - Table View
     func numberOfRows(in section: Int) -> Int {
         return modelsCount()
     }
