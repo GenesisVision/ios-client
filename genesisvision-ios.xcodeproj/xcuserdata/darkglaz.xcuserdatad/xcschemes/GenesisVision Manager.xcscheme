@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FCC9DD23200DF2C3008825EC"
-               BuildableName = "genesisvision-ios.app"
+               BuildableName = "Genesis Vision.app"
                BlueprintName = "genesisvision-ios"
                ReferencedContainer = "container:genesisvision-ios.xcodeproj">
             </BuildableReference>
@@ -34,7 +34,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FCC9DD23200DF2C3008825EC"
-            BuildableName = "genesisvision-ios.app"
+            BuildableName = "Genesis Vision.app"
             BlueprintName = "genesisvision-ios"
             ReferencedContainer = "container:genesisvision-ios.xcodeproj">
          </BuildableReference>
@@ -58,7 +58,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FCC9DD23200DF2C3008825EC"
-            BuildableName = "genesisvision-ios.app"
+            BuildableName = "Genesis Vision.app"
             BlueprintName = "genesisvision-ios"
             ReferencedContainer = "container:genesisvision-ios.xcodeproj">
          </BuildableReference>
@@ -77,7 +77,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FCC9DD23200DF2C3008825EC"
-            BuildableName = "genesisvision-ios.app"
+            BuildableName = "Genesis Vision.app"
             BlueprintName = "genesisvision-ios"
             ReferencedContainer = "container:genesisvision-ios.xcodeproj">
          </BuildableReference>
