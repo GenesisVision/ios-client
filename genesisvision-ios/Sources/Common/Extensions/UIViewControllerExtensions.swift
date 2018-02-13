@@ -147,4 +147,13 @@ extension UIViewController {
     func hideKeyboard() {
         view.endEditing(true)
     }
+    
+    // MARK: - Navigation
+    func present(viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func push(viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }

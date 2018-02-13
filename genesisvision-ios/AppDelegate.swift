@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func setup() {
-        RealmController.shared.setup()
         AppearanceController.setupAppearance()
         SwaggerClientAPI.basePath = Constants.Api.basePath
     }

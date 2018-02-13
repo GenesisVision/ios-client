@@ -3,7 +3,6 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'genesisvision-ios' do
-    pod 'RealmSwift'
     pod 'Charts'
     
     pod 'Alamofire'

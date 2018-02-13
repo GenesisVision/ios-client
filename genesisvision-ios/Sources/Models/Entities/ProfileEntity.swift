@@ -6,8 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
+import UIKit
 
 enum FieldType: String, EnumCollection {
     case firstName = "First Name"
@@ -29,7 +28,7 @@ enum FieldType: String, EnumCollection {
     case balance = "Balance"
 }
 
-final class ProfileEntity: Object {
+final class ProfileEntity {
 
     @objc dynamic var firstName: String?
     @objc dynamic var middleName: String?

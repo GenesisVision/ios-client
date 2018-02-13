@@ -7,11 +7,6 @@ PODS:
   - IQKeyboardManagerSwift (5.0.4)
   - Kingfisher (4.2.0)
   - PKHUD (5.0.0)
-  - Realm (3.0.1):
-    - Realm/Headers (= 3.0.1)
-  - Realm/Headers (3.0.1)
-  - RealmSwift (3.0.1):
-    - Realm (= 3.0.1)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
@@ -25,7 +20,6 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
   - PKHUD
-  - RealmSwift
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - TextFieldEffects
@@ -38,13 +32,11 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
   Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
-  Realm: ba6144c74f835f7497791f6599d63a7755377b83
-  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: 542488f7c230a0c76bc9a7ea72843478d143b56a
+PODFILE CHECKSUM: 3c8a0158bce15bb8740e8ca58724f2cc00868995
 
 COCOAPODS: 1.4.0

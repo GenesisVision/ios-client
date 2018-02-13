@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
 
-final class InvestmentProgramEntity: TemplatableObject, TemplateEntityProtocol {
+final class InvestmentProgramEntity {
     
     @objc dynamic var nickname: String = ""
     @objc dynamic var currency: String = Currency.gvt.rawValue

@@ -12,19 +12,6 @@ class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
     
-    static func setCurrentProfile(_ profileObject: ProfileObject) {
-        realmWrite {
-            let currentProfile: ProfileEntity = ProfileEntity()
-            
-            currentProfile.firstName = profileObject.firstName
-            currentProfile.lastName = profileObject.lastName
-            currentProfile.middleName = profileObject.middleName
-            currentProfile.avatar = profileObject.avatar ?? ""
-            currentProfile.email = profileObject.email ?? ""
-            currentProfile.phone = profileObject.phone
-        }
-    }
-    
     static var authorizedToken: String? {
         set(newToken) {
             UserDefaults.standard.set(newToken, forKey: Constants.UserDefaults.authorizedToken)

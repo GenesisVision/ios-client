@@ -160,6 +160,13 @@ extension TournamentListViewController: UIViewControllerPreviewingDelegate {
 }
 
 extension TournamentListViewController: DZNEmptyDataSetDelegate {
+    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = viewModel.noDataText()
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         showProgressHUD()
         pullToRefresh()

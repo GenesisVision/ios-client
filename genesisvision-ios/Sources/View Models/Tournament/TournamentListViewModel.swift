@@ -73,6 +73,10 @@ class TournamentListViewModel {
         return modelsCount()
     }
     
+    func noDataText() -> String {
+        return "This list is empty yet.\nPlease try again later"
+    }
+    
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> TraderTableViewCellViewModel? {
         return traderTableViewCellViewModels[index]

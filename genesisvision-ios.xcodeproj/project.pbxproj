@@ -76,7 +76,6 @@
 		FC1410262030168100B71E7F /* TradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140FDF2030168100B71E7F /* TradesViewModel.swift */; };
 		FC1410272030168100B71E7F /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140FE02030168100B71E7F /* TradeViewModel.swift */; };
 		FC1410282030168100B71E7F /* UploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140FE12030168100B71E7F /* UploadResult.swift */; };
-		FC431D94201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC431D93201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift */; };
 		FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */; };
 		FC4964152015445E00104CEB /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964142015445E00104CEB /* WalletViewController.swift */; };
 		FC4964182015474700104CEB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964172015474700104CEB /* DashboardViewController.swift */; };
@@ -150,13 +149,7 @@
 		FCA5707C2027962A001942F3 /* WalletTransactionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */; };
 		FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */; };
 		FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */; };
-		FCB2C4DC2010997A0012AA58 /* DataModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DB2010997A0012AA58 /* DataModelCollection.swift */; };
-		FCB2C4DE20109A0C0012AA58 /* RealmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DD20109A0C0012AA58 /* RealmController.swift */; };
-		FCB2C4E020109A950012AA58 /* Realm+WriteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4DF20109A950012AA58 /* Realm+WriteFunctions.swift */; };
-		FCB2C4E220109AA10012AA58 /* Realm+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E120109AA10012AA58 /* Realm+Notifications.swift */; };
 		FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */; };
-		FCB2C4E62010AA3C0012AA58 /* TemplatableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E52010AA3C0012AA58 /* TemplatableObject.swift */; };
-		FCB2C4E82010AABA0012AA58 /* TemplateModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E72010AABA0012AA58 /* TemplateModelCollection.swift */; };
 		FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */; };
 		FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */; };
 		FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */; };
@@ -195,16 +188,12 @@
 		FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD89200E63D2008825EC /* UIViewControllerExtensions.swift */; };
 		FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD8B200E658E008825EC /* ReusableCell.swift */; };
 		FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */; };
-		FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */; };
-		FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */; };
 		FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */; };
 		FCE8236320161339000061E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236220161339000061E8 /* Constants.swift */; };
 		FCE82365201622BD000061E8 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE82364201622BD000061E8 /* ActionButton.swift */; };
 		FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE823662016239C000061E8 /* RoundedImageView.swift */; };
 		FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236C201631B3000061E8 /* UIViewExtension.swift */; };
-		FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */; };
 		FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */; };
-		FCF1060720179F5A00E3F481 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1060620179F5A00E3F481 /* UserEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -285,7 +274,6 @@
 		FC140FDF2030168100B71E7F /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
 		FC140FE02030168100B71E7F /* TradeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		FC140FE12030168100B71E7F /* UploadResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadResult.swift; sourceTree = "<group>"; };
-		FC431D93201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationPlainObjectProtocol.swift; sourceTree = "<group>"; };
 		FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramPlainObjectTranslation.swift; sourceTree = "<group>"; };
 		FC4964142015445E00104CEB /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		FC4964172015474700104CEB /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -360,13 +348,7 @@
 		FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionExtension.swift; sourceTree = "<group>"; };
 		FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableHeaderView.xib; sourceTree = "<group>"; };
 		FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableHeaderView.swift; sourceTree = "<group>"; };
-		FCB2C4DB2010997A0012AA58 /* DataModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelCollection.swift; sourceTree = "<group>"; };
-		FCB2C4DD20109A0C0012AA58 /* RealmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmController.swift; sourceTree = "<group>"; };
-		FCB2C4DF20109A950012AA58 /* Realm+WriteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+WriteFunctions.swift"; sourceTree = "<group>"; };
-		FCB2C4E120109AA10012AA58 /* Realm+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Notifications.swift"; sourceTree = "<group>"; };
 		FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateEntityProtocol.swift; sourceTree = "<group>"; };
-		FCB2C4E52010AA3C0012AA58 /* TemplatableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatableObject.swift; sourceTree = "<group>"; };
-		FCB2C4E72010AABA0012AA58 /* TemplateModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateModelCollection.swift; sourceTree = "<group>"; };
 		FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomAccessCollection+Random.swift"; sourceTree = "<group>"; };
 		FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -407,15 +389,11 @@
 		FCC9DD89200E63D2008825EC /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		FCC9DD8B200E658E008825EC /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		FCC9DD8D200E67EF008825EC /* UITableView+CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellViewModel.swift"; sourceTree = "<group>"; };
-		FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollection.swift; sourceTree = "<group>"; };
-		FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCollectionDelegate.swift; sourceTree = "<group>"; };
 		FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		FCE8236220161339000061E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FCE82364201622BD000061E8 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		FCE823662016239C000061E8 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		FCE8236C201631B3000061E8 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Singletone.swift"; sourceTree = "<group>"; };
-		FCF1060620179F5A00E3F481 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -955,10 +933,7 @@
 			children = (
 				FCC9DD62200E2246008825EC /* CellViewModel.swift */,
 				FCC9DD6B200E47B2008825EC /* Money.swift */,
-				FCC9DDA8200F9AF8008825EC /* DisplayCollection */,
-				FCF105FF20179C2B00E3F481 /* Object+Singletone.swift */,
 				FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */,
-				FC431D93201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift */,
 				FC91379120311CA6002321C7 /* Utils.swift */,
 			);
 			path = Helpers;
@@ -1011,7 +986,6 @@
 			children = (
 				FCC9DD67200E3E2F008825EC /* InvestmentProgramEntity.swift */,
 				FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */,
-				FCF1060620179F5A00E3F481 /* UserEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1019,13 +993,7 @@
 		FCC9DD4C200DFA5E008825EC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FCB2C4DD20109A0C0012AA58 /* RealmController.swift */,
-				FCB2C4E120109AA10012AA58 /* Realm+Notifications.swift */,
-				FCB2C4DF20109A950012AA58 /* Realm+WriteFunctions.swift */,
-				FCB2C4DB2010997A0012AA58 /* DataModelCollection.swift */,
-				FCB2C4E52010AA3C0012AA58 /* TemplatableObject.swift */,
 				FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */,
-				FCB2C4E72010AABA0012AA58 /* TemplateModelCollection.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1129,15 +1097,6 @@
 				FCC9DD79200E4CCF008825EC /* BaseViewController.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		FCC9DDA8200F9AF8008825EC /* DisplayCollection */ = {
-			isa = PBXGroup;
-			children = (
-				FCC9DDA4200F9A64008825EC /* DisplayCollection.swift */,
-				FCC9DDA6200F9A80008825EC /* DisplayCollectionDelegate.swift */,
-			);
-			path = DisplayCollection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1257,8 +1216,6 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
@@ -1272,8 +1229,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
@@ -1321,8 +1276,6 @@
 				FC140FF02030168100B71E7F /* BrokerInitData.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
-				FCB2C4E62010AA3C0012AA58 /* TemplatableObject.swift in Sources */,
-				FCB2C4DE20109A0C0012AA58 /* RealmController.swift in Sources */,
 				FCC9DD6C200E47B2008825EC /* Money.swift in Sources */,
 				FC140FF92030168100B71E7F /* InvestmentProgram.swift in Sources */,
 				FC140FF32030168100B71E7F /* BrokerTradeServer.swift in Sources */,
@@ -1338,9 +1291,7 @@
 				FC1410202030168100B71E7F /* ParticipantsViewModel.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* ConfirmationViewModel.swift in Sources */,
-				FCF1060020179C2B00E3F481 /* Object+Singletone.swift in Sources */,
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
-				FCC9DDA5200F9A64008825EC /* DisplayCollection.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				FC92CB222030192300CDBF19 /* InvestmentProgramTableViewCellViewModel.swift in Sources */,
@@ -1359,16 +1310,12 @@
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				FC1410112030168100B71E7F /* UpdateProfileViewModel.swift in Sources */,
 				FCA5705520273528001942F3 /* ProfileFieldTableViewCell.swift in Sources */,
-				FCB2C4E82010AABA0012AA58 /* TemplateModelCollection.swift in Sources */,
-				FCB2C4E220109AA10012AA58 /* Realm+Notifications.swift in Sources */,
 				FC14100B2030168100B71E7F /* ProfilePublicViewModel.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				FCA5705820273538001942F3 /* ProfileFieldTableViewCellViewModel.swift in Sources */,
-				FCF1060720179F5A00E3F481 /* UserEntity.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramDetailViewController.swift in Sources */,
 				FC1410252030168100B71E7F /* TradesFilter.swift in Sources */,
 				FCC9DD68200E3E2F008825EC /* InvestmentProgramEntity.swift in Sources */,
-				FCB2C4DC2010997A0012AA58 /* DataModelCollection.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
@@ -1388,7 +1335,6 @@
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
 				FC91378E2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift in Sources */,
-				FC431D94201A460300DDAFC8 /* TranslationPlainObjectProtocol.swift in Sources */,
 				FC140FED2030168100B71E7F /* ManagerAPI.swift in Sources */,
 				FC140FEC2030168100B71E7F /* InvestorAPI.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
@@ -1413,7 +1359,6 @@
 				FCA5707C2027962A001942F3 /* WalletTransactionExtension.swift in Sources */,
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
 				FC140FEB2030168100B71E7F /* BrokerAPI.swift in Sources */,
-				FCB2C4E020109A950012AA58 /* Realm+WriteFunctions.swift in Sources */,
 				FC9137872030A4A8002321C7 /* DetailHeaderTableViewCell.swift in Sources */,
 				FC140FEE2030168100B71E7F /* TradesAPI.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
@@ -1452,7 +1397,6 @@
 				FCB8DFD32010FBC800698D18 /* ProfileObject.swift in Sources */,
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
 				FC1410012030168100B71E7F /* InvestorProgram.swift in Sources */,
-				FCC9DDA7200F9A80008825EC /* DisplayCollectionDelegate.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
 				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
