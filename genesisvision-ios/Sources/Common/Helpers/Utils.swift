@@ -8,7 +8,7 @@
 
 import UIKit
 
-func getFileURL(fileName: String) -> URL {
-    return URL(string: Constants.Api.basePath + "/api/files/get?fileName=" + fileName)!
+func getFileURL(fileName: String) -> URL? {
+    return URL(string: Constants.Api.filePath + fileName)
 }
 

@@ -12,10 +12,5 @@ class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if #available(iOS 11.0, *) {
-            navigationBar.prefersLargeTitles = true
-            navigationItem.largeTitleDisplayMode = .always
-        }
     }
 }

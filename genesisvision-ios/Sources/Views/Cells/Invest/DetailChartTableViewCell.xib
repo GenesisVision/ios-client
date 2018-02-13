@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-C2-NOM">
-                        <rect key="frame" x="20" y="0.0" width="355" height="300"/>
+                        <rect key="frame" x="8" y="0.0" width="379" height="300"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSK-tJ-aAe">
-                                <rect key="frame" x="0.0" y="0.0" width="355" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="379" height="300"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-Sy-3Pg" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="355" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="379" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -49,9 +48,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="qDu-C2-NOM" secondAttribute="trailing" id="EFj-BT-8sf"/>
                     <constraint firstAttribute="bottom" secondItem="qDu-C2-NOM" secondAttribute="bottom" id="M6p-VI-FlQ"/>
-                    <constraint firstItem="qDu-C2-NOM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OdX-K0-4Wi"/>
+                    <constraint firstItem="qDu-C2-NOM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="T10-P5-x1y"/>
+                    <constraint firstAttribute="trailing" secondItem="qDu-C2-NOM" secondAttribute="trailing" constant="8" id="VgQ-KK-oKE"/>
                     <constraint firstItem="qDu-C2-NOM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uca-9w-BEG"/>
                 </constraints>
             </tableViewCellContentView>

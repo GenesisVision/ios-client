@@ -14,8 +14,6 @@ class DetailHeaderTableViewCell: UITableViewCell {
     @IBOutlet var profileImageView: ProfileImageView!
     
     // MARK: - Labels
-    @IBOutlet var userNameLabel: UILabel!
-    
     @IBOutlet var depositLabel: UILabel!
     @IBOutlet var tradesLabel: UILabel!
     @IBOutlet var weeksLabel: UILabel!

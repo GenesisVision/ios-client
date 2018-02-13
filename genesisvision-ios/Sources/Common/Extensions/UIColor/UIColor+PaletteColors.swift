@@ -17,8 +17,6 @@ extension UIColor {
         static var black: UIColor  { return #colorLiteral(red: 0.1254901961, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                     //f44336
     }
     
-    static var lightGray: UIColor  { return #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1) }                                   //efeff4
-    
     static var primary: UIColor  { return Common.blue }
     static var darkPrimary: UIColor  { return #colorLiteral(red: 0.1647058824, green: 0.4549019608, blue: 0.5490196078, alpha: 1) }                                 //2a748c
     static var accent: UIColor  { return #colorLiteral(red: 0.6666666667, green: 0.7215686275, blue: 0.7529411765, alpha: 1) }                                      //aab8c0

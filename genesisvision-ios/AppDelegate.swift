@@ -21,26 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // MARK: - Setup
-
 extension AppDelegate {
     private func setup() {
         AppearanceController.setupAppearance()
         SwaggerClientAPI.basePath = Constants.Api.basePath
-    }
-}
-
-// MARK: - Push notifications
-
-extension AppDelegate {
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print(deviceToken)
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("APNs registration failed: \(error)")
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification data: [AnyHashable : Any]) {
-        // TODO: Push handle with router
     }
 }

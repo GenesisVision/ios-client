@@ -15,8 +15,6 @@ struct DetailHeaderTableViewCellViewModel {
 
 extension DetailHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailHeaderTableViewCell) {
-        cell.userNameLabel.text = participantViewModel.name
-
         cell.profileImageView.levelLabel.isHidden = true
         cell.profileImageView.flagImageView.isHidden = true
         

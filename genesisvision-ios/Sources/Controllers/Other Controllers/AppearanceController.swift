@@ -24,6 +24,8 @@ struct AppearanceController {
         }
         
         UINavigationBar.appearance().tintColor = UIColor.primary
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
     }
     
     // TabBar

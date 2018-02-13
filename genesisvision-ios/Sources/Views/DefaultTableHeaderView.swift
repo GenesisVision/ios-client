@@ -11,7 +11,7 @@ import UIKit
 
 class DefaultTableHeaderView: UITableViewHeaderFooterView {
 
-    static let font = UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.semibold)
+    static let font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.bold)
     
     static var titleInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
