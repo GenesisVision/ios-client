@@ -12,4 +12,8 @@ extension UIImage {
     static var placeholder: UIImage {
         return #imageLiteral(resourceName: "gv_logo")
     }
+    
+    static var noDataPlaceholder: UIImage {
+        return #imageLiteral(resourceName: "img_trader_nodata_placeholder")
+    }
 }

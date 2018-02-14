@@ -34,7 +34,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark]
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
+                          NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -44,6 +45,10 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]
         
         return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage.placeholder
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

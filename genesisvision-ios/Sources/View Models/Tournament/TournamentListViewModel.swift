@@ -74,7 +74,7 @@ class TournamentListViewModel {
     }
     
     func noDataText() -> String {
-        return "This list is empty yet.\nPlease try again later"
+        return "The tournament\nhasn\'t started yet.\n\nPlease try again later."
     }
     
     /// Get TableViewCellViewModel for IndexPath

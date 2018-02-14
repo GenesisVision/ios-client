@@ -162,9 +162,18 @@ extension TournamentListViewController: UIViewControllerPreviewingDelegate {
 extension TournamentListViewController: DZNEmptyDataSetDelegate {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark]
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
+                          NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
         
         return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
+    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage.noDataPlaceholder
     }
     
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
