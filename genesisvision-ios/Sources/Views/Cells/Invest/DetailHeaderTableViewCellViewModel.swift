@@ -41,10 +41,13 @@ extension DetailHeaderTableViewCellViewModel: CellViewModel {
             let totalProfit = participantViewModel.totalProfit,
             let totalProfitInPercent = participantViewModel.totalProfitInPercent {
             
+            let totalProfitValue = Double(round(100 * totalProfit) / 100)
+            let totalProfitInPercentValue = Double(round(100 * totalProfitInPercent) / 100)
+            
             cell.depositValueLabel.text = String(describing: place)
             cell.tradesValueLabel.text = String(describing: ordersCount)
-            cell.weeksValueLabel.text = String(describing: totalProfit)
-            cell.profitValueLabel.text = String(describing: totalProfitInPercent) + "%"
+            cell.weeksValueLabel.text = String(describing: totalProfitValue)
+            cell.profitValueLabel.text = String(describing: totalProfitInPercentValue) + "%"
             
             cell.depositValueLabel.textColor = UIColor.primary
             cell.tradesValueLabel.textColor = UIColor.Font.medium
