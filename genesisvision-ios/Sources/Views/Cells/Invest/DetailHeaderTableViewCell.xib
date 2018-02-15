@@ -40,7 +40,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9F-C6-Fvx" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="102" y="0.0" width="100.5" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FCU-YT-lPe" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="FCU-YT-lPe" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100.5" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="FCU-YT-lPe" secondAttribute="height" multiplier="1:1" id="ujL-IP-Tkx"/>
@@ -255,4 +255,7 @@
             <point key="canvasLocation" x="34" y="39"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="img_logo" width="100" height="100"/>
+    </resources>
 </document>

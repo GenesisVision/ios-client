@@ -32,6 +32,8 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.profileImageView.levelLabel.isHidden = true
         cell.profileImageView.flagImageView.isHidden = true
         
+        cell.profileImageView.profilePhotoImageView.image = UIImage.placeholder
+        
         if let logo = participantViewModel.avatar {
             let logoURL = getFileURL(fileName: logo)
             cell.profileImageView.profilePhotoImageView.kf.indicatorType = .activity
