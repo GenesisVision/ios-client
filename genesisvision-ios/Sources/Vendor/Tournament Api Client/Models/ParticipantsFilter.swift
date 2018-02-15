@@ -13,12 +13,14 @@ open class ParticipantsFilter: Codable {
 
     public var skip: Int?
     public var take: Int?
+    public var name: String?
 
 
     
-    public init(skip: Int?, take: Int?) {
+    public init(skip: Int?, take: Int?, name: String?) {
         self.skip = skip
         self.take = take
+        self.name = name
     }
     
 
@@ -30,6 +32,7 @@ open class ParticipantsFilter: Codable {
 
         try container.encodeIfPresent(skip, forKey: "skip")
         try container.encodeIfPresent(take, forKey: "take")
+        try container.encodeIfPresent(name, forKey: "name")
     }
 
     // Decodable protocol methods
@@ -39,6 +42,7 @@ open class ParticipantsFilter: Codable {
 
         skip = try container.decodeIfPresent(Int.self, forKey: "skip")
         take = try container.decodeIfPresent(Int.self, forKey: "take")
+        name = try container.decodeIfPresent(String.self, forKey: "name")
     }
 }
 

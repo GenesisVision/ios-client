@@ -17,6 +17,7 @@ class TournamentListViewModel {
     
     var skip = 0                            //offset
     var totalCount = 0                      //total count of programs
+    var searchText = ""
 
     var traderTableViewCellViewModels = [TraderTableViewCellViewModel]()
     
@@ -34,7 +35,7 @@ class TournamentListViewModel {
     
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
+        fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
     }
@@ -45,7 +46,7 @@ class TournamentListViewModel {
         }
         
         skip += Constants.Api.take
-        fetch({ [weak self] (totalCount, viewModels) in
+        fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
             var allViewModels = self?.traderTableViewCellViewModels ?? [TraderTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
@@ -59,7 +60,7 @@ class TournamentListViewModel {
     func refresh(completion: @escaping CompletionBlock) {
         skip = 0
         
-        fetch({ [weak self] (totalCount, viewModels) in
+        fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
     }
@@ -74,7 +75,7 @@ class TournamentListViewModel {
     }
     
     func noDataText() -> String {
-        return "The tournament\nhasn\'t started yet.\n\nPlease try again later."
+        return "No result.\n\nPlease try again later."
     }
     
     /// Get TableViewCellViewModel for IndexPath
@@ -126,10 +127,10 @@ class TournamentListViewModel {
         self.totalCount = totalCount
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = ParticipantsFilter(skip: skip, take: Constants.Api.take)
+            let filter = ParticipantsFilter(skip: skip, take: Constants.Api.take, name: name)
             
             tournamentParticipants(withFilter: filter, completion: { (participantViewModels) in
                 guard let participantViewModels = participantViewModels else { return completionError(.failure(reason: nil)) }

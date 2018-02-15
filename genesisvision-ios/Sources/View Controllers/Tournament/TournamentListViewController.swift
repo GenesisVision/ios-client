@@ -23,6 +23,18 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+            searchBar.showsCancelButton = false
+            searchBar.isTranslucent = true
+            searchBar.backgroundColor = UIColor.background
+            searchBar.barTintColor = UIColor.primary
+            searchBar.tintColor = UIColor.primary
+            searchBar.placeholder = "Search"
+        }
+    }
+    
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -68,8 +80,14 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         registerForPreviewing()
         
         showProgressHUD()
+
+        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
     
+    private func updateData() {
+        showProgressHUD()
+        pullToRefresh()
+    }
     
     private func fetchMore() {
         self.canFetchMoreResults = false
@@ -93,6 +111,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 self?.refreshControl?.endRefreshing()
+                self?.searchBar.updateConstraints()
                 self?.tableView.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
@@ -177,8 +196,44 @@ extension TournamentListViewController: DZNEmptyDataSetDelegate {
     }
     
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        showProgressHUD()
-        pullToRefresh()
+        updateData()
+    }
+}
+
+extension TournamentListViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText else {
+            return
+        }
+        
+        viewModel.searchText = searchText
+        
+        updateData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        searchBar.text = ""
+        
+        guard let searchText = searchBar.text, !viewModel.searchText.isEmpty else {
+            return
+        }
+    
+        viewModel.searchText = searchText
+        
+        updateData()
     }
 }
 
