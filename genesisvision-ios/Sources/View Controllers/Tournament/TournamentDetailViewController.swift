@@ -15,6 +15,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     var viewModel: TournamentDetailViewModel! {
         didSet {
             title = viewModel.getNickname()
+            
             showProgressHUD()
             pullToRefresh()
         }
@@ -22,6 +23,9 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var refreshControl: UIRefreshControl!
+    private var ipfsHashBarButtonItem: UIBarButtonItem! {
+        return UIBarButtonItem(title: "IPFS", style: .done, target: self, action: #selector(ipfsHashButtonAction(_:)))
+    }
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -70,7 +74,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.title = self?.viewModel.title
+                self?.setupNavigationBar()
                 self?.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             case .failure(let reason):
@@ -78,6 +82,28 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
+    }
+    
+    private func setupNavigationBar() {
+        title = viewModel.title
+        
+        guard viewModel.ipfsHash() != nil else {
+            print("Incorrect ipfsHashURL")
+            navigationItem.rightBarButtonItem = nil
+            return
+        }
+  
+        navigationItem.rightBarButtonItem = ipfsHashBarButtonItem
+    }
+    
+    // MARK: - IBActions
+    @IBAction func ipfsHashButtonAction(_ sender: UIButton) {
+        guard let ipfsHashURL = viewModel.ipfsHash() else {
+            print("Incorrect ipfsHashURL")
+            return
+        }
+        
+        open(url: ipfsHashURL)
     }
 }
 

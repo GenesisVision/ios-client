@@ -6,8 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import SafariServices
 import UIKit.UIViewController
-
 import PKHUD
 
 extension UIViewController {
@@ -142,7 +142,7 @@ extension UIViewController {
         }
     }
     
-    // MARK: - Other
+    // MARK: - Keyboard
     
     func hideKeyboard() {
         view.endEditing(true)
@@ -155,5 +155,16 @@ extension UIViewController {
     
     func push(viewController: UIViewController) {
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func open(url: URL) {
+        let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+        safariViewController.preferredBarTintColor = UIColor.white
+        safariViewController.preferredControlTintColor = UIColor.primary
+        if #available(iOS 11.0, *) {
+            safariViewController.dismissButtonStyle = .close
+        }
+        
+        present(viewController: safariViewController)
     }
 }

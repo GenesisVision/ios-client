@@ -118,6 +118,16 @@ class TournamentDetailViewModel {
         }
     }
     
+    func ipfsHash() -> URL? {
+        guard let ipfsHash = participantViewModel?.ipfsHash else {
+            print("ipfsHash is not enable")
+            return nil
+        }
+        
+        return URL(string: Constants.Api.ipfsPath + ipfsHash)
+    }
+    
+    
     // MARK: - Private methods
     private func fetch(participantID: String, completion: @escaping (_ participantViewModel: ParticipantViewModel?) -> Void) {
         guard let uuid = UUID(uuidString: participantID) else { return completion(nil) }
