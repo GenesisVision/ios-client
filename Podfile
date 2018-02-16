@@ -10,10 +10,9 @@ target 'genesisvision-ios' do
     pod 'IQKeyboardManagerSwift'
     
     pod 'DZNEmptyDataSet'
-    pod 'RxSwift',    '~> 4.0'
-    pod 'RxCocoa',    '~> 4.0'
-    
+
     pod 'TextFieldEffects'
     pod 'Kingfisher', '~> 4.0'
     pod 'TTRangeSlider'
+    pod 'Firebase/Core'
 end

@@ -90,7 +90,7 @@ extension UIViewController {
     // MARK: - PKHUD
     func showProgressHUD() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        HUD.show(.progress)
+        HUD.show(.progress, onView: self.view)
     }
 
     func hideHUD() {
@@ -159,12 +159,12 @@ extension UIViewController {
     
     func open(url: URL) {
         let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
-        safariViewController.preferredBarTintColor = UIColor.white
+        safariViewController.preferredBarTintColor = UIColor.Background.gray
         safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }
-        
+        safariViewController.modalPresentationStyle = .overFullScreen
         present(viewController: safariViewController)
     }
 }
