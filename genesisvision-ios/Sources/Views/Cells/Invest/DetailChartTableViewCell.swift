@@ -25,7 +25,8 @@ class DetailChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.background
+        let extractedExpr = UIColor.Background.main
+        backgroundColor = extractedExpr
         selectionStyle = .none
     }
     

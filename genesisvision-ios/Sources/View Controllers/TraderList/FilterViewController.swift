@@ -42,7 +42,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         title = viewModel.title
-        view.backgroundColor = UIColor.background
+        view.backgroundColor = UIColor.Background.main
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
         navigationItem.rightBarButtonItem = resetBarButtonItem

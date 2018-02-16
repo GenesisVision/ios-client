@@ -24,7 +24,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var refreshControl: UIRefreshControl!
     private var ipfsHashBarButtonItem: UIBarButtonItem! {
-        return UIBarButtonItem(title: "IPFS", style: .done, target: self, action: #selector(ipfsHashButtonAction(_:)))
+        return UIBarButtonItem(image: UIImage.NavBar.ipfsList, style: .done, target: self, action: #selector(ipfsHashButtonAction(_:)))
     }
     
     // MARK: - Outlets
@@ -50,6 +50,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        tableView.separatorStyle = .none
         tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
         

@@ -32,7 +32,7 @@ class ProfileHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.background
+        backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
     
@@ -74,7 +74,7 @@ class ProfileHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.background
+        backgroundColor = UIColor.Background.main
     }
     
     // MARK: - Public Methods

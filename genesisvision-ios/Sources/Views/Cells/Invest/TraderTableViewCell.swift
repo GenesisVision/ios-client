@@ -47,6 +47,7 @@ class TraderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.background
+        backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.main
     }
 }

@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.background
+        view.backgroundColor = UIColor.Background.main
     }
 }
 
@@ -27,7 +27,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.configure(with: .defaultConfiguration)
         tableView.tableFooterView = UIView()
         
-        view.backgroundColor = UIColor.background
+        view.backgroundColor = UIColor.Background.main
     }
 }
 
@@ -52,6 +52,6 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.background
+        return UIColor.Background.main
     }
 }

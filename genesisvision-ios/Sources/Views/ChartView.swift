@@ -91,7 +91,7 @@ class ChartView: LineChartView {
     
     // MARK: - Private methods
     private func setup() {
-        backgroundColor = UIColor.background
+        backgroundColor = UIColor.Background.main
         
         animate(xAxisDuration: 1.0)
     }

@@ -66,7 +66,7 @@ extension TraderTableViewCellViewModel: CellViewModel {
             cell.depositValueLabel.textColor = UIColor.primary
             cell.tradesValueLabel.textColor = UIColor.Font.medium
             cell.weeksValueLabel.textColor = UIColor.Font.medium
-            cell.profitValueLabel.textColor = totalProfitInPercent >= 0 ? UIColor.Font.green : UIColor.Font.red
+            cell.profitValueLabel.textColor = totalProfitInPercent == 0 ? UIColor.Font.medium : totalProfitInPercent >= 0 ? UIColor.Font.green : UIColor.Font.red
         }
     }
 }

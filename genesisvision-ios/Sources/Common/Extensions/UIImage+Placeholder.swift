@@ -9,11 +9,10 @@
 import UIKit.UIImage
 
 extension UIImage {
-    static var placeholder: UIImage {
-        return #imageLiteral(resourceName: "gv_logo")
-    }
+    static var placeholder: UIImage =  #imageLiteral(resourceName: "gv_logo")
+    static var noDataPlaceholder: UIImage = #imageLiteral(resourceName: "img_trader_nodata_placeholder")
     
-    static var noDataPlaceholder: UIImage {
-        return #imageLiteral(resourceName: "img_trader_nodata_placeholder")
+    struct NavBar {
+        static var ipfsList: UIImage = #imageLiteral(resourceName: "img_ipfs_list")
     }
 }

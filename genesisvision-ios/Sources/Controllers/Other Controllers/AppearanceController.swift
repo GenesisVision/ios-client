@@ -31,7 +31,7 @@ struct AppearanceController {
     private static func setupTabBar() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.primary], for: .selected)
         UITabBar.appearance().tintColor = UIColor.primary
-        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().backgroundColor = UIColor.Background.gray
     }
     
     // MARK: - IQKeyboardManager

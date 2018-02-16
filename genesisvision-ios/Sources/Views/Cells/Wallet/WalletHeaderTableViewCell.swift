@@ -27,7 +27,7 @@ class WalletHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.background
+        backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
 }
