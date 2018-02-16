@@ -31,7 +31,10 @@ class ChartView: LineChartView {
             pinchZoomEnabled = chartType == .detail
             
             rightAxis.enabled = chartType == .detail
-            rightAxis.drawGridLinesEnabled = false
+            rightAxis.drawGridLinesEnabled = true
+            rightAxis.gridColor = UIColor.Font.light
+            rightAxis.axisLineColor = UIColor.Font.medium
+            rightAxis.labelTextColor = UIColor.Font.dark
             
             chartDescription?.enabled = false
             leftAxis.enabled = false

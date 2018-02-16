@@ -24,8 +24,6 @@ extension UIColor {
         static var gray: UIColor  { return #colorLiteral(red: 0.8117647059, green: 0.8352941176, blue: 0.8549019608, alpha: 1) }                                    //cfd5da
         
         static var white: UIColor  { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                                   //cfd8dc
-        
-        
     }
     
     static var primary: UIColor  { return Common.blue }

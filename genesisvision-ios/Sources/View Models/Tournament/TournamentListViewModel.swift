@@ -21,11 +21,9 @@ class TournamentListViewModel {
     //offset
     var skip = 0
     //total count of participants
-    var totalCount = 0
-    
-    var participantsCount = 0 {
+    var totalCount = 0 {
         didSet {
-            subtitle = "\(participantsCount) participants"
+            subtitle = "\(totalCount) participants"
         }
     }
     
@@ -48,12 +46,6 @@ class TournamentListViewModel {
         self.router = router
         
         state = .tournament
-        
-        tournamentParticipantsSummary { [weak self] (viewModel) in
-            if let participantsCount = viewModel?.participantsCount {
-                self?.participantsCount = participantsCount
-            }
-        }
     }
     
     // MARK: - Public methods
@@ -203,5 +195,4 @@ class TournamentListViewModel {
             completion(viewModel)
         })
     }
-
 }
