@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,5 +25,6 @@ extension AppDelegate {
     private func setup() {
         AppearanceController.setupAppearance()
         SwaggerClientAPI.basePath = Constants.Api.basePath
+        FirebaseApp.configure()
     }
 }

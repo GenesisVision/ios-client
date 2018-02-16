@@ -213,7 +213,7 @@ extension TournamentListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideKeyboard()
         
-        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText else {
+        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText || searchText.isEmpty && !viewModel.searchText.isEmpty else {
             return
         }
         
