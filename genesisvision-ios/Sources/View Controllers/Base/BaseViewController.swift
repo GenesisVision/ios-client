@@ -40,6 +40,10 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+    func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = "Update"
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]

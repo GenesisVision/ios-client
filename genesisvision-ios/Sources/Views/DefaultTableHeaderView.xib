@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="DefaultTableHeaderView" id="iN0-l3-epB" customClass="DefaultTableHeaderView" customModule="GV_Investor" customModuleProvider="target">
+        <view contentMode="scaleToFill" misplaced="YES" restorationIdentifier="DefaultTableHeaderView" id="iN0-l3-epB" customClass="DefaultTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -23,16 +23,16 @@
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="GtU-OR-Odo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="2oc-ie-480"/>
+                <constraint firstItem="GtU-OR-Odo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2oc-ie-480"/>
                 <constraint firstItem="GtU-OR-Odo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="jzi-H1-sa2"/>
                 <constraint firstAttribute="trailing" secondItem="GtU-OR-Odo" secondAttribute="trailing" constant="16" id="nma-FM-Ush"/>
-                <constraint firstAttribute="bottom" secondItem="GtU-OR-Odo" secondAttribute="bottom" constant="10" id="qI6-7E-Lk3"/>
+                <constraint firstAttribute="bottom" secondItem="GtU-OR-Odo" secondAttribute="bottom" id="qI6-7E-Lk3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="headerLabel" destination="GtU-OR-Odo" id="kMz-aC-aoy"/>
             </connections>
-            <point key="canvasLocation" x="34.5" y="59"/>
+            <point key="canvasLocation" x="34.5" y="58.5"/>
         </view>
     </objects>
 </document>

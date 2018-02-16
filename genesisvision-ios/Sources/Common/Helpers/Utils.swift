@@ -11,4 +11,3 @@ import UIKit
 func getFileURL(fileName: String) -> URL? {
     return URL(string: Constants.Api.filePath + fileName)
 }
-

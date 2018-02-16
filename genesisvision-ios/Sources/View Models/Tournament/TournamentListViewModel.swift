@@ -6,17 +6,29 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit.UITableViewHeaderFooterView
+
 class TournamentListViewModel {
     // MARK: - Variables
     var title: String = "Tournament"
+    var subtitle: String = ""
     
     var router: TournamentRouter!
     
     var dataType: DataType = .api
     var state: ListState?
     
-    var skip = 0                            //offset
-    var totalCount = 0                      //total count of programs
+    //offset
+    var skip = 0
+    //total count of participants
+    var totalCount = 0
+    
+    var participantsCount = 0 {
+        didSet {
+            subtitle = "\(participantsCount) participants"
+        }
+    }
+    
     var searchText = ""
 
     var traderTableViewCellViewModels = [TraderTableViewCellViewModel]()
@@ -26,11 +38,22 @@ class TournamentListViewModel {
         return [TraderTableViewCellViewModel.self]
     }
     
+    /// Return view models for registration header/footer Nib files
+    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [DefaultTableHeaderView.self]
+    }
+    
     // MARK: - Init
     init(withRouter router: TournamentRouter) {
         self.router = router
         
         state = .tournament
+        
+        tournamentParticipantsSummary { [weak self] (viewModel) in
+            if let participantsCount = viewModel?.participantsCount {
+                self?.participantsCount = participantsCount
+            }
+        }
     }
     
     // MARK: - Public methods
@@ -69,7 +92,21 @@ class TournamentListViewModel {
         return traderTableViewCellViewModels.count
     }
     
-    // MARK: - Table View
+    // MARK: - TableView
+    func headerTitle(for section: Int) -> String? {
+        switch section {
+        default:
+            return subtitle
+        }
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        default:
+            return 26.0
+        }
+    }
+    
     func numberOfRows(in section: Int) -> Int {
         return modelsCount()
     }
@@ -154,4 +191,17 @@ class TournamentListViewModel {
             }
         }
     }
+    
+    private func tournamentParticipantsSummary(completion: @escaping (_ participantsViewModel: ParticipantsSummaryViewModel?) -> Void) {
+        TournamentAPI.apiTournamentParticipantsCountGet(completion: { (viewModel, error) in
+            guard viewModel != nil else {
+                return ErrorHandler.handleApiError(error: error, completion: { (result) in
+                    completion(nil)
+                })
+            }
+            
+            completion(viewModel)
+        })
+    }
+
 }

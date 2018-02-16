@@ -45,8 +45,6 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.title
-        
         setup()
     }
     
@@ -61,6 +59,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: TournamentListViewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: TournamentListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -79,8 +78,8 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private func setup() {
         registerForPreviewing()
         
+        title = viewModel.title
         showProgressHUD()
-
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
     
@@ -150,6 +149,22 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = viewModel.headerTitle(for: section) else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+        header.headerLabel.font = UIFont.systemFont(ofSize: 15.0)
+        header.headerLabel.text = title
+        header.headerLabel.textColor = UIColor.Font.medium
+        return header
+    }
+    
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,10 +200,6 @@ extension TournamentListViewController: DZNEmptyDataSetDelegate {
                           NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
         
         return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return 40
     }
     
     override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {

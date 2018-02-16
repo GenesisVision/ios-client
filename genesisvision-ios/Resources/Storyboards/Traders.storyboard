@@ -229,7 +229,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="56" id="o4r-WO-DfN"/>
+                                        <constraint firstAttribute="height" constant="50" id="o4r-WO-DfN"/>
                                     </constraints>
                                     <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -245,7 +245,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="0KB-fL-CNR" secondAttribute="bottom" id="4PW-W5-Qg0"/>
                             <constraint firstItem="zbn-fA-wrw" firstAttribute="trailing" secondItem="0KB-fL-CNR" secondAttribute="trailing" id="CdU-Wi-shV"/>
