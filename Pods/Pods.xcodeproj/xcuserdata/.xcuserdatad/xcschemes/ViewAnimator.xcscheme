@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F370CA9AFB99A3894AAD5DCF3CBA9DD3'
-               BlueprintName = 'Pods-genesisvision-ios'
+               BlueprintIdentifier = '1A7CBD3A07E1516A916F2BF4CFDDDA44'
+               BlueprintName = 'ViewAnimator'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods-genesisvision-ios.framework'>
+               BuildableName = 'ViewAnimator.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

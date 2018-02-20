@@ -29,6 +29,7 @@ PODS:
   - PKHUD (5.0.0)
   - TextFieldEffects (1.4.0)
   - TTRangeSlider (1.0.5)
+  - ViewAnimator (1.0.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - PKHUD
   - TextFieldEffects
   - TTRangeSlider
+  - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -56,7 +58,8 @@ SPEC CHECKSUMS:
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
+  ViewAnimator: d7b18e0be98e05807f61ad886a36363727209377
 
-PODFILE CHECKSUM: 104fd71cbd93fd1ffdc741fee7dafbb62e657006
+PODFILE CHECKSUM: 9674d19838885fd1312b2351ebe11c3e7e9d20a6
 
 COCOAPODS: 1.4.0

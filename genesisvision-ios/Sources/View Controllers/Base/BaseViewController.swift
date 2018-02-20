@@ -24,10 +24,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.configure(with: .defaultConfiguration)
         tableView.tableFooterView = UIView()
         
         view.backgroundColor = UIColor.Background.main
+        tableView.backgroundColor = UIColor.Background.main
     }
 }
 

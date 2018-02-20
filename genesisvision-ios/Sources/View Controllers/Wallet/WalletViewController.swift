@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import ViewAnimator
 
 class WalletViewController: BaseViewControllerWithTableView {
 
@@ -15,6 +16,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     private var canFetchMoreResults = true
     private var refreshControl: UIRefreshControl!
     private var withdrawBarButtonItem: UIBarButtonItem?
+    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: WalletViewModel!
@@ -78,6 +80,18 @@ class WalletViewController: BaseViewControllerWithTableView {
         fetchTransactions()
     }
 
+    private func updateData() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
+    
+    private func reloadData() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+        tableView.animateViews(animations: [tableViewAnimation])
+    }
+    
     private func fetch() {
         showProgressHUD()
         fetchBalance()
@@ -94,8 +108,7 @@ class WalletViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
@@ -111,7 +124,7 @@ class WalletViewController: BaseViewControllerWithTableView {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure:
                 break
             }
@@ -161,7 +174,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WalletViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        showProgressHUD()
-        pullToRefresh()
+        updateData()
     }
 }

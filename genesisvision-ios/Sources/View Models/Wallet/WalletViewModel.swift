@@ -158,7 +158,7 @@ final class WalletViewModel {
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
         case .transactions:
-            return 70.0
+            return 50.0
         case .header:
             return 0.0
         }

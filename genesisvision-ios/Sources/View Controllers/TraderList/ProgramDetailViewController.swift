@@ -9,6 +9,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import ViewAnimator
 
 class ProgramDetailViewController: BaseViewControllerWithTableView {
 
@@ -28,6 +29,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var refreshControl: UIRefreshControl!
     private var historyBarButtonItem: UIBarButtonItem?
+    private let tableViewAnimation = AnimationType.from(direction: .left, offset: 30.0)
     
     // MARK: - IBOutlets
     @IBOutlet var buttonsView: UIView!

@@ -94,6 +94,11 @@
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
+		<key>ViewAnimator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

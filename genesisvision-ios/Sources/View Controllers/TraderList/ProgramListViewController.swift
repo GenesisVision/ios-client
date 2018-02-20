@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import ViewAnimator
 
 class ProgramListViewController: BaseViewControllerWithTableView {
     
@@ -16,6 +17,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private var canFetchMoreResults = true
     private var refreshControl: UIRefreshControl!
     private var filterBarButtonItem: UIBarButtonItem?
+    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel! {
@@ -65,13 +67,13 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setupSignInButton() {
         signInButtonEnable = viewModel.signInButtonEnable()
         
-        signInButtonViewHeightConstraint.constant = !signInButtonEnable ? 0.0 : 76.0
+        signInButtonViewHeightConstraint.constant = signInButtonEnable ? 76.0 : 0.0
         signInButton.isHidden = !signInButtonEnable
     }
     
     private func setupTableConfiguration() {
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        tableViewConfiguration.bottomInset = !signInButtonEnable ? 0.0 : 76.0 + 16.0
+        tableViewConfiguration.bottomInset = signInButtonEnable ? 76.0 + 16.0 : 0.0
         tableView.configure(with: .custom(tableViewConfiguration))
         
         tableView.delegate = self
@@ -79,7 +81,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
-        
+
         setupPullToRefresh()
     }
     
@@ -111,6 +113,13 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         pullToRefresh()
     }
     
+    
+    private func reloadData() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+        tableView.animateViews(animations: [tableViewAnimation])
+    }
+    
     private func fetchMore() {
         self.canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -119,7 +128,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self?.canFetchMoreResults = true
             switch result {
             case .success:
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure:
                 break
             }
@@ -131,8 +140,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")

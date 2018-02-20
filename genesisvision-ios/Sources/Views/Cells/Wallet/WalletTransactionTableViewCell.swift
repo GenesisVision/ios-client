@@ -40,6 +40,7 @@ class WalletTransactionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
 }
