@@ -8,29 +8,45 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-class TournamentListViewModel {
+final class TournamentListViewModel {
     // MARK: - Variables
     var title: String = "Tournament"
-    var subtitle: String = ""
-    
     var router: TournamentRouter!
     
     var dataType: DataType = .api
-    var state: ListState?
-    
-    //offset
+    var participantsCount: String = ""
     var skip = 0
-    //total count of participants
     var totalCount = 0 {
         didSet {
-            subtitle = "\(totalCount) participants"
+            participantsCount = "\(totalCount) participants"
         }
     }
-    
     var searchText = ""
-
     var traderTableViewCellViewModels = [TraderTableViewCellViewModel]()
     
+    // MARK: - Init
+    init(withRouter router: TournamentRouter) {
+        self.router = router
+    }
+    
+    // MARK: - Public methods
+    func noDataText() -> String {
+        return "No result.\n\nPlease try again later."
+    }
+    
+    func getDetailViewController(with index: Int) -> TournamentDetailViewController? {
+        guard let model = model(for: index) else {
+            return nil
+        }
+        
+        return router.getDetail(with: model.participantViewModel.id?.uuidString ?? "")
+    }
+    
+}
+
+// MARK: - TableView
+extension TournamentListViewModel {
+    // MARK: - Variables
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [TraderTableViewCellViewModel.self]
@@ -41,13 +57,36 @@ class TournamentListViewModel {
         return [DefaultTableHeaderView.self]
     }
     
-    // MARK: - Init
-    init(withRouter router: TournamentRouter) {
-        self.router = router
-        
-        state = .tournament
+    // MARK: - Public methods
+    func headerTitle(for section: Int) -> String? {
+        switch section {
+        default:
+            return participantsCount
+        }
     }
     
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        default:
+            return 26.0
+        }
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return modelsCount()
+    }
+}
+
+// MARK: - Navigation
+extension TournamentListViewModel {
+    // MARK: - Public methods
+    func showDetail(with model: ParticipantViewModel) {
+        router.show(routeType: .showDetail(participantID: model.id?.uuidString ?? ""))
+    }
+}
+
+// MARK: - Fetch
+extension TournamentListViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
         fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
@@ -84,45 +123,9 @@ class TournamentListViewModel {
         return traderTableViewCellViewModels.count
     }
     
-    // MARK: - TableView
-    func headerTitle(for section: Int) -> String? {
-        switch section {
-        default:
-            return subtitle
-        }
-    }
-    
-    func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        default:
-            return 26.0
-        }
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
-    }
-    
-    func noDataText() -> String {
-        return "No result.\n\nPlease try again later."
-    }
-    
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> TraderTableViewCellViewModel? {
         return traderTableViewCellViewModels[index]
-    }
-    
-    func getDetailViewController(with index: Int) -> TournamentDetailViewController? {
-        guard let model = model(for: index) else {
-            return nil
-        }
-        
-        return router.getDetail(with: model.participantViewModel.id?.uuidString ?? "")
-    }
-    
-    // MARK: - Navigation
-    func showDetail(with model: ParticipantViewModel) {
-        router.show(routeType: .showDetail(participantID: model.id?.uuidString ?? ""))
     }
     
     // MARK: - Private methods

@@ -9,7 +9,7 @@
 import Foundation
 import TTRangeSlider
 
-class FilterViewModel {
+final class FilterViewModel {
     
     // MARK: - View Model
     private weak var investmentProgramListViewModel: InvestmentProgramListViewModel?

@@ -8,7 +8,14 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-class TournamentDetailViewModel {
+protocol ViewModelWithTableView {
+    func headerTitle(for section: Int) -> String?
+    func headerHeight(for section: Int) -> CGFloat
+    func numberOfSections() -> Int
+    func numberOfRows(in section: Int) -> Int
+}
+
+final class TournamentDetailViewModel {
     enum SectionType {
         case header
         case chart
@@ -16,11 +23,8 @@ class TournamentDetailViewModel {
     
     // MARK: - Variables
     var title: String = "Tournament Detail"
-    
-    private var sections: [SectionType] = [.header, .chart]
-    
     var router: TournamentDetailRouter!
-    
+
     private var participantID: String!
     private var participantViewModel: ParticipantViewModel? {
         didSet {
@@ -29,14 +33,13 @@ class TournamentDetailViewModel {
             }
         }
     }
-    
-    var dataType: DataType = .api
-    
+    private var sections: [SectionType] = [.header, .chart]
     var models: [CellViewAnyModel]?
+    var dataType: DataType = .api
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self]
+        return [TraderDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -51,11 +54,15 @@ class TournamentDetailViewModel {
     }
     
     // MARK: - Public methods
-    func getNickname() -> String {
-        return participantViewModel?.name ?? ""
+    func ipfsHash() -> URL? {
+        guard let ipfsHash = participantViewModel?.ipfsHash else {
+            print("ipfsHash is not enable")
+            return nil
+        }
+        
+        return URL(string: Constants.Api.ipfsPath + ipfsHash)
     }
     
-    // MARK: - TableView
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .chart:
@@ -90,6 +97,20 @@ class TournamentDetailViewModel {
             return 1
         }
     }
+}
+
+// MARK: - TableView
+extension TournamentDetailViewModel: ViewModelWithTableView {
+    // MARK: - Public Methods
+    
+}
+
+// MARK: - Fetch
+extension TournamentDetailViewModel {
+    // MARK: - Public methods
+    func getNickname() -> String {
+        return participantViewModel?.name ?? ""
+    }
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
@@ -100,7 +121,7 @@ class TournamentDetailViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return DetailHeaderTableViewCellViewModel(participantViewModel: participantViewModel)
+            return TraderDetailHeaderTableViewCellViewModel(participantViewModel: participantViewModel)
         case .chart:
             return DetailChartTableViewCellViewModel(chart: participantViewModel.chart ?? [], name: participantViewModel.name ?? "")
         }
@@ -117,16 +138,6 @@ class TournamentDetailViewModel {
             completion(.success)
         }
     }
-    
-    func ipfsHash() -> URL? {
-        guard let ipfsHash = participantViewModel?.ipfsHash else {
-            print("ipfsHash is not enable")
-            return nil
-        }
-        
-        return URL(string: Constants.Api.ipfsPath + ipfsHash)
-    }
-    
     
     // MARK: - Private methods
     private func fetch(participantID: String, completion: @escaping (_ participantViewModel: ParticipantViewModel?) -> Void) {
@@ -149,5 +160,4 @@ class TournamentDetailViewModel {
         
         successCompletion(participantViewModel)
     }
-    
 }

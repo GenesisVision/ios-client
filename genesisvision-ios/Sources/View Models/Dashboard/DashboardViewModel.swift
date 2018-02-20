@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-class DashboardViewModel {
+final class DashboardViewModel {
     
     // MARK: - Variables
     var title: String = "Dashboard"

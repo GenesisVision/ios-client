@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tournament Detail View Controller-->
+        <scene sceneID="F6s-vD-eYu">
+            <objects>
+                <viewController storyboardIdentifier="TournamentDetailViewController" id="H79-hP-7sh" customClass="TournamentDetailViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yhl-CA-0ih">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3yr-ai-ouQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hzs-5l-iF5" firstAttribute="trailing" secondItem="3yr-ai-ouQ" secondAttribute="trailing" id="1p3-2S-Jhw"/>
+                            <constraint firstItem="3yr-ai-ouQ" firstAttribute="top" secondItem="yhl-CA-0ih" secondAttribute="top" id="CAk-RF-7f2"/>
+                            <constraint firstItem="3yr-ai-ouQ" firstAttribute="leading" secondItem="Hzs-5l-iF5" secondAttribute="leading" id="Eea-zc-KwF"/>
+                            <constraint firstItem="Hzs-5l-iF5" firstAttribute="bottom" secondItem="3yr-ai-ouQ" secondAttribute="bottom" id="sdb-tM-ARi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hzs-5l-iF5"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LEr-sM-ewm"/>
+                    <connections>
+                        <outlet property="tableView" destination="3yr-ai-ouQ" id="JF2-Wj-bf3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bks-1h-bsv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5329" y="905"/>
+        </scene>
+        <!--Tournament List View Controller-->
+        <scene sceneID="MQl-g5-QxT">
+            <objects>
+                <viewController storyboardIdentifier="TournamentListViewController" id="qrP-dd-nUw" customClass="TournamentListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5nY-UN-A0m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0KB-fL-CNR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translucent="NO" id="GNj-Jo-Q5C">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                </searchBar>
+                                <connections>
+                                    <outlet property="dataSource" destination="qrP-dd-nUw" id="ZB9-uX-fsa"/>
+                                    <outlet property="delegate" destination="qrP-dd-nUw" id="NU4-7R-WMP"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0KB-fL-CNR" secondAttribute="bottom" id="4PW-W5-Qg0"/>
+                            <constraint firstItem="zbn-fA-wrw" firstAttribute="trailing" secondItem="0KB-fL-CNR" secondAttribute="trailing" id="CdU-Wi-shV"/>
+                            <constraint firstItem="0KB-fL-CNR" firstAttribute="leading" secondItem="zbn-fA-wrw" secondAttribute="leading" id="Xfe-tQ-ZdC"/>
+                            <constraint firstItem="0KB-fL-CNR" firstAttribute="top" secondItem="zbn-fA-wrw" secondAttribute="top" id="gZZ-Iu-Ybm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zbn-fA-wrw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JMt-sh-qnt"/>
+                    <connections>
+                        <outlet property="searchBar" destination="GNj-Jo-Q5C" id="8se-0c-7w9"/>
+                        <outlet property="tableView" destination="0KB-fL-CNR" id="WvH-C8-fMd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8fk-JE-Nbu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4577" y="905"/>
+        </scene>
+    </scenes>
+</document>

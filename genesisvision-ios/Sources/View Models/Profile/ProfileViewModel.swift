@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewModel {
+final class ProfileViewModel {
     
     enum SectionType {
         case header

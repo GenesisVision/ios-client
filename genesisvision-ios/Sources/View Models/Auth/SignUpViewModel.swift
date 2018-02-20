@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-class SignUpViewModel {
+final class SignUpViewModel {
     
     // MARK: - Variables
     var title: String = "Sign Up"

@@ -7,15 +7,18 @@
 //
 
 enum ProgramDetailRouteType {
-    case invest
+    case invest, withdraw, history
 }
 
 class ProgramDetailRouter: Router {
-    
     // MARK: - Public methods
     func show(routeType: ProgramDetailRouteType) {
         switch routeType {
         case .invest:
+            invest()
+        case .withdraw:
+            invest()
+        case .history:
             invest()
         }
     }
@@ -23,6 +26,14 @@ class ProgramDetailRouter: Router {
     // MARK: - Private methods
     private func invest() {
         //TODO: invest
+    }
+    
+    private func withdraw() {
+        //TODO: withdraw
+    }
+    
+    private func history() {
+        //TODO: history
     }
 }
 

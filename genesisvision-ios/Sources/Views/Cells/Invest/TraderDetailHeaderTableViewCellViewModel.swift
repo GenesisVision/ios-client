@@ -1,5 +1,5 @@
 //
-//  DetailHeaderTableViewCellViewModel.swift
+//  TraderDetailHeaderTableViewCellViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 11.02.18.
@@ -9,11 +9,11 @@
 import Foundation
 import Kingfisher
 
-struct DetailHeaderTableViewCellViewModel {
+struct TraderDetailHeaderTableViewCellViewModel {
     let participantViewModel: ParticipantViewModel
 }
 
-extension DetailHeaderTableViewCellViewModel: CellViewModel {
+extension TraderDetailHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailHeaderTableViewCell) {
         cell.profileImageView.levelLabel.isHidden = true
         cell.profileImageView.flagImageView.isHidden = true

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletViewModel {
+final class WalletViewModel {
     
     enum SectionType {
         case header

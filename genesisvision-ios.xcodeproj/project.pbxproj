@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03E5CEB1247FC0633F810102 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
+		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
+		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
 		FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F952030168100B71E7F /* AlamofireImplementations.swift */; };
 		FC140FE32030168100B71E7F /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F962030168100B71E7F /* APIHelper.swift */; };
 		FC140FE42030168100B71E7F /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F972030168100B71E7F /* APIs.swift */; };
@@ -105,9 +107,9 @@
 		FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */; };
 		FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC91378A2030A4DA002321C7 /* DetailChartTableViewCell.xib */; };
 		FC91378E2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC91378D2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift */; };
-		FC9137902030A4FD002321C7 /* DetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC91378F2030A4FD002321C7 /* DetailHeaderTableViewCellViewModel.swift */; };
+		FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC91378F2030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift */; };
 		FC91379220311CA6002321C7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC91379120311CA6002321C7 /* Utils.swift */; };
-		FC92CB222030192300CDBF19 /* InvestmentProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB212030192200CDBF19 /* InvestmentProgramTableViewCellViewModel.swift */; };
+		FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */; };
 		FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB252030290A00CDBF19 /* TournamentListViewModel.swift */; };
 		FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB2720304B2B00CDBF19 /* TournamentListViewController.swift */; };
 		FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A22201AA07700157AD6 /* ProfileImageView.swift */; };
@@ -207,6 +209,8 @@
 		A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release tournament.xcconfig"; sourceTree = "<group>"; };
 		C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_genesisvision_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		FC016C15203B0FD2006956FE /* Tournament.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tournament.storyboard; sourceTree = "<group>"; };
+		FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC140F952030168100B71E7F /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		FC140F962030168100B71E7F /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		FC140F972030168100B71E7F /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
@@ -305,9 +309,9 @@
 		FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChartTableViewCell.swift; sourceTree = "<group>"; };
 		FC91378A2030A4DA002321C7 /* DetailChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailChartTableViewCell.xib; sourceTree = "<group>"; };
 		FC91378D2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChartTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		FC91378F2030A4FD002321C7 /* DetailHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC91378F2030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraderDetailHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC91379120311CA6002321C7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		FC92CB212030192200CDBF19 /* InvestmentProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC92CB252030290A00CDBF19 /* TournamentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewModel.swift; sourceTree = "<group>"; };
 		FC92CB2720304B2B00CDBF19 /* TournamentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewController.swift; sourceTree = "<group>"; };
 		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -743,12 +747,13 @@
 		FCA57067202735BA001942F3 /* Invest */ = {
 			isa = PBXGroup;
 			children = (
-				FC92CB212030192200CDBF19 /* InvestmentProgramTableViewCellViewModel.swift */,
 				FCA57068202735C4001942F3 /* Filter */,
+				FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */,
 				FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */,
 				FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */,
 				FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */,
-				FC91378F2030A4FD002321C7 /* DetailHeaderTableViewCellViewModel.swift */,
+				FC91378F2030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift */,
+				FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */,
 				FC9137852030A4A8002321C7 /* DetailHeaderTableViewCell.swift */,
 				FC9137862030A4A8002321C7 /* DetailHeaderTableViewCell.xib */,
 				FC91378D2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift */,
@@ -877,6 +882,7 @@
 				FC49641D2015500700104CEB /* Dashboard.storyboard */,
 				FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */,
 				FCC9DD5C200DFFDC008825EC /* Traders.storyboard */,
+				FC016C15203B0FD2006956FE /* Tournament.storyboard */,
 				FCC9DD5A200DFFB8008825EC /* Profile.storyboard */,
 			);
 			path = Storyboards;
@@ -1173,6 +1179,7 @@
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Traders.storyboard in Resources */,
 				FCA5706220273585001942F3 /* ProfileHeaderTableViewCell.xib in Resources */,
+				FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */,
 				FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				FCF4F9EC203733FB00AC917C /* GoogleService-Info.plist in Resources */,
@@ -1297,8 +1304,9 @@
 				FCA19A33201ADFAD00157AD6 /* ConfirmationViewModel.swift in Sources */,
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
+				FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
-				FC92CB222030192300CDBF19 /* InvestmentProgramTableViewCellViewModel.swift in Sources */,
+				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
 				FC140FFD2030168100B71E7F /* InvestmentRequest.swift in Sources */,
 				FCB8DFC92010F67300698D18 /* ConfirmationViewController.swift in Sources */,
@@ -1349,7 +1357,7 @@
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
-				FC9137902030A4FD002321C7 /* DetailHeaderTableViewCellViewModel.swift in Sources */,
+				FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FC1410232030168100B71E7F /* TradeAccount.swift in Sources */,
 				FC1410022030168100B71E7F /* LoginViewModel.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,

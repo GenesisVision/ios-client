@@ -16,8 +16,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         didSet {
             title = viewModel.getNickname()
             
-            showProgressHUD()
-            pullToRefresh()
+            updateData()
         }
     }
     
@@ -97,6 +96,11 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         navigationItem.rightBarButtonItem = ipfsHashBarButtonItem
     }
     
+    private func updateData() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
     // MARK: - IBActions
     @IBAction func ipfsHashButtonAction(_ sender: UIButton) {
         guard let ipfsHashURL = viewModel.ipfsHash() else {
@@ -109,7 +113,6 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
 }
 
 extension TournamentDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
@@ -145,7 +148,6 @@ extension TournamentDetailViewController: UITableViewDelegate, UITableViewDataSo
 
 extension TournamentDetailViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        showProgressHUD()
-        pullToRefresh()
+        updateData()
     }
 }

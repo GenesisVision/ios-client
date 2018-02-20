@@ -21,6 +21,7 @@ extension UIViewController {
         case auth
         case wallet
         case dashboard
+        case tournament
     }
     
     private class func mainStoryboardInstancePrivate<T: UIViewController>(name: String) -> T? {

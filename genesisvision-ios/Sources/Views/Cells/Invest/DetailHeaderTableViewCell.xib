@@ -55,13 +55,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bf-3f-pmQ">
-                                                <rect key="frame" x="80.5" y="80" width="20" height="20"/>
+                                                <rect key="frame" x="60.5" y="60" width="40" height="40"/>
                                                 <color key="backgroundColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="0Bf-3f-pmQ" secondAttribute="height" multiplier="1:1" id="ZVL-hD-tUm"/>
-                                                    <constraint firstAttribute="width" constant="20" id="xyG-ik-fFM"/>
+                                                    <constraint firstAttribute="width" constant="40" id="xyG-ik-fFM"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>

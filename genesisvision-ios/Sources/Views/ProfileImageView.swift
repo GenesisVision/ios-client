@@ -30,4 +30,11 @@ class ProfileImageView: UIView {
             levelLabel.roundWithBorder(2.0)
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        profilePhotoImageView.roundCorners()
+        levelLabel.roundWithBorder(2.0)
+    }
 }

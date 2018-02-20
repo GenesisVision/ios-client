@@ -15,6 +15,7 @@ class FilterSortTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.main
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-class WelcomeViewModel {
+final class WelcomeViewModel {
     
     // MARK: - Variables
     var title: String = "Invest"
@@ -33,7 +33,6 @@ class WelcomeViewModel {
     }
     
     // MARK: - Private methods
-    
     private func startAsAuthorized() {
         AuthManager.updateToken()
         router.show(routeType: .startAsAuthorized)

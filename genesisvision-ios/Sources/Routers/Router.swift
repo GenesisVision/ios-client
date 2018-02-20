@@ -96,7 +96,7 @@ class Router {
     }
     
     private func createTournamentNavigationController() {
-        guard let viewController = TournamentListViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return }
         tournamentViewController = viewController
         let router = TournamentRouter(parentRouter: self)
         childRouters.append(router)

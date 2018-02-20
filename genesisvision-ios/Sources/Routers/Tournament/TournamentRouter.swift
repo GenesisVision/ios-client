@@ -23,7 +23,7 @@ class TournamentRouter: Router {
     }
     
     func getDetail(with participantID: String) -> TournamentDetailViewController? {
-        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .traders) else { return nil }
+        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .tournament) else { return nil }
         let router = TournamentDetailRouter(parentRouter: self)
         let viewModel = TournamentDetailViewModel(withRouter: router, with: participantID)
         viewController.viewModel = viewModel
@@ -33,7 +33,7 @@ class TournamentRouter: Router {
     
     // MARK: - Private methods
     private func showDetail(with participantID: String) {
-        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .tournament) else { return }
         let router = TournamentDetailRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = TournamentDetailViewModel(withRouter: router, with: participantID)
         viewController.viewModel = viewModel
