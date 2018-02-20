@@ -177,13 +177,15 @@ extension TournamentListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let cellPosition = self.tableView.convert(location, from: self.view)
+        let cellPosition = tableView.convert(location, from: view)
         
-        guard let indexPath = tableView.indexPathForRow(at: cellPosition) else { return nil }
-        
-        guard let vc = viewModel.getDetailViewController(with: indexPath.row) else { return nil }
+        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
+            let vc = viewModel.getDetailViewController(with: indexPath.row),
+            let cell = tableView.cellForRow(at: indexPath)
+            else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
+        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
         
         return vc
     }

@@ -29,6 +29,17 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Outlets
     @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+            searchBar.showsCancelButton = false
+            searchBar.isTranslucent = true
+            searchBar.backgroundColor = UIColor.Background.main
+            searchBar.barTintColor = UIColor.primary
+            searchBar.tintColor = UIColor.primary
+            searchBar.placeholder = "Search"
+        }
+    }
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -95,6 +106,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         navigationItem.rightBarButtonItem = filterBarButtonItem
     }
     
+    private func updateData() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
     private func fetchMore() {
         self.canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -123,7 +139,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             }
         }
     }
-
+    
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
         viewModel.showSignInVC()
@@ -144,11 +160,11 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
             return
         }
         
-        guard let programEntity = viewModel.model(for: indexPath.row)?.investmentProgramEntity else {
+        guard let investmentProgram = viewModel.model(for: indexPath.row)?.investmentProgram else {
             return
         }
 
-        viewModel.showDetail(with: programEntity)
+        viewModel.showDetail(with: investmentProgram)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -177,13 +193,15 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let cellPosition = self.tableView.convert(location, from: self.view)
+        let cellPosition = tableView.convert(location, from: view)
         
-        guard let indexPath = tableView.indexPathForRow(at: cellPosition) else { return nil }
-        
-        guard let vc = viewModel.getDetailViewController(with: indexPath.row) else { return nil }
+        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
+            let vc = viewModel.getDetailViewController(with: indexPath.row),
+            let cell = tableView.cellForRow(at: indexPath)
+            else { return nil }
         
         vc.preferredContentSize = CGSize(width: 0.0, height: 500)
+        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
         
         return vc
     }
@@ -195,7 +213,41 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
 
 extension ProgramListViewController: DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        showProgressHUD()
-        pullToRefresh()
+        updateData()
+    }
+}
+extension ProgramListViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText || searchText.isEmpty && !viewModel.searchText.isEmpty else {
+            return
+        }
+        
+        viewModel.searchText = searchText
+        
+        updateData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        searchBar.text = ""
+        
+        guard let searchText = searchBar.text, !viewModel.searchText.isEmpty else {
+            return
+        }
+        
+        viewModel.searchText = searchText
+        
+        updateData()
     }
 }
