@@ -1,23 +1,20 @@
 //
-//  InvestmentProgramListViewModel.swift
+//  ProgramHistoryViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 25.01.18.
+//  Created by George Shaginyan on 21.02.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum InvestmentProgramListViewState {
-    case programList, programListWithSignIn
-}
-
-final class InvestmentProgramListViewModel {
+final class ProgramHistoryViewModel {
     // MARK: - Variables
-    var title: String = "Invest"
-    var router: InvestmentProgramListRouter!
-    var state: InvestmentProgramListViewState?
-    var detailState: ProgramDetailViewState = .full
-   
+    var title: String = "History"
+    var investmentProgramId: String?
+    
+    var router: ProgramHistoryRouter!
+    
     var dataType: DataType = .api
+    
     var programsCount: String = ""
     var skip = 0
     var totalCount = 0 {
@@ -25,31 +22,18 @@ final class InvestmentProgramListViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    var sorting: InvestmentsFilter.Sorting = .byOrdersAsc
-    var investMaxAmountFrom: Double?
-    var investMaxAmountTo: Double?
-    var searchText = ""
-    var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
+
+    var viewModels = [ProgramTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: InvestmentProgramListRouter) {
+    init(withRouter router: ProgramHistoryRouter, investmentProgramId: String) {
         self.router = router
-        
-        state = isLogin() ? .programList : .programListWithSignIn
-    }
-    
-    // MARK: - Public methods
-    func isLogin() -> Bool {
-        return AuthManager.isLogin()
-    }
-    
-    func signInButtonEnable() -> Bool {
-        return state == .programListWithSignIn
+        self.investmentProgramId = investmentProgramId
     }
 }
 
 // MARK: - TableView
-extension InvestmentProgramListViewModel {
+extension ProgramHistoryViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -57,33 +41,16 @@ extension InvestmentProgramListViewModel {
     }
     
     func modelsCount() -> Int {
-        return investmentProgramViewModels.count
+        return viewModels.count
     }
-
+    
     func numberOfRows(in section: Int) -> Int {
         return modelsCount()
     }
 }
 
-// MARK: - Navigation
-extension InvestmentProgramListViewModel {
-    // MARK: - Public methods
-    func showSignInVC() {
-        router.show(routeType: .signIn)
-    }
-    
-    func showFilterVC() {
-        router.show(routeType: .showFilterVC(investmentProgramListViewModel: self))
-    }
-    
-    func showDetail(with investmentProgram: InvestmentProgram) {
-        //TODO: update detailState from investmentProgram
-        router.show(routeType: .showProgramDetail(investmentProgram: investmentProgram, state: detailState))
-    }
-}
-
 // MARK: - Fetch
-extension InvestmentProgramListViewModel {
+extension ProgramHistoryViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
@@ -98,7 +65,7 @@ extension InvestmentProgramListViewModel {
         
         skip += Constants.Api.take
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.investmentProgramViewModels ?? [ProgramTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [ProgramTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -118,17 +85,9 @@ extension InvestmentProgramListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> ProgramTableViewCellViewModel? {
-        return investmentProgramViewModels[index]
+        return viewModels[index]
     }
-    
-    func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
-        guard let model = model(for: index) else {
-            return nil
-        }
-        //TODO: update detailState from model.investmentProgram
-        return router.getDetailViewController(withEntity: model.investmentProgram, state: detailState)
-    }
-    
+
     // MARK: - Private methods
     private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
         InvestorAPI.apiInvestorInvestmentsPost(filter: filter) { [weak self] (viewModel, error) in
@@ -149,26 +108,15 @@ extension InvestmentProgramListViewModel {
         successCompletion(viewModel)
     }
     
-    private func fakeViewModels(completion: (_ traderCellModels: [ProgramTableViewCellViewModel]) -> Void) {
-        var cellModels = [ProgramTableViewCellViewModel]()
-        
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            //
-//            cellModels.append(InvestmentProgramTableViewCellViewModel(investmentProgram: InvestmentProgram.templateEntity))
-        }
-        
-        completion(cellModels)
-    }
-    
     private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
-        self.investmentProgramViewModels = viewModels
+        self.viewModels = viewModels
         self.totalCount = totalCount
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: investMaxAmountFrom, investMaxAmountTo: investMaxAmountTo, sorting: sorting, skip: skip, take: Constants.Api.take)
+            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: nil, skip: skip, take: Constants.Api.take)
             
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
@@ -186,10 +134,8 @@ extension InvestmentProgramListViewModel {
                 completionError(.success)
             })
         case .fake:
-            fakeViewModels { (investmentProgramViewModels) in
-                completionSuccess(investmentProgramViewModels.count, investmentProgramViewModels)
-                completionError(.success)
-            }
+            break
         }
     }
 }
+

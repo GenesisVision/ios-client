@@ -63,8 +63,8 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         historyBarButtonItem = UIBarButtonItem(title: "History", style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = historyBarButtonItem
         
-        investButton.tintColor = UIColor.Font.green
-        withdrawButton.tintColor = UIColor.Font.red
+        investButton.tintColor = UIColor.Button.green
+        withdrawButton.tintColor = UIColor.Button.red
         
         investButtonViewTrailingConstraint.isActive = true
         investButtonViewWidthConstraint.isActive = false

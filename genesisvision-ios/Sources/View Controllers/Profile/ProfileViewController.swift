@@ -27,16 +27,24 @@ class ProfileViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var editProfileButton: UIBarButtonItem! {
-        return UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Button.green
+        return barButtonItem
     }
     private var cancelEditProfileButton: UIBarButtonItem! {
-        return UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Button.red
+        return barButtonItem
     }
     private var saveProfileButton: UIBarButtonItem! {
-        return UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Button.green
+        return barButtonItem
     }
     private var signOutButton: UIBarButtonItem! {
-        return UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Button.red
+        return barButtonItem
     }
 
     // MARK: - Lifecycle
@@ -52,6 +60,7 @@ class ProfileViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func fetch() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.getProfile { [weak self] (result) in
             self?.hideHUD()
             switch result {

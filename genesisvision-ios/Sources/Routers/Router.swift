@@ -15,6 +15,7 @@ protocol RouterProtocol {
     func push(viewController: UIViewController)
     //Modal
     func present(viewController: UIViewController, from currentViewController: UIViewController)
+    func dismiss(animated: Bool)
 }
 
 class Router {
@@ -126,6 +127,11 @@ extension Router: RouterProtocol {
     //Modal
     func present(viewController: UIViewController, from currentViewController: UIViewController) {
         currentViewController.present(viewController: viewController)
+    }
+    
+    func dismiss(animated: Bool) {
+        guard let viewController = navigationController?.topViewController else { return }
+        viewController.dismiss(animated: true, completion: nil)
     }
     
     func setWindowRoot(viewController: UIViewController?) {

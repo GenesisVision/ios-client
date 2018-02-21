@@ -1,0 +1,80 @@
+//
+//  ProgramWithdrawViewController.swift
+//  genesisvision-ios
+//
+//  Created by George Shaginyan on 21.02.18.
+//  Copyright © 2018 Genesis Vision. All rights reserved.
+//
+
+import UIKit
+
+class ProgramWithdrawViewController: UIViewController {
+
+    var viewModel: ProgramWithdrawViewModel!
+    
+    // MARK: - TextFields
+    @IBOutlet var valueTextField: UITextField!
+    
+    // MARK: - Labels
+    @IBOutlet var availableFundsLabel: UILabel!
+    
+    // MARK: - Buttons
+    @IBOutlet var withdrawButton: UIButton!
+    @IBOutlet var withdrawAllButton: UIButton!
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = viewModel.title
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    // MARK: - Private methods
+    private func withdrawMethod() {
+        hideKeyboard()
+        showProgressHUD()
+        guard let text = valueTextField.text,
+            let value = Double(text)
+            else { return }
+        
+        viewModel.withdraw(with: value) { [weak self]  (result) in
+            switch result {
+            case .success:
+                self?.showSuccessHUD()
+            case .failure(let reason):
+                if reason != nil {
+                    self?.showErrorHUD(subtitle: reason)
+                }
+            }
+        }
+    }
+    
+    private func withdrawAllMethod() {
+        hideKeyboard()
+        showProgressHUD()
+        
+        viewModel.withdrawAll(completion: { [weak self]  (result) in
+            switch result {
+            case .success:
+                self?.showSuccessHUD()
+            case .failure(let reason):
+                if reason != nil {
+                    self?.showErrorHUD(subtitle: reason)
+                }
+            }
+        })
+    }
+    
+    // MARK: - Actions
+    @IBAction func withdrawButtonAction(_ sender: UIButton) {
+        withdrawMethod()
+    }
+    
+    @IBAction func withdrawAllButtonAction(_ sender: UIButton) {
+        withdrawAllMethod()
+    }
+}

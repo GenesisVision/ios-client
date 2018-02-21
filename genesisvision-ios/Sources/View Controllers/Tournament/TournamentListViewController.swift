@@ -8,11 +8,12 @@
 
 import UIKit
 import DZNEmptyDataSet
+import ViewAnimator
 
 class TournamentListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
-    private var canFetchMoreResults = true
+    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: TournamentListViewModel! {
@@ -69,8 +70,14 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
     
+    private func reloadData() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+        tableView.animateViews(animations: [tableViewAnimation])
+    }
+    
     override func fetchMore() {
-        self.canFetchMoreResults = false
+        canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
             self?.canFetchMoreResults = true
@@ -90,9 +97,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.refreshControl?.endRefreshing()
-                self?.searchBar.updateConstraints()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")

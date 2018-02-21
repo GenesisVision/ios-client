@@ -14,7 +14,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
-    private var canFetchMoreResults = true
     private var filterBarButtonItem: UIBarButtonItem?
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
@@ -101,11 +100,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func fetchMore() {
-        self.canFetchMoreResults = false
+        canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self?.canFetchMoreResults = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.reloadData()
@@ -116,6 +115,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {

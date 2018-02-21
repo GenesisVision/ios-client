@@ -23,12 +23,6 @@ final class WalletViewModel {
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
     
-    private var profileViewModel: ProfileShortViewModel? {
-        didSet {
-            balance = profileViewModel?.balance ?? 0.0
-        }
-    }
-    
     private var balance: Double = 0.0
     private var currency: String = Constants.currency
     
@@ -60,31 +54,20 @@ final class WalletViewModel {
         router.show(routeType: .withdraw)
     }
     
+    func deposit() {
+        router.show(routeType: .deposit)
+    }
+    
     // MARK: - Data methods
     func getBalance() -> Double {
         return balance
     }
     
     func fetchBalance(completion: @escaping CompletionBlock) {
-        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
-        
-        isInvestorApp
-            ? InvestorAPI.apiInvestorProfileGet(authorization: token) { [weak self] (viewModel, error) in
-                guard error == nil else {
-                    return ErrorHandler.handleApiError(error: error, completion: completion)
-                }
-                
-                self?.profileViewModel = viewModel
-                completion(.success)
-            }
-            : ManagerAPI.apiManagerProfileGet(authorization: token) { [weak self] (viewModel, error) in
-                guard error == nil else {
-                    return ErrorHandler.handleApiError(error: error, completion: completion)
-                }
-                
-                self?.profileViewModel = viewModel
-                completion(CompletionResult.success)
-            }
+        AuthManager.getBalance { [weak self] (value) in
+            self?.balance = value
+            completion(.success)
+        }
     }
     
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
@@ -177,7 +160,8 @@ final class WalletViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        fetchBalance { (result) in
+        AuthManager.getBalance { [weak self] (value) in
+            self?.balance = value
         }
     }
     
@@ -224,7 +208,6 @@ final class WalletViewModel {
     
     /// Return WalletTransactionsViewModel from API
     private func fetchTransactions(authorization: String, filter: TransactionsFilter, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {
-        
         isInvestorApp
             ? InvestorAPI.apiInvestorWalletTransactionsPost(authorization: authorization, filter: filter, completion: completion)
             : ManagerAPI.apiManagerWalletTransactionsPost(authorization: authorization, filter: filter, completion: completion)

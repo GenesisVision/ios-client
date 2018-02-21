@@ -22,6 +22,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Veriables
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!
+    var canFetchMoreResults = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

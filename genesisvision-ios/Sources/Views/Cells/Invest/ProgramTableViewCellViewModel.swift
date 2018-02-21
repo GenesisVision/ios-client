@@ -15,6 +15,17 @@ struct ProgramTableViewCellViewModel {
 
 extension ProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: TraderTableViewCell) {
+        cell.chartView.isHidden = true
+        cell.noDataLabel.isHidden = false
+        
+        cell.noDataLabel.text = "Not enough data"
+        
+//        if let chart = participantViewModel.chart, chart.count > 0 {
+//            cell.chartView.isHidden = false
+//            cell.noDataLabel.isHidden = true
+//            cell.chartView.setup(dataSet: participantViewModel.chart, name: participantViewModel.name)
+//        }
+        
         var currency = Currency.gvt.rawValue.uppercased()
         var username = ""
         

@@ -106,14 +106,17 @@ final class ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        router.show(routeType: .invest)
+        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
+        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
     }
     
     func withdraw() {
-        router.show(routeType: .withdraw)
+        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
     }
     
     func showHistory() {
-        router.show(routeType: .history)
+        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
+        router.show(routeType: .history(investmentProgramId: investmentProgramId))
     }
 }

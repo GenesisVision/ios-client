@@ -7,33 +7,48 @@
 //
 
 enum ProgramDetailRouteType {
-    case invest, withdraw, history
+    case invest(investmentProgramId: String), withdraw(investmentProgramId: String), history(investmentProgramId: String)
 }
 
 class ProgramDetailRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramDetailRouteType) {
         switch routeType {
-        case .invest:
-            invest()
-        case .withdraw:
-            invest()
-        case .history:
-            invest()
+        case .invest(let investmentProgramId):
+            invest(with: investmentProgramId)
+        case .withdraw(let investmentProgramId):
+            withdraw(with: investmentProgramId)
+        case .history(let investmentProgramId):
+            history(with: investmentProgramId)
         }
     }
     
     // MARK: - Private methods
-    private func invest() {
-        //TODO: invest
+    private func invest(with investmentProgramId: String) {
+        guard let viewController = ProgramInvestViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        viewController.viewModel = viewModel
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func withdraw() {
-        //TODO: withdraw
+    private func withdraw(with investmentProgramId: String) {
+        guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        viewController.viewModel = viewModel
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func history() {
-        //TODO: history
+    private func history(with investmentProgramId: String) {
+        guard let viewController = ProgramHistoryViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramHistoryRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramHistoryViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        viewController.viewModel = viewModel
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

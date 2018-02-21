@@ -102,6 +102,16 @@
 		FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */; };
 		FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */; };
 		FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */; };
+		FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */; };
+		FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */; };
+		FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */; };
+		FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */; };
+		FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */; };
+		FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */; };
+		FC83DF67203DA7B600A8F8CE /* ProgramHistoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */; };
+		FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */; };
+		FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */; };
+		FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF6C203DCBE400A8F8CE /* ProfileDataProvider.swift */; };
 		FC9137872030A4A8002321C7 /* DetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9137852030A4A8002321C7 /* DetailHeaderTableViewCell.swift */; };
 		FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC9137862030A4A8002321C7 /* DetailHeaderTableViewCell.xib */; };
 		FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */; };
@@ -304,6 +314,16 @@
 		FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCell.swift; sourceTree = "<group>"; };
 		FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSortTableViewCell.xib; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestViewController.swift; sourceTree = "<group>"; };
+		FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawViewController.swift; sourceTree = "<group>"; };
+		FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestViewModel.swift; sourceTree = "<group>"; };
+		FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawViewModel.swift; sourceTree = "<group>"; };
+		FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawRouter.swift; sourceTree = "<group>"; };
+		FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestRouter.swift; sourceTree = "<group>"; };
+		FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHistoryRouter.swift; sourceTree = "<group>"; };
+		FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHistoryViewController.swift; sourceTree = "<group>"; };
+		FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHistoryViewModel.swift; sourceTree = "<group>"; };
+		FC83DF6C203DCBE400A8F8CE /* ProfileDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataProvider.swift; sourceTree = "<group>"; };
 		FC9137852030A4A8002321C7 /* DetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		FC9137862030A4A8002321C7 /* DetailHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -640,9 +660,12 @@
 		FC4C194320304F0400625795 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				FC5E904520216769000E4A90 /* FilterRouter.swift */,
 				FCA19A2C201ADAB100157AD6 /* InvestmentProgramListRouter.swift */,
 				FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */,
+				FC5E904520216769000E4A90 /* FilterRouter.swift */,
+				FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */,
+				FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */,
+				FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -668,9 +691,12 @@
 		FC4C194A203050F200625795 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
 				FCBD22BF2019E960000B8E38 /* InvestmentProgramListViewModel.swift */,
 				FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */,
+				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
+				FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */,
+				FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */,
+				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -898,7 +924,7 @@
 				FCC9DD4A200DFA5E008825EC /* Models */,
 				FCC9DD4D200DFA5E008825EC /* Other */,
 				FCC9DD4E200DFA5E008825EC /* Routers */,
-				FCC9DD4F200DFA5E008825EC /* Services */,
+				FCC9DD4F200DFA5E008825EC /* Data Providers */,
 				FCC9DD50200DFA5E008825EC /* Vendor */,
 				FCC9DD51200DFA5E008825EC /* Views */,
 			);
@@ -1029,11 +1055,12 @@
 			path = Routers;
 			sourceTree = "<group>";
 		};
-		FCC9DD4F200DFA5E008825EC /* Services */ = {
+		FCC9DD4F200DFA5E008825EC /* Data Providers */ = {
 			isa = PBXGroup;
 			children = (
+				FC83DF6C203DCBE400A8F8CE /* ProfileDataProvider.swift */,
 			);
-			path = Services;
+			path = "Data Providers";
 			sourceTree = "<group>";
 		};
 		FCC9DD50200DFA5E008825EC /* Vendor */ = {
@@ -1086,6 +1113,9 @@
 				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
 				FCC9DD87200E61C0008825EC /* ProgramDetailViewController.swift */,
 				FC5E9049202169DC000E4A90 /* FilterViewController.swift */,
+				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
+				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
+				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
 			);
 			path = TraderList;
 			sourceTree = "<group>";
@@ -1274,15 +1304,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC83DF67203DA7B600A8F8CE /* ProgramHistoryRouter.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
 				FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				FC1410272030168100B71E7F /* TradeViewModel.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				FC140FFF2030168100B71E7F /* InvestmentShort.swift in Sources */,
+				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
+				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				FC14101B2030168100B71E7F /* NewParticipant.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
+				FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -1295,6 +1329,7 @@
 				FC1410152030168100B71E7F /* TournamentAPI.swift in Sources */,
 				FC14101A2030168100B71E7F /* IFormFile.swift in Sources */,
 				FC14101C2030168100B71E7F /* NewTrade.swift in Sources */,
+				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
 				FC1410142030168100B71E7F /* FilesAPI.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
@@ -1328,6 +1363,7 @@
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				FCA5705820273538001942F3 /* ProfileFieldTableViewCellViewModel.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramDetailViewController.swift in Sources */,
+				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
 				FC1410252030168100B71E7F /* TradesFilter.swift in Sources */,
 				FCC9DD68200E3E2F008825EC /* InvestmentProgramEntity.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
@@ -1351,7 +1387,9 @@
 				FC91378E2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift in Sources */,
 				FC140FED2030168100B71E7F /* ManagerAPI.swift in Sources */,
 				FC140FEC2030168100B71E7F /* InvestorAPI.swift in Sources */,
+				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
+				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
 				FC1410092030168100B71E7F /* Period.swift in Sources */,
 				FC1410042030168100B71E7F /* ManagerRequest.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
@@ -1387,6 +1425,7 @@
 				FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */,
 				FC14101E2030168100B71E7F /* ParticipantsFilter.swift in Sources */,
 				FC1410072030168100B71E7F /* NewInvestmentRequest.swift in Sources */,
+				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
 				FCA5706120273585001942F3 /* ProfileHeaderTableViewCell.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
 				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
@@ -1412,6 +1451,7 @@
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
 				FC1410012030168100B71E7F /* InvestorProgram.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
+				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
 				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
 				FC14101D2030168100B71E7F /* ParticipantRequest.swift in Sources */,

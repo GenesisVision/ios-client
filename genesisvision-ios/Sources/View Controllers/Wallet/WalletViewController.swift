@@ -8,14 +8,12 @@
 
 import UIKit
 import DZNEmptyDataSet
-import ViewAnimator
 
 class WalletViewController: BaseViewControllerWithTableView {
 
     // MARK: - Variables
-    private var canFetchMoreResults = true
+    private var depositBarButtonItem: UIBarButtonItem?
     private var withdrawBarButtonItem: UIBarButtonItem?
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: WalletViewModel!
@@ -38,6 +36,8 @@ class WalletViewController: BaseViewControllerWithTableView {
         super.viewWillAppear(animated)
         
         title = viewModel.title
+        
+        setupUI()
     }
     
     // MARK: - Private methods
@@ -48,7 +48,12 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction(_:)))
-        navigationItem.rightBarButtonItem = withdrawBarButtonItem
+        withdrawBarButtonItem?.tintColor = UIColor.Button.red
+        navigationItem.leftBarButtonItem = withdrawBarButtonItem
+        
+        depositBarButtonItem = UIBarButtonItem(title: "Deposit", style: .done, target: self, action: #selector(depositButtonAction(_:)))
+        depositBarButtonItem?.tintColor = UIColor.Button.green
+        navigationItem.rightBarButtonItem = depositBarButtonItem
     }
     
     private func setupTableConfiguration() {
@@ -69,7 +74,6 @@ class WalletViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     private func fetch() {
@@ -79,8 +83,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchBalance() {
-        viewModel.fetchBalance { (result) in
-        }
+        viewModel.fetchBalance { (result) in }
     }
     
     private func fetchTransactions() {
@@ -97,7 +100,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchMoreTransactions() {
-        self.canFetchMoreResults = false
+        canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMoreTransactions { [weak self] (result) in
             self?.canFetchMoreResults = true
@@ -114,6 +117,10 @@ class WalletViewController: BaseViewControllerWithTableView {
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         viewModel.withdraw()
+    }
+    
+    @IBAction func depositButtonAction(_ sender: UIButton) {
+        viewModel.deposit()
     }
 }
 

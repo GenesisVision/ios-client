@@ -11,6 +11,7 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
+    private static var profileShortViewModel: ProfileShortViewModel?
     
     static var authorizedToken: String? {
         set(newToken) {
@@ -39,9 +40,23 @@ class AuthManager {
         return AuthManager.authorizedToken != nil
     }
     
+    static func getBalance(completion: @escaping (_ balance: Double) -> Void) {
+        getProfileShort(completion: { (viewModel) in
+            if viewModel != nil  {
+                profileShortViewModel = viewModel
+            }
+            
+            completion(profileShortViewModel?.balance ?? 0.0)
+        })
+    }
+    
+    static func saveProfileShort(viewModel: ProfileShortViewModel) {
+        self.profileShortViewModel = viewModel
+    }
+    
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
         guard profileViewModel != nil else {
-            getFullProfile(completion: { (viewModel) in
+            ProfileDataProvider.getProfileFull(completion: { (viewModel) in
                 if viewModel != nil  {
                     profileViewModel = viewModel
                 }
@@ -54,48 +69,22 @@ class AuthManager {
         completion(profileViewModel)
     }
     
-    private static func getFullProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
-        isInvestorApp
-            ? getInvestorProfile(completion: { (viewModel) in
-                profileViewModel = viewModel
-                completion(profileViewModel)
+    static func getProfileShort(completion: @escaping (_ profile: ProfileShortViewModel?) -> Void) {
+        guard profileViewModel != nil else {
+            ProfileDataProvider.getProfileShort(completion: { (viewModel) in
+                if viewModel != nil  {
+                    profileShortViewModel = viewModel
+                }
+                
+                completion(viewModel)
             })
-            : getInvestorProfile(completion: { (viewModel) in
-                profileViewModel = viewModel
-                completion(profileViewModel)
-            })
+            return
+        }
+        
+        completion(profileShortViewModel)
     }
     
     // MARK: - Private methods
-    private static func getInvestorProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
-        InvestorAPI.apiInvestorProfileFullGet(authorization: authorizedToken ?? "") { (viewModel, error) in
-            AuthManager().responseHandler(viewModel, error: error, successCompletion: { (profileViewModel) in
-                completion(profileViewModel)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
-        }
-    }
-    
-    private static func getManagerProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
-        ManagerAPI.apiManagerProfileFullGet(authorization: authorizedToken ?? "") { (viewModel, error) in
-            AuthManager().responseHandler(viewModel, error: error, successCompletion: { (profileViewModel) in
-                completion(profileViewModel)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
-        }
-    }
-
-    private func responseHandler(_ viewModel: ProfileFullViewModel?, error: Error?, successCompletion: @escaping (_ viewModel: ProfileFullViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard viewModel != nil else {
-            return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
-        }
-        
-        successCompletion(viewModel)
-    }
-    
     private func updateApiToken(completion: @escaping CompletionBlock)  {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
         

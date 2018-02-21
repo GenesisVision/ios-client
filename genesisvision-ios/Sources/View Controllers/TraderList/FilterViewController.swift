@@ -45,6 +45,7 @@ class FilterViewController: BaseViewControllerWithTableView {
         view.backgroundColor = UIColor.Background.main
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
+        resetBarButtonItem?.tintColor = UIColor.Button.red
         navigationItem.rightBarButtonItem = resetBarButtonItem
     }
     
