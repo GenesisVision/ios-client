@@ -18,20 +18,51 @@ class BaseViewController: UIViewController {
     }
 }
 
-class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView {
+class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
+    // MARK: - Veriables
     var tableView: UITableView!
+    var refreshControl: UIRefreshControl!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
         
         view.backgroundColor = UIColor.Background.main
         tableView.backgroundColor = UIColor.Background.main
     }
+    
+    // MARK: - Fetching
+    func updateData() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
+    @objc func pullToRefresh() {
+        //Fetch
+    }
+    
+    func fetchMore() {
+        //Fetch next page
+    }
+    
+    func setupPullToRefresh(title: String? = Constants.Titles.refreshControlTitle) {
+        let tintColor = UIColor.primary
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: title ?? Constants.Titles.refreshControlTitle, attributes: attributes)
+        refreshControl.tintColor = tintColor
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
 }
 
-extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
+// MARK: - EmptyData
+extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
@@ -57,5 +88,9 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetSource {
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.Background.main
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        updateData()
     }
 }

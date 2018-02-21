@@ -51,8 +51,6 @@ class FilterViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: FilterViewModel.cellModelsForRegistration)
     }
     
@@ -99,12 +97,6 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
-    }
-}
-
-extension FilterViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-
     }
 }
 

@@ -21,7 +21,6 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Variables
-    private var refreshControl: UIRefreshControl!
     private var ipfsHashBarButtonItem: UIBarButtonItem! {
         return UIBarButtonItem(image: UIImage.NavBar.ipfsList, style: .done, target: self, action: #selector(ipfsHashButtonAction(_:)))
     }
@@ -47,8 +46,6 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
@@ -56,19 +53,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         setupPullToRefresh()
     }
     
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    
-    @objc private func pullToRefresh() {
+    override func pullToRefresh() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
@@ -94,11 +79,6 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         }
   
         navigationItem.rightBarButtonItem = ipfsHashBarButtonItem
-    }
-    
-    private func updateData() {
-        showProgressHUD()
-        pullToRefresh()
     }
     
     // MARK: - IBActions
@@ -143,11 +123,5 @@ extension TournamentDetailViewController: UITableViewDelegate, UITableViewDataSo
         let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
         header.headerLabel.text = title
         return header
-    }
-}
-
-extension TournamentDetailViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        updateData()
     }
 }

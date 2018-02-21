@@ -41,9 +41,3 @@ class DashboardViewController: BaseViewControllerWithTableView {
         tableView.emptyDataSetSource = self
     }
 }
-
-extension DashboardViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        
-    }
-}

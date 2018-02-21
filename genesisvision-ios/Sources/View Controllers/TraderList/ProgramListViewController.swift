@@ -15,7 +15,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
     private var canFetchMoreResults = true
-    private var refreshControl: UIRefreshControl!
     private var filterBarButtonItem: UIBarButtonItem?
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
@@ -78,22 +77,9 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
 
         setupPullToRefresh()
-    }
-    
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
     
     private func setup() {
@@ -108,19 +94,13 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         navigationItem.rightBarButtonItem = filterBarButtonItem
     }
     
-    private func updateData() {
-        showProgressHUD()
-        pullToRefresh()
-    }
-    
-    
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
         tableView.animateViews(animations: [tableViewAnimation])
     }
     
-    private func fetchMore() {
+    override func fetchMore() {
         self.canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
@@ -135,7 +115,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    @objc private func pullToRefresh() {
+    override func pullToRefresh() {
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -219,11 +199,6 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
     }
 }
 
-extension ProgramListViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        updateData()
-    }
-}
 extension ProgramListViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)

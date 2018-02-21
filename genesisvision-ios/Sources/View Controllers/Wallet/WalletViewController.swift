@@ -14,7 +14,6 @@ class WalletViewController: BaseViewControllerWithTableView {
 
     // MARK: - Variables
     private var canFetchMoreResults = true
-    private var refreshControl: UIRefreshControl!
     private var withdrawBarButtonItem: UIBarButtonItem?
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
@@ -55,37 +54,18 @@ class WalletViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: WalletViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: WalletViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
     
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    @objc private func pullToRefresh() {
+    override func pullToRefresh() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         fetchBalance()
         fetchTransactions()
     }
 
-    private func updateData() {
-        showProgressHUD()
-        pullToRefresh()
-    }
-    
-    
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
@@ -169,11 +149,5 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
         header.headerLabel.text = title
         return header
-    }
-}
-
-extension WalletViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        updateData()
     }
 }

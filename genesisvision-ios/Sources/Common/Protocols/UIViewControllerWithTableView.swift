@@ -10,4 +10,12 @@ import UIKit
 
 protocol UIViewControllerWithTableView {
     var tableView: UITableView! { get }
+    var refreshControl: UIRefreshControl! { get }
+}
+
+protocol UIViewControllerWithFetching {
+    func updateData()
+    func pullToRefresh()
+    
+    func fetchMore()
 }

@@ -26,8 +26,6 @@ class ProfileViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Variables
-    private var refreshControl: UIRefreshControl!
-    
     private var editProfileButton: UIBarButtonItem! {
         return UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
     }
@@ -82,25 +80,12 @@ class ProfileViewController: BaseViewControllerWithTableView {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: ProfileViewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }
     
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    @objc private func pullToRefresh() {
+    override func pullToRefresh() {
         fetch()
     }
     
@@ -178,13 +163,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
-    }
-}
-
-extension ProfileViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        showProgressHUD()
-        pullToRefresh()
     }
 }
 

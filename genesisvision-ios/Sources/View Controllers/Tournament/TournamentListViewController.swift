@@ -13,7 +13,6 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var canFetchMoreResults = true
-    private var refreshControl: UIRefreshControl!
     
     // MARK: - View Model
     var viewModel: TournamentListViewModel! {
@@ -56,23 +55,10 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.registerNibs(for: TournamentListViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: TournamentListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
-    }
-    
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
     
     private func setup() {
@@ -83,12 +69,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
     
-    private func updateData() {
-        showProgressHUD()
-        pullToRefresh()
-    }
-    
-    private func fetchMore() {
+    override func fetchMore() {
         self.canFetchMoreResults = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
@@ -103,7 +84,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    @objc private func pullToRefresh() {
+    override func pullToRefresh() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
@@ -195,7 +176,7 @@ extension TournamentListViewController: UIViewControllerPreviewingDelegate {
     }
 }
 
-extension TournamentListViewController: DZNEmptyDataSetDelegate {
+extension TournamentListViewController {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
@@ -206,10 +187,6 @@ extension TournamentListViewController: DZNEmptyDataSetDelegate {
     
     override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage.noDataPlaceholder
-    }
-    
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        updateData()
     }
 }
 

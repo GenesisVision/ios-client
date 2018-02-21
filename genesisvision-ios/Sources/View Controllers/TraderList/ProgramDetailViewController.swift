@@ -27,7 +27,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     @IBOutlet var withdrawButton: UIButton!
     
     // MARK: - Variables
-    private var refreshControl: UIRefreshControl!
     private var historyBarButtonItem: UIBarButtonItem?
     private let tableViewAnimation = AnimationType.from(direction: .left, offset: 30.0)
     
@@ -89,8 +88,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: ProgramDetailViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: ProgramDetailViewModel.viewModelsForRegistration)
@@ -98,25 +95,18 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         setupPullToRefresh()
     }
     
-    private func setupPullToRefresh() {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Loading...", attributes: attributes)
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+    override func pullToRefresh() {
+        //Fetch
+        hideHUD()
+        reloadData()
     }
     
-    @objc private func pullToRefresh() {
+    private func reloadData() {
         refreshControl?.endRefreshing()
+        tableView.reloadData()
+        tableView.animateViews(animations: [tableViewAnimation])
     }
     
-    private func updateData() {
-//        showProgressHUD()
-//        pullToRefresh()
-    }
     
     // MARK: - IBActions
     @IBAction func historyButtonAction(_ sender: UIButton) {
@@ -166,8 +156,3 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension ProgramDetailViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        updateData()
-    }
-}
