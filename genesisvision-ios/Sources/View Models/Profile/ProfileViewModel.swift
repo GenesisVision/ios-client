@@ -8,17 +8,16 @@
 
 import UIKit
 
+enum ProfileState {
+    case show
+    case edit
+}
+
 final class ProfileViewModel {
     
     enum SectionType {
         case header
         case fields
-    }
-    
-    
-    enum ProfileState {
-        case show
-        case edit
     }
     
     // MARK: - Variables
@@ -29,6 +28,7 @@ final class ProfileViewModel {
     private var editProfileEntity: ProfileEntity?
     
     var editableFields: [EditableField]!
+    var pickedImage: UIImage?
     
     class EditableField {
         var text: String
@@ -91,6 +91,24 @@ final class ProfileViewModel {
             
             completion(.failure(reason: nil))
         }
+    }
+    
+    func getName() -> String {
+        guard let firstName = profileEntity?.firstName,
+            let lastName = profileEntity?.lastName
+            else { return "" }
+        
+        let username = firstName + " " + lastName
+        
+        return username
+    }
+    
+    func getAvatarURL() -> URL? {
+        guard let avatar = profileEntity?.avatar,
+            let avatarURL = getFileURL(fileName: avatar)
+            else { return nil }
+        
+        return avatarURL
     }
     
     // MARK: - TableView

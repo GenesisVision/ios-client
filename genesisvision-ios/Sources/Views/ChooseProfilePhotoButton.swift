@@ -8,46 +8,41 @@
 
 import UIKit
 
-class ChooseProfilePhotoButton: UIButton {
-    
-    @IBOutlet var photoImageView: UIImageView!
-    @IBOutlet private var addImageView: UIImageView!
-    
-    var borderColor: UIColor!
-    private var borderTappedColor: UIColor {
-        return UIColor.Button.darkBorder
-    }
-    private var borderWidth: CGFloat {
-        return photoImageView.bounds.height * Constants.SystemSizes.imageViewBorderWidthPercentage
+class ChooseProfilePhotoButton: UIView {
+    // MARK: - Outlets
+    @IBOutlet var shadowView: UIView! {
+        didSet {
+            shadowView.roundCorners()
+        }
     }
     
-    override func awakeAfter(using aDecoder: NSCoder) -> Any? {
-        return self.loadFromNibIfEmbeddedInDifferentNib()
+    @IBOutlet var photoImageView: UIImageView! {
+        didSet {
+            photoImageView.roundCorners()
+        }
+    }
+    
+    @IBOutlet var choosePhotoButton: UIButton! {
+        didSet {
+            choosePhotoButton.backgroundColor = .clear
+        }
+    }
+    
+    // MARK: - Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        (isHighlighted || isSelected) ? buttonTappedState() : buttonDefaultState()
+
+        photoImageView.roundCorners()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        borderColor = .white
+    // MARK: - Public methdods
+    func change(state: ProfileState) {
+        choosePhotoButton.isHidden = state == .show
+        shadowView.isHidden = state == .show
     }
-    
-    private func buttonTappedState() {
-        photoImageView.roundWithBorder(borderWidth, color: borderTappedColor)
-        addImageView.roundWithBorder(borderWidth, color: borderTappedColor)
-        photoImageView.backgroundColor = borderTappedColor
-        addImageView.backgroundColor = borderTappedColor
-    }
-    
-    private func buttonDefaultState() {
-        photoImageView.roundWithBorder(borderWidth, color: borderColor)
-        addImageView.roundWithBorder(borderWidth, color: borderColor)
-        photoImageView.backgroundColor = .clear
-        addImageView.backgroundColor = borderColor
-    }
-    
 }
 

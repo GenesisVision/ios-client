@@ -23,7 +23,6 @@ extension ProfileHeaderTableViewCellViewModel {
             view.chooseProfilePhotoButton.photoImageView.kf.setImage(with: avatarURL, placeholder: UIImage.placeholder)
         }
         
-        view.hideLabel(value: editable)
         view.nameLabel.text = editable ? nil : profileEntity.fullName
         
         view.delegate = delegate

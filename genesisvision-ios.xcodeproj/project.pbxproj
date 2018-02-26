@@ -10,6 +10,7 @@
 		03E5CEB1247FC0633F810102 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
+		FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */; };
 		FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F952030168100B71E7F /* AlamofireImplementations.swift */; };
 		FC140FE32030168100B71E7F /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F962030168100B71E7F /* APIHelper.swift */; };
 		FC140FE42030168100B71E7F /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F972030168100B71E7F /* APIs.swift */; };
@@ -221,6 +222,7 @@
 		D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		FC016C15203B0FD2006956FE /* Tournament.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tournament.storyboard; sourceTree = "<group>"; };
 		FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		FC140F952030168100B71E7F /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		FC140F962030168100B71E7F /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		FC140F972030168100B71E7F /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
@@ -1084,6 +1086,7 @@
 				FCA19A22201AA07700157AD6 /* ProfileImageView.swift */,
 				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
 				FCA5706B2027402F001942F3 /* ChooseProfilePhotoButton.swift */,
+				FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1371,6 +1374,7 @@
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				FC140FFC2030168100B71E7F /* InvestmentProgramViewModel.swift in Sources */,
 				FCA5706C2027402F001942F3 /* ChooseProfilePhotoButton.swift in Sources */,
+				FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */,
 				FC1410212030168100B71E7F /* ParticipantViewModel.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,

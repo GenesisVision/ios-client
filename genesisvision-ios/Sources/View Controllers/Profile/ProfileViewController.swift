@@ -9,7 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 
-class ProfileViewController: BaseViewControllerWithTableView {
+class ProfileViewController: BaseViewControllerWithTableView, UINavigationControllerDelegate {
 
     // MARK: - View Model
     var viewModel: ProfileViewModel! {
@@ -19,6 +19,11 @@ class ProfileViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Outlets
+    @IBOutlet weak var headerView: ProfileHeaderView! {
+        didSet {
+            headerView.delegate = self
+        }
+    }
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -56,6 +61,8 @@ class ProfileViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        headerView.setup(with: viewModel.getName(), avatarURL: viewModel.getAvatarURL())
     }
     
     // MARK: - Private methods
@@ -101,11 +108,46 @@ class ProfileViewController: BaseViewControllerWithTableView {
     private func editProfileStateAction() {
         navigationItem.leftBarButtonItem = saveProfileButton
         navigationItem.rightBarButtonItem = cancelEditProfileButton
+        headerView.profileState = viewModel.profileState
     }
     
     private func showProfileStateAction() {
         navigationItem.leftBarButtonItem = editProfileButton
         navigationItem.rightBarButtonItem = signOutButton
+        headerView.profileState = viewModel.profileState
+    }
+    
+    private func takePhoto(type: UIImagePickerControllerSourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = type
+        
+        picker.navigationBar.barTintColor = UIColor.Background.main
+        picker.navigationBar.tintColor = UIColor.primary
+        picker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.primary]
+        present(picker, animated: true, completion: nil)
+    }
+    
+    private func takePhoto() {
+        view.endEditing(true)
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] (action) in
+            DispatchQueue.main.async {
+                self?.takePhoto(type: .camera)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Фотогалерея", style: .default, handler: { [weak self] (action) in
+            DispatchQueue.main.async {
+                self?.takePhoto(type: .photoLibrary)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler:nil))
+        alertController.view.tintColor = UIColor.primary
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Actions
@@ -175,14 +217,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ProfileViewController: ProfileHeaderTableViewCellDelegate {
-    func chooseProfilePhotoCellDidPressOnPhoto(_ cell: ProfileHeaderTableViewCell) {
-        //take photo
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func chooseProfilePhotoDidPressOnPhoto(_ view: ProfileHeaderView) {
+        takePhoto()
     }
 }
 
-extension ProfileViewController: ProfileHeaderViewDelegate {
-    func chooseProfilePhotoDidPressOnPhoto(_ cell: ProfileHeaderView) {
-        //take photo
+//    MARK: UIImagePickerControllerDelegate
+extension ProfileViewController: UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        viewModel.pickedImage = pickedImage
+        headerView.update(avatar: viewModel.pickedImage)
+        
+        picker.dismiss(animated: true, completion: nil)
     }
 }

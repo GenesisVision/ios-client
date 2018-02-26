@@ -63,4 +63,8 @@ extension UIColor {
         static var green: UIColor  { return Common.green }
         static var red: UIColor  { return Common.red }
     }
+    
+    struct Border {
+        static var forImage: UIColor  { return UIColor.white }
+    }
 }
