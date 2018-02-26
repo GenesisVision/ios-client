@@ -11,6 +11,17 @@
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
 		FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */; };
+		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
+		FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */; };
+		FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200D2044359800872BE5 /* WalletDepositViewModel.swift */; };
+		FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200F2044359D00872BE5 /* WalletWithdrawViewModel.swift */; };
+		FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E2011204435D300872BE5 /* WalletWithdrawRouter.swift */; };
+		FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E2013204435DE00872BE5 /* WalletDepositRouter.swift */; };
+		FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20162044459500872BE5 /* CIColorExtension.swift */; };
+		FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20172044459500872BE5 /* CIImageExtension.swift */; };
+		FC0E201E2044459500872BE5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC0E20182044459500872BE5 /* Info.plist */; };
+		FC0E201F2044459500872BE5 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E201A2044459500872BE5 /* QRCode.swift */; };
+		FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E201B2044459500872BE5 /* UIImageViewExtension.swift */; };
 		FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F952030168100B71E7F /* AlamofireImplementations.swift */; };
 		FC140FE32030168100B71E7F /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F962030168100B71E7F /* APIHelper.swift */; };
 		FC140FE42030168100B71E7F /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC140F972030168100B71E7F /* APIs.swift */; };
@@ -103,6 +114,7 @@
 		FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */; };
 		FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */; };
 		FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */; };
+		FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D87B320446F17002FC943 /* String+Сonversion.swift */; };
 		FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */; };
 		FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */; };
 		FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */; };
@@ -223,6 +235,18 @@
 		FC016C15203B0FD2006956FE /* Tournament.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tournament.storyboard; sourceTree = "<group>"; };
 		FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
+		FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewController.swift; sourceTree = "<group>"; };
+		FC0E200D2044359800872BE5 /* WalletDepositViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewModel.swift; sourceTree = "<group>"; };
+		FC0E200F2044359D00872BE5 /* WalletWithdrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewModel.swift; sourceTree = "<group>"; };
+		FC0E2011204435D300872BE5 /* WalletWithdrawRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRouter.swift; sourceTree = "<group>"; };
+		FC0E2013204435DE00872BE5 /* WalletDepositRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositRouter.swift; sourceTree = "<group>"; };
+		FC0E20162044459500872BE5 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
+		FC0E20172044459500872BE5 /* CIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIImageExtension.swift; sourceTree = "<group>"; };
+		FC0E20182044459500872BE5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC0E20192044459500872BE5 /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
+		FC0E201A2044459500872BE5 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		FC0E201B2044459500872BE5 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		FC140F952030168100B71E7F /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		FC140F962030168100B71E7F /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		FC140F972030168100B71E7F /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
@@ -316,6 +340,7 @@
 		FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCell.swift; sourceTree = "<group>"; };
 		FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSortTableViewCell.xib; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC7D87B320446F17002FC943 /* String+Сonversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Сonversion.swift"; sourceTree = "<group>"; };
 		FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestViewController.swift; sourceTree = "<group>"; };
 		FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawViewController.swift; sourceTree = "<group>"; };
 		FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestViewModel.swift; sourceTree = "<group>"; };
@@ -459,6 +484,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC0E20072044350E00872BE5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FCA19A22201AA07700157AD6 /* ProfileImageView.swift */,
+				FCA5706B2027402F001942F3 /* ChooseProfilePhotoButton.swift */,
+				FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FC0E20082044352000872BE5 /* Header View */ = {
+			isa = PBXGroup;
+			children = (
+				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
+				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
+			);
+			path = "Header View";
+			sourceTree = "<group>";
+		};
+		FC0E20152044459500872BE5 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				FC0E20162044459500872BE5 /* CIColorExtension.swift */,
+				FC0E20172044459500872BE5 /* CIImageExtension.swift */,
+				FC0E20182044459500872BE5 /* Info.plist */,
+				FC0E20192044459500872BE5 /* QRCode.h */,
+				FC0E201A2044459500872BE5 /* QRCode.swift */,
+				FC0E201B2044459500872BE5 /* UIImageViewExtension.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		FC140F942030168100B71E7F /* API Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +641,8 @@
 			isa = PBXGroup;
 			children = (
 				FC4964142015445E00104CEB /* WalletViewController.swift */,
+				FC0E20092044357800872BE5 /* WalletDepositViewController.swift */,
+				FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -655,6 +714,8 @@
 			isa = PBXGroup;
 			children = (
 				FCA19A44201AE86900157AD6 /* WalletRouter.swift */,
+				FC0E2013204435DE00872BE5 /* WalletDepositRouter.swift */,
+				FC0E2011204435D300872BE5 /* WalletWithdrawRouter.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -717,6 +778,8 @@
 			isa = PBXGroup;
 			children = (
 				FCA19A3E201AE83100157AD6 /* WalletViewModel.swift */,
+				FC0E200D2044359800872BE5 /* WalletDepositViewModel.swift */,
+				FC0E200F2044359D00872BE5 /* WalletWithdrawViewModel.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -919,8 +982,8 @@
 		FCC9DD43200DFA5E008825EC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FCBD22BE2019E925000B8E38 /* View Models */,
 				FCC9DD44200DFA5E008825EC /* Common */,
+				FCBD22BE2019E925000B8E38 /* View Models */,
 				FCC9DD49200DFA5E008825EC /* View Controllers */,
 				FCC9DD47200DFA5E008825EC /* Controllers */,
 				FCC9DD4A200DFA5E008825EC /* Models */,
@@ -961,6 +1024,7 @@
 				FCA5707320274BD0001942F3 /* Bundle+Locale.swift */,
 				FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */,
 				FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */,
+				FC7D87B320446F17002FC943 /* String+Сonversion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1068,6 +1132,7 @@
 		FCC9DD50200DFA5E008825EC /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				FC0E20152044459500872BE5 /* QRCode */,
 				FC140F942030168100B71E7F /* API Client */,
 				FC140F9E2030168100B71E7F /* Main Api Client */,
 				FC140FCA2030168100B71E7F /* Tournament Api Client */,
@@ -1078,15 +1143,12 @@
 		FCC9DD51200DFA5E008825EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
-				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
+				FC0E20082044352000872BE5 /* Header View */,
 				FCE823662016239C000061E8 /* RoundedImageView.swift */,
 				FCC9DD52200DFA5E008825EC /* Cells */,
 				FCE82364201622BD000061E8 /* ActionButton.swift */,
-				FCA19A22201AA07700157AD6 /* ProfileImageView.swift */,
+				FC0E20072044350E00872BE5 /* Profile */,
 				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
-				FCA5706B2027402F001942F3 /* ChooseProfilePhotoButton.swift */,
-				FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1223,6 +1285,7 @@
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
 				FCA5705620273528001942F3 /* ProfileFieldTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
+				FC0E201E2044459500872BE5 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1314,6 +1377,7 @@
 				FC1410272030168100B71E7F /* TradeViewModel.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				FC140FFF2030168100B71E7F /* InvestmentShort.swift in Sources */,
+				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				FC14101B2030168100B71E7F /* NewParticipant.swift in Sources */,
@@ -1328,12 +1392,15 @@
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
 				FCC9DD6C200E47B2008825EC /* Money.swift in Sources */,
 				FC140FF92030168100B71E7F /* InvestmentProgram.swift in Sources */,
+				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC140FF32030168100B71E7F /* BrokerTradeServer.swift in Sources */,
 				FC1410152030168100B71E7F /* TournamentAPI.swift in Sources */,
 				FC14101A2030168100B71E7F /* IFormFile.swift in Sources */,
 				FC14101C2030168100B71E7F /* NewTrade.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
 				FC1410142030168100B71E7F /* FilesAPI.swift in Sources */,
+				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
+				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
 				FC1410082030168100B71E7F /* NewManager.swift in Sources */,
@@ -1364,6 +1431,7 @@
 				FCA5705520273528001942F3 /* ProfileFieldTableViewCell.swift in Sources */,
 				FC14100B2030168100B71E7F /* ProfilePublicViewModel.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
+				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				FCA5705820273538001942F3 /* ProfileFieldTableViewCellViewModel.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramDetailViewController.swift in Sources */,
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
@@ -1381,6 +1449,7 @@
 				FC140FE62030168100B71E7F /* Configuration.swift in Sources */,
 				FC14100A2030168100B71E7F /* ProfileFullViewModel.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
+				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
 				FC140FF42030168100B71E7F /* ClosePeriodData.swift in Sources */,
 				FC14100C2030168100B71E7F /* ProfileShortViewModel.swift in Sources */,
 				FC1410172030168100B71E7F /* AccountCreated.swift in Sources */,
@@ -1393,6 +1462,7 @@
 				FC140FEC2030168100B71E7F /* InvestorAPI.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
+				FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */,
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
 				FC1410092030168100B71E7F /* Period.swift in Sources */,
 				FC1410042030168100B71E7F /* ManagerRequest.swift in Sources */,
@@ -1425,8 +1495,11 @@
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FC14101F2030168100B71E7F /* ParticipantsSummaryViewModel.swift in Sources */,
 				FC140FF12030168100B71E7F /* BrokersFilter.swift in Sources */,
+				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
+				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
 				FC140FF72030168100B71E7F /* Invest.swift in Sources */,
 				FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */,
+				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				FC14101E2030168100B71E7F /* ParticipantsFilter.swift in Sources */,
 				FC1410072030168100B71E7F /* NewInvestmentRequest.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
@@ -1436,6 +1509,7 @@
 				FC140FEF2030168100B71E7F /* Broker.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
 				FCA5706A2027395E001942F3 /* UIImage+Placeholder.swift in Sources */,
+				FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
 				FC140FFA2030168100B71E7F /* InvestmentProgramStatistic.swift in Sources */,
 				FCA19A43201AE85C00157AD6 /* DashboardRouter.swift in Sources */,

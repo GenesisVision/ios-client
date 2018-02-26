@@ -8,13 +8,13 @@
 
 import UIKit.UIViewController
 
-enum ProgramWithdrawRouterType {
+enum ProgramWithdrawRouteType {
     case withdrawRequested
 }
 
 class ProgramWithdrawRouter: Router {
     // MARK: - Public methods
-    func show(routeType: ProgramWithdrawRouterType) {
+    func show(routeType: ProgramWithdrawRouteType) {
         switch routeType {
         case .withdrawRequested:
             withdrawRequested()

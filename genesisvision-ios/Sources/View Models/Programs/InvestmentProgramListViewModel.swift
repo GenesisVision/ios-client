@@ -150,12 +150,11 @@ extension InvestmentProgramListViewModel {
     }
     
     private func fakeViewModels(completion: (_ traderCellModels: [ProgramTableViewCellViewModel]) -> Void) {
-        var cellModels = [ProgramTableViewCellViewModel]()
+        let cellModels = [ProgramTableViewCellViewModel]()
         
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            //
+//        for _ in 0..<Constants.TemplatesCounts.traders {
 //            cellModels.append(InvestmentProgramTableViewCellViewModel(investmentProgram: InvestmentProgram.templateEntity))
-        }
+//        }
         
         completion(cellModels)
     }

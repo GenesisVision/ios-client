@@ -89,8 +89,8 @@ extension UIViewController {
     }
 
     // MARK: - PKHUD
-    func showProgressHUD() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    func showProgressHUD(withNetworkActivity networkActivity: Bool = true) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = networkActivity
         HUD.show(.progress, onView: self.view)
     }
 
@@ -122,13 +122,9 @@ extension UIViewController {
             HUD.flash(.success, delay: 1.0)
         }
     }
-
-    func showSuccessHUD() {
-        HUD.show(.success)
-    }
     
     func showSuccessHUD(completion: ((Bool) -> Void)? = nil) {
-        HUD.flash(.success, onView: nil, delay: 1.0, completion: completion)
+        HUD.flash(.success, onView: self.view, delay: 1.0, completion: completion)
     }
 
     func showHUD(type: HUDContentType) {

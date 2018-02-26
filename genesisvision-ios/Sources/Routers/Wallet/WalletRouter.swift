@@ -26,11 +26,21 @@ class WalletRouter: Router {
     
     // MARK: - Private methods
     private func withdraw() {
-        //TODO: withdraw
+        guard let viewController = WalletWithdrawViewController.storyboardInstance(name: .wallet) else { return }
+        let router = WalletWithdrawRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = WalletWithdrawViewModel(withRouter: router)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func deposit() {
-        //TODO: deposit
+        guard let viewController = WalletDepositViewController.storyboardInstance(name: .wallet) else { return }
+        let router = WalletDepositRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = WalletDepositViewModel(withRouter: router)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showProgramDetail(with investmentProgram: InvestmentProgram, state: ProgramDetailViewState) {

@@ -6,16 +6,18 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum ProgramInvestRouterType {
-    case confirm
+enum ProgramInvestRouteType {
+    case confirm, goBack
 }
 
 class ProgramInvestRouter: Router {
     // MARK: - Public methods
-    func show(routeType: ProgramInvestRouterType) {
+    func show(routeType: ProgramInvestRouteType) {
         switch routeType {
         case .confirm:
             confirm()
+        case .goBack:
+            popViewController(animated: true)
         }
     }
     

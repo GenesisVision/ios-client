@@ -33,6 +33,10 @@ final class ProgramInvestViewModel {
         apiInvest(with: value, completion: completion)
     }
     
+    func goBack() {
+        router.show(routeType: .goBack)
+    }
+    
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {

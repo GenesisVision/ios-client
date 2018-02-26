@@ -41,6 +41,7 @@ class SignUpViewController: BaseViewController {
     private func sighUpMethod() {
         hideKeyboard()
         showProgressHUD()
+        
         viewModel.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
@@ -50,9 +51,7 @@ class SignUpViewController: BaseViewController {
                     self?.viewModel.showConfirmationVC()
                 })
             case .failure(let reason):
-                if reason != nil {
-                    self?.showErrorHUD(subtitle: reason)
-                }
+                self?.showErrorHUD(subtitle: reason)
             }
         }
     }

@@ -83,7 +83,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchBalance() {
-        viewModel.fetchBalance { (result) in }
+        viewModel.fetchBalance { [weak self] (result) in }
     }
     
     private func fetchTransactions() {
@@ -155,6 +155,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         
         let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
         header.headerLabel.text = title
+        
         return header
     }
 }

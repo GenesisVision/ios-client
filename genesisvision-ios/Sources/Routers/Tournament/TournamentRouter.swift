@@ -6,14 +6,14 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum TournamentRouterType {
+enum TournamentRouteType {
     case showDetail(participantID: String), getDetail(participantID: String)
 }
 
 class TournamentRouter: Router {
     
     // MARK: - Public methods
-    func show(routeType: TournamentRouterType) {
+    func show(routeType: TournamentRouteType) {
         switch routeType {
         case .getDetail(let participantID):
             _ = getDetail(with: participantID)

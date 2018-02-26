@@ -152,7 +152,9 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     // MARK: - Actions
     @IBAction func editProfileButtonAction(_ sender: UIButton) {
+        hideKeyboard()
         showProgressHUD()
+        
         viewModel.editProfile { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -178,9 +180,12 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     @IBAction func saveProfileButtonAction(_ sender: UIButton) {
+        hideKeyboard()
         showProgressHUD()
+        
         viewModel.saveProfile { [weak self] (result) in
             self?.hideHUD()
+            
             switch result {
             case .success:
                 self?.showProfileStateAction()

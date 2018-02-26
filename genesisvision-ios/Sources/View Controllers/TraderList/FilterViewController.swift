@@ -58,8 +58,10 @@ class FilterViewController: BaseViewControllerWithTableView {
     // MARK: - IBAction
     @IBAction func applyButtonAction(_ sender: UIButton) {
         showProgressHUD()
+        
         viewModel.apply { [weak self] (result) in
             self?.hideHUD()
+            
             switch result {
             case .success:
                 self?.viewModel.popToInvestVC()

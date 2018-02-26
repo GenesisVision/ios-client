@@ -38,20 +38,24 @@ class ProgramInvestViewController: BaseViewController {
     private func investMethod() {
         hideKeyboard()
         showProgressHUD()
-        guard let text = valueTextField.text,
-            let value = Double(text)
-            else { return }
         
-        viewModel.invest(with: value) { [weak self]  (result) in
-//            self?.hideHUD()
+        guard let text = valueTextField.text,
+            let amount = text.doubleValue
+            else {
+                showErrorHUD(subtitle: nil)
+                return
+        }
+        
+        viewModel.invest(with: amount) { [weak self] (result) in
+            self?.hideHUD()
             
             switch result {
             case .success:
-                self?.showSuccessHUD()
+                self?.showSuccessHUD(completion: { (success) in
+                    self?.viewModel.goBack()
+                })
             case .failure(let reason):
-                if reason != nil {
-                    self?.showErrorHUD(subtitle: reason)
-                }
+                self?.showErrorHUD(subtitle: reason)
             }
         }
     }

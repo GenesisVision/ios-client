@@ -37,18 +37,19 @@ class ProgramWithdrawViewController: UIViewController {
     private func withdrawMethod() {
         hideKeyboard()
         showProgressHUD()
+        
         guard let text = valueTextField.text,
-            let value = Double(text)
+            let amount = text.doubleValue
             else { return }
         
-        viewModel.withdraw(with: value) { [weak self]  (result) in
+        viewModel.withdraw(with: amount) { [weak self] (result) in
+            self?.hideHUD()
+            
             switch result {
             case .success:
                 self?.showSuccessHUD()
             case .failure(let reason):
-                if reason != nil {
-                    self?.showErrorHUD(subtitle: reason)
-                }
+                self?.showErrorHUD(subtitle: reason)
             }
         }
     }
@@ -57,14 +58,14 @@ class ProgramWithdrawViewController: UIViewController {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.withdrawAll(completion: { [weak self]  (result) in
+        viewModel.withdrawAll(completion: { [weak self] (result) in
+            self?.hideHUD()
+            
             switch result {
             case .success:
                 self?.showSuccessHUD()
             case .failure(let reason):
-                if reason != nil {
-                    self?.showErrorHUD(subtitle: reason)
-                }
+                self?.showErrorHUD(subtitle: reason)
             }
         })
     }

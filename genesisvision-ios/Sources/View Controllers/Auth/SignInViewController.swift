@@ -40,6 +40,7 @@ class SignInViewController: BaseViewController {
     private func sighInMethod() {
         hideKeyboard()
         showProgressHUD()
+        
         viewModel.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
             self?.hideHUD()
             
@@ -49,9 +50,7 @@ class SignInViewController: BaseViewController {
                     self?.viewModel.startAsAuthorized()
                 })
             case .failure(let reason):
-                if reason != nil {
-                    self?.showErrorHUD(subtitle: reason)
-                }
+                self?.showErrorHUD(subtitle: reason)
             }
         }
     }

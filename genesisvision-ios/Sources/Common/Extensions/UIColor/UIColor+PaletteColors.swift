@@ -54,6 +54,8 @@ extension UIColor {
         
         static var green: UIColor  { return Common.green }
         static var red: UIColor  { return Common.red }
+        
+        static var black: UIColor  { return Common.black }
     }
     
     struct Button {
