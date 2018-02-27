@@ -42,15 +42,15 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         cell.currencyLabel.text = currency
         
         if let rating = investment.rating {
-            cell.profileImageView.levelLabel.text = String(describing: Int(rating))
+            cell.programLogoImageView.levelLabel.text = String(describing: Int(rating))
         }
         
-        cell.profileImageView.flagImageView.isHidden = true
+        cell.programLogoImageView.flagImageView.isHidden = true
         
         if let logo = investment.logo {
             let logoURL = getFileURL(fileName: logo)
-            cell.profileImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.profileImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
+            cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
+            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
         cell.depositLabel.text = "LAST PERIOD"

@@ -29,15 +29,15 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.userNameLabel.text = participantViewModel.name ?? ""
         
         cell.currencyLabel.isHidden = true
-        cell.profileImageView.levelLabel.isHidden = true
-        cell.profileImageView.flagImageView.isHidden = true
+        cell.programLogoImageView.levelLabel.isHidden = true
+        cell.programLogoImageView.flagImageView.isHidden = true
         
-        cell.profileImageView.profilePhotoImageView.image = UIImage.placeholder
+        cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = participantViewModel.avatar {
             let logoURL = getFileURL(fileName: logo)
-            cell.profileImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.profileImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
+            cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
+            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
         cell.depositLabel.text = "PLACE"

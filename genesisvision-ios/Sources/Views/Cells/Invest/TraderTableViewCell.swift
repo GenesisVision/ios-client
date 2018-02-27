@@ -12,7 +12,7 @@ import Charts
 class TraderTableViewCell: UITableViewCell {
     
     // MARK: - Views
-    @IBOutlet var profileImageView: ProfileImageView!
+    @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = false

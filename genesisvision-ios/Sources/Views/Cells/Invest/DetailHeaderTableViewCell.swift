@@ -11,7 +11,7 @@ import UIKit
 class DetailHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Views
-    @IBOutlet var profileImageView: ProfileImageView!
+    @IBOutlet var programLogoImageView: ProfileImageView!
     
     // MARK: - Labels
     @IBOutlet var depositLabel: UILabel!

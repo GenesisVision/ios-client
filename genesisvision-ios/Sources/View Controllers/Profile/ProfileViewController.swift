@@ -22,6 +22,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     @IBOutlet weak var headerView: ProfileHeaderView! {
         didSet {
             headerView.delegate = self
+            headerView.isHidden = true
         }
     }
     @IBOutlet override var tableView: UITableView! {
@@ -68,10 +69,13 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     // MARK: - Private methods
     private func fetch() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         viewModel.getProfile { [weak self] (result) in
             self?.hideHUD()
+            
             switch result {
             case .success:
+                self?.headerView.isHidden = false
                 self?.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             case .failure(let reason):

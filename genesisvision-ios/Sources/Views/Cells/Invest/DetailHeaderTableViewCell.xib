@@ -245,9 +245,9 @@
                 <outlet property="backgroundView" destination="pAT-RZ-KY2" id="9to-QC-5XO"/>
                 <outlet property="depositLabel" destination="lVR-bT-PAU" id="BBg-Eo-TcJ"/>
                 <outlet property="depositValueLabel" destination="ipL-eK-VSN" id="9gn-mQ-rog"/>
-                <outlet property="profileImageView" destination="B9F-C6-Fvx" id="Wid-to-zbc"/>
                 <outlet property="profitLabel" destination="5wV-M5-33s" id="hGZ-v5-VCF"/>
                 <outlet property="profitValueLabel" destination="0an-dS-o1G" id="cH4-fI-e0q"/>
+                <outlet property="programLogoImageView" destination="B9F-C6-Fvx" id="usX-db-cSO"/>
                 <outlet property="tradesLabel" destination="mR5-gd-zVy" id="lRR-VU-F1K"/>
                 <outlet property="tradesValueLabel" destination="Vy4-QQ-GKf" id="ED0-Wy-nT6"/>
                 <outlet property="weeksLabel" destination="pfr-pO-KT2" id="WdE-2L-vh7"/>

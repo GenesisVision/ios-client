@@ -174,6 +174,9 @@
 		FCA5707C2027962A001942F3 /* WalletTransactionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */; };
 		FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */; };
 		FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */; };
+		FCB177662045690500A482B7 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB177642045690500A482B7 /* DashboardTableViewCell.swift */; };
+		FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB177652045690500A482B7 /* DashboardTableViewCell.xib */; };
+		FCB177692045691300A482B7 /* DashboardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */; };
 		FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */; };
 		FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */; };
 		FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */; };
@@ -400,6 +403,9 @@
 		FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionExtension.swift; sourceTree = "<group>"; };
 		FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableHeaderView.xib; sourceTree = "<group>"; };
 		FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableHeaderView.swift; sourceTree = "<group>"; };
+		FCB177642045690500A482B7 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		FCB177652045690500A482B7 /* DashboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardTableViewCell.xib; sourceTree = "<group>"; };
+		FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateEntityProtocol.swift; sourceTree = "<group>"; };
 		FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomAccessCollection+Random.swift"; sourceTree = "<group>"; };
@@ -867,6 +873,16 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		FCB17763204568DA00A482B7 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */,
+				FCB177642045690500A482B7 /* DashboardTableViewCell.swift */,
+				FCB177652045690500A482B7 /* DashboardTableViewCell.xib */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		FCB8DFC72010F64D00698D18 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,6 +1172,7 @@
 		FCC9DD52200DFA5E008825EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FCB17763204568DA00A482B7 /* Dashboard */,
 				FCA57067202735BA001942F3 /* Invest */,
 				FCA570652027359F001942F3 /* Profile */,
 				FCA57066202735A8001942F3 /* Wallet */,
@@ -1269,6 +1286,7 @@
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */,
+				FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */,
 				FCA5707820274D48001942F3 /* WalletHeaderTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
@@ -1436,6 +1454,7 @@
 				FCC9DD88200E61C0008825EC /* ProgramDetailViewController.swift in Sources */,
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
 				FC1410252030168100B71E7F /* TradesFilter.swift in Sources */,
+				FCB177662045690500A482B7 /* DashboardTableViewCell.swift in Sources */,
 				FCC9DD68200E3E2F008825EC /* InvestmentProgramEntity.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
@@ -1474,6 +1493,7 @@
 				FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FC1410232030168100B71E7F /* TradeAccount.swift in Sources */,
 				FC1410022030168100B71E7F /* LoginViewModel.swift in Sources */,
+				FCB177692045691300A482B7 /* DashboardTableViewCellViewModel.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,
 				FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
@@ -1639,7 +1659,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios.manager";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Manager";
 		};
@@ -1715,7 +1735,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios.investor";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Investor";
 		};
@@ -1784,7 +1804,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios.investor";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Investor";
 		};
@@ -1853,7 +1873,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios.investor";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Tournament";
 		};
@@ -1930,7 +1950,7 @@
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Tournament";
 		};
@@ -1999,7 +2019,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vision.genesis.genesisvision-ios.manager";
 				PRODUCT_NAME = "Genesis Vision";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Manager";
 		};
