@@ -178,12 +178,9 @@
                                 <rect key="frame" x="0.0" y="591" width="375" height="76"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXP-jp-r4E" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="0.0" width="139.5" height="60"/>
-                                        <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="Ju0-Ks-7te"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <rect key="frame" x="32" y="0.0" width="147.5" height="60"/>
+                                        <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Invest">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -197,12 +194,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-1d-sP2" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="203.5" y="0.0" width="139.5" height="60"/>
+                                        <rect key="frame" x="195.5" y="0.0" width="147.5" height="60"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="etc-A2-HSL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Withdraw">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -224,17 +218,11 @@
                                     <constraint firstAttribute="height" constant="76" id="ENW-kr-OIX"/>
                                     <constraint firstItem="BL2-1d-sP2" firstAttribute="width" secondItem="NXP-jp-r4E" secondAttribute="width" id="JEA-Wm-mNb"/>
                                     <constraint firstItem="BL2-1d-sP2" firstAttribute="bottom" secondItem="NXP-jp-r4E" secondAttribute="bottom" id="K3n-4w-Buz"/>
-                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="leading" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="32" id="KEy-bp-JiD"/>
-                                    <constraint firstAttribute="trailing" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="32" id="QbA-j2-zrc"/>
-                                    <constraint firstAttribute="trailing" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="203.5" id="SwY-A7-fyk"/>
+                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="leading" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="16" id="KEy-bp-JiD"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="32" id="SwY-A7-fyk"/>
                                     <constraint firstAttribute="trailing" secondItem="BL2-1d-sP2" secondAttribute="trailing" constant="32" id="abe-cD-5W2"/>
                                     <constraint firstItem="NXP-jp-r4E" firstAttribute="top" secondItem="6Dm-Se-2kf" secondAttribute="top" id="yhv-71-DZj"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="QbA-j2-zrc"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -253,11 +241,11 @@
                     <connections>
                         <outlet property="buttonsView" destination="6Dm-Se-2kf" id="D8V-Qf-oVu"/>
                         <outlet property="investButton" destination="NXP-jp-r4E" id="3Wk-bY-KTw"/>
-                        <outlet property="investButtonViewTrailingConstraint" destination="SwY-A7-fyk" id="jBn-Nb-BLf"/>
-                        <outlet property="investButtonViewWidthConstraint" destination="JEA-Wm-mNb" id="uZc-Mm-5pz"/>
+                        <outlet property="investButtonViewTrailingConstraint" destination="SwY-A7-fyk" id="29q-1x-eEs"/>
+                        <outlet property="investButtonViewWidthConstraint" destination="JEA-Wm-mNb" id="s0f-VW-Zae"/>
                         <outlet property="tableView" destination="Okg-0k-2HX" id="rmu-N2-vmJ"/>
                         <outlet property="withdrawButton" destination="BL2-1d-sP2" id="fxg-GH-DQ6"/>
-                        <outlet property="withdrawButtonViewLeadingConstraint" destination="KEy-bp-JiD" id="xaB-2O-hmX"/>
+                        <outlet property="withdrawButtonViewLeadingConstraint" destination="KEy-bp-JiD" id="CvL-T7-BuB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50I-f0-5XA" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -66,16 +66,19 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         investButton.tintColor = UIColor.Button.green
         withdrawButton.tintColor = UIColor.Button.red
         
-        investButtonViewTrailingConstraint.isActive = true
-        investButtonViewWidthConstraint.isActive = false
-        withdrawButtonViewLeadingConstraint.isActive = false
         withdrawButton.isHidden = true
         
         switch viewModel.state {
         case .show:
+            investButtonViewTrailingConstraint.isActive = true
+            investButtonViewWidthConstraint.isActive = false
+            withdrawButtonViewLeadingConstraint.isActive = false
             investButtonViewTrailingConstraint.constant = 32
             navigationItem.rightBarButtonItem = nil
         case .invest:
+            investButtonViewTrailingConstraint.isActive = true
+            investButtonViewWidthConstraint.isActive = false
+            withdrawButtonViewLeadingConstraint.isActive = false
             investButtonViewTrailingConstraint.constant = 32
         case .full:
             investButtonViewTrailingConstraint.isActive = false
@@ -96,9 +99,23 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
-        //Fetch
-        hideHUD()
-        reloadData()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        viewModel.fetch { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.setupNavigationBar()
+                self?.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
+            }
+        }
+    }
+    
+    private func setupNavigationBar() {
+        title = viewModel.title
     }
     
     private func reloadData() {

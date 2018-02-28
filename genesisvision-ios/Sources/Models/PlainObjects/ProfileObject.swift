@@ -22,7 +22,6 @@ struct ProfileObject {
     let gender: Bool?
     let avatar: String?
     let email: String?
-    let balance: Double?
 }
 
 extension ProfileObject {
@@ -41,24 +40,5 @@ extension ProfileObject {
         self.gender = profileFullViewModel.gender
         self.avatar = profileFullViewModel.avatar
         self.email = profileFullViewModel.email
-        self.balance = profileFullViewModel.balance
-    }
-    
-    init(profileShortViewModel: ProfileShortViewModel) {
-        self.email = profileShortViewModel.email
-        self.balance = profileShortViewModel.balance
-        
-        self.firstName = nil
-        self.middleName = nil
-        self.lastName = nil
-        self.documentType = nil
-        self.documentNumber = nil
-        self.country = nil
-        self.city = nil
-        self.address = nil
-        self.phone = nil
-        self.birthday = nil
-        self.gender = false
-        self.avatar = nil
     }
 }

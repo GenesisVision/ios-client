@@ -20,65 +20,32 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = "Not enough data"
         
-//        if let chart = participantViewModel.chart, chart.count > 0 {
+//        if let chart = investmentProgram.chart, chart.count > 0 {
 //            cell.chartView.isHidden = false
 //            cell.noDataLabel.isHidden = true
 //            cell.chartView.setup(dataSet: participantViewModel.chart, name: participantViewModel.name)
 //        }
         
-        var currency = Currency.gvt.rawValue.uppercased()
-        var username = ""
-        
-        if let account = investmentProgram.account {
-            username = account.login ?? ""
-            currency = account.currency?.uppercased() ?? ""
+        if let title = investmentProgram.title {
+            cell.userNameLabel.text = title
         }
         
-        guard let investment = investmentProgram.investment else {
-            return
+        if let currency = investmentProgram.currency {
+            cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
-        cell.userNameLabel.text = username
-        cell.currencyLabel.text = currency
-        
-        if let rating = investment.rating {
-            cell.programLogoImageView.levelLabel.text = String(describing: Int(rating))
+        if let level = investmentProgram.level {
+            cell.programLogoImageView.levelLabel.text = String(describing: level)
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true
         
-        if let logo = investment.logo {
+        if let logo = investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.depositLabel.text = "LAST PERIOD"
-        cell.tradesLabel.text = "TRADES"
-        cell.weeksLabel.text = "WEEKS"
-        cell.profitLabel.text = "PROFIT %"
-        
-        cell.depositLabel.textColor = UIColor.Font.dark
-        cell.tradesLabel.textColor = UIColor.Font.medium
-        cell.weeksLabel.textColor = UIColor.Font.medium
-        cell.profitLabel.textColor = UIColor.Font.dark
-        
-        if let lastPeriod = investment.lastPeriod?.number,
-            let trades = investment.ordersCount,
-            let totalProfit = investment.totalProfit,
-            let weeks = investment.period {
-            
-            let totalProfitValue = Double(round(100 * totalProfit) / 100)
-            
-            cell.depositValueLabel.text = String(describing: lastPeriod)
-            cell.tradesValueLabel.text = String(describing: trades)
-            cell.weeksValueLabel.text = String(describing: weeks)
-            cell.profitValueLabel.text = String(describing: totalProfitValue) + "%"
-            
-            cell.depositValueLabel.textColor = UIColor.primary
-            cell.tradesValueLabel.textColor = UIColor.Font.medium
-            cell.weeksValueLabel.textColor = UIColor.Font.medium
-            cell.profitValueLabel.textColor = totalProfitValue == 0 ? UIColor.Font.medium : totalProfitValue >= 0 ? UIColor.Font.green : UIColor.Font.red
-        }
+        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avrProfit: investmentProgram.profitAvg, totalProfit: investmentProgram.profitTotal)
     }
 }

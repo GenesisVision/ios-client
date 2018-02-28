@@ -11,18 +11,50 @@ import Foundation
 
 open class InvestmentProgram: Codable {
 
-    public var manager: ProfilePublicViewModel?
-    public var investment: Investment?
-    public var account: ManagerAccount?
-    public var token: ManagerToken?
+    public enum Currency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+    public var id: UUID?
+    public var title: String?
+    public var level: Int?
+    public var logo: String?
+    public var balance: Double?
+    public var currency: Currency?
+    public var tradesCount: Int?
+    public var investorsCount: Int?
+    public var periodDuration: Int?
+    public var endOfPeriod: Date?
+    public var profitAvg: Double?
+    public var profitTotal: Double?
+    public var availableInvestment: Double?
+    public var feeSuccess: Double?
+    public var feeManagement: Double?
+    public var isPending: Bool?
 
 
     
-    public init(manager: ProfilePublicViewModel?, investment: Investment?, account: ManagerAccount?, token: ManagerToken?) {
-        self.manager = manager
-        self.investment = investment
-        self.account = account
-        self.token = token
+    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isPending: Bool?) {
+        self.id = id
+        self.title = title
+        self.level = level
+        self.logo = logo
+        self.balance = balance
+        self.currency = currency
+        self.tradesCount = tradesCount
+        self.investorsCount = investorsCount
+        self.periodDuration = periodDuration
+        self.endOfPeriod = endOfPeriod
+        self.profitAvg = profitAvg
+        self.profitTotal = profitTotal
+        self.availableInvestment = availableInvestment
+        self.feeSuccess = feeSuccess
+        self.feeManagement = feeManagement
+        self.isPending = isPending
     }
     
 
@@ -32,10 +64,22 @@ open class InvestmentProgram: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(manager, forKey: "manager")
-        try container.encodeIfPresent(investment, forKey: "investment")
-        try container.encodeIfPresent(account, forKey: "account")
-        try container.encodeIfPresent(token, forKey: "token")
+        try container.encodeIfPresent(id, forKey: "id")
+        try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(currency, forKey: "currency")
+        try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
+        try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
+        try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
+        try container.encodeIfPresent(endOfPeriod, forKey: "endOfPeriod")
+        try container.encodeIfPresent(profitAvg, forKey: "profitAvg")
+        try container.encodeIfPresent(profitTotal, forKey: "profitTotal")
+        try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
+        try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
+        try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
+        try container.encodeIfPresent(isPending, forKey: "isPending")
     }
 
     // Decodable protocol methods
@@ -43,10 +87,22 @@ open class InvestmentProgram: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
-        investment = try container.decodeIfPresent(Investment.self, forKey: "investment")
-        account = try container.decodeIfPresent(ManagerAccount.self, forKey: "account")
-        token = try container.decodeIfPresent(ManagerToken.self, forKey: "token")
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
+        title = try container.decodeIfPresent(String.self, forKey: "title")
+        level = try container.decodeIfPresent(Int.self, forKey: "level")
+        logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
+        tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
+        investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
+        periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
+        endOfPeriod = try container.decodeIfPresent(Date.self, forKey: "endOfPeriod")
+        profitAvg = try container.decodeIfPresent(Double.self, forKey: "profitAvg")
+        profitTotal = try container.decodeIfPresent(Double.self, forKey: "profitTotal")
+        availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
+        feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
+        feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
+        isPending = try container.decodeIfPresent(Bool.self, forKey: "isPending")
     }
 }
 

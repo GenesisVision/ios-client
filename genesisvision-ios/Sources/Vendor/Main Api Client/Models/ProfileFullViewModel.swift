@@ -11,6 +11,8 @@ import Foundation
 
 open class ProfileFullViewModel: Codable {
 
+    public var id: UUID?
+    public var email: String?
     public var firstName: String?
     public var middleName: String?
     public var lastName: String?
@@ -24,13 +26,12 @@ open class ProfileFullViewModel: Codable {
     public var gender: Bool?
     public var avatar: String?
     public var userName: String?
-    public var id: UUID?
-    public var email: String?
-    public var balance: Double?
 
 
     
-    public init(firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, userName: String?, id: UUID?, email: String?, balance: Double?) {
+    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, userName: String?) {
+        self.id = id
+        self.email = email
         self.firstName = firstName
         self.middleName = middleName
         self.lastName = lastName
@@ -44,9 +45,6 @@ open class ProfileFullViewModel: Codable {
         self.gender = gender
         self.avatar = avatar
         self.userName = userName
-        self.id = id
-        self.email = email
-        self.balance = balance
     }
     
 
@@ -56,6 +54,8 @@ open class ProfileFullViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(id, forKey: "id")
+        try container.encodeIfPresent(email, forKey: "email")
         try container.encodeIfPresent(firstName, forKey: "firstName")
         try container.encodeIfPresent(middleName, forKey: "middleName")
         try container.encodeIfPresent(lastName, forKey: "lastName")
@@ -69,9 +69,6 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(gender, forKey: "gender")
         try container.encodeIfPresent(avatar, forKey: "avatar")
         try container.encodeIfPresent(userName, forKey: "userName")
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(email, forKey: "email")
-        try container.encodeIfPresent(balance, forKey: "balance")
     }
 
     // Decodable protocol methods
@@ -79,6 +76,8 @@ open class ProfileFullViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
+        email = try container.decodeIfPresent(String.self, forKey: "email")
         firstName = try container.decodeIfPresent(String.self, forKey: "firstName")
         middleName = try container.decodeIfPresent(String.self, forKey: "middleName")
         lastName = try container.decodeIfPresent(String.self, forKey: "lastName")
@@ -92,9 +91,6 @@ open class ProfileFullViewModel: Codable {
         gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
         userName = try container.decodeIfPresent(String.self, forKey: "userName")
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        email = try container.decodeIfPresent(String.self, forKey: "email")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
     }
 }
 

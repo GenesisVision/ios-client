@@ -90,19 +90,13 @@ final class TournamentDetailViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        switch sections[section] {
+    switch sections[section] {
         case .header:
             return 1
         case .chart:
             return 1
         }
     }
-}
-
-// MARK: - TableView
-extension TournamentDetailViewModel: ViewModelWithTableView {
-    // MARK: - Public Methods
-    
 }
 
 // MARK: - Fetch
@@ -128,7 +122,7 @@ extension TournamentDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        fetch(participantID: self.participantID) { [weak self] (viewModel) in
+        TournamentDataProvider.getTournamentParticipant(with: self.participantID) { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(reason: nil))
             }
@@ -137,27 +131,5 @@ extension TournamentDetailViewModel {
             
             completion(.success)
         }
-    }
-    
-    // MARK: - Private methods
-    private func fetch(participantID: String, completion: @escaping (_ participantViewModel: ParticipantViewModel?) -> Void) {
-        guard let uuid = UUID(uuidString: participantID) else { return completion(nil) }
-        
-        TournamentAPI.apiTournamentParticipantGet(participantId: uuid) { [weak self] (viewModel, error) in
-            self?.responseHandler(viewModel, error: error, successCompletion: { (participant) in
-                completion(participant)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
-        }
-    }
-    
-    private func responseHandler(_ participantViewModel: ParticipantViewModel?, error: Error?, successCompletion: @escaping (_ participant: ParticipantViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard participantViewModel != nil else {
-            return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
-        }
-        
-        successCompletion(participantViewModel)
     }
 }

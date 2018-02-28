@@ -19,8 +19,18 @@ final class ProgramDetailViewModel {
     }
 
     // MARK: - Variables
+    var title: String = "Program Detail"
     private var router: ProgramDetailRouter
-    private var investmentProgram: InvestmentProgram?
+    
+    private var investmentProgramID: String!
+    private var investmentProgramDetails: InvestmentProgramDetails? {
+        didSet {
+            if let title = investmentProgramDetails?.title {
+                self.title = title
+            }
+        }
+    }
+    
     var state: ProgramDetailViewState = .show
     private var sections: [SectionType] = [.header, .chart]
     private var models: [CellViewAnyModel]?
@@ -36,21 +46,13 @@ final class ProgramDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter, with investmentProgram: InvestmentProgram, state: ProgramDetailViewState) {
+    init(withRouter router: ProgramDetailRouter, with investmentProgramID: String, state: ProgramDetailViewState) {
         self.router = router
-        self.investmentProgram = investmentProgram
+        self.investmentProgramID = investmentProgramID
         self.state = state
     }
     
     // MARK: - Public methods
-    func getNickname() -> String {
-        return investmentProgram?.account?.login ?? ""
-    }
-    
-    func getModel() -> InvestmentProgram? {
-        return investmentProgram
-    }
-    
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .chart:
@@ -70,7 +72,7 @@ final class ProgramDetailViewModel {
     }
     
     func numberOfSections() -> Int {
-        guard investmentProgram != nil else {
+        guard investmentProgramDetails != nil else {
             return 0
         }
         
@@ -85,38 +87,58 @@ final class ProgramDetailViewModel {
             return 1
         }
     }
-    
-    /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard let investment = investmentProgram?.investment else {
-            return nil
-        }
-        
-        let type = sections[indexPath.section]
-        switch type {
-        case .header:
-            return ProgramDetailHeaderTableViewCellViewModel(investment: investment)
-        case .chart:
-            return DetailChartTableViewCellViewModel(chart: [], name: "")
-        }
-    }
 }
 
 // MARK: - Navigation
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
-        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
+        guard let investmentProgramID = investmentProgramID else { return }
+        router.show(routeType: .invest(investmentProgramId: investmentProgramID))
     }
     
     func withdraw() {
-        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
+        guard let investmentProgramID = investmentProgramID else { return }
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramID))
     }
     
     func showHistory() {
-        guard let investmentProgramId = investmentProgram?.investment?.id?.uuidString else { return }
-        router.show(routeType: .history(investmentProgramId: investmentProgramId))
+        guard let investmentProgramID = investmentProgramID else { return }
+        router.show(routeType: .history(investmentProgramId: investmentProgramID))
+    }
+}
+
+// MARK: - Fetch
+extension ProgramDetailViewModel {
+    // MARK: - Public methods
+    func getNickname() -> String {
+        return investmentProgramDetails?.manager?.username ?? ""
+    }
+    
+    /// Get TableViewCellViewModel for IndexPath
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        guard let investmentProgramDetails = investmentProgramDetails else {
+            return nil
+        }
+        
+        let type = sections[indexPath.section]
+        switch type {
+        case .header:
+            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+        case .chart:
+            return DetailChartTableViewCellViewModel(chart: [], name: "")
+        }
+    }
+    
+    func fetch(completion: @escaping CompletionBlock) {
+        ProgramDataProvider.getProgram(investmentProgramID: self.investmentProgramID) { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return completion(.failure(reason: nil))
+            }
+            
+            self?.investmentProgramDetails = viewModel
+            
+            completion(.success)
+        }
     }
 }

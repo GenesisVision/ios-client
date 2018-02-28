@@ -12,17 +12,7 @@ class DetailHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
-    
-    // MARK: - Labels
-    @IBOutlet var depositLabel: UILabel!
-    @IBOutlet var tradesLabel: UILabel!
-    @IBOutlet var weeksLabel: UILabel!
-    @IBOutlet var profitLabel: UILabel!
-    
-    @IBOutlet var depositValueLabel: UILabel!
-    @IBOutlet var tradesValueLabel: UILabel!
-    @IBOutlet var weeksValueLabel: UILabel!
-    @IBOutlet var profitValueLabel: UILabel!
+    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

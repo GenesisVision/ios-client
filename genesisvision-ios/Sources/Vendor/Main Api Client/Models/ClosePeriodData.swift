@@ -12,14 +12,14 @@ import Foundation
 open class ClosePeriodData: Codable {
 
     public var currentPeriod: Period?
-    public var nextPeriod: Period?
+    public var tokenHolders: [InvestorAmount]?
     public var canCloseCurrentPeriod: Bool?
 
 
     
-    public init(currentPeriod: Period?, nextPeriod: Period?, canCloseCurrentPeriod: Bool?) {
+    public init(currentPeriod: Period?, tokenHolders: [InvestorAmount]?, canCloseCurrentPeriod: Bool?) {
         self.currentPeriod = currentPeriod
-        self.nextPeriod = nextPeriod
+        self.tokenHolders = tokenHolders
         self.canCloseCurrentPeriod = canCloseCurrentPeriod
     }
     
@@ -31,7 +31,7 @@ open class ClosePeriodData: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(currentPeriod, forKey: "currentPeriod")
-        try container.encodeIfPresent(nextPeriod, forKey: "nextPeriod")
+        try container.encodeIfPresent(tokenHolders, forKey: "tokenHolders")
         try container.encodeIfPresent(canCloseCurrentPeriod, forKey: "canCloseCurrentPeriod")
     }
 
@@ -41,7 +41,7 @@ open class ClosePeriodData: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         currentPeriod = try container.decodeIfPresent(Period.self, forKey: "currentPeriod")
-        nextPeriod = try container.decodeIfPresent(Period.self, forKey: "nextPeriod")
+        tokenHolders = try container.decodeIfPresent([InvestorAmount].self, forKey: "tokenHolders")
         canCloseCurrentPeriod = try container.decodeIfPresent(Bool.self, forKey: "canCloseCurrentPeriod")
     }
 }

@@ -11,13 +11,13 @@ import Foundation
 
 open class InvestmentProgramsViewModel: Codable {
 
-    public var investments: [InvestmentProgram]?
+    public var investmentPrograms: [InvestmentProgram]?
     public var total: Int?
 
 
     
-    public init(investments: [InvestmentProgram]?, total: Int?) {
-        self.investments = investments
+    public init(investmentPrograms: [InvestmentProgram]?, total: Int?) {
+        self.investmentPrograms = investmentPrograms
         self.total = total
     }
     
@@ -28,7 +28,7 @@ open class InvestmentProgramsViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(investments, forKey: "investments")
+        try container.encodeIfPresent(investmentPrograms, forKey: "investmentPrograms")
         try container.encodeIfPresent(total, forKey: "total")
     }
 
@@ -37,7 +37,7 @@ open class InvestmentProgramsViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        investments = try container.decodeIfPresent([InvestmentProgram].self, forKey: "investments")
+        investmentPrograms = try container.decodeIfPresent([InvestmentProgram].self, forKey: "investmentPrograms")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }

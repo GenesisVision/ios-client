@@ -1,5 +1,5 @@
 //
-//  WalletViewModel.swift
+//  WalletControllerViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 26.01.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class WalletViewModel {
+final class WalletControllerViewModel {
     
     enum SectionType {
         case header
@@ -26,7 +26,7 @@ final class WalletViewModel {
     private var balance: Double = 0.0
     private var currency: String = Constants.currency
     
-    var dataType: DataType = .fake
+    var dataType: DataType = .api
     var skip = 0            //offset
     var totalCount = 0      //total count of programs
     
@@ -187,15 +187,15 @@ final class WalletViewModel {
         guard let authorization = AuthManager.authorizedToken else { return completionError(.failure(reason: nil)) }
         let filter = TransactionsFilter(skip: skip, take: Constants.Api.take)
         
-        fetchTransactions(authorization: authorization, filter: filter) { (walletTransactionsViewModel, error) in
-            guard error == nil else {
-                return ErrorHandler.handleApiError(error: error, completion: completionError)
+        WalletDataProvider.getWalletTransactions(authorization: authorization, filter: filter) { (transactionsViewModel) in
+            guard transactionsViewModel != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
             var viewModels = [WalletTransactionTableViewCellViewModel]()
+
+            let totalCount = transactionsViewModel?.total ?? 0
             
-            let totalCount = walletTransactionsViewModel?.total ?? 0
-            
-            walletTransactionsViewModel?.transactions?.forEach({ (walletTransaction) in
+            transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
                 let viewModel = WalletTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
                 viewModels.append(viewModel)
             })
@@ -203,13 +203,5 @@ final class WalletViewModel {
             completionSuccess(totalCount, viewModels)
             completionError(.success)
         }
-    }
-    
-    
-    /// Return WalletTransactionsViewModel from API
-    private func fetchTransactions(authorization: String, filter: TransactionsFilter, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {
-        isInvestorApp
-            ? InvestorAPI.apiInvestorWalletTransactionsPost(authorization: authorization, filter: filter, completion: completion)
-            : ManagerAPI.apiManagerWalletTransactionsPost(authorization: authorization, filter: filter, completion: completion)
     }
 }

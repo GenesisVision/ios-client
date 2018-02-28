@@ -7,7 +7,7 @@
 //
 
 enum WalletRouteType {
-    case withdraw, deposit, showProgramDetail(investmentProgram: InvestmentProgram, state: ProgramDetailViewState)
+    case withdraw, deposit, showProgramDetail(investmentProgramID: String, state: ProgramDetailViewState)
 }
 
 class WalletRouter: Router {
@@ -19,8 +19,8 @@ class WalletRouter: Router {
             withdraw()
         case .deposit:
             deposit()
-        case .showProgramDetail(let investmentProgram, let state):
-            showProgramDetail(with: investmentProgram, state: state)
+        case .showProgramDetail(let investmentProgramID, let state):
+            showProgramDetail(with: investmentProgramID, state: state)
         }
     }
     
@@ -43,10 +43,10 @@ class WalletRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showProgramDetail(with investmentProgram: InvestmentProgram, state: ProgramDetailViewState) {
+    private func showProgramDetail(with investmentProgramID: String, state: ProgramDetailViewState) {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgram, state: state)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramID, state: state)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

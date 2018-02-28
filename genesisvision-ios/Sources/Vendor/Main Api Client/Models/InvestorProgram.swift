@@ -11,14 +11,14 @@ import Foundation
 
 open class InvestorProgram: Codable {
 
-    public var investmentProgram: InvestmentShort?
+    public var investmentProgram: InvestmentProgramDetails?
     public var requests: [InvestmentRequest]?
     public var totalIn: Double?
     public var totalOut: Double?
 
 
     
-    public init(investmentProgram: InvestmentShort?, requests: [InvestmentRequest]?, totalIn: Double?, totalOut: Double?) {
+    public init(investmentProgram: InvestmentProgramDetails?, requests: [InvestmentRequest]?, totalIn: Double?, totalOut: Double?) {
         self.investmentProgram = investmentProgram
         self.requests = requests
         self.totalIn = totalIn
@@ -43,7 +43,7 @@ open class InvestorProgram: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        investmentProgram = try container.decodeIfPresent(InvestmentShort.self, forKey: "investmentProgram")
+        investmentProgram = try container.decodeIfPresent(InvestmentProgramDetails.self, forKey: "investmentProgram")
         requests = try container.decodeIfPresent([InvestmentRequest].self, forKey: "requests")
         totalIn = try container.decodeIfPresent(Double.self, forKey: "totalIn")
         totalOut = try container.decodeIfPresent(Double.self, forKey: "totalOut")

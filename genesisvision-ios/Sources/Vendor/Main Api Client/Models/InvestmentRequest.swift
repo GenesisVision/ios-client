@@ -18,6 +18,7 @@ open class InvestmentRequest: Codable {
     public enum Status: String, Codable { 
         case new = "New"
         case executed = "Executed"
+        case cancelled = "Cancelled"
     }
     public var id: UUID?
     public var date: Date?

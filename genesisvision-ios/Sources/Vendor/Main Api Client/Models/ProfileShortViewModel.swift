@@ -13,14 +13,14 @@ open class ProfileShortViewModel: Codable {
 
     public var id: UUID?
     public var email: String?
-    public var balance: Double?
+    public var wallets: [WalletViewModel]?
 
 
     
-    public init(id: UUID?, email: String?, balance: Double?) {
+    public init(id: UUID?, email: String?, wallets: [WalletViewModel]?) {
         self.id = id
         self.email = email
-        self.balance = balance
+        self.wallets = wallets
     }
     
 
@@ -32,7 +32,7 @@ open class ProfileShortViewModel: Codable {
 
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(email, forKey: "email")
-        try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(wallets, forKey: "wallets")
     }
 
     // Decodable protocol methods
@@ -42,7 +42,7 @@ open class ProfileShortViewModel: Codable {
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         email = try container.decodeIfPresent(String.self, forKey: "email")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        wallets = try container.decodeIfPresent([WalletViewModel].self, forKey: "wallets")
     }
 }
 

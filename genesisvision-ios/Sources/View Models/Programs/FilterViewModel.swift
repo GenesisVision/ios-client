@@ -24,14 +24,14 @@ final class FilterViewModel {
     
     private var sections: [SectionType] = [.amount, .sort]
     private var router: FilterRouter!
-    private var sortingList: [InvestmentsFilter.Sorting : String] = [.byRatingAsc : "Rating asc",
+    private var sortingList: [InvestmentProgramsFilter.Sorting : String] = [.byRatingAsc : "Rating asc",
                                                                      .byRatingDesc : "Rating desc",
                                                                      .byOrdersAsc : "Orders asc",
                                                                      .byOrdersDesc : "Orders desc",
                                                                      .byProfitAsc : "Profit asc",
                                                                      .byProfitDesc : "Profit desc"]
     
-    var selectedSorting: InvestmentsFilter.Sorting = .byOrdersAsc
+    var selectedSorting: InvestmentProgramsFilter.Sorting = .byOrdersAsc
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     
@@ -82,7 +82,7 @@ final class FilterViewModel {
             sortCellModels[idx].selected = idx == indexPath.row ? !sortCellModels[idx].selected : false
         }
         
-        selectedSorting = sortCellModels[indexPath.row].selected ? InvestmentsFilter.Sorting(rawValue: sortCellModels[indexPath.row].sorting.type)! : InvestmentsFilter.Sorting.byOrdersAsc
+        selectedSorting = sortCellModels[indexPath.row].selected ? InvestmentProgramsFilter.Sorting(rawValue: sortCellModels[indexPath.row].sorting.type)! : InvestmentProgramsFilter.Sorting.byOrdersAsc
     }
     
     func numberOfSections() -> Int {
@@ -99,7 +99,7 @@ final class FilterViewModel {
     }
     
     func reset() {
-        selectedSorting = InvestmentsFilter.Sorting.byOrdersAsc
+        selectedSorting = InvestmentProgramsFilter.Sorting.byOrdersAsc
         investMaxAmountFrom = nil
         investMaxAmountTo = nil
         

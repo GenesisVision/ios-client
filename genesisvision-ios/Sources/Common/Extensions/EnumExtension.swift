@@ -31,4 +31,4 @@ public extension EnumCollection {
     }
 }
 
-extension InvestmentsFilter.Sorting: EnumCollection {}
+extension InvestmentProgramsFilter.Sorting: EnumCollection {}

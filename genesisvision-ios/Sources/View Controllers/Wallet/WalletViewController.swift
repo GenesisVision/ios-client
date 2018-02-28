@@ -16,7 +16,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     private var withdrawBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
-    var viewModel: WalletViewModel!
+    var viewModel: WalletControllerViewModel!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -59,8 +59,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: WalletViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: WalletViewModel.viewModelsForRegistration)
+        tableView.registerNibs(for: WalletControllerViewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: WalletControllerViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -83,7 +83,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchBalance() {
-        viewModel.fetchBalance { [weak self] (result) in }
+        viewModel.fetchBalance { (result) in }
     }
     
     private func fetchTransactions() {

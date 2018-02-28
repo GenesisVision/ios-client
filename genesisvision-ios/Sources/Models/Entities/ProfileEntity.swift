@@ -25,7 +25,6 @@ enum FieldType: String, EnumCollection {
     case gender = "Gender"
     case avatar = "Avatar"
     case email = "Email"
-    case balance = "Balance"
 }
 
 final class ProfileEntity {
@@ -43,7 +42,6 @@ final class ProfileEntity {
     @objc dynamic var gender: Bool = false
     @objc dynamic var avatar: String?
     @objc dynamic var email: String?
-    @objc dynamic var balance: Double = 0.0
     
     @objc dynamic var statusValue: String = ""
 
@@ -135,7 +133,6 @@ extension ProfileEntity {
         entity.gender = true
         entity.avatar = logos.rand!
         entity.email = templates.rand!
-        entity.balance = [0.0, 20.0, 30.0, 1.0].rand!
         
         return entity
     }
@@ -154,6 +151,5 @@ extension ProfileEntity {
         self.gender = profileModel.gender ?? true
         self.avatar = profileModel.avatar ?? nil
         self.email = profileModel.email ?? nil
-        self.balance = profileModel.balance ?? 0.0
     }
 }

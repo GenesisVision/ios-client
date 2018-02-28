@@ -89,8 +89,8 @@ extension ProgramHistoryViewModel {
     }
 
     // MARK: - Private methods
-    private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        InvestorAPI.apiInvestorInvestmentsPost(filter: filter) { [weak self] (viewModel, error) in
+    private func apiInvestmentPrograms(withFilter filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
+        InvestorAPI.apiInvestorInvestmentProgramsPost(filter: filter) { [weak self] (viewModel, error) in
             self?.responseHandler(viewModel, error: error, successCompletion: { (programs) in
                 completion(programs)
             }, errorCompletion: { (error) in
@@ -116,7 +116,7 @@ extension ProgramHistoryViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: nil, skip: skip, take: Constants.Api.take)
+            let filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: nil, skip: skip, take: Constants.Api.take)
             
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
@@ -125,7 +125,7 @@ extension ProgramHistoryViewModel {
                 
                 let totalCount = investmentPrograms.total ?? 0
                 
-                investmentPrograms.investments?.forEach({ (investmentProgram) in
+                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
                     let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram)
                     investmentProgramViewModels.append(traderTableViewCellModel)
                 })

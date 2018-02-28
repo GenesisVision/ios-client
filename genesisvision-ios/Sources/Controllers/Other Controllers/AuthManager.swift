@@ -11,7 +11,7 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
-    private static var profileShortViewModel: ProfileShortViewModel?
+    private static var walletViewModel: WalletViewModel?
     
     static var authorizedToken: String? {
         set(newToken) {
@@ -41,17 +41,17 @@ class AuthManager {
     }
     
     static func getBalance(completion: @escaping (_ balance: Double) -> Void) {
-        getProfileShort(completion: { (viewModel) in
+        getWallet { (viewModel) in
             if viewModel != nil  {
-                profileShortViewModel = viewModel
+                walletViewModel = viewModel
             }
             
-            completion(profileShortViewModel?.balance ?? 0.0)
-        })
+            completion(walletViewModel?.amount ?? 0.0)
+        }
     }
     
-    static func saveProfileShort(viewModel: ProfileShortViewModel) {
-        self.profileShortViewModel = viewModel
+    static func saveWalletViewModel(viewModel: WalletViewModel) {
+        self.walletViewModel = viewModel
     }
     
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
@@ -69,19 +69,19 @@ class AuthManager {
         completion(profileViewModel)
     }
     
-    static func getProfileShort(completion: @escaping (_ profile: ProfileShortViewModel?) -> Void) {
-        guard profileViewModel != nil else {
-            ProfileDataProvider.getProfileShort(completion: { (viewModel) in
+    static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void) {
+        guard walletViewModel != nil else {
+            WalletDataProvider.getWallet(completion: { (viewModel) in
                 if viewModel != nil  {
-                    profileShortViewModel = viewModel
+                    walletViewModel = viewModel?.wallets?.first
                 }
                 
-                completion(viewModel)
+                completion(walletViewModel)
             })
             return
         }
         
-        completion(profileShortViewModel)
+        completion(walletViewModel)
     }
     
     // MARK: - Private methods

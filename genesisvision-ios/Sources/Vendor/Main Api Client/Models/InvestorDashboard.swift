@@ -11,12 +11,14 @@ import Foundation
 
 open class InvestorDashboard: Codable {
 
-    public var programs: [InvestorProgram]?
+    public var investmentPrograms: [InvestmentProgramDashboard]?
+    public var total: Int?
 
 
     
-    public init(programs: [InvestorProgram]?) {
-        self.programs = programs
+    public init(investmentPrograms: [InvestmentProgramDashboard]?, total: Int?) {
+        self.investmentPrograms = investmentPrograms
+        self.total = total
     }
     
 
@@ -26,7 +28,8 @@ open class InvestorDashboard: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(programs, forKey: "programs")
+        try container.encodeIfPresent(investmentPrograms, forKey: "investmentPrograms")
+        try container.encodeIfPresent(total, forKey: "total")
     }
 
     // Decodable protocol methods
@@ -34,7 +37,8 @@ open class InvestorDashboard: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        programs = try container.decodeIfPresent([InvestorProgram].self, forKey: "programs")
+        investmentPrograms = try container.decodeIfPresent([InvestmentProgramDashboard].self, forKey: "investmentPrograms")
+        total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }
 

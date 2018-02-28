@@ -11,12 +11,14 @@ import Foundation
 
 open class TradesViewModel: Codable {
 
-    public var trades: [MetaTraderOrder]?
+    public var trades: [OrderModel]?
+    public var total: Int?
 
 
     
-    public init(trades: [MetaTraderOrder]?) {
+    public init(trades: [OrderModel]?, total: Int?) {
         self.trades = trades
+        self.total = total
     }
     
 
@@ -27,6 +29,7 @@ open class TradesViewModel: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(trades, forKey: "trades")
+        try container.encodeIfPresent(total, forKey: "total")
     }
 
     // Decodable protocol methods
@@ -34,7 +37,8 @@ open class TradesViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        trades = try container.decodeIfPresent([MetaTraderOrder].self, forKey: "trades")
+        trades = try container.decodeIfPresent([OrderModel].self, forKey: "trades")
+        total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }
 

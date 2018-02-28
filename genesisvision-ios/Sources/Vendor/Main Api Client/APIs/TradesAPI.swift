@@ -28,27 +28,36 @@ open class TradesAPI {
      Get trades by IPFS hash id
      - GET /api/trades/ipfsHistory
      - examples: [{contentType=application/json, example={
+  "total" : 0,
   "trades" : [ {
-    "volume" : 2.3021358869347655,
+    "date" : "2000-01-23T04:56:07.000+00:00",
     "symbol" : "symbol",
     "dateOpen" : "2000-01-23T04:56:07.000+00:00",
     "ticket" : 6,
-    "priceClose" : 5.962133916683182,
-    "dateClose" : "2000-01-23T04:56:07.000+00:00",
-    "priceOpen" : 1.4658129805029452,
     "login" : 0,
-    "profit" : 5.637376656633329,
+    "volume" : 1.4658129805029452,
+    "entry" : "In",
+    "priceClose" : 2.3021358869347655,
+    "dateClose" : "2000-01-23T04:56:07.000+00:00",
+    "price" : 7.061401241503109,
+    "priceOpen" : 5.637376656633329,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profit" : 5.962133916683182,
     "direction" : "Buy"
   }, {
-    "volume" : 2.3021358869347655,
+    "date" : "2000-01-23T04:56:07.000+00:00",
     "symbol" : "symbol",
     "dateOpen" : "2000-01-23T04:56:07.000+00:00",
     "ticket" : 6,
-    "priceClose" : 5.962133916683182,
-    "dateClose" : "2000-01-23T04:56:07.000+00:00",
-    "priceOpen" : 1.4658129805029452,
     "login" : 0,
-    "profit" : 5.637376656633329,
+    "volume" : 1.4658129805029452,
+    "entry" : "In",
+    "priceClose" : 2.3021358869347655,
+    "dateClose" : "2000-01-23T04:56:07.000+00:00",
+    "price" : 7.061401241503109,
+    "priceOpen" : 5.637376656633329,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profit" : 5.962133916683182,
     "direction" : "Buy"
   } ]
 }}]

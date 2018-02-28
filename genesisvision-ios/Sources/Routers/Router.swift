@@ -57,7 +57,7 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: walletViewController)
             let router = WalletRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
-            walletViewController.viewModel = WalletViewModel(withRouter: router)
+            walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_wallet")
             navigationController.tabBarItem.title = "Wallet"
             viewControllers.append(navigationController)

@@ -25,7 +25,7 @@ final class InvestmentProgramListViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    var sorting: InvestmentsFilter.Sorting = .byOrdersAsc
+    var sorting: InvestmentProgramsFilter.Sorting = .byOrdersAsc
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
@@ -76,9 +76,8 @@ extension InvestmentProgramListViewModel {
         router.show(routeType: .showFilterVC(investmentProgramListViewModel: self))
     }
     
-    func showDetail(with investmentProgram: InvestmentProgram) {
-        //TODO: update detailState from investmentProgram
-        router.show(routeType: .showProgramDetail(investmentProgram: investmentProgram, state: detailState))
+    func showDetail(with investmentProgramID: String) {
+        router.show(routeType: .showProgramDetail(investmentProgramID: investmentProgramID, state: detailState))
     }
 }
 
@@ -125,13 +124,13 @@ extension InvestmentProgramListViewModel {
         guard let model = model(for: index) else {
             return nil
         }
-        //TODO: update detailState from model.investmentProgram
-        return router.getDetailViewController(withEntity: model.investmentProgram, state: detailState)
+        
+        return router.getDetailViewController(with: model.investmentProgram.id?.uuidString ?? "", state: detailState)
     }
     
     // MARK: - Private methods
-    private func apiInvestmentPrograms(withFilter filter: InvestmentsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        InvestorAPI.apiInvestorInvestmentsPost(filter: filter) { [weak self] (viewModel, error) in
+    private func apiInvestmentPrograms(withFilter filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
+        InvestorAPI.apiInvestorInvestmentProgramsPost(filter: filter) { [weak self] (viewModel, error) in
             self?.responseHandler(viewModel, error: error, successCompletion: { (programs) in
                 completion(programs)
             }, errorCompletion: { (error) in
@@ -167,7 +166,7 @@ extension InvestmentProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: investMaxAmountFrom, investMaxAmountTo: investMaxAmountTo, sorting: sorting, skip: skip, take: Constants.Api.take)
+            let filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: investMaxAmountFrom, investMaxAmountTo: investMaxAmountTo, sorting: sorting, skip: skip, take: Constants.Api.take)
             
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
@@ -176,7 +175,7 @@ extension InvestmentProgramListViewModel {
                 
                 let totalCount = investmentPrograms.total ?? 0
                 
-                investmentPrograms.investments?.forEach({ (investmentProgram) in
+                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
                     let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram)
                     investmentProgramViewModels.append(traderTableViewCellModel)
                 })

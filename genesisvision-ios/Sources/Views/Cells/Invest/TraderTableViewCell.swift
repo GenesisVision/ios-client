@@ -13,6 +13,8 @@ class TraderTableViewCell: UITableViewCell {
     
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
+    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
+    
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = false
@@ -32,16 +34,6 @@ class TraderTableViewCell: UITableViewCell {
             currencyLabel.addBorder(withBorderWidth: 1.0, color: UIColor.primary)
         }
     }
-    
-    @IBOutlet var depositLabel: UILabel!
-    @IBOutlet var tradesLabel: UILabel!
-    @IBOutlet var weeksLabel: UILabel!
-    @IBOutlet var profitLabel: UILabel!
-    
-    @IBOutlet var depositValueLabel: UILabel!
-    @IBOutlet var tradesValueLabel: UILabel!
-    @IBOutlet var weeksValueLabel: UILabel!
-    @IBOutlet var profitValueLabel: UILabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

@@ -42,7 +42,7 @@ final class ProgramWithdrawViewModel {
         
         let investModel = Invest(investmentProgramId: uuid, amount: amount)
         
-        InvestorAPI.apiInvestorInvestmentsWithdrawPost(authorization: token, model: investModel) { [weak self] (error) in
+        InvestorAPI.apiInvestorInvestmentProgramsWithdrawPost(authorization: token, model: investModel) { [weak self] (error) in
             self?.responseHandler(error, completion: completion)
         }
     }

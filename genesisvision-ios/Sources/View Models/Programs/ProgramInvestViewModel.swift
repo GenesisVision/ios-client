@@ -46,18 +46,17 @@ final class ProgramInvestViewModel {
             else { return completion(.failure(reason: nil)) }
         
         let investModel = Invest(investmentProgramId: uuid, amount: value)
-        
-        InvestorAPI.apiInvestorInvestmentsInvestPost(authorization: token, model: investModel) { [weak self] (profileShortViewModel, error) in
-            self?.responseHandler(profileShortViewModel, error: error, completion: completion)
+        InvestorAPI.apiInvestorInvestmentProgramsInvestPost(authorization: token, model: investModel) { [weak self] (walletViewModel, error) in
+            self?.responseHandler(walletViewModel, error: error, completion: completion)
         }
     }
     
-    private func responseHandler(_ viewModel: ProfileShortViewModel?, error: Error?, completion: @escaping CompletionBlock) {
-        guard let profileShortViewModel = viewModel else {
+    private func responseHandler(_ viewModel: WalletsViewModel?, error: Error?, completion: @escaping CompletionBlock) {
+        guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
             return ErrorHandler.handleApiError(error: error, completion: completion)
         }
-        
-        AuthManager.saveProfileShort(viewModel: profileShortViewModel)
+
+        AuthManager.saveWalletViewModel(viewModel: wallet)
 
         completion(.success)
     }

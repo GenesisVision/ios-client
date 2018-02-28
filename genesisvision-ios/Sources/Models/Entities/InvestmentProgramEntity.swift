@@ -62,8 +62,8 @@ extension InvestmentProgramEntity {
     }
     
     func traslation(fromInvestmentProgram program: InvestmentProgram) {
-        self.nickname = program.account?.login ?? ""
-        self.currency = program.account?.currency ?? ""
+        self.nickname = program.manager?.login ?? ""
+        self.currency = program.currency ?? ""
         self.dateFrom = program.investment?.dateFrom ?? nil
         self.dateTo = program.investment?.dateTo ?? nil
         self.period = program.investment?.period ?? 0

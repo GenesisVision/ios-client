@@ -10,6 +10,8 @@ final class WalletWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     
+    var currency = WalletWithdrawRequestModel.Currency.gvt
+    
     private var router: WalletWithdrawRouter!
     
     // MARK: - Init
@@ -32,12 +34,19 @@ final class WalletWithdrawViewModel {
     private func apiWithdraw(with amount: Double, address: String, completion: @escaping CompletionBlock) {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
 
-        completion(.success)
-//        let investModel = Invest(investmentProgramId: uuid, amount: value)
+        let requestModel = WalletWithdrawRequestModel(currency: currency, amount: amount, blockchainAddress: address)
         
-//        InvestorAPI.apiInvestorInvestmentsWithdrawPost(authorization: token, model: investModel) { [weak self] (error) in
-//            self?.responseHandler(error, completion: completion)
-//        }
+        InvestorAPI.apiInvestorWalletWithdrawRequestPost(authorization: token, request: requestModel) { [weak self] (error) in
+            self?.responseHandler(error, completion: completion)
+        }
+    }
+    
+    private func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
+        if let error = error {
+            return ErrorHandler.handleApiError(error: error, completion: completion)
+        }
+        
+        completion(.success)
     }
 }
 

@@ -152,7 +152,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
             return
         }
 
-        viewModel.showDetail(with: investmentProgram)
+        viewModel.showDetail(with: investmentProgram.id?.uuidString ?? "")
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case signIn, showProgramDetail(investmentProgram: InvestmentProgram, state: ProgramDetailViewState), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel)
+    case signIn, showProgramDetail(investmentProgramID: String, state: ProgramDetailViewState), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -19,15 +19,15 @@ class InvestmentProgramListRouter: Router {
             signInAction()
         case .showFilterVC(let investmentProgramListViewModel):
             showFilterVC(with: investmentProgramListViewModel)
-        case .showProgramDetail(let investmentProgram, let state):
-            showProgramDetail(with: investmentProgram, state: state)
+        case .showProgramDetail(let investmentProgramID, let state):
+            showProgramDetail(with: investmentProgramID, state: state)
         }
     }
     
-    func getDetailViewController(withEntity investmentProgram: InvestmentProgram, state: ProgramDetailViewState) -> ProgramDetailViewController? {
+    func getDetailViewController(with investmentProgramID: String, state: ProgramDetailViewState) -> ProgramDetailViewController? {
         guard let traderViewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
         let router = ProgramDetailRouter(parentRouter: self)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgram, state: state)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramID, state: state)
         traderViewController.viewModel = viewModel
         
         return traderViewController
@@ -42,10 +42,10 @@ class InvestmentProgramListRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showProgramDetail(with investmentProgram: InvestmentProgram, state: ProgramDetailViewState) {
+    private func showProgramDetail(with investmentProgramID: String, state: ProgramDetailViewState) {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgram, state: state)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramID, state: state)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

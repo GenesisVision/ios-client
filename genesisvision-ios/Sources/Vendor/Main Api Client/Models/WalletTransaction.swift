@@ -17,19 +17,34 @@ open class WalletTransaction: Codable {
         case openProgram = "OpenProgram"
         case investToProgram = "InvestToProgram"
         case withdrawFromProgram = "WithdrawFromProgram"
+        case profitFromProgram = "ProfitFromProgram"
+        case cancelInvestmentRequest = "CancelInvestmentRequest"
+        case partialInvestmentExecutionRefund = "PartialInvestmentExecutionRefund"
+    }
+    public enum Currency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case usd = "USD"
+        case eur = "EUR"
     }
     public var id: UUID?
     public var type: ModelType?
     public var amount: Double?
     public var date: Date?
+    public var walletId: UUID?
+    public var currency: Currency?
 
 
     
-    public init(id: UUID?, type: ModelType?, amount: Double?, date: Date?) {
+    public init(id: UUID?, type: ModelType?, amount: Double?, date: Date?, walletId: UUID?, currency: Currency?) {
         self.id = id
         self.type = type
         self.amount = amount
         self.date = date
+        self.walletId = walletId
+        self.currency = currency
     }
     
 
@@ -43,6 +58,8 @@ open class WalletTransaction: Codable {
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(amount, forKey: "amount")
         try container.encodeIfPresent(date, forKey: "date")
+        try container.encodeIfPresent(walletId, forKey: "walletId")
+        try container.encodeIfPresent(currency, forKey: "currency")
     }
 
     // Decodable protocol methods
@@ -54,6 +71,8 @@ open class WalletTransaction: Codable {
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
+        walletId = try container.decodeIfPresent(UUID.self, forKey: "walletId")
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }
 }
 

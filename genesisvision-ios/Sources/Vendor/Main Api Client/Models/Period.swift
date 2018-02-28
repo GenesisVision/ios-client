@@ -22,17 +22,21 @@ open class Period: Codable {
     public var dateTo: Date?
     public var status: Status?
     public var startBalance: Double?
+    public var managerStartBalance: Double?
+    public var managerStartShare: Double?
     public var investmentRequest: [InvestmentRequest]?
 
 
     
-    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, investmentRequest: [InvestmentRequest]?) {
+    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, managerStartBalance: Double?, managerStartShare: Double?, investmentRequest: [InvestmentRequest]?) {
         self.id = id
         self.number = number
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.status = status
         self.startBalance = startBalance
+        self.managerStartBalance = managerStartBalance
+        self.managerStartShare = managerStartShare
         self.investmentRequest = investmentRequest
     }
     
@@ -49,6 +53,8 @@ open class Period: Codable {
         try container.encodeIfPresent(dateTo, forKey: "dateTo")
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(startBalance, forKey: "startBalance")
+        try container.encodeIfPresent(managerStartBalance, forKey: "managerStartBalance")
+        try container.encodeIfPresent(managerStartShare, forKey: "managerStartShare")
         try container.encodeIfPresent(investmentRequest, forKey: "investmentRequest")
     }
 
@@ -63,6 +69,8 @@ open class Period: Codable {
         dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         startBalance = try container.decodeIfPresent(Double.self, forKey: "startBalance")
+        managerStartBalance = try container.decodeIfPresent(Double.self, forKey: "managerStartBalance")
+        managerStartShare = try container.decodeIfPresent(Double.self, forKey: "managerStartShare")
         investmentRequest = try container.decodeIfPresent([InvestmentRequest].self, forKey: "investmentRequest")
     }
 }
