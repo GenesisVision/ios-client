@@ -27,20 +27,22 @@ class WalletDepositViewController: BaseViewController {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        title = viewModel.title
-        
-        setupUI()
-    }
-    
     // MARK: - Private methods
     private func setup() {
-        setupUI()
+        showProgressHUD()
+        viewModel.fetch { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.setupUI()
+            case .failure(let reason):
+                break
+            }
+        }
     }
     
     private func setupUI() {
+        title = viewModel.title
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
     }

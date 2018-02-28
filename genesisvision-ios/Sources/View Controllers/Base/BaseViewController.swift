@@ -32,6 +32,9 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         
+        tableView.separatorInset.left = 16.0
+        tableView.separatorInset.right = 16.0
+        
         view.backgroundColor = UIColor.Background.main
         tableView.backgroundColor = UIColor.Background.main
     }

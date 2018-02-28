@@ -20,13 +20,27 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func getWalletTransactions(authorization: String, filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
+    static func getWalletTransactions(filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        
         isInvestorApp
             ? getInvestorWalletTransactions(with: authorization, filter: filter) { (viewModel) in
                 completion(viewModel)
                 }
             : getManagerWalletTransactions(with: authorization, filter: filter) { (viewModel) in
                 completion(viewModel)
+        }
+    }
+    
+    static func getWalletAddress(completion: @escaping (_ walletAddressViewModel: WalletAddressViewModel?) -> Void) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        
+        InvestorAPI.apiInvestorWalletAddressGet(authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: { (walletAddressViewModel) in
+                completion(walletAddressViewModel)
+            }, errorCompletion: { (error) in
+                completion(nil)
+            })
         }
     }
     

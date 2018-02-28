@@ -184,10 +184,9 @@ final class WalletControllerViewModel {
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken else { return completionError(.failure(reason: nil)) }
         let filter = TransactionsFilter(skip: skip, take: Constants.Api.take)
         
-        WalletDataProvider.getWalletTransactions(authorization: authorization, filter: filter) { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(filter: filter) { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }

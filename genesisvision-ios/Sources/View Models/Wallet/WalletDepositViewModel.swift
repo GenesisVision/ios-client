@@ -20,8 +20,6 @@ final class WalletDepositViewModel {
     // MARK: - Init
     init(withRouter router: WalletDepositRouter) {
         self.router = router
-        
-        setup()
     }
     
     // MARK: - Public methods
@@ -33,6 +31,21 @@ final class WalletDepositViewModel {
         return qrImage ?? UIImage.placeholder
     }
     
+    func fetch(completion: @escaping CompletionBlock) {
+        getAddress { [weak self] (address) in
+            guard let address = address,
+                var qrCode = QRCode(address)
+                else { return completion(.failure(reason: nil)) }
+            
+            self?.address = address
+            qrCode.size = CGSize(width: 300, height: 300)
+            qrCode.color = CIColor(cgColor: UIColor.Font.black.cgColor)
+            qrCode.backgroundColor = CIColor(cgColor: UIColor.Background.main.cgColor)
+            self?.qrImage = qrCode.image
+            completion(.success)
+        }
+    }
+    
     // MARK: - Navigation
     func copy(completion: @escaping CompletionBlock) {
         UIPasteboard.general.string = address
@@ -40,27 +53,14 @@ final class WalletDepositViewModel {
     }
     
     // MARK: - Private methods
-    private func setup() {
-        //get address
-        getAddress { [weak self] (address) in
-            guard let address = address,
-                var qrCode = QRCode(address)
-                else { return }
+    private func getAddress(completion: @escaping (_ address: String?) -> Void) {
+        WalletDataProvider.getWalletAddress { (viewModel) in
+            guard let address = viewModel?.address else {
+                return completion(nil)
+            }
             
-            self?.address = address
-            qrCode.size = CGSize(width: 300, height: 300)
-            qrCode.color = CIColor(cgColor: UIColor.Font.black.cgColor)
-            qrCode.backgroundColor = CIColor(cgColor: UIColor.Background.main.cgColor)
-            self?.qrImage = qrCode.image
+            completion(address)
         }
-    }
-    
-    private func getAddress(completion: (_ address: String?) -> Void) {
-        var address: String?
-        address = "0xad01944aeb8aa224a0d0ed7dd5c220f8fl96ed62"
-        //get from api
-        
-        completion(address)
     }
     
 }
