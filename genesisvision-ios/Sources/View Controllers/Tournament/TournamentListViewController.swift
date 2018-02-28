@@ -16,11 +16,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
-    var viewModel: TournamentListViewModel! {
-        didSet {
-            pullToRefresh()
-        }
-    }
+    var viewModel: TournamentListViewModel!
     
     // MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -67,6 +63,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         
         title = viewModel.title
         showProgressHUD()
+        pullToRefresh()
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
     

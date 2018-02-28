@@ -9,7 +9,7 @@
 import UIKit.UIView
 
 class ProfileImageView: UIView {
-    @IBOutlet var profilePhotoImageView: RoundedImageView! {
+    @IBOutlet var profilePhotoImageView: UIImageView! {
         didSet {
             profilePhotoImageView.roundCorners()
         }

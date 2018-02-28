@@ -23,7 +23,12 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet weak var withdrawButton: ActionButton!
     
     // MARK: - Views
-    @IBOutlet var managerAvatarImageView: UIImageView!
+    @IBOutlet var managerAvatarImageView: UIImageView! {
+        didSet {
+            managerAvatarImageView.roundCorners()
+        }
+    }
+    
     @IBOutlet var programLogoImageView: ProfileImageView!
     
     // MARK: - Labels

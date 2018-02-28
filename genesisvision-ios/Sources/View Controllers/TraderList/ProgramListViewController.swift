@@ -18,11 +18,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
-    var viewModel: InvestmentProgramListViewModel! {
-        didSet {
-            pullToRefresh()
-        }
-    }
+    var viewModel: InvestmentProgramListViewModel!
     
     // MARK: - Buttons
     @IBOutlet var signInButton: UIButton!
@@ -69,6 +65,19 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         signInButton.isHidden = !signInButtonEnable
     }
     
+    private func setup() {
+        registerForPreviewing()
+        
+        showProgressHUD()
+        pullToRefresh()
+        setupUI()
+    }
+    
+    private func setupUI() {
+        filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
+        navigationItem.rightBarButtonItem = filterBarButtonItem
+    }
+    
     private func setupTableConfiguration() {
         var tableViewConfiguration: TableViewConfiguration = .defaultConfig
         tableViewConfiguration.bottomInset = signInButtonEnable ? 76.0 + 16.0 : 0.0
@@ -77,20 +86,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
-
-        setupPullToRefresh()
-    }
-    
-    private func setup() {
-        registerForPreviewing()
         
-        showProgressHUD()
-        setupUI()
-    }
-    
-    private func setupUI() {
-        filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
-        navigationItem.rightBarButtonItem = filterBarButtonItem
+        setupPullToRefresh()
     }
     
     private func reloadData() {

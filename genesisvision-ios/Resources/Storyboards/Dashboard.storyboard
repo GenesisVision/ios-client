@@ -13,7 +13,7 @@
         <!--Dashboard View Controller-->
         <scene sceneID="A4w-nA-Z8l">
             <objects>
-                <viewController storyboardIdentifier="DashboardViewController" id="4Iy-NG-MEA" customClass="DashboardViewController" customModule="GV_Investor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardViewController" id="4Iy-NG-MEA" customClass="DashboardViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cJF-Gy-plB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6XZ-lt-BbI"/>
                     <connections>
-                        <outlet property="tableView" destination="EU9-8d-Mr6" id="hc1-RT-sSv"/>
+                        <outlet property="tableView" destination="EU9-8d-Mr6" id="bLW-xg-ss4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9f-Hh-prd" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,7 +7,7 @@
 //
 
 enum DashboardRouteType {
-    case invest
+    case showProgramDetail(investmentProgramID: String)
 }
 
 class DashboardRouter: Router {
@@ -15,13 +15,27 @@ class DashboardRouter: Router {
     // MARK: - Public methods
     func show(routeType: DashboardRouteType) {
         switch routeType {
-        case .invest:
-            invest()
+        case .showProgramDetail(let investmentProgramID):
+            showProgramDetail(with: investmentProgramID)
         }
     }
     
     // MARK: - Private methods
-    private func invest() {
-        //TODO: invest
+    func getDetailViewController(with investmentProgramID: String, state: ProgramDetailViewState) -> ProgramDetailViewController? {
+        guard let traderViewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
+        let router = ProgramDetailRouter(parentRouter: self)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramID, state: state)
+        traderViewController.viewModel = viewModel
+        
+        return traderViewController
+    }
+    
+    private func showProgramDetail(with investmentProgramID: String) {
+        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramID, state: .full)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -16,11 +16,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
-    var viewModel: ProgramHistoryViewModel! {
-        didSet {
-            pullToRefresh()
-        }
-    }
+    var viewModel: ProgramHistoryViewModel!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -53,6 +49,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         showProgressHUD()
+        pullToRefresh()
     }
     
     private func reloadData() {

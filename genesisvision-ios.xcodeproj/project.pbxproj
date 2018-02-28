@@ -129,6 +129,7 @@
 		FCA5707C2027962A001942F3 /* WalletTransactionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */; };
 		FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */; };
 		FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */; };
+		FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */; };
 		FCB177662045690500A482B7 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB177642045690500A482B7 /* DashboardTableViewCell.swift */; };
 		FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB177652045690500A482B7 /* DashboardTableViewCell.xib */; };
 		FCB177692045691300A482B7 /* DashboardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */; };
@@ -375,6 +376,7 @@
 		FCA5707B2027962A001942F3 /* WalletTransactionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionExtension.swift; sourceTree = "<group>"; };
 		FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableHeaderView.xib; sourceTree = "<group>"; };
 		FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableHeaderView.swift; sourceTree = "<group>"; };
+		FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataProvider.swift; sourceTree = "<group>"; };
 		FCB177642045690500A482B7 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		FCB177652045690500A482B7 /* DashboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardTableViewCell.xib; sourceTree = "<group>"; };
 		FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -1192,6 +1194,7 @@
 				FCB1786F2045C47A00A482B7 /* WalletDataProvider.swift */,
 				FCB178712046CA0D00A482B7 /* ProgramDataProvider.swift */,
 				FCB178ED2046D45600A482B7 /* TournamentDataProvider.swift */,
+				FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */,
 			);
 			path = "Data Providers";
 			sourceTree = "<group>";
@@ -1566,6 +1569,7 @@
 				FCA19A2F201ADF8800157AD6 /* SignUpViewModel.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramDetailViewModel.swift in Sources */,
 				FCA5707C2027962A001942F3 /* WalletTransactionExtension.swift in Sources */,
+				FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */,
 				FCB178DA2046CD0B00A482B7 /* OpenTradesViewModel.swift in Sources */,
 				FCB178D52046CD0B00A482B7 /* NewInvestmentRequest.swift in Sources */,
 				FCB178B22046CD0B00A482B7 /* FilesAPI.swift in Sources */,

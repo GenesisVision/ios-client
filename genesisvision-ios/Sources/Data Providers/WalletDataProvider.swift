@@ -9,13 +9,13 @@
 class WalletDataProvider: DataProvider {
     // MARK: - Public methods
     static func getWallet(completion: @escaping (_ wallet: WalletsViewModel?) -> Void) {
-        guard let token = AuthManager.authorizedToken else { return completion(nil) }
+        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
         isInvestorApp
-            ? getInvestorWallet(with: token) { (viewModel) in
+            ? getInvestorWallet(with: authorization) { (viewModel) in
                 completion(viewModel)
                 }
-            : getManagerWallet(with: token) { (viewModel) in
+            : getManagerWallet(with: authorization) { (viewModel) in
                 completion(viewModel)
         }
     }

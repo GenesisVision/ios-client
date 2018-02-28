@@ -8,18 +8,19 @@
 
 class ProfileDataProvider: DataProvider {
     static func getProfileFull(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
-        guard let token = AuthManager.authorizedToken else { return completion(nil) }
+        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        
         isInvestorApp
-            ? getInvestorProfileFull(with: token) { (viewModel) in
+            ? getInvestorProfileFull(with: authorization) { (viewModel) in
                 completion(viewModel)
             }
-            : getInvestorProfileFull(with: token) { (viewModel) in
+            : getInvestorProfileFull(with: authorization) { (viewModel) in
                 completion(viewModel)
             }
     }
     
-    private static func getInvestorProfileFull(with token: String, completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
-        InvestorAPI.apiInvestorProfileFullGet(authorization: token) { (viewModel, error) in
+    private static func getInvestorProfileFull(with authorization: String, completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
+        InvestorAPI.apiInvestorProfileFullGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: { (profileViewModel) in
                 completion(profileViewModel)
             }, errorCompletion: { (error) in

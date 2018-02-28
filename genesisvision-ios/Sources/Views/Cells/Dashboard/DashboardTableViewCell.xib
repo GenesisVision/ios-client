@@ -104,7 +104,7 @@
                                                 </connections>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="NWy-P3-Njc" firstAttribute="top" secondItem="eR4-cm-b0v" secondAttribute="top" id="Bxb-TY-Dx2"/>
                                             <constraint firstAttribute="height" constant="50" id="Jem-Nu-sny"/>
@@ -184,7 +184,7 @@
                                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="investButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="LCj-C0-400"/>
+                                                    <action selector="investButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="AJg-cB-aPK"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9c2-xR-gFQ" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
@@ -194,7 +194,7 @@
                                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="withdrawButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="6pP-7l-GSo"/>
+                                                    <action selector="withdrawButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="Bmd-ZJ-qnx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -214,7 +214,7 @@
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="investButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="ihV-D8-F46"/>
+                                            <action selector="investButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="Ltu-Hp-rRT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA5-RJ-dW7" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
@@ -224,7 +224,7 @@
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="withdrawButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="hTg-tP-gYC"/>
+                                            <action selector="withdrawButtonAction:" destination="yJg-Tu-voD" eventType="touchUpInside" id="lL4-OB-HZb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -252,14 +252,13 @@
             <connections>
                 <outlet property="backgroundView" destination="pmM-AY-Ar8" id="D7T-bo-ldA"/>
                 <outlet property="investButton" destination="j5P-yu-uuF" id="2k6-Dx-PnL"/>
-                <outlet property="investButtonAction" destination="j5P-yu-uuF" id="p8U-z5-Qu8"/>
                 <outlet property="managerAvatarImageView" destination="NWy-P3-Njc" id="kBl-ee-EzA"/>
                 <outlet property="periodLabel" destination="5Wu-Jf-bGB" id="VJy-m6-oJS"/>
                 <outlet property="profitLabel" destination="zQ0-rr-01i" id="BrN-LY-kAK"/>
                 <outlet property="programLogoImageView" destination="Y5N-D7-MC5" id="0Rb-4T-iTV"/>
                 <outlet property="tokensCountLabel" destination="CnU-MT-hcM" id="EeV-sD-Dbs"/>
                 <outlet property="userNameLabel" destination="lce-kU-kjo" id="4PH-Zl-R48"/>
-                <outlet property="withdrawButton" destination="9c2-xR-gFQ" id="pcn-BA-E1w"/>
+                <outlet property="withdrawButton" destination="9c2-xR-gFQ" id="3fp-Rb-kAo"/>
             </connections>
             <point key="canvasLocation" x="34" y="327.5"/>
         </tableViewCell>

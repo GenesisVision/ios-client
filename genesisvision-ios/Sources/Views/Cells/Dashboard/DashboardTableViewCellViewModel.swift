@@ -34,6 +34,14 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.tokensCountLabel.text = String(describing: tokensCount)
         }
         
+        if let period = investmentProgram.periodDuration {
+            cell.periodLabel.text = String(describing: period)
+        }
+        
+        if let profit = investmentProgram.profitTotal {
+            cell.profitLabel.text = String(describing: profit) + "%"
+        }
+        
         if let level = investmentProgram.level {
             cell.programLogoImageView.levelLabel.text = String(describing: level)
         }
