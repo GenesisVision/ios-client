@@ -7,13 +7,24 @@
 //
 
 class DataProvider {
-    func responseHandler<T>(_ viewModel: T?, error: Error?, successCompletion: @escaping (_ viewModel: T?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    func responseHandler<T>(_ viewModel: T? = nil, error: Error?, successCompletion: @escaping (_ viewModel: T?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard viewModel != nil else {
+        guard viewModel != nil && error == nil else {
             print("Error")
             return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
         }
         
         successCompletion(viewModel)
     }
+    
+    func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
+        
+        guard error != nil else {
+            print("Error")
+            return ErrorHandler.handleApiError(error: error, completion: completion)
+        }
+        
+        completion(.success)
+    }
+    
 }

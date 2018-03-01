@@ -8,8 +8,11 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-enum ProgramDetailViewState {
-    case show, invest, full
+struct ProgramDetailViewProperties {
+    var isHistoryEnable: Bool = false
+    var isInvestEnable: Bool = false
+    var isWithdrawEnable: Bool = false
+    var hasNewRequests: Bool = false
 }
 
 final class ProgramDetailViewModel {
@@ -22,16 +25,27 @@ final class ProgramDetailViewModel {
     var title: String = "Program Detail"
     private var router: ProgramDetailRouter
     
-    private var investmentProgramID: String!
+    private var investmentProgramId: String!
     private var investmentProgramDetails: InvestmentProgramDetails? {
         didSet {
+            if let isHistoryEnable = investmentProgramDetails?.isHistoryEnable,
+                let isInvestEnable = investmentProgramDetails?.isInvestEnable,
+                let isWithdrawEnable = investmentProgramDetails?.isWithdrawEnable,
+                let hasNewRequests = investmentProgramDetails?.hasNewRequests {
+                viewProperties = ProgramDetailViewProperties(isHistoryEnable: isHistoryEnable,
+                                                             isInvestEnable: isInvestEnable,
+                                                             isWithdrawEnable: isWithdrawEnable,
+                                                             hasNewRequests: hasNewRequests)
+            }
+            
             if let title = investmentProgramDetails?.title {
                 self.title = title
             }
         }
     }
     
-    var state: ProgramDetailViewState = .show
+    var viewProperties: ProgramDetailViewProperties?
+    
     private var sections: [SectionType] = [.header, .chart]
     private var models: [CellViewAnyModel]?
     
@@ -46,10 +60,9 @@ final class ProgramDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter, with investmentProgramID: String, state: ProgramDetailViewState) {
+    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String) {
         self.router = router
-        self.investmentProgramID = investmentProgramID
-        self.state = state
+        self.investmentProgramId = investmentProgramId
     }
     
     // MARK: - Public methods
@@ -93,18 +106,23 @@ final class ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let investmentProgramID = investmentProgramID else { return }
-        router.show(routeType: .invest(investmentProgramId: investmentProgramID))
+        guard let investmentProgramId = investmentProgramId else { return }
+        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
     }
     
     func withdraw() {
-        guard let investmentProgramID = investmentProgramID else { return }
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramID))
+        guard let investmentProgramId = investmentProgramId else { return }
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
     }
     
     func showHistory() {
-        guard let investmentProgramID = investmentProgramID else { return }
-        router.show(routeType: .history(investmentProgramId: investmentProgramID))
+        guard let investmentProgramId = investmentProgramId else { return }
+        router.show(routeType: .history(investmentProgramId: investmentProgramId))
+    }
+    
+    func showRequests() {
+        guard let investmentProgramId = investmentProgramId else { return }
+        router.show(routeType: .requests(investmentProgramId: investmentProgramId))
     }
 }
 
@@ -131,7 +149,7 @@ extension ProgramDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        ProgramDataProvider.getProgram(investmentProgramID: self.investmentProgramID) { [weak self] (viewModel) in
+        ProgramDataProvider.getProgram(investmentProgramId: self.investmentProgramId) { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(reason: nil))
             }

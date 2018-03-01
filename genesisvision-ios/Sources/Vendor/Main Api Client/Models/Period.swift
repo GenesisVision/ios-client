@@ -24,11 +24,11 @@ open class Period: Codable {
     public var startBalance: Double?
     public var managerStartBalance: Double?
     public var managerStartShare: Double?
-    public var investmentRequest: [InvestmentRequest]?
+    public var investmentRequest: [InvestmentProgramRequest]?
 
 
     
-    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, managerStartBalance: Double?, managerStartShare: Double?, investmentRequest: [InvestmentRequest]?) {
+    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, managerStartBalance: Double?, managerStartShare: Double?, investmentRequest: [InvestmentProgramRequest]?) {
         self.id = id
         self.number = number
         self.dateFrom = dateFrom
@@ -71,7 +71,7 @@ open class Period: Codable {
         startBalance = try container.decodeIfPresent(Double.self, forKey: "startBalance")
         managerStartBalance = try container.decodeIfPresent(Double.self, forKey: "managerStartBalance")
         managerStartShare = try container.decodeIfPresent(Double.self, forKey: "managerStartShare")
-        investmentRequest = try container.decodeIfPresent([InvestmentRequest].self, forKey: "investmentRequest")
+        investmentRequest = try container.decodeIfPresent([InvestmentProgramRequest].self, forKey: "investmentRequest")
     }
 }
 

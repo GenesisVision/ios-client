@@ -42,6 +42,10 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.profitLabel.text = String(describing: profit) + "%"
         }
         
+        if let investmentProgramId = investmentProgram.id?.uuidString {
+            cell.investmentProgramId = investmentProgramId
+        }
+        
         if let level = investmentProgram.level {
             cell.programLogoImageView.levelLabel.text = String(describing: level)
         }

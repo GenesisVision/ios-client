@@ -9,14 +9,15 @@
 import UIKit
 
 protocol DashboardTableViewCellProtocol: class {
-    func investProgramDidPress()
-    func withdrawProgramDidPress()
+    func investProgramDidPress(with investmentProgramId: String)
+    func withdrawProgramDidPress(with investmentProgramId: String)
 }
 
 class DashboardTableViewCell: UITableViewCell {
     
     // MARK: - Variables
     weak var delegate: DashboardTableViewCellProtocol?
+    var investmentProgramId: String = ""
     
     // MARK: - Buttons
     @IBOutlet weak var investButton: ActionButton!
@@ -26,10 +27,15 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet var managerAvatarImageView: UIImageView! {
         didSet {
             managerAvatarImageView.roundCorners()
+            managerAvatarImageView.addBorder(withBorderWidth: 2.0)
         }
     }
     
-    @IBOutlet var programLogoImageView: ProfileImageView!
+    @IBOutlet var programLogoImageView: ProfileImageView! {
+        didSet {
+            programLogoImageView.profilePhotoImageView.addBorder(withBorderWidth: 2.0)
+        }
+    }
     
     // MARK: - Labels
     @IBOutlet var userNameLabel: UILabel!
@@ -47,10 +53,10 @@ class DashboardTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: Any) {
-        delegate?.investProgramDidPress()
+        delegate?.investProgramDidPress(with: investmentProgramId)
     }
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
-        delegate?.withdrawProgramDidPress()
+        delegate?.withdrawProgramDidPress(with: investmentProgramId)
     }
 }

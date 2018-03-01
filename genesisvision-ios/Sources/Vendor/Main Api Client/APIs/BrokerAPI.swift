@@ -160,39 +160,81 @@ open class BrokerAPI {
     "email" : "email"
   } ],
   "investments" : [ {
-    "periodDuration" : 5,
-    "feeManagement" : 2.027123023002322,
-    "level" : 0,
-    "availableInvestment" : 9.301444243932576,
-    "title" : "title",
-    "isPending" : true,
-    "tradesCount" : 1,
-    "balance" : 6.027456183070403,
-    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "logo" : "logo",
-    "currency" : "Undefined",
-    "profitTotal" : 7.061401241503109,
-    "feeSuccess" : 3.616076749251911,
+    "feeEntrance" : 5.962133916683182,
+    "period" : 0,
+    "feeManagement" : 1.4658129805029452,
+    "description" : "description",
+    "dateFrom" : "2000-01-23T04:56:07.000+00:00",
+    "login" : "login",
+    "investMinAmount" : 5.637376656633329,
+    "isEnabled" : true,
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "ipfsHash" : "ipfsHash",
+    "feeSuccess" : 6.027456183070403,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "profitAvg" : 2.3021358869347655,
-    "investorsCount" : 5
+    "investMaxAmount" : 2.3021358869347655,
+    "lastPeriod" : {
+      "number" : 7,
+      "managerStartBalance" : 3.616076749251911,
+      "managerStartShare" : 2.027123023002322,
+      "investmentRequest" : [ {
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "amount" : 4.145608029883936,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Invest",
+        "status" : "New"
+      }, {
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "amount" : 4.145608029883936,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Invest",
+        "status" : "New"
+      } ],
+      "dateTo" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "dateFrom" : "2000-01-23T04:56:07.000+00:00",
+      "startBalance" : 9.301444243932576,
+      "status" : "Planned"
+    },
+    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
-    "periodDuration" : 5,
-    "feeManagement" : 2.027123023002322,
-    "level" : 0,
-    "availableInvestment" : 9.301444243932576,
-    "title" : "title",
-    "isPending" : true,
-    "tradesCount" : 1,
-    "balance" : 6.027456183070403,
-    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "logo" : "logo",
-    "currency" : "Undefined",
-    "profitTotal" : 7.061401241503109,
-    "feeSuccess" : 3.616076749251911,
+    "feeEntrance" : 5.962133916683182,
+    "period" : 0,
+    "feeManagement" : 1.4658129805029452,
+    "description" : "description",
+    "dateFrom" : "2000-01-23T04:56:07.000+00:00",
+    "login" : "login",
+    "investMinAmount" : 5.637376656633329,
+    "isEnabled" : true,
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "ipfsHash" : "ipfsHash",
+    "feeSuccess" : 6.027456183070403,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "profitAvg" : 2.3021358869347655,
-    "investorsCount" : 5
+    "investMaxAmount" : 2.3021358869347655,
+    "lastPeriod" : {
+      "number" : 7,
+      "managerStartBalance" : 3.616076749251911,
+      "managerStartShare" : 2.027123023002322,
+      "investmentRequest" : [ {
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "amount" : 4.145608029883936,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Invest",
+        "status" : "New"
+      }, {
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "amount" : 4.145608029883936,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Invest",
+        "status" : "New"
+      } ],
+      "dateTo" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "dateFrom" : "2000-01-23T04:56:07.000+00:00",
+      "startBalance" : 9.301444243932576,
+      "status" : "Planned"
+    },
+    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   } ]
 }}]
      
@@ -420,26 +462,26 @@ open class BrokerAPI {
      - GET /api/broker/period/сlosingData
      - examples: [{contentType=application/json, example={
   "tokenHolders" : [ {
-    "amount" : 2.3021358869347655,
+    "amount" : 0.8008281904610115,
     "investorId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
-    "amount" : 2.3021358869347655,
+    "amount" : 0.8008281904610115,
     "investorId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   } ],
   "canCloseCurrentPeriod" : true,
   "currentPeriod" : {
-    "number" : 0,
-    "managerStartBalance" : 1.4658129805029452,
-    "managerStartShare" : 5.962133916683182,
+    "number" : 7,
+    "managerStartBalance" : 3.616076749251911,
+    "managerStartShare" : 2.027123023002322,
     "investmentRequest" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 5.637376656633329,
+      "amount" : 4.145608029883936,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
       "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 5.637376656633329,
+      "amount" : 4.145608029883936,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
       "status" : "New"
@@ -447,7 +489,7 @@ open class BrokerAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 6.027456183070403,
+    "startBalance" : 9.301444243932576,
     "status" : "Planned"
   }
 }}]

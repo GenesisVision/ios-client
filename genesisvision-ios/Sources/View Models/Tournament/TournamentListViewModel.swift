@@ -81,7 +81,7 @@ extension TournamentListViewModel {
 extension TournamentListViewModel {
     // MARK: - Public methods
     func showDetail(with model: ParticipantViewModel) {
-        router.show(routeType: .showDetail(participantID: model.id?.uuidString ?? ""))
+        router.show(routeType: .showDetail(participantId: model.id?.uuidString ?? ""))
     }
 }
 

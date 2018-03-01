@@ -23,8 +23,24 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Buttons
-    @IBOutlet var investButton: UIButton!
-    @IBOutlet var withdrawButton: UIButton!
+    @IBOutlet var investButton: UIButton! {
+        didSet {
+            investButton.tintColor = UIColor.Button.green
+            investButton.isHidden = true
+        }
+    }
+    @IBOutlet var withdrawButton: UIButton! {
+        didSet {
+            withdrawButton.tintColor = UIColor.Button.red
+            withdrawButton.isHidden = true
+        }
+    }
+    @IBOutlet var requestsButton: UIButton! {
+        didSet {
+            requestsButton.tintColor = UIColor.Button.primary
+            requestsButton.isHidden = true
+        }
+    }
     
     // MARK: - Variables
     private var historyBarButtonItem: UIBarButtonItem?
@@ -32,9 +48,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     // MARK: - IBOutlets
     @IBOutlet var buttonsView: UIView!
-    @IBOutlet weak var investButtonViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var investButtonViewTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var withdrawButtonViewLeadingConstraint: NSLayoutConstraint!
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -60,32 +73,15 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        title = viewModel.title
+        
+        guard let viewProperties = viewModel.viewProperties else { return }
         historyBarButtonItem = UIBarButtonItem(title: "History", style: .done, target: self, action: #selector(historyButtonAction(_:)))
-        navigationItem.rightBarButtonItem = historyBarButtonItem
-        
-        investButton.tintColor = UIColor.Button.green
-        withdrawButton.tintColor = UIColor.Button.red
-        
-        withdrawButton.isHidden = true
-        
-        switch viewModel.state {
-        case .show:
-            investButtonViewTrailingConstraint.isActive = true
-            investButtonViewWidthConstraint.isActive = false
-            withdrawButtonViewLeadingConstraint.isActive = false
-            investButtonViewTrailingConstraint.constant = 32
-            navigationItem.rightBarButtonItem = nil
-        case .invest:
-            investButtonViewTrailingConstraint.isActive = true
-            investButtonViewWidthConstraint.isActive = false
-            withdrawButtonViewLeadingConstraint.isActive = false
-            investButtonViewTrailingConstraint.constant = 32
-        case .full:
-            investButtonViewTrailingConstraint.isActive = false
-            investButtonViewWidthConstraint.isActive = true
-            withdrawButtonViewLeadingConstraint.isActive = true
-            withdrawButton.isHidden = false
-        }
+        navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
+
+        investButton.isHidden = !viewProperties.isInvestEnable
+        withdrawButton.isHidden = !viewProperties.isWithdrawEnable
+        requestsButton.isHidden = !viewProperties.hasNewRequests
     }
     
     private func setupTableConfiguration() {
@@ -104,7 +100,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.setupNavigationBar()
+                self?.setupUI()
                 self?.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             case .failure(let reason):
@@ -112,10 +108,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
-    }
-    
-    private func setupNavigationBar() {
-        title = viewModel.title
     }
     
     private func reloadData() {
@@ -136,6 +128,10 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         viewModel.withdraw()
+    }
+    
+    @IBAction func requestsButtonAction(_ sender: UIButton) {
+        viewModel.showRequests()
     }
 }
 

@@ -25,7 +25,7 @@ final class TournamentDetailViewModel {
     var title: String = "Tournament Detail"
     var router: TournamentDetailRouter!
 
-    private var participantID: String!
+    private var participantId: String!
     private var participantViewModel: ParticipantViewModel? {
         didSet {
             if let name = participantViewModel?.name {
@@ -48,9 +48,9 @@ final class TournamentDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: TournamentDetailRouter, with participantID: String) {
+    init(withRouter router: TournamentDetailRouter, with participantId: String) {
         self.router = router
-        self.participantID = participantID
+        self.participantId = participantId
     }
     
     // MARK: - Public methods
@@ -122,7 +122,7 @@ extension TournamentDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        TournamentDataProvider.getTournamentParticipant(with: self.participantID) { [weak self] (viewModel) in
+        TournamentDataProvider.getTournamentParticipant(with: self.participantId) { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(reason: nil))
             }

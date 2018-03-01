@@ -13,6 +13,7 @@ final class DashboardViewModel {
     
     private var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
+    private weak var delegate: DashboardTableViewCellProtocol?
     
     var programsCount: String = ""
     var skip = 0
@@ -25,11 +26,12 @@ final class DashboardViewModel {
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
-    var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
+    var viewModels = [DashboardTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: DashboardRouter) {
+    init(withRouter router: DashboardRouter, delegate: DashboardTableViewCellProtocol) {
         self.router = router
+        self.delegate = delegate
     }
 }
 
@@ -42,7 +44,7 @@ extension DashboardViewModel {
     }
     
     func modelsCount() -> Int {
-        return dashboardProgramViewModels.count
+        return viewModels.count
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -53,8 +55,15 @@ extension DashboardViewModel {
 // MARK: - Navigation
 extension DashboardViewModel {
     // MARK: - Public methods
-    func showDetail(with investmentProgramID: String) {
-        router.show(routeType: .showProgramDetail(investmentProgramID: investmentProgramID))
+    func showDetail(with investmentProgramId: String) {
+        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId))
+    }
+    func invest(with investmentProgramId: String) {
+        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
+    }
+    
+    func withdraw(with investmentProgramId: String) {
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
     }
 }
 
@@ -74,7 +83,7 @@ extension DashboardViewModel {
         
         skip += Constants.Api.take
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.dashboardProgramViewModels ?? [DashboardTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [DashboardTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -94,7 +103,7 @@ extension DashboardViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> DashboardTableViewCellViewModel? {
-        return dashboardProgramViewModels[index]
+        return viewModels[index]
     }
     
     func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
@@ -102,12 +111,12 @@ extension DashboardViewModel {
             return nil
         }
         
-        return router.getDetailViewController(with: model.investmentProgram.id?.uuidString ?? "", state: .full)
+        return router.getDetailViewController(with: model.investmentProgram.id?.uuidString ?? "")
     }
     
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
-        self.dashboardProgramViewModels = viewModels
+        self.viewModels = viewModels
         self.totalCount = totalCount
     }
     
@@ -120,7 +129,7 @@ extension DashboardViewModel {
             let totalCount = dashboard.total ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, delegate: nil)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, delegate: self.delegate)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             

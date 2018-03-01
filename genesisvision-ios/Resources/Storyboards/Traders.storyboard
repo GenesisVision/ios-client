@@ -175,64 +175,91 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Dm-Se-2kf">
-                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <rect key="frame" x="0.0" y="535" width="375" height="132"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXP-jp-r4E" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="0.0" width="147.5" height="60"/>
-                                        <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Invest">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="investButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="WnM-UU-AAT"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-1d-sP2" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="195.5" y="0.0" width="147.5" height="60"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Withdraw">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="withdrawButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="hhh-vD-HLF"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-IT-8me">
+                                        <rect key="frame" x="32" y="0.0" width="311" height="116"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FYO-Ia-0dk">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXP-jp-r4E" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="50"/>
+                                                        <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <state key="normal" title="Invest">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="investButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="WnM-UU-AAT"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-1d-sP2" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="163.5" y="0.0" width="147.5" height="50"/>
+                                                        <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <state key="normal" title="Withdraw">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="withdrawButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="hhh-vD-HLF"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="W4J-7R-nZP"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4r-81-z60" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="66" width="311" height="50"/>
+                                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Requests">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="investButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="slt-9H-hiA"/>
+                                                    <action selector="requestsButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="gwG-1b-NFy"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="g4r-81-z60" firstAttribute="height" secondItem="FYO-Ia-0dk" secondAttribute="height" id="Swt-9y-beH"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="NXP-jp-r4E" secondAttribute="bottom" constant="16" id="37j-Ng-qEj"/>
-                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="top" secondItem="NXP-jp-r4E" secondAttribute="top" id="6cC-d7-sj5"/>
-                                    <constraint firstItem="NXP-jp-r4E" firstAttribute="leading" secondItem="6Dm-Se-2kf" secondAttribute="leading" constant="32" id="DwL-jO-zUK"/>
-                                    <constraint firstAttribute="height" constant="76" id="ENW-kr-OIX"/>
-                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="width" secondItem="NXP-jp-r4E" secondAttribute="width" id="JEA-Wm-mNb"/>
-                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="bottom" secondItem="NXP-jp-r4E" secondAttribute="bottom" id="K3n-4w-Buz"/>
-                                    <constraint firstItem="BL2-1d-sP2" firstAttribute="leading" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="16" id="KEy-bp-JiD"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NXP-jp-r4E" secondAttribute="trailing" constant="32" id="SwY-A7-fyk"/>
-                                    <constraint firstAttribute="trailing" secondItem="BL2-1d-sP2" secondAttribute="trailing" constant="32" id="abe-cD-5W2"/>
-                                    <constraint firstItem="NXP-jp-r4E" firstAttribute="top" secondItem="6Dm-Se-2kf" secondAttribute="top" id="yhv-71-DZj"/>
+                                    <constraint firstItem="SLG-IT-8me" firstAttribute="top" secondItem="6Dm-Se-2kf" secondAttribute="top" id="7gM-jE-Zh6"/>
+                                    <constraint firstAttribute="bottom" secondItem="SLG-IT-8me" secondAttribute="bottom" constant="16" id="HnC-1Z-Lh0"/>
+                                    <constraint firstAttribute="trailing" secondItem="SLG-IT-8me" secondAttribute="trailing" constant="32" id="pGl-h0-h3j"/>
+                                    <constraint firstItem="SLG-IT-8me" firstAttribute="leading" secondItem="6Dm-Se-2kf" secondAttribute="leading" constant="32" id="yZ5-75-rPC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wCW-GM-tTm" firstAttribute="bottom" secondItem="6Dm-Se-2kf" secondAttribute="bottom" id="1UX-lh-S2Y"/>
-                            <constraint firstAttribute="trailing" secondItem="6Dm-Se-2kf" secondAttribute="trailing" id="EaW-le-cKF"/>
+                            <constraint firstItem="6Dm-Se-2kf" firstAttribute="bottom" secondItem="wCW-GM-tTm" secondAttribute="bottom" id="2fg-Ww-ZOJ"/>
                             <constraint firstItem="wCW-GM-tTm" firstAttribute="bottom" secondItem="Okg-0k-2HX" secondAttribute="bottom" id="LSd-M7-b2d"/>
                             <constraint firstItem="wCW-GM-tTm" firstAttribute="trailing" secondItem="Okg-0k-2HX" secondAttribute="trailing" id="aeM-IV-L5G"/>
-                            <constraint firstItem="6Dm-Se-2kf" firstAttribute="leading" secondItem="wCW-GM-tTm" secondAttribute="leading" id="mXJ-ZB-vOF"/>
+                            <constraint firstItem="6Dm-Se-2kf" firstAttribute="trailing" secondItem="wCW-GM-tTm" secondAttribute="trailing" id="dMx-XC-STF"/>
                             <constraint firstItem="Okg-0k-2HX" firstAttribute="leading" secondItem="wCW-GM-tTm" secondAttribute="leading" id="naG-7t-j70"/>
+                            <constraint firstItem="6Dm-Se-2kf" firstAttribute="leading" secondItem="wCW-GM-tTm" secondAttribute="leading" id="vAu-hi-jk0"/>
                             <constraint firstItem="Okg-0k-2HX" firstAttribute="top" secondItem="45y-LA-dTh" secondAttribute="top" id="vo7-Qt-3CI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wCW-GM-tTm"/>
@@ -241,11 +268,9 @@
                     <connections>
                         <outlet property="buttonsView" destination="6Dm-Se-2kf" id="D8V-Qf-oVu"/>
                         <outlet property="investButton" destination="NXP-jp-r4E" id="3Wk-bY-KTw"/>
-                        <outlet property="investButtonViewTrailingConstraint" destination="SwY-A7-fyk" id="29q-1x-eEs"/>
-                        <outlet property="investButtonViewWidthConstraint" destination="JEA-Wm-mNb" id="s0f-VW-Zae"/>
+                        <outlet property="requestsButton" destination="g4r-81-z60" id="hcO-P2-C7j"/>
                         <outlet property="tableView" destination="Okg-0k-2HX" id="rmu-N2-vmJ"/>
                         <outlet property="withdrawButton" destination="BL2-1d-sP2" id="fxg-GH-DQ6"/>
-                        <outlet property="withdrawButtonViewLeadingConstraint" destination="KEy-bp-JiD" id="CvL-T7-BuB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50I-f0-5XA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,8 +363,8 @@
                     </view>
                     <connections>
                         <outlet property="amountLabel" destination="CnT-JI-9c1" id="AJs-Nj-W0k"/>
+                        <outlet property="amountTextField" destination="A2Y-Zj-wXk" id="Kn4-oq-dCz"/>
                         <outlet property="investButton" destination="Uun-QE-fnC" id="E6p-Y6-MIj"/>
-                        <outlet property="valueTextField" destination="A2Y-Zj-wXk" id="oVZ-Fr-xu8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSN-5k-fg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -467,8 +492,8 @@
                         <viewLayoutGuide key="safeArea" id="hGH-6b-05e"/>
                     </view>
                     <connections>
+                        <outlet property="amountTextField" destination="XSe-TB-6fb" id="TYh-Nm-sFE"/>
                         <outlet property="availableFundsLabel" destination="kbt-C9-czJ" id="dpe-Kd-fY7"/>
-                        <outlet property="valueTextField" destination="XSe-TB-6fb" id="lij-Q7-m1U"/>
                         <outlet property="withdrawAllButton" destination="dl5-DC-vFG" id="Tro-1q-Scr"/>
                         <outlet property="withdrawButton" destination="SGY-XJ-JFL" id="hlI-MX-tRp"/>
                     </connections>

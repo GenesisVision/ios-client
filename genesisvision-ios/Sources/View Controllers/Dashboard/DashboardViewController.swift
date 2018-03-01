@@ -150,3 +150,13 @@ extension DashboardViewController: UIViewControllerPreviewingDelegate {
         push(viewController: viewControllerToCommit)
     }
 }
+
+extension DashboardViewController: DashboardTableViewCellProtocol {
+    func investProgramDidPress(with investmentProgramId: String) {
+        viewModel.invest(with: investmentProgramId)
+    }
+    
+    func withdrawProgramDidPress(with investmentProgramId: String) {
+        viewModel.withdraw(with: investmentProgramId)
+    }
+}

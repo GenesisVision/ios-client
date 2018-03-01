@@ -15,7 +15,26 @@ struct WalletTransactionTableViewCellViewModel {
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
         if let type = walletTransaction.type {
-            cell.investTypeLabel.text = type.rawValue
+            var text = ""
+            
+            switch type {
+            case .investToProgram:
+                text = "Invest To Program"
+            case .openProgram:
+                text = "Open Program"
+            case .withdrawFromProgram:
+                text = "Withdraw From Program"
+            case .profitFromProgram:
+                text = "Profit From Program"
+            case .cancelInvestmentRequest:
+                text = "Cancel Investment Request"
+            case .partialInvestmentExecutionRefund:
+                text = "Partial Investment Execution Refund"
+            default:
+                text = type.rawValue
+            }
+            
+            cell.investTypeLabel.text = text
         }
         
         if let date = walletTransaction.date {

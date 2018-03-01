@@ -17,6 +17,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
+    // MARK: - Private methods
     private static func getDashboardProgram(with authorization: String, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
 
         InvestorAPI.apiInvestorDashboardGet(authorization: authorization) { (dashboard, error) in

@@ -393,6 +393,147 @@ open class ManagerAPI {
     }
 
     /**
+     Get investment program details by id
+     
+     - parameter investmentProgramId: (query)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramGet(investmentProgramId: UUID, completion: @escaping ((_ data: InvestmentProgramViewModel?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramGetWithRequestBuilder(investmentProgramId: investmentProgramId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get investment program details by id
+     - GET /api/manager/investmentProgram
+     - examples: [{contentType=application/json, example={
+  "investmentProgram" : {
+    "periodDuration" : 7,
+    "investedTokens" : 5,
+    "feeManagement" : 7.386281948385884,
+    "manager" : {
+      "country" : "country",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "username" : "username"
+    },
+    "hasNewRequests" : true,
+    "level" : 0,
+    "availableInvestment" : 2.027123023002322,
+    "description" : "description",
+    "title" : "title",
+    "isInvestEnable" : true,
+    "tradesCount" : 5,
+    "isWithdrawEnable" : true,
+    "balance" : 6.027456183070403,
+    "isHistoryEnable" : true,
+    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "profitTotal" : 3.616076749251911,
+    "feeSuccess" : 4.145608029883936,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitAvg" : 9.301444243932576,
+    "ownBalance" : 1.4658129805029452,
+    "investorsCount" : 2
+  }
+}}]
+     
+     - parameter investmentProgramId: (query)  
+
+     - returns: RequestBuilder<InvestmentProgramViewModel> 
+     */
+    open class func apiManagerInvestmentProgramGetWithRequestBuilder(investmentProgramId: UUID) -> RequestBuilder<InvestmentProgramViewModel> {
+        let path = "/api/manager/investmentProgram"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "investmentProgramId": investmentProgramId
+        ])
+        
+
+        let requestBuilder: RequestBuilder<InvestmentProgramViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get public investment program's list
+     
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramsPost(filter: InvestmentProgramsFilter? = nil, completion: @escaping ((_ data: InvestmentProgramsViewModel?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramsPostWithRequestBuilder(filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get public investment program's list
+     - POST /api/manager/investmentPrograms
+     - examples: [{contentType=application/json, example={
+  "total" : 4,
+  "investmentPrograms" : [ {
+    "periodDuration" : 5,
+    "feeManagement" : 2.027123023002322,
+    "hasNewRequests" : true,
+    "level" : 0,
+    "availableInvestment" : 9.301444243932576,
+    "title" : "title",
+    "tradesCount" : 1,
+    "balance" : 6.027456183070403,
+    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "profitTotal" : 7.061401241503109,
+    "feeSuccess" : 3.616076749251911,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitAvg" : 2.3021358869347655,
+    "investorsCount" : 5
+  }, {
+    "periodDuration" : 5,
+    "feeManagement" : 2.027123023002322,
+    "hasNewRequests" : true,
+    "level" : 0,
+    "availableInvestment" : 9.301444243932576,
+    "title" : "title",
+    "tradesCount" : 1,
+    "balance" : 6.027456183070403,
+    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "profitTotal" : 7.061401241503109,
+    "feeSuccess" : 3.616076749251911,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitAvg" : 2.3021358869347655,
+    "investorsCount" : 5
+  } ]
+}}]
+     
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<InvestmentProgramsViewModel> 
+     */
+    open class func apiManagerInvestmentProgramsPostWithRequestBuilder(filter: InvestmentProgramsFilter? = nil) -> RequestBuilder<InvestmentProgramsViewModel> {
+        let path = "/api/manager/investmentPrograms"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<InvestmentProgramsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Manager withdrawal from his own investment program
      
      - parameter authorization: (header) JWT access token 

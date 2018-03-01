@@ -13,7 +13,7 @@ class ProgramInvestViewController: BaseViewController {
     var viewModel: ProgramInvestViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var valueTextField: UITextField!
+    @IBOutlet var amountTextField: UITextField!
     
     // MARK: - Labels
     @IBOutlet var amountLabel: UILabel!
@@ -35,11 +35,17 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     // MARK: - Private methods
+    private func setupUI() {
+        viewModel.getAmountText { [weak self] (text) in
+            self?.amountLabel.text = text
+        }
+    }
+    
     private func investMethod() {
         hideKeyboard()
         showProgressHUD()
         
-        guard let text = valueTextField.text,
+        guard let text = amountTextField.text,
             let amount = text.doubleValue
             else {
                 showErrorHUD(subtitle: nil)
@@ -57,12 +63,6 @@ class ProgramInvestViewController: BaseViewController {
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)
             }
-        }
-    }
-    
-    private func setupUI() {
-        viewModel.getAmountText { [weak self] (text) in
-            self?.amountLabel.text = text
         }
     }
     

@@ -22,5 +22,4 @@ class DetailHeaderTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
-    
 }

@@ -47,7 +47,7 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
-            dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
+            dashboardViewController.viewModel = DashboardViewModel(withRouter: router, delegate: dashboardViewController)
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_dashboard")
             navigationController.tabBarItem.title = "Dashboard"
             viewControllers.append(navigationController)
@@ -177,5 +177,41 @@ extension Router {
         rootTabBarController = tabBarController
         
         setWindowRoot(viewController: rootTabBarController)
+    }
+    
+    func showProgramDetail(with investmentProgramId: String) {
+        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
+        guard let traderViewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
+        let router = ProgramDetailRouter(parentRouter: self)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId)
+        traderViewController.viewModel = viewModel
+        
+        return traderViewController
+    }
+    
+    func invest(with investmentProgramId: String) {
+        guard let viewController = ProgramInvestViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func withdraw(with investmentProgramId: String) {
+        guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

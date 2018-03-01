@@ -9,8 +9,8 @@
 import UIKit
 
 class TournamentDataProvider: DataProvider {
-    static func getTournamentParticipant(with participantID: String, completion: @escaping (_ participant: ParticipantViewModel?) -> Void) {
-        guard let uuid = UUID(uuidString: participantID) else { return completion(nil) }
+    static func getTournamentParticipant(with participantId: String, completion: @escaping (_ participant: ParticipantViewModel?) -> Void) {
+        guard let uuid = UUID(uuidString: participantId) else { return completion(nil) }
         
         TournamentAPI.apiTournamentParticipantGet(participantId: uuid) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: { (participantViewModel) in

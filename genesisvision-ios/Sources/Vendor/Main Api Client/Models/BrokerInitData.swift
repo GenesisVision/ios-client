@@ -12,11 +12,11 @@ import Foundation
 open class BrokerInitData: Codable {
 
     public var newManagerRequest: [ManagerRequest]?
-    public var investments: [InvestmentProgram]?
+    public var investments: [BrokerInvestmentProgram]?
 
 
     
-    public init(newManagerRequest: [ManagerRequest]?, investments: [InvestmentProgram]?) {
+    public init(newManagerRequest: [ManagerRequest]?, investments: [BrokerInvestmentProgram]?) {
         self.newManagerRequest = newManagerRequest
         self.investments = investments
     }
@@ -38,7 +38,7 @@ open class BrokerInitData: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         newManagerRequest = try container.decodeIfPresent([ManagerRequest].self, forKey: "newManagerRequest")
-        investments = try container.decodeIfPresent([InvestmentProgram].self, forKey: "investments")
+        investments = try container.decodeIfPresent([BrokerInvestmentProgram].self, forKey: "investments")
     }
 }
 

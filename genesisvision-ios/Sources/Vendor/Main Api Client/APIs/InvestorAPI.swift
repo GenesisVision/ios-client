@@ -187,10 +187,10 @@ open class InvestorAPI {
       "avatar" : "avatar",
       "username" : "username"
     },
+    "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 3.616076749251911,
     "title" : "title",
-    "isPending" : true,
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isWithdrawEnable" : true,
@@ -214,10 +214,10 @@ open class InvestorAPI {
       "avatar" : "avatar",
       "username" : "username"
     },
+    "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 3.616076749251911,
     "title" : "title",
-    "isPending" : true,
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isWithdrawEnable" : true,
@@ -273,20 +273,20 @@ open class InvestorAPI {
      - GET /api/investor/investmentProgram
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
-    "periodDuration" : 2,
-    "investedTokens" : 1,
-    "feeManagement" : 4.145608029883936,
+    "periodDuration" : 7,
+    "investedTokens" : 5,
+    "feeManagement" : 7.386281948385884,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
       "username" : "username"
     },
+    "hasNewRequests" : true,
     "level" : 0,
-    "availableInvestment" : 3.616076749251911,
+    "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
-    "isPending" : true,
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isWithdrawEnable" : true,
@@ -295,11 +295,12 @@ open class InvestorAPI {
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
     "currency" : "Undefined",
-    "profitTotal" : 9.301444243932576,
-    "feeSuccess" : 2.027123023002322,
+    "profitTotal" : 3.616076749251911,
+    "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "profitAvg" : 7.061401241503109,
-    "investorsCount" : 5
+    "profitAvg" : 9.301444243932576,
+    "ownBalance" : 1.4658129805029452,
+    "investorsCount" : 2
   }
 }}]
      
@@ -381,6 +382,62 @@ open class InvestorAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<OpenTradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Get investment program's requests
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorInvestmentProgramRequestsPost(authorization: String, filter: InvestmentProgramRequestsFilter? = nil, completion: @escaping ((_ data: InvestmentProgramRequests?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramRequestsPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get investment program's requests
+     - POST /api/investor/investmentProgram/requests
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "requests" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 4.145608029883936,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Invest",
+    "status" : "New"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 4.145608029883936,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Invest",
+    "status" : "New"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<InvestmentProgramRequests> 
+     */
+    open class func apiInvestorInvestmentProgramRequestsPostWithRequestBuilder(authorization: String, filter: InvestmentProgramRequestsFilter? = nil) -> RequestBuilder<InvestmentProgramRequests> {
+        let path = "/api/investor/investmentProgram/requests"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<InvestmentProgramRequests>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
@@ -570,14 +627,14 @@ open class InvestorAPI {
      Get public investment program's list
      - POST /api/investor/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 0,
+  "total" : 4,
   "investmentPrograms" : [ {
     "periodDuration" : 5,
     "feeManagement" : 2.027123023002322,
+    "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 9.301444243932576,
     "title" : "title",
-    "isPending" : true,
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
@@ -591,10 +648,10 @@ open class InvestorAPI {
   }, {
     "periodDuration" : 5,
     "feeManagement" : 2.027123023002322,
+    "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 9.301444243932576,
     "title" : "title",
-    "isPending" : true,
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",

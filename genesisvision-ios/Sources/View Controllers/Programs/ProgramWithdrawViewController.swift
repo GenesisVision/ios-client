@@ -13,7 +13,7 @@ class ProgramWithdrawViewController: UIViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var valueTextField: UITextField!
+    @IBOutlet var amountTextField: UITextField!
     
     // MARK: - Labels
     @IBOutlet var availableFundsLabel: UILabel!
@@ -31,14 +31,20 @@ class ProgramWithdrawViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupUI()
     }
     
     // MARK: - Private methods
+    private func setupUI() {
+        
+    }
+    
     private func withdrawMethod() {
         hideKeyboard()
         showProgressHUD()
         
-        guard let text = valueTextField.text,
+        guard let text = amountTextField.text,
             let amount = text.doubleValue
             else { return }
         
