@@ -56,8 +56,12 @@ extension ProgramRequestsViewModel {
 // MARK: - Navigation
 extension ProgramRequestsViewModel {
     // MARK: - Public methods
-    func cancel(with requestID: String) {
-        //cancel request apirequest
+    func cancel(with requestID: String, completion: @escaping CompletionBlock) {
+        ProgramRequestDataProvider.cancelRequest(requestId: requestID, completion: completion)
+    }
+    
+    func goBack() {
+        router.show(routeType: .goBack)
     }
 }
 
@@ -109,7 +113,7 @@ extension ProgramRequestsViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramRequestTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(reason: nil)) }
         
-        let filter = InvestmentProgramRequestsFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, status: nil, type: nil, skip: skip, take: take)
+        let filter = InvestmentProgramRequestsFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, status: .new, type: nil, skip: skip, take: take)
         
         ProgramRequestDataProvider.getRequests(filter: filter) { (requests) in
             guard let requests = requests else { return completionError(.failure(reason: nil)) }

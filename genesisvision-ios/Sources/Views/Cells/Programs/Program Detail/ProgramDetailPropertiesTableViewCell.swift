@@ -1,23 +1,18 @@
 //
-//  DetailHeaderTableViewCell.swift
+//  ProgramDetailPropertiesTableViewCell.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 11.02.18.
+//  Created by George Shaginyan on 01.03.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class DetailHeaderTableViewCell: UITableViewCell {
+class ProgramDetailPropertiesTableViewCell: UITableViewCell {
 
     // MARK: - Views
-    @IBOutlet var programLogoImageView: ProfileImageView!
-    @IBOutlet var titleLabel: UILabel! {
-        didSet {
-            titleLabel.isHidden = true
-        }
-    }
-    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
+    @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -27,4 +22,5 @@ class DetailHeaderTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
+    
 }

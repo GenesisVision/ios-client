@@ -19,6 +19,7 @@ final class ProgramDetailViewModel {
     enum SectionType {
         case header
         case chart
+        case details
     }
 
     // MARK: - Variables
@@ -46,12 +47,12 @@ final class ProgramDetailViewModel {
     
     var viewProperties: ProgramDetailViewProperties?
     
-    private var sections: [SectionType] = [.header, .chart]
+    private var sections: [SectionType] = [.header, .chart, .details]
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self]
+        return [ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramDetailPropertiesTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -69,8 +70,8 @@ final class ProgramDetailViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .chart:
-            return "Total funds history"
-        case .header:
+            return nil //"Total funds history"
+        case .header, .details:
             return nil
         }
     }
@@ -78,8 +79,10 @@ final class ProgramDetailViewModel {
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
         case .chart:
-            return 50.0
+            return 0.0
         case .header:
+            return 0.0
+        case .details:
             return 0.0
         }
     }
@@ -97,6 +100,8 @@ final class ProgramDetailViewModel {
         case .header:
             return 1
         case .chart:
+            return 1
+        case .details:
             return 1
         }
     }
@@ -145,6 +150,8 @@ extension ProgramDetailViewModel {
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         case .chart:
             return DetailChartTableViewCellViewModel(chart: [], name: "")
+        case .details:
+            return ProgramDetailPropertiesTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }
     }
     

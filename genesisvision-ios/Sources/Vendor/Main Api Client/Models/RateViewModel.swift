@@ -27,14 +27,14 @@ open class RateViewModel: Codable {
         case usd = "USD"
         case eur = "EUR"
     }
-    public var amount: Double?
+    public var rate: Double?
     public var from: From
     public var to: To
 
 
     
-    public init(amount: Double?, from: From, to: To) {
-        self.amount = amount
+    public init(rate: Double?, from: From, to: To) {
+        self.rate = rate
         self.from = from
         self.to = to
     }
@@ -46,7 +46,7 @@ open class RateViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(amount, forKey: "amount")
+        try container.encodeIfPresent(rate, forKey: "rate")
         try container.encode(from, forKey: "from")
         try container.encode(to, forKey: "to")
     }
@@ -56,7 +56,7 @@ open class RateViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        amount = try container.decodeIfPresent(Double.self, forKey: "amount")
+        rate = try container.decodeIfPresent(Double.self, forKey: "rate")
         from = try container.decode(From.self, forKey: "from")
         to = try container.decode(To.self, forKey: "to")
     }

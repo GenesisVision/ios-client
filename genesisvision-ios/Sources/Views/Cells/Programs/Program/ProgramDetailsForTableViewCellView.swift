@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramDetailsForTableViewCellView: UIView {
+class ProgramDetailsForTableViewCellView: UIStackView {
 
     @IBOutlet var investorsTitleLabel: UILabel!
     @IBOutlet var balanceTitleLabel: UILabel!

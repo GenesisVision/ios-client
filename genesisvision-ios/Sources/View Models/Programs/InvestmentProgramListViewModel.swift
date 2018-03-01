@@ -130,12 +130,8 @@ extension InvestmentProgramListViewModel {
     
     // MARK: - Private methods
     private func apiInvestmentPrograms(withFilter filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        InvestorAPI.apiInvestorInvestmentProgramsPost(filter: filter) { [weak self] (viewModel, error) in
-            self?.responseHandler(viewModel, error: error, successCompletion: { (programs) in
-                completion(programs)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
+        ProgramDataProvider.getPrograms(with: filter) { (viewModel) in
+            completion(viewModel)
         }
     }
     

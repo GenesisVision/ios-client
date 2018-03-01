@@ -27,10 +27,9 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: investmentProgramDetails.investorsCount,
-                                      balance: investmentProgramDetails.balance,
-                                      avrProfit: investmentProgramDetails.profitAvg,
-                                      totalProfit: investmentProgramDetails.profitTotal)
+        if let description = investmentProgramDetails.description {
+            cell.descriptionLabel.text = description
+        }
     }
 }
 

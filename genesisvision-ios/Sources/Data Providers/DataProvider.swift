@@ -19,7 +19,7 @@ class DataProvider {
     
     func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
         
-        guard error != nil else {
+        guard error == nil else {
             print("Error")
             return ErrorHandler.handleApiError(error: error, completion: completion)
         }

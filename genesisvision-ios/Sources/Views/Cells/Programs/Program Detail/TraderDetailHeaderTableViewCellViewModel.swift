@@ -25,7 +25,6 @@ extension TraderDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
-        
-        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avrProfitTitle: "PROFIT", avrProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT %", totalProfit: participantViewModel.totalProfitInPercent)
+        cell.descriptionLabel.isHidden = true
     }
 }

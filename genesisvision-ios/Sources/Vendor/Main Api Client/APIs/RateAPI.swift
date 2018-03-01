@@ -28,7 +28,7 @@ open class RateAPI {
      Get rate
      - POST /api/rate
      - examples: [{contentType=application/json, example={
-  "amount" : 0.8008281904610115,
+  "rate" : 0.8008281904610115,
   "from" : "Undefined",
   "to" : "Undefined"
 }}]

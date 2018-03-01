@@ -259,10 +259,11 @@ open class InvestorAPI {
      Get investment program details by id
      
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentProgramGet(investmentProgramId: UUID, completion: @escaping ((_ data: InvestmentProgramViewModel?,_ error: Error?) -> Void)) {
-        apiInvestorInvestmentProgramGetWithRequestBuilder(investmentProgramId: investmentProgramId).execute { (response, error) -> Void in
+    open class func apiInvestorInvestmentProgramGet(investmentProgramId: UUID, authorization: String? = nil, completion: @escaping ((_ data: InvestmentProgramViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramGetWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -273,8 +274,20 @@ open class InvestorAPI {
      - GET /api/investor/investmentProgram
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
-    "periodDuration" : 7,
     "investedTokens" : 5,
+    "availableInvestment" : 2.027123023002322,
+    "description" : "description",
+    "title" : "title",
+    "isWithdrawEnable" : true,
+    "balance" : 6.027456183070403,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "feeSuccess" : 4.145608029883936,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "ownBalance" : 1.4658129805029452,
+    "investorsCount" : 2,
+    "periodDuration" : 7,
+    "tradeIpfsHash" : "tradeIpfsHash",
     "feeManagement" : 7.386281948385884,
     "manager" : {
       "country" : "country",
@@ -284,31 +297,22 @@ open class InvestorAPI {
     },
     "hasNewRequests" : true,
     "level" : 0,
-    "availableInvestment" : 2.027123023002322,
-    "description" : "description",
-    "title" : "title",
     "isInvestEnable" : true,
     "tradesCount" : 5,
-    "isWithdrawEnable" : true,
-    "balance" : 6.027456183070403,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "logo" : "logo",
-    "currency" : "Undefined",
+    "ipfsHash" : "ipfsHash",
     "profitTotal" : 3.616076749251911,
-    "feeSuccess" : 4.145608029883936,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "profitAvg" : 9.301444243932576,
-    "ownBalance" : 1.4658129805029452,
-    "investorsCount" : 2
+    "profitAvg" : 9.301444243932576
   }
 }}]
      
      - parameter investmentProgramId: (query)  
+     - parameter authorization: (header)  (optional)
 
      - returns: RequestBuilder<InvestmentProgramViewModel> 
      */
-    open class func apiInvestorInvestmentProgramGetWithRequestBuilder(investmentProgramId: UUID) -> RequestBuilder<InvestmentProgramViewModel> {
+    open class func apiInvestorInvestmentProgramGetWithRequestBuilder(investmentProgramId: UUID, authorization: String? = nil) -> RequestBuilder<InvestmentProgramViewModel> {
         let path = "/api/investor/investmentProgram"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -318,10 +322,14 @@ open class InvestorAPI {
             "investmentProgramId": investmentProgramId
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<InvestmentProgramViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -613,11 +621,12 @@ open class InvestorAPI {
     /**
      Get public investment program's list
      
+     - parameter authorization: (header)  (optional)
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentProgramsPost(filter: InvestmentProgramsFilter? = nil, completion: @escaping ((_ data: InvestmentProgramsViewModel?,_ error: Error?) -> Void)) {
-        apiInvestorInvestmentProgramsPostWithRequestBuilder(filter: filter).execute { (response, error) -> Void in
+    open class func apiInvestorInvestmentProgramsPost(authorization: String? = nil, filter: InvestmentProgramsFilter? = nil, completion: @escaping ((_ data: InvestmentProgramsViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramsPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -665,21 +674,26 @@ open class InvestorAPI {
   } ]
 }}]
      
+     - parameter authorization: (header)  (optional)
      - parameter filter: (body)  (optional)
 
      - returns: RequestBuilder<InvestmentProgramsViewModel> 
      */
-    open class func apiInvestorInvestmentProgramsPostWithRequestBuilder(filter: InvestmentProgramsFilter? = nil) -> RequestBuilder<InvestmentProgramsViewModel> {
+    open class func apiInvestorInvestmentProgramsPostWithRequestBuilder(authorization: String? = nil, filter: InvestmentProgramsFilter? = nil) -> RequestBuilder<InvestmentProgramsViewModel> {
         let path = "/api/investor/investmentPrograms"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<InvestmentProgramsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**

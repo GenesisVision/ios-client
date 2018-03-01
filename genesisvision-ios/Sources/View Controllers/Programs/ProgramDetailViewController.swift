@@ -82,6 +82,18 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
         requestsButton.isHidden = !viewProperties.hasNewRequests
+        
+        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
+        
+        if viewProperties.hasNewRequests && (viewProperties.isWithdrawEnable || viewProperties.isInvestEnable) {
+            tableViewConfiguration.bottomInset = 132.0
+        } else if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
+            tableViewConfiguration.bottomInset = 66.0
+        } else {
+            tableViewConfiguration.bottomInset = 0.0
+        }
+        
+        tableView.configure(with: .custom(tableViewConfiguration))
     }
     
     private func setupTableConfiguration() {

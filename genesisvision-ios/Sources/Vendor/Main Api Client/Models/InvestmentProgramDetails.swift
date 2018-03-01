@@ -37,6 +37,8 @@ open class InvestmentProgramDetails: Codable {
     public var availableInvestment: Double?
     public var feeSuccess: Double?
     public var feeManagement: Double?
+    public var ipfsHash: String?
+    public var tradeIpfsHash: String?
     public var manager: ProfilePublicViewModel?
     public var hasNewRequests: Bool?
     public var isHistoryEnable: Bool?
@@ -45,7 +47,7 @@ open class InvestmentProgramDetails: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Int?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Int?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -64,6 +66,8 @@ open class InvestmentProgramDetails: Codable {
         self.availableInvestment = availableInvestment
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
+        self.ipfsHash = ipfsHash
+        self.tradeIpfsHash = tradeIpfsHash
         self.manager = manager
         self.hasNewRequests = hasNewRequests
         self.isHistoryEnable = isHistoryEnable
@@ -96,6 +100,8 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
+        try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
+        try container.encodeIfPresent(tradeIpfsHash, forKey: "tradeIpfsHash")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isHistoryEnable, forKey: "isHistoryEnable")
@@ -126,6 +132,8 @@ open class InvestmentProgramDetails: Codable {
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
+        ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
+        tradeIpfsHash = try container.decodeIfPresent(String.self, forKey: "tradeIpfsHash")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isHistoryEnable = try container.decodeIfPresent(Bool.self, forKey: "isHistoryEnable")

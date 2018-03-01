@@ -161,6 +161,7 @@ open class BrokerAPI {
   } ],
   "investments" : [ {
     "feeEntrance" : 5.962133916683182,
+    "tradeIpfsHash" : "tradeIpfsHash",
     "period" : 0,
     "feeManagement" : 1.4658129805029452,
     "description" : "description",
@@ -199,6 +200,7 @@ open class BrokerAPI {
     "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
     "feeEntrance" : 5.962133916683182,
+    "tradeIpfsHash" : "tradeIpfsHash",
     "period" : 0,
     "feeManagement" : 1.4658129805029452,
     "description" : "description",
@@ -270,9 +272,9 @@ open class BrokerAPI {
      - parameter accrual: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodAccrueProfitsPost(authorization: String, accrual: InvestmentProgramAccrual? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+    open class func apiBrokerPeriodAccrueProfitsPost(authorization: String, accrual: InvestmentProgramAccrual? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiBrokerPeriodAccrueProfitsPostWithRequestBuilder(authorization: authorization, accrual: accrual).execute { (response, error) -> Void in
-            completion(response?.body, error);
+            completion(error);
         }
     }
 
@@ -280,14 +282,13 @@ open class BrokerAPI {
     /**
      Accrue investors' profits
      - POST /api/broker/period/accrueProfits
-     - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
      - parameter authorization: (header) JWT access token 
      - parameter accrual: (body)  (optional)
 
-     - returns: RequestBuilder<UUID> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func apiBrokerPeriodAccrueProfitsPostWithRequestBuilder(authorization: String, accrual: InvestmentProgramAccrual? = nil) -> RequestBuilder<UUID> {
+    open class func apiBrokerPeriodAccrueProfitsPostWithRequestBuilder(authorization: String, accrual: InvestmentProgramAccrual? = nil) -> RequestBuilder<Void> {
         let path = "/api/broker/period/accrueProfits"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: accrual)
@@ -299,7 +300,7 @@ open class BrokerAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
@@ -517,6 +518,46 @@ open class BrokerAPI {
         let requestBuilder: RequestBuilder<ClosePeriodData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Update manager history ipfs hash
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter data: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerTradesIpfsHashUpdatePost(authorization: String, data: ManagerHistoryIpfsHash? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerTradesIpfsHashUpdatePostWithRequestBuilder(authorization: authorization, data: data).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update manager history ipfs hash
+     - POST /api/broker/trades/ipfsHash/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter data: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerTradesIpfsHashUpdatePostWithRequestBuilder(authorization: String, data: ManagerHistoryIpfsHash? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/trades/ipfsHash/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: data)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**

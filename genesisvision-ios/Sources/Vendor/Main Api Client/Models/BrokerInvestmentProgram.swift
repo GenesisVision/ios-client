@@ -26,10 +26,11 @@ open class BrokerInvestmentProgram: Codable {
     public var lastPeriod: Period?
     public var login: String?
     public var ipfsHash: String?
+    public var tradeIpfsHash: String?
 
 
     
-    public init(id: UUID?, managerAccountId: UUID?, dateFrom: Date?, dateTo: Date?, description: String?, isEnabled: Bool?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, lastPeriod: Period?, login: String?, ipfsHash: String?) {
+    public init(id: UUID?, managerAccountId: UUID?, dateFrom: Date?, dateTo: Date?, description: String?, isEnabled: Bool?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, lastPeriod: Period?, login: String?, ipfsHash: String?, tradeIpfsHash: String?) {
         self.id = id
         self.managerAccountId = managerAccountId
         self.dateFrom = dateFrom
@@ -45,6 +46,7 @@ open class BrokerInvestmentProgram: Codable {
         self.lastPeriod = lastPeriod
         self.login = login
         self.ipfsHash = ipfsHash
+        self.tradeIpfsHash = tradeIpfsHash
     }
     
 
@@ -69,6 +71,7 @@ open class BrokerInvestmentProgram: Codable {
         try container.encodeIfPresent(lastPeriod, forKey: "lastPeriod")
         try container.encodeIfPresent(login, forKey: "login")
         try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
+        try container.encodeIfPresent(tradeIpfsHash, forKey: "tradeIpfsHash")
     }
 
     // Decodable protocol methods
@@ -91,6 +94,7 @@ open class BrokerInvestmentProgram: Codable {
         lastPeriod = try container.decodeIfPresent(Period.self, forKey: "lastPeriod")
         login = try container.decodeIfPresent(String.self, forKey: "login")
         ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
+        tradeIpfsHash = try container.decodeIfPresent(String.self, forKey: "tradeIpfsHash")
     }
 }
 

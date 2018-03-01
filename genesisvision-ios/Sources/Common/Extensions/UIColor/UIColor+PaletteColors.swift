@@ -48,6 +48,8 @@ extension UIColor {
     }
     
     struct Font {
+        static var primary: UIColor  { return Common.blue }
+        
         static var dark: UIColor  { return  Common.dark }
         static var medium: UIColor  { return Common.darkGray }
         static var light: UIColor  { return Common.gray }
