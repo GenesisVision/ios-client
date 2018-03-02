@@ -47,17 +47,7 @@ final class WalletControllerViewModel {
         
         setup()
     }
-    
-    // MARK: - Public methods
-    // MARK: - Navigation
-    func withdraw() {
-        router.show(routeType: .withdraw)
-    }
-    
-    func deposit() {
-        router.show(routeType: .deposit)
-    }
-    
+
     // MARK: - Data methods
     func getBalance() -> Double {
         return balance
@@ -202,5 +192,17 @@ final class WalletControllerViewModel {
             completionSuccess(totalCount, viewModels)
             completionError(.success)
         }
+    }
+}
+
+
+// MARK: - Navigation
+extension WalletControllerViewModel {
+    func withdraw() {
+        router.show(routeType: .withdraw)
+    }
+    
+    func deposit() {
+        router.show(routeType: .deposit)
     }
 }

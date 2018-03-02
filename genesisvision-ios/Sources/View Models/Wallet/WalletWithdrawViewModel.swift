@@ -10,13 +10,16 @@ final class WalletWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     
+    private weak var walletProtocol: WalletProtocol?
+    
     var currency = WalletWithdrawRequestModel.Currency.gvt
     
     private var router: WalletWithdrawRouter!
     
     // MARK: - Init
-    init(withRouter router: WalletWithdrawRouter) {
+    init(withRouter router: WalletWithdrawRouter, walletProtocol: WalletProtocol) {
         self.router = router
+        self.walletProtocol = walletProtocol
     }
     
     // MARK: - Public methods
@@ -27,6 +30,11 @@ final class WalletWithdrawViewModel {
     
     func readQRCode(completion: @escaping CompletionBlock) {
         router.show(routeType: .readQRCode)
+    }
+    
+    func goBack() {
+        walletProtocol?.didWithdrawn()
+        router.goBack()
     }
     
     // MARK: - Private methods

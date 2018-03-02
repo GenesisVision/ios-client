@@ -54,7 +54,9 @@ class WalletWithdrawViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.showSuccessHUD()
+                self?.showSuccessHUD(completion: { (success) in
+                    self?.viewModel.goBack()
+                })
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)
             }

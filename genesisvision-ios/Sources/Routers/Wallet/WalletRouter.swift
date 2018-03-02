@@ -26,9 +26,11 @@ class WalletRouter: Router {
     
     // MARK: - Private methods
     private func withdraw() {
+        guard let vc = currentController() else { return }
+        
         guard let viewController = WalletWithdrawViewController.storyboardInstance(name: .wallet) else { return }
         let router = WalletWithdrawRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = WalletWithdrawViewModel(withRouter: router)
+        let viewModel = WalletWithdrawViewModel(withRouter: router, walletProtocol: vc as! WalletProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

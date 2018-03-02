@@ -30,7 +30,6 @@ final class ProgramWithdrawViewModel {
     }
     
     func withdrawAll(completion: @escaping CompletionBlock) {
-        //TODO: add to API method
         apiWithdrawAll(completion: completion)
     }
     

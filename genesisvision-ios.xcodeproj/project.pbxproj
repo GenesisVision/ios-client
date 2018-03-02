@@ -109,6 +109,7 @@
 		FC2722E520485A3F005225F2 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722AA20485A3E005225F2 /* WalletViewModel.swift */; };
 		FC2722E620485A3F005225F2 /* WalletWithdrawRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */; };
 		FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */; };
+		FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E920496FB5005225F2 /* WalletProtocol.swift */; };
 		FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */; };
 		FC4964152015445E00104CEB /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964142015445E00104CEB /* WalletViewController.swift */; };
 		FC4964182015474700104CEB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964172015474700104CEB /* DashboardViewController.swift */; };
@@ -366,6 +367,7 @@
 		FC2722AA20485A3E005225F2 /* WalletViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRequestModel.swift; sourceTree = "<group>"; };
 		FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
+		FC2722E920496FB5005225F2 /* WalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProtocol.swift; sourceTree = "<group>"; };
 		FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramPlainObjectTranslation.swift; sourceTree = "<group>"; };
 		FC4964142015445E00104CEB /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		FC4964172015474700104CEB /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -1295,6 +1297,7 @@
 				FCC9DD8B200E658E008825EC /* ReusableCell.swift */,
 				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
 				FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */,
+				FC2722E920496FB5005225F2 /* WalletProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1678,6 +1681,7 @@
 				FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */,
 				FC2722D920485A3F005225F2 /* RegisterInvestorViewModel.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
+				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* SignInViewModel.swift in Sources */,
 				FCC9DD7A200E4CCF008825EC /* BaseNavigationController.swift in Sources */,

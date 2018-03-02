@@ -159,3 +159,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         return header
     }
 }
+
+extension WalletViewController: WalletProtocol {
+    func didWithdrawn() {
+        reloadData()
+    }
+}
