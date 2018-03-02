@@ -81,7 +81,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure:
                 break
             }

@@ -108,6 +108,7 @@
 		FC2722E420485A3F005225F2 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722A920485A3E005225F2 /* WalletTransactionsViewModel.swift */; };
 		FC2722E520485A3F005225F2 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722AA20485A3E005225F2 /* WalletViewModel.swift */; };
 		FC2722E620485A3F005225F2 /* WalletWithdrawRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */; };
+		FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */; };
 		FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */; };
 		FC4964152015445E00104CEB /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964142015445E00104CEB /* WalletViewController.swift */; };
 		FC4964182015474700104CEB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964172015474700104CEB /* DashboardViewController.swift */; };
@@ -364,6 +365,7 @@
 		FC2722A920485A3E005225F2 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
 		FC2722AA20485A3E005225F2 /* WalletViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRequestModel.swift; sourceTree = "<group>"; };
+		FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramPlainObjectTranslation.swift; sourceTree = "<group>"; };
 		FC4964142015445E00104CEB /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		FC4964172015474700104CEB /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -1292,6 +1294,7 @@
 			children = (
 				FCC9DD8B200E658E008825EC /* ReusableCell.swift */,
 				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
+				FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1525,6 +1528,7 @@
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
+				FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */,
 				FC2722C320485A3F005225F2 /* InvestmentProgramRequestsFilter.swift in Sources */,
 				FC2722C520485A3F005225F2 /* InvestmentProgramsViewModel.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,

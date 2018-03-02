@@ -15,26 +15,38 @@ struct WalletTransactionTableViewCellViewModel {
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
         if let type = walletTransaction.type {
-            var text = ""
+            var text: String?
+            var textColor: UIColor?
             
             switch type {
             case .investToProgram:
                 text = "Invest To Program"
+                textColor = UIColor.Font.red
             case .openProgram:
                 text = "Open Program"
+                textColor = UIColor.Font.light
             case .withdrawFromProgram:
                 text = "Withdraw From Program"
+                textColor = UIColor.Font.green
             case .profitFromProgram:
                 text = "Profit From Program"
+                textColor = UIColor.Font.green
             case .cancelInvestmentRequest:
                 text = "Cancel Investment Request"
+                textColor = UIColor.Font.green
             case .partialInvestmentExecutionRefund:
                 text = "Partial Investment Execution Refund"
-            default:
-                text = type.rawValue
+                textColor = UIColor.Font.medium
+            case .deposit:
+                text = "Deposit"
+                textColor = UIColor.Font.green
+            case .withdraw:
+                text = "Withdraw"
+                textColor = UIColor.Font.red
             }
             
             cell.investTypeLabel.text = text
+            cell.amountLabel.textColor = textColor
         }
         
         if let date = walletTransaction.date {
@@ -42,7 +54,6 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
         }
         
         if let amount = walletTransaction.amount {
-            cell.amountLabel.textColor = amount >= 0 ? UIColor.Transaction.greenTransaction : UIColor.Transaction.redTransaction
             cell.amountLabel.text = String(describing: amount)
         }
         

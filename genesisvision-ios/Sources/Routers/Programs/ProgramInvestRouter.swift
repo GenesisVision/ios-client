@@ -7,7 +7,7 @@
 //
 
 enum ProgramInvestRouteType {
-    case confirm, goBack
+    case confirm
 }
 
 class ProgramInvestRouter: Router {
@@ -16,8 +16,6 @@ class ProgramInvestRouter: Router {
         switch routeType {
         case .confirm:
             confirm()
-        case .goBack:
-            popViewController(animated: true)
         }
     }
     

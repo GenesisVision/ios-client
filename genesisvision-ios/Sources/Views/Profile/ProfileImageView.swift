@@ -12,6 +12,7 @@ class ProfileImageView: UIView {
     @IBOutlet var profilePhotoImageView: UIImageView! {
         didSet {
             profilePhotoImageView.roundCorners()
+            profilePhotoImageView.image = UIImage.placeholder
         }
     }
     

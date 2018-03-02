@@ -28,18 +28,12 @@ class Router {
     var childRouters: [Router] = []
     
     //for authorized user
-    weak var rootTabBarController: UITabBarController?
+    weak var rootTabBarController: BaseTabBarController?
     
     weak var navigationController: UINavigationController?
     
     private var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
-        
-        if let navigationController = getProgramsNavigationController() {
-            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_program_list")
-            navigationController.tabBarItem.title = "Invest"
-            viewControllers.append(navigationController)
-        }
         
         var navigationController = BaseNavigationController()
         
@@ -50,6 +44,12 @@ class Router {
             dashboardViewController.viewModel = DashboardViewModel(withRouter: router, delegate: dashboardViewController)
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_dashboard")
             navigationController.tabBarItem.title = "Dashboard"
+            viewControllers.append(navigationController)
+        }
+        
+        if let navigationController = getProgramsNavigationController() {
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_program_list")
+            navigationController.tabBarItem.title = "Invest"
             viewControllers.append(navigationController)
         }
         
@@ -85,6 +85,7 @@ class Router {
             self.programsViewController = parentRouter?.programsViewController
         }
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
+        self.rootTabBarController = parentRouter?.rootTabBarController
     }
     
     // MARK: - Private methods
@@ -142,6 +143,10 @@ extension Router: RouterProtocol {
  
 //Common methods
 extension Router {
+    func currentController() -> UIViewController? {
+        return navigationController?.topViewController
+    }
+    
     func getProgramsNavigationController() -> UINavigationController? {
         createProgramsNavigationController()
         
@@ -173,10 +178,22 @@ extension Router {
     func startAsAuthorized() {
         let tabBarController = BaseTabBarController()
         tabBarController.viewControllers = tabBarControllers
-        
+    
         rootTabBarController = tabBarController
         
         setWindowRoot(viewController: rootTabBarController)
+    }
+    
+    func getRootTabBar(parent: Router?) -> UITabBarController? {
+        if let rootTabBarController = parent?.rootTabBarController {
+            return rootTabBarController
+        }
+        
+        if let parent = parent {
+            return getRootTabBar(parent: parent.parentRouter)
+        }
+        
+        return nil
     }
     
     func showProgramDetail(with investmentProgramId: String) {
@@ -198,20 +215,28 @@ extension Router {
     }
     
     func invest(with investmentProgramId: String) {
+        guard let vc = currentController() else { return }
+        
         guard let viewController = ProgramInvestViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func withdraw(with investmentProgramId: String) {
+        guard let vc = currentController() else { return }
+        
         guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func goBack() {
+        popViewController(animated: true)
     }
 }

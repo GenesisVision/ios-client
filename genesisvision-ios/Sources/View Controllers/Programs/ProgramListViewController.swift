@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 import ViewAnimator
 
 class ProgramListViewController: BaseViewControllerWithTableView {
@@ -24,7 +23,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     @IBOutlet var signInButton: UIButton!
     
     // MARK: - Outlets
-    @IBOutlet weak var signInButtonViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
             searchBar.delegate = self
@@ -61,7 +59,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setupSignInButton() {
         signInButtonEnable = viewModel.signInButtonEnable()
         
-        signInButtonViewHeightConstraint.constant = signInButtonEnable ? 76.0 : 0.0
         signInButton.isHidden = !signInButtonEnable
     }
     
@@ -79,9 +76,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        tableViewConfiguration.bottomInset = signInButtonEnable ? 76.0 + 16.0 : 0.0
-        tableView.configure(with: .custom(tableViewConfiguration))
+        tableView.contentInset.bottom = signInButtonEnable ? 76.0 + 16.0 : 0.0
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -118,6 +113,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 self?.reloadData()
+                break
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")

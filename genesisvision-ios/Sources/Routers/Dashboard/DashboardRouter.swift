@@ -7,7 +7,7 @@
 //
 
 enum DashboardRouteType {
-    case showProgramDetail(investmentProgramId: String), invest(investmentProgramId: String), withdraw(investmentProgramId: String)
+    case showProgramDetail(investmentProgramId: String), invest(investmentProgramId: String), withdraw(investmentProgramId: String), programList
 }
 
 class DashboardRouter: Router {
@@ -21,6 +21,13 @@ class DashboardRouter: Router {
             invest(with: investmentProgramId)
         case .withdraw(let investmentProgramId):
             withdraw(with: investmentProgramId)
+        case .programList:
+            showProgramList()
         }
+    }
+    
+    // MARK: - Private methods
+    private func showProgramList() {
+        getRootTabBar(parent: self)?.selectedIndex = 1
     }
 }

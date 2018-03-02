@@ -31,7 +31,7 @@ class SignUpViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-            emailTextField.text = "qqq@qqq.com"
+            emailTextField.text = "investor@gv.com"
             passwordTextField.text = "qwerty"
             confirmPasswordTextField.text = "qwerty"
         #endif

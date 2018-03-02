@@ -129,6 +129,27 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension DashboardViewController {
+    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = viewModel.noDataText()
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
+                          NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        viewModel.showProgramList()
+    }
+    
+    override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = "Start investing!"
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+}
+
 extension DashboardViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {

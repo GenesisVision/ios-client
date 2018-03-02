@@ -13,6 +13,10 @@ import ViewAnimator
 
 class ProgramDetailViewController: BaseViewControllerWithTableView {
 
+    let buttonHeight: CGFloat = 50.0
+    let buttonBottom: CGFloat = 16.0
+    let buttonsVerticalHeight: CGFloat = 8.0
+    
     // MARK: - View Model
     var viewModel: ProgramDetailViewModel! {
         didSet {
@@ -83,17 +87,13 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
         requestsButton.isHidden = !viewProperties.hasNewRequests
         
-        var tableViewConfiguration: TableViewConfiguration = .defaultConfig
-        
         if viewProperties.hasNewRequests && (viewProperties.isWithdrawEnable || viewProperties.isInvestEnable) {
-            tableViewConfiguration.bottomInset = 132.0
+            tableView.contentInset.bottom = buttonHeight + buttonHeight + buttonsVerticalHeight + buttonBottom
         } else if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
-            tableViewConfiguration.bottomInset = 66.0
+            tableView.contentInset.bottom = buttonHeight + buttonBottom
         } else {
-            tableViewConfiguration.bottomInset = 0.0
+            tableView.contentInset.bottom = 0.0
         }
-        
-        tableView.configure(with: .custom(tableViewConfiguration))
     }
     
     private func setupTableConfiguration() {
@@ -112,9 +112,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.setupUI()
-                self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
@@ -123,6 +121,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func reloadData() {
+        setupUI()
         refreshControl?.endRefreshing()
         tableView.reloadData()
         tableView.animateViews(animations: [tableViewAnimation])
@@ -181,3 +180,19 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
+extension ProgramDetailViewController: ProgramDetailProtocol {
+    func didRequestCanceled() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
+    func didWithdrawn() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+    
+    func didInvested() {
+        showProgressHUD()
+        pullToRefresh()
+    }
+}

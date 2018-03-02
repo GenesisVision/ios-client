@@ -23,6 +23,8 @@ extension DashboardTableViewCellViewModel: CellViewModel {
                 cell.userNameLabel.text = username
             }
             
+            cell.managerAvatarImageView.image = UIImage.placeholder
+        
             if let avatar = manager.avatar {
                 let avatarURL = getFileURL(fileName: avatar)
                 cell.managerAvatarImageView.kf.indicatorType = .activity
@@ -31,11 +33,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let tokensCount = investmentProgram.investedTokens {
-            cell.tokensCountLabel.text = String(describing: tokensCount)
+            cell.tokensCountLabel.text = String(describing: tokensCount) + " tokens"
         }
         
-        if let period = investmentProgram.periodDuration {
-            cell.periodLabel.text = String(describing: period)
+        if let endOfPeriod = investmentProgram.endOfPeriod {
+            cell.periodLabel.text = endOfPeriod.defaultFormatString
         }
         
         if let profit = investmentProgram.profitTotal {
@@ -50,7 +52,12 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.levelLabel.text = String(describing: level)
         }
         
+        if let periodDuration = investmentProgram.periodDuration {
+            cell.periodDurationLabel.text = String(describing: periodDuration)
+        }
+        
         cell.programLogoImageView.flagImageView.isHidden = true
+        cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)

@@ -10,7 +10,7 @@ import UIKit
 
 class ProgramDataProvider: DataProvider {
     static func getProgram(investmentProgramId: String, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        let authorization = AuthManager.authorizedToken
         
         getInvestorProgram(with: investmentProgramId, authorization: authorization) { (viewModel) in
             completion(viewModel)
@@ -18,7 +18,7 @@ class ProgramDataProvider: DataProvider {
     }
     
     static func getPrograms(with filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        let authorization = AuthManager.authorizedToken
         
         isInvestorApp
             ? getInvestorPrograms(with: filter, authorization: authorization) { (viewModel) in

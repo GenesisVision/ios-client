@@ -47,7 +47,9 @@ final class ProgramDetailViewModel {
     
     var viewProperties: ProgramDetailViewProperties?
     
-    private var sections: [SectionType] = [.header, .chart, .details]
+    private var sections: [SectionType] = [.header,
+//                                           .chart,
+                                           .details]
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files

@@ -9,7 +9,7 @@
 import UIKit
 
 enum ProgramRequestsRouteType {
-    case cancel(requestId: String), goBack
+    case cancel(requestId: String)
 }
 
 class ProgramRequestsRouter: Router {
@@ -19,8 +19,6 @@ class ProgramRequestsRouter: Router {
         switch routeType {
         case .cancel(let requestId):
             cancel(with: requestId)
-        case .goBack:
-            popViewController(animated: true)
         }
     }
     

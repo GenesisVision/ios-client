@@ -21,6 +21,8 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
         
         cell.programLogoImageView.flagImageView.isHidden = true
         
+        cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
+        
         if let logo = investmentProgramDetails.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity

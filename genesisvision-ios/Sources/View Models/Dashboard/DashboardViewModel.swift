@@ -54,7 +54,10 @@ extension DashboardViewModel {
 
 // MARK: - Navigation
 extension DashboardViewModel {
-    // MARK: - Public methods
+    func noDataText() -> String {
+        return "You have no investments yet."
+    }
+    
     func showDetail(with investmentProgramId: String) {
         router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId))
     }
@@ -64,6 +67,10 @@ extension DashboardViewModel {
     
     func withdraw(with investmentProgramId: String) {
         router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
+    }
+    
+    func showProgramList() {
+        router.show(routeType: .programList)
     }
 }
 

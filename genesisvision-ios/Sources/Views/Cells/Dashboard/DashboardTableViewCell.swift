@@ -42,6 +42,7 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet var tokensCountLabel: UILabel!
     @IBOutlet var profitLabel: UILabel!
     @IBOutlet var periodLabel: UILabel!
+    @IBOutlet var periodDurationLabel: UILabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

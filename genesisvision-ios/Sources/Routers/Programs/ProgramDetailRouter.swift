@@ -36,9 +36,11 @@ class ProgramDetailRouter: Router {
     }
     
     private func requests(with investmentProgramId: String) {
+        guard let vc = currentController() else { return }
+        
         guard let viewController = ProgramRequestsViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramRequestsRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramRequestsViewModel(withRouter: router, investmentProgramId: investmentProgramId, delegate: viewController)
+        let viewModel = ProgramRequestsViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc as! ProgramDetailProtocol)
         viewController.viewModel = viewModel
         
         navigationController?.pushViewController(viewController, animated: true)

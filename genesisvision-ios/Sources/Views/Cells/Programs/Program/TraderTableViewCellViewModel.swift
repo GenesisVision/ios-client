@@ -31,7 +31,6 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.currencyLabel.isHidden = true
         cell.programLogoImageView.levelLabel.isHidden = true
         cell.programLogoImageView.flagImageView.isHidden = true
-        
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = participantViewModel.avatar {

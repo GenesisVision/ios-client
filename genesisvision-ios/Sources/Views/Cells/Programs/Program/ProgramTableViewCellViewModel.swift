@@ -39,6 +39,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true
+        cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)

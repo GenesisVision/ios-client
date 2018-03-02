@@ -12,13 +12,15 @@ final class ProgramWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     var investmentProgramId: String?
+    private weak var programDetailProtocol: ProgramDetailProtocol?
     
     private var router: ProgramWithdrawRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramWithdrawRouter, investmentProgramId: String) {
+    init(withRouter router: ProgramWithdrawRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
+        self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods
@@ -30,6 +32,11 @@ final class ProgramWithdrawViewModel {
     func withdrawAll(completion: @escaping CompletionBlock) {
         //TODO: add to API method
         apiWithdrawAll(completion: completion)
+    }
+    
+    func goBack() {
+        programDetailProtocol?.didWithdrawn()
+        router.goBack()
     }
     
     // MARK: - Private methods

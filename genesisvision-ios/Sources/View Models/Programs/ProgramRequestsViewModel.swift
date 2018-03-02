@@ -12,7 +12,7 @@ final class ProgramRequestsViewModel {
     // MARK: - Variables
     var title: String = "Requests"
     private var investmentProgramId: String!
-    private weak var delegate: ProgramRequestTableViewCellProtocol?
+    private weak var programDetailProtocol: ProgramDetailProtocol?
     
     var router: ProgramRequestsRouter!
     
@@ -28,10 +28,10 @@ final class ProgramRequestsViewModel {
     var viewModels = [ProgramRequestTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, delegate: ProgramRequestTableViewCellProtocol) {
+    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol) {
         self.router = router
         self.investmentProgramId = investmentProgramId
-        self.delegate = delegate
+        self.programDetailProtocol = programDetailProtocol
     }
 }
 
@@ -61,7 +61,8 @@ extension ProgramRequestsViewModel {
     }
     
     func goBack() {
-        router.show(routeType: .goBack)
+        programDetailProtocol?.didRequestCanceled()
+        router.goBack()
     }
 }
 
@@ -115,7 +116,7 @@ extension ProgramRequestsViewModel {
         
         let filter = InvestmentProgramRequestsFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, status: .new, type: nil, skip: skip, take: take)
         
-        ProgramRequestDataProvider.getRequests(filter: filter) { (requests) in
+        ProgramRequestDataProvider.getRequests(filter: filter) { [weak self] (requests) in
             guard let requests = requests else { return completionError(.failure(reason: nil)) }
             
             var programRequestViewModels = [ProgramRequestTableViewCellViewModel]()
@@ -123,7 +124,8 @@ extension ProgramRequestsViewModel {
             let totalCount = requests.total ?? 0
             
             requests.requests?.forEach({ (programRequest) in
-                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, delegate: self.delegate)
+                guard let vc = self?.router.currentController() else { return }
+                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, delegate: vc as? ProgramRequestTableViewCellProtocol)
                 programRequestViewModels.append(programRequestTableViewCellModel)
             })
             

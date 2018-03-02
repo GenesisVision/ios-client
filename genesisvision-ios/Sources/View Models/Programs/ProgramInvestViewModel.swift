@@ -12,13 +12,15 @@ final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Invest"
     var investmentProgramId: String?
+    private weak var programDetailProtocol: ProgramDetailProtocol?
     
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, investmentProgramId: String) {
+    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
+        self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods
@@ -34,7 +36,8 @@ final class ProgramInvestViewModel {
     }
     
     func goBack() {
-        router.show(routeType: .goBack)
+        programDetailProtocol?.didInvested()
+        router.goBack()
     }
     
     // MARK: - Private methods
