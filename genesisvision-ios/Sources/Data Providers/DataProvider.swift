@@ -26,5 +26,4 @@ class DataProvider {
         
         completion(.success)
     }
-    
 }

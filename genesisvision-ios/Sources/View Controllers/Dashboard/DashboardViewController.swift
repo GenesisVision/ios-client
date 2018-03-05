@@ -77,7 +77,8 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        super.pullToRefresh()
+        
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -147,6 +148,17 @@ extension DashboardViewController {
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]
         
         return NSAttributedString(string: text, attributes: attributes)
+    }
+    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
+        print("emptyDataSetWillAppear")
+    }
+    
+    func emptyDataSetDidAppear(_ scrollView: UIScrollView!) {
+        print("emptyDataSetDidAppear")
+    }
+    
+    func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
+        print("emptyDataSetWillDisappear")
     }
 }
 

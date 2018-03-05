@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import AVFoundation
 
 class WalletWithdrawViewController: BaseViewController {
     
     // MARK: - Variables
     private var withdrawButton: UIButton?
     private var readQRCodeButton: UIButton?
+    
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
     
     // MARK: - View Model
     var viewModel: WalletWithdrawViewModel!
@@ -64,12 +73,28 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     @IBAction func readQRCodeButtonAction(_ sender: UIButton) {
-        hideKeyboard()
-        showProgressHUD()
+        readerVC.delegate = self
         
-        viewModel.readQRCode { [weak self] (result) in
-            self?.hideHUD()
-        }
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
     }
 }
 
+extension WalletWithdrawViewController: QRCodeReaderViewControllerDelegate {
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        feedback()
+        
+        self.addressTextField.text = result.value
+        reader.dismiss(animated: true, completion: nil)
+    }
+    
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
+        print("Switching capturing to: \(newCaptureDevice.device.localizedName)")
+    }
+}

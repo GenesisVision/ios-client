@@ -12,8 +12,7 @@ import DZNEmptyDataSet
 class WalletViewController: BaseViewControllerWithTableView {
 
     // MARK: - Variables
-    private var depositBarButtonItem: UIBarButtonItem?
-    private var withdrawBarButtonItem: UIBarButtonItem?
+    private var filtersBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
@@ -47,13 +46,9 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction(_:)))
-        withdrawBarButtonItem?.tintColor = UIColor.Button.red
-        navigationItem.leftBarButtonItem = withdrawBarButtonItem
-        
-        depositBarButtonItem = UIBarButtonItem(title: "Deposit", style: .done, target: self, action: #selector(depositButtonAction(_:)))
-        depositBarButtonItem?.tintColor = UIColor.Button.green
-        navigationItem.rightBarButtonItem = depositBarButtonItem
+        filtersBarButtonItem = UIBarButtonItem(title: "Filters", style: .done, target: self, action: #selector(filtersButtonAction(_:)))
+        filtersBarButtonItem?.tintColor = UIColor.Button.primary
+        navigationItem.rightBarButtonItem = filtersBarButtonItem
     }
     
     private func setupTableConfiguration() {
@@ -66,7 +61,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        super.pullToRefresh()
+
         fetchBalance()
         fetchTransactions()
     }
@@ -115,12 +111,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Actions
-    @IBAction func withdrawButtonAction(_ sender: UIButton) {
-        viewModel.withdraw()
-    }
-    
-    @IBAction func depositButtonAction(_ sender: UIButton) {
-        viewModel.deposit()
+    @IBAction func filtersButtonAction(_ sender: UIButton) {
+        viewModel.filters()
     }
 }
 
@@ -163,5 +155,15 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 extension WalletViewController: WalletProtocol {
     func didWithdrawn() {
         reloadData()
+    }
+}
+
+extension WalletViewController: WalletHeaderTableViewCellProtocol {
+    func depositProgramDidPress() {
+        viewModel.deposit()
+    }
+    
+    func withdrawProgramDidPress() {
+        viewModel.withdraw()
     }
 }

@@ -110,6 +110,16 @@
 		FC2722E620485A3F005225F2 /* WalletWithdrawRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */; };
 		FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */; };
 		FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E920496FB5005225F2 /* WalletProtocol.swift */; };
+		FC27232720498959005225F2 /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27231D20498958005225F2 /* QRCodeReader.swift */; };
+		FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27231E20498958005225F2 /* QRCodeReaderResult.swift */; };
+		FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27231F20498958005225F2 /* QRCodeReaderView.swift */; };
+		FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232020498958005225F2 /* QRCodeReaderViewContainer.swift */; };
+		FC27232B20498959005225F2 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232120498958005225F2 /* QRCodeReaderViewController.swift */; };
+		FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232220498958005225F2 /* QRCodeReaderViewControllerBuilder.swift */; };
+		FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232320498958005225F2 /* QRCodeReaderViewControllerDelegate.swift */; };
+		FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232420498958005225F2 /* ReaderOverlayView.swift */; };
+		FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232520498958005225F2 /* SwitchCameraButton.swift */; };
+		FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27232620498958005225F2 /* ToggleTorchButton.swift */; };
 		FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */; };
 		FC4964152015445E00104CEB /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964142015445E00104CEB /* WalletViewController.swift */; };
 		FC4964182015474700104CEB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964172015474700104CEB /* DashboardViewController.swift */; };
@@ -141,6 +151,7 @@
 		FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */; };
 		FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */; };
 		FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */; };
+		FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */; };
 		FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D87B320446F17002FC943 /* String+Сonversion.swift */; };
 		FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */; };
 		FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */; };
@@ -368,6 +379,16 @@
 		FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRequestModel.swift; sourceTree = "<group>"; };
 		FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		FC2722E920496FB5005225F2 /* WalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProtocol.swift; sourceTree = "<group>"; };
+		FC27231D20498958005225F2 /* QRCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReader.swift; sourceTree = "<group>"; };
+		FC27231E20498958005225F2 /* QRCodeReaderResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderResult.swift; sourceTree = "<group>"; };
+		FC27231F20498958005225F2 /* QRCodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
+		FC27232020498958005225F2 /* QRCodeReaderViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewContainer.swift; sourceTree = "<group>"; };
+		FC27232120498958005225F2 /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewController.swift; sourceTree = "<group>"; };
+		FC27232220498958005225F2 /* QRCodeReaderViewControllerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewControllerBuilder.swift; sourceTree = "<group>"; };
+		FC27232320498958005225F2 /* QRCodeReaderViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewControllerDelegate.swift; sourceTree = "<group>"; };
+		FC27232420498958005225F2 /* ReaderOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderOverlayView.swift; sourceTree = "<group>"; };
+		FC27232520498958005225F2 /* SwitchCameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCameraButton.swift; sourceTree = "<group>"; };
+		FC27232620498958005225F2 /* ToggleTorchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTorchButton.swift; sourceTree = "<group>"; };
 		FC431D95201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramPlainObjectTranslation.swift; sourceTree = "<group>"; };
 		FC4964142015445E00104CEB /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		FC4964172015474700104CEB /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -399,6 +420,7 @@
 		FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterAmountTableViewCell.xib; sourceTree = "<group>"; };
 		FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCell.swift; sourceTree = "<group>"; };
 		FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSortTableViewCell.xib; sourceTree = "<group>"; };
+		FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDataProvider.swift; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7D87B320446F17002FC943 /* String+Сonversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Сonversion.swift"; sourceTree = "<group>"; };
 		FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestViewController.swift; sourceTree = "<group>"; };
@@ -706,6 +728,23 @@
 				FC2722AB20485A3E005225F2 /* WalletWithdrawRequestModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FC27231C20498958005225F2 /* QRCodeReader */ = {
+			isa = PBXGroup;
+			children = (
+				FC27231D20498958005225F2 /* QRCodeReader.swift */,
+				FC27231E20498958005225F2 /* QRCodeReaderResult.swift */,
+				FC27231F20498958005225F2 /* QRCodeReaderView.swift */,
+				FC27232020498958005225F2 /* QRCodeReaderViewContainer.swift */,
+				FC27232120498958005225F2 /* QRCodeReaderViewController.swift */,
+				FC27232220498958005225F2 /* QRCodeReaderViewControllerBuilder.swift */,
+				FC27232320498958005225F2 /* QRCodeReaderViewControllerDelegate.swift */,
+				FC27232420498958005225F2 /* ReaderOverlayView.swift */,
+				FC27232520498958005225F2 /* SwitchCameraButton.swift */,
+				FC27232620498958005225F2 /* ToggleTorchButton.swift */,
+			);
+			path = QRCodeReader;
 			sourceTree = "<group>";
 		};
 		FC4964162015446700104CEB /* Wallet */ = {
@@ -1252,6 +1291,7 @@
 				FCB178ED2046D45600A482B7 /* TournamentDataProvider.swift */,
 				FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */,
 				FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */,
+				FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */,
 			);
 			path = "Data Providers";
 			sourceTree = "<group>";
@@ -1259,6 +1299,7 @@
 		FCC9DD50200DFA5E008825EC /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				FC27231C20498958005225F2 /* QRCodeReader */,
 				FC0E20152044459500872BE5 /* QRCode */,
 				FC140F942030168100B71E7F /* API Client */,
 				FCB177F22045B40E00A482B7 /* Main Api Client */,
@@ -1504,6 +1545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */,
 				FC83DF67203DA7B600A8F8CE /* ProgramHistoryRouter.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
 				FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */,
@@ -1524,6 +1566,7 @@
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
 				FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */,
 				FC4C519F2048059E0042CEE1 /* ProgramRequestsViewModel.swift in Sources */,
+				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				FC2722CF20485A3F005225F2 /* NewManager.swift in Sources */,
 				FC2722D420485A3F005225F2 /* OrderModel.swift in Sources */,
@@ -1556,6 +1599,7 @@
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */,
+				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
@@ -1563,6 +1607,7 @@
 				FC2722BE20485A3F005225F2 /* InvestmentProgramAccrual.swift in Sources */,
 				FC27226920484BC4005225F2 /* ProgramDetailPropertiesTableViewCell.swift in Sources */,
 				FC91379220311CA6002321C7 /* Utils.swift in Sources */,
+				FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */,
 				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
@@ -1604,6 +1649,7 @@
 				FCB178EE2046D45600A482B7 /* TournamentDataProvider.swift in Sources */,
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
+				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
 				FC2722C820485A3F005225F2 /* InvestorDashboard.swift in Sources */,
@@ -1616,6 +1662,7 @@
 				FC2722D520485A3F005225F2 /* Period.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				FC1410242030168100B71E7F /* TradeServerViewModel.swift in Sources */,
+				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
@@ -1655,6 +1702,7 @@
 				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
 				FC2722C620485A3F005225F2 /* InvestmentProgramViewModel.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
+				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
 				FC27226C20484BEF005225F2 /* ProgramDetailPropertiesTableViewCellViewModel.swift in Sources */,
 				FC2722CB20485A3F005225F2 /* ManagerIpfsHash.swift in Sources */,
 				FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */,
@@ -1681,6 +1729,7 @@
 				FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */,
 				FC2722D920485A3F005225F2 /* RegisterInvestorViewModel.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
+				FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */,
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* SignInViewModel.swift in Sources */,
@@ -1690,6 +1739,7 @@
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
 				FC2722B920485A3F005225F2 /* ErrorMessage.swift in Sources */,
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
+				FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */,
 				FC2722C720485A3F005225F2 /* InvestorAmount.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
 				FC2722E220485A3F005225F2 /* WalletsViewModel.swift in Sources */,
@@ -1697,6 +1747,7 @@
 				FC2722B220485A3F005225F2 /* Broker.swift in Sources */,
 				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
+				FC27232B20498959005225F2 /* QRCodeReaderViewController.swift in Sources */,
 				FC14101D2030168100B71E7F /* ParticipantRequest.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */,
@@ -1723,6 +1774,7 @@
 				FCA19A3F201AE83100157AD6 /* WalletControllerViewModel.swift in Sources */,
 				FC140FE42030168100B71E7F /* APIs.swift in Sources */,
 				FC2722C920485A3F005225F2 /* LoginViewModel.swift in Sources */,
+				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
 				FC4964182015474700104CEB /* DashboardViewController.swift in Sources */,
 				FC2722DD20485A3F005225F2 /* TradesViewModel.swift in Sources */,
 			);

@@ -12,6 +12,7 @@ class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
     private static var walletViewModel: WalletViewModel?
+    private static var rateViewModel: RateViewModel?
     
     static var authorizedToken: String? {
         set(newToken) {
@@ -40,12 +41,14 @@ class AuthManager {
         return AuthManager.authorizedToken != nil
     }
     
+    static func getSavedRate(completion: @escaping (_ rate: Double) -> Void) {
+        getRate { (viewModel) in
+            completion(rateViewModel?.rate ?? 0.0)
+        }
+    }
+    
     static func getBalance(completion: @escaping (_ balance: Double) -> Void) {
         getWallet { (viewModel) in
-            if viewModel != nil  {
-                walletViewModel = viewModel
-            }
-            
             completion(walletViewModel?.amount ?? 0.0)
         }
     }
@@ -67,6 +70,21 @@ class AuthManager {
         }
         
         completion(profileViewModel)
+    }
+    
+    static func getRate(completion: @escaping (_ rate: RateViewModel?) -> Void) {
+        guard rateViewModel != nil else {
+            RateDataProvider.getTake(completion: { (viewModel) in
+                if viewModel != nil  {
+                    rateViewModel = viewModel
+                }
+                
+                completion(rateViewModel)
+            })
+            return
+        }
+        
+        completion(rateViewModel)
     }
     
     static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void) {

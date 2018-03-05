@@ -23,8 +23,14 @@ final class WalletControllerViewModel {
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
     
-    private var balance: Double = 0.0
+    private var balance: Double = 0.0 {
+        didSet {
+            self.usdBalance = balance * self.rate
+        }
+    }
     private var currency: String = Constants.currency
+    private var rate: Double = 0.0
+    private var usdBalance: Double = 0.0
     
     var dataType: DataType = .api
     var skip = 0            //offset
@@ -47,16 +53,83 @@ final class WalletControllerViewModel {
         
         setup()
     }
-
+    
     // MARK: - Data methods
     func getBalance() -> Double {
         return balance
     }
+}
+
+// MARK: - TableView
+extension WalletControllerViewModel {
+    func numberOfSections() -> Int {
+        return sections.count
+    }
     
+    func numberOfRows(in section: Int) -> Int {
+        switch sections[section] {
+        case .header:
+            return 1
+        case .transactions:
+            return transactions.count
+        }
+    }
+    
+    func headerTitle(for section: Int) -> String? {
+        switch sections[section] {
+        case .transactions:
+            return "Transactions"
+        case .header:
+            return nil
+        }
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch sections[section] {
+        case .transactions:
+            return 50.0
+        case .header:
+            return 0.0
+        }
+    }
+    
+    /// Get TableViewCellViewModel for IndexPath
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        let type = sections[indexPath.section]
+        switch type {
+        case .header:
+            return WalletHeaderTableViewCellViewModel(balance: balance, currency: currency, usdBalance: usdBalance)
+        case .transactions:
+            return transactions[indexPath.row]
+        }
+    }
+    
+    // MARK: - Private methods
+    private func setup() {
+        fetchBalance { (result) in }
+    }
+    
+    private func fakeTransactions(completion: (_ transactionCellModels: [WalletTransactionTableViewCellViewModel]) -> Void) {
+        var cellModels = [WalletTransactionTableViewCellViewModel]()
+        
+        for _ in 0..<Constants.TemplatesCounts.traders {
+            cellModels.append(WalletTransactionTableViewCellViewModel(walletTransaction: WalletTransaction.templateModel))
+        }
+        
+        completion(cellModels)
+    }
+}
+
+// MARK: - Fetch
+extension WalletControllerViewModel {
     func fetchBalance(completion: @escaping CompletionBlock) {
-        AuthManager.getBalance { [weak self] (value) in
-            self?.balance = value
-            completion(.success)
+        AuthManager.getSavedRate { [weak self] (value) in
+            self?.rate = value
+            
+            AuthManager.getBalance { [weak self] (value) in
+                self?.balance = value
+                completion(.success)
+            }
         }
     }
     
@@ -105,66 +178,6 @@ final class WalletControllerViewModel {
             }, completionError: completion)
     }
     
-    // MARK: - TableView
-    func numberOfSections() -> Int {
-        return sections.count
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        switch sections[section] {
-        case .header:
-            return 1
-        case .transactions:
-            return transactions.count
-        }
-    }
-    
-    func headerTitle(for section: Int) -> String? {
-        switch sections[section] {
-        case .transactions:
-            return "Transactions"
-        case .header:
-            return nil
-        }
-    }
-    
-    func headerHeight(for section: Int) -> CGFloat {
-        switch sections[section] {
-        case .transactions:
-            return 50.0
-        case .header:
-            return 0.0
-        }
-    }
-    
-    /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        let type = sections[indexPath.section]
-        switch type {
-        case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, currency: currency)
-        case .transactions:
-            return transactions[indexPath.row]
-        }
-    }
-    
-    // MARK: - Private methods
-    private func setup() {
-        AuthManager.getBalance { [weak self] (value) in
-            self?.balance = value
-        }
-    }
-    
-    private func fakeTransactions(completion: (_ transactionCellModels: [WalletTransactionTableViewCellViewModel]) -> Void) {
-        var cellModels = [WalletTransactionTableViewCellViewModel]()
-        
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            cellModels.append(WalletTransactionTableViewCellViewModel(walletTransaction: WalletTransaction.templateModel))
-        }
-        
-        completion(cellModels)
-    }
-    
     /// Update saved transactions (WalletTransactionTableViewCellViewModel)
     private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.transactions = viewModels
@@ -204,5 +217,9 @@ extension WalletControllerViewModel {
     
     func deposit() {
         router.show(routeType: .deposit)
+    }
+    
+    func filters() {
+        //TODO: show filters screen
     }
 }

@@ -46,7 +46,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     @objc func pullToRefresh() {
-        //Fetch
+        feedback()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func fetchMore() {

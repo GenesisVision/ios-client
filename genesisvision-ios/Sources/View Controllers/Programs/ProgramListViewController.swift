@@ -107,7 +107,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        super.pullToRefresh()
+        
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {

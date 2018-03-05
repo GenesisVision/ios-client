@@ -106,6 +106,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     override func pullToRefresh() {
+        super.pullToRefresh()
+        
         fetch()
     }
     

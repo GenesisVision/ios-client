@@ -44,6 +44,7 @@ extension UIColor {
     
     struct Wallet {
         static var balance: UIColor  { return Font.dark }
+        static var usdBalance: UIColor  { return Font.light }
         static var currency: UIColor  { return primary }
     }
     

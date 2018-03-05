@@ -11,12 +11,14 @@ import Foundation
 struct WalletHeaderTableViewCellViewModel {
     let balance: Double
     let currency: String
+    let usdBalance: Double
 }
 
 extension WalletHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletHeaderTableViewCell) {
         cell.balanceLabel.text = String(describing: balance)
         cell.currencyLabel.text = currency
+        cell.usdBalanceLabel.text = String(describing: usdBalance)
     }
 }
 

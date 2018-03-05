@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol WalletHeaderTableViewCellProtocol: class {
+    func depositProgramDidPress()
+    func withdrawProgramDidPress()
+}
+
 class WalletHeaderTableViewCell: UITableViewCell {
+    
+    // MARK: - Variables
+    weak var delegate: WalletHeaderTableViewCellProtocol?
     
     // MARK: - Labels
     @IBOutlet var balanceLabel: UILabel! {
@@ -23,6 +31,16 @@ class WalletHeaderTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet var usdBalanceLabel: UILabel! {
+        didSet {
+            usdBalanceLabel.textColor = UIColor.Wallet.usdBalance
+        }
+    }
+    
+    // MARK: - Buttons
+    @IBOutlet weak var depositButton: UIButton!
+    @IBOutlet weak var withdrawButton: UIButton!
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +48,15 @@ class WalletHeaderTableViewCell: UITableViewCell {
         backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
+    }
+    
+    // MARK: - Actions
+    @IBAction func depositButtonAction(_ sender: Any) {
+        delegate?.depositProgramDidPress()
+    }
+    
+    @IBAction func withdrawButtonAction(_ sender: Any) {
+        delegate?.withdrawProgramDidPress()
     }
 }
 

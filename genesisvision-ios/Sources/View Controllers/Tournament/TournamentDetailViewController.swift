@@ -54,7 +54,8 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     }
     
     override func pullToRefresh() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        super.pullToRefresh()
+        
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {

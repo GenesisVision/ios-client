@@ -7,7 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
     return URL(string: Constants.Api.filePath + fileName)
+}
+
+func feedback(style: UIImpactFeedbackStyle = .light) {
+    let feedbackSupportLevel: Int = UIDevice.current.value(forKey: "_feedbackSupportLevel") as! Int
+    
+    let generator = UIImpactFeedbackGenerator(style: style)
+    generator.impactOccurred()
+    return
 }
