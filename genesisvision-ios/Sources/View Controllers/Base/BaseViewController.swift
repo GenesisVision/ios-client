@@ -98,4 +98,8 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         updateData()
     }
+    
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
 }

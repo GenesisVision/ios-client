@@ -11,6 +11,7 @@ import UIKit
 class ProgramPropertiesForTableViewCellView: UIStackView {
     
     @IBOutlet var endOfPeriodLabel: UILabel!
+    @IBOutlet var endOfPeriodDaysLabel: UILabel!
     @IBOutlet var periodDurationLabel: UILabel!
     
     @IBOutlet var feeSuccessLabel: UILabel!
@@ -29,6 +30,8 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
             let availableInvestment = availableInvestment else { return }
             
         endOfPeriodLabel.text = endOfPeriod.defaultFormatString
+        let dateInterval = endOfPeriod.interval(ofComponent: .day, fromDate: Date())
+        endOfPeriodDaysLabel.text = String(describing: dateInterval)
         periodDurationLabel.text = String(describing: periodDuration)
         feeSuccessLabel.text = String(describing: Double(round(100 * feeSuccess) / 100))
         feeManagementLabel.text = String(describing: Double(round(100 * feeManagement) / 100))
@@ -36,6 +39,7 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         availableInvestmentLabel.text = String(describing: Double(round(100 * availableInvestment) / 100))
         
         endOfPeriodLabel.textColor = UIColor.Font.primary
+        endOfPeriodDaysLabel.textColor = UIColor.Font.primary
         periodDurationLabel.textColor = UIColor.Font.dark
         feeSuccessLabel.textColor = UIColor.Font.primary
         feeManagementLabel.textColor = UIColor.Font.primary

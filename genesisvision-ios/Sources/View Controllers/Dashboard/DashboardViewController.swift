@@ -149,17 +149,6 @@ extension DashboardViewController {
         
         return NSAttributedString(string: text, attributes: attributes)
     }
-    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
-        print("emptyDataSetWillAppear")
-    }
-    
-    func emptyDataSetDidAppear(_ scrollView: UIScrollView!) {
-        print("emptyDataSetDidAppear")
-    }
-    
-    func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
-        print("emptyDataSetWillDisappear")
-    }
 }
 
 extension DashboardViewController: UIViewControllerPreviewingDelegate {
