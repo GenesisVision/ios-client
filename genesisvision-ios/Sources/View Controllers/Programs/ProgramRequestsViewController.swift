@@ -36,7 +36,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setup() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
         setupUI()
     }
     
@@ -60,10 +60,8 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     
     override func fetchMore() {
         canFetchMoreResults = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
             self?.canFetchMoreResults = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.reloadData()
@@ -73,9 +71,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
+    private func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -86,6 +82,12 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
     }
 }
 
@@ -116,11 +118,10 @@ extension ProgramRequestsViewController: ProgramRequestTableViewCellProtocol {
     func cancelRequestDidPress(with requestID: String) {
         showProgressHUD()
         viewModel.cancel(with: requestID) { [weak self]  (result) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (success) in
-                    self?.viewModel.goBack()
+                    self?.fetch()
                 })
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)

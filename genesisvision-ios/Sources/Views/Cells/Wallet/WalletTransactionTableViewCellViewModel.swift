@@ -14,7 +14,7 @@ struct WalletTransactionTableViewCellViewModel {
 
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
-        if let type = walletTransaction.type {
+        if let type = walletTransaction.type, let amount = walletTransaction.amount {
             var text: String?
             var textColor: UIColor?
             
@@ -30,7 +30,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 textColor = UIColor.Font.green
             case .profitFromProgram:
                 text = "Profit From Program"
-                textColor = UIColor.Font.green
+                textColor = amount == 0 ? UIColor.Font.medium : (amount > 0 ? UIColor.Font.green : UIColor.Font.red)
             case .cancelInvestmentRequest:
                 text = "Cancel Investment Request"
                 textColor = UIColor.Font.green
@@ -43,18 +43,18 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             case .withdraw:
                 text = "Withdraw"
                 textColor = UIColor.Font.red
+            case .closingProgramRefund:
+                text = "Closing Program Refund"
+                textColor = UIColor.Font.medium
             }
             
             cell.investTypeLabel.text = text
             cell.amountLabel.textColor = textColor
+            cell.amountLabel.text = String(describing: amount.rounded(toPlaces: 4))
         }
         
         if let date = walletTransaction.date {
             cell.dateLabel.text = date.defaultFormatString
-        }
-        
-        if let amount = walletTransaction.amount {
-            cell.amountLabel.text = String(describing: amount)
         }
         
         cell.currencyLabel.text = Constants.currency

@@ -20,7 +20,12 @@ class ProgramWithdrawViewController: UIViewController {
     
     // MARK: - Buttons
     @IBOutlet var withdrawButton: UIButton!
-    @IBOutlet var withdrawAllButton: UIButton!
+    @IBOutlet var withdrawAllButton: UIButton! {
+        didSet {
+            withdrawAllButton.backgroundColor = UIColor.Button.gray
+            withdrawAllButton.isEnabled = false
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

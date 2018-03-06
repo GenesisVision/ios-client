@@ -23,11 +23,12 @@ open class InvestmentProgramDetails: Codable {
     public var title: String?
     public var description: String?
     public var level: Int?
+    public var login: String?
     public var logo: String?
     public var balance: Double?
     public var ownBalance: Double?
     public var currency: Currency?
-    public var investedTokens: Int?
+    public var investedTokens: Double?
     public var tradesCount: Int?
     public var investorsCount: Int?
     public var periodDuration: Int?
@@ -44,14 +45,16 @@ open class InvestmentProgramDetails: Codable {
     public var isHistoryEnable: Bool?
     public var isInvestEnable: Bool?
     public var isWithdrawEnable: Bool?
+    public var canCloseProgram: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Int?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, canCloseProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
         self.level = level
+        self.login = login
         self.logo = logo
         self.balance = balance
         self.ownBalance = ownBalance
@@ -73,6 +76,7 @@ open class InvestmentProgramDetails: Codable {
         self.isHistoryEnable = isHistoryEnable
         self.isInvestEnable = isInvestEnable
         self.isWithdrawEnable = isWithdrawEnable
+        self.canCloseProgram = canCloseProgram
     }
     
 
@@ -86,6 +90,7 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(login, forKey: "login")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(ownBalance, forKey: "ownBalance")
@@ -107,6 +112,7 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(isHistoryEnable, forKey: "isHistoryEnable")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
         try container.encodeIfPresent(isWithdrawEnable, forKey: "isWithdrawEnable")
+        try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
     }
 
     // Decodable protocol methods
@@ -118,11 +124,12 @@ open class InvestmentProgramDetails: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        login = try container.decodeIfPresent(String.self, forKey: "login")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         ownBalance = try container.decodeIfPresent(Double.self, forKey: "ownBalance")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        investedTokens = try container.decodeIfPresent(Int.self, forKey: "investedTokens")
+        investedTokens = try container.decodeIfPresent(Double.self, forKey: "investedTokens")
         tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
         investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
@@ -139,6 +146,7 @@ open class InvestmentProgramDetails: Codable {
         isHistoryEnable = try container.decodeIfPresent(Bool.self, forKey: "isHistoryEnable")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
         isWithdrawEnable = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawEnable")
+        canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
     }
 }
 

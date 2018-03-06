@@ -150,43 +150,45 @@ open class BrokerAPI {
     "name" : "name",
     "currency" : "Undefined",
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "email" : "email"
+    "email" : "email",
+    "depositInUsd" : 0.8008281904610115
   }, {
     "password" : "password",
     "requestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
     "currency" : "Undefined",
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "email" : "email"
+    "email" : "email",
+    "depositInUsd" : 0.8008281904610115
   } ],
   "investments" : [ {
-    "feeEntrance" : 5.962133916683182,
+    "feeEntrance" : 5.637376656633329,
     "tradeIpfsHash" : "tradeIpfsHash",
-    "period" : 0,
-    "feeManagement" : 1.4658129805029452,
+    "period" : 6,
+    "feeManagement" : 5.962133916683182,
     "description" : "description",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "login" : "login",
-    "investMinAmount" : 5.637376656633329,
+    "investMinAmount" : 2.3021358869347655,
     "isEnabled" : true,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "ipfsHash" : "ipfsHash",
-    "feeSuccess" : 6.027456183070403,
+    "feeSuccess" : 1.4658129805029452,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investMaxAmount" : 2.3021358869347655,
+    "investMaxAmount" : 7.061401241503109,
     "lastPeriod" : {
-      "number" : 7,
-      "managerStartBalance" : 3.616076749251911,
-      "managerStartShare" : 2.027123023002322,
+      "number" : 9,
+      "managerStartBalance" : 2.027123023002322,
+      "managerStartShare" : 4.145608029883936,
       "investmentRequest" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
-        "amount" : 4.145608029883936,
+        "amount" : 7.386281948385884,
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "type" : "Invest",
         "status" : "New"
       }, {
         "date" : "2000-01-23T04:56:07.000+00:00",
-        "amount" : 4.145608029883936,
+        "amount" : 7.386281948385884,
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "type" : "Invest",
         "status" : "New"
@@ -194,38 +196,38 @@ open class BrokerAPI {
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-      "startBalance" : 9.301444243932576,
+      "startBalance" : 3.616076749251911,
       "status" : "Planned"
     },
     "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
-    "feeEntrance" : 5.962133916683182,
+    "feeEntrance" : 5.637376656633329,
     "tradeIpfsHash" : "tradeIpfsHash",
-    "period" : 0,
-    "feeManagement" : 1.4658129805029452,
+    "period" : 6,
+    "feeManagement" : 5.962133916683182,
     "description" : "description",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "login" : "login",
-    "investMinAmount" : 5.637376656633329,
+    "investMinAmount" : 2.3021358869347655,
     "isEnabled" : true,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "ipfsHash" : "ipfsHash",
-    "feeSuccess" : 6.027456183070403,
+    "feeSuccess" : 1.4658129805029452,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investMaxAmount" : 2.3021358869347655,
+    "investMaxAmount" : 7.061401241503109,
     "lastPeriod" : {
-      "number" : 7,
-      "managerStartBalance" : 3.616076749251911,
-      "managerStartShare" : 2.027123023002322,
+      "number" : 9,
+      "managerStartBalance" : 2.027123023002322,
+      "managerStartShare" : 4.145608029883936,
       "investmentRequest" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
-        "amount" : 4.145608029883936,
+        "amount" : 7.386281948385884,
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "type" : "Invest",
         "status" : "New"
       }, {
         "date" : "2000-01-23T04:56:07.000+00:00",
-        "amount" : 4.145608029883936,
+        "amount" : 7.386281948385884,
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "type" : "Invest",
         "status" : "New"
@@ -233,7 +235,7 @@ open class BrokerAPI {
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-      "startBalance" : 9.301444243932576,
+      "startBalance" : 3.616076749251911,
       "status" : "Planned"
     },
     "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
@@ -349,6 +351,52 @@ open class BrokerAPI {
     }
 
     /**
+     Close investment program
+     
+     - parameter investmentProgramId: (query)  
+     - parameter managerBalance: (query)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerPeriodProcessClosingProgramPost(investmentProgramId: UUID, managerBalance: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodProcessClosingProgramPostWithRequestBuilder(investmentProgramId: investmentProgramId, managerBalance: managerBalance, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Close investment program
+     - POST /api/broker/period/processClosingProgram
+     
+     - parameter investmentProgramId: (query)  
+     - parameter managerBalance: (query)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerPeriodProcessClosingProgramPostWithRequestBuilder(investmentProgramId: UUID, managerBalance: Double, authorization: String) -> RequestBuilder<Void> {
+        let path = "/api/broker/period/processClosingProgram"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "investmentProgramId": investmentProgramId, 
+            "managerBalance": managerBalance
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Process investment requests
      
      - parameter investmentProgramId: (query)  
@@ -393,45 +441,39 @@ open class BrokerAPI {
     }
 
     /**
-     Set investment period start balance, manager share, manager balance
+     Update manager token initial price/total supply after loss
      
      - parameter investmentProgramId: (query)  
-     - parameter balance: (query)  
-     - parameter managerBalance: (query)  
-     - parameter managerShare: (query)  
+     - parameter investorLossShare: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodSetStartValuesPost(investmentProgramId: UUID, balance: Double, managerBalance: Double, managerShare: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerPeriodSetStartValuesPostWithRequestBuilder(investmentProgramId: investmentProgramId, balance: balance, managerBalance: managerBalance, managerShare: managerShare, authorization: authorization).execute { (response, error) -> Void in
+    open class func apiBrokerPeriodReevaluateManagerTokenPost(investmentProgramId: UUID, investorLossShare: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodReevaluateManagerTokenPostWithRequestBuilder(investmentProgramId: investmentProgramId, investorLossShare: investorLossShare, authorization: authorization).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Set investment period start balance, manager share, manager balance
-     - POST /api/broker/period/setStartValues
+     Update manager token initial price/total supply after loss
+     - POST /api/broker/period/reevaluateManagerToken
      
      - parameter investmentProgramId: (query)  
-     - parameter balance: (query)  
-     - parameter managerBalance: (query)  
-     - parameter managerShare: (query)  
+     - parameter investorLossShare: (query)  
      - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiBrokerPeriodSetStartValuesPostWithRequestBuilder(investmentProgramId: UUID, balance: Double, managerBalance: Double, managerShare: Double, authorization: String) -> RequestBuilder<Void> {
-        let path = "/api/broker/period/setStartValues"
+    open class func apiBrokerPeriodReevaluateManagerTokenPostWithRequestBuilder(investmentProgramId: UUID, investorLossShare: Double, authorization: String) -> RequestBuilder<Void> {
+        let path = "/api/broker/period/reevaluateManagerToken"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "investmentProgramId": investmentProgramId, 
-            "balance": balance, 
-            "managerBalance": managerBalance, 
-            "managerShare": managerShare
+            "investorLossShare": investorLossShare
         ])
         
         let nillableHeaders: [String: Any?] = [
@@ -442,6 +484,46 @@ open class BrokerAPI {
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Set investment period start balance, manager share, manager balance
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerPeriodSetStartValuesPost(authorization: String, model: StartValues? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodSetStartValuesPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Set investment period start balance, manager share, manager balance
+     - POST /api/broker/period/setStartValues
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerPeriodSetStartValuesPostWithRequestBuilder(authorization: String, model: StartValues? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/period/setStartValues"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
@@ -471,18 +553,18 @@ open class BrokerAPI {
   } ],
   "canCloseCurrentPeriod" : true,
   "currentPeriod" : {
-    "number" : 7,
-    "managerStartBalance" : 3.616076749251911,
-    "managerStartShare" : 2.027123023002322,
+    "number" : 9,
+    "managerStartBalance" : 2.027123023002322,
+    "managerStartShare" : 4.145608029883936,
     "investmentRequest" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 4.145608029883936,
+      "amount" : 7.386281948385884,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
       "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "amount" : 4.145608029883936,
+      "amount" : 7.386281948385884,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
       "status" : "New"
@@ -490,7 +572,7 @@ open class BrokerAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 9.301444243932576,
+    "startBalance" : 3.616076749251911,
     "status" : "Planned"
   }
 }}]
@@ -638,52 +720,6 @@ open class BrokerAPI {
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Update manager token initial price/total supply after loss
-     
-     - parameter investmentProgramId: (query)  
-     - parameter investorLossShare: (query)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func apiBrokerTradesReevaluateManagerTokenPost(investmentProgramId: UUID, investorLossShare: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerTradesReevaluateManagerTokenPostWithRequestBuilder(investmentProgramId: investmentProgramId, investorLossShare: investorLossShare, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update manager token initial price/total supply after loss
-     - POST /api/broker/trades/reevaluateManagerToken
-     
-     - parameter investmentProgramId: (query)  
-     - parameter investorLossShare: (query)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func apiBrokerTradesReevaluateManagerTokenPostWithRequestBuilder(investmentProgramId: UUID, investorLossShare: Double, authorization: String) -> RequestBuilder<Void> {
-        let path = "/api/broker/trades/reevaluateManagerToken"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "investmentProgramId": investmentProgramId, 
-            "investorLossShare": investorLossShare
-        ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }

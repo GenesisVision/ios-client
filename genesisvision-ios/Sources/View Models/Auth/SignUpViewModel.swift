@@ -26,26 +26,6 @@ final class SignUpViewModel {
     
     // MARK: - API
     func signUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        isInvestorApp
-            ? investorSignUp(email: email, password: password, confirmPassword: confirmPassword, completion: completion)
-            : managerSignUp(email: email, password: password, confirmPassword: confirmPassword, completion: completion)
-    }
-    
-    // MARK: - Private methods
-    // MARK: - API Methods
-    private func investorSignUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
-        
-        InvestorAPI.apiInvestorAuthSignUpPost(model: registerInvestorViewModel) { (error) in
-            ResponseHandler.handleApi(error: error, completion: completion)
-        }
-    }
-    
-    private func managerSignUp(email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        let registerManagerViewModel = RegisterManagerViewModel(email: email, password: password, confirmPassword: confirmPassword)
-        
-        ManagerAPI.apiManagerAuthSignUpPost(model: registerManagerViewModel) { (error) in
-            ResponseHandler.handleApi(error: error, completion: completion)
-        }
+        AuthDataProvider.signUp(email: email, password: password, confirmPassword: confirmPassword, completion: completion)
     }
 }

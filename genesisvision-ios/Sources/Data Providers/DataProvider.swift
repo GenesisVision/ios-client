@@ -8,6 +8,7 @@
 
 class DataProvider {
     func responseHandler<T>(_ viewModel: T? = nil, error: Error?, successCompletion: @escaping (_ viewModel: T?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        networkActivity(show: false)
         
         guard viewModel != nil && error == nil else {
             print("Error")
@@ -18,6 +19,7 @@ class DataProvider {
     }
     
     func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
+        networkActivity(show: false)
         
         guard error == nil else {
             print("Error")

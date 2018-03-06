@@ -14,9 +14,10 @@ func getFileURL(fileName: String) -> URL? {
 }
 
 func feedback(style: UIImpactFeedbackStyle = .light) {
-    let feedbackSupportLevel: Int = UIDevice.current.value(forKey: "_feedbackSupportLevel") as! Int
-    
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.impactOccurred()
-    return
+}
+
+func networkActivity(show: Bool = true) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = show
 }

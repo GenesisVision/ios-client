@@ -17,6 +17,38 @@ class ProgramDataProvider: DataProvider {
         }
     }
     
+    static func investProgram(withAmount amount: Double, investmentProgramId: String?, completion: @escaping (_ walletsViewModel: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let investmentProgramId = investmentProgramId,
+            let uuid = UUID(uuidString: investmentProgramId)
+            else { return errorCompletion(.failure(reason: nil)) }
+        
+        let investModel = Invest(investmentProgramId: uuid, amount: amount)
+        
+        InvestorAPI.apiInvestorInvestmentProgramsInvestPost(authorization: authorization, model: investModel) { (walletsViewModel, error) in
+            DataProvider().responseHandler(walletsViewModel, error: error, successCompletion: { (viewModel) in
+                completion(viewModel)
+            }, errorCompletion: { (result) in
+                errorCompletion(result)
+            })
+        }
+    }
+    
+    static func withdrawProgram(withAmount amount: Double, investmentProgramId: String?, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let investmentProgramId = investmentProgramId,
+            let uuid = UUID(uuidString: investmentProgramId)
+            else { return errorCompletion(.failure(reason: nil)) }
+        
+        let investModel = Invest(investmentProgramId: uuid, amount: amount)
+
+        InvestorAPI.apiInvestorInvestmentProgramsWithdrawPost(authorization: authorization, model: investModel) { (error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                errorCompletion(result)
+            })
+        }
+    }
+    
     static func getPrograms(with filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
         let authorization = AuthManager.authorizedToken
         

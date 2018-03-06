@@ -49,7 +49,7 @@ class AuthManager {
     
     static func getBalance(completion: @escaping (_ balance: Double) -> Void) {
         getWallet { (viewModel) in
-            completion(walletViewModel?.amount ?? 0.0)
+            completion(walletViewModel?.amount?.rounded(toPlaces: 4) ?? 0.0)
         }
     }
     

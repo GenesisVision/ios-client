@@ -18,6 +18,6 @@ extension WalletTransaction {
         let amount = Double(arc4random_uniform(40000)) - 20000
         let type = types[idx]
 
-        return WalletTransaction(id: nil, type: type, amount: amount, date: Date(), walletId: nil, currency: WalletTransaction.Currency.gvt)
+        return WalletTransaction(id: nil, type: type, amount: amount, date: Date(), walletId: nil, currency: WalletTransaction.Currency.gvt, investmentProgramRequest: nil, paymentTx: nil)
     }
 }

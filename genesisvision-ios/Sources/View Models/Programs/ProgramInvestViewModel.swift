@@ -43,24 +43,15 @@ final class ProgramInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        guard let programId = investmentProgramId,
-            let uuid = UUID(uuidString: programId),
-            let token = AuthManager.authorizedToken
-            else { return completion(.failure(reason: nil)) }
-        
-        let investModel = Invest(investmentProgramId: uuid, amount: value)
-        InvestorAPI.apiInvestorInvestmentProgramsInvestPost(authorization: token, model: investModel) { [weak self] (walletViewModel, error) in
-            self?.responseHandler(walletViewModel, error: error, completion: completion)
+        ProgramDataProvider.investProgram(withAmount: value, investmentProgramId: investmentProgramId, completion: { (viewModel) in
+            guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
+                return completion(.failure(reason: nil))
+            }
+            
+            AuthManager.saveWalletViewModel(viewModel: wallet)
+            completion(.success)
+        }) { (result) in
+            completion(result)
         }
-    }
-    
-    private func responseHandler(_ viewModel: WalletsViewModel?, error: Error?, completion: @escaping CompletionBlock) {
-        guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
-            return ErrorHandler.handleApiError(error: error, completion: completion)
-        }
-
-        AuthManager.saveWalletViewModel(viewModel: wallet)
-
-        completion(.success)
     }
 }

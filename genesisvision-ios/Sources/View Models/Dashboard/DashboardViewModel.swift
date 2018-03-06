@@ -29,9 +29,9 @@ final class DashboardViewModel {
     var viewModels = [DashboardTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: DashboardRouter, delegate: DashboardTableViewCellProtocol) {
+    init(withRouter router: DashboardRouter) {
         self.router = router
-        self.delegate = delegate
+        self.delegate = router.currentController() as? DashboardTableViewCellProtocol
     }
 }
 

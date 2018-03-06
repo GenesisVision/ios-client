@@ -15,15 +15,16 @@ final class ProgramHistoryViewModel {
     
     var dataType: DataType = .api
     
-    var programsCount: String = ""
+    var transactionsCount: String = ""
     var skip = 0
+    var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
-            programsCount = "\(totalCount) programs"
+            transactionsCount = "\(totalCount) transactions"
         }
     }
 
-    var viewModels = [ProgramTableViewCellViewModel]()
+    var viewModels = [WalletTransactionTableViewCellViewModel]()
     
     // MARK: - Init
     init(withRouter router: ProgramHistoryRouter, investmentProgramId: String) {
@@ -37,7 +38,7 @@ extension ProgramHistoryViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramTableViewCellViewModel.self]
+        return [WalletTransactionTableViewCellViewModel.self]
     }
     
     func modelsCount() -> Int {
@@ -65,7 +66,7 @@ extension ProgramHistoryViewModel {
         
         skip += Constants.Api.take
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [ProgramTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [WalletTransactionTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -84,51 +85,35 @@ extension ProgramHistoryViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramTableViewCellViewModel? {
+    func model(for index: Int) -> WalletTransactionTableViewCellViewModel? {
         return viewModels[index]
     }
 
     // MARK: - Private methods
-    private func apiInvestmentPrograms(withFilter filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        ProgramDataProvider.getPrograms(with: filter) { (viewModel) in
-            completion(viewModel)
-        }
-    }
-    
-    private func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard viewModel != nil else {
-            return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
-        }
-        
-        successCompletion(viewModel)
-    }
-    
-    private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
+   private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: nil, skip: skip, take: Constants.Api.take)
-            
-            apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
-                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
+            WalletDataProvider.getWalletTransactions(withProgramId: investmentProgramId, type: nil, skip: skip, take: take) { (transactionsViewModel) in
+                guard transactionsViewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
+                }
+                var viewModels = [WalletTransactionTableViewCellViewModel]()
                 
-                var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
+                let totalCount = transactionsViewModel?.total ?? 0
                 
-                let totalCount = investmentPrograms.total ?? 0
-                
-                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
-                    let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram)
-                    investmentProgramViewModels.append(traderTableViewCellModel)
+                transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
+                    let viewModel = WalletTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
+                    viewModels.append(viewModel)
                 })
                 
-                completionSuccess(totalCount, investmentProgramViewModels)
+                completionSuccess(totalCount, viewModels)
                 completionError(.success)
-            })
+            }
         case .fake:
             break
         }

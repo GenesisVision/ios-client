@@ -17,8 +17,8 @@ open class FilesAPI {
      - parameter id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiFilesGetByIdGet(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiFilesGetByIdGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func apiFilesByIdGet(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiFilesByIdGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -26,14 +26,14 @@ open class FilesAPI {
 
     /**
      Download file
-     - GET /api/files/get/{id}
+     - GET /api/files/{id}
      
      - parameter id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiFilesGetByIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
-        var path = "/api/files/get/{id}"
+    open class func apiFilesByIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
+        var path = "/api/files/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -52,8 +52,8 @@ open class FilesAPI {
      - parameter id: (query)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiFilesGetGet(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiFilesGetGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func apiFilesGet(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiFilesGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -61,14 +61,14 @@ open class FilesAPI {
 
     /**
      Download file
-     - GET /api/files/get
+     - GET /api/files
      
      - parameter id: (query)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiFilesGetGetWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
-        let path = "/api/files/get"
+    open class func apiFilesGetWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
+        let path = "/api/files"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

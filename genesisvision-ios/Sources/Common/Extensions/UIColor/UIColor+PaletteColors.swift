@@ -32,7 +32,6 @@ extension UIColor {
     struct Background {
         static var main: UIColor  { return Common.white }
         static var gray: UIColor  { return Common.lightGray }
-        
     }
     struct Transaction {
         static var greenTransaction: UIColor  { return Common.green }
@@ -67,6 +66,8 @@ extension UIColor {
         
         static var green: UIColor  { return Common.green }
         static var red: UIColor  { return Common.red }
+        
+        static var gray: UIColor  { return Common.gray }
     }
     
     struct Border {

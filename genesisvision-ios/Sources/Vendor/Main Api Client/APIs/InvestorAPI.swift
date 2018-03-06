@@ -179,7 +179,8 @@ open class InvestorAPI {
   "total" : 7,
   "investmentPrograms" : [ {
     "periodDuration" : 2,
-    "investedTokens" : 1,
+    "investedTokens" : 1.4658129805029452,
+    "canCloseProgram" : true,
     "feeManagement" : 4.145608029883936,
     "manager" : {
       "country" : "country",
@@ -206,7 +207,8 @@ open class InvestorAPI {
     "investorsCount" : 5
   }, {
     "periodDuration" : 2,
-    "investedTokens" : 1,
+    "investedTokens" : 1.4658129805029452,
+    "canCloseProgram" : true,
     "feeManagement" : 4.145608029883936,
     "manager" : {
       "country" : "country",
@@ -274,10 +276,12 @@ open class InvestorAPI {
      - GET /api/investor/investmentProgram
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
-    "investedTokens" : 5,
+    "investedTokens" : 5.962133916683182,
+    "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
+    "login" : "login",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
@@ -415,13 +419,13 @@ open class InvestorAPI {
   "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 4.145608029883936,
+    "amount" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 4.145608029883936,
+    "amount" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "status" : "New"
@@ -966,6 +970,58 @@ open class InvestorAPI {
     }
 
     /**
+     Get user investment programs with tx
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter mask: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorWalletTransactionsInvestmentProgramsListGet(authorization: String, mask: String? = nil, completion: @escaping ((_ data: WalletInvestmentPrograms?,_ error: Error?) -> Void)) {
+        apiInvestorWalletTransactionsInvestmentProgramsListGetWithRequestBuilder(authorization: authorization, mask: mask).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get user investment programs with tx
+     - GET /api/investor/wallet/transactions/investmentProgramsList
+     - examples: [{contentType=application/json, example={
+  "investmentPrograms" : [ {
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  }, {
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter mask: (query)  (optional)
+
+     - returns: RequestBuilder<WalletInvestmentPrograms> 
+     */
+    open class func apiInvestorWalletTransactionsInvestmentProgramsListGetWithRequestBuilder(authorization: String, mask: String? = nil) -> RequestBuilder<WalletInvestmentPrograms> {
+        let path = "/api/investor/wallet/transactions/investmentProgramsList"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "mask": mask
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletInvestmentPrograms>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Get user wallet transactions
      
      - parameter authorization: (header) JWT access token 
@@ -987,17 +1043,43 @@ open class InvestorAPI {
   "transactions" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investmentProgramRequest" : {
+      "investmentProgram" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title"
+      },
+      "type" : "Invest",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit"
+    "type" : "Deposit",
+    "paymentTx" : {
+      "address" : "address",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "hash" : "hash"
+    }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investmentProgramRequest" : {
+      "investmentProgram" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title"
+      },
+      "type" : "Invest",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit"
+    "type" : "Deposit",
+    "paymentTx" : {
+      "address" : "address",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "hash" : "hash"
+    }
   } ]
 }}]
      

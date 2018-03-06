@@ -66,7 +66,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         registerForPreviewing()
         
         showProgressHUD()
-        pullToRefresh()
+        fetch()
         setupUI()
     }
     
@@ -91,12 +91,23 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.animateViews(animations: [tableViewAnimation])
     }
     
+    func fetch() {
+        viewModel.refresh { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.reloadData()
+                break
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
+            }
+        }
+    }
     override func fetchMore() {
         canFetchMoreResults = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
             self?.canFetchMoreResults = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.reloadData()
@@ -109,17 +120,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
         
-        viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
-            switch result {
-            case .success:
-                self?.reloadData()
-                break
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
-            }
-        }
+        fetch()
     }
     
     // MARK: - Actions

@@ -68,8 +68,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     // MARK: - Private methods
     private func fetch() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         viewModel.getProfile { [weak self] (result) in
             self?.hideHUD()
             

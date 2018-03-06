@@ -56,6 +56,10 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
         
+        fetch()
+    }
+    
+    private func fetch() {
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {

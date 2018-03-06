@@ -411,10 +411,12 @@ open class ManagerAPI {
      - GET /api/manager/investmentProgram
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
-    "investedTokens" : 5,
+    "investedTokens" : 5.962133916683182,
+    "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
+    "login" : "login",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
@@ -817,6 +819,58 @@ open class ManagerAPI {
     }
 
     /**
+     Get user investment programs with tx
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter mask: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerWalletTransactionsInvestmentProgramsListGet(authorization: String, mask: String? = nil, completion: @escaping ((_ data: WalletInvestmentPrograms?,_ error: Error?) -> Void)) {
+        apiManagerWalletTransactionsInvestmentProgramsListGetWithRequestBuilder(authorization: authorization, mask: mask).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get user investment programs with tx
+     - GET /api/manager/wallet/transactions/investmentProgramsList
+     - examples: [{contentType=application/json, example={
+  "investmentPrograms" : [ {
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  }, {
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter mask: (query)  (optional)
+
+     - returns: RequestBuilder<WalletInvestmentPrograms> 
+     */
+    open class func apiManagerWalletTransactionsInvestmentProgramsListGetWithRequestBuilder(authorization: String, mask: String? = nil) -> RequestBuilder<WalletInvestmentPrograms> {
+        let path = "/api/manager/wallet/transactions/investmentProgramsList"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "mask": mask
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletInvestmentPrograms>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Get user wallet transactions
      
      - parameter authorization: (header) JWT access token 
@@ -838,17 +892,43 @@ open class ManagerAPI {
   "transactions" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investmentProgramRequest" : {
+      "investmentProgram" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title"
+      },
+      "type" : "Invest",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit"
+    "type" : "Deposit",
+    "paymentTx" : {
+      "address" : "address",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "hash" : "hash"
+    }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investmentProgramRequest" : {
+      "investmentProgram" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title"
+      },
+      "type" : "Invest",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit"
+    "type" : "Deposit",
+    "paymentTx" : {
+      "address" : "address",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "hash" : "hash"
+    }
   } ]
 }}]
      

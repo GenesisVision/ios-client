@@ -41,29 +41,13 @@ final class ProgramWithdrawViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiWithdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        guard let programId = investmentProgramId,
-            let uuid = UUID(uuidString: programId),
-            let token = AuthManager.authorizedToken
-            else { return completion(.failure(reason: nil)) }
-        
-        let investModel = Invest(investmentProgramId: uuid, amount: amount)
-        
-        InvestorAPI.apiInvestorInvestmentProgramsWithdrawPost(authorization: token, model: investModel) { [weak self] (error) in
-            self?.responseHandler(error, completion: completion)
+        ProgramDataProvider.withdrawProgram(withAmount: amount, investmentProgramId: investmentProgramId) { (result) in
+            completion(result)
         }
     }
     
     private func apiWithdrawAll(completion: @escaping CompletionBlock) {
-        guard let programId = investmentProgramId,
-            let uuid = UUID(uuidString: programId),
-            let token = AuthManager.authorizedToken
-            else { return completion(.failure(reason: nil)) }
 
-//        let investModel = Invest(investmentProgramId: uuid)
-        
-//        InvestorAPI.apiInvestorInvestmentsWithdrawPost(authorization: token, model: investModel) { [weak self] (error) in
-//            self?.responseHandler(error, completion: completion)
-//        }
     }
     
     private func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {

@@ -41,7 +41,7 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
-            dashboardViewController.viewModel = DashboardViewModel(withRouter: router, delegate: dashboardViewController)
+            dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_dashboard")
             navigationController.tabBarItem.title = "Dashboard"
             viewControllers.append(navigationController)

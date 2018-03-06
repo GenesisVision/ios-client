@@ -11,12 +11,21 @@ import Foundation
 
 open class TransactionsFilter: Codable {
 
+    public enum ModelType: String, Codable { 
+        case all = "All"
+        case _internal = "Internal"
+        case external = "External"
+    }
+    public var investmentProgramId: UUID?
+    public var type: ModelType?
     public var skip: Int?
     public var take: Int?
 
 
     
-    public init(skip: Int?, take: Int?) {
+    public init(investmentProgramId: UUID?, type: ModelType?, skip: Int?, take: Int?) {
+        self.investmentProgramId = investmentProgramId
+        self.type = type
         self.skip = skip
         self.take = take
     }
@@ -28,6 +37,8 @@ open class TransactionsFilter: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(investmentProgramId, forKey: "investmentProgramId")
+        try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(skip, forKey: "skip")
         try container.encodeIfPresent(take, forKey: "take")
     }
@@ -37,6 +48,8 @@ open class TransactionsFilter: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        investmentProgramId = try container.decodeIfPresent(UUID.self, forKey: "investmentProgramId")
+        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         skip = try container.decodeIfPresent(Int.self, forKey: "skip")
         take = try container.decodeIfPresent(Int.self, forKey: "take")
     }

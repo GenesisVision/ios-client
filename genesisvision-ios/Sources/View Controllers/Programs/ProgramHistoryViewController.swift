@@ -49,7 +49,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
     }
     
     private func reloadData() {
@@ -60,9 +60,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     
     override func fetchMore() {
         canFetchMoreResults = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self?.canFetchMoreResults = true
             switch result {
             case .success:
@@ -73,9 +71,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
+    private func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -86,6 +82,12 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
     }
 }
 

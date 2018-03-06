@@ -39,7 +39,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
         registerForPreviewing()
         
         showProgressHUD()
-        pullToRefresh()
+        fetch()
         setupUI()
     }
     
@@ -61,12 +61,23 @@ class DashboardViewController: BaseViewControllerWithTableView {
         tableView.animateViews(animations: [tableViewAnimation])
     }
     
+    private func fetch() {
+        viewModel.refresh { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
+            }
+        }
+    }
+    
     override func fetchMore() {
         canFetchMoreResults = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.viewModel.fetchMore { [weak self] (result) in
             self?.canFetchMoreResults = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case .success:
                 self?.reloadData()
@@ -79,16 +90,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
         
-        viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
-            }
-        }
+        fetch()
     }
 }
 

@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit
+
 class WalletDataProvider: DataProvider {
     // MARK: - Public methods
     static func getWallet(completion: @escaping (_ wallet: WalletsViewModel?) -> Void) {
@@ -20,8 +22,12 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func getWalletTransactions(filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
+    static func getWalletTransactions(withProgramId investmentProgramId: String?, type: TransactionsFilter.ModelType?, skip: Int?, take: Int?, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
+        
+        let uuid = UUID(uuidString: investmentProgramId ?? "")
+        
+        let filter = TransactionsFilter(investmentProgramId: uuid, type: type, skip: skip, take: take)
         
         isInvestorApp
             ? getInvestorWalletTransactions(with: authorization, filter: filter) { (viewModel) in

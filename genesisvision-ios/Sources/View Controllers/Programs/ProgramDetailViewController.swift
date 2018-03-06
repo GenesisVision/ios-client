@@ -106,9 +106,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         setupPullToRefresh()
     }
     
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
+    private func fetch() {
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {
@@ -119,6 +117,12 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
     }
     
     private func reloadData() {
@@ -184,16 +188,16 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProgramDetailViewController: ProgramDetailProtocol {
     func didRequestCanceled() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
     }
     
     func didWithdrawn() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
     }
     
     func didInvested() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
     }
 }

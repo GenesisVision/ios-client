@@ -90,12 +90,10 @@ extension UIViewController {
 
     // MARK: - PKHUD
     func showProgressHUD(withNetworkActivity networkActivity: Bool = true) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = networkActivity
         HUD.show(.progress, onView: self.view)
     }
 
     func hideHUD() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         HUD.hide()
     }
 

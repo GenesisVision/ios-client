@@ -30,35 +30,11 @@ final class SignInViewModel {
     
     // MARK: - API
     func signIn(email: String, password: String, completion: @escaping CompletionBlock) {
-        isInvestorApp
-            ? investorSignIn(email: email, password: password, completion: completion)
-            : managerSignIn(email: email, password: password, completion: completion)
-    }
-    
-    
-    // MARK: - Private methods
-    // MARK: - API
-    private func investorSignIn(email: String, password: String, completion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(email: email, password: password)
-        InvestorAPI.apiInvestorAuthSignInPost(model: loginViewModel) { [weak self] (token, error) in
-            self?.responseHandler(token, error: error, completion: completion)
+        AuthDataProvider.signIn(email: email, password: password, completion: { (token) in
+            AuthManager.authorizedToken = token
+            completion(.success)
+        }) { (result) in
+            completion(result)
         }
-    }
-    
-    private func managerSignIn(email: String, password: String, completion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(email: email, password: password)
-        ManagerAPI.apiManagerAuthSignInPost(model: loginViewModel) { [weak self] (token, error) in
-            self?.responseHandler(token, error: error, completion: completion)
-        }
-    }
-    
-    private func responseHandler(_ token: String?, error: Error?, completion: @escaping CompletionBlock) {
-        guard token != nil else {
-            return ErrorHandler.handleApiError(error: error, completion: completion)
-        }
-        
-        AuthManager.authorizedToken = token
-        
-        completion(.success)
     }
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import UIKit
-
 class DashboardDataProvider: DataProvider {
     static func getProgram(completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }

@@ -22,6 +22,7 @@ final class WalletControllerViewModel {
 
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
+    private weak var delegate: WalletHeaderTableViewCellProtocol?
     
     private var balance: Double = 0.0 {
         didSet {
@@ -34,6 +35,7 @@ final class WalletControllerViewModel {
     
     var dataType: DataType = .api
     var skip = 0            //offset
+    var take = Constants.Api.take
     var totalCount = 0      //total count of programs
     
     /// Return view models for registration cell Nib files
@@ -50,6 +52,7 @@ final class WalletControllerViewModel {
     // MARK: - Init
     init(withRouter router: WalletRouter) {
         self.router = router
+        self.delegate = router.currentController() as? WalletHeaderTableViewCellProtocol
         
         setup()
     }
@@ -98,7 +101,7 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, currency: currency, usdBalance: usdBalance)
+            return WalletHeaderTableViewCellViewModel(balance: balance, currency: currency, usdBalance: usdBalance, delegate: delegate)
         case .transactions:
             return transactions[indexPath.row]
         }
@@ -186,15 +189,12 @@ extension WalletControllerViewModel {
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        
-        let filter = TransactionsFilter(skip: skip, take: Constants.Api.take)
-        
-        WalletDataProvider.getWalletTransactions(filter: filter) { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(withProgramId: nil, type: TransactionsFilter.ModelType.all, skip: skip, take: take) { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
             var viewModels = [WalletTransactionTableViewCellViewModel]()
-
+            
             let totalCount = transactionsViewModel?.total ?? 0
             
             transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
