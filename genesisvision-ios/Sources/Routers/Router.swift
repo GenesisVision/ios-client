@@ -236,7 +236,7 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func goBack() {
+    func goToBack() {
         popViewController(animated: true)
     }
 }

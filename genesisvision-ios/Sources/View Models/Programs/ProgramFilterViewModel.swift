@@ -1,5 +1,5 @@
 //
-//  FilterViewModel.swift
+//  ProgramFilterViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 31.01.18.
@@ -9,7 +9,7 @@
 import Foundation
 import TTRangeSlider
 
-final class FilterViewModel {
+final class ProgramFilterViewModel {
     
     // MARK: - View Model
     private weak var investmentProgramListViewModel: InvestmentProgramListViewModel?
@@ -23,7 +23,7 @@ final class FilterViewModel {
     var title: String = "Filter"
     
     private var sections: [SectionType] = [.amount, .sort]
-    private var router: FilterRouter!
+    private var router: ProgramFilterRouter!
     private var sortingList: [InvestmentProgramsFilter.Sorting : String] = [.byRatingAsc : "Rating asc",
                                                                      .byRatingDesc : "Rating desc",
                                                                      .byOrdersAsc : "Orders asc",
@@ -51,7 +51,7 @@ final class FilterViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: FilterRouter,
+    init(withRouter router: ProgramFilterRouter,
          investmentProgramListViewModel: InvestmentProgramListViewModel) {
         
         self.router = router

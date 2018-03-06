@@ -35,9 +35,9 @@ final class ProgramInvestViewModel {
         apiInvest(with: value, completion: completion)
     }
     
-    func goBack() {
+    func goToBack() {
         programDetailProtocol?.didInvested()
-        router.goBack()
+        router.goToBack()
     }
     
     // MARK: - Private methods

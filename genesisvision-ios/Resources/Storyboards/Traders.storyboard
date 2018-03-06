@@ -40,10 +40,10 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZlK-UV-lqh">
-                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <rect key="frame" x="16" y="591" width="343" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="0.0" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="2JN-2E-WQD"/>
@@ -62,16 +62,15 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="32" bottom="16" trailing="32"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="ZlK-UV-lqh" secondAttribute="trailing" id="EgZ-Cl-Ig0"/>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="ZlK-UV-lqh" secondAttribute="trailing" constant="16" id="EgZ-Cl-Ig0"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="FoC-GU-UBn" secondAttribute="top" id="GaM-cJ-3Ou"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
-                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="ZlK-UV-lqh" secondAttribute="bottom" id="SPa-bn-kKf"/>
-                            <constraint firstItem="ZlK-UV-lqh" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="Y9f-1u-AiK"/>
+                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="ZlK-UV-lqh" secondAttribute="bottom" constant="16" id="SPa-bn-kKf"/>
+                            <constraint firstItem="ZlK-UV-lqh" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" constant="16" id="Y9f-1u-AiK"/>
                             <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
                         </constraints>
@@ -86,12 +85,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6g-4y-p9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536.8" y="905.3973013493254"/>
+            <point key="canvasLocation" x="1537" y="916"/>
         </scene>
-        <!--Filter View Controller-->
+        <!--Program Filter View Controller-->
         <scene sceneID="1ZW-ud-iiu">
             <objects>
-                <viewController storyboardIdentifier="FilterViewController" id="Jkr-qa-duU" customClass="FilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterViewController" id="Jkr-qa-duU" customClass="ProgramFilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3sG-FT-NvN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,7 +104,7 @@
                                 <rect key="frame" x="0.0" y="591" width="375" height="76"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-S8-rLI" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="0.0" width="311" height="60"/>
+                                        <rect key="frame" x="16" y="0.0" width="343" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="pey-Fb-Efi"/>
@@ -127,9 +126,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tpj-S8-rLI" firstAttribute="top" secondItem="BSz-ej-GYD" secondAttribute="top" id="DFS-aj-KtT"/>
-                                    <constraint firstAttribute="trailing" secondItem="tpj-S8-rLI" secondAttribute="trailing" constant="32" id="N1c-sa-V6L"/>
+                                    <constraint firstAttribute="trailing" secondItem="tpj-S8-rLI" secondAttribute="trailing" constant="16" id="N1c-sa-V6L"/>
                                     <constraint firstAttribute="height" constant="76" id="mUW-JC-Nyz"/>
-                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="leading" secondItem="BSz-ej-GYD" secondAttribute="leading" constant="32" id="nm6-6x-UVr"/>
+                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="leading" secondItem="BSz-ej-GYD" secondAttribute="leading" constant="16" id="nm6-6x-UVr"/>
                                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="tpj-S8-rLI" secondAttribute="bottom" constant="16" id="yQj-ul-qlJ"/>
                                 </constraints>
                             </view>
@@ -170,13 +169,13 @@
                                 <rect key="frame" x="0.0" y="543" width="375" height="124"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-IT-8me">
-                                        <rect key="frame" x="32" y="0.0" width="311" height="108"/>
+                                        <rect key="frame" x="16" y="0.0" width="343" height="108"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FYO-Ia-0dk">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXP-jp-r4E" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="50"/>
                                                         <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <state key="normal" title="Invest">
@@ -192,7 +191,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-1d-sP2" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="163.5" y="0.0" width="147.5" height="50"/>
+                                                        <rect key="frame" x="179.5" y="0.0" width="163.5" height="50"/>
                                                         <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <state key="normal" title="Withdraw">
@@ -213,7 +212,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4r-81-z60" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="58" width="311" height="50"/>
+                                                <rect key="frame" x="0.0" y="58" width="343" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <state key="normal" title="Requests">
@@ -238,8 +237,8 @@
                                 <constraints>
                                     <constraint firstItem="SLG-IT-8me" firstAttribute="top" secondItem="6Dm-Se-2kf" secondAttribute="top" id="7gM-jE-Zh6"/>
                                     <constraint firstAttribute="bottom" secondItem="SLG-IT-8me" secondAttribute="bottom" constant="16" id="HnC-1Z-Lh0"/>
-                                    <constraint firstAttribute="trailing" secondItem="SLG-IT-8me" secondAttribute="trailing" constant="32" id="pGl-h0-h3j"/>
-                                    <constraint firstItem="SLG-IT-8me" firstAttribute="leading" secondItem="6Dm-Se-2kf" secondAttribute="leading" constant="32" id="yZ5-75-rPC"/>
+                                    <constraint firstAttribute="trailing" secondItem="SLG-IT-8me" secondAttribute="trailing" constant="16" id="pGl-h0-h3j"/>
+                                    <constraint firstItem="SLG-IT-8me" firstAttribute="leading" secondItem="6Dm-Se-2kf" secondAttribute="leading" constant="16" id="yZ5-75-rPC"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -277,10 +276,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-ct-e8Z">
-                                <rect key="frame" x="32" y="46" width="311" height="212"/>
+                                <rect key="frame" x="16" y="46" width="343" height="212"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 100 GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnT-JI-9c1">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="0ss-Le-MHa"/>
                                         </constraints>
@@ -289,7 +288,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Investment value" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A2Y-Zj-wXk" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="76" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="76" width="343" height="60"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="xws-Vm-Ec6"/>
@@ -310,10 +309,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RPh-aw-fvK">
-                                        <rect key="frame" x="0.0" y="152" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="152" width="343" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-QE-fnC" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                                 <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="6RF-tT-uvW"/>
@@ -346,9 +345,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="F8v-KL-HF4" firstAttribute="trailing" secondItem="HZc-ct-e8Z" secondAttribute="trailing" constant="32" id="DGR-NF-mW9"/>
+                            <constraint firstItem="F8v-KL-HF4" firstAttribute="trailing" secondItem="HZc-ct-e8Z" secondAttribute="trailing" constant="16" id="DGR-NF-mW9"/>
                             <constraint firstItem="HZc-ct-e8Z" firstAttribute="top" secondItem="F8v-KL-HF4" secondAttribute="top" constant="26" id="q61-zz-YZS"/>
-                            <constraint firstItem="HZc-ct-e8Z" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" constant="32" id="yTO-YU-Rch"/>
+                            <constraint firstItem="HZc-ct-e8Z" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" constant="16" id="yTO-YU-Rch"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F8v-KL-HF4"/>
                     </view>
@@ -371,10 +370,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-wg-RDk">
-                                <rect key="frame" x="32" y="52" width="311" height="361.5"/>
+                                <rect key="frame" x="16" y="52" width="343" height="361.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available funds: $1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbt-C9-czJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="1tb-tn-ViB"/>
                                         </constraints>
@@ -383,7 +382,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How much would you like to withdraw?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OR1-5w-Cvf">
-                                        <rect key="frame" x="0.0" y="76" width="311" height="31"/>
+                                        <rect key="frame" x="0.0" y="76" width="343" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="oab-jB-tVz"/>
                                         </constraints>
@@ -392,7 +391,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Withdraw value" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XSe-TB-6fb" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="123" width="311" height="50"/>
+                                        <rect key="frame" x="0.0" y="123" width="343" height="50"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="XzU-mh-3MG"/>
@@ -413,7 +412,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGY-XJ-JFL" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="189" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="189" width="343" height="60"/>
                                         <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="tcE-na-mnm"/>
@@ -432,7 +431,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7Y-vJ-8DD">
-                                        <rect key="frame" x="0.0" y="265" width="311" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="265" width="343" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="q6d-Mo-5UR"/>
                                         </constraints>
@@ -441,7 +440,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl5-DC-vFG" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="301.5" width="311" height="60"/>
+                                        <rect key="frame" x="0.0" y="301.5" width="343" height="60"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Withdraw all available funds">
@@ -476,8 +475,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mlj-wg-RDk" firstAttribute="leading" secondItem="hGH-6b-05e" secondAttribute="leading" constant="32" id="6vr-mh-q7s"/>
-                            <constraint firstItem="hGH-6b-05e" firstAttribute="trailing" secondItem="mlj-wg-RDk" secondAttribute="trailing" constant="32" id="WM0-xT-hZI"/>
+                            <constraint firstItem="mlj-wg-RDk" firstAttribute="leading" secondItem="hGH-6b-05e" secondAttribute="leading" constant="16" id="6vr-mh-q7s"/>
+                            <constraint firstItem="hGH-6b-05e" firstAttribute="trailing" secondItem="mlj-wg-RDk" secondAttribute="trailing" constant="16" id="WM0-xT-hZI"/>
                             <constraint firstItem="mlj-wg-RDk" firstAttribute="top" secondItem="hGH-6b-05e" secondAttribute="top" constant="32" id="ZEv-Pr-uEt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hGH-6b-05e"/>

@@ -1,8 +1,8 @@
 //
-//  FilterViewController.swift
+//  WalletFilterViewController.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 31.01.18.
+//  Created by George Shaginyan on 06.03.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
@@ -10,14 +10,10 @@ import UIKit
 import DZNEmptyDataSet
 import TTRangeSlider
 
-class FilterViewController: BaseViewControllerWithTableView {
-
+class WalletFilterViewController: BaseViewControllerWithTableView {
+    
     // MARK: - View Model
-    var viewModel: FilterViewModel! {
-        didSet {
-            viewModel.sliderDelegate = self
-        }
-    }
+    var viewModel: WalletFilterViewModel!
     
     // MARK: - Variables
     private var resetBarButtonItem: UIBarButtonItem?
@@ -31,7 +27,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setup()
     }
     
@@ -52,7 +48,11 @@ class FilterViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: FilterViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: WalletFilterViewModel.cellModelsForRegistration)
+    }
+    
+    private func reloadData() {
+        tableView.reloadData()
     }
     
     // MARK: - IBAction
@@ -64,7 +64,7 @@ class FilterViewController: BaseViewControllerWithTableView {
             
             switch result {
             case .success:
-                self?.viewModel.popToInvestVC()
+                self?.viewModel.goToBack()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
@@ -74,20 +74,13 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
         viewModel.reset()
-        tableView.reloadData()
+        reloadData()
     }
 }
 
-extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
+extension WalletFilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    
-        viewModel.select(for: indexPath)
-        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = viewModel.model(for: indexPath)
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
@@ -100,12 +93,5 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
-    }
-}
-
-extension FilterViewController: TTRangeSliderDelegate {
-    func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
-        viewModel.investMaxAmountFrom = Double(selectedMinimum)
-        viewModel.investMaxAmountTo = Double(selectedMaximum)
     }
 }

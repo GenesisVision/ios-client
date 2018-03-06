@@ -34,9 +34,9 @@ class InvestmentProgramListRouter: Router {
     }
     
     private func showFilterVC(with investmentProgramListViewModel: InvestmentProgramListViewModel) {
-        guard let viewController = FilterViewController.storyboardInstance(name: .traders) else { return }
-        let router = FilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = FilterViewModel(withRouter: router, investmentProgramListViewModel: investmentProgramListViewModel)
+        guard let viewController = ProgramFilterViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramFilterViewModel(withRouter: router, investmentProgramListViewModel: investmentProgramListViewModel)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

@@ -33,9 +33,9 @@ final class ProgramWithdrawViewModel {
         apiWithdrawAll(completion: completion)
     }
     
-    func goBack() {
+    func goToBack() {
         programDetailProtocol?.didWithdrawn()
-        router.goBack()
+        router.goToBack()
     }
     
     // MARK: - Private methods

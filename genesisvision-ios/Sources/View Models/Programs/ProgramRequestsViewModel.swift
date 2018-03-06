@@ -60,9 +60,9 @@ extension ProgramRequestsViewModel {
         ProgramRequestDataProvider.cancelRequest(requestId: requestID, completion: completion)
     }
     
-    func goBack() {
+    func goToBack() {
         programDetailProtocol?.didRequestCanceled()
-        router.goBack()
+        router.goToBack()
     }
 }
 

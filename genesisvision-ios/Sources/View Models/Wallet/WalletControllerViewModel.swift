@@ -22,6 +22,7 @@ final class WalletControllerViewModel {
 
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
+    private var transactionsFilter = TransactionsFilter(investmentProgramId: nil, type: .all, skip: 0, take: Constants.Api.take)
     private weak var delegate: WalletHeaderTableViewCellProtocol?
     
     private var balance: Double = 0.0 {
@@ -220,6 +221,6 @@ extension WalletControllerViewModel {
     }
     
     func filters() {
-        //TODO: show filters screen
+        router.show(routeType: .showFilterVC(transactionsFilter: transactionsFilter))
     }
 }

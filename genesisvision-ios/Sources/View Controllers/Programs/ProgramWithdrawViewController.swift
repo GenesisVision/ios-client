@@ -59,7 +59,7 @@ class ProgramWithdrawViewController: UIViewController {
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (success) in
-                    self?.viewModel.goBack()
+                    self?.viewModel.goToBack()
                 })
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)

@@ -32,3 +32,4 @@ public extension EnumCollection {
 }
 
 extension InvestmentProgramsFilter.Sorting: EnumCollection {}
+extension TransactionsFilter.ModelType: EnumCollection {}
