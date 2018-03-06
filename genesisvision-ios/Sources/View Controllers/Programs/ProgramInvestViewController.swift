@@ -43,15 +43,12 @@ class ProgramInvestViewController: BaseViewController {
     
     private func investMethod() {
         hideKeyboard()
-        showProgressHUD()
         
         guard let text = amountTextField.text,
             let amount = text.doubleValue
-            else {
-                showErrorHUD(subtitle: nil)
-                return
-        }
+            else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
+        showProgressHUD()
         viewModel.invest(with: amount) { [weak self] (result) in
             self?.hideHUD()
             

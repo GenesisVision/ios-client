@@ -47,12 +47,12 @@ class ProgramWithdrawViewController: UIViewController {
     
     private func withdrawMethod() {
         hideKeyboard()
-        showProgressHUD()
         
         guard let text = amountTextField.text,
             let amount = text.doubleValue
-            else { return }
+            else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
         
+        showProgressHUD()
         viewModel.withdraw(with: amount) { [weak self] (result) in
             self?.hideHUD()
             

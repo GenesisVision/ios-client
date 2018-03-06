@@ -51,13 +51,13 @@ class WalletWithdrawViewController: BaseViewController {
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         hideKeyboard()
-        showProgressHUD()
         
         guard let amountText = amountTextField.text,
             let amount = amountText.doubleValue,
             let address = addressTextField.text
-            else { return }
+            else { return showErrorHUD(subtitle: "Enter withdraw amount and data, please") }
         
+        showProgressHUD()
         viewModel.withdraw(with: amount, address: address) { [weak self] (result) in
             self?.hideHUD()
             
