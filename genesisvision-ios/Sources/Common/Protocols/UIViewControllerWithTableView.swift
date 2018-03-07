@@ -17,6 +17,6 @@ protocol UIViewControllerWithTableView {
 protocol UIViewControllerWithFetching {
     func updateData()
     func pullToRefresh()
-    
+    func fetch()
     func fetchMore()
 }

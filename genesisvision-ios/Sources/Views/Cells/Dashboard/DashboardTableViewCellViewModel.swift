@@ -16,13 +16,11 @@ struct DashboardTableViewCellViewModel {
 
 extension DashboardTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardTableViewCell) {
-        cell.userNameLabel.text = ""
+        if let title = investmentProgram.title {
+            cell.titleLabel.text = title
+        }
         
         if let manager = investmentProgram.manager {
-            if let username = manager.username {
-                cell.userNameLabel.text = username
-            }
-            
             cell.managerAvatarImageView.image = UIImage.placeholder
         
             if let avatar = manager.avatar {
@@ -37,23 +35,35 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let endOfPeriod = investmentProgram.endOfPeriod {
+            let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+            cell.periodLeftValueLabel.text = periodLeft.0
+            cell.periodLeftTitleLabel.text = periodLeft.1
             cell.periodLabel.text = endOfPeriod.defaultFormatString
         }
         
         if let profit = investmentProgram.profitTotal {
             cell.profitLabel.text = String(describing: profit) + "%"
+            cell.profitLabel.textColor = profit == 0 ? UIColor.Font.medium : profit > 0 ? UIColor.Font.green : UIColor.Font.red
         }
         
         if let investmentProgramId = investmentProgram.id?.uuidString {
             cell.investmentProgramId = investmentProgramId
         }
         
-        if let level = investmentProgram.level {
-            cell.programLogoImageView.levelLabel.text = String(describing: level)
+        if let isInvestEnable = investmentProgram.isInvestEnable {
+            cell.investButton.isHidden = !isInvestEnable
         }
         
-        if let periodDuration = investmentProgram.periodDuration {
-            cell.periodDurationLabel.text = String(describing: periodDuration)
+        if let isWithdrawEnable = investmentProgram.isWithdrawEnable {
+            cell.withdrawButton.isHidden = !isWithdrawEnable
+        }
+        
+        if let isEnable = investmentProgram.isEnabled {
+            cell.buttonsStackView.isHidden = !isEnable
+        }
+        
+        if let level = investmentProgram.level {
+            cell.programLogoImageView.levelLabel.text = String(describing: level)
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true

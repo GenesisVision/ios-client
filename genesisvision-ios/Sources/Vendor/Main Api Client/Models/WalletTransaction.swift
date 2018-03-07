@@ -36,18 +36,20 @@ open class WalletTransaction: Codable {
     public var date: Date?
     public var walletId: UUID?
     public var currency: Currency?
+    public var investmentProgram: InvestmentProgramTxInfo?
     public var investmentProgramRequest: InvestmentProgramRequestTxInfo?
     public var paymentTx: PaymentTxInfo?
 
 
     
-    public init(id: UUID?, type: ModelType?, amount: Double?, date: Date?, walletId: UUID?, currency: Currency?, investmentProgramRequest: InvestmentProgramRequestTxInfo?, paymentTx: PaymentTxInfo?) {
+    public init(id: UUID?, type: ModelType?, amount: Double?, date: Date?, walletId: UUID?, currency: Currency?, investmentProgram: InvestmentProgramTxInfo?, investmentProgramRequest: InvestmentProgramRequestTxInfo?, paymentTx: PaymentTxInfo?) {
         self.id = id
         self.type = type
         self.amount = amount
         self.date = date
         self.walletId = walletId
         self.currency = currency
+        self.investmentProgram = investmentProgram
         self.investmentProgramRequest = investmentProgramRequest
         self.paymentTx = paymentTx
     }
@@ -65,6 +67,7 @@ open class WalletTransaction: Codable {
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(walletId, forKey: "walletId")
         try container.encodeIfPresent(currency, forKey: "currency")
+        try container.encodeIfPresent(investmentProgram, forKey: "investmentProgram")
         try container.encodeIfPresent(investmentProgramRequest, forKey: "investmentProgramRequest")
         try container.encodeIfPresent(paymentTx, forKey: "paymentTx")
     }
@@ -80,6 +83,7 @@ open class WalletTransaction: Codable {
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         walletId = try container.decodeIfPresent(UUID.self, forKey: "walletId")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
+        investmentProgram = try container.decodeIfPresent(InvestmentProgramTxInfo.self, forKey: "investmentProgram")
         investmentProgramRequest = try container.decodeIfPresent(InvestmentProgramRequestTxInfo.self, forKey: "investmentProgramRequest")
         paymentTx = try container.decodeIfPresent(PaymentTxInfo.self, forKey: "paymentTx")
     }

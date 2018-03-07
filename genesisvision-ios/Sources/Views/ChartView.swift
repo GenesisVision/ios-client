@@ -15,7 +15,7 @@ enum ChartType {
 class ChartView: LineChartView {
 
     // MARK: - Variables
-    private var dataSet: [Double]? = [] {
+    private var dataSet: [Chart]? = [] {
         didSet {
             updateData()
         }
@@ -43,7 +43,7 @@ class ChartView: LineChartView {
             autoScaleMinMaxEnabled = true
             
             xAxis.enabled = false
-            
+
             chartDataSet.setColor(UIColor.primary)
             chartDataSet.fillColor = UIColor.primary
             
@@ -70,7 +70,7 @@ class ChartView: LineChartView {
     }
     
     // MARK: - Public methods
-    func setup(chartType: ChartType = .default, dataSet: [Double]?, name: String? = "DataSet") {
+    func setup(chartType: ChartType = .default, dataSet: [Chart]?, name: String? = "DataSet") {
         self.chartType = chartType
         self.name = name
         self.dataSet = dataSet
@@ -84,9 +84,9 @@ class ChartView: LineChartView {
         setData(dataSet)
     }
     
-    private func setFakeData(_ count: Int, range: UInt32) -> [Double] {
-        let values = (0..<count).map { (i) -> Double in
-            return Double(arc4random_uniform(range)) - Double(range / 2)
+    private func setFakeData(_ count: Int, range: UInt32) -> [Chart] {
+        let values = (0..<count).map { (i) -> Chart in
+            return Chart(date: nil, fund: nil, profit: nil, loss: nil, totalProfit: Double(arc4random_uniform(range) - range / 2))
         }
         
         return values
@@ -99,13 +99,13 @@ class ChartView: LineChartView {
         animate(xAxisDuration: 1.0)
     }
     
-    private func setData(_ values: [Double]?) {
+    private func setData(_ values: [Chart]?) {
         guard let values = values, values.count > 0 else {
             return
         }
         
         let chartDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: values[i])
+            return ChartDataEntry(x: Double(i), y: values[i].totalProfit ?? 0)
         }
         
         chartDataSet = LineChartDataSet(values: chartDataEntry, label: name ?? "")

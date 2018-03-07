@@ -106,7 +106,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         setupPullToRefresh()
     }
     
-    private func fetch() {
+    override func fetch() {
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
             switch result {

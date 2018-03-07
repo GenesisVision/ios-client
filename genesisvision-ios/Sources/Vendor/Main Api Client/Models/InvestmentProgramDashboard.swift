@@ -35,16 +35,18 @@ open class InvestmentProgramDashboard: Codable {
     public var availableInvestment: Double?
     public var feeSuccess: Double?
     public var feeManagement: Double?
+    public var isEnabled: Bool?
+    public var chart: [Chart]?
     public var manager: ProfilePublicViewModel?
     public var hasNewRequests: Bool?
     public var isHistoryEnable: Bool?
     public var isInvestEnable: Bool?
     public var isWithdrawEnable: Bool?
-    public var canCloseProgram: Bool?
+    public var isOwnProgram: Bool?
 
 
     
-    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, canCloseProgram: Bool?) {
+    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.level = level
@@ -61,12 +63,14 @@ open class InvestmentProgramDashboard: Codable {
         self.availableInvestment = availableInvestment
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
+        self.isEnabled = isEnabled
+        self.chart = chart
         self.manager = manager
         self.hasNewRequests = hasNewRequests
         self.isHistoryEnable = isHistoryEnable
         self.isInvestEnable = isInvestEnable
         self.isWithdrawEnable = isWithdrawEnable
-        self.canCloseProgram = canCloseProgram
+        self.isOwnProgram = isOwnProgram
     }
     
 
@@ -92,12 +96,14 @@ open class InvestmentProgramDashboard: Codable {
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
+        try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
+        try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isHistoryEnable, forKey: "isHistoryEnable")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
         try container.encodeIfPresent(isWithdrawEnable, forKey: "isWithdrawEnable")
-        try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
     }
 
     // Decodable protocol methods
@@ -121,12 +127,14 @@ open class InvestmentProgramDashboard: Codable {
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
+        isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
+        chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isHistoryEnable = try container.decodeIfPresent(Bool.self, forKey: "isHistoryEnable")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
         isWithdrawEnable = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawEnable")
-        canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
     }
 }
 

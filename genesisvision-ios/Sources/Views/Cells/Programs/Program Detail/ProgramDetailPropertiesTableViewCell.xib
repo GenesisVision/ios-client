@@ -187,11 +187,11 @@
                                                                 <color key="textColor" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TbJ-fG-2Vp">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="TbJ-fG-2Vp">
                                                                 <rect key="frame" x="0.0" y="15.5" width="109.5" height="15.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHM-DO-EBw">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="15.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="76" height="15.5"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                                         <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -311,23 +311,23 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PeE-eO-pca">
                                                 <rect key="frame" x="0.0" y="23.5" width="293" height="15.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available to invest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Miq-Wk-qGK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="204.5" height="15.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invested tokens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Miq-Wk-qGK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                                         <color key="textColor" red="0.66666666669999997" green="0.72156862749999995" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6l2-B6-JT1">
-                                                        <rect key="frame" x="212.5" y="0.0" width="80.5" height="15.5"/>
+                                                        <rect key="frame" x="185.5" y="0.0" width="107.5" height="15.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWf-Fz-nuh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="48.5" height="15.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="61" height="15.5"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                                 <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-4Z-zgJ">
-                                                                <rect key="frame" x="52.5" y="0.0" width="28" height="15.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="tokens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-4Z-zgJ">
+                                                                <rect key="frame" x="65" y="0.0" width="42.5" height="15.5"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                                 <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -340,12 +340,13 @@
                                     </stackView>
                                 </subviews>
                                 <connections>
-                                    <outlet property="availableInvestmentLabel" destination="SWf-Fz-nuh" id="rQd-WW-aXL"/>
-                                    <outlet property="endOfPeriodDaysLabel" destination="sHM-DO-EBw" id="mKA-eC-sD1"/>
-                                    <outlet property="endOfPeriodLabel" destination="OnF-2X-MwO" id="ebh-pW-ggC"/>
+                                    <outlet property="endOfPeriodLabel" destination="OnF-2X-MwO" id="p9t-hP-gyt"/>
                                     <outlet property="feeManagementLabel" destination="LFc-yC-mfG" id="Dv2-f9-Gra"/>
                                     <outlet property="feeSuccessLabel" destination="zqY-Mk-ce7" id="Geh-ld-KXo"/>
-                                    <outlet property="periodDurationLabel" destination="eC7-pZ-m05" id="Npl-2A-3Pm"/>
+                                    <outlet property="investedTokensLabel" destination="SWf-Fz-nuh" id="5bc-o3-FO7"/>
+                                    <outlet property="periodDurationLabel" destination="eC7-pZ-m05" id="HqY-eg-0ab"/>
+                                    <outlet property="periodLeftTitleLabel" destination="XGF-l7-uH7" id="GgO-Ve-m66"/>
+                                    <outlet property="periodLeftValueLabel" destination="sHM-DO-EBw" id="1U8-EC-ULa"/>
                                     <outlet property="tradesLabel" destination="wqO-va-t8o" id="fRt-Hv-GA0"/>
                                 </connections>
                             </stackView>

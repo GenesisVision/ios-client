@@ -42,11 +42,15 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Fetching
     func updateData() {
         showProgressHUD()
-        pullToRefresh()
+        fetch()
     }
     
     @objc func pullToRefresh() {
         feedback()
+    }
+    
+    func fetch() {
+        //Fetch first page
     }
     
     func fetchMore() {

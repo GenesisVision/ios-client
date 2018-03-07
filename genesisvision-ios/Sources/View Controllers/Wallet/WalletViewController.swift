@@ -72,7 +72,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.reloadData()
     }
     
-    private func fetch() {
+    override func fetch() {
         showProgressHUD()
         fetchBalance()
         fetchTransactions()

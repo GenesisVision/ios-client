@@ -20,6 +20,7 @@ class DashboardTableViewCell: UITableViewCell {
     var investmentProgramId: String = ""
     
     // MARK: - Buttons
+    @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var investButton: ActionButton!
     @IBOutlet weak var withdrawButton: ActionButton!
     
@@ -38,11 +39,12 @@ class DashboardTableViewCell: UITableViewCell {
     }
     
     // MARK: - Labels
-    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tokensCountLabel: UILabel!
     @IBOutlet var profitLabel: UILabel!
     @IBOutlet var periodLabel: UILabel!
-    @IBOutlet var periodDurationLabel: UILabel!
+    @IBOutlet var periodLeftValueLabel: UILabel!
+    @IBOutlet var periodLeftTitleLabel: UILabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

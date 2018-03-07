@@ -22,14 +22,12 @@ open class InvestmentProgramRequestTxInfo: Codable {
     }
     public var type: ModelType?
     public var status: Status?
-    public var investmentProgram: InvestmentProgramTxInfo?
 
 
     
-    public init(type: ModelType?, status: Status?, investmentProgram: InvestmentProgramTxInfo?) {
+    public init(type: ModelType?, status: Status?) {
         self.type = type
         self.status = status
-        self.investmentProgram = investmentProgram
     }
     
 
@@ -41,7 +39,6 @@ open class InvestmentProgramRequestTxInfo: Codable {
 
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(investmentProgram, forKey: "investmentProgram")
     }
 
     // Decodable protocol methods
@@ -51,7 +48,6 @@ open class InvestmentProgramRequestTxInfo: Codable {
 
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
-        investmentProgram = try container.decodeIfPresent(InvestmentProgramTxInfo.self, forKey: "investmentProgram")
     }
 }
 

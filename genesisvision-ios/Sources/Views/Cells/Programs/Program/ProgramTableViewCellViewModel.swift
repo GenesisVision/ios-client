@@ -20,11 +20,11 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = "Not enough data"
         
-//        if let chart = investmentProgram.chart, chart.count > 0 {
-//            cell.chartView.isHidden = false
-//            cell.noDataLabel.isHidden = true
-//            cell.chartView.setup(dataSet: participantViewModel.chart, name: participantViewModel.name)
-//        }
+        if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 0 {
+            cell.chartView.isHidden = false
+            cell.noDataLabel.isHidden = true
+            cell.chartView.setup(dataSet: chart, name: title)
+        }
         
         if let title = investmentProgram.title {
             cell.userNameLabel.text = title

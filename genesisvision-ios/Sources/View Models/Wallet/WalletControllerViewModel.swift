@@ -112,16 +112,6 @@ extension WalletControllerViewModel {
     private func setup() {
         fetchBalance { (result) in }
     }
-    
-    private func fakeTransactions(completion: (_ transactionCellModels: [WalletTransactionTableViewCellViewModel]) -> Void) {
-        var cellModels = [WalletTransactionTableViewCellViewModel]()
-        
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            cellModels.append(WalletTransactionTableViewCellViewModel(walletTransaction: WalletTransaction.templateModel))
-        }
-        
-        completion(cellModels)
-    }
 }
 
 // MARK: - Fetch
@@ -146,10 +136,7 @@ extension WalletControllerViewModel {
                 completion(.success)
                 }, completionError: completion)
         case .fake:
-            fakeTransactions(completion: { [weak self] (viewModels) in
-                self?.updateFetchedData(totalCount: viewModels.count, viewModels)
-                completion(.success)
-            })
+            break
         }
         
     }

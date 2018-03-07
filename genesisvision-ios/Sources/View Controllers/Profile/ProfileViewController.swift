@@ -67,7 +67,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     // MARK: - Private methods
-    private func fetch() {
+    override func fetch() {
         viewModel.getProfile { [weak self] (result) in
             self?.hideHUD()
             

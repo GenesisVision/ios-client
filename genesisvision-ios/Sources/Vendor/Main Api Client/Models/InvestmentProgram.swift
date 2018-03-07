@@ -34,11 +34,12 @@ open class InvestmentProgram: Codable {
     public var availableInvestment: Double?
     public var feeSuccess: Double?
     public var feeManagement: Double?
+    public var chart: [Chart]?
     public var hasNewRequests: Bool?
 
 
     
-    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, hasNewRequests: Bool?) {
+    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, hasNewRequests: Bool?) {
         self.id = id
         self.title = title
         self.level = level
@@ -54,6 +55,7 @@ open class InvestmentProgram: Codable {
         self.availableInvestment = availableInvestment
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
+        self.chart = chart
         self.hasNewRequests = hasNewRequests
     }
     
@@ -79,6 +81,7 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
+        try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
     }
 
@@ -102,6 +105,7 @@ open class InvestmentProgram: Codable {
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
+        chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
     }
 }

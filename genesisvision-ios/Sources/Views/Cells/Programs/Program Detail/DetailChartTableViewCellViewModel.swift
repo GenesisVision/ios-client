@@ -9,7 +9,7 @@
 import Foundation
 
 struct DetailChartTableViewCellViewModel {
-    let chart: [Double]
+    let chart: [Chart]
     let name: String
 }
 
@@ -26,6 +26,6 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
         
         cell.chartView.isHidden = false
         cell.noDataLabel.isHidden = true
-        cell.chartView.setup(chartType: .detail, dataSet: chart, name: name)
+        cell.chartView.setup(chartType: .default, dataSet: chart, name: name)
     }
 }

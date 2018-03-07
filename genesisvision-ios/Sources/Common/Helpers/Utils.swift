@@ -21,3 +21,9 @@ func feedback(style: UIImpactFeedbackStyle = .light) {
 func networkActivity(show: Bool = true) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = show
 }
+
+func getPeriodLeft(endOfPeriod: Date) -> (String, String) {
+    let dateInterval = endOfPeriod.interval(ofComponent: .minute, fromDate: Date())
+
+    return (String(describing: dateInterval > 0 ? dateInterval : 0), "min")
+}

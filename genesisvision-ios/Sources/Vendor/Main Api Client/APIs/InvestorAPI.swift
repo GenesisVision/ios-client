@@ -180,7 +180,6 @@ open class InvestorAPI {
   "investmentPrograms" : [ {
     "periodDuration" : 2,
     "investedTokens" : 1.4658129805029452,
-    "canCloseProgram" : true,
     "feeManagement" : 4.145608029883936,
     "manager" : {
       "country" : "country",
@@ -195,20 +194,34 @@ open class InvestorAPI {
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isWithdrawEnable" : true,
+    "isOwnProgram" : true,
     "balance" : 6.027456183070403,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
     "logo" : "logo",
     "currency" : "Undefined",
     "profitTotal" : 9.301444243932576,
     "feeSuccess" : 2.027123023002322,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 7.061401241503109,
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    } ],
     "investorsCount" : 5
   }, {
     "periodDuration" : 2,
     "investedTokens" : 1.4658129805029452,
-    "canCloseProgram" : true,
     "feeManagement" : 4.145608029883936,
     "manager" : {
       "country" : "country",
@@ -223,15 +236,30 @@ open class InvestorAPI {
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isWithdrawEnable" : true,
+    "isOwnProgram" : true,
     "balance" : 6.027456183070403,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
     "logo" : "logo",
     "currency" : "Undefined",
     "profitTotal" : 9.301444243932576,
     "feeSuccess" : 2.027123023002322,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 7.061401241503109,
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    } ],
     "investorsCount" : 5
   } ]
 }}]
@@ -277,7 +305,6 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
     "investedTokens" : 5.962133916683182,
-    "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
@@ -303,11 +330,26 @@ open class InvestorAPI {
     "level" : 0,
     "isInvestEnable" : true,
     "tradesCount" : 5,
+    "isOwnProgram" : true,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
     "ipfsHash" : "ipfsHash",
     "profitTotal" : 3.616076749251911,
-    "profitAvg" : 9.301444243932576
+    "profitAvg" : 9.301444243932576,
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    } ]
   }
 }}]
      
@@ -640,7 +682,7 @@ open class InvestorAPI {
      Get public investment program's list
      - POST /api/investor/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 1,
   "investmentPrograms" : [ {
     "periodDuration" : 5,
     "feeManagement" : 2.027123023002322,
@@ -657,6 +699,19 @@ open class InvestorAPI {
     "feeSuccess" : 3.616076749251911,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 2.3021358869347655,
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    } ],
     "investorsCount" : 5
   }, {
     "periodDuration" : 5,
@@ -674,6 +729,19 @@ open class InvestorAPI {
     "feeSuccess" : 3.616076749251911,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 2.3021358869347655,
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "loss" : 1.2315135367772556,
+      "totalProfit" : 1.0246457001441578,
+      "fund" : 4.145608029883936,
+      "profit" : 7.386281948385884
+    } ],
     "investorsCount" : 5
   } ]
 }}]
@@ -1044,14 +1112,14 @@ open class InvestorAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "investmentProgramRequest" : {
-      "investmentProgram" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "title" : "title"
-      },
       "type" : "Invest",
       "status" : "New"
     },
     "amount" : 0.8008281904610115,
+    "investmentProgram" : {
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title"
+    },
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Deposit",
@@ -1064,14 +1132,14 @@ open class InvestorAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "walletId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "investmentProgramRequest" : {
-      "investmentProgram" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "title" : "title"
-      },
       "type" : "Invest",
       "status" : "New"
     },
     "amount" : 0.8008281904610115,
+    "investmentProgram" : {
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title"
+    },
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Deposit",

@@ -48,7 +48,7 @@ final class ProgramDetailViewModel {
     var viewProperties: ProgramDetailViewProperties?
     
     private var sections: [SectionType] = [.header,
-//                                           .chart,
+                                           .chart,
                                            .details]
     private var models: [CellViewAnyModel]?
     
@@ -151,7 +151,7 @@ extension ProgramDetailViewModel {
         case .header:
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         case .chart:
-            return DetailChartTableViewCellViewModel(chart: [], name: "")
+            return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "")
         case .details:
             return ProgramDetailPropertiesTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }

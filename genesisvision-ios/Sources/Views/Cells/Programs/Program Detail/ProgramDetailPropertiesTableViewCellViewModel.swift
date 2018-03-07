@@ -19,6 +19,6 @@ extension ProgramDetailPropertiesTableViewCellViewModel: CellViewModel {
                                       avrProfit: investmentProgramDetails.profitAvg,
                                       totalProfit: investmentProgramDetails.profitTotal)
         
-        cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod, periodDuration: investmentProgramDetails.periodDuration, feeSuccess: investmentProgramDetails.feeSuccess, feeManagement: investmentProgramDetails.feeManagement, trades: investmentProgramDetails.tradesCount, availableInvestment: investmentProgramDetails.availableInvestment)
+        cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod, periodDuration: investmentProgramDetails.periodDuration, feeSuccess: investmentProgramDetails.feeSuccess, feeManagement: investmentProgramDetails.feeManagement, trades: investmentProgramDetails.tradesCount, investedTokens: investmentProgramDetails.investedTokens)
     }
 }

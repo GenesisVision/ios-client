@@ -13,12 +13,14 @@ open class NewTradeEvent: Codable {
 
     public var managerAccountId: UUID
     public var trades: [OrderModel]
+    public var balance: Double
 
 
     
-    public init(managerAccountId: UUID, trades: [OrderModel]) {
+    public init(managerAccountId: UUID, trades: [OrderModel], balance: Double) {
         self.managerAccountId = managerAccountId
         self.trades = trades
+        self.balance = balance
     }
     
 
@@ -30,6 +32,7 @@ open class NewTradeEvent: Codable {
 
         try container.encode(managerAccountId, forKey: "managerAccountId")
         try container.encode(trades, forKey: "trades")
+        try container.encode(balance, forKey: "balance")
     }
 
     // Decodable protocol methods
@@ -39,6 +42,7 @@ open class NewTradeEvent: Codable {
 
         managerAccountId = try container.decode(UUID.self, forKey: "managerAccountId")
         trades = try container.decode([OrderModel].self, forKey: "trades")
+        balance = try container.decode(Double.self, forKey: "balance")
     }
 }
 

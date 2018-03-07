@@ -40,8 +40,8 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             let avrProfit = avrProfit,
             let totalProfit = totalProfit {
             
-            let avrProfitValue = Double(round(100 * avrProfit) / 100)
-            let totalProfitValue = Double(round(100 * totalProfit) / 100)
+            let avrProfitValue = avrProfit.rounded(toPlaces: 4)
+            let totalProfitValue = totalProfit.rounded(toPlaces: 4)
             
             investorsValueLabel.text = String(describing: investorsCount)
             balanceValueLabel.text = String(describing: balance)
@@ -51,7 +51,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             investorsValueLabel.textColor = UIColor.primary
             balanceValueLabel.textColor = UIColor.Font.medium
             avrProfitValueLabel.textColor = UIColor.Font.medium
-            totalProfitValueLabel.textColor = totalProfitValue == 0 ? UIColor.Font.medium : totalProfitValue >= 0 ? UIColor.Font.green : UIColor.Font.red
+            totalProfitValueLabel.textColor = totalProfitValue == 0 ? UIColor.Font.medium : totalProfitValue > 0 ? UIColor.Font.green : UIColor.Font.red
         }
     }
 }

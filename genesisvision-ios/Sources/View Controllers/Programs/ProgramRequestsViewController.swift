@@ -71,7 +71,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func fetch() {
+    override func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideHUD()
             switch result {

@@ -23,7 +23,7 @@ extension TraderTableViewCellViewModel: CellViewModel {
         if let chart = participantViewModel.chart, chart.count > 0 {
             cell.chartView.isHidden = false
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(dataSet: participantViewModel.chart, name: participantViewModel.name)
+            cell.chartView.setup(dataSet: [], name: participantViewModel.name)
         }
         
         cell.userNameLabel.text = participantViewModel.name ?? ""
