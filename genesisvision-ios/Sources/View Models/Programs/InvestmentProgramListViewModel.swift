@@ -116,16 +116,16 @@ extension InvestmentProgramListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramTableViewCellViewModel? {
+    func model(at index: Int) -> ProgramTableViewCellViewModel? {
         return investmentProgramViewModels[index]
     }
     
     func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
-        guard let model = model(for: index) else {
-            return nil
-        }
+        guard let model = model(at: index),
+            let investmentProgramId = model.investmentProgram.id
+            else { return nil }
         
-        return router.getDetailViewController(with: model.investmentProgram.id?.uuidString ?? "")
+        return router.getDetailViewController(with: investmentProgramId.uuidString)
     }
     
     // MARK: - Private methods

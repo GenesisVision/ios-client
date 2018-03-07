@@ -108,6 +108,15 @@ extension WalletControllerViewModel {
         }
     }
     
+    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+            let investmentProgram = model.walletTransaction.investmentProgram,
+            let investmentProgramId = investmentProgram.id
+            else { return nil }
+        
+        return router.getDetailViewController(with: investmentProgramId.uuidString)
+    }
+
     // MARK: - Private methods
     private func setup() {
         fetchBalance { (result) in }
@@ -209,5 +218,14 @@ extension WalletControllerViewModel {
     
     func filters() {
         router.show(routeType: .showFilterVC(transactionsFilter: transactionsFilter))
+    }
+    
+    func showDetail(at indexPath: IndexPath) {
+        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+            let investmentProgram = model.walletTransaction.investmentProgram,
+            let investmentProgramId = investmentProgram.id
+            else { return }
+        
+        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
     }
 }

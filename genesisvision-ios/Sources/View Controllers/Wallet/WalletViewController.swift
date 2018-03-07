@@ -117,12 +117,28 @@ class WalletViewController: BaseViewControllerWithTableView {
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else {
+            return
+        }
+        
+        viewModel.showDetail(at: indexPath)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
             return UITableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (viewModel.numberOfRows(in: indexPath.section) - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
+            fetchMoreTransactions()
+        }
     }
     
     // MARK: - UITableViewDataSource

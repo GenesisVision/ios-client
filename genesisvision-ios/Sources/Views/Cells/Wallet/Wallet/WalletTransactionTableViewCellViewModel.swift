@@ -20,6 +20,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             
             var arithmeticSign = ""
             
+            cell.amountLabel.text = ""
             switch type {
             case .investToProgram:
                 text = "Invest To Program"
@@ -35,15 +36,20 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 arithmeticSign = "+"
             case .profitFromProgram:
                 text = "Profit From Program"
-                textColor = amount == 0 ? UIColor.Font.medium : (amount > 0 ? UIColor.Font.green : UIColor.Font.red)
-                arithmeticSign = "+"
+                if amount == 0 {
+                    textColor = UIColor.Font.medium
+                    arithmeticSign = ""
+                } else {
+                    textColor = amount > 0 ? UIColor.Font.green : UIColor.Font.red
+                    arithmeticSign = "+"
+                }
             case .cancelInvestmentRequest:
                 text = "Cancel Investment Request"
                 textColor = UIColor.Font.green
-                arithmeticSign = ""
+                arithmeticSign = "+"
             case .partialInvestmentExecutionRefund:
                 text = "Partial Investment Execution Refund"
-                textColor = UIColor.Font.medium
+                textColor = UIColor.Font.green
                 arithmeticSign = "+"
             case .deposit:
                 text = "Deposit"
@@ -55,7 +61,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 arithmeticSign = "-"
             case .closingProgramRefund:
                 text = "Closing Program Refund"
-                textColor = UIColor.Font.medium
+                textColor = UIColor.Font.green
                 arithmeticSign = "+"
             }
             
@@ -66,6 +72,10 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
         
         if let date = walletTransaction.date {
             cell.dateLabel.text = date.defaultFormatString
+        }
+        
+        if walletTransaction.investmentProgram != nil {
+            cell.selectionStyle = .default
         }
         
         cell.currencyLabel.text = Constants.currency

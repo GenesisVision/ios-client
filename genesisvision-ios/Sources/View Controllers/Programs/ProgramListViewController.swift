@@ -131,7 +131,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
             return
         }
         
-        guard let investmentProgram = viewModel.model(for: indexPath.row)?.investmentProgram else {
+        guard let investmentProgram = viewModel.model(at: indexPath.row)?.investmentProgram else {
             return
         }
 
@@ -139,7 +139,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(at: indexPath.row) else {
             return UITableViewCell()
         }
 
