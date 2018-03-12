@@ -8,6 +8,72 @@
 
 /* Begin PBXBuildFile section */
 		03E5CEB1247FC0633F810102 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
+		5E4CC3DE205678CF00916AA8 /* BrokerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC39B205678CF00916AA8 /* BrokerAPI.swift */; };
+		5E4CC3DF205678CF00916AA8 /* FilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC39C205678CF00916AA8 /* FilesAPI.swift */; };
+		5E4CC3E0205678CF00916AA8 /* RateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC39D205678CF00916AA8 /* RateAPI.swift */; };
+		5E4CC3E1205678CF00916AA8 /* TradesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC39E205678CF00916AA8 /* TradesAPI.swift */; };
+		5E4CC3E2205678CF00916AA8 /* InvestorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC39F205678CF00916AA8 /* InvestorAPI.swift */; };
+		5E4CC3E3205678CF00916AA8 /* ManagerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A0205678CF00916AA8 /* ManagerAPI.swift */; };
+		5E4CC3E4205678CF00916AA8 /* ManagerOpenTrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A2205678CF00916AA8 /* ManagerOpenTrades.swift */; };
+		5E4CC3E5205678CF00916AA8 /* Broker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A3205678CF00916AA8 /* Broker.swift */; };
+		5E4CC3E6205678CF00916AA8 /* TradesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A4205678CF00916AA8 /* TradesFilter.swift */; };
+		5E4CC3E7205678CF00916AA8 /* OpenTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A5205678CF00916AA8 /* OpenTradesViewModel.swift */; };
+		5E4CC3E8205678CF00916AA8 /* NewTradeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A6205678CF00916AA8 /* NewTradeEvent.swift */; };
+		5E4CC3E9205678CF00916AA8 /* BrokersFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A7205678CF00916AA8 /* BrokersFilter.swift */; };
+		5E4CC3EA205678CF00916AA8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A8205678CF00916AA8 /* LoginViewModel.swift */; };
+		5E4CC3EB205678CF00916AA8 /* InvestmentProgramDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3A9205678CF00916AA8 /* InvestmentProgramDashboard.swift */; };
+		5E4CC3EC205678CF00916AA8 /* BrokersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AA205678CF00916AA8 /* BrokersViewModel.swift */; };
+		5E4CC3ED205678CF00916AA8 /* InvestmentProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AB205678CF00916AA8 /* InvestmentProgramViewModel.swift */; };
+		5E4CC3EE205678CF00916AA8 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AC205678CF00916AA8 /* Period.swift */; };
+		5E4CC3EF205678CF00916AA8 /* ClosePeriodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AD205678CF00916AA8 /* ClosePeriodData.swift */; };
+		5E4CC3F0205678CF00916AA8 /* InvestmentProgramRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AE205678CF00916AA8 /* InvestmentProgramRequest.swift */; };
+		5E4CC3F1205678CF00916AA8 /* ProfilePublicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3AF205678CF00916AA8 /* ProfilePublicViewModel.swift */; };
+		5E4CC3F2205678CF00916AA8 /* RequestRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B0205678CF00916AA8 /* RequestRate.swift */; };
+		5E4CC3F3205678CF00916AA8 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B1205678CF00916AA8 /* ErrorViewModel.swift */; };
+		5E4CC3F4205678CF00916AA8 /* NewInvestmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B2205678CF00916AA8 /* NewInvestmentRequest.swift */; };
+		5E4CC3F5205678CF00916AA8 /* RegisterInvestorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B3205678CF00916AA8 /* RegisterInvestorViewModel.swift */; };
+		5E4CC3F6205678CF00916AA8 /* InvestmentProgramAccrual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B4205678CF00916AA8 /* InvestmentProgramAccrual.swift */; };
+		5E4CC3F7205678CF00916AA8 /* BrokerInitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B5205678CF00916AA8 /* BrokerInitData.swift */; };
+		5E4CC3F8205678CF00916AA8 /* InvestorAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B6205678CF00916AA8 /* InvestorAmount.swift */; };
+		5E4CC3F9205678CF00916AA8 /* PaymentTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B7205678CF00916AA8 /* PaymentTxInfo.swift */; };
+		5E4CC3FA205678CF00916AA8 /* WalletsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B8205678CF00916AA8 /* WalletsViewModel.swift */; };
+		5E4CC3FB205678CF00916AA8 /* InvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3B9205678CF00916AA8 /* InvestmentProgram.swift */; };
+		5E4CC3FC205678CF00916AA8 /* NewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BA205678CF00916AA8 /* NewManager.swift */; };
+		5E4CC3FD205678CF00916AA8 /* InvestmentProgramRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BB205678CF00916AA8 /* InvestmentProgramRequests.swift */; };
+		5E4CC3FE205678CF00916AA8 /* WalletAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BC205678CF00916AA8 /* WalletAddressViewModel.swift */; };
+		5E4CC3FF205678CF00916AA8 /* TradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BD205678CF00916AA8 /* TradesViewModel.swift */; };
+		5E4CC400205678CF00916AA8 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BE205678CF00916AA8 /* OrderModel.swift */; };
+		5E4CC401205678D000916AA8 /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3BF205678CF00916AA8 /* WalletTransaction.swift */; };
+		5E4CC402205678D000916AA8 /* BrokerTradeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C0205678CF00916AA8 /* BrokerTradeServer.swift */; };
+		5E4CC403205678D000916AA8 /* InvestorDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C1205678CF00916AA8 /* InvestorDashboard.swift */; };
+		5E4CC404205678D000916AA8 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C2205678CF00916AA8 /* Chart.swift */; };
+		5E4CC405205678D000916AA8 /* NewOpenTradesEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C3205678CF00916AA8 /* NewOpenTradesEvent.swift */; };
+		5E4CC406205678D000916AA8 /* InvestmentProgramRequestsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C4205678CF00916AA8 /* InvestmentProgramRequestsFilter.swift */; };
+		5E4CC407205678D000916AA8 /* InvestmentProgramsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C5205678CF00916AA8 /* InvestmentProgramsViewModel.swift */; };
+		5E4CC408205678D000916AA8 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C6205678CF00916AA8 /* UpdateProfileViewModel.swift */; };
+		5E4CC409205678D000916AA8 /* RegisterManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C7205678CF00916AA8 /* RegisterManagerViewModel.swift */; };
+		5E4CC40A205678D000916AA8 /* ManagerHistoryIpfsHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C8205678CF00916AA8 /* ManagerHistoryIpfsHash.swift */; };
+		5E4CC40B205678D000916AA8 /* WalletInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3C9205678CF00916AA8 /* WalletInvestmentProgram.swift */; };
+		5E4CC40C205678D000916AA8 /* InvestmentProgramDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CA205678CF00916AA8 /* InvestmentProgramDetails.swift */; };
+		5E4CC40D205678D000916AA8 /* StartValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CB205678CF00916AA8 /* StartValues.swift */; };
+		5E4CC40E205678D000916AA8 /* Invest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CC205678CF00916AA8 /* Invest.swift */; };
+		5E4CC40F205678D000916AA8 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CD205678CF00916AA8 /* ErrorMessage.swift */; };
+		5E4CC410205678D000916AA8 /* ManagerIpfsHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CE205678CF00916AA8 /* ManagerIpfsHash.swift */; };
+		5E4CC411205678D000916AA8 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3CF205678CF00916AA8 /* WalletTransactionsViewModel.swift */; };
+		5E4CC412205678D000916AA8 /* WalletWithdrawRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D0205678CF00916AA8 /* WalletWithdrawRequestModel.swift */; };
+		5E4CC413205678D000916AA8 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D1205678CF00916AA8 /* WalletViewModel.swift */; };
+		5E4CC414205678D000916AA8 /* WalletInvestmentPrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D2205678CF00916AA8 /* WalletInvestmentPrograms.swift */; };
+		5E4CC415205678D000916AA8 /* IFormFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D3205678CF00916AA8 /* IFormFile.swift */; };
+		5E4CC416205678D000916AA8 /* ManagerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D4205678CF00916AA8 /* ManagerRequest.swift */; };
+		5E4CC417205678D000916AA8 /* OpenOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D5205678CF00916AA8 /* OpenOrderModel.swift */; };
+		5E4CC418205678D000916AA8 /* RateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D6205678CF00916AA8 /* RateViewModel.swift */; };
+		5E4CC419205678D000916AA8 /* InvestmentProgramRequestTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D7205678CF00916AA8 /* InvestmentProgramRequestTxInfo.swift */; };
+		5E4CC41A205678D000916AA8 /* TransactionsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D8205678CF00916AA8 /* TransactionsFilter.swift */; };
+		5E4CC41B205678D000916AA8 /* ProfileFullViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3D9205678CF00916AA8 /* ProfileFullViewModel.swift */; };
+		5E4CC41C205678D000916AA8 /* InvestmentProgramsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DA205678CF00916AA8 /* InvestmentProgramsFilter.swift */; };
+		5E4CC41D205678D000916AA8 /* UploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DB205678CF00916AA8 /* UploadResult.swift */; };
+		5E4CC41E205678D000916AA8 /* BrokerInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DC205678CF00916AA8 /* BrokerInvestmentProgram.swift */; };
+		5E4CC41F205678D000916AA8 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DD205678CF00916AA8 /* InvestmentProgramTxInfo.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
 		FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */; };
@@ -112,72 +178,6 @@
 		FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E65204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift */; };
 		FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC900E66204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib */; };
 		FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E69204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift */; };
-		FC900EB1204FFB2E007E9142 /* BrokerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E6E204FFB2E007E9142 /* BrokerAPI.swift */; };
-		FC900EB2204FFB2E007E9142 /* FilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E6F204FFB2E007E9142 /* FilesAPI.swift */; };
-		FC900EB3204FFB2E007E9142 /* InvestorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E70204FFB2E007E9142 /* InvestorAPI.swift */; };
-		FC900EB4204FFB2E007E9142 /* ManagerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E71204FFB2E007E9142 /* ManagerAPI.swift */; };
-		FC900EB5204FFB2E007E9142 /* RateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E72204FFB2E007E9142 /* RateAPI.swift */; };
-		FC900EB6204FFB2E007E9142 /* TradesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E73204FFB2E007E9142 /* TradesAPI.swift */; };
-		FC900EB7204FFB2E007E9142 /* Broker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E75204FFB2E007E9142 /* Broker.swift */; };
-		FC900EB8204FFB2E007E9142 /* BrokerInitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E76204FFB2E007E9142 /* BrokerInitData.swift */; };
-		FC900EB9204FFB2E007E9142 /* BrokerInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E77204FFB2E007E9142 /* BrokerInvestmentProgram.swift */; };
-		FC900EBA204FFB2E007E9142 /* BrokersFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E78204FFB2E007E9142 /* BrokersFilter.swift */; };
-		FC900EBB204FFB2E007E9142 /* BrokersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E79204FFB2E007E9142 /* BrokersViewModel.swift */; };
-		FC900EBC204FFB2E007E9142 /* BrokerTradeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7A204FFB2E007E9142 /* BrokerTradeServer.swift */; };
-		FC900EBD204FFB2E007E9142 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7B204FFB2E007E9142 /* Chart.swift */; };
-		FC900EBE204FFB2E007E9142 /* ClosePeriodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7C204FFB2E007E9142 /* ClosePeriodData.swift */; };
-		FC900EBF204FFB2E007E9142 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7D204FFB2E007E9142 /* ErrorMessage.swift */; };
-		FC900EC0204FFB2E007E9142 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7E204FFB2E007E9142 /* ErrorViewModel.swift */; };
-		FC900EC1204FFB2E007E9142 /* IFormFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E7F204FFB2E007E9142 /* IFormFile.swift */; };
-		FC900EC2204FFB2E007E9142 /* Invest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E80204FFB2E007E9142 /* Invest.swift */; };
-		FC900EC3204FFB2E007E9142 /* InvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E81204FFB2E007E9142 /* InvestmentProgram.swift */; };
-		FC900EC4204FFB2E007E9142 /* InvestmentProgramAccrual.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E82204FFB2E007E9142 /* InvestmentProgramAccrual.swift */; };
-		FC900EC5204FFB2E007E9142 /* InvestmentProgramDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E83204FFB2E007E9142 /* InvestmentProgramDashboard.swift */; };
-		FC900EC6204FFB2E007E9142 /* InvestmentProgramDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E84204FFB2E007E9142 /* InvestmentProgramDetails.swift */; };
-		FC900EC7204FFB2E007E9142 /* InvestmentProgramRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E85204FFB2E007E9142 /* InvestmentProgramRequest.swift */; };
-		FC900EC8204FFB2E007E9142 /* InvestmentProgramRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E86204FFB2E007E9142 /* InvestmentProgramRequests.swift */; };
-		FC900EC9204FFB2E007E9142 /* InvestmentProgramRequestsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E87204FFB2E007E9142 /* InvestmentProgramRequestsFilter.swift */; };
-		FC900ECA204FFB2E007E9142 /* InvestmentProgramRequestTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E88204FFB2E007E9142 /* InvestmentProgramRequestTxInfo.swift */; };
-		FC900ECB204FFB2E007E9142 /* InvestmentProgramsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E89204FFB2E007E9142 /* InvestmentProgramsFilter.swift */; };
-		FC900ECC204FFB2E007E9142 /* InvestmentProgramsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8A204FFB2E007E9142 /* InvestmentProgramsViewModel.swift */; };
-		FC900ECD204FFB2E007E9142 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8B204FFB2E007E9142 /* InvestmentProgramTxInfo.swift */; };
-		FC900ECE204FFB2E007E9142 /* InvestmentProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8C204FFB2E007E9142 /* InvestmentProgramViewModel.swift */; };
-		FC900ECF204FFB2E007E9142 /* InvestorAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8D204FFB2E007E9142 /* InvestorAmount.swift */; };
-		FC900ED0204FFB2E007E9142 /* InvestorDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8E204FFB2E007E9142 /* InvestorDashboard.swift */; };
-		FC900ED1204FFB2E007E9142 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E8F204FFB2E007E9142 /* LoginViewModel.swift */; };
-		FC900ED2204FFB2E007E9142 /* ManagerHistoryIpfsHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E90204FFB2E007E9142 /* ManagerHistoryIpfsHash.swift */; };
-		FC900ED3204FFB2E007E9142 /* ManagerIpfsHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E91204FFB2E007E9142 /* ManagerIpfsHash.swift */; };
-		FC900ED4204FFB2E007E9142 /* ManagerOpenTrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E92204FFB2E007E9142 /* ManagerOpenTrades.swift */; };
-		FC900ED5204FFB2E007E9142 /* ManagerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E93204FFB2E007E9142 /* ManagerRequest.swift */; };
-		FC900ED6204FFB2E007E9142 /* NewInvestmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E94204FFB2E007E9142 /* NewInvestmentRequest.swift */; };
-		FC900ED7204FFB2E007E9142 /* NewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E95204FFB2E007E9142 /* NewManager.swift */; };
-		FC900ED8204FFB2E007E9142 /* NewOpenTradesEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E96204FFB2E007E9142 /* NewOpenTradesEvent.swift */; };
-		FC900ED9204FFB2E007E9142 /* NewTradeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E97204FFB2E007E9142 /* NewTradeEvent.swift */; };
-		FC900EDA204FFB2E007E9142 /* OpenOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E98204FFB2E007E9142 /* OpenOrderModel.swift */; };
-		FC900EDB204FFB2E007E9142 /* OpenTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E99204FFB2E007E9142 /* OpenTradesViewModel.swift */; };
-		FC900EDC204FFB2E007E9142 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9A204FFB2E007E9142 /* OrderModel.swift */; };
-		FC900EDD204FFB2E007E9142 /* PaymentTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9B204FFB2E007E9142 /* PaymentTxInfo.swift */; };
-		FC900EDE204FFB2E007E9142 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9C204FFB2E007E9142 /* Period.swift */; };
-		FC900EDF204FFB2E007E9142 /* ProfileFullViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9D204FFB2E007E9142 /* ProfileFullViewModel.swift */; };
-		FC900EE0204FFB2E007E9142 /* ProfilePublicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9E204FFB2E007E9142 /* ProfilePublicViewModel.swift */; };
-		FC900EE1204FFB2E007E9142 /* RateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E9F204FFB2E007E9142 /* RateViewModel.swift */; };
-		FC900EE2204FFB2E007E9142 /* RegisterInvestorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA0204FFB2E007E9142 /* RegisterInvestorViewModel.swift */; };
-		FC900EE3204FFB2E007E9142 /* RegisterManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA1204FFB2E007E9142 /* RegisterManagerViewModel.swift */; };
-		FC900EE4204FFB2E007E9142 /* RequestRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA2204FFB2E007E9142 /* RequestRate.swift */; };
-		FC900EE5204FFB2E007E9142 /* StartValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA3204FFB2E007E9142 /* StartValues.swift */; };
-		FC900EE6204FFB2E007E9142 /* TradesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA4204FFB2E007E9142 /* TradesFilter.swift */; };
-		FC900EE7204FFB2E007E9142 /* TradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA5204FFB2E007E9142 /* TradesViewModel.swift */; };
-		FC900EE8204FFB2E007E9142 /* TransactionsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA6204FFB2E007E9142 /* TransactionsFilter.swift */; };
-		FC900EE9204FFB2E007E9142 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA7204FFB2E007E9142 /* UpdateProfileViewModel.swift */; };
-		FC900EEA204FFB2E007E9142 /* UploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA8204FFB2E007E9142 /* UploadResult.swift */; };
-		FC900EEB204FFB2E007E9142 /* WalletAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EA9204FFB2E007E9142 /* WalletAddressViewModel.swift */; };
-		FC900EEC204FFB2E007E9142 /* WalletInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAA204FFB2E007E9142 /* WalletInvestmentProgram.swift */; };
-		FC900EED204FFB2E007E9142 /* WalletInvestmentPrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAB204FFB2E007E9142 /* WalletInvestmentPrograms.swift */; };
-		FC900EEE204FFB2E007E9142 /* WalletsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAC204FFB2E007E9142 /* WalletsViewModel.swift */; };
-		FC900EEF204FFB2E007E9142 /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAD204FFB2E007E9142 /* WalletTransaction.swift */; };
-		FC900EF0204FFB2E007E9142 /* WalletTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAE204FFB2E007E9142 /* WalletTransactionsViewModel.swift */; };
-		FC900EF1204FFB2E007E9142 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EAF204FFB2E007E9142 /* WalletViewModel.swift */; };
-		FC900EF2204FFB2E007E9142 /* WalletWithdrawRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900EB0204FFB2E007E9142 /* WalletWithdrawRequestModel.swift */; };
 		FC9137872030A4A8002321C7 /* DetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9137852030A4A8002321C7 /* DetailHeaderTableViewCell.swift */; };
 		FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC9137862030A4A8002321C7 /* DetailHeaderTableViewCell.xib */; };
 		FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */; };
@@ -284,6 +284,72 @@
 		1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug investor.xcconfig"; sourceTree = "<group>"; };
 		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
 		48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release manager.xcconfig"; sourceTree = "<group>"; };
+		5E4CC39B205678CF00916AA8 /* BrokerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerAPI.swift; sourceTree = "<group>"; };
+		5E4CC39C205678CF00916AA8 /* FilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesAPI.swift; sourceTree = "<group>"; };
+		5E4CC39D205678CF00916AA8 /* RateAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAPI.swift; sourceTree = "<group>"; };
+		5E4CC39E205678CF00916AA8 /* TradesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesAPI.swift; sourceTree = "<group>"; };
+		5E4CC39F205678CF00916AA8 /* InvestorAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorAPI.swift; sourceTree = "<group>"; };
+		5E4CC3A0205678CF00916AA8 /* ManagerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAPI.swift; sourceTree = "<group>"; };
+		5E4CC3A2205678CF00916AA8 /* ManagerOpenTrades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerOpenTrades.swift; sourceTree = "<group>"; };
+		5E4CC3A3205678CF00916AA8 /* Broker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broker.swift; sourceTree = "<group>"; };
+		5E4CC3A4205678CF00916AA8 /* TradesFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesFilter.swift; sourceTree = "<group>"; };
+		5E4CC3A5205678CF00916AA8 /* OpenTradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenTradesViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3A6205678CF00916AA8 /* NewTradeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTradeEvent.swift; sourceTree = "<group>"; };
+		5E4CC3A7205678CF00916AA8 /* BrokersFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokersFilter.swift; sourceTree = "<group>"; };
+		5E4CC3A8205678CF00916AA8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3A9205678CF00916AA8 /* InvestmentProgramDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramDashboard.swift; sourceTree = "<group>"; };
+		5E4CC3AA205678CF00916AA8 /* BrokersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokersViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3AB205678CF00916AA8 /* InvestmentProgramViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3AC205678CF00916AA8 /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		5E4CC3AD205678CF00916AA8 /* ClosePeriodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosePeriodData.swift; sourceTree = "<group>"; };
+		5E4CC3AE205678CF00916AA8 /* InvestmentProgramRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequest.swift; sourceTree = "<group>"; };
+		5E4CC3AF205678CF00916AA8 /* ProfilePublicViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePublicViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3B0205678CF00916AA8 /* RequestRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestRate.swift; sourceTree = "<group>"; };
+		5E4CC3B1205678CF00916AA8 /* ErrorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3B2205678CF00916AA8 /* NewInvestmentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewInvestmentRequest.swift; sourceTree = "<group>"; };
+		5E4CC3B3205678CF00916AA8 /* RegisterInvestorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInvestorViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3B4205678CF00916AA8 /* InvestmentProgramAccrual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramAccrual.swift; sourceTree = "<group>"; };
+		5E4CC3B5205678CF00916AA8 /* BrokerInitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInitData.swift; sourceTree = "<group>"; };
+		5E4CC3B6205678CF00916AA8 /* InvestorAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorAmount.swift; sourceTree = "<group>"; };
+		5E4CC3B7205678CF00916AA8 /* PaymentTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTxInfo.swift; sourceTree = "<group>"; };
+		5E4CC3B8205678CF00916AA8 /* WalletsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3B9205678CF00916AA8 /* InvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgram.swift; sourceTree = "<group>"; };
+		5E4CC3BA205678CF00916AA8 /* NewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewManager.swift; sourceTree = "<group>"; };
+		5E4CC3BB205678CF00916AA8 /* InvestmentProgramRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequests.swift; sourceTree = "<group>"; };
+		5E4CC3BC205678CF00916AA8 /* WalletAddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletAddressViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3BD205678CF00916AA8 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3BE205678CF00916AA8 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		5E4CC3BF205678CF00916AA8 /* WalletTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
+		5E4CC3C0205678CF00916AA8 /* BrokerTradeServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerTradeServer.swift; sourceTree = "<group>"; };
+		5E4CC3C1205678CF00916AA8 /* InvestorDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorDashboard.swift; sourceTree = "<group>"; };
+		5E4CC3C2205678CF00916AA8 /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		5E4CC3C3205678CF00916AA8 /* NewOpenTradesEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOpenTradesEvent.swift; sourceTree = "<group>"; };
+		5E4CC3C4205678CF00916AA8 /* InvestmentProgramRequestsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequestsFilter.swift; sourceTree = "<group>"; };
+		5E4CC3C5205678CF00916AA8 /* InvestmentProgramsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramsViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3C6205678CF00916AA8 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3C7205678CF00916AA8 /* RegisterManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterManagerViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3C8205678CF00916AA8 /* ManagerHistoryIpfsHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerHistoryIpfsHash.swift; sourceTree = "<group>"; };
+		5E4CC3C9205678CF00916AA8 /* WalletInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletInvestmentProgram.swift; sourceTree = "<group>"; };
+		5E4CC3CA205678CF00916AA8 /* InvestmentProgramDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramDetails.swift; sourceTree = "<group>"; };
+		5E4CC3CB205678CF00916AA8 /* StartValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartValues.swift; sourceTree = "<group>"; };
+		5E4CC3CC205678CF00916AA8 /* Invest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invest.swift; sourceTree = "<group>"; };
+		5E4CC3CD205678CF00916AA8 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		5E4CC3CE205678CF00916AA8 /* ManagerIpfsHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerIpfsHash.swift; sourceTree = "<group>"; };
+		5E4CC3CF205678CF00916AA8 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3D0205678CF00916AA8 /* WalletWithdrawRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRequestModel.swift; sourceTree = "<group>"; };
+		5E4CC3D1205678CF00916AA8 /* WalletViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3D2205678CF00916AA8 /* WalletInvestmentPrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletInvestmentPrograms.swift; sourceTree = "<group>"; };
+		5E4CC3D3205678CF00916AA8 /* IFormFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFormFile.swift; sourceTree = "<group>"; };
+		5E4CC3D4205678CF00916AA8 /* ManagerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerRequest.swift; sourceTree = "<group>"; };
+		5E4CC3D5205678CF00916AA8 /* OpenOrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOrderModel.swift; sourceTree = "<group>"; };
+		5E4CC3D6205678CF00916AA8 /* RateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3D7205678CF00916AA8 /* InvestmentProgramRequestTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequestTxInfo.swift; sourceTree = "<group>"; };
+		5E4CC3D8205678CF00916AA8 /* TransactionsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsFilter.swift; sourceTree = "<group>"; };
+		5E4CC3D9205678CF00916AA8 /* ProfileFullViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFullViewModel.swift; sourceTree = "<group>"; };
+		5E4CC3DA205678CF00916AA8 /* InvestmentProgramsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramsFilter.swift; sourceTree = "<group>"; };
+		5E4CC3DB205678CF00916AA8 /* UploadResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadResult.swift; sourceTree = "<group>"; };
+		5E4CC3DC205678CF00916AA8 /* BrokerInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInvestmentProgram.swift; sourceTree = "<group>"; };
+		5E4CC3DD205678CF00916AA8 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
 		9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug tournament.xcconfig"; sourceTree = "<group>"; };
@@ -396,72 +462,6 @@
 		FC900E65204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterTypeTableViewCell.swift; sourceTree = "<group>"; };
 		FC900E66204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletFilterTypeTableViewCell.xib; sourceTree = "<group>"; };
 		FC900E69204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterTypeTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		FC900E6E204FFB2E007E9142 /* BrokerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerAPI.swift; sourceTree = "<group>"; };
-		FC900E6F204FFB2E007E9142 /* FilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesAPI.swift; sourceTree = "<group>"; };
-		FC900E70204FFB2E007E9142 /* InvestorAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorAPI.swift; sourceTree = "<group>"; };
-		FC900E71204FFB2E007E9142 /* ManagerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAPI.swift; sourceTree = "<group>"; };
-		FC900E72204FFB2E007E9142 /* RateAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAPI.swift; sourceTree = "<group>"; };
-		FC900E73204FFB2E007E9142 /* TradesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesAPI.swift; sourceTree = "<group>"; };
-		FC900E75204FFB2E007E9142 /* Broker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broker.swift; sourceTree = "<group>"; };
-		FC900E76204FFB2E007E9142 /* BrokerInitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInitData.swift; sourceTree = "<group>"; };
-		FC900E77204FFB2E007E9142 /* BrokerInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInvestmentProgram.swift; sourceTree = "<group>"; };
-		FC900E78204FFB2E007E9142 /* BrokersFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokersFilter.swift; sourceTree = "<group>"; };
-		FC900E79204FFB2E007E9142 /* BrokersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokersViewModel.swift; sourceTree = "<group>"; };
-		FC900E7A204FFB2E007E9142 /* BrokerTradeServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerTradeServer.swift; sourceTree = "<group>"; };
-		FC900E7B204FFB2E007E9142 /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
-		FC900E7C204FFB2E007E9142 /* ClosePeriodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosePeriodData.swift; sourceTree = "<group>"; };
-		FC900E7D204FFB2E007E9142 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
-		FC900E7E204FFB2E007E9142 /* ErrorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
-		FC900E7F204FFB2E007E9142 /* IFormFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFormFile.swift; sourceTree = "<group>"; };
-		FC900E80204FFB2E007E9142 /* Invest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invest.swift; sourceTree = "<group>"; };
-		FC900E81204FFB2E007E9142 /* InvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgram.swift; sourceTree = "<group>"; };
-		FC900E82204FFB2E007E9142 /* InvestmentProgramAccrual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramAccrual.swift; sourceTree = "<group>"; };
-		FC900E83204FFB2E007E9142 /* InvestmentProgramDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramDashboard.swift; sourceTree = "<group>"; };
-		FC900E84204FFB2E007E9142 /* InvestmentProgramDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramDetails.swift; sourceTree = "<group>"; };
-		FC900E85204FFB2E007E9142 /* InvestmentProgramRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequest.swift; sourceTree = "<group>"; };
-		FC900E86204FFB2E007E9142 /* InvestmentProgramRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequests.swift; sourceTree = "<group>"; };
-		FC900E87204FFB2E007E9142 /* InvestmentProgramRequestsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequestsFilter.swift; sourceTree = "<group>"; };
-		FC900E88204FFB2E007E9142 /* InvestmentProgramRequestTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramRequestTxInfo.swift; sourceTree = "<group>"; };
-		FC900E89204FFB2E007E9142 /* InvestmentProgramsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramsFilter.swift; sourceTree = "<group>"; };
-		FC900E8A204FFB2E007E9142 /* InvestmentProgramsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramsViewModel.swift; sourceTree = "<group>"; };
-		FC900E8B204FFB2E007E9142 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
-		FC900E8C204FFB2E007E9142 /* InvestmentProgramViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramViewModel.swift; sourceTree = "<group>"; };
-		FC900E8D204FFB2E007E9142 /* InvestorAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorAmount.swift; sourceTree = "<group>"; };
-		FC900E8E204FFB2E007E9142 /* InvestorDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorDashboard.swift; sourceTree = "<group>"; };
-		FC900E8F204FFB2E007E9142 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		FC900E90204FFB2E007E9142 /* ManagerHistoryIpfsHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerHistoryIpfsHash.swift; sourceTree = "<group>"; };
-		FC900E91204FFB2E007E9142 /* ManagerIpfsHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerIpfsHash.swift; sourceTree = "<group>"; };
-		FC900E92204FFB2E007E9142 /* ManagerOpenTrades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerOpenTrades.swift; sourceTree = "<group>"; };
-		FC900E93204FFB2E007E9142 /* ManagerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerRequest.swift; sourceTree = "<group>"; };
-		FC900E94204FFB2E007E9142 /* NewInvestmentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewInvestmentRequest.swift; sourceTree = "<group>"; };
-		FC900E95204FFB2E007E9142 /* NewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewManager.swift; sourceTree = "<group>"; };
-		FC900E96204FFB2E007E9142 /* NewOpenTradesEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOpenTradesEvent.swift; sourceTree = "<group>"; };
-		FC900E97204FFB2E007E9142 /* NewTradeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTradeEvent.swift; sourceTree = "<group>"; };
-		FC900E98204FFB2E007E9142 /* OpenOrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOrderModel.swift; sourceTree = "<group>"; };
-		FC900E99204FFB2E007E9142 /* OpenTradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenTradesViewModel.swift; sourceTree = "<group>"; };
-		FC900E9A204FFB2E007E9142 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		FC900E9B204FFB2E007E9142 /* PaymentTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTxInfo.swift; sourceTree = "<group>"; };
-		FC900E9C204FFB2E007E9142 /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
-		FC900E9D204FFB2E007E9142 /* ProfileFullViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFullViewModel.swift; sourceTree = "<group>"; };
-		FC900E9E204FFB2E007E9142 /* ProfilePublicViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePublicViewModel.swift; sourceTree = "<group>"; };
-		FC900E9F204FFB2E007E9142 /* RateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateViewModel.swift; sourceTree = "<group>"; };
-		FC900EA0204FFB2E007E9142 /* RegisterInvestorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInvestorViewModel.swift; sourceTree = "<group>"; };
-		FC900EA1204FFB2E007E9142 /* RegisterManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterManagerViewModel.swift; sourceTree = "<group>"; };
-		FC900EA2204FFB2E007E9142 /* RequestRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestRate.swift; sourceTree = "<group>"; };
-		FC900EA3204FFB2E007E9142 /* StartValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartValues.swift; sourceTree = "<group>"; };
-		FC900EA4204FFB2E007E9142 /* TradesFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesFilter.swift; sourceTree = "<group>"; };
-		FC900EA5204FFB2E007E9142 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
-		FC900EA6204FFB2E007E9142 /* TransactionsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsFilter.swift; sourceTree = "<group>"; };
-		FC900EA7204FFB2E007E9142 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
-		FC900EA8204FFB2E007E9142 /* UploadResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadResult.swift; sourceTree = "<group>"; };
-		FC900EA9204FFB2E007E9142 /* WalletAddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletAddressViewModel.swift; sourceTree = "<group>"; };
-		FC900EAA204FFB2E007E9142 /* WalletInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletInvestmentProgram.swift; sourceTree = "<group>"; };
-		FC900EAB204FFB2E007E9142 /* WalletInvestmentPrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletInvestmentPrograms.swift; sourceTree = "<group>"; };
-		FC900EAC204FFB2E007E9142 /* WalletsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsViewModel.swift; sourceTree = "<group>"; };
-		FC900EAD204FFB2E007E9142 /* WalletTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
-		FC900EAE204FFB2E007E9142 /* WalletTransactionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsViewModel.swift; sourceTree = "<group>"; };
-		FC900EAF204FFB2E007E9142 /* WalletViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
-		FC900EB0204FFB2E007E9142 /* WalletWithdrawRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawRequestModel.swift; sourceTree = "<group>"; };
 		FC9137852030A4A8002321C7 /* DetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		FC9137862030A4A8002321C7 /* DetailHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		FC9137892030A4DA002321C7 /* DetailChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -590,6 +590,86 @@
 				A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5E4CC39A205678CF00916AA8 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CC39B205678CF00916AA8 /* BrokerAPI.swift */,
+				5E4CC39C205678CF00916AA8 /* FilesAPI.swift */,
+				5E4CC39D205678CF00916AA8 /* RateAPI.swift */,
+				5E4CC39E205678CF00916AA8 /* TradesAPI.swift */,
+				5E4CC39F205678CF00916AA8 /* InvestorAPI.swift */,
+				5E4CC3A0205678CF00916AA8 /* ManagerAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		5E4CC3A1205678CF00916AA8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CC3A2205678CF00916AA8 /* ManagerOpenTrades.swift */,
+				5E4CC3A3205678CF00916AA8 /* Broker.swift */,
+				5E4CC3A4205678CF00916AA8 /* TradesFilter.swift */,
+				5E4CC3A5205678CF00916AA8 /* OpenTradesViewModel.swift */,
+				5E4CC3A6205678CF00916AA8 /* NewTradeEvent.swift */,
+				5E4CC3A7205678CF00916AA8 /* BrokersFilter.swift */,
+				5E4CC3A8205678CF00916AA8 /* LoginViewModel.swift */,
+				5E4CC3A9205678CF00916AA8 /* InvestmentProgramDashboard.swift */,
+				5E4CC3AA205678CF00916AA8 /* BrokersViewModel.swift */,
+				5E4CC3AB205678CF00916AA8 /* InvestmentProgramViewModel.swift */,
+				5E4CC3AC205678CF00916AA8 /* Period.swift */,
+				5E4CC3AD205678CF00916AA8 /* ClosePeriodData.swift */,
+				5E4CC3AE205678CF00916AA8 /* InvestmentProgramRequest.swift */,
+				5E4CC3AF205678CF00916AA8 /* ProfilePublicViewModel.swift */,
+				5E4CC3B0205678CF00916AA8 /* RequestRate.swift */,
+				5E4CC3B1205678CF00916AA8 /* ErrorViewModel.swift */,
+				5E4CC3B2205678CF00916AA8 /* NewInvestmentRequest.swift */,
+				5E4CC3B3205678CF00916AA8 /* RegisterInvestorViewModel.swift */,
+				5E4CC3B4205678CF00916AA8 /* InvestmentProgramAccrual.swift */,
+				5E4CC3B5205678CF00916AA8 /* BrokerInitData.swift */,
+				5E4CC3B6205678CF00916AA8 /* InvestorAmount.swift */,
+				5E4CC3B7205678CF00916AA8 /* PaymentTxInfo.swift */,
+				5E4CC3B8205678CF00916AA8 /* WalletsViewModel.swift */,
+				5E4CC3B9205678CF00916AA8 /* InvestmentProgram.swift */,
+				5E4CC3BA205678CF00916AA8 /* NewManager.swift */,
+				5E4CC3BB205678CF00916AA8 /* InvestmentProgramRequests.swift */,
+				5E4CC3BC205678CF00916AA8 /* WalletAddressViewModel.swift */,
+				5E4CC3BD205678CF00916AA8 /* TradesViewModel.swift */,
+				5E4CC3BE205678CF00916AA8 /* OrderModel.swift */,
+				5E4CC3BF205678CF00916AA8 /* WalletTransaction.swift */,
+				5E4CC3C0205678CF00916AA8 /* BrokerTradeServer.swift */,
+				5E4CC3C1205678CF00916AA8 /* InvestorDashboard.swift */,
+				5E4CC3C2205678CF00916AA8 /* Chart.swift */,
+				5E4CC3C3205678CF00916AA8 /* NewOpenTradesEvent.swift */,
+				5E4CC3C4205678CF00916AA8 /* InvestmentProgramRequestsFilter.swift */,
+				5E4CC3C5205678CF00916AA8 /* InvestmentProgramsViewModel.swift */,
+				5E4CC3C6205678CF00916AA8 /* UpdateProfileViewModel.swift */,
+				5E4CC3C7205678CF00916AA8 /* RegisterManagerViewModel.swift */,
+				5E4CC3C8205678CF00916AA8 /* ManagerHistoryIpfsHash.swift */,
+				5E4CC3C9205678CF00916AA8 /* WalletInvestmentProgram.swift */,
+				5E4CC3CA205678CF00916AA8 /* InvestmentProgramDetails.swift */,
+				5E4CC3CB205678CF00916AA8 /* StartValues.swift */,
+				5E4CC3CC205678CF00916AA8 /* Invest.swift */,
+				5E4CC3CD205678CF00916AA8 /* ErrorMessage.swift */,
+				5E4CC3CE205678CF00916AA8 /* ManagerIpfsHash.swift */,
+				5E4CC3CF205678CF00916AA8 /* WalletTransactionsViewModel.swift */,
+				5E4CC3D0205678CF00916AA8 /* WalletWithdrawRequestModel.swift */,
+				5E4CC3D1205678CF00916AA8 /* WalletViewModel.swift */,
+				5E4CC3D2205678CF00916AA8 /* WalletInvestmentPrograms.swift */,
+				5E4CC3D3205678CF00916AA8 /* IFormFile.swift */,
+				5E4CC3D4205678CF00916AA8 /* ManagerRequest.swift */,
+				5E4CC3D5205678CF00916AA8 /* OpenOrderModel.swift */,
+				5E4CC3D6205678CF00916AA8 /* RateViewModel.swift */,
+				5E4CC3D7205678CF00916AA8 /* InvestmentProgramRequestTxInfo.swift */,
+				5E4CC3D8205678CF00916AA8 /* TransactionsFilter.swift */,
+				5E4CC3D9205678CF00916AA8 /* ProfileFullViewModel.swift */,
+				5E4CC3DA205678CF00916AA8 /* InvestmentProgramsFilter.swift */,
+				5E4CC3DB205678CF00916AA8 /* UploadResult.swift */,
+				5E4CC3DC205678CF00916AA8 /* BrokerInvestmentProgram.swift */,
+				5E4CC3DD205678CF00916AA8 /* InvestmentProgramTxInfo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B8DB3D95241F1BF35C1AA19C /* Frameworks */ = {
@@ -933,86 +1013,6 @@
 			path = Wallet;
 			sourceTree = "<group>";
 		};
-		FC900E6D204FFB2E007E9142 /* APIs */ = {
-			isa = PBXGroup;
-			children = (
-				FC900E6E204FFB2E007E9142 /* BrokerAPI.swift */,
-				FC900E6F204FFB2E007E9142 /* FilesAPI.swift */,
-				FC900E70204FFB2E007E9142 /* InvestorAPI.swift */,
-				FC900E71204FFB2E007E9142 /* ManagerAPI.swift */,
-				FC900E72204FFB2E007E9142 /* RateAPI.swift */,
-				FC900E73204FFB2E007E9142 /* TradesAPI.swift */,
-			);
-			path = APIs;
-			sourceTree = "<group>";
-		};
-		FC900E74204FFB2E007E9142 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FC900E75204FFB2E007E9142 /* Broker.swift */,
-				FC900E76204FFB2E007E9142 /* BrokerInitData.swift */,
-				FC900E77204FFB2E007E9142 /* BrokerInvestmentProgram.swift */,
-				FC900E78204FFB2E007E9142 /* BrokersFilter.swift */,
-				FC900E79204FFB2E007E9142 /* BrokersViewModel.swift */,
-				FC900E7A204FFB2E007E9142 /* BrokerTradeServer.swift */,
-				FC900E7B204FFB2E007E9142 /* Chart.swift */,
-				FC900E7C204FFB2E007E9142 /* ClosePeriodData.swift */,
-				FC900E7D204FFB2E007E9142 /* ErrorMessage.swift */,
-				FC900E7E204FFB2E007E9142 /* ErrorViewModel.swift */,
-				FC900E7F204FFB2E007E9142 /* IFormFile.swift */,
-				FC900E80204FFB2E007E9142 /* Invest.swift */,
-				FC900E81204FFB2E007E9142 /* InvestmentProgram.swift */,
-				FC900E82204FFB2E007E9142 /* InvestmentProgramAccrual.swift */,
-				FC900E83204FFB2E007E9142 /* InvestmentProgramDashboard.swift */,
-				FC900E84204FFB2E007E9142 /* InvestmentProgramDetails.swift */,
-				FC900E85204FFB2E007E9142 /* InvestmentProgramRequest.swift */,
-				FC900E86204FFB2E007E9142 /* InvestmentProgramRequests.swift */,
-				FC900E87204FFB2E007E9142 /* InvestmentProgramRequestsFilter.swift */,
-				FC900E88204FFB2E007E9142 /* InvestmentProgramRequestTxInfo.swift */,
-				FC900E89204FFB2E007E9142 /* InvestmentProgramsFilter.swift */,
-				FC900E8A204FFB2E007E9142 /* InvestmentProgramsViewModel.swift */,
-				FC900E8B204FFB2E007E9142 /* InvestmentProgramTxInfo.swift */,
-				FC900E8C204FFB2E007E9142 /* InvestmentProgramViewModel.swift */,
-				FC900E8D204FFB2E007E9142 /* InvestorAmount.swift */,
-				FC900E8E204FFB2E007E9142 /* InvestorDashboard.swift */,
-				FC900E8F204FFB2E007E9142 /* LoginViewModel.swift */,
-				FC900E90204FFB2E007E9142 /* ManagerHistoryIpfsHash.swift */,
-				FC900E91204FFB2E007E9142 /* ManagerIpfsHash.swift */,
-				FC900E92204FFB2E007E9142 /* ManagerOpenTrades.swift */,
-				FC900E93204FFB2E007E9142 /* ManagerRequest.swift */,
-				FC900E94204FFB2E007E9142 /* NewInvestmentRequest.swift */,
-				FC900E95204FFB2E007E9142 /* NewManager.swift */,
-				FC900E96204FFB2E007E9142 /* NewOpenTradesEvent.swift */,
-				FC900E97204FFB2E007E9142 /* NewTradeEvent.swift */,
-				FC900E98204FFB2E007E9142 /* OpenOrderModel.swift */,
-				FC900E99204FFB2E007E9142 /* OpenTradesViewModel.swift */,
-				FC900E9A204FFB2E007E9142 /* OrderModel.swift */,
-				FC900E9B204FFB2E007E9142 /* PaymentTxInfo.swift */,
-				FC900E9C204FFB2E007E9142 /* Period.swift */,
-				FC900E9D204FFB2E007E9142 /* ProfileFullViewModel.swift */,
-				FC900E9E204FFB2E007E9142 /* ProfilePublicViewModel.swift */,
-				FC900E9F204FFB2E007E9142 /* RateViewModel.swift */,
-				FC900EA0204FFB2E007E9142 /* RegisterInvestorViewModel.swift */,
-				FC900EA1204FFB2E007E9142 /* RegisterManagerViewModel.swift */,
-				FC900EA2204FFB2E007E9142 /* RequestRate.swift */,
-				FC900EA3204FFB2E007E9142 /* StartValues.swift */,
-				FC900EA4204FFB2E007E9142 /* TradesFilter.swift */,
-				FC900EA5204FFB2E007E9142 /* TradesViewModel.swift */,
-				FC900EA6204FFB2E007E9142 /* TransactionsFilter.swift */,
-				FC900EA7204FFB2E007E9142 /* UpdateProfileViewModel.swift */,
-				FC900EA8204FFB2E007E9142 /* UploadResult.swift */,
-				FC900EA9204FFB2E007E9142 /* WalletAddressViewModel.swift */,
-				FC900EAA204FFB2E007E9142 /* WalletInvestmentProgram.swift */,
-				FC900EAB204FFB2E007E9142 /* WalletInvestmentPrograms.swift */,
-				FC900EAC204FFB2E007E9142 /* WalletsViewModel.swift */,
-				FC900EAD204FFB2E007E9142 /* WalletTransaction.swift */,
-				FC900EAE204FFB2E007E9142 /* WalletTransactionsViewModel.swift */,
-				FC900EAF204FFB2E007E9142 /* WalletViewModel.swift */,
-				FC900EB0204FFB2E007E9142 /* WalletWithdrawRequestModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		FC92CB2920304B3100CDBF19 /* Tournament */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,8 +1081,8 @@
 		FCB177F22045B40E00A482B7 /* Main Api Client */ = {
 			isa = PBXGroup;
 			children = (
-				FC900E6D204FFB2E007E9142 /* APIs */,
-				FC900E74204FFB2E007E9142 /* Models */,
+				5E4CC39A205678CF00916AA8 /* APIs */,
+				5E4CC3A1205678CF00916AA8 /* Models */,
 			);
 			path = "Main Api Client";
 			sourceTree = "<group>";
@@ -1152,7 +1152,6 @@
 			children = (
 				FCC9DD3A200DFA5E008825EC /* Assets */,
 				FCC9DD3C200DFA5E008825EC /* Config */,
-				FCC9DD3E200DFA5E008825EC /* Fonts */,
 				FCC9DD40200DFA5E008825EC /* Storyboards */,
 			);
 			path = Resources;
@@ -1174,13 +1173,6 @@
 				FCE8236220161339000061E8 /* Constants.swift */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		FCC9DD3E200DFA5E008825EC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		FCC9DD40200DFA5E008825EC /* Storyboards */ = {
@@ -1596,64 +1588,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC900ECC204FFB2E007E9142 /* InvestmentProgramsViewModel.swift in Sources */,
 				FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */,
 				FC83DF67203DA7B600A8F8CE /* ProgramHistoryRouter.swift in Sources */,
-				FC900EE2204FFB2E007E9142 /* RegisterInvestorViewModel.swift in Sources */,
-				FC900EE7204FFB2E007E9142 /* TradesViewModel.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
-				FC900EDA204FFB2E007E9142 /* OpenOrderModel.swift in Sources */,
+				5E4CC3EF205678CF00916AA8 /* ClosePeriodData.swift in Sources */,
+				5E4CC3F9205678CF00916AA8 /* PaymentTxInfo.swift in Sources */,
 				FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */,
+				5E4CC3F8205678CF00916AA8 /* InvestorAmount.swift in Sources */,
+				5E4CC3FD205678CF00916AA8 /* InvestmentProgramRequests.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
-				FC900EB6204FFB2E007E9142 /* TradesAPI.swift in Sources */,
 				FC1410272030168100B71E7F /* TradeViewModel.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
-				FC900EC0204FFB2E007E9142 /* ErrorViewModel.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
+				5E4CC3EB205678CF00916AA8 /* InvestmentProgramDashboard.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				FC14101B2030168100B71E7F /* NewParticipant.swift in Sources */,
+				5E4CC41F205678D000916AA8 /* InvestmentProgramTxInfo.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
 				FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */,
 				FC4C519F2048059E0042CEE1 /* ProgramRequestsViewModel.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
+				5E4CC3EC205678CF00916AA8 /* BrokersViewModel.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
-				FC900ED9204FFB2E007E9142 /* NewTradeEvent.swift in Sources */,
-				FC900EDE204FFB2E007E9142 /* Period.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
-				FC900EE4204FFB2E007E9142 /* RequestRate.swift in Sources */,
+				5E4CC3E8205678CF00916AA8 /* NewTradeEvent.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
-				FC900EDC204FFB2E007E9142 /* OrderModel.swift in Sources */,
+				5E4CC407205678D000916AA8 /* InvestmentProgramsViewModel.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
-				FC900ECA204FFB2E007E9142 /* InvestmentProgramRequestTxInfo.swift in Sources */,
-				FC900EBA204FFB2E007E9142 /* BrokersFilter.swift in Sources */,
 				FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */,
+				5E4CC411205678D000916AA8 /* WalletTransactionsViewModel.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
-				FC900EDD204FFB2E007E9142 /* PaymentTxInfo.swift in Sources */,
 				FC1410152030168100B71E7F /* TournamentAPI.swift in Sources */,
 				FC14101C2030168100B71E7F /* NewTrade.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
-				FC900ECB204FFB2E007E9142 /* InvestmentProgramsFilter.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
-				FC900EB2204FFB2E007E9142 /* FilesAPI.swift in Sources */,
 				FC1410162030168100B71E7F /* TradeserverAPI.swift in Sources */,
+				5E4CC3F6205678CF00916AA8 /* InvestmentProgramAccrual.swift in Sources */,
 				FC1410202030168100B71E7F /* ParticipantsViewModel.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* ConfirmationViewModel.swift in Sources */,
-				FC900EE3204FFB2E007E9142 /* RegisterManagerViewModel.swift in Sources */,
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
+				5E4CC403205678D000916AA8 /* InvestorDashboard.swift in Sources */,
 				FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
-				FC900ED6204FFB2E007E9142 /* NewInvestmentRequest.swift in Sources */,
+				5E4CC3E9205678CF00916AA8 /* BrokersFilter.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
+				5E4CC3ED205678CF00916AA8 /* InvestmentProgramViewModel.swift in Sources */,
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
 				FCB8DFC92010F67300698D18 /* ConfirmationViewController.swift in Sources */,
@@ -1663,71 +1652,73 @@
 				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
+				5E4CC3E1205678CF00916AA8 /* TradesAPI.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
 				FCA570642027358F001942F3 /* ProfileHeaderTableViewCellViewModel.swift in Sources */,
-				FC900EDB204FFB2E007E9142 /* OpenTradesViewModel.swift in Sources */,
-				FC900EC9204FFB2E007E9142 /* InvestmentProgramRequestsFilter.swift in Sources */,
+				5E4CC3FC205678CF00916AA8 /* NewManager.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
-				FC900EC6204FFB2E007E9142 /* InvestmentProgramDetails.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
-				FC900ED2204FFB2E007E9142 /* ManagerHistoryIpfsHash.swift in Sources */,
+				5E4CC3F5205678CF00916AA8 /* RegisterInvestorViewModel.swift in Sources */,
 				FCA5705520273528001942F3 /* ProfileFieldTableViewCell.swift in Sources */,
-				FC900EC2204FFB2E007E9142 /* Invest.swift in Sources */,
+				5E4CC40B205678D000916AA8 /* WalletInvestmentProgram.swift in Sources */,
+				5E4CC3E7205678CF00916AA8 /* OpenTradesViewModel.swift in Sources */,
 				FC900E5C204EA852007E9142 /* RoundingExtensions.swift in Sources */,
-				FC900EE9204FFB2E007E9142 /* UpdateProfileViewModel.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
-				FC900EBC204FFB2E007E9142 /* BrokerTradeServer.swift in Sources */,
-				FC900EED204FFB2E007E9142 /* WalletInvestmentPrograms.swift in Sources */,
+				5E4CC41C205678D000916AA8 /* InvestmentProgramsFilter.swift in Sources */,
 				FC900E60204EDF21007E9142 /* WalletFilterRouter.swift in Sources */,
 				FCA5705820273538001942F3 /* ProfileFieldTableViewCellViewModel.swift in Sources */,
-				FC900ECD204FFB2E007E9142 /* InvestmentProgramTxInfo.swift in Sources */,
-				FC900EEC204FFB2E007E9142 /* WalletInvestmentProgram.swift in Sources */,
+				5E4CC3FA205678CF00916AA8 /* WalletsViewModel.swift in Sources */,
+				5E4CC3DE205678CF00916AA8 /* BrokerAPI.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramDetailViewController.swift in Sources */,
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
-				FC900EB4204FFB2E007E9142 /* ManagerAPI.swift in Sources */,
 				FCB177662045690500A482B7 /* DashboardTableViewCell.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
+				5E4CC404205678D000916AA8 /* Chart.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				FCA5706C2027402F001942F3 /* ChooseProfilePhotoButton.swift in Sources */,
 				FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */,
 				FC1410212030168100B71E7F /* ParticipantViewModel.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
+				5E4CC40A205678D000916AA8 /* ManagerHistoryIpfsHash.swift in Sources */,
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,
 				FC140FE62030168100B71E7F /* Configuration.swift in Sources */,
-				FC900EE5204FFB2E007E9142 /* StartValues.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
 				FC1410172030168100B71E7F /* AccountCreated.swift in Sources */,
+				5E4CC3F4205678CF00916AA8 /* NewInvestmentRequest.swift in Sources */,
 				FCB178EE2046D45600A482B7 /* TournamentDataProvider.swift in Sources */,
-				FC900ECE204FFB2E007E9142 /* InvestmentProgramViewModel.swift in Sources */,
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
+				5E4CC41E205678D000916AA8 /* BrokerInvestmentProgram.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
-				FC900EBB204FFB2E007E9142 /* BrokersViewModel.swift in Sources */,
+				5E4CC3E0205678CF00916AA8 /* RateAPI.swift in Sources */,
 				FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */,
-				FC900EC3204FFB2E007E9142 /* InvestmentProgram.swift in Sources */,
+				5E4CC3FE205678CF00916AA8 /* WalletAddressViewModel.swift in Sources */,
+				5E4CC409205678D000916AA8 /* RegisterManagerViewModel.swift in Sources */,
 				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,
+				5E4CC415205678D000916AA8 /* IFormFile.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
 				FC91378E2030A4F2002321C7 /* DetailChartTableViewCellViewModel.swift in Sources */,
-				FC900EE6204FFB2E007E9142 /* TradesFilter.swift in Sources */,
-				FC900EEA204FFB2E007E9142 /* UploadResult.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
+				5E4CC40D205678D000916AA8 /* StartValues.swift in Sources */,
+				5E4CC41A205678D000916AA8 /* TransactionsFilter.swift in Sources */,
 				FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */,
 				FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */,
-				FC900ED1204FFB2E007E9142 /* LoginViewModel.swift in Sources */,
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
-				FC900EBE204FFB2E007E9142 /* ClosePeriodData.swift in Sources */,
-				FC900EE0204FFB2E007E9142 /* ProfilePublicViewModel.swift in Sources */,
+				5E4CC413205678D000916AA8 /* WalletViewModel.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
-				FC900EBF204FFB2E007E9142 /* ErrorMessage.swift in Sources */,
+				5E4CC3F1205678CF00916AA8 /* ProfilePublicViewModel.swift in Sources */,
+				5E4CC3FF205678CF00916AA8 /* TradesViewModel.swift in Sources */,
 				FC1410242030168100B71E7F /* TradeServerViewModel.swift in Sources */,
-				FC900EB9204FFB2E007E9142 /* BrokerInvestmentProgram.swift in Sources */,
+				5E4CC40F205678D000916AA8 /* ErrorMessage.swift in Sources */,
+				5E4CC408205678D000916AA8 /* UpdateProfileViewModel.swift in Sources */,
 				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
+				5E4CC3FB205678CF00916AA8 /* InvestmentProgram.swift in Sources */,
 				FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */,
 				FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
@@ -1736,32 +1727,33 @@
 				FC1410232030168100B71E7F /* TradeAccount.swift in Sources */,
 				FCB177692045691300A482B7 /* DashboardTableViewCellViewModel.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,
-				FC900ED3204FFB2E007E9142 /* ManagerIpfsHash.swift in Sources */,
+				5E4CC3E2205678CF00916AA8 /* InvestorAPI.swift in Sources */,
+				5E4CC3F7205678CF00916AA8 /* BrokerInitData.swift in Sources */,
 				FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
-				FC900EDF204FFB2E007E9142 /* ProfileFullViewModel.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
-				FC900EC1204FFB2E007E9142 /* IFormFile.swift in Sources */,
+				5E4CC418205678D000916AA8 /* RateViewModel.swift in Sources */,
 				FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* SignUpViewModel.swift in Sources */,
-				FC900EEF204FFB2E007E9142 /* WalletTransaction.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramDetailViewModel.swift in Sources */,
 				FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */,
-				FC900EEE204FFB2E007E9142 /* WalletsViewModel.swift in Sources */,
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
+				5E4CC3EA205678CF00916AA8 /* LoginViewModel.swift in Sources */,
+				5E4CC405205678D000916AA8 /* NewOpenTradesEvent.swift in Sources */,
 				FC9137872030A4A8002321C7 /* DetailHeaderTableViewCell.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
-				FC900ED0204FFB2E007E9142 /* InvestorDashboard.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
+				5E4CC401205678D000916AA8 /* WalletTransaction.swift in Sources */,
 				FC4C193E20304EC900625795 /* TournamentRouter.swift in Sources */,
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FC14101F2030168100B71E7F /* ParticipantsSummaryViewModel.swift in Sources */,
 				FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */,
 				FC900E5E204EC403007E9142 /* AuthDataProvider.swift in Sources */,
+				5E4CC3E6205678CF00916AA8 /* TradesFilter.swift in Sources */,
 				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
-				FC900ED5204FFB2E007E9142 /* ManagerRequest.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
+				5E4CC419205678D000916AA8 /* InvestmentProgramRequestTxInfo.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
 				FC27226C20484BEF005225F2 /* ProgramDetailPropertiesTableViewCellViewModel.swift in Sources */,
 				FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */,
@@ -1770,26 +1762,27 @@
 				FC14101E2030168100B71E7F /* ParticipantsFilter.swift in Sources */,
 				FC4C51A4204806370042CEE1 /* ProgramRequestTableViewCell.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
-				FC900ED7204FFB2E007E9142 /* NewManager.swift in Sources */,
 				FCA5706120273585001942F3 /* ProfileHeaderTableViewCell.swift in Sources */,
-				FC900ED4204FFB2E007E9142 /* ManagerOpenTrades.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
+				5E4CC3F0205678CF00916AA8 /* InvestmentProgramRequest.swift in Sources */,
+				5E4CC402205678D000916AA8 /* BrokerTradeServer.swift in Sources */,
+				5E4CC40E205678D000916AA8 /* Invest.swift in Sources */,
 				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
 				FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */,
-				FC900EB3204FFB2E007E9142 /* InvestorAPI.swift in Sources */,
-				FC900EC7204FFB2E007E9142 /* InvestmentProgramRequest.swift in Sources */,
 				FCB178722046CA0D00A482B7 /* ProgramDataProvider.swift in Sources */,
-				FC900EE8204FFB2E007E9142 /* TransactionsFilter.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
+				5E4CC41D205678D000916AA8 /* UploadResult.swift in Sources */,
+				5E4CC3EE205678CF00916AA8 /* Period.swift in Sources */,
 				FCA5706A2027395E001942F3 /* UIImage+Placeholder.swift in Sources */,
 				FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */,
+				5E4CC40C205678D000916AA8 /* InvestmentProgramDetails.swift in Sources */,
+				5E4CC414205678D000916AA8 /* WalletInvestmentPrograms.swift in Sources */,
 				FC27226E20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
+				5E4CC406205678D000916AA8 /* InvestmentProgramRequestsFilter.swift in Sources */,
 				FCA19A43201AE85C00157AD6 /* DashboardRouter.swift in Sources */,
-				FC900EBD204FFB2E007E9142 /* Chart.swift in Sources */,
 				FC91378B2030A4DA002321C7 /* DetailChartTableViewCell.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
-				FC900EF2204FFB2E007E9142 /* WalletWithdrawRequestModel.swift in Sources */,
 				FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */,
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
@@ -1797,48 +1790,47 @@
 				FCC9DD7A200E4CCF008825EC /* BaseNavigationController.swift in Sources */,
 				FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
-				FC900ECF204FFB2E007E9142 /* InvestorAmount.swift in Sources */,
+				5E4CC416205678D000916AA8 /* ManagerRequest.swift in Sources */,
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
 				FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
-				FC900EB1204FFB2E007E9142 /* BrokerAPI.swift in Sources */,
-				FC900EF0204FFB2E007E9142 /* WalletTransactionsViewModel.swift in Sources */,
+				5E4CC41B205678D000916AA8 /* ProfileFullViewModel.swift in Sources */,
 				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
 				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
+				5E4CC400205678CF00916AA8 /* OrderModel.swift in Sources */,
 				FC27232B20498959005225F2 /* QRCodeReaderViewController.swift in Sources */,
 				FC14101D2030168100B71E7F /* ParticipantRequest.swift in Sources */,
-				FC900EB8204FFB2E007E9142 /* BrokerInitData.swift in Sources */,
-				FC900EB5204FFB2E007E9142 /* RateAPI.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */,
 				FCA5707720274D48001942F3 /* WalletHeaderTableViewCell.swift in Sources */,
 				FC4C194620304F3300625795 /* TournamentDetailRouter.swift in Sources */,
-				FC900EC5204FFB2E007E9142 /* InvestmentProgramDashboard.swift in Sources */,
 				FCFF38FE2046F9CA00BEEDDA /* ProgramDetailsForTableViewCellView.swift in Sources */,
+				5E4CC3F2205678CF00916AA8 /* RequestRate.swift in Sources */,
+				5E4CC417205678D000916AA8 /* OpenOrderModel.swift in Sources */,
+				5E4CC3E3205678CF00916AA8 /* ManagerAPI.swift in Sources */,
+				5E4CC412205678D000916AA8 /* WalletWithdrawRequestModel.swift in Sources */,
 				FCE82365201622BD000061E8 /* ActionButton.swift in Sources */,
 				FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */,
 				FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */,
-				FC900EB7204FFB2E007E9142 /* Broker.swift in Sources */,
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
 				FC4C51A7204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift in Sources */,
+				5E4CC3E5205678CF00916AA8 /* Broker.swift in Sources */,
+				5E4CC3DF205678CF00916AA8 /* FilesAPI.swift in Sources */,
 				FC4C19502030555700625795 /* TournamentDetailViewController.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,
-				FC900EE1204FFB2E007E9142 /* RateViewModel.swift in Sources */,
-				FC900EC8204FFB2E007E9142 /* InvestmentProgramRequests.swift in Sources */,
-				FC900EEB204FFB2E007E9142 /* WalletAddressViewModel.swift in Sources */,
 				FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */,
 				FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */,
 				FCB1786E2045C46E00A482B7 /* DataProvider.swift in Sources */,
 				FCA19A41201AE83F00157AD6 /* DashboardViewModel.swift in Sources */,
+				5E4CC3F3205678CF00916AA8 /* ErrorViewModel.swift in Sources */,
+				5E4CC3E4205678CF00916AA8 /* ManagerOpenTrades.swift in Sources */,
 				FCA19A39201AE02F00157AD6 /* SignInRouter.swift in Sources */,
-				FC900EC4204FFB2E007E9142 /* InvestmentProgramAccrual.swift in Sources */,
-				FC900EF1204FFB2E007E9142 /* WalletViewModel.swift in Sources */,
 				FCB8DFC42010F5EC00698D18 /* SignUpViewController.swift in Sources */,
 				FC4964152015445E00104CEB /* WalletViewController.swift in Sources */,
 				FCA19A3F201AE83100157AD6 /* WalletControllerViewModel.swift in Sources */,
-				FC900ED8204FFB2E007E9142 /* NewOpenTradesEvent.swift in Sources */,
 				FC140FE42030168100B71E7F /* APIs.swift in Sources */,
+				5E4CC410205678D000916AA8 /* ManagerIpfsHash.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
 				FC4964182015474700104CEB /* DashboardViewController.swift in Sources */,
 			);

@@ -20,12 +20,6 @@ class ProgramWithdrawViewController: UIViewController {
     
     // MARK: - Buttons
     @IBOutlet var withdrawButton: UIButton!
-    @IBOutlet var withdrawAllButton: UIButton! {
-        didSet {
-            withdrawAllButton.backgroundColor = UIColor.Button.gray
-            withdrawAllButton.isEnabled = false
-        }
-    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -42,7 +36,7 @@ class ProgramWithdrawViewController: UIViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        
+        availableFundsLabel.text = "Available funds: " + String(describing: viewModel.investedTokens) + "tokens"
     }
     
     private func withdrawMethod() {
@@ -67,28 +61,8 @@ class ProgramWithdrawViewController: UIViewController {
         }
     }
     
-    private func withdrawAllMethod() {
-        hideKeyboard()
-        showProgressHUD()
-        
-        viewModel.withdrawAll(completion: { [weak self] (result) in
-            self?.hideHUD()
-            
-            switch result {
-            case .success:
-                self?.showSuccessHUD()
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
-            }
-        })
-    }
-    
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         withdrawMethod()
-    }
-    
-    @IBAction func withdrawAllButtonAction(_ sender: UIButton) {
-        withdrawAllMethod()
     }
 }

@@ -412,21 +412,22 @@ open class ManagerAPI {
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
     "investedTokens" : 5.962133916683182,
-    "availableInvestment" : 2.027123023002322,
+    "availableInvestment" : 7.386281948385884,
     "description" : "description",
     "title" : "title",
     "login" : "login",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
+    "profitAvgPercent" : 2.027123023002322,
     "currency" : "Undefined",
-    "feeSuccess" : 4.145608029883936,
+    "feeSuccess" : 1.2315135367772556,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "ownBalance" : 1.4658129805029452,
     "investorsCount" : 2,
     "periodDuration" : 7,
     "tradeIpfsHash" : "tradeIpfsHash",
-    "feeManagement" : 7.386281948385884,
+    "feeManagement" : 1.0246457001441578,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -435,6 +436,7 @@ open class ManagerAPI {
     },
     "hasNewRequests" : true,
     "level" : 0,
+    "profitTotalPercent" : 4.145608029883936,
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isOwnProgram" : true,
@@ -446,16 +448,16 @@ open class ManagerAPI {
     "profitAvg" : 9.301444243932576,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     } ]
   }
 }}]
@@ -503,65 +505,69 @@ open class ManagerAPI {
      Get public investment program's list
      - POST /api/manager/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 7,
   "investmentPrograms" : [ {
     "periodDuration" : 5,
-    "feeManagement" : 2.027123023002322,
+    "feeManagement" : 7.386281948385884,
     "hasNewRequests" : true,
     "level" : 0,
-    "availableInvestment" : 9.301444243932576,
+    "availableInvestment" : 2.027123023002322,
+    "profitTotalPercent" : 3.616076749251911,
     "title" : "title",
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
+    "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
     "profitTotal" : 7.061401241503109,
-    "feeSuccess" : 3.616076749251911,
+    "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     } ],
     "investorsCount" : 5
   }, {
     "periodDuration" : 5,
-    "feeManagement" : 2.027123023002322,
+    "feeManagement" : 7.386281948385884,
     "hasNewRequests" : true,
     "level" : 0,
-    "availableInvestment" : 9.301444243932576,
+    "availableInvestment" : 2.027123023002322,
+    "profitTotalPercent" : 3.616076749251911,
     "title" : "title",
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
+    "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
     "profitTotal" : 7.061401241503109,
-    "feeSuccess" : 3.616076749251911,
+    "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.2315135367772556,
-      "totalProfit" : 1.0246457001441578,
-      "fund" : 4.145608029883936,
-      "profit" : 7.386281948385884
+      "loss" : 1.4894159098541704,
+      "totalProfit" : 6.84685269835264,
+      "fund" : 1.2315135367772556,
+      "profit" : 1.0246457001441578
     } ],
     "investorsCount" : 5
   } ]

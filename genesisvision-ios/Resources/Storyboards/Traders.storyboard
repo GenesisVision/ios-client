@@ -77,7 +77,7 @@
         <!--Program Filter View Controller-->
         <scene sceneID="1ZW-ud-iiu">
             <objects>
-                <viewController storyboardIdentifier="FilterViewController" id="Jkr-qa-duU" customClass="ProgramFilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgramFilterViewController" id="Jkr-qa-duU" customClass="ProgramFilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3sG-FT-NvN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +357,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-wg-RDk">
-                                <rect key="frame" x="16" y="52" width="343" height="361.5"/>
+                                <rect key="frame" x="16" y="52" width="343" height="249"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available funds: $1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbt-C9-czJ">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
@@ -417,44 +417,14 @@
                                             <action selector="withdrawButtonAction:" destination="g8w-BM-UJe" eventType="touchUpInside" id="WnI-3f-13s"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7Y-vJ-8DD">
-                                        <rect key="frame" x="0.0" y="265" width="343" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="q6d-Mo-5UR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl5-DC-vFG" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="301.5" width="343" height="60"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="Withdraw all available funds">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="withdrawAllButtonAction:" destination="g8w-BM-UJe" eventType="touchUpInside" id="0Jh-zd-BpM"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="SGY-XJ-JFL" firstAttribute="leading" secondItem="XSe-TB-6fb" secondAttribute="leading" id="GGW-qO-W3A"/>
-                                    <constraint firstItem="X7Y-vJ-8DD" firstAttribute="leading" secondItem="SGY-XJ-JFL" secondAttribute="leading" id="Kyt-W0-8JI"/>
-                                    <constraint firstItem="dl5-DC-vFG" firstAttribute="leading" secondItem="X7Y-vJ-8DD" secondAttribute="leading" id="QhH-g9-7Kc"/>
                                     <constraint firstItem="OR1-5w-Cvf" firstAttribute="trailing" secondItem="kbt-C9-czJ" secondAttribute="trailing" id="VGI-ZS-NjF"/>
                                     <constraint firstAttribute="trailing" secondItem="kbt-C9-czJ" secondAttribute="trailing" id="VJA-kK-X9V"/>
                                     <constraint firstItem="OR1-5w-Cvf" firstAttribute="leading" secondItem="kbt-C9-czJ" secondAttribute="leading" id="Z12-Ia-rl4"/>
-                                    <constraint firstItem="dl5-DC-vFG" firstAttribute="height" secondItem="SGY-XJ-JFL" secondAttribute="height" id="dLN-Te-qsb"/>
-                                    <constraint firstItem="X7Y-vJ-8DD" firstAttribute="trailing" secondItem="SGY-XJ-JFL" secondAttribute="trailing" id="dcO-AA-NnV"/>
                                     <constraint firstItem="kbt-C9-czJ" firstAttribute="leading" secondItem="mlj-wg-RDk" secondAttribute="leading" id="hzP-Aa-iKM"/>
                                     <constraint firstItem="XSe-TB-6fb" firstAttribute="trailing" secondItem="OR1-5w-Cvf" secondAttribute="trailing" id="wE6-dr-At3"/>
-                                    <constraint firstItem="dl5-DC-vFG" firstAttribute="trailing" secondItem="X7Y-vJ-8DD" secondAttribute="trailing" id="wwN-Uw-BJM"/>
                                     <constraint firstItem="SGY-XJ-JFL" firstAttribute="trailing" secondItem="XSe-TB-6fb" secondAttribute="trailing" id="zj1-w6-pY6"/>
                                     <constraint firstItem="XSe-TB-6fb" firstAttribute="leading" secondItem="OR1-5w-Cvf" secondAttribute="leading" id="zld-ow-pvI"/>
                                 </constraints>
@@ -471,7 +441,6 @@
                     <connections>
                         <outlet property="amountTextField" destination="XSe-TB-6fb" id="TYh-Nm-sFE"/>
                         <outlet property="availableFundsLabel" destination="kbt-C9-czJ" id="dpe-Kd-fY7"/>
-                        <outlet property="withdrawAllButton" destination="dl5-DC-vFG" id="Tro-1q-Scr"/>
                         <outlet property="withdrawButton" destination="SGY-XJ-JFL" id="hlI-MX-tRp"/>
                     </connections>
                 </viewController>

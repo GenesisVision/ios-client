@@ -225,12 +225,12 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with investmentProgramId: String) {
+    func withdraw(with investmentProgramId: String, investedTokens: Double) {
         guard let vc = currentController() else { return }
         
         guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc as? ProgramDetailProtocol)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, investedTokens: investedTokens, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

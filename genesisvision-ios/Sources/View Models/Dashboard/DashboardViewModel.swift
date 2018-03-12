@@ -65,8 +65,8 @@ extension DashboardViewModel {
         router.show(routeType: .invest(investmentProgramId: investmentProgramId))
     }
     
-    func withdraw(with investmentProgramId: String) {
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
+    func withdraw(with investmentProgramId: String, investedTokens: Double) {
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens))
     }
     
     func showProgramList() {

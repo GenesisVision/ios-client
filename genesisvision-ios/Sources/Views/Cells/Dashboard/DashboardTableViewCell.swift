@@ -10,7 +10,7 @@ import UIKit
 
 protocol DashboardTableViewCellProtocol: class {
     func investProgramDidPress(with investmentProgramId: String)
-    func withdrawProgramDidPress(with investmentProgramId: String)
+    func withdrawProgramDidPress(with investmentProgramId: String, investedTokens: Double)
 }
 
 class DashboardTableViewCell: UITableViewCell {
@@ -18,6 +18,7 @@ class DashboardTableViewCell: UITableViewCell {
     // MARK: - Variables
     weak var delegate: DashboardTableViewCellProtocol?
     var investmentProgramId: String = ""
+    var investedTokens: Double = 0.0
     
     // MARK: - Buttons
     @IBOutlet weak var buttonsStackView: UIStackView!
@@ -60,6 +61,6 @@ class DashboardTableViewCell: UITableViewCell {
     }
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
-        delegate?.withdrawProgramDidPress(with: investmentProgramId)
+        delegate?.withdrawProgramDidPress(with: investmentProgramId, investedTokens: investedTokens)
     }
 }

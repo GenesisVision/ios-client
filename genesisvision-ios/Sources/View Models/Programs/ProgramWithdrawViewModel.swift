@@ -12,25 +12,26 @@ final class ProgramWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     var investmentProgramId: String?
+    var investedTokens: Double?
+    
     private weak var programDetailProtocol: ProgramDetailProtocol?
     
     private var router: ProgramWithdrawRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramWithdrawRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?) {
+    init(withRouter router: ProgramWithdrawRouter,
+         investmentProgramId: String,
+         investedTokens: Double,
+         programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
-        self.programDetailProtocol = programDetailProtocol
+        self.investedTokens = investedTokens
     }
     
     // MARK: - Public methods
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
         apiWithdraw(with: amount, completion: completion)
-    }
-    
-    func withdrawAll(completion: @escaping CompletionBlock) {
-        apiWithdrawAll(completion: completion)
     }
     
     func goToBack() {
@@ -44,10 +45,6 @@ final class ProgramWithdrawViewModel {
         ProgramDataProvider.withdrawProgram(withAmount: amount, investmentProgramId: investmentProgramId) { (result) in
             completion(result)
         }
-    }
-    
-    private func apiWithdrawAll(completion: @escaping CompletionBlock) {
-
     }
     
     private func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {

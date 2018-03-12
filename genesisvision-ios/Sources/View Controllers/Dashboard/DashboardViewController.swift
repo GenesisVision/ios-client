@@ -180,7 +180,7 @@ extension DashboardViewController: DashboardTableViewCellProtocol {
         viewModel.invest(with: investmentProgramId)
     }
     
-    func withdrawProgramDidPress(with investmentProgramId: String) {
-        viewModel.withdraw(with: investmentProgramId)
+    func withdrawProgramDidPress(with investmentProgramId: String, investedTokens: Double) {
+        viewModel.withdraw(with: investmentProgramId, investedTokens: investedTokens)
     }
 }

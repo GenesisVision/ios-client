@@ -118,8 +118,8 @@ extension ProgramDetailViewModel {
     }
     
     func withdraw() {
-        guard let investmentProgramId = investmentProgramId else { return }
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId))
+        guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens else { return }
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens))
     }
     
     func showHistory() {

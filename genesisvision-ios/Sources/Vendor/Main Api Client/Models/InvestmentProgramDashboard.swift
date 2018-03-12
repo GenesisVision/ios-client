@@ -32,6 +32,8 @@ open class InvestmentProgramDashboard: Codable {
     public var endOfPeriod: Date?
     public var profitAvg: Double?
     public var profitTotal: Double?
+    public var profitAvgPercent: Double?
+    public var profitTotalPercent: Double?
     public var availableInvestment: Double?
     public var feeSuccess: Double?
     public var feeManagement: Double?
@@ -46,7 +48,7 @@ open class InvestmentProgramDashboard: Codable {
 
 
     
-    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.level = level
@@ -60,6 +62,8 @@ open class InvestmentProgramDashboard: Codable {
         self.endOfPeriod = endOfPeriod
         self.profitAvg = profitAvg
         self.profitTotal = profitTotal
+        self.profitAvgPercent = profitAvgPercent
+        self.profitTotalPercent = profitTotalPercent
         self.availableInvestment = availableInvestment
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
@@ -93,6 +97,8 @@ open class InvestmentProgramDashboard: Codable {
         try container.encodeIfPresent(endOfPeriod, forKey: "endOfPeriod")
         try container.encodeIfPresent(profitAvg, forKey: "profitAvg")
         try container.encodeIfPresent(profitTotal, forKey: "profitTotal")
+        try container.encodeIfPresent(profitAvgPercent, forKey: "profitAvgPercent")
+        try container.encodeIfPresent(profitTotalPercent, forKey: "profitTotalPercent")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
@@ -124,6 +130,8 @@ open class InvestmentProgramDashboard: Codable {
         endOfPeriod = try container.decodeIfPresent(Date.self, forKey: "endOfPeriod")
         profitAvg = try container.decodeIfPresent(Double.self, forKey: "profitAvg")
         profitTotal = try container.decodeIfPresent(Double.self, forKey: "profitTotal")
+        profitAvgPercent = try container.decodeIfPresent(Double.self, forKey: "profitAvgPercent")
+        profitTotalPercent = try container.decodeIfPresent(Double.self, forKey: "profitTotalPercent")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")

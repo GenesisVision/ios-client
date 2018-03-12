@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 target 'genesisvision-ios' do
@@ -16,5 +16,5 @@ target 'genesisvision-ios' do
     pod 'TTRangeSlider'
     pod 'Firebase/Core'
     
-    pod "ViewAnimator"
+    pod 'ViewAnimator'
 end
