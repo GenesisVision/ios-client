@@ -7,15 +7,11 @@
 //
 
 import UIKit
-import ViewAnimator
 
 class ProgramRequestsViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: ProgramRequestsViewModel!
-    
-    // MARK: - Variables
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -55,7 +51,6 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     override func fetchMore() {
@@ -115,13 +110,13 @@ extension ProgramRequestsViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension ProgramRequestsViewController: ProgramRequestTableViewCellProtocol {
-    func cancelRequestDidPress(with requestID: String) {
+    func cancelRequestDidPress(with requestID: String, lastRequest: Bool) {
         showProgressHUD()
         viewModel.cancel(with: requestID) { [weak self]  (result) in
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (success) in
-                    self?.fetch()
+                    lastRequest ? self?.viewModel.goToBack() : self?.fetch()
                 })
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)

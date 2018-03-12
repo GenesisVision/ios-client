@@ -16,7 +16,7 @@ struct ProgramDetailHeaderTableViewCellViewModel {
 extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailHeaderTableViewCell) {
         if let level = investmentProgramDetails.level {
-            cell.programLogoImageView.levelLabel.text = String(describing: level)
+            cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true

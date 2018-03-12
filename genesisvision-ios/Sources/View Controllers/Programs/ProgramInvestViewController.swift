@@ -16,7 +16,7 @@ class ProgramInvestViewController: BaseViewController {
     @IBOutlet var amountTextField: UITextField!
     
     // MARK: - Labels
-    @IBOutlet var amountLabel: UILabel!
+    @IBOutlet var balanceLabel: UILabel!
     
     // MARK: - Buttons
     @IBOutlet var investButton: UIButton!
@@ -37,7 +37,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Private methods
     private func setupUI() {
         viewModel.getAmountText { [weak self] (text) in
-            self?.amountLabel.text = text
+            self?.balanceLabel.text = text
         }
     }
     

@@ -8,12 +8,8 @@
 
 import UIKit
 import DZNEmptyDataSet
-import ViewAnimator
 
 class ProgramHistoryViewController: BaseViewControllerWithTableView {
-    
-    // MARK: - Variables
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: ProgramHistoryViewModel!
@@ -55,7 +51,6 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     override func fetchMore() {

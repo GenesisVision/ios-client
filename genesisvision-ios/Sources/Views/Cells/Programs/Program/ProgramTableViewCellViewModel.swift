@@ -35,7 +35,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let level = investmentProgram.level {
-            cell.programLogoImageView.levelLabel.text = String(describing: level)
+            cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true

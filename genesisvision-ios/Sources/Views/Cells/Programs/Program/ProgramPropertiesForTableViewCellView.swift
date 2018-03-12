@@ -35,12 +35,12 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
         periodLeftValueLabel.text = periodLeft.0
         periodLeftTitleLabel.text = periodLeft.1
-        periodDurationLabel.text = String(describing: periodDuration)
+        periodDurationLabel.text = periodDuration.toString()
         
-        feeSuccessLabel.text = String(describing: feeSuccess.rounded(toPlaces: 4))
-        feeManagementLabel.text = String(describing: feeManagement.rounded(toPlaces: 4))
-        tradesLabel.text = String(describing: trades)
-        investedTokensLabel.text = String(describing: investedTokens.rounded(toPlaces: 4))
+        feeSuccessLabel.text = feeSuccess.rounded(toPlaces: 4).toString()
+        feeManagementLabel.text = feeManagement.rounded(toPlaces: 4).toString()
+        tradesLabel.text = trades.toString()
+        investedTokensLabel.text = investedTokens.rounded(toPlaces: 4).toString()
         
         endOfPeriodLabel.textColor = UIColor.Font.primary
         periodLeftValueLabel.textColor = UIColor.Font.primary

@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import ViewAnimator
 
 class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
     private var filterBarButtonItem: UIBarButtonItem?
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel!
@@ -76,7 +74,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     override func fetch() {

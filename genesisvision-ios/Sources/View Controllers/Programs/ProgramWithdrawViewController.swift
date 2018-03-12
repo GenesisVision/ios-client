@@ -19,7 +19,11 @@ class ProgramWithdrawViewController: UIViewController {
     @IBOutlet var availableFundsLabel: UILabel!
     
     // MARK: - Buttons
-    @IBOutlet var withdrawButton: UIButton!
+    @IBOutlet var withdrawButton: UIButton! {
+        didSet {
+            withdrawButton(enable: false)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -36,7 +40,23 @@ class ProgramWithdrawViewController: UIViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        availableFundsLabel.text = "Available funds: " + String(describing: viewModel.investedTokens) + "tokens"
+        guard let investedTokens = viewModel.investedTokens else { return }
+        availableFundsLabel.text = "Available funds: " + investedTokens.toString() + " tokens"
+        
+        amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let investedTokens = viewModel.investedTokens, let value = textField.text?.doubleValue else {
+            return withdrawButton(enable: false)
+        }
+        
+        withdrawButton(enable: value > 0.0 && value <= investedTokens)
+    }
+    
+    private func withdrawButton(enable: Bool) {
+        withdrawButton.isUserInteractionEnabled = enable
+        withdrawButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.gray
     }
     
     private func withdrawMethod() {

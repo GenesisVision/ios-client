@@ -9,12 +9,13 @@
 import UIKit
 
 protocol ProgramRequestTableViewCellProtocol: class {
-    func cancelRequestDidPress(with requestID: String)
+    func cancelRequestDidPress(with requestID: String, lastRequest: Bool)
 }
 
 class ProgramRequestTableViewCell: UITableViewCell {
     // MARK: - Variables
     weak var delegate: ProgramRequestTableViewCellProtocol?
+    var lastRequest: Bool = false
     var requestID: String = ""
     var requestStatus: String = "" {
         didSet {
@@ -41,7 +42,7 @@ class ProgramRequestTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func cancelButtonAction(_ sender: Any) {
-        delegate?.cancelRequestDidPress(with: requestID)
+        delegate?.cancelRequestDidPress(with: requestID, lastRequest: lastRequest)
     }
 
 }

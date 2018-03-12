@@ -8,12 +8,8 @@
 
 import UIKit
 import DZNEmptyDataSet
-import ViewAnimator
 
 class TournamentListViewController: BaseViewControllerWithTableView {
-    
-    // MARK: - Variables
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
     
     // MARK: - View Model
     var viewModel: TournamentListViewModel!
@@ -70,7 +66,6 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     override func fetch() {

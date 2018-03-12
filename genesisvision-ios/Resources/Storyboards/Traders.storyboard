@@ -339,8 +339,8 @@
                         <viewLayoutGuide key="safeArea" id="F8v-KL-HF4"/>
                     </view>
                     <connections>
-                        <outlet property="amountLabel" destination="CnT-JI-9c1" id="AJs-Nj-W0k"/>
                         <outlet property="amountTextField" destination="A2Y-Zj-wXk" id="Kn4-oq-dCz"/>
+                        <outlet property="balanceLabel" destination="CnT-JI-9c1" id="Bot-Ws-dhh"/>
                         <outlet property="investButton" destination="Uun-QE-fnC" id="E6p-Y6-MIj"/>
                     </connections>
                 </viewController>

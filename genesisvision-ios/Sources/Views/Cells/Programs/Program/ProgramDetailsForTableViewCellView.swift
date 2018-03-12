@@ -43,10 +43,10 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             let avrProfitValue = avrProfit.rounded(toPlaces: 4)
             let totalProfitValue = totalProfit.rounded(toPlaces: 4)
             
-            investorsValueLabel.text = String(describing: investorsCount)
-            balanceValueLabel.text = String(describing: balance)
-            avrProfitValueLabel.text = String(describing: avrProfitValue) + "%"
-            totalProfitValueLabel.text = String(describing: totalProfitValue) + "%"
+            investorsValueLabel.text = investorsCount.toString()
+            balanceValueLabel.text = balance.rounded(toPlaces: 4).toString()
+            avrProfitValueLabel.text = avrProfitValue.toString() + "%"
+            totalProfitValueLabel.text = totalProfitValue.toString() + "%"
             
             investorsValueLabel.textColor = UIColor.primary
             balanceValueLabel.textColor = UIColor.Font.medium

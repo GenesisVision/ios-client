@@ -15,6 +15,4 @@ target 'genesisvision-ios' do
     pod 'Kingfisher', '~> 4.0'
     pod 'TTRangeSlider'
     pod 'Firebase/Core'
-    
-    pod 'ViewAnimator'
 end

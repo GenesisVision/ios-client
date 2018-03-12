@@ -25,5 +25,5 @@ func networkActivity(show: Bool = true) {
 func getPeriodLeft(endOfPeriod: Date) -> (String, String) {
     let dateInterval = endOfPeriod.interval(ofComponent: .minute, fromDate: Date())
 
-    return (String(describing: dateInterval > 0 ? dateInterval : 0), "min")
+    return ((dateInterval > 0 ? dateInterval : 0).toString(), "min")
 }

@@ -31,7 +31,8 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let tokensCount = investmentProgram.investedTokens {
-            cell.tokensCountLabel.text = String(describing: tokensCount) + " tokens"
+            cell.tokensCountLabel.text = tokensCount.toString() + " tokens"
+            cell.investedTokens = tokensCount
         }
         
         if let endOfPeriod = investmentProgram.endOfPeriod {
@@ -42,7 +43,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let profit = investmentProgram.profitTotal {
-            cell.profitLabel.text = String(describing: profit) + "%"
+            cell.profitLabel.text = profit.toString() + "%"
             cell.profitLabel.textColor = profit == 0 ? UIColor.Font.medium : profit > 0 ? UIColor.Font.green : UIColor.Font.red
         }
         
@@ -63,7 +64,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let level = investmentProgram.level {
-            cell.programLogoImageView.levelLabel.text = String(describing: level)
+            cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.flagImageView.isHidden = true

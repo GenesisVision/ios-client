@@ -125,7 +125,7 @@ extension ProgramRequestsViewModel {
             
             requests.requests?.forEach({ (programRequest) in
                 guard let vc = self?.router.currentController() else { return }
-                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, delegate: vc as? ProgramRequestTableViewCellProtocol)
+                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, lastRequest: requests.requests?.count == 1, delegate: vc as? ProgramRequestTableViewCellProtocol)
                 programRequestViewModels.append(programRequestTableViewCellModel)
             })
             

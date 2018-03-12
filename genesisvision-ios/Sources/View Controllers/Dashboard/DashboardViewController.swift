@@ -8,15 +8,11 @@
 
 import UIKit
 import DZNEmptyDataSet
-import ViewAnimator
 
 class DashboardViewController: BaseViewControllerWithTableView {
 
     // MARK: - View Model
     var viewModel: DashboardViewModel!
-
-    // MARK: - Variables
-    private let tableViewAnimation = AnimationType.from(direction: .right, offset: 30.0)
 
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -58,7 +54,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
-        tableView.animateViews(animations: [tableViewAnimation])
     }
     
     override func fetch() {

@@ -74,6 +74,7 @@
 		5E4CC41D205678D000916AA8 /* UploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DB205678CF00916AA8 /* UploadResult.swift */; };
 		5E4CC41E205678D000916AA8 /* BrokerInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DC205678CF00916AA8 /* BrokerInvestmentProgram.swift */; };
 		5E4CC41F205678D000916AA8 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CC3DD205678CF00916AA8 /* InvestmentProgramTxInfo.swift */; };
+		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
 		FC0E20062044123F00872BE5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* ProfileHeaderView.swift */; };
@@ -350,6 +351,7 @@
 		5E4CC3DB205678CF00916AA8 /* UploadResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadResult.swift; sourceTree = "<group>"; };
 		5E4CC3DC205678CF00916AA8 /* BrokerInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInvestmentProgram.swift; sourceTree = "<group>"; };
 		5E4CC3DD205678CF00916AA8 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
+		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
 		9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug tournament.xcconfig"; sourceTree = "<group>"; };
@@ -1235,6 +1237,7 @@
 				FCD4A2032028B3D600BA7E18 /* NotificationNameExtension.swift */,
 				FC7D87B320446F17002FC943 /* String+Сonversion.swift */,
 				FC900E5B204EA852007E9142 /* RoundingExtensions.swift */,
+				5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1544,7 +1547,6 @@
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1558,7 +1560,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewAnimator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1816,6 +1817,7 @@
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
 				FC4C51A7204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift in Sources */,
 				5E4CC3E5205678CF00916AA8 /* Broker.swift in Sources */,
+				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
 				5E4CC3DF205678CF00916AA8 /* FilesAPI.swift in Sources */,
 				FC4C19502030555700625795 /* TournamentDetailViewController.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,
