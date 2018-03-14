@@ -12,7 +12,7 @@ import TTRangeSlider
 final class WalletFilterViewModel {
     
     // MARK: - View Model
-    private weak var transactionsFilter: TransactionsFilter?
+    private weak var walletControllerViewModel: WalletControllerViewModel?
     
     enum SectionType {
         case type
@@ -24,11 +24,13 @@ final class WalletFilterViewModel {
     // MARK: - Variables
     var title: String = "Filter"
     
+    var filterProgramId: String?
+    var modelType: TransactionsFilter.ModelType = .all
+    
     private var sections: [SectionType] = [.type]
     private var router: WalletFilterRouter!
     private var typeList: [String] = [TransactionsFilter.ModelType.all.rawValue, TransactionsFilter.ModelType.external.rawValue, TransactionsFilter.ModelType._internal.rawValue]
     
-    var selectedTypeIndex = 0
     private var walletFilterTypeTableViewCellViewModel: WalletFilterTypeTableViewCellViewModel!
     
     /// Return view models for registration cell Nib files
@@ -37,10 +39,10 @@ final class WalletFilterViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: WalletFilterRouter, transactionsFilter: TransactionsFilter) {
+    init(withRouter router: WalletFilterRouter, walletControllerViewModel: WalletControllerViewModel) {
         
         self.router = router
-        self.transactionsFilter = transactionsFilter
+        self.walletControllerViewModel = walletControllerViewModel
         
         setup()
     }
@@ -67,11 +69,17 @@ final class WalletFilterViewModel {
     }
     
     func reset() {
-        selectedTypeIndex = 0
+        modelType = .all
+        
+        walletControllerViewModel?.modelType = modelType
+        walletControllerViewModel?.filterProgramId = filterProgramId
     }
     
     func apply(completion: @escaping CompletionBlock) {
+        walletControllerViewModel?.modelType = modelType
+        walletControllerViewModel?.filterProgramId = filterProgramId
         
+        walletControllerViewModel?.refresh(completion: completion)
     }
     
     func goToBack() {
@@ -80,7 +88,22 @@ final class WalletFilterViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        walletFilterTypeTableViewCellViewModel = WalletFilterTypeTableViewCellViewModel(selectedIndex: selectedTypeIndex, types: typeList, delegate: nil)
+        if let type = walletControllerViewModel?.modelType {
+            modelType = type
+        }
+        
+        filterProgramId = walletControllerViewModel?.filterProgramId
+        let selectedIndex = typeList.index(of: modelType.rawValue)
+        
+        walletFilterTypeTableViewCellViewModel = WalletFilterTypeTableViewCellViewModel(selectedIndex: selectedIndex ?? 0, types: typeList, delegate: self)
+    }
+}
+
+extension WalletFilterViewModel: WalletFilterTypeTableViewCellProtocol {
+    func segmentControlDidChanged(index: Int) {
+        if let type = TransactionsFilter.ModelType(rawValue: typeList[index]) {
+            modelType = type
+        }
     }
 }
 

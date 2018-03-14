@@ -178,6 +178,7 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "total" : 1,
   "investmentPrograms" : [ {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 1.4658129805029452,
     "availableInvestment" : 4.145608029883936,
     "title" : "title",
@@ -200,6 +201,7 @@ open class InvestorAPI {
     "hasNewRequests" : true,
     "level" : 0,
     "profitTotalPercent" : 2.027123023002322,
+    "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isOwnProgram" : true,
@@ -222,6 +224,7 @@ open class InvestorAPI {
       "profit" : 1.0246457001441578
     } ]
   }, {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 1.4658129805029452,
     "availableInvestment" : 4.145608029883936,
     "title" : "title",
@@ -244,6 +247,7 @@ open class InvestorAPI {
     "hasNewRequests" : true,
     "level" : 0,
     "profitTotalPercent" : 2.027123023002322,
+    "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isOwnProgram" : true,
@@ -290,6 +294,66 @@ open class InvestorAPI {
     }
 
     /**
+     Get investment program buy token model
+     
+     - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorInvestmentProgramBuyTokensGet(investmentProgramId: UUID, authorization: String, completion: @escaping ((_ data: InvestmentProgramBuyToken?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramBuyTokensGetWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get investment program buy token model
+     - GET /api/investor/investmentProgram/buyTokens
+     - examples: [{contentType=application/json, example={
+  "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+  "manager" : {
+    "country" : "country",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "avatar" : "avatar",
+    "username" : "username"
+  },
+  "level" : 0,
+  "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+  "gvtUsdRate" : 6.027456183070403,
+  "logo" : "logo",
+  "description" : "description",
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "title" : "title",
+  "gvtWalletAmount" : 1.4658129805029452
+}}]
+     
+     - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<InvestmentProgramBuyToken> 
+     */
+    open class func apiInvestorInvestmentProgramBuyTokensGetWithRequestBuilder(investmentProgramId: UUID, authorization: String) -> RequestBuilder<InvestmentProgramBuyToken> {
+        let path = "/api/investor/investmentProgram/buyTokens"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "investmentProgramId": investmentProgramId
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<InvestmentProgramBuyToken>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Get investment program details by id
      
      - parameter investmentProgramId: (query)  
@@ -308,8 +372,9 @@ open class InvestorAPI {
      - GET /api/investor/investmentProgram
      - examples: [{contentType=application/json, example={
   "investmentProgram" : {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 5.962133916683182,
-    "availableInvestment" : 7.386281948385884,
+    "availableInvestment" : 1.0246457001441578,
     "description" : "description",
     "title" : "title",
     "login" : "login",
@@ -318,13 +383,13 @@ open class InvestorAPI {
     "logo" : "logo",
     "profitAvgPercent" : 2.027123023002322,
     "currency" : "Undefined",
-    "feeSuccess" : 1.2315135367772556,
+    "feeSuccess" : 1.4894159098541704,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "ownBalance" : 1.4658129805029452,
     "investorsCount" : 2,
     "periodDuration" : 7,
     "tradeIpfsHash" : "tradeIpfsHash",
-    "feeManagement" : 1.0246457001441578,
+    "feeManagement" : 6.84685269835264,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -334,15 +399,19 @@ open class InvestorAPI {
     "hasNewRequests" : true,
     "level" : 0,
     "profitTotalPercent" : 4.145608029883936,
+    "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
     "tradesCount" : 5,
     "isOwnProgram" : true,
+    "volumeTotal" : 7.386281948385884,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "volumeTotalChange" : "Unchanged",
     "isEnabled" : true,
     "ipfsHash" : "ipfsHash",
     "profitTotal" : 3.616076749251911,
     "profitAvg" : 9.301444243932576,
+    "volumeAvg" : 1.2315135367772556,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "loss" : 1.4894159098541704,
@@ -690,12 +759,14 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "total" : 7,
   "investmentPrograms" : [ {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
     "feeManagement" : 7.386281948385884,
     "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 2.027123023002322,
     "profitTotalPercent" : 3.616076749251911,
+    "profitTotalChange" : "Unchanged",
     "title" : "title",
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
@@ -722,12 +793,14 @@ open class InvestorAPI {
     } ],
     "investorsCount" : 5
   }, {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
     "feeManagement" : 7.386281948385884,
     "hasNewRequests" : true,
     "level" : 0,
     "availableInvestment" : 2.027123023002322,
     "profitTotalPercent" : 3.616076749251911,
+    "profitTotalChange" : "Unchanged",
     "title" : "title",
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
@@ -1045,6 +1118,49 @@ open class InvestorAPI {
         let requestBuilder: RequestBuilder<WalletsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Get user wallet statistic
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorWalletStatisticPost(authorization: String, filter: WalletStatisticFilter? = nil, completion: @escaping ((_ data: WalletStatistic?,_ error: Error?) -> Void)) {
+        apiInvestorWalletStatisticPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get user wallet statistic
+     - POST /api/investor/wallet/statistic
+     - examples: [{contentType=application/json, example={
+  "chart" : [ 0.8008281904610115, 0.8008281904610115 ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<WalletStatistic> 
+     */
+    open class func apiInvestorWalletStatisticPostWithRequestBuilder(authorization: String, filter: WalletStatisticFilter? = nil) -> RequestBuilder<WalletStatistic> {
+        let path = "/api/investor/wallet/statistic"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletStatistic>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**

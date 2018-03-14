@@ -125,8 +125,8 @@ final class ProgramFilterViewModel {
         investmentProgramListViewModel?.refresh(completion: completion)
     }
     
-    func popToInvestVC() {
-        router.popViewController(animated: true)
+    func goToBack() {
+        router.goToBack()
     }
     
     // MARK: - Private methods

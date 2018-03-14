@@ -68,7 +68,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
             
             switch result {
             case .success:
-                self?.viewModel.popToInvestVC()
+                self?.viewModel.goToBack()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")

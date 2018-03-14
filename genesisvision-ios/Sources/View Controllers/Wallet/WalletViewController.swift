@@ -35,7 +35,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         super.viewWillAppear(animated)
         
         title = viewModel.title
-        
+        reloadData()
         setupUI()
     }
     

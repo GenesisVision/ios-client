@@ -39,9 +39,11 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 if amount == 0 {
                     textColor = UIColor.Font.medium
                     arithmeticSign = ""
-                } else {
-                    textColor = amount > 0 ? UIColor.Font.green : UIColor.Font.red
+                } else if amount > 0 {
+                    textColor = UIColor.Font.green
                     arithmeticSign = "+"
+                } else {
+                    textColor = UIColor.Font.red
                 }
             case .cancelInvestmentRequest:
                 text = "Cancel Investment Request"

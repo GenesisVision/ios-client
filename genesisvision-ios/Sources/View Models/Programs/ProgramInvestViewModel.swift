@@ -26,7 +26,8 @@ final class ProgramInvestViewModel {
     // MARK: - Public methods
     func getAmountText(completion: @escaping (_ text: String) -> Void) {
         AuthManager.getBalance(completion: { (value) in
-            let text = "Balance: " + value.toString() + " GVT"
+            let valueText = value.toString()
+            let text = "Balance: " + valueText + " GVT"
             completion(text)
         })
     }

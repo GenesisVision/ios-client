@@ -22,7 +22,6 @@ final class WalletControllerViewModel {
 
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
-    private var transactionsFilter = TransactionsFilter(investmentProgramId: nil, type: .all, skip: 0, take: Constants.Api.take)
     private weak var delegate: WalletHeaderTableViewCellProtocol?
     
     private var balance: Double = 0.0 {
@@ -38,6 +37,9 @@ final class WalletControllerViewModel {
     var skip = 0            //offset
     var take = Constants.Api.take
     var totalCount = 0      //total count of programs
+    
+    var filterProgramId: String?
+    var modelType: TransactionsFilter.ModelType = .all
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -186,7 +188,7 @@ extension WalletControllerViewModel {
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        WalletDataProvider.getWalletTransactions(withProgramId: nil, type: TransactionsFilter.ModelType.all, skip: skip, take: take) { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(withProgramId: filterProgramId, type: modelType, skip: skip, take: take) { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
@@ -217,7 +219,7 @@ extension WalletControllerViewModel {
     }
     
     func filters() {
-        router.show(routeType: .showFilterVC(transactionsFilter: transactionsFilter))
+        router.show(routeType: .showFilterVC(walletControllerViewModel: self))
     }
     
     func showDetail(at indexPath: IndexPath) {

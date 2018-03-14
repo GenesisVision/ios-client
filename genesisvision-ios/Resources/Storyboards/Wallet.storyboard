@@ -28,8 +28,8 @@
                         <constraints>
                             <constraint firstItem="BEW-FT-LL7" firstAttribute="top" secondItem="RpL-oe-0nZ" secondAttribute="top" id="IvW-pV-SfN"/>
                             <constraint firstItem="gyN-Ia-4Bd" firstAttribute="trailing" secondItem="BEW-FT-LL7" secondAttribute="trailing" id="KSG-Q6-RAY"/>
+                            <constraint firstAttribute="bottom" secondItem="BEW-FT-LL7" secondAttribute="bottom" id="XhI-hG-a6V"/>
                             <constraint firstItem="BEW-FT-LL7" firstAttribute="leading" secondItem="gyN-Ia-4Bd" secondAttribute="leading" id="vzZ-Hw-H4I"/>
-                            <constraint firstItem="gyN-Ia-4Bd" firstAttribute="bottom" secondItem="BEW-FT-LL7" secondAttribute="bottom" id="zXF-6j-3hm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gyN-Ia-4Bd"/>
                     </view>

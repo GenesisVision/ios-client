@@ -11,7 +11,7 @@ import Foundation
 
 open class TradesFilter: Codable {
 
-    public var managerId: UUID?
+    public var investmentProgramId: UUID?
     public var dateFrom: Date?
     public var dateTo: Date?
     public var symbol: String?
@@ -20,8 +20,8 @@ open class TradesFilter: Codable {
 
 
     
-    public init(managerId: UUID?, dateFrom: Date?, dateTo: Date?, symbol: String?, skip: Int?, take: Int?) {
-        self.managerId = managerId
+    public init(investmentProgramId: UUID?, dateFrom: Date?, dateTo: Date?, symbol: String?, skip: Int?, take: Int?) {
+        self.investmentProgramId = investmentProgramId
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.symbol = symbol
@@ -36,7 +36,7 @@ open class TradesFilter: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(managerId, forKey: "managerId")
+        try container.encodeIfPresent(investmentProgramId, forKey: "investmentProgramId")
         try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
         try container.encodeIfPresent(dateTo, forKey: "dateTo")
         try container.encodeIfPresent(symbol, forKey: "symbol")
@@ -49,7 +49,7 @@ open class TradesFilter: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
+        investmentProgramId = try container.decodeIfPresent(UUID.self, forKey: "investmentProgramId")
         dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
         dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
         symbol = try container.decodeIfPresent(String.self, forKey: "symbol")

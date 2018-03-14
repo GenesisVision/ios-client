@@ -13,7 +13,6 @@ extension Double {
     func toString(currency: Bool = false) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = currency ? .currency : .decimal
-//        numberFormatter.locale = Locale(identifier: "en_US")
         let number = NSNumber(value: self)
         return numberFormatter.string(from: number) ?? String(describing: self)
     }
@@ -23,7 +22,6 @@ extension Int {
     func toString(currency: Bool = false) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = currency ? .currency : .decimal
-//        numberFormatter.locale = Locale(identifier: "en_US")
         let number = NSNumber(value: self)
         return numberFormatter.string(from: number) ?? String(describing: self)
     }

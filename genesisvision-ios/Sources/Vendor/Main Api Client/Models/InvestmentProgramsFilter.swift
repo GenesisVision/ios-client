@@ -12,12 +12,14 @@ import Foundation
 open class InvestmentProgramsFilter: Codable {
 
     public enum Sorting: String, Codable { 
-        case byRatingAsc = "ByRatingAsc"
-        case byRatingDesc = "ByRatingDesc"
+        case byLevelAsc = "ByLevelAsc"
+        case byLevelDesc = "ByLevelDesc"
         case byProfitAsc = "ByProfitAsc"
         case byProfitDesc = "ByProfitDesc"
         case byOrdersAsc = "ByOrdersAsc"
         case byOrdersDesc = "ByOrdersDesc"
+        case byEndOfPeriodAsk = "ByEndOfPeriodAsk"
+        case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
     }
     public var managerId: UUID?
     public var brokerId: UUID?
@@ -25,18 +27,32 @@ open class InvestmentProgramsFilter: Codable {
     public var investMaxAmountFrom: Double?
     public var investMaxAmountTo: Double?
     public var sorting: Sorting?
+    public var name: String?
+    public var levelMin: Int?
+    public var levelMax: Int?
+    public var profitAvgMin: Int?
+    public var profitAvgMax: Int?
+    public var periodMin: Int?
+    public var periodMax: Int?
     public var skip: Int?
     public var take: Int?
 
 
     
-    public init(managerId: UUID?, brokerId: UUID?, brokerTradeServerId: UUID?, investMaxAmountFrom: Double?, investMaxAmountTo: Double?, sorting: Sorting?, skip: Int?, take: Int?) {
+    public init(managerId: UUID?, brokerId: UUID?, brokerTradeServerId: UUID?, investMaxAmountFrom: Double?, investMaxAmountTo: Double?, sorting: Sorting?, name: String?, levelMin: Int?, levelMax: Int?, profitAvgMin: Int?, profitAvgMax: Int?, periodMin: Int?, periodMax: Int?, skip: Int?, take: Int?) {
         self.managerId = managerId
         self.brokerId = brokerId
         self.brokerTradeServerId = brokerTradeServerId
         self.investMaxAmountFrom = investMaxAmountFrom
         self.investMaxAmountTo = investMaxAmountTo
         self.sorting = sorting
+        self.name = name
+        self.levelMin = levelMin
+        self.levelMax = levelMax
+        self.profitAvgMin = profitAvgMin
+        self.profitAvgMax = profitAvgMax
+        self.periodMin = periodMin
+        self.periodMax = periodMax
         self.skip = skip
         self.take = take
     }
@@ -54,6 +70,13 @@ open class InvestmentProgramsFilter: Codable {
         try container.encodeIfPresent(investMaxAmountFrom, forKey: "investMaxAmountFrom")
         try container.encodeIfPresent(investMaxAmountTo, forKey: "investMaxAmountTo")
         try container.encodeIfPresent(sorting, forKey: "sorting")
+        try container.encodeIfPresent(name, forKey: "name")
+        try container.encodeIfPresent(levelMin, forKey: "levelMin")
+        try container.encodeIfPresent(levelMax, forKey: "levelMax")
+        try container.encodeIfPresent(profitAvgMin, forKey: "profitAvgMin")
+        try container.encodeIfPresent(profitAvgMax, forKey: "profitAvgMax")
+        try container.encodeIfPresent(periodMin, forKey: "periodMin")
+        try container.encodeIfPresent(periodMax, forKey: "periodMax")
         try container.encodeIfPresent(skip, forKey: "skip")
         try container.encodeIfPresent(take, forKey: "take")
     }
@@ -69,6 +92,13 @@ open class InvestmentProgramsFilter: Codable {
         investMaxAmountFrom = try container.decodeIfPresent(Double.self, forKey: "investMaxAmountFrom")
         investMaxAmountTo = try container.decodeIfPresent(Double.self, forKey: "investMaxAmountTo")
         sorting = try container.decodeIfPresent(Sorting.self, forKey: "sorting")
+        name = try container.decodeIfPresent(String.self, forKey: "name")
+        levelMin = try container.decodeIfPresent(Int.self, forKey: "levelMin")
+        levelMax = try container.decodeIfPresent(Int.self, forKey: "levelMax")
+        profitAvgMin = try container.decodeIfPresent(Int.self, forKey: "profitAvgMin")
+        profitAvgMax = try container.decodeIfPresent(Int.self, forKey: "profitAvgMax")
+        periodMin = try container.decodeIfPresent(Int.self, forKey: "periodMin")
+        periodMax = try container.decodeIfPresent(Int.self, forKey: "periodMax")
         skip = try container.decodeIfPresent(Int.self, forKey: "skip")
         take = try container.decodeIfPresent(Int.self, forKey: "take")
     }
