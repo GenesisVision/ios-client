@@ -24,6 +24,10 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
         }
     }
     
+    
+    // MARK: - Buttons
+    @IBOutlet weak var applyButton: ActionButton!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,8 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.contentInset.bottom = applyButton.frame.height + 16.0 + 16.0
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: WalletFilterViewModel.cellModelsForRegistration)

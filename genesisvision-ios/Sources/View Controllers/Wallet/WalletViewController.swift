@@ -45,7 +45,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        filtersBarButtonItem = UIBarButtonItem(title: "Filters", style: .done, target: self, action: #selector(filtersButtonAction(_:)))
+        filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
         filtersBarButtonItem?.tintColor = UIColor.Button.primary
         navigationItem.rightBarButtonItem = filtersBarButtonItem
     }

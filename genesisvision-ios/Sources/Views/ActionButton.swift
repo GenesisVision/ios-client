@@ -10,11 +10,11 @@ import UIKit.UIButton
 
 @IBDesignable class ActionButton: UIButton {
     
-    @IBInspectable var cornerSize: CGFloat = 15.0
+    @IBInspectable var cornerSize: CGFloat = 6.0
     @IBInspectable var borderSize: CGFloat = 0.0
     @IBInspectable var customBorderColor: UIColor? = .white
     @IBInspectable var borderAlpha: CGFloat = 1.0
-    @IBInspectable var fontSize: CGFloat = 17.0
+    @IBInspectable var fontSize: CGFloat = 14.0
     
     override func awakeFromNib() {
         super.awakeFromNib()

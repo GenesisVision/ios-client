@@ -28,39 +28,34 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZlK-UV-lqh">
-                                <rect key="frame" x="16" y="591" width="343" height="60"/>
+                                <rect key="frame" x="88.5" y="606" width="198" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="2JN-2E-WQD"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <state key="normal" title="Sign in">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="SIGN IN">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="signInButtonAction:" destination="4qn-RU-Ufu" eventType="touchUpInside" id="gyk-oD-Hb4"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="mVv-EH-5Fw"/>
+                                    <constraint firstAttribute="width" constant="198" id="we6-UK-Yzj"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="ZlK-UV-lqh" secondAttribute="trailing" constant="16" id="EgZ-Cl-Ig0"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="nZd-JI-9hr" secondAttribute="top" id="IhV-n4-mgM"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="ZlK-UV-lqh" secondAttribute="bottom" constant="16" id="SPa-bn-kKf"/>
-                            <constraint firstItem="ZlK-UV-lqh" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" constant="16" id="Y9f-1u-AiK"/>
                             <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
+                            <constraint firstItem="ZlK-UV-lqh" firstAttribute="centerX" secondItem="nZd-JI-9hr" secondAttribute="centerX" id="zvd-Q0-crZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FoC-GU-UBn"/>
                     </view>
@@ -72,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6g-4y-p9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537" y="916"/>
+            <point key="canvasLocation" x="1537" y="915"/>
         </scene>
         <!--Program Filter View Controller-->
         <scene sceneID="1ZW-ud-iiu">
@@ -82,63 +77,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-Ka-Ja5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-Ka-Ja5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSz-ej-GYD">
-                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-hx-mtC">
+                                <rect key="frame" x="88" y="606" width="198" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-S8-rLI" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="pey-Fb-Efi"/>
+                                            <constraint firstAttribute="width" constant="198" id="Ncm-Tk-kNw"/>
+                                            <constraint firstAttribute="height" constant="45" id="pey-Fb-Efi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <state key="normal" title="Apply">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="APPLY">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="applyButtonAction:" destination="Jkr-qa-duU" eventType="touchUpInside" id="bjM-rj-gum"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="top" secondItem="BSz-ej-GYD" secondAttribute="top" id="DFS-aj-KtT"/>
-                                    <constraint firstAttribute="trailing" secondItem="tpj-S8-rLI" secondAttribute="trailing" constant="16" id="N1c-sa-V6L"/>
-                                    <constraint firstAttribute="height" constant="76" id="mUW-JC-Nyz"/>
-                                    <constraint firstItem="tpj-S8-rLI" firstAttribute="leading" secondItem="BSz-ej-GYD" secondAttribute="leading" constant="16" id="nm6-6x-UVr"/>
-                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="tpj-S8-rLI" secondAttribute="bottom" constant="16" id="yQj-ul-qlJ"/>
+                                    <constraint firstAttribute="height" constant="45" id="dH6-yZ-Twk"/>
+                                    <constraint firstAttribute="width" constant="198" id="iVu-4r-Ei2"/>
                                 </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="3sG-FT-NvN" secondAttribute="top" id="0fk-7x-n71"/>
-                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="BSz-ej-GYD" secondAttribute="bottom" id="K2J-rx-S9Z"/>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
                             <constraint firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oVJ-hx-mtC" secondAttribute="bottom" constant="16" id="Xsv-0r-bx0"/>
+                            <constraint firstItem="oVJ-hx-mtC" firstAttribute="centerX" secondItem="3sG-FT-NvN" secondAttribute="centerX" id="YdI-Jb-amv"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
-                            <constraint firstItem="BSz-ej-GYD" firstAttribute="trailing" secondItem="Oxo-lc-AeP" secondAttribute="trailing" id="beh-7L-Kx1"/>
-                            <constraint firstItem="BSz-ej-GYD" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="cNm-0C-2TE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oxo-lc-AeP"/>
                     </view>
                     <connections>
+                        <outlet property="applyButton" destination="tpj-S8-rLI" id="UmX-tY-r26"/>
                         <outlet property="tableView" destination="oh9-Ka-Ja5" id="1jZ-aY-nyb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFZ-YF-8K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2225" y="917"/>
+            <point key="canvasLocation" x="2201" y="915"/>
         </scene>
         <!--Program Detail View Controller-->
         <scene sceneID="3mF-C7-1tJ">
@@ -153,63 +140,48 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Dm-Se-2kf">
-                                <rect key="frame" x="0.0" y="543" width="375" height="124"/>
+                                <rect key="frame" x="0.0" y="553" width="375" height="114"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-IT-8me">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="108"/>
+                                        <rect key="frame" x="16" y="0.0" width="343" height="98"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FYO-Ia-0dk">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXP-jp-r4E" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="45"/>
                                                         <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                        <state key="normal" title="Invest">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                        <state key="normal" title="INVEST">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                                <real key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="investButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="WnM-UU-AAT"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-1d-sP2" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="179.5" y="0.0" width="163.5" height="50"/>
+                                                        <rect key="frame" x="179.5" y="0.0" width="163.5" height="45"/>
                                                         <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                        <state key="normal" title="Withdraw">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                        <state key="normal" title="WITHDRAW">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                                <real key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="withdrawButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="hhh-vD-HLF"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="W4J-7R-nZP"/>
+                                                    <constraint firstAttribute="height" constant="45" id="W4J-7R-nZP"/>
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4r-81-z60" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="58" width="343" height="50"/>
+                                                <rect key="frame" x="0.0" y="53" width="343" height="45"/>
                                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="Requests">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="REQUESTS">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="requestsButtonAction:" destination="1tc-CA-jr8" eventType="touchUpInside" id="gwG-1b-NFy"/>
                                                 </connections>
@@ -262,11 +234,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-ct-e8Z">
-                                <rect key="frame" x="16" y="46" width="343" height="212"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-ct-e8Z">
+                                <rect key="frame" x="16" y="46" width="222" height="197"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 100 GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnT-JI-9c1">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="222" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="0ss-Le-MHa"/>
                                         </constraints>
@@ -275,7 +247,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Investment value" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A2Y-Zj-wXk" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="0.0" y="76" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="76" width="222" height="60"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="xws-Vm-Ec6"/>
@@ -295,37 +267,32 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RPh-aw-fvK">
-                                        <rect key="frame" x="0.0" y="152" width="343" height="60"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RPh-aw-fvK">
+                                        <rect key="frame" x="0.0" y="152" width="222" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-QE-fnC" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="222" height="45"/>
                                                 <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="6RF-tT-uvW"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                <state key="normal" title="Invest">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="INVEST">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="investButtonAction:" destination="gqQ-0p-fKJ" eventType="touchUpInside" id="fKd-Vn-KlS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="kvt-Wd-Sla"/>
+                                            <constraint firstAttribute="width" constant="198" id="oLQ-Nl-SSe"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="RPh-aw-fvK" secondAttribute="trailing" id="5Ng-xW-tef"/>
                                     <constraint firstItem="CnT-JI-9c1" firstAttribute="leading" secondItem="HZc-ct-e8Z" secondAttribute="leading" id="61S-aQ-2ac"/>
                                     <constraint firstItem="A2Y-Zj-wXk" firstAttribute="leading" secondItem="HZc-ct-e8Z" secondAttribute="leading" id="DO8-aP-5hj"/>
                                     <constraint firstAttribute="trailing" secondItem="CnT-JI-9c1" secondAttribute="trailing" id="JIP-b9-Eq5"/>
-                                    <constraint firstItem="RPh-aw-fvK" firstAttribute="leading" secondItem="HZc-ct-e8Z" secondAttribute="leading" id="JO1-Yg-lZU"/>
+                                    <constraint firstItem="RPh-aw-fvK" firstAttribute="centerX" secondItem="A2Y-Zj-wXk" secondAttribute="centerX" id="Zhw-H6-r4i"/>
                                     <constraint firstAttribute="trailing" secondItem="A2Y-Zj-wXk" secondAttribute="trailing" id="pi2-LJ-xby"/>
                                 </constraints>
                             </stackView>
@@ -357,7 +324,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-wg-RDk">
-                                <rect key="frame" x="16" y="52" width="343" height="249"/>
+                                <rect key="frame" x="16" y="52" width="343" height="234"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available funds: $1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbt-C9-czJ">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
@@ -399,33 +366,28 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGY-XJ-JFL" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="189" width="343" height="60"/>
+                                        <rect key="frame" x="72.5" y="189" width="198" height="45"/>
                                         <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="tcE-na-mnm"/>
+                                            <constraint firstAttribute="width" constant="198" id="Ix1-SB-ZD8"/>
+                                            <constraint firstAttribute="height" constant="45" id="tcE-na-mnm"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="Withdraw">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="WITHDRAW">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerSize">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="withdrawButtonAction:" destination="g8w-BM-UJe" eventType="touchUpInside" id="WnI-3f-13s"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="SGY-XJ-JFL" firstAttribute="leading" secondItem="XSe-TB-6fb" secondAttribute="leading" id="GGW-qO-W3A"/>
+                                    <constraint firstItem="SGY-XJ-JFL" firstAttribute="centerX" secondItem="XSe-TB-6fb" secondAttribute="centerX" id="DXb-qp-eK4"/>
                                     <constraint firstItem="OR1-5w-Cvf" firstAttribute="trailing" secondItem="kbt-C9-czJ" secondAttribute="trailing" id="VGI-ZS-NjF"/>
                                     <constraint firstAttribute="trailing" secondItem="kbt-C9-czJ" secondAttribute="trailing" id="VJA-kK-X9V"/>
                                     <constraint firstItem="OR1-5w-Cvf" firstAttribute="leading" secondItem="kbt-C9-czJ" secondAttribute="leading" id="Z12-Ia-rl4"/>
                                     <constraint firstItem="kbt-C9-czJ" firstAttribute="leading" secondItem="mlj-wg-RDk" secondAttribute="leading" id="hzP-Aa-iKM"/>
                                     <constraint firstItem="XSe-TB-6fb" firstAttribute="trailing" secondItem="OR1-5w-Cvf" secondAttribute="trailing" id="wE6-dr-At3"/>
-                                    <constraint firstItem="SGY-XJ-JFL" firstAttribute="trailing" secondItem="XSe-TB-6fb" secondAttribute="trailing" id="zj1-w6-pY6"/>
                                     <constraint firstItem="XSe-TB-6fb" firstAttribute="leading" secondItem="OR1-5w-Cvf" secondAttribute="leading" id="zld-ow-pvI"/>
                                 </constraints>
                             </stackView>

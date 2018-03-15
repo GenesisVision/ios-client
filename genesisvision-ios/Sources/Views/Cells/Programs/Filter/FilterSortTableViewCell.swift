@@ -10,6 +10,13 @@ import UIKit
 
 class FilterSortTableViewCell: UITableViewCell {
 
+    // MARK: - Labels
+    @IBOutlet var titleLabel: UILabel! {
+        didSet {
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+        }
+    }
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

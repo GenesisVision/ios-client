@@ -12,7 +12,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
-    private var filterBarButtonItem: UIBarButtonItem?
+    private var filtersBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel!
@@ -56,12 +56,12 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(filterButtonAction(_:)))
-        navigationItem.rightBarButtonItem = filterBarButtonItem
+        filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
+        navigationItem.rightBarButtonItem = filtersBarButtonItem
     }
     
     private func setupTableConfiguration() {
-        tableView.contentInset.bottom = signInButtonEnable ? 76.0 + 16.0 : 0.0
+        tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 16.0 + 16.0 : 0.0
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -112,7 +112,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         viewModel.showSignInVC()
     }
     
-    @IBAction func filterButtonAction(_ sender: UIButton) {
+    @IBAction func filtersButtonAction(_ sender: UIButton) {
         viewModel.showFilterVC()
     }
 }

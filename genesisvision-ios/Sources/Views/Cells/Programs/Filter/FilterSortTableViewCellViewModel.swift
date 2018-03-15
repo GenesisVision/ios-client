@@ -20,7 +20,7 @@ struct FilterSortTableViewCellViewModel {
 
 extension FilterSortTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterSortTableViewCell) {
-        cell.textLabel?.text = sorting.text
+        cell.titleLabel.text = "Sort by " + sorting.text
         cell.accessoryType = selected ? .checkmark : .none
     }
 }
