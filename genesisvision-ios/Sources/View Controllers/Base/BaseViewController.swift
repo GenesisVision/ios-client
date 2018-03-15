@@ -19,6 +19,7 @@ class BaseViewController: UIViewController {
 }
 
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
+    
     // MARK: - Veriables
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!

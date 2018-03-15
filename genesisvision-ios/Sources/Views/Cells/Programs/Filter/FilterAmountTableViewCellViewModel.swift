@@ -9,22 +9,43 @@
 import UIKit
 import TTRangeSlider
 
+struct AmountTitles {
+    var title: String
+    var subtitle: String
+}
+
+enum AmountType: Int {
+    case level
+    case totalProfit
+    case averageProfit
+}
+
 struct FilterAmountTableViewCellViewModel {
-    var minValue: Double
-    var maxValue: Double
-    var selectedMaxAmountFrom: Double?
-    var selectedMaxAmountTo: Double?
-    var step: Float
+    var minValue: Int?
+    var maxValue: Int?
+    
+    var amountTitles: AmountTitles
+    var amountType: AmountType
+    
+    var selectedMinValue: Int?
+    var selectedMaxValue: Int?
+    
     weak var delegate: TTRangeSliderDelegate?
 }
 
 extension FilterAmountTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterAmountTableViewCell) {
-        cell.sliderView.minValue = Float(minValue)
-        cell.sliderView.maxValue = Float(maxValue)
-        cell.sliderView.selectedMinimum = Float(selectedMaxAmountFrom ?? minValue)
-        cell.sliderView.selectedMaximum = Float(selectedMaxAmountTo ?? maxValue)
-        cell.sliderView.step = step
+        cell.titleLabel.text = amountTitles.title
+        cell.subtitleLabel.text = amountTitles.subtitle
+        cell.titleLabel.textColor = UIColor.Slider.title
+        cell.subtitleLabel.textColor = UIColor.Slider.subTitle
+        let min = minValue ?? 0
+        let max = maxValue ?? 100
+        cell.sliderView.minValue = Float(min)
+        cell.sliderView.maxValue = Float(max)
+        cell.sliderView.selectedMinimum = Float(selectedMinValue ?? min)
+        cell.sliderView.selectedMaximum = Float(selectedMaxValue ?? max)
+        
         cell.sliderView.delegate = delegate
     }
 }

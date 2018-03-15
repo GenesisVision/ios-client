@@ -891,7 +891,13 @@ open class ManagerAPI {
      Get user wallet statistic
      - POST /api/manager/wallet/statistic
      - examples: [{contentType=application/json, example={
-  "chart" : [ 0.8008281904610115, 0.8008281904610115 ]
+  "chart" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115
+  } ]
 }}]
      
      - parameter authorization: (header) JWT access token 

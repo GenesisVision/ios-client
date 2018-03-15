@@ -76,9 +76,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.dateLabel.text = date.defaultFormatString
         }
         
-        if walletTransaction.investmentProgram != nil {
-            cell.selectionStyle = .default
-        }
+        cell.selectionStyle = walletTransaction.investmentProgram != nil ? .default : .none
         
         cell.currencyLabel.text = Constants.currency
     }

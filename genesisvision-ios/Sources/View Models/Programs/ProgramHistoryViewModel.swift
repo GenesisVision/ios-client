@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit
+
 final class ProgramHistoryViewModel {
     // MARK: - Variables
     var title: String = "History"
@@ -98,7 +100,12 @@ extension ProgramHistoryViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            WalletDataProvider.getWalletTransactions(withProgramId: investmentProgramId, type: nil, skip: skip, take: take) { (transactionsViewModel) in
+            guard let investmentProgramId = investmentProgramId,
+                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(reason: nil)) }
+            
+            let filter = TransactionsFilter(investmentProgramId: uuid, type: nil, skip: skip, take: take)
+            
+            WalletDataProvider.getWalletTransactions(with: filter) { (transactionsViewModel) in
                 guard transactionsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

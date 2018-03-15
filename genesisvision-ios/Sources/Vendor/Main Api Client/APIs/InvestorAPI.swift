@@ -177,6 +177,8 @@ open class InvestorAPI {
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
   "total" : 1,
+  "profitFromProgram" : 1.4894159098541704,
+  "investedAmount" : 6.84685269835264,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 1.4658129805029452,
@@ -1138,7 +1140,13 @@ open class InvestorAPI {
      Get user wallet statistic
      - POST /api/investor/wallet/statistic
      - examples: [{contentType=application/json, example={
-  "chart" : [ 0.8008281904610115, 0.8008281904610115 ]
+  "chart" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115
+  } ]
 }}]
      
      - parameter authorization: (header) JWT access token 

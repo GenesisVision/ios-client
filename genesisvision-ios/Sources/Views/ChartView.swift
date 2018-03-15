@@ -9,10 +9,10 @@
 import Charts
 
 enum ChartType {
-    case `default`, detail
+    case `default`, detail, full
 }
 
-class ChartView: LineChartView {
+class ChartView: CombinedChartView {
 
     // MARK: - Variables
     private var dataSet: [Chart]? = [] {
@@ -25,40 +25,46 @@ class ChartView: LineChartView {
     
     private var chartType: ChartType = .default
     
-    private var chartDataSet: LineChartDataSet! {
+    private var lineChartDataSet: LineChartDataSet! {
         didSet {
-            dragEnabled = chartType == .detail
-            pinchZoomEnabled = chartType == .detail
+            lineChartDataSet.setColor(UIColor.primary)
             
-            rightAxis.enabled = chartType == .detail
-            rightAxis.drawGridLinesEnabled = true
-            rightAxis.gridColor = UIColor.Font.light
-            rightAxis.axisLineColor = UIColor.Font.medium
-            rightAxis.labelTextColor = UIColor.Font.dark
+            lineChartDataSet.lineWidth = 1
             
-            chartDescription?.enabled = false
-            leftAxis.enabled = false
-            legend.enabled = false
-            drawGridBackgroundEnabled = false
-            autoScaleMinMaxEnabled = true
+            lineChartDataSet.drawFilledEnabled = false
+            lineChartDataSet.drawCirclesEnabled = false
+            lineChartDataSet.drawIconsEnabled = false
             
-            xAxis.enabled = false
-
-            chartDataSet.setColor(UIColor.primary)
-            chartDataSet.fillColor = UIColor.primary
+            lineChartDataSet.highlightEnabled = false
             
-            chartDataSet.lineWidth = 1
+            lineChartDataSet.drawValuesEnabled = false
+            lineChartDataSet.drawCircleHoleEnabled = false
             
-            chartDataSet.drawFilledEnabled = true
-            chartDataSet.drawCirclesEnabled = false
-            chartDataSet.drawIconsEnabled = false
-            
-            chartDataSet.highlightEnabled = false
-            
-            chartDataSet.drawValuesEnabled = false
-            chartDataSet.drawCircleHoleEnabled = false
-            
-            chartDataSet.mode = .cubicBezier
+            lineChartDataSet.mode = .cubicBezier
+        }
+    }
+    
+    private var fundDataSet: BarChartDataSet! {
+        didSet {
+            fundDataSet.setColor(UIColor.Font.blue)
+            fundDataSet.drawValuesEnabled = false
+            fundDataSet.highlightEnabled = false
+        }
+    }
+    
+    private var lossDataSet: BarChartDataSet! {
+        didSet {
+            fundDataSet.setColor(UIColor.Font.red)
+            fundDataSet.drawValuesEnabled = false
+            fundDataSet.highlightEnabled = false
+        }
+    }
+    
+    private var profitDataSet: BarChartDataSet! {
+        didSet {
+            fundDataSet.setColor(UIColor.Font.green)
+            fundDataSet.drawValuesEnabled = false
+            fundDataSet.highlightEnabled = false
         }
     }
     
@@ -96,6 +102,23 @@ class ChartView: LineChartView {
     private func setup() {
         backgroundColor = UIColor.Background.main
         
+        dragEnabled = chartType == .detail
+        pinchZoomEnabled = chartType == .detail
+        
+        rightAxis.enabled = chartType == .detail
+        rightAxis.drawGridLinesEnabled = true
+        rightAxis.gridColor = UIColor.Font.light
+        rightAxis.axisLineColor = UIColor.Font.medium
+        rightAxis.labelTextColor = UIColor.Font.dark
+        
+        chartDescription?.enabled = false
+        leftAxis.enabled = false
+        legend.enabled = false
+        drawGridBackgroundEnabled = false
+        autoScaleMinMaxEnabled = true
+        
+        xAxis.enabled = false
+        
         animate(xAxisDuration: 1.0)
     }
     
@@ -104,11 +127,43 @@ class ChartView: LineChartView {
             return
         }
         
-        let chartDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+        let data = CombinedChartData()
+        data.lineData = generateLineChart(values)
+        
+        if chartType == .full {
+            data.barData = generateBarChart(values)
+        }
+        
+        self.data = data
+    }
+    
+    private func generateLineChart(_ values: [Chart]) -> LineChartData {
+        let totalProfitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: Double(i), y: values[i].totalProfit ?? 0)
         }
         
-        chartDataSet = LineChartDataSet(values: chartDataEntry, label: name ?? "")
-        data = LineChartData(dataSet: chartDataSet)
+        lineChartDataSet = LineChartDataSet(values: totalProfitDataEntry, label: "Total profit")
+        
+        return LineChartData(dataSet: lineChartDataSet)
+    }
+    
+    private func generateBarChart(_ values: [Chart]) -> BarChartData {
+        let fundDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
+            return BarChartDataEntry(x: Double(i), y: values[i].fund ?? 0)
+        }
+        
+        let lossDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
+            return BarChartDataEntry(x: Double(i), y: values[i].loss ?? 0)
+        }
+        
+        let profitDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
+            return BarChartDataEntry(x: Double(i), y: values[i].profit ?? 0)
+        }
+        
+        fundDataSet = BarChartDataSet(values: fundDataEntry, label: "Fund")
+        lossDataSet = BarChartDataSet(values: lossDataEntry, label: "Loss")
+        profitDataSet = BarChartDataSet(values: profitDataEntry, label: "Profit")
+        
+        return BarChartData(dataSets: [fundDataSet, lossDataSet, profitDataSet])
     }
 }

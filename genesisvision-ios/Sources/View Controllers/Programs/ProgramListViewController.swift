@@ -33,7 +33,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
 
         title = viewModel.title
-        
         setup()
     }
     
@@ -81,7 +80,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.reloadData()
                 break
             case .failure(let reason):
                 print("Error with reason: ")
@@ -95,9 +93,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self?.canFetchMoreResults = true
             switch result {
             case .success:
-                self?.reloadData()
-            case .failure:
                 break
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
             }
         }
     }
@@ -176,5 +175,11 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         push(viewController: viewControllerToCommit)
+    }
+}
+
+extension ProgramListViewController: ReloadDataProtocol {
+    func didReloadData() {
+        reloadData()
     }
 }

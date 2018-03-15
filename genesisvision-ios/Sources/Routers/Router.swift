@@ -94,7 +94,7 @@ class Router {
         programsViewController = viewController
         let router = InvestmentProgramListRouter(parentRouter: self)
         childRouters.append(router)
-        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router)
+        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: viewController)
     }
     
     private func createTournamentNavigationController() {

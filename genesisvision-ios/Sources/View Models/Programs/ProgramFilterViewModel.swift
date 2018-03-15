@@ -15,34 +15,41 @@ final class ProgramFilterViewModel {
     private weak var investmentProgramListViewModel: InvestmentProgramListViewModel?
     
     enum SectionType {
-        case amount
+        case slider
         case sort
     }
     
     // MARK: - Variables
     var title: String = "Filter"
     
-    private var sections: [SectionType] = [.amount, .sort]
+    private let amountsTitles = [AmountTitles(title: "Level", subtitle: "Select Trader Level"),
+                                 AmountTitles(title: "Total Profit", subtitle: "Select Trader Total Profit"),
+                                 AmountTitles(title: "Average Profit", subtitle: "Select Trader Profit")]
+    
+    private var amounts: [AmountType] = [.level, .totalProfit, .averageProfit]
+    private var sections: [SectionType] = [.slider, .sort]
     private var router: ProgramFilterRouter!
-    private var sortingList: [InvestmentProgramsFilter.Sorting : String] = [.byRatingAsc : "Rating asc",
-                                                                     .byRatingDesc : "Rating desc",
-                                                                     .byOrdersAsc : "Orders asc",
-                                                                     .byOrdersDesc : "Orders desc",
-                                                                     .byProfitAsc : "Profit asc",
-                                                                     .byProfitDesc : "Profit desc"]
+    private var sortingList: [InvestmentProgramsFilter.Sorting : String] = [.byLevelAsc : "Level ⇡",
+                                                                     .byLevelDesc : "Level ⇣",
+                                                                     .byOrdersAsc : "Orders ⇡",
+                                                                     .byOrdersDesc : "Orders ⇣",
+                                                                     .byProfitAsc : "Profit ⇡",
+                                                                     .byProfitDesc : "Profit ⇣",
+                                                                     .byEndOfPeriodAsk : "End of period ⇡",
+                                                                     .byEndOfPeriodDesc : "End of period ⇣"]
     
-    var selectedSorting: InvestmentProgramsFilter.Sorting = .byOrdersAsc
-    var investMaxAmountFrom: Double?
-    var investMaxAmountTo: Double?
+    var filter: InvestmentProgramsFilter?
     
-    var amountCellModel: FilterAmountTableViewCellViewModel!
+    var amountCellModels = [FilterAmountTableViewCellViewModel]()
+    var amountCellModel: FilterAmountTableViewCellViewModel?
     var sortCellModels = [FilterSortTableViewCellViewModel]()
     
-    weak var sliderDelegate: TTRangeSliderDelegate? {
-        didSet {
-            amountCellModel.delegate = sliderDelegate
-        }
-    }
+    weak var sliderDelegate: TTRangeSliderDelegate?
+//        {
+//        didSet {
+//            amountCellModels.delegate = sliderDelegate
+//        }
+//    }
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -57,9 +64,9 @@ final class ProgramFilterViewModel {
         self.router = router
         self.investmentProgramListViewModel = investmentProgramListViewModel
         
-        self.selectedSorting = investmentProgramListViewModel.sorting
-        self.investMaxAmountFrom = investmentProgramListViewModel.investMaxAmountFrom
-        self.investMaxAmountTo = investmentProgramListViewModel.investMaxAmountTo
+        if let filter = investmentProgramListViewModel.filter {
+            self.filter = filter
+        }
         
         setup()
     }
@@ -70,8 +77,8 @@ final class ProgramFilterViewModel {
     func model(for indexPath: IndexPath) -> CellViewAnyModel {
         let type = sections[indexPath.section]
         switch type {
-        case .amount:
-            return amountCellModel
+        case .slider:
+            return amountCellModels[indexPath.row]
         case .sort:
             return sortCellModels[indexPath.row]
         }
@@ -82,7 +89,7 @@ final class ProgramFilterViewModel {
             sortCellModels[idx].selected = idx == indexPath.row ? !sortCellModels[idx].selected : false
         }
         
-        selectedSorting = sortCellModels[indexPath.row].selected ? InvestmentProgramsFilter.Sorting(rawValue: sortCellModels[indexPath.row].sorting.type)! : InvestmentProgramsFilter.Sorting.byOrdersAsc
+        filter?.sorting = sortCellModels[indexPath.row].selected ? InvestmentProgramsFilter.Sorting(rawValue: sortCellModels[indexPath.row].sorting.type)! : InvestmentProgramsFilter.Sorting.byProfitAsc
     }
     
     func numberOfSections() -> Int {
@@ -91,24 +98,33 @@ final class ProgramFilterViewModel {
     
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
-        case .amount:
-            return 1
+        case .slider:
+            return amountCellModels.count
         case .sort:
             return sortCellModels.count
         }
     }
     
     func reset() {
-        selectedSorting = InvestmentProgramsFilter.Sorting.byOrdersAsc
-        investMaxAmountFrom = nil
-        investMaxAmountTo = nil
+        filter?.sorting = InvestmentProgramsFilter.Sorting.byProfitAsc
         
-        amountCellModel.selectedMaxAmountFrom = investMaxAmountFrom
-        amountCellModel.selectedMaxAmountTo = investMaxAmountTo
+        for idx in 0...amounts.count - 1 {
+            var viewModel = amountCellModels[idx]
+            
+            switch amounts[idx] {
+            case .level:
+                viewModel.selectedMinValue = filter?.levelMin
+                viewModel.selectedMaxValue = filter?.levelMax
+            case .totalProfit:
+                viewModel.selectedMinValue = filter?.profitTotalMin
+                viewModel.selectedMaxValue = filter?.profitTotalMax
+            case .averageProfit:
+                viewModel.selectedMinValue = filter?.profitAvgPercentMin
+                viewModel.selectedMaxValue = filter?.profitAvgPercentMax
+            }
+        }
         
-        investmentProgramListViewModel?.sorting = selectedSorting
-        investmentProgramListViewModel?.investMaxAmountFrom = investMaxAmountFrom
-        investmentProgramListViewModel?.investMaxAmountTo = investMaxAmountTo
+        investmentProgramListViewModel?.filter = filter
         
         for idx in 0...sortCellModels.count - 1 {
             sortCellModels[idx].selected = false
@@ -118,10 +134,8 @@ final class ProgramFilterViewModel {
     }
     
     func apply(completion: @escaping CompletionBlock) {
-        investmentProgramListViewModel?.sorting = selectedSorting
-        investmentProgramListViewModel?.investMaxAmountFrom = investMaxAmountFrom
-        investmentProgramListViewModel?.investMaxAmountTo = investMaxAmountTo
-        
+        investmentProgramListViewModel?.filter = filter
+
         investmentProgramListViewModel?.refresh(completion: completion)
     }
     
@@ -131,12 +145,29 @@ final class ProgramFilterViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        amountCellModel = FilterAmountTableViewCellViewModel(minValue: 0.0, maxValue: 1100.0, selectedMaxAmountFrom: investMaxAmountFrom, selectedMaxAmountTo: investMaxAmountTo, step: 50.0, delegate: nil)
+        for idx in 0...amounts.count - 1 {
+            var amountCellModel: FilterAmountTableViewCellViewModel?
+            
+            let titles = amountsTitles[idx]
+            let type = amounts[idx]
+            
+            switch type {
+            case .level:
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, delegate: nil)
+            case .totalProfit:
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitTotalMin, selectedMaxValue: filter?.profitTotalMax, delegate: nil)
+            case .averageProfit:
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, delegate: nil)
+            }
+        
+            amountCellModels.append(amountCellModel!)
+        }
         
         sortingList.forEach { (dict) in
-            sortCellModels.append(FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), selected: dict.key == selectedSorting))
+            sortCellModels.append(FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), selected: dict.key == filter?.sorting))
         }
         
         sortCellModels.sort(by: {$0.sorting.text < $1.sorting.text})
     }
 }
+

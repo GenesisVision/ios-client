@@ -22,12 +22,8 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func getWalletTransactions(withProgramId investmentProgramId: String?, type: TransactionsFilter.ModelType?, skip: Int?, take: Int?, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
+    static func getWalletTransactions(with filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
-        
-        let uuid = UUID(uuidString: investmentProgramId ?? "")
-        
-        let filter = TransactionsFilter(investmentProgramId: uuid, type: type, skip: skip, take: take)
         
         isInvestorApp
             ? getInvestorWalletTransactions(with: authorization, filter: filter) { (viewModel) in

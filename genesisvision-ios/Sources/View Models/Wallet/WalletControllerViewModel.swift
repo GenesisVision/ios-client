@@ -23,6 +23,7 @@ final class WalletControllerViewModel {
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
     private weak var delegate: WalletHeaderTableViewCellProtocol?
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     private var balance: Double = 0.0 {
         didSet {
@@ -38,8 +39,7 @@ final class WalletControllerViewModel {
     var take = Constants.Api.take
     var totalCount = 0      //total count of programs
     
-    var filterProgramId: String?
-    var modelType: TransactionsFilter.ModelType = .all
+    var filter: TransactionsFilter?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -56,6 +56,7 @@ final class WalletControllerViewModel {
     init(withRouter router: WalletRouter) {
         self.router = router
         self.delegate = router.currentController() as? WalletHeaderTableViewCellProtocol
+        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
         
         setup()
     }
@@ -121,6 +122,7 @@ extension WalletControllerViewModel {
 
     // MARK: - Private methods
     private func setup() {
+        filter = TransactionsFilter(investmentProgramId: nil, type: .all, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }
@@ -184,11 +186,14 @@ extension WalletControllerViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.transactions = viewModels
         self.totalCount = totalCount
+        self.reloadDataProtocol?.didReloadData()
     }
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        WalletDataProvider.getWalletTransactions(withProgramId: filterProgramId, type: modelType, skip: skip, take: take) { (transactionsViewModel) in
+        guard let filter = filter else { return completionError(.failure(reason: nil)) }
+        
+        WalletDataProvider.getWalletTransactions(with: filter) { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }

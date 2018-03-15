@@ -15,7 +15,8 @@ final class InvestmentProgramListViewModel {
     var title: String = "Invest"
     var router: InvestmentProgramListRouter!
     var state: InvestmentProgramListViewState?
-   
+    private weak var reloadDataProtocol: ReloadDataProtocol?
+    
     var dataType: DataType = .api
     var programsCount: String = ""
     var skip = 0
@@ -25,15 +26,19 @@ final class InvestmentProgramListViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    var sorting: InvestmentProgramsFilter.Sorting = .byOrdersAsc
-    var investMaxAmountFrom: Double?
-    var investMaxAmountTo: Double?
+
+    var filter: InvestmentProgramsFilter?
+    
     var searchText = ""
     var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
     
+    
     // MARK: - Init
-    init(withRouter router: InvestmentProgramListRouter) {
+    init(withRouter router: InvestmentProgramListRouter, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
+        self.reloadDataProtocol = reloadDataProtocol
+            
+        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byOrdersAsc, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
         
         state = isLogin() ? .programList : .programListWithSignIn
     }
@@ -157,12 +162,13 @@ extension InvestmentProgramListViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
         self.investmentProgramViewModels = viewModels
         self.totalCount = totalCount
+        self.reloadDataProtocol?.didReloadData()
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: investMaxAmountFrom, investMaxAmountTo: investMaxAmountTo, sorting: sorting, skip: skip, take: take)
+            guard let filter = filter else { return completionError(.failure(reason: nil)) }
             
             apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }

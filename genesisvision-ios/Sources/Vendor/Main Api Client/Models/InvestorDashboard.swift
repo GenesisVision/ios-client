@@ -13,12 +13,16 @@ open class InvestorDashboard: Codable {
 
     public var investmentPrograms: [InvestmentProgramDashboard]?
     public var total: Int?
+    public var profitFromProgram: Double?
+    public var investedAmount: Double?
 
 
     
-    public init(investmentPrograms: [InvestmentProgramDashboard]?, total: Int?) {
+    public init(investmentPrograms: [InvestmentProgramDashboard]?, total: Int?, profitFromProgram: Double?, investedAmount: Double?) {
         self.investmentPrograms = investmentPrograms
         self.total = total
+        self.profitFromProgram = profitFromProgram
+        self.investedAmount = investedAmount
     }
     
 
@@ -30,6 +34,8 @@ open class InvestorDashboard: Codable {
 
         try container.encodeIfPresent(investmentPrograms, forKey: "investmentPrograms")
         try container.encodeIfPresent(total, forKey: "total")
+        try container.encodeIfPresent(profitFromProgram, forKey: "profitFromProgram")
+        try container.encodeIfPresent(investedAmount, forKey: "investedAmount")
     }
 
     // Decodable protocol methods
@@ -39,6 +45,8 @@ open class InvestorDashboard: Codable {
 
         investmentPrograms = try container.decodeIfPresent([InvestmentProgramDashboard].self, forKey: "investmentPrograms")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
+        profitFromProgram = try container.decodeIfPresent(Double.self, forKey: "profitFromProgram")
+        investedAmount = try container.decodeIfPresent(Double.self, forKey: "investedAmount")
     }
 }
 

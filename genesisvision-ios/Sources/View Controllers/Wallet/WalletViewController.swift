@@ -35,7 +35,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         super.viewWillAppear(animated)
         
         title = viewModel.title
-        reloadData()
         setupUI()
     }
     
@@ -87,7 +86,7 @@ class WalletViewController: BaseViewControllerWithTableView {
             self?.hideHUD()
             switch result {
             case .success:
-                self?.reloadData()
+                break
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
@@ -101,9 +100,10 @@ class WalletViewController: BaseViewControllerWithTableView {
             self?.canFetchMoreResults = true
             switch result {
             case .success:
-                self?.reloadData()
-            case .failure:
                 break
+            case .failure(let reason):
+                print("Error with reason: ")
+                print(reason ?? "")
             }
         }
     }
@@ -168,6 +168,12 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WalletViewController: WalletProtocol {
     func didWithdrawn() {
+        reloadData()
+    }
+}
+
+extension WalletViewController: ReloadDataProtocol {
+    func didReloadData() {
         reloadData()
     }
 }

@@ -11,11 +11,11 @@ import Foundation
 
 open class WalletStatistic: Codable {
 
-    public var chart: [Double]?
+    public var chart: [DateChart]?
 
 
     
-    public init(chart: [Double]?) {
+    public init(chart: [DateChart]?) {
         self.chart = chart
     }
     
@@ -34,7 +34,7 @@ open class WalletStatistic: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        chart = try container.decodeIfPresent([Double].self, forKey: "chart")
+        chart = try container.decodeIfPresent([DateChart].self, forKey: "chart")
     }
 }
 

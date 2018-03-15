@@ -24,8 +24,7 @@ final class WalletFilterViewModel {
     // MARK: - Variables
     var title: String = "Filter"
     
-    var filterProgramId: String?
-    var modelType: TransactionsFilter.ModelType = .all
+    var filter: TransactionsFilter?
     
     private var sections: [SectionType] = [.type]
     private var router: WalletFilterRouter!
@@ -69,15 +68,13 @@ final class WalletFilterViewModel {
     }
     
     func reset() {
-        modelType = .all
+        filter?.type = .all
         
-        walletControllerViewModel?.modelType = modelType
-        walletControllerViewModel?.filterProgramId = filterProgramId
+        walletControllerViewModel?.filter = filter
     }
     
     func apply(completion: @escaping CompletionBlock) {
-        walletControllerViewModel?.modelType = modelType
-        walletControllerViewModel?.filterProgramId = filterProgramId
+        walletControllerViewModel?.filter = filter
         
         walletControllerViewModel?.refresh(completion: completion)
     }
@@ -88,12 +85,13 @@ final class WalletFilterViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        if let type = walletControllerViewModel?.modelType {
-            modelType = type
+        if let filter = walletControllerViewModel?.filter {
+            self.filter = filter
         }
         
-        filterProgramId = walletControllerViewModel?.filterProgramId
-        let selectedIndex = typeList.index(of: modelType.rawValue)
+        guard let type = filter?.type else { return }
+        
+        let selectedIndex = typeList.index(of: type.rawValue)
         
         walletFilterTypeTableViewCellViewModel = WalletFilterTypeTableViewCellViewModel(selectedIndex: selectedIndex ?? 0, types: typeList, delegate: self)
     }
@@ -102,7 +100,7 @@ final class WalletFilterViewModel {
 extension WalletFilterViewModel: WalletFilterTypeTableViewCellProtocol {
     func segmentControlDidChanged(index: Int) {
         if let type = TransactionsFilter.ModelType(rawValue: typeList[index]) {
-            modelType = type
+            filter?.type = type
         }
     }
 }

@@ -109,7 +109,7 @@ extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension ProgramFilterViewController: TTRangeSliderDelegate {
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
-        viewModel.investMaxAmountFrom = Double(selectedMinimum)
-        viewModel.investMaxAmountTo = Double(selectedMaximum)
+        viewModel.filter?.investMaxAmountFrom = Double(selectedMinimum)
+        viewModel.filter?.investMaxAmountTo = Double(selectedMaximum)
     }
 }
