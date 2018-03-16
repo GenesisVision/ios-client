@@ -42,7 +42,7 @@ final class ProgramFilterViewModel {
     
     var amountCellModels = [FilterAmountTableViewCellViewModel]()
     var amountCellModel: FilterAmountTableViewCellViewModel?
-    var sortCellModels = [FilterSortTableViewCellViewModel]()
+    var sortCellModel: FilterSortTableViewCellViewModel!
     
     weak var sliderDelegate: TTRangeSliderDelegate?
 //        {
@@ -80,16 +80,12 @@ final class ProgramFilterViewModel {
         case .slider:
             return amountCellModels[indexPath.row]
         case .sort:
-            return sortCellModels[indexPath.row]
+            return sortCellModel!
         }
     }
     
     func select(for indexPath: IndexPath) {
-        for idx in 0...sortCellModels.count - 1 {
-            sortCellModels[idx].selected = idx == indexPath.row ? !sortCellModels[idx].selected : false
-        }
-        
-        filter?.sorting = sortCellModels[indexPath.row].selected ? InvestmentProgramsFilter.Sorting(rawValue: sortCellModels[indexPath.row].sorting.type)! : InvestmentProgramsFilter.Sorting.byProfitAsc
+
     }
     
     func numberOfSections() -> Int {
@@ -101,7 +97,7 @@ final class ProgramFilterViewModel {
         case .slider:
             return amountCellModels.count
         case .sort:
-            return sortCellModels.count
+            return 1
         }
     }
     
@@ -126,11 +122,6 @@ final class ProgramFilterViewModel {
         
         investmentProgramListViewModel?.filter = filter
         
-        for idx in 0...sortCellModels.count - 1 {
-            sortCellModels[idx].selected = false
-        }
-        
-        sortCellModels[0].selected = true
     }
     
     func apply(completion: @escaping CompletionBlock) {
@@ -163,11 +154,9 @@ final class ProgramFilterViewModel {
             amountCellModels.append(amountCellModel!)
         }
         
-        sortingList.forEach { (dict) in
-            sortCellModels.append(FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), selected: dict.key == filter?.sorting))
+        if let dict = sortingList.first {
+            sortCellModel = FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), opened: false)
         }
-        
-        sortCellModels.sort(by: {$0.sorting.text < $1.sorting.text})
     }
 }
 

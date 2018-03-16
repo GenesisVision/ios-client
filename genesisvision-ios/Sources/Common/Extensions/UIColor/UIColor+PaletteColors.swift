@@ -25,6 +25,7 @@ extension UIColor {
         static var darkGray: UIColor { return #colorLiteral(red: 0.6666666667, green: 0.7215686275, blue: 0.7529411765, alpha: 1) }                                //aab8c0
         static var gray: UIColor { return #colorLiteral(red: 0.8117647059, green: 0.8352941176, blue: 0.8549019608, alpha: 1) }                                    //cfd5da
         static var sliderLineColor: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                         //e3ebed
+        static var textFieldLineColor: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                      //ccd5d4
         
         static var white: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                                   //cfd8dc
     }
@@ -80,6 +81,13 @@ extension UIColor {
         static var label: UIColor { return Common.darkBlue }
         static var title: UIColor { return Common.veryDarkBlue }
         static var subTitle: UIColor { return Common.darkBlue }
+    }
+    
+    struct TextField {
+        static var line: UIColor { return Common.textFieldLineColor }
+        static var empty: UIColor { return Common.textFieldLineColor }
+        static var filled: UIColor { return Common.primary }
+        static var placeholder: UIColor { return Common.veryDarkBlue }
     }
     
     struct Border {

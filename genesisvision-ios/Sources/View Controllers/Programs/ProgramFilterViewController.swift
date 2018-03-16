@@ -93,8 +93,11 @@ extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     
-        viewModel.select(for: indexPath)
-        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        if let cell = tableView.cellForRow(at: indexPath) as? FilterSortTableViewCell {
+            if !cell.isFirstResponder {
+                _ = cell.becomeFirstResponder()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -15,12 +15,13 @@ struct SortField {
 
 struct FilterSortTableViewCellViewModel {
     var sorting: SortField
-    var selected: Bool
+    var opened: Bool
 }
 
 extension FilterSortTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterSortTableViewCell) {
         cell.titleLabel.text = "Sort by " + sorting.text
-        cell.accessoryType = selected ? .checkmark : .none
+        cell.arrowImageView.image = #imageLiteral(resourceName: "img_dropdown_icon")
+        cell.arrowImageView.transform = cell.arrowImageView.transform.rotated(by: CGFloat(opened ? Double.pi/2 : 0.0))
     }
 }

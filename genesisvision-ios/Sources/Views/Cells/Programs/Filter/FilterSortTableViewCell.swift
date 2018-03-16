@@ -10,10 +10,19 @@ import UIKit
 
 class FilterSortTableViewCell: UITableViewCell {
 
+    let picker = UIPickerView()
+    
     // MARK: - Labels
     @IBOutlet var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+        }
+    }
+    
+    // MARK: - Views
+    @IBOutlet var arrowImageView: UIImageView! {
+        didSet {
+            arrowImageView.image = #imageLiteral(resourceName: "img_dropdown_icon")
         }
     }
     
@@ -28,6 +37,19 @@ class FilterSortTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         tintColor = UIColor.primary
+    }
+    
+
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    open override var canResignFirstResponder: Bool {
+        return true
+    }
+    
+    open override var inputView: UIView? {
+        return picker
     }
     
 }
