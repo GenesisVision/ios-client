@@ -28,7 +28,6 @@ class DashboardTableViewCell: UITableViewCell {
     // MARK: - Views
     @IBOutlet var managerAvatarImageView: UIImageView! {
         didSet {
-            managerAvatarImageView.roundCorners()
             managerAvatarImageView.addBorder(withBorderWidth: 2.0)
         }
     }

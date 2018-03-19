@@ -10,17 +10,9 @@ import UIKit
 
 class ChooseProfilePhotoButton: UIView {
     // MARK: - Outlets
-    @IBOutlet var shadowView: UIView! {
-        didSet {
-            shadowView.roundCorners()
-        }
-    }
+    @IBOutlet var shadowView: UIView!
     
-    @IBOutlet var photoImageView: UIImageView! {
-        didSet {
-            photoImageView.roundCorners()
-        }
-    }
+    @IBOutlet var photoImageView: UIImageView!
     
     @IBOutlet var choosePhotoButton: UIButton! {
         didSet {
@@ -35,8 +27,6 @@ class ChooseProfilePhotoButton: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        photoImageView.roundCorners()
     }
     
     // MARK: - Public methdods

@@ -18,19 +18,28 @@ struct AppearanceController {
     
     // NavigationBar
     private static func setupNavigationBar() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark,
+                                                            NSAttributedStringKey.font: UIFont(name: "NeuzeitGro-Bol", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)]
+        
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
+        
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
         }
         
-        UINavigationBar.appearance().tintColor = UIColor.primary
+        UINavigationBar.appearance().tintColor = UIColor.NavBar.tint
+        UINavigationBar.appearance().backgroundColor = UIColor.NavBar.background
     }
     
     // TabBar
     private static func setupTabBar() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.primary], for: .selected)
-        UITabBar.appearance().tintColor = UIColor.primary
-        UITabBar.appearance().backgroundColor = UIColor.Background.gray
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.unselected,
+                                                          NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 8)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.tint,
+                                                          NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 8)], for: .selected)
+
+        UITabBar.appearance().tintColor = UIColor.TabBar.tint
+        UITabBar.appearance().backgroundColor = UIColor.TabBar.background
     }
     
     // MARK: - IQKeyboardManager

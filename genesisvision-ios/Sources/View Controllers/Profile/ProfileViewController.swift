@@ -33,23 +33,19 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     // MARK: - Variables
     private var editProfileButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
-        barButtonItem.tintColor = UIColor.Button.green
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_edit"), style: .done, target: self, action: #selector(editProfileButtonAction(_:)))
         return barButtonItem
     }
     private var cancelEditProfileButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
-        barButtonItem.tintColor = UIColor.Button.red
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_cancel"), style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
         return barButtonItem
     }
     private var saveProfileButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
-        barButtonItem.tintColor = UIColor.Button.green
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_check"), style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
         return barButtonItem
     }
     private var signOutButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(signOutButtonAction(_:)))
-        barButtonItem.tintColor = UIColor.Button.red
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_logout"), style: .done, target: self, action: #selector(signOutButtonAction(_:)))
         return barButtonItem
     }
 
@@ -63,7 +59,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        headerView.setup(with: viewModel.getName(), avatarURL: viewModel.getAvatarURL())
+        headerView.setup(with: viewModel.getAvatarURL())
     }
     
     // MARK: - Private methods
@@ -92,6 +88,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         showProfileStateAction()
         
         title = viewModel.title
+        navigationItem.title = viewModel.title.capitalized
     }
     
     private func setupTableConfiguration() {

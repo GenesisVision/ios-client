@@ -80,6 +80,11 @@
 		5E0B1BA1205956F600557707 /* BrokerInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B5B205956F600557707 /* BrokerInvestmentProgram.swift */; };
 		5E0B1BA2205956F600557707 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B5C205956F600557707 /* InvestmentProgramTxInfo.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
+		5E239271205F67F100CB5AEC /* NeuzeitGro-Bla.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926D205F67F000CB5AEC /* NeuzeitGro-Bla.ttf */; };
+		5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */; };
+		5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */; };
+		5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */; };
+		5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
@@ -122,7 +127,6 @@
 		FC27226A20484BC4005225F2 /* ProgramDetailPropertiesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC27226820484BC4005225F2 /* ProgramDetailPropertiesTableViewCell.xib */; };
 		FC27226C20484BEF005225F2 /* ProgramDetailPropertiesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27226B20484BEF005225F2 /* ProgramDetailPropertiesTableViewCellViewModel.swift */; };
 		FC27226E20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27226D20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift */; };
-		FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */; };
 		FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2722E920496FB5005225F2 /* WalletProtocol.swift */; };
 		FC27232720498959005225F2 /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27231D20498958005225F2 /* QRCodeReader.swift */; };
 		FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27231E20498958005225F2 /* QRCodeReaderResult.swift */; };
@@ -363,6 +367,11 @@
 		5E0B1B5B205956F600557707 /* BrokerInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInvestmentProgram.swift; sourceTree = "<group>"; };
 		5E0B1B5C205956F600557707 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		5E23926D205F67F000CB5AEC /* NeuzeitGro-Bla.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Bla.ttf"; sourceTree = "<group>"; };
+		5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Bol.ttf"; sourceTree = "<group>"; };
+		5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Reg.ttf"; sourceTree = "<group>"; };
+		5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Lig.ttf"; sourceTree = "<group>"; };
+		5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
@@ -412,7 +421,6 @@
 		FC27226820484BC4005225F2 /* ProgramDetailPropertiesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramDetailPropertiesTableViewCell.xib; sourceTree = "<group>"; };
 		FC27226B20484BEF005225F2 /* ProgramDetailPropertiesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailPropertiesTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC27226D20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPropertiesForTableViewCellView.swift; sourceTree = "<group>"; };
-		FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		FC2722E920496FB5005225F2 /* WalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProtocol.swift; sourceTree = "<group>"; };
 		FC27231D20498958005225F2 /* QRCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReader.swift; sourceTree = "<group>"; };
 		FC27231E20498958005225F2 /* QRCodeReaderResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderResult.swift; sourceTree = "<group>"; };
@@ -688,6 +696,17 @@
 				5E0B1B5C205956F600557707 /* InvestmentProgramTxInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5E23926C205F67F000CB5AEC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5E23926D205F67F000CB5AEC /* NeuzeitGro-Bla.ttf */,
+				5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */,
+				5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */,
+				5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		B8DB3D95241F1BF35C1AA19C /* Frameworks */ = {
@@ -1168,6 +1187,7 @@
 		FCC9DD39200DFA5E008825EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5E23926C205F67F000CB5AEC /* Fonts */,
 				FCC9DD3A200DFA5E008825EC /* Assets */,
 				FCC9DD3C200DFA5E008825EC /* Config */,
 				FCC9DD40200DFA5E008825EC /* Storyboards */,
@@ -1397,9 +1417,9 @@
 		FCC9DD64200E236E008825EC /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */,
 				FCC9DD8B200E658E008825EC /* ReusableCell.swift */,
 				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
-				FC2722E720493F11005225F2 /* ProgramDetailProtocol.swift */,
 				FC2722E920496FB5005225F2 /* WalletProtocol.swift */,
 				5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */,
 			);
@@ -1501,9 +1521,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
+				5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */,
+				5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */,
+				5E239271205F67F100CB5AEC /* NeuzeitGro-Bla.ttf in Resources */,
 				FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */,
 				FCA5707820274D48001942F3 /* WalletHeaderTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
@@ -1521,6 +1544,7 @@
 				FC4C51A5204806370042CEE1 /* ProgramRequestTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
+				5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */,
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
 				FCA5705620273528001942F3 /* ProfileFieldTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
@@ -1643,7 +1667,6 @@
 				5E0B1B69205956F600557707 /* LoginViewModel.swift in Sources */,
 				5E0B1B88205956F600557707 /* UpdateProfileViewModel.swift in Sources */,
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
-				FC2722E820493F11005225F2 /* ProgramDetailProtocol.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC1410152030168100B71E7F /* TournamentAPI.swift in Sources */,
 				5E0B1B8E205956F600557707 /* StartValues.swift in Sources */,
@@ -1659,6 +1682,7 @@
 				5E0B1B7C205956F600557707 /* NewManager.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
+				5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */,
 				5E0B1B81205956F600557707 /* WalletTransaction.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
 				5E0B1B6A205956F600557707 /* InvestmentProgramDashboard.swift in Sources */,

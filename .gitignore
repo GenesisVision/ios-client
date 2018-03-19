@@ -7,7 +7,7 @@ DerivedData/
 .idea/
 
 ## Constants 
-
+Constants.swift
 
 ## Obj-C/Swift specific
 *.hmap

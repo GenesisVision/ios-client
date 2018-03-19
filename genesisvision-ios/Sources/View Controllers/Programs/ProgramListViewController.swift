@@ -8,6 +8,22 @@
 
 import UIKit
 
+class GradientView: UIView {
+    override open class var layerClass: AnyClass {
+        return CAGradientLayer.classForCoder()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let gradientLayer = self.layer as! CAGradientLayer
+        gradientLayer.colors = [
+            UIColor.init(white: 1, alpha: 0).cgColor,
+            UIColor.white.cgColor
+        ]
+        backgroundColor = UIColor.clear
+    }
+}
+
 class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
@@ -28,16 +44,24 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
+    // MARK: - Views
+    @IBOutlet var gradientView: GradientView!
+    
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = viewModel.title
+        navigationItem.title = viewModel.title.capitalized
+        
         setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: - Private methods
@@ -45,6 +69,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         signInButtonEnable = viewModel.signInButtonEnable()
         
         signInButton.isHidden = !signInButtonEnable
+        gradientView.isHidden = !signInButtonEnable
     }
     
     private func setup() {

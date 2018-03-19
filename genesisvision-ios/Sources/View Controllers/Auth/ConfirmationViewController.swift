@@ -30,8 +30,6 @@ class ConfirmationViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // MARK: - Actions

@@ -19,18 +19,12 @@ class ProfileHeaderView: UIView {
     
     var profileState: ProfileState = .show {
         didSet {
-            hideLabel(value: profileState == .edit)
             chooseProfilePhotoButton.change(state: profileState)
         }
     }
     
-    // MARK: - Outlets
-    @IBOutlet weak var nameLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var nameLabelTopConstraint: NSLayoutConstraint!
-    
     // MARK: - Views
     @IBOutlet var backgroundImageView: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
     
     // MARK: - Buttons
     @IBOutlet var chooseProfilePhotoButton: ChooseProfilePhotoButton!
@@ -43,18 +37,9 @@ class ProfileHeaderView: UIView {
     }
     
     // MARK: - Private methdos
-    private func hideLabel(value: Bool) {
-        nameLabelHeightConstraint.constant = value ? 0.0 : 30.0
-        nameLabelTopConstraint.constant = value ? 0.0 : 16.0
-        
-        UIView.animate(withDuration: 0.5) {
-            self.layoutIfNeeded()
-        }
-    }
     
     // MARK: - Public Methods
-    func setup(with title: String? = nil, avatarURL: URL? = nil) {
-        update(title: title)
+    func setup(with avatarURL: URL? = nil) {
         update(avatar: avatarURL)
     }
     
@@ -69,13 +54,6 @@ class ProfileHeaderView: UIView {
     func update(avatar image: UIImage?) {
         if let image = image {
             chooseProfilePhotoButton.photoImageView.image = image
-        }
-    }
-    
-    func update(title text: String?) {
-        if let text = text {
-            hideLabel(value: false)
-            nameLabel.text = text
         }
     }
     

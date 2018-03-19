@@ -25,8 +25,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = viewModel.title
-        
         setup()
     }
     
@@ -41,6 +39,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         title = viewModel.title
+        navigationItem.title = viewModel.title.capitalized
     }
     
     private func setupTableConfiguration() {

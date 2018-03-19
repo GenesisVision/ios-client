@@ -11,7 +11,8 @@ import UIKit.UIView
 class ProfileImageView: UIView {
     @IBOutlet var profilePhotoImageView: UIImageView! {
         didSet {
-            profilePhotoImageView.roundCorners()
+            profilePhotoImageView.contentMode = .scaleAspectFill
+            profilePhotoImageView.clipsToBounds = true
             profilePhotoImageView.image = UIImage.placeholder
         }
     }
@@ -27,15 +28,12 @@ class ProfileImageView: UIView {
     @IBOutlet var levelLabel: UILabel! {
         didSet {
             levelLabel.backgroundColor = .clear
-            levelLabel.layer.backgroundColor = UIColor.darkPrimary.cgColor
-            levelLabel.roundWithBorder(2.0)
+            levelLabel.textColor = UIColor.Font.white
+            levelLabel.layer.backgroundColor = UIColor.primary.cgColor
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        profilePhotoImageView.roundCorners()
-        levelLabel.roundWithBorder(2.0)
     }
 }

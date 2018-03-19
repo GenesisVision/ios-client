@@ -42,14 +42,16 @@ class Router {
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
-            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_dashboard")
-            navigationController.tabBarItem.title = "Dashboard"
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_dashboard_unselected")
+            navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_dashboard_selected")
+            navigationController.tabBarItem.title = "DASHBOARD"
             viewControllers.append(navigationController)
         }
         
         if let navigationController = getProgramsNavigationController() {
-            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_program_list")
-            navigationController.tabBarItem.title = "Invest"
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_program_list_unselected")
+            navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_program_list_selected")
+            navigationController.tabBarItem.title = "INVEST"
             viewControllers.append(navigationController)
         }
         
@@ -58,8 +60,9 @@ class Router {
             let router = WalletRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
-            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_wallet")
-            navigationController.tabBarItem.title = "Wallet"
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_wallet_unselected")
+            navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_wallet_selected")
+            navigationController.tabBarItem.title = "WALLET"
             viewControllers.append(navigationController)
         }
         
@@ -68,8 +71,9 @@ class Router {
             let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
             profileViewController.viewModel = ProfileViewModel(withRouter: router)
-            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_profile")
-            navigationController.tabBarItem.title = "Profile"
+            navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_profile_unselected")
+            navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_profile_selected")
+            navigationController.tabBarItem.title = "PROFILE"
             viewControllers.append(navigationController)
         }
         

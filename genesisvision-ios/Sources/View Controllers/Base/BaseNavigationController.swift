@@ -13,6 +13,10 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.barTintColor = UIColor.Background.gray
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor.NavBar.background
+        
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
     }
 }

@@ -15,6 +15,7 @@ import UIKit.UIButton
     @IBInspectable var customBorderColor: UIColor? = .white
     @IBInspectable var borderAlpha: CGFloat = 1.0
     @IBInspectable var fontSize: CGFloat = 14.0
+    @IBInspectable var customFont: UIFont? = UIFont(name: "NeuzeitGro-Bol", size: 14)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +24,8 @@ import UIKit.UIButton
         self.layer.borderColor = customBorderColor?.withAlphaComponent(borderAlpha).cgColor
         self.layer.borderWidth = borderSize
         self.layer.masksToBounds = true
+        
+        titleLabel?.font = UIFont(name: "NeuzeitGro-Bol", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize)
     }
     
     override func layoutSubviews() {

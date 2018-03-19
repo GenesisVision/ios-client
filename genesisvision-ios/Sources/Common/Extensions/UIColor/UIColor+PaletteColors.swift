@@ -27,7 +27,8 @@ extension UIColor {
         static var sliderLineColor: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                         //e3ebed
         static var textFieldLineColor: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                      //ccd5d4
         
-        static var white: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                                   //cfd8dc
+//        static var white: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                                   //cfd8dc
+        static var white: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                                   //ffffff
     }
     
     static var primary: UIColor { return Common.primary }
@@ -52,9 +53,10 @@ extension UIColor {
     }
     
     struct Font {
-        static var primary: UIColor { return Common     .primary }
+        static var primary: UIColor { return Common.primary }
         
-        static var dark: UIColor { return  Common.dark }
+        static var dark: UIColor { return  Common.veryDarkBlue }
+        
         static var medium: UIColor { return Common.darkGray }
         static var light: UIColor { return Common.gray }
         
@@ -63,6 +65,7 @@ extension UIColor {
         static var blue: UIColor { return Common.blue }
         
         static var black: UIColor { return Common.black }
+        static var white: UIColor { return Common.white }
     }
     
     struct Button {
@@ -88,6 +91,17 @@ extension UIColor {
         static var empty: UIColor { return Common.textFieldLineColor }
         static var filled: UIColor { return Common.primary }
         static var placeholder: UIColor { return Common.veryDarkBlue }
+    }
+    
+    struct TabBar {
+        static var tint: UIColor { return Common.white }
+        static var background: UIColor { return Common.primary }
+        static var unselected: UIColor { return #colorLiteral(red: 0.7411764706, green: 0.9098039216, blue: 0.9019607843, alpha: 1) }
+    }
+    
+    struct NavBar {
+        static var tint: UIColor { return Common.primary }
+        static var background: UIColor { return Common.white }
     }
     
     struct Border {

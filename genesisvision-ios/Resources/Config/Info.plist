@@ -44,5 +44,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>UIAppFonts</key>
+    <array>
+        <string>NeuzeitGro-Bla.ttf</string>
+        <string>NeuzeitGro-Bol.ttf</string>
+        <string>NeuzeitGro-Reg.ttf</string>
+        <string>NeuzeitGro-Lig.ttf</string>
+    </array>
 </dict>
 </plist>

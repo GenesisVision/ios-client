@@ -27,6 +27,13 @@
                                     <outlet property="delegate" destination="4qn-RU-Ufu" id="wQZ-cu-ubr"/>
                                 </connections>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-na-XEw" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="W24-2b-0Dv"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZlK-UV-lqh">
                                 <rect key="frame" x="88.5" y="606" width="198" height="45"/>
                                 <subviews>
@@ -53,6 +60,9 @@
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="nZd-JI-9hr" secondAttribute="top" id="IhV-n4-mgM"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="ZlK-UV-lqh" secondAttribute="bottom" constant="16" id="SPa-bn-kKf"/>
+                            <constraint firstItem="GKl-na-XEw" firstAttribute="trailing" secondItem="FoC-GU-UBn" secondAttribute="trailing" id="YkM-vy-iJA"/>
+                            <constraint firstAttribute="bottom" secondItem="GKl-na-XEw" secondAttribute="bottom" id="YmY-5g-8wI"/>
+                            <constraint firstItem="GKl-na-XEw" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="o1h-EN-kZk"/>
                             <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
                             <constraint firstItem="ZlK-UV-lqh" firstAttribute="centerX" secondItem="nZd-JI-9hr" secondAttribute="centerX" id="zvd-Q0-crZ"/>
@@ -61,6 +71,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
                     <connections>
+                        <outlet property="gradientView" destination="GKl-na-XEw" id="Bs5-qe-b3o"/>
                         <outlet property="signInButton" destination="cvZ-bk-mvw" id="laf-Wh-Kd5"/>
                         <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
                     </connections>
@@ -82,6 +93,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPS-Tf-3yD" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="FE5-Oa-MIe"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-hx-mtC">
                                 <rect key="frame" x="88" y="606" width="198" height="45"/>
                                 <subviews>
@@ -113,8 +131,11 @@
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
                             <constraint firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oVJ-hx-mtC" secondAttribute="bottom" constant="16" id="Xsv-0r-bx0"/>
+                            <constraint firstAttribute="bottom" secondItem="ZPS-Tf-3yD" secondAttribute="bottom" id="YMC-0L-wEK"/>
                             <constraint firstItem="oVJ-hx-mtC" firstAttribute="centerX" secondItem="3sG-FT-NvN" secondAttribute="centerX" id="YdI-Jb-amv"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
+                            <constraint firstItem="ZPS-Tf-3yD" firstAttribute="trailing" secondItem="Oxo-lc-AeP" secondAttribute="trailing" id="bXY-TB-i04"/>
+                            <constraint firstItem="ZPS-Tf-3yD" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="xiR-Q1-7bT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oxo-lc-AeP"/>
                     </view>
