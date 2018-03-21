@@ -12,7 +12,7 @@ import StoreKit
 final class WelcomeViewModel {
     
     // MARK: - Variables
-    var title: String = "Invest"
+    var title: String = ""
     
     private var router: WelcomeRouter!
     

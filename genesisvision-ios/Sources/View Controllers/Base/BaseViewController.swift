@@ -75,7 +75,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data"
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }

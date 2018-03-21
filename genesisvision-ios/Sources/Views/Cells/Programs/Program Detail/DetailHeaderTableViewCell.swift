@@ -12,18 +12,13 @@ class DetailHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
-    @IBOutlet var titleLabel: UILabel! {
-        didSet {
-            titleLabel.isHidden = true
-        }
-    }
-    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var managerLabel: UILabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        backgroundColor = UIColor.Background.main
+
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }

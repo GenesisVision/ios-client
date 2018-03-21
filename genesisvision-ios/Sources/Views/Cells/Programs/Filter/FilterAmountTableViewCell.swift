@@ -14,13 +14,13 @@ class FilterAmountTableViewCell: UITableViewCell {
     // MARK: - Labels
     @IBOutlet var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+            titleLabel.font = UIFont.getFont(.bold, size: 18)
         }
     }
     
     @IBOutlet var subtitleLabel: UILabel! {
         didSet {
-            subtitleLabel.font = UIFont.systemFont(ofSize: 14.0)
+            subtitleLabel.font = UIFont.getFont(.regular, size: 14)
         }
     }
     
@@ -42,12 +42,11 @@ class FilterAmountTableViewCell: UITableViewCell {
         sliderView.handleBorderColor = UIColor.red
         sliderView.maxLabelColour = UIColor.Slider.label
         sliderView.minLabelColour = UIColor.Slider.label
-        sliderView.minLabelFont = UIFont.systemFont(ofSize: 14.0)
-        sliderView.maxLabelFont = UIFont.systemFont(ofSize: 14.0)
+        sliderView.minLabelFont = UIFont.getFont(.regular, size: 14)
+        sliderView.maxLabelFont = UIFont.getFont(.regular, size: 14)
         sliderView.lineHeight = 5.0
         sliderView.handleDiameter = 13.0
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }

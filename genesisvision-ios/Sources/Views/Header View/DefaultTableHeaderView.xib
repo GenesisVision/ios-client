@@ -11,12 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" misplaced="YES" restorationIdentifier="DefaultTableHeaderView" id="iN0-l3-epB" customClass="DefaultTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
+        <view contentMode="scaleToFill" restorationIdentifier="DefaultTableHeaderView" id="iN0-l3-epB" customClass="DefaultTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtU-OR-Odo">
-                    <rect key="frame" x="16" y="10" width="343" height="50"/>
+                    <rect key="frame" x="16" y="0.0" width="343" height="70"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                     <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>

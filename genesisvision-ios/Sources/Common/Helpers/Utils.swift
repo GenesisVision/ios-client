@@ -27,3 +27,19 @@ func getPeriodLeft(endOfPeriod: Date) -> (String, String) {
 
     return ((dateInterval > 0 ? dateInterval : 0).toString(), "min")
 }
+
+var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc]
+var sortingValues: [String] = ["Level ⇡", "Level ⇣", "Orders ⇡", "Orders ⇣", "Profit ⇡", "Profit ⇣", "End of period ⇡", "End of period ⇣"]
+struct SortingList {
+    var sortingValue: String
+    var sortingKey: InvestmentProgramsFilter.Sorting
+}
+var sortingList: [SortingList] = sortingValues.enumerated().map { (index, element) in
+    return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
+}
+
+func getSortingValue(sortingKey: InvestmentProgramsFilter.Sorting) -> String {
+    guard let index = sortingKeys.index(of: sortingKey) else { return "" }
+    return sortingValues[index]
+}
+

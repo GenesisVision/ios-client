@@ -140,7 +140,7 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
         }
         
         let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
-        header.headerLabel.font = UIFont.systemFont(ofSize: 15.0)
+        header.headerLabel.font = UIFont.getFont(.regular, size: 15)
         header.headerLabel.text = title
         header.headerLabel.textColor = UIColor.Font.medium
         return header
@@ -180,7 +180,7 @@ extension TournamentListViewController {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.systemFont(ofSize: 25, weight: .bold)]
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }

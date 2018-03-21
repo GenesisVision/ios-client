@@ -88,18 +88,17 @@ class AuthManager {
     }
     
     static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void) {
-        guard walletViewModel != nil else {
-            WalletDataProvider.getWallet(completion: { (viewModel) in
-                if viewModel != nil  {
-                    walletViewModel = viewModel?.wallets?.first
-                }
-                
-                completion(walletViewModel)
-            })
-            return
+        if let walletViewModel = walletViewModel {
+            completion(walletViewModel)
         }
         
-        completion(walletViewModel)
+        WalletDataProvider.getWallet(completion: { (viewModel) in
+            if viewModel != nil  {
+                walletViewModel = viewModel?.wallets?.first
+            }
+            
+            completion(walletViewModel)
+        })
     }
     
     // MARK: - Private methods

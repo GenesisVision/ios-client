@@ -28,6 +28,6 @@ class DashboardRouter: Router {
     
     // MARK: - Private methods
     private func showProgramList() {
-        getRootTabBar(parent: self)?.selectedIndex = 1
+        changeTab(withParentRouter: self, to: .programList)
     }
 }

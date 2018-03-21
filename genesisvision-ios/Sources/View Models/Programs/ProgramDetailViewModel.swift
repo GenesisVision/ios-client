@@ -38,10 +38,6 @@ final class ProgramDetailViewModel {
                                                              isWithdrawEnable: isWithdrawEnable,
                                                              hasNewRequests: hasNewRequests)
             }
-            
-            if let title = investmentProgramDetails?.title {
-                self.title = title
-            }
         }
     }
     

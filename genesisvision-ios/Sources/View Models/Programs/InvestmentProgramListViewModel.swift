@@ -6,13 +6,24 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit.UITableViewHeaderFooterView
+
 enum InvestmentProgramListViewState {
     case programList, programListWithSignIn
 }
 
 final class InvestmentProgramListViewModel {
+    
+    enum SectionType {
+        case header
+        case programList
+    }
+    
     // MARK: - Variables
-    var title: String = "Invest"
+    var title: String = "Programs"
+    
+    private var sections: [SectionType] = [.header, .programList]
+    
     var router: InvestmentProgramListRouter!
     var state: InvestmentProgramListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -58,15 +69,49 @@ extension InvestmentProgramListViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramTableViewCellViewModel.self]
+        return [ProgramListHeaderTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
+    }
+    
+    /// Return view models for registration header/footer Nib files
+    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [SortHeaderView.self]
     }
     
     func modelsCount() -> Int {
         return investmentProgramViewModels.count
     }
 
+    func numberOfSections() -> Int {
+        return sections.count
+    }
+    
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        switch sections[section] {
+        case .programList:
+            return modelsCount()
+        case .header:
+            return 1
+        }
+    }
+    
+    func headerTitle(for section: Int) -> String? {
+        switch sections[section] {
+        case .programList:
+            guard let sort = filter?.sorting else { return "Sort by " }
+            
+            return "Sort by " + getSortingValue(sortingKey: sort)
+        case .header:
+            return nil
+        }
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch sections[section] {
+        case .programList:
+            return 50.0
+        case .header:
+            return 0.0
+        }
     }
 }
 
@@ -84,6 +129,15 @@ extension InvestmentProgramListViewModel {
     func showDetail(with investmentProgramId: String) {
         router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId))
     }
+    
+    func showDetail(at indexPath: IndexPath) {
+        guard let model: ProgramTableViewCellViewModel = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
+        
+        let investmentProgram = model.investmentProgram
+        guard let investmentProgramId = investmentProgram.id else { return }
+        
+        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+    }
 }
 
 // MARK: - Fetch
@@ -100,7 +154,7 @@ extension InvestmentProgramListViewModel {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += take
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.investmentProgramViewModels ?? [ProgramTableViewCellViewModel]()
             
@@ -121,14 +175,23 @@ extension InvestmentProgramListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at index: Int) -> ProgramTableViewCellViewModel? {
-        return investmentProgramViewModels[index]
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        let type = sections[indexPath.section]
+        switch type {
+        case .header:
+            return ProgramListHeaderTableViewCellViewModel(programListCount: totalCount)
+        case .programList:
+            return investmentProgramViewModels[indexPath.row]
+        }
     }
     
-    func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
-        guard let model = model(at: index),
-            let investmentProgramId = model.investmentProgram.id
-            else { return nil }
+    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
+            return nil
+        }
+        
+        let investmentProgram = model.investmentProgram
+        guard let investmentProgramId = investmentProgram.id else { return nil}
         
         return router.getDetailViewController(with: investmentProgramId.uuidString)
     }
@@ -191,5 +254,26 @@ extension InvestmentProgramListViewModel {
                 completionError(.success)
             }
         }
+    }
+}
+
+extension InvestmentProgramListViewModel {
+    func logoImageName() -> String? {
+        let imageName = "img_program_list_logo"
+        return imageName
+    }
+    
+    func noDataText() -> String {
+        return "you don’t have \nany programs"
+    }
+    
+    func noDataImageName() -> String {
+        let imageName = "img_program_list_logo"
+        return imageName
+    }
+    
+    func noDataButtonTitle() -> String {
+        let text = "Update"
+        return text.uppercased()
     }
 }

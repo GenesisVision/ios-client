@@ -8,41 +8,38 @@
 
 import UIKit
 
-protocol DashboardTableViewCellProtocol: class {
-    func investProgramDidPress(with investmentProgramId: String)
-    func withdrawProgramDidPress(with investmentProgramId: String, investedTokens: Double)
-}
-
 class DashboardTableViewCell: UITableViewCell {
     
     // MARK: - Variables
-    weak var delegate: DashboardTableViewCellProtocol?
     var investmentProgramId: String = ""
     var investedTokens: Double = 0.0
     
-    // MARK: - Buttons
-    @IBOutlet weak var buttonsStackView: UIStackView!
-    @IBOutlet weak var investButton: ActionButton!
-    @IBOutlet weak var withdrawButton: ActionButton!
-    
     // MARK: - Views
-    @IBOutlet var managerAvatarImageView: UIImageView! {
-        didSet {
-            managerAvatarImageView.addBorder(withBorderWidth: 2.0)
-        }
-    }
+    @IBOutlet var programLogoImageView: ProfileImageView!
     
-    @IBOutlet var programLogoImageView: ProfileImageView! {
+    @IBOutlet var chartView: ChartView! {
         didSet {
-            programLogoImageView.profilePhotoImageView.addBorder(withBorderWidth: 2.0)
+            chartView.backgroundColor = UIColor.Background.main
+            chartView.isUserInteractionEnabled = false
         }
     }
     
     // MARK: - Labels
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var tokensCountLabel: UILabel!
-    @IBOutlet var profitLabel: UILabel!
-    @IBOutlet var periodLabel: UILabel!
+    @IBOutlet var noDataLabel: UILabel! {
+        didSet {
+            noDataLabel.textColor = UIColor.Font.dark
+        }
+    }
+    
+    @IBOutlet var programTitleLabel: UILabel!
+    @IBOutlet var managerNameLabel: UILabel!
+    
+    @IBOutlet var tokensCountValueLabel: UILabel!
+    @IBOutlet var tokensCountTitleLabel: UILabel!
+    
+    @IBOutlet var profitValueLabel: UILabel!
+    @IBOutlet var profitTitleLabel: UILabel!
+    
     @IBOutlet var periodLeftValueLabel: UILabel!
     @IBOutlet var periodLeftTitleLabel: UILabel!
     
@@ -50,16 +47,6 @@ class DashboardTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
-    }
-    
-    // MARK: - Actions
-    @IBAction func investButtonAction(_ sender: Any) {
-        delegate?.investProgramDidPress(with: investmentProgramId)
-    }
-    
-    @IBAction func withdrawButtonAction(_ sender: Any) {
-        delegate?.withdrawProgramDidPress(with: investmentProgramId, investedTokens: investedTokens)
     }
 }

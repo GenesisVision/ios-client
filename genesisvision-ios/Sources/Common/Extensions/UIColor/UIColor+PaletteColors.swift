@@ -21,13 +21,13 @@ extension UIColor {
         static var red: UIColor { return #colorLiteral(red: 0.8745098039, green: 0.09411764706, blue: 0.3960784314, alpha: 1) }                                     //df1865
         static var black: UIColor { return #colorLiteral(red: 0.1254901961, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                   //f44336
         
-        static var lightGray: UIColor { return #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1) }                               //cfd8dc
+//        static var lightGray: UIColor { return #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1) }                               //cfd8dc
         static var darkGray: UIColor { return #colorLiteral(red: 0.6666666667, green: 0.7215686275, blue: 0.7529411765, alpha: 1) }                                //aab8c0
         static var gray: UIColor { return #colorLiteral(red: 0.8117647059, green: 0.8352941176, blue: 0.8549019608, alpha: 1) }                                    //cfd5da
         static var sliderLineColor: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                         //e3ebed
         static var textFieldLineColor: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                      //ccd5d4
         
-//        static var white: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                                   //cfd8dc
+        static var lightGray: UIColor { return #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.9921568627, alpha: 1) }                               //fcfdfd
         static var white: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                                   //ffffff
     }
     
@@ -44,18 +44,21 @@ extension UIColor {
         static var investType: UIColor { return Font.dark }
         static var currency: UIColor { return Font.medium }
         static var date: UIColor { return Font.medium }
+        static var programTitle: UIColor { return #colorLiteral(red: 0.1450980392, green: 0.4666666667, blue: 0.5568627451, alpha: 1) }
+        static var programStatus: UIColor { return #colorLiteral(red: 0.1450980392, green: 0.4666666667, blue: 0.5568627451, alpha: 1) }
     }
     
-    struct Wallet {
-        static var balance: UIColor { return Font.dark }
-        static var usdBalance: UIColor { return Font.light }
-        static var currency: UIColor { return primary }
+    struct Header {
+        static var darkTitle: UIColor { return Font.dark }
+        static var darkSubtitle: UIColor { return Font.dark }
+        static var graySubtitle: UIColor { return Common.sliderLineColor }
     }
     
     struct Font {
         static var primary: UIColor { return Common.primary }
         
         static var dark: UIColor { return  Common.veryDarkBlue }
+        static var darkBlue: UIColor { return  Common.darkBlue }
         
         static var medium: UIColor { return Common.darkGray }
         static var light: UIColor { return Common.gray }
@@ -76,6 +79,7 @@ extension UIColor {
         static var red: UIColor { return Common.red }
         
         static var gray: UIColor { return Common.gray }
+        
     }
     
     struct Slider {
@@ -102,6 +106,7 @@ extension UIColor {
     struct NavBar {
         static var tint: UIColor { return Common.primary }
         static var background: UIColor { return Common.white }
+        static var grayBackground: UIColor { return #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1) }
     }
     
     struct Border {

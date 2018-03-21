@@ -51,9 +51,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = viewModel.title
-        navigationItem.title = viewModel.title.capitalized
         
         setup()
     }
@@ -83,6 +80,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
         navigationItem.rightBarButtonItem = filtersBarButtonItem
+        
+        title = viewModel.title.uppercased()
+        navigationItem.title = viewModel.title
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_navbar_left_logo"), style: .done, target: nil, action: nil)
+        navigationItem.leftBarButtonItem?.isEnabled = false
     }
     
     private func setupTableConfiguration() {
@@ -91,6 +93,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: InvestmentProgramListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -98,6 +101,18 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
+    }
+    
+    private func updateSortHeaderView() {
+        guard let title = self.viewModel.headerTitle(for: 0) else {
+            return
+        }
+        
+        let header = self.tableView.headerView(forSection: 0) as! SortHeaderView
+        header.sortButton.setTitle(title, for: .normal)
+        
+        showProgressHUD()
+        fetch()
     }
     
     override func fetch() {
@@ -152,15 +167,11 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
             return
         }
         
-        guard let investmentProgram = viewModel.model(at: indexPath.row)?.investmentProgram else {
-            return
-        }
-
-        viewModel.showDetail(with: investmentProgram.id?.uuidString ?? "")
+        viewModel.showDetail(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath.row) else {
+        guard let model = viewModel.model(at: indexPath) else {
             return UITableViewCell()
         }
 
@@ -173,10 +184,29 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = viewModel.headerTitle(for: section) else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as SortHeaderView
+        header.sortButton.setTitle(title, for: .normal)
+        header.delegate = self
+        
+        return header
+    }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
     }
 }
 
@@ -188,7 +218,7 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
         let cellPosition = tableView.convert(location, from: view)
         
         guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailViewController(with: indexPath.row),
+            let vc = viewModel.getDetailViewController(with: indexPath),
             let cell = tableView.cellForRow(at: indexPath)
             else { return nil }
         
@@ -206,5 +236,25 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
 extension ProgramListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+    }
+}
+
+extension ProgramListViewController: SortHeaderViewProtocol {
+    func sortButtonDidPress() {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        
+        guard let selectedValue = viewModel.filter?.sorting else { return }
+        
+        let values = sortingValues
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: sortingKeys.index(of: selectedValue) ?? 0)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { vc, picker, index, values in
+            self.viewModel.filter?.sorting = sortingKeys[index.row]
+            self.updateSortHeaderView()
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        alert.show()
     }
 }

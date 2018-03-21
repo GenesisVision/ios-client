@@ -26,8 +26,10 @@ open class InvestmentProgram: Codable {
     }
     public var id: UUID?
     public var title: String?
+    public var description: String?
     public var level: Int?
     public var logo: String?
+    public var isEnabled: Bool?
     public var balance: Double?
     public var currency: Currency?
     public var tradesCount: Int?
@@ -45,14 +47,17 @@ open class InvestmentProgram: Codable {
     public var feeManagement: Double?
     public var chart: [Chart]?
     public var hasNewRequests: Bool?
+    public var isInvestEnable: Bool?
 
 
     
-    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, hasNewRequests: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, hasNewRequests: Bool?, isInvestEnable: Bool?) {
         self.id = id
         self.title = title
+        self.description = description
         self.level = level
         self.logo = logo
+        self.isEnabled = isEnabled
         self.balance = balance
         self.currency = currency
         self.tradesCount = tradesCount
@@ -70,6 +75,7 @@ open class InvestmentProgram: Codable {
         self.feeManagement = feeManagement
         self.chart = chart
         self.hasNewRequests = hasNewRequests
+        self.isInvestEnable = isInvestEnable
     }
     
 
@@ -81,8 +87,10 @@ open class InvestmentProgram: Codable {
 
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
@@ -100,6 +108,7 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
+        try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
     }
 
     // Decodable protocol methods
@@ -109,8 +118,10 @@ open class InvestmentProgram: Codable {
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        description = try container.decodeIfPresent(String.self, forKey: "description")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
@@ -128,6 +139,7 @@ open class InvestmentProgram: Codable {
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
+        isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
     }
 }
 

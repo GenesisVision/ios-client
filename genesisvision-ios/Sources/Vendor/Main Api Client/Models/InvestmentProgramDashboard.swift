@@ -26,6 +26,7 @@ open class InvestmentProgramDashboard: Codable {
     }
     public var id: UUID?
     public var title: String?
+    public var description: String?
     public var level: Int?
     public var logo: String?
     public var balance: Double?
@@ -55,9 +56,10 @@ open class InvestmentProgramDashboard: Codable {
 
 
     
-    public init(id: UUID?, title: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
+        self.description = description
         self.level = level
         self.logo = logo
         self.balance = balance
@@ -95,6 +97,7 @@ open class InvestmentProgramDashboard: Codable {
 
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(balance, forKey: "balance")
@@ -130,6 +133,7 @@ open class InvestmentProgramDashboard: Codable {
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        description = try container.decodeIfPresent(String.self, forKey: "description")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")

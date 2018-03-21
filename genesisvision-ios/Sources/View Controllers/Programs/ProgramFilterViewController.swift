@@ -91,16 +91,6 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
 extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    
-        if let cell = tableView.cellForRow(at: indexPath) as? FilterSortTableViewCell {
-            if !cell.isFirstResponder {
-                _ = cell.becomeFirstResponder()
-            }
-        }
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = viewModel.model(for: indexPath)
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

@@ -12,16 +12,14 @@ import Foundation
 open class InvestorDashboard: Codable {
 
     public var investmentPrograms: [InvestmentProgramDashboard]?
-    public var total: Int?
-    public var profitFromProgram: Double?
+    public var profitFromPrograms: Double?
     public var investedAmount: Double?
 
 
     
-    public init(investmentPrograms: [InvestmentProgramDashboard]?, total: Int?, profitFromProgram: Double?, investedAmount: Double?) {
+    public init(investmentPrograms: [InvestmentProgramDashboard]?, profitFromPrograms: Double?, investedAmount: Double?) {
         self.investmentPrograms = investmentPrograms
-        self.total = total
-        self.profitFromProgram = profitFromProgram
+        self.profitFromPrograms = profitFromPrograms
         self.investedAmount = investedAmount
     }
     
@@ -33,8 +31,7 @@ open class InvestorDashboard: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(investmentPrograms, forKey: "investmentPrograms")
-        try container.encodeIfPresent(total, forKey: "total")
-        try container.encodeIfPresent(profitFromProgram, forKey: "profitFromProgram")
+        try container.encodeIfPresent(profitFromPrograms, forKey: "profitFromPrograms")
         try container.encodeIfPresent(investedAmount, forKey: "investedAmount")
     }
 
@@ -44,8 +41,7 @@ open class InvestorDashboard: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         investmentPrograms = try container.decodeIfPresent([InvestmentProgramDashboard].self, forKey: "investmentPrograms")
-        total = try container.decodeIfPresent(Int.self, forKey: "total")
-        profitFromProgram = try container.decodeIfPresent(Double.self, forKey: "profitFromProgram")
+        profitFromPrograms = try container.decodeIfPresent(Double.self, forKey: "profitFromPrograms")
         investedAmount = try container.decodeIfPresent(Double.self, forKey: "investedAmount")
     }
 }

@@ -99,9 +99,7 @@ class ChartView: CombinedChartView {
     }
     
     // MARK: - Private methods
-    private func setup() {
-        backgroundColor = UIColor.Background.main
-        
+    private func setup() {    
         dragEnabled = chartType == .detail
         pinchZoomEnabled = chartType == .detail
         

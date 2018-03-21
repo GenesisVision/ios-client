@@ -39,9 +39,12 @@ open class InvestmentProgramDetails: Codable {
     public var ownBalance: Double?
     public var currency: Currency?
     public var investedTokens: Double?
+    public var investedAmount: Double?
+    public var profitFromProgram: Double?
     public var tradesCount: Int?
     public var investorsCount: Int?
     public var periodDuration: Int?
+    public var programStartDate: Date?
     public var startOfPeriod: Date?
     public var endOfPeriod: Date?
     public var profitAvg: Double?
@@ -60,6 +63,7 @@ open class InvestmentProgramDetails: Codable {
     public var isEnabled: Bool?
     public var chart: [Chart]?
     public var manager: ProfilePublicViewModel?
+    public var profitDiagram: PeriodProfitDiagram?
     public var hasNewRequests: Bool?
     public var isHistoryEnable: Bool?
     public var isInvestEnable: Bool?
@@ -68,7 +72,7 @@ open class InvestmentProgramDetails: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -79,9 +83,12 @@ open class InvestmentProgramDetails: Codable {
         self.ownBalance = ownBalance
         self.currency = currency
         self.investedTokens = investedTokens
+        self.investedAmount = investedAmount
+        self.profitFromProgram = profitFromProgram
         self.tradesCount = tradesCount
         self.investorsCount = investorsCount
         self.periodDuration = periodDuration
+        self.programStartDate = programStartDate
         self.startOfPeriod = startOfPeriod
         self.endOfPeriod = endOfPeriod
         self.profitAvg = profitAvg
@@ -100,6 +107,7 @@ open class InvestmentProgramDetails: Codable {
         self.isEnabled = isEnabled
         self.chart = chart
         self.manager = manager
+        self.profitDiagram = profitDiagram
         self.hasNewRequests = hasNewRequests
         self.isHistoryEnable = isHistoryEnable
         self.isInvestEnable = isInvestEnable
@@ -124,9 +132,12 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(ownBalance, forKey: "ownBalance")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(investedTokens, forKey: "investedTokens")
+        try container.encodeIfPresent(investedAmount, forKey: "investedAmount")
+        try container.encodeIfPresent(profitFromProgram, forKey: "profitFromProgram")
         try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
         try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
+        try container.encodeIfPresent(programStartDate, forKey: "programStartDate")
         try container.encodeIfPresent(startOfPeriod, forKey: "startOfPeriod")
         try container.encodeIfPresent(endOfPeriod, forKey: "endOfPeriod")
         try container.encodeIfPresent(profitAvg, forKey: "profitAvg")
@@ -145,6 +156,7 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(manager, forKey: "manager")
+        try container.encodeIfPresent(profitDiagram, forKey: "profitDiagram")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isHistoryEnable, forKey: "isHistoryEnable")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
@@ -167,9 +179,12 @@ open class InvestmentProgramDetails: Codable {
         ownBalance = try container.decodeIfPresent(Double.self, forKey: "ownBalance")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         investedTokens = try container.decodeIfPresent(Double.self, forKey: "investedTokens")
+        investedAmount = try container.decodeIfPresent(Double.self, forKey: "investedAmount")
+        profitFromProgram = try container.decodeIfPresent(Double.self, forKey: "profitFromProgram")
         tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
         investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
+        programStartDate = try container.decodeIfPresent(Date.self, forKey: "programStartDate")
         startOfPeriod = try container.decodeIfPresent(Date.self, forKey: "startOfPeriod")
         endOfPeriod = try container.decodeIfPresent(Date.self, forKey: "endOfPeriod")
         profitAvg = try container.decodeIfPresent(Double.self, forKey: "profitAvg")
@@ -188,6 +203,7 @@ open class InvestmentProgramDetails: Codable {
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
+        profitDiagram = try container.decodeIfPresent(PeriodProfitDiagram.self, forKey: "profitDiagram")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isHistoryEnable = try container.decodeIfPresent(Bool.self, forKey: "isHistoryEnable")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")

@@ -17,6 +17,7 @@ class TraderTableViewCell: UITableViewCell {
     
     @IBOutlet var chartView: ChartView! {
         didSet {
+            chartView.backgroundColor = UIColor.Background.main
             chartView.isUserInteractionEnabled = false
         }
     }
@@ -28,10 +29,15 @@ class TraderTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var userNameLabel: UILabel!
-    @IBOutlet var currencyLabel: UILabel! {
+    @IBOutlet var programTitleLabel: UILabel!
+    @IBOutlet var managerNameLabel: UILabel! {
         didSet {
-            currencyLabel.addBorder(withBorderWidth: 1.0, color: UIColor.primary)
+            managerNameLabel.isHidden = true
+        }
+    }
+    @IBOutlet var currencyLabel: CurrencyLabel! {
+        didSet {
+            currencyLabel.textColor = UIColor.Font.white
         }
     }
     
@@ -39,7 +45,6 @@ class TraderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
     }
 }

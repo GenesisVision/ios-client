@@ -16,7 +16,6 @@ final class ProgramFilterViewModel {
     
     enum SectionType {
         case slider
-        case sort
     }
     
     // MARK: - Variables
@@ -27,22 +26,13 @@ final class ProgramFilterViewModel {
                                  AmountTitles(title: "Average Profit", subtitle: "Select Trader Profit")]
     
     private var amounts: [AmountType] = [.level, .totalProfit, .averageProfit]
-    private var sections: [SectionType] = [.slider, .sort]
+    private var sections: [SectionType] = [.slider]
     private var router: ProgramFilterRouter!
-    private var sortingList: [InvestmentProgramsFilter.Sorting : String] = [.byLevelAsc : "Level ⇡",
-                                                                     .byLevelDesc : "Level ⇣",
-                                                                     .byOrdersAsc : "Orders ⇡",
-                                                                     .byOrdersDesc : "Orders ⇣",
-                                                                     .byProfitAsc : "Profit ⇡",
-                                                                     .byProfitDesc : "Profit ⇣",
-                                                                     .byEndOfPeriodAsk : "End of period ⇡",
-                                                                     .byEndOfPeriodDesc : "End of period ⇣"]
     
     var filter: InvestmentProgramsFilter?
     
     var amountCellModels = [FilterAmountTableViewCellViewModel]()
     var amountCellModel: FilterAmountTableViewCellViewModel?
-    var sortCellModel: FilterSortTableViewCellViewModel!
     
     weak var sliderDelegate: TTRangeSliderDelegate?
 //        {
@@ -53,8 +43,7 @@ final class ProgramFilterViewModel {
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FilterAmountTableViewCellViewModel.self,
-                FilterSortTableViewCellViewModel.self]
+        return [FilterAmountTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -79,8 +68,6 @@ final class ProgramFilterViewModel {
         switch type {
         case .slider:
             return amountCellModels[indexPath.row]
-        case .sort:
-            return sortCellModel!
         }
     }
     
@@ -96,14 +83,10 @@ final class ProgramFilterViewModel {
         switch sections[section] {
         case .slider:
             return amountCellModels.count
-        case .sort:
-            return 1
         }
     }
     
     func reset() {
-        filter?.sorting = InvestmentProgramsFilter.Sorting.byProfitAsc
-        
         for idx in 0...amounts.count - 1 {
             var viewModel = amountCellModels[idx]
             
@@ -152,10 +135,6 @@ final class ProgramFilterViewModel {
             }
         
             amountCellModels.append(amountCellModel!)
-        }
-        
-        if let dict = sortingList.first {
-            sortCellModel = FilterSortTableViewCellViewModel(sorting: SortField(type: dict.key.rawValue, text: dict.value), opened: false)
         }
     }
 }

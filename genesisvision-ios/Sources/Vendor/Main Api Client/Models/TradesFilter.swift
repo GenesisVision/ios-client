@@ -11,20 +11,32 @@ import Foundation
 
 open class TradesFilter: Codable {
 
+    public enum Sorting: String, Codable { 
+        case byDateAsk = "ByDateAsk"
+        case byDateDesc = "ByDateDesc"
+        case byTicketAsk = "ByTicketAsk"
+        case byTicketDesc = "ByTicketDesc"
+        case bySymbolAsk = "BySymbolAsk"
+        case bySymbolDesc = "BySymbolDesc"
+        case byDirectionAsk = "ByDirectionAsk"
+        case byDirectionDesc = "ByDirectionDesc"
+    }
     public var investmentProgramId: UUID?
     public var dateFrom: Date?
     public var dateTo: Date?
     public var symbol: String?
+    public var sorting: Sorting?
     public var skip: Int?
     public var take: Int?
 
 
     
-    public init(investmentProgramId: UUID?, dateFrom: Date?, dateTo: Date?, symbol: String?, skip: Int?, take: Int?) {
+    public init(investmentProgramId: UUID?, dateFrom: Date?, dateTo: Date?, symbol: String?, sorting: Sorting?, skip: Int?, take: Int?) {
         self.investmentProgramId = investmentProgramId
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.symbol = symbol
+        self.sorting = sorting
         self.skip = skip
         self.take = take
     }
@@ -40,6 +52,7 @@ open class TradesFilter: Codable {
         try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
         try container.encodeIfPresent(dateTo, forKey: "dateTo")
         try container.encodeIfPresent(symbol, forKey: "symbol")
+        try container.encodeIfPresent(sorting, forKey: "sorting")
         try container.encodeIfPresent(skip, forKey: "skip")
         try container.encodeIfPresent(take, forKey: "take")
     }
@@ -53,6 +66,7 @@ open class TradesFilter: Codable {
         dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
         dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
         symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
+        sorting = try container.decodeIfPresent(Sorting.self, forKey: "sorting")
         skip = try container.decodeIfPresent(Int.self, forKey: "skip")
         take = try container.decodeIfPresent(Int.self, forKey: "take")
     }

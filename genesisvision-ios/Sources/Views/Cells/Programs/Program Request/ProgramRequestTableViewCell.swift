@@ -36,7 +36,6 @@ class ProgramRequestTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
     }
     

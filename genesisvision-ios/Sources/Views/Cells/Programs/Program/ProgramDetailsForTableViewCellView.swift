@@ -12,46 +12,48 @@ class ProgramDetailsForTableViewCellView: UIStackView {
 
     @IBOutlet var investorsTitleLabel: UILabel!
     @IBOutlet var balanceTitleLabel: UILabel!
-    @IBOutlet var avrProfitTitleLabel: UILabel!
+    @IBOutlet var avgProfitTitleLabel: UILabel!
     @IBOutlet var totalProfitTitleLabel: UILabel!
     
     @IBOutlet var investorsValueLabel: UILabel!
     @IBOutlet var balanceValueLabel: UILabel!
-    @IBOutlet var avrProfitValueLabel: UILabel!
+    @IBOutlet var avgProfitValueLabel: UILabel!
     @IBOutlet var totalProfitValueLabel: UILabel!
     
     // MARK: - Public Methods
     func setup(with investorsCountTitle: String? = "INVESTORS", investorsCount: Int?,
                balanceTitle: String? = "BALANCE", balance: Double?,
-               avrProfitTitle: String? = "AVR %", avrProfit: Double?,
-               totalProfitTitle: String? = "TOTAL %", totalProfit: Double?) {
+               avgProfitTitle: String? = "AVG. PROFIT", avgProfit: Double?,
+               totalProfitTitle: String? = "TOTAL PROFIT", totalProfit: Double?) {
         investorsTitleLabel.text = investorsCountTitle
         balanceTitleLabel.text = balanceTitle
-        avrProfitTitleLabel.text = avrProfitTitle
+        avgProfitTitleLabel.text = avgProfitTitle
         totalProfitTitleLabel.text = totalProfitTitle
         
-        investorsTitleLabel.textColor = UIColor.Font.dark
-        balanceTitleLabel.textColor = UIColor.Font.medium
-        avrProfitTitleLabel.textColor = UIColor.Font.medium
-        totalProfitTitleLabel.textColor = UIColor.Font.dark
+        investorsTitleLabel.textColor = UIColor.Font.darkBlue
+        balanceTitleLabel.textColor = UIColor.Font.darkBlue
+        avgProfitTitleLabel.textColor = UIColor.Font.darkBlue
+        totalProfitTitleLabel.textColor = UIColor.Font.darkBlue
+        
+        backgroundColor = UIColor.NavBar.grayBackground
         
         if let investorsCount = investorsCount,
             let balance = balance,
-            let avrProfit = avrProfit,
+            let avgProfit = avgProfit,
             let totalProfit = totalProfit {
             
-            let avrProfitValue = avrProfit.rounded(toPlaces: 4)
+            let avgProfitValue = avgProfit.rounded(toPlaces: 4)
             let totalProfitValue = totalProfit.rounded(toPlaces: 4)
             
             investorsValueLabel.text = investorsCount.toString()
             balanceValueLabel.text = balance.rounded(toPlaces: 4).toString()
-            avrProfitValueLabel.text = avrProfitValue.toString() + "%"
+            avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.text = totalProfitValue.toString() + "%"
             
-            investorsValueLabel.textColor = UIColor.primary
-            balanceValueLabel.textColor = UIColor.Font.medium
-            avrProfitValueLabel.textColor = UIColor.Font.medium
-            totalProfitValueLabel.textColor = totalProfitValue == 0 ? UIColor.Font.medium : totalProfitValue > 0 ? UIColor.Font.green : UIColor.Font.red
+            investorsValueLabel.textColor = UIColor.Font.dark
+            balanceValueLabel.textColor = UIColor.Font.dark
+            avgProfitValueLabel.textColor = UIColor.Font.dark
+            totalProfitValueLabel.textColor = UIColor.Font.dark
         }
     }
 }

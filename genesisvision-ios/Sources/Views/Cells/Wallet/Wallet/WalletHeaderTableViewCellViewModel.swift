@@ -7,20 +7,22 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 struct WalletHeaderTableViewCellViewModel {
     let balance: Double
-    let currency: String
     let usdBalance: Double
+    let imageName: String
     weak var delegate: WalletHeaderTableViewCellProtocol?
 }
 
 extension WalletHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletHeaderTableViewCell) {
         cell.balanceLabel.text = balance.rounded(toPlaces: 4).toString()
-        cell.currencyLabel.text = currency
         cell.usdBalanceLabel.text = usdBalance.rounded(toPlaces: 2).toString(currency: true)
         cell.delegate = delegate
+        
+        cell.logoImageView.image = UIImage(named: imageName)
     }
 }
 

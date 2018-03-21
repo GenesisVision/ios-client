@@ -1,9 +1,8 @@
 //
-//  Date+DefaultFormat.swift
-//  genesisvision-ios
+//  UIButtonExtension.swift
+//  RunForGood-ios
 //
-//  Created by George Shaginyan on 04.02.18.
-//  Copyright © 2018 Genesis Vision. All rights reserved.
+//  Created by George on 20/03/2018.
 //
 
 import Foundation

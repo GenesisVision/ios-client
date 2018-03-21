@@ -106,7 +106,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         setBottomLine(borderColor: bottomlineColor)
         leftImage = isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_colored_icon") : #imageLiteral(resourceName: "img_textfield_email_colored_icon")
         
-        font = UIFont(name: "NeuzeitGro-Reg", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)
+        font = UIFont.getFont(.regular, size: 18)
         
         clearImage = #imageLiteral(resourceName: "img_textfield_clear")
         

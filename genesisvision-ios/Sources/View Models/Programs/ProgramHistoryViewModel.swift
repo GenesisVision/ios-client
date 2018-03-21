@@ -66,7 +66,7 @@ extension ProgramHistoryViewModel {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += take
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.viewModels ?? [WalletTransactionTableViewCellViewModel]()
             

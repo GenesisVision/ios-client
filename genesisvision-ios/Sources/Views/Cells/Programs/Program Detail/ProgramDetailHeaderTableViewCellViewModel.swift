@@ -19,8 +19,6 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
-        cell.programLogoImageView.flagImageView.isHidden = true
-        
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = investmentProgramDetails.logo {
@@ -29,8 +27,12 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        if let description = investmentProgramDetails.description {
-            cell.descriptionLabel.text = description
+        if let title = investmentProgramDetails.title {
+            cell.titleLabel.text = title
+        }
+        
+        if let username = investmentProgramDetails.manager?.username {
+            cell.managerLabel.text = "by " + username
         }
     }
 }

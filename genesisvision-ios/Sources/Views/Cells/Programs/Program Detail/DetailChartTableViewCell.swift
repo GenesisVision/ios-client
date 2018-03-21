@@ -12,7 +12,12 @@ import Charts
 class DetailChartTableViewCell: UITableViewCell {
 
     // MARK: - Views
-    @IBOutlet var chartView: ChartView!
+    @IBOutlet var chartView: ChartView! {
+        didSet {
+            chartView.backgroundColor = UIColor.NavBar.grayBackground
+            chartView.isUserInteractionEnabled = false
+        }
+    }
     
     // MARK: - Labels
     @IBOutlet var noDataLabel: UILabel! {
@@ -25,8 +30,8 @@ class DetailChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let extractedExpr = UIColor.Background.main
-        backgroundColor = extractedExpr
+        backgroundColor = UIColor.NavBar.grayBackground
+        contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
     }
     

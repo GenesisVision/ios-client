@@ -29,6 +29,18 @@ class WalletTransactionTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet var programTitleLabel: UILabel! {
+        didSet {
+            programTitleLabel.textColor = UIColor.Transaction.programTitle
+        }
+    }
+    
+    @IBOutlet var programStatusLabel: UILabel! {
+        didSet {
+            programStatusLabel.textColor = UIColor.Transaction.programStatus
+        }
+    }
+    
     @IBOutlet var currencyLabel: UILabel! {
         didSet {
             currencyLabel.textColor = UIColor.Transaction.currency
@@ -39,7 +51,6 @@ class WalletTransactionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }

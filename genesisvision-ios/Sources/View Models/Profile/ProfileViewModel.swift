@@ -21,7 +21,7 @@ final class ProfileViewModel {
     }
     
     // MARK: - Variables
-    var title: String = isInvestorApp ? "Investor Profile" : "Manager Profile"
+    var title: String = "Profile"
     
     private var router: ProfileRouter!
     private var profileEntity: ProfileEntity?

@@ -26,11 +26,12 @@ extension TraderTableViewCellViewModel: CellViewModel {
             cell.chartView.setup(dataSet: [], name: participantViewModel.name)
         }
         
-        cell.userNameLabel.text = participantViewModel.name ?? ""
+        if let name = participantViewModel.name {
+            cell.programTitleLabel.text = name
+        }
         
         cell.currencyLabel.isHidden = true
         cell.programLogoImageView.levelLabel.isHidden = true
-        cell.programLogoImageView.flagImageView.isHidden = true
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = participantViewModel.avatar {
@@ -39,6 +40,6 @@ extension TraderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avrProfitTitle: "PROFIT", avrProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT %", totalProfit: participantViewModel.totalProfitInPercent)
+        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avgProfitTitle: "PROFIT", avgProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT %", totalProfit: participantViewModel.totalProfitInPercent)
     }
 }

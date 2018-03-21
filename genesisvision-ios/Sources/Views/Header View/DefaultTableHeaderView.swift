@@ -11,7 +11,7 @@ import UIKit
 
 class DefaultTableHeaderView: UITableViewHeaderFooterView {
 
-    static let font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.bold)
+    static let font = UIFont.getFont(.bold, size: 25)
     
     static var titleInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -27,6 +27,6 @@ class DefaultTableHeaderView: UITableViewHeaderFooterView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.Background.gray
+        contentView.backgroundColor = UIColor.Background.main
     }
 }

@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,37 +24,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYB-jK-eXS">
-                        <rect key="frame" x="37" y="22" width="226" height="21.5"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Sort by profit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYB-jK-eXS">
+                        <rect key="frame" x="8" y="16" width="304" height="34.5"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
+                        <color key="textColor" red="0.80000000000000004" green="0.83529411764705885" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_dropdown_icon" translatesAutoresizingMaskIntoConstraints="NO" id="2bl-TW-wr9">
-                        <rect key="frame" x="271" y="30.5" width="11" height="5"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="5" id="3IN-Iq-A6c"/>
-                            <constraint firstAttribute="width" constant="11" id="gdD-9e-dle"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="2bl-TW-wr9" secondAttribute="trailing" constant="38" id="DFX-yS-QJi"/>
-                    <constraint firstItem="2bl-TW-wr9" firstAttribute="leading" secondItem="YYB-jK-eXS" secondAttribute="trailing" constant="8" id="PEQ-iK-HF1"/>
-                    <constraint firstItem="YYB-jK-eXS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="37" id="RLn-ri-EXT"/>
-                    <constraint firstItem="YYB-jK-eXS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XSP-Wm-SYW"/>
-                    <constraint firstItem="2bl-TW-wr9" firstAttribute="centerY" secondItem="YYB-jK-eXS" secondAttribute="centerY" id="bcL-NT-hC8"/>
+                    <constraint firstAttribute="trailing" secondItem="YYB-jK-eXS" secondAttribute="trailing" constant="8" id="1Lk-Be-5Mj"/>
+                    <constraint firstItem="YYB-jK-eXS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8RY-sP-UB3"/>
+                    <constraint firstItem="YYB-jK-eXS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="IW9-nQ-TyB"/>
+                    <constraint firstAttribute="bottom" secondItem="YYB-jK-eXS" secondAttribute="bottom" constant="16" id="ktm-r6-MAR"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="arrowImageView" destination="2bl-TW-wr9" id="YW5-xe-2nU"/>
                 <outlet property="titleLabel" destination="YYB-jK-eXS" id="7lr-vA-yNe"/>
             </connections>
             <point key="canvasLocation" x="34" y="65.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="img_dropdown_icon" width="13" height="7"/>
-    </resources>
 </document>

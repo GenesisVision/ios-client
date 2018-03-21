@@ -6,17 +6,26 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit.UITableViewHeaderFooterView
+
 final class DashboardViewModel {
+    
+    enum SectionType {
+        case header
+        case programList
+    }
     
     // MARK: - Variables
     var title: String = "Dashboard"
     
+    private var sections: [SectionType] = [.header, .programList]
+    
     private var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
-    private weak var delegate: DashboardTableViewCellProtocol?
     
     var programsCount: String = ""
     var skip = 0
+    var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
             programsCount = "\(totalCount) programs"
@@ -28,10 +37,13 @@ final class DashboardViewModel {
     var searchText = ""
     var viewModels = [DashboardTableViewCellViewModel]()
     
+    var filter: InvestmentProgramsFilter?
+    
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        self.delegate = router.currentController() as? DashboardTableViewCellProtocol
+        
+        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byOrdersAsc, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
     }
 }
 
@@ -40,27 +52,82 @@ extension DashboardViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardTableViewCellViewModel.self]
+        return [DashboardHeaderTableViewCellViewModel.self, DashboardTableViewCellViewModel.self]
+    }
+    
+    /// Return view models for registration header/footer Nib files
+    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [SortHeaderView.self]
     }
     
     func modelsCount() -> Int {
         return viewModels.count
     }
     
+    func numberOfSections() -> Int {
+        return sections.count
+    }
+    
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        switch sections[section] {
+        case .programList:
+            return modelsCount()
+        case .header:
+            return 1
+        }
+    }
+    
+    func headerTitle(for section: Int) -> String? {
+        switch sections[section] {
+        case .programList:
+            guard let sort = filter?.sorting else { return "Sort by " }
+            
+            return "Sort by " + getSortingValue(sortingKey: sort)
+        case .header:
+            return nil
+        }
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch sections[section] {
+        case .programList:
+            return 50.0
+        case .header:
+            return 0.0
+        }
     }
 }
 
 // MARK: - Navigation
 extension DashboardViewModel {
-    func noDataText() -> String {
-        return "You have no investments yet."
+    func logoImageName() -> String? {
+        let imageName = "img_dashboard_logo"
+        return imageName
     }
     
-    func showDetail(with investmentProgramId: String) {
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId))
+    func noDataText() -> String {
+        return "you don’t have \nany programs yet.."
     }
+    
+    func noDataImageName() -> String? {
+        let imageName = "img_dashboard_logo"
+        return imageName
+    }
+    
+    func noDataButtonTitle() -> String {
+        let text = "Browse programs"
+        return text.uppercased()
+    }
+    
+    func showDetail(at indexPath: IndexPath) {
+        guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
+        
+        let investmentProgram = model.investmentProgram
+        guard let investmentProgramId = investmentProgram.id else { return }
+        
+        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+    }
+    
     func invest(with investmentProgramId: String) {
         router.show(routeType: .invest(investmentProgramId: investmentProgramId))
     }
@@ -88,7 +155,7 @@ extension DashboardViewModel {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += take
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.viewModels ?? [DashboardTableViewCellViewModel]()
             
@@ -109,16 +176,29 @@ extension DashboardViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> DashboardTableViewCellViewModel? {
-        return viewModels[index]
-    }
-    
-    func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
-        guard let model = model(for: index) else {
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        guard let dashboard = dashboard else {
             return nil
         }
         
-        return router.getDetailViewController(with: model.investmentProgram.id?.uuidString ?? "")
+        let type = sections[indexPath.section]
+        switch type {
+        case .header:
+            return DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard)
+        case .programList:
+            return viewModels[indexPath.row]
+        }
+    }
+    
+    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+        guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
+                return nil
+        }
+        
+        let investmentProgram = model.investmentProgram
+        guard let investmentProgramId = investmentProgram.id else { return nil}
+        
+        return router.getDetailViewController(with: investmentProgramId.uuidString)
     }
     
     // MARK: - Private methods
@@ -128,15 +208,17 @@ extension DashboardViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        DashboardDataProvider.getProgram(completion: { (dashboard) in
+        DashboardDataProvider.getProgram(completion: { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completionError(.failure(reason: nil)) }
+            
+            self?.dashboard = dashboard
             
             var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
             
-            let totalCount = dashboard.total ?? 0
+            let totalCount = dashboard.investmentPrograms?.count ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, delegate: self.delegate)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             

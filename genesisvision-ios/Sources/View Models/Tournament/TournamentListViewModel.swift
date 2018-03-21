@@ -16,6 +16,7 @@ final class TournamentListViewModel {
     var dataType: DataType = .api
     var participantsCount: String = ""
     var skip = 0
+    var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
             participantsCount = "\(totalCount) participants"
@@ -99,7 +100,7 @@ extension TournamentListViewModel {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += take
         fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
             var allViewModels = self?.traderTableViewCellViewModels ?? [TraderTableViewCellViewModel]()
             
@@ -162,7 +163,7 @@ extension TournamentListViewModel {
     private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = ParticipantsFilter(skip: skip, take: Constants.Api.take, name: name)
+            let filter = ParticipantsFilter(skip: skip, take: take, name: name)
             
             tournamentParticipants(withFilter: filter, completion: { (participantViewModels) in
                 guard let participantViewModels = participantViewModels else { return completionError(.failure(reason: nil)) }

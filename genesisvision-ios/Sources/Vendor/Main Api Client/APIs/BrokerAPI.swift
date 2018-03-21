@@ -53,6 +53,115 @@ open class BrokerAPI {
     }
 
     /**
+     Confirm email after registration
+     
+     - parameter userId: (query)  (optional)
+     - parameter code: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAuthConfirmEmailGet(userId: String? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerAuthConfirmEmailGetWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Confirm email after registration
+     - GET /api/broker/auth/confirmEmail
+     
+     - parameter userId: (query)  (optional)
+     - parameter code: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerAuthConfirmEmailGetWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/auth/confirmEmail"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "userId": userId, 
+            "code": code
+        ])
+        
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Forgot password
+     
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAuthForgotPasswordPost(model: ForgotPasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerAuthForgotPasswordPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Forgot password
+     - POST /api/broker/auth/forgotPassword
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerAuthForgotPasswordPostWithRequestBuilder(model: ForgotPasswordViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/auth/forgotPassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Reset password
+     
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAuthResetPasswordPost(model: ResetPasswordViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiBrokerAuthResetPasswordPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Reset password
+     - POST /api/broker/auth/resetPassword
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiBrokerAuthResetPasswordPostWithRequestBuilder(model: ResetPasswordViewModel? = nil) -> RequestBuilder<String> {
+        let path = "/api/broker/auth/resetPassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Authorize
      
      - parameter model: (body)  (optional)
@@ -127,6 +236,46 @@ open class BrokerAPI {
     }
 
     /**
+     Change password
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerAuthhangePasswordPost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerAuthhangePasswordPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Change password
+     - POST /api/broker/auth/сhangePassword
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerAuthhangePasswordPostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/auth/сhangePassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Get broker initial data
      
      - parameter brokerTradeServerId: (query)  
@@ -180,6 +329,7 @@ open class BrokerAPI {
       "number" : 9,
       "managerStartBalance" : 2.027123023002322,
       "managerStartShare" : 4.145608029883936,
+      "processStatus" : "None",
       "investmentRequest" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "amount" : 7.386281948385884,
@@ -219,6 +369,7 @@ open class BrokerAPI {
       "number" : 9,
       "managerStartBalance" : 2.027123023002322,
       "managerStartShare" : 4.145608029883936,
+      "processStatus" : "None",
       "investmentRequest" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "amount" : 7.386281948385884,
@@ -311,11 +462,12 @@ open class BrokerAPI {
      Close investment period
      
      - parameter investmentProgramId: (query)  
+     - parameter currentBalance: (query)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerPeriodClosePost(investmentProgramId: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerPeriodClosePostWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
+    open class func apiBrokerPeriodClosePost(investmentProgramId: UUID, currentBalance: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerPeriodClosePostWithRequestBuilder(investmentProgramId: investmentProgramId, currentBalance: currentBalance, authorization: authorization).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -326,18 +478,20 @@ open class BrokerAPI {
      - POST /api/broker/period/close
      
      - parameter investmentProgramId: (query)  
+     - parameter currentBalance: (query)  
      - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiBrokerPeriodClosePostWithRequestBuilder(investmentProgramId: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func apiBrokerPeriodClosePostWithRequestBuilder(investmentProgramId: UUID, currentBalance: Double, authorization: String) -> RequestBuilder<Void> {
         let path = "/api/broker/period/close"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "investmentProgramId": investmentProgramId
+            "investmentProgramId": investmentProgramId, 
+            "currentBalance": currentBalance
         ])
         
         let nillableHeaders: [String: Any?] = [
@@ -556,6 +710,7 @@ open class BrokerAPI {
     "number" : 9,
     "managerStartBalance" : 2.027123023002322,
     "managerStartShare" : 4.145608029883936,
+    "processStatus" : "None",
     "investmentRequest" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "amount" : 7.386281948385884,

@@ -87,8 +87,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     private func setupUI() {
         showProfileStateAction()
         
-        title = viewModel.title
-        navigationItem.title = viewModel.title.capitalized
+        title = viewModel.title.uppercased()
+        navigationItem.title = viewModel.title
     }
     
     private func setupTableConfiguration() {

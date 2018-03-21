@@ -16,7 +16,7 @@ extension ProgramDetailPropertiesTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramDetailPropertiesTableViewCell) {
         cell.programDetailsView.setup(investorsCount: investmentProgramDetails.investorsCount,
                                       balance: investmentProgramDetails.balance,
-                                      avrProfit: investmentProgramDetails.profitAvg,
+                                      avgProfit: investmentProgramDetails.profitAvg,
                                       totalProfit: investmentProgramDetails.profitTotal)
         
         cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod, periodDuration: investmentProgramDetails.periodDuration, feeSuccess: investmentProgramDetails.feeSuccess, feeManagement: investmentProgramDetails.feeManagement, trades: investmentProgramDetails.tradesCount, investedTokens: investmentProgramDetails.investedTokens)

@@ -19,7 +19,7 @@ struct AppearanceController {
     // NavigationBar
     private static func setupNavigationBar() {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark,
-                                                            NSAttributedStringKey.font: UIFont(name: "NeuzeitGro-Bol", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)]
+                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
         
@@ -34,9 +34,9 @@ struct AppearanceController {
     // TabBar
     private static func setupTabBar() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.unselected,
-                                                          NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 8)], for: .normal)
+                                                          NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.tint,
-                                                          NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 8)], for: .selected)
+                                                          NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .selected)
 
         UITabBar.appearance().tintColor = UIColor.TabBar.tint
         UITabBar.appearance().backgroundColor = UIColor.TabBar.background

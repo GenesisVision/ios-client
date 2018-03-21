@@ -21,7 +21,6 @@ struct FilterSortTableViewCellViewModel {
 extension FilterSortTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterSortTableViewCell) {
         cell.titleLabel.text = "Sort by " + sorting.text
-        cell.arrowImageView.image = #imageLiteral(resourceName: "img_dropdown_icon")
-        cell.arrowImageView.transform = cell.arrowImageView.transform.rotated(by: CGFloat(opened ? Double.pi/2 : 0.0))
+        cell.titleLabel.addImage(image: #imageLiteral(resourceName: "img_dropdown_icon"), imageOffsetX: 10, afterLabel: true)
     }
 }

@@ -63,8 +63,16 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.barTintColor = UIColor.NavBar.grayBackground
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.barTintColor = UIColor.NavBar.background
         
         hideHUD()
     }
@@ -78,7 +86,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         title = viewModel.title
         
         guard let viewProperties = viewModel.viewProperties else { return }
-        historyBarButtonItem = UIBarButtonItem(title: "History", style: .done, target: self, action: #selector(historyButtonAction(_:)))
+        historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
 
         investButton.isHidden = !viewProperties.isInvestEnable

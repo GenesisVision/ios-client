@@ -27,7 +27,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let title = investmentProgram.title {
-            cell.userNameLabel.text = title
+            cell.programTitleLabel.text = title
         }
         
         if let currency = investmentProgram.currency {
@@ -38,7 +38,6 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
-        cell.programLogoImageView.flagImageView.isHidden = true
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
         if let logo = investmentProgram.logo {
@@ -47,6 +46,6 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avrProfit: investmentProgram.profitAvg, totalProfit: investmentProgram.profitTotal)
+        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvg, totalProfit: investmentProgram.profitTotal)
     }
 }

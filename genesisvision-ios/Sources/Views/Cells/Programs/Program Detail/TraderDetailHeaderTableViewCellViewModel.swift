@@ -16,7 +16,6 @@ struct TraderDetailHeaderTableViewCellViewModel {
 extension TraderDetailHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailHeaderTableViewCell) {
         cell.programLogoImageView.levelLabel.isHidden = true
-        cell.programLogoImageView.flagImageView.isHidden = true
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
@@ -25,6 +24,5 @@ extension TraderDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
-        cell.descriptionLabel.isHidden = true
     }
 }

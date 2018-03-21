@@ -17,11 +17,9 @@ class ProfileImageView: UIView {
         }
     }
     
-    @IBOutlet var flagImageView: RoundedImageView! {
+    @IBOutlet var readMoreImageView: UIImageView! {
         didSet {
-            flagImageView.image = UIImage.placeholder
-            guard let _ = flagImageView.image else { return }
-            flagImageView.addBorder(withBorderWidth: 2.0)
+            readMoreImageView.image = #imageLiteral(resourceName: "img_program_read_more")
         }
     }
     

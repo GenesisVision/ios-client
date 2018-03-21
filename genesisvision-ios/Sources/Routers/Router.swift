@@ -20,6 +20,10 @@ protocol RouterProtocol {
 
 class Router {
     
+    enum TabsType: Int {
+        case dashboard, programList, wallet, profile
+    }
+    
     // MARK: - Variables
     private var tournamentViewController: TournamentListViewController!
     private var programsViewController: ProgramListViewController!
@@ -51,7 +55,7 @@ class Router {
         if let navigationController = getProgramsNavigationController() {
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_program_list_unselected")
             navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_program_list_selected")
-            navigationController.tabBarItem.title = "INVEST"
+            navigationController.tabBarItem.title = "PROGRAMS"
             viewControllers.append(navigationController)
         }
         
@@ -200,6 +204,10 @@ extension Router {
         return nil
     }
     
+    func changeTab(withParentRouter parent: Router?, to tabType: TabsType) {
+        getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
+    }
+    
     func showProgramDetail(with investmentProgramId: String) {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
@@ -210,12 +218,13 @@ extension Router {
     }
     
     func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
-        guard let traderViewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
+        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
         let router = ProgramDetailRouter(parentRouter: self)
         let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId)
-        traderViewController.viewModel = viewModel
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
         
-        return traderViewController
+        return viewController
     }
     
     func invest(with investmentProgramId: String) {

@@ -16,6 +16,13 @@ open class Period: Codable {
         case inProccess = "InProccess"
         case closed = "Closed"
     }
+    public enum ProcessStatus: String, Codable { 
+        case _none = "None"
+        case accrueProfitsDone = "AccrueProfitsDone"
+        case reevaluateManagerTokenDone = "ReevaluateManagerTokenDone"
+        case processInvestmentRequestsDone = "ProcessInvestmentRequestsDone"
+        case closePeriodDone = "ClosePeriodDone"
+    }
     public var id: UUID?
     public var number: Int?
     public var dateFrom: Date?
@@ -24,11 +31,12 @@ open class Period: Codable {
     public var startBalance: Double?
     public var managerStartBalance: Double?
     public var managerStartShare: Double?
+    public var processStatus: ProcessStatus?
     public var investmentRequest: [InvestmentProgramRequest]?
 
 
     
-    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, managerStartBalance: Double?, managerStartShare: Double?, investmentRequest: [InvestmentProgramRequest]?) {
+    public init(id: UUID?, number: Int?, dateFrom: Date?, dateTo: Date?, status: Status?, startBalance: Double?, managerStartBalance: Double?, managerStartShare: Double?, processStatus: ProcessStatus?, investmentRequest: [InvestmentProgramRequest]?) {
         self.id = id
         self.number = number
         self.dateFrom = dateFrom
@@ -37,6 +45,7 @@ open class Period: Codable {
         self.startBalance = startBalance
         self.managerStartBalance = managerStartBalance
         self.managerStartShare = managerStartShare
+        self.processStatus = processStatus
         self.investmentRequest = investmentRequest
     }
     
@@ -55,6 +64,7 @@ open class Period: Codable {
         try container.encodeIfPresent(startBalance, forKey: "startBalance")
         try container.encodeIfPresent(managerStartBalance, forKey: "managerStartBalance")
         try container.encodeIfPresent(managerStartShare, forKey: "managerStartShare")
+        try container.encodeIfPresent(processStatus, forKey: "processStatus")
         try container.encodeIfPresent(investmentRequest, forKey: "investmentRequest")
     }
 
@@ -71,6 +81,7 @@ open class Period: Codable {
         startBalance = try container.decodeIfPresent(Double.self, forKey: "startBalance")
         managerStartBalance = try container.decodeIfPresent(Double.self, forKey: "managerStartBalance")
         managerStartShare = try container.decodeIfPresent(Double.self, forKey: "managerStartShare")
+        processStatus = try container.decodeIfPresent(ProcessStatus.self, forKey: "processStatus")
         investmentRequest = try container.decodeIfPresent([InvestmentProgramRequest].self, forKey: "investmentRequest")
     }
 }

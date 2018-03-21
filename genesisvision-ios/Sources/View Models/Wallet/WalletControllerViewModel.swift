@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import UIKit
+import UIKit.UITableViewHeaderFooterView
 
 final class WalletControllerViewModel {
     
@@ -41,17 +41,6 @@ final class WalletControllerViewModel {
     
     var filter: TransactionsFilter?
     
-    /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletHeaderTableViewCellViewModel.self,
-                WalletTransactionTableViewCellViewModel.self]
-    }
-    
-    /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [DefaultTableHeaderView.self]
-    }
-    
     // MARK: - Init
     init(withRouter router: WalletRouter) {
         self.router = router
@@ -69,6 +58,17 @@ final class WalletControllerViewModel {
 
 // MARK: - TableView
 extension WalletControllerViewModel {
+    /// Return view models for registration cell Nib files
+    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [WalletHeaderTableViewCellViewModel.self,
+                WalletTransactionTableViewCellViewModel.self]
+    }
+    
+    /// Return view models for registration header/footer Nib files
+    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [SortHeaderView.self]
+    }
+    
     func numberOfSections() -> Int {
         return sections.count
     }
@@ -85,7 +85,8 @@ extension WalletControllerViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .transactions:
-            return "Transactions"
+            guard let sort = filter?.type?.rawValue else { return ""}
+            return sort + " Transactions"
         case .header:
             return nil
         }
@@ -105,7 +106,7 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, currency: currency, usdBalance: usdBalance, delegate: delegate)
+            return WalletHeaderTableViewCellViewModel(balance: balance, usdBalance: usdBalance, imageName: logoImageName(), delegate: delegate)
         case .transactions:
             return transactions[indexPath.row]
         }
@@ -160,7 +161,7 @@ extension WalletControllerViewModel {
             return completion(.failure(reason: nil))
         }
         
-        skip += Constants.Api.take
+        skip += take
         
         fetchTransactions({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.transactions ?? [WalletTransactionTableViewCellViewModel]()
@@ -234,5 +235,29 @@ extension WalletControllerViewModel {
             else { return }
         
         router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+    }
+    
+    func showProgramList() {
+        router.show(routeType: .programList)
+    }
+}
+
+extension WalletControllerViewModel {
+    func logoImageName() -> String {
+        let imageName = "img_wallet_logo"
+        return imageName
+    }
+    
+    func noDataText() -> String {
+        return "you don’t have \nany transactions"
+    }
+    
+    func noDataImageName() -> String? {
+        return nil
+    }
+    
+    func noDataButtonTitle() -> String {
+        let text = "Browse programs"
+        return text.uppercased()
     }
 }

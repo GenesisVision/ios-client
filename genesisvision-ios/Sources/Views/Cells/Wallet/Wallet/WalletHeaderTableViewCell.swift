@@ -11,6 +11,7 @@ import UIKit
 protocol WalletHeaderTableViewCellProtocol: class {
     func depositProgramDidPress()
     func withdrawProgramDidPress()
+    func updateBalanceDidPress()
 }
 
 class WalletHeaderTableViewCell: UITableViewCell {
@@ -18,34 +19,30 @@ class WalletHeaderTableViewCell: UITableViewCell {
     // MARK: - Variables
     weak var delegate: WalletHeaderTableViewCellProtocol?
     
+    // MARK: - Views
+    @IBOutlet var logoImageView: UIImageView!
     // MARK: - Labels
     @IBOutlet var balanceLabel: UILabel! {
         didSet {
-            balanceLabel.textColor = UIColor.Wallet.balance
-        }
-    }
-    
-    @IBOutlet var currencyLabel: UILabel! {
-        didSet {
-            currencyLabel.textColor = UIColor.Wallet.currency
+            balanceLabel.textColor = UIColor.Header.darkTitle
         }
     }
     
     @IBOutlet var usdBalanceLabel: UILabel! {
         didSet {
-            usdBalanceLabel.textColor = UIColor.Wallet.usdBalance
+            usdBalanceLabel.textColor = UIColor.Header.graySubtitle
         }
     }
     
     // MARK: - Buttons
     @IBOutlet weak var depositButton: UIButton!
     @IBOutlet weak var withdrawButton: UIButton!
+    @IBOutlet weak var updateBalanceButton: UIButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.main
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
@@ -57,6 +54,10 @@ class WalletHeaderTableViewCell: UITableViewCell {
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
         delegate?.withdrawProgramDidPress()
+    }
+    
+    @IBAction func updateBalanceButtonAction(_ sender: Any) {
+        delegate?.updateBalanceDidPress()
     }
 }
 

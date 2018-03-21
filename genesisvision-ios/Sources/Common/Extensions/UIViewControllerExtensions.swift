@@ -154,12 +154,74 @@ extension UIViewController {
     
     func open(url: URL) {
         let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
-        safariViewController.preferredBarTintColor = UIColor.Background.gray
+        safariViewController.preferredBarTintColor = UIColor.Background.main
         safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }
         safariViewController.modalPresentationStyle = .overFullScreen
         present(viewController: safariViewController)
+    }
+    
+    func showActionSheet(with title: String?,
+                         message: String?,
+                         title firstActionTitle: String?,
+                         handler firstHandler: (() -> Void)?,
+                         title secondActionTitle: String? = nil,
+                         handler secondHandler: (() -> Void)? = nil,
+                         title thirdActionTitle: String? = nil,
+                         handler thirdHandler: (() -> Void)? = nil,
+                         title fourthActionTitle: String? = nil,
+                         handler fourthHandler: (() -> Void)? = nil,
+                         cancelTitle: String?,
+                         cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        if let actionTitle = firstActionTitle {
+            let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
+                if firstHandler != nil {
+                    firstHandler!()
+                }
+            }
+            alert.addAction(action)
+        }
+        
+        if let actionTitle = secondActionTitle {
+            let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
+                if secondHandler != nil {
+                    secondHandler!()
+                }
+            }
+            alert.addAction(action)
+        }
+        
+        if let actionTitle = thirdActionTitle {
+            let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
+                if thirdHandler != nil {
+                    thirdHandler!()
+                }
+            }
+            alert.addAction(action)
+        }
+        
+        if let actionTitle = fourthActionTitle {
+            let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
+                if fourthHandler != nil {
+                    fourthHandler!()
+                }
+            }
+            alert.addAction(action)
+        }
+        
+        if let cancelTitle = cancelTitle {
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (UIAlertAction) in
+                if cancelHandler != nil {
+                    cancelHandler!()
+                }
+            }
+            alert.addAction(cancelAction)
+        }
+        
+        present(alert, animated: true, completion: nil)
     }
 }

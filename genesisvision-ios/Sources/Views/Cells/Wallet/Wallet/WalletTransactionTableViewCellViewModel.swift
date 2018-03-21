@@ -76,8 +76,18 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.dateLabel.text = date.defaultFormatString
         }
         
-        cell.selectionStyle = walletTransaction.investmentProgram != nil ? .default : .none
+        if let title = walletTransaction.investmentProgram?.title {
+            cell.programTitleLabel.text = title
+        } else {
+            cell.programTitleLabel.isHidden = true
+        }
         
-        cell.currencyLabel.text = Constants.currency
+        if let status = walletTransaction.investmentProgramRequest?.status {
+            cell.programStatusLabel.text = status.rawValue
+        } else {
+            cell.programStatusLabel.isHidden = true
+        }
+        
+        cell.selectionStyle = walletTransaction.investmentProgram != nil ? .default : .none
     }
 }

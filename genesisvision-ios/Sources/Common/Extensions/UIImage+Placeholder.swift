@@ -9,7 +9,7 @@
 import UIKit.UIImage
 
 extension UIImage {
-    static var placeholder: UIImage =  #imageLiteral(resourceName: "gv_logo")
+    static var placeholder: UIImage =  #imageLiteral(resourceName: "img_logo")
     static var noDataPlaceholder: UIImage = #imageLiteral(resourceName: "img_trader_nodata_placeholder")
     
     struct NavBar {

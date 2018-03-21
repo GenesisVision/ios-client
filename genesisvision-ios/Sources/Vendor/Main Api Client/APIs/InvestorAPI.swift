@@ -52,6 +52,75 @@ open class InvestorAPI {
     }
 
     /**
+     Forgot password
+     
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthForgotPasswordPost(model: ForgotPasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorAuthForgotPasswordPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Forgot password
+     - POST /api/investor/auth/forgotPassword
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorAuthForgotPasswordPostWithRequestBuilder(model: ForgotPasswordViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/auth/forgotPassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Reset password
+     
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthResetPasswordPost(model: ResetPasswordViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiInvestorAuthResetPasswordPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Reset password
+     - POST /api/investor/auth/resetPassword
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func apiInvestorAuthResetPasswordPostWithRequestBuilder(model: ResetPasswordViewModel? = nil) -> RequestBuilder<String> {
+        let path = "/api/investor/auth/resetPassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Authorize
      
      - parameter model: (body)  (optional)
@@ -160,6 +229,46 @@ open class InvestorAPI {
     }
 
     /**
+     Change password
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthhangePasswordPost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorAuthhangePasswordPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Change password
+     - POST /api/investor/auth/сhangePassword
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorAuthhangePasswordPostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/auth/сhangePassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Get investor dashboard
      
      - parameter authorization: (header) JWT access token 
@@ -176,13 +285,13 @@ open class InvestorAPI {
      Get investor dashboard
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
-  "total" : 1,
-  "profitFromProgram" : 1.4894159098541704,
-  "investedAmount" : 6.84685269835264,
+  "profitFromPrograms" : 1.0246457001441578,
+  "investedAmount" : 1.4894159098541704,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 1.4658129805029452,
     "availableInvestment" : 4.145608029883936,
+    "description" : "description",
     "title" : "title",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
@@ -229,6 +338,7 @@ open class InvestorAPI {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 1.4658129805029452,
     "availableInvestment" : 4.145608029883936,
+    "description" : "description",
     "title" : "title",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
@@ -314,6 +424,7 @@ open class InvestorAPI {
      - GET /api/investor/investmentProgram/buyTokens
      - examples: [{contentType=application/json, example={
   "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+  "periodDuration" : 5,
   "manager" : {
     "country" : "country",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -376,22 +487,24 @@ open class InvestorAPI {
   "investmentProgram" : {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 5.962133916683182,
-    "availableInvestment" : 1.0246457001441578,
+    "profitFromProgram" : 2.3021358869347655,
+    "availableInvestment" : 6.84685269835264,
     "description" : "description",
+    "investedAmount" : 5.637376656633329,
     "title" : "title",
     "login" : "login",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
-    "profitAvgPercent" : 2.027123023002322,
+    "profitAvgPercent" : 7.386281948385884,
     "currency" : "Undefined",
-    "feeSuccess" : 1.4894159098541704,
+    "feeSuccess" : 7.457744773683766,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "ownBalance" : 1.4658129805029452,
-    "investorsCount" : 2,
-    "periodDuration" : 7,
+    "investorsCount" : 9,
+    "periodDuration" : 3,
     "tradeIpfsHash" : "tradeIpfsHash",
-    "feeManagement" : 6.84685269835264,
+    "feeManagement" : 1.1730742509559433,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -400,20 +513,21 @@ open class InvestorAPI {
     },
     "hasNewRequests" : true,
     "level" : 0,
-    "profitTotalPercent" : 4.145608029883936,
+    "profitTotalPercent" : 1.2315135367772556,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
-    "tradesCount" : 5,
+    "tradesCount" : 7,
     "isOwnProgram" : true,
-    "volumeTotal" : 7.386281948385884,
+    "volumeTotal" : 1.0246457001441578,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "volumeTotalChange" : "Unchanged",
     "isEnabled" : true,
     "ipfsHash" : "ipfsHash",
-    "profitTotal" : 3.616076749251911,
-    "profitAvg" : 9.301444243932576,
-    "volumeAvg" : 1.2315135367772556,
+    "profitTotal" : 4.145608029883936,
+    "profitAvg" : 2.027123023002322,
+    "volumeAvg" : 1.4894159098541704,
+    "programStartDate" : "2000-01-23T04:56:07.000+00:00",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "loss" : 1.4894159098541704,
@@ -426,7 +540,13 @@ open class InvestorAPI {
       "totalProfit" : 6.84685269835264,
       "fund" : 1.2315135367772556,
       "profit" : 1.0246457001441578
-    } ]
+    } ],
+    "profitDiagram" : {
+      "managerFund" : 4.965218492984954,
+      "profitIsPositive" : true,
+      "profit" : 9.965781217890562,
+      "investorsFund" : 5.025004791520295
+    }
   }
 }}]
      
@@ -576,12 +696,11 @@ open class InvestorAPI {
     /**
      Get manager trade history
      
-     - parameter authorization: (header) JWT access token 
      - parameter filter: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorInvestmentProgramTradesPost(authorization: String, filter: TradesFilter? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        apiInvestorInvestmentProgramTradesPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+    open class func apiInvestorInvestmentProgramTradesPost(filter: TradesFilter? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramTradesPostWithRequestBuilder(filter: filter).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -591,6 +710,7 @@ open class InvestorAPI {
      Get manager trade history
      - POST /api/investor/investmentProgram/trades
      - examples: [{contentType=application/json, example={
+  "tradeServerType" : "Undefined",
   "total" : 0,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -625,26 +745,21 @@ open class InvestorAPI {
   } ]
 }}]
      
-     - parameter authorization: (header) JWT access token 
      - parameter filter: (body)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func apiInvestorInvestmentProgramTradesPostWithRequestBuilder(authorization: String, filter: TradesFilter? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func apiInvestorInvestmentProgramTradesPostWithRequestBuilder(filter: TradesFilter? = nil) -> RequestBuilder<TradesViewModel> {
         let path = "/api/investor/investmentProgram/trades"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
 
         let url = NSURLComponents(string: URLString)
 
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<TradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
@@ -769,10 +884,13 @@ open class InvestorAPI {
     "availableInvestment" : 2.027123023002322,
     "profitTotalPercent" : 3.616076749251911,
     "profitTotalChange" : "Unchanged",
+    "description" : "description",
     "title" : "title",
+    "isInvestEnable" : true,
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
@@ -803,10 +921,13 @@ open class InvestorAPI {
     "availableInvestment" : 2.027123023002322,
     "profitTotalPercent" : 3.616076749251911,
     "profitTotalChange" : "Unchanged",
+    "description" : "description",
     "title" : "title",
+    "isInvestEnable" : true,
     "tradesCount" : 1,
     "balance" : 6.027456183070403,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",

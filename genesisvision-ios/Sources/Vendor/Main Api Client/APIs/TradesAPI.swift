@@ -28,6 +28,7 @@ open class TradesAPI {
      Get trades by IPFS hash id
      - GET /api/trades/ipfsHistory
      - examples: [{contentType=application/json, example={
+  "tradeServerType" : "Undefined",
   "total" : 0,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
