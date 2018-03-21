@@ -20,6 +20,7 @@ final class ProgramDetailViewModel {
         case header
         case chart
         case details
+        case moreDetails
     }
 
     // MARK: - Variables
@@ -45,12 +46,13 @@ final class ProgramDetailViewModel {
     
     private var sections: [SectionType] = [.header,
                                            .chart,
-                                           .details]
+                                           .details,
+                                           .moreDetails]
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramDetailPropertiesTableViewCellViewModel.self]
+        return [ProgramDetailsTableViewCellViewModel.self, ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramMoreDetailsTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -68,8 +70,8 @@ final class ProgramDetailViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .chart:
-            return nil //"Total funds history"
-        case .header, .details:
+            return nil
+        case .header, .details, .moreDetails:
             return nil
         }
     }
@@ -81,6 +83,8 @@ final class ProgramDetailViewModel {
         case .header:
             return 0.0
         case .details:
+            return 0.0
+        case .moreDetails:
             return 0.0
         }
     }
@@ -100,6 +104,8 @@ final class ProgramDetailViewModel {
         case .chart:
             return 1
         case .details:
+            return 1
+        case .moreDetails:
             return 1
         }
     }
@@ -148,8 +154,10 @@ extension ProgramDetailViewModel {
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         case .chart:
             return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "")
+        case .moreDetails:
+            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         case .details:
-            return ProgramDetailPropertiesTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+            return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }
     }
     

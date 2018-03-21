@@ -1,5 +1,5 @@
 //
-//  ProgramDetailPropertiesTableViewCell.swift
+//  ProgramMoreDetailsTableViewCell.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 01.03.18.
@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ProgramDetailPropertiesTableViewCell: UITableViewCell {
+class ProgramMoreDetailsTableViewCell: UITableViewCell {
 
     // MARK: - Views
-    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
     
     // MARK: - Lifecycle

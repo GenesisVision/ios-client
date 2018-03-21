@@ -31,6 +31,8 @@ open class InvestmentProgramDashboard: Codable {
     public var logo: String?
     public var balance: Double?
     public var currency: Currency?
+    public var investedAmount: Double?
+    public var profitFromProgram: Double?
     public var investedTokens: Double?
     public var tradesCount: Int?
     public var investorsCount: Int?
@@ -56,7 +58,7 @@ open class InvestmentProgramDashboard: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedAmount: Double?, profitFromProgram: Double?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -64,6 +66,8 @@ open class InvestmentProgramDashboard: Codable {
         self.logo = logo
         self.balance = balance
         self.currency = currency
+        self.investedAmount = investedAmount
+        self.profitFromProgram = profitFromProgram
         self.investedTokens = investedTokens
         self.tradesCount = tradesCount
         self.investorsCount = investorsCount
@@ -102,6 +106,8 @@ open class InvestmentProgramDashboard: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(currency, forKey: "currency")
+        try container.encodeIfPresent(investedAmount, forKey: "investedAmount")
+        try container.encodeIfPresent(profitFromProgram, forKey: "profitFromProgram")
         try container.encodeIfPresent(investedTokens, forKey: "investedTokens")
         try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
         try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
@@ -138,6 +144,8 @@ open class InvestmentProgramDashboard: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
+        investedAmount = try container.decodeIfPresent(Double.self, forKey: "investedAmount")
+        profitFromProgram = try container.decodeIfPresent(Double.self, forKey: "profitFromProgram")
         investedTokens = try container.decodeIfPresent(Double.self, forKey: "investedTokens")
         tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
         investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")

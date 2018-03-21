@@ -31,7 +31,7 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
             let trades = trades,
             let investedTokens = investedTokens else { return }
             
-        endOfPeriodLabel.text = endOfPeriod.defaultFormatString
+//        endOfPeriodLabel.text = endOfPeriod.defaultFormatString
         let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
         periodLeftValueLabel.text = periodLeft.0
         periodLeftTitleLabel.text = periodLeft.1
@@ -42,13 +42,13 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         tradesLabel.text = trades.toString()
         investedTokensLabel.text = investedTokens.rounded(toPlaces: 4).toString()
         
-        endOfPeriodLabel.textColor = UIColor.Font.primary
-        periodLeftValueLabel.textColor = UIColor.Font.primary
-        periodDurationLabel.textColor = UIColor.Font.dark
-        feeSuccessLabel.textColor = UIColor.Font.primary
-        feeManagementLabel.textColor = UIColor.Font.primary
-        tradesLabel.textColor = UIColor.Font.primary
-        investedTokensLabel.textColor = UIColor.Font.primary
+//        endOfPeriodLabel.textColor = UIColor.Font.primary
+//        periodLeftValueLabel.textColor = UIColor.Font.primary
+//        periodDurationLabel.textColor = UIColor.Font.dark
+//        feeSuccessLabel.textColor = UIColor.Font.primary
+//        feeManagementLabel.textColor = UIColor.Font.primary
+//        tradesLabel.textColor = UIColor.Font.primary
+//        investedTokensLabel.textColor = UIColor.Font.primary
     }
 }
 

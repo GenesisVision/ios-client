@@ -269,13 +269,30 @@ open class InvestorAPI {
     }
 
     /**
+     * enum for parameter sorting
+     */
+    public enum Sorting_apiInvestorDashboardGet: String { 
+        case byLevelAsc = "ByLevelAsc"
+        case byLevelDesc = "ByLevelDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+        case byOrdersAsc = "ByOrdersAsc"
+        case byOrdersDesc = "ByOrdersDesc"
+        case byEndOfPeriodAsk = "ByEndOfPeriodAsk"
+        case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
+        case byTitleAsk = "ByTitleAsk"
+        case byTitleDesc = "ByTitleDesc"
+    }
+
+    /**
      Get investor dashboard
      
      - parameter authorization: (header) JWT access token 
+     - parameter sorting: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorDashboardGet(authorization: String, completion: @escaping ((_ data: InvestorDashboard?,_ error: Error?) -> Void)) {
-        apiInvestorDashboardGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func apiInvestorDashboardGet(authorization: String, sorting: Sorting_apiInvestorDashboardGet? = nil, completion: @escaping ((_ data: InvestorDashboard?,_ error: Error?) -> Void)) {
+        apiInvestorDashboardGetWithRequestBuilder(authorization: authorization, sorting: sorting).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -285,24 +302,26 @@ open class InvestorAPI {
      Get investor dashboard
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
-  "profitFromPrograms" : 1.0246457001441578,
-  "investedAmount" : 1.4894159098541704,
+  "profitFromPrograms" : 6.84685269835264,
+  "investedAmount" : 7.457744773683766,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "investedTokens" : 1.4658129805029452,
-    "availableInvestment" : 4.145608029883936,
+    "investedTokens" : 5.637376656633329,
+    "profitFromProgram" : 5.962133916683182,
+    "availableInvestment" : 1.2315135367772556,
     "description" : "description",
+    "investedAmount" : 1.4658129805029452,
     "title" : "title",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
-    "profitAvgPercent" : 3.616076749251911,
+    "profitAvgPercent" : 4.145608029883936,
     "currency" : "Undefined",
-    "feeSuccess" : 7.386281948385884,
+    "feeSuccess" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 5,
-    "periodDuration" : 2,
-    "feeManagement" : 1.2315135367772556,
+    "investorsCount" : 7,
+    "periodDuration" : 9,
+    "feeManagement" : 1.4894159098541704,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -311,16 +330,16 @@ open class InvestorAPI {
     },
     "hasNewRequests" : true,
     "level" : 0,
-    "profitTotalPercent" : 2.027123023002322,
+    "profitTotalPercent" : 7.386281948385884,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
-    "tradesCount" : 5,
+    "tradesCount" : 2,
     "isOwnProgram" : true,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "isEnabled" : true,
-    "profitTotal" : 9.301444243932576,
-    "profitAvg" : 7.061401241503109,
+    "profitTotal" : 2.027123023002322,
+    "profitAvg" : 3.616076749251911,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "loss" : 1.4894159098541704,
@@ -336,20 +355,22 @@ open class InvestorAPI {
     } ]
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "investedTokens" : 1.4658129805029452,
-    "availableInvestment" : 4.145608029883936,
+    "investedTokens" : 5.637376656633329,
+    "profitFromProgram" : 5.962133916683182,
+    "availableInvestment" : 1.2315135367772556,
     "description" : "description",
+    "investedAmount" : 1.4658129805029452,
     "title" : "title",
     "isWithdrawEnable" : true,
     "balance" : 6.027456183070403,
     "logo" : "logo",
-    "profitAvgPercent" : 3.616076749251911,
+    "profitAvgPercent" : 4.145608029883936,
     "currency" : "Undefined",
-    "feeSuccess" : 7.386281948385884,
+    "feeSuccess" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 5,
-    "periodDuration" : 2,
-    "feeManagement" : 1.2315135367772556,
+    "investorsCount" : 7,
+    "periodDuration" : 9,
+    "feeManagement" : 1.4894159098541704,
     "manager" : {
       "country" : "country",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -358,16 +379,16 @@ open class InvestorAPI {
     },
     "hasNewRequests" : true,
     "level" : 0,
-    "profitTotalPercent" : 2.027123023002322,
+    "profitTotalPercent" : 7.386281948385884,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
-    "tradesCount" : 5,
+    "tradesCount" : 2,
     "isOwnProgram" : true,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "isEnabled" : true,
-    "profitTotal" : 9.301444243932576,
-    "profitAvg" : 7.061401241503109,
+    "profitTotal" : 2.027123023002322,
+    "profitAvg" : 3.616076749251911,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "loss" : 1.4894159098541704,
@@ -385,16 +406,20 @@ open class InvestorAPI {
 }}]
      
      - parameter authorization: (header) JWT access token 
+     - parameter sorting: (query)  (optional)
 
      - returns: RequestBuilder<InvestorDashboard> 
      */
-    open class func apiInvestorDashboardGetWithRequestBuilder(authorization: String) -> RequestBuilder<InvestorDashboard> {
+    open class func apiInvestorDashboardGetWithRequestBuilder(authorization: String, sorting: Sorting_apiInvestorDashboardGet? = nil) -> RequestBuilder<InvestorDashboard> {
         let path = "/api/investor/dashboard"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Sorting": sorting?.rawValue
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]

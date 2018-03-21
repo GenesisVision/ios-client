@@ -35,7 +35,7 @@ class WalletDepositViewController: BaseViewController {
             switch result {
             case .success:
                 self?.setupUI()
-            case .failure(let reason):
+            case .failure(let _):
                 break
             }
         }

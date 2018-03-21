@@ -10,15 +10,15 @@ import UIKit
 
 class ProgramDetailsTableViewCell: UITableViewCell {
 
+    // MARK: - Views
+    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+        contentView.backgroundColor = UIColor.NavBar.grayBackground
+        selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

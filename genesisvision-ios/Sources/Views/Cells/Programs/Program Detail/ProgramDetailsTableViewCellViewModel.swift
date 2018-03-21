@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct ProgramDetailsTableViewCellViewModel {
+    let investmentProgramDetails: InvestmentProgramDetails
+}
+
+extension ProgramDetailsTableViewCellViewModel: CellViewModel {
+    func setup(on cell: ProgramDetailsTableViewCell) {
+        cell.programDetailsView.setup(investorsCount: investmentProgramDetails.investorsCount,
+                                      balance: investmentProgramDetails.balance,
+                                      avgProfit: investmentProgramDetails.profitAvg,
+                                      totalProfit: investmentProgramDetails.profitTotal)
+    }
+}
+
