@@ -7,18 +7,17 @@
 //
 
 class DashboardDataProvider: DataProvider {
-    static func getProgram(completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
+    static func getProgram(with sorting: InvestorAPI.Sorting_apiInvestorDashboardGet, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        getDashboardProgram(with: authorization) { (viewModel) in
+        getDashboardProgram(with: sorting, authorization: authorization) { (viewModel) in
             completion(viewModel)
         }
     }
     
     // MARK: - Private methods
-    private static func getDashboardProgram(with authorization: String, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
-
-        InvestorAPI.apiInvestorDashboardGet(authorization: authorization) { (dashboard, error) in
+    private static func getDashboardProgram(with sorting: InvestorAPI.Sorting_apiInvestorDashboardGet, authorization: String, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void) {
+        InvestorAPI.apiInvestorDashboardGet(authorization: authorization, sorting: sorting) { (dashboard, error) in
             DataProvider().responseHandler(dashboard, error: error, successCompletion: { (viewModel) in
                 completion(viewModel)
             }, errorCompletion: { (error) in

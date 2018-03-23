@@ -19,17 +19,21 @@ import UIKit.UIButton
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = cornerSize
-        self.layer.borderColor = customBorderColor?.withAlphaComponent(borderAlpha).cgColor
-        self.layer.borderWidth = borderSize
-        self.layer.masksToBounds = true
+        layer.cornerRadius = cornerSize
+        layer.borderColor = customBorderColor?.withAlphaComponent(borderAlpha).cgColor
+        layer.borderWidth = borderSize
+        layer.masksToBounds = true
         
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
         titleLabel?.textColor = UIColor.Font.white
         backgroundColor = UIColor.Button.primary
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func addShadow() {
+        layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 1.0
+        layer.shadowRadius = 6.0
+        layer.masksToBounds = true
     }
 }

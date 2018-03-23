@@ -8,22 +8,6 @@
 
 import UIKit
 
-class GradientView: UIView {
-    override open class var layerClass: AnyClass {
-        return CAGradientLayer.classForCoder()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        let gradientLayer = self.layer as! CAGradientLayer
-        gradientLayer.colors = [
-            UIColor.init(white: 1, alpha: 0).cgColor,
-            UIColor.white.cgColor
-        ]
-        backgroundColor = UIColor.clear
-    }
-}
-
 class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
@@ -83,8 +67,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         title = viewModel.title.uppercased()
         navigationItem.title = viewModel.title
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_navbar_left_logo"), style: .done, target: nil, action: nil)
-        navigationItem.leftBarButtonItem?.isEnabled = false
     }
     
     private func setupTableConfiguration() {
@@ -104,11 +86,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func updateSortHeaderView() {
-        guard let title = self.viewModel.headerTitle(for: 0) else {
+        guard let title = self.viewModel.headerTitle(for: 1) else {
             return
         }
         
-        let header = self.tableView.headerView(forSection: 0) as! SortHeaderView
+        let header = self.tableView.headerView(forSection: 1) as! SortHeaderView
         header.sortButton.setTitle(title, for: .normal)
         
         showProgressHUD()
@@ -179,6 +161,8 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
+        
         if (viewModel.modelsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
             fetchMore()
         }
@@ -243,18 +227,36 @@ extension ProgramListViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         
-        guard let selectedValue = viewModel.filter?.sorting else { return }
+        var selectedIndexRow = viewModel.getSelectedSortingIndex()
+        let values = viewModel.sortingValues
         
-        let values = sortingValues
         let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: sortingKeys.index(of: selectedValue) ?? 0)
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
         
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { vc, picker, index, values in
-            self.viewModel.filter?.sorting = sortingKeys[index.row]
-            self.updateSortHeaderView()
+        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
+            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
+            
+            self?.viewModel.changeSorting(at: selectedIndexRow)
+            self?.updateSortHeaderView()
         }
         
-        alert.addAction(title: "Done", style: .cancel)
+        applyAction.isEnabled = false
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            
+            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
+                return applyAction.isEnabled = false
+            }
+            
+            applyAction.isEnabled = true
+            selectedIndexRow = index.row
+        }
+        
+        alert.addAction(applyAction)
+        
+        alert.addAction(title: "Cancel", style: .cancel)
+        
         alert.show()
     }
 }
+

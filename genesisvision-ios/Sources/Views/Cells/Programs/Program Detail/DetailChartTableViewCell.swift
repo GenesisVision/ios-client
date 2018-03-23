@@ -30,7 +30,7 @@ class DetailChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.NavBar.grayBackground
+        backgroundColor = UIColor.NavBar.background
         contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
     }

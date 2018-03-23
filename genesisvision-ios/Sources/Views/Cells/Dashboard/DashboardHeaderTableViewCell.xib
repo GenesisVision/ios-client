@@ -29,13 +29,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="E7a-wh-nA6">
-                        <rect key="frame" x="27" y="16" width="266" height="184.5"/>
+                        <rect key="frame" x="26" y="16" width="268" height="184.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vNr-3h-jIw">
-                                <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="268" height="44"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_dashboard_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jJN-aL-dt0">
-                                        <rect key="frame" x="111" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="112" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="jJN-aL-dt0" secondAttribute="height" multiplier="1:1" id="7VC-lg-08Y"/>
                                         </constraints>
@@ -46,16 +46,16 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RLg-YI-kVG">
-                                <rect key="frame" x="0.0" y="71" width="266" height="113.5"/>
+                                <rect key="frame" x="0.0" y="71" width="268" height="113.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="Kvc-6A-tXE">
-                                        <rect key="frame" x="119.5" y="0.0" width="27.5" height="57"/>
+                                        <rect key="frame" x="120.5" y="0.0" width="27.5" height="57"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="55"/>
                                         <color key="textColor" red="0.098039215686274508" green="0.30980392156862746" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL PORTFOLIO VALUE" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0v-tu-1zU">
-                                        <rect key="frame" x="50" y="57" width="166.5" height="56.5"/>
+                                        <rect key="frame" x="51" y="57" width="166.5" height="56.5"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.098039215686274508" green="0.30980392156862746" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -67,8 +67,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="E7a-wh-nA6" secondAttribute="bottom" constant="8" id="6zW-H2-cHV"/>
-                    <constraint firstAttribute="trailing" secondItem="E7a-wh-nA6" secondAttribute="trailing" constant="27" id="m7h-SE-lzk"/>
-                    <constraint firstItem="E7a-wh-nA6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="xdH-DF-P7G"/>
+                    <constraint firstAttribute="trailing" secondItem="E7a-wh-nA6" secondAttribute="trailing" constant="26" id="m7h-SE-lzk"/>
+                    <constraint firstItem="E7a-wh-nA6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="xdH-DF-P7G"/>
                     <constraint firstItem="E7a-wh-nA6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="z7H-aH-SbC"/>
                 </constraints>
             </tableViewCellContentView>

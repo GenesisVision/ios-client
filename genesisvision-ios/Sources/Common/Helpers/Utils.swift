@@ -22,24 +22,37 @@ func networkActivity(show: Bool = true) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = show
 }
 
-func getPeriodLeft(endOfPeriod: Date) -> (String, String) {
-    let dateInterval = endOfPeriod.interval(ofComponent: .minute, fromDate: Date())
+func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
+    let seconds = endOfPeriod.interval(ofComponent: .second, fromDate: Date())
 
-    return ((dateInterval > 0 ? dateInterval : 0).toString(), "min")
+    let minutes = seconds / 60
+    let hours = minutes / 60
+    let days = hours / 24
+    
+    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : seconds >= 0 ? "seconds" : nil
+    let periodLeftValue: Int = days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : seconds >= 0 ? seconds : -1
+    
+    return (periodLeftValue, periodLeftTimeString)
 }
 
-var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc]
-var sortingValues: [String] = ["Level ⇡", "Level ⇣", "Orders ⇡", "Orders ⇣", "Profit ⇡", "Profit ⇣", "End of period ⇡", "End of period ⇣"]
-struct SortingList {
-    var sortingValue: String
-    var sortingKey: InvestmentProgramsFilter.Sorting
-}
-var sortingList: [SortingList] = sortingValues.enumerated().map { (index, element) in
-    return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
+enum LineStyle {
+    case solid, dashed
 }
 
-func getSortingValue(sortingKey: InvestmentProgramsFilter.Sorting) -> String {
-    guard let index = sortingKeys.index(of: sortingKey) else { return "" }
-    return sortingValues[index]
+func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.fillColor = UIColor.clear.cgColor
+    shapeLayer.strokeColor = color.cgColor
+    shapeLayer.lineWidth = 1.0
+    shapeLayer.lineJoin = kCALineJoinRound
+    
+    if style == .dashed {
+        shapeLayer.lineDashPattern = [2, 6]
+    }
+   
+    let path = CGMutablePath()
+    path.addLines(between: [p0, p1])
+    shapeLayer.path = path
+    view.layer.addSublayer(shapeLayer)
 }
 

@@ -22,6 +22,7 @@ final class DashboardViewModel {
     
     private var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var programsCount: String = ""
     var skip = 0
@@ -31,19 +32,45 @@ final class DashboardViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    var sorting: InvestmentProgramsFilter.Sorting = .byOrdersAsc
+    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = .byProfitAsc
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
     var viewModels = [DashboardTableViewCellViewModel]()
     
-    var filter: InvestmentProgramsFilter?
+    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc, .byTitleAsk, .byTitleDesc]
+    
+    var sortingValues: [String] = ["level ⇡", "level ⇣", "orders ⇡", "orders ⇣", "profit ⇡", "profit ⇣", "end of period ⇡", "end of period ⇣", "title ⇡", "title ⇣"]
+    
+    struct SortingList {
+        var sortingValue: String
+        var sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet
+    }
+    
+    var sortingList: [SortingList] {
+        return sortingValues.enumerated().map { (index, element) in
+            return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
+        }
+    }
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        
-        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byOrdersAsc, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
+        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
+    }
+    
+    // MARK: - Public methods
+    func getSortingValue(sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet) -> String {
+        guard let index = sortingKeys.index(of: sortingKey) else { return "" }
+        return sortingValues[index]
+    }
+    
+    func changeSorting(at index: Int) {
+        sorting = sortingKeys[index]
+    }
+    
+    func getSelectedSortingIndex() -> Int {
+        return sortingKeys.index(of: sorting) ?? 0
     }
 }
 
@@ -80,9 +107,7 @@ extension DashboardViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .programList:
-            guard let sort = filter?.sorting else { return "Sort by " }
-            
-            return "Sort by " + getSortingValue(sortingKey: sort)
+            return "Sort by " + getSortingValue(sortingKey: sorting)
         case .header:
             return nil
         }
@@ -205,10 +230,11 @@ extension DashboardViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
+        self.reloadDataProtocol?.didReloadData()
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        DashboardDataProvider.getProgram(completion: { [weak self] (dashboard) in
+        DashboardDataProvider.getProgram(with: sorting) { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completionError(.failure(reason: nil)) }
             
             self?.dashboard = dashboard
@@ -218,12 +244,18 @@ extension DashboardViewModel {
             let totalCount = dashboard.investmentPrograms?.count ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             
             completionSuccess(totalCount, dashboardProgramViewModels)
             completionError(.success)
-        })
+        }
+    }
+}
+
+extension DashboardViewModel: ReloadDataProtocol {
+    func didReloadData() {
+        refresh { (result) in }
     }
 }

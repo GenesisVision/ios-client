@@ -28,19 +28,16 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     // MARK: - Buttons
     @IBOutlet var investButton: UIButton! {
         didSet {
-            investButton.tintColor = UIColor.Button.green
             investButton.isHidden = true
         }
     }
     @IBOutlet var withdrawButton: UIButton! {
         didSet {
-            withdrawButton.tintColor = UIColor.Button.red
             withdrawButton.isHidden = true
         }
     }
     @IBOutlet var requestsButton: UIButton! {
         didSet {
-            requestsButton.tintColor = UIColor.Button.primary
             requestsButton.isHidden = true
         }
     }
@@ -48,8 +45,9 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var historyBarButtonItem: UIBarButtonItem?
     
-    // MARK: - IBOutlets
+    // MARK: - Views
     @IBOutlet var buttonsView: UIView!
+    @IBOutlet var gradientView: GradientView!
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -89,9 +87,12 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
 
+        tableView.backgroundColor = UIColor.NavBar.grayBackground
+        
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
         requestsButton.isHidden = !viewProperties.hasNewRequests
+        gradientView.isHidden = false
         
         if viewProperties.hasNewRequests && (viewProperties.isWithdrawEnable || viewProperties.isInvestEnable) {
             tableView.contentInset.bottom = buttonHeight + buttonHeight + buttonsVerticalHeight + buttonBottom
@@ -99,6 +100,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             tableView.contentInset.bottom = buttonHeight + buttonBottom
         } else {
             tableView.contentInset.bottom = 0.0
+            gradientView.isHidden = true
         }
     }
     
@@ -162,7 +164,7 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
         guard let model = viewModel.model(at: indexPath) else {
             return UITableViewCell()
         }
-        
+
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
@@ -204,5 +206,12 @@ extension ProgramDetailViewController: ProgramDetailProtocol {
     func didInvested() {
         showProgressHUD()
         fetch()
+    }
+}
+
+
+extension ProgramDetailViewController: ReloadDataProtocol {
+    func didReloadData() {
+        reloadData()
     }
 }

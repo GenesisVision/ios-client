@@ -40,6 +40,6 @@ extension TraderTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avgProfitTitle: "PROFIT", avgProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT %", totalProfit: participantViewModel.totalProfitInPercent)
+        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avgProfitTitle: "PROFIT", avgProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT", totalProfit: participantViewModel.totalProfitInPercent)
     }
 }

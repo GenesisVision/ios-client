@@ -11,6 +11,7 @@ import Kingfisher
 
 struct ProgramDetailHeaderTableViewCellViewModel {
     let investmentProgramDetails: InvestmentProgramDetails
+    weak var delegate: DetailHeaderTableViewCellProtocol?
 }
 
 extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
@@ -34,6 +35,8 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
         if let username = investmentProgramDetails.manager?.username {
             cell.managerLabel.text = "by " + username
         }
+        
+        cell.delegate = delegate
     }
 }
 

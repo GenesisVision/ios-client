@@ -92,7 +92,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     private func setupTableConfiguration() {
-        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: ProfileViewModel.cellModelsForRegistration)

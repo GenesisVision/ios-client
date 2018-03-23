@@ -211,7 +211,7 @@ extension Router {
     func showProgramDetail(with investmentProgramId: String) {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
@@ -220,7 +220,7 @@ extension Router {
     func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
         let router = ProgramDetailRouter(parentRouter: self)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         

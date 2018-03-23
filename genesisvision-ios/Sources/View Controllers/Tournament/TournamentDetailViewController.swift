@@ -46,7 +46,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
+        
         tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
         

@@ -11,6 +11,7 @@ import Kingfisher
 
 struct DashboardTableViewCellViewModel {
     let investmentProgram: InvestmentProgramDashboard
+    weak var reloadDataProtocol: ReloadDataProtocol?
 }
 
 extension DashboardTableViewCellViewModel: CellViewModel {
@@ -39,17 +40,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.investedTokens = tokensCount
         }
         
-        if let endOfPeriod = investmentProgram.endOfPeriod {
-            let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
-            cell.periodLeftValueLabel.text = periodLeft.0
-            cell.periodLeftTitleLabel.text = periodLeft.1.uppercased() + " LEFT"
-        }
-        
         if let profit = investmentProgram.profitTotal {
             cell.profitValueLabel.text = profit.toString() + "%"
             cell.profitValueLabel.textColor = profit >= 0 ? UIColor.Font.dark : UIColor.Font.red
             cell.profitTitleLabel.text = profit >= 0 ? "PROFIT" : "LOSS"
-            cell.profitTitleLabel.textColor = profit >= 0 ? UIColor.Font.dark : UIColor.Font.red
+            cell.profitTitleLabel.textColor = profit >= 0 ? UIColor.Font.primary : UIColor.Font.red
         }
         
         if let investmentProgramId = investmentProgram.id?.uuidString {
@@ -67,5 +62,15 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
+        
+        if let isEnabled = investmentProgram.isEnabled {
+            cell.isEnable = isEnabled
+            
+            guard let endOfPeriod = investmentProgram.endOfPeriod else { return }
+            
+            cell.endOfPeriod = endOfPeriod
+        }
+        
+        cell.reloadDataProtocol = reloadDataProtocol
     }
 }

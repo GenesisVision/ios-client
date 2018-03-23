@@ -35,7 +35,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
         avgProfitTitleLabel.textColor = UIColor.Font.darkBlue
         totalProfitTitleLabel.textColor = UIColor.Font.darkBlue
         
-        backgroundColor = UIColor.NavBar.grayBackground
+        backgroundColor = UIColor.NavBar.background
         
         if let investorsCount = investorsCount,
             let balance = balance,
@@ -48,7 +48,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             investorsValueLabel.text = investorsCount.toString()
             balanceValueLabel.text = balance.rounded(toPlaces: 4).toString()
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
-            totalProfitValueLabel.text = totalProfitValue.toString() + "%"
+            totalProfitValueLabel.text = totalProfitValue.toString()
             
             investorsValueLabel.textColor = UIColor.Font.dark
             balanceValueLabel.textColor = UIColor.Font.dark

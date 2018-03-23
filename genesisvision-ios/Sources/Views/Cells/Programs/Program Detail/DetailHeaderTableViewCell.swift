@@ -8,18 +8,33 @@
 
 import UIKit
 
+protocol DetailHeaderTableViewCellProtocol: class {
+    func showDescriptionDidPress()
+}
+
 class DetailHeaderTableViewCell: UITableViewCell {
 
+    // MARK: - Variables
+    weak var delegate: DetailHeaderTableViewCellProtocol?
+    
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var managerLabel: UILabel!
     
+    // MARK: - Buttons
+    @IBOutlet weak var descriptionButton: UIButton!
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
+    }
+    
+    // MARK: - Actions
+    @IBAction func descriptionButtonAction(_ sender: Any) {
+        delegate?.showDescriptionDidPress()
     }
 }

@@ -10,9 +10,6 @@ import UIKit
 import DZNEmptyDataSet
 
 class WalletViewController: BaseViewControllerWithTableView {
-
-    // MARK: - Variables
-    private var filtersBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
@@ -46,15 +43,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
-        filtersBarButtonItem?.tintColor = UIColor.Button.primary
-        filtersBarButtonItem?.isEnabled = false
-        navigationItem.rightBarButtonItem = filtersBarButtonItem
-
         updateTitle()
-        navigationItem.leftBarButtonItem?.image = #imageLiteral(resourceName: "img_navbar_left_logo")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_navbar_left_logo"), style: .done, target: nil, action: nil)
-        navigationItem.leftBarButtonItem?.isEnabled = false
         
     }
     
@@ -161,6 +150,8 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
+        
         if (viewModel.numberOfRows(in: indexPath.section) - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
             fetchMoreTransactions()
         }

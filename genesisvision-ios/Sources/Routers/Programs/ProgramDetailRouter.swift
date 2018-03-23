@@ -7,7 +7,7 @@
 //
 
 enum ProgramDetailRouteType {
-    case invest(investmentProgramId: String), withdraw(investmentProgramId: String, investedTokens: Double), history(investmentProgramId: String), requests(investmentProgramId: String)
+    case invest(investmentProgramId: String), withdraw(investmentProgramId: String, investedTokens: Double), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails)
 }
 
 class ProgramDetailRouter: Router {
@@ -22,6 +22,8 @@ class ProgramDetailRouter: Router {
             history(with: investmentProgramId)
         case .requests(let investmentProgramId):
             requests(with: investmentProgramId)
+        case .description(let investmentProgramDetails):
+            description(with: investmentProgramDetails)
         }
     }
     
@@ -32,6 +34,15 @@ class ProgramDetailRouter: Router {
         let viewModel = ProgramHistoryViewModel(withRouter: router, investmentProgramId: investmentProgramId)
         viewController.viewModel = viewModel
         
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func description(with investmentProgramDetails: InvestmentProgramDetails) {
+        guard let viewController = ProgramDescriptionViewController.storyboardInstance(name: .traders) else { return }
+        let router = ProgramDescriptionRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramDescriptionViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
+        viewController.viewModel = viewModel
+
         navigationController?.pushViewController(viewController, animated: true)
     }
     

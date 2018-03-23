@@ -79,7 +79,6 @@ extension UIColor {
         static var red: UIColor { return Common.red }
         
         static var gray: UIColor { return Common.gray }
-        
     }
     
     struct Slider {
@@ -111,5 +110,9 @@ extension UIColor {
     
     struct Border {
         static var forImage: UIColor { return UIColor.white }
+    }
+    
+    struct Cell {
+        static var separator: UIColor { return #colorLiteral(red: 0.4901960784, green: 0.5764705882, blue: 0.6, alpha: 0.5) }
     }
 }

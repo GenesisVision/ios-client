@@ -29,7 +29,9 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
+        
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         
@@ -58,12 +60,14 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         //Fetch next page
     }
     
-    func setupPullToRefresh(title: String? = Constants.Titles.refreshControlTitle) {
+    func setupPullToRefresh(title: String? = nil) {
         let tintColor = UIColor.primary
         let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: title ?? Constants.Titles.refreshControlTitle, attributes: attributes)
+        if let title = title {
+            refreshControl.attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        }
         refreshControl.tintColor = tintColor
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl

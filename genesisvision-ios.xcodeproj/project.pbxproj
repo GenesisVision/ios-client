@@ -19,6 +19,7 @@
 		5E18138A2062487200481646 /* ProgramDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1813882062487200481646 /* ProgramDetailsTableViewCell.swift */; };
 		5E18138B2062487200481646 /* ProgramDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E1813892062487200481646 /* ProgramDetailsTableViewCell.xib */; };
 		5E18138D206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18138C206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift */; };
+		5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */; };
 		5E239271205F67F100CB5AEC /* NeuzeitGro-Bla.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926D205F67F000CB5AEC /* NeuzeitGro-Bla.ttf */; };
 		5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */; };
 		5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */; };
@@ -97,6 +98,11 @@
 		5E32E3B12062AF46000BCF3E /* InvestmentProgramBuyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32E3672062AF45000BCF3E /* InvestmentProgramBuyToken.swift */; };
 		5E32E3B22062AF46000BCF3E /* BrokerInvestmentProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32E3682062AF45000BCF3E /* BrokerInvestmentProgram.swift */; };
 		5E32E3B32062AF46000BCF3E /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32E3692062AF45000BCF3E /* InvestmentProgramTxInfo.swift */; };
+		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
+		5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */; };
+		5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */; };
+		5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */; };
+		5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */; };
 		5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */; };
 		5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858343205FFA010039E13F /* UILabelExtension.swift */; };
 		5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858345205FFCF70039E13F /* UIFontExtension.swift */; };
@@ -329,6 +335,7 @@
 		5E1813882062487200481646 /* ProgramDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		5E1813892062487200481646 /* ProgramDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		5E18138C206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtension.swift; sourceTree = "<group>"; };
 		5E23926D205F67F000CB5AEC /* NeuzeitGro-Bla.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Bla.ttf"; sourceTree = "<group>"; };
 		5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Bol.ttf"; sourceTree = "<group>"; };
 		5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Reg.ttf"; sourceTree = "<group>"; };
@@ -407,6 +414,11 @@
 		5E32E3672062AF45000BCF3E /* InvestmentProgramBuyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramBuyToken.swift; sourceTree = "<group>"; };
 		5E32E3682062AF45000BCF3E /* BrokerInvestmentProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInvestmentProgram.swift; sourceTree = "<group>"; };
 		5E32E3692062AF45000BCF3E /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
+		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewModel.swift; sourceTree = "<group>"; };
+		5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionRouter.swift; sourceTree = "<group>"; };
+		5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewController.swift; sourceTree = "<group>"; };
+		5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		5E858343205FFA010039E13F /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		5E858345205FFCF70039E13F /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -928,6 +940,7 @@
 				FCC9DD81200E5CA0008825EC /* UITableView+Registration.swift */,
 				FCC9DD83200E5CEC008825EC /* UITableView+ReusableCell.swift */,
 				FCC9DD85200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift */,
+				5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */,
 			);
 			path = UITableView;
 			sourceTree = "<group>";
@@ -979,6 +992,7 @@
 				FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */,
 				FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */,
 				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
+				5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1011,6 +1025,7 @@
 				FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */,
 				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
 				FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */,
+				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1350,6 +1365,7 @@
 				5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */,
 				5E858343205FFA010039E13F /* UILabelExtension.swift */,
 				5E858345205FFCF70039E13F /* UIFontExtension.swift */,
+				5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1476,6 +1492,7 @@
 				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
 				5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */,
 				5E1813862061D40600481646 /* CurrencyLabel.swift */,
+				5E395A2C2065613800A6B779 /* GradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1513,6 +1530,7 @@
 				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
 				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
 				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
+				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1724,6 +1742,7 @@
 				5E32E3A32062AF46000BCF3E /* WalletTransactionsViewModel.swift in Sources */,
 				5E32E36C2062AF46000BCF3E /* RateAPI.swift in Sources */,
 				5E1813832061D36700481646 /* UIView+Extensions.swift in Sources */,
+				5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */,
 				5E32E36A2062AF46000BCF3E /* BrokerAPI.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
@@ -1740,6 +1759,7 @@
 				5E32E38A2062AF46000BCF3E /* InvestmentProgramRequests.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
+				5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
@@ -1797,6 +1817,7 @@
 				FC900E5C204EA852007E9142 /* RoundingExtensions.swift in Sources */,
 				5E32E3A22062AF46000BCF3E /* ManagerIpfsHash.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
+				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E32E3A12062AF46000BCF3E /* ErrorMessage.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
@@ -1822,6 +1843,7 @@
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				5E32E36D2062AF46000BCF3E /* TradesAPI.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
+				5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */,
 				FC1410172030168100B71E7F /* AccountCreated.swift in Sources */,
 				FCB178EE2046D45600A482B7 /* TournamentDataProvider.swift in Sources */,
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
@@ -1895,6 +1917,7 @@
 				FC27226C20484BEF005225F2 /* ProgramMoreDetailsTableViewCellViewModel.swift in Sources */,
 				5E32E3732062AF46000BCF3E /* OpenTradesViewModel.swift in Sources */,
 				5E32E3972062AF46000BCF3E /* InvestmentProgramsViewModel.swift in Sources */,
+				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				5E32E3AA2062AF46000BCF3E /* OpenOrderModel.swift in Sources */,
 				FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */,
 				FC5E9048202167CF000E4A90 /* ProgramFilterViewModel.swift in Sources */,
@@ -1931,6 +1954,7 @@
 				FCA19A31201ADF9800157AD6 /* SignInViewModel.swift in Sources */,
 				5E32E3A52062AF46000BCF3E /* WalletViewModel.swift in Sources */,
 				5E32E38C2062AF46000BCF3E /* ResetPasswordViewModel.swift in Sources */,
+				5E395A2D2065613800A6B779 /* GradientView.swift in Sources */,
 				FCC9DD7A200E4CCF008825EC /* BaseNavigationController.swift in Sources */,
 				FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,

@@ -26,6 +26,7 @@ final class ProgramDetailViewModel {
     // MARK: - Variables
     var title: String = "Program Detail"
     private var router: ProgramDetailRouter
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     private var investmentProgramId: String!
     private var investmentProgramDetails: InvestmentProgramDetails? {
@@ -61,9 +62,10 @@ final class ProgramDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String) {
+    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
+        self.reloadDataProtocol = reloadDataProtocol
     }
     
     // MARK: - Public methods
@@ -151,11 +153,11 @@ extension ProgramDetailViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: self)
         case .chart:
             return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "")
         case .moreDetails:
-            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self)
         case .details:
             return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }
@@ -170,6 +172,22 @@ extension ProgramDetailViewModel {
             self?.investmentProgramDetails = viewModel
             
             completion(.success)
+        }
+    }
+}
+
+
+extension ProgramDetailViewModel: DetailHeaderTableViewCellProtocol {
+    func showDescriptionDidPress() {
+        guard let investmentProgramDetails = investmentProgramDetails else { return }
+        router.show(routeType: .description(investmentProgramDetails: investmentProgramDetails))
+    }
+}
+
+extension ProgramDetailViewModel: ReloadDataProtocol {
+    func didReloadData() {
+        fetch { [weak self] (result) in
+            self?.reloadDataProtocol?.didReloadData()
         }
     }
 }

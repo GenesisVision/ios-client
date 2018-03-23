@@ -11,7 +11,7 @@ extension Date {
     var defaultFormatString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
+        dateFormatter.timeStyle = .short
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }

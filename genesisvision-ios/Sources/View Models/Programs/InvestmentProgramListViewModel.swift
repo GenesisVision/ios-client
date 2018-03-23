@@ -43,6 +43,20 @@ final class InvestmentProgramListViewModel {
     var searchText = ""
     var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
     
+    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc, .byTitleAsk, .byTitleDesc]
+    
+    var sortingValues: [String] = ["level ⇡", "level ⇣", "orders ⇡", "orders ⇣", "profit ⇡", "profit ⇣", "end of period ⇡", "end of period ⇣", "title ⇡", "title ⇣"]
+    
+    struct SortingList {
+        var sortingValue: String
+        var sortingKey: InvestmentProgramsFilter.Sorting
+    }
+    
+    var sortingList: [SortingList] {
+        return sortingValues.enumerated().map { (index, element) in
+            return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
+        }
+    }
     
     // MARK: - Init
     init(withRouter router: InvestmentProgramListRouter, reloadDataProtocol: ReloadDataProtocol?) {
@@ -61,6 +75,21 @@ final class InvestmentProgramListViewModel {
     
     func signInButtonEnable() -> Bool {
         return state == .programListWithSignIn
+    }
+    
+    func getSortingValue(sortingKey: InvestmentProgramsFilter.Sorting) -> String {
+        guard let index = sortingKeys.index(of: sortingKey) else { return "" }
+        return sortingValues[index]
+    }
+    
+    func changeSorting(at index: Int) {
+        filter?.sorting = sortingKeys[index]
+    }
+    
+    func getSelectedSortingIndex() -> Int {
+        guard let sorting = filter?.sorting else { return 0 }
+        
+        return sortingKeys.index(of: sorting) ?? 0
     }
 }
 

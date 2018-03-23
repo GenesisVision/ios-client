@@ -10,10 +10,18 @@ import Foundation
 
 struct ProgramMoreDetailsTableViewCellViewModel {
     let investmentProgramDetails: InvestmentProgramDetails
+    weak var reloadDataProtocol: ReloadDataProtocol?
 }
 
 extension ProgramMoreDetailsTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramMoreDetailsTableViewCell) {
-        cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod, periodDuration: investmentProgramDetails.periodDuration, feeSuccess: investmentProgramDetails.feeSuccess, feeManagement: investmentProgramDetails.feeManagement, trades: investmentProgramDetails.tradesCount, investedTokens: investmentProgramDetails.investedTokens)
+        cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod,
+                                         periodDuration: investmentProgramDetails.periodDuration,
+                                         feeSuccess: investmentProgramDetails.feeSuccess,
+                                         feeManagement: investmentProgramDetails.feeManagement,
+                                         trades: investmentProgramDetails.tradesCount,
+                                         investedTokens: investmentProgramDetails.investedTokens,
+                                         isEnable: investmentProgramDetails.isEnabled ?? false,
+                                         reloadDataProtocol: reloadDataProtocol)
     }
 }
