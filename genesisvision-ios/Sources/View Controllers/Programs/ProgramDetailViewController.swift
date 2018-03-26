@@ -86,8 +86,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         guard let viewProperties = viewModel.viewProperties else { return }
         historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
-
-//        tableView.backgroundColor = UIColor.NavBar.grayBackground
         
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
@@ -208,7 +206,6 @@ extension ProgramDetailViewController: ProgramDetailProtocol {
         fetch()
     }
 }
-
 
 extension ProgramDetailViewController: ReloadDataProtocol {
     func didReloadData() {

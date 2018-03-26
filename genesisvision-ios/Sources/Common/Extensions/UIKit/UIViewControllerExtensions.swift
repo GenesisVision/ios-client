@@ -37,6 +37,7 @@ extension UIViewController {
     // MARK: - Alerts
     func showAlertWithTitle(title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.primary
         
         if actionTitle != nil {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
@@ -77,6 +78,8 @@ extension UIViewController {
     
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.primary
+        
         present(alertController, animated: true, completion: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -99,30 +102,30 @@ extension UIViewController {
 
     func showErrorHUD(title: String?, subtitle: String?) {
         if title != nil || subtitle != nil {
-            HUD.flash(.labeledError(title: title, subtitle: subtitle), delay: 1.0)
+            HUD.flash(.labeledError(title: title, subtitle: subtitle), delay: Constants.hudDelay)
         } else {
-            HUD.flash(.error, delay: 1.0)
+            HUD.flash(.error, delay: Constants.hudDelay)
         }
     }
     
     func showErrorHUD(subtitle: String?) {
         if subtitle != nil {
-            HUD.flash(.labeledError(title: nil, subtitle: subtitle), delay: 1.0)
+            HUD.flash(.labeledError(title: nil, subtitle: subtitle), delay: Constants.hudDelay)
         } else {
-            HUD.flash(.error, delay: 1.0)
+            HUD.flash(.error, delay: Constants.hudDelay)
         }
     }
 
     func showSuccessHUD(title: String?, subtitle: String?) {
         if title != nil || subtitle != nil {
-            HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), delay: 2.0)
+            HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), delay: Constants.hudDelay)
         } else {
-            HUD.flash(.success, delay: 1.0)
+            HUD.flash(.success, delay: Constants.hudDelay)
         }
     }
     
     func showSuccessHUD(completion: ((Bool) -> Void)? = nil) {
-        HUD.flash(.success, onView: self.view, delay: 1.0, completion: completion)
+        HUD.flash(.success, onView: self.view, delay: Constants.hudDelay, completion: completion)
     }
 
     func showHUD(type: HUDContentType) {
@@ -133,7 +136,7 @@ extension UIViewController {
         if delay != nil {
             HUD.flash(type, delay: delay!)
         } else {
-            HUD.flash(type, delay: 1.0)
+            HUD.flash(type, delay: Constants.hudDelay)
         }
     }
     
@@ -176,6 +179,7 @@ extension UIViewController {
                          cancelTitle: String?,
                          cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.primary
         
         if let actionTitle = firstActionTitle {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in

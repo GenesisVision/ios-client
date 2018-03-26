@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class SignUpViewController: BaseViewController {
 
@@ -18,6 +19,7 @@ class SignUpViewController: BaseViewController {
             emailTextField.setClearButtonWhileEditing()
             emailTextField.setBottomLine()
             emailTextField.setLeftImageView()
+            emailTextField.delegate = self
         }
     }
     @IBOutlet var passwordTextField: DesignableUITextField! {
@@ -25,6 +27,7 @@ class SignUpViewController: BaseViewController {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.setBottomLine()
             passwordTextField.setLeftImageView()
+            passwordTextField.delegate = self
         }
     }
     @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
@@ -32,6 +35,7 @@ class SignUpViewController: BaseViewController {
             confirmPasswordTextField.setClearButtonWhileEditing()
             confirmPasswordTextField.setBottomLine()
             confirmPasswordTextField.setLeftImageView()
+            confirmPasswordTextField.delegate = self
         }
     }
     
@@ -49,7 +53,7 @@ class SignUpViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-            emailTextField.text = "investor@gv.com"
+            emailTextField.text = "george@genesis.vision"
             passwordTextField.text = "qwerty"
             confirmPasswordTextField.text = "qwerty"
         #endif
@@ -81,5 +85,18 @@ class SignUpViewController: BaseViewController {
     // MARK: - Actions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         sighUpMethod()
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case confirmPasswordTextField:
+            sighUpMethod()
+        default:
+            IQKeyboardManager.sharedManager().goNext()
+        }
+        
+        return false
     }
 }

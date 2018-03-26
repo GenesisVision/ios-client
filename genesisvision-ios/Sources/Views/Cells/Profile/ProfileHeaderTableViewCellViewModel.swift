@@ -10,14 +10,14 @@ import Foundation
 import Kingfisher
 
 struct ProfileHeaderTableViewCellViewModel {
-    let profileEntity: ProfileEntity
+    let profileModel: ProfileFullViewModel
     var editable: Bool
     weak var delegate: ProfileHeaderViewDelegate?
 }
 
 extension ProfileHeaderTableViewCellViewModel {
     func setup(on view: ProfileHeaderView) {
-        if let avatar = profileEntity.avatar {
+        if let avatar = profileModel.avatar {
             let avatarURL = getFileURL(fileName: avatar)
             view.chooseProfilePhotoButton.photoImageView.kf.indicatorType = .activity
             view.chooseProfilePhotoButton.photoImageView.kf.setImage(with: avatarURL, placeholder: UIImage.placeholder)

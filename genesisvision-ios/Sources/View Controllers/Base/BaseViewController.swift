@@ -89,8 +89,10 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = "Update"
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]
+        let text = "update".uppercased()
+        
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -109,5 +111,21 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     
     func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func buttonBackgroundImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> UIImage! {
+        let capInsets = UIEdgeInsetsMake(22.0, 22.0, 22.0, 22.0)
+        let rectInsets = UIEdgeInsetsMake(0, -20, 0.0, -20)
+        var image: UIImage = #imageLiteral(resourceName: "img_button")
+        
+        if state == .highlighted {
+            image = #imageLiteral(resourceName: "img_button_highlighted")
+        }
+        
+        return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch).withAlignmentRectInsets(rectInsets)
     }
 }

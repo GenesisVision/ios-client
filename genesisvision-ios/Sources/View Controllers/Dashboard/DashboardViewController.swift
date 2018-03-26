@@ -187,7 +187,8 @@ extension DashboardViewController {
     
     override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = viewModel.noDataButtonTitle()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.primary]
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -218,6 +219,7 @@ extension DashboardViewController: UIViewControllerPreviewingDelegate {
 extension DashboardViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
         
         var selectedIndexRow = viewModel.getSelectedSortingIndex()
         let values = viewModel.sortingValues

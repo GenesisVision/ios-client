@@ -15,7 +15,12 @@ class ProgramDescriptionViewController: BaseViewController {
     @IBOutlet weak var programLogoImageView: ProfileImageView!
     @IBOutlet weak var programTitleLabel: UILabel!
     @IBOutlet weak var managerNameLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView! {
+        didSet {
+            descriptionTextView.backgroundColor = UIColor.NavBar.grayBackground
+        }
+    }
+    @IBOutlet weak var closeButton: UIButton!
     
     // MARK: - View Model
     var viewModel: ProgramDescriptionViewModel! {
@@ -37,6 +42,14 @@ class ProgramDescriptionViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
+        
+        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(closeButtonAction(_:)))
+        swipeGestureRecognizer.direction = .down
+        view.addGestureRecognizer(swipeGestureRecognizer)
+        
+        navigationController?.navigationBar.barTintColor = UIColor.NavBar.grayBackground
+        view.backgroundColor = UIColor.NavBar.grayBackground
+        
         fillData()
     }
     
@@ -53,5 +66,10 @@ class ProgramDescriptionViewController: BaseViewController {
         managerNameLabel.text = viewModel.getProgramManagerUsername()
         
         programLogoImageView.levelLabel.text = viewModel.getProgramLevelText()
+    }
+    
+    // MARK: - Actions
+    @IBAction func closeButtonAction(_ sender: UIButton) {
+        viewModel.closeVC()
     }
 }

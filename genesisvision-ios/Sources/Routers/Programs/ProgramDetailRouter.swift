@@ -42,8 +42,13 @@ class ProgramDetailRouter: Router {
         let router = ProgramDescriptionRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramDescriptionViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
         viewController.viewModel = viewModel
+        let navController = BaseNavigationController(rootViewController: viewController)
 
-        navigationController?.pushViewController(viewController, animated: true)
+        guard let topViewController = navigationController?.topViewController else {
+            return
+        }
+        
+        present(viewController: navController, from: topViewController)
     }
     
     private func requests(with investmentProgramId: String) {

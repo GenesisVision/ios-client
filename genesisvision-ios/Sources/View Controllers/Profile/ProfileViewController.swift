@@ -123,6 +123,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = type
+        picker.allowsEditing = true
         
         picker.navigationBar.barTintColor = UIColor.Background.main
         picker.navigationBar.tintColor = UIColor.primary
@@ -134,6 +135,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         view.endEditing(true)
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.view.tintColor = UIColor.primary
+        
         alertController.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] (action) in
             DispatchQueue.main.async {
                 self?.takePhoto(type: .camera)
@@ -147,7 +150,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         }))
         
         alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler:nil))
-        alertController.view.tintColor = UIColor.primary
         
         present(alertController, animated: true, completion: nil)
     }
@@ -215,9 +217,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard indexPath.row > 0 else { return }
+        guard indexPath.section == 0, indexPath.row > 0 else {
+            return
+        }
         
         cell.addDashedBottomLine()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
     }
     
     // MARK: - UITableViewDataSource
@@ -243,9 +251,31 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        viewModel.pickedImage = pickedImage
+        var imageName = "TempImage.png"
+        var selectedImage: UIImage?
+        
+        if let imageUrl = info[UIImagePickerControllerReferenceURL] as? NSURL {
+            imageName = imageUrl.lastPathComponent!
+            selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage
+        } else if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            viewModel.pickedImage = pickedImage
+            selectedImage = pickedImage
+        }
+        
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let photoURL = NSURL(fileURLWithPath: documentDirectory)
+        let localPath = photoURL.appendingPathComponent(imageName)
+        let data = UIImagePNGRepresentation(selectedImage!)
+        
+        viewModel.pickedImageURL = localPath
+        viewModel.pickedImage = selectedImage
         headerView.update(avatar: viewModel.pickedImage)
+        
+        do {
+            try data?.write(to: localPath!, options: .atomic)
+        } catch {
+
+        }
         
         picker.dismiss(animated: true, completion: nil)
     }

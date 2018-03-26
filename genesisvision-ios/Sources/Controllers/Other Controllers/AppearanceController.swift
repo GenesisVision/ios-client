@@ -47,6 +47,10 @@ struct AppearanceController {
         IQKeyboardManager.sharedManager().enable = enable
         IQKeyboardManager.sharedManager().enableAutoToolbar = enableAutoToolbar
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = shouldResignOnTouchOutside
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 32.0
+        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.primary
+        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Dismiss"
+        IQKeyboardManager.sharedManager().placeholderFont = UIFont.getFont(.regular, size: 14.0)
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class ProgramPropertiesForTableViewCellView: UIStackView {
     // MARK: - Outlets
-    @IBOutlet var endOfPeriodLabel: UILabel!
+    @IBOutlet var endOfPeriodLabel: UILabel! 
     @IBOutlet var periodDurationLabel: UILabel!
     
     @IBOutlet var periodLeftValueLabel: UILabel!

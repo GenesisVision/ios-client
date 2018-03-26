@@ -8,6 +8,25 @@
 
 import UIKit
 
+enum FieldType: String, EnumCollection {
+    case firstName = "First Name"
+    case middleName = "Middle Name"
+    case lastName = "Last Name"
+    
+    case documentType = "Document Type"
+    case documentNumber = "Document Number"
+    
+    case country = "Country"
+    case city = "City"
+    case address = "Address"
+    
+    case phone = "Phone"
+    case birthday = "Birthday"
+    case gender = "Gender"
+    case avatar = "Avatar"
+    case email = "Email"
+}
+
 enum ProfileState {
     case show
     case edit
@@ -24,11 +43,12 @@ final class ProfileViewModel {
     var title: String = "Profile"
     
     private var router: ProfileRouter!
-    private var profileEntity: ProfileEntity?
-    private var editProfileEntity: ProfileEntity?
+    private var profileModel: ProfileFullViewModel?
+    private var editProfileModel: ProfileFullViewModel?
     
     var editableFields: [EditableField]!
     var pickedImage: UIImage?
+    var pickedImageURL: URL?
     
     class EditableField {
         var text: String
@@ -84,8 +104,7 @@ final class ProfileViewModel {
     func getProfile(completion: @escaping CompletionBlock) {
         AuthManager.getProfile { [weak self] (viewModel) in
             if let profileModel = viewModel {
-                self?.profileEntity = ProfileEntity()
-                self?.profileEntity?.traslation(fromProfileModel: profileModel)
+                self?.profileModel = profileModel
                 completion(.success)
             }
             
@@ -94,8 +113,8 @@ final class ProfileViewModel {
     }
     
     func getName() -> String {
-        guard let firstName = profileEntity?.firstName,
-            let lastName = profileEntity?.lastName
+        guard let firstName = profileModel?.firstName,
+            let lastName = profileModel?.lastName
             else { return "" }
         
         let username = firstName + " " + lastName
@@ -104,7 +123,7 @@ final class ProfileViewModel {
     }
     
     func getAvatarURL() -> URL? {
-        guard let avatar = profileEntity?.avatar,
+        guard let avatar = profileModel?.avatar,
             let avatarURL = getFileURL(fileName: avatar)
             else { return nil }
         
@@ -113,7 +132,7 @@ final class ProfileViewModel {
     
     // MARK: - TableView
     func numberOfSections() -> Int {
-        return profileEntity != nil ? sections.count : 0
+        return profileModel != nil ? sections.count : 0
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -136,32 +155,32 @@ final class ProfileViewModel {
                 let type: FieldType = FieldType(rawValue: field.placeholder)!
                 switch type {
                 case .firstName:
-                    self?.profileEntity?.firstName = text
+                    self?.profileModel?.firstName = text
                 case .middleName:
-                    self?.profileEntity?.middleName = text
+                    self?.profileModel?.middleName = text
                 case .lastName:
-                    self?.profileEntity?.lastName = text
+                    self?.profileModel?.lastName = text
                     
                 case .country:
-                    self?.profileEntity?.country = text
+                    self?.profileModel?.country = text
                 case .city:
-                    self?.profileEntity?.city = text
+                    self?.profileModel?.city = text
                 case .address:
-                    self?.profileEntity?.address = text
+                    self?.profileModel?.address = text
                     
                 case .documentNumber:
-                    self?.profileEntity?.documentNumber = text
+                    self?.profileModel?.documentNumber = text
                 case .documentType:
-                    self?.profileEntity?.documentType = text
+                    self?.profileModel?.documentType = text
                     
                 case .phone:
-                    self?.profileEntity?.phone = text
+                    self?.profileModel?.phone = text
                 case .birthday:
-                    self?.profileEntity?.birthday = Date() //TODO:
+                    self?.profileModel?.birthday = Date() //TODO:
                 case .gender:
-                    self?.profileEntity?.gender = text == "Male" ? true : false
+                    self?.profileModel?.gender = text == "Male" ? true : false
                 case .email:
-                    self?.profileEntity?.email = text
+                    self?.profileModel?.email = text
                     
                 default:
                     break
@@ -213,21 +232,68 @@ final class ProfileViewModel {
         }
     }
     
+    private func getFields() -> [FieldType : String] {
+        return [.firstName : profileModel?.firstName ?? "",
+                .middleName : profileModel?.middleName ?? "",
+                .lastName : profileModel?.lastName ?? "",
+                .documentType : profileModel?.lastName ?? "",
+                .documentNumber : profileModel?.documentNumber ?? "",
+                .country : profileModel?.country ?? "",
+                .city : profileModel?.city ?? "",
+                .address : profileModel?.address ?? "",
+                .phone : profileModel?.phone ?? "",
+                .birthday : getBirthday(),
+                .gender : getGender(),
+                .email : profileModel?.email ?? ""]
+    }
+    
+    private func getKeyboardTypes(for fieldType: FieldType) -> UIKeyboardType {
+        switch fieldType {
+        case .email:
+            return .emailAddress
+        case .gender:
+            return .asciiCapableNumberPad
+        default:
+            return .default
+        }
+    }
+    
+    private func getTextContentTypes(for fieldType: FieldType) -> UITextContentType? {
+        switch fieldType {
+        case .address:
+            return .fullStreetAddress
+        case .country:
+            return .countryName
+        case .city:
+            return .addressCity
+        case .firstName:
+            return .name
+        case .middleName:
+            return .middleName
+        case .lastName:
+            return .familyName
+        case .phone:
+            return .telephoneNumber
+        default:
+            return nil
+        }
+    }
+    
     private func setupCellViewModel() {
-        profileHeaderTableViewCellViewModel = ProfileHeaderTableViewCellViewModel(profileEntity: profileEntity ?? ProfileEntity.templateEntity, editable: false, delegate: delegate)
-        
-        if let profileEntity = profileEntity {
+        if let profileModel = profileModel {
+            profileHeaderTableViewCellViewModel = ProfileHeaderTableViewCellViewModel(profileModel: profileModel, editable: false, delegate: delegate)
+            
             var editableFields: [EditableField] = []
             
             FieldType.allValues.forEach { (type) in
-                let fields = profileEntity.getFields()
+                let fields = getFields()
                 let key = type.rawValue
                 
                 let text = fields[type] ?? ""
                 let placeholder = key.capitalized
                 let editable = profileState == .edit
-                let keyboardType = profileEntity.getKeyboardTypes(for: type)
-                let textContentType = profileEntity.getTextContentTypes(for: type)
+                let keyboardType = getKeyboardTypes(for: type)
+                let textContentType = getTextContentTypes(for: type)
                 
                 let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, keyboardType: keyboardType, textContentType: textContentType, isValid: { (text) -> Bool in
                     return text.count > 1
@@ -240,28 +306,54 @@ final class ProfileViewModel {
         }
     }
     
+    var fullName: String {
+        guard let firstName = profileModel?.firstName, let lastName = profileModel?.lastName else { return String.placeholder }
+        return firstName + " " + lastName
+    }
+    
+    func getBirthday() -> String {
+        guard let date = profileModel?.birthday else { return "" }
+        
+        return date.defaultFormatString
+    }
+    
+    func getGender() -> String {
+        guard let gender = profileModel?.gender else { return "" }
+        
+        return gender ? "Male" : "Female"
+    }
+    
     private func saveProfileApi(completion: @escaping CompletionBlock) {
-//        let model = UpdateProfileViewModel(firstName: profileEntity?.firstName,
-//                                           middleName: profileEntity?.middleName,
-//                                           lastName: profileEntity?.lastName,
-//                                           documentType: profileEntity?.documentType,
-//                                           documentNumber: profileEntity?.documentNumber,
-//                                           country: profileEntity?.country,
-//                                           city: profileEntity?.city,
-//                                           address: profileEntity?.address,
-//                                           phone: profileEntity?.phone,
-//                                           birthday: profileEntity?.birthday,
-//                                           gender: profileEntity?.gender,
-//                                           avatar: profileEntity?.avatar)
-//        
-//        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
-//        
-//        isInvestorApp
-//            ? InvestorAPI.apiInvestorProfileUpdatePost(authorization: token, model: model) { (error) in
-//                ResponseHandler.handleApi(error: error, completion: completion)
-//                }
-//            : ManagerAPI.apiManagerProfileUpdatePost(authorization: token, model: model) { (error) in
-//                ResponseHandler.handleApi(error: error, completion: completion)
-//        }
+        if let pickedImageURL = pickedImageURL {
+            FilesAPI.apiFilesUploadPost(uploadedFile: pickedImageURL) { (result, error) in
+                print(result ?? "")
+                completion(.failure(reason: nil))
+            }
+        }
+        
+        let model = UpdateProfileViewModel(userName: editProfileModel?.userName,
+                                           firstName: editProfileModel?.firstName,
+                                           middleName: editProfileModel?.middleName,
+                                           lastName: editProfileModel?.lastName,
+                                           documentType: editProfileModel?.documentType,
+                                           documentNumber: editProfileModel?.documentNumber,
+                                           country: editProfileModel?.country,
+                                           city: editProfileModel?.city,
+                                           address: editProfileModel?.address,
+                                           phone: editProfileModel?.phone,
+                                           birthday: editProfileModel?.birthday,
+                                           gender: editProfileModel?.gender,
+                                           avatar: editProfileModel?.avatar)
+        
+
+        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
+
+        isInvestorApp
+            ? InvestorAPI.apiInvestorProfileUpdatePost(authorization: token, model: model) { (error) in
+                ResponseHandler.handleApi(error: error, completion: completion)
+                }
+            : ManagerAPI.apiManagerProfileUpdatePost(authorization: token, model: model) { (error) in
+                ResponseHandler.handleApi(error: error, completion: completion)
+        }
     }
 }

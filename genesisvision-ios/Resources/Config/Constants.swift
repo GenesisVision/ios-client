@@ -76,6 +76,7 @@ final class Constants {
     }
     
     static let currency = "GVT"
+    static let hudDelay: Double = 2.0
     
     struct SystemSizes {
         static let imageViewBorderWidthPercentage: CGFloat = 0.04

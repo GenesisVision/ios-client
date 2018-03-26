@@ -92,7 +92,7 @@ extension DashboardViewModel {
     }
     
     func numberOfSections() -> Int {
-        return sections.count
+        return modelsCount() > 0 ? sections.count : 0
     }
     
     func numberOfRows(in section: Int) -> Int {
@@ -135,8 +135,7 @@ extension DashboardViewModel {
     }
     
     func noDataImageName() -> String? {
-        let imageName = "img_dashboard_logo"
-        return imageName
+        return logoImageName()
     }
     
     func noDataButtonTitle() -> String {
@@ -209,7 +208,7 @@ extension DashboardViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard)
+            return modelsCount() > 0 ? DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard) : nil
         case .programList:
             return viewModels[indexPath.row]
         }

@@ -252,4 +252,8 @@ extension Router {
     func goToBack() {
         popViewController(animated: true)
     }
+    
+    func closeVC() {
+        dismiss(animated: true)
+    }
 }

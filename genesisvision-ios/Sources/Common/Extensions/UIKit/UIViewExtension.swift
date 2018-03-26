@@ -10,9 +10,13 @@ import UIKit.UIView
 
 extension UIView {
     func roundCorners() {
+        roundCorners(with: frame.height / 2)
+    }
+    
+    func roundCorners(with radius: CGFloat) {
         contentMode = .scaleAspectFill
         clipsToBounds = true
-        layer.cornerRadius = frame.height / 2
+        layer.cornerRadius = radius
     }
     
     func roundWithBorder(_ approximateBorderWidth: CGFloat, color: UIColor = .white) {

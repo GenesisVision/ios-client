@@ -108,7 +108,18 @@ extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension ProgramFilterViewController: TTRangeSliderDelegate {
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
-        viewModel.filter?.investMaxAmountFrom = Double(selectedMinimum)
-        viewModel.filter?.investMaxAmountTo = Double(selectedMaximum)
+        let type: SliderType = SliderType(rawValue: sender.tag)!
+        
+        switch type {
+        case .level:
+            viewModel.filter?.levelMin = Int(selectedMinimum)
+            viewModel.filter?.levelMax = Int(selectedMaximum)
+        case .totalProfit:
+            viewModel.filter?.profitTotalMin = Int(selectedMinimum)
+            viewModel.filter?.profitTotalMax = Int(selectedMaximum)
+        case .avgProfit:
+            viewModel.filter?.profitAvgPercentMin = Int(selectedMinimum)
+            viewModel.filter?.profitAvgPercentMax = Int(selectedMaximum)
+        }
     }
 }

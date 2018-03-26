@@ -29,6 +29,7 @@ struct FilterAmountTableViewCellViewModel {
     
     var selectedMinValue: Int?
     var selectedMaxValue: Int?
+    var sliderViewTag: Int
     
     weak var delegate: TTRangeSliderDelegate?
 }
@@ -43,8 +44,11 @@ extension FilterAmountTableViewCellViewModel: CellViewModel {
         let max = maxValue ?? 100
         cell.sliderView.minValue = Float(min)
         cell.sliderView.maxValue = Float(max)
+        cell.sliderView.enableStep = sliderViewTag == 0
+        cell.sliderView.step = 1
         cell.sliderView.selectedMinimum = Float(selectedMinValue ?? min)
         cell.sliderView.selectedMaximum = Float(selectedMaxValue ?? max)
+        cell.sliderView.tag = sliderViewTag
         
         cell.sliderView.delegate = delegate
     }

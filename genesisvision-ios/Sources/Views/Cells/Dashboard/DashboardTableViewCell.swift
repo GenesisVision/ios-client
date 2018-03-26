@@ -43,7 +43,7 @@ class DashboardTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var programTitleLabel: UILabel!
+    @IBOutlet var programTitleLabel: UILabel! 
     @IBOutlet var managerNameLabel: UILabel!
     
     @IBOutlet var tokensCountValueLabel: UILabel!

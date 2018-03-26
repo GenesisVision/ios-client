@@ -28,10 +28,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yd5-vC-X02">
-                                <rect key="frame" x="8" y="52" width="359" height="385"/>
+                                <rect key="frame" x="8" y="52" width="359" height="369"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_full_splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2QQ-B7-COZ">
-                                        <rect key="frame" x="119.66666666666669" y="121" width="120" height="144"/>
+                                        <rect key="frame" x="119.66666666666669" y="113" width="120" height="144"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="qbx-rh-Fb9"/>
                                             <constraint firstAttribute="height" constant="144" id="w3L-Yj-Pjh"/>
@@ -45,7 +45,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-DZ-YsC">
-                                <rect key="frame" x="47" y="445" width="281" height="112"/>
+                                <rect key="frame" x="47" y="429" width="281" height="112"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="G6D-1M-bzU" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="281" height="40"/>
@@ -55,14 +55,14 @@
                                         </constraints>
                                         <color key="textColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VNX-Cg-TzZ" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="281" height="40"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -70,7 +70,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKV-bX-ykN" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="88.666666666666686" y="644" width="198" height="45"/>
+                                <rect key="frame" x="88.666666666666686" y="628" width="198" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="muP-bi-HtM"/>
@@ -84,10 +84,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-D3-BNQ">
-                                <rect key="frame" x="16" y="726" width="343" height="36"/>
+                                <rect key="frame" x="16" y="710" width="343" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSb-pR-zSL">
-                                        <rect key="frame" x="102.66666666666667" y="0.0" width="137.66666666666663" height="14"/>
+                                        <rect key="frame" x="97.000000000000014" y="0.0" width="149.33333333333337" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="65n-pK-yes"/>
                                         </constraints>
@@ -96,7 +96,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYD-sE-MAU">
-                                        <rect key="frame" x="145" y="22" width="53" height="14"/>
+                                        <rect key="frame" x="143" y="22" width="57" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="WXq-gw-b5l"/>
                                         </constraints>
@@ -114,7 +114,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Yd5-vC-X02" firstAttribute="leading" secondItem="BQV-GE-ydP" secondAttribute="leading" constant="8" id="1AJ-ae-5TK"/>
-                            <constraint firstItem="BQV-GE-ydP" firstAttribute="bottom" secondItem="Hn4-D3-BNQ" secondAttribute="bottom" constant="16" id="6G1-Yv-tlL"/>
+                            <constraint firstItem="BQV-GE-ydP" firstAttribute="bottom" secondItem="Hn4-D3-BNQ" secondAttribute="bottom" constant="32" id="6G1-Yv-tlL"/>
                             <constraint firstItem="BQV-GE-ydP" firstAttribute="trailing" secondItem="EFr-DZ-YsC" secondAttribute="trailing" constant="47" id="BKw-hC-HlA"/>
                             <constraint firstItem="EFr-DZ-YsC" firstAttribute="leading" secondItem="BQV-GE-ydP" secondAttribute="leading" constant="47" id="C5e-2G-5XN"/>
                             <constraint firstItem="EFr-DZ-YsC" firstAttribute="top" secondItem="Yd5-vC-X02" secondAttribute="bottom" constant="8" id="D6p-Ko-X46"/>
@@ -177,21 +177,21 @@
                                         </constraints>
                                         <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EE3-Cd-HBc" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="281" height="40"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w89-iN-mGb" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="144" width="281" height="40"/>
                                         <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -217,7 +217,7 @@
                                 <rect key="frame" x="16" y="762" width="343" height="0.0"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-3I-480">
-                                        <rect key="frame" x="-68.000000000000014" y="-762" width="154" height="14"/>
+                                        <rect key="frame" x="-71.333333333333343" y="-762" width="162.66666666666666" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="ial-EF-U2L"/>
                                         </constraints>
@@ -226,7 +226,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhQ-75-sRn">
-                                        <rect key="frame" x="-16" y="-762" width="50" height="14"/>
+                                        <rect key="frame" x="-16" y="-762" width="52" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="H06-fI-npm"/>
                                         </constraints>

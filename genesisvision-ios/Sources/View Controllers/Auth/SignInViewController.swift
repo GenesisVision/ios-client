@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class SignInViewController: BaseViewController {
 
@@ -18,6 +19,7 @@ class SignInViewController: BaseViewController {
             emailTextField.setClearButtonWhileEditing()
             emailTextField.setBottomLine()
             emailTextField.setLeftImageView()
+            emailTextField.delegate = self
         }
     }
     
@@ -26,6 +28,7 @@ class SignInViewController: BaseViewController {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.setBottomLine()
             passwordTextField.setLeftImageView()
+            passwordTextField.delegate = self
         }
     }
     
@@ -44,7 +47,7 @@ class SignInViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         #if DEBUG
-            emailTextField.text = "investor@gv.com"
+            emailTextField.text = "george@genesis.vision"
             passwordTextField.text = "qwerty"
         #endif
     }
@@ -80,5 +83,18 @@ class SignInViewController: BaseViewController {
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         showSignUpVC()
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case passwordTextField:
+            sighInMethod()
+        default:
+            IQKeyboardManager.sharedManager().goNext()
+        }
+        
+        return false
     }
 }

@@ -7,21 +7,10 @@
 //
 
 enum ProgramDescriptionRouteType {
-    case dismiss
+    
 }
 
 class ProgramDescriptionRouter: Router {
-    // MARK: - Public methods
-    func show(routeType: ProgramDescriptionRouteType) {
-        switch routeType {
-        case .dismiss:
-            dismiss()
-        }
-    }
     
-    // MARK: - Private methods
-    private func dismiss() {
-        //TODO:
-    }
 }
 

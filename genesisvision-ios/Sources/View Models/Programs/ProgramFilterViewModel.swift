@@ -9,6 +9,10 @@
 import Foundation
 import TTRangeSlider
 
+enum SliderType: Int {
+    case level, totalProfit, avgProfit
+}
+
 final class ProgramFilterViewModel {
     
     // MARK: - View Model
@@ -32,14 +36,12 @@ final class ProgramFilterViewModel {
     var filter: InvestmentProgramsFilter?
     
     var amountCellModels = [FilterAmountTableViewCellViewModel]()
-    var amountCellModel: FilterAmountTableViewCellViewModel?
     
-    weak var sliderDelegate: TTRangeSliderDelegate?
-//        {
-//        didSet {
-//            amountCellModels.delegate = sliderDelegate
-//        }
-//    }
+    weak var sliderDelegate: TTRangeSliderDelegate? {
+        didSet {
+            setup()
+        }
+    }
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -56,8 +58,6 @@ final class ProgramFilterViewModel {
         if let filter = investmentProgramListViewModel.filter {
             self.filter = filter
         }
-        
-        setup()
     }
     
     // MARK: - Public methods
@@ -92,19 +92,24 @@ final class ProgramFilterViewModel {
             
             switch amounts[idx] {
             case .level:
+                filter?.levelMin = 1
+                filter?.levelMax = 7
                 viewModel.selectedMinValue = filter?.levelMin
                 viewModel.selectedMaxValue = filter?.levelMax
             case .totalProfit:
+                filter?.profitTotalMin = nil
+                filter?.profitTotalMax = nil
                 viewModel.selectedMinValue = filter?.profitTotalMin
                 viewModel.selectedMaxValue = filter?.profitTotalMax
             case .averageProfit:
+                filter?.profitAvgPercentMin = nil
+                filter?.profitAvgPercentMax = nil
                 viewModel.selectedMinValue = filter?.profitAvgPercentMin
                 viewModel.selectedMaxValue = filter?.profitAvgPercentMax
             }
         }
         
         investmentProgramListViewModel?.filter = filter
-        
     }
     
     func apply(completion: @escaping CompletionBlock) {
@@ -127,15 +132,14 @@ final class ProgramFilterViewModel {
             
             switch type {
             case .level:
-                amountCellModel = FilterAmountTableViewCellViewModel(minValue: 1, maxValue: 7, amountTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, delegate: nil)
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: 1, maxValue: 7, amountTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, sliderViewTag: idx, delegate: sliderDelegate)
             case .totalProfit:
-                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitTotalMin, selectedMaxValue: filter?.profitTotalMax, delegate: nil)
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitTotalMin, selectedMaxValue: filter?.profitTotalMax, sliderViewTag: idx, delegate: sliderDelegate)
             case .averageProfit:
-                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, delegate: nil)
+                amountCellModel = FilterAmountTableViewCellViewModel(minValue: nil, maxValue: nil, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, sliderViewTag: idx, delegate: sliderDelegate)
             }
         
             amountCellModels.append(amountCellModel!)
         }
     }
 }
-

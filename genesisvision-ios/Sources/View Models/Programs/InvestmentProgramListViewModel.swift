@@ -242,11 +242,11 @@ extension InvestmentProgramListViewModel {
     }
     
     private func fakeViewModels(completion: (_ traderCellModels: [ProgramTableViewCellViewModel]) -> Void) {
-        let cellModels = [ProgramTableViewCellViewModel]()
+        var cellModels = [ProgramTableViewCellViewModel]()
         
-//        for _ in 0..<Constants.TemplatesCounts.traders {
-//            cellModels.append(InvestmentProgramTableViewCellViewModel(investmentProgram: InvestmentProgram.templateEntity))
-//        }
+        for _ in 0..<Constants.TemplatesCounts.traders {
+            cellModels.append(ProgramTableViewCellViewModel(investmentProgram: InvestmentProgram(id: nil, title: "title", description: "descr", level: 1, logo: nil, isEnabled: true, balance: 123, currency: nil, tradesCount: nil, investorsCount: nil, periodDuration: nil, startOfPeriod: nil, endOfPeriod: nil, profitAvg: nil, profitTotal: nil, profitAvgPercent: nil, profitTotalPercent: nil, profitTotalChange: nil, availableInvestment: nil, feeSuccess: nil, feeManagement: nil, chart: nil, hasNewRequests: false, isInvestEnable: nil)))
+        }
         
         completion(cellModels)
     }
@@ -293,16 +293,15 @@ extension InvestmentProgramListViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs"
+        return "no programs yet"
     }
     
-    func noDataImageName() -> String {
-        let imageName = "img_program_list_logo"
-        return imageName
+    func noDataImageName() -> String? {
+        return logoImageName()
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Update"
-        return text.uppercased()
+        let text = "update".uppercased()
+        return text
     }
 }

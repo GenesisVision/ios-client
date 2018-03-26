@@ -226,6 +226,7 @@ extension ProgramListViewController: ReloadDataProtocol {
 extension ProgramListViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
         
         var selectedIndexRow = viewModel.getSelectedSortingIndex()
         let values = viewModel.sortingValues
@@ -260,3 +261,29 @@ extension ProgramListViewController: SortHeaderViewProtocol {
     }
 }
 
+extension ProgramListViewController {
+    
+    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = viewModel.noDataText()
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        if let imageName = viewModel.noDataImageName() {
+            return UIImage(named: imageName)
+        }
+        
+        return UIImage.placeholder
+    }
+    
+    override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = viewModel.noDataButtonTitle()
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
+                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+}

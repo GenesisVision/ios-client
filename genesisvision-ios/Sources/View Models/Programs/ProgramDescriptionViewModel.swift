@@ -10,7 +10,7 @@ import Foundation
 
 final class ProgramDescriptionViewModel {
     // MARK: - Variables
-    var title: String = "Program Details"
+    var title: String = "Program Info"
     
     var investmentProgramId: String?
     
@@ -56,11 +56,7 @@ final class ProgramDescriptionViewModel {
     }
     
     // MARK: - Navigation
-    func dismiss() {
-        //TODO: if modal
-    }
-    
-    func goToBack() {
-        router.goToBack()
+    func closeVC() {
+        router.closeVC()
     }
 }
