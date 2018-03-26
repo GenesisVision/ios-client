@@ -37,11 +37,13 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         return barButtonItem
     }
     private var cancelEditProfileButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_cancel"), style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelEditProfileButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Font.red
         return barButtonItem
     }
     private var saveProfileButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_check"), style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveProfileButtonAction(_:)))
+        barButtonItem.tintColor = UIColor.Font.primary
         return barButtonItem
     }
     private var signOutButton: UIBarButtonItem! {
@@ -210,6 +212,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.row > 0 else { return }
+        
+        cell.addDashedBottomLine()
     }
     
     // MARK: - UITableViewDataSource

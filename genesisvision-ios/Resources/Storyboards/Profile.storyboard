@@ -30,19 +30,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-rQ-dRW" customClass="ChooseProfilePhotoButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="95.666666666666686" y="8" width="184" height="184"/>
+                                            <rect key="frame" x="108" y="8" width="160" height="160"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PZf-lb-c2V">
-                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="184"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLP-66-RUC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="184"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                     <color key="backgroundColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6f-xj-I7n">
-                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="184"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Edit">
                                                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,7 +84,7 @@
                                         <constraint firstItem="pPQ-rQ-dRW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="blr-FG-pJn" secondAttribute="leading" constant="8" id="bmv-ZJ-7s6"/>
                                         <constraint firstAttribute="trailing" secondItem="C5e-J1-qFB" secondAttribute="trailing" id="mE0-u0-9AL"/>
                                         <constraint firstAttribute="bottom" secondItem="C5e-J1-qFB" secondAttribute="bottom" id="rPz-E8-SLX"/>
-                                        <constraint firstAttribute="bottom" secondItem="pPQ-rQ-dRW" secondAttribute="bottom" constant="8" id="xUt-o7-Fdb"/>
+                                        <constraint firstAttribute="bottom" secondItem="pPQ-rQ-dRW" secondAttribute="bottom" constant="32" id="xUt-o7-Fdb"/>
                                         <constraint firstItem="pPQ-rQ-dRW" firstAttribute="centerY" secondItem="blr-FG-pJn" secondAttribute="centerY" id="yj1-kF-xbY"/>
                                     </constraints>
                                     <connections>
@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536.8" y="132.68365817091455"/>
+            <point key="canvasLocation" x="1536.8" y="132.26600985221674"/>
         </scene>
     </scenes>
     <resources>

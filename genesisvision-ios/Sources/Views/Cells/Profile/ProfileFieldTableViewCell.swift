@@ -14,10 +14,11 @@ class ProfileFieldTableViewCell: UITableViewCell {
     var valueChanged: ((String) -> Void)?
     
     // MARK: - Views
-    @IBOutlet var textField: HoshiTextField! {
+    @IBOutlet var titleLabel: UILabel!
+    
+    @IBOutlet var textField: DesignableUITextField! {
         didSet {
-            textField.borderInactiveColor = UIColor.black
-            textField.placeholderColor = UIColor.Font.dark
+            textField.setClearButtonWhileEditing()
         }
     }
     

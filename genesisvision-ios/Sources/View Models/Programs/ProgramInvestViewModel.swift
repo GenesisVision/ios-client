@@ -10,7 +10,7 @@ import Foundation
 
 final class ProgramInvestViewModel {
     // MARK: - Variables
-    var title: String = "Invest"
+    var title: String = "Investment"
     var investmentProgramId: String?
     private weak var programDetailProtocol: ProgramDetailProtocol?
     
@@ -27,8 +27,7 @@ final class ProgramInvestViewModel {
     func getAmountText(completion: @escaping (_ text: String) -> Void) {
         AuthManager.getBalance(completion: { (value) in
             let valueText = value.toString()
-            let text = "Balance: " + valueText + " GVT"
-            completion(text)
+            completion(valueText)
         })
     }
     

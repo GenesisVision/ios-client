@@ -3,10 +3,9 @@ import Foundation
 
 // MARK: - Designable Extension
 
-@IBDesignable
 extension UIView {
     
-    @IBInspectable
+    
     /// Should the corner be as circle
     public var circleCorner: Bool {
         get {
@@ -17,7 +16,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Corner radius of view; also inspectable from Storyboard.
     public var cornerRadius: CGFloat {
         get {
@@ -29,7 +28,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Border color of view; also inspectable from Storyboard.
     public var borderColor: UIColor? {
         get {
@@ -47,7 +46,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Border width of view; also inspectable from Storyboard.
     public var borderWidth: CGFloat {
         get {
@@ -58,7 +57,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Shadow color of view; also inspectable from Storyboard.
     public var shadowColor: UIColor? {
         get {
@@ -72,7 +71,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Shadow offset of view; also inspectable from Storyboard.
     public var shadowOffset: CGSize {
         get {
@@ -83,7 +82,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Shadow opacity of view; also inspectable from Storyboard.
     public var shadowOpacity: Double {
         get {
@@ -94,7 +93,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Shadow radius of view; also inspectable from Storyboard.
     public var shadowRadius: CGFloat {
         get {
@@ -105,7 +104,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Shadow path of view; also inspectable from Storyboard.
     public var shadowPath: CGPath? {
         get {
@@ -116,7 +115,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Should shadow rasterize of view; also inspectable from Storyboard.
     /// cache the rendered shadow so that it doesn't need to be redrawn
     public var shadowShouldRasterize: Bool {
@@ -128,7 +127,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Should shadow rasterize of view; also inspectable from Storyboard.
     /// cache the rendered shadow so that it doesn't need to be redrawn
     public var shadowRasterizationScale: CGFloat {
@@ -140,7 +139,7 @@ extension UIView {
         }
     }
     
-    @IBInspectable
+    
     /// Corner radius of view; also inspectable from Storyboard.
     public var maskToBounds: Bool {
         get {

@@ -52,7 +52,7 @@ final class ProfileViewModel {
     var sections: [SectionType] = [.fields]
     var profileState: ProfileState = .show {
         didSet {
-            for idx in 1...editableFields.count - 1 {
+            for idx in 0...editableFields.count - 1 {
                 editableFields[idx].editable = profileState == .edit
             }
         }

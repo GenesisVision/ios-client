@@ -6,54 +6,60 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Bol.ttf">
+            <string>NeuzeitGro-Bol</string>
+        </array>
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ProfileFieldTableViewCell" customModule="GV_Investor" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="84" id="KGk-i7-Jjw" customClass="ProfileFieldTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="519" height="84"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="519" height="83.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="khk" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XVf-np-JYJ" customClass="HoshiTextField" customModule="TextFieldEffects">
-                        <rect key="frame" x="8" y="8" width="304" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="zGq-Pa-pn3"/>
-                        </constraints>
-                        <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="KJHKJ" placeholder="JKHKJH" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XVf-np-JYJ" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="20" y="45" width="479" height="22.5"/>
+                        <color key="textColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="18"/>
                         <textInputTraits key="textInputTraits"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                <color key="value" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                <color key="value" red="0.0039215686269999999" green="0.74117647060000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                         <connections>
                             <action selector="descriptionTextViewChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="AbH-Q5-i8A"/>
                         </connections>
                     </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2K-nM-fuK">
+                        <rect key="frame" x="20" y="27" width="479" height="10"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
+                        <color key="textColor" red="0.80000000000000004" green="0.83529411764705885" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="XVf-np-JYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="7MV-1F-ZHe"/>
-                    <constraint firstAttribute="trailing" secondItem="XVf-np-JYJ" secondAttribute="trailing" constant="8" id="Sgc-0s-114"/>
-                    <constraint firstItem="XVf-np-JYJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="kNt-9P-9C6"/>
-                    <constraint firstAttribute="bottom" secondItem="XVf-np-JYJ" secondAttribute="bottom" constant="8" id="syY-Cg-qPh"/>
+                    <constraint firstAttribute="bottom" secondItem="XVf-np-JYJ" secondAttribute="bottom" constant="16" id="3Rc-vD-soi"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="6iv-TH-Ckk"/>
+                    <constraint firstItem="E2K-nM-fuK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cmg-9B-fpA"/>
+                    <constraint firstItem="XVf-np-JYJ" firstAttribute="trailing" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="QkJ-5t-Spq"/>
+                    <constraint firstItem="XVf-np-JYJ" firstAttribute="top" secondItem="E2K-nM-fuK" secondAttribute="bottom" constant="8" id="TEV-ap-LAA"/>
+                    <constraint firstItem="XVf-np-JYJ" firstAttribute="leading" secondItem="E2K-nM-fuK" secondAttribute="leading" id="UFo-RK-l8N"/>
+                    <constraint firstItem="E2K-nM-fuK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qG3-KE-7iO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="textField" destination="XVf-np-JYJ" id="SNO-jN-cC0"/>
+                <outlet property="titleLabel" destination="E2K-nM-fuK" id="vbE-CN-yX2"/>
             </connections>
+            <point key="canvasLocation" x="21.5" y="-1"/>
         </tableViewCell>
     </objects>
 </document>

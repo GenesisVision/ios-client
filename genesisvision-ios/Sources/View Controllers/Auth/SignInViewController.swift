@@ -13,8 +13,21 @@ class SignInViewController: BaseViewController {
     var viewModel: SignInViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var emailTextField: DesignableUITextField! {
+        didSet {
+            emailTextField.setClearButtonWhileEditing()
+            emailTextField.setBottomLine()
+            emailTextField.setLeftImageView()
+        }
+    }
+    
+    @IBOutlet var passwordTextField: DesignableUITextField! {
+        didSet {
+            passwordTextField.setClearButtonWhileEditing()
+            passwordTextField.setBottomLine()
+            passwordTextField.setLeftImageView()
+        }
+    }
     
     // MARK: - Buttons
     @IBOutlet var signInButton: UIButton!

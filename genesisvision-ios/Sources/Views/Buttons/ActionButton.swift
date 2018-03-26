@@ -8,13 +8,13 @@
 
 import UIKit.UIButton
 
-@IBDesignable class ActionButton: UIButton {
+class ActionButton: UIButton {
     
-    @IBInspectable var cornerSize: CGFloat = 6.0
-    @IBInspectable var borderSize: CGFloat = 0.0
-    @IBInspectable var customBorderColor: UIColor? = .white
-    @IBInspectable var borderAlpha: CGFloat = 1.0
-    @IBInspectable var fontSize: CGFloat = 14.0
+    var cornerSize: CGFloat = 6.0
+    var borderSize: CGFloat = 0.0
+    var customBorderColor: UIColor? = .white
+    var borderAlpha: CGFloat = 1.0
+    var fontSize: CGFloat = 14.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +25,8 @@ import UIKit.UIButton
         layer.masksToBounds = true
         
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
-        titleLabel?.textColor = UIColor.Font.white
+        setTitleColor(UIColor.Font.white, for: .normal)
+        
         backgroundColor = UIColor.Button.primary
     }
     

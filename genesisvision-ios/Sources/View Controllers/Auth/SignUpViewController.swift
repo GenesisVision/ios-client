@@ -13,9 +13,27 @@ class SignUpViewController: BaseViewController {
     var viewModel: SignUpViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var confirmPasswordTextField: UITextField!
+    @IBOutlet var emailTextField: DesignableUITextField! {
+        didSet {
+            emailTextField.setClearButtonWhileEditing()
+            emailTextField.setBottomLine()
+            emailTextField.setLeftImageView()
+        }
+    }
+    @IBOutlet var passwordTextField: DesignableUITextField! {
+        didSet {
+            passwordTextField.setClearButtonWhileEditing()
+            passwordTextField.setBottomLine()
+            passwordTextField.setLeftImageView()
+        }
+    }
+    @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
+        didSet {
+            confirmPasswordTextField.setClearButtonWhileEditing()
+            confirmPasswordTextField.setBottomLine()
+            confirmPasswordTextField.setLeftImageView()
+        }
+    }
     
     // MARK: - Buttons
     @IBOutlet var signUpButton: UIButton!

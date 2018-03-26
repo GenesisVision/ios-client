@@ -19,11 +19,10 @@ struct ProfileFieldTableViewCellViewModel {
 
 extension ProfileFieldTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProfileFieldTableViewCell) {
+        cell.titleLabel.text = placeholder.uppercased()
         cell.textField.text = text
         cell.textField.placeholder = placeholder
         cell.textField.isUserInteractionEnabled = editable
-        
-        cell.textField.borderActiveColor = editable ? UIColor.primary : nil
         
         if let keyboardType = keyboardType {
             cell.textField.keyboardType = keyboardType

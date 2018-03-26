@@ -150,10 +150,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPQ-Ux-GbI">
-                                <rect key="frame" x="8" y="8" width="359" height="377"/>
+                                <rect key="frame" x="8" y="8" width="359" height="413"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_full_splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wFf-na-w6v">
-                                        <rect key="frame" x="119.66666666666669" y="116.66666666666669" width="120" height="144"/>
+                                        <rect key="frame" x="119.66666666666669" y="134.66666666666666" width="120" height="143.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="FLg-5p-fmQ"/>
                                             <constraint firstAttribute="height" constant="144" id="lx8-hZ-Qx9"/>
@@ -167,7 +167,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="RFL-SX-3Yp">
-                                <rect key="frame" x="47" y="393" width="281" height="184"/>
+                                <rect key="frame" x="47" y="429" width="281" height="184"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zvZ-cd-xIs" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="281" height="40"/>
@@ -200,7 +200,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-Gj-GVf" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="89.000000000000014" y="644" width="197.33333333333337" height="45"/>
+                                <rect key="frame" x="89.000000000000014" y="680" width="197.33333333333337" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="KHw-x4-OgG"/>
@@ -214,10 +214,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p3R-pE-LEd">
-                                <rect key="frame" x="16" y="726" width="343" height="36"/>
+                                <rect key="frame" x="16" y="762" width="343" height="0.0"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-3I-480">
-                                        <rect key="frame" x="94.666666666666671" y="0.0" width="153.66666666666663" height="14"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-3I-480">
+                                        <rect key="frame" x="-68.000000000000014" y="-762" width="154" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="ial-EF-U2L"/>
                                         </constraints>
@@ -225,8 +225,8 @@
                                         <color key="textColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhQ-75-sRn">
-                                        <rect key="frame" x="146.66666666666666" y="22" width="50" height="14"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhQ-75-sRn">
+                                        <rect key="frame" x="-16" y="-762" width="50" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="H06-fI-npm"/>
                                         </constraints>

@@ -8,12 +8,13 @@
 
 import UIKit
 
-@IBDesignable class RoundedImageView: UIImageView {
+@IBDesignable
+class RoundedImageView: UIImageView {
     
-    @IBInspectable var cornerSize: CGFloat = 54.0
-    @IBInspectable var borderSize: CGFloat = 2.0
-    @IBInspectable var customBorderColor: UIColor = .white
-    @IBInspectable var borderAlpha: CGFloat = 1.0
+    var cornerSize: CGFloat = 54.0
+    var borderSize: CGFloat = 2.0
+    var customBorderColor: UIColor = .white
+    var borderAlpha: CGFloat = 1.0
     
     override func draw(_ rect: CGRect) {
         

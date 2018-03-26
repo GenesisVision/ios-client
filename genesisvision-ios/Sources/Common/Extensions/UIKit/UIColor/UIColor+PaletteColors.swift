@@ -12,7 +12,7 @@ extension UIColor {
     private struct Common {
         static var primary: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                 //15bbaf
         static var blue: UIColor { return #colorLiteral(red: 0.2235294118, green: 0.6549019608, blue: 0.8588235294, alpha: 1) }                                    //39a7db
-        static var darkBlue: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                //28768D
+        static var darkBlue: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                //546E7A
         static var veryDarkBlue: UIColor { return  #colorLiteral(red: 0.1058823529, green: 0.3098039216, blue: 0.3921568627, alpha: 1) }                           //1B4F64
         
         static var dark: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                    //546e7a
@@ -69,6 +69,8 @@ extension UIColor {
         
         static var black: UIColor { return Common.black }
         static var white: UIColor { return Common.white }
+        
+        static var numPadText: UIColor { return #colorLiteral(red: 0.1450980392, green: 0.4666666667, blue: 0.5568627451, alpha: 1) }
     }
     
     struct Button {
@@ -79,6 +81,7 @@ extension UIColor {
         static var red: UIColor { return Common.red }
         
         static var gray: UIColor { return Common.gray }
+        static var numpadBackground: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 0.25) }
     }
     
     struct Slider {

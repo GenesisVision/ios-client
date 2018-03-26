@@ -25,6 +25,13 @@ class ProgramWithdrawViewController: UIViewController {
         }
     }
     
+    // MARK: - Views
+    @IBOutlet var numpadView: NumpadView! {
+        didSet {
+            numpadView.delegate = self
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,5 +91,44 @@ class ProgramWithdrawViewController: UIViewController {
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         withdrawMethod()
+    }
+}
+
+extension ProgramWithdrawViewController: NumpadViewProtocol {
+    func onClearClicked(view: NumpadView) {
+        guard let text = amountTextField.text, !text.isEmpty else { return }
+        
+        guard text != "0," else {
+            amountTextField.text?.removeAll()
+            return
+        }
+        
+        amountTextField.text?.removeLast(1)
+    }
+    
+    func onSeparatorClicked(view: NumpadView) {
+        guard let text = amountTextField.text else { return }
+        
+        guard text.range(of: ",") == nil else {
+            return
+        }
+        
+        guard !text.isEmpty else {
+            amountTextField.text?.append("0,")
+            return
+        }
+        
+        amountTextField.text?.append(",")
+    }
+    
+    func onNumberClicked(view: NumpadView, value: Int) {
+        guard let text = amountTextField.text else { return }
+        
+        if text.isEmpty && value == 0 {
+            amountTextField.text?.append("0,")
+            return
+        }
+        
+        amountTextField.text?.append(value.toString())
     }
 }

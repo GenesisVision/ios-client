@@ -56,8 +56,8 @@ final class Constants {
         static let take = 50 //count of templates on 1 page
         
         struct Main {
-            static let debug = "https://tost.genesis.vision"
-            static let release = "https://tost.genesis.vision"
+            static let debug = "https://pre-alpha.genesis.vision" //"https://tost.genesis.vision"
+            static let release = "https://pre-alpha.genesis.vision" //"https://tost.genesis.vision"
         }
         struct Tournament {
             static let debug = "https://ios-tournament.genesis.vision"

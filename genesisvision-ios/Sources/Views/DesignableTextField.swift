@@ -8,41 +8,23 @@
 
 import UIKit
 
-@IBDesignable
 class DesignableUITextField: UITextField, UITextFieldDelegate {
     
-    var padding: UIEdgeInsets {
-        get {
-            var imageWidth: CGFloat = 0
-            if let leftImage = leftImage {
-                imageWidth = leftImage.size.width
-            }
-
-            return UIEdgeInsets(top: 0, left: leftPadding + imageWidth + rightPadding, bottom: 0, right: 0)
-        }
-    }
+    var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
-    @IBInspectable var leftImage: UIImage?
+    var leftImage: UIImage?
     
-    @IBInspectable var clearImage: UIImage? {
-        didSet {
-            updateView()
-        }
-    }
+    var clearImage: UIImage = #imageLiteral(resourceName: "img_textfield_clear")
     
-    @IBInspectable var leftPadding: CGFloat = 3
-    @IBInspectable var rightPadding: CGFloat = 18
+    var leftPadding: CGFloat = 3
+    var rightPadding: CGFloat = 18
     
-    @IBInspectable var color: UIColor = UIColor.lightGray {
-        didSet {
-            updateView()
-        }
-    }
+    var color: UIColor = UIColor.lightGray
     
-    @IBInspectable var bottomlineHeight: Double = 1.0
-    @IBInspectable var bottomlineColor: UIColor = UIColor.TextField.line
+    var bottomlineHeight: Double = 1.0
+    var bottomlineColor: UIColor = UIColor.TextField.line
     
-    @IBInspectable var placeholderColor: UIColor? {
+    var placeholderColor: UIColor? {
         get {
             return self.placeholderColor
             
@@ -52,31 +34,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         }
     }
     
-    func updateView() {
-        if let image = leftImage {
-            leftViewMode = UITextFieldViewMode.always
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFill
-            imageView.tintColor = color
-            leftView = imageView
-        } else {
-            leftViewMode = UITextFieldViewMode.never
-            leftView = nil
-        }
-        
-        if let image = clearImage {
-            rightViewMode = UITextFieldViewMode.whileEditing
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFit
-            rightView = imageView
-        }
-        
-        
-        
-        attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedStringKey.foregroundColor: color])
-    }
-    
-    func setBottomLine(borderColor: UIColor) {
+    func setBottomLine(borderColor: UIColor? = UIColor.TextField.line) {
         borderStyle = UITextBorderStyle.none
         backgroundColor = UIColor.clear
         
@@ -89,32 +47,35 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         addSubview(borderLine)
     }
     
-    func underlined(borderColor: UIColor) {
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = borderColor.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
+    func setClearButtonWhileEditing() {
+        let clearButton = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
+        clearButton.setImage(clearImage, for: .normal)
+        clearButton.contentMode = .scaleAspectFit
+        clearButton.addTarget(self, action: #selector(clearClicked(sender:)), for: .touchUpInside)
+        rightView = clearButton
+        clearButtonMode = .never
+        rightViewMode = .whileEditing
+    }
+    
+    func setLeftImageView() {
+        if let text = text {
+            leftImage = !text.isEmpty ? textContentType == UITextContentType.emailAddress ? #imageLiteral(resourceName: "img_textfield_email_icon") : isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_icon") : nil : textContentType == UITextContentType.emailAddress ? #imageLiteral(resourceName: "img_textfield_email_colored_icon") : isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_colored_icon") : nil
+        }
+        
+        guard let image = leftImage else {
+            return
+        }
+        
+        leftViewMode = UITextFieldViewMode.always
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = color
+        leftView = imageView
+        
+        padding = UIEdgeInsets(top: 0, left: leftPadding + image.size.width + rightPadding, bottom: 0, right: 0)
     }
     
     // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setBottomLine(borderColor: bottomlineColor)
-        leftImage = isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_colored_icon") : #imageLiteral(resourceName: "img_textfield_email_colored_icon")
-        
-        font = UIFont.getFont(.regular, size: 18)
-        
-        clearImage = #imageLiteral(resourceName: "img_textfield_clear")
-        
-        if let text = text {
-            leftImage = !text.isEmpty ? isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_icon") : #imageLiteral(resourceName: "img_textfield_email_icon") : isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_colored_icon") : #imageLiteral(resourceName: "img_textfield_email_colored_icon")
-        }
-    }
-
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }
@@ -125,5 +86,10 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    // MARK: - Private methods
+    @objc private func clearClicked(sender: UIButton) {
+        text = ""
     }
 }
