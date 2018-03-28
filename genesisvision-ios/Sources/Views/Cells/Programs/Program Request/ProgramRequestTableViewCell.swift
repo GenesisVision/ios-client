@@ -24,7 +24,12 @@ class ProgramRequestTableViewCell: UITableViewCell {
     }
     
     // MARK: - Buttons
-    @IBOutlet weak var cancelButton: ActionButton!
+    @IBOutlet weak var cancelButton: UIButton! {
+        didSet {
+            cancelButton.setImage(#imageLiteral(resourceName: "img_cancel"), for: .normal)
+            cancelButton.tintColor = UIColor.Font.red
+        }
+    }
     
     // MARK: - Labels
     @IBOutlet var typeLabel: UILabel!

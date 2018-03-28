@@ -62,7 +62,7 @@
                                                     <constraint firstAttribute="width" secondItem="hOf-6X-8yR" secondAttribute="height" multiplier="1:1" id="CA6-uh-qPa"/>
                                                     <constraint firstAttribute="width" constant="21" id="PeT-MA-jzk"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -120,7 +120,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzn-bM-hio">
                                         <rect key="frame" x="0.0" y="0.0" width="423" height="100"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
                                         <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>

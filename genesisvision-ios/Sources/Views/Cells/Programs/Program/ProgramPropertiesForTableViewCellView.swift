@@ -55,10 +55,14 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         investedTokensLabel.text = investedTokens.rounded(toPlaces: 4).toString()
     }
     
-    // MARK: - Lifecycle
-    deinit {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    // MARK: - Lifecycle
+    deinit {
+        stopTimer()
     }
     
     // MARK: - Private methods

@@ -28,6 +28,7 @@ class ProfileImageView: UIView {
             levelLabel.backgroundColor = .clear
             levelLabel.textColor = UIColor.Font.white
             levelLabel.layer.backgroundColor = UIColor.primary.cgColor
+            levelLabel.font = UIFont.getFont(.bold, size: 15)
         }
     }
     

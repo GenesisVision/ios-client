@@ -41,10 +41,18 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
                                                     <color key="backgroundColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_profile_image_edit" translatesAutoresizingMaskIntoConstraints="NO" id="gg7-NN-EN1">
+                                                    <rect key="frame" x="134.33333333333334" y="134.33333333333334" width="33.666666666666657" height="33.666666666666657"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="gg7-NN-EN1" secondAttribute="height" multiplier="1:1" id="i3d-a3-zIh"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6f-xj-I7n">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Edit">
+                                                    <state key="normal">
                                                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -61,15 +69,19 @@
                                                 <constraint firstItem="oLP-66-RUC" firstAttribute="leading" secondItem="pPQ-rQ-dRW" secondAttribute="leading" id="FRP-UH-G83"/>
                                                 <constraint firstAttribute="trailing" secondItem="oLP-66-RUC" secondAttribute="trailing" id="MNj-Fi-JBl"/>
                                                 <constraint firstItem="oLP-66-RUC" firstAttribute="top" secondItem="pPQ-rQ-dRW" secondAttribute="top" id="MO4-he-OMy"/>
+                                                <constraint firstAttribute="bottom" secondItem="gg7-NN-EN1" secondAttribute="bottom" id="N7d-vY-yZw"/>
                                                 <constraint firstAttribute="bottom" secondItem="PZf-lb-c2V" secondAttribute="bottom" id="U9D-Yn-d8x"/>
+                                                <constraint firstAttribute="trailing" secondItem="gg7-NN-EN1" secondAttribute="trailing" id="bRk-Zb-Zb2"/>
                                                 <constraint firstItem="PZf-lb-c2V" firstAttribute="top" secondItem="pPQ-rQ-dRW" secondAttribute="top" id="ecJ-Vk-KXJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="h6f-xj-I7n" secondAttribute="bottom" id="fIC-ZO-X7a"/>
                                                 <constraint firstAttribute="width" secondItem="pPQ-rQ-dRW" secondAttribute="height" multiplier="1:1" id="igM-XL-or4"/>
+                                                <constraint firstItem="gg7-NN-EN1" firstAttribute="width" secondItem="pPQ-rQ-dRW" secondAttribute="height" multiplier="1:5" id="kzx-SJ-sHM"/>
                                                 <constraint firstAttribute="trailing" secondItem="h6f-xj-I7n" secondAttribute="trailing" id="xjY-T3-jfB"/>
                                                 <constraint firstAttribute="trailing" secondItem="PZf-lb-c2V" secondAttribute="trailing" id="zN5-41-MYi"/>
                                             </constraints>
                                             <connections>
                                                 <outlet property="choosePhotoButton" destination="h6f-xj-I7n" id="0wd-B0-A5u"/>
+                                                <outlet property="editImageView" destination="gg7-NN-EN1" id="kfd-wJ-4iW"/>
                                                 <outlet property="photoImageView" destination="PZf-lb-c2V" id="JRS-MF-6tG"/>
                                                 <outlet property="shadowView" destination="oLP-66-RUC" id="Q7n-6G-Jr1"/>
                                             </connections>
@@ -119,5 +131,6 @@
     </scenes>
     <resources>
         <image name="img_logo" width="100" height="100"/>
+        <image name="img_profile_image_edit" width="16" height="15"/>
     </resources>
 </document>

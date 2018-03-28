@@ -44,6 +44,13 @@
                         <color key="textColor" red="0.80000000000000004" green="0.83529411764705885" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_dropdown_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-Ux-vYM">
+                        <rect key="frame" x="479" y="35" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="14" id="QAy-dB-zyA"/>
+                            <constraint firstAttribute="height" constant="14" id="aYa-zo-pyK"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="XVf-np-JYJ" secondAttribute="bottom" constant="16" id="3Rc-vD-soi"/>
@@ -52,15 +59,21 @@
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="trailing" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="QkJ-5t-Spq"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="top" secondItem="E2K-nM-fuK" secondAttribute="bottom" constant="8" id="TEV-ap-LAA"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="leading" secondItem="E2K-nM-fuK" secondAttribute="leading" id="UFo-RK-l8N"/>
+                    <constraint firstItem="RbV-Ux-vYM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gsG-te-J0I"/>
+                    <constraint firstAttribute="trailing" secondItem="RbV-Ux-vYM" secondAttribute="trailing" constant="26" id="otU-rB-qsO"/>
                     <constraint firstItem="E2K-nM-fuK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qG3-KE-7iO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="accessoryImageView" destination="RbV-Ux-vYM" id="bje-JX-Jbx"/>
                 <outlet property="textField" destination="XVf-np-JYJ" id="SNO-jN-cC0"/>
                 <outlet property="titleLabel" destination="E2K-nM-fuK" id="vbE-CN-yX2"/>
             </connections>
             <point key="canvasLocation" x="21.5" y="-1"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="img_dropdown_icon" width="13" height="7"/>
+    </resources>
 </document>

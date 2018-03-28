@@ -23,7 +23,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     var clearImage: UIImage = #imageLiteral(resourceName: "img_textfield_clear")
     
     var leftPadding: CGFloat = 3
-    var rightPadding: CGFloat = 18
+    var rightPadding: CGFloat = 16.0
+    let imageWidth: CGFloat = 16.0
     
     var color: UIColor = UIColor.lightGray
     
@@ -73,12 +74,13 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         }
         
         leftViewMode = UITextFieldViewMode.always
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFill
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 16.0, height: 16.0))
+        imageView.image = image
+        imageView.contentMode = .center
         imageView.tintColor = color
         leftView = imageView
         
-        padding = UIEdgeInsets(top: 0, left: leftPadding + image.size.width + rightPadding, bottom: 0, right: 0)
+        padding = UIEdgeInsets(top: 0, left: leftPadding + imageWidth + rightPadding, bottom: 0, right: 0)
     }
     
     // MARK: - Lifecycle

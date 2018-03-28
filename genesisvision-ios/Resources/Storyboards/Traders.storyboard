@@ -333,20 +333,20 @@
                                     <constraint firstAttribute="width" constant="248" id="Gpq-FP-Cl8"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56Q-o4-16Y">
-                                <rect key="frame" x="26" y="369" width="323" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="56Q-o4-16Y">
+                                <rect key="frame" x="26" y="349" width="323" height="30"/>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="30"/>
                                 <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HN-qX-6U8">
-                                <rect key="frame" x="26" y="414" width="323" height="17.666666666666686"/>
+                                <rect key="frame" x="26" y="387" width="323" height="15"/>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tHe-KP-b4b">
-                                <rect key="frame" x="42" y="459.66666666666669" width="291" height="235.33333333333331"/>
+                                <rect key="frame" x="42" y="410" width="291" height="285"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -386,14 +386,14 @@
                             <constraint firstItem="9HN-qX-6U8" firstAttribute="trailing" secondItem="56Q-o4-16Y" secondAttribute="trailing" id="SP0-Ld-9Th"/>
                             <constraint firstItem="6fB-qD-ZU0" firstAttribute="top" secondItem="alM-XH-W9O" secondAttribute="topMargin" constant="34" id="TDl-Os-JWg"/>
                             <constraint firstItem="tHe-KP-b4b" firstAttribute="leading" secondItem="alM-XH-W9O" secondAttribute="leadingMargin" constant="26" id="VUO-5i-7br"/>
-                            <constraint firstItem="56Q-o4-16Y" firstAttribute="top" secondItem="6fB-qD-ZU0" secondAttribute="bottom" constant="44" id="Wfu-g2-wiH"/>
+                            <constraint firstItem="56Q-o4-16Y" firstAttribute="top" secondItem="6fB-qD-ZU0" secondAttribute="bottom" constant="24" id="Wfu-g2-wiH"/>
                             <constraint firstItem="56Q-o4-16Y" firstAttribute="leading" secondItem="NX1-Bf-30x" secondAttribute="leading" constant="26" id="aED-bx-e3v"/>
                             <constraint firstItem="NX1-Bf-30x" firstAttribute="trailing" secondItem="56Q-o4-16Y" secondAttribute="trailing" constant="26" id="e1W-Ww-Gn3"/>
                             <constraint firstItem="9HN-qX-6U8" firstAttribute="leading" secondItem="56Q-o4-16Y" secondAttribute="leading" id="h4m-0E-u7r"/>
-                            <constraint firstItem="9HN-qX-6U8" firstAttribute="top" secondItem="56Q-o4-16Y" secondAttribute="bottom" constant="10" id="jAS-2M-7oG"/>
+                            <constraint firstItem="9HN-qX-6U8" firstAttribute="top" secondItem="56Q-o4-16Y" secondAttribute="bottom" constant="8" id="jAS-2M-7oG"/>
                             <constraint firstItem="NX1-Bf-30x" firstAttribute="trailing" secondItem="xjJ-Ip-t3t" secondAttribute="trailing" id="lvY-qR-dRm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tHe-KP-b4b" secondAttribute="trailing" constant="26" id="ngd-OC-EJ8"/>
-                            <constraint firstItem="tHe-KP-b4b" firstAttribute="top" secondItem="9HN-qX-6U8" secondAttribute="bottom" constant="28" id="uac-6u-xW9"/>
+                            <constraint firstItem="tHe-KP-b4b" firstAttribute="top" secondItem="9HN-qX-6U8" secondAttribute="bottom" constant="8" id="uac-6u-xW9"/>
                             <constraint firstItem="NX1-Bf-30x" firstAttribute="trailing" secondItem="6fB-qD-ZU0" secondAttribute="trailing" constant="64" id="uvo-mP-6f3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NX1-Bf-30x"/>

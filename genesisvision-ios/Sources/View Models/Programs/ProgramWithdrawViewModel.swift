@@ -26,6 +26,7 @@ final class ProgramWithdrawViewModel {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.investedTokens = investedTokens
+        self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods

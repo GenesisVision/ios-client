@@ -48,8 +48,10 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     }
     
     private func reloadData() {
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     
     override func fetchMore() {

@@ -25,6 +25,10 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         title = viewModel.title
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         setup()
     }
@@ -49,8 +53,10 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     }
     
     private func reloadData() {
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     
     override func fetchMore() {

@@ -12,6 +12,10 @@ class ProgramMoreDetailsTableViewCell: UITableViewCell {
 
     // MARK: - Views
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
+
+    deinit {
+        programPropertiesView.stopTimer()
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

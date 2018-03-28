@@ -9,9 +9,63 @@
 import UIKit
 
 protocol NumpadViewProtocol: class {
+    var textLabel: UILabel { get }
+    
+    func textLabelDidChange(value: Double?)
     func onClearClicked(view: NumpadView)
     func onSeparatorClicked(view: NumpadView)
     func onNumberClicked(view: NumpadView, value: Int)
+}
+
+extension NumpadViewProtocol {
+    func textLabelDidChange(value: Double?) {
+        //update ui
+    }
+    
+    func onClearClicked(view: NumpadView) {
+        guard let text = textLabel.text, !text.isEmpty else { return }
+        
+        if text == "0." {
+            textLabel.text?.removeAll()
+        } else {
+            textLabel.text?.removeLast(1)
+        }
+        
+        if textLabel.text == "" {
+            textLabel.text = 0.toString()
+        }
+        
+        textLabelDidChange(value: textLabel.text?.doubleValue)
+    }
+    
+    func onSeparatorClicked(view: NumpadView) {
+        guard let text = textLabel.text else { return }
+        
+        guard text.range(of: ".") == nil else {
+            return
+        }
+        
+        guard !text.isEmpty else {
+            textLabel.text = "0."
+            return
+        }
+        
+        textLabel.text?.append(".")
+        
+        textLabelDidChange(value: textLabel.text?.doubleValue)
+    }
+    
+    func onNumberClicked(view: NumpadView, value: Int) {
+        guard let text = textLabel.text else { return }
+        
+        if text == "0" {
+            textLabel.text = value == 0 ? "0." : value.toString()
+        } else {
+            textLabel.text?.append(value.toString())
+        }
+        
+        textLabelDidChange(value: textLabel.text?.doubleValue)
+    }
 }
 
 class NumpadView: UIView {

@@ -19,8 +19,8 @@ class AmountLabel: UILabel {
     
     override var text: String? {
         didSet {
-            if let text = text, let doubleValue = text.doubleValue {
-                self.textColor = doubleValue > 0.0 ? UIColor.Font.amountDarkBlue : UIColor.Font.amountPlaceholder
+            if let text = text {
+                self.textColor = text != "0" ? UIColor.Font.amountDarkBlue : UIColor.Font.amountPlaceholder
             }
         }
     }

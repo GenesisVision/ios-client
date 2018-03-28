@@ -79,11 +79,7 @@ final class ProfileViewModel {
         }
     }
     
-    weak var tableCellDelegate: ProfileHeaderTableViewCellDelegate?
     weak var delegate: ProfileHeaderViewDelegate?
-    
-    
-    var profileHeaderTableViewCellViewModel: ProfileHeaderTableViewCellViewModel?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -300,8 +296,6 @@ final class ProfileViewModel {
     
     private func setupCellViewModel() {
         if let profileModel = profileModel {
-            profileHeaderTableViewCellViewModel = ProfileHeaderTableViewCellViewModel(profileModel: profileModel, editable: false, delegate: delegate)
-            
             var editableFields: [EditableField] = []
             
             FieldType.allValues.forEach { (type) in
@@ -335,6 +329,12 @@ final class ProfileViewModel {
         guard let date = profileModel?.birthday else { return "" }
         
         return date.dateFormatString
+    }
+    
+    func getBirthdate() -> Date {
+        guard let date = profileModel?.birthday else { return Date() }
+        
+        return date
     }
     
     func getGender() -> String {

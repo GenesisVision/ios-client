@@ -57,7 +57,9 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func reloadData() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - IBAction

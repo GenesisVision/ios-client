@@ -13,6 +13,7 @@ class ChooseProfilePhotoButton: UIView {
     @IBOutlet var shadowView: UIView!
     
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var editImageView: UIImageView!
     
     @IBOutlet var choosePhotoButton: UIButton! {
         didSet {
@@ -23,6 +24,10 @@ class ChooseProfilePhotoButton: UIView {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        editImageView.isHidden = true
+        editImageView.tintColor = UIColor.Font.white
+        editImageView.image = #imageLiteral(resourceName: "img_profile_image_edit")
     }
     
     override func layoutSubviews() {
@@ -33,6 +38,7 @@ class ChooseProfilePhotoButton: UIView {
     func change(state: ProfileState) {
         choosePhotoButton.isHidden = state == .show
         shadowView.isHidden = state == .show
+        editImageView.isHidden = state == .show
     }
 }
 

@@ -77,11 +77,6 @@ class ProgramWithdrawViewController: BaseViewController {
         availableFundsLabel.text = investedTokens.toString()
     }
     
-    private func amountLabelDidChange() {
-        let value = amountLabel.text?.doubleValue
-        enteredAmount = value != nil ? value! : 0.0
-    }
-    
     private func withdrawButton(enable: Bool) {
         withdrawButton.isUserInteractionEnabled = enable
         withdrawButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.gray
@@ -114,7 +109,9 @@ class ProgramWithdrawViewController: BaseViewController {
         
         amountLabel.text = investedTokens.toString()
         
-        amountLabelDidChange()
+        if let value = amountLabel.text?.doubleValue {
+            enteredAmount = value
+        }
     }
     
     // MARK: - Actions
@@ -124,48 +121,11 @@ class ProgramWithdrawViewController: BaseViewController {
 }
 
 extension ProgramWithdrawViewController: NumpadViewProtocol {
-    func onClearClicked(view: NumpadView) {
-        guard let text = amountLabel.text, !text.isEmpty else { return }
-        
-        if text == "0." {
-            amountLabel.text?.removeAll()
-        } else {
-            amountLabel.text?.removeLast(1)
-        }
-        
-        if amountLabel.text == "" {
-            amountLabel.text = 0.toString()
-        }
-        
-        amountLabelDidChange()
+    var textLabel: UILabel {
+        return self.amountLabel
     }
     
-    func onSeparatorClicked(view: NumpadView) {
-        guard let text = amountLabel.text else { return }
-        
-        guard text.range(of: ".") == nil else {
-            return
-        }
-        
-        guard !text.isEmpty else {
-            amountLabel.text = "0."
-            return
-        }
-        
-        amountLabel.text?.append(".")
-        
-        amountLabelDidChange()
-    }
-    
-    func onNumberClicked(view: NumpadView, value: Int) {
-        guard let text = amountLabel.text else { return }
-        
-        if text == "0" {
-            amountLabel.text = value == 0 ? "0." : value.toString()
-        } else {
-            amountLabel.text?.append(value.toString())
-        }
-        
-        amountLabelDidChange()
+    func textLabelDidChange(value: Double?) {
+        enteredAmount = value != nil ? value! : 0.0
     }
 }

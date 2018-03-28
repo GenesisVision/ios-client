@@ -68,8 +68,10 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
 
     private func reloadData() {
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     
     private func updateSortHeaderView() {
@@ -119,6 +121,11 @@ class WalletViewController: BaseViewControllerWithTableView {
                 print(reason ?? "")
             }
         }
+    }
+    
+    private func update(sorting type: TransactionsFilter.ModelType) {
+        viewModel.filter?.type = type
+        updateSortHeaderView()
     }
     
     // MARK: - Actions
@@ -196,12 +203,10 @@ extension WalletViewController: ReloadDataProtocol {
 
 extension WalletViewController: WalletHeaderTableViewCellProtocol {
     func depositProgramDidPress() {
-//        viewModel.deposit()
         showAlertWithTitle(title: nil, message: "Coming soon", actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
     }
     
     func withdrawProgramDidPress() {
-//        viewModel.withdraw()
         showAlertWithTitle(title: nil, message: "Coming soon", actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
     }
     
@@ -243,16 +248,39 @@ extension WalletViewController {
 
 extension WalletViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
-        showActionSheet(with: nil, message: nil, firstActionTitle: "All", firstHandler: { [weak self] in
-            self?.viewModel.filter?.type = .all
-            self?.updateSortHeaderView()
-        }, secondActionTitle: "Internal", secondHandler: { [weak self] in
-            self?.viewModel.filter?.type = ._internal
-            self?.updateSortHeaderView()
-        }, thirdActionTitle: "External", thirdHandler: { [weak self] in
-            self?.viewModel.filter?.type = .external
-            self?.updateSortHeaderView()
-        }, cancelTitle: "Cancel", cancelHandler: nil)
+        guard let type: TransactionsFilter.ModelType = viewModel.filter?.type else {
+            return
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.primary
+        
+        let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: .all)
+        }
+        let internalAction = UIAlertAction(title: "Internal", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: ._internal)
+        }
+        let externalAction = UIAlertAction(title: "External", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: .external)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        switch type {
+        case .all:
+            allAction.isEnabled = false
+        case ._internal:
+            internalAction.isEnabled = false
+        case .external:
+            externalAction.isEnabled = false
+        }
+        
+        alert.addAction(allAction)
+        alert.addAction(internalAction)
+        alert.addAction(externalAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 

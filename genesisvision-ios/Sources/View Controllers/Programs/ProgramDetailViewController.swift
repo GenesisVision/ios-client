@@ -131,11 +131,11 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func reloadData() {
-        setupUI()
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
-    
     
     // MARK: - IBActions
     @IBAction func historyButtonAction(_ sender: UIButton) {

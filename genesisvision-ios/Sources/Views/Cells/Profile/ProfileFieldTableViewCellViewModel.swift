@@ -27,6 +27,9 @@ extension ProfileFieldTableViewCellViewModel: CellViewModel {
         cell.textField.isUserInteractionEnabled = editable
         cell.selectionStyle = selectable ? .default : .none
         
+        cell.accessoryImageView.isHidden = !(editable || selectable)
+        cell.accessoryImageView.image = selectable ? #imageLiteral(resourceName: "img_dropdown_icon") : #imageLiteral(resourceName: "img_profile_edit")
+
         if let keyboardType = keyboardType {
             cell.textField.keyboardType = keyboardType
         }

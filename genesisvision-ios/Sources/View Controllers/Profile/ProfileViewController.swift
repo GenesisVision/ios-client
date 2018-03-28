@@ -152,21 +152,48 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         present(alertController, animated: true, completion: nil)
     }
     
+    private func update(gender value: Bool) {
+        viewModel.update(gender: value)
+        reloadData()
+    }
+    
     private func selectGender() {
-        showActionSheet(with: "Gender", message: nil, firstActionTitle: "Female", firstHandler: { [weak self] in
-                self?.viewModel.update(gender: false)
-                self?.reloadData()
-            }, secondActionTitle: "Male", secondHandler: { [weak self] in
-                self?.viewModel.update(gender: true)
-                self?.reloadData()
-            }, cancelTitle: "Cancel", cancelHandler: nil)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.primary
+       
+        let maleAction = UIAlertAction(title: "Male", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(gender: true)
+        }
+        let femaleAction = UIAlertAction(title: "Female", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(gender: false)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        switch viewModel.getGender() {
+        case "Female":
+            femaleAction.isEnabled = false
+        case "Male":
+            maleAction.isEnabled = false
+        default:
+            break
+        }
+        
+        alert.addAction(maleAction)
+        alert.addAction(femaleAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     private func selectBirthdate() {
-        let alert = UIAlertController(style: .actionSheet, title: "Birthdate", message: "Select  birthdate")
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         alert.view.tintColor = UIColor.primary
         
-        alert.addDatePicker(mode: .date, date: Date(), minimumDate: nil, maximumDate: nil) { [weak self] date in
+        var components = DateComponents()
+        components.year = -18
+        let maxDate = Calendar.current.date(byAdding: components, to: Date())
+
+        alert.addDatePicker(mode: .date, date: self.viewModel.getBirthdate(), minimumDate: nil, maximumDate: maxDate) { [weak self] date in
             self?.viewModel.update(birthdate: date)
             self?.reloadData()
         }
@@ -176,8 +203,10 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     private func reloadData() {
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Actions
@@ -260,10 +289,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard indexPath.section == 0, indexPath.row > 0 else {
-            return
-        }
-        
         cell.addDashedBottomLine()
     }
     
@@ -345,3 +370,4 @@ extension ProfileViewController: UITextFieldDelegate {
         return false
     }
 }
+

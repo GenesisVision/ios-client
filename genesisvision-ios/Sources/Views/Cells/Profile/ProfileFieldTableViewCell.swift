@@ -16,6 +16,8 @@ class ProfileFieldTableViewCell: UITableViewCell {
     // MARK: - Views
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet var accessoryImageView: UIImageView!
+    
     @IBOutlet var textField: DesignableUITextField! {
         didSet {
             textField.setClearButtonWhileEditing()
@@ -26,6 +28,7 @@ class ProfileFieldTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        accessoryImageView.isHidden = true
         backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
