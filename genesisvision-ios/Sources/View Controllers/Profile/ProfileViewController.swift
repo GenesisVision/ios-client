@@ -251,32 +251,45 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var imageName = "TempImage.png"
+        var data: Data?
+        let fileName = "test.jpg"
         var selectedImage: UIImage?
-        
-        if let imageUrl = info[UIImagePickerControllerReferenceURL] as? NSURL {
-            imageName = imageUrl.lastPathComponent!
-            selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage
-        } else if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            viewModel.pickedImage = pickedImage
-            selectedImage = pickedImage
+
+        if let refURL = info[UIImagePickerControllerReferenceURL] as! URL? {
+            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                data = UIImageJPEGRepresentation(image, 0.5)
+                selectedImage = image
+            } else {
+                do {
+                    data = try Data(contentsOf: refURL)
+                } catch {
+                    print("Unable to load data: \(error)")
+                }
+
+                if let data = data {
+                    selectedImage = UIImage(data: data)
+                }
+            }
+        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            data = UIImageJPEGRepresentation(image, 0.5)
+            selectedImage = image
         }
         
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let photoURL = NSURL(fileURLWithPath: documentDirectory)
-        let localPath = photoURL.appendingPathComponent(imageName)
-        let data = UIImagePNGRepresentation(selectedImage!)
-        
-        viewModel.pickedImageURL = localPath
-        viewModel.pickedImage = selectedImage
-        headerView.update(avatar: viewModel.pickedImage)
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)
         
         do {
-            try data?.write(to: localPath!, options: .atomic)
+            try data?.write(to: fileURL, options: .atomic)
         } catch {
-
+            print("Unable to write data: \(error)")
         }
         
+        viewModel.pickedImageURL = fileURL
+        viewModel.pickedImage = selectedImage
+        
+        DispatchQueue.main.async {
+            self.headerView.update(avatar: selectedImage)
+        }
+    
         picker.dismiss(animated: true, completion: nil)
     }
 }

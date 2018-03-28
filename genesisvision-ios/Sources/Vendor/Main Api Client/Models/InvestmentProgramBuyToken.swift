@@ -11,6 +11,14 @@ import Foundation
 
 open class InvestmentProgramBuyToken: Codable {
 
+    public enum Currency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public var id: UUID?
     public var logo: String?
     public var description: String?
@@ -19,13 +27,14 @@ open class InvestmentProgramBuyToken: Codable {
     public var title: String?
     public var startOfPeriod: Date?
     public var endOfPeriod: Date?
-    public var gvtUsdRate: Double?
+    public var gvtRate: Double?
     public var gvtWalletAmount: Double?
     public var periodDuration: Int?
+    public var currency: Currency?
 
 
     
-    public init(id: UUID?, logo: String?, description: String?, manager: ProfilePublicViewModel?, level: Int?, title: String?, startOfPeriod: Date?, endOfPeriod: Date?, gvtUsdRate: Double?, gvtWalletAmount: Double?, periodDuration: Int?) {
+    public init(id: UUID?, logo: String?, description: String?, manager: ProfilePublicViewModel?, level: Int?, title: String?, startOfPeriod: Date?, endOfPeriod: Date?, gvtRate: Double?, gvtWalletAmount: Double?, periodDuration: Int?, currency: Currency?) {
         self.id = id
         self.logo = logo
         self.description = description
@@ -34,9 +43,10 @@ open class InvestmentProgramBuyToken: Codable {
         self.title = title
         self.startOfPeriod = startOfPeriod
         self.endOfPeriod = endOfPeriod
-        self.gvtUsdRate = gvtUsdRate
+        self.gvtRate = gvtRate
         self.gvtWalletAmount = gvtWalletAmount
         self.periodDuration = periodDuration
+        self.currency = currency
     }
     
 
@@ -54,9 +64,10 @@ open class InvestmentProgramBuyToken: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(startOfPeriod, forKey: "startOfPeriod")
         try container.encodeIfPresent(endOfPeriod, forKey: "endOfPeriod")
-        try container.encodeIfPresent(gvtUsdRate, forKey: "gvtUsdRate")
+        try container.encodeIfPresent(gvtRate, forKey: "gvtRate")
         try container.encodeIfPresent(gvtWalletAmount, forKey: "gvtWalletAmount")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
+        try container.encodeIfPresent(currency, forKey: "currency")
     }
 
     // Decodable protocol methods
@@ -72,9 +83,10 @@ open class InvestmentProgramBuyToken: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         startOfPeriod = try container.decodeIfPresent(Date.self, forKey: "startOfPeriod")
         endOfPeriod = try container.decodeIfPresent(Date.self, forKey: "endOfPeriod")
-        gvtUsdRate = try container.decodeIfPresent(Double.self, forKey: "gvtUsdRate")
+        gvtRate = try container.decodeIfPresent(Double.self, forKey: "gvtRate")
         gvtWalletAmount = try container.decodeIfPresent(Double.self, forKey: "gvtWalletAmount")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }
 }
 

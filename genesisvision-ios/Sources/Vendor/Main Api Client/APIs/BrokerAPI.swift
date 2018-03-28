@@ -59,23 +59,24 @@ open class BrokerAPI {
      - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiBrokerAuthConfirmEmailGet(userId: String? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerAuthConfirmEmailGetWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
-            completion(error);
+    open class func apiBrokerAuthConfirmEmailPost(userId: String? = nil, code: String? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiBrokerAuthConfirmEmailPostWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
+            completion(response?.body, error);
         }
     }
 
 
     /**
      Confirm email after registration
-     - GET /api/broker/auth/confirmEmail
+     - POST /api/broker/auth/confirmEmail
+     - examples: [{contentType=application/json, example=""}]
      
      - parameter userId: (query)  (optional)
      - parameter code: (query)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<String> 
      */
-    open class func apiBrokerAuthConfirmEmailGetWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<Void> {
+    open class func apiBrokerAuthConfirmEmailPostWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<String> {
         let path = "/api/broker/auth/confirmEmail"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -87,43 +88,9 @@ open class BrokerAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Forgot password
-     
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func apiBrokerAuthForgotPasswordPost(model: ForgotPasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiBrokerAuthForgotPasswordPostWithRequestBuilder(model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Forgot password
-     - POST /api/broker/auth/forgotPassword
-     
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func apiBrokerAuthForgotPasswordPostWithRequestBuilder(model: ForgotPasswordViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/api/broker/auth/forgotPassword"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -294,21 +261,21 @@ open class BrokerAPI {
      - GET /api/broker/initData
      - examples: [{contentType=application/json, example={
   "newManagerRequest" : [ {
+    "depositAmount" : 0.8008281904610115,
     "password" : "password",
     "requestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
     "currency" : "Undefined",
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "email" : "email",
-    "depositInUsd" : 0.8008281904610115
+    "email" : "email"
   }, {
+    "depositAmount" : 0.8008281904610115,
     "password" : "password",
     "requestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
     "currency" : "Undefined",
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "email" : "email",
-    "depositInUsd" : 0.8008281904610115
+    "email" : "email"
   } ],
   "investments" : [ {
     "feeEntrance" : 5.637376656633329,

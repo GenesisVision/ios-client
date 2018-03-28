@@ -18,23 +18,24 @@ open class InvestorAPI {
      - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorAuthConfirmEmailGet(userId: String? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiInvestorAuthConfirmEmailGetWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
-            completion(error);
+    open class func apiInvestorAuthConfirmEmailPost(userId: String? = nil, code: String? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiInvestorAuthConfirmEmailPostWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
+            completion(response?.body, error);
         }
     }
 
 
     /**
      Confirm email after registration
-     - GET /api/investor/auth/confirmEmail
+     - POST /api/investor/auth/confirmEmail
+     - examples: [{contentType=application/json, example=""}]
      
      - parameter userId: (query)  (optional)
      - parameter code: (query)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<String> 
      */
-    open class func apiInvestorAuthConfirmEmailGetWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<Void> {
+    open class func apiInvestorAuthConfirmEmailPostWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<String> {
         let path = "/api/investor/auth/confirmEmail"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -46,9 +47,9 @@ open class InvestorAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -333,6 +334,11 @@ open class InvestorAPI {
     "profitTotalPercent" : 7.386281948385884,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
+    "token" : {
+      "tokenSymbol" : "tokenSymbol",
+      "initialPrice" : 4.965218492984954,
+      "tokenName" : "tokenName"
+    },
     "tradesCount" : 2,
     "isOwnProgram" : true,
     "isHistoryEnable" : true,
@@ -342,16 +348,18 @@ open class InvestorAPI {
     "profitAvg" : 3.616076749251911,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ]
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
@@ -382,6 +390,11 @@ open class InvestorAPI {
     "profitTotalPercent" : 7.386281948385884,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
+    "token" : {
+      "tokenSymbol" : "tokenSymbol",
+      "initialPrice" : 4.965218492984954,
+      "tokenName" : "tokenName"
+    },
     "tradesCount" : 2,
     "isOwnProgram" : true,
     "isHistoryEnable" : true,
@@ -391,16 +404,18 @@ open class InvestorAPI {
     "profitAvg" : 3.616076749251911,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ]
   } ]
 }}]
@@ -450,6 +465,7 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
   "periodDuration" : 5,
+  "gvtRate" : 6.027456183070403,
   "manager" : {
     "country" : "country",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -458,9 +474,9 @@ open class InvestorAPI {
   },
   "level" : 0,
   "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-  "gvtUsdRate" : 6.027456183070403,
   "logo" : "logo",
   "description" : "description",
+  "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "title" : "title",
   "gvtWalletAmount" : 1.4658129805029452
@@ -541,6 +557,11 @@ open class InvestorAPI {
     "profitTotalPercent" : 1.2315135367772556,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
+    "token" : {
+      "tokenSymbol" : "tokenSymbol",
+      "initialPrice" : 4.965218492984954,
+      "tokenName" : "tokenName"
+    },
     "tradesCount" : 7,
     "isOwnProgram" : true,
     "volumeTotal" : 1.0246457001441578,
@@ -555,22 +576,24 @@ open class InvestorAPI {
     "programStartDate" : "2000-01-23T04:56:07.000+00:00",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "profitDiagram" : {
-      "managerFund" : 4.965218492984954,
+      "managerFund" : 5.025004791520295,
       "profitIsPositive" : true,
-      "profit" : 9.965781217890562,
-      "investorsFund" : 5.025004791520295
+      "profit" : 9.369310271410669,
+      "investorsFund" : 9.965781217890562
     }
   }
 }}]
@@ -899,7 +922,7 @@ open class InvestorAPI {
      Get public investment program's list
      - POST /api/investor/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
@@ -925,16 +948,18 @@ open class InvestorAPI {
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "investorsCount" : 5
   }, {
@@ -962,16 +987,18 @@ open class InvestorAPI {
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "investorsCount" : 5
   } ]

@@ -12,16 +12,18 @@ import Foundation
 open class Chart: Codable {
 
     public var date: Date?
-    public var fund: Double?
+    public var managerFund: Double?
+    public var investorFund: Double?
     public var profit: Double?
     public var loss: Double?
     public var totalProfit: Double?
 
 
     
-    public init(date: Date?, fund: Double?, profit: Double?, loss: Double?, totalProfit: Double?) {
+    public init(date: Date?, managerFund: Double?, investorFund: Double?, profit: Double?, loss: Double?, totalProfit: Double?) {
         self.date = date
-        self.fund = fund
+        self.managerFund = managerFund
+        self.investorFund = investorFund
         self.profit = profit
         self.loss = loss
         self.totalProfit = totalProfit
@@ -35,7 +37,8 @@ open class Chart: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(fund, forKey: "fund")
+        try container.encodeIfPresent(managerFund, forKey: "managerFund")
+        try container.encodeIfPresent(investorFund, forKey: "investorFund")
         try container.encodeIfPresent(profit, forKey: "profit")
         try container.encodeIfPresent(loss, forKey: "loss")
         try container.encodeIfPresent(totalProfit, forKey: "totalProfit")
@@ -47,7 +50,8 @@ open class Chart: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         date = try container.decodeIfPresent(Date.self, forKey: "date")
-        fund = try container.decodeIfPresent(Double.self, forKey: "fund")
+        managerFund = try container.decodeIfPresent(Double.self, forKey: "managerFund")
+        investorFund = try container.decodeIfPresent(Double.self, forKey: "investorFund")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         loss = try container.decodeIfPresent(Double.self, forKey: "loss")
         totalProfit = try container.decodeIfPresent(Double.self, forKey: "totalProfit")

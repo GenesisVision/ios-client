@@ -15,6 +15,20 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.Background.main
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+    }
+    
+    // MARK: - Public methods
+    func setupNavigationBar(with style: ColorStyle = .white) {
+        let colors = StyleColors(with: style)
+        
+        AppearanceController.setupNavigationBar(with: style)
+        
+        navigationController?.navigationBar.tintColor = colors.tintColor
+        navigationController?.navigationBar.backgroundColor = colors.tintColor
+        navigationController?.navigationBar.barTintColor = colors.backgroundColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
+                                                                   NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
     }
 }
 

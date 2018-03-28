@@ -47,7 +47,8 @@ class ProgramDescriptionViewController: BaseViewController {
         swipeGestureRecognizer.direction = .down
         view.addGestureRecognizer(swipeGestureRecognizer)
         
-        navigationController?.navigationBar.barTintColor = UIColor.NavBar.grayBackground
+        setupNavigationBar(with: .gray)
+        
         view.backgroundColor = UIColor.NavBar.grayBackground
         
         fillData()

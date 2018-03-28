@@ -92,7 +92,7 @@ class ChartView: CombinedChartView {
     
     private func setFakeData(_ count: Int, range: UInt32) -> [Chart] {
         let values = (0..<count).map { (i) -> Chart in
-            return Chart(date: nil, fund: nil, profit: nil, loss: nil, totalProfit: Double(arc4random_uniform(range) - range / 2))
+            return Chart(date: nil, managerFund: nil, investorFund: nil, profit: nil, loss: nil, totalProfit: Double(arc4random_uniform(range) - range / 2))
         }
         
         return values
@@ -147,7 +147,7 @@ class ChartView: CombinedChartView {
     
     private func generateBarChart(_ values: [Chart]) -> BarChartData {
         let fundDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
-            return BarChartDataEntry(x: Double(i), y: values[i].fund ?? 0)
+            return BarChartDataEntry(x: Double(i), y: values[i].investorFund ?? 0)
         }
         
         let lossDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in

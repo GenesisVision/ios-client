@@ -12,9 +12,8 @@ import DZNEmptyDataSet
 
 class ProgramDetailViewController: BaseViewControllerWithTableView {
 
-    let buttonHeight: CGFloat = 50.0
-    let buttonBottom: CGFloat = 16.0
-    let buttonsVerticalHeight: CGFloat = 8.0
+    let buttonHeight: CGFloat = 45.0
+    let buttonBottom: CGFloat = 34.0
     
     // MARK: - View Model
     var viewModel: ProgramDetailViewModel! {
@@ -64,13 +63,15 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.barTintColor = UIColor.NavBar.grayBackground
+        setupNavigationBar(with: .gray)
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        setupNavigationBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        navigationController?.navigationBar.barTintColor = UIColor.NavBar.background
         
         hideHUD()
     }
@@ -92,9 +93,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         requestsButton.isHidden = !viewProperties.hasNewRequests
         gradientView.isHidden = false
         
-        if viewProperties.hasNewRequests && (viewProperties.isWithdrawEnable || viewProperties.isInvestEnable) {
-            tableView.contentInset.bottom = buttonHeight + buttonHeight + buttonsVerticalHeight + buttonBottom
-        } else if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
+        if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
             tableView.contentInset.bottom = buttonHeight + buttonBottom
         } else {
             tableView.contentInset.bottom = 0.0

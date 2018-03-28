@@ -50,6 +50,7 @@ open class InvestmentProgramDashboard: Codable {
     public var isEnabled: Bool?
     public var chart: [Chart]?
     public var manager: ProfilePublicViewModel?
+    public var token: Token?
     public var hasNewRequests: Bool?
     public var isHistoryEnable: Bool?
     public var isInvestEnable: Bool?
@@ -58,7 +59,7 @@ open class InvestmentProgramDashboard: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedAmount: Double?, profitFromProgram: Double?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedAmount: Double?, profitFromProgram: Double?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, token: Token?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -85,6 +86,7 @@ open class InvestmentProgramDashboard: Codable {
         self.isEnabled = isEnabled
         self.chart = chart
         self.manager = manager
+        self.token = token
         self.hasNewRequests = hasNewRequests
         self.isHistoryEnable = isHistoryEnable
         self.isInvestEnable = isInvestEnable
@@ -125,6 +127,7 @@ open class InvestmentProgramDashboard: Codable {
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(manager, forKey: "manager")
+        try container.encodeIfPresent(token, forKey: "token")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isHistoryEnable, forKey: "isHistoryEnable")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
@@ -163,6 +166,7 @@ open class InvestmentProgramDashboard: Codable {
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
+        token = try container.decodeIfPresent(Token.self, forKey: "token")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isHistoryEnable = try container.decodeIfPresent(Bool.self, forKey: "isHistoryEnable")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")

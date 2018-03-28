@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit
+
 class ProfileDataProvider: DataProvider {
     static func getProfileFull(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
@@ -19,8 +21,13 @@ class ProfileDataProvider: DataProvider {
             }
     }
     
-    static func updateProfileImage() {
-        
+    static func updateProfileImage(imageURL: URL, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        FilesAPI.apiFilesUploadPost(uploadedFile: imageURL) { (uploadResultModel, error) in
+            DataProvider().responseHandler(uploadResultModel, error: error, successCompletion: { (viewModel) in
+                let uuid = uploadResultModel?.id?.uuidString
+                completion(uuid)
+            }, errorCompletion: errorCompletion)
+        }
     }
     
     static func updateProfile(model: UpdateProfileViewModel, completion: @escaping CompletionBlock) {

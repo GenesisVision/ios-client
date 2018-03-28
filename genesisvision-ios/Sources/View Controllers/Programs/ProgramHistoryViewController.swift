@@ -26,12 +26,12 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         title = viewModel.title
-        
-        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setup()
     }
     
     // MARK: - Private methods

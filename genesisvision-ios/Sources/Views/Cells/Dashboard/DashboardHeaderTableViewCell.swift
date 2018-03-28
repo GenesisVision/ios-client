@@ -17,6 +17,12 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet var investedAmountLabel: UILabel! {
+        didSet {
+            investedAmountLabel.textColor = UIColor.Header.darkTitle
+        }
+    }
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

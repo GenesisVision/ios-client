@@ -68,7 +68,6 @@ func convertToImage(with view: UIView) -> UIImage? {
     return nil
 }
 
-
 extension UIImage {
     func alpha(_ value: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)

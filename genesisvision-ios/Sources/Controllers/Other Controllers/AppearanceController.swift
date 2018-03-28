@@ -9,6 +9,31 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+enum ColorStyle {
+    case white, primary, gray
+}
+
+struct StyleColors {
+    var tintColor = UIColor.NavBar.tint
+    var backgroundColor = UIColor.NavBar.background
+    var textColor = UIColor.Font.dark
+    
+    init(with style: ColorStyle = .white) {
+        switch style {
+        case .primary:
+            self.tintColor = UIColor.Font.white
+            self.backgroundColor = UIColor.primary
+            self.textColor = UIColor.Font.white
+        case .gray:
+            self.backgroundColor = UIColor.NavBar.grayBackground
+        default:
+            self.tintColor = UIColor.NavBar.tint
+            self.backgroundColor = UIColor.NavBar.background
+            self.textColor = UIColor.Font.dark
+        }
+    }
+}
+
 struct AppearanceController {
     static func setupAppearance() {
         setupNavigationBar()
@@ -17,19 +42,23 @@ struct AppearanceController {
     }
     
     // NavigationBar
-    private static func setupNavigationBar() {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark,
+    static func setupNavigationBar(with style: ColorStyle = .white) {
+        let colors = StyleColors(with: style)
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
                                                             NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
-        
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
         }
         
-        UINavigationBar.appearance().tintColor = UIColor.NavBar.tint
-        UINavigationBar.appearance().backgroundColor = UIColor.NavBar.background
+        UINavigationBar.appearance().tintColor = colors.tintColor
+        UINavigationBar.appearance().backgroundColor = colors.backgroundColor
+        
+        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
     }
+    
     
     // TabBar
     private static func setupTabBar() {

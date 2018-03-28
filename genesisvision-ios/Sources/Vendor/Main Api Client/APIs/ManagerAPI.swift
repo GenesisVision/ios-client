@@ -59,23 +59,24 @@ open class ManagerAPI {
      - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiManagerAuthConfirmEmailGet(userId: String? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiManagerAuthConfirmEmailGetWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
-            completion(error);
+    open class func apiManagerAuthConfirmEmailPost(userId: String? = nil, code: String? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        apiManagerAuthConfirmEmailPostWithRequestBuilder(userId: userId, code: code).execute { (response, error) -> Void in
+            completion(response?.body, error);
         }
     }
 
 
     /**
      Confirm email after registration
-     - GET /api/manager/auth/confirmEmail
+     - POST /api/manager/auth/confirmEmail
+     - examples: [{contentType=application/json, example=""}]
      
      - parameter userId: (query)  (optional)
      - parameter code: (query)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<String> 
      */
-    open class func apiManagerAuthConfirmEmailGetWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<Void> {
+    open class func apiManagerAuthConfirmEmailPostWithRequestBuilder(userId: String? = nil, code: String? = nil) -> RequestBuilder<String> {
         let path = "/api/manager/auth/confirmEmail"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -87,9 +88,9 @@ open class ManagerAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -551,6 +552,11 @@ open class ManagerAPI {
     "profitTotalPercent" : 1.2315135367772556,
     "profitTotalChange" : "Unchanged",
     "isInvestEnable" : true,
+    "token" : {
+      "tokenSymbol" : "tokenSymbol",
+      "initialPrice" : 4.965218492984954,
+      "tokenName" : "tokenName"
+    },
     "tradesCount" : 7,
     "isOwnProgram" : true,
     "volumeTotal" : 1.0246457001441578,
@@ -565,22 +571,24 @@ open class ManagerAPI {
     "programStartDate" : "2000-01-23T04:56:07.000+00:00",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "profitDiagram" : {
-      "managerFund" : 4.965218492984954,
+      "managerFund" : 5.025004791520295,
       "profitIsPositive" : true,
-      "profit" : 9.965781217890562,
-      "investorsFund" : 5.025004791520295
+      "profit" : 9.369310271410669,
+      "investorsFund" : 9.965781217890562
     }
   }
 }}]
@@ -628,7 +636,7 @@ open class ManagerAPI {
      Get public investment program's list
      - POST /api/manager/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
@@ -654,16 +662,18 @@ open class ManagerAPI {
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "investorsCount" : 5
   }, {
@@ -691,16 +701,18 @@ open class ManagerAPI {
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "loss" : 1.4894159098541704,
-      "totalProfit" : 6.84685269835264,
-      "fund" : 1.2315135367772556,
-      "profit" : 1.0246457001441578
+      "loss" : 6.84685269835264,
+      "managerFund" : 1.2315135367772556,
+      "totalProfit" : 7.457744773683766,
+      "investorFund" : 1.0246457001441578,
+      "profit" : 1.4894159098541704
     } ],
     "investorsCount" : 5
   } ]

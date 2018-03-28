@@ -15,8 +15,8 @@ struct DashboardHeaderTableViewCellViewModel {
 extension DashboardHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardHeaderTableViewCell) {
         
-        if let profitFromPrograms = investorDashboard.profitFromPrograms {
-            cell.profitFromProgramsLabel.text = profitFromPrograms.toString()
+        if let investedAmount = investorDashboard.investedAmount {
+            cell.investedAmountLabel.text = investedAmount.toString()
         }
     }
 }

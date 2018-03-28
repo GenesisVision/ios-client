@@ -62,6 +62,7 @@ open class InvestmentProgramDetails: Codable {
     public var tradeIpfsHash: String?
     public var isEnabled: Bool?
     public var chart: [Chart]?
+    public var token: Token?
     public var manager: ProfilePublicViewModel?
     public var profitDiagram: PeriodProfitDiagram?
     public var hasNewRequests: Bool?
@@ -72,7 +73,7 @@ open class InvestmentProgramDetails: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, chart: [Chart]?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -106,6 +107,7 @@ open class InvestmentProgramDetails: Codable {
         self.tradeIpfsHash = tradeIpfsHash
         self.isEnabled = isEnabled
         self.chart = chart
+        self.token = token
         self.manager = manager
         self.profitDiagram = profitDiagram
         self.hasNewRequests = hasNewRequests
@@ -155,6 +157,7 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(tradeIpfsHash, forKey: "tradeIpfsHash")
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(chart, forKey: "chart")
+        try container.encodeIfPresent(token, forKey: "token")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(profitDiagram, forKey: "profitDiagram")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
@@ -202,6 +205,7 @@ open class InvestmentProgramDetails: Codable {
         tradeIpfsHash = try container.decodeIfPresent(String.self, forKey: "tradeIpfsHash")
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
+        token = try container.decodeIfPresent(Token.self, forKey: "token")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         profitDiagram = try container.decodeIfPresent(PeriodProfitDiagram.self, forKey: "profitDiagram")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")

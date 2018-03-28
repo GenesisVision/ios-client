@@ -12,14 +12,6 @@ class ProgramInvestViewController: BaseViewController {
     
     var viewModel: ProgramInvestViewModel!
     
-    // MARK: - TextFields
-    @IBOutlet var amountTextField: DesignableUITextField! {
-        didSet {
-            amountTextField.isUserInteractionEnabled = false
-            amountTextField.font = UIFont.getFont(.light, size: 72)
-        }
-    }
-    
     // MARK: - Views
     @IBOutlet var numpadView: NumpadView! {
         didSet {
@@ -29,9 +21,26 @@ class ProgramInvestViewController: BaseViewController {
     
     // MARK: - Labels
     @IBOutlet var balanceLabel: UILabel!
+    @IBOutlet var balanceCurrencyLabel: UILabel!
+    @IBOutlet var usdBalanceLabel: UILabel!
+    @IBOutlet var amountLabel: AmountLabel! 
+    
+    @IBOutlet var amountCurrencyLabel: UILabel!
+    @IBOutlet var usdAmountLabel: UILabel!
     
     // MARK: - Buttons
     @IBOutlet var investButton: UIButton!
+    
+    // MARK: - Variables
+    var enteredAmount: Double = 0.0 {
+        didSet {
+            viewModel.getUSDAmountText(amount: enteredAmount) { [weak self] (usdAmountValue) in
+                self?.usdAmountLabel.text = usdAmountValue
+            }
+            
+            investButton(enable: enteredAmount > 0)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,34 +55,36 @@ class ProgramInvestViewController: BaseViewController {
         setupUI()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
- 
-        navigationController?.navigationBar.barTintColor = UIColor.NavBar.background
-        navigationController?.navigationBar.tintColor = UIColor.Font.primary
-        
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.dark,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+    override func willMove(toParentViewController parent: UIViewController?) {
+        setupNavigationBar()
     }
-    
     
     // MARK: - Private methods
     private func setupUI() {
-        navigationController?.navigationBar.barTintColor = UIColor.Font.primary
-        navigationController?.navigationBar.tintColor = UIColor.Font.white
+        setupNavigationBar(with: .primary)
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Font.white,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+        investButton(enable: false)
         
-        viewModel.getAmountText { [weak self] (text) in
-            self?.balanceLabel.text = text
+        viewModel.getBalanceText { [weak self] (balanceText, usdBalanceText) in
+            self?.balanceLabel.text = balanceText
+            self?.usdBalanceLabel.text = usdBalanceText
         }
+    }
+    
+    private func amountLabelDidChange() {
+        let value = amountLabel.text?.doubleValue
+        enteredAmount = value != nil ? value! : 0.0
+    }
+    
+    private func investButton(enable: Bool) {
+        investButton.isUserInteractionEnabled = enable
+        investButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.gray
     }
     
     private func investMethod() {
         hideKeyboard()
         
-        guard let text = amountTextField.text,
+        guard let text = amountLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
@@ -100,39 +111,47 @@ class ProgramInvestViewController: BaseViewController {
 
 extension ProgramInvestViewController: NumpadViewProtocol {
     func onClearClicked(view: NumpadView) {
-        guard let text = amountTextField.text, !text.isEmpty else { return }
+        guard let text = amountLabel.text, !text.isEmpty else { return }
         
-        guard text != "0," else {
-            amountTextField.text?.removeAll()
-            return
+        if text == "0." {
+            amountLabel.text?.removeAll()
+        } else {
+            amountLabel.text?.removeLast(1)
         }
         
-        amountTextField.text?.removeLast(1)
+        if amountLabel.text == "" {
+            amountLabel.text = 0.toString()
+        }
+        
+        amountLabelDidChange()
     }
     
     func onSeparatorClicked(view: NumpadView) {
-        guard let text = amountTextField.text else { return }
+        guard let text = amountLabel.text else { return }
         
-        guard text.range(of: ",") == nil else {
+        guard text.range(of: ".") == nil else {
             return
         }
         
         guard !text.isEmpty else {
-            amountTextField.text?.append("0,")
+            amountLabel.text = "0."
             return
         }
         
-        amountTextField.text?.append(",")
+        amountLabel.text?.append(".")
+        
+        amountLabelDidChange()
     }
     
     func onNumberClicked(view: NumpadView, value: Int) {
-        guard let text = amountTextField.text else { return }
+        guard let text = amountLabel.text else { return }
         
-        if text.isEmpty && value == 0 {
-            amountTextField.text?.append("0,")
-            return
+        if text == "0" {
+            amountLabel.text = value == 0 ? "0." : value.toString()
+        } else {
+            amountLabel.text?.append(value.toString())
         }
         
-        amountTextField.text?.append(value.toString())
+        amountLabelDidChange()
     }
 }

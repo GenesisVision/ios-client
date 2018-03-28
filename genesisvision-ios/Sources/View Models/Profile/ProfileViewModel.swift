@@ -105,6 +105,7 @@ final class ProfileViewModel {
         AuthManager.getProfile { [weak self] (viewModel) in
             if let profileModel = viewModel {
                 self?.profileModel = profileModel
+                self?.editProfileModel = profileModel
                 completion(.success)
             }
             
@@ -324,13 +325,18 @@ final class ProfileViewModel {
     }
     
     private func saveProfileApi(completion: @escaping CompletionBlock) {
-        if let pickedImageURL = pickedImageURL {
-            FilesAPI.apiFilesUploadPost(uploadedFile: pickedImageURL) { (result, error) in
-                print(result ?? "")
-                completion(.failure(reason: nil))
-            }
+        guard let pickedImageURL = pickedImageURL else {
+            self.updateProfileApi(completion: completion)
+            return 
         }
         
+        ProfileDataProvider.updateProfileImage(imageURL: pickedImageURL, completion: { [weak self] (imageID) in
+            self?.editProfileModel?.avatar = imageID
+            self?.updateProfileApi(completion: completion)
+        }, errorCompletion: completion)
+    }
+    
+    private func updateProfileApi(completion: @escaping CompletionBlock) {
         let model = UpdateProfileViewModel(userName: editProfileModel?.userName,
                                            firstName: editProfileModel?.firstName,
                                            middleName: editProfileModel?.middleName,
@@ -345,15 +351,8 @@ final class ProfileViewModel {
                                            gender: editProfileModel?.gender,
                                            avatar: editProfileModel?.avatar)
         
-
-        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
-
-        isInvestorApp
-            ? InvestorAPI.apiInvestorProfileUpdatePost(authorization: token, model: model) { (error) in
-                ResponseHandler.handleApi(error: error, completion: completion)
-                }
-            : ManagerAPI.apiManagerProfileUpdatePost(authorization: token, model: model) { (error) in
-                ResponseHandler.handleApi(error: error, completion: completion)
-        }
+        ProfileDataProvider.updateProfile(model: model, completion: completion)
     }
+    
+    
 }
