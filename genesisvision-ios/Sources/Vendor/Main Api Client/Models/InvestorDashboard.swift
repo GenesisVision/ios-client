@@ -11,16 +11,18 @@ import Foundation
 
 open class InvestorDashboard: Codable {
 
-    public var investmentPrograms: [InvestmentProgramDashboard]?
+    public var investmentPrograms: [InvestmentProgramDashboardInvestor]?
     public var profitFromPrograms: Double?
     public var investedAmount: Double?
+    public var totalPortfolioAmount: Double?
 
 
     
-    public init(investmentPrograms: [InvestmentProgramDashboard]?, profitFromPrograms: Double?, investedAmount: Double?) {
+    public init(investmentPrograms: [InvestmentProgramDashboardInvestor]?, profitFromPrograms: Double?, investedAmount: Double?, totalPortfolioAmount: Double?) {
         self.investmentPrograms = investmentPrograms
         self.profitFromPrograms = profitFromPrograms
         self.investedAmount = investedAmount
+        self.totalPortfolioAmount = totalPortfolioAmount
     }
     
 
@@ -33,6 +35,7 @@ open class InvestorDashboard: Codable {
         try container.encodeIfPresent(investmentPrograms, forKey: "investmentPrograms")
         try container.encodeIfPresent(profitFromPrograms, forKey: "profitFromPrograms")
         try container.encodeIfPresent(investedAmount, forKey: "investedAmount")
+        try container.encodeIfPresent(totalPortfolioAmount, forKey: "totalPortfolioAmount")
     }
 
     // Decodable protocol methods
@@ -40,9 +43,10 @@ open class InvestorDashboard: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        investmentPrograms = try container.decodeIfPresent([InvestmentProgramDashboard].self, forKey: "investmentPrograms")
+        investmentPrograms = try container.decodeIfPresent([InvestmentProgramDashboardInvestor].self, forKey: "investmentPrograms")
         profitFromPrograms = try container.decodeIfPresent(Double.self, forKey: "profitFromPrograms")
         investedAmount = try container.decodeIfPresent(Double.self, forKey: "investedAmount")
+        totalPortfolioAmount = try container.decodeIfPresent(Double.self, forKey: "totalPortfolioAmount")
     }
 }
 

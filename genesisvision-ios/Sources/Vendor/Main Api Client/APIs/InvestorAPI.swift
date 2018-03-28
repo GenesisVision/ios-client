@@ -304,6 +304,7 @@ open class InvestorAPI {
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
   "profitFromPrograms" : 6.84685269835264,
+  "totalPortfolioAmount" : 1.1730742509559433,
   "investedAmount" : 7.457744773683766,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",

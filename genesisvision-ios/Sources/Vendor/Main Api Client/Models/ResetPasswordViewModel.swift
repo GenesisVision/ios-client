@@ -11,14 +11,14 @@ import Foundation
 
 open class ResetPasswordViewModel: Codable {
 
-    public var id: String
+    public var userId: String
     public var code: String
     public var password: String
 
 
     
-    public init(id: String, code: String, password: String) {
-        self.id = id
+    public init(userId: String, code: String, password: String) {
+        self.userId = userId
         self.code = code
         self.password = password
     }
@@ -30,7 +30,7 @@ open class ResetPasswordViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(id, forKey: "id")
+        try container.encode(userId, forKey: "userId")
         try container.encode(code, forKey: "code")
         try container.encode(password, forKey: "password")
     }
@@ -40,7 +40,7 @@ open class ResetPasswordViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decode(String.self, forKey: "id")
+        userId = try container.decode(String.self, forKey: "userId")
         code = try container.decode(String.self, forKey: "code")
         password = try container.decode(String.self, forKey: "password")
     }

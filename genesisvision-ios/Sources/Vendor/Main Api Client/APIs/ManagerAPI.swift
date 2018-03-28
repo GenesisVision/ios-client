@@ -377,6 +377,168 @@ open class ManagerAPI {
     }
 
     /**
+     Dashboard programs
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerDashboardProgramsGet(authorization: String, filter: ManagerDashboardProgramsFilter? = nil, completion: @escaping ((_ data: ManagerInvestmentPrograms?,_ error: Error?) -> Void)) {
+        apiManagerDashboardProgramsGetWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Dashboard programs
+     - GET /api/manager/dashboard/programs
+     - examples: [{contentType=application/json, example={
+  "investmentPrograms" : [ {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "periodDuration" : 5,
+    "level" : 0,
+    "description" : "description",
+    "title" : "title",
+    "profitCurrent" : 9.301444243932576,
+    "tradesCount" : 1,
+    "balance" : 6.027456183070403,
+    "isEnabled" : true,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "profitTotal" : 2.3021358869347655,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 5,
+    "profitTotalGvt" : 7.061401241503109
+  }, {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "periodDuration" : 5,
+    "level" : 0,
+    "description" : "description",
+    "title" : "title",
+    "profitCurrent" : 9.301444243932576,
+    "tradesCount" : 1,
+    "balance" : 6.027456183070403,
+    "isEnabled" : true,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "profitTotal" : 2.3021358869347655,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 5,
+    "profitTotalGvt" : 7.061401241503109
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<ManagerInvestmentPrograms> 
+     */
+    open class func apiManagerDashboardProgramsGetWithRequestBuilder(authorization: String, filter: ManagerDashboardProgramsFilter? = nil) -> RequestBuilder<ManagerInvestmentPrograms> {
+        let path = "/api/manager/dashboard/programs"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ManagerInvestmentPrograms>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Dashboard statistic
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerDashboardStatisticGet(authorization: String, completion: @escaping ((_ data: ManagerDashboardStatistic?,_ error: Error?) -> Void)) {
+        apiManagerDashboardStatisticGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Dashboard statistic
+     - GET /api/manager/dashboard/statistic
+     - examples: [{contentType=application/json, example={
+  "programBalances" : [ {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "title" : "title"
+  }, {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "title" : "title"
+  } ],
+  "endOfNextPeriod" : {
+    "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "duration" : 5,
+    "title" : "title"
+  },
+  "totalProfit" : 5.637376656633329,
+  "fundChart" : [ {
+    "managerFund" : 2.3021358869347655,
+    "investorFund" : 7.061401241503109,
+    "title" : "title",
+    "profit" : 9.301444243932576
+  }, {
+    "managerFund" : 2.3021358869347655,
+    "investorFund" : 7.061401241503109,
+    "title" : "title",
+    "profit" : 9.301444243932576
+  } ],
+  "profitChart" : [ {
+    "data" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "totalProfit" : 3.616076749251911
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "totalProfit" : 3.616076749251911
+    } ],
+    "title" : "title"
+  }, {
+    "data" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "totalProfit" : 3.616076749251911
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "totalProfit" : 3.616076749251911
+    } ],
+    "title" : "title"
+  } ],
+  "investorsCount" : 6,
+  "investorsFund" : 1.4658129805029452
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ManagerDashboardStatistic> 
+     */
+    open class func apiManagerDashboardStatisticGetWithRequestBuilder(authorization: String) -> RequestBuilder<ManagerDashboardStatistic> {
+        let path = "/api/manager/dashboard/statistic"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ManagerDashboardStatistic>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Cancel investment request
      
      - parameter requestId: (query)  
@@ -503,6 +665,68 @@ open class ManagerAPI {
     }
 
     /**
+     Get investment program buy token model
+     
+     - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramBuyTokensGet(investmentProgramId: UUID, authorization: String, completion: @escaping ((_ data: InvestmentProgramBuyToken?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramBuyTokensGetWithRequestBuilder(investmentProgramId: investmentProgramId, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get investment program buy token model
+     - GET /api/manager/investmentProgram/buyTokens
+     - examples: [{contentType=application/json, example={
+  "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+  "periodDuration" : 5,
+  "gvtRate" : 6.027456183070403,
+  "manager" : {
+    "country" : "country",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "avatar" : "avatar",
+    "username" : "username"
+  },
+  "level" : 0,
+  "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+  "logo" : "logo",
+  "description" : "description",
+  "currency" : "Undefined",
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "title" : "title",
+  "gvtWalletAmount" : 1.4658129805029452
+}}]
+     
+     - parameter investmentProgramId: (query)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<InvestmentProgramBuyToken> 
+     */
+    open class func apiManagerInvestmentProgramBuyTokensGetWithRequestBuilder(investmentProgramId: UUID, authorization: String) -> RequestBuilder<InvestmentProgramBuyToken> {
+        let path = "/api/manager/investmentProgram/buyTokens"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "investmentProgramId": investmentProgramId
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<InvestmentProgramBuyToken>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Get investment program details by id
      
      - parameter investmentProgramId: (query)  
@@ -616,6 +840,225 @@ open class ManagerAPI {
         let requestBuilder: RequestBuilder<InvestmentProgramViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Get investment program's requests
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramRequestsPost(authorization: String, filter: InvestmentProgramRequestsFilter? = nil, completion: @escaping ((_ data: InvestmentProgramRequests?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramRequestsPostWithRequestBuilder(authorization: authorization, filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get investment program's requests
+     - POST /api/manager/investmentProgram/requests
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "requests" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 7.386281948385884,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Invest",
+    "status" : "New"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 7.386281948385884,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Invest",
+    "status" : "New"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<InvestmentProgramRequests> 
+     */
+    open class func apiManagerInvestmentProgramRequestsPostWithRequestBuilder(authorization: String, filter: InvestmentProgramRequestsFilter? = nil) -> RequestBuilder<InvestmentProgramRequests> {
+        let path = "/api/manager/investmentProgram/requests"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<InvestmentProgramRequests>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Get manager trade history
+     
+     - parameter filter: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramTradesPost(filter: TradesFilter? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramTradesPostWithRequestBuilder(filter: filter).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get manager trade history
+     - POST /api/manager/investmentProgram/trades
+     - examples: [{contentType=application/json, example={
+  "tradeServerType" : "Undefined",
+  "total" : 0,
+  "trades" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "symbol" : "symbol",
+    "dateOpen" : "2000-01-23T04:56:07.000+00:00",
+    "ticket" : 6,
+    "login" : 0,
+    "volume" : 1.4658129805029452,
+    "entry" : "In",
+    "priceClose" : 2.3021358869347655,
+    "dateClose" : "2000-01-23T04:56:07.000+00:00",
+    "price" : 7.061401241503109,
+    "priceOpen" : 5.637376656633329,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profit" : 5.962133916683182,
+    "direction" : "Buy"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "symbol" : "symbol",
+    "dateOpen" : "2000-01-23T04:56:07.000+00:00",
+    "ticket" : 6,
+    "login" : 0,
+    "volume" : 1.4658129805029452,
+    "entry" : "In",
+    "priceClose" : 2.3021358869347655,
+    "dateClose" : "2000-01-23T04:56:07.000+00:00",
+    "price" : 7.061401241503109,
+    "priceOpen" : 5.637376656633329,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profit" : 5.962133916683182,
+    "direction" : "Buy"
+  } ]
+}}]
+     
+     - parameter filter: (body)  (optional)
+
+     - returns: RequestBuilder<TradesViewModel> 
+     */
+    open class func apiManagerInvestmentProgramTradesPostWithRequestBuilder(filter: TradesFilter? = nil) -> RequestBuilder<TradesViewModel> {
+        let path = "/api/manager/investmentProgram/trades"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: filter)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<TradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Cancel investment request
+     
+     - parameter requestId: (query)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramsCancelInvestmentRequestPost(requestId: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramsCancelInvestmentRequestPostWithRequestBuilder(requestId: requestId, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Cancel investment request
+     - POST /api/manager/investmentPrograms/cancelInvestmentRequest
+     
+     - parameter requestId: (query)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiManagerInvestmentProgramsCancelInvestmentRequestPostWithRequestBuilder(requestId: UUID, authorization: String) -> RequestBuilder<Void> {
+        let path = "/api/manager/investmentPrograms/cancelInvestmentRequest"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "requestId": requestId
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Invest in manager
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramsInvestPost(authorization: String, model: Invest? = nil, completion: @escaping ((_ data: WalletsViewModel?,_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramsInvestPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Invest in manager
+     - POST /api/manager/investmentPrograms/invest
+     - examples: [{contentType=application/json, example={
+  "wallets" : [ {
+    "amount" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  }, {
+    "amount" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<WalletsViewModel> 
+     */
+    open class func apiManagerInvestmentProgramsInvestPostWithRequestBuilder(authorization: String, model: Invest? = nil) -> RequestBuilder<WalletsViewModel> {
+        let path = "/api/manager/investmentPrograms/invest"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
@@ -736,6 +1179,46 @@ open class ManagerAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<InvestmentProgramsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Withdraw from investment program
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerInvestmentProgramsWithdrawPost(authorization: String, model: Invest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiManagerInvestmentProgramsWithdrawPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Withdraw from investment program
+     - POST /api/manager/investmentPrograms/withdraw
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiManagerInvestmentProgramsWithdrawPostWithRequestBuilder(authorization: String, model: Invest? = nil) -> RequestBuilder<Void> {
+        let path = "/api/manager/investmentPrograms/withdraw"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }

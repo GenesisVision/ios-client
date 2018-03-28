@@ -11,13 +11,15 @@ import Foundation
 
 open class RegisterManagerViewModel: Codable {
 
+    public var userName: String
     public var email: String
     public var password: String
     public var confirmPassword: String?
 
 
     
-    public init(email: String, password: String, confirmPassword: String?) {
+    public init(userName: String, email: String, password: String, confirmPassword: String?) {
+        self.userName = userName
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
@@ -30,6 +32,7 @@ open class RegisterManagerViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encode(userName, forKey: "userName")
         try container.encode(email, forKey: "email")
         try container.encode(password, forKey: "password")
         try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
@@ -40,6 +43,7 @@ open class RegisterManagerViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        userName = try container.decode(String.self, forKey: "userName")
         email = try container.decode(String.self, forKey: "email")
         password = try container.decode(String.self, forKey: "password")
         confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
