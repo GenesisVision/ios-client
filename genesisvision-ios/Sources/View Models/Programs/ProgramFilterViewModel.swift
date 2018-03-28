@@ -16,7 +16,7 @@ enum SliderType: Int {
 final class ProgramFilterViewModel {
     
     // MARK: - View Model
-    private weak var investmentProgramListViewModel: InvestmentProgramListViewModel?
+    private var investmentProgramListViewModel: InvestmentProgramListViewModel?
     
     enum SectionType {
         case slider
@@ -33,7 +33,7 @@ final class ProgramFilterViewModel {
     private var sections: [SectionType] = [.slider]
     private var router: ProgramFilterRouter!
     
-    var filter: InvestmentProgramsFilter?
+    private var filter: InvestmentProgramsFilter?
     
     var amountCellModels = [FilterAmountTableViewCellViewModel]()
     
@@ -56,11 +56,48 @@ final class ProgramFilterViewModel {
         self.investmentProgramListViewModel = investmentProgramListViewModel
         
         if let filter = investmentProgramListViewModel.filter {
-            self.filter = filter
+            self.filter = InvestmentProgramsFilter(managerId: filter.managerId,
+                                                   brokerId: filter.brokerId,
+                                                   brokerTradeServerId: filter.brokerTradeServerId,
+                                                   investMaxAmountFrom: filter.investMaxAmountFrom,
+                                                   investMaxAmountTo: filter.investMaxAmountTo,
+                                                   sorting: filter.sorting,
+                                                   name: filter.name,
+                                                   levelMin: filter.levelMin,
+                                                   levelMax: filter.levelMax,
+                                                   profitAvgMin: filter.profitAvgMin,
+                                                   profitAvgMax: filter.profitAvgMax,
+                                                   profitTotalMin: filter.profitTotalMin,
+                                                   profitTotalMax: filter.profitTotalMax,
+                                                   profitTotalPercentMin: filter.profitTotalPercentMin,
+                                                   profitTotalPercentMax: filter.profitTotalPercentMax,
+                                                   profitAvgPercentMin: filter.profitAvgPercentMin,
+                                                   profitAvgPercentMax: filter.profitAvgPercentMax,
+                                                   profitTotalChange: filter.profitTotalChange,
+                                                   periodMin: filter.periodMin,
+                                                   periodMax: filter.periodMax,
+                                                   skip: filter.skip,
+                                                   take: filter.take)
         }
     }
     
     // MARK: - Public methods
+    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil) {
+        if let levelMin = levelMin, let levelMax = levelMax {
+            filter?.levelMin = levelMin
+            filter?.levelMax = levelMax
+        }
+        
+        if let profitTotalMin = profitTotalMin, let profitTotalMax = profitTotalMax {
+            filter?.profitTotalMin = profitTotalMin
+            filter?.profitTotalMax = profitTotalMax
+        }
+        
+        if let profitAvgPercentMin = profitAvgPercentMin, let profitAvgPercentMax = profitAvgPercentMax {
+            filter?.profitAvgPercentMin = profitAvgPercentMin
+            filter?.profitAvgPercentMax = profitAvgPercentMax
+        }
+    }
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for indexPath: IndexPath) -> CellViewAnyModel {
@@ -69,10 +106,6 @@ final class ProgramFilterViewModel {
         case .slider:
             return amountCellModels[indexPath.row]
         }
-    }
-    
-    func select(for indexPath: IndexPath) {
-
     }
     
     func numberOfSections() -> Int {
@@ -107,9 +140,9 @@ final class ProgramFilterViewModel {
                 viewModel.selectedMinValue = filter?.profitAvgPercentMin
                 viewModel.selectedMaxValue = filter?.profitAvgPercentMax
             }
+            
+            amountCellModels[idx] = viewModel
         }
-        
-        investmentProgramListViewModel?.filter = filter
     }
     
     func apply(completion: @escaping CompletionBlock) {

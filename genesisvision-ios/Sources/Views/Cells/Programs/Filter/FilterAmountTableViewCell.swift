@@ -47,6 +47,12 @@ class FilterAmountTableViewCell: UITableViewCell {
         sliderView.lineHeight = 5.0
         sliderView.handleDiameter = 13.0
         
+        sliderView.minLabelAccessibilityHint = "min"
+        sliderView.minLabelAccessibilityLabel = "min"
+
+        sliderView.maxLabelAccessibilityHint = "max"
+        sliderView.maxLabelAccessibilityLabel = "max"
+        
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }

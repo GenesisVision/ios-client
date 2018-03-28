@@ -112,14 +112,11 @@ extension ProgramFilterViewController: TTRangeSliderDelegate {
         
         switch type {
         case .level:
-            viewModel.filter?.levelMin = Int(selectedMinimum)
-            viewModel.filter?.levelMax = Int(selectedMaximum)
+            viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
         case .totalProfit:
-            viewModel.filter?.profitTotalMin = Int(selectedMinimum)
-            viewModel.filter?.profitTotalMax = Int(selectedMaximum)
+            viewModel.updateFilter(profitTotalMin: Int(selectedMinimum), profitTotalMax: Int(selectedMaximum))
         case .avgProfit:
-            viewModel.filter?.profitAvgPercentMin = Int(selectedMinimum)
-            viewModel.filter?.profitAvgPercentMax = Int(selectedMaximum)
+            viewModel.updateFilter(profitAvgPercentMin: Int(selectedMinimum), profitAvgPercentMax: Int(selectedMaximum))
         }
     }
 }
