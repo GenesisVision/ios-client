@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 
 class TournamentDetailViewController: BaseViewControllerWithTableView {
     

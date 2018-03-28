@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
+import IQKeyboardManagerSwift
 
 class ProfileViewController: BaseViewControllerWithTableView, UINavigationControllerDelegate {
-
     // MARK: - View Model
     var viewModel: ProfileViewModel! {
         didSet {
@@ -72,8 +71,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             switch result {
             case .success:
                 self?.headerView.isHidden = false
-                self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 print("Error with reason: ")
                 print(reason ?? "")
@@ -154,6 +152,34 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         present(alertController, animated: true, completion: nil)
     }
     
+    private func selectGender() {
+        showActionSheet(with: "Gender", message: nil, firstActionTitle: "Female", firstHandler: { [weak self] in
+                self?.viewModel.update(gender: false)
+                self?.reloadData()
+            }, secondActionTitle: "Male", secondHandler: { [weak self] in
+                self?.viewModel.update(gender: true)
+                self?.reloadData()
+            }, cancelTitle: "Cancel", cancelHandler: nil)
+    }
+    
+    private func selectBirthdate() {
+        let alert = UIAlertController(style: .actionSheet, title: "Birthdate", message: "Select  birthdate")
+        alert.view.tintColor = UIColor.primary
+        
+        alert.addDatePicker(mode: .date, date: Date(), minimumDate: nil, maximumDate: nil) { [weak self] date in
+            self?.viewModel.update(birthdate: date)
+            self?.reloadData()
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        alert.show()
+    }
+    
+    private func reloadData() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+    }
+    
     // MARK: - Actions
     @IBAction func editProfileButtonAction(_ sender: UIButton) {
         hideKeyboard()
@@ -164,7 +190,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             switch result {
             case .success:
                 self?.editProfileStateAction()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure:
                 print("Error")
             }
@@ -176,7 +202,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             switch result {
             case .success:
                 self?.showProfileStateAction()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure:
                 print("Error")
             }
@@ -193,7 +219,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             switch result {
             case .success:
                 self?.showProfileStateAction()
-                self?.tableView.reloadData()
+                self?.reloadData()
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)
             }
@@ -208,6 +234,23 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let fieldType = viewModel.didSelect(indexPath) else {
+            return
+        }
+        
+        switch fieldType {
+        case .birthday:
+            selectBirthdate()
+        case .gender:
+            selectGender()
+        default:
+            break
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
             return UITableViewCell()
@@ -222,10 +265,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.addDashedBottomLine()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
     }
     
     // MARK: - UITableViewDataSource
@@ -244,7 +283,7 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
 }
 
-//    MARK: UIImagePickerControllerDelegate
+
 extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -291,5 +330,18 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
         }
     
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let canGoNext = IQKeyboardManager.sharedManager().canGoNext
+        if canGoNext {
+            IQKeyboardManager.sharedManager().goNext()
+        } else {
+            IQKeyboardManager.sharedManager().resignFirstResponder()
+        }
+        
+        return false
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct DashboardTableViewCellViewModel {
-    let investmentProgram: InvestmentProgramDashboard
+    let investmentProgram: InvestmentProgramDashboardInvestor
     weak var reloadDataProtocol: ReloadDataProtocol?
 }
 

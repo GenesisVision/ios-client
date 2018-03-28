@@ -276,7 +276,7 @@ extension ProgramListViewController {
             return UIImage(named: imageName)
         }
         
-        return UIImage.placeholder
+        return UIImage.noDataPlaceholder
     }
     
     override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {

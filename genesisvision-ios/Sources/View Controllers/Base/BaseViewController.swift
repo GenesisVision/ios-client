@@ -112,7 +112,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
     
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return UIImage.placeholder
+        return UIImage.noDataPlaceholder
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

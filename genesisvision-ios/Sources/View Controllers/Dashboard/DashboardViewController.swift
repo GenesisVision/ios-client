@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 
 class DashboardViewController: BaseViewControllerWithTableView {
 
@@ -178,7 +177,7 @@ extension DashboardViewController {
             return UIImage(named: imageName)
         }
         
-        return UIImage.placeholder
+        return UIImage.noDataPlaceholder
     }
     
     override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {

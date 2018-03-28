@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 import TTRangeSlider
 
 class WalletFilterViewController: BaseViewControllerWithTableView {

@@ -168,14 +168,14 @@ extension UIViewController {
     
     func showActionSheet(with title: String?,
                          message: String?,
-                         title firstActionTitle: String?,
-                         handler firstHandler: (() -> Void)?,
-                         title secondActionTitle: String? = nil,
-                         handler secondHandler: (() -> Void)? = nil,
-                         title thirdActionTitle: String? = nil,
-                         handler thirdHandler: (() -> Void)? = nil,
-                         title fourthActionTitle: String? = nil,
-                         handler fourthHandler: (() -> Void)? = nil,
+                         firstActionTitle: String?,
+                         firstHandler: (() -> Void)?,
+                         secondActionTitle: String? = nil,
+                         secondHandler: (() -> Void)? = nil,
+                         thirdActionTitle: String? = nil,
+                         thirdHandler: (() -> Void)? = nil,
+                         fourthActionTitle: String? = nil,
+                         fourthHandler: (() -> Void)? = nil,
                          cancelTitle: String?,
                          cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)

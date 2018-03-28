@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol DesignableUITextFieldDelegate: class {
+    func textFieldDidClear()
+}
+
 class DesignableUITextField: UITextField, UITextFieldDelegate {
+    
+    weak var designableTextFieldDelegate: DesignableUITextFieldDelegate?
     
     var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
@@ -91,5 +97,6 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     // MARK: - Private methods
     @objc private func clearClicked(sender: UIButton) {
         text = ""
+        designableTextFieldDelegate?.textFieldDidClear()
     }
 }

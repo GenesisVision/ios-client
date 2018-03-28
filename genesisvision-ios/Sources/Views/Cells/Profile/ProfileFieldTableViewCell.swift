@@ -19,6 +19,7 @@ class ProfileFieldTableViewCell: UITableViewCell {
     @IBOutlet var textField: DesignableUITextField! {
         didSet {
             textField.setClearButtonWhileEditing()
+            textField.designableTextFieldDelegate = self
         }
     }
     
@@ -32,5 +33,10 @@ class ProfileFieldTableViewCell: UITableViewCell {
     @IBAction func descriptionTextViewChanged(_ sender: UITextField) {
         valueChanged?(sender.text ?? "")
     }
-    
+}
+
+extension ProfileFieldTableViewCell: DesignableUITextFieldDelegate {
+    func textFieldDidClear() {
+        valueChanged?("")
+    }
 }

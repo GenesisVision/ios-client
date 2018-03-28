@@ -74,7 +74,7 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: profileViewController)
             let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
-            profileViewController.viewModel = ProfileViewModel(withRouter: router)
+            profileViewController.viewModel = ProfileViewModel(withRouter: router, textFieldDelegate: profileViewController)
             navigationController.tabBarItem.image = #imageLiteral(resourceName: "img_tabbar_profile_unselected")
             navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "img_tabbar_profile_selected")
             navigationController.tabBarItem.title = "PROFILE"

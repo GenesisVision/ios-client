@@ -88,7 +88,7 @@ extension DashboardViewModel {
     }
     
     func modelsCount() -> Int {
-        return viewModels.count
+        return  viewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -216,7 +216,7 @@ extension DashboardViewModel {
     
     func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
         guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
-                return nil
+            return nil
         }
         
         let investmentProgram = model.investmentProgram

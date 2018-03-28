@@ -16,6 +16,14 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    var dateFormatString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Bundle.main.locale
+        return dateFormatter.string(from: self)
+    }
+    
     func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
         
         let currentCalendar = Calendar.current

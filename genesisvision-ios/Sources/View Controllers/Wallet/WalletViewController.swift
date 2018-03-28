@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 
 class WalletViewController: BaseViewControllerWithTableView {
     
@@ -225,7 +224,7 @@ extension WalletViewController {
             return UIImage(named: imageName)
         }
         
-        return UIImage.placeholder
+        return UIImage.noDataPlaceholder
     }
     
     override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
@@ -244,13 +243,13 @@ extension WalletViewController {
 
 extension WalletViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
-        showActionSheet(with: nil, message: nil, title: "All", handler: { [weak self] in
+        showActionSheet(with: nil, message: nil, firstActionTitle: "All", firstHandler: { [weak self] in
             self?.viewModel.filter?.type = .all
             self?.updateSortHeaderView()
-        }, title: "Internal", handler: { [weak self] in
+        }, secondActionTitle: "Internal", secondHandler: { [weak self] in
             self?.viewModel.filter?.type = ._internal
             self?.updateSortHeaderView()
-        }, title: "External", handler: { [weak self] in
+        }, thirdActionTitle: "External", thirdHandler: { [weak self] in
             self?.viewModel.filter?.type = .external
             self?.updateSortHeaderView()
         }, cancelTitle: "Cancel", cancelHandler: nil)
