@@ -9,7 +9,11 @@
 class RateDataProvider: DataProvider {
     // MARK: - Public methods
     static func getTake(completion: @escaping (_ rateViewModel: RateViewModel?) -> Void) {
-        let requestRate = RequestRate(from: RequestRate.From.gvt, to: RequestRate.To.usd)
+        getTake(from: RequestRate.From.gvt, to: RequestRate.To.usd, completion: completion)
+    }
+    
+    static func getTake(from: RequestRate.From, to: RequestRate.To, completion: @escaping (_ rateViewModel: RateViewModel?) -> Void) {
+        let requestRate = RequestRate(from: from, to: to)
         
         getTake(with: requestRate) { (viewModel) in
             completion(viewModel)

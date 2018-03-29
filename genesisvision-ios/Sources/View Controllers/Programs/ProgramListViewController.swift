@@ -281,7 +281,7 @@ extension ProgramListViewController {
         return UIImage.noDataPlaceholder
     }
     
-    override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = viewModel.noDataButtonTitle()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
                           NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]

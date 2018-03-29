@@ -36,6 +36,10 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.managerLabel.text = "by " + username
         }
         
+        if let currency = investmentProgramDetails.currency {
+            cell.currencyLabel.text = currency.rawValue.uppercased()
+        }
+        
         cell.delegate = delegate
     }
 }

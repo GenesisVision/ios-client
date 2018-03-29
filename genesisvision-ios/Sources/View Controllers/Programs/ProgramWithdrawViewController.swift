@@ -13,17 +13,18 @@ class ProgramWithdrawViewController: BaseViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - Labels
-    @IBOutlet var availableFundsLabel: UILabel!  {
+    @IBOutlet var balanceLabel: UILabel!  {
         didSet {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllTokensButtonAction))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllButtonAction))
             tapGesture.numberOfTapsRequired = 1
-            availableFundsLabel.isUserInteractionEnabled = true
-            availableFundsLabel.addGestureRecognizer(tapGesture)
+            balanceLabel.isUserInteractionEnabled = true
+            balanceLabel.addGestureRecognizer(tapGesture)
         }
     }
     
-    @IBOutlet var availableFundsCurrencyLabel: UILabel!
-    @IBOutlet var amountLabel: UILabel! {
+    @IBOutlet var balanceCurrencyLabel: UILabel!
+
+    @IBOutlet var amountLabel: AmountLabel! {
         didSet {
             amountLabel.font = UIFont.getFont(.light, size: 72)
         }
@@ -43,12 +44,11 @@ class ProgramWithdrawViewController: BaseViewController {
     // MARK: - Variables
     var enteredAmount: Double = 0.0 {
         didSet {
-            if let investedTokens = viewModel.investedTokens {
-                withdrawButton(enable: enteredAmount > 0.0 && enteredAmount <= investedTokens)
-            }
+            withdrawButton(enable: enteredAmount > 0.0 && enteredAmount <= investedTokens)
         }
     }
     
+    var investedTokens: Double = 0.0
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -73,13 +73,18 @@ class ProgramWithdrawViewController: BaseViewController {
         
         withdrawButton(enable: false)
         
-        guard let investedTokens = viewModel.investedTokens else { return }
-        availableFundsLabel.text = investedTokens.toString()
+        if let investedTokens = viewModel.investedTokens {
+            self.investedTokens = investedTokens
+            balanceLabel.text = self.investedTokens.toString()
+        }
+        
+        self.balanceCurrencyLabel.text = "tokens"
+        self.amountCurrencyLabel.text = "tokens"
     }
     
     private func withdrawButton(enable: Bool) {
         withdrawButton.isUserInteractionEnabled = enable
-        withdrawButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.gray
+        withdrawButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
     }
     
     private func withdrawMethod() {
@@ -104,14 +109,9 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
-    @objc private func copyAllTokensButtonAction() {
-        guard let investedTokens = viewModel.investedTokens else { return }
-        
-        amountLabel.text = investedTokens.toString()
-        
-        if let value = amountLabel.text?.doubleValue {
-            enteredAmount = value
-        }
+    @objc private func copyAllButtonAction() {
+        enteredAmount = investedTokens
+        amountLabel.text = investedTokens.toString(withoutFormatter: true)
     }
     
     // MARK: - Actions

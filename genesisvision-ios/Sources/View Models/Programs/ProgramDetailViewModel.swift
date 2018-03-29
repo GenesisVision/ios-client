@@ -35,7 +35,7 @@ final class ProgramDetailViewModel {
                 let isInvestEnable = investmentProgramDetails?.isInvestEnable,
                 let isWithdrawEnable = investmentProgramDetails?.isWithdrawEnable,
                 let hasNewRequests = investmentProgramDetails?.hasNewRequests {
-                viewProperties = ProgramDetailViewProperties(isHistoryEnable: isHistoryEnable,
+                self.viewProperties = ProgramDetailViewProperties(isHistoryEnable: isHistoryEnable,
                                                              isInvestEnable: isInvestEnable,
                                                              isWithdrawEnable: isWithdrawEnable,
                                                              hasNewRequests: hasNewRequests)
@@ -117,13 +117,13 @@ final class ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let investmentProgramId = investmentProgramId else { return }
-        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
+        guard let investmentProgramId = investmentProgramId, let currency = investmentProgramDetails?.currency else { return }
+        router.show(routeType: .invest(investmentProgramId: investmentProgramId, currency: currency.rawValue))
     }
     
     func withdraw() {
-        guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens else { return }
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens))
+        guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens, let currency = investmentProgramDetails?.currency else { return }
+        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency.rawValue))
     }
     
     func showHistory() {

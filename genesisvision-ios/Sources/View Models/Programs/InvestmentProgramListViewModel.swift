@@ -39,13 +39,13 @@ final class InvestmentProgramListViewModel {
     }
 
     var filter: InvestmentProgramsFilter?
-    
+    private var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
     var searchText = ""
     var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
     
-    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc, .byTitleAsk, .byTitleDesc]
+    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsk, .byTitleDesc, .byTitleAsk]
     
-    var sortingValues: [String] = ["level ⇡", "level ⇣", "orders ⇡", "orders ⇣", "profit ⇡", "profit ⇣", "end of period ⇡", "end of period ⇣", "title ⇡", "title ⇣"]
+    var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
     
     struct SortingList {
         var sortingValue: String
@@ -63,7 +63,7 @@ final class InvestmentProgramListViewModel {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
             
-        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: .byOrdersAsc, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
+        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
         
         state = isLogin() ? .programList : .programListWithSignIn
     }

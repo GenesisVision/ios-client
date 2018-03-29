@@ -7,7 +7,7 @@
 //
 
 enum DashboardRouteType {
-    case showProgramDetail(investmentProgramId: String), invest(investmentProgramId: String), withdraw(investmentProgramId: String, investedTokens: Double), programList
+    case showProgramDetail(investmentProgramId: String), invest(investmentProgramId: String, currency: String), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), programList
 }
 
 class DashboardRouter: Router {
@@ -17,10 +17,10 @@ class DashboardRouter: Router {
         switch routeType {
         case .showProgramDetail(let investmentProgramId):
             showProgramDetail(with: investmentProgramId)
-        case .invest(let investmentProgramId):
-            invest(with: investmentProgramId)
-        case .withdraw(let investmentProgramId, let investedTokens):
-            withdraw(with: investmentProgramId, investedTokens: investedTokens)
+        case .invest(let investmentProgramId, let currency):
+            invest(with: investmentProgramId, currency: currency)
+        case .withdraw(let investmentProgramId, let investedTokens, let currency):
+            withdraw(with: investmentProgramId, investedTokens: investedTokens, currency: currency)
         case .programList:
             showProgramList()
         }

@@ -25,17 +25,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Sort by profit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYB-jK-eXS">
-                        <rect key="frame" x="8" y="16" width="304" height="34.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
                         <color key="textColor" red="0.80000000000000004" green="0.83529411764705885" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="YYB-jK-eXS" secondAttribute="trailing" constant="8" id="1Lk-Be-5Mj"/>
-                    <constraint firstItem="YYB-jK-eXS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8RY-sP-UB3"/>
-                    <constraint firstItem="YYB-jK-eXS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="IW9-nQ-TyB"/>
-                    <constraint firstAttribute="bottom" secondItem="YYB-jK-eXS" secondAttribute="bottom" constant="16" id="ktm-r6-MAR"/>
+                    <constraint firstAttribute="trailing" secondItem="YYB-jK-eXS" secondAttribute="trailing" id="1Lk-Be-5Mj"/>
+                    <constraint firstItem="YYB-jK-eXS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8RY-sP-UB3"/>
+                    <constraint firstItem="YYB-jK-eXS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IW9-nQ-TyB"/>
+                    <constraint firstAttribute="bottom" secondItem="YYB-jK-eXS" secondAttribute="bottom" id="ktm-r6-MAR"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

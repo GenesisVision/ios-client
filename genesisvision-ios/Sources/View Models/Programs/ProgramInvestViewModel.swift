@@ -12,54 +12,68 @@ final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
     var investmentProgramId: String?
+    
     private var rate: Double = 0.0
     private var balance: Double = 0.0 {
         didSet {
-            self.usdBalance = balance * self.rate
+            self.exchangedBalance = balance * self.rate
         }
     }
-    private var usdBalance: Double = 0.0
+    private var exchangedBalance: Double = 0.0
+    var currency: String = "GVT"
     
     private weak var programDetailProtocol: ProgramDetailProtocol?
     
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, currency: String, programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
+        self.currency = currency
         self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods
-    func getBalanceText(completion: @escaping (_ balance: String, _ usdBalance: String) -> Void) {
-        AuthManager.getSavedRate { [weak self] (value) in
-            self?.rate = value
+    func getBalance(completion: @escaping (_ balance: Double, _ exchangedBalance: Double) -> Void) {
+        let toCurrency = RequestRate.To(rawValue: self.currency)
+        
+        RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
+            if viewModel != nil, let rate = viewModel?.rate {
+                self.rate = rate
+            }
             
             AuthManager.getBalance { [weak self] (value) in
                 self?.balance = value
-                
-                if let balanceText = self?.balance.toString(), let usdBalanceText = self?.usdBalance.toString(currency: true) {
-                    completion(balanceText, usdBalanceText)
+                if let balance = self?.balance, let exchangedBalance = self?.exchangedBalance {
+                    completion(balance, exchangedBalance)
                 }
             }
-        }
+        })
     }
     
-    func getUSDAmountText(amount: Double, completion: @escaping (_ usdAmount: String) -> Void) {
+    func getExchangedAmount(amount: Double, completion: @escaping (_ exchangedAmount: Double) -> Void) {
+        guard amount > 0 else {
+            return completion(0.0)
+        }
         guard self.rate > 0 else {
-            AuthManager.getSavedRate { [weak self] (value) in
-                self?.rate = value
+            let toCurrency = RequestRate.To(rawValue: self.currency)
+            
+            RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
+                if viewModel != nil, let rate = viewModel?.rate {
+                    self.rate = rate
+                }
                 
-                let amountWithRate = amount * value
-                completion(amountWithRate.toString(currency: true))
-            }
+                let exchangedBalance = amount * self.rate
+                
+                completion(exchangedBalance)
+            })
             
             return
         }
         
-        let amountWithRate = amount * self.rate
-        completion(amountWithRate.toString(currency: true))
+        let exchangedBalance = amount * self.rate
+        completion(exchangedBalance)
     }
     
     // MARK: - Navigation

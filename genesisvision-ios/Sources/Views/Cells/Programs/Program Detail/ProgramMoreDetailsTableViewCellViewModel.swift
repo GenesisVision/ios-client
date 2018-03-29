@@ -20,7 +20,8 @@ extension ProgramMoreDetailsTableViewCellViewModel: CellViewModel {
                                          feeSuccess: investmentProgramDetails.feeSuccess,
                                          feeManagement: investmentProgramDetails.feeManagement,
                                          trades: investmentProgramDetails.tradesCount,
-                                         investedTokens: investmentProgramDetails.investedTokens,
+                                         ownBalance: investmentProgramDetails.ownBalance,
+                                         balance: investmentProgramDetails.balance,
                                          isEnable: investmentProgramDetails.isEnabled ?? false,
                                          reloadDataProtocol: reloadDataProtocol)
     }

@@ -49,6 +49,8 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: ProgramRequestsViewModel.cellModelsForRegistration)
         
+        setupNavigationBar()
+        
         setupPullToRefresh()
     }
     

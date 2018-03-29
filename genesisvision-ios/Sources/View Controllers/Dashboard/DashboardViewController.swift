@@ -186,7 +186,7 @@ extension DashboardViewController {
         viewModel.showProgramList()
     }
     
-    override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = viewModel.noDataButtonTitle()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
                           NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]

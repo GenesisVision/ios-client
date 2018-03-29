@@ -42,7 +42,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             let avgProfit = avgProfit,
             let totalProfit = totalProfit {
             
-            let avgProfitValue = avgProfit.rounded(toPlaces: 4)
+            let avgProfitValue = avgProfit.rounded(toPlaces: 2)
             let totalProfitValue = totalProfit.rounded(toPlaces: 4)
             
             investorsValueLabel.text = investorsCount.toString()

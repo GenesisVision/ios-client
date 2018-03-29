@@ -57,6 +57,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.bounces = false
         tableView.registerNibs(for: ProgramFilterViewModel.cellModelsForRegistration)
     }
     
@@ -114,8 +115,6 @@ extension ProgramFilterViewController: TTRangeSliderDelegate {
         switch type {
         case .level:
             viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
-        case .totalProfit:
-            viewModel.updateFilter(profitTotalMin: Int(selectedMinimum), profitTotalMax: Int(selectedMaximum))
         case .avgProfit:
             viewModel.updateFilter(profitAvgPercentMin: Int(selectedMinimum), profitAvgPercentMax: Int(selectedMaximum))
         }

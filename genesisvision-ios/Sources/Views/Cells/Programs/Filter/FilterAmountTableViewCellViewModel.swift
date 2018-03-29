@@ -14,18 +14,12 @@ struct AmountTitles {
     var subtitle: String
 }
 
-enum AmountType: Int {
-    case level
-    case totalProfit
-    case averageProfit
-}
-
 struct FilterAmountTableViewCellViewModel {
     var minValue: Int?
     var maxValue: Int?
     
     var amountTitles: AmountTitles
-    var amountType: AmountType
+    var amountType: SliderType
     
     var selectedMinValue: Int?
     var selectedMaxValue: Int?

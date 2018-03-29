@@ -29,7 +29,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="KJHKJ" placeholder="JKHKJH" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XVf-np-JYJ" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="45" width="479" height="22.5"/>
+                        <rect key="frame" x="20" y="45" width="451" height="22.5"/>
                         <color key="textColor" red="0.10588235294117647" green="0.30980392156862746" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="18"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
@@ -56,7 +56,7 @@
                     <constraint firstAttribute="bottom" secondItem="XVf-np-JYJ" secondAttribute="bottom" constant="16" id="3Rc-vD-soi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="6iv-TH-Ckk"/>
                     <constraint firstItem="E2K-nM-fuK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cmg-9B-fpA"/>
-                    <constraint firstItem="XVf-np-JYJ" firstAttribute="trailing" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="QkJ-5t-Spq"/>
+                    <constraint firstItem="RbV-Ux-vYM" firstAttribute="leading" secondItem="XVf-np-JYJ" secondAttribute="trailing" constant="8" id="K9m-Dx-JOm"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="top" secondItem="E2K-nM-fuK" secondAttribute="bottom" constant="8" id="TEV-ap-LAA"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="leading" secondItem="E2K-nM-fuK" secondAttribute="leading" id="UFo-RK-l8N"/>
                     <constraint firstItem="RbV-Ux-vYM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gsG-te-J0I"/>

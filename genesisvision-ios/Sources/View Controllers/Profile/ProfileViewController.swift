@@ -101,7 +101,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     override func pullToRefresh() {
         super.pullToRefresh()
-        
+ 
         fetch()
     }
     
@@ -109,12 +109,14 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         navigationItem.leftBarButtonItem = saveProfileButton
         navigationItem.rightBarButtonItem = cancelEditProfileButton
         headerView.profileState = viewModel.profileState
+        tableView.bounces = false
     }
     
     private func showProfileStateAction() {
         navigationItem.leftBarButtonItem = editProfileButton
         navigationItem.rightBarButtonItem = signOutButton
         headerView.profileState = viewModel.profileState
+        tableView.bounces = true
     }
     
     private func takePhoto(type: UIImagePickerControllerSourceType) {
@@ -132,24 +134,27 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     private func takePhoto() {
         view.endEditing(true)
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.view.tintColor = UIColor.primary
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.primary
         
-        alertController.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] (action) in
+        alert.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] (action) in
             DispatchQueue.main.async {
                 self?.takePhoto(type: .camera)
             }
         }))
         
-        alertController.addAction(UIAlertAction(title: "Фотогалерея", style: .default, handler: { [weak self] (action) in
+        alert.addAction(UIAlertAction(title: "Фотогалерея", style: .default, handler: { [weak self] (action) in
             DispatchQueue.main.async {
                 self?.takePhoto(type: .photoLibrary)
             }
         }))
         
-        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler:nil))
         
-        present(alertController, animated: true, completion: nil)
+        alert.popoverPresentationController?.sourceView = headerView.chooseProfilePhotoButton
+        alert.popoverPresentationController?.sourceRect = headerView.chooseProfilePhotoButton.bounds
+        
+        present(alert, animated: true, completion: nil)
     }
     
     private func update(gender value: Bool) {
@@ -182,6 +187,12 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         alert.addAction(femaleAction)
         alert.addAction(cancelAction)
         
+        let rowIndex = viewModel.numberOfRows(in: 0)
+        if let cell = tableView.cellForRow(at: IndexPath(row: rowIndex - 1, section: 0)) {
+            alert.popoverPresentationController?.sourceView = cell
+            alert.popoverPresentationController?.sourceRect = cell.bounds
+        }
+        
         present(alert, animated: true, completion: nil)
     }
     
@@ -190,7 +201,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         alert.view.tintColor = UIColor.primary
         
         var components = DateComponents()
-        components.year = -18
+        components.year = -Constants.Profile.minYear
         let maxDate = Calendar.current.date(byAdding: components, to: Date())
 
         alert.addDatePicker(mode: .date, date: self.viewModel.getBirthdate(), minimumDate: nil, maximumDate: maxDate) { [weak self] date in
@@ -212,10 +223,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     // MARK: - Actions
     @IBAction func editProfileButtonAction(_ sender: UIButton) {
         hideKeyboard()
-        showProgressHUD()
         
         viewModel.editProfile { [weak self] (result) in
-            self?.hideHUD()
             switch result {
             case .success:
                 self?.editProfileStateAction()
@@ -227,6 +236,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     @IBAction func cancelEditProfileButtonAction(_ sender: UIButton) {
+        hideKeyboard()
+        
         viewModel.cancelEditProfile { [weak self] (result) in
             switch result {
             case .success:
@@ -247,8 +258,10 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             
             switch result {
             case .success:
-                self?.showProfileStateAction()
-                self?.reloadData()
+                self?.showSuccessHUD(completion: { (success) in
+                    self?.showProfileStateAction()
+                    self?.reloadData()
+                })
             case .failure(let reason):
                 self?.showErrorHUD(subtitle: reason)
             }
@@ -256,7 +269,9 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {
-        viewModel.signOut()
+        showAlertWithTitle(title: nil, message: "Log Out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
+            self?.viewModel.signOut()
+        }, cancelHandler: nil)
     }
 }
 

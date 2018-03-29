@@ -17,7 +17,6 @@ class SignInViewController: BaseViewController {
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setBottomLine()
             emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
@@ -26,7 +25,6 @@ class SignInViewController: BaseViewController {
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setBottomLine()
             passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
@@ -50,9 +48,16 @@ class SignInViewController: BaseViewController {
             emailTextField.text = "george@genesis.vision"
             passwordTextField.text = "qwerty"
         #endif
+        
+        setupUI()
     }
     
     // MARK: - Private methods
+    private func setupUI() {
+        emailTextField.setBottomLine()
+        passwordTextField.setBottomLine()
+    }
+    
     private func sighInMethod() {
         hideKeyboard()
         showProgressHUD()

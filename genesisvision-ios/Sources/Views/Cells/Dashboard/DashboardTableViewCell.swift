@@ -19,6 +19,7 @@ class DashboardTableViewCell: UITableViewCell {
         didSet {
             updatePeriodLeftValueLabel()
             contentView.backgroundColor = isEnable ? UIColor.Background.main : UIColor.Background.gray
+            chartView.backgroundColor = isEnable ? UIColor.Background.main : UIColor.Background.gray
         }
     }
     
@@ -31,8 +32,8 @@ class DashboardTableViewCell: UITableViewCell {
     
     @IBOutlet var chartView: ChartView! {
         didSet {
-            chartView.backgroundColor = UIColor.Background.main
             chartView.isUserInteractionEnabled = false
+            chartView.backgroundColor = UIColor.Background.main
         }
     }
     
@@ -54,6 +55,12 @@ class DashboardTableViewCell: UITableViewCell {
     
     @IBOutlet var periodLeftValueLabel: UILabel!
     @IBOutlet var periodLeftTitleLabel: UILabel!
+    
+    @IBOutlet var currencyLabel: CurrencyLabel! {
+        didSet {
+            currencyLabel.textColor = UIColor.Font.white
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

@@ -21,6 +21,7 @@ class DetailHeaderTableViewCell: UITableViewCell {
     @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var managerLabel: UILabel!
+    @IBOutlet var currencyLabel: UILabel!
     
     // MARK: - Buttons
     @IBOutlet weak var descriptionButton: UIButton!

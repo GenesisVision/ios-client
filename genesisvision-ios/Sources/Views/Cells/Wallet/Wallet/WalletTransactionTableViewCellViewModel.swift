@@ -32,7 +32,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 arithmeticSign = ""
             case .withdrawFromProgram:
                 text = "Withdraw From Program"
-                textColor = UIColor.Font.green
+                textColor = UIColor.Font.primary
                 arithmeticSign = "+"
             case .profitFromProgram:
                 text = "Profit From Program"
@@ -40,22 +40,22 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                     textColor = UIColor.Font.medium
                     arithmeticSign = ""
                 } else if amount > 0 {
-                    textColor = UIColor.Font.green
+                    textColor = UIColor.Font.primary
                     arithmeticSign = "+"
                 } else {
                     textColor = UIColor.Font.red
                 }
             case .cancelInvestmentRequest:
                 text = "Cancel Investment Request"
-                textColor = UIColor.Font.green
+                textColor = UIColor.Font.primary
                 arithmeticSign = "+"
             case .partialInvestmentExecutionRefund:
                 text = "Partial Investment Execution Refund"
-                textColor = UIColor.Font.green
+                textColor = UIColor.Font.primary
                 arithmeticSign = "+"
             case .deposit:
                 text = "Deposit"
-                textColor = UIColor.Font.green
+                textColor = UIColor.Font.primary
                 arithmeticSign = "+"
             case .withdraw:
                 text = "Withdraw"
@@ -63,7 +63,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 arithmeticSign = "-"
             case .closingProgramRefund:
                 text = "Closing Program Refund"
-                textColor = UIColor.Font.green
+                textColor = UIColor.Font.primary
                 arithmeticSign = "+"
             }
             

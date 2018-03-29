@@ -32,15 +32,15 @@ final class DashboardViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = .byProfitAsc
+    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
     var viewModels = [DashboardTableViewCellViewModel]()
     
-    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byLevelAsc, .byLevelDesc, .byOrdersAsc, .byOrdersDesc, .byProfitAsc, .byProfitDesc, .byEndOfPeriodAsk, .byEndOfPeriodDesc, .byTitleAsk, .byTitleDesc]
+    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsk, .byTitleDesc, .byTitleAsk]
     
-    var sortingValues: [String] = ["level ⇡", "level ⇣", "orders ⇡", "orders ⇣", "profit ⇡", "profit ⇣", "end of period ⇡", "end of period ⇣", "title ⇡", "title ⇣"]
+    var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
     
     struct SortingList {
         var sortingValue: String
@@ -150,14 +150,6 @@ extension DashboardViewModel {
         guard let investmentProgramId = investmentProgram.id else { return }
         
         router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
-    }
-    
-    func invest(with investmentProgramId: String) {
-        router.show(routeType: .invest(investmentProgramId: investmentProgramId))
-    }
-    
-    func withdraw(with investmentProgramId: String, investedTokens: Double) {
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens))
     }
     
     func showProgramList() {

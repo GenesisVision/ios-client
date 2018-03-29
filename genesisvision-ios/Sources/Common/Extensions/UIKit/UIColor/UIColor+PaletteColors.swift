@@ -12,7 +12,7 @@ extension UIColor {
     private struct Common {
         static var primary: UIColor { return #colorLiteral(red: 0, green: 0.7411764706, blue: 0.6862745098, alpha: 1) }                                 //00BDAF
         static var blue: UIColor { return #colorLiteral(red: 0.2235294118, green: 0.6549019608, blue: 0.8588235294, alpha: 1) }                                    //39a7db
-        static var darkBlue: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                //546E7A
+        static var darkBlue: UIColor { return #colorLiteral(red: 0.1568627451, green: 0.462745098, blue: 0.5529411765, alpha: 1) }                                //28768d
         static var veryDarkBlue: UIColor { return  #colorLiteral(red: 0.1058823529, green: 0.3098039216, blue: 0.3921568627, alpha: 1) }                           //1B4F64
         
         static var dark: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                    //546e7a
@@ -21,10 +21,9 @@ extension UIColor {
         static var red: UIColor { return #colorLiteral(red: 0.8745098039, green: 0.09411764706, blue: 0.3960784314, alpha: 1) }                                     //df1865
         static var black: UIColor { return #colorLiteral(red: 0.1254901961, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                   //f44336
         
-//        static var lightGray: UIColor { return #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1) }                               //cfd8dc
         static var darkGray: UIColor { return #colorLiteral(red: 0.6666666667, green: 0.7215686275, blue: 0.7529411765, alpha: 1) }                                //aab8c0
         static var gray: UIColor { return #colorLiteral(red: 0.8117647059, green: 0.8352941176, blue: 0.8549019608, alpha: 1) }                                    //cfd5da
-        static var placeholder: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                         //e3ebed
+        static var placeholder: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                              //e3ebed
         static var textFieldLineColor: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                      //ccd5d4
         
         static var lightGray: UIColor { return #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.9921568627, alpha: 1) }                               //fcfdfd
@@ -32,7 +31,6 @@ extension UIColor {
     }
     
     static var primary: UIColor { return Common.primary }
-    static var darkPrimary: UIColor { return Common.darkBlue }
     
     struct Background {
         static var main: UIColor { return Common.white }

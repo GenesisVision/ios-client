@@ -11,6 +11,6 @@ import Foundation
 extension Double {
     func rounded(toPlaces places: UInt) -> Double {
         let decimalValue = pow(10.0, Double(places))
-        return (self * decimalValue) / decimalValue
+        return (self * decimalValue).rounded() / decimalValue
     }
 }

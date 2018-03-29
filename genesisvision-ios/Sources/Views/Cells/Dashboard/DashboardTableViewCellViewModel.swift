@@ -32,7 +32,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let managerName = investmentProgram.manager?.username {
-            cell.managerNameLabel.text = managerName
+            cell.managerNameLabel.text = "by " + managerName
         }
         
         if let tokensCount = investmentProgram.investedTokens {
@@ -45,6 +45,10 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.profitValueLabel.textColor = profit >= 0 ? UIColor.Font.dark : UIColor.Font.red
             cell.profitTitleLabel.text = profit >= 0 ? "PROFIT" : "LOSS"
             cell.profitTitleLabel.textColor = profit >= 0 ? UIColor.Font.primary : UIColor.Font.red
+        }
+        
+        if let currency = investmentProgram.currency {
+            cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
         if let investmentProgramId = investmentProgram.id?.uuidString {

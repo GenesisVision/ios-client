@@ -20,25 +20,50 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet var balanceLabel: UILabel!
-    @IBOutlet var balanceCurrencyLabel: UILabel!
-    @IBOutlet var usdBalanceLabel: UILabel!
-    @IBOutlet var amountLabel: AmountLabel! 
+    @IBOutlet var balanceLabel: UILabel! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllButtonAction))
+            tapGesture.numberOfTapsRequired = 1
+            balanceLabel.isUserInteractionEnabled = true
+            balanceLabel.addGestureRecognizer(tapGesture)
+        }
+    }
     
+    @IBOutlet var balanceCurrencyLabel: UILabel!
+    @IBOutlet var exchangedBalanceLabel: UILabel!
+    @IBOutlet var exchangedBalanceCurrencyLabel: UILabel!
+    
+    @IBOutlet var amountLabel: AmountLabel! {
+        didSet {
+            amountLabel.font = UIFont.getFont(.light, size: 72)
+        }
+    }
     @IBOutlet var amountCurrencyLabel: UILabel!
-    @IBOutlet var usdAmountLabel: UILabel!
+    @IBOutlet var exchangedAmountLabel: UILabel!
+    @IBOutlet var exchangedAmountCurrencyLabel: UILabel!
     
     // MARK: - Buttons
     @IBOutlet var investButton: UIButton!
     
     // MARK: - Variables
+    var balance: Double = 0.0 {
+        didSet {
+            self.balanceLabel.text = balance.toString()
+        }
+    }
+    var exchangedBalance: Double = 0.0 {
+        didSet {
+            self.exchangedBalanceLabel.text = exchangedBalance.toString()
+        }
+    }
+    
     var enteredAmount: Double = 0.0 {
         didSet {
-            viewModel.getUSDAmountText(amount: enteredAmount) { [weak self] (usdAmountValue) in
-                self?.usdAmountLabel.text = usdAmountValue
+            viewModel.getExchangedAmount(amount: enteredAmount) { [weak self] (exchangedAmountValue) in
+                self?.exchangedAmountLabel.text = exchangedAmountValue.toString()
             }
             
-            investButton(enable: enteredAmount > 0)
+            investButton(enable: enteredAmount > 0 && enteredAmount <= balance)
         }
     }
     
@@ -64,16 +89,21 @@ class ProgramInvestViewController: BaseViewController {
         setupNavigationBar(with: .primary)
         
         investButton(enable: false)
-        
-        viewModel.getBalanceText { [weak self] (balanceText, usdBalanceText) in
-            self?.balanceLabel.text = balanceText
-            self?.usdBalanceLabel.text = usdBalanceText
+
+        viewModel.getBalance { [weak self] (balance, exchangedBalance) in
+            self?.balance = balance
+            self?.exchangedBalance = exchangedBalance
         }
+        
+        self.balanceCurrencyLabel.text = "GVT"
+        self.exchangedBalanceCurrencyLabel.text = viewModel.currency
+        self.amountCurrencyLabel.text = "GVT"
+        self.exchangedAmountCurrencyLabel.text = viewModel.currency
     }
     
     private func investButton(enable: Bool) {
         investButton.isUserInteractionEnabled = enable
-        investButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.gray
+        investButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
     }
     
     private func investMethod() {
@@ -96,6 +126,11 @@ class ProgramInvestViewController: BaseViewController {
                 self?.showErrorHUD(subtitle: reason)
             }
         }
+    }
+    
+    @objc private func copyAllButtonAction() {        
+        enteredAmount = balance
+        amountLabel.text = balance.toString(withoutFormatter: true)
     }
     
     // MARK: - Actions

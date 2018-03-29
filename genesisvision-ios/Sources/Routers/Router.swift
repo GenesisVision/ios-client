@@ -227,23 +227,23 @@ extension Router {
         return viewController
     }
     
-    func invest(with investmentProgramId: String) {
+    func invest(with investmentProgramId: String, currency: String) {
         guard let vc = currentController() else { return }
         
         guard let viewController = ProgramInvestViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc as? ProgramDetailProtocol)
+        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with investmentProgramId: String, investedTokens: Double) {
+    func withdraw(with investmentProgramId: String, investedTokens: Double, currency: String) {
         guard let vc = currentController() else { return }
         
         guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
         let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, investedTokens: investedTokens, programDetailProtocol: vc as? ProgramDetailProtocol)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

@@ -16,7 +16,11 @@ extension DashboardHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardHeaderTableViewCell) {
         
         if let investedAmount = investorDashboard.investedAmount {
-            cell.investedAmountLabel.text = investedAmount.toString()
+            cell.investedAmountLabel.text = investedAmount.rounded(toPlaces: 2).toString()
+        }
+        
+        if let profitFromPrograms = investorDashboard.profitFromPrograms {
+            cell.profitFromProgramsLabel.text = profitFromPrograms.rounded(toPlaces: 4).toString()
         }
     }
 }

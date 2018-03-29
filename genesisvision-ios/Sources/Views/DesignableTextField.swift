@@ -42,6 +42,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     }
     
     func setBottomLine(borderColor: UIColor? = UIColor.TextField.line) {
+        layoutIfNeeded()
+        
         borderStyle = UITextBorderStyle.none
         backgroundColor = UIColor.clear
         

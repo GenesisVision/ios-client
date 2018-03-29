@@ -43,6 +43,8 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        setupNavigationBar()
+        
         showProgressHUD()
         fetch()
     }

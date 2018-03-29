@@ -14,6 +14,16 @@ final class ProgramWithdrawViewModel {
     var investmentProgramId: String?
     var investedTokens: Double?
     
+    private var rate: Double = 0.0
+    private var balance: Double = 0.0 {
+        didSet {
+            self.exchangedBalance = balance * self.rate
+        }
+    }
+    
+    private var exchangedBalance: Double = 0.0
+    var currency: String = "GVT"
+    
     private weak var programDetailProtocol: ProgramDetailProtocol?
     
     private var router: ProgramWithdrawRouter!
@@ -22,14 +32,17 @@ final class ProgramWithdrawViewModel {
     init(withRouter router: ProgramWithdrawRouter,
          investmentProgramId: String,
          investedTokens: Double,
+         currency: String,
          programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.investedTokens = investedTokens
+        self.currency = currency
         self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods
+    
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
         apiWithdraw(with: amount, completion: completion)

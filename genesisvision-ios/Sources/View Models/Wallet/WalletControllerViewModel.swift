@@ -123,7 +123,7 @@ extension WalletControllerViewModel {
 
     // MARK: - Private methods
     private func setup() {
-        filter = TransactionsFilter(investmentProgramId: nil, type: .all, skip: skip, take: take)
+        filter = TransactionsFilter(investmentProgramId: nil, type: Constants.Filters.walletModelTypeDefault, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }

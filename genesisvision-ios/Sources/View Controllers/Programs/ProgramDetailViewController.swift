@@ -57,13 +57,15 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        showProgressHUD()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupNavigationBar(with: .gray)
+        
+        setup()
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -85,6 +87,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         title = viewModel.title
         
         guard let viewProperties = viewModel.viewProperties else { return }
+        
         historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
         
@@ -132,6 +135,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
+            self.setupUI()
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }

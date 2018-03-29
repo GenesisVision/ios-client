@@ -17,7 +17,6 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setBottomLine()
             emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
@@ -25,7 +24,6 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setBottomLine()
             passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
@@ -33,7 +31,6 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
         didSet {
             confirmPasswordTextField.setClearButtonWhileEditing()
-            confirmPasswordTextField.setBottomLine()
             confirmPasswordTextField.setLeftImageView()
             confirmPasswordTextField.delegate = self
         }
@@ -57,9 +54,18 @@ class SignUpViewController: BaseViewController {
             passwordTextField.text = "qwerty"
             confirmPasswordTextField.text = "qwerty"
         #endif
+        
+        setupUI()
     }
 
     // MARK: - Private methods
+    private func setupUI() {
+        emailTextField.setBottomLine()
+        passwordTextField.setBottomLine()
+        confirmPasswordTextField.setBottomLine()
+    }
+    
+    
     private func sighUpMethod() {
         hideKeyboard()
         showProgressHUD()

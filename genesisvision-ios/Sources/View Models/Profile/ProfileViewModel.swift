@@ -295,29 +295,27 @@ final class ProfileViewModel {
     }
     
     private func setupCellViewModel() {
-        if let profileModel = profileModel {
-            var editableFields: [EditableField] = []
+        var editableFields: [EditableField] = []
+        
+        FieldType.allValues.forEach { (type) in
+            let fields = getFields()
+            let key = type.rawValue
             
-            FieldType.allValues.forEach { (type) in
-                let fields = getFields()
-                let key = type.rawValue
-                
-                let text = fields[type] ?? ""
-                let placeholder = key.capitalized
-                let editable = getEditable(for: type)
-                let selectable = getSelectable(for: type)
-                let keyboardType = getKeyboardTypes(for: type)
-                let textContentType = getTextContentTypes(for: type)
-                
-                let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, selectable: selectable, type: type, keyboardType: keyboardType, textContentType: textContentType, isValid: { (text) -> Bool in
-                    return text.count > 1
-                })
-                
-                editableFields.append(editableField)
-            }
+            let text = fields[type] ?? ""
+            let placeholder = key.capitalized
+            let editable = getEditable(for: type)
+            let selectable = getSelectable(for: type)
+            let keyboardType = getKeyboardTypes(for: type)
+            let textContentType = getTextContentTypes(for: type)
             
-            self.editableFields = editableFields
+            let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, selectable: selectable, type: type, keyboardType: keyboardType, textContentType: textContentType, isValid: { (text) -> Bool in
+                return text.count > 1
+            })
+            
+            editableFields.append(editableField)
         }
+        
+        self.editableFields = editableFields
     }
     
     var fullName: String {

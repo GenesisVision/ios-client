@@ -19,5 +19,13 @@ class BaseTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let items = tabBar.items {
+            for item in items {
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    item.titlePositionAdjustment = UIOffsetMake(0, -4)
+                }
+            }
+        }
     }
 }

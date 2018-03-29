@@ -236,7 +236,7 @@ extension WalletViewController {
         viewModel.showProgramList()
     }
     
-    override func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let text = viewModel.noDataButtonTitle()
         
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
@@ -279,6 +279,11 @@ extension WalletViewController: SortHeaderViewProtocol {
         alert.addAction(internalAction)
         alert.addAction(externalAction)
         alert.addAction(cancelAction)
+        
+        if let header = tableView.headerView(forSection: 1) {
+            alert.popoverPresentationController?.sourceView = header
+            alert.popoverPresentationController?.sourceRect = header.bounds
+        }
         
         present(alert, animated: true, completion: nil)
     }

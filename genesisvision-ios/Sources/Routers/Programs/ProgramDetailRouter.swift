@@ -7,17 +7,17 @@
 //
 
 enum ProgramDetailRouteType {
-    case invest(investmentProgramId: String), withdraw(investmentProgramId: String, investedTokens: Double), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails)
+    case invest(investmentProgramId: String, currency: String), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails)
 }
 
 class ProgramDetailRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramDetailRouteType) {
         switch routeType {
-        case .invest(let investmentProgramId):
-            invest(with: investmentProgramId)
-        case .withdraw(let investmentProgramId, let investedTokens):
-            withdraw(with: investmentProgramId, investedTokens: investedTokens)
+        case .invest(let investmentProgramId, let currency):
+            invest(with: investmentProgramId, currency: currency)
+        case .withdraw(let investmentProgramId, let investedTokens, let currency):
+            withdraw(with: investmentProgramId, investedTokens: investedTokens, currency: currency)
         case .history(let investmentProgramId):
             history(with: investmentProgramId)
         case .requests(let investmentProgramId):
@@ -42,13 +42,12 @@ class ProgramDetailRouter: Router {
         let router = ProgramDescriptionRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramDescriptionViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
         viewController.viewModel = viewModel
-        let navController = BaseNavigationController(rootViewController: viewController)
 
         guard let topViewController = navigationController?.topViewController else {
             return
         }
         
-        present(viewController: navController, from: topViewController)
+        present(viewController: viewController, from: topViewController)
     }
     
     private func requests(with investmentProgramId: String) {

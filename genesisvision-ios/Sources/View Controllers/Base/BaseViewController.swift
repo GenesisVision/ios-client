@@ -91,7 +91,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 // MARK: - EmptyData
 extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data"
+        let text = ""
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
                           NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
         
@@ -100,15 +100,6 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     
     func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return 40
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = "update".uppercased()
-        
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
     }
     
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
