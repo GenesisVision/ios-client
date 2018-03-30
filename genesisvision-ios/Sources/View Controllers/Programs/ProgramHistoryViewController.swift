@@ -51,7 +51,6 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -71,13 +70,13 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

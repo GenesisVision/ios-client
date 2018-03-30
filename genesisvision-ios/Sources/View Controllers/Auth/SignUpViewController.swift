@@ -71,15 +71,15 @@ class SignUpViewController: BaseViewController {
         showProgressHUD()
         
         viewModel.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { [weak self] (finish) in
                     self?.viewModel.showConfirmationVC()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

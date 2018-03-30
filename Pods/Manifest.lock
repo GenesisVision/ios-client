@@ -27,6 +27,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - PKHUD (5.0.0)
+  - ReachabilitySwift (4.1.0)
   - TextFieldEffects (1.4.0)
   - TTRangeSlider (1.0.5)
 
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
   - PKHUD
+  - ReachabilitySwift
   - TextFieldEffects
   - TTRangeSlider
 
@@ -54,9 +56,10 @@ SPEC CHECKSUMS:
   Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: efe1716a211cc2cffaf4e6ce2ab56a58d26b1215
+PODFILE CHECKSUM: 501145663fc75bddb8f017871989249bdb7fd6cd
 
 COCOAPODS: 1.4.0

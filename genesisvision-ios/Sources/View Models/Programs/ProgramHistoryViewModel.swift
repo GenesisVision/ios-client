@@ -63,7 +63,7 @@ extension ProgramHistoryViewModel {
     
     func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -101,11 +101,11 @@ extension ProgramHistoryViewModel {
         switch dataType {
         case .api:
             guard let investmentProgramId = investmentProgramId,
-                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(reason: nil)) }
+                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             let filter = TransactionsFilter(investmentProgramId: uuid, type: nil, skip: skip, take: take)
             
-            WalletDataProvider.getWalletTransactions(with: filter) { (transactionsViewModel) in
+            WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
                 guard transactionsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -120,7 +120,7 @@ extension ProgramHistoryViewModel {
                 
                 completionSuccess(totalCount, viewModels)
                 completionError(.success)
-            }
+            }, errorCompletion: completionError)
         case .fake:
             break
         }

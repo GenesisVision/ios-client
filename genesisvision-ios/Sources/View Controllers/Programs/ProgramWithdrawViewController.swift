@@ -96,15 +96,15 @@ class ProgramWithdrawViewController: BaseViewController {
         
         showProgressHUD()
         viewModel.withdraw(with: amount) { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (success) in
                     self?.viewModel.goToBack()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

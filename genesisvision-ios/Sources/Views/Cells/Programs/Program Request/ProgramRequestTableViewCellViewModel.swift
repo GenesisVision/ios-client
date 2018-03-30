@@ -26,7 +26,7 @@ extension ProgramRequestTableViewCellViewModel: CellViewModel {
             cell.typeLabel.text = type
         }
         if let amount = request.amount {
-            cell.amountLabel.text = amount.rounded(toPlaces: 4).toString()
+            cell.amountLabel.text = amount.rounded(withType: .gvt).toString()
         }
         if let requestID = request.id?.uuidString {
             cell.requestID = requestID

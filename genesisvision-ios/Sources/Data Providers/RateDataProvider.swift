@@ -8,26 +8,20 @@
 
 class RateDataProvider: DataProvider {
     // MARK: - Public methods
-    static func getTake(completion: @escaping (_ rateViewModel: RateViewModel?) -> Void) {
-        getTake(from: RequestRate.From.gvt, to: RequestRate.To.usd, completion: completion)
+    static func getTake(completion: @escaping (_ rateViewModel: RateViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        getTake(from: RequestRate.From.gvt, to: RequestRate.To.usd, completion: completion, errorCompletion: errorCompletion)
     }
     
-    static func getTake(from: RequestRate.From, to: RequestRate.To, completion: @escaping (_ rateViewModel: RateViewModel?) -> Void) {
+    static func getTake(from: RequestRate.From, to: RequestRate.To, completion: @escaping (_ rateViewModel: RateViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let requestRate = RequestRate(from: from, to: to)
         
-        getTake(with: requestRate) { (viewModel) in
-            completion(viewModel)
-        }
+        getTake(with: requestRate, completion: completion, errorCompletion: errorCompletion)
     }
     
     // MARK: - Private methods
-    private static func getTake(with model: RequestRate?, completion: @escaping (_ rateViewModel: RateViewModel?) -> Void) {
+    private static func getTake(with model: RequestRate?, completion: @escaping (_ rateViewModel: RateViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         RateAPI.apiRatePost(model: model) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: { (rateViewModel) in
-                completion(rateViewModel)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 }

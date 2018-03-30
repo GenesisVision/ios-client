@@ -66,15 +66,15 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     // MARK: - Private methods
     override func fetch() {
         viewModel.getProfile { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
+                self?.headerView.setup(with: self?.viewModel.getAvatarURL())
                 self?.headerView.isHidden = false
                 self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -215,7 +215,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -254,7 +253,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         showProgressHUD()
         
         viewModel.saveProfile { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
@@ -262,8 +261,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
                     self?.showProfileStateAction()
                     self?.reloadData()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

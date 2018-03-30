@@ -40,11 +40,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.investedTokens = tokensCount
         }
         
-        if let profit = investmentProgram.profitTotal {
-            cell.profitValueLabel.text = profit.toString() + "%"
-            cell.profitValueLabel.textColor = profit >= 0 ? UIColor.Font.dark : UIColor.Font.red
-            cell.profitTitleLabel.text = profit >= 0 ? "PROFIT" : "LOSS"
-            cell.profitTitleLabel.textColor = profit >= 0 ? UIColor.Font.primary : UIColor.Font.red
+        if let profitAvg = investmentProgram.profitFromProgram {
+            cell.profitValueLabel.text = profitAvg.toString()
+            cell.profitValueLabel.textColor = profitAvg >= 0 ? UIColor.Font.dark : UIColor.Font.red
+            cell.profitTitleLabel.text = profitAvg >= 0 ? "PROFIT" : "LOSS"
+            cell.profitTitleLabel.textColor = profitAvg >= 0 ? UIColor.Font.primary : UIColor.Font.red
         }
         
         if let currency = investmentProgram.currency {
@@ -68,11 +68,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let isEnabled = investmentProgram.isEnabled {
-            cell.isEnable = isEnabled
-            
             guard let endOfPeriod = investmentProgram.endOfPeriod else { return }
             
             cell.endOfPeriod = endOfPeriod
+            
+            cell.isEnable = isEnabled
         }
         
         cell.reloadDataProtocol = reloadDataProtocol

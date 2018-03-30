@@ -40,6 +40,11 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
+    // MARK: - Lifecycle
+    deinit {
+        stopTimer()
+    }
+
     // MARK: - Public Methods
     func setup(with endOfPeriod: Date?, periodDuration: Int?, feeSuccess: Double?, feeManagement: Double?, trades: Int?, ownBalance: Double?, balance: Double?, isEnable: Bool, reloadDataProtocol: ReloadDataProtocol?) {
         guard let endOfPeriod = endOfPeriod,
@@ -56,21 +61,16 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         
         periodDurationLabel.text = periodDuration.toString()
         
-        feeSuccessLabel.text = feeSuccess.rounded(toPlaces: 2).toString()
-        feeManagementLabel.text = feeManagement.rounded(toPlaces: 2).toString()
+        feeSuccessLabel.text = feeSuccess.rounded(withType: .other).toString()
+        feeManagementLabel.text = feeManagement.rounded(withType: .other).toString()
         tradesLabel.text = trades.toString()
-        let managersShare = (ownBalance / balance * 100).rounded(toPlaces: 2)
+        let managersShare = (ownBalance / balance * 100).rounded(withType: .other)
         managersShareLabel.text = managersShare.toString()
     }
     
     func stopTimer() {
         timer?.invalidate()
         timer = nil
-    }
-    
-    // MARK: - Lifecycle
-    deinit {
-        stopTimer()
     }
     
     // MARK: - Private methods
@@ -84,7 +84,14 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
             periodLeftValueLabel.font = UIFont.getFont(.bold, size: 20)
             
             updatePeriodLeftValue()
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+            
+            if let endOfPeriod = endOfPeriod {
+                let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+                let periodLeftValue = periodLeft.0
+                if periodLeftValue >= 0 {
+                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+                }
+            }
         } else {
             programClosed()
         }
@@ -103,11 +110,13 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
             let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
             let periodLeftValue = periodLeft.0
             
-            if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
-                periodLeftValueLabel.text = periodLeftValue.toString()
-                periodLeftTimeLabel.text = periodLeftTimeValue
-            } else {
-                reloadDataProtocol?.didReloadData()
+            DispatchQueue.main.async {
+                if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
+                    self.periodLeftValueLabel.text = periodLeftValue.toString()
+                    self.periodLeftTimeLabel.text = periodLeftTimeValue
+                } else {
+                    self.reloadDataProtocol?.didReloadData()
+                }
             }
         }
     }

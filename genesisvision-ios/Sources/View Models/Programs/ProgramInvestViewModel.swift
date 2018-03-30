@@ -35,7 +35,7 @@ final class ProgramInvestViewModel {
     }
     
     // MARK: - Public methods
-    func getBalance(completion: @escaping (_ balance: Double, _ exchangedBalance: Double) -> Void) {
+    func getBalance(completion: @escaping (_ balance: Double, _ exchangedBalance: Double) -> Void, completionError: @escaping CompletionBlock) {
         let toCurrency = RequestRate.To(rawValue: self.currency)
         
         RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
@@ -43,16 +43,16 @@ final class ProgramInvestViewModel {
                 self.rate = rate
             }
             
-            AuthManager.getBalance { [weak self] (value) in
+            AuthManager.getBalance(completion: { [weak self] (value) in
                 self?.balance = value
                 if let balance = self?.balance, let exchangedBalance = self?.exchangedBalance {
                     completion(balance, exchangedBalance)
                 }
-            }
-        })
+                }, completionError: completionError)
+        }, errorCompletion: completionError)
     }
     
-    func getExchangedAmount(amount: Double, completion: @escaping (_ exchangedAmount: Double) -> Void) {
+    func getExchangedAmount(amount: Double, completion: @escaping (_ exchangedAmount: Double) -> Void, completionError: @escaping CompletionBlock) {
         guard amount > 0 else {
             return completion(0.0)
         }
@@ -67,7 +67,7 @@ final class ProgramInvestViewModel {
                 let exchangedBalance = amount * self.rate
                 
                 completion(exchangedBalance)
-            })
+            }, errorCompletion: completionError)
             
             return
         }
@@ -91,7 +91,7 @@ final class ProgramInvestViewModel {
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
         ProgramDataProvider.investProgram(withAmount: value, investmentProgramId: investmentProgramId, completion: { (viewModel) in
             guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             AuthManager.saveWalletViewModel(viewModel: wallet)

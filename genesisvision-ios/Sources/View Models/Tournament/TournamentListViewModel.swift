@@ -97,7 +97,7 @@ extension TournamentListViewModel {
     
     func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -166,7 +166,7 @@ extension TournamentListViewModel {
             let filter = ParticipantsFilter(skip: skip, take: take, name: name)
             
             tournamentParticipants(withFilter: filter, completion: { (participantViewModels) in
-                guard let participantViewModels = participantViewModels else { return completionError(.failure(reason: nil)) }
+                guard let participantViewModels = participantViewModels else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var viewModels = [TraderTableViewCellViewModel]()
                 

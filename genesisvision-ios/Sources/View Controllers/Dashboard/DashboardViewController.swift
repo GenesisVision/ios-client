@@ -27,6 +27,16 @@ class DashboardViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        for visibleCell in tableView.visibleCells {
+            if let cell = visibleCell as? DashboardTableViewCell {
+                cell.stopTimer()
+            }
+        }
+    }
     // MARK: - Private methods
     private func setup() {
         registerForPreviewing()
@@ -60,7 +70,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -79,13 +88,13 @@ class DashboardViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -136,6 +145,12 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (viewModel.modelsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
             fetchMore()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? DashboardTableViewCell {
+            cell.stopTimer()
         }
     }
     

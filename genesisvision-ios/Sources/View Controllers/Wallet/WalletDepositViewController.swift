@@ -30,14 +30,21 @@ class WalletDepositViewController: BaseViewController {
     // MARK: - Private methods
     private func setup() {
         showProgressHUD()
-        viewModel.fetch { [weak self] (result) in
-            self?.hideHUD()
+        viewModel.fetch(completion: { [weak self] (result) in
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.setupUI()
-            case .failure(let reason):
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
                 break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

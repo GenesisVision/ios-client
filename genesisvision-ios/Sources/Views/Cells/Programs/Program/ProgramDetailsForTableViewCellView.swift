@@ -24,7 +24,8 @@ class ProgramDetailsForTableViewCellView: UIStackView {
     func setup(with investorsCountTitle: String? = "INVESTORS", investorsCount: Int?,
                balanceTitle: String? = "BALANCE", balance: Double?,
                avgProfitTitle: String? = "AVG. PROFIT", avgProfit: Double?,
-               totalProfitTitle: String? = "TOTAL PROFIT", totalProfit: Double?) {
+               totalProfitTitle: String? = "TOTAL PROFIT", totalProfit: Double?,
+               currency: String?) {
         investorsTitleLabel.text = investorsCountTitle
         balanceTitleLabel.text = balanceTitle
         avgProfitTitleLabel.text = avgProfitTitle
@@ -42,11 +43,11 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             let avgProfit = avgProfit,
             let totalProfit = totalProfit {
             
-            let avgProfitValue = avgProfit.rounded(toPlaces: 2)
-            let totalProfitValue = totalProfit.rounded(toPlaces: 4)
+            let avgProfitValue = avgProfit.rounded(withType: .other)
+            let totalProfitValue = totalProfit.rounded(withType: .gvt)
             
             investorsValueLabel.text = investorsCount.toString()
-            balanceValueLabel.text = balance.rounded(toPlaces: 4).toString()
+            balanceValueLabel.text = balance.rounded(withCurrency: currency).toString()
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.text = totalProfitValue.toString()
             

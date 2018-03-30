@@ -180,7 +180,7 @@ extension InvestmentProgramListViewModel {
     
     func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -226,12 +226,6 @@ extension InvestmentProgramListViewModel {
     }
     
     // MARK: - Private methods
-    private func apiInvestmentPrograms(withFilter filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void) {
-        ProgramDataProvider.getPrograms(with: filter) { (viewModel) in
-            completion(viewModel)
-        }
-    }
-    
     private func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard viewModel != nil else {
@@ -260,10 +254,10 @@ extension InvestmentProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let filter = filter else { return completionError(.failure(reason: nil)) }
+            guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            apiInvestmentPrograms(withFilter: filter, completion: { (investmentProgramsViewModel) in
-                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(reason: nil)) }
+            ProgramDataProvider.getPrograms(with: filter, completion: { (investmentProgramsViewModel) in
+                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
                 
@@ -276,7 +270,7 @@ extension InvestmentProgramListViewModel {
                 
                 completionSuccess(totalCount, investmentProgramViewModels)
                 completionError(.success)
-            })
+            }, errorCompletion: completionError)
         case .fake:
             fakeViewModels { (investmentProgramViewModels) in
                 completionSuccess(investmentProgramViewModels.count, investmentProgramViewModels)

@@ -101,27 +101,21 @@ extension UIViewController {
     }
 
     func showErrorHUD(title: String?, subtitle: String?) {
-        if title != nil || subtitle != nil {
-            HUD.flash(.labeledError(title: title, subtitle: subtitle), delay: Constants.hudDelay)
-        } else {
-            HUD.flash(.error, delay: Constants.hudDelay)
-        }
+        title != nil || subtitle != nil
+            ? HUD.flash(.labeledError(title: title, subtitle: subtitle), onView: self.view, delay: Constants.hudDelay)
+            : HUD.flash(.error, onView: self.view, delay: Constants.hudDelay)
     }
     
-    func showErrorHUD(subtitle: String?) {
-        if subtitle != nil {
-            HUD.flash(.labeledError(title: nil, subtitle: subtitle), delay: Constants.hudDelay)
-        } else {
-            HUD.flash(.error, delay: Constants.hudDelay)
-        }
+    func showErrorHUD(subtitle: String? = nil) {
+        subtitle != nil
+            ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self.view, delay: Constants.hudDelay)
+            : HUD.flash(.error, onView: self.view, delay: Constants.hudDelay)
     }
 
     func showSuccessHUD(title: String?, subtitle: String?) {
-        if title != nil || subtitle != nil {
-            HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), delay: Constants.hudDelay)
-        } else {
-            HUD.flash(.success, delay: Constants.hudDelay)
-        }
+        title != nil || subtitle != nil
+            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self.view, delay: Constants.hudDelay)
+            : HUD.flash(.success, onView: self.view, delay: Constants.hudDelay)
     }
     
     func showSuccessHUD(completion: ((Bool) -> Void)? = nil) {
@@ -129,19 +123,14 @@ extension UIViewController {
     }
 
     func showHUD(type: HUDContentType) {
-        HUD.show(.success)
+        HUD.show(.success, onView: self.view)
     }
 
-    func showFlashHUD(type: HUDContentType, delay: TimeInterval?) {
-        if delay != nil {
-            HUD.flash(type, delay: delay!)
-        } else {
-            HUD.flash(type, delay: Constants.hudDelay)
-        }
+    func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
+        HUD.flash(type, onView: self.view, delay: delay ?? Constants.hudDelay)
     }
     
     // MARK: - Keyboard
-    
     func hideKeyboard() {
         view.endEditing(true)
     }
@@ -227,5 +216,9 @@ extension UIViewController {
         }
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func errorHandle(with errorMessageType: ErrorMessageType, hud: Bool = false) {
+        
     }
 }

@@ -68,6 +68,15 @@ func convertToImage(with view: UIView) -> UIImage? {
     return nil
 }
 
+func startTimer() -> Bool {
+    switch UIDevice().type {
+    case .iPhone5, .iPhone5S, .iPhone6, .iPhone6plus:
+        return false
+    default:
+        return true
+    }
+}
+
 extension UIImage {
     func alpha(_ value: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)

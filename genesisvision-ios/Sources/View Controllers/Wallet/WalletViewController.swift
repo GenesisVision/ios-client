@@ -43,7 +43,6 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         updateTitle()
-        
     }
     
     private func updateTitle() {
@@ -98,13 +97,13 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     private func fetchTransactions() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 break
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -116,9 +115,8 @@ class WalletViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 break
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

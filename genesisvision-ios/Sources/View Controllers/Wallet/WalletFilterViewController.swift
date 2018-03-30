@@ -67,14 +67,13 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
         showProgressHUD()
         
         viewModel.apply { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
                 self?.viewModel.goToBack()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

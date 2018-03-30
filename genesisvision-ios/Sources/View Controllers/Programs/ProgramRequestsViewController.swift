@@ -56,7 +56,6 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -76,13 +75,13 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -128,8 +127,8 @@ extension ProgramRequestsViewController: ProgramRequestTableViewCellProtocol {
                 self?.showSuccessHUD(completion: { (success) in
                     lastRequest ? self?.viewModel.goToBack() : self?.fetch()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

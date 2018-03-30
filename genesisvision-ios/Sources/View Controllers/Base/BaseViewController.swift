@@ -30,6 +30,10 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
                                                                    NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
     }
+    
+    func hideAll() {
+        hideHUD()
+    }
 }
 
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
@@ -38,6 +42,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     var canFetchMoreResults = true
+    var previousViewController: UIViewController?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -52,8 +57,12 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
+        tabBarController?.delegate = self
+        
         view.backgroundColor = UIColor.Background.main
         tableView.backgroundColor = UIColor.Background.main
+        
+        refreshControl?.endRefreshing()
     }
     
     // MARK: - Fetching
@@ -74,6 +83,13 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         //Fetch next page
     }
     
+    override func hideAll() {
+        DispatchQueue.main.async {
+            self.hideHUD()
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
     func setupPullToRefresh(title: String? = nil) {
         let tintColor = UIColor.primary
         let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
@@ -85,6 +101,40 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         refreshControl.tintColor = tintColor
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
+    }
+}
+
+extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        
+        guard previousViewController == viewController,
+            let navController = viewController as? BaseNavigationController,
+            let tabsType = TabsType(rawValue: tabBarIndex) else { return }
+    
+        switch tabsType {
+        case .dashboard:
+            if let vc = navController.viewControllers.first as? DashboardViewController, let tableView = vc.tableView {
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+            }
+        case .programList:
+            if let vc = navController.viewControllers.first as? ProgramListViewController, let tableView = vc.tableView {
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+            }
+        case .wallet:
+            if let vc = navController.viewControllers.first as? WalletViewController, let tableView = vc.tableView {
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+            }
+        case .profile:
+            if let vc = navController.viewControllers.first as? ProfileViewController, let tableView = vc.tableView {
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+            }
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        previousViewController = tabBarController.selectedViewController
+        return true
     }
 }
 

@@ -31,11 +31,11 @@ final class WalletDepositViewModel {
         return qrImage ?? UIImage.placeholder
     }
     
-    func fetch(completion: @escaping CompletionBlock) {
-        getAddress { [weak self] (address) in
+    func fetch(completion: @escaping CompletionBlock, completionError: @escaping CompletionBlock) {
+        getAddress(completion: { [weak self] (address) in
             guard let address = address,
                 var qrCode = QRCode(address)
-                else { return completion(.failure(reason: nil)) }
+                else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.address = address
             qrCode.size = CGSize(width: 300, height: 300)
@@ -43,7 +43,7 @@ final class WalletDepositViewModel {
             qrCode.backgroundColor = CIColor(cgColor: UIColor.Background.main.cgColor)
             self?.qrImage = qrCode.image
             completion(.success)
-        }
+            }, completionError: completionError)
     }
     
     // MARK: - Navigation
@@ -53,15 +53,14 @@ final class WalletDepositViewModel {
     }
     
     // MARK: - Private methods
-    private func getAddress(completion: @escaping (_ address: String?) -> Void) {
-        WalletDataProvider.getWalletAddress { (viewModel) in
+    private func getAddress(completion: @escaping (_ address: String?) -> Void, completionError: @escaping CompletionBlock) {
+        WalletDataProvider.getWalletAddress(completion: { (viewModel) in
             guard let address = viewModel?.address else {
                 return completion(nil)
             }
             
             completion(address)
-        }
+        }, errorCompletion: completionError)
     }
-    
 }
 

@@ -40,7 +40,7 @@ final class WalletWithdrawViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiWithdraw(with amount: Double, address: String, completion: @escaping CompletionBlock) {
-        guard let token = AuthManager.authorizedToken else { return completion(.failure(reason: nil)) }
+        guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
 
         let requestModel = WalletWithdrawRequestModel(currency: currency, amount: amount, blockchainAddress: address)
         

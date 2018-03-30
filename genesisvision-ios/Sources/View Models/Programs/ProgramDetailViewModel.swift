@@ -164,15 +164,15 @@ extension ProgramDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        ProgramDataProvider.getProgram(investmentProgramId: self.investmentProgramId) { [weak self] (viewModel) in
+        ProgramDataProvider.getProgram(investmentProgramId: self.investmentProgramId, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             self?.investmentProgramDetails = viewModel
             
             completion(.success)
-        }
+        }, errorCompletion: completion)
     }
 }
 

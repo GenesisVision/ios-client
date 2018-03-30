@@ -63,15 +63,15 @@ class SignInViewController: BaseViewController {
         showProgressHUD()
         
         viewModel.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { [weak self] (finish) in
                     self?.viewModel.startAsAuthorized()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

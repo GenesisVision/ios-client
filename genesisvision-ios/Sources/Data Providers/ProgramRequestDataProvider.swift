@@ -12,15 +12,13 @@ class ProgramRequestDataProvider: DataProvider {
     static func getRequests(filter: InvestmentProgramRequestsFilter, completion: @escaping (_ programRequests: InvestmentProgramRequests?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        getProgramRequests(with: authorization, filter: filter) { (viewModel) in
-            completion(viewModel)
-        }
+        getProgramRequests(with: authorization, filter: filter, completion: completion)
     }
     
     static func cancelRequest(requestId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken, 
             let uuid = UUID(uuidString: requestId)
-            else { return completion(.failure(reason: nil)) }
+            else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         cancelRequest(with: authorization, requestId: uuid, completion: completion)
     }

@@ -18,12 +18,11 @@ protocol RouterProtocol {
     func dismiss(animated: Bool)
 }
 
+enum TabsType: Int {
+    case dashboard, programList, wallet, profile
+}
+
 class Router {
-    
-    enum TabsType: Int {
-        case dashboard, programList, wallet, profile
-    }
-    
     // MARK: - Variables
     private var tournamentViewController: TournamentListViewController!
     private var programsViewController: ProgramListViewController!

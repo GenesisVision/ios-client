@@ -26,6 +26,7 @@ class WalletTransactionTableViewCell: UITableViewCell {
     @IBOutlet var amountLabel: UILabel! {
         didSet {
             amountLabel.textColor = UIColor.Transaction.greenTransaction
+            amountLabel.font = UIFont.getFont(.bold, size: 20)
         }
     }
     

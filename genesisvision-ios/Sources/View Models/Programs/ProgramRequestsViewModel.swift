@@ -77,7 +77,7 @@ extension ProgramRequestsViewModel {
     
     func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -112,12 +112,12 @@ extension ProgramRequestsViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramRequestTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(reason: nil)) }
+        guard let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
         let filter = InvestmentProgramRequestsFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, status: .new, type: nil, skip: skip, take: take)
         
         ProgramRequestDataProvider.getRequests(filter: filter) { [weak self] (requests) in
-            guard let requests = requests else { return completionError(.failure(reason: nil)) }
+            guard let requests = requests else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             var programRequestViewModels = [ProgramRequestTableViewCellViewModel]()
             

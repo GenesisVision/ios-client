@@ -124,7 +124,7 @@ extension TournamentDetailViewModel {
     func fetch(completion: @escaping CompletionBlock) {
         TournamentDataProvider.getTournamentParticipant(with: self.participantId) { [weak self] (viewModel) in
             guard viewModel != nil else {
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             self?.participantViewModel = viewModel

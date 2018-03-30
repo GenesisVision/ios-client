@@ -101,13 +101,13 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 break
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -118,9 +118,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 break
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

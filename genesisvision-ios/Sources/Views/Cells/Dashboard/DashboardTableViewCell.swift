@@ -70,6 +70,11 @@ class DashboardTableViewCell: UITableViewCell {
     }
     
     deinit {
+        stopTimer()
+    }
+    
+    // MARK: - Public methods
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -85,7 +90,15 @@ class DashboardTableViewCell: UITableViewCell {
             periodLeftValueLabel.font = UIFont.getFont(.regular, size: 30)
             
             updatePeriodLeftValue()
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+            
+            if let endOfPeriod = endOfPeriod {
+                let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+                let periodLeftValue = periodLeft.0
+                
+                if periodLeftValue >= 0 {
+                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+                }
+            }
         } else {
             programClosed()
         }
@@ -96,6 +109,7 @@ class DashboardTableViewCell: UITableViewCell {
         periodLeftValueLabel.font = UIFont.getFont(.bold, size: 15)
         
         periodLeftValueLabel.text = "Program \nclosed"
+        periodLeftTitleLabel.isHidden = true
     }
     
     @objc func updatePeriodLeftValue() {
@@ -103,11 +117,17 @@ class DashboardTableViewCell: UITableViewCell {
             let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
             let periodLeftValue = periodLeft.0
             
-            if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
-                periodLeftValueLabel.text = periodLeftValue.toString()
-                periodLeftTitleLabel.text = periodLeftTimeValue.uppercased() + " LEFT"
-            } else {
-                reloadDataProtocol?.didReloadData()
+            DispatchQueue.main.async {
+                if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
+                    self.periodLeftValueLabel.isHidden = false
+                    self.periodLeftTitleLabel.isHidden = false
+                    self.periodLeftValueLabel.text = periodLeftValue.toString()
+                    self.periodLeftTitleLabel.text = periodLeftTimeValue.uppercased() + " LEFT"
+                } else {
+                    self.periodLeftValueLabel.isHidden = true
+                    self.periodLeftTitleLabel.isHidden = true
+                    self.reloadDataProtocol?.didReloadData()
+                }
             }
         }
     }

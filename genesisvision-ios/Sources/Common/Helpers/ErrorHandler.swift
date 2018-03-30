@@ -7,11 +7,17 @@
 //
 
 import Foundation
+import PKHUD
+
+enum ErrorMessageType {
+    case connectionError(message: String)
+    case apiError(message: String?)
+}
 
 class ErrorHandler {
     static func handleApiError(error: Error?, completion: @escaping CompletionBlock) {
         guard let errorResponse = error as? ErrorResponse else {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         switch errorResponse {
@@ -20,11 +26,11 @@ class ErrorHandler {
             
             guard code != 401 else {
                 NotificationCenter.default.post(name: .signOut, object: nil)
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             guard let jsonData = data else {
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             var errorViewModel: ErrorViewModel?
@@ -34,11 +40,26 @@ class ErrorHandler {
             } catch {}
             
             guard let errorsText = errorViewModel?.errors?.flatMap({$0.message}).joined(separator: "\n") else {
-                return completion(.failure(reason: nil))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             print("API ERROR text \(errorsText)")
-            completion(.failure(reason: errorsText))
+            completion(.failure(errorType: .apiError(message: errorsText)))
+        }
+    }
+    
+    static func handleError(with errorMessageType: ErrorMessageType, viewController: UIViewController? = nil, hud: Bool = false) {
+        switch errorMessageType {
+        case .apiError(let message):
+            hud && viewController != nil
+                ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
+                : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")
+        case .connectionError(let message):
+            if let vc = viewController {
+                DispatchQueue.main.async {
+                    vc.showFlashHUD(type: .label(message), delay: 1.5)
+                }
+            }
         }
     }
 }

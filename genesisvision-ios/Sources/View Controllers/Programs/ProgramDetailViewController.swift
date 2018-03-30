@@ -75,7 +75,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        hideHUD()
+        hideAll()
     }
     
     // MARK: - Private methods
@@ -116,13 +116,13 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.fetch { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -136,7 +136,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.setupUI()
-            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
     }

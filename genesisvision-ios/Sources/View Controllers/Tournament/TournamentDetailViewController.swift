@@ -38,7 +38,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        hideHUD()
+        hideAll()
     }
     
     // MARK: - Private methods
@@ -60,15 +60,14 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         viewModel.fetch { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
+            
             switch result {
             case .success:
                 self?.setupNavigationBar()
-                self?.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
-            case .failure(let reason):
-                print("Error with reason: ")
-                print(reason ?? "")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }

@@ -59,8 +59,15 @@ class ProgramInvestViewController: BaseViewController {
     
     var enteredAmount: Double = 0.0 {
         didSet {
-            viewModel.getExchangedAmount(amount: enteredAmount) { [weak self] (exchangedAmountValue) in
+            viewModel.getExchangedAmount(amount: enteredAmount, completion: { [weak self] (exchangedAmountValue) in
                 self?.exchangedAmountLabel.text = exchangedAmountValue.toString()
+            }) { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
             }
             
             investButton(enable: enteredAmount > 0 && enteredAmount <= balance)
@@ -90,9 +97,16 @@ class ProgramInvestViewController: BaseViewController {
         
         investButton(enable: false)
 
-        viewModel.getBalance { [weak self] (balance, exchangedBalance) in
+        viewModel.getBalance(completion: { [weak self] (balance, exchangedBalance) in
             self?.balance = balance
             self?.exchangedBalance = exchangedBalance
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
         }
         
         self.balanceCurrencyLabel.text = "GVT"
@@ -115,15 +129,15 @@ class ProgramInvestViewController: BaseViewController {
         
         showProgressHUD()
         viewModel.invest(with: amount) { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
                 self?.showSuccessHUD(completion: { (success) in
                     self?.viewModel.goToBack()
                 })
-            case .failure(let reason):
-                self?.showErrorHUD(subtitle: reason)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

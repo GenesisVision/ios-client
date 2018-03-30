@@ -35,14 +35,18 @@ final class ProfileViewModel {
     var title: String = "Profile"
     
     private var router: ProfileRouter!
-    private var profileModel: ProfileFullViewModel?
+    private var profileModel: ProfileFullViewModel? {
+        didSet {
+            setupCellViewModel()
+        }
+    }
     private var editProfileModel: ProfileFullViewModel?
     
     weak var textFieldDelegate: UITextFieldDelegate?
     
     var rows: [FieldType] = [.email, .firstName, .middleName, .lastName, .birthday, .gender]
     
-    var editableFields: [EditableField]!
+    var editableFields = [EditableField]()
     var pickedImage: UIImage?
     var pickedImageURL: URL?
     
@@ -72,6 +76,8 @@ final class ProfileViewModel {
     var sections: [SectionType] = [.fields]
     var profileState: ProfileState = .show {
         didSet {
+            guard editableFields.count > 0 else { return }
+            
             for idx in 0...editableFields.count - 1 {
                 editableFields[idx].editable = getEditable(for: editableFields[idx].type)
                 editableFields[idx].selectable = getSelectable(for: editableFields[idx].type)
@@ -100,15 +106,14 @@ final class ProfileViewModel {
     
     // MARK: - Public methods
     func getProfile(completion: @escaping CompletionBlock) {
-        AuthManager.getProfile { [weak self] (viewModel) in
+        AuthManager.getProfile(completion: { [weak self] (viewModel) in
             if let profileModel = viewModel {
                 self?.profileModel = profileModel
-                self?.editProfileModel = profileModel
                 completion(.success)
             }
             
-            completion(.failure(reason: nil))
-        }
+            completion(.failure(errorType: .apiError(message: nil)))
+        }, completionError: completion)
     }
     
     func getName() -> String {
@@ -169,12 +174,14 @@ final class ProfileViewModel {
     
     func editProfile(completion: @escaping CompletionBlock) {
         profileState = .edit
+        editProfileModel = profileModel
         completion(.success)
     }
     
     
     func cancelEditProfile(completion: @escaping CompletionBlock) {
         profileState = .show
+        editProfileModel = nil
         completion(.success)
     }
     
@@ -214,7 +221,8 @@ final class ProfileViewModel {
     
     // MARK: - Navigation
     func signOut() {
-        AuthManager.authorizedToken = nil
+        AuthManager.signOut()
+        profileModel = nil
         router.show(routeType: .signOut)
     }
     
@@ -227,14 +235,7 @@ final class ProfileViewModel {
     private func setup() {
         NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
         
-        getProfile { [weak self] (result) in
-            switch result {
-            case .success:
-                self?.setupCellViewModel()
-            case .failure:
-                print("Error")
-            }
-        }
+        getProfile { (result) in }
     }
     
     private func getFields() -> [FieldType : String] {
@@ -372,6 +373,7 @@ final class ProfileViewModel {
             switch result {
             case .success:
                 self?.profileModel = self?.editProfileModel
+                self?.editProfileModel = nil
                 self?.profileState = .show
                 self?.setupCellViewModel()
             case .failure( _):

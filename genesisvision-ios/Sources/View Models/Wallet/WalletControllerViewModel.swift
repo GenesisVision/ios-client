@@ -134,10 +134,10 @@ extension WalletControllerViewModel {
         AuthManager.getSavedRate { [weak self] (value) in
             self?.rate = value
             
-            AuthManager.getBalance { [weak self] (value) in
+            AuthManager.getBalance(completion: { [weak self] (value) in
                 self?.balance = value
                 completion(.success)
-            }
+            }, completionError: completion)
         }
     }
     
@@ -158,7 +158,7 @@ extension WalletControllerViewModel {
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMoreTransactions(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -192,9 +192,9 @@ extension WalletControllerViewModel {
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let filter = filter else { return completionError(.failure(reason: nil)) }
+        guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        WalletDataProvider.getWalletTransactions(with: filter) { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
@@ -209,7 +209,7 @@ extension WalletControllerViewModel {
             
             completionSuccess(totalCount, viewModels)
             completionError(.success)
-        }
+        }, errorCompletion: completionError)
     }
 }
 

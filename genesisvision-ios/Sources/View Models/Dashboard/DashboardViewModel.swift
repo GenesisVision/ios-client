@@ -168,7 +168,7 @@ extension DashboardViewModel {
     
     func fetchMore(completion: @escaping CompletionBlock) {
         if skip >= totalCount {
-            return completion(.failure(reason: nil))
+            return completion(.failure(errorType: .apiError(message: nil)))
         }
         
         skip += take
@@ -225,8 +225,8 @@ extension DashboardViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        DashboardDataProvider.getProgram(with: sorting) { [weak self] (dashboard) in
-            guard let dashboard = dashboard else { return completionError(.failure(reason: nil)) }
+        DashboardDataProvider.getProgram(with: sorting, completion: { [weak self] (dashboard) in
+            guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.dashboard = dashboard
             
@@ -241,7 +241,7 @@ extension DashboardViewModel {
             
             completionSuccess(totalCount, dashboardProgramViewModels)
             completionError(.success)
-        }
+        }, errorCompletion: completionError)
     }
 }
 

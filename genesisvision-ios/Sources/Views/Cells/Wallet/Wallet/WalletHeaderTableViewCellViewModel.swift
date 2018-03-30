@@ -18,8 +18,8 @@ struct WalletHeaderTableViewCellViewModel {
 
 extension WalletHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletHeaderTableViewCell) {
-        cell.balanceLabel.text = balance.rounded(toPlaces: 4).toString()
-        cell.usdBalanceLabel.text = usdBalance.rounded(toPlaces: 2).toString(currency: true)
+        cell.balanceLabel.text = balance.rounded(withType: .gvt).toString()
+        cell.usdBalanceLabel.text = usdBalance.rounded(withType: .other).toString(currency: true)
         cell.delegate = delegate
         
         cell.logoImageView.image = UIImage(named: imageName)

@@ -69,7 +69,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             
             cell.investTypeLabel.text = text
             cell.amountLabel.textColor = textColor
-            cell.amountLabel.text = arithmeticSign + amount.rounded(toPlaces: 6).toString()
+            cell.amountLabel.text = arithmeticSign + amount.rounded(withType: .gvt).toString()
         }
         
         if let date = walletTransaction.date {

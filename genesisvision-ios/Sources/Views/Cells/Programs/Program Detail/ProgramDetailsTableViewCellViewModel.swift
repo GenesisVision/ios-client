@@ -17,7 +17,8 @@ extension ProgramDetailsTableViewCellViewModel: CellViewModel {
         cell.programDetailsView.setup(investorsCount: investmentProgramDetails.investorsCount,
                                       balance: investmentProgramDetails.balance,
                                       avgProfit: investmentProgramDetails.profitAvg,
-                                      totalProfit: investmentProgramDetails.profitTotal)
+                                      totalProfit: investmentProgramDetails.profitTotal,
+                                      currency: investmentProgramDetails.currency?.rawValue)
     }
 }
 

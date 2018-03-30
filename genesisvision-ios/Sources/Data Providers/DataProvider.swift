@@ -8,6 +8,10 @@
 
 class DataProvider {
     func responseHandler<T>(_ viewModel: T? = nil, error: Error?, successCompletion: @escaping (_ viewModel: T?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard ReachabilityManager.shared.reachability.connection != .none else {
+            return errorCompletion(.failure(errorType: .connectionError(message: Constants.ErrorMessages.noInternetConnection)))
+        }
+    
         networkActivity(show: false)
         
         guard viewModel != nil && error == nil else {
@@ -19,6 +23,10 @@ class DataProvider {
     }
     
     func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
+        guard ReachabilityManager.shared.reachability.connection != .none else {
+            return completion(.failure(errorType: .connectionError(message: Constants.ErrorMessages.noInternetConnection)))
+        }
+        
         networkActivity(show: false)
         
         guard error == nil else {
