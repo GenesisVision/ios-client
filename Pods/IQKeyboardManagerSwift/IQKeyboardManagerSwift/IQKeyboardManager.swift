@@ -82,43 +82,52 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         var isEnabled = enable
         
-        if let textFieldViewController = _textFieldView?.viewController() {
-            
-            if isEnabled == false {
+//        let enableMode = _textFieldView?.enableMode
+//
+//        if enableMode == .enabled {
+//            isEnabled = true
+//        } else if enableMode == .disabled {
+//            isEnabled = false
+//        } else {
+        
+            if let textFieldViewController = _textFieldView?.viewController() {
                 
-                //If viewController is kind of enable viewController class, then assuming it's enabled.
-                for enabledClass in enabledDistanceHandlingClasses {
+                if isEnabled == false {
                     
-                    if textFieldViewController.isKind(of: enabledClass) {
-                        isEnabled = true
-                        break
-                    }
-                }
-            }
-            
-            if isEnabled == true {
-                
-                //If viewController is kind of disabled viewController class, then assuming it's disabled.
-                for disabledClass in disabledDistanceHandlingClasses {
-                    
-                    if textFieldViewController.isKind(of: disabledClass) {
-                        isEnabled = false
-                        break
+                    //If viewController is kind of enable viewController class, then assuming it's enabled.
+                    for enabledClass in enabledDistanceHandlingClasses {
+                        
+                        if textFieldViewController.isKind(of: enabledClass) {
+                            isEnabled = true
+                            break
+                        }
                     }
                 }
                 
-                //Special Controllers
                 if isEnabled == true {
                     
-                    let classNameString = NSStringFromClass(type(of:textFieldViewController.self))
+                    //If viewController is kind of disabled viewController class, then assuming it's disabled.
+                    for disabledClass in disabledDistanceHandlingClasses {
+                        
+                        if textFieldViewController.isKind(of: disabledClass) {
+                            isEnabled = false
+                            break
+                        }
+                    }
                     
-                    //_UIAlertControllerTextFieldViewController
-                    if (classNameString.contains("UIAlertController") && classNameString.hasSuffix("TextFieldViewController")) {
-                        isEnabled = false
+                    //Special Controllers
+                    if isEnabled == true {
+                        
+                        let classNameString = NSStringFromClass(type(of:textFieldViewController.self))
+                        
+                        //_UIAlertControllerTextFieldViewController
+                        if (classNameString.contains("UIAlertController") && classNameString.hasSuffix("TextFieldViewController")) {
+                            isEnabled = false
+                        }
                     }
                 }
             }
-        }
+//        }
         
         return isEnabled
     }
@@ -367,39 +376,47 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         var shouldResign = shouldResignOnTouchOutside
         
-        if let textFieldViewController = _textFieldView?.viewController() {
-            
-            if shouldResign == false {
+        let enableMode = _textFieldView?.shouldResignOnTouchOutsideMode
+        
+        if enableMode == .enabled {
+            shouldResign = true
+        } else if enableMode == .disabled {
+            shouldResign = false
+        } else {
+            if let textFieldViewController = _textFieldView?.viewController() {
                 
-                //If viewController is kind of enable viewController class, then assuming shouldResignOnTouchOutside is enabled.
-                for enabledClass in enabledTouchResignedClasses {
+                if shouldResign == false {
                     
-                    if textFieldViewController.isKind(of: enabledClass) {
-                        shouldResign = true
-                        break
-                    }
-                }
-            }
-            
-            if shouldResign == true {
-                
-                //If viewController is kind of disable viewController class, then assuming shouldResignOnTouchOutside is disable.
-                for disabledClass in disabledTouchResignedClasses {
-                    
-                    if textFieldViewController.isKind(of: disabledClass) {
-                        shouldResign = false
-                        break
+                    //If viewController is kind of enable viewController class, then assuming shouldResignOnTouchOutside is enabled.
+                    for enabledClass in enabledTouchResignedClasses {
+                        
+                        if textFieldViewController.isKind(of: enabledClass) {
+                            shouldResign = true
+                            break
+                        }
                     }
                 }
                 
-                //Special Controllers
                 if shouldResign == true {
                     
-                    let classNameString = NSStringFromClass(type(of:textFieldViewController.self))
+                    //If viewController is kind of disable viewController class, then assuming shouldResignOnTouchOutside is disable.
+                    for disabledClass in disabledTouchResignedClasses {
+                        
+                        if textFieldViewController.isKind(of: disabledClass) {
+                            shouldResign = false
+                            break
+                        }
+                    }
                     
-                    //_UIAlertControllerTextFieldViewController
-                    if (classNameString.contains("UIAlertController") && classNameString.hasSuffix("TextFieldViewController")) {
-                        shouldResign = false
+                    //Special Controllers
+                    if shouldResign == true {
+                        
+                        let classNameString = NSStringFromClass(type(of:textFieldViewController.self))
+                        
+                        //_UIAlertControllerTextFieldViewController
+                        if (classNameString.contains("UIAlertController") && classNameString.hasSuffix("TextFieldViewController")) {
+                            shouldResign = false
+                        }
                     }
                 }
             }
@@ -557,10 +574,10 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 let isAcceptAsFirstResponder = goPrevious()
                 
                 if isAcceptAsFirstResponder &&
-                    barButton.invocation.target != nil &&
-                    barButton.invocation.action != nil {
+                    barButton.invocation?.target != nil &&
+                    barButton.invocation?.action != nil {
                     
-                    UIApplication.shared.sendAction(barButton.invocation.action!, to: barButton.invocation.target, from: textFieldRetain, for: UIEvent())
+                    UIApplication.shared.sendAction(barButton.invocation!.action!, to: barButton.invocation!.target, from: textFieldRetain, for: UIEvent())
                 }
             }
         }
@@ -581,10 +598,10 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 let isAcceptAsFirstResponder = goNext()
                 
                 if isAcceptAsFirstResponder &&
-                    barButton.invocation.target != nil &&
-                    barButton.invocation.action != nil {
+                    barButton.invocation?.target != nil &&
+                    barButton.invocation?.action != nil {
                     
-                    UIApplication.shared.sendAction(barButton.invocation.action!, to: barButton.invocation.target, from: textFieldRetain, for: UIEvent())
+                    UIApplication.shared.sendAction(barButton.invocation!.action!, to: barButton.invocation!.target, from: textFieldRetain, for: UIEvent())
                 }
             }
         }
@@ -604,10 +621,10 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             let isResignedFirstResponder = resignFirstResponder()
             
             if isResignedFirstResponder &&
-                barButton.invocation.target != nil &&
-                barButton.invocation.action != nil{
+                barButton.invocation?.target != nil &&
+                barButton.invocation?.action != nil{
                 
-                UIApplication.shared.sendAction(barButton.invocation.action!, to: barButton.invocation.target, from: textFieldRetain, for: UIEvent())
+                UIApplication.shared.sendAction(barButton.invocation!.action!, to: barButton.invocation!.target, from: textFieldRetain, for: UIEvent())
             }
         }
     }
@@ -726,11 +743,11 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
 
     ///-------------------------------------------
     /// MARK: Third Party Library support
-    /// Add TextField/TextView Notifications customised NSNotifications. For example while using YYTextView https://github.com/ibireme/YYText
+    /// Add TextField/TextView Notifications customised Notifications. For example while using YYTextView https://github.com/ibireme/YYText
     ///-------------------------------------------
     
     /**
-    Add/Remove customised Notification for third party customised TextField/TextView. Please be aware that the NSNotification object must be idential to UITextField/UITextView NSNotification objects and customised TextField/TextView support must be idential to UITextField/UITextView.
+    Add/Remove customised Notification for third party customised TextField/TextView. Please be aware that the Notification object must be idential to UITextField/UITextView Notification objects and customised TextField/TextView support must be idential to UITextField/UITextView.
     @param didBeginEditingNotificationName This should be identical to UITextViewTextDidBeginEditingNotification
     @param didEndEditingNotificationName This should be identical to UITextViewTextDidEndEditingNotification
     */
@@ -739,8 +756,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         registeredClasses.append(aClass)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldViewDidBeginEditing(_:)),    name: NSNotification.Name(rawValue: didBeginEditingNotificationName), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldViewDidEndEditing(_:)),      name: NSNotification.Name(rawValue: didEndEditingNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldViewDidBeginEditing(_:)),    name: Notification.Name(rawValue: didBeginEditingNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldViewDidEndEditing(_:)),      name: Notification.Name(rawValue: didEndEditingNotificationName), object: nil)
     }
     
     open func unregisterTextFieldViewClass(_ aClass: UIView.Type, didBeginEditingNotificationName : String, didEndEditingNotificationName : String) {
@@ -751,8 +768,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             registeredClasses.remove(at: index)
         }
 
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: didBeginEditingNotificationName), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: didEndEditingNotificationName), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: didBeginEditingNotificationName), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: didEndEditingNotificationName), object: nil)
     }
     
     /**************************************************************************************/
@@ -808,7 +825,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     fileprivate var         _statusBarFrame = CGRect.zero
     
     /** To save keyboard animation duration. */
-    fileprivate var         _animationDuration = 0.25
+    fileprivate var         _animationDuration : TimeInterval = 0.25
     
     /** To mimic the keyboard animation */
     fileprivate var         _animationCurve = UIViewAnimationOptions.curveEaseOut
@@ -885,7 +902,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             struct Static {
                 /** @abstract   Save keyWindow object for reuse.
                 @discussion Sometimes [[UIApplication sharedApplication] keyWindow] is returning nil between the app.   */
-                static var keyWindow : UIWindow?
+                static weak var keyWindow : UIWindow?
             }
 
             /*  (Bug ID: #23, #25, #73)   */
@@ -922,16 +939,17 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             //frame size needs to be adjusted on iOS8 due to orientation structure changes.
             newFrame.size = unwrappedController.view.frame.size
             
-            var safeAreaNewInset = UIEdgeInsets.zero;
-            
 #if swift(>=3.2)
+    
+            var safeAreaNewInset = UIEdgeInsets.zero
+
             if canAdjustAdditionalSafeAreaInsets {
         
                 if #available(iOS 11, *) {
                     
                     if let textFieldView = _textFieldView {
-                        safeAreaNewInset = _initialAdditionalSafeAreaInsets;
-                        let viewMovement : CGFloat = _topViewBeginRect.maxY - newFrame.maxY;
+                        safeAreaNewInset = _initialAdditionalSafeAreaInsets
+                        let viewMovement : CGFloat = _topViewBeginRect.maxY - newFrame.maxY
                         
                         //Maintain keyboardDistanceFromTextField
                         var specialKeyboardDistanceFromTextField = textFieldView.keyboardDistanceFromTextField
@@ -945,8 +963,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         
                         let newKeyboardDistanceFromTextField = (specialKeyboardDistanceFromTextField == kIQUseDefaultKeyboardDistance) ? keyboardDistanceFromTextField : specialKeyboardDistanceFromTextField
                         
-                        let textFieldDistance = textFieldView.frame.size.height + newKeyboardDistanceFromTextField;
-                        safeAreaNewInset.bottom += min(viewMovement, textFieldDistance);
+                        let textFieldDistance = textFieldView.frame.size.height + newKeyboardDistanceFromTextField
+                        safeAreaNewInset.bottom += min(viewMovement, textFieldDistance)
                     }
                 }
             }
@@ -958,7 +976,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
 #if swift(>=3.2)
                 if self.canAdjustAdditionalSafeAreaInsets {
                     if #available(iOS 11, *) {
-                        unwrappedController.additionalSafeAreaInsets = safeAreaNewInset;
+                        unwrappedController.additionalSafeAreaInsets = safeAreaNewInset
                     }
                 }
 #endif
@@ -1438,17 +1456,17 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
         let oldKBSize = _kbSize
 
-        if let info = (notification as NSNotification?)?.userInfo {
+        if let info = notification?.userInfo {
             
             //  Getting keyboard animation.
-            if let curve = (info[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue {
+            if let curve = info[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
                 _animationCurve = UIViewAnimationOptions(rawValue: curve)
             } else {
                 _animationCurve = UIViewAnimationOptions.curveEaseOut
             }
             
             //  Getting keyboard animation duration
-            if let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            if let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
                 
                 //Saving animation duration
                 if duration != 0.0 {
@@ -1459,7 +1477,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             }
             
             //  Getting UIKeyboardSize.
-            if let kbFrame = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if let kbFrame = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
                 
                 let screenSize = UIScreen.main.bounds
                 
@@ -1503,7 +1521,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 
 #if swift(>=3.2)
                 if #available(iOS 11, *) {
-                    _initialAdditionalSafeAreaInsets = unwrappedRootController.additionalSafeAreaInsets;
+                    _initialAdditionalSafeAreaInsets = unwrappedRootController.additionalSafeAreaInsets
                 }
 #endif
                 if _topViewBeginRect.origin.y != 0 &&
@@ -1592,13 +1610,14 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         //  Boolean to know keyboard is showing/hiding
         _privateIsKeyboardShowing = false
         
-        let info : [AnyHashable: Any]? = (notification as NSNotification?)?.userInfo
-        
-        //  Getting keyboard animation duration
-        if let duration =  (info?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
-            if duration != 0 {
-                //  Setitng keyboard animation duration
-                _animationDuration = duration
+        if let info = notification?.userInfo {
+            
+            //  Getting keyboard animation duration
+            if let duration =  info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
+                if duration != 0 {
+                    //  Setitng keyboard animation duration
+                    _animationDuration = duration
+                }
             }
         }
         
@@ -1674,7 +1693,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         
 #if swift(>=3.2)
                         if #available(iOS 11, *) {
-                            rootViewController.additionalSafeAreaInsets = self._initialAdditionalSafeAreaInsets;
+                            rootViewController.additionalSafeAreaInsets = self._initialAdditionalSafeAreaInsets
                         }
 #endif
 
@@ -1727,7 +1746,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         
 #if swift(>=3.2)
         if #available(iOS 11, *) {
-            _initialAdditionalSafeAreaInsets = .zero;
+            _initialAdditionalSafeAreaInsets = .zero
         }
 #endif
         
@@ -1816,7 +1835,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                     
 #if swift(>=3.2)
                     if #available(iOS 11, *) {
-                        _initialAdditionalSafeAreaInsets = rootViewController.additionalSafeAreaInsets;
+                        _initialAdditionalSafeAreaInsets = rootViewController.additionalSafeAreaInsets
                     }
 #endif
 
@@ -1920,29 +1939,31 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             return
         }
         
+        #if swift(>=3.2)
         if let rootViewController = _rootViewController {
-#if swift(>=3.2)
             if #available(iOS 11, *) {
                 if UIEdgeInsetsEqualToEdgeInsets(_initialAdditionalSafeAreaInsets, rootViewController.additionalSafeAreaInsets) {
-                    rootViewController.additionalSafeAreaInsets = _initialAdditionalSafeAreaInsets;
+                    rootViewController.additionalSafeAreaInsets = _initialAdditionalSafeAreaInsets
                 }
             }
-#endif
         }
+        #endif
 
         let elapsedTime = CACurrentMediaTime() - startTime
         showLog("****** \(#function) ended: \(elapsedTime) seconds ******")
     }
     
     /**  UIApplicationDidChangeStatusBarFrameNotification. Need to refresh view position and update _topViewBeginRect. (Bug ID: #446)*/
-    @objc internal func didChangeStatusBarFrame(_ notification : Notification?) -> Void {
+    @objc internal func didChangeStatusBarFrame(_ notification : Notification) -> Void {
         
         let oldStatusBarFrame = _statusBarFrame
         
         //  Getting keyboard animation duration
-        if let newFrame =  ((notification as NSNotification?)?.userInfo?[UIApplicationStatusBarFrameUserInfoKey] as? NSNumber)?.cgRectValue {
-            
-            _statusBarFrame = newFrame
+        if let info = notification.userInfo {
+            if let newFrame = info[UIApplicationStatusBarFrameUserInfoKey] as? CGRect {
+                
+                _statusBarFrame = newFrame
+            }
         }
 
         if privateIsEnabled() == false {
@@ -1952,17 +1973,17 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
         let startTime = CACurrentMediaTime()
         showLog("****** \(#function) started ******")
         
-        if _rootViewController != nil &&
-            !_topViewBeginRect.equalTo(_rootViewController!.view.frame) == true {
+        if let unwrappedRootController = _rootViewController {
 
-            if let unwrappedRootController = _rootViewController {
+            if !_topViewBeginRect.equalTo(unwrappedRootController.view.frame) == true {
+
                 _topViewBeginRect = unwrappedRootController.view.frame
                 
-#if swift(>=3.2)
-                if #available(iOS 11, *) {
-                    _initialAdditionalSafeAreaInsets = unwrappedRootController.additionalSafeAreaInsets;
-                }
-#endif
+                #if swift(>=3.2)
+                    if #available(iOS 11, *) {
+                        _initialAdditionalSafeAreaInsets = unwrappedRootController.additionalSafeAreaInsets
+                    }
+                #endif
                 
                 if _topViewBeginRect.origin.y != 0 &&
                     shouldFixInteractivePopGestureRecognizer == true &&
@@ -1978,11 +1999,12 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 }
                 
                 showLog("Saving \(unwrappedRootController._IQDescription()) beginning Frame: \(_topViewBeginRect)")
-            } else {
-                _topViewBeginRect = CGRect.zero
             }
+            
+        } else {
+            _topViewBeginRect = CGRect.zero
         }
-        
+
         //If _textFieldView is inside UITableViewController then let UITableViewController to handle it (Bug ID: #37) (Bug ID: #76) See note:- https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html If it is UIAlertView textField then do not affect anything (Bug ID: #70).
         
         if _privateIsKeyboardShowing == true &&
@@ -2106,12 +2128,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                                 toolbar.barTintColor = nil
                             default:
                                 toolbar.barStyle = UIBarStyle.default
-                                
-                                if let barTintColor = toolbarBarTintColor {
-                                    toolbar.barTintColor = barTintColor
-                                } else {
-                                    toolbar.barTintColor = nil
-                                }
+                                toolbar.barTintColor = toolbarBarTintColor
                                 
                                 //Setting toolbar tintColor //  (Enhancement ID: #30)
                                 if shouldToolbarUsesTextFieldTintColor {
@@ -2133,12 +2150,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                                 toolbar.barTintColor = nil
                             default:
                                 toolbar.barStyle = UIBarStyle.default
-                                
-                                if let barTintColor = toolbarBarTintColor {
-                                    toolbar.barTintColor = barTintColor
-                                } else {
-                                    toolbar.barTintColor = nil
-                                }
+                                toolbar.barTintColor = toolbarBarTintColor
 
                                 if shouldToolbarUsesTextFieldTintColor {
                                     toolbar.tintColor = _textView.tintColor
@@ -2253,43 +2265,43 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     open func registerAllNotifications() {
 
         //  Registering for keyboard notification.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidShow(_:)), name: Notification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidHide(_:)), name: Notification.Name.UIKeyboardDidHide, object: nil)
         
         //  Registering for UITextField notification.
-        registerTextFieldViewClass(UITextField.self, didBeginEditingNotificationName: NSNotification.Name.UITextFieldTextDidBeginEditing.rawValue, didEndEditingNotificationName: NSNotification.Name.UITextFieldTextDidEndEditing.rawValue)
+        registerTextFieldViewClass(UITextField.self, didBeginEditingNotificationName: Notification.Name.UITextFieldTextDidBeginEditing.rawValue, didEndEditingNotificationName: Notification.Name.UITextFieldTextDidEndEditing.rawValue)
         
         //  Registering for UITextView notification.
-        registerTextFieldViewClass(UITextView.self, didBeginEditingNotificationName: NSNotification.Name.UITextViewTextDidBeginEditing.rawValue, didEndEditingNotificationName: NSNotification.Name.UITextViewTextDidEndEditing.rawValue)
+        registerTextFieldViewClass(UITextView.self, didBeginEditingNotificationName: Notification.Name.UITextViewTextDidBeginEditing.rawValue, didEndEditingNotificationName: Notification.Name.UITextViewTextDidEndEditing.rawValue)
         
         //  Registering for orientation changes notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.willChangeStatusBarOrientation(_:)), name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.willChangeStatusBarOrientation(_:)), name: Notification.Name.UIApplicationWillChangeStatusBarOrientation, object: UIApplication.shared)
         
         //  Registering for status bar frame change notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeStatusBarFrame(_:)), name: NSNotification.Name.UIApplicationDidChangeStatusBarFrame, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeStatusBarFrame(_:)), name: Notification.Name.UIApplicationDidChangeStatusBarFrame, object: UIApplication.shared)
     }
 
     open func unregisterAllNotifications() {
         
         //  Unregistering for keyboard notification.
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidHide, object: nil)
 
         //  Unregistering for UITextField notification.
-        unregisterTextFieldViewClass(UITextField.self, didBeginEditingNotificationName: NSNotification.Name.UITextFieldTextDidBeginEditing.rawValue, didEndEditingNotificationName: NSNotification.Name.UITextFieldTextDidEndEditing.rawValue)
+        unregisterTextFieldViewClass(UITextField.self, didBeginEditingNotificationName: Notification.Name.UITextFieldTextDidBeginEditing.rawValue, didEndEditingNotificationName: Notification.Name.UITextFieldTextDidEndEditing.rawValue)
         
         //  Unregistering for UITextView notification.
-        unregisterTextFieldViewClass(UITextView.self, didBeginEditingNotificationName: NSNotification.Name.UITextViewTextDidBeginEditing.rawValue, didEndEditingNotificationName: NSNotification.Name.UITextViewTextDidEndEditing.rawValue)
+        unregisterTextFieldViewClass(UITextView.self, didBeginEditingNotificationName: Notification.Name.UITextViewTextDidBeginEditing.rawValue, didEndEditingNotificationName: Notification.Name.UITextViewTextDidEndEditing.rawValue)
         
         //  Unregistering for orientation changes notification
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation, object: UIApplication.shared)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillChangeStatusBarOrientation, object: UIApplication.shared)
         
         //  Unregistering for status bar frame change notification
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidChangeStatusBarFrame, object: UIApplication.shared)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidChangeStatusBarFrame, object: UIApplication.shared)
     }
 
     fileprivate func showLog(_ logString: String) {

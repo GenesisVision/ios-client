@@ -60,11 +60,27 @@ public enum IQPreviousNextDisplayMode : Int {
     case alwaysShow
 }
 
+/**
+ `IQEnableModeDefault`
+ Pick default settings.
+ 
+ `IQEnableModeEnabled`
+ setting is enabled.
+ 
+ `IQEnableModeDisabled`
+ setting is disabled.
+ */
+public enum IQEnableMode : Int {
+    case Default
+    case enabled
+    case disabled
+}
+
 /*
  
  /---------------------------------------------------------------------------------------------------\
  \---------------------------------------------------------------------------------------------------/
- |                                   iOS NSNotification Mechanism                                    |
+ |                                   iOS Notification Mechanism                                    |
  /---------------------------------------------------------------------------------------------------\
  \---------------------------------------------------------------------------------------------------/
  

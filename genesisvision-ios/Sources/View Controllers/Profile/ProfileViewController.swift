@@ -70,9 +70,11 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             
             switch result {
             case .success:
-                self?.headerView.setup(with: self?.viewModel.getAvatarURL())
-                self?.headerView.isHidden = false
-                self?.reloadData()
+                DispatchQueue.main.async {
+                    self?.headerView.setup(with: self?.viewModel.getAvatarURL())
+                    self?.headerView.isHidden = false
+                    self?.reloadData()
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
@@ -240,8 +242,11 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         viewModel.cancelEditProfile { [weak self] (result) in
             switch result {
             case .success:
-                self?.showProfileStateAction()
-                self?.reloadData()
+                DispatchQueue.main.async {
+                    self?.headerView.setup(with: self?.viewModel.getAvatarURL())
+                    self?.showProfileStateAction()
+                    self?.reloadData()
+                }
             case .failure:
                 print("Error")
             }

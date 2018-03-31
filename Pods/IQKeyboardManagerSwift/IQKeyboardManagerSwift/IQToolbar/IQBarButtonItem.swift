@@ -23,6 +23,7 @@
 
 
 import UIKit
+import Foundation
 
 open class IQBarButtonItem: UIBarButtonItem {
 
@@ -43,14 +44,10 @@ open class IQBarButtonItem: UIBarButtonItem {
 
         let  appearanceProxy = self.appearance()
 
-        let states : [UIControlState] = [.normal,.highlighted,.disabled,.selected,.application,.reserved];
-
-        //Tint color
-        appearanceProxy.tintColor = nil
+        let states : [UIControlState] = [.normal,.highlighted,.disabled,.selected,.application,.reserved]
 
         for state in states {
 
-            appearanceProxy.setTitleTextAttributes(nil, for: state)
             appearanceProxy.setBackgroundImage(nil, for: state, barMetrics: .default)
             appearanceProxy.setBackgroundImage(nil, for: state, style: .done, barMetrics: .default)
             appearanceProxy.setBackgroundImage(nil, for: state, style: .plain, barMetrics: .default)
@@ -59,8 +56,41 @@ open class IQBarButtonItem: UIBarButtonItem {
         
         appearanceProxy.setTitlePositionAdjustment(UIOffset.zero, for: .default)
         appearanceProxy.setBackgroundVerticalPositionAdjustment(0, for: .default)
-        appearanceProxy.setBackButtonTitlePositionAdjustment(UIOffset.zero, for: .default)
         appearanceProxy.setBackButtonBackgroundVerticalPositionAdjustment(0, for: .default)
+    }
+    
+    open override var tintColor: UIColor? {
+        didSet {
+
+            #if swift(>=4)
+                var textAttributes = [NSAttributedStringKey : Any]()
+                
+                if let attributes = titleTextAttributes(for: .normal) {
+                
+                    for (key, value) in attributes {
+                
+                        textAttributes[NSAttributedStringKey.init(key)] = value
+                    }
+                }
+                
+                textAttributes[NSAttributedStringKey.foregroundColor] = tintColor
+                
+                setTitleTextAttributes(textAttributes, for: .normal)
+
+            #else
+
+                var textAttributes = [String:Any]()
+                
+                if let attributes = titleTextAttributes(for: .normal) {
+                    textAttributes = attributes
+                }
+                
+                textAttributes[NSForegroundColorAttributeName] = tintColor
+                
+                setTitleTextAttributes(textAttributes, for: .normal)
+
+            #endif
+        }
     }
 
     /**
@@ -85,6 +115,12 @@ open class IQBarButtonItem: UIBarButtonItem {
     /**
      Customized Invocation to be called when button is pressed. invocation is internally created using setTarget:action: method.
      */
-    open var invocation : (target: AnyObject?, action: Selector?)
+    open var invocation : (target: AnyObject?, action: Selector?)?
     
+    deinit {
+
+        target = nil
+        invocation?.target = nil
+        invocation = nil
+    }
 }
