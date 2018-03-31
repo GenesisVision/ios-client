@@ -186,7 +186,6 @@ final class ProfileViewModel {
     }
     
     func saveProfile(completion: @escaping CompletionBlock) {
-        profileState = .show
         saveProfileApi(completion: completion)
     }
     
@@ -385,7 +384,6 @@ final class ProfileViewModel {
                 self?.profileModel = self?.editProfileModel
                 self?.editProfileModel = nil
                 self?.profileState = .show
-                self?.setupCellViewModel()
             case .failure( _):
                 break
             }

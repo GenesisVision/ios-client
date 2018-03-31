@@ -8,6 +8,7 @@
 
 import Foundation
 import PKHUD
+import NotificationBannerSwift
 
 enum ErrorMessageType {
     case connectionError(message: String)
@@ -55,11 +56,10 @@ class ErrorHandler {
                 ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
                 : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")
         case .connectionError(let message):
-            if let vc = viewController {
-                DispatchQueue.main.async {
-                    vc.showFlashHUD(type: .label(message), delay: 1.5)
-                }
-            }
+            if let notificationBanner = ReachabilityManager.shared.notificationBanner, notificationBanner.isDisplaying || notificationBanner.bannerQueue.numberOfBanners > 0 { return }
+            
+            ReachabilityManager.shared.notificationBanner?.titleLabel?.text = message
+            ReachabilityManager.shared.notificationBanner?.show()
         }
     }
 }

@@ -31,6 +31,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     var bottomlineHeight: Double = 1.0
     var bottomlineColor: UIColor = UIColor.TextField.line
     
+    var borderLine = UIView()
+    
     var placeholderColor: UIColor? {
         get {
             return self.placeholderColor
@@ -47,9 +49,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         borderStyle = UITextBorderStyle.none
         backgroundColor = UIColor.clear
         
-        let borderLine = UIView()
-        let height = bottomlineHeight
-        borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - height, width: Double(self.frame.width), height: height)
+        borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - bottomlineHeight, width: Double(self.frame.width), height: bottomlineHeight)
         
         borderLine.backgroundColor = borderColor
         
@@ -96,6 +96,12 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - bottomlineHeight, width: Double(self.frame.width), height: bottomlineHeight)
     }
     
     // MARK: - Private methods

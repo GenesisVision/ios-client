@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let reachabilityManager = ReachabilityManager()
+    var reachabilityManager: ReachabilityManager?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setup()
@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - Setup
 extension AppDelegate {
     private func setup() {
+        reachabilityManager = ReachabilityManager()
         AppearanceController.setupAppearance()
         SwaggerClientAPI.basePath = Constants.Api.basePath
         FirebaseApp.configure()

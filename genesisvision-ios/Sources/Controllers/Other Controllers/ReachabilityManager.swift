@@ -8,13 +8,19 @@
 
 import Reachability
 import PKHUD
+import NotificationBannerSwift
 
 class ReachabilityManager {
     static let shared = ReachabilityManager()
     
+    var notificationBanner: NotificationBanner?
+    
     let reachability = Reachability()!
     
     init() {
+        notificationBanner = NotificationBanner(title: Constants.ErrorMessages.noInternetConnection, style: .danger)
+        notificationBanner?.haptic = .medium
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
         do {
             try reachability.startNotifier()
@@ -37,6 +43,10 @@ class ReachabilityManager {
         case .cellular:
             print("Reachable via Cellular")
         case .none:
+            if let notificationBanner = notificationBanner, notificationBanner.isDisplaying || notificationBanner.bannerQueue.numberOfBanners > 0 { return }
+            
+            notificationBanner?.haptic = .medium
+            notificationBanner?.show()
             print("Network not reachable")
         }
     }

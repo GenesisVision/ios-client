@@ -84,10 +84,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     override func hideAll() {
-        DispatchQueue.main.async {
-            self.hideHUD()
-            self.refreshControl?.endRefreshing()
-        }
+        self.hideHUD()
+        self.refreshControl?.endRefreshing()
     }
     
     func setupPullToRefresh(title: String? = nil) {

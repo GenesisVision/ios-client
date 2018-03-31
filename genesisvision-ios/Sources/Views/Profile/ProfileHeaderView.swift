@@ -45,6 +45,8 @@ class ProfileHeaderView: UIView {
     
     
     func update(avatar url: URL?) {
+        chooseProfilePhotoButton.photoImageView.image = UIImage.placeholder
+        
         if let url = url {
             chooseProfilePhotoButton.photoImageView.kf.indicatorType = .activity
             chooseProfilePhotoButton.photoImageView.kf.setImage(with: url, placeholder: UIImage.placeholder)

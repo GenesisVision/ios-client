@@ -258,16 +258,18 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         showProgressHUD()
         
         viewModel.saveProfile { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.showSuccessHUD(completion: { (success) in
-                    self?.showProfileStateAction()
-                    self?.reloadData()
-                })
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            DispatchQueue.main.async {
+                self?.hideAll()
+                
+                switch result {
+                case .success:
+                    self?.showSuccessHUD(completion: { (success) in
+                        self?.showProfileStateAction()
+                        self?.reloadData()
+                    })
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
             }
         }
     }

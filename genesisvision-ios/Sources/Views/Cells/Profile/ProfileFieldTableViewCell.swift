@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TextFieldEffects
 
 class ProfileFieldTableViewCell: UITableViewCell {
 

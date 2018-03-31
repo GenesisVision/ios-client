@@ -11,10 +11,10 @@ target 'genesisvision-ios' do
     
     pod 'DZNEmptyDataSet'
 
-    pod 'TextFieldEffects'
     pod 'Kingfisher', '~> 4.0'
     pod 'TTRangeSlider'
     pod 'Firebase/Core'
     
     pod 'ReachabilitySwift'
+    pod 'NotificationBannerSwift'
 end
