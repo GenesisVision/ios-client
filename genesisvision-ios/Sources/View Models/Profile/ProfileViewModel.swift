@@ -221,14 +221,14 @@ final class ProfileViewModel {
     
     // MARK: - Navigation
     func signOut() {
-        AuthManager.signOut()
-        profileModel = nil
+        clearData()
         router.show(routeType: .signOut)
     }
     
+    
     @objc private func signOutNotification(notification: Notification) {
         NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
-        signOut()
+        forceSignOut()
     }
     
     // MARK: -  Private methods
@@ -236,6 +236,16 @@ final class ProfileViewModel {
         NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
         
         getProfile { (result) in }
+    }
+    
+    private func clearData() {
+        AuthManager.signOut()
+        profileModel = nil
+    }
+    
+    private func forceSignOut() {
+        clearData()
+        router.show(routeType: .forceSignOut)
     }
     
     private func getFields() -> [FieldType : String] {

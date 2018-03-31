@@ -177,6 +177,18 @@ extension Router {
         setWindowRoot(viewController: navigationController)
     }
     
+    func startAsForceSignOut() {
+        guard let navigationController = getProgramsNavigationController(),
+            let programsVC = navigationController.topViewController as? ProgramListViewController,
+            let viewModel = programsVC.viewModel,
+            let router = viewModel.router else { return }
+        
+        router.show(routeType: .signIn)
+        
+        
+        setWindowRoot(viewController: navigationController)
+    }
+    
     func startTournament() {
         guard let navigationController = getTournamentNavigationController() else { return }
         setWindowRoot(viewController: navigationController)

@@ -8,6 +8,7 @@
 
 enum ProfileRouteType {
     case signOut
+    case forceSignOut
 }
 
 class ProfileRouter: Router {
@@ -17,11 +18,17 @@ class ProfileRouter: Router {
         switch routeType {
         case .signOut:
             signOut()
+        case .forceSignOut:
+            forceSignOut()
         }
     }
     
     // MARK: - Private methods
     private func signOut() {
         startAsUnauthorized()
+    }
+    
+    private func forceSignOut() {
+        startAsForceSignOut()
     }
 }
