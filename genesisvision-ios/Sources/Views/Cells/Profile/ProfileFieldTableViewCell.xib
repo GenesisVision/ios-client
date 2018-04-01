@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,7 +29,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="KJHKJ" placeholder="JKHKJH" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XVf-np-JYJ" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="48.5" width="451" height="40"/>
+                        <rect key="frame" x="20" y="48.5" width="443" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="xZi-F5-KPM"/>
                         </constraints>
@@ -59,7 +59,7 @@
                     <constraint firstAttribute="bottom" secondItem="XVf-np-JYJ" secondAttribute="bottom" constant="8" id="3Rc-vD-soi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="E2K-nM-fuK" secondAttribute="trailing" id="6iv-TH-Ckk"/>
                     <constraint firstItem="E2K-nM-fuK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cmg-9B-fpA"/>
-                    <constraint firstItem="RbV-Ux-vYM" firstAttribute="leading" secondItem="XVf-np-JYJ" secondAttribute="trailing" constant="8" id="K9m-Dx-JOm"/>
+                    <constraint firstItem="RbV-Ux-vYM" firstAttribute="leading" secondItem="XVf-np-JYJ" secondAttribute="trailing" constant="16" id="K9m-Dx-JOm"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="top" secondItem="E2K-nM-fuK" secondAttribute="bottom" constant="8" id="TEV-ap-LAA"/>
                     <constraint firstItem="XVf-np-JYJ" firstAttribute="leading" secondItem="E2K-nM-fuK" secondAttribute="leading" id="UFo-RK-l8N"/>
                     <constraint firstItem="RbV-Ux-vYM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gsG-te-J0I"/>

@@ -43,7 +43,6 @@ class ProfileHeaderView: UIView {
         update(avatar: avatarURL)
     }
     
-    
     func update(avatar url: URL?) {
         chooseProfilePhotoButton.photoImageView.image = UIImage.placeholder
         

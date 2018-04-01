@@ -40,7 +40,6 @@ final class ProfileViewModel {
             setupCellViewModel()
         }
     }
-    private var editProfileModel: ProfileFullViewModel?
     
     weak var textFieldDelegate: UITextFieldDelegate?
     
@@ -174,31 +173,40 @@ final class ProfileViewModel {
     
     func editProfile(completion: @escaping CompletionBlock) {
         profileState = .edit
-        editProfileModel = profileModel
         completion(.success)
     }
     
     
     func cancelEditProfile(completion: @escaping CompletionBlock) {
+        setupCellViewModel()
         profileState = .show
-        editProfileModel = nil
-        completion(.success)
+        getProfile(completion: completion)
     }
     
     func saveProfile(completion: @escaping CompletionBlock) {
         saveProfileApi(completion: completion)
     }
     
-    func update(birthdate: Date) {
-        editProfileModel?.birthday = birthdate
+    func update(birthdate: Date?) {
         if let idx = editableFields.index(where: { $0.type == .birthday }) {
+            guard let birthdate = birthdate else {
+                editableFields[idx].text = ""
+                return
+            }
+            
+            profileModel?.birthday = birthdate
             editableFields[idx].text = birthdate.dateFormatString
         }
     }
     
-    func update(gender: Bool) {
-        editProfileModel?.gender = gender
+    func update(gender: Bool?) {
         if let idx = editableFields.index(where: { $0.type == .gender }) {
+            guard let gender = gender else {
+                editableFields[idx].text = ""
+                return
+            }
+            
+            profileModel?.gender = gender
             editableFields[idx].text = gender ? "Male" : "Female"
         }
     }
@@ -253,7 +261,7 @@ final class ProfileViewModel {
                 .middleName : profileModel?.middleName ?? "",
                 .lastName : profileModel?.lastName ?? "",
                 .birthday : getBirthday(),
-                .gender : getGender()]
+                .gender : getGenderValue()]
     }
     
     private func getKeyboardTypes(for fieldType: FieldType) -> UIKeyboardType {
@@ -339,13 +347,19 @@ final class ProfileViewModel {
         return date.dateFormatString
     }
     
-    func getBirthdate() -> Date {
-        guard let date = profileModel?.birthday else { return Date() }
+    func getBirthdate() -> Date? {
+        guard let date = profileModel?.birthday else { return nil }
         
         return date
     }
     
-    func getGender() -> String {
+    func getGender() -> Bool? {
+        guard let gender = profileModel?.gender else { return nil }
+        
+        return gender
+    }
+    
+    func getGenderValue() -> String {
         guard let gender = profileModel?.gender else { return "" }
         
         return gender ? "Male" : "Female"
@@ -358,31 +372,33 @@ final class ProfileViewModel {
         }
         
         ProfileDataProvider.updateProfileImage(imageURL: pickedImageURL, completion: { [weak self] (imageID) in
-            self?.editProfileModel?.avatar = imageID
+            self?.profileModel?.avatar = imageID
             self?.updateProfileApi(completion: completion)
         }, errorCompletion: completion)
     }
     
     private func updateProfileApi(completion: @escaping CompletionBlock) {
-        let model = UpdateProfileViewModel(userName: editProfileModel?.userName,
-                                           firstName: editProfileModel?.firstName,
-                                           middleName: editProfileModel?.middleName,
-                                           lastName: editProfileModel?.lastName,
-                                           documentType: editProfileModel?.documentType,
-                                           documentNumber: editProfileModel?.documentNumber,
-                                           country: editProfileModel?.country,
-                                           city: editProfileModel?.city,
-                                           address: editProfileModel?.address,
-                                           phone: editProfileModel?.phone,
-                                           birthday: editProfileModel?.birthday,
-                                           gender: editProfileModel?.gender,
-                                           avatar: editProfileModel?.avatar)
+        guard let profileModel = profileModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        let model = UpdateProfileViewModel(userName: profileModel.userName,
+                                           firstName: profileModel.firstName,
+                                           middleName: profileModel.middleName,
+                                           lastName: profileModel.lastName,
+                                           documentType: profileModel.documentType,
+                                           documentNumber: profileModel.documentNumber,
+                                           country: profileModel.country,
+                                           city: profileModel.city,
+                                           address: profileModel.address,
+                                           phone: profileModel.phone,
+                                           birthday: profileModel.birthday,
+                                           gender: profileModel.gender,
+                                           avatar: profileModel.avatar)
         
         ProfileDataProvider.updateProfile(model: model) { [weak self] (result) in
             switch result {
             case .success:
-                self?.profileModel = self?.editProfileModel
-                self?.editProfileModel = nil
+                AuthManager.saveProfileViewModel(viewModel: profileModel)
+                self?.setupCellViewModel()
                 self?.profileState = .show
             case .failure( _):
                 break

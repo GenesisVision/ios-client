@@ -63,20 +63,22 @@ class AuthManager {
         self.walletViewModel = viewModel
     }
     
+    static func saveProfileViewModel(viewModel: ProfileFullViewModel) {
+        self.profileViewModel = viewModel
+    }
+    
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void, completionError: @escaping CompletionBlock) {
-        guard profileViewModel != nil else {
-            ProfileDataProvider.getProfileFull(completion: { (viewModel) in
-                if viewModel != nil  {
-                    profileViewModel = viewModel
-                }
-                
-                completion(viewModel)
-            }, errorCompletion: completionError)
-            
-            return
+        if let profileViewModel = profileViewModel {
+            completion(profileViewModel)
         }
         
-        completion(profileViewModel)
+        ProfileDataProvider.getProfileFull(completion: { (viewModel) in
+            if viewModel != nil  {
+                profileViewModel = viewModel
+            }
+            
+            completion(viewModel)
+        }, errorCompletion: completionError)
     }
     
     static func getRate(completion: @escaping (_ rate: RateViewModel?) -> Void) {

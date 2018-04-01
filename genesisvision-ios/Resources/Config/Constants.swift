@@ -28,7 +28,7 @@ import UIKit
 
 enum CompletionResult {
     case success
-    case failure(reason: String?)
+    case failure(errorType: ErrorMessageType)
 }
 
 typealias ActionCompletionBlock = () -> Void
@@ -56,18 +56,33 @@ final class Constants {
         static let take = 50 //count of templates on 1 page
         
         struct Main {
-            static let debug = "https://pre-alpha.genesis.vision" //"https://tost.genesis.vision"
-            static let release = "https://pre-alpha.genesis.vision" //"https://tost.genesis.vision"
+            static let debug = "https://alpha.genesis.vision"
+            static let release = "https://alpha.genesis.vision"
         }
         struct Tournament {
-            static let debug = "https://ios-tournament.genesis.vision"
-            static let release = "https://ios-tournament.genesis.vision"
+            static let debug = ""
+            static let release = ""
         }
     }
     
     struct UserDefaults {
         static let authorizedToken: String = "AuthorizedToken"
         static let timesOpened: String = "TimesOpened"
+    }
+    
+    struct Filters {
+        static let minLevel: Int = 1
+        static let maxLevel: Int = 7
+        
+        static let minAvgProfit: Int = -100
+        static let maxAvgProfit: Int = 1000
+        
+        static let walletModelTypeDefault: TransactionsFilter.ModelType = .all
+    }
+    
+    struct Sorting {
+        static let programListDefault: InvestmentProgramsFilter.Sorting = .byProfitDesc
+        static let dashboardDefault: InvestorAPI.Sorting_apiInvestorDashboardGet = .byProfitDesc
     }
 
     struct TemplatesCounts {
@@ -78,12 +93,19 @@ final class Constants {
     static let currency = "GVT"
     static let hudDelay: Double = 2.0
     
+    struct Profile {
+        static let minYear: Int = 0
+    }
     struct SystemSizes {
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
     
     struct Keys {
         static let signOutKey: String = "signOutKey"
+    }
+    
+    struct ErrorMessages {
+        static let noInternetConnection = "No Internet Connection"
     }
     
     struct Titles {

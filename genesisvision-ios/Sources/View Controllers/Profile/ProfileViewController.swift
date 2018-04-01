@@ -66,17 +66,16 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     // MARK: - Private methods
     override func fetch() {
         viewModel.getProfile { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                self?.hideAll()
+                switch result {
+                case .success:
                     self?.headerView.setup(with: self?.viewModel.getAvatarURL())
                     self?.headerView.isHidden = false
                     self?.reloadData()
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self)
                 }
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -139,19 +138,19 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.view.tintColor = UIColor.primary
         
-        alert.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] (action) in
+        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self] (action) in
             DispatchQueue.main.async {
                 self?.takePhoto(type: .camera)
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Фотогалерея", style: .default, handler: { [weak self] (action) in
+        alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { [weak self] (action) in
             DispatchQueue.main.async {
                 self?.takePhoto(type: .photoLibrary)
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
         
         alert.popoverPresentationController?.sourceView = headerView.chooseProfilePhotoButton
         alert.popoverPresentationController?.sourceRect = headerView.chooseProfilePhotoButton.bounds
@@ -161,7 +160,10 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     private func update(gender value: Bool) {
         viewModel.update(gender: value)
-        reloadData()
+        UIView.setAnimationsEnabled(false)
+        let indexPath = IndexPath(row: 5, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .none)
+        UIView.setAnimationsEnabled(true)
     }
     
     private func selectGender() {
@@ -176,13 +178,12 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        switch viewModel.getGender() {
-        case "Female":
-            femaleAction.isEnabled = false
-        case "Male":
-            maleAction.isEnabled = false
-        default:
-            break
+        if let gender = viewModel.getGender() {
+            if gender {
+                maleAction.isEnabled = false
+            } else {
+                femaleAction.isEnabled = false
+            }
         }
         
         alert.addAction(maleAction)
@@ -208,7 +209,10 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
 
         alert.addDatePicker(mode: .date, date: self.viewModel.getBirthdate(), minimumDate: nil, maximumDate: maxDate) { [weak self] date in
             self?.viewModel.update(birthdate: date)
-            self?.reloadData()
+            UIView.setAnimationsEnabled(false)
+            let indexPath = IndexPath(row: 4, section: 0)
+            self?.tableView.reloadRows(at: [indexPath], with: .none)
+            UIView.setAnimationsEnabled(true)
         }
         
         alert.addAction(title: "Done", style: .cancel)
@@ -230,8 +234,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             case .success:
                 self?.editProfileStateAction()
                 self?.reloadData()
-            case .failure:
-                print("Error")
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }
@@ -242,11 +246,9 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         viewModel.cancelEditProfile { [weak self] (result) in
             switch result {
             case .success:
-                DispatchQueue.main.async {
-                    self?.headerView.setup(with: self?.viewModel.getAvatarURL())
-                    self?.showProfileStateAction()
-                    self?.reloadData()
-                }
+                self?.headerView.setup(with: self?.viewModel.getAvatarURL())
+                self?.showProfileStateAction()
+                self?.reloadData()
             case .failure:
                 print("Error")
             }
@@ -275,7 +277,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {
-        showAlertWithTitle(title: nil, message: "Log Out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
+        showAlertWithTitle(title: nil, message: "Log out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
             self?.viewModel.signOut()
         }, cancelHandler: nil)
     }
