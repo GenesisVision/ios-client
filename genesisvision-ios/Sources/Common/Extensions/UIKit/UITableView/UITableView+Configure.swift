@@ -95,6 +95,5 @@ extension UITableView {
         self.separatorInset.top = configuration.separatorInsetTop
         self.separatorInset.bottom = configuration.separatorInsetBottom
     }
-    
 }
 

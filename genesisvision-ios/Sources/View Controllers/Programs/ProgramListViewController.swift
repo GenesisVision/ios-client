@@ -111,6 +111,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             }
         }
     }
+    
     override func fetchMore() {
         canFetchMoreResults = false
         self.viewModel.fetchMore { [weak self] (result) in

@@ -113,21 +113,26 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
         switch tabsType {
         case .dashboard:
             if let vc = navController.viewControllers.first as? DashboardViewController, let tableView = vc.tableView {
-                tableView.setContentOffset(CGPoint.zero, animated: true)
+                scrollToFirstRow(tableView: tableView)
             }
         case .programList:
             if let vc = navController.viewControllers.first as? ProgramListViewController, let tableView = vc.tableView {
-                tableView.setContentOffset(CGPoint.zero, animated: true)
+                scrollToFirstRow(tableView: tableView)
             }
         case .wallet:
             if let vc = navController.viewControllers.first as? WalletViewController, let tableView = vc.tableView {
-                tableView.setContentOffset(CGPoint.zero, animated: true)
+                scrollToFirstRow(tableView: tableView)
             }
         case .profile:
             if let vc = navController.viewControllers.first as? ProfileViewController, let tableView = vc.tableView {
-                tableView.setContentOffset(CGPoint.zero, animated: true)
+                scrollToFirstRow(tableView: tableView)
             }
         }
+    }
+    
+    func scrollToFirstRow(tableView: UITableView) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

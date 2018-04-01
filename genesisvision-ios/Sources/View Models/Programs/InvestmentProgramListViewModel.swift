@@ -30,7 +30,11 @@ final class InvestmentProgramListViewModel {
     
     var dataType: DataType = .api
     var programsCount: String = ""
-    var skip = 0
+    var skip = 0 {
+        didSet {
+            filter?.skip = skip
+        }
+    }
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
@@ -255,7 +259,7 @@ extension InvestmentProgramListViewModel {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
+
             ProgramDataProvider.getPrograms(with: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
