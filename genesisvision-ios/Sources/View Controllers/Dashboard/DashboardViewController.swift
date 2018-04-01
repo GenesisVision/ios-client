@@ -37,12 +37,18 @@ class DashboardViewController: BaseViewControllerWithTableView {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if viewModel.modelsCount() == 0 {
+            fetch()
+        }
+    }
     // MARK: - Private methods
     private func setup() {
         registerForPreviewing()
-        
-        showProgressHUD()
-        fetch()
+
         setupUI()
     }
     

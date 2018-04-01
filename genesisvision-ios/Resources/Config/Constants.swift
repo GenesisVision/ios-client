@@ -102,6 +102,8 @@ final class Constants {
     
     struct Keys {
         static let signOutKey: String = "signOutKey"
+        
+        static let addedLineLayer: String = "addedLineLayer"
     }
     
     struct ErrorMessages {

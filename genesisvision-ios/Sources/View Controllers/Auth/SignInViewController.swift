@@ -16,6 +16,7 @@ class SignInViewController: BaseViewController {
     // MARK: - TextFields
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
+            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
             emailTextField.setLeftImageView()
             emailTextField.delegate = self
@@ -24,6 +25,7 @@ class SignInViewController: BaseViewController {
     
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
+            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.setLeftImageView()
             passwordTextField.delegate = self

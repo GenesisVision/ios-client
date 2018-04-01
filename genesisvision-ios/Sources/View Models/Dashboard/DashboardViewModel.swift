@@ -88,7 +88,7 @@ extension DashboardViewModel {
     }
     
     func modelsCount() -> Int {
-        return  viewModels.count
+        return viewModels.count
     }
     
     func numberOfSections() -> Int {

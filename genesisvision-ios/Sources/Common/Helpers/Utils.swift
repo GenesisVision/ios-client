@@ -40,10 +40,19 @@ enum LineStyle {
 }
 
 func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
+    if let sublayers = view.layer.sublayers {
+        for layer in sublayers {
+            if layer.name == Constants.Keys.addedLineLayer {
+                layer.removeFromSuperlayer()
+            }
+        }
+    }
+    
     let shapeLayer = CAShapeLayer()
     shapeLayer.fillColor = UIColor.clear.cgColor
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.lineWidth = 1.0
+    shapeLayer.name = Constants.Keys.addedLineLayer
     shapeLayer.lineJoin = kCALineJoinRound
     
     if style == .dashed {
