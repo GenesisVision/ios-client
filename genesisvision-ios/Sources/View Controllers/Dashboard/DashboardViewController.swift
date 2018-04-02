@@ -24,6 +24,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        showProgressHUD()
         setup()
     }
     

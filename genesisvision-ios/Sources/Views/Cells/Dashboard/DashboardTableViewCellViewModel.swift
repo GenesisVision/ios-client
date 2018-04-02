@@ -18,14 +18,18 @@ extension DashboardTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardTableViewCell) {
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
+        cell.viewForChartView.isHidden = cell.chartView.isHidden
         
-        cell.noDataLabel.text = "Not enough data"
+        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
         
-        if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 0 {
+        if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false
+            cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
             cell.chartView.setup(dataSet: chart, name: title)
         }
+        
+        cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
         if let title = investmentProgram.title {
             cell.programTitleLabel.text = title

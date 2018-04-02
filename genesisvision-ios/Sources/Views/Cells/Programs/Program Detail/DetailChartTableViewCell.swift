@@ -12,6 +12,7 @@ import Charts
 class DetailChartTableViewCell: UITableViewCell {
 
     // MARK: - Views
+    @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.backgroundColor = UIColor.NavBar.grayBackground

@@ -16,36 +16,40 @@ struct ProgramTableViewCellViewModel {
 extension ProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: TraderTableViewCell) {
         cell.chartView.isHidden = true
+        cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
         
-        cell.noDataLabel.text = "Not enough data"
+        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
         
-        if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 0 {
+        if let chart = self.investmentProgram.chart, let title = self.investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false
+            cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
             cell.chartView.setup(dataSet: chart, name: title)
         }
         
-        if let title = investmentProgram.title {
+        cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
+        
+        if let title = self.investmentProgram.title {
             cell.programTitleLabel.text = title
         }
         
-        if let currency = investmentProgram.currency {
+        if let currency = self.investmentProgram.currency {
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
-        if let level = investmentProgram.level {
+        if let level = self.investmentProgram.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = investmentProgram.logo {
+        if let logo = self.investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvg, totalProfit: investmentProgram.profitTotal, currency: investmentProgram.currency?.rawValue)
+        cell.programDetailsView.setup(investorsCount: self.investmentProgram.investorsCount, balance: self.investmentProgram.balance, avgProfit: self.investmentProgram.profitAvg, totalProfit: self.investmentProgram.profitTotal, currency: self.investmentProgram.currency?.rawValue)
     }
 }

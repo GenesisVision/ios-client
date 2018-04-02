@@ -108,6 +108,7 @@ final class Constants {
     
     struct ErrorMessages {
         static let noInternetConnection = "No Internet Connection"
+        static let noDataText = "not enough data\n for the chart"
     }
     
     struct Titles {

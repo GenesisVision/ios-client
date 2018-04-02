@@ -16,15 +16,19 @@ struct TraderTableViewCellViewModel {
 extension TraderTableViewCellViewModel: CellViewModel {
     func setup(on cell: TraderTableViewCell) {
         cell.chartView.isHidden = true
+        cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
         
-        cell.noDataLabel.text = "Not enough data"
+        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
         
-        if let chart = participantViewModel.chart, chart.count > 0 {
+        if let chart = participantViewModel.chart, chart.count > 1 {
             cell.chartView.isHidden = false
+            cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
             cell.chartView.setup(dataSet: [], name: participantViewModel.name)
         }
+        
+        cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
         if let name = participantViewModel.name {
             cell.programTitleLabel.text = name

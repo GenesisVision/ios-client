@@ -29,7 +29,8 @@ class DashboardTableViewCell: UITableViewCell {
     
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
-    
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = false
@@ -56,11 +57,7 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet var periodLeftValueLabel: UILabel!
     @IBOutlet var periodLeftTitleLabel: UILabel!
     
-    @IBOutlet var currencyLabel: CurrencyLabel! {
-        didSet {
-            currencyLabel.textColor = UIColor.Font.white
-        }
-    }
+    @IBOutlet var currencyLabel: CurrencyLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

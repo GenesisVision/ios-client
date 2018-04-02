@@ -14,7 +14,8 @@ class TraderTableViewCell: UITableViewCell {
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
-    
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.backgroundColor = UIColor.Background.main
@@ -30,16 +31,7 @@ class TraderTableViewCell: UITableViewCell {
     }
     
     @IBOutlet var programTitleLabel: UILabel!
-    @IBOutlet var managerNameLabel: UILabel! {
-        didSet {
-            managerNameLabel.isHidden = true
-        }
-    }
-    @IBOutlet var currencyLabel: CurrencyLabel! {
-        didSet {
-            currencyLabel.textColor = UIColor.Font.white
-        }
-    }
+    @IBOutlet var currencyLabel: CurrencyLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

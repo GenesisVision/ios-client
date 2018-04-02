@@ -15,6 +15,9 @@ class ProgramDetailsForTableViewCellView: UIStackView {
     @IBOutlet var avgProfitTitleLabel: UILabel!
     @IBOutlet var totalProfitTitleLabel: UILabel!
     
+    @IBOutlet var balanceCurrencyLabel: CurrencyLabel!
+    @IBOutlet var profitCurrencyLabel: CurrencyLabel!
+    
     @IBOutlet var investorsValueLabel: UILabel!
     @IBOutlet var balanceValueLabel: UILabel!
     @IBOutlet var avgProfitValueLabel: UILabel!
@@ -50,6 +53,9 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             balanceValueLabel.text = balance.rounded(withCurrency: currency).toString()
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.text = totalProfitValue.toString()
+            
+            balanceCurrencyLabel.text = currency
+            profitCurrencyLabel.text = Constants.currency
             
             investorsValueLabel.textColor = UIColor.Font.dark
             balanceValueLabel.textColor = UIColor.Font.dark
