@@ -21,13 +21,15 @@ open class ProgramBalances: Codable {
     }
     public var title: String?
     public var balance: Double?
+    public var balanceUsd: Double?
     public var currency: Currency?
 
 
     
-    public init(title: String?, balance: Double?, currency: Currency?) {
+    public init(title: String?, balance: Double?, balanceUsd: Double?, currency: Currency?) {
         self.title = title
         self.balance = balance
+        self.balanceUsd = balanceUsd
         self.currency = currency
     }
     
@@ -40,6 +42,7 @@ open class ProgramBalances: Codable {
 
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(balanceUsd, forKey: "balanceUsd")
         try container.encodeIfPresent(currency, forKey: "currency")
     }
 
@@ -50,6 +53,7 @@ open class ProgramBalances: Codable {
 
         title = try container.decodeIfPresent(String.self, forKey: "title")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        balanceUsd = try container.decodeIfPresent(Double.self, forKey: "balanceUsd")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }
 }

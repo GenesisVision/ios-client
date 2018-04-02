@@ -34,10 +34,17 @@ open class InvestmentProgramDashboardManager: Codable {
     public var profitTotal: Double?
     public var profitTotalGvt: Double?
     public var profitCurrent: Double?
+    public var isInvestEnable: Bool?
+    public var isWithdrawEnable: Bool?
+    public var token: Token?
+    public var ownBalance: Double?
+    public var minAccountBalanceUsd: Double?
+    public var minAccountBalance: Double?
+    public var login: String?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, token: Token?, ownBalance: Double?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, login: String?) {
         self.id = id
         self.title = title
         self.description = description
@@ -53,6 +60,13 @@ open class InvestmentProgramDashboardManager: Codable {
         self.profitTotal = profitTotal
         self.profitTotalGvt = profitTotalGvt
         self.profitCurrent = profitCurrent
+        self.isInvestEnable = isInvestEnable
+        self.isWithdrawEnable = isWithdrawEnable
+        self.token = token
+        self.ownBalance = ownBalance
+        self.minAccountBalanceUsd = minAccountBalanceUsd
+        self.minAccountBalance = minAccountBalance
+        self.login = login
     }
     
 
@@ -77,6 +91,13 @@ open class InvestmentProgramDashboardManager: Codable {
         try container.encodeIfPresent(profitTotal, forKey: "profitTotal")
         try container.encodeIfPresent(profitTotalGvt, forKey: "profitTotalGvt")
         try container.encodeIfPresent(profitCurrent, forKey: "profitCurrent")
+        try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
+        try container.encodeIfPresent(isWithdrawEnable, forKey: "isWithdrawEnable")
+        try container.encodeIfPresent(token, forKey: "token")
+        try container.encodeIfPresent(ownBalance, forKey: "ownBalance")
+        try container.encodeIfPresent(minAccountBalanceUsd, forKey: "minAccountBalanceUsd")
+        try container.encodeIfPresent(minAccountBalance, forKey: "minAccountBalance")
+        try container.encodeIfPresent(login, forKey: "login")
     }
 
     // Decodable protocol methods
@@ -99,6 +120,13 @@ open class InvestmentProgramDashboardManager: Codable {
         profitTotal = try container.decodeIfPresent(Double.self, forKey: "profitTotal")
         profitTotalGvt = try container.decodeIfPresent(Double.self, forKey: "profitTotalGvt")
         profitCurrent = try container.decodeIfPresent(Double.self, forKey: "profitCurrent")
+        isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
+        isWithdrawEnable = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawEnable")
+        token = try container.decodeIfPresent(Token.self, forKey: "token")
+        ownBalance = try container.decodeIfPresent(Double.self, forKey: "ownBalance")
+        minAccountBalanceUsd = try container.decodeIfPresent(Double.self, forKey: "minAccountBalanceUsd")
+        minAccountBalance = try container.decodeIfPresent(Double.self, forKey: "minAccountBalance")
+        login = try container.decodeIfPresent(String.self, forKey: "login")
     }
 }
 

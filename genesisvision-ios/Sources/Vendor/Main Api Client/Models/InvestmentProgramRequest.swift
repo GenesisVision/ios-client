@@ -25,15 +25,17 @@ open class InvestmentProgramRequest: Codable {
     public var amount: Double?
     public var type: ModelType?
     public var status: Status?
+    public var canCancelRequest: Bool?
 
 
     
-    public init(id: UUID?, date: Date?, amount: Double?, type: ModelType?, status: Status?) {
+    public init(id: UUID?, date: Date?, amount: Double?, type: ModelType?, status: Status?, canCancelRequest: Bool?) {
         self.id = id
         self.date = date
         self.amount = amount
         self.type = type
         self.status = status
+        self.canCancelRequest = canCancelRequest
     }
     
 
@@ -48,6 +50,7 @@ open class InvestmentProgramRequest: Codable {
         try container.encodeIfPresent(amount, forKey: "amount")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(canCancelRequest, forKey: "canCancelRequest")
     }
 
     // Decodable protocol methods
@@ -60,6 +63,7 @@ open class InvestmentProgramRequest: Codable {
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
+        canCancelRequest = try container.decodeIfPresent(Bool.self, forKey: "canCancelRequest")
     }
 }
 

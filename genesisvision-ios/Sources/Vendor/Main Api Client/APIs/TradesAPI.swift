@@ -12,13 +12,27 @@ import Alamofire
 
 open class TradesAPI {
     /**
+     * enum for parameter type
+     */
+    public enum ModelType_apiTradesIpfsHistoryGet: String { 
+        case undefined = "Undefined"
+        case metaTrader4 = "MetaTrader4"
+        case metaTrader5 = "MetaTrader5"
+        case ninjaTrader = "NinjaTrader"
+        case ctrader = "cTrader"
+        case rumus = "Rumus"
+        case metastock = "Metastock"
+    }
+
+    /**
      Get trades by IPFS hash id
      
+     - parameter type: (query)  
      - parameter ipfsHashId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiTradesIpfsHistoryGet(ipfsHashId: String? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        apiTradesIpfsHistoryGetWithRequestBuilder(ipfsHashId: ipfsHashId).execute { (response, error) -> Void in
+    open class func apiTradesIpfsHistoryGet(type: ModelType_apiTradesIpfsHistoryGet, ipfsHashId: String? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        apiTradesIpfsHistoryGetWithRequestBuilder(type: type, ipfsHashId: ipfsHashId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -63,18 +77,20 @@ open class TradesAPI {
   } ]
 }}]
      
+     - parameter type: (query)  
      - parameter ipfsHashId: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func apiTradesIpfsHistoryGetWithRequestBuilder(ipfsHashId: String? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func apiTradesIpfsHistoryGetWithRequestBuilder(type: ModelType_apiTradesIpfsHistoryGet, ipfsHashId: String? = nil) -> RequestBuilder<TradesViewModel> {
         let path = "/api/trades/ipfsHistory"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "ipfsHashId": ipfsHashId
+            "ipfsHashId": ipfsHashId, 
+            "type": type.rawValue
         ])
         
 

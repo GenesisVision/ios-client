@@ -14,13 +14,15 @@ open class ResetPasswordViewModel: Codable {
     public var userId: String
     public var code: String
     public var password: String
+    public var confirmPassword: String?
 
 
     
-    public init(userId: String, code: String, password: String) {
+    public init(userId: String, code: String, password: String, confirmPassword: String?) {
         self.userId = userId
         self.code = code
         self.password = password
+        self.confirmPassword = confirmPassword
     }
     
 
@@ -33,6 +35,7 @@ open class ResetPasswordViewModel: Codable {
         try container.encode(userId, forKey: "userId")
         try container.encode(code, forKey: "code")
         try container.encode(password, forKey: "password")
+        try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
     }
 
     // Decodable protocol methods
@@ -43,6 +46,7 @@ open class ResetPasswordViewModel: Codable {
         userId = try container.decode(String.self, forKey: "userId")
         code = try container.decode(String.self, forKey: "code")
         password = try container.decode(String.self, forKey: "password")
+        confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
     }
 }
 

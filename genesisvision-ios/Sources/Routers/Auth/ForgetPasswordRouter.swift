@@ -1,31 +1,30 @@
 //
-//  SignUpRouter.swift
+//  ForgotPasswordRouter.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 26.01.18.
+//  Created by George on 02/04/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum SignUpRouteType {
-    case confirmation
+enum ForgotPasswordRouteType {
+    case forgotPasswordInfo
 }
 
-class SignUpRouter: Router {
-    
+class ForgotPasswordRouter: Router {
     // MARK: - Public methods
-    func show(routeType: SignUpRouteType) {
+    func show(routeType: ForgotPasswordRouteType) {
         switch routeType {
-        case .confirmation:
-            confirmationAction()
+        case .forgotPasswordInfo:
+            showForgotPasswordInfo()
         }
     }
     
     // MARK: - Private methods
-    private func confirmationAction() {
+    private func showForgotPasswordInfo() {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         childRouters.append(router)
-        viewController.viewModel = SignUpConfirmationViewModel(withRouter: router)
+        viewController.viewModel = ForgotPasswordInfoViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -61,6 +61,8 @@ open class InvestmentProgramDetails: Codable {
     public var ipfsHash: String?
     public var tradeIpfsHash: String?
     public var isEnabled: Bool?
+    public var minAccountBalanceUsd: Double?
+    public var minAccountBalance: Double?
     public var chart: [Chart]?
     public var token: Token?
     public var manager: ProfilePublicViewModel?
@@ -73,7 +75,7 @@ open class InvestmentProgramDetails: Codable {
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, chart: [Chart]?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, chart: [Chart]?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -106,6 +108,8 @@ open class InvestmentProgramDetails: Codable {
         self.ipfsHash = ipfsHash
         self.tradeIpfsHash = tradeIpfsHash
         self.isEnabled = isEnabled
+        self.minAccountBalanceUsd = minAccountBalanceUsd
+        self.minAccountBalance = minAccountBalance
         self.chart = chart
         self.token = token
         self.manager = manager
@@ -156,6 +160,8 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
         try container.encodeIfPresent(tradeIpfsHash, forKey: "tradeIpfsHash")
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
+        try container.encodeIfPresent(minAccountBalanceUsd, forKey: "minAccountBalanceUsd")
+        try container.encodeIfPresent(minAccountBalance, forKey: "minAccountBalance")
         try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(token, forKey: "token")
         try container.encodeIfPresent(manager, forKey: "manager")
@@ -204,6 +210,8 @@ open class InvestmentProgramDetails: Codable {
         ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
         tradeIpfsHash = try container.decodeIfPresent(String.self, forKey: "tradeIpfsHash")
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
+        minAccountBalanceUsd = try container.decodeIfPresent(Double.self, forKey: "minAccountBalanceUsd")
+        minAccountBalance = try container.decodeIfPresent(Double.self, forKey: "minAccountBalance")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         token = try container.decodeIfPresent(Token.self, forKey: "token")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")

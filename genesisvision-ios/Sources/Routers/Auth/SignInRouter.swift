@@ -7,7 +7,7 @@
 //
 
 enum SignInRouteType {
-    case startAsAuthorized, signUp
+    case startAsAuthorized, signUp, forgotPassword
 }
 
 class SignInRouter: Router {
@@ -19,6 +19,8 @@ class SignInRouter: Router {
             startAsAuthorized()
         case .signUp:
             signUpAction()
+        case .forgotPassword:
+            forgotPasswordAction()
         }
     }
     
@@ -30,6 +32,15 @@ class SignInRouter: Router {
         router.navigationController = navigationController
         childRouters.append(router)
         viewController.viewModel = SignUpViewModel(withRouter: router)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func forgotPasswordAction() {
+        guard let viewController = ForgotPasswordViewController.storyboardInstance(name: .auth) else { return }
+        let router = ForgotPasswordRouter(parentRouter: self)
+        router.navigationController = navigationController
+        childRouters.append(router)
+        viewController.viewModel = ForgetPasswordViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

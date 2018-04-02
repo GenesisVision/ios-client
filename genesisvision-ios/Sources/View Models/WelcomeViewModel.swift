@@ -24,7 +24,7 @@ final class WelcomeViewModel {
     // MARK: - Public methods
     // MARK: - Navigation
     func start() {
-        requestReview()
+//        requestReview()
         isTournamentApp
             ? startTournament()
             : AuthManager.isLogin()

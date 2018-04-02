@@ -239,14 +239,8 @@ extension InvestmentProgramListViewModel {
         successCompletion(viewModel)
     }
     
-    private func fakeViewModels(completion: (_ traderCellModels: [ProgramTableViewCellViewModel]) -> Void) {
-        var cellModels = [ProgramTableViewCellViewModel]()
-        
-        for _ in 0..<Constants.TemplatesCounts.traders {
-            cellModels.append(ProgramTableViewCellViewModel(investmentProgram: InvestmentProgram(id: nil, title: "title", description: "descr", level: 1, logo: nil, isEnabled: true, balance: 123, currency: nil, tradesCount: nil, investorsCount: nil, periodDuration: nil, startOfPeriod: nil, endOfPeriod: nil, profitAvg: nil, profitTotal: nil, profitAvgPercent: nil, profitTotalPercent: nil, profitTotalChange: nil, availableInvestment: nil, feeSuccess: nil, feeManagement: nil, chart: nil, hasNewRequests: false, isInvestEnable: nil)))
-        }
-        
-        completion(cellModels)
+    private func fakeViewModels(completion: (_ traderCellModels: [ProgramTableViewCellViewModel]) -> Void) {    
+        completion([ProgramTableViewCellViewModel]())
     }
     
     private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {

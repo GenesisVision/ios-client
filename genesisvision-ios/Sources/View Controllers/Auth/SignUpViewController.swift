@@ -87,10 +87,6 @@ class SignUpViewController: BaseViewController {
         }
     }
     
-    private func showConfirmationVC() {
-        viewModel.showConfirmationVC()
-    }
-    
     // MARK: - Actions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         sighUpMethod()

@@ -12,6 +12,46 @@ import Alamofire
 
 open class InvestorAPI {
     /**
+     Change password
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorAuthChangePasswordPost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiInvestorAuthChangePasswordPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Change password
+     - POST /api/investor/auth/changePassword
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiInvestorAuthChangePasswordPostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/investor/auth/changePassword"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Confirm email after registration
      
      - parameter userId: (query)  (optional)
@@ -53,7 +93,7 @@ open class InvestorAPI {
     }
 
     /**
-     Forgot password
+     Forgot password investor
      
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -66,7 +106,7 @@ open class InvestorAPI {
 
 
     /**
-     Forgot password
+     Forgot password investor
      - POST /api/investor/auth/forgotPassword
      
      - parameter model: (body)  (optional)
@@ -230,46 +270,6 @@ open class InvestorAPI {
     }
 
     /**
-     Change password
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func apiInvestorAuthhangePasswordPost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        apiInvestorAuthhangePasswordPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Change password
-     - POST /api/investor/auth/сhangePassword
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func apiInvestorAuthhangePasswordPostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/api/investor/auth/сhangePassword"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
      * enum for parameter sorting
      */
     public enum Sorting_apiInvestorDashboardGet: String { 
@@ -337,7 +337,7 @@ open class InvestorAPI {
     "isInvestEnable" : true,
     "token" : {
       "tokenSymbol" : "tokenSymbol",
-      "initialPrice" : 4.965218492984954,
+      "initialPrice" : 9.965781217890562,
       "tokenName" : "tokenName"
     },
     "tradesCount" : 2,
@@ -393,7 +393,7 @@ open class InvestorAPI {
     "isInvestEnable" : true,
     "token" : {
       "tokenSymbol" : "tokenSymbol",
-      "initialPrice" : 4.965218492984954,
+      "initialPrice" : 9.965781217890562,
       "tokenName" : "tokenName"
     },
     "tradesCount" : 2,
@@ -557,15 +557,17 @@ open class InvestorAPI {
     "level" : 0,
     "profitTotalPercent" : 1.2315135367772556,
     "profitTotalChange" : "Unchanged",
+    "minAccountBalance" : 5.025004791520295,
     "isInvestEnable" : true,
     "token" : {
       "tokenSymbol" : "tokenSymbol",
-      "initialPrice" : 4.965218492984954,
+      "initialPrice" : 9.965781217890562,
       "tokenName" : "tokenName"
     },
     "tradesCount" : 7,
     "isOwnProgram" : true,
     "volumeTotal" : 1.0246457001441578,
+    "minAccountBalanceUsd" : 4.965218492984954,
     "isHistoryEnable" : true,
     "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "volumeTotalChange" : "Unchanged",
@@ -591,10 +593,10 @@ open class InvestorAPI {
       "profit" : 1.4894159098541704
     } ],
     "profitDiagram" : {
-      "managerFund" : 5.025004791520295,
+      "managerFund" : 9.369310271410669,
       "profitIsPositive" : true,
-      "profit" : 9.369310271410669,
-      "investorsFund" : 9.965781217890562
+      "profit" : 8.762042012749001,
+      "investorsFund" : 6.683562403749608
     }
   }
 }}]
@@ -707,12 +709,14 @@ open class InvestorAPI {
   "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "canCancelRequest" : true,
     "amount" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "canCancelRequest" : true,
     "amount" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -740,6 +744,52 @@ open class InvestorAPI {
         let requestBuilder: RequestBuilder<InvestmentProgramRequests>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Get manager trades chart
+     
+     - parameter investmentProgramId: (query)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorInvestmentProgramTradesChartGet(investmentProgramId: UUID, completion: @escaping ((_ data: TradesChartViewModel?,_ error: Error?) -> Void)) {
+        apiInvestorInvestmentProgramTradesChartGetWithRequestBuilder(investmentProgramId: investmentProgramId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get manager trades chart
+     - GET /api/investor/investmentProgram/trades/chart
+     - examples: [{contentType=application/json, example={
+  "chart" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "profit" : 0.8008281904610115
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "profit" : 0.8008281904610115
+  } ]
+}}]
+     
+     - parameter investmentProgramId: (query)  
+
+     - returns: RequestBuilder<TradesChartViewModel> 
+     */
+    open class func apiInvestorInvestmentProgramTradesChartGetWithRequestBuilder(investmentProgramId: UUID) -> RequestBuilder<TradesChartViewModel> {
+        let path = "/api/investor/investmentProgram/trades/chart"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "InvestmentProgramId": investmentProgramId
+        ])
+        
+
+        let requestBuilder: RequestBuilder<TradesChartViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -926,26 +976,34 @@ open class InvestorAPI {
   "total" : 1,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "periodDuration" : 5,
-    "feeManagement" : 7.386281948385884,
-    "hasNewRequests" : true,
-    "level" : 0,
     "availableInvestment" : 2.027123023002322,
-    "profitTotalPercent" : 3.616076749251911,
-    "profitTotalChange" : "Unchanged",
     "description" : "description",
     "title" : "title",
-    "isInvestEnable" : true,
-    "tradesCount" : 1,
     "balance" : 6.027456183070403,
-    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "isEnabled" : true,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
-    "profitTotal" : 7.061401241503109,
     "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 5,
+    "periodDuration" : 5,
+    "feeManagement" : 7.386281948385884,
+    "manager" : {
+      "country" : "country",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "username" : "username"
+    },
+    "hasNewRequests" : true,
+    "level" : 0,
+    "profitTotalPercent" : 3.616076749251911,
+    "profitTotalChange" : "Unchanged",
+    "isInvestEnable" : true,
+    "tradesCount" : 1,
+    "isOwnProgram" : true,
+    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
+    "profitTotal" : 7.061401241503109,
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -961,30 +1019,37 @@ open class InvestorAPI {
       "totalProfit" : 7.457744773683766,
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
-    } ],
-    "investorsCount" : 5
+    } ]
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "periodDuration" : 5,
-    "feeManagement" : 7.386281948385884,
-    "hasNewRequests" : true,
-    "level" : 0,
     "availableInvestment" : 2.027123023002322,
-    "profitTotalPercent" : 3.616076749251911,
-    "profitTotalChange" : "Unchanged",
     "description" : "description",
     "title" : "title",
-    "isInvestEnable" : true,
-    "tradesCount" : 1,
     "balance" : 6.027456183070403,
-    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
-    "isEnabled" : true,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
-    "profitTotal" : 7.061401241503109,
     "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 5,
+    "periodDuration" : 5,
+    "feeManagement" : 7.386281948385884,
+    "manager" : {
+      "country" : "country",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "username" : "username"
+    },
+    "hasNewRequests" : true,
+    "level" : 0,
+    "profitTotalPercent" : 3.616076749251911,
+    "profitTotalChange" : "Unchanged",
+    "isInvestEnable" : true,
+    "tradesCount" : 1,
+    "isOwnProgram" : true,
+    "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "isEnabled" : true,
+    "profitTotal" : 7.061401241503109,
     "profitAvg" : 2.3021358869347655,
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1000,8 +1065,7 @@ open class InvestorAPI {
       "totalProfit" : 7.457744773683766,
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
-    } ],
-    "investorsCount" : 5
+    } ]
   } ]
 }}]
      

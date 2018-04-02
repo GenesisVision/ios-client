@@ -28,6 +28,10 @@ final class SignInViewModel {
         router.show(routeType: .signUp)
     }
     
+    func showForgotPasswordVC() {
+        router.show(routeType: .forgotPassword)
+    }
+    
     // MARK: - API
     func signIn(email: String, password: String, completion: @escaping CompletionBlock) {
         AuthDataProvider.signIn(email: email, password: password, completion: { (token) in

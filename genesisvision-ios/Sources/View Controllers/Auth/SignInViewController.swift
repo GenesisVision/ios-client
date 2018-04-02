@@ -34,6 +34,7 @@ class SignInViewController: BaseViewController {
     
     // MARK: - Buttons
     @IBOutlet var signInButton: UIButton!
+    @IBOutlet var forgotPasswordButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
     
     // MARK: - Lifecycle
@@ -83,9 +84,18 @@ class SignInViewController: BaseViewController {
         viewModel.showSignUpVC()
     }
     
+    private func showForgotPasswordVC() {
+        hideKeyboard()
+        viewModel.showForgotPasswordVC()
+    }
+    
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
         sighInMethod()
+    }
+    
+    @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
+        showForgotPasswordVC()
     }
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {

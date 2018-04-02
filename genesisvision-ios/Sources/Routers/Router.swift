@@ -264,6 +264,10 @@ extension Router {
         popViewController(animated: true)
     }
     
+    func goToRoot() {
+        popToRootViewController(animated: true)
+    }
+    
     func closeVC() {
         dismiss(animated: true)
     }

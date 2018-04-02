@@ -46,12 +46,14 @@ open class InvestmentProgram: Codable {
     public var feeSuccess: Double?
     public var feeManagement: Double?
     public var chart: [Chart]?
+    public var manager: ProfilePublicViewModel?
     public var hasNewRequests: Bool?
     public var isInvestEnable: Bool?
+    public var isOwnProgram: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, hasNewRequests: Bool?, isInvestEnable: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -74,8 +76,10 @@ open class InvestmentProgram: Codable {
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
         self.chart = chart
+        self.manager = manager
         self.hasNewRequests = hasNewRequests
         self.isInvestEnable = isInvestEnable
+        self.isOwnProgram = isOwnProgram
     }
     
 
@@ -107,8 +111,10 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(chart, forKey: "chart")
+        try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
+        try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
     }
 
     // Decodable protocol methods
@@ -138,8 +144,10 @@ open class InvestmentProgram: Codable {
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
+        manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
+        isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
     }
 }
 
