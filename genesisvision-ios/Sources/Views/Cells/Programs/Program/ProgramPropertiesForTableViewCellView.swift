@@ -8,9 +8,12 @@
 
 import UIKit
 
+enum TimerState {
+    case closed, opened, inProcess
+}
+
 class ProgramPropertiesForTableViewCellView: UIStackView {
     // MARK: - Outlets
-    @IBOutlet var endOfPeriodLabel: UILabel! 
     @IBOutlet var periodDurationLabel: UILabel!
     @IBOutlet var periodDurationTitleLabel: UILabel! {
         didSet {
@@ -21,6 +24,20 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     @IBOutlet var periodLeftValueLabel: UILabel!
     @IBOutlet var periodLeftTimeLabel: UILabel!
     @IBOutlet var periodLeftTitleLabel: UILabel!
+    
+    @IBOutlet var untilPeriodImageView: UIImageView! {
+        didSet {
+            untilPeriodImageView.isHidden = false
+        }
+    }
+    
+    @IBOutlet var inProcessIndicatorView: UIActivityIndicatorView! {
+        didSet {
+            inProcessIndicatorView.startAnimating()
+            inProcessIndicatorView.color = UIColor.primary
+            inProcessIndicatorView.isHidden = true
+        }
+    }
     
     @IBOutlet var feeSuccessLabel: UILabel!
     @IBOutlet var feeManagementLabel: UILabel!
@@ -36,8 +53,10 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         }
     }
     
-    var timer: Timer?
+    var debugMode = isDebug
     
+    var timer: Timer?
+
     weak var reloadDataProtocol: ReloadDataProtocol?
     
     // MARK: - Lifecycle
@@ -73,51 +92,113 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         timer = nil
     }
     
+    func startTimer() {
+        guard let endOfPeriod = endOfPeriod else { return stopTimer() }
+        
+        let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+        if periodLeft.0 > 0 && (periodLeft.0 < 2 && periodLeft.1 == "minutes" || periodLeft.1 == "seconds") {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+            RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
+        }
+    }
+    
     // MARK: - Private methods
     private func updatePeriodLeftValueLabel() {
-        periodLeftTimeLabel.isHidden = !isEnable
+        stopTimer()
         
-        timer?.invalidate()
+        if debugMode {
+            endOfPeriod = Date(timeIntervalSinceNow: Constants.TemplatesCounts.timerSeconds)
+        }
         
-        if isEnable {
-            periodLeftValueLabel.numberOfLines = 1
-            periodLeftValueLabel.font = UIFont.getFont(.bold, size: 20)
+        guard isEnable else { return programClosed() }
+        programOpened()
+        updatePeriodLeftValue()
+        startTimer()
+    }
+    
+    private func periodUntilHide(_ state: TimerState) {
+        switch state {
+        case .opened:
+            periodLeftTitleLabel.isHidden = false
+            periodLeftTimeLabel.isHidden = false
+            periodLeftValueLabel.isHidden = false
+            untilPeriodImageView.isHidden = false
             
-            updatePeriodLeftValue()
+            inProcessIndicatorView.isHidden = true
+            inProcessIndicatorView.stopAnimating()
             
-            if let endOfPeriod = endOfPeriod {
-                let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
-                let periodLeftValue = periodLeft.0
-                if periodLeftValue >= 0 {
-                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
-                }
-            }
-        } else {
-            programClosed()
+            periodLeftTimeLabel.numberOfLines = 1
+            periodLeftTimeLabel.font = UIFont.getFont(.bold, size: 20)
+        case .closed:
+            periodLeftTitleLabel.isHidden = true
+            periodLeftValueLabel.isHidden = true
+            untilPeriodImageView.isHidden = true
+            
+            inProcessIndicatorView.isHidden = true
+            inProcessIndicatorView.stopAnimating()
+            
+            periodLeftTimeLabel.numberOfLines = 3
+            periodLeftTimeLabel.font = UIFont.getFont(.bold, size: 20)
+        case .inProcess:
+            periodLeftTitleLabel.isHidden = true
+            periodLeftValueLabel.isHidden = true
+            untilPeriodImageView.isHidden = true
+            
+            inProcessIndicatorView.isHidden = false
+            inProcessIndicatorView.startAnimating()
+            
+            periodLeftTimeLabel.numberOfLines = 3
+            periodLeftTimeLabel.font = UIFont.getFont(.bold, size: 15)
+        }
+    }
+    
+    private func programOpened() {
+        DispatchQueue.main.async {
+            self.periodUntilHide(.opened)
         }
     }
     
     private func programClosed() {
-        periodLeftValueLabel.numberOfLines = 3
-        periodLeftValueLabel.font = UIFont.getFont(.bold, size: 15)
+        DispatchQueue.main.async {
+            self.periodUntilHide(.closed)
+            self.periodLeftTimeLabel.text = "\nProgram \nclosed"
+        }
+    }
         
-        periodLeftValueLabel.text = "\nProgram \nclosed"
-        periodLeftTitleLabel.isHidden = true
+    private func programInProcess() {
+        DispatchQueue.main.async {
+            self.periodUntilHide(.inProcess)
+            self.periodLeftTimeLabel.text = "\nCalculating \nprofit..."
+        }
+        
+        Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(reloadData), userInfo: nil, repeats: false)
+    }
+    
+    @objc private func reloadData() {
+        reloadDataProtocol?.didReloadData()
+        if debugMode {
+            endOfPeriod = Date(timeIntervalSinceNow: Constants.TemplatesCounts.timerSeconds)
+        }
     }
     
     @objc func updatePeriodLeftValue() {
-        if let endOfPeriod = endOfPeriod {
-            let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
-            let periodLeftValue = periodLeft.0
-            
+        guard let endOfPeriod = endOfPeriod else { return stopTimer() }
+        
+        let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+        guard let periodLeftTimeValue = periodLeft.1 else { return stopTimer() }
+        
+        if periodLeft.0 > 0 && (periodLeft.0 < 2 && periodLeftTimeValue == "minutes" || periodLeftTimeValue == "seconds") {
             DispatchQueue.main.async {
-                if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
-                    self.periodLeftValueLabel.text = periodLeftValue.toString()
-                    self.periodLeftTimeLabel.text = periodLeftTimeValue
-                } else {
-                    self.reloadDataProtocol?.didReloadData()
-                }
+                self.periodLeftValueLabel.text = periodLeft.0.toString()
+                self.periodLeftTimeLabel.text = periodLeftTimeValue
             }
+        } else if periodLeft.0 == 0 {
+            stopTimer()
+            
+            self.programInProcess()
+        } else {
+            self.periodLeftValueLabel.text = periodLeft.0.toString()
+            self.periodLeftTimeLabel.text = periodLeftTimeValue
         }
     }
 }

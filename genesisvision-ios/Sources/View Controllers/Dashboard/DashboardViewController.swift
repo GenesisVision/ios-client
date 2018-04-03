@@ -131,6 +131,10 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
         
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        
+        if let cell = cell as? DashboardTableViewCell {
+            cell.startTimer()
+        }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -50,6 +50,6 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: self.investmentProgram.investorsCount, balance: self.investmentProgram.balance, avgProfit: self.investmentProgram.profitAvg, totalProfit: self.investmentProgram.profitTotal, currency: self.investmentProgram.currency?.rawValue)
+        cell.programDetailsView.setup(investorsCount: self.investmentProgram.investorsCount, balance: self.investmentProgram.balance, avgProfit: self.investmentProgram.profitAvgPercent, totalProfit: self.investmentProgram.profitTotal, currency: self.investmentProgram.currency?.rawValue)
     }
 }

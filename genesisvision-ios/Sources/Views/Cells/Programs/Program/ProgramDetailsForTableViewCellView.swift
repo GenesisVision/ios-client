@@ -37,7 +37,6 @@ class ProgramDetailsForTableViewCellView: UIStackView {
         investorsTitleLabel.textColor = UIColor.Font.darkBlue
         balanceTitleLabel.textColor = UIColor.Font.darkBlue
         avgProfitTitleLabel.textColor = UIColor.Font.darkBlue
-        totalProfitTitleLabel.textColor = UIColor.Font.darkBlue
         
         backgroundColor = UIColor.NavBar.background
         
@@ -54,13 +53,16 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.text = totalProfitValue.toString()
             
-            balanceCurrencyLabel.text = currency
-            profitCurrencyLabel.text = Constants.currency
-            
             investorsValueLabel.textColor = UIColor.Font.dark
             balanceValueLabel.textColor = UIColor.Font.dark
             avgProfitValueLabel.textColor = UIColor.Font.dark
-            totalProfitValueLabel.textColor = UIColor.Font.dark
+            
+            totalProfitValueLabel.textColor = totalProfit >= 0 ? UIColor.Font.dark : UIColor.Font.red
+            totalProfitTitleLabel.text = totalProfit >= 0 ? "TOTAL PROFIT" : "LOSS"
+            totalProfitTitleLabel.textColor = totalProfit >= 0 ? UIColor.Font.darkBlue : UIColor.Font.red
+            
+            balanceCurrencyLabel.text = currency
+            profitCurrencyLabel.text = Constants.currency
         }
     }
 }

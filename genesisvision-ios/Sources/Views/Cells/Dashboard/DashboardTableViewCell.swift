@@ -23,8 +23,10 @@ class DashboardTableViewCell: UITableViewCell {
         }
     }
     
-    var timer: Timer?
+    var debugMode = isDebug
     
+    var timer: Timer?
+    var date = Date(timeIntervalSinceNow: Constants.TemplatesCounts.timerSeconds)
     weak var reloadDataProtocol: ReloadDataProtocol?
     
     // MARK: - Views
@@ -35,6 +37,14 @@ class DashboardTableViewCell: UITableViewCell {
         didSet {
             chartView.isUserInteractionEnabled = false
             chartView.backgroundColor = UIColor.Background.main
+        }
+    }
+    
+    @IBOutlet var inProcessIndicatorView: UIActivityIndicatorView! {
+        didSet {
+            inProcessIndicatorView.startAnimating()
+            inProcessIndicatorView.color = UIColor.primary
+            inProcessIndicatorView.isHidden = true
         }
     }
     
@@ -76,56 +86,97 @@ class DashboardTableViewCell: UITableViewCell {
         timer = nil
     }
     
+    func startTimer() {
+        guard let endOfPeriod = endOfPeriod else { return stopTimer() }
+        
+        let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+        if periodLeft.0 > 0 && (periodLeft.0 < 2 && periodLeft.1 == "minutes" || periodLeft.1 == "seconds") {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+            RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
+        }
+    }
+    
     // MARK: - Private methods
     private func updatePeriodLeftValueLabel() {
-        periodLeftTitleLabel.isHidden = !isEnable
+        stopTimer()
         
-        timer?.invalidate()
+        if debugMode {
+           endOfPeriod = Date(timeIntervalSinceNow: Constants.TemplatesCounts.timerSeconds)
+        }
         
-        if isEnable {
-            periodLeftValueLabel.numberOfLines = 1
-            periodLeftValueLabel.font = UIFont.getFont(.regular, size: 30)
+        guard isEnable else { return programClosed() }
+        programOpened()
+        updatePeriodLeftValue()
+        startTimer()
+    }
+    
+    private func periodUntilHide(_ state: TimerState) {
+        switch state {
+        case .opened:
+            periodLeftValueLabel.isHidden = false
             
-//            updatePeriodLeftValue()
+            inProcessIndicatorView.isHidden = true
+            inProcessIndicatorView.stopAnimating()
             
-            if let endOfPeriod = endOfPeriod {
-                let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
-                let periodLeftValue = periodLeft.0
-                
-                if periodLeftValue >= 0 {
-//                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
-                }
-            }
-        } else {
-            programClosed()
+            periodLeftTitleLabel.numberOfLines = 1
+            periodLeftTitleLabel.font = UIFont.getFont(.bold, size: 12)
+        case .closed:
+            periodLeftValueLabel.isHidden = true
+            
+            inProcessIndicatorView.isHidden = true
+            inProcessIndicatorView.stopAnimating()
+            
+            periodLeftTitleLabel.numberOfLines = 2
+            periodLeftTitleLabel.font = UIFont.getFont(.bold, size: 18)
+        case .inProcess:
+            periodLeftValueLabel.isHidden = true
+            
+            inProcessIndicatorView.isHidden = false
+            inProcessIndicatorView.startAnimating()
+            
+            periodLeftTitleLabel.numberOfLines = 2
+            periodLeftTitleLabel.font = UIFont.getFont(.bold, size: 12)
+        }
+    }
+    
+    private func programOpened() {
+        DispatchQueue.main.async {
+            self.periodUntilHide(.opened)
         }
     }
     
     private func programClosed() {
-        periodLeftValueLabel.numberOfLines = 2
-        periodLeftValueLabel.font = UIFont.getFont(.bold, size: 15)
-        
-        periodLeftValueLabel.text = "Program \nclosed"
-        periodLeftTitleLabel.isHidden = true
+        DispatchQueue.main.async {
+            self.periodUntilHide(.closed)
+            self.periodLeftTitleLabel .text = "Program \nclosed"
+        }
+    }
+    
+    private func programInProcess() {
+        DispatchQueue.main.async {
+            self.periodUntilHide(.inProcess)
+            self.periodLeftTitleLabel.text = "Calculating \nprofit..."
+        }
     }
     
     @objc func updatePeriodLeftValue() {
-        if let endOfPeriod = endOfPeriod {
-            let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
-            let periodLeftValue = periodLeft.0
-            
+        guard let endOfPeriod = endOfPeriod else { return stopTimer() }
+        
+        let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
+        guard let periodLeftTitle = periodLeft.1 else { return stopTimer() }
+        
+        if periodLeft.0 > 0 && (periodLeft.0 < 2 && periodLeftTitle == "minutes" || periodLeftTitle == "seconds") {
             DispatchQueue.main.async {
-                if periodLeftValue >= 0, let periodLeftTimeValue = periodLeft.1 {
-                    self.periodLeftValueLabel.isHidden = false
-                    self.periodLeftTitleLabel.isHidden = false
-                    self.periodLeftValueLabel.text = periodLeftValue.toString()
-                    self.periodLeftTitleLabel.text = periodLeftTimeValue.uppercased() + " LEFT"
-                } else {
-                    self.periodLeftValueLabel.isHidden = true
-                    self.periodLeftTitleLabel.isHidden = true
-                    self.reloadDataProtocol?.didReloadData()
-                }
+                self.periodLeftValueLabel.text = periodLeft.0.toString()
+                self.periodLeftTitleLabel.text = periodLeftTitle.uppercased() + " LEFT"
             }
+        } else if periodLeft.0 == 0 {
+            stopTimer()
+            
+            self.programInProcess()
+        } else {
+            self.periodLeftValueLabel.text = periodLeft.0.toString()
+            self.periodLeftTitleLabel.text = periodLeftTitle.uppercased() + " LEFT"
         }
     }
 }

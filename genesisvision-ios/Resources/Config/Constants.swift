@@ -88,6 +88,8 @@ final class Constants {
     struct TemplatesCounts {
         static let traders: Int = 30
         static let transactions: Int = 30
+        
+        static let timerSeconds: Double = 200.0
     }
     
     static let currency = "GVT"

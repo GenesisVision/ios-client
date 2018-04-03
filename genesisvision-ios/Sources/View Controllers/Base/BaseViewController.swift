@@ -51,7 +51,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 
         fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
-        fetchMoreActivityIndicator.tintColor = UIColor.primary
+        fetchMoreActivityIndicator.color = UIColor.primary
         fetchMoreActivityIndicator.startAnimating()
         tableView.tableFooterView = fetchMoreActivityIndicator
         
