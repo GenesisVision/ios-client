@@ -44,12 +44,12 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.investedTokens = tokensCount
         }
         
-        if let profitTotal = investmentProgram.profitTotal {
-            cell.profitValueLabel.text = profitTotal.toString()
-            cell.profitValueLabel.textColor = profitTotal >= 0 ? UIColor.Font.dark : UIColor.Font.red
-            cell.profitTitleLabel.text = profitTotal >= 0 ? "PROFIT" : "LOSS"
-            cell.profitTitleLabel.textColor = profitTotal >= 0 ? UIColor.Font.primary : UIColor.Font.red
+        if let profitFromProgram = investmentProgram.profitFromProgram {
+            cell.profitValueLabel.text = profitFromProgram.toString()
+            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Font.dark : UIColor.Font.red
         }
+        
+        cell.profitTitleLabel.text = "MY PROFIT"
         
         if let currency = investmentProgram.currency {
             cell.currencyLabel.text = currency.rawValue.uppercased()
