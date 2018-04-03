@@ -107,6 +107,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none

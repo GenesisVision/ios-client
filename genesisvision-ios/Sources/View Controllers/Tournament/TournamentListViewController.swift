@@ -45,6 +45,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setupTableConfiguration() {
+        tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: TournamentListViewModel.cellModelsForRegistration)

@@ -55,6 +55,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = applyButton.frame.height + 16.0 + 16.0
         
         tableView.delegate = self

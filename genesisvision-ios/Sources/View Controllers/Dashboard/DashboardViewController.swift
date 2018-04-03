@@ -60,7 +60,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: DashboardViewModel.cellModelsForRegistration)
