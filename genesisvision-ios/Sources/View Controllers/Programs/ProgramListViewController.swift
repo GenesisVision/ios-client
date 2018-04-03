@@ -70,6 +70,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 16.0 + 16.0 : 0.0
         
         tableView.delegate = self
@@ -103,19 +104,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         viewModel.refresh { [weak self] (result) in
             self?.hideAll()
             
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
-    }
-    
-    override func fetchMore() {
-        canFetchMoreResults = false
-        self.viewModel.fetchMore { [weak self] (result) in
-            self?.canFetchMoreResults = true
             switch result {
             case .success:
                 break
@@ -165,9 +153,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
 
-        if (viewModel.modelsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
-            fetchMore()
-        }
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

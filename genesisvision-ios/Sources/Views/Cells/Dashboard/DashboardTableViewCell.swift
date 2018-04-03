@@ -86,14 +86,14 @@ class DashboardTableViewCell: UITableViewCell {
             periodLeftValueLabel.numberOfLines = 1
             periodLeftValueLabel.font = UIFont.getFont(.regular, size: 30)
             
-            updatePeriodLeftValue()
+//            updatePeriodLeftValue()
             
             if let endOfPeriod = endOfPeriod {
                 let periodLeft = getPeriodLeft(endOfPeriod: endOfPeriod)
                 let periodLeftValue = periodLeft.0
                 
                 if periodLeftValue >= 0 {
-                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
+//                    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
                 }
             }
         } else {

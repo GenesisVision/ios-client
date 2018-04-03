@@ -446,7 +446,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="avH-9D-fsN">
-                                                <rect key="frame" x="356" y="104.5" width="40.5" height="26"/>
+                                                <rect key="frame" x="353" y="104.5" width="46.5" height="26"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Haa-dz-P5w">
                                                         <rect key="frame" x="0.0" y="0.0" width="12.5" height="25"/>
@@ -455,13 +455,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZx-vx-4s3" customClass="WhiteCurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="16.5" y="0.0" width="24" height="14"/>
+                                                        <rect key="frame" x="16.5" y="0.0" width="30" height="16"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="24" id="ht5-b1-mAX"/>
-                                                            <constraint firstAttribute="height" constant="14" id="wb5-3Y-SJS"/>
+                                                            <constraint firstAttribute="width" constant="30" id="ht5-b1-mAX"/>
+                                                            <constraint firstAttribute="height" constant="16" id="wb5-3Y-SJS"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="8"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
                                                         <color key="textColor" red="0.0" green="0.73725490199999999" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </label>

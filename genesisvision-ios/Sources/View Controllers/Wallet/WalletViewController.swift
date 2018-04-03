@@ -108,19 +108,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func fetchMoreTransactions() {
-        canFetchMoreResults = false
-        viewModel.fetchMoreTransactions { [weak self] (result) in
-            self?.canFetchMoreResults = true
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
-    }
-    
     private func update(sorting type: TransactionsFilter.ModelType) {
         viewModel.filter?.type = type
         updateSortHeaderView()
@@ -156,9 +143,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
         
-        if (viewModel.numberOfRows(in: indexPath.section) - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
-            fetchMoreTransactions()
-        }
+        showInfiniteIndicator(value: viewModel.fetchMoreTransactions(at: indexPath.row))
     }
     
     // MARK: - UITableViewDataSource

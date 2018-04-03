@@ -59,18 +59,12 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.configure(with: .defaultConfiguration)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: DashboardViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: InvestmentProgramListViewModel.viewModelsForRegistration)
-        
-        tableView.layer.shadowColor = UIColor.black.cgColor
-        tableView.layer.shadowOffset = CGSize(width: 100, height: 100)
-        tableView.layer.shadowRadius = 5.0
-        tableView.layer.shadowOpacity = 0.5
-        tableView.clipsToBounds = true
-        tableView.layer.masksToBounds = true
-
         
         setupPullToRefresh()
     }
@@ -106,19 +100,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func fetchMore() {
-        canFetchMoreResults = false
-        self.viewModel.fetchMore { [weak self] (result) in
-            self?.canFetchMoreResults = true
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure:
-                break
-            }
-        }
-    }
-    
     override func pullToRefresh() {
         super.pullToRefresh()
         
@@ -150,9 +131,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
         
-        if (viewModel.modelsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
-            fetchMore()
-        }
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

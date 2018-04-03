@@ -37,11 +37,10 @@ class BaseViewController: UIViewController {
 }
 
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
-    
     // MARK: - Veriables
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var canFetchMoreResults = true
+    var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
     
     // MARK: - Lifecycle
@@ -49,7 +48,12 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         super.viewDidLoad()
         
         tableView.separatorStyle = .none
-        tableView.tableFooterView = UIView()
+
+        fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
+        fetchMoreActivityIndicator.tintColor = UIColor.primary
+        fetchMoreActivityIndicator.startAnimating()
+        tableView.tableFooterView = fetchMoreActivityIndicator
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
@@ -81,6 +85,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     func fetchMore() {
         //Fetch next page
+    }
+    
+    func showInfiniteIndicator(value: Bool) {
+        tableView.tableFooterView = value ? fetchMoreActivityIndicator : UIView()
     }
     
     override func hideAll() {

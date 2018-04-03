@@ -13,6 +13,7 @@ final class TournamentListViewModel {
     var title: String = "Tournament"
     var router: TournamentRouter!
     
+    var canFetchMoreResults = true
     var dataType: DataType = .api
     var participantsCount: String = ""
     var skip = 0
@@ -95,12 +96,18 @@ extension TournamentListViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(completion: @escaping CompletionBlock) {
-        if skip >= totalCount {
-            return completion(.failure(errorType: .apiError(message: nil)))
+    func fetchMore(at row: Int) -> Bool {
+        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+            fetchMore()
         }
         
-        skip += take
+        return skip < totalCount
+    }
+    
+    func fetchMore() {
+        guard skip < totalCount else { return }
+        
+        canFetchMoreResults = false
         fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
             var allViewModels = self?.traderTableViewCellViewModels ?? [TraderTableViewCellViewModel]()
             
@@ -109,7 +116,14 @@ extension TournamentListViewModel {
             })
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: completion)
+            }, completionError: { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+        })
     }
     
     func refresh(completion: @escaping CompletionBlock) {
@@ -158,6 +172,7 @@ extension TournamentListViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) {
         self.traderTableViewCellViewModels = viewModels
         self.totalCount = totalCount
+        self.skip += self.take
     }
     
     private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {

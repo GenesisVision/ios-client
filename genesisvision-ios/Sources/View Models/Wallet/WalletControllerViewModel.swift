@@ -34,6 +34,7 @@ final class WalletControllerViewModel {
     private var rate: Double = 0.0
     private var usdBalance: Double = 0.0
     
+    var canFetchMoreResults = true
     var dataType: DataType = .api
     var skip = 0            //offset
     var take = Constants.Api.take
@@ -156,13 +157,18 @@ extension WalletControllerViewModel {
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
-    func fetchMoreTransactions(completion: @escaping CompletionBlock) {
-        if skip >= totalCount {
-            return completion(.failure(errorType: .apiError(message: nil)))
+    func fetchMoreTransactions(at row: Int) -> Bool {
+        if numberOfRows(in: 1) - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+            fetchMoreTransactions()
         }
         
-        skip += take
+        return skip < totalCount
+    }
+    
+    func fetchMoreTransactions() {
+        guard skip < totalCount else { return }
         
+        canFetchMoreResults = false
         fetchTransactions({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.transactions ?? [WalletTransactionTableViewCellViewModel]()
             
@@ -171,7 +177,14 @@ extension WalletControllerViewModel {
             })
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: completion)
+            }, completionError: { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+        })
     }
     
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
@@ -187,6 +200,7 @@ extension WalletControllerViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.transactions = viewModels
         self.totalCount = totalCount
+        self.skip += self.take
         self.reloadDataProtocol?.didReloadData()
     }
     

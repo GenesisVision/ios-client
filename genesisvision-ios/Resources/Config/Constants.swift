@@ -51,7 +51,7 @@ final class Constants {
         
         static let filePath = basePath + "/api/files?id="
         
-        static let fetchThreshold = 20 // a constant to determine when to fetch the results
+        static let fetchThreshold = 1 // a constant to determine when to fetch the results
 
         static let take = 50 //count of templates on 1 page
         

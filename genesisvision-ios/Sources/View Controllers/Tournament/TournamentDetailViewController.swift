@@ -33,6 +33,8 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showInfiniteIndicator(value: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,6 +50,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         
         tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
+        showInfiniteIndicator(value: false)
         
         setupPullToRefresh()
     }

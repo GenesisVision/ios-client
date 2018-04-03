@@ -24,6 +24,7 @@ final class DashboardViewModel {
     private var dashboard: InvestorDashboard?
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var canFetchMoreResults = true
     var programsCount: String = ""
     var skip = 0
     var take = Constants.Api.take
@@ -166,12 +167,18 @@ extension DashboardViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(completion: @escaping CompletionBlock) {
-        if skip >= totalCount {
-            return completion(.failure(errorType: .apiError(message: nil)))
+    func fetchMore(at row: Int) -> Bool {
+        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+            fetchMore()
         }
         
-        skip += take
+        return skip < totalCount
+    }
+    
+    func fetchMore() {
+        guard skip < totalCount else { return }
+        
+        canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.viewModels ?? [DashboardTableViewCellViewModel]()
             
@@ -180,7 +187,14 @@ extension DashboardViewModel {
             })
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: completion)
+            }, completionError: { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+        })
     }
     
     func refresh(completion: @escaping CompletionBlock) {
@@ -221,10 +235,12 @@ extension DashboardViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
+        self.skip += self.take
         self.reloadDataProtocol?.didReloadData()
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+        
         DashboardDataProvider.getProgram(with: sorting, completion: { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
             

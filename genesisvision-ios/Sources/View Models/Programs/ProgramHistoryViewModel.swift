@@ -15,8 +15,8 @@ final class ProgramHistoryViewModel {
     
     var router: ProgramHistoryRouter!
     
+    var canFetchMoreResults = true
     var dataType: DataType = .api
-    
     var transactionsCount: String = ""
     var skip = 0
     var take = Constants.Api.take
@@ -61,12 +61,18 @@ extension ProgramHistoryViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(completion: @escaping CompletionBlock) {
-        if skip >= totalCount {
-            return completion(.failure(errorType: .apiError(message: nil)))
+    func fetchMore(at row: Int) -> Bool {
+        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+            fetchMore()
         }
         
-        skip += take
+        return skip < totalCount
+    }
+    
+    func fetchMore() {
+        guard skip < totalCount else { return }
+        
+        canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.viewModels ?? [WalletTransactionTableViewCellViewModel]()
             
@@ -75,7 +81,14 @@ extension ProgramHistoryViewModel {
             })
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: completion)
+            }, completionError: { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+        })
     }
     
     func refresh(completion: @escaping CompletionBlock) {
@@ -95,6 +108,7 @@ extension ProgramHistoryViewModel {
    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
+        self.skip += self.take
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
@@ -104,7 +118,6 @@ extension ProgramHistoryViewModel {
                 let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             let filter = TransactionsFilter(investmentProgramId: uuid, type: nil, skip: skip, take: take)
-            
             WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
                 guard transactionsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)

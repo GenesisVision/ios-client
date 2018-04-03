@@ -96,6 +96,8 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         requestsButton.isHidden = !viewProperties.hasNewRequests
         gradientView.isHidden = false
         
+        showInfiniteIndicator(value: false)
+        
         if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
             tableView.contentInset.bottom = buttonHeight + buttonBottom
         } else {

@@ -47,6 +47,8 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
         
         view.backgroundColor = UIColor.Background.main
         
+        showInfiniteIndicator(value: false)
+        
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
         resetBarButtonItem?.tintColor = UIColor.Button.red
         navigationItem.rightBarButtonItem = resetBarButtonItem
@@ -59,6 +61,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.bounces = false
         tableView.registerNibs(for: ProgramFilterViewModel.cellModelsForRegistration)
+        showInfiniteIndicator(value: false)
     }
     
     private func reloadData() {

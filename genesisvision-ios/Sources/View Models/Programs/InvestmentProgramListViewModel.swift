@@ -28,6 +28,7 @@ final class InvestmentProgramListViewModel {
     var state: InvestmentProgramListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var canFetchMoreResults = true
     var dataType: DataType = .api
     var programsCount: String = ""
     var skip = 0 {
@@ -182,12 +183,18 @@ extension InvestmentProgramListViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(completion: @escaping CompletionBlock) {
-        if skip >= totalCount {
-            return completion(.failure(errorType: .apiError(message: nil)))
+    func fetchMore(at row: Int) -> Bool {
+        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+            fetchMore()
         }
         
-        skip += take
+        return skip < totalCount
+    }
+    
+    func fetchMore() {
+        guard skip < totalCount else { return }
+        
+        canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.investmentProgramViewModels ?? [ProgramTableViewCellViewModel]()
             
@@ -196,7 +203,14 @@ extension InvestmentProgramListViewModel {
             })
             
             self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: completion)
+            }, completionError: { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+        })
     }
     
     func refresh(completion: @escaping CompletionBlock) {
@@ -246,6 +260,8 @@ extension InvestmentProgramListViewModel {
     private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
         self.investmentProgramViewModels = viewModels
         self.totalCount = totalCount
+        self.skip += self.take
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     
@@ -253,7 +269,6 @@ extension InvestmentProgramListViewModel {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-
             ProgramDataProvider.getPrograms(with: filter, completion: { (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 

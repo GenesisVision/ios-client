@@ -43,6 +43,8 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
         title = viewModel.title
         view.backgroundColor = UIColor.Background.main
         
+        showInfiniteIndicator(value: false)
+        
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
         resetBarButtonItem?.tintColor = UIColor.Button.red
         navigationItem.rightBarButtonItem = resetBarButtonItem
@@ -54,6 +56,7 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: WalletFilterViewModel.cellModelsForRegistration)
+        showInfiniteIndicator(value: false)
     }
     
     private func reloadData() {

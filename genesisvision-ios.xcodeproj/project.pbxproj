@@ -29,6 +29,7 @@
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */; };
 		5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */; };
+		5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */; };
 		5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */; };
 		5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */; };
 		5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */; };
@@ -369,6 +370,7 @@
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewModel.swift; sourceTree = "<group>"; };
 		5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionRouter.swift; sourceTree = "<group>"; };
+		5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopJumpingTableViewOnInsertRows.swift; sourceTree = "<group>"; };
 		5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewController.swift; sourceTree = "<group>"; };
 		5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadButton.swift; sourceTree = "<group>"; };
@@ -1030,6 +1032,7 @@
 				FCC9DD83200E5CEC008825EC /* UITableView+ReusableCell.swift */,
 				FCC9DD85200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift */,
 				5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */,
+				5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */,
 			);
 			path = UITableView;
 			sourceTree = "<group>";
@@ -1971,6 +1974,7 @@
 				5E82EF9E20727B34006EEA3F /* Token.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
+				5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */,
 				5E82EF8720727B34006EEA3F /* InvestmentProgramRequestsFilter.swift in Sources */,
 				FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */,
 				5E181E6A2067AD1900BF3240 /* NumpadView.swift in Sources */,

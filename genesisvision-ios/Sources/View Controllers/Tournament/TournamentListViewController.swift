@@ -81,19 +81,6 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func fetchMore() {
-        canFetchMoreResults = false
-        self.viewModel.fetchMore { [weak self] (result) in
-            self?.canFetchMoreResults = true
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure:
-                break
-            }
-        }
-    }
-    
     override func pullToRefresh() {
         super.pullToRefresh()
         
@@ -127,9 +114,7 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row != 0 { cell.addDashedBottomLine() }
         
-        if (viewModel.modelsCount() - indexPath.row) == Constants.Api.fetchThreshold && canFetchMoreResults {
-            fetchMore()
-        }
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

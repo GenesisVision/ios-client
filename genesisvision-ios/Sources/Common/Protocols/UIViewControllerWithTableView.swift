@@ -11,10 +11,11 @@ import UIKit
 protocol UIViewControllerWithTableView {
     var tableView: UITableView! { get }
     var refreshControl: UIRefreshControl! { get }
-    var canFetchMoreResults: Bool { get }
 }
 
 protocol UIViewControllerWithFetching {
+    var fetchMoreActivityIndicator: UIActivityIndicatorView! { get }
+    
     func updateData()
     func pullToRefresh()
     func fetch()

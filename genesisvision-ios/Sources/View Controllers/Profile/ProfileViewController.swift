@@ -90,6 +90,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         
         title = viewModel.title.uppercased()
         navigationItem.title = viewModel.title
+        
+        showInfiniteIndicator(value: false)
     }
     
     private func setupTableConfiguration() {
