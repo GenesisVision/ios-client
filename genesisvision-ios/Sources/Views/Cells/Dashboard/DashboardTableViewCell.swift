@@ -76,6 +76,12 @@ class DashboardTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Background.main
     }
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
+    }
+    
     deinit {
         stopTimer()
     }

@@ -55,4 +55,10 @@ class WalletTransactionTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
+    }
 }

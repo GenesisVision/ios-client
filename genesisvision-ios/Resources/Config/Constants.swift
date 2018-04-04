@@ -40,6 +40,11 @@ enum DataType {
     case fake
 }
 
+enum CurrencyType: Int {
+    case gvt = 4, crypto = 8, other = 2
+}
+
+
 final class Constants {
     
     struct Api {
@@ -59,6 +64,7 @@ final class Constants {
             static let debug = "https://alpha.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
+        
         struct Tournament {
             static let debug = ""
             static let release = ""
@@ -98,6 +104,7 @@ final class Constants {
     struct Profile {
         static let minYear: Int = 0
     }
+    
     struct SystemSizes {
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }

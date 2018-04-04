@@ -44,6 +44,12 @@ class ProgramRequestTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Background.main
     }
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
+    }
+    
     // MARK: - Actions
     @IBAction func cancelButtonAction(_ sender: Any) {
         delegate?.cancelRequestDidPress(with: requestID, lastRequest: lastRequest)

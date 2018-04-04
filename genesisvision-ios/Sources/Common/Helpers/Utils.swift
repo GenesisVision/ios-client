@@ -35,6 +35,26 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
     return (periodLeftValue, periodLeftTimeString)
 }
 
+func getDecimalCount(for currencyValue: String?) -> Int {
+    guard let currencyValue = currencyValue,
+        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue) else { return 2 }
+    
+    var currencyType: CurrencyType = .gvt
+    
+    switch currency {
+    case .usd, .eur:
+        currencyType = .other
+    case .eth, .btc:
+        currencyType = .crypto
+    case .gvt:
+        currencyType = .gvt
+    default:
+        currencyType = .other
+    }
+    
+    return currencyType.rawValue
+}
+
 enum LineStyle {
     case solid, dashed
 }

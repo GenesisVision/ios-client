@@ -154,11 +154,20 @@ class ProgramInvestViewController: BaseViewController {
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
+    var currency: String {
+        return Constants.currency
+    }
+    
+    func changedActive(value: Bool) {
+        numpadView.isEnable = value
+    }
+    
     var textLabel: UILabel {
         return self.amountLabel
     }
     
     func textLabelDidChange(value: Double?) {
+        numpadView.isEnable = true
         enteredAmount = value != nil ? value! : 0.0
     }
 }

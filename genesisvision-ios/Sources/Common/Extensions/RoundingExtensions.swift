@@ -8,33 +8,28 @@
 
 import Foundation
 
-enum RoundedType {
-    case gvt, crypto, other
+extension Decimal {
+    var count: Int {
+        return max(-exponent, 0)
+    }
 }
 
 extension Double {
-    func rounded(toPlaces places: UInt) -> Double {
+    func rounded(toPlaces places: Int) -> Double {
         let decimalValue = pow(10.0, Double(places))
         return (self * decimalValue).rounded() / decimalValue
     }
     
-    func rounded(withType type: RoundedType) -> Double {
-        switch type {
-        case .gvt:
-            return rounded(toPlaces: 4)
-        case .crypto:
-            return rounded(toPlaces: 8)
-        default:
-            return rounded(toPlaces: 2)
-        }
+    func rounded(withType type: CurrencyType) -> Double {
+        return rounded(toPlaces: type.rawValue)
     }
     
-    func rounded(withCurrency currency: String?) -> Double {
-        guard let currency = currency, let currencyType = InvestmentProgramDetails.Currency(rawValue: currency) else {
+    func rounded(withCurrency currencyValue: String?) -> Double {
+        guard let currencyValue = currencyValue, let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue) else {
             return rounded(withType: .other)
         }
         
-        switch currencyType {
+        switch currency {
         case .usd, .eur:
             return rounded(withType: .other)
         case .eth, .btc:
