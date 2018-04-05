@@ -50,7 +50,7 @@ class WalletDepositViewController: BaseViewController {
     }
     
     private func setupUI() {
-        title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
     }

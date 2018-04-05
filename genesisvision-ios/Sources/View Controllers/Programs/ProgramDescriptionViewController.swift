@@ -25,7 +25,7 @@ class ProgramDescriptionViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: ProgramDescriptionViewModel! {
         didSet {
-            title = viewModel.title
+            navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         }
     }
     

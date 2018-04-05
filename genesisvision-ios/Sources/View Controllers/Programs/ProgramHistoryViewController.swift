@@ -24,7 +24,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -57,7 +57,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private func setup() {
         registerForPreviewing()
         
-        title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         showProgressHUD()
         fetch()
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)

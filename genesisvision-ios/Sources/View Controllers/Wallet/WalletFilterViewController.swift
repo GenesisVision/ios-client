@@ -40,7 +40,7 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         view.backgroundColor = UIColor.Background.main
         
         showInfiniteIndicator(value: false)

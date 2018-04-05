@@ -66,7 +66,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         navigationItem.rightBarButtonItem = filtersBarButtonItem
         
         title = viewModel.title.uppercased()
-        navigationItem.title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
     }
     
     private func setupTableConfiguration() {

@@ -84,7 +84,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
         guard let viewProperties = viewModel.viewProperties else { return }
         
