@@ -13,7 +13,9 @@ target 'genesisvision-ios' do
 
     pod 'Kingfisher', '~> 4.0'
     pod 'TTRangeSlider'
+    
     pod 'Firebase/Core'
+    pod 'Firebase/Crash'
     
     pod 'ReachabilitySwift'
     pod 'NotificationBannerSwift'

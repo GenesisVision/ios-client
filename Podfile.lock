@@ -7,6 +7,9 @@ PODS:
   - Firebase/Core (4.11.0):
     - FirebaseAnalytics (= 4.1.0)
     - FirebaseCore (= 4.0.18)
+  - Firebase/Crash (4.11.0):
+    - Firebase/Core
+    - FirebaseCrash (= 2.0.2)
   - FirebaseAnalytics (4.1.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -14,9 +17,17 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.18):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCrash (2.0.2):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
   - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/Logger (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - IQKeyboardManagerSwift (5.0.8)
@@ -31,6 +42,7 @@ PODS:
     - MarqueeLabel/Swift
     - SnapKit (~> 4.0)
   - PKHUD (5.0.0)
+  - Protobuf (3.5.0)
   - ReachabilitySwift (4.1.0)
   - SnapKit (4.0.0)
   - TTRangeSlider (1.0.5)
@@ -40,6 +52,7 @@ DEPENDENCIES:
   - Charts
   - DZNEmptyDataSet
   - Firebase/Core
+  - Firebase/Crash
   - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
   - NotificationBannerSwift
@@ -54,6 +67,7 @@ SPEC CHECKSUMS:
   Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
   FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
   FirebaseCore: b981f47e5254cbcfdeb483355300d743f6fcab2c
+  FirebaseCrash: cded0fc566c03651aea606a101bc156085f333ca
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
@@ -62,10 +76,11 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NotificationBannerSwift: 4eceb2add9d5eaa0596c63d49690b4d6476e74ec
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: e91e7e2edbfa361fa5340d8084a04a3c40ffef53
+PODFILE CHECKSUM: 591556abcc838b4435ad628a4edf1177cd78ffb6
 
 COCOAPODS: 1.4.0
