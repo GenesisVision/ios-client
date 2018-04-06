@@ -7,20 +7,24 @@
 //
 
 enum ProgramInvestRouteType {
-    case confirm
+    case investmentRequested
 }
 
 class ProgramInvestRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramInvestRouteType) {
         switch routeType {
-        case .confirm:
-            confirm()
+        case .investmentRequested:
+            investmentRequested()
         }
     }
     
     // MARK: - Private methods
-    private func confirm() {
-        //TODO: confirm screen
+    private func investmentRequested() {
+        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        childRouters.append(router)
+        viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

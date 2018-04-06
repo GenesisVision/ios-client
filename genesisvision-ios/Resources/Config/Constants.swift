@@ -99,7 +99,12 @@ final class Constants {
     }
     
     static let currency = "GVT"
-    static let hudDelay: Double = 2.0
+    
+    struct HudDelay {
+        static let `default`: Double = 2.0
+        static let error: Double = 2.0
+        static let success: Double = 1.0
+    }
     
     struct Profile {
         static let minYear: Int = 0

@@ -42,7 +42,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Private methods

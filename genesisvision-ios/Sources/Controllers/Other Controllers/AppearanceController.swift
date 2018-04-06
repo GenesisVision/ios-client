@@ -17,6 +17,7 @@ struct StyleColors {
     var tintColor = UIColor.NavBar.tint
     var backgroundColor = UIColor.NavBar.background
     var textColor = UIColor.Font.dark
+    var subtitleColor = UIColor.Font.medium
     
     init(with style: ColorStyle = .white) {
         switch style {
@@ -24,6 +25,7 @@ struct StyleColors {
             self.tintColor = UIColor.Font.white
             self.backgroundColor = UIColor.primary
             self.textColor = UIColor.Font.white
+            self.subtitleColor = UIColor.Font.white.withAlphaComponent(0.5)
         case .gray:
             self.backgroundColor = UIColor.NavBar.grayBackground
         default:

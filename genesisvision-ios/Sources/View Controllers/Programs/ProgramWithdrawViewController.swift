@@ -45,6 +45,7 @@ class ProgramWithdrawViewController: BaseViewController {
     var enteredAmount: Double = 0.0 {
         didSet {
             withdrawButton(enable: enteredAmount > 0.0 && enteredAmount <= investedTokens)
+            updateNumPadState(value: amountLabel.text)
         }
     }
     
@@ -54,7 +55,7 @@ class ProgramWithdrawViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion(), style: .primary)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,18 +101,26 @@ class ProgramWithdrawViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { (success) in
-                    self?.viewModel.goToBack()
-                })
+                self?.viewModel.showWithdrawRequestedVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }
     
+    private func updateNumPadState(value: String?) {
+        if let text = value, text.range(of: ".") != nil,
+            let lastComponents = text.components(separatedBy: ".").last,
+            lastComponents.count >= getDecimalCount(for: currency) {
+            changedActive(value: false)
+        } else {
+            changedActive(value: true)
+        }
+    }
+    
     @objc private func copyAllButtonAction() {
-        enteredAmount = investedTokens
         amountLabel.text = investedTokens.toString(withoutFormatter: true)
+        enteredAmount = investedTokens
     }
     
     // MARK: - Actions

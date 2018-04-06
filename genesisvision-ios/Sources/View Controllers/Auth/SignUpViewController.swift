@@ -78,9 +78,7 @@ class SignUpViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { [weak self] (finish) in
-                    self?.viewModel.showConfirmationVC()
-                })
+                self?.viewModel.showConfirmationVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

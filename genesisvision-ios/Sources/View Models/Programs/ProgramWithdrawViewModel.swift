@@ -48,6 +48,10 @@ final class ProgramWithdrawViewModel {
         apiWithdraw(with: amount, completion: completion)
     }
     
+    func showWithdrawRequestedVC() {
+        router.show(routeType: .withdrawRequested)
+    }
+    
     func goToBack() {
         programDetailProtocol?.didWithdrawn()
         router.goToBack()

@@ -171,8 +171,8 @@ extension KeyedDecodingContainerProtocol {
 }
 
 extension UINavigationItem {
-    func setTitle(title: String, subtitle: String) {
-        let colors = StyleColors()
+    func setTitle(title: String, subtitle: String, style: ColorStyle = .white) {
+        let colors = StyleColors(with: style)
         
         let titleLabel = UILabel()
         titleLabel.text = title
@@ -184,7 +184,7 @@ extension UINavigationItem {
         let subtitleLabel = UILabel()
         subtitleLabel.text = subtitle
         subtitleLabel.font = UIFont.getFont(.bold, size: 10)
-        subtitleLabel.textColor = UIColor.Font.medium
+        subtitleLabel.textColor = colors.subtitleColor
         subtitleLabel.textAlignment = .center
         subtitleLabel.sizeToFit()
         

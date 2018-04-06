@@ -110,9 +110,7 @@ extension ProgramRequestsViewController: ProgramRequestTableViewCellProtocol {
         viewModel.cancel(with: requestID) { [weak self]  (result) in
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { (success) in
-                    lastRequest ? self?.viewModel.goToBack() : self?.fetch()
-                })
+                lastRequest ? self?.viewModel.goToBack() : self?.showSuccessHUD(completion: { (success) in self?.fetch() })
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

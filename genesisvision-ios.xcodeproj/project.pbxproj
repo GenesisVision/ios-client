@@ -30,6 +30,9 @@
 		5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */; };
 		5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */; };
 		5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */; };
+		5E6D681D207655A100299408 /* String+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681C207655A100299408 /* String+Constants.swift */; };
+		5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */; };
+		5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */; };
 		5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */; };
 		5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */; };
 		5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */; };
@@ -371,6 +374,9 @@
 		5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewModel.swift; sourceTree = "<group>"; };
 		5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionRouter.swift; sourceTree = "<group>"; };
 		5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopJumpingTableViewOnInsertRows.swift; sourceTree = "<group>"; };
+		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
+		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
+		5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawSuccessViewModel.swift; sourceTree = "<group>"; };
 		5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewController.swift; sourceTree = "<group>"; };
 		5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadButton.swift; sourceTree = "<group>"; };
@@ -871,6 +877,7 @@
 				5E858345205FFCF70039E13F /* UIFontExtension.swift */,
 				5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */,
 				5EF2256F206E486B00D2CB12 /* UIDevice.swift */,
+				5E6D681C207655A100299408 /* String+Constants.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1119,6 +1126,8 @@
 				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
 				FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */,
 				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
+				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
+				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1849,6 +1858,7 @@
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				FC14101B2030168100B71E7F /* NewParticipant.swift in Sources */,
+				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
 				FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */,
@@ -1860,6 +1870,7 @@
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */,
 				5E82EF8520727B34006EEA3F /* ManagerInvestmentPrograms.swift in Sources */,
+				5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */,
 				5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -1996,6 +2007,7 @@
 				FC1410232030168100B71E7F /* TradeAccount.swift in Sources */,
 				5E82EF9C20727B34006EEA3F /* WalletStatistic.swift in Sources */,
 				5E82EF5B20727B34006EEA3F /* Broker.swift in Sources */,
+				5E6D681D207655A100299408 /* String+Constants.swift in Sources */,
 				5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */,
 				5E82EF7620727B34006EEA3F /* NewManager.swift in Sources */,
 				FCB177692045691300A482B7 /* DashboardTableViewCellViewModel.swift in Sources */,

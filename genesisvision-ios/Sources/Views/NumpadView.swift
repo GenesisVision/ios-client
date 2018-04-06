@@ -20,10 +20,6 @@ protocol NumpadViewProtocol: class {
 }
 
 extension NumpadViewProtocol {
-    func textLabelDidChange(value: Double?) {
-        //update ui
-    }
-    
     func onClearClicked(view: NumpadView) {
         guard let text = textLabel.text, !text.isEmpty else { return }
         
@@ -66,14 +62,17 @@ extension NumpadViewProtocol {
             textLabel.text?.append(value.toString())
         }
         
-        if let text = textLabel.text, text.range(of: ".") != nil,
+        textLabelDidChange(value: textLabel.text?.doubleValue)
+    }
+    
+    func updateNumPadState(text: String) {
+        if text.range(of: ".") != nil,
             let lastComponents = text.components(separatedBy: ".").last,
             lastComponents.count >= getDecimalCount(for: currency) {
             changedActive(value: false)
-            return
+        } else {
+            changedActive(value: true)
         }
-        
-        textLabelDidChange(value: textLabel.text?.doubleValue)
     }
 }
 

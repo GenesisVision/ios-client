@@ -71,6 +71,7 @@ class ProgramInvestViewController: BaseViewController {
             }
             
             investButton(enable: enteredAmount > 0 && enteredAmount <= balance)
+            updateNumPadState(value: amountLabel.text)
         }
     }
     
@@ -78,7 +79,7 @@ class ProgramInvestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion(), style: .primary)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,18 +134,26 @@ class ProgramInvestViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { (success) in
-                    self?.viewModel.goToBack()
-                })
+                self?.viewModel.showInvestmentRequestedVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }
     
-    @objc private func copyAllButtonAction() {        
-        enteredAmount = balance
+    private func updateNumPadState(value: String?) {
+        if let text = value, text.range(of: ".") != nil,
+            let lastComponents = text.components(separatedBy: ".").last,
+            lastComponents.count >= getDecimalCount(for: currency) {
+            changedActive(value: false)
+        } else {
+            changedActive(value: true)
+        }
+    }
+    
+    @objc private func copyAllButtonAction() {
         amountLabel.text = balance.toString(withoutFormatter: true)
+        enteredAmount = balance
     }
     
     // MARK: - Actions
@@ -164,6 +173,10 @@ extension ProgramInvestViewController: NumpadViewProtocol {
     
     var textLabel: UILabel {
         return self.amountLabel
+    }
+    
+    var enteredAmountValue: Double {
+        return enteredAmount
     }
     
     func textLabelDidChange(value: Double?) {

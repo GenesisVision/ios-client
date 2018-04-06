@@ -1,17 +1,17 @@
 //
-//  ForgotPasswordInfoViewModel.swift
+//  ProgramInvestSuccessViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 02/04/2018.
+//  Created by George on 05/04/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit.UIImage
 
-final class ForgotPasswordInfoViewModel: InfoViewModel {
+final class ProgramInvestSuccessViewModel: InfoViewModel {
     // MARK: - Variables
-    var text: String = String.Info.forgotPasswordSuccess
-    var iconImage: UIImage = #imageLiteral(resourceName: "confirm-email-icon")
+    var text: String = String.Info.investmentRequestSuccess
+    var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
     var backgroundColor: UIColor = UIColor.Background.primary
     var textColor: UIColor = UIColor.Font.white
     var tintColor: UIColor = UIColor.Font.white
@@ -25,7 +25,6 @@ final class ForgotPasswordInfoViewModel: InfoViewModel {
     }
     
     func goBack() {
-        router.goToRoot()
+        router.goToSecond()
     }
 }
-

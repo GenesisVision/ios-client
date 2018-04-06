@@ -32,6 +32,10 @@ final class WalletWithdrawViewModel {
         router.show(routeType: .readQRCode)
     }
     
+    func showWalletWithdrawRequested() {
+        //TODO: showWalletWithdrawRequested
+    }
+    
     func goToBack() {
         walletProtocol?.didWithdrawn()
         router.goToBack()

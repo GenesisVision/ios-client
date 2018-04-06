@@ -10,7 +10,7 @@ import UIKit.UIImage
 
 final class SignUpConfirmationViewModel: InfoViewModel {
     // MARK: - Variables
-    var text: String = "please confirm \nyour email."
+    var text: String = String.Info.signUpConfirmationSuccess
     var iconImage: UIImage = #imageLiteral(resourceName: "confirm-email-icon")
     var backgroundColor: UIColor = UIColor.Background.primary
     var textColor: UIColor = UIColor.Font.white

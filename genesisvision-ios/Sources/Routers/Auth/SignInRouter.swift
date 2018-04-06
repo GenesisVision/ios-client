@@ -28,8 +28,7 @@ class SignInRouter: Router {
     // MARK: - Navigation
     private func signUpAction() {
         guard let viewController = SignUpViewController.storyboardInstance(name: .auth) else { return }
-        let router = SignUpRouter(parentRouter: self)
-        router.navigationController = navigationController
+        let router = SignUpRouter(parentRouter: self, navigationController: navigationController)
         childRouters.append(router)
         viewController.viewModel = SignUpViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
@@ -37,8 +36,7 @@ class SignInRouter: Router {
     
     private func forgotPasswordAction() {
         guard let viewController = ForgotPasswordViewController.storyboardInstance(name: .auth) else { return }
-        let router = ForgotPasswordRouter(parentRouter: self)
-        router.navigationController = navigationController
+        let router = ForgotPasswordRouter(parentRouter: self, navigationController: navigationController)
         childRouters.append(router)
         viewController.viewModel = ForgetPasswordViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)

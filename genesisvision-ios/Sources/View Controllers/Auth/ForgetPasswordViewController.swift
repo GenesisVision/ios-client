@@ -57,9 +57,7 @@ class ForgotPasswordViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.showSuccessHUD(completion: { [weak self] (finish) in
-                    self?.viewModel.showForgotPasswordInfoVC()
-                })
+                self?.viewModel.showForgotPasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

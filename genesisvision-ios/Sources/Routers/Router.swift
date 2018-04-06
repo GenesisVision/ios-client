@@ -14,6 +14,7 @@ protocol RouterProtocol {
     func popViewController(animated: Bool)
     func push(viewController: UIViewController)
     //Modal
+    func present(viewController: UIViewController)
     func present(viewController: UIViewController, from currentViewController: UIViewController)
     func dismiss(animated: Bool)
 }
@@ -133,6 +134,10 @@ extension Router: RouterProtocol {
     }
     
     //Modal
+    func present(viewController: UIViewController) {
+        navigationController?.present(viewController: viewController)
+    }
+    
     func present(viewController: UIViewController, from currentViewController: UIViewController) {
         currentViewController.present(viewController: viewController)
     }
@@ -261,6 +266,11 @@ extension Router {
     }
     
     func goToBack() {
+        popViewController(animated: true)
+    }
+    
+    func goToSecond() {
+        popViewController(animated: false)
         popViewController(animated: true)
     }
     
