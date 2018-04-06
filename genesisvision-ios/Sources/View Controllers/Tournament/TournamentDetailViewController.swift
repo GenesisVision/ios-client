@@ -95,7 +95,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
             return
         }
         
-        open(url: ipfsHashURL)
+        openSafariVC(with: ipfsHashURL)
     }
 }
 

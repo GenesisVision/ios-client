@@ -19,7 +19,7 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
         
-        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
+        cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
         if let chart = participantViewModel.chart, chart.count > 1 {
             cell.chartView.isHidden = false

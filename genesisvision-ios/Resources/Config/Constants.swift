@@ -46,6 +46,10 @@ enum CurrencyType: Int {
 
 
 final class Constants {
+    struct Urls {
+        static let feedbackWebAddress = "https://feedback.genesis.vision"
+        static let feedbackEmailAddress = "support@genesis.vision"
+    }
     
     struct Api {
         static let basePath = isTournamentApp
@@ -74,6 +78,12 @@ final class Constants {
     struct UserDefaults {
         static let authorizedToken: String = "AuthorizedToken"
         static let timesOpened: String = "TimesOpened"
+    }
+    
+    struct Keys {
+        static let signOutKey: String = "signOutKey"
+        
+        static let addedLineLayer: String = "addedLineLayer"
     }
     
     struct Filters {
@@ -114,18 +124,5 @@ final class Constants {
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
     
-    struct Keys {
-        static let signOutKey: String = "signOutKey"
-        
-        static let addedLineLayer: String = "addedLineLayer"
-    }
     
-    struct ErrorMessages {
-        static let noInternetConnection = "No Internet Connection"
-        static let noDataText = "not enough data\n for the chart"
-    }
-    
-    struct Titles {
-        static let refreshControlTitle = "Loading..."
-    }
 }

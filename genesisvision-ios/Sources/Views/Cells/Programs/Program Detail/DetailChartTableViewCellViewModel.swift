@@ -16,7 +16,7 @@ struct DetailChartTableViewCellViewModel {
 
 extension DetailChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailChartTableViewCell) {
-        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
+        cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
         guard chart.count > 1 else {
             cell.chartView.isHidden = true

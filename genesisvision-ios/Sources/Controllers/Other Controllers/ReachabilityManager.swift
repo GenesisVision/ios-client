@@ -18,7 +18,7 @@ class ReachabilityManager {
     let reachability = Reachability()!
     
     init() {
-        notificationBanner = NotificationBanner(title: Constants.ErrorMessages.noInternetConnection, style: .danger)
+        notificationBanner = NotificationBanner(title: String.Alerts.ErrorMessages.noInternetConnection, style: .danger)
         notificationBanner?.haptic = .medium
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)

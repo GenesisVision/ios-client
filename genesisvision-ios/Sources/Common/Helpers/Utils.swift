@@ -112,3 +112,21 @@ func getVersion() -> String {
     let build = dictionary["CFBundleVersion"] as! String
     return "\(version)(\(build))"
 }
+
+func getDeviceInfo() -> String {
+    var text = ""
+    
+    let systemVersion = UIDevice.current.systemVersion
+    text.append("iOS: \(systemVersion)\n")
+    print(text)
+    
+    let model = UIDevice.current.type.rawValue
+    text.append("Device: \(model)")
+    print(text)
+    
+    return text
+}
+
+func getFeedbackSubject() -> String {
+    return "iOS Feedback " + getVersion()
+}

@@ -13,4 +13,29 @@ extension String {
         static var investmentRequestSuccess: String { return "At the end of the current trading period your GVT will be exchanged to the manager's tokens. \n\nIn case there won't be enough tokens for you, your extra GVT will be cashed back." }
         static var withdrawRequestSuccess: String { return "At the end of the current trading period the tokens will be returned to the manager and your funds are return to you." }
     }
+    
+    struct Alerts {
+        static var cancelButtonText: String = "Cancel"
+        
+        struct Feedback {
+            static var alertTitle: String = "You can send your feedback to us with the following options:"
+            static var websiteButtonText: String = "Visit feedback website"
+            static var emailButtonText: String = "Send email"
+        }
+        
+        struct ErrorMessages {
+            static let noInternetConnection = "No Internet Connection"
+            static let noDataText = "not enough data\n for the chart"
+            
+            struct MailErrorAlert {
+                static let title = "Could not send e-mail"
+                static let message = "Your device could not send e-mail. Please check e-mail configuration and try again."
+                static let cancelButtonText = "OK"
+            }
+        }
+    }
+    
+    struct Titles {
+        static let refreshControlTitle = "Loading..."
+    }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import MessageUI
 
 class BaseViewController: UIViewController {
     
@@ -33,6 +34,47 @@ class BaseViewController: UIViewController {
     
     func hideAll() {
         hideHUD()
+    }
+}
+
+extension BaseViewController: MFMailComposeViewControllerDelegate {
+    func sendEmailFeedback() {
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = configuredMailComposeViewController()
+            present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showSendMailErrorAlert()
+        }
+    }
+    
+    private func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let colors = StyleColors()
+        
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients([Constants.Urls.feedbackEmailAddress])
+        mailComposerVC.setSubject(getFeedbackSubject())
+        mailComposerVC.setMessageBody(getDeviceInfo(), isHTML: false)
+        mailComposerVC.navigationBar.isTranslucent = false
+        mailComposerVC.navigationBar.barTintColor = colors.backgroundColor
+        mailComposerVC.navigationBar.tintColor = colors.tintColor
+        mailComposerVC.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
+                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+        return mailComposerVC
+    }
+    
+    private func showSendMailErrorAlert() {
+        showAlertWithTitle(title: String.Alerts.ErrorMessages.MailErrorAlert.title,
+                           message: String.Alerts.ErrorMessages.MailErrorAlert.message,
+                           actionTitle: nil,
+                           cancelTitle: String.Alerts.ErrorMessages.MailErrorAlert.cancelButtonText,
+                           handler: nil,
+                           cancelHandler: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

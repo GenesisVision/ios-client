@@ -20,7 +20,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden
         
-        cell.noDataLabel.text = Constants.ErrorMessages.noDataText
+        cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
         if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false

@@ -62,15 +62,8 @@ extension UIViewController {
     
     func showSettingsAlert(_ message: String) {
         let alert = UIAlertController(title: "Privacy settings", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {(_ action: UIAlertAction) -> Void in
-            
-            if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url as URL)
-                }
-            }
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
+            self?.openUrl(with: UIApplicationOpenSettingsURLString)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -88,6 +81,16 @@ extension UIViewController {
                     didShowed!()
                 }
             })
+        }
+    }
+    
+    func openUrl(with urlAddress: String) {
+        if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url as URL)
+            }
         }
     }
 
@@ -144,7 +147,7 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func open(url: URL) {
+    func openSafariVC(with url: URL) {
         let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
         safariViewController.preferredBarTintColor = UIColor.Background.main
         safariViewController.preferredControlTintColor = UIColor.primary
@@ -153,6 +156,12 @@ extension UIViewController {
         }
         safariViewController.modalPresentationStyle = .overFullScreen
         present(viewController: safariViewController)
+    }
+    
+    func openSafariVC(with urlAddress: String) {
+        guard let url = URL(string: urlAddress) else { return }
+        
+        openSafariVC(with: url)
     }
     
     func showActionSheet(with title: String?,

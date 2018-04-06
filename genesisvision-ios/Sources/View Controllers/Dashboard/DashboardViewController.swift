@@ -13,6 +13,9 @@ class DashboardViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: DashboardViewModel!
 
+    // MARK: - Variables
+    private var feedbackBarButtonItem: UIBarButtonItem?
+    
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -56,6 +59,9 @@ class DashboardViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         title = viewModel.title.uppercased()
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        
+        feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
+        navigationItem.rightBarButtonItem = feedbackBarButtonItem
     }
     
     private func setupTableConfiguration() {
@@ -103,6 +109,24 @@ class DashboardViewController: BaseViewControllerWithTableView {
         super.pullToRefresh()
         
         fetch()
+    }
+    
+    // MARK: - Actions
+    @IBAction func feedbackButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.primary
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
+            self?.openSafariVC(with: Constants.Urls.feedbackWebAddress)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.emailButtonText, style: .default, handler: { [weak self] (action) in
+            self?.sendEmailFeedback()
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler:nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -264,4 +288,3 @@ extension DashboardViewController: ReloadDataProtocol {
         reloadData()
     }
 }
-
