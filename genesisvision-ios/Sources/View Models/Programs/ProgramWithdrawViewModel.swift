@@ -49,6 +49,7 @@ final class ProgramWithdrawViewModel {
     }
     
     func showWithdrawRequestedVC() {
+        programDetailProtocol?.didWithdrawn()
         router.show(routeType: .withdrawRequested)
     }
     

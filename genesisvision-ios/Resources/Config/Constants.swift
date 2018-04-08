@@ -123,6 +123,4 @@ final class Constants {
     struct SystemSizes {
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
-    
-    
 }

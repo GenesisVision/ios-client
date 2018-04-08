@@ -82,6 +82,7 @@ final class ProgramInvestViewModel {
     }
     
     func showInvestmentRequestedVC() {
+        programDetailProtocol?.didInvested()
         router.show(routeType: .investmentRequested)
     }
     
