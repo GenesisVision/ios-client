@@ -26,10 +26,11 @@ open class ManagerRequest: Codable {
     public var currency: Currency?
     public var password: String?
     public var depositAmount: Double?
+    public var leverage: Int?
 
 
     
-    public init(userId: UUID?, requestId: UUID?, name: String?, email: String?, currency: Currency?, password: String?, depositAmount: Double?) {
+    public init(userId: UUID?, requestId: UUID?, name: String?, email: String?, currency: Currency?, password: String?, depositAmount: Double?, leverage: Int?) {
         self.userId = userId
         self.requestId = requestId
         self.name = name
@@ -37,6 +38,7 @@ open class ManagerRequest: Codable {
         self.currency = currency
         self.password = password
         self.depositAmount = depositAmount
+        self.leverage = leverage
     }
     
 
@@ -53,6 +55,7 @@ open class ManagerRequest: Codable {
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(password, forKey: "password")
         try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
+        try container.encodeIfPresent(leverage, forKey: "leverage")
     }
 
     // Decodable protocol methods
@@ -67,6 +70,7 @@ open class ManagerRequest: Codable {
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         password = try container.decodeIfPresent(String.self, forKey: "password")
         depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")
+        leverage = try container.decodeIfPresent(Int.self, forKey: "leverage")
     }
 }
 

@@ -41,10 +41,11 @@ open class InvestmentProgramDashboardManager: Codable {
     public var minAccountBalanceUsd: Double?
     public var minAccountBalance: Double?
     public var login: String?
+    public var canCloseProgram: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, token: Token?, ownBalance: Double?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, login: String?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, token: Token?, ownBalance: Double?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, login: String?, canCloseProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -67,6 +68,7 @@ open class InvestmentProgramDashboardManager: Codable {
         self.minAccountBalanceUsd = minAccountBalanceUsd
         self.minAccountBalance = minAccountBalance
         self.login = login
+        self.canCloseProgram = canCloseProgram
     }
     
 
@@ -98,6 +100,7 @@ open class InvestmentProgramDashboardManager: Codable {
         try container.encodeIfPresent(minAccountBalanceUsd, forKey: "minAccountBalanceUsd")
         try container.encodeIfPresent(minAccountBalance, forKey: "minAccountBalance")
         try container.encodeIfPresent(login, forKey: "login")
+        try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
     }
 
     // Decodable protocol methods
@@ -127,6 +130,7 @@ open class InvestmentProgramDashboardManager: Codable {
         minAccountBalanceUsd = try container.decodeIfPresent(Double.self, forKey: "minAccountBalanceUsd")
         minAccountBalance = try container.decodeIfPresent(Double.self, forKey: "minAccountBalance")
         login = try container.decodeIfPresent(String.self, forKey: "login")
+        canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
     }
 }
 

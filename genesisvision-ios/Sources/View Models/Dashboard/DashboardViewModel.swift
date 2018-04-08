@@ -39,7 +39,7 @@ final class DashboardViewModel {
     var searchText = ""
     var viewModels = [DashboardTableViewCellViewModel]()
     
-    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsk, .byTitleDesc, .byTitleAsk]
+    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]
     
     var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
     

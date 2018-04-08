@@ -14,6 +14,7 @@ open class NewInvestmentRequest: Codable {
     public var brokerTradeServerId: UUID
     public var tradePlatformPassword: String
     public var depositAmount: Double
+    public var leverage: Int
     public var tokenName: String
     public var tokenSymbol: String
     public var dateFrom: Date?
@@ -29,10 +30,11 @@ open class NewInvestmentRequest: Codable {
 
 
     
-    public init(brokerTradeServerId: UUID, tradePlatformPassword: String, depositAmount: Double, tokenName: String, tokenSymbol: String, dateFrom: Date?, dateTo: Date?, logo: String?, title: String, description: String?, feeManagement: Double?, feeSuccess: Double?, investMinAmount: Double?, investMaxAmount: Double?, period: Int) {
+    public init(brokerTradeServerId: UUID, tradePlatformPassword: String, depositAmount: Double, leverage: Int, tokenName: String, tokenSymbol: String, dateFrom: Date?, dateTo: Date?, logo: String?, title: String, description: String?, feeManagement: Double?, feeSuccess: Double?, investMinAmount: Double?, investMaxAmount: Double?, period: Int) {
         self.brokerTradeServerId = brokerTradeServerId
         self.tradePlatformPassword = tradePlatformPassword
         self.depositAmount = depositAmount
+        self.leverage = leverage
         self.tokenName = tokenName
         self.tokenSymbol = tokenSymbol
         self.dateFrom = dateFrom
@@ -57,6 +59,7 @@ open class NewInvestmentRequest: Codable {
         try container.encode(brokerTradeServerId, forKey: "brokerTradeServerId")
         try container.encode(tradePlatformPassword, forKey: "tradePlatformPassword")
         try container.encode(depositAmount, forKey: "depositAmount")
+        try container.encode(leverage, forKey: "leverage")
         try container.encode(tokenName, forKey: "tokenName")
         try container.encode(tokenSymbol, forKey: "tokenSymbol")
         try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
@@ -79,6 +82,7 @@ open class NewInvestmentRequest: Codable {
         brokerTradeServerId = try container.decode(UUID.self, forKey: "brokerTradeServerId")
         tradePlatformPassword = try container.decode(String.self, forKey: "tradePlatformPassword")
         depositAmount = try container.decode(Double.self, forKey: "depositAmount")
+        leverage = try container.decode(Int.self, forKey: "leverage")
         tokenName = try container.decode(String.self, forKey: "tokenName")
         tokenSymbol = try container.decode(String.self, forKey: "tokenSymbol")
         dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")

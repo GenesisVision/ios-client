@@ -29,7 +29,7 @@ class ChartView: CombinedChartView {
         didSet {
             lineChartDataSet.setColor(UIColor.primary)
             
-            lineChartDataSet.lineWidth = 2
+            lineChartDataSet.lineWidth = 3
             
             lineChartDataSet.drawFilledEnabled = false
             lineChartDataSet.drawCirclesEnabled = false

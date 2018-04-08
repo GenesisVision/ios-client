@@ -202,6 +202,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
     
     func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        fetchMoreActivityIndicator.stopAnimating()
         return 40
     }
     

@@ -50,6 +50,15 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
+        if let isEnabled = self.investmentProgram.isEnabled,
+            isEnabled,
+            let freeTokens = self.investmentProgram.freeTokens,
+            let total = freeTokens.total,
+            let investorsTokens = freeTokens.investorsTokens,
+            let requestsTokens = freeTokens.requestsTokens {
+            cell.stackedProgressView.setup(totalValue: total, investedValue: investorsTokens, requestsValue: requestsTokens)
+        }
+        
         cell.programDetailsView.setup(investorsCount: self.investmentProgram.investorsCount, balance: self.investmentProgram.balance, avgProfit: self.investmentProgram.profitAvgPercent, totalProfit: self.investmentProgram.profitTotal, currency: self.investmentProgram.currency?.rawValue)
     }
 }

@@ -12,7 +12,8 @@ class ProgramMoreDetailsTableViewCell: UITableViewCell {
 
     // MARK: - Views
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
-
+    @IBOutlet var stackedProgressView: StackedProgressView!
+    
     deinit {
         programPropertiesView.stopTimer()
     }

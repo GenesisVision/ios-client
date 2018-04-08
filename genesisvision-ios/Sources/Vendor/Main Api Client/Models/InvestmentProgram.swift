@@ -47,13 +47,15 @@ open class InvestmentProgram: Codable {
     public var feeManagement: Double?
     public var chart: [Chart]?
     public var manager: ProfilePublicViewModel?
+    public var freeTokens: FreeTokens?
     public var hasNewRequests: Bool?
     public var isInvestEnable: Bool?
     public var isOwnProgram: Bool?
+    public var canCloseProgram: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, manager: ProfilePublicViewModel?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, manager: ProfilePublicViewModel?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -77,9 +79,11 @@ open class InvestmentProgram: Codable {
         self.feeManagement = feeManagement
         self.chart = chart
         self.manager = manager
+        self.freeTokens = freeTokens
         self.hasNewRequests = hasNewRequests
         self.isInvestEnable = isInvestEnable
         self.isOwnProgram = isOwnProgram
+        self.canCloseProgram = canCloseProgram
     }
     
 
@@ -112,9 +116,11 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(manager, forKey: "manager")
+        try container.encodeIfPresent(freeTokens, forKey: "freeTokens")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
+        try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
     }
 
     // Decodable protocol methods
@@ -145,9 +151,11 @@ open class InvestmentProgram: Codable {
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
+        freeTokens = try container.decodeIfPresent(FreeTokens.self, forKey: "freeTokens")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
+        canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
     }
 }
 

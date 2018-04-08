@@ -18,9 +18,9 @@ open class InvestmentProgramsFilter: Codable {
         case byProfitDesc = "ByProfitDesc"
         case byOrdersAsc = "ByOrdersAsc"
         case byOrdersDesc = "ByOrdersDesc"
-        case byEndOfPeriodAsk = "ByEndOfPeriodAsk"
+        case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
         case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
-        case byTitleAsk = "ByTitleAsk"
+        case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
     }
     public enum ProfitTotalChange: String, Codable { 

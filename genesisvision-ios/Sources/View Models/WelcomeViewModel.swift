@@ -34,7 +34,6 @@ final class WelcomeViewModel {
     
     // MARK: - Private methods
     private func startAsAuthorized() {
-        AuthManager.updateToken()
         router.show(routeType: .startAsAuthorized)
     }
     

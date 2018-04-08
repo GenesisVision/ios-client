@@ -15,6 +15,7 @@ class TraderTableViewCell: UITableViewCell {
     @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
     @IBOutlet var stackView: UIStackView!
+    @IBOutlet var stackedProgressView: StackedProgressView!
     @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {

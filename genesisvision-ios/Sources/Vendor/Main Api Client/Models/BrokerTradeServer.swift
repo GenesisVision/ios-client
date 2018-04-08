@@ -27,10 +27,11 @@ open class BrokerTradeServer: Codable {
     public var type: ModelType?
     public var broker: Broker?
     public var registrationDate: Date?
+    public var leverages: [Int]?
 
 
     
-    public init(id: UUID?, brokerId: UUID?, name: String?, host: String?, type: ModelType?, broker: Broker?, registrationDate: Date?) {
+    public init(id: UUID?, brokerId: UUID?, name: String?, host: String?, type: ModelType?, broker: Broker?, registrationDate: Date?, leverages: [Int]?) {
         self.id = id
         self.brokerId = brokerId
         self.name = name
@@ -38,6 +39,7 @@ open class BrokerTradeServer: Codable {
         self.type = type
         self.broker = broker
         self.registrationDate = registrationDate
+        self.leverages = leverages
     }
     
 
@@ -54,6 +56,7 @@ open class BrokerTradeServer: Codable {
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(broker, forKey: "broker")
         try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
+        try container.encodeIfPresent(leverages, forKey: "leverages")
     }
 
     // Decodable protocol methods
@@ -68,6 +71,7 @@ open class BrokerTradeServer: Codable {
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         broker = try container.decodeIfPresent(Broker.self, forKey: "broker")
         registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
+        leverages = try container.decodeIfPresent([Int].self, forKey: "leverages")
     }
 }
 

@@ -17,7 +17,6 @@ class ProgramDetailsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
         contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
     }

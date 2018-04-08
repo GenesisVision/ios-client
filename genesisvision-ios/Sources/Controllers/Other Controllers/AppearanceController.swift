@@ -84,4 +84,3 @@ struct AppearanceController {
         IQKeyboardManager.sharedManager().placeholderFont = UIFont.getFont(.regular, size: 14.0)
     }
 }
-

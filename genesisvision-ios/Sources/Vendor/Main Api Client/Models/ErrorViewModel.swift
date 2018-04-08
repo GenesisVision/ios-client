@@ -14,6 +14,7 @@ open class ErrorViewModel: Codable {
     public enum Code: String, Codable { 
         case internalServerError = "InternalServerError"
         case validationError = "ValidationError"
+        case requiresTwoFactor = "RequiresTwoFactor"
     }
     public var errors: [ErrorMessage]?
     public var code: Code?

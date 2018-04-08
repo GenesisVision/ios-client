@@ -53,6 +53,278 @@ open class ManagerAPI {
     }
 
     /**
+     2FA confirm
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faConfirmPost(authorization: String, model: TwoFactorAuthenticatorConfirm? = nil, completion: @escaping ((_ data: RecoveryCodesViewModel?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faConfirmPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     2FA confirm
+     - POST /api/manager/auth/2fa/confirm
+     - examples: [{contentType=application/json, example={
+  "codes" : [ {
+    "code" : "code",
+    "isActive" : true
+  }, {
+    "code" : "code",
+    "isActive" : true
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<RecoveryCodesViewModel> 
+     */
+    open class func apiManagerAuth2faConfirmPostWithRequestBuilder(authorization: String, model: TwoFactorAuthenticatorConfirm? = nil) -> RequestBuilder<RecoveryCodesViewModel> {
+        let path = "/api/manager/auth/2fa/confirm"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<RecoveryCodesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     2FA create
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faCreatePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faCreatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     2FA create
+     - POST /api/manager/auth/2fa/create
+     - examples: [{contentType=application/json, example={
+  "sharedKey" : "sharedKey",
+  "authenticatorUri" : "authenticatorUri"
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<TwoFactorAuthenticator> 
+     */
+    open class func apiManagerAuth2faCreatePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<TwoFactorAuthenticator> {
+        let path = "/api/manager/auth/2fa/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<TwoFactorAuthenticator>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     2FA disable
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faDisablePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiManagerAuth2faDisablePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     2FA disable
+     - POST /api/manager/auth/2fa/disable
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiManagerAuth2faDisablePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<Void> {
+        let path = "/api/manager/auth/2fa/disable"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     2FA status
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faGet(authorization: String, completion: @escaping ((_ data: TwoFactorStatus?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     2FA status
+     - GET /api/manager/auth/2fa
+     - examples: [{contentType=application/json, example={
+  "twoFactorEnabled" : true
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<TwoFactorStatus> 
+     */
+    open class func apiManagerAuth2faGetWithRequestBuilder(authorization: String) -> RequestBuilder<TwoFactorStatus> {
+        let path = "/api/manager/auth/2fa"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<TwoFactorStatus>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     2FA generate new recovery codes
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faRecoveryCodesNewPost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ data: RecoveryCodesViewModel?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faRecoveryCodesNewPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     2FA generate new recovery codes
+     - POST /api/manager/auth/2fa/recoveryCodes/new
+     - examples: [{contentType=application/json, example={
+  "codes" : [ {
+    "code" : "code",
+    "isActive" : true
+  }, {
+    "code" : "code",
+    "isActive" : true
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<RecoveryCodesViewModel> 
+     */
+    open class func apiManagerAuth2faRecoveryCodesNewPostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<RecoveryCodesViewModel> {
+        let path = "/api/manager/auth/2fa/recoveryCodes/new"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<RecoveryCodesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     2FA recovery codes
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiManagerAuth2faRecoveryCodesPost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ data: RecoveryCodesViewModel?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faRecoveryCodesPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     2FA recovery codes
+     - POST /api/manager/auth/2fa/recoveryCodes
+     - examples: [{contentType=application/json, example={
+  "codes" : [ {
+    "code" : "code",
+    "isActive" : true
+  }, {
+    "code" : "code",
+    "isActive" : true
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<RecoveryCodesViewModel> 
+     */
+    open class func apiManagerAuth2faRecoveryCodesPostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<RecoveryCodesViewModel> {
+        let path = "/api/manager/auth/2fa/recoveryCodes"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<RecoveryCodesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Change password
      
      - parameter authorization: (header) JWT access token 
@@ -327,7 +599,7 @@ open class ManagerAPI {
      Get all enabled trade servers
      - POST /api/manager/brokers
      - examples: [{contentType=application/json, example={
-  "total" : 0,
+  "total" : 6,
   "brokers" : [ {
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
@@ -341,7 +613,8 @@ open class ManagerAPI {
       "description" : "description",
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }
+    },
+    "leverages" : [ 0, 0 ]
   }, {
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
@@ -355,7 +628,8 @@ open class ManagerAPI {
       "description" : "description",
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }
+    },
+    "leverages" : [ 0, 0 ]
   } ]
 }}]
      
@@ -396,6 +670,7 @@ open class ManagerAPI {
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
+    "canCloseProgram" : true,
     "level" : 0,
     "minAccountBalance" : 4.145608029883936,
     "description" : "description",
@@ -423,6 +698,7 @@ open class ManagerAPI {
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
+    "canCloseProgram" : true,
     "level" : 0,
     "minAccountBalance" : 4.145608029883936,
     "description" : "description",
@@ -492,6 +768,7 @@ open class ManagerAPI {
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
+    "canCloseProgram" : true,
     "level" : 0,
     "minAccountBalance" : 4.145608029883936,
     "description" : "description",
@@ -519,6 +796,7 @@ open class ManagerAPI {
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "periodDuration" : 5,
+    "canCloseProgram" : true,
     "level" : 0,
     "minAccountBalance" : 4.145608029883936,
     "description" : "description",
@@ -866,8 +1144,10 @@ open class ManagerAPI {
   "investmentProgram" : {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 5.962133916683182,
+    "canCloseProgram" : true,
     "profitFromProgram" : 2.3021358869347655,
     "availableInvestment" : 6.84685269835264,
+    "brokerTitle" : "brokerTitle",
     "description" : "description",
     "investedAmount" : 5.637376656633329,
     "title" : "title",
@@ -879,6 +1159,7 @@ open class ManagerAPI {
     "currency" : "Undefined",
     "feeSuccess" : 7.457744773683766,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "brokerTradeServerTitle" : "brokerTradeServerTitle",
     "ownBalance" : 1.4658129805029452,
     "investorsCount" : 9,
     "periodDuration" : 3,
@@ -895,6 +1176,11 @@ open class ManagerAPI {
     "profitTotalPercent" : 1.2315135367772556,
     "profitTotalChange" : "Unchanged",
     "minAccountBalance" : 5.025004791520295,
+    "freeTokens" : {
+      "total" : 1.1730742509559433,
+      "requestsTokens" : 5.025004791520295,
+      "investorsTokens" : 4.965218492984954
+    },
     "isInvestEnable" : true,
     "token" : {
       "tokenSymbol" : "tokenSymbol",
@@ -985,14 +1271,14 @@ open class ManagerAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
-    "amount" : 7.386281948385884,
+    "amount" : 1.2315135367772556,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
-    "amount" : 7.386281948385884,
+    "amount" : 1.2315135367772556,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "status" : "New"
@@ -1194,9 +1480,10 @@ open class ManagerAPI {
      Get public investment program's list
      - POST /api/manager/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 9,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
@@ -1219,6 +1506,11 @@ open class ManagerAPI {
     "level" : 0,
     "profitTotalPercent" : 3.616076749251911,
     "profitTotalChange" : "Unchanged",
+    "freeTokens" : {
+      "total" : 1.1730742509559433,
+      "requestsTokens" : 5.025004791520295,
+      "investorsTokens" : 4.965218492984954
+    },
     "isInvestEnable" : true,
     "tradesCount" : 1,
     "isOwnProgram" : true,
@@ -1243,6 +1535,7 @@ open class ManagerAPI {
     } ]
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
+    "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
@@ -1265,6 +1558,11 @@ open class ManagerAPI {
     "level" : 0,
     "profitTotalPercent" : 3.616076749251911,
     "profitTotalChange" : "Unchanged",
+    "freeTokens" : {
+      "total" : 1.1730742509559433,
+      "requestsTokens" : 5.025004791520295,
+      "investorsTokens" : 4.965218492984954
+    },
     "isInvestEnable" : true,
     "tradesCount" : 1,
     "isOwnProgram" : true,
