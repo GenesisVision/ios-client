@@ -14,6 +14,7 @@ final class ProgramHistoryViewModel {
     var investmentProgramId: String?
     
     var router: ProgramHistoryRouter!
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
@@ -29,9 +30,10 @@ final class ProgramHistoryViewModel {
     var viewModels = [WalletTransactionTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramHistoryRouter, investmentProgramId: String) {
+    init(withRouter router: ProgramHistoryRouter, investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
+        self.reloadDataProtocol = reloadDataProtocol
     }
 }
 
@@ -109,6 +111,8 @@ extension ProgramHistoryViewModel {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
+        canFetchMoreResults = true
+        self.reloadDataProtocol?.didReloadData()
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {

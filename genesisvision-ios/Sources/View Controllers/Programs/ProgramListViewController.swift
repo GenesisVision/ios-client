@@ -31,7 +31,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Views
     @IBOutlet var gradientView: GradientView!
     
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

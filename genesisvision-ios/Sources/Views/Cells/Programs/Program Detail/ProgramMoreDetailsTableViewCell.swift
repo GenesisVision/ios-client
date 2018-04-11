@@ -14,17 +14,20 @@ class ProgramMoreDetailsTableViewCell: UITableViewCell {
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
     @IBOutlet var stackedProgressView: StackedProgressView!
     
-    deinit {
-        programPropertiesView.stopTimer()
+    weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol? {
+        didSet {
+            programPropertiesView.delegate = programPropertiesForTableViewCellViewProtocol
+        }
     }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-    
+
         contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
-    
+    deinit {
+        programPropertiesView.stopTimer()
+    }
 }

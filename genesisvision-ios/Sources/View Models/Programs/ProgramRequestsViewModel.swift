@@ -13,6 +13,7 @@ final class ProgramRequestsViewModel {
     var title: String = "Requests"
     private var investmentProgramId: String!
     private weak var programDetailProtocol: ProgramDetailProtocol?
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var router: ProgramRequestsRouter!
     
@@ -29,10 +30,11 @@ final class ProgramRequestsViewModel {
     var viewModels = [ProgramRequestTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol) {
+    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.programDetailProtocol = programDetailProtocol
+        self.reloadDataProtocol = reloadDataProtocol
     }
 }
 
@@ -124,6 +126,8 @@ extension ProgramRequestsViewModel {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
+        canFetchMoreResults = true
+        self.reloadDataProtocol?.didReloadData()
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramRequestTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {

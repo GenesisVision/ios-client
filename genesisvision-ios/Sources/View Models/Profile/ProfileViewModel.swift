@@ -195,7 +195,7 @@ final class ProfileViewModel {
             }
             
             profileModel?.birthday = birthdate
-            editableFields[idx].text = birthdate.dateFormatString
+            editableFields[idx].text = birthdate.onlyDateFormatString
         }
     }
     
@@ -344,7 +344,7 @@ final class ProfileViewModel {
     func getBirthday() -> String {
         guard let date = profileModel?.birthday else { return "" }
         
-        return date.dateFormatString
+        return date.onlyDateFormatString
     }
     
     func getBirthdate() -> Date? {

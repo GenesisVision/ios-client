@@ -29,7 +29,7 @@ class ChartView: CombinedChartView {
         didSet {
             lineChartDataSet.setColor(UIColor.primary)
             
-            lineChartDataSet.lineWidth = 3
+            lineChartDataSet.lineWidth = 2
             
             lineChartDataSet.drawFilledEnabled = false
             lineChartDataSet.drawCirclesEnabled = false
@@ -116,8 +116,6 @@ class ChartView: CombinedChartView {
         autoScaleMinMaxEnabled = true
         
         xAxis.enabled = false
-        
-        animate(xAxisDuration: 1.0)
     }
     
     private func setData(_ values: [Chart]?) {

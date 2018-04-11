@@ -12,7 +12,14 @@ enum TimerState {
     case closed, opened, inProcess
 }
 
+protocol ProgramPropertiesForTableViewCellViewProtocol: class {
+    func showTradesDidPressed()
+}
+
 class ProgramPropertiesForTableViewCellView: UIStackView {
+    
+    weak var delegate: ProgramPropertiesForTableViewCellViewProtocol?
+    
     // MARK: - Outlets
     @IBOutlet var periodDurationLabel: UILabel!
     @IBOutlet var periodDurationTitleLabel: UILabel! {
@@ -42,6 +49,14 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     @IBOutlet var feeSuccessLabel: UILabel!
     @IBOutlet var feeManagementLabel: UILabel!
     
+    @IBOutlet var tradesStackView: UIStackView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTrades))
+            tapGesture.numberOfTapsRequired = 1
+            tradesStackView.isUserInteractionEnabled = true
+            tradesStackView.addGestureRecognizer(tapGesture)
+        }
+    }
     @IBOutlet var tradesLabel: UILabel!
     @IBOutlet var managersShareLabel: UILabel!
     
@@ -103,6 +118,10 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     }
     
     // MARK: - Private methods
+    @objc private func showTrades() {
+        delegate?.showTradesDidPressed()
+    }
+    
     private func updatePeriodLeftValueLabel() {
         stopTimer()
         

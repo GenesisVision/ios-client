@@ -19,9 +19,9 @@ class ProgramDetailsForTableViewCellView: UIStackView {
     @IBOutlet var profitCurrencyLabel: CurrencyLabel!
     
     @IBOutlet var investorsValueLabel: UILabel!
-    @IBOutlet var balanceValueLabel: UILabel!
-    @IBOutlet var avgProfitValueLabel: UILabel!
-    @IBOutlet var totalProfitValueLabel: UILabel!
+    @IBOutlet var balanceValueLabel: BalanceLabel!
+    @IBOutlet var avgProfitValueLabel: BalanceLabel!
+    @IBOutlet var totalProfitValueLabel: BalanceLabel!
     
     // MARK: - Public Methods
     func setup(with investorsCountTitle: String? = "INVESTORS", investorsCount: Int?,
@@ -43,15 +43,19 @@ class ProgramDetailsForTableViewCellView: UIStackView {
         if let investorsCount = investorsCount,
             let balance = balance,
             let avgProfit = avgProfit,
-            let totalProfit = totalProfit {
+            let totalProfit = totalProfit,
+            let currency = currency {
             
             let avgProfitValue = avgProfit.rounded(withType: .other)
             let totalProfitValue = totalProfit.rounded(withType: .gvt)
             
             investorsValueLabel.text = investorsCount.toString()
-            balanceValueLabel.text = balance.rounded(withCurrency: currency).toString()
+            balanceValueLabel.amountValue = balance
+            balanceValueLabel.shortView = true
+            balanceValueLabel.currency = currency
+            balanceValueLabel.shortView = true
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
-            totalProfitValueLabel.text = totalProfitValue.toString()
+            totalProfitValueLabel.amountValue = totalProfitValue
             
             investorsValueLabel.textColor = UIColor.Font.dark
             balanceValueLabel.textColor = UIColor.Font.dark

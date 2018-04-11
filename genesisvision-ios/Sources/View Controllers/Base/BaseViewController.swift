@@ -130,6 +130,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     func showInfiniteIndicator(value: Bool) {
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
         tableView.tableFooterView = value ? fetchMoreActivityIndicator : UIView()
     }
     

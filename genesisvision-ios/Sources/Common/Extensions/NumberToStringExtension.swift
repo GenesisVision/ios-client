@@ -1,4 +1,3 @@
-
 //
 //  NumberToStringExtension.swift
 //  genesisvision-ios

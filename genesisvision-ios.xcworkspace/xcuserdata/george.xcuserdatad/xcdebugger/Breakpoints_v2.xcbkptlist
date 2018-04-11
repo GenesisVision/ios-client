@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Views/StackedProgressBar.swift"
-            timestampString = "544886653.378997"
+            filePath = "genesisvision-ios/Sources/View Models/Auth/ForgetPasswordViewModel.swift"
+            timestampString = "545151373.713562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "layoutSubviews()"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "forgotPassword(email:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Views/StackedProgressBar.swift"
-            timestampString = "544886653.379329"
+            filePath = "genesisvision-ios/Sources/Data Providers/AuthDataProvider.swift"
+            timestampString = "545151776.7405421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "setup(totalValue:investedValue:requestsValue:)"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "investorForgotPassword(with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

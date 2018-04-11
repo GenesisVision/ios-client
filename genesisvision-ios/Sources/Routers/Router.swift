@@ -98,7 +98,7 @@ class Router {
     
     // MARK: - Private methods
     private func createProgramsNavigationController() {
-        guard let viewController = ProgramListViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
         programsViewController = viewController
         let router = InvestmentProgramListRouter(parentRouter: self)
         childRouters.append(router)
@@ -225,18 +225,18 @@ extension Router {
     }
     
     func showProgramDetail(with investmentProgramId: String) {
-        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return }
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController, programPropertiesForTableViewCellViewProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
-        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .traders) else { return nil }
+        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return nil }
         let router = ProgramDetailRouter(parentRouter: self)
-        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, with: investmentProgramId, reloadDataProtocol: viewController, programPropertiesForTableViewCellViewProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         
@@ -246,7 +246,7 @@ extension Router {
     func invest(with investmentProgramId: String, currency: String) {
         guard let vc = currentController() else { return }
         
-        guard let viewController = ProgramInvestViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
@@ -257,7 +257,7 @@ extension Router {
     func withdraw(with investmentProgramId: String, investedTokens: Double, currency: String) {
         guard let vc = currentController() else { return }
         
-        guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
         let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel

@@ -34,7 +34,7 @@ class InvestmentProgramListRouter: Router {
     }
     
     private func showFilterVC(with investmentProgramListViewModel: InvestmentProgramListViewModel) {
-        guard let viewController = ProgramFilterViewController.storyboardInstance(name: .traders) else { return }
+        guard let viewController = ProgramFilterViewController.storyboardInstance(name: .programs) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramFilterViewModel(withRouter: router, investmentProgramListViewModel: investmentProgramListViewModel)
         viewController.viewModel = viewModel

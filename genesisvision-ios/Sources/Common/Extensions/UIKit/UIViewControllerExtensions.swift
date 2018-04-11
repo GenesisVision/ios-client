@@ -15,9 +15,10 @@ extension UIViewController {
     // MARK: - Stroryboard Instances
     enum StoryboardNames: String {
         case main
+        case program
         case launch
         case profile
-        case traders
+        case programs
         case auth
         case wallet
         case dashboard

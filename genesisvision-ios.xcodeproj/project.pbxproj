@@ -132,6 +132,16 @@
 		5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */; };
 		5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */; };
 		5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */; };
+		5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7FC745207B6337001617FD /* BalanceLabel.swift */; };
+		5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E8340DB207E3279004A29F1 /* Program.storyboard */; };
+		5E8340DE207E38A4004A29F1 /* ProgramDetailTradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */; };
+		5E8340E0207E3907004A29F1 /* ProgramDetailTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */; };
+		5E8340E5207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340E3207E39B5004A29F1 /* ProgramDetailTradesTableViewCell.swift */; };
+		5E8340E6207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8340E4207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib */; };
+		5E8340E9207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340E8207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift */; };
+		5E8340EB207E4660004A29F1 /* ProgramDetailTradesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */; };
+		5E8340EE207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8340EC207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift */; };
+		5E8340EF207E5E39004A29F1 /* ProgramDetailTradesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8340ED207E508F004A29F1 /* ProgramDetailTradesHeaderView.xib */; };
 		5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */; };
 		5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858343205FFA010039E13F /* UILabelExtension.swift */; };
 		5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858345205FFCF70039E13F /* UIFontExtension.swift */; };
@@ -328,7 +338,7 @@
 		FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */; };
 		FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD42200DFA5E008825EC /* Main.storyboard */; };
 		FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5A200DFFB8008825EC /* Profile.storyboard */; };
-		FCC9DD5D200DFFDC008825EC /* Traders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5C200DFFDC008825EC /* Traders.storyboard */; };
+		FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5C200DFFDC008825EC /* Programs.storyboard */; };
 		FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */; };
 		FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */; };
 		FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD62200E2246008825EC /* CellViewModel.swift */; };
@@ -484,6 +494,16 @@
 		5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewController.swift; sourceTree = "<group>"; };
 		5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadButton.swift; sourceTree = "<group>"; };
+		5E7FC745207B6337001617FD /* BalanceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLabel.swift; sourceTree = "<group>"; };
+		5E8340DB207E3279004A29F1 /* Program.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Program.storyboard; sourceTree = "<group>"; };
+		5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesViewController.swift; sourceTree = "<group>"; };
+		5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesViewModel.swift; sourceTree = "<group>"; };
+		5E8340E3207E39B5004A29F1 /* ProgramDetailTradesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesTableViewCell.swift; sourceTree = "<group>"; };
+		5E8340E4207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramDetailTradesTableViewCell.xib; sourceTree = "<group>"; };
+		5E8340E8207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesRouter.swift; sourceTree = "<group>"; };
+		5E8340EC207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailTradesHeaderView.swift; sourceTree = "<group>"; };
+		5E8340ED207E508F004A29F1 /* ProgramDetailTradesHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramDetailTradesHeaderView.xib; sourceTree = "<group>"; };
 		5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		5E858343205FFA010039E13F /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		5E858345205FFCF70039E13F /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -690,7 +710,7 @@
 		FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCC9DD42200DFA5E008825EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FCC9DD5A200DFFB8008825EC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		FCC9DD5C200DFFDC008825EC /* Traders.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Traders.storyboard; sourceTree = "<group>"; };
+		FCC9DD5C200DFFDC008825EC /* Programs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Programs.storyboard; sourceTree = "<group>"; };
 		FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraderTableViewCell.swift; sourceTree = "<group>"; };
 		FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TraderTableViewCell.xib; sourceTree = "<group>"; };
 		FCC9DD62200E2246008825EC /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
@@ -886,6 +906,26 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		5E7FC747207B6342001617FD /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				5E1813862061D40600481646 /* CurrencyLabel.swift */,
+				5E367906206BC6DA006E226A /* AmountLabel.swift */,
+				5E7FC745207B6337001617FD /* BalanceLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		5E8340E7207E39BD004A29F1 /* ProgramDetailTrades */ = {
+			isa = PBXGroup;
+			children = (
+				5E8340E8207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift */,
+				5E8340E3207E39B5004A29F1 /* ProgramDetailTradesTableViewCell.swift */,
+				5E8340E4207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib */,
+			);
+			path = ProgramDetailTrades;
+			sourceTree = "<group>";
+		};
 		5EF058D320681F0A00373CBB /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -930,6 +970,8 @@
 				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
 				5E85834B2060148E0039E13F /* SortHeaderView.swift */,
 				5E858349206014820039E13F /* SortHeaderView.xib */,
+				5E8340EC207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift */,
+				5E8340ED207E508F004A29F1 /* ProgramDetailTradesHeaderView.xib */,
 			);
 			path = "Header View";
 			sourceTree = "<group>";
@@ -1116,6 +1158,7 @@
 				FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */,
 				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
 				5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */,
+				5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1151,6 +1194,7 @@
 				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
 				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
 				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
+				5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1301,6 +1345,7 @@
 				FC4C51AA204806950042CEE1 /* Program */,
 				FC4C51A9204806610042CEE1 /* Program Detail */,
 				FC4C51A82048064F0042CEE1 /* Program Request */,
+				5E8340E7207E39BD004A29F1 /* ProgramDetailTrades */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1438,7 +1483,8 @@
 				FC49641F2015502A00104CEB /* Wallet.storyboard */,
 				FC49641D2015500700104CEB /* Dashboard.storyboard */,
 				FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */,
-				FCC9DD5C200DFFDC008825EC /* Traders.storyboard */,
+				FCC9DD5C200DFFDC008825EC /* Programs.storyboard */,
+				5E8340DB207E3279004A29F1 /* Program.storyboard */,
 				FC016C15203B0FD2006956FE /* Tournament.storyboard */,
 				FCC9DD5A200DFFB8008825EC /* Profile.storyboard */,
 			);
@@ -1611,10 +1657,9 @@
 				FC0E20072044350E00872BE5 /* Profile */,
 				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
 				5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */,
-				5E1813862061D40600481646 /* CurrencyLabel.swift */,
+				5E7FC747207B6342001617FD /* Labels */,
 				5E395A2C2065613800A6B779 /* GradientView.swift */,
 				5E181E692067AD1900BF3240 /* NumpadView.swift */,
-				5E367906206BC6DA006E226A /* AmountLabel.swift */,
 				5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */,
 			);
 			path = Views;
@@ -1654,6 +1699,7 @@
 				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
 				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
 				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
+				5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1741,6 +1787,7 @@
 			files = (
 				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
 				5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */,
+				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
@@ -1753,7 +1800,8 @@
 				5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */,
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
 				5E85834A206014820039E13F /* SortHeaderView.xib in Resources */,
-				FCC9DD5D200DFFDC008825EC /* Traders.storyboard in Resources */,
+				5E8340E6207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib in Resources */,
+				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				FCA5706220273585001942F3 /* ProfileHeaderTableViewCell.xib in Resources */,
 				FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */,
 				FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */,
@@ -1761,6 +1809,7 @@
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5E18138B2062487200481646 /* ProgramDetailsTableViewCell.xib in Resources */,
 				5EBBECE520626F9700872656 /* ProgramListHeaderTableViewCell.xib in Resources */,
+				5E8340EF207E5E39004A29F1 /* ProgramDetailTradesHeaderView.xib in Resources */,
 				FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
@@ -1933,6 +1982,7 @@
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				5E478B742077B1EC00E697C1 /* InvestmentProgramsViewModel.swift in Sources */,
+				5E8340E0207E3907004A29F1 /* ProgramDetailTradesViewModel.swift in Sources */,
 				FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
@@ -1943,6 +1993,7 @@
 				5E478B8D2077B1EC00E697C1 /* RateViewModel.swift in Sources */,
 				FC27226920484BC4005225F2 /* ProgramMoreDetailsTableViewCell.swift in Sources */,
 				5E478B952077B1EC00E697C1 /* UploadResult.swift in Sources */,
+				5E8340EE207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift in Sources */,
 				5E478B672077B1EC00E697C1 /* TradesViewModel.swift in Sources */,
 				5E478B6B2077B1EC00E697C1 /* ForgotPasswordViewModel.swift in Sources */,
 				FC91379220311CA6002321C7 /* Utils.swift in Sources */,
@@ -2022,6 +2073,7 @@
 				5E181E6A2067AD1900BF3240 /* NumpadView.swift in Sources */,
 				FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */,
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
+				5E8340E9207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift in Sources */,
 				5E478B792077B1EC00E697C1 /* ManagerHistoryIpfsHash.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				FC1410242030168100B71E7F /* TradeServerViewModel.swift in Sources */,
@@ -2061,6 +2113,7 @@
 				FC9137872030A4A8002321C7 /* DetailHeaderTableViewCell.swift in Sources */,
 				5E478B5C2077B1EC00E697C1 /* PaymentTxInfo.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
+				5E8340EB207E4660004A29F1 /* ProgramDetailTradesRouter.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				FC4C193E20304EC900625795 /* TournamentRouter.swift in Sources */,
@@ -2075,6 +2128,7 @@
 				5E478B8F2077B1EC00E697C1 /* TwoFactorAuthenticator.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
 				FC27226C20484BEF005225F2 /* ProgramMoreDetailsTableViewCellViewModel.swift in Sources */,
+				5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */,
 				5E478B882077B1EC00E697C1 /* IFormFile.swift in Sources */,
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */,
@@ -2127,6 +2181,7 @@
 				5E478B482077B1EC00E697C1 /* BrokersFilter.swift in Sources */,
 				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
 				FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */,
+				5E8340DE207E38A4004A29F1 /* ProgramDetailTradesViewController.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
 				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
 				5E478B512077B1EC00E697C1 /* ManagerProfitChart.swift in Sources */,
@@ -2169,6 +2224,7 @@
 				FCA19A3F201AE83100157AD6 /* WalletControllerViewModel.swift in Sources */,
 				FC140FE42030168100B71E7F /* APIs.swift in Sources */,
 				5E478B802077B1EC00E697C1 /* Invest.swift in Sources */,
+				5E8340E5207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
 				5E478B972077B1EC00E697C1 /* BrokerInvestmentProgram.swift in Sources */,
 				5E478B7F2077B1EC00E697C1 /* RecoveryCodesViewModel.swift in Sources */,
@@ -2245,13 +2301,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DMANAGER\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -2323,13 +2379,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DINVESTOR\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -2394,13 +2450,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DINVESTOR\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -2465,13 +2521,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DTOURNAMENT\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -2543,13 +2599,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DTOURNAMENT\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2615,13 +2671,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78C97SMYBK;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DMANAGER\"";
-				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.alpha.investor;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

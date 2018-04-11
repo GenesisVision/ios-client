@@ -27,6 +27,7 @@ final class ProgramDetailViewModel {
     var title: String = "Program Detail"
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
     
     private var investmentProgramId: String!
     private var investmentProgramDetails: InvestmentProgramDetails? {
@@ -62,10 +63,11 @@ final class ProgramDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?, programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.reloadDataProtocol = reloadDataProtocol
+        self.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
     }
     
     // MARK: - Public methods
@@ -131,6 +133,11 @@ extension ProgramDetailViewModel {
         router.show(routeType: .history(investmentProgramId: investmentProgramId))
     }
     
+    func showTrades() {
+        guard let investmentProgramId = investmentProgramId else { return }
+        router.show(routeType: .trades(investmentProgramId: investmentProgramId))
+    }
+    
     func showRequests() {
         guard let investmentProgramId = investmentProgramId else { return }
         router.show(routeType: .requests(investmentProgramId: investmentProgramId))
@@ -157,7 +164,7 @@ extension ProgramDetailViewModel {
         case .chart:
             return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "")
         case .moreDetails:
-            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self)
+            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
         case .details:
             return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }

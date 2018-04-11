@@ -49,6 +49,13 @@ class ProgramDataProvider: DataProvider {
             : getManagerPrograms(with: filter, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
     }
     
+    static func getProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        isInvestorApp
+            ? getInvestorProgramTrades(with: filter, completion: completion, errorCompletion: errorCompletion)
+            : getManagerProgramTrades(with: filter, completion: completion, errorCompletion: errorCompletion)
+    }
+    
     // MARK: - Private methods
     private static func getInvestorProgram(with investmentProgramId: String, authorization: String?, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -66,6 +73,19 @@ class ProgramDataProvider: DataProvider {
     
     private static func getManagerPrograms(with filter: InvestmentProgramsFilter, authorization: String?, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         ManagerAPI.apiManagerInvestmentProgramsPost(authorization: authorization, filter: filter) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    
+    private static func getInvestorProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        InvestorAPI.apiInvestorInvestmentProgramTradesPost(filter: filter) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    private static func getManagerProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        ManagerAPI.apiManagerInvestmentProgramTradesPost(filter: filter) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
