@@ -21,7 +21,6 @@ class DetailChartTableViewCell: UITableViewCell {
     
     // MARK: - Views
     @IBOutlet var viewForChartView: UIView!
-    @IBOutlet var segmentedControl: TTSegmentedControl!
     
     @IBOutlet var chartView: ChartView! {
         didSet {
@@ -44,13 +43,6 @@ class DetailChartTableViewCell: UITableViewCell {
         backgroundColor = UIColor.NavBar.background
         contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
-        
-        segmentedControl.itemTitles = ["day", "week", "month", "year"]
-        segmentedControl.backgroundColor = UIColor.NavBar.grayBackground
-        segmentedControl.allowChangeThumbWidth = false
-        segmentedControl.didSelectItemWith = { (index, title) -> () in
-            print("Selected item \(index)")
-        }
     }
     
     // MARK: - Private methods

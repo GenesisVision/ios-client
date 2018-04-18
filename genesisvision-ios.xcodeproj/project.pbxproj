@@ -125,6 +125,7 @@
 		5E478B992077B1EC00E697C1 /* ManagerDashboardStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B3A2077B1EC00E697C1 /* ManagerDashboardStatistic.swift */; };
 		5E478B9A2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B3B2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift */; };
 		5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */; };
+		5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */; };
 		5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */; };
 		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
 		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
@@ -164,7 +165,6 @@
 		5EBBECE720626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */; };
 		5EBBECE920626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
-		5EF2256E206E33EC00D2CB12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2256D206E33EC00D2CB12 /* GoogleService-Info.plist */; };
 		5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2256F206E486B00D2CB12 /* UIDevice.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
@@ -490,6 +490,7 @@
 		5E478B3A2077B1EC00E697C1 /* ManagerDashboardStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerDashboardStatistic.swift; sourceTree = "<group>"; };
 		5E478B3B2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
 		5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProgressBar.swift; sourceTree = "<group>"; };
+		5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopJumpingTableViewOnInsertRows.swift; sourceTree = "<group>"; };
 		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
 		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
@@ -529,7 +530,6 @@
 		5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
-		5EF2256D206E33EC00D2CB12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5EF2256F206E486B00D2CB12 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
@@ -1476,7 +1476,7 @@
 		FCC9DD3C200DFA5E008825EC /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				5EF2256D206E33EC00D2CB12 /* GoogleService-Info.plist */,
+				5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */,
 				FC7CAE14201C310E00163A53 /* Info.plist */,
 				FCE8236220161339000061E8 /* Constants.swift */,
 			);
@@ -1803,7 +1803,6 @@
 				FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */,
 				5E239271205F67F100CB5AEC /* NeuzeitGro-Bla.ttf in Resources */,
 				FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */,
-				5EF2256E206E33EC00D2CB12 /* GoogleService-Info.plist in Resources */,
 				FCA5707820274D48001942F3 /* WalletHeaderTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
 				5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */,
@@ -1824,6 +1823,7 @@
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
 				FC4C51A5204806370042CEE1 /* ProgramRequestTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
+				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */,
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
