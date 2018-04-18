@@ -24,7 +24,7 @@ final class WelcomeViewModel {
     // MARK: - Public methods
     // MARK: - Navigation
     func start() {
-//        requestReview()
+        requestReview()
         isTournamentApp
             ? startTournament()
             : AuthManager.isLogin()
@@ -52,7 +52,7 @@ final class WelcomeViewModel {
         timesOpened += 1
         UserDefaults.standard.set(timesOpened, forKey: key)
         
-        if timesOpened > 9 {
+        if timesOpened > 29 {
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
