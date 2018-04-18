@@ -218,8 +218,14 @@ extension ProgramDetailViewController: ReloadDataProtocol {
     }
 }
 
-extension ProgramDetailViewController:  ProgramPropertiesForTableViewCellViewProtocol {
+extension ProgramDetailViewController: ProgramPropertiesForTableViewCellViewProtocol {
     func showTradesDidPressed() {
         viewModel.showTrades()
+    }
+}
+
+extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
+    func showFullChartDidPressed() {
+        viewModel.showFullChart()
     }
 }

@@ -130,8 +130,13 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     func showInfiniteIndicator(value: Bool) {
-        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
-        tableView.tableFooterView = value ? fetchMoreActivityIndicator : UIView()
+        guard value, fetchMoreActivityIndicator != nil else {
+            tableView.tableFooterView = UIView()
+            return
+        }
+        
+        fetchMoreActivityIndicator.startAnimating()
+        tableView.tableFooterView = fetchMoreActivityIndicator
     }
     
     override func hideAll() {

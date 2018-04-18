@@ -78,6 +78,7 @@ final class Constants {
     struct UserDefaults {
         static let authorizedToken: String = "AuthorizedToken"
         static let timesOpened: String = "TimesOpened"
+        static let restrictRotation: String = "RestrictRotation"
     }
     
     struct Keys {

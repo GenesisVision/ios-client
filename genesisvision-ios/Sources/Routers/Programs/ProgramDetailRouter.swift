@@ -6,8 +6,10 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import Foundation
+
 enum ProgramDetailRouteType {
-    case invest(investmentProgramId: String, currency: String), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails), trades(investmentProgramId: String)
+    case invest(investmentProgramId: String, currency: String), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails), trades(investmentProgramId: String), fullChart(investmentProgramDetails: InvestmentProgramDetails)
 }
 
 class ProgramDetailRouter: Router {
@@ -26,6 +28,8 @@ class ProgramDetailRouter: Router {
             description(with: investmentProgramDetails)
         case .trades(let investmentProgramId):
             trades(with: investmentProgramId)
+        case .fullChart(let investmentProgramDetails):
+            fullChart(with: investmentProgramDetails)
         }
     }
     
@@ -66,10 +70,20 @@ class ProgramDetailRouter: Router {
     private func trades(with investmentProgramId: String) {
         guard let viewController = ProgramDetailTradesViewController.storyboardInstance(name: .program) else { return }
         let router = ProgramDetailTradesRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailTradesViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController as? ReloadDataProtocol)
+        let viewModel = ProgramDetailTradesViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func fullChart(with investmentProgramDetails: InvestmentProgramDetails) {
+        guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program) else { return }
+        let router = ProgramDetailFullChartRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = ProgramDetailFullChartViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
+        viewController.viewModel = viewModel
+        viewController.modalTransitionStyle = .crossDissolve
+
+        navigationController?.present(viewController: viewController)
     }
 }
 

@@ -118,11 +118,9 @@ func getDeviceInfo() -> String {
     
     let systemVersion = UIDevice.current.systemVersion
     text.append("iOS: \(systemVersion)\n")
-    print(text)
     
     let model = UIDevice.current.type.rawValue
     text.append("Device: \(model)")
-    print(text)
     
     return text
 }

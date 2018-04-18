@@ -74,6 +74,11 @@
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+		<key>TTSegmentedControl.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 		<key>TextFieldEffects.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

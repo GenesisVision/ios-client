@@ -15,6 +15,20 @@ extension Date {
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }
+   
+    static func getFormatStringForChart(for date: Date, chartDurationType: ChartDurationType) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .none
+        switch chartDurationType {
+        case .day:
+            dateFormatter.timeStyle = .short
+        default:
+            dateFormatter.dateStyle = .short
+        }
+        dateFormatter.locale = Bundle.main.locale
+        return dateFormatter.string(from: date)
+    }
     
     var onlyDateFormatString: String {
         let dateFormatter = DateFormatter()

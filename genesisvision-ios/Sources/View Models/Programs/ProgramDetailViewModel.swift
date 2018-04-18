@@ -28,6 +28,7 @@ final class ProgramDetailViewModel {
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
+    private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
     private var investmentProgramId: String!
     private var investmentProgramDetails: InvestmentProgramDetails? {
@@ -63,11 +64,16 @@ final class ProgramDetailViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter, with investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?, programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?) {
+    init(withRouter router: ProgramDetailRouter,
+         investmentProgramId: String,
+         reloadDataProtocol: ReloadDataProtocol?,
+         programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?,
+         detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.reloadDataProtocol = reloadDataProtocol
         self.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
+        self.detailChartTableViewCellProtocol = detailChartTableViewCellProtocol
     }
     
     // MARK: - Public methods
@@ -134,13 +140,20 @@ extension ProgramDetailViewModel {
     }
     
     func showTrades() {
-        guard let investmentProgramId = investmentProgramId else { return }
+        guard let tradesCount = investmentProgramDetails?.tradesCount, tradesCount > 0, let investmentProgramId = investmentProgramId else { return }
         router.show(routeType: .trades(investmentProgramId: investmentProgramId))
     }
     
     func showRequests() {
         guard let investmentProgramId = investmentProgramId else { return }
         router.show(routeType: .requests(investmentProgramId: investmentProgramId))
+    }
+    
+    func showFullChart() {
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.restrictRotation)
+        
+        guard let investmentProgramDetails = investmentProgramDetails else { return }
+        router.show(routeType: .fullChart(investmentProgramDetails: investmentProgramDetails))
     }
 }
 
@@ -162,7 +175,7 @@ extension ProgramDetailViewModel {
         case .header:
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: self)
         case .chart:
-            return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "")
+            return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
         case .moreDetails:
             return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
         case .details:

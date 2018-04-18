@@ -6,10 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum ProgramHistoryRouteType {
-    
-}
-
 class ProgramHistoryRouter: Router {
 
 }

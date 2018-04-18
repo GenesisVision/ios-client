@@ -126,6 +126,9 @@
 		5E478B9A2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B3B2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift */; };
 		5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */; };
 		5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */; };
+		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
+		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
+		5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */; };
 		5E6D681D207655A100299408 /* String+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681C207655A100299408 /* String+Constants.swift */; };
 		5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */; };
 		5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */; };
@@ -488,6 +491,9 @@
 		5E478B3B2077B1EC00E697C1 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
 		5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProgressBar.swift; sourceTree = "<group>"; };
 		5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopJumpingTableViewOnInsertRows.swift; sourceTree = "<group>"; };
+		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
+		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
+		5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewModel.swift; sourceTree = "<group>"; };
 		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
 		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
 		5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawSuccessViewModel.swift; sourceTree = "<group>"; };
@@ -1159,6 +1165,7 @@
 				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
 				5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */,
 				5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */,
+				5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1195,6 +1202,7 @@
 				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
 				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
 				5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */,
+				5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1700,6 +1708,7 @@
 				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
 				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
 				5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */,
+				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1865,6 +1874,7 @@
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/TTSegmentedControl/TTSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1882,6 +1892,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1964,6 +1975,7 @@
 				FC14101C2030168100B71E7F /* NewTrade.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
+				5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */,
 				5E478B8A2077B1EC00E697C1 /* WalletStatistic.swift in Sources */,
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
@@ -2021,6 +2033,7 @@
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* ForgetPasswordViewModel.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
+				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
 				FC900E60204EDF21007E9142 /* WalletFilterRouter.swift in Sources */,
 				5E478B6C2077B1EC00E697C1 /* BrokerTradeServer.swift in Sources */,
@@ -2086,6 +2099,7 @@
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */,
 				5E478B772077B1EC00E697C1 /* RegisterManagerViewModel.swift in Sources */,
+				5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */,
 				FC900E64204EE0EF007E9142 /* WalletFilterViewModel.swift in Sources */,
 				FC1410232030168100B71E7F /* TradeAccount.swift in Sources */,
 				5E6D681D207655A100299408 /* String+Constants.swift in Sources */,

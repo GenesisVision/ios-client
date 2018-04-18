@@ -25,7 +25,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(dataSet: chart, name: title)
+            cell.chartView.setup(dataSet: chart, name: title, currencyValue: self.investmentProgram.currency?.rawValue)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8

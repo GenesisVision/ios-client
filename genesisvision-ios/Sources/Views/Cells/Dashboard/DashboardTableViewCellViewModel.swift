@@ -26,7 +26,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(dataSet: chart, name: title)
+            cell.chartView.setup(dataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue, chartDurationType: .day)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
