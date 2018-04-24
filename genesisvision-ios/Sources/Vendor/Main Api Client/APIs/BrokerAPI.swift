@@ -357,6 +357,46 @@ open class BrokerAPI {
     }
 
     /**
+     Upload accounts online info
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter accounts: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiBrokerManagersAccountsOnlineInfoUpdatePost(authorization: String, accounts: [ManagerAccountOnlineInfo]? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        apiBrokerManagersAccountsOnlineInfoUpdatePostWithRequestBuilder(authorization: authorization, accounts: accounts).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Upload accounts online info
+     - POST /api/broker/managersAccounts/onlineInfo/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter accounts: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func apiBrokerManagersAccountsOnlineInfoUpdatePostWithRequestBuilder(authorization: String, accounts: [ManagerAccountOnlineInfo]? = nil) -> RequestBuilder<Void> {
+        let path = "/api/broker/managersAccounts/onlineInfo/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: accounts)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Accrue investors' profits
      
      - parameter authorization: (header) JWT access token 

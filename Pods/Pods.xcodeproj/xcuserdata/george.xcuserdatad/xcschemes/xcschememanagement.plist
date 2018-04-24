@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -64,6 +69,11 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>SWSegmentedControl.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -77,7 +87,7 @@
 		<key>TTSegmentedControl.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>18</integer>
 		</dict>
 		<key>TextFieldEffects.xcscheme</key>
 		<dict>

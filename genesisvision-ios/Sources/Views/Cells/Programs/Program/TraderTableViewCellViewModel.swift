@@ -25,7 +25,7 @@ extension TraderTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(dataSet: [], name: participantViewModel.name)
+            cell.chartView.setup(chartDataSet: [], name: participantViewModel.name)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8

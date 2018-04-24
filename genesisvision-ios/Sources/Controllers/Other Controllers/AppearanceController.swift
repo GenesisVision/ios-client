@@ -41,6 +41,8 @@ struct AppearanceController {
         setupNavigationBar()
         setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
+        
+        setupSegmentedControl()
     }
     
     // NavigationBar
@@ -82,5 +84,16 @@ struct AppearanceController {
         IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.primary
         IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Dismiss"
         IQKeyboardManager.sharedManager().placeholderFont = UIFont.getFont(.regular, size: 14.0)
+    }
+    
+    // MARK: - SegmentedControl
+    private static func setupSegmentedControl() {
+        let segmentedControlAppearance = ScrollableSegmentedControl.appearance()
+        segmentedControlAppearance.segmentContentColor = UIColor.Font.light
+        segmentedControlAppearance.selectedSegmentContentColor = UIColor.primary
+        segmentedControlAppearance.backgroundColor = UIColor.clear
+        segmentedControlAppearance.tintColor = UIColor.primary
+        segmentedControlAppearance.borderColor = UIColor.primary
+        segmentedControlAppearance.borderWidth = 2
     }
 }

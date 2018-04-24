@@ -17,18 +17,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="DetailChartTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="100"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="198" id="KGk-i7-Jjw" customClass="DetailChartTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="395" height="198"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="395" height="197.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-C2-NOM">
-                        <rect key="frame" x="8" y="0.0" width="379" height="100"/>
+                        <rect key="frame" x="8" y="0.0" width="379" height="29.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSK-tJ-aAe">
-                                <rect key="frame" x="0.0" y="0.0" width="379" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="379" height="29.5"/>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
                                 <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,19 +36,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-Sy-3Pg" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="379" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="LWZ-TG-y6k"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLT-u0-XIt" customClass="ScrollableSegmentedControl" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="100" width="379" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Hub-9t-1MV"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WC9-Sy-3Pg" secondAttribute="trailing" id="1zJ-nl-R3k"/>
                             <constraint firstItem="bSK-tJ-aAe" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" id="Btr-em-7QZ"/>
-                            <constraint firstAttribute="bottom" secondItem="WC9-Sy-3Pg" secondAttribute="bottom" id="Cr3-FZ-TUt"/>
+                            <constraint firstItem="tLT-u0-XIt" firstAttribute="top" secondItem="WC9-Sy-3Pg" secondAttribute="bottom" id="ED7-9G-ppE"/>
                             <constraint firstItem="WC9-Sy-3Pg" firstAttribute="leading" secondItem="qDu-C2-NOM" secondAttribute="leading" id="UJ7-wt-YEb"/>
                             <constraint firstAttribute="trailing" secondItem="bSK-tJ-aAe" secondAttribute="trailing" id="Uts-93-Nav"/>
                             <constraint firstAttribute="bottom" secondItem="bSK-tJ-aAe" secondAttribute="bottom" id="WQd-zO-lEw"/>
-                            <constraint firstAttribute="height" constant="100" id="Ydm-ty-dmd"/>
                             <constraint firstItem="bSK-tJ-aAe" firstAttribute="leading" secondItem="qDu-C2-NOM" secondAttribute="leading" id="g1e-II-pIj"/>
                             <constraint firstItem="WC9-Sy-3Pg" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" id="icB-LW-jGC"/>
+                            <constraint firstAttribute="trailing" secondItem="tLT-u0-XIt" secondAttribute="trailing" id="qq6-Gm-sL7"/>
+                            <constraint firstAttribute="bottom" secondItem="tLT-u0-XIt" secondAttribute="bottom" id="wI3-qK-4JL"/>
+                            <constraint firstItem="tLT-u0-XIt" firstAttribute="leading" secondItem="qDu-C2-NOM" secondAttribute="leading" id="xoj-bl-Sgq"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -63,9 +75,10 @@
             <connections>
                 <outlet property="chartView" destination="WC9-Sy-3Pg" id="2bG-16-V2E"/>
                 <outlet property="noDataLabel" destination="bSK-tJ-aAe" id="lcV-7s-4Qn"/>
+                <outlet property="segmentedControl" destination="tLT-u0-XIt" id="8Qd-CZ-KWB"/>
                 <outlet property="viewForChartView" destination="qDu-C2-NOM" id="J4L-A0-BkJ"/>
             </connections>
-            <point key="canvasLocation" x="-3.5" y="143.5"/>
+            <point key="canvasLocation" x="-3.5" y="94"/>
         </tableViewCell>
     </objects>
 </document>

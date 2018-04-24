@@ -13,7 +13,6 @@ target 'genesisvision-ios' do
 
     pod 'Kingfisher', '~> 4.0'
     pod 'TTRangeSlider'
-    pod 'TTSegmentedControl'
     
     pod 'Firebase/Core'
     pod 'Firebase/Crash'

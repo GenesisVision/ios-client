@@ -16,6 +16,7 @@ open class InvestmentProgram: Codable {
         case gvt = "GVT"
         case eth = "ETH"
         case btc = "BTC"
+        case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -46,16 +47,18 @@ open class InvestmentProgram: Codable {
     public var feeSuccess: Double?
     public var feeManagement: Double?
     public var chart: [Chart]?
+    public var equityChart: [ChartByDate]?
     public var manager: ProfilePublicViewModel?
     public var freeTokens: FreeTokens?
     public var hasNewRequests: Bool?
     public var isInvestEnable: Bool?
     public var isOwnProgram: Bool?
     public var canCloseProgram: Bool?
+    public var isFavorite: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, manager: ProfilePublicViewModel?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, equityChart: [ChartByDate]?, manager: ProfilePublicViewModel?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFavorite: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -78,12 +81,14 @@ open class InvestmentProgram: Codable {
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
         self.chart = chart
+        self.equityChart = equityChart
         self.manager = manager
         self.freeTokens = freeTokens
         self.hasNewRequests = hasNewRequests
         self.isInvestEnable = isInvestEnable
         self.isOwnProgram = isOwnProgram
         self.canCloseProgram = canCloseProgram
+        self.isFavorite = isFavorite
     }
     
 
@@ -115,12 +120,14 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(chart, forKey: "chart")
+        try container.encodeIfPresent(equityChart, forKey: "equityChart")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(freeTokens, forKey: "freeTokens")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
     }
 
     // Decodable protocol methods
@@ -150,12 +157,14 @@ open class InvestmentProgram: Codable {
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
+        equityChart = try container.decodeIfPresent([ChartByDate].self, forKey: "equityChart")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         freeTokens = try container.decodeIfPresent(FreeTokens.self, forKey: "freeTokens")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
     }
 }
 

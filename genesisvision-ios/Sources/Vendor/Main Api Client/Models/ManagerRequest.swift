@@ -16,6 +16,7 @@ open class ManagerRequest: Codable {
         case gvt = "GVT"
         case eth = "ETH"
         case btc = "BTC"
+        case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }

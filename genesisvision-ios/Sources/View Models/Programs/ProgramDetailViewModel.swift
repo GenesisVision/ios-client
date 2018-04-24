@@ -31,6 +31,7 @@ final class ProgramDetailViewModel {
     private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
     private var investmentProgramId: String!
+    private var equityChart: [TradeChart]?
     private var investmentProgramDetails: InvestmentProgramDetails? {
         didSet {
             if let isHistoryEnable = investmentProgramDetails?.isHistoryEnable,
@@ -74,6 +75,10 @@ final class ProgramDetailViewModel {
         self.reloadDataProtocol = reloadDataProtocol
         self.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
         self.detailChartTableViewCellProtocol = detailChartTableViewCellProtocol
+        
+        updateChart(with: .all) { [weak self] (result) in
+            self?.reloadDataProtocol?.didReloadData()
+        }
     }
     
     // MARK: - Public methods
@@ -155,6 +160,22 @@ extension ProgramDetailViewModel {
         guard let investmentProgramDetails = investmentProgramDetails else { return }
         router.show(routeType: .fullChart(investmentProgramDetails: investmentProgramDetails))
     }
+    
+    func updateChart(with type: ChartDurationType, completion: @escaping CompletionBlock) {
+        let timeFrame = type.getTimeFrame()
+        
+        ProgramDataProvider.getProgramChart(with: timeFrame, investmentProgramId: investmentProgramId, completion: { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            if let chart = viewModel?.chart {
+                self?.equityChart = chart
+            }
+            
+            completion(.success)
+        }, errorCompletion: completion)
+    }
 }
 
 // MARK: - Fetch
@@ -175,7 +196,7 @@ extension ProgramDetailViewModel {
         case .header:
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: self)
         case .chart:
-            return DetailChartTableViewCellViewModel(chart: investmentProgramDetails.chart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
+            return DetailChartTableViewCellViewModel(chart: equityChart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
         case .moreDetails:
             return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
         case .details:

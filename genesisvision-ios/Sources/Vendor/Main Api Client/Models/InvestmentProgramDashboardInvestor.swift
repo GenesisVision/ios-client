@@ -16,6 +16,7 @@ open class InvestmentProgramDashboardInvestor: Codable {
         case gvt = "GVT"
         case eth = "ETH"
         case btc = "BTC"
+        case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -48,7 +49,10 @@ open class InvestmentProgramDashboardInvestor: Codable {
     public var feeSuccess: Double?
     public var feeManagement: Double?
     public var isEnabled: Bool?
+    public var isArchived: Bool?
     public var chart: [Chart]?
+    public var equityChart: [ChartByDate]?
+    public var freeTokens: FreeTokens?
     public var manager: ProfilePublicViewModel?
     public var token: Token?
     public var hasNewRequests: Bool?
@@ -56,10 +60,11 @@ open class InvestmentProgramDashboardInvestor: Codable {
     public var isInvestEnable: Bool?
     public var isWithdrawEnable: Bool?
     public var isOwnProgram: Bool?
+    public var isFavorite: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedAmount: Double?, profitFromProgram: Double?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, chart: [Chart]?, manager: ProfilePublicViewModel?, token: Token?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, investedAmount: Double?, profitFromProgram: Double?, investedTokens: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, isEnabled: Bool?, isArchived: Bool?, chart: [Chart]?, equityChart: [ChartByDate]?, freeTokens: FreeTokens?, manager: ProfilePublicViewModel?, token: Token?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?, isFavorite: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -84,7 +89,10 @@ open class InvestmentProgramDashboardInvestor: Codable {
         self.feeSuccess = feeSuccess
         self.feeManagement = feeManagement
         self.isEnabled = isEnabled
+        self.isArchived = isArchived
         self.chart = chart
+        self.equityChart = equityChart
+        self.freeTokens = freeTokens
         self.manager = manager
         self.token = token
         self.hasNewRequests = hasNewRequests
@@ -92,6 +100,7 @@ open class InvestmentProgramDashboardInvestor: Codable {
         self.isInvestEnable = isInvestEnable
         self.isWithdrawEnable = isWithdrawEnable
         self.isOwnProgram = isOwnProgram
+        self.isFavorite = isFavorite
     }
     
 
@@ -125,7 +134,10 @@ open class InvestmentProgramDashboardInvestor: Codable {
         try container.encodeIfPresent(feeSuccess, forKey: "feeSuccess")
         try container.encodeIfPresent(feeManagement, forKey: "feeManagement")
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
+        try container.encodeIfPresent(isArchived, forKey: "isArchived")
         try container.encodeIfPresent(chart, forKey: "chart")
+        try container.encodeIfPresent(equityChart, forKey: "equityChart")
+        try container.encodeIfPresent(freeTokens, forKey: "freeTokens")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(token, forKey: "token")
         try container.encodeIfPresent(hasNewRequests, forKey: "hasNewRequests")
@@ -133,6 +145,7 @@ open class InvestmentProgramDashboardInvestor: Codable {
         try container.encodeIfPresent(isInvestEnable, forKey: "isInvestEnable")
         try container.encodeIfPresent(isWithdrawEnable, forKey: "isWithdrawEnable")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
+        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
     }
 
     // Decodable protocol methods
@@ -164,7 +177,10 @@ open class InvestmentProgramDashboardInvestor: Codable {
         feeSuccess = try container.decodeIfPresent(Double.self, forKey: "feeSuccess")
         feeManagement = try container.decodeIfPresent(Double.self, forKey: "feeManagement")
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
+        isArchived = try container.decodeIfPresent(Bool.self, forKey: "isArchived")
         chart = try container.decodeIfPresent([Chart].self, forKey: "chart")
+        equityChart = try container.decodeIfPresent([ChartByDate].self, forKey: "equityChart")
+        freeTokens = try container.decodeIfPresent(FreeTokens.self, forKey: "freeTokens")
         manager = try container.decodeIfPresent(ProfilePublicViewModel.self, forKey: "manager")
         token = try container.decodeIfPresent(Token.self, forKey: "token")
         hasNewRequests = try container.decodeIfPresent(Bool.self, forKey: "hasNewRequests")
@@ -172,6 +188,7 @@ open class InvestmentProgramDashboardInvestor: Codable {
         isInvestEnable = try container.decodeIfPresent(Bool.self, forKey: "isInvestEnable")
         isWithdrawEnable = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawEnable")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
+        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
     }
 }
 

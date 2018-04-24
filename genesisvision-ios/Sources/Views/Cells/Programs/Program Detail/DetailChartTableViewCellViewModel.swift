@@ -9,7 +9,7 @@
 import Foundation
 
 struct DetailChartTableViewCellViewModel {
-    let chart: [Chart]
+    let chart: [TradeChart]
     let name: String
     let currencyValue: String?
     weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
@@ -28,7 +28,7 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
         
         cell.chartView.isHidden = false
         cell.noDataLabel.isHidden = true
-        cell.chartView.setup(chartType: .default, dataSet: chart, name: name, currencyValue: currencyValue)
+        cell.chartView.setup(chartType: .default, tradeChartDataSet: chart, name: name, currencyValue: currencyValue)
         cell.delegate = detailChartTableViewCellProtocol
     }
 }

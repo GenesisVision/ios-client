@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TTSegmentedControl
 import Charts
 
 class ProgramDetailFullChartViewController: BaseViewController {
@@ -27,7 +26,12 @@ class ProgramDetailFullChartViewController: BaseViewController {
     @IBOutlet var currencyValueLabel: CurrencyLabel!
     
     // MARK: - Views
-    @IBOutlet var segmentedControl: TTSegmentedControl!
+    @IBOutlet var segmentedControl: SWSegmentedControl! {
+        didSet {
+            segmentedControl.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = true
@@ -61,14 +65,9 @@ class ProgramDetailFullChartViewController: BaseViewController {
         
         view.backgroundColor = UIColor.Font.dark
         
-        chartView.setup(chartType: .full, dataSet: viewModel.investmentProgramDetails?.chart, name: "Full Chart", currencyValue: viewModel.investmentProgramDetails?.currency?.rawValue)
+        chartView.setup(chartType: .full, chartDataSet: viewModel.investmentProgramDetails?.chart, name: "Full Chart", currencyValue: viewModel.investmentProgramDetails?.currency?.rawValue)
         
-        segmentedControl.itemTitles = viewModel.getAllChartDurationTypes()
-        segmentedControl.selectItemAt(index: viewModel.getSelectedChartDurationTypes())
-        segmentedControl.allowChangeThumbWidth = false
-        segmentedControl.didSelectItemWith = { (index, title) -> () in
-            self.viewModel.selectChartDurationTypes(index: index)
-        }
+        segmentedControl.setSelectedSegmentIndex(viewModel.getSelectedChartDurationTypes())
     }
     
     // MARK: - Actions

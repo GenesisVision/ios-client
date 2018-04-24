@@ -16,6 +16,7 @@ open class InvestmentProgramDetails: Codable {
         case gvt = "GVT"
         case eth = "ETH"
         case btc = "BTC"
+        case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -45,6 +46,7 @@ open class InvestmentProgramDetails: Codable {
     public var investorsCount: Int?
     public var periodDuration: Int?
     public var programStartDate: Date?
+    public var programEndDate: Date?
     public var startOfPeriod: Date?
     public var endOfPeriod: Date?
     public var profitAvg: Double?
@@ -76,10 +78,12 @@ open class InvestmentProgramDetails: Codable {
     public var isWithdrawEnable: Bool?
     public var isOwnProgram: Bool?
     public var canCloseProgram: Bool?
+    public var canClosePeriod: Bool?
+    public var isFavorite: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, chart: [Chart]?, brokerTitle: String?, brokerTradeServerTitle: String?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, programEndDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, chart: [Chart]?, brokerTitle: String?, brokerTradeServerTitle: String?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canClosePeriod: Bool?, isFavorite: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -96,6 +100,7 @@ open class InvestmentProgramDetails: Codable {
         self.investorsCount = investorsCount
         self.periodDuration = periodDuration
         self.programStartDate = programStartDate
+        self.programEndDate = programEndDate
         self.startOfPeriod = startOfPeriod
         self.endOfPeriod = endOfPeriod
         self.profitAvg = profitAvg
@@ -127,6 +132,8 @@ open class InvestmentProgramDetails: Codable {
         self.isWithdrawEnable = isWithdrawEnable
         self.isOwnProgram = isOwnProgram
         self.canCloseProgram = canCloseProgram
+        self.canClosePeriod = canClosePeriod
+        self.isFavorite = isFavorite
     }
     
 
@@ -152,6 +159,7 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
         try container.encodeIfPresent(programStartDate, forKey: "programStartDate")
+        try container.encodeIfPresent(programEndDate, forKey: "programEndDate")
         try container.encodeIfPresent(startOfPeriod, forKey: "startOfPeriod")
         try container.encodeIfPresent(endOfPeriod, forKey: "endOfPeriod")
         try container.encodeIfPresent(profitAvg, forKey: "profitAvg")
@@ -183,6 +191,8 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(isWithdrawEnable, forKey: "isWithdrawEnable")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(canClosePeriod, forKey: "canClosePeriod")
+        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
     }
 
     // Decodable protocol methods
@@ -206,6 +216,7 @@ open class InvestmentProgramDetails: Codable {
         investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
         programStartDate = try container.decodeIfPresent(Date.self, forKey: "programStartDate")
+        programEndDate = try container.decodeIfPresent(Date.self, forKey: "programEndDate")
         startOfPeriod = try container.decodeIfPresent(Date.self, forKey: "startOfPeriod")
         endOfPeriod = try container.decodeIfPresent(Date.self, forKey: "endOfPeriod")
         profitAvg = try container.decodeIfPresent(Double.self, forKey: "profitAvg")
@@ -237,6 +248,8 @@ open class InvestmentProgramDetails: Codable {
         isWithdrawEnable = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawEnable")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        canClosePeriod = try container.decodeIfPresent(Bool.self, forKey: "canClosePeriod")
+        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
     }
 }
 

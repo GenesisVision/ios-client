@@ -75,6 +75,9 @@ final class ProgramFilterViewModel {
                                                    profitTotalChange: filter.profitTotalChange,
                                                    periodMin: filter.periodMin,
                                                    periodMax: filter.periodMax,
+                                                   showActivePrograms: filter.showActivePrograms,
+                                                   equityChartLength: filter.equityChartLength,
+                                                   showMyFavorites: filter.showMyFavorites,
                                                    skip: filter.skip,
                                                    take: filter.take)
         }

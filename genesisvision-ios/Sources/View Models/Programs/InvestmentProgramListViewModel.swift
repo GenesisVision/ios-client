@@ -67,8 +67,8 @@ final class InvestmentProgramListViewModel {
     init(withRouter router: InvestmentProgramListRouter, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
-            
-        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, skip: skip, take: take)
+        
+        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, showActivePrograms: nil, equityChartLength: nil, showMyFavorites: nil, skip: skip, take: take)
         
         state = isLogin() ? .programList : .programListWithSignIn
     }

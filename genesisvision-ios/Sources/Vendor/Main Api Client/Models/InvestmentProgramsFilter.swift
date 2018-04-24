@@ -48,12 +48,15 @@ open class InvestmentProgramsFilter: Codable {
     public var profitTotalChange: ProfitTotalChange?
     public var periodMin: Int?
     public var periodMax: Int?
+    public var showActivePrograms: Bool?
+    public var equityChartLength: Int?
+    public var showMyFavorites: Bool?
     public var skip: Int?
     public var take: Int?
 
 
     
-    public init(managerId: UUID?, brokerId: UUID?, brokerTradeServerId: UUID?, investMaxAmountFrom: Double?, investMaxAmountTo: Double?, sorting: Sorting?, name: String?, levelMin: Int?, levelMax: Int?, profitAvgMin: Int?, profitAvgMax: Int?, profitTotalMin: Int?, profitTotalMax: Int?, profitTotalPercentMin: Int?, profitTotalPercentMax: Int?, profitAvgPercentMin: Int?, profitAvgPercentMax: Int?, profitTotalChange: ProfitTotalChange?, periodMin: Int?, periodMax: Int?, skip: Int?, take: Int?) {
+    public init(managerId: UUID?, brokerId: UUID?, brokerTradeServerId: UUID?, investMaxAmountFrom: Double?, investMaxAmountTo: Double?, sorting: Sorting?, name: String?, levelMin: Int?, levelMax: Int?, profitAvgMin: Int?, profitAvgMax: Int?, profitTotalMin: Int?, profitTotalMax: Int?, profitTotalPercentMin: Int?, profitTotalPercentMax: Int?, profitAvgPercentMin: Int?, profitAvgPercentMax: Int?, profitTotalChange: ProfitTotalChange?, periodMin: Int?, periodMax: Int?, showActivePrograms: Bool?, equityChartLength: Int?, showMyFavorites: Bool?, skip: Int?, take: Int?) {
         self.managerId = managerId
         self.brokerId = brokerId
         self.brokerTradeServerId = brokerTradeServerId
@@ -74,6 +77,9 @@ open class InvestmentProgramsFilter: Codable {
         self.profitTotalChange = profitTotalChange
         self.periodMin = periodMin
         self.periodMax = periodMax
+        self.showActivePrograms = showActivePrograms
+        self.equityChartLength = equityChartLength
+        self.showMyFavorites = showMyFavorites
         self.skip = skip
         self.take = take
     }
@@ -105,6 +111,9 @@ open class InvestmentProgramsFilter: Codable {
         try container.encodeIfPresent(profitTotalChange, forKey: "profitTotalChange")
         try container.encodeIfPresent(periodMin, forKey: "periodMin")
         try container.encodeIfPresent(periodMax, forKey: "periodMax")
+        try container.encodeIfPresent(showActivePrograms, forKey: "showActivePrograms")
+        try container.encodeIfPresent(equityChartLength, forKey: "equityChartLength")
+        try container.encodeIfPresent(showMyFavorites, forKey: "showMyFavorites")
         try container.encodeIfPresent(skip, forKey: "skip")
         try container.encodeIfPresent(take, forKey: "take")
     }
@@ -134,6 +143,9 @@ open class InvestmentProgramsFilter: Codable {
         profitTotalChange = try container.decodeIfPresent(ProfitTotalChange.self, forKey: "profitTotalChange")
         periodMin = try container.decodeIfPresent(Int.self, forKey: "periodMin")
         periodMax = try container.decodeIfPresent(Int.self, forKey: "periodMax")
+        showActivePrograms = try container.decodeIfPresent(Bool.self, forKey: "showActivePrograms")
+        equityChartLength = try container.decodeIfPresent(Int.self, forKey: "equityChartLength")
+        showMyFavorites = try container.decodeIfPresent(Bool.self, forKey: "showMyFavorites")
         skip = try container.decodeIfPresent(Int.self, forKey: "skip")
         take = try container.decodeIfPresent(Int.self, forKey: "take")
     }

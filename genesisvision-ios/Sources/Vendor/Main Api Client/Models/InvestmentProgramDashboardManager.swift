@@ -16,6 +16,7 @@ open class InvestmentProgramDashboardManager: Codable {
         case gvt = "GVT"
         case eth = "ETH"
         case btc = "BTC"
+        case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -42,10 +43,12 @@ open class InvestmentProgramDashboardManager: Codable {
     public var minAccountBalance: Double?
     public var login: String?
     public var canCloseProgram: Bool?
+    public var canClosePeriod: Bool?
+    public var isFavorite: Bool?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, token: Token?, ownBalance: Double?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, login: String?, canCloseProgram: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, balance: Double?, currency: Currency?, tradesCount: Int?, periodDuration: Int?, investorsCount: Int?, isEnabled: Bool?, startOfPeriod: Date?, profitTotal: Double?, profitTotalGvt: Double?, profitCurrent: Double?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, token: Token?, ownBalance: Double?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, login: String?, canCloseProgram: Bool?, canClosePeriod: Bool?, isFavorite: Bool?) {
         self.id = id
         self.title = title
         self.description = description
@@ -69,6 +72,8 @@ open class InvestmentProgramDashboardManager: Codable {
         self.minAccountBalance = minAccountBalance
         self.login = login
         self.canCloseProgram = canCloseProgram
+        self.canClosePeriod = canClosePeriod
+        self.isFavorite = isFavorite
     }
     
 
@@ -101,6 +106,8 @@ open class InvestmentProgramDashboardManager: Codable {
         try container.encodeIfPresent(minAccountBalance, forKey: "minAccountBalance")
         try container.encodeIfPresent(login, forKey: "login")
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(canClosePeriod, forKey: "canClosePeriod")
+        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
     }
 
     // Decodable protocol methods
@@ -131,6 +138,8 @@ open class InvestmentProgramDashboardManager: Codable {
         minAccountBalance = try container.decodeIfPresent(Double.self, forKey: "minAccountBalance")
         login = try container.decodeIfPresent(String.self, forKey: "login")
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        canClosePeriod = try container.decodeIfPresent(Bool.self, forKey: "canClosePeriod")
+        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
     }
 }
 

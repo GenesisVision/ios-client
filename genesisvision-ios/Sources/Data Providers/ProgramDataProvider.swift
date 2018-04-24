@@ -56,6 +56,11 @@ class ProgramDataProvider: DataProvider {
             : getManagerProgramTrades(with: filter, completion: completion, errorCompletion: errorCompletion)
     }
     
+    static func getProgramChart(with timeFrame: InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        getInvestorProgramTradesChart(with: timeFrame, investmentProgramId: investmentProgramId, completion: completion, errorCompletion: errorCompletion)
+    }
+    
     // MARK: - Private methods
     private static func getInvestorProgram(with investmentProgramId: String, authorization: String?, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -86,6 +91,24 @@ class ProgramDataProvider: DataProvider {
     
     private static func getManagerProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         ManagerAPI.apiManagerInvestmentProgramTradesPost(filter: filter) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    private static func getInvestorProgramTradesChart(with timeFrame: InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.apiInvestorInvestmentProgramEquityChartGet(investmentProgramId: uuid, timeFrame: timeFrame) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    private static func getManagerProgramTradesChart(with timeFrame: ManagerAPI.TimeFrame_apiManagerInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ManagerAPI.apiManagerInvestmentProgramEquityChartGet(investmentProgramId: uuid, timeFrame: timeFrame) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
