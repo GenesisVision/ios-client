@@ -26,10 +26,29 @@ class ProgramDetailFullChartViewController: BaseViewController {
     @IBOutlet var currencyValueLabel: CurrencyLabel!
     
     // MARK: - Views
-    @IBOutlet var segmentedControl: SWSegmentedControl! {
+    @IBOutlet var segmentedControl: ScrollableSegmentedControl! {
         didSet {
-            segmentedControl.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            segmentedControl.segmentStyle = .textOnly
+            segmentedControl.insertSegment(withTitle: "1D", at: 0)
+            segmentedControl.insertSegment(withTitle: "1W", at: 1)
+            segmentedControl.insertSegment(withTitle: "1M", at: 2)
+            segmentedControl.insertSegment(withTitle: "3M", at: 3)
+            segmentedControl.insertSegment(withTitle: "6M", at: 4)
+            segmentedControl.insertSegment(withTitle: "1Y", at: 5)
+            segmentedControl.insertSegment(withTitle: "All", at: 6)
+            segmentedControl.selectedSegmentIndex = 6
+            segmentedControl.underlineSelected = true
+            segmentedControl.height = 21
+            
+            let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.Font.light]
+            let textHighlightAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.primary]
+            let textSelectAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.primary]
+            
+            segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
+            segmentedControl.setTitleTextAttributes(textHighlightAttributes, for: .highlighted)
+            segmentedControl.setTitleTextAttributes(textSelectAttributes, for: .selected)
+            
+            segmentedControl.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
         }
     }
     @IBOutlet var chartView: ChartView! {
@@ -66,8 +85,10 @@ class ProgramDetailFullChartViewController: BaseViewController {
         view.backgroundColor = UIColor.Font.dark
         
         chartView.setup(chartType: .full, chartDataSet: viewModel.investmentProgramDetails?.chart, name: "Full Chart", currencyValue: viewModel.investmentProgramDetails?.currency?.rawValue)
-        
-        segmentedControl.setSelectedSegmentIndex(viewModel.getSelectedChartDurationTypes())
+    }
+    
+    @objc func segmentSelected(sender: ScrollableSegmentedControl) {
+        print("Segment at index \(sender.selectedSegmentIndex)  selected")
     }
     
     // MARK: - Actions

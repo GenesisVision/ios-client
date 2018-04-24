@@ -69,6 +69,21 @@ class DashboardTableViewCell: UITableViewCell {
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     
+    @IBOutlet var myProfitTooltip: TooltipButton! {
+        didSet {
+            myProfitTooltip.tooltipText = String.Tooltitps.myProfit
+        }
+    }
+    @IBOutlet var myTokensTooltip: TooltipButton! {
+        didSet {
+            myTokensTooltip.tooltipText = String.Tooltitps.myTokens
+        }
+    }
+    @IBOutlet var periodDurationTooltip: TooltipButton! {
+        didSet {
+            periodDurationTooltip.tooltipText = String.Tooltitps.periodDuration
+        }
+    }
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

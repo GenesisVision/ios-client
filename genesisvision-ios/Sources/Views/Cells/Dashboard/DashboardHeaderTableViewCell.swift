@@ -23,6 +23,17 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet var portfolioProfitTooltip: TooltipButton! {
+        didSet {
+            portfolioProfitTooltip.tooltipText = String.Tooltitps.portfolioProfit
+        }
+    }
+    
+    @IBOutlet var portfolioInvestedTooltip: TooltipButton! {
+        didSet {
+            portfolioInvestedTooltip.tooltipText = String.Tooltitps.portfolioInvested
+        }
+    }
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

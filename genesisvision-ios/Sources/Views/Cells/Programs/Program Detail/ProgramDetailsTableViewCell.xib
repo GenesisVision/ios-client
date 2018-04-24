@@ -134,25 +134,79 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="avgProfitTitleLabel" destination="Q6n-jq-AlM" id="SnJ-Pu-F0V"/>
+                                    <outlet property="avgProfitTooltip" destination="hHv-2C-EQ8" id="l2Z-hU-SgU"/>
                                     <outlet property="avgProfitValueLabel" destination="J2B-oQ-gIQ" id="boT-6C-oub"/>
                                     <outlet property="balanceCurrencyLabel" destination="geq-fe-IzN" id="KcB-1l-Tp8"/>
                                     <outlet property="balanceTitleLabel" destination="ozc-Tv-ORs" id="bVu-Jm-j23"/>
+                                    <outlet property="balanceTooltip" destination="CHX-HG-4tT" id="yZc-CG-fn1"/>
                                     <outlet property="balanceValueLabel" destination="zdq-Eh-Vxs" id="QpJ-pJ-yGy"/>
                                     <outlet property="investorsTitleLabel" destination="r4h-35-GP2" id="ahU-NM-OCV"/>
+                                    <outlet property="investorsTooltip" destination="1vB-mw-mJa" id="WfL-I0-CPM"/>
                                     <outlet property="investorsValueLabel" destination="9jk-hE-FOq" id="tmc-00-LzI"/>
                                     <outlet property="profitCurrencyLabel" destination="oMI-29-B1W" id="SjD-gb-Iwr"/>
                                     <outlet property="totalProfitTitleLabel" destination="dYJ-FY-cqN" id="kqr-G2-Cq4"/>
+                                    <outlet property="totalProfitTooltip" destination="WFc-62-zJz" id="TmF-bK-wzG"/>
                                     <outlet property="totalProfitValueLabel" destination="tTb-dl-S9g" id="7pd-G5-9ih"/>
                                 </connections>
                             </stackView>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFc-62-zJz" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="78.5" y="131" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ECT-SV-96X"/>
+                            <constraint firstAttribute="width" constant="20" id="lCo-ER-eTm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-2C-EQ8" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="150" y="131" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-HG-4tT" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="217.5" y="131" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1vB-mw-mJa" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="295" y="131" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="hHv-2C-EQ8" firstAttribute="trailing" secondItem="Q6n-jq-AlM" secondAttribute="trailing" constant="22" id="3cH-8b-VKp"/>
+                    <constraint firstItem="WFc-62-zJz" firstAttribute="trailing" secondItem="dYJ-FY-cqN" secondAttribute="trailing" constant="22" id="6wc-q8-vRO"/>
+                    <constraint firstItem="1vB-mw-mJa" firstAttribute="centerY" secondItem="r4h-35-GP2" secondAttribute="centerY" id="9py-0S-mHq"/>
+                    <constraint firstItem="hHv-2C-EQ8" firstAttribute="centerY" secondItem="Q6n-jq-AlM" secondAttribute="centerY" id="Bxz-lU-lE9"/>
+                    <constraint firstItem="1vB-mw-mJa" firstAttribute="trailing" secondItem="r4h-35-GP2" secondAttribute="trailing" constant="22" id="Hbl-St-Bwj"/>
+                    <constraint firstItem="CHX-HG-4tT" firstAttribute="width" secondItem="WFc-62-zJz" secondAttribute="width" id="Lw7-Op-ovO"/>
+                    <constraint firstItem="CHX-HG-4tT" firstAttribute="height" secondItem="WFc-62-zJz" secondAttribute="height" id="QuP-nY-DFv"/>
+                    <constraint firstItem="WFc-62-zJz" firstAttribute="centerY" secondItem="dYJ-FY-cqN" secondAttribute="centerY" id="T8x-em-rMX"/>
+                    <constraint firstItem="1vB-mw-mJa" firstAttribute="height" secondItem="WFc-62-zJz" secondAttribute="height" id="amW-h5-Q9f"/>
                     <constraint firstItem="dXr-96-Uji" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bpQ-rE-ynA"/>
+                    <constraint firstItem="1vB-mw-mJa" firstAttribute="width" secondItem="WFc-62-zJz" secondAttribute="width" id="dRt-E8-egT"/>
+                    <constraint firstItem="hHv-2C-EQ8" firstAttribute="height" secondItem="WFc-62-zJz" secondAttribute="height" id="feg-6F-qXV"/>
                     <constraint firstAttribute="bottom" secondItem="dXr-96-Uji" secondAttribute="bottom" constant="8" id="glY-uZ-vSL"/>
                     <constraint firstAttribute="trailing" secondItem="dXr-96-Uji" secondAttribute="trailing" constant="16" id="rQD-3z-rnB"/>
                     <constraint firstItem="dXr-96-Uji" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="s8u-OH-oKb"/>
+                    <constraint firstItem="CHX-HG-4tT" firstAttribute="trailing" secondItem="ozc-Tv-ORs" secondAttribute="trailing" constant="22" id="tIb-9y-o6D"/>
+                    <constraint firstItem="CHX-HG-4tT" firstAttribute="centerY" secondItem="ozc-Tv-ORs" secondAttribute="centerY" id="tVx-jf-u0b"/>
+                    <constraint firstItem="hHv-2C-EQ8" firstAttribute="width" secondItem="WFc-62-zJz" secondAttribute="width" id="vYI-Jt-aD1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

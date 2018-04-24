@@ -10,6 +10,30 @@ import UIKit
 
 class ProgramDetailsForTableViewCellView: UIStackView {
 
+    // MARK: - Outlets
+    @IBOutlet var investorsTooltip: TooltipButton! {
+        didSet {
+            investorsTooltip.tooltipText = String.Tooltitps.investors
+        }
+    }
+    
+    @IBOutlet var balanceTooltip: TooltipButton! {
+        didSet {
+            balanceTooltip.tooltipText = String.Tooltitps.balance
+        }
+    }
+    @IBOutlet var avgProfitTooltip: TooltipButton! {
+        didSet {
+            avgProfitTooltip.tooltipText = String.Tooltitps.avgProfit
+        }
+    }
+    
+    @IBOutlet var totalProfitTooltip: TooltipButton! {
+        didSet {
+            totalProfitTooltip.tooltipText = String.Tooltitps.totalProfit
+        }
+    }
+    
     @IBOutlet var investorsTitleLabel: UILabel!
     @IBOutlet var balanceTitleLabel: UILabel!
     @IBOutlet var avgProfitTitleLabel: UILabel!

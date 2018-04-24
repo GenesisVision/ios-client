@@ -96,6 +96,18 @@ extension UIViewController {
     }
 
     // MARK: - PKHUD
+    func showTooltip(with text: String = "", for view: UIView) {
+        EasyTipView.show(forView: view,
+                         withinSuperview: self.view,
+                         text: text,
+                         preferences: EasyTipView.globalPreferences,
+                         delegate: nil)
+    }
+    
+    func showTooltipHUD(withText text: String = "") {
+        showAlertWithTitle(title: "", message: text, actionTitle: String.Alerts.okButtonText, cancelTitle: nil, handler: nil, cancelHandler: nil)
+    }
+    
     func showProgressHUD(withNetworkActivity networkActivity: Bool = true) {
         HUD.show(.progress, onView: self.view)
     }

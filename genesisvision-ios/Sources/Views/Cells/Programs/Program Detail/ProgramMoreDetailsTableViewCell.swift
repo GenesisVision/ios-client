@@ -13,6 +13,11 @@ class ProgramMoreDetailsTableViewCell: UITableViewCell {
     // MARK: - Views
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
     @IBOutlet var stackedProgressView: StackedProgressView!
+    @IBOutlet var availableTokensTooltip: TooltipButton! {
+        didSet {
+            availableTokensTooltip.tooltipText = String.Tooltitps.availableTokens
+        }
+    }
     
     weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol? {
         didSet {

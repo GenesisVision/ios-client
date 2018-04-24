@@ -21,6 +21,35 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     weak var delegate: ProgramPropertiesForTableViewCellViewProtocol?
     
     // MARK: - Outlets
+    @IBOutlet var periodDurationTooltip: TooltipButton! {
+        didSet {
+            periodDurationTooltip.tooltipText = String.Tooltitps.periodDuration
+        }
+    }
+    
+    @IBOutlet var managersFundsShareTooltip: TooltipButton! {
+        didSet {
+            managersFundsShareTooltip.tooltipText = String.Tooltitps.managersFundsShare
+        }
+    }
+    @IBOutlet var tradesTooltip: TooltipButton! {
+        didSet {
+            tradesTooltip.tooltipText = String.Tooltitps.trades
+        }
+    }
+    
+    @IBOutlet var successFeeTooltip: TooltipButton! {
+        didSet {
+            successFeeTooltip.tooltipText = String.Tooltitps.successFee
+        }
+    }
+    @IBOutlet var managementFeeTooltip: TooltipButton! {
+        didSet {
+            managementFeeTooltip.tooltipText = String.Tooltitps.managementFee
+        }
+    }
+    
+    
     @IBOutlet var periodDurationLabel: UILabel!
     @IBOutlet var periodDurationTitleLabel: UILabel! {
         didSet {

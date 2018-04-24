@@ -223,17 +223,55 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEl-wq-3oj" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="120.5" y="313" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Ia5-le-CvB"/>
+                            <constraint firstAttribute="height" constant="20" id="mEo-t9-ELw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-UB-hUg" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="270" y="313" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKk-5Q-D98" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="419" y="313" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                        <state key="normal" title="i">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="dKk-5Q-D98" firstAttribute="height" secondItem="LEl-wq-3oj" secondAttribute="height" id="046-tr-MtR"/>
+                    <constraint firstItem="dKk-5Q-D98" firstAttribute="width" secondItem="LEl-wq-3oj" secondAttribute="width" id="65Y-wP-l9k"/>
+                    <constraint firstItem="LEl-wq-3oj" firstAttribute="centerY" secondItem="ncb-xI-wCa" secondAttribute="centerY" id="9FY-7d-srV"/>
+                    <constraint firstItem="9fb-UB-hUg" firstAttribute="height" secondItem="LEl-wq-3oj" secondAttribute="height" id="HGH-6s-FYh"/>
+                    <constraint firstItem="9fb-UB-hUg" firstAttribute="width" secondItem="LEl-wq-3oj" secondAttribute="width" id="K8G-ro-Nh0"/>
+                    <constraint firstItem="dKk-5Q-D98" firstAttribute="trailing" secondItem="US5-xa-Ovc" secondAttribute="trailing" constant="22" id="M6f-kE-w3R"/>
                     <constraint firstItem="zzv-ah-CQj" firstAttribute="top" secondItem="Ftf-Go-21a" secondAttribute="topMargin" constant="8" id="UvT-UD-UdU"/>
                     <constraint firstAttribute="bottom" secondItem="hTY-OZ-kY7" secondAttribute="bottom" id="Xfe-Vz-lb2"/>
+                    <constraint firstItem="dKk-5Q-D98" firstAttribute="centerY" secondItem="US5-xa-Ovc" secondAttribute="centerY" id="Z8G-Oi-mCd"/>
+                    <constraint firstItem="9fb-UB-hUg" firstAttribute="trailing" secondItem="gbR-ie-YIm" secondAttribute="trailing" constant="22" id="cht-0r-0k1"/>
                     <constraint firstAttribute="bottomMargin" secondItem="zzv-ah-CQj" secondAttribute="bottom" constant="8" id="dkd-SQ-3dE"/>
                     <constraint firstItem="hTY-OZ-kY7" firstAttribute="top" secondItem="Ftf-Go-21a" secondAttribute="top" id="f96-Bs-ktZ"/>
                     <constraint firstAttribute="trailing" secondItem="zzv-ah-CQj" secondAttribute="trailing" constant="16" id="fMs-XF-FZ1"/>
                     <constraint firstItem="zzv-ah-CQj" firstAttribute="leading" secondItem="Ftf-Go-21a" secondAttribute="leading" constant="16" id="nSs-eg-Qic"/>
                     <constraint firstAttribute="trailing" secondItem="hTY-OZ-kY7" secondAttribute="trailing" id="p6A-4S-vD3"/>
                     <constraint firstItem="hTY-OZ-kY7" firstAttribute="leading" secondItem="Ftf-Go-21a" secondAttribute="leading" id="r9O-ql-Hgh"/>
+                    <constraint firstItem="LEl-wq-3oj" firstAttribute="trailing" secondItem="ncb-xI-wCa" secondAttribute="trailing" constant="22" id="tSZ-ur-V2a"/>
+                    <constraint firstItem="9fb-UB-hUg" firstAttribute="centerY" secondItem="gbR-ie-YIm" secondAttribute="centerY" id="vh1-6D-3p8"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -244,7 +282,10 @@
                 <outlet property="currencyLabel" destination="TzT-Ox-Mxj" id="IYt-Hx-Sxz"/>
                 <outlet property="inProcessIndicatorView" destination="2Qh-f5-WVt" id="vKq-KJ-2o7"/>
                 <outlet property="managerNameLabel" destination="TpX-wr-lEf" id="Tbb-HV-hTg"/>
+                <outlet property="myProfitTooltip" destination="9fb-UB-hUg" id="TKp-Ln-15Z"/>
+                <outlet property="myTokensTooltip" destination="LEl-wq-3oj" id="J0L-nV-UDH"/>
                 <outlet property="noDataLabel" destination="i6Y-DK-ndn" id="cQa-p1-sI4"/>
+                <outlet property="periodDurationTooltip" destination="dKk-5Q-D98" id="0ql-cB-WEd"/>
                 <outlet property="periodLeftTitleLabel" destination="US5-xa-Ovc" id="IJJ-TP-5So"/>
                 <outlet property="periodLeftValueLabel" destination="ZCG-vf-c5T" id="7eA-nG-z8E"/>
                 <outlet property="profitTitleLabel" destination="gbR-ie-YIm" id="Eru-BI-VTN"/>
