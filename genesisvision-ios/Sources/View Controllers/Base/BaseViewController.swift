@@ -187,8 +187,7 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     }
     
     func scrollToFirstRow(tableView: UITableView) {
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        tableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
