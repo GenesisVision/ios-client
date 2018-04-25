@@ -159,6 +159,8 @@
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
 		5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */; };
 		5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */; };
+		5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB62090AB1000A92B49 /* MarkerView.xib */; };
+		5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB82090AB2300A92B49 /* MarkerView.swift */; };
 		5EB8E9D420723D4A00F46A8A /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D320723D4A00F46A8A /* ForgetPasswordViewModel.swift */; };
 		5EB8E9D620723D6500F46A8A /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */; };
 		5EB8E9D820723D7E00F46A8A /* ForgetPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D720723D7E00F46A8A /* ForgetPasswordRouter.swift */; };
@@ -531,6 +533,8 @@
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
 		5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		5EAD0AB62090AB1000A92B49 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
+		5EAD0AB82090AB2300A92B49 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		5EB8E9D320723D4A00F46A8A /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
 		5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		5EB8E9D720723D7E00F46A8A /* ForgetPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordRouter.swift; sourceTree = "<group>"; };
@@ -1706,6 +1710,8 @@
 				5E395A2C2065613800A6B779 /* GradientView.swift */,
 				5E181E692067AD1900BF3240 /* NumpadView.swift */,
 				5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */,
+				5EAD0AB82090AB2300A92B49 /* MarkerView.swift */,
+				5EAD0AB62090AB1000A92B49 /* MarkerView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1836,6 +1842,7 @@
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
+				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */,
 				5E239271205F67F100CB5AEC /* NeuzeitGro-Bla.ttf in Resources */,
@@ -2155,6 +2162,7 @@
 				FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5E87E817208F752C00141269 /* TwoFactorStatus.swift in Sources */,
+				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
 				5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
 				FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */,

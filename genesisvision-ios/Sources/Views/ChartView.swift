@@ -70,15 +70,21 @@ class ChartView: CombinedChartView {
             
             lineChartDataSet.lineWidth = 1.5
             
-            lineChartDataSet.drawFilledEnabled = false
+            lineChartDataSet.drawFilledEnabled = chartType != .default
             lineChartDataSet.drawCirclesEnabled = false
             lineChartDataSet.drawIconsEnabled = false
             
             lineChartDataSet.highlightEnabled = true
             lineChartDataSet.highlightColor = UIColor.Font.dark
             lineChartDataSet.setDrawHighlightIndicators(true)
-            lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = true
+            lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = false
             lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
+            
+            let gradientColors = [UIColor.white.cgColor, UIColor.primary.cgColor]
+            let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+            
+            lineChartDataSet.fillAlpha = 0.7
+            lineChartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
             
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
@@ -160,12 +166,12 @@ class ChartView: CombinedChartView {
     // MARK: - Private methods
     private func setup() {
         doubleTapToZoomEnabled = chartType == .full
-        dragEnabled = chartType == .full
+        dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
 
-        highlightPerTapEnabled = chartType == .full
-        highlightPerDragEnabled = chartType == .full
-        highlightFullBarEnabled = chartType == .full
+        highlightPerTapEnabled = chartType != .default
+        highlightPerDragEnabled = chartType != .default
+        highlightFullBarEnabled = chartType != .default
        
         let rightAxisFormatter = NumberFormatter()
         rightAxisFormatter.minimumFractionDigits = 0
@@ -204,7 +210,6 @@ class ChartView: CombinedChartView {
         
         drawGridBackgroundEnabled = false
         
-        
         //xAxis
         xAxis.drawGridLinesEnabled = false
         xAxis.labelRotationAngle = 0.3
@@ -224,10 +229,6 @@ class ChartView: CombinedChartView {
         
         legend.enabled = false
         autoScaleMinMaxEnabled = true
-        
-        if chartType != .default {
-            animate(xAxisDuration: 1.0)
-        }
     }
     
     private func setData(_ values: [TradeChart]?) {

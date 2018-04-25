@@ -105,7 +105,7 @@ struct AppearanceController {
         preferences.drawing.font = UIFont.getFont(.regular, size: 15)
         preferences.drawing.foregroundColor = UIColor.Font.white
         preferences.drawing.backgroundColor = UIColor.primary
-        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.top
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
         preferences.drawing.shadowColor = UIColor.Font.dark
         preferences.drawing.shadowOpacity = 0.5
         preferences.drawing.shadowRadius = 3.0

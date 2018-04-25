@@ -115,17 +115,6 @@ public extension EasyTipView {
         
         superview.addSubview(self)
         
-        if preferences.dismissWhenTouchingOutside {
-            if let window = self.window {
-                let dismissOverlay  = UIView(frame: window.bounds)
-                dismissOverlay.isUserInteractionEnabled = true
-                dismissOverlay.addGestureRecognizer(tap)
-                dismissOverlay.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-                window.addSubview(dismissOverlay)
-                self.dismissOverlay = dismissOverlay
-            }
-        }
-        
         let animations : () -> () = {
             self.transform = finalTransform
             self.alpha = 1
@@ -239,7 +228,6 @@ open class EasyTipView: UIView {
         public var drawing      = Drawing()
         public var positioning  = Positioning()
         public var animating    = Animating()
-        public var dismissWhenTouchingOutside = false
         public var hasShadow = false
         public var hasBorder: Bool {
             return drawing.borderWidth > 0 && drawing.borderColor != UIColor.clear

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIColor
 
 struct DetailChartTableViewCellViewModel {
     let chart: [TradeChart]
@@ -28,7 +29,15 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
         
         cell.chartView.isHidden = false
         cell.noDataLabel.isHidden = true
-        cell.chartView.setup(chartType: .default, tradeChartDataSet: chart, name: name, currencyValue: currencyValue)
+        if let first = chart.first?.profit, let last = chart.last?.profit {
+            let value = last - first
+            let percent = first == 0 ? last * 100 : (value == 0 ? 0 : value > 0 ? (last - first / first * 100) : (first - last / first * 100))
+            let upDownSign = value == 0 ? "" : value > 0 ? "↑ " : "↓ "
+            let text = upDownSign + value.rounded(withType: .gvt).toString() + " GVT (" + percent.rounded(toPlaces: 0).toString() + " %)"
+            cell.changesLabel.text = text
+            cell.changesLabel.textColor = value == 0 ? UIColor.Font.darkBlue : value > 0 ? UIColor.Font.green : UIColor.Font.red
+        }
+        cell.chartView.setup(chartType: .detail, tradeChartDataSet: chart, name: name, currencyValue: currencyValue)
         cell.delegate = detailChartTableViewCellProtocol
     }
 }
