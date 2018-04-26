@@ -30,7 +30,7 @@ class WalletHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet var usdBalanceLabel: UILabel! {
         didSet {
-            usdBalanceLabel.textColor = UIColor.Header.graySubtitle
+            usdBalanceLabel.textColor = UIColor.Header.darkTitle.withAlphaComponent(0.7)
         }
     }
     
@@ -43,7 +43,7 @@ class WalletHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
         selectionStyle = .none
     }
     

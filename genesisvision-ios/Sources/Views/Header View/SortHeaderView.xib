@@ -26,12 +26,22 @@
                         <action selector="sortButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="1cr-jv-vL5"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGK-uo-fad" customClass="ShadowView" customModule="Genesis_Vision" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="55" width="353" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="c2t-tr-hXh"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CG9-Um-TBR" secondAttribute="trailing" constant="8" id="K26-Xs-oLG"/>
+                <constraint firstAttribute="trailing" secondItem="wGK-uo-fad" secondAttribute="trailing" id="YXa-Pk-Yfr"/>
                 <constraint firstItem="CG9-Um-TBR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bKW-jk-d7e"/>
+                <constraint firstAttribute="bottom" secondItem="wGK-uo-fad" secondAttribute="bottom" id="beB-g8-bLy"/>
                 <constraint firstItem="CG9-Um-TBR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="dWk-Yv-dzq"/>
+                <constraint firstItem="wGK-uo-fad" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dm7-b2-i9r"/>
                 <constraint firstItem="CG9-Um-TBR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="vX4-M6-wlo"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -33,7 +33,9 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
             let value = last - first
             let percent = first == 0 ? last * 100 : (value == 0 ? 0 : value > 0 ? (last - first / first * 100) : (first - last / first * 100))
             let upDownSign = value == 0 ? "" : value > 0 ? "↑ " : "↓ "
-            let text = upDownSign + value.rounded(withType: .gvt).toString() + " GVT (" + percent.rounded(toPlaces: 0).toString() + " %)"
+            
+            let text = upDownSign + value.rounded(withType: .gvt).toString() + " % (" + percent.rounded(toPlaces: 0).toString() + " %)"
+            
             cell.changesLabel.text = text
             cell.changesLabel.textColor = value == 0 ? UIColor.Font.darkBlue : value > 0 ? UIColor.Font.green : UIColor.Font.red
         }

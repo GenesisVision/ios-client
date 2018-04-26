@@ -12,7 +12,7 @@ protocol ProgramRequestTableViewCellProtocol: class {
     func cancelRequestDidPress(with requestID: String, lastRequest: Bool)
 }
 
-class ProgramRequestTableViewCell: UITableViewCell {
+class ProgramRequestTableViewCell: PlateTableViewCell {
     // MARK: - Variables
     weak var delegate: ProgramRequestTableViewCellProtocol?
     var lastRequest: Bool = false
@@ -40,14 +40,6 @@ class ProgramRequestTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        contentView.backgroundColor = UIColor.Background.main
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        
-        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
     }
     
     // MARK: - Actions

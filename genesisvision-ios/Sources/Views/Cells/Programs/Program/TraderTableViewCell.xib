@@ -22,25 +22,25 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TraderTableViewCell" rowHeight="370" id="KGk-i7-Jjw" customClass="TraderTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="475" height="370"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TraderTableViewCell" rowHeight="176" id="KGk-i7-Jjw" customClass="TraderTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="475" height="176"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="475" height="369.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="475" height="175.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhC-FL-XlQ">
-                        <rect key="frame" x="0.0" y="0.0" width="475" height="369.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="175.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zN4-IX-FiD">
-                        <rect key="frame" x="16" y="19" width="443" height="340"/>
+                        <rect key="frame" x="16" y="19" width="443" height="138"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xv1-6M-0z1">
-                                <rect key="frame" x="0.0" y="0.0" width="443" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xv1-6M-0z1">
+                                <rect key="frame" x="0.0" y="0.0" width="443" height="60.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iG3-wO-Vm5" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="5.5" width="50" height="50"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_navbar_left_logo" translatesAutoresizingMaskIntoConstraints="NO" id="oKy-xX-VHD">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -73,19 +73,49 @@
                                             <outlet property="profilePhotoImageView" destination="oKy-xX-VHD" id="46U-xS-BBr"/>
                                         </connections>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="B8n-PM-Ibv">
-                                        <rect key="frame" x="66" y="17.5" width="329" height="15"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="B8n-PM-Ibv">
+                                        <rect key="frame" x="58" y="0.0" width="345" height="60.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anu-t6-JHG">
-                                                <rect key="frame" x="0.0" y="0.0" width="329" height="15"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="281" height="60.5"/>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                 <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf8-Ie-DjM">
+                                                <rect key="frame" x="285" y="0.0" width="60" height="60.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzn-bM-hio">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60.5"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                        <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JvI-96-Xpf" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="mnS-Tc-YfR"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="9nq-jE-Foc"/>
+                                                    <constraint firstItem="JvI-96-Xpf" firstAttribute="top" secondItem="yf8-Ie-DjM" secondAttribute="top" id="MAa-ko-eZ6"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JvI-96-Xpf" secondAttribute="trailing" id="O5k-n5-ZSJ"/>
+                                                    <constraint firstItem="JvI-96-Xpf" firstAttribute="leading" secondItem="yf8-Ie-DjM" secondAttribute="leading" id="WJr-0W-dqe"/>
+                                                    <constraint firstItem="mzn-bM-hio" firstAttribute="leading" secondItem="yf8-Ie-DjM" secondAttribute="leading" id="YBw-JL-Ydu"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mzn-bM-hio" secondAttribute="trailing" id="a2K-Zz-nPe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JvI-96-Xpf" secondAttribute="bottom" id="bCa-03-ySg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mzn-bM-hio" secondAttribute="bottom" id="etX-js-9ZC"/>
+                                                    <constraint firstItem="mzn-bM-hio" firstAttribute="top" secondItem="yf8-Ie-DjM" secondAttribute="top" id="zMS-hO-Vv4"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-6r-Frk" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="411" y="16" width="32" height="18"/>
+                                        <rect key="frame" x="411" y="21.5" width="32" height="18"/>
                                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="Bf6-zp-bnK"/>
@@ -97,190 +127,121 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf8-Ie-DjM">
-                                <rect key="frame" x="0.0" y="108.5" width="443" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-L2-2Gg" customClass="ProgramDetailsForTableViewCellView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="82" width="443" height="56"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzn-bM-hio">
-                                        <rect key="frame" x="0.0" y="0.0" width="443" height="100"/>
-                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                        <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JvI-96-Xpf" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="443" height="100"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="7dv-DC-7pc"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="JvI-96-Xpf" firstAttribute="top" secondItem="yf8-Ie-DjM" secondAttribute="top" id="MAa-ko-eZ6"/>
-                                    <constraint firstAttribute="trailing" secondItem="JvI-96-Xpf" secondAttribute="trailing" id="O5k-n5-ZSJ"/>
-                                    <constraint firstItem="JvI-96-Xpf" firstAttribute="leading" secondItem="yf8-Ie-DjM" secondAttribute="leading" id="WJr-0W-dqe"/>
-                                    <constraint firstItem="mzn-bM-hio" firstAttribute="leading" secondItem="yf8-Ie-DjM" secondAttribute="leading" id="YBw-JL-Ydu"/>
-                                    <constraint firstAttribute="trailing" secondItem="mzn-bM-hio" secondAttribute="trailing" id="a2K-Zz-nPe"/>
-                                    <constraint firstAttribute="bottom" secondItem="JvI-96-Xpf" secondAttribute="bottom" id="bCa-03-ySg"/>
-                                    <constraint firstAttribute="bottom" secondItem="mzn-bM-hio" secondAttribute="bottom" id="etX-js-9ZC"/>
-                                    <constraint firstAttribute="height" constant="100" id="uHM-8S-k4s"/>
-                                    <constraint firstItem="mzn-bM-hio" firstAttribute="top" secondItem="yf8-Ie-DjM" secondAttribute="top" id="zMS-hO-Vv4"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jKe-Th-cXB">
-                                <rect key="frame" x="0.0" y="243" width="443" height="97"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-L2-2Gg" customClass="ProgramDetailsForTableViewCellView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="443" height="56"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-il-rIy">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="56"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-il-rIy">
-                                                <rect key="frame" x="0.0" y="0.0" width="105" height="56"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vd-lF-uRV" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="36.5" y="0.0" width="32" height="18"/>
-                                                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="BTY-5k-Zge"/>
-                                                            <constraint firstAttribute="width" constant="32" id="V22-nT-xiy"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="34" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-1Z-EZR" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="40" y="20" width="25" height="25"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL PROFIT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vD-q0-1m7">
-                                                        <rect key="frame" x="25" y="47" width="55" height="9"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
-                                                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="sf1-Bb-YUA">
-                                                <rect key="frame" x="113" y="20" width="104.5" height="36"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="1" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e4V-HV-QRw">
-                                                        <rect key="frame" x="46" y="0.0" width="12.5" height="25"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG. PROFIT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-cm-Wwa">
-                                                        <rect key="frame" x="27.5" y="27" width="50" height="9"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
-                                                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="dGH-PM-kWn">
-                                                <rect key="frame" x="225.5" y="0.0" width="104.5" height="56"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KL-TW-bqN" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="36.5" y="0.0" width="32" height="18"/>
-                                                        <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="32" id="XXt-jX-EPs"/>
-                                                            <constraint firstAttribute="height" constant="18" id="ZC9-qu-Uqu"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="17" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uZy-5J-VEO" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="40" y="20" width="25" height="25"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BALANCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkc-dD-YUT">
-                                                        <rect key="frame" x="34" y="47" width="37" height="9"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
-                                                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jKZ-18-f7k">
-                                                <rect key="frame" x="338" y="20" width="105" height="36"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="2" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eob-6H-qGE">
-                                                        <rect key="frame" x="46.5" y="0.0" width="12.5" height="25"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVESTORS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDY-Ug-jo4">
-                                                        <rect key="frame" x="30.5" y="27" width="44" height="9"/>
-                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
-                                                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="3dc-il-rIy" firstAttribute="width" secondItem="sf1-Bb-YUA" secondAttribute="width" id="4Mb-Np-XED"/>
-                                            <constraint firstItem="Eob-6H-qGE" firstAttribute="height" secondItem="uZy-5J-VEO" secondAttribute="height" id="4S0-Na-yuO"/>
-                                            <constraint firstAttribute="height" constant="56" id="6Pm-7K-MJ3"/>
-                                            <constraint firstItem="jKZ-18-f7k" firstAttribute="width" secondItem="dGH-PM-kWn" secondAttribute="width" id="YmQ-yF-EVf"/>
-                                            <constraint firstItem="uZy-5J-VEO" firstAttribute="height" secondItem="e4V-HV-QRw" secondAttribute="height" id="arz-pf-fiK"/>
-                                            <constraint firstItem="dGH-PM-kWn" firstAttribute="width" secondItem="sf1-Bb-YUA" secondAttribute="width" id="olf-de-GqV"/>
-                                            <constraint firstItem="e4V-HV-QRw" firstAttribute="height" secondItem="YYm-1Z-EZR" secondAttribute="height" id="tgK-RP-n0l"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="avgProfitTitleLabel" destination="3fz-cm-Wwa" id="iXV-0W-PLz"/>
-                                            <outlet property="avgProfitValueLabel" destination="e4V-HV-QRw" id="4Sx-Sw-2cW"/>
-                                            <outlet property="balanceCurrencyLabel" destination="0KL-TW-bqN" id="jEy-Qs-ZCI"/>
-                                            <outlet property="balanceTitleLabel" destination="Zkc-dD-YUT" id="A96-hh-G7E"/>
-                                            <outlet property="balanceValueLabel" destination="uZy-5J-VEO" id="qgM-lF-QKg"/>
-                                            <outlet property="investorsTitleLabel" destination="gDY-Ug-jo4" id="Esf-GC-YBx"/>
-                                            <outlet property="investorsValueLabel" destination="Eob-6H-qGE" id="Yxx-Ll-YFX"/>
-                                            <outlet property="profitCurrencyLabel" destination="1vd-lF-uRV" id="myZ-cL-Pn1"/>
-                                            <outlet property="totalProfitTitleLabel" destination="9vD-q0-1m7" id="nY1-li-jEe"/>
-                                            <outlet property="totalProfitValueLabel" destination="YYm-1Z-EZR" id="J6Y-bx-S9d"/>
-                                        </connections>
-                                    </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YcR-i1-qOa">
-                                        <rect key="frame" x="0.0" y="68" width="443" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE TOKENS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66s-kM-b8A">
-                                                <rect key="frame" x="0.0" y="0.0" width="443" height="21"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vd-lF-uRV" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="36.5" y="0.0" width="32" height="18"/>
+                                                <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="81E-5p-JwC"/>
+                                                    <constraint firstAttribute="height" constant="18" id="BTY-5k-Zge"/>
+                                                    <constraint firstAttribute="width" constant="32" id="V22-nT-xiy"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="34" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-1Z-EZR" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="40" y="20" width="25" height="25"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL PROFIT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vD-q0-1m7">
+                                                <rect key="frame" x="25" y="47" width="55" height="9"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
                                                 <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLP-Ah-ovH" customClass="StackedProgressView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="121.5" y="21" width="200" height="8"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="8" id="Jcw-3M-4CQ"/>
-                                                    <constraint firstAttribute="width" constant="200" id="VvL-1o-wBA"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="66s-kM-b8A" secondAttribute="trailing" id="8rr-4n-dWz"/>
-                                            <constraint firstItem="66s-kM-b8A" firstAttribute="leading" secondItem="YcR-i1-qOa" secondAttribute="leading" id="WIK-Em-hFu"/>
-                                            <constraint firstItem="NLP-Ah-ovH" firstAttribute="centerX" secondItem="YcR-i1-qOa" secondAttribute="centerX" id="WPC-87-6Pa"/>
-                                            <constraint firstAttribute="bottom" secondItem="NLP-Ah-ovH" secondAttribute="bottom" id="cAT-qT-dNV"/>
-                                            <constraint firstItem="66s-kM-b8A" firstAttribute="top" secondItem="YcR-i1-qOa" secondAttribute="top" id="f6B-Nw-1p7"/>
-                                            <constraint firstItem="NLP-Ah-ovH" firstAttribute="top" secondItem="66s-kM-b8A" secondAttribute="bottom" id="tDn-9Y-eHA"/>
-                                        </constraints>
-                                    </view>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="sf1-Bb-YUA">
+                                        <rect key="frame" x="113" y="20" width="104.5" height="36"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="1" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e4V-HV-QRw">
+                                                <rect key="frame" x="46" y="0.0" width="12.5" height="25"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG. PROFIT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-cm-Wwa">
+                                                <rect key="frame" x="27.5" y="27" width="50" height="9"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
+                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="dGH-PM-kWn">
+                                        <rect key="frame" x="225.5" y="0.0" width="104.5" height="56"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KL-TW-bqN" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="36.5" y="0.0" width="32" height="18"/>
+                                                <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="XXt-jX-EPs"/>
+                                                    <constraint firstAttribute="height" constant="18" id="ZC9-qu-Uqu"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="17" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uZy-5J-VEO" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="40" y="20" width="25" height="25"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BALANCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkc-dD-YUT">
+                                                <rect key="frame" x="34" y="47" width="37" height="9"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
+                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jKZ-18-f7k">
+                                        <rect key="frame" x="338" y="20" width="105" height="36"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="2" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eob-6H-qGE">
+                                                <rect key="frame" x="46.5" y="0.0" width="12.5" height="25"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVESTORS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDY-Ug-jo4">
+                                                <rect key="frame" x="30.5" y="27" width="44" height="9"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
+                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="97" id="nTJ-m2-63u"/>
+                                    <constraint firstItem="3dc-il-rIy" firstAttribute="width" secondItem="sf1-Bb-YUA" secondAttribute="width" id="4Mb-Np-XED"/>
+                                    <constraint firstItem="Eob-6H-qGE" firstAttribute="height" secondItem="uZy-5J-VEO" secondAttribute="height" id="4S0-Na-yuO"/>
+                                    <constraint firstAttribute="height" constant="56" id="6Pm-7K-MJ3"/>
+                                    <constraint firstItem="jKZ-18-f7k" firstAttribute="width" secondItem="dGH-PM-kWn" secondAttribute="width" id="YmQ-yF-EVf"/>
+                                    <constraint firstItem="uZy-5J-VEO" firstAttribute="height" secondItem="e4V-HV-QRw" secondAttribute="height" id="arz-pf-fiK"/>
+                                    <constraint firstItem="dGH-PM-kWn" firstAttribute="width" secondItem="sf1-Bb-YUA" secondAttribute="width" id="olf-de-GqV"/>
+                                    <constraint firstItem="e4V-HV-QRw" firstAttribute="height" secondItem="YYm-1Z-EZR" secondAttribute="height" id="tgK-RP-n0l"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="avgProfitTitleLabel" destination="3fz-cm-Wwa" id="iXV-0W-PLz"/>
+                                    <outlet property="avgProfitValueLabel" destination="e4V-HV-QRw" id="4Sx-Sw-2cW"/>
+                                    <outlet property="balanceCurrencyLabel" destination="0KL-TW-bqN" id="jEy-Qs-ZCI"/>
+                                    <outlet property="balanceTitleLabel" destination="Zkc-dD-YUT" id="A96-hh-G7E"/>
+                                    <outlet property="balanceValueLabel" destination="uZy-5J-VEO" id="qgM-lF-QKg"/>
+                                    <outlet property="investorsTitleLabel" destination="gDY-Ug-jo4" id="Esf-GC-YBx"/>
+                                    <outlet property="investorsValueLabel" destination="Eob-6H-qGE" id="Yxx-Ll-YFX"/>
+                                    <outlet property="profitCurrencyLabel" destination="1vd-lF-uRV" id="myZ-cL-Pn1"/>
+                                    <outlet property="totalProfitTitleLabel" destination="9vD-q0-1m7" id="nY1-li-jEe"/>
+                                    <outlet property="totalProfitValueLabel" destination="YYm-1Z-EZR" id="J6Y-bx-S9d"/>
+                                </connections>
                             </stackView>
                         </subviews>
                     </stackView>
@@ -294,7 +255,7 @@
                     <constraint firstAttribute="trailing" secondItem="nhC-FL-XlQ" secondAttribute="trailing" id="eZi-Gk-hPz"/>
                     <constraint firstItem="zN4-IX-FiD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ez1-v1-4RD"/>
                     <constraint firstAttribute="trailing" secondItem="zN4-IX-FiD" secondAttribute="trailing" constant="16" id="hTV-nn-dcE"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="zN4-IX-FiD" secondAttribute="bottom" id="zrx-sR-tGe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="zN4-IX-FiD" secondAttribute="bottom" constant="8" id="zrx-sR-tGe"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -308,10 +269,9 @@
                 <outlet property="programLogoImageView" destination="iG3-wO-Vm5" id="VVY-Lb-kcJ"/>
                 <outlet property="programTitleLabel" destination="anu-t6-JHG" id="Pt5-ns-tc3"/>
                 <outlet property="stackView" destination="zN4-IX-FiD" id="x50-gj-JWb"/>
-                <outlet property="stackedProgressView" destination="NLP-Ah-ovH" id="wlB-lW-hEZ"/>
                 <outlet property="viewForChartView" destination="yf8-Ie-DjM" id="J8R-l4-uTQ"/>
             </connections>
-            <point key="canvasLocation" x="211.5" y="15"/>
+            <point key="canvasLocation" x="211.5" y="-23"/>
         </tableViewCell>
     </objects>
     <resources>

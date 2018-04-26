@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardTableViewCell: UITableViewCell {
+class DashboardTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
     var investmentProgramId: String = ""
@@ -58,6 +58,8 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet var programTitleLabel: UILabel! 
     @IBOutlet var managerNameLabel: UILabel!
     
+    @IBOutlet var tokenSymbolLabel: CurrencyLabel!
+    
     @IBOutlet var tokensCountValueLabel: UILabel!
     @IBOutlet var tokensCountTitleLabel: UILabel!
     
@@ -69,32 +71,15 @@ class DashboardTableViewCell: UITableViewCell {
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     
-    @IBOutlet var myProfitTooltip: TooltipButton! {
+    @IBOutlet var dashboardTooltip: TooltipButton! {
         didSet {
-            myProfitTooltip.tooltipText = String.Tooltitps.myProfit
+            dashboardTooltip.tooltipText = String.Tooltitps.dashboard
         }
     }
-    @IBOutlet var myTokensTooltip: TooltipButton! {
-        didSet {
-            myTokensTooltip.tooltipText = String.Tooltitps.myTokens
-        }
-    }
-    @IBOutlet var periodDurationTooltip: TooltipButton! {
-        didSet {
-            periodDurationTooltip.tooltipText = String.Tooltitps.periodDuration
-        }
-    }
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        contentView.backgroundColor = UIColor.Background.main
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        
-        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
     }
     
     deinit {

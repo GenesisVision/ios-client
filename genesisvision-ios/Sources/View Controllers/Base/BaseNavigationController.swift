@@ -10,13 +10,24 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
+    var shadowView: ShadowView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.isTranslucent = false
-        navigationBar.barTintColor = UIColor.NavBar.background
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        navigationBar.barTintColor = UIColor.NavBar.grayBackground
+        navigationBar.isTranslucent = false
+        navigationBar.tintColor = UIColor.primary
+        
+        shadowView = ShadowView()
+//        view.insertSubview(shadowView, belowSubview: navigationBar)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        shadowView.frame = navigationBar.frame
     }
 }

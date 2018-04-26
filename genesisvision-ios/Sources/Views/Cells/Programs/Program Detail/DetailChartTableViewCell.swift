@@ -16,7 +16,7 @@ protocol DetailChartTableViewCellProtocol: class {
 
 var circleHeight: CGFloat = 6.0
 
-class DetailChartTableViewCell: UITableViewCell {
+class DetailChartTableViewCell: PlateTableViewCell {
 
     // MARK: - Variables
     weak var delegate: DetailChartTableViewCellProtocol?
@@ -56,8 +56,14 @@ class DetailChartTableViewCell: UITableViewCell {
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.delegate = self
-            chartView.backgroundColor = UIColor.NavBar.grayBackground
+            chartView.backgroundColor = .clear
             chartView.isUserInteractionEnabled = true
+        }
+    }
+    
+    @IBOutlet var chartTooltip: TooltipButton! {
+        didSet {
+            chartTooltip.tooltipText = String.Tooltitps.chart
         }
     }
    
@@ -78,8 +84,6 @@ class DetailChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        backgroundColor = UIColor.NavBar.background
-        contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
         
         circleView.backgroundColor = UIColor.Font.white
@@ -93,6 +97,14 @@ class DetailChartTableViewCell: UITableViewCell {
         addSubview(markerView)
         
         hideMarker()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
     }
     
     // MARK: - Private methods
@@ -129,10 +141,10 @@ extension DetailChartTableViewCell: ChartViewDelegate {
             : highlight.xPx - 40 > chartView.frame.width - 90
             ? chartView.frame.width - 90
             : highlight.xPx - 40
-        markerView.frame = CGRect(x: x, y: 0, width: 90, height: 36)
+        markerView.frame = CGRect(x: x, y: 8, width: 90, height: 36)
         
         markerView.contentView.backgroundColor = UIColor.Font.dark
-        markerView.valueLabel.text = entry.y.rounded(withType: .gvt).toString() + " GVT"
+        markerView.valueLabel.text = entry.y.rounded(withType: .gvt).toString() + " %"
         markerView.dateLabel.text = dateString
         
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)

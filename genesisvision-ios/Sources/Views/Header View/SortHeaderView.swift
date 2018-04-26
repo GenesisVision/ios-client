@@ -18,12 +18,16 @@ class SortHeaderView: UITableViewHeaderFooterView {
     weak var delegate: SortHeaderViewProtocol?
     
     // MARK: - Buttons
-    @IBOutlet var sortButton: UIButton!
+    @IBOutlet var sortButton: UIButton! {
+        didSet {
+            sortButton.setTitleColor(UIColor.Font.dark, for: .normal)
+        }
+    }
 
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
     }
     
     // MARK: - Actions

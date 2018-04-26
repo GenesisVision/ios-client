@@ -11,6 +11,8 @@ import UIKit.UIImage
 final class ProgramInvestSuccessViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.investmentRequestSuccess
+    var investedAmount: Double = 0.0
+    
     var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
     var backgroundColor: UIColor = UIColor.Background.primary
     var textColor: UIColor = UIColor.Font.white
@@ -20,8 +22,10 @@ final class ProgramInvestSuccessViewModel: InfoViewModel {
     var router: Router!
     
     // MARK: - Init
-    init(withRouter router: Router) {
+    init(withRouter router: Router, investedAmount: Double) {
         self.router = router
+        self.investedAmount = investedAmount
+        text = String.Info.investmentRequestSuccess.replacingOccurrences(of: "<N>", with: investedAmount.rounded(withType: .gvt).toString())
     }
     
     func goBack() {

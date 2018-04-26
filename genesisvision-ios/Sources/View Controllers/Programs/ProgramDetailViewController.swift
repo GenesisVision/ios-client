@@ -64,7 +64,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupNavigationBar(with: .gray)
+        setupNavigationBar()
         
         setup()
     }
@@ -89,20 +89,10 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         
         guard let viewProperties = viewModel.viewProperties else { return }
         
-        historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
-        navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
-
-        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
-        
-        if viewProperties.isHistoryEnable, let historyBarButtonItem = historyBarButtonItem {
-            navigationItem.rightBarButtonItems = [historyBarButtonItem, favoriteBarButtonItem]
-        } else {
-            navigationItem.rightBarButtonItem = favoriteBarButtonItem
-        }
-        
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
         requestsButton.isHidden = !viewProperties.hasNewRequests
+        
         gradientView.isHidden = false
         
         showInfiniteIndicator(value: false)
@@ -112,6 +102,19 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         } else {
             tableView.contentInset.bottom = 0.0
             gradientView.isHidden = true
+        }
+        
+        guard AuthManager.isLogin() else { return }
+        
+        historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
+        navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
+        
+        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
+        
+        if viewProperties.isHistoryEnable, let historyBarButtonItem = historyBarButtonItem, AuthManager.isLogin() {
+            navigationItem.rightBarButtonItems = [historyBarButtonItem, favoriteBarButtonItem]
+        } else {
+            navigationItem.rightBarButtonItem = favoriteBarButtonItem
         }
     }
     

@@ -201,6 +201,7 @@ extension WalletControllerViewModel {
         self.transactions = viewModels
         self.totalCount = totalCount
         self.skip += self.take
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     

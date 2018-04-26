@@ -28,6 +28,7 @@ struct StyleColors {
             self.subtitleColor = UIColor.Font.white.withAlphaComponent(0.5)
         case .gray:
             self.backgroundColor = UIColor.NavBar.grayBackground
+            self.subtitleColor = UIColor.Font.dark.withAlphaComponent(0.7)
         default:
             self.tintColor = UIColor.NavBar.tint
             self.backgroundColor = UIColor.NavBar.background
@@ -44,11 +45,12 @@ struct AppearanceController {
         
         setupSegmentedControl()
         setupPlateCell()
+        setupShadowView()
         setupEasyTipView()
     }
     
     // NavigationBar
-    static func setupNavigationBar(with style: ColorStyle = .white) {
+    static func setupNavigationBar(with style: ColorStyle = .gray) {
         let colors = StyleColors(with: style)
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
@@ -125,8 +127,8 @@ struct AppearanceController {
     // MARK: - PlateCell
     private static func setupPlateCell() {
         PlateTableViewCell.appearance().plateAppearance =
-            PlateTableViewCellAppearance(cornerRadius: 8,
-                                         horizontalMarginValue: 12,
+            PlateTableViewCellAppearance(cornerRadius: 6,
+                                         horizontalMarginValue: 8,
                                          verticalMarginValues: 4,
                                          backgroundColor: UIColor.Font.white,
                                          selectedBackgroundColor: UIColor.Font.light)
@@ -137,6 +139,6 @@ struct AppearanceController {
         ShadowView.appearance().shadowViewAppearance =
             ShadowViewAppearance(shadowOpacity: 0.14,
                                  shadowColor: UIColor.Font.black,
-                                 shadowRadius: 2)
+                                 shadowRadius: 3)
     }
 }

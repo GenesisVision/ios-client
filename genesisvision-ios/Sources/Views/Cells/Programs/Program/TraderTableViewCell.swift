@@ -15,7 +15,7 @@ class TraderTableViewCell: PlateTableViewCell {
     @IBOutlet var programLogoImageView: ProfileImageView!
     @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
     @IBOutlet var stackView: UIStackView!
-    @IBOutlet var stackedProgressView: StackedProgressView!
+
     @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
@@ -37,13 +37,5 @@ class TraderTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-
-//        contentView.backgroundColor = UIColor.Background.main
     }
-    
-//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-//        super.setHighlighted(highlighted, animated: animated)
-//
-//        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
-//    }
 }

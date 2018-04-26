@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramDetailTradesTableViewCell: UITableViewCell {
+class ProgramDetailTradesTableViewCell: PlateTableViewCell {
 
     // MARK: - Labels
     @IBOutlet var dateOpenLabel: UILabel!

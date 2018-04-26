@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,18 +57,18 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XMh-23-ign">
-                                <rect key="frame" x="0.0" y="71" width="215" height="117.5"/>
+                                <rect key="frame" x="16" y="71" width="183" height="117.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="0jC-Mg-c4f">
-                                        <rect key="frame" x="94" y="0.0" width="27.5" height="59"/>
+                                        <rect key="frame" x="78" y="0.0" width="27.5" height="59"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="55"/>
                                         <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="zec-gJ-vrl">
-                                        <rect key="frame" x="95.5" y="59" width="24" height="58.5"/>
-                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="48"/>
-                                        <color key="textColor" red="0.66666666669999997" green="0.72156862749999995" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="81.5" y="59" width="20" height="58.5"/>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="40"/>
+                                        <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="0.69513704196217496" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -95,7 +95,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Vir-CW-q3x"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="DEPOSIT">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -106,6 +106,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXF-JW-Yh4" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="118" y="0.0" width="97" height="45"/>
                                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="WITHDRAW"/>
                                         <connections>
                                             <action selector="withdrawButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9pX-CQ-kKV"/>
@@ -117,6 +118,10 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XMh-23-ign" secondAttribute="trailing" constant="16" id="CS6-Kz-aa6"/>
+                            <constraint firstItem="XMh-23-ign" firstAttribute="leading" secondItem="Dn0-ka-RaN" secondAttribute="leading" constant="16" id="WkY-wc-8I5"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>

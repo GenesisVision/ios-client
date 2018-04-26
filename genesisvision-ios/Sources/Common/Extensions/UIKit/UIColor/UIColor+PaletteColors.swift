@@ -23,7 +23,8 @@ extension UIColor {
         
         static var darkGray: UIColor { return #colorLiteral(red: 0.6666666667, green: 0.7215686275, blue: 0.7529411765, alpha: 1) }                                //aab8c0
         static var gray: UIColor { return #colorLiteral(red: 0.8117647059, green: 0.8352941176, blue: 0.8549019608, alpha: 1) }                                    //cfd5da
-        static var placeholder: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                              //e3ebed
+        static var placeholder: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 1) }                             //e3ebed
+        static var bgGray: UIColor { return #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1) }                                  //e0e0e0
         static var textFieldLineColor: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                      //ccd5d4
         
         static var lightGray: UIColor { return #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.9921568627, alpha: 1) }                               //fcfdfd
@@ -37,6 +38,7 @@ extension UIColor {
         static var highlightedCell: UIColor { return Common.primary.withAlphaComponent(0.3) }
         static var primary: UIColor { return Common.primary }
         static var gray: UIColor { return Common.lightGray }
+        static var darkGray: UIColor { return Common.bgGray }
     }
     struct Transaction {
         static var greenTransaction: UIColor { return Common.green }
@@ -110,7 +112,7 @@ extension UIColor {
     struct NavBar {
         static var tint: UIColor { return Common.primary }
         static var background: UIColor { return Common.white }
-        static var grayBackground: UIColor { return #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1) }
+        static var grayBackground: UIColor { return Common.bgGray }
     }
     
     struct Border {

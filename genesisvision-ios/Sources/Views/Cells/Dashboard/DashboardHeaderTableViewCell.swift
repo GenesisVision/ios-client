@@ -39,7 +39,7 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
         selectionStyle = .none
     }
     

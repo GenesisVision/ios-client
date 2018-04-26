@@ -79,6 +79,7 @@ class ProgramInvestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.Background.main
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion(), style: .primary)
     }
     
@@ -134,7 +135,7 @@ class ProgramInvestViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showInvestmentRequestedVC()
+                self?.viewModel.showInvestmentRequestedVC(investedAmount: amount)
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

@@ -9,7 +9,7 @@
 import UIKit
 import TTRangeSlider
 
-class FilterAmountTableViewCell: UITableViewCell {
+class FilterAmountTableViewCell: PlateTableViewCell {
 
     // MARK: - Labels
     @IBOutlet var titleLabel: UILabel! {
@@ -32,6 +32,14 @@ class FilterAmountTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         setupUI()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
     }
     
     // MARK: - Private methods

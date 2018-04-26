@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramDetailsTableViewCell: UITableViewCell {
+class ProgramDetailsTableViewCell: PlateTableViewCell {
 
     // MARK: - Views
     @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
@@ -17,7 +17,14 @@ class ProgramDetailsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.NavBar.grayBackground
         selectionStyle = .none
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
     }
 }

@@ -414,7 +414,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvR-VF-Osi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QvR-VF-Osi">
                                 <rect key="frame" x="32" y="204" width="256" height="72"/>
                                 <string key="text">please confirm 
 your email.</string>
@@ -439,7 +439,7 @@ your email.</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm-email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mzN-51-Yz2">
                                 <rect key="frame" x="128" y="115" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="mzN-51-Yz2" secondAttribute="height" multiplier="1:1" id="y0l-nz-qQo"/>
+                                    <constraint firstAttribute="height" constant="64" id="jDS-9p-pq3"/>
                                 </constraints>
                             </imageView>
                         </subviews>

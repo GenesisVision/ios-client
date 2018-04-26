@@ -37,18 +37,18 @@ class PlateTableViewCell: UITableViewCell {
   // For UIAppearance proxy
   @objc dynamic var plateAppearance: PlateTableViewCellAppearance? {
     set {
-      plateAppearanceValue = newValue
+        plateAppearanceValue = newValue
     }
     get {
-      return plateAppearanceValue
+        return plateAppearanceValue
     }
   }
 
   var roundType: RoundType = .all {
     didSet {
-      if oldValue != roundType {
-        updateAppearance()
-      }
+        if oldValue != roundType {
+            updateAppearance()
+        }
     }
   }
 

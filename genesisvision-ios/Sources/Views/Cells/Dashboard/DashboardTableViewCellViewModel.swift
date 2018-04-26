@@ -38,6 +38,9 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         if let managerName = investmentProgram.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
+        if let tokenSymbol = investmentProgram.token?.tokenSymbol {
+            cell.tokenSymbolLabel.text = tokenSymbol
+        }
         
         if let tokensCount = investmentProgram.investedTokens {
             cell.tokensCountValueLabel.text = tokensCount.toString()

@@ -8,11 +8,10 @@
 
 import UIKit
 
-class ProgramMoreDetailsTableViewCell: UITableViewCell {
+class ProgramMoreDetailsTableViewCell: PlateTableViewCell {
 
     // MARK: - Views
     @IBOutlet var programPropertiesView: ProgramPropertiesForTableViewCellView!
-    @IBOutlet var stackedProgressView: StackedProgressView!
     @IBOutlet var availableTokensTooltip: TooltipButton! {
         didSet {
             availableTokensTooltip.tooltipText = String.Tooltitps.availableTokens
@@ -28,10 +27,17 @@ class ProgramMoreDetailsTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
+    }
+    
     deinit {
         programPropertiesView.stopTimer()
     }

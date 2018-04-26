@@ -15,12 +15,12 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.Background.main
+        view.backgroundColor = UIColor.Background.darkGray
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
     }
     
     // MARK: - Public methods
-    func setupNavigationBar(with style: ColorStyle = .white) {
+    func setupNavigationBar(with style: ColorStyle = .gray) {
         let colors = StyleColors(with: style)
         
         AppearanceController.setupNavigationBar(with: style)
@@ -105,8 +105,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         
         tabBarController?.delegate = self
         
-        view.backgroundColor = UIColor.Background.main
-        tableView.backgroundColor = UIColor.Background.main
+        view.backgroundColor = UIColor.Background.darkGray
+        tableView.backgroundColor = UIColor.Background.darkGray
         
         refreshControl?.endRefreshing()
     }

@@ -90,8 +90,6 @@ extension ProgramDetailTradesViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row != 0 { cell.addDashedBottomLine() }
-        
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     

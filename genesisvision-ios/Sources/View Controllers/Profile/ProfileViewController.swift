@@ -314,10 +314,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.addDashedBottomLine()
-    }
-    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)

@@ -12,7 +12,7 @@ protocol FilterSwitchTableViewCellProtocol: class {
     func switchControl(_ sender: UISwitch!, didChangeSelectedValue: Bool)
 }
 
-class FilterSwitchTableViewCell: UITableViewCell {
+class FilterSwitchTableViewCell: PlateTableViewCell {
 
     weak var delegate: FilterSwitchTableViewCellProtocol?
     
@@ -37,6 +37,14 @@ class FilterSwitchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         setupUI()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
     }
     
     // MARK: - Private methods

@@ -45,7 +45,11 @@ final class InvestmentProgramListViewModel {
 
     var filter: InvestmentProgramsFilter?
     private var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
-    var searchText = ""
+    var searchText = "" {
+        didSet {
+            filter?.name = searchText
+        }
+    }
     var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
     
     var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]

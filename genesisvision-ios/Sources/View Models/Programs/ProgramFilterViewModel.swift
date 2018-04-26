@@ -100,9 +100,14 @@ final class ProgramFilterViewModel {
     }
     
     // MARK: - Public methods
-    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil, showActivePrograms: Bool = false, showMyFavorites: Bool = false) {
-        filter?.showMyFavorites = showMyFavorites
-        filter?.showActivePrograms = showActivePrograms
+    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil, showActivePrograms: Bool? = nil, showMyFavorites: Bool? = nil) {
+        
+        if let showMyFavorites = showMyFavorites {
+            filter?.showMyFavorites = showMyFavorites
+        }
+        if let showActivePrograms = showActivePrograms {
+            filter?.showActivePrograms = showActivePrograms
+        }
         
         if let levelMin = levelMin, let levelMax = levelMax {
             filter?.levelMin = levelMin
@@ -140,7 +145,7 @@ final class ProgramFilterViewModel {
         case .slider:
             return sliderCellModels.count
         case .switchControl:
-            return switchCellModels.count
+            return AuthManager.isLogin() ? switchCellModels.count : switchCellModels.count - 1
         }
     }
     

@@ -149,7 +149,7 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1vB-mw-mJa" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="308" y="16" width="20" height="20"/>
+                        <rect key="frame" x="308" y="8" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="KYE-YJ-wAX"/>
@@ -162,8 +162,8 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="1vB-mw-mJa" firstAttribute="top" secondItem="jg9-gc-edP" secondAttribute="top" id="LFM-ck-bd6"/>
-                    <constraint firstItem="1vB-mw-mJa" firstAttribute="trailing" secondItem="jg9-gc-edP" secondAttribute="trailing" id="Skp-4f-LvF"/>
+                    <constraint firstItem="1vB-mw-mJa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="TcG-pv-lcX"/>
+                    <constraint firstAttribute="trailing" secondItem="1vB-mw-mJa" secondAttribute="trailing" constant="16" id="Tfg-1L-3Aw"/>
                     <constraint firstItem="dXr-96-Uji" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bpQ-rE-ynA"/>
                     <constraint firstAttribute="bottom" secondItem="dXr-96-Uji" secondAttribute="bottom" constant="8" id="glY-uZ-vSL"/>
                     <constraint firstAttribute="trailing" secondItem="dXr-96-Uji" secondAttribute="trailing" constant="16" id="rQD-3z-rnB"/>

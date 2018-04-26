@@ -16,15 +16,7 @@ struct ProgramMoreDetailsTableViewCellViewModel {
 
 extension ProgramMoreDetailsTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramMoreDetailsTableViewCell) {
-        if let isEnabled = self.investmentProgramDetails.isEnabled,
-            isEnabled,
-            let freeTokens = self.investmentProgramDetails.freeTokens,
-            let total = freeTokens.total,
-            let investorsTokens = freeTokens.investorsTokens,
-            let requestsTokens = freeTokens.requestsTokens {
-            cell.stackedProgressView.setup(totalValue: total, investedValue: investorsTokens, requestsValue: requestsTokens)
-        }
-        
+
         cell.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
         cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod,
                                          periodDuration: investmentProgramDetails.periodDuration,

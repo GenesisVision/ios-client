@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletTransactionTableViewCell: UITableViewCell {
+class WalletTransactionTableViewCell: PlateTableViewCell {
 
     // MARK: - Labels
     @IBOutlet var investTypeLabel: UILabel! {
@@ -52,13 +52,6 @@ class WalletTransactionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        
-        contentView.backgroundColor = highlighted ? UIColor.Background.highlightedCell : UIColor.Background.main
     }
 }

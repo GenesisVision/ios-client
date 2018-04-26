@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileFieldTableViewCell: UITableViewCell {
+class ProfileFieldTableViewCell: PlateTableViewCell {
 
     var valueChanged: ((String) -> Void)?
     
@@ -28,8 +28,14 @@ class ProfileFieldTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         accessoryImageView.isHidden = true
-        backgroundColor = UIColor.Background.main
-        selectionStyle = .none
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
     }
     
     @IBAction func descriptionTextViewChanged(_ sender: UITextField) {

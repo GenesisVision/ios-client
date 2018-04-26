@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilterSortTableViewCell: UITableViewCell {
+class FilterSortTableViewCell: PlateTableViewCell {
 
     // MARK: - Labels
     @IBOutlet var titleLabel: UILabel! {
@@ -21,7 +21,7 @@ class FilterSortTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

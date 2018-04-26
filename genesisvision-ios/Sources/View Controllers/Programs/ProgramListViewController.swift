@@ -21,6 +21,18 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     @IBOutlet var signInButton: UIButton!
     
     // MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+            searchBar.showsCancelButton = false
+            searchBar.isTranslucent = false
+            searchBar.backgroundColor = UIColor.Background.darkGray
+            searchBar.barTintColor = UIColor.primary
+            searchBar.tintColor = UIColor.primary
+            searchBar.placeholder = "Search"
+        }
+    }
+    
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupSignInButton()
@@ -150,8 +162,6 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section > 0, indexPath.row > 0 { cell.addDashedBottomLine() }
-
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
 
@@ -272,5 +282,42 @@ extension ProgramListViewController {
                           NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
         
         return NSAttributedString(string: text, attributes: attributes)
+    }
+}
+
+extension ProgramListViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText || searchText.isEmpty && !viewModel.searchText.isEmpty else {
+            return
+        }
+        
+        viewModel.searchText = searchText
+        
+        updateData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+        
+        searchBar.text = ""
+        
+        guard let searchText = searchBar.text, !viewModel.searchText.isEmpty else {
+            return
+        }
+        
+        viewModel.searchText = searchText
+        
+        updateData()
     }
 }

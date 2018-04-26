@@ -65,7 +65,7 @@ final class Constants {
         static let take = 50 //count of templates on 1 page
         
         struct Main {
-            static let debug = "https://alpha.genesis.vision"
+            static let debug = "https://black-api.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         

@@ -7,24 +7,24 @@
 //
 
 enum ProgramInvestRouteType {
-    case investmentRequested
+    case investmentRequested(investedAmount: Double)
 }
 
 class ProgramInvestRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramInvestRouteType) {
         switch routeType {
-        case .investmentRequested:
-            investmentRequested()
+        case .investmentRequested(let investedAmount):
+            investmentRequested(investedAmount: investedAmount)
         }
     }
     
     // MARK: - Private methods
-    private func investmentRequested() {
+    private func investmentRequested(investedAmount: Double) {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         childRouters.append(router)
-        viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router)
+        viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router, investedAmount: investedAmount)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

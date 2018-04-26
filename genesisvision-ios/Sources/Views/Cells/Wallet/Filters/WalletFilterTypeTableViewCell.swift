@@ -12,7 +12,7 @@ protocol WalletFilterTypeTableViewCellProtocol: class {
     func segmentControlDidChanged(index: Int)
 }
 
-class WalletFilterTypeTableViewCell: UITableViewCell {
+class WalletFilterTypeTableViewCell: PlateTableViewCell {
 
     // MARK: - Variables
     weak var delegate: WalletFilterTypeTableViewCellProtocol?
@@ -28,7 +28,7 @@ class WalletFilterTypeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
         selectionStyle = .none
     }
     
