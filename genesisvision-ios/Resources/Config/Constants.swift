@@ -94,6 +94,9 @@ final class Constants {
         static let minAvgProfit: Int = -100
         static let maxAvgProfit: Int = 1000
         
+        static let showActivePrograms = false
+        static let showMyFavorites = false
+        
         static let walletModelTypeDefault: TransactionsFilter.ModelType = .all
     }
     

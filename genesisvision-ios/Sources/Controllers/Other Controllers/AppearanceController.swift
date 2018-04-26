@@ -43,7 +43,7 @@ struct AppearanceController {
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
         
         setupSegmentedControl()
-        
+        setupPlateCell()
         setupEasyTipView()
     }
     
@@ -120,5 +120,23 @@ struct AppearanceController {
         preferences.animating.captureAllTaps = true
         
         EasyTipView.globalPreferences = preferences
+    }
+    
+    // MARK: - PlateCell
+    private static func setupPlateCell() {
+        PlateTableViewCell.appearance().plateAppearance =
+            PlateTableViewCellAppearance(cornerRadius: 8,
+                                         horizontalMarginValue: 12,
+                                         verticalMarginValues: 4,
+                                         backgroundColor: UIColor.Font.white,
+                                         selectedBackgroundColor: UIColor.Font.light)
+    }
+    
+    // MARK: - ShadowView
+    private static func setupShadowView() {
+        ShadowView.appearance().shadowViewAppearance =
+            ShadowViewAppearance(shadowOpacity: 0.14,
+                                 shadowColor: UIColor.Font.black,
+                                 shadowRadius: 2)
     }
 }

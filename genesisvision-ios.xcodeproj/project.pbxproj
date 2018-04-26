@@ -174,6 +174,13 @@
 		5EBBECE720626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */; };
 		5EBBECE920626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
+		5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */; };
+		5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */; };
+		5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91A2091157500C83F23 /* ShadowView.swift */; };
+		5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */; };
+		5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */; };
+		5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */; };
+		5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */; };
 		5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2256F206E486B00D2CB12 /* UIDevice.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
@@ -236,7 +243,7 @@
 		FC496422201558AD00104CEB /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC496421201558AD00104CEB /* AppearanceController.swift */; };
 		FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */; };
 		FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964252015598300104CEB /* UIColor+Hex.swift */; };
-		FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */; };
+		FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */; };
 		FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */; };
 		FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD67202267910044C3EC /* EnumExtension.swift */; };
 		FC4C193E20304EC900625795 /* TournamentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C193D20304EC900625795 /* TournamentRouter.swift */; };
@@ -548,6 +555,13 @@
 		5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
+		5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCell.swift; sourceTree = "<group>"; };
+		5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCellAppearance.swift; sourceTree = "<group>"; };
+		5ED0C91A2091157500C83F23 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewAppearance.swift; sourceTree = "<group>"; };
+		5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSwitchTableViewCell.xib; sourceTree = "<group>"; };
+		5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EF2256F206E486B00D2CB12 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
@@ -617,7 +631,7 @@
 		FC496421201558AD00104CEB /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PaletteColors.swift"; sourceTree = "<group>"; };
 		FC4964252015598300104CEB /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAmountTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSliderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD67202267910044C3EC /* EnumExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtension.swift; sourceTree = "<group>"; };
 		FC4C193D20304EC900625795 /* TournamentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRouter.swift; sourceTree = "<group>"; };
@@ -1402,12 +1416,15 @@
 		FCA57068202735C4001942F3 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				FC4BFD632022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift */,
+				FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */,
 				FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */,
 				FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */,
 				FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */,
 				FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */,
 				FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */,
+				5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */,
+				5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */,
+				5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -1559,6 +1576,10 @@
 		FCC9DD44200DFA5E008825EC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5ED0C91A2091157500C83F23 /* ShadowView.swift */,
+				5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */,
+				5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */,
+				5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */,
 				FCC9DD64200E236E008825EC /* Protocols */,
 				FCC9DD45200DFA5E008825EC /* Extensions */,
 				FCC9DD46200DFA5E008825EC /* Helpers */,
@@ -1854,6 +1875,7 @@
 				5E85834A206014820039E13F /* SortHeaderView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
+				5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */,
 				FCA5706220273585001942F3 /* ProfileHeaderTableViewCell.xib in Resources */,
 				FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */,
 				FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */,
@@ -2031,8 +2053,11 @@
 				5E87E81D208F752C00141269 /* Token.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5E87E7FD208F752C00141269 /* ChangePasswordViewModel.swift in Sources */,
+				5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */,
 				5E87E812208F752C00141269 /* ErrorMessage.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
+				5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */,
+				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
 				5E87E813208F752C00141269 /* ManagerIpfsHash.swift in Sources */,
@@ -2041,6 +2066,7 @@
 				5E87E7E3208F752C00141269 /* ProfilePublicViewModel.swift in Sources */,
 				5E1813802061D36700481646 /* Common+Extensions.swift in Sources */,
 				FC1410162030168100B71E7F /* TradeserverAPI.swift in Sources */,
+				5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */,
 				FC1410202030168100B71E7F /* ParticipantsViewModel.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* SignUpConfirmationViewModel.swift in Sources */,
@@ -2140,6 +2166,7 @@
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				5E87E7CC208F752C00141269 /* FilesAPI.swift in Sources */,
 				5E87E805208F752C00141269 /* PeriodProfitDiagram.swift in Sources */,
+				5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */,
 				FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */,
 				5E87E7D9208F752C00141269 /* LoginViewModel.swift in Sources */,
 				FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */,
@@ -2265,7 +2292,7 @@
 				5E87E822208F752C00141269 /* TransactionsFilter.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				5E87E81F208F752C00141269 /* InvestmentProgramRequestTxInfo.swift in Sources */,
-				FC4BFD642022586F0044C3EC /* FilterAmountTableViewCellViewModel.swift in Sources */,
+				FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */,
 				FCA5707720274D48001942F3 /* WalletHeaderTableViewCell.swift in Sources */,
 				FC4C194620304F3300625795 /* TournamentDetailRouter.swift in Sources */,
 				FCFF38FE2046F9CA00BEEDDA /* ProgramDetailsForTableViewCellView.swift in Sources */,
@@ -2280,6 +2307,7 @@
 				FC4C19502030555700625795 /* TournamentDetailViewController.swift in Sources */,
 				5E87E80C208F752C00141269 /* InvestmentProgramDetails.swift in Sources */,
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,
+				5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,
 				FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */,
 				FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */,

@@ -61,6 +61,14 @@ class ProgramDataProvider: DataProvider {
         getInvestorProgramTradesChart(with: timeFrame, investmentProgramId: investmentProgramId, completion: completion, errorCompletion: errorCompletion)
     }
     
+    static func programFavorites(isFavorite: Bool, investmentProgramId: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        isFavorite
+            ? programFavoritesRemove(with: investmentProgramId, authorization: authorization, completion: completion)
+            : programFavoritesAdd(with: investmentProgramId, authorization: authorization, completion: completion)
+    }
+    
     // MARK: - Private methods
     private static func getInvestorProgram(with investmentProgramId: String, authorization: String?, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -110,6 +118,22 @@ class ProgramDataProvider: DataProvider {
         
         ManagerAPI.apiManagerInvestmentProgramEquityChartGet(investmentProgramId: uuid, timeFrame: timeFrame) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+
+    private static func programFavoritesAdd(with investmentProgramId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.apiInvestorInvestmentProgramsFavoritesAddPost(investmentProgramId: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    private static func programFavoritesRemove(with investmentProgramId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.apiInvestorInvestmentProgramsFavoritesRemovePost(investmentProgramId: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
         }
     }
 }

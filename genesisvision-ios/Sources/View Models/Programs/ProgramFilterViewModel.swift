@@ -13,6 +13,11 @@ enum SliderType: Int {
     case level, avgProfit
 }
 
+enum SwitchType: Int {
+    case activePrograms, favoritePrograms
+}
+
+
 final class ProgramFilterViewModel {
     
     // MARK: - View Model
@@ -20,31 +25,36 @@ final class ProgramFilterViewModel {
     
     enum SectionType {
         case slider
+        case switchControl
     }
     
     // MARK: - Variables
     var title: String = "Filter"
     
-    private let amountsTitles = [AmountTitles(title: "Level", subtitle: "Select Trader Level"),
-                                 AmountTitles(title: "Average Profit %", subtitle: "Select Trader Profit %")]
+    private let sliderTitles = [FilterTitles(title: "", subtitle: "Select Trader Level"),
+                                 FilterTitles(title: "", subtitle: "Select Trader Profit %")]
     
-    private var amounts: [SliderType] = [.level, .avgProfit]
-    private var sections: [SectionType] = [.slider]
+    private let switchTitles = [FilterTitles(title: "", subtitle: "Only active programs"),
+                                FilterTitles(title: "", subtitle: "Only favorite programs")]
+    
+    private var sections: [SectionType] = [.slider, .switchControl]
+    
+    private var sliderRows: [SliderType] = [.level, .avgProfit]
+    private var switchRows: [SwitchType] = [.activePrograms, .favoritePrograms]
+    
     private var router: ProgramFilterRouter!
     
     private var filter: InvestmentProgramsFilter?
     
-    var amountCellModels = [FilterAmountTableViewCellViewModel]()
+    var sliderCellModels = [FilterSliderTableViewCellViewModel]()
+    var switchCellModels = [FilterSwitchTableViewCellViewModel]()
     
-    weak var sliderDelegate: TTRangeSliderDelegate? {
-        didSet {
-            setup()
-        }
-    }
+    weak var sliderDelegate: TTRangeSliderDelegate?
+    weak var switchDelegate: FilterSwitchTableViewCellProtocol?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FilterAmountTableViewCellViewModel.self]
+        return [FilterSliderTableViewCellViewModel.self, FilterSwitchTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -83,8 +93,17 @@ final class ProgramFilterViewModel {
         }
     }
     
+    func setup(sliderDelegate: TTRangeSliderDelegate?, switchDelegate: FilterSwitchTableViewCellProtocol?) {
+        self.sliderDelegate = sliderDelegate
+        self.switchDelegate = switchDelegate
+        setup()
+    }
+    
     // MARK: - Public methods
-    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil) {
+    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil, showActivePrograms: Bool = false, showMyFavorites: Bool = false) {
+        filter?.showMyFavorites = showMyFavorites
+        filter?.showActivePrograms = showActivePrograms
+        
         if let levelMin = levelMin, let levelMax = levelMax {
             filter?.levelMin = levelMin
             filter?.levelMax = levelMax
@@ -106,7 +125,9 @@ final class ProgramFilterViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .slider:
-            return amountCellModels[indexPath.row]
+            return sliderCellModels[indexPath.row]
+        case .switchControl:
+            return switchCellModels[indexPath.row]
         }
     }
     
@@ -117,15 +138,17 @@ final class ProgramFilterViewModel {
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
         case .slider:
-            return amountCellModels.count
+            return sliderCellModels.count
+        case .switchControl:
+            return switchCellModels.count
         }
     }
     
     func reset() {
-        for idx in 0...amounts.count - 1 {
-            var viewModel = amountCellModels[idx]
+        for idx in 0...sliderRows.count - 1 {
+            var viewModel = sliderCellModels[idx]
             
-            switch amounts[idx] {
+            switch sliderRows[idx] {
             case .level:
                 filter?.levelMin = Constants.Filters.minLevel
                 filter?.levelMax = Constants.Filters.maxLevel
@@ -138,7 +161,20 @@ final class ProgramFilterViewModel {
                 viewModel.selectedMaxValue = filter?.profitAvgPercentMax
             }
             
-            amountCellModels[idx] = viewModel
+            sliderCellModels[idx] = viewModel
+        }
+        
+        for idx in 0...switchRows.count - 1 {
+            var viewModel = switchCellModels[idx]
+            
+            switch switchRows[idx] {
+            case .activePrograms:
+                filter?.showActivePrograms = Constants.Filters.showActivePrograms
+                viewModel.isOn = filter?.showActivePrograms
+            case .favoritePrograms:
+                filter?.showMyFavorites = Constants.Filters.showMyFavorites
+                viewModel.isOn = filter?.showMyFavorites
+            }
         }
     }
     
@@ -154,20 +190,36 @@ final class ProgramFilterViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        for idx in 0...amounts.count - 1 {
-            var amountCellModel: FilterAmountTableViewCellViewModel?
+        for idx in 0...sliderRows.count - 1 {
+            var sliderCellModel: FilterSliderTableViewCellViewModel?
             
-            let titles = amountsTitles[idx]
-            let type = amounts[idx]
+            let titles = sliderTitles[idx]
+            let type = sliderRows[idx]
             
             switch type {
             case .level:
-                amountCellModel = FilterAmountTableViewCellViewModel(minValue: Constants.Filters.minLevel, maxValue: Constants.Filters.maxLevel, amountTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, sliderViewTag: idx, delegate: sliderDelegate)
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: Constants.Filters.minLevel, maxValue: Constants.Filters.maxLevel, filterTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, sliderViewTag: idx, delegate: sliderDelegate)
             case .avgProfit:
-                amountCellModel = FilterAmountTableViewCellViewModel(minValue: Constants.Filters.minAvgProfit, maxValue: Constants.Filters.maxAvgProfit, amountTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, sliderViewTag: idx, delegate: sliderDelegate)
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: Constants.Filters.minAvgProfit, maxValue: Constants.Filters.maxAvgProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, sliderViewTag: idx, delegate: sliderDelegate)
             }
         
-            amountCellModels.append(amountCellModel!)
+            sliderCellModels.append(sliderCellModel!)
+        }
+        
+        for idx in 0...switchRows.count - 1 {
+            var switchCellModel: FilterSwitchTableViewCellViewModel?
+            
+            let titles = switchTitles[idx]
+            let type = switchRows[idx]
+            
+            switch type {
+            case .activePrograms:
+                switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showActivePrograms, switchViewTag: idx, delegate: switchDelegate)
+            case .favoritePrograms:
+                switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showMyFavorites, switchViewTag: idx, delegate: switchDelegate)
+            }
+            
+            switchCellModels.append(switchCellModel!)
         }
     }
 }

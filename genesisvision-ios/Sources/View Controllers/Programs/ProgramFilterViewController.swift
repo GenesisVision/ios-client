@@ -14,7 +14,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: ProgramFilterViewModel! {
         didSet {
-            viewModel.sliderDelegate = self
+            viewModel.setup(sliderDelegate: self, switchDelegate: self)
         }
     }
     
@@ -120,6 +120,19 @@ extension ProgramFilterViewController: TTRangeSliderDelegate {
             viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
         case .avgProfit:
             viewModel.updateFilter(profitAvgPercentMin: Int(selectedMinimum), profitAvgPercentMax: Int(selectedMaximum))
+        }
+    }
+}
+
+extension ProgramFilterViewController: FilterSwitchTableViewCellProtocol {
+    func switchControl(_ sender: UISwitch!, didChangeSelectedValue: Bool) {
+        let type: SwitchType = SwitchType(rawValue: sender.tag)!
+        
+        switch type {
+        case .activePrograms:
+            viewModel.updateFilter(showActivePrograms: didChangeSelectedValue)
+        case .favoritePrograms:
+            viewModel.updateFilter(showMyFavorites: didChangeSelectedValue)
         }
     }
 }

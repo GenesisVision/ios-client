@@ -9,16 +9,16 @@
 import UIKit
 import TTRangeSlider
 
-struct AmountTitles {
+struct FilterTitles {
     var title: String
     var subtitle: String
 }
 
-struct FilterAmountTableViewCellViewModel {
+struct FilterSliderTableViewCellViewModel {
     var minValue: Int?
     var maxValue: Int?
     
-    var amountTitles: AmountTitles
+    var filterTitles: FilterTitles
     var amountType: SliderType
     
     var selectedMinValue: Int?
@@ -28,10 +28,10 @@ struct FilterAmountTableViewCellViewModel {
     weak var delegate: TTRangeSliderDelegate?
 }
 
-extension FilterAmountTableViewCellViewModel: CellViewModel {
+extension FilterSliderTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterAmountTableViewCell) {
-        cell.titleLabel.text = amountTitles.title
-        cell.subtitleLabel.text = amountTitles.subtitle
+        cell.titleLabel.text = filterTitles.title
+        cell.subtitleLabel.text = filterTitles.subtitle
         cell.titleLabel.textColor = UIColor.Slider.title
         cell.subtitleLabel.textColor = UIColor.Slider.subTitle
         let min = minValue ?? 0

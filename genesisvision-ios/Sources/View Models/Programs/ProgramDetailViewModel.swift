@@ -48,6 +48,10 @@ final class ProgramDetailViewModel {
     
     var viewProperties: ProgramDetailViewProperties?
     
+    var isFavorite: Bool {
+        return investmentProgramDetails?.isFavorite ?? false
+    }
+    
     private var sections: [SectionType] = [.header,
                                            .chart,
                                            .details,
@@ -137,6 +141,25 @@ extension ProgramDetailViewModel {
     func withdraw() {
         guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens, let currency = investmentProgramDetails?.currency else { return }
         router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency.rawValue))
+    }
+    
+    
+    func changeFavorite(completion: @escaping CompletionBlock) {
+        guard let investmentProgramId = investmentProgramId,
+            let isFavorite = investmentProgramDetails?.isFavorite else { return }
+        
+        investmentProgramDetails?.isFavorite = !isFavorite
+        ProgramDataProvider.programFavorites(isFavorite: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+                self?.investmentProgramDetails?.isFavorite = isFavorite
+            }
+            
+            completion(result)
+        }
     }
     
     func showHistory() {

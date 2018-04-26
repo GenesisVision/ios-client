@@ -43,6 +43,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var historyBarButtonItem: UIBarButtonItem?
+    private var favoriteBarButtonItem: UIBarButtonItem!
     
     // MARK: - Views
     @IBOutlet var buttonsView: UIView!
@@ -90,6 +91,14 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         
         historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
+
+        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
+        
+        if viewProperties.isHistoryEnable, let historyBarButtonItem = historyBarButtonItem {
+            navigationItem.rightBarButtonItems = [historyBarButtonItem, favoriteBarButtonItem]
+        } else {
+            navigationItem.rightBarButtonItem = favoriteBarButtonItem
+        }
         
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
@@ -139,6 +148,11 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.setupUI()
+            
+            if self.favoriteBarButtonItem != nil {
+                self.favoriteBarButtonItem.image = self.viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+            }
+            
             self.tableView.reloadData()
         }
     }
@@ -146,6 +160,24 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     // MARK: - IBActions
     @IBAction func historyButtonAction(_ sender: UIButton) {
         viewModel.showHistory()
+    }
+    
+    @IBAction func favoriteButtonAction(_ sender: UIButton) {
+        let isFavorite = viewModel.isFavorite
+        favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+        
+        showProgressHUD()
+        viewModel.changeFavorite() { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.showSuccessHUD()
+            case .failure(let errorType):
+                self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
     }
     
     @IBAction func investButtonAction(_ sender: UIButton) {
