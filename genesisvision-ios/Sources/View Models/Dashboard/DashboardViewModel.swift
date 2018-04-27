@@ -73,6 +73,31 @@ final class DashboardViewModel {
     func getSelectedSortingIndex() -> Int {
         return sortingKeys.index(of: sorting) ?? 0
     }
+    
+    func changeFavorite(value: Bool, at investmentProgramId: String, completion: @escaping CompletionBlock) {
+        
+    }
+    
+    func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            guard let model = model(at: investmentProgramId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.investmentProgram.isFavorite = value
+            completion(.success)
+            return
+        }
+        
+        ProgramDataProvider.programFavorites(isFavorite: !value, investmentProgramId: investmentProgramId) { [weak self] (result) in
+            switch result {
+            case .success:
+                guard let model = self?.model(at: investmentProgramId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.investmentProgram.isFavorite = value
+                completion(.success)
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
+    }
 }
 
 // MARK: - TableView
@@ -220,6 +245,14 @@ extension DashboardViewModel {
         }
     }
     
+    func model(at investmentProgramId: String) -> CellViewAnyModel? {
+        if let i = viewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+            return viewModels[i]
+        }
+        
+        return nil
+    }
+    
     func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
         guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
             return nil
@@ -251,7 +284,7 @@ extension DashboardViewModel {
             let totalCount = dashboard.investmentPrograms?.count ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self, delegate: self?.router.currentController() as? ProgramDetailViewControllerProtocol)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             

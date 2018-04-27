@@ -12,6 +12,7 @@ import Kingfisher
 struct DashboardTableViewCellViewModel {
     let investmentProgram: InvestmentProgramDashboardInvestor
     weak var reloadDataProtocol: ReloadDataProtocol?
+    weak var delegate: ProgramDetailViewControllerProtocol?
 }
 
 extension DashboardTableViewCellViewModel: CellViewModel {
@@ -19,6 +20,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden
+        cell.delegate = delegate
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
@@ -64,6 +66,10 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         if let level = investmentProgram.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
+        }
+        
+        if let isFavorite = investmentProgram.isFavorite {
+            cell.favoriteButton.isSelected = isFavorite
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder

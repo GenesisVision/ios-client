@@ -82,7 +82,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEW-Cd-WMk" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="841" y="8" width="20" height="20"/>
+                        <rect key="frame" x="841" y="12" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="feX-8R-ZMy"/>
@@ -95,7 +95,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QEW-Cd-WMk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="COj-eK-25K"/>
+                    <constraint firstItem="QEW-Cd-WMk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="COj-eK-25K"/>
                     <constraint firstAttribute="trailing" secondItem="QEW-Cd-WMk" secondAttribute="trailing" constant="16" id="Ij4-et-6Rx"/>
                     <constraint firstItem="qDu-C2-NOM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="T10-P5-x1y"/>
                     <constraint firstAttribute="trailing" secondItem="qDu-C2-NOM" secondAttribute="trailing" constant="8" id="VgQ-KK-oKE"/>

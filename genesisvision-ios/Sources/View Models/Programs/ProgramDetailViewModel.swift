@@ -21,6 +21,7 @@ final class ProgramDetailViewModel {
         case chart
         case details
         case moreDetails
+        case availableToInvest
     }
 
     // MARK: - Variables
@@ -30,7 +31,7 @@ final class ProgramDetailViewModel {
     private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
     private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
-    private var investmentProgramId: String!
+    var investmentProgramId: String!
     private var equityChart: [TradeChart]?
     private var investmentProgramDetails: InvestmentProgramDetails? {
         didSet {
@@ -55,12 +56,13 @@ final class ProgramDetailViewModel {
     private var sections: [SectionType] = [.header,
                                            .chart,
                                            .details,
-                                           .moreDetails]
+                                           .moreDetails,
+                                           .availableToInvest]
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramDetailsTableViewCellViewModel.self, ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramMoreDetailsTableViewCellViewModel.self]
+        return [ProgramDetailsTableViewCellViewModel.self, ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramMoreDetailsTableViewCellViewModel.self, DetailTextTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -71,9 +73,9 @@ final class ProgramDetailViewModel {
     // MARK: - Init
     init(withRouter router: ProgramDetailRouter,
          investmentProgramId: String,
-         reloadDataProtocol: ReloadDataProtocol?,
-         programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?,
-         detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?) {
+         reloadDataProtocol: ReloadDataProtocol? = nil,
+         programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol? = nil,
+         detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol? = nil) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.reloadDataProtocol = reloadDataProtocol
@@ -87,25 +89,11 @@ final class ProgramDetailViewModel {
     
     // MARK: - Public methods
     func headerTitle(for section: Int) -> String? {
-        switch sections[section] {
-        case .chart:
-            return nil
-        case .header, .details, .moreDetails:
-            return nil
-        }
+        return nil
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        switch sections[section] {
-        case .chart:
-            return 0.0
-        case .header:
-            return 0.0
-        case .details:
-            return 0.0
-        case .moreDetails:
-            return 0.0
-        }
+        return 0.0
     }
     
     func numberOfSections() -> Int {
@@ -117,16 +105,7 @@ final class ProgramDetailViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        switch sections[section] {
-        case .header:
-            return 1
-        case .chart:
-            return 1
-        case .details:
-            return 1
-        case .moreDetails:
-            return 1
-        }
+        return 1
     }
 }
 
@@ -224,6 +203,8 @@ extension ProgramDetailViewModel {
             return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
         case .details:
             return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+        case .availableToInvest:
+            return DetailTextTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         }
     }
     

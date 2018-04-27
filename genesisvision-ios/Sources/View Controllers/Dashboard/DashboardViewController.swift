@@ -286,3 +286,19 @@ extension DashboardViewController: ReloadDataProtocol {
         reloadData()
     }
 }
+
+extension DashboardViewController: ProgramDetailViewControllerProtocol {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.reloadData()
+            default:
+                break
+            }
+        }
+    }
+}

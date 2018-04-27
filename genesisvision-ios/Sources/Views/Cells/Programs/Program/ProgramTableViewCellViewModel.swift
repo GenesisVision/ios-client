@@ -11,6 +11,7 @@ import Kingfisher
 
 struct ProgramTableViewCellViewModel {
     let investmentProgram: InvestmentProgram
+    weak var delegate: ProgramDetailViewControllerProtocol?
 }
 
 extension ProgramTableViewCellViewModel: CellViewModel {
@@ -18,38 +19,51 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         cell.chartView.isHidden = true
         cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
+        cell.delegate = delegate
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = self.investmentProgram.chart, let title = self.investmentProgram.title, chart.count > 1 {
+        if let chart = investmentProgram.equityChart, let title = investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartDataSet: chart, name: title, currencyValue: self.investmentProgram.currency?.rawValue)
+            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
-        if let title = self.investmentProgram.title {
+        if let title = investmentProgram.title {
             cell.programTitleLabel.text = title
         }
         
-        if let currency = self.investmentProgram.currency {
+        if let investmentProgramId = investmentProgram.id?.uuidString {
+            cell.investmentProgramId = investmentProgramId
+        }
+        
+        if let managerName = investmentProgram.manager?.username {
+            cell.managerNameLabel.text = "by " + managerName
+        }
+        
+        if let isFavorite = investmentProgram.isFavorite {
+            cell.favoriteButton.isSelected = isFavorite
+        }
+        
+        if let currency = investmentProgram.currency {
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
-        if let level = self.investmentProgram.level {
+        if let level = investmentProgram.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = self.investmentProgram.logo {
+        if let logo = investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: self.investmentProgram.investorsCount, balance: self.investmentProgram.balance, avgProfit: self.investmentProgram.profitAvgPercent, totalProfit: self.investmentProgram.profitTotal, currency: self.investmentProgram.currency?.rawValue)
+        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvgPercent, totalProfit: investmentProgram.profitTotal, currency: investmentProgram.currency?.rawValue)
     }
 }

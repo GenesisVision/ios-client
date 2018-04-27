@@ -11,7 +11,9 @@ import UIKit
 class DashboardTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
-    var investmentProgramId: String = ""
+    weak var delegate: ProgramDetailViewControllerProtocol?
+    
+    var investmentProgramId: String?
     var investedTokens: Double = 0.0
     
     var endOfPeriod: Date?
@@ -47,6 +49,8 @@ class DashboardTableViewCell: PlateTableViewCell {
             inProcessIndicatorView.isHidden = true
         }
     }
+    
+    @IBOutlet var favoriteButton: FavoriteButton!
     
     // MARK: - Labels
     @IBOutlet var noDataLabel: UILabel! {
@@ -84,6 +88,13 @@ class DashboardTableViewCell: PlateTableViewCell {
     
     deinit {
         stopTimer()
+    }
+    
+    // MARK: - Actions
+    @IBAction func favoriteButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let investmentProgramId = investmentProgramId else { return }
+        delegate?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: sender.isSelected, request: true)
     }
     
     // MARK: - Public methods

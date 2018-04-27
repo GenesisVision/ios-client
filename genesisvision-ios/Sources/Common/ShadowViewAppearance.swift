@@ -1,9 +1,9 @@
 //
 //  ShadowViewAppearance.swift
-//  CHMeetupApp
+//  genesisvision-ios
 //
-//  Created by Alexander Zimin on 12/03/2017.
-//  Copyright © 2017 CocoaHeads Community. All rights reserved.
+//  Created by George on 27/04/2018.
+//  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit

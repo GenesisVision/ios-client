@@ -62,10 +62,11 @@ final class Constants {
         
         static let fetchThreshold = 1 // a constant to determine when to fetch the results
 
-        static let take = 50 //count of templates on 1 page
+        static let take: Int = 50 //count of templates on 1 page
+        static let equityChartLength: Int = 36
         
         struct Main {
-            static let debug = "https://black-api.genesis.vision"
+            static let debug = "https://alpha.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         

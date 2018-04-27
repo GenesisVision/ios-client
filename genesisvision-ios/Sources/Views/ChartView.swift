@@ -58,6 +58,12 @@ class ChartView: CombinedChartView {
         }
     }
     
+    private var chartByDateDataSet: [ChartByDate]? {
+        didSet {
+            updateData()
+        }
+    }
+    
     private var name: String?
     private var currencyValue: String = ""
     
@@ -67,7 +73,6 @@ class ChartView: CombinedChartView {
     private var lineChartDataSet: LineChartDataSet! {
         didSet {
             lineChartDataSet.setColor(UIColor.primary)
-            
             lineChartDataSet.lineWidth = 1.5
             
             lineChartDataSet.drawFilledEnabled = chartType != .default
@@ -123,20 +128,12 @@ class ChartView: CombinedChartView {
     }
     
     // MARK: - Public methods
-    func setup(chartType: ChartType = .default, tradeChartDataSet: [TradeChart]?, name: String? = "DataSet", currencyValue: String? = nil, chartDurationType: ChartDurationType? = nil) {
-        self.chartType = chartType
-        self.name = name
-        self.tradeChartDataSet = tradeChartDataSet
-        self.currencyValue = currencyValue ?? ""
-        self.chartDurationType = chartDurationType ?? .day
-        
-        setup()
-    }
-    
-    func setup(chartType: ChartType = .default, chartDataSet: [Chart]?, name: String? = "DataSet", currencyValue: String? = nil, chartDurationType: ChartDurationType? = nil) {
+    func setup(chartType: ChartType = .default, chartDataSet: [Chart]? = nil, tradeChartDataSet: [TradeChart]? = nil, chartByDateDataSet: [ChartByDate]? = nil, name: String? = "DataSet", currencyValue: String? = nil, chartDurationType: ChartDurationType? = nil) {
         self.chartType = chartType
         self.name = name
         self.chartDataSet = chartDataSet
+        self.tradeChartDataSet = tradeChartDataSet
+        self.chartByDateDataSet = chartByDateDataSet
         self.currencyValue = currencyValue ?? ""
         self.chartDurationType = chartDurationType ?? .day
         
@@ -150,6 +147,8 @@ class ChartView: CombinedChartView {
     func updateData() {
         if tradeChartDataSet != nil {
             setData(tradeChartDataSet)
+        } else if chartByDateDataSet != nil {
+            setData(chartByDateDataSet)
         } else {
             setData(chartDataSet)
         }
@@ -165,6 +164,11 @@ class ChartView: CombinedChartView {
     
     // MARK: - Private methods
     private func setup() {
+        if chartType == .default, let firstValue = chartByDateDataSet?.first?.value, let lastValue = chartByDateDataSet?.last?.value {
+            
+            lineChartDataSet.setColor(firstValue > lastValue ? UIColor.Font.red : UIColor.primary)
+        }
+        
         doubleTapToZoomEnabled = chartType == .full
         dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
@@ -206,7 +210,7 @@ class ChartView: CombinedChartView {
         rightAxis.drawZeroLineEnabled = true
         rightAxis.zeroLineColor = UIColor.Cell.separator
         rightAxis.zeroLineWidth = 1.0
-        rightAxis.zeroLineDashLengths = [2.0, 6.0]
+        rightAxis.zeroLineDashLengths = chartType == .default ? [2.0, 2.0] : [2.0, 6.0]
         
         drawGridBackgroundEnabled = false
         
@@ -222,6 +226,7 @@ class ChartView: CombinedChartView {
             let dateString = Date.getFormatStringForChart(for: date, chartDurationType: self.chartDurationType)
             return dateString
         })
+        
         xAxis.labelPosition = .bottom
         xAxis.enabled = chartType == .full
         
@@ -253,12 +258,23 @@ class ChartView: CombinedChartView {
         self.data = data
     }
     
+    private func setData(_ values: [ChartByDate]?) {
+        guard let values = values, values.count > 0 else {
+            return
+        }
+        
+        let data = CombinedChartData()
+        data.lineData = generateLineChart(values)
+        
+        self.data = data
+    }
+    
     private func generateLineChart(_ values: [TradeChart]) -> LineChartData {
         let totalProfitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].profit ?? 0)
         }
         
-        lineChartDataSet = LineChartDataSet(values: totalProfitDataEntry, label: "Total profit")
+        lineChartDataSet = LineChartDataSet(values: totalProfitDataEntry, label: "Profit")
         
         return LineChartData(dataSet: lineChartDataSet)
     }
@@ -269,6 +285,16 @@ class ChartView: CombinedChartView {
         }
         
         lineChartDataSet = LineChartDataSet(values: totalProfitDataEntry, label: "Total profit")
+        
+        return LineChartData(dataSet: lineChartDataSet)
+    }
+    
+    private func generateLineChart(_ values: [ChartByDate]) -> LineChartData {
+        let totalProfitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
+        }
+        
+        lineChartDataSet = LineChartDataSet(values: totalProfitDataEntry, label: "Value")
         
         return LineChartData(dataSet: lineChartDataSet)
     }

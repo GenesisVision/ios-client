@@ -35,6 +35,7 @@
 		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
 		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
 		5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */; };
+		5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E696019209362EE00505726 /* FavoriteButton.swift */; };
 		5E6D681D207655A100299408 /* String+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681C207655A100299408 /* String+Constants.swift */; };
 		5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */; };
 		5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */; };
@@ -181,6 +182,9 @@
 		5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */; };
 		5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */; };
 		5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */; };
+		5EDA74D92093A34E00E8EA34 /* DetailTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */; };
+		5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */; };
+		5EDA74DC2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */; };
 		5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2256F206E486B00D2CB12 /* UIDevice.swift */; };
 		FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC016C15203B0FD2006956FE /* Tournament.storyboard */; };
 		FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC016C17203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift */; };
@@ -413,6 +417,7 @@
 		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
 		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
 		5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewModel.swift; sourceTree = "<group>"; };
+		5E696019209362EE00505726 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
 		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
 		5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawSuccessViewModel.swift; sourceTree = "<group>"; };
@@ -559,6 +564,9 @@
 		5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCell.swift; sourceTree = "<group>"; };
+		5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTextTableViewCell.xib; sourceTree = "<group>"; };
+		5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EF2256F206E486B00D2CB12 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
 		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
@@ -826,6 +834,7 @@
 				FCE82364201622BD000061E8 /* ActionButton.swift */,
 				5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */,
 				5E87E766208F64C200141269 /* TooltipButton.swift */,
+				5E696019209362EE00505726 /* FavoriteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1321,6 +1330,9 @@
 				5E18138C206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift */,
 				5E1813882062487200481646 /* ProgramDetailsTableViewCell.swift */,
 				5E1813892062487200481646 /* ProgramDetailsTableViewCell.xib */,
+				5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */,
+				5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */,
+				5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */,
 			);
 			path = "Program Detail";
 			sourceTree = "<group>";
@@ -1882,6 +1894,7 @@
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */,
+				5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */,
 				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
 				FCA5705620273528001942F3 /* ProfileFieldTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
@@ -2042,6 +2055,7 @@
 				5E18138D206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift in Sources */,
 				5E87E81D208F752C00141269 /* Token.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
+				5EDA74DC2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift in Sources */,
 				5E87E7FD208F752C00141269 /* ChangePasswordViewModel.swift in Sources */,
 				5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */,
 				5E87E812208F752C00141269 /* ErrorMessage.swift in Sources */,
@@ -2099,6 +2113,7 @@
 				5E87E7E9208F752C00141269 /* InvestmentProgramAccrual.swift in Sources */,
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* ForgetPasswordViewModel.swift in Sources */,
+				5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E87E7D0208F752C00141269 /* ManagerAPI.swift in Sources */,
@@ -2250,6 +2265,7 @@
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
+				5EDA74D92093A34E00E8EA34 /* DetailTextTableViewCell.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* SignInViewModel.swift in Sources */,
 				5E87E7CB208F752C00141269 /* BrokerAPI.swift in Sources */,
 				5E395A2D2065613800A6B779 /* GradientView.swift in Sources */,

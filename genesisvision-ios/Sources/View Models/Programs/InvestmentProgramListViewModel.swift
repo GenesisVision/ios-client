@@ -31,6 +31,7 @@ final class InvestmentProgramListViewModel {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var programsCount: String = ""
+    var equityChartLength = Constants.Api.equityChartLength
     var skip = 0 {
         didSet {
             filter?.skip = skip
@@ -72,7 +73,7 @@ final class InvestmentProgramListViewModel {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, showActivePrograms: nil, equityChartLength: nil, showMyFavorites: nil, skip: skip, take: take)
+        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, showActivePrograms: nil, equityChartLength: equityChartLength, showMyFavorites: nil, skip: skip, take: take)
         
         state = isLogin() ? .programList : .programListWithSignIn
     }
@@ -99,6 +100,28 @@ final class InvestmentProgramListViewModel {
         guard let sorting = filter?.sorting else { return 0 }
         
         return sortingKeys.index(of: sorting) ?? 0
+    }
+    
+    func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            guard let model = model(at: investmentProgramId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.investmentProgram.isFavorite = value
+            completion(.success)
+            return
+        }
+        
+        
+        ProgramDataProvider.programFavorites(isFavorite: !value, investmentProgramId: investmentProgramId) { [weak self] (result) in
+            switch result {
+            case .success:
+                guard let model = self?.model(at: investmentProgramId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.investmentProgram.isFavorite = value
+                completion(.success)
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
     }
 }
 
@@ -236,6 +259,14 @@ extension InvestmentProgramListViewModel {
         }
     }
     
+    func model(at investmentProgramId: String) -> CellViewAnyModel? {
+        if let i = investmentProgramViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+            return investmentProgramViewModels[i]
+        }
+        
+        return nil
+    }
+    
     func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
         guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
             return nil
@@ -273,7 +304,7 @@ extension InvestmentProgramListViewModel {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            ProgramDataProvider.getPrograms(with: filter, completion: { (investmentProgramsViewModel) in
+            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
@@ -281,7 +312,7 @@ extension InvestmentProgramListViewModel {
                 let totalCount = investmentPrograms.total ?? 0
                 
                 investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
-                    let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram)
+                    let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.currentController() as? ProgramDetailViewControllerProtocol)
                     investmentProgramViewModels.append(traderTableViewCellModel)
                 })
                 

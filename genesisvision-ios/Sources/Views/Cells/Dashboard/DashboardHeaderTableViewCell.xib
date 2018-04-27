@@ -115,7 +115,7 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SmH-r3-7fb" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="113.5" y="178.5" width="20" height="20"/>
+                        <rect key="frame" x="119.5" y="178.5" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="c3I-fP-v9l"/>
@@ -127,7 +127,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PK-jX-FDX" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="265" y="178.5" width="20" height="20"/>
+                        <rect key="frame" x="271" y="178.5" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                         <state key="normal" title="i">
@@ -139,12 +139,12 @@
                     <constraint firstAttribute="bottom" secondItem="E7a-wh-nA6" secondAttribute="bottom" constant="8" id="6zW-H2-cHV"/>
                     <constraint firstItem="SmH-r3-7fb" firstAttribute="centerY" secondItem="IPD-R4-JtS" secondAttribute="centerY" id="Apd-VX-I4G"/>
                     <constraint firstItem="1PK-jX-FDX" firstAttribute="height" secondItem="SmH-r3-7fb" secondAttribute="height" id="BEF-qn-m3q"/>
-                    <constraint firstItem="1PK-jX-FDX" firstAttribute="trailing" secondItem="h0v-tu-1zU" secondAttribute="trailing" constant="22" id="P3C-wf-6Mo"/>
                     <constraint firstItem="1PK-jX-FDX" firstAttribute="centerY" secondItem="h0v-tu-1zU" secondAttribute="centerY" id="Ypu-be-1s3"/>
                     <constraint firstItem="1PK-jX-FDX" firstAttribute="width" secondItem="SmH-r3-7fb" secondAttribute="width" id="cn5-tr-ofS"/>
-                    <constraint firstItem="SmH-r3-7fb" firstAttribute="trailing" secondItem="IPD-R4-JtS" secondAttribute="trailing" constant="22" id="g95-0J-z3w"/>
                     <constraint firstAttribute="trailing" secondItem="E7a-wh-nA6" secondAttribute="trailing" constant="16" id="m7h-SE-lzk"/>
+                    <constraint firstItem="1PK-jX-FDX" firstAttribute="leading" secondItem="h0v-tu-1zU" secondAttribute="trailing" constant="8" id="v7Q-PC-zln"/>
                     <constraint firstItem="E7a-wh-nA6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xdH-DF-P7G"/>
+                    <constraint firstItem="SmH-r3-7fb" firstAttribute="leading" secondItem="IPD-R4-JtS" secondAttribute="trailing" constant="8" id="yy8-uj-tx2"/>
                     <constraint firstItem="E7a-wh-nA6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="z7H-aH-SbC"/>
                 </constraints>
             </tableViewCellContentView>

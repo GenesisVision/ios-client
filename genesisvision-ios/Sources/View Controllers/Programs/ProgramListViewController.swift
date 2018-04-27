@@ -192,6 +192,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 
+// MARK: - UIViewControllerPreviewingDelegate
 extension ProgramListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -214,12 +215,31 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
     }
 }
 
+// MARK: - ReloadDataProtocol
 extension ProgramListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
     }
 }
 
+// MARK: - ProgramDetailViewControllerProtocol
+extension ProgramListViewController: ProgramDetailViewControllerProtocol {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.reloadData()
+            default:
+                break
+            }
+        }
+    }
+}
+
+// MARK: - SortHeaderViewProtocol
 extension ProgramListViewController: SortHeaderViewProtocol {
     func sortButtonDidPress() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
@@ -259,7 +279,6 @@ extension ProgramListViewController: SortHeaderViewProtocol {
 }
 
 extension ProgramListViewController {
-    
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
@@ -286,7 +305,6 @@ extension ProgramListViewController {
 }
 
 extension ProgramListViewController: UISearchBarDelegate {
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }

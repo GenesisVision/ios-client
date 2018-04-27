@@ -225,7 +225,11 @@ extension Router {
     }
     
     func showProgramDetail(with investmentProgramId: String) {
+        guard let vc = currentController() else { return }
+        
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return }
+        viewController.delegate = vc as? ProgramDetailViewControllerProtocol
+        
         let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController, programPropertiesForTableViewCellViewProtocol: viewController, detailChartTableViewCellProtocol: viewController)
         viewController.viewModel = viewModel

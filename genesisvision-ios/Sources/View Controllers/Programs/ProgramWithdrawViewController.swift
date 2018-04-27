@@ -55,6 +55,7 @@ class ProgramWithdrawViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.Background.main
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion(), style: .primary)
     }
     

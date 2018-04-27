@@ -10,6 +10,10 @@
 import UIKit
 import DZNEmptyDataSet
 
+protocol ProgramDetailViewControllerProtocol: class {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool)
+}
+
 class ProgramDetailViewController: BaseViewControllerWithTableView {
 
     let buttonHeight: CGFloat = 45.0
@@ -42,6 +46,8 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Variables
+    weak var delegate: ProgramDetailViewControllerProtocol?
+    
     private var historyBarButtonItem: UIBarButtonItem?
     private var favoriteBarButtonItem: UIBarButtonItem!
     
@@ -109,7 +115,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
         navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
         
-        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
+        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
         
         if viewProperties.isHistoryEnable, let historyBarButtonItem = historyBarButtonItem, AuthManager.isLogin() {
             navigationItem.rightBarButtonItems = [historyBarButtonItem, favoriteBarButtonItem]
@@ -153,7 +159,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             self.setupUI()
             
             if self.favoriteBarButtonItem != nil {
-                self.favoriteBarButtonItem.image = self.viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+                self.favoriteBarButtonItem.image = self.viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
             }
             
             self.tableView.reloadData()
@@ -167,7 +173,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     @IBAction func favoriteButtonAction(_ sender: UIButton) {
         let isFavorite = viewModel.isFavorite
-        favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+        favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         
         showProgressHUD()
         viewModel.changeFavorite() { [weak self] (result) in
@@ -175,9 +181,11 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             
             switch result {
             case .success:
-                self?.showSuccessHUD()
+                if let investmentProgramId = self?.viewModel.investmentProgramId {
+                    self?.delegate?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: !isFavorite, request: false)
+                }
             case .failure(let errorType):
-                self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_selected") : #imageLiteral(resourceName: "img_favorite")
+                self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
