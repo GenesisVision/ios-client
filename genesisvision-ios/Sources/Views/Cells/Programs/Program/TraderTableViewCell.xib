@@ -162,8 +162,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c3b-lK-ryn">
                                 <rect key="frame" x="0.0" y="79.5" width="309" height="85"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO AVAILABLE TOKENS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ios-Za-qwD">
+                                        <rect key="frame" x="0.0" y="0.0" width="309" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="dnb-Gv-cdR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="11"/>
+                                        <color key="textColor" red="0.87450980389999999" green="0.094117647060000004" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-L2-2Gg" customClass="ProgramDetailsForTableViewCellView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="309" height="56"/>
+                                        <rect key="frame" x="0.0" y="29" width="309" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-il-rIy">
                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="56"/>
@@ -278,15 +287,6 @@
                                             <outlet property="totalProfitValueLabel" destination="YYm-1Z-EZR" id="J6Y-bx-S9d"/>
                                         </connections>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO AVAILABLE TOKENS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ios-Za-qwD">
-                                        <rect key="frame" x="0.0" y="64" width="309" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="dnb-Gv-cdR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="11"/>
-                                        <color key="textColor" red="0.87450980389999999" green="0.094117647060000004" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>

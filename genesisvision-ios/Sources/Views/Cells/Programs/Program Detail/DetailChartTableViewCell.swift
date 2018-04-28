@@ -11,6 +11,7 @@ import Charts
 
 protocol DetailChartTableViewCellProtocol: class {
     func showFullChartDidPressed()
+    func scrollEnable(_ isScrollEnable: Bool)
     func updateChart(with type: ChartDurationType)
 }
 
@@ -20,6 +21,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
 
     // MARK: - Variables
     weak var delegate: DetailChartTableViewCellProtocol?
+    var chartDurationType: ChartDurationType = .all
     
     // MARK: - Views
     let markerView = MarkerView()
@@ -56,6 +58,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.delegate = self
+            chartView.chartViewProtocol = self
             chartView.backgroundColor = .clear
             chartView.isUserInteractionEnabled = true
         }
@@ -135,13 +138,15 @@ class DetailChartTableViewCell: PlateTableViewCell {
 extension DetailChartTableViewCell: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         let date = Date(timeIntervalSince1970: entry.x)
-        let dateString = date.dateAndTimeFormatString
+        let type: ChartDurationType = ChartDurationType(rawValue: segmentedControl.selectedSegmentIndex) ?? .all
+        let dateString = Date.getFormatStringForChart(for: date, chartDurationType: type)
         let x = highlight.xPx - 40 < 0
             ? 0
             : highlight.xPx - 40 > chartView.frame.width - 90
             ? chartView.frame.width - 90
             : highlight.xPx - 40
-        markerView.frame = CGRect(x: x, y: 8, width: 90, height: 36)
+        
+        markerView.frame = CGRect(x: x, y: 12, width: 90, height: 36)
         
         markerView.contentView.backgroundColor = UIColor.Font.dark
         markerView.valueLabel.text = entry.y.rounded(withType: .gvt).toString() + " %"
@@ -151,8 +156,16 @@ extension DetailChartTableViewCell: ChartViewDelegate {
 
         hideMarker(value: false)
     }
+}
+
+extension DetailChartTableViewCell: ChartViewProtocol {
+    func didChangeMarker() {
+        delegate?.scrollEnable(false)
+    }
     
-    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+    func didHideMarker() {
         hideMarker()
+        delegate?.scrollEnable(true)
     }
 }
+

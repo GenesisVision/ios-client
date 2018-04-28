@@ -11,13 +11,13 @@ import UIKit
 class DashboardHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Labels
-    @IBOutlet var profitFromProgramsLabel: UILabel! {
+    @IBOutlet var profitFromProgramsLabel: BalanceLabel! {
         didSet {
             profitFromProgramsLabel.textColor = UIColor.Header.darkTitle
         }
     }
     
-    @IBOutlet var investedAmountLabel: UILabel! {
+    @IBOutlet var investedAmountLabel: BalanceLabel! {
         didSet {
             investedAmountLabel.textColor = UIColor.Header.darkTitle
         }

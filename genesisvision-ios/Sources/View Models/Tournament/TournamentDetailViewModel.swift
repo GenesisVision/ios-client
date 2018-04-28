@@ -117,7 +117,7 @@ extension TournamentDetailViewModel {
         case .header:
             return TraderDetailHeaderTableViewCellViewModel(participantViewModel: participantViewModel)
         case .chart:
-            return DetailChartTableViewCellViewModel(chart: [], name: participantViewModel.name ?? "", currencyValue: "", detailChartTableViewCellProtocol: nil)
+            return DetailChartTableViewCellViewModel(chart: [], name: participantViewModel.name ?? "", currencyValue: "", chartDurationType: nil, detailChartTableViewCellProtocol: nil)
         }
     }
     

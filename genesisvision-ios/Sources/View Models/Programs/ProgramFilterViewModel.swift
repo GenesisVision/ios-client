@@ -180,6 +180,8 @@ final class ProgramFilterViewModel {
                 filter?.showMyFavorites = Constants.Filters.showMyFavorites
                 viewModel.isOn = filter?.showMyFavorites
             }
+            
+            switchCellModels[idx] = viewModel
         }
     }
     

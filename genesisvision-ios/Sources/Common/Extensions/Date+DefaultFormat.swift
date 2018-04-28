@@ -18,12 +18,12 @@ extension Date {
    
     static func getFormatStringForChart(for date: Date, chartDurationType: ChartDurationType) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .none
         switch chartDurationType {
         case .day:
             dateFormatter.timeStyle = .short
+            dateFormatter.dateStyle = .short
         default:
+            dateFormatter.timeStyle = .none
             dateFormatter.dateStyle = .short
         }
         dateFormatter.locale = Bundle.main.locale

@@ -34,7 +34,7 @@
                         <rect key="frame" x="8" y="0.0" width="861" height="25"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VrT-R2-RQZ">
-                                <rect key="frame" x="0.0" y="8" width="861" height="21"/>
+                                <rect key="frame" x="0.0" y="12" width="861" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="z97-FM-lyo"/>
                                 </constraints>
@@ -49,14 +49,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-Sy-3Pg" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="33" width="861" height="100"/>
+                                <rect key="frame" x="0.0" y="37" width="861" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="LWZ-TG-y6k"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLT-u0-XIt" customClass="ScrollableSegmentedControl" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="133" width="861" height="30"/>
+                                <rect key="frame" x="0.0" y="137" width="861" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Hub-9t-1MV"/>
@@ -66,7 +66,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WC9-Sy-3Pg" secondAttribute="trailing" id="1zJ-nl-R3k"/>
-                            <constraint firstItem="VrT-R2-RQZ" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" constant="8" id="4Tf-i7-Gb1"/>
+                            <constraint firstItem="VrT-R2-RQZ" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" constant="12" id="4Tf-i7-Gb1"/>
                             <constraint firstItem="bSK-tJ-aAe" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" id="Btr-em-7QZ"/>
                             <constraint firstItem="tLT-u0-XIt" firstAttribute="top" secondItem="WC9-Sy-3Pg" secondAttribute="bottom" id="ED7-9G-ppE"/>
                             <constraint firstAttribute="trailing" secondItem="VrT-R2-RQZ" secondAttribute="trailing" id="L7z-bY-Bw0"/>
@@ -75,7 +75,7 @@
                             <constraint firstAttribute="trailing" secondItem="bSK-tJ-aAe" secondAttribute="trailing" id="Uts-93-Nav"/>
                             <constraint firstAttribute="bottom" secondItem="bSK-tJ-aAe" secondAttribute="bottom" id="WQd-zO-lEw"/>
                             <constraint firstItem="bSK-tJ-aAe" firstAttribute="leading" secondItem="qDu-C2-NOM" secondAttribute="leading" id="g1e-II-pIj"/>
-                            <constraint firstItem="WC9-Sy-3Pg" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" constant="33" id="icB-LW-jGC"/>
+                            <constraint firstItem="WC9-Sy-3Pg" firstAttribute="top" secondItem="qDu-C2-NOM" secondAttribute="top" constant="37" id="icB-LW-jGC"/>
                             <constraint firstAttribute="trailing" secondItem="tLT-u0-XIt" secondAttribute="trailing" id="qq6-Gm-sL7"/>
                             <constraint firstAttribute="bottom" secondItem="tLT-u0-XIt" secondAttribute="bottom" id="wI3-qK-4JL"/>
                             <constraint firstItem="tLT-u0-XIt" firstAttribute="leading" secondItem="qDu-C2-NOM" secondAttribute="leading" id="xoj-bl-Sgq"/>

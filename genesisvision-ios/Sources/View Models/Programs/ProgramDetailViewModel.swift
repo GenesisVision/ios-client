@@ -31,6 +31,7 @@ final class ProgramDetailViewModel {
     private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
     private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
+    var chartDurationType: ChartDurationType = .all
     var investmentProgramId: String!
     private var equityChart: [TradeChart]?
     private var investmentProgramDetails: InvestmentProgramDetails? {
@@ -178,6 +179,7 @@ extension ProgramDetailViewModel {
             
             if let chart = viewModel?.chart {
                 self?.equityChart = chart
+                self?.chartDurationType = type
             }
             
             completion(.success)
@@ -203,7 +205,7 @@ extension ProgramDetailViewModel {
         case .header:
             return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: self)
         case .chart:
-            return DetailChartTableViewCellViewModel(chart: equityChart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
+            return DetailChartTableViewCellViewModel(chart: equityChart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, chartDurationType: self.chartDurationType, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
         case .moreDetails:
             return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
         case .details:

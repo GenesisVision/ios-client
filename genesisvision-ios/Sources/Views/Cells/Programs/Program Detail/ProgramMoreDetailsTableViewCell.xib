@@ -141,16 +141,16 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="70m-8P-mLb">
                                                         <rect key="frame" x="0.0" y="15" width="49" height="38"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-Re-0gb" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-Re-0gb">
                                                                 <rect key="frame" x="0.0" y="0.0" width="19" height="38"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                                <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldC-GF-wXB">
                                                                 <rect key="frame" x="27" y="0.0" width="22" height="38"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                                <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -174,7 +174,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="zqT-3J-Mlr">
                                                         <rect key="frame" x="0.0" y="15" width="19" height="38"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="trades" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shu-b7-WGK">
@@ -207,13 +207,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3G-qm-bwm">
                                                         <rect key="frame" x="0.0" y="53" width="19" height="38"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9o-oT-yAW">
                                                         <rect key="frame" x="19" y="53" width="22" height="38"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -235,13 +235,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKp-A5-59e">
                                                         <rect key="frame" x="0.0" y="53" width="19" height="38"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7F-vF-JmU">
                                                         <rect key="frame" x="19" y="53" width="22" height="38"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
-                                                        <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -278,7 +278,7 @@
                         </connections>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVo-v5-Sb1" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="514" y="27" width="20" height="20"/>
+                        <rect key="frame" x="534" y="12" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="dmZ-lT-5G8"/>
@@ -333,11 +333,11 @@
                     <constraint firstItem="b8S-JW-Qfi" firstAttribute="width" secondItem="jVo-v5-Sb1" secondAttribute="width" id="Tan-iO-qLT"/>
                     <constraint firstItem="5D2-xI-pGU" firstAttribute="centerY" secondItem="M14-bq-m1p" secondAttribute="centerY" id="UZO-fj-qaS"/>
                     <constraint firstItem="VDP-yL-3UK" firstAttribute="centerY" secondItem="GHJ-od-hBI" secondAttribute="centerY" id="dXM-YP-gKl"/>
-                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="top" secondItem="NRW-Wn-zMN" secondAttribute="top" id="g8B-x9-rHZ"/>
+                    <constraint firstAttribute="trailing" secondItem="jVo-v5-Sb1" secondAttribute="trailing" constant="16" id="eKs-tO-xlb"/>
                     <constraint firstItem="7rZ-Os-z6e" firstAttribute="leading" secondItem="LaC-qf-mgk" secondAttribute="leadingMargin" constant="16" id="hZ0-pe-LV1"/>
-                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="trailing" secondItem="NRW-Wn-zMN" secondAttribute="trailing" id="jJ0-lh-hbx"/>
                     <constraint firstItem="oCc-ya-PPZ" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="jn3-Nz-nZD"/>
                     <constraint firstItem="5D2-xI-pGU" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="juZ-40-2hf"/>
+                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="top" secondItem="LaC-qf-mgk" secondAttribute="top" constant="12" id="mgm-uT-r1y"/>
                     <constraint firstItem="VDP-yL-3UK" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="pdm-1V-6Tx"/>
                     <constraint firstItem="VDP-yL-3UK" firstAttribute="width" secondItem="jVo-v5-Sb1" secondAttribute="width" id="sFU-ed-yJY"/>
                     <constraint firstItem="5D2-xI-pGU" firstAttribute="width" secondItem="jVo-v5-Sb1" secondAttribute="width" id="tQH-mj-mdN"/>

@@ -168,6 +168,11 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         }
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesEnded")
+        print(touches)
+    }
+    
     // MARK: - IBActions
     @IBAction func historyButtonAction(_ sender: UIButton) {
         viewModel.showHistory()
@@ -273,6 +278,12 @@ extension ProgramDetailViewController: ProgramPropertiesForTableViewCellViewProt
 }
 
 extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
+    func scrollEnable(_ isScrollEnable: Bool) {
+        if #available(iOS 11, *) {
+            tableView.isScrollEnabled = isScrollEnable
+        }
+    }
+    
     func showFullChartDidPressed() {
         viewModel.showFullChart()
     }

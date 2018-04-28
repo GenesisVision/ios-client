@@ -13,6 +13,7 @@ struct DetailChartTableViewCellViewModel {
     let chart: [TradeChart]
     let name: String
     let currencyValue: String?
+    let chartDurationType: ChartDurationType?
     weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
 }
 
@@ -31,15 +32,17 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
         cell.noDataLabel.isHidden = true
         if let first = chart.first?.profit, let last = chart.last?.profit {
             let value = last - first
-            let percent = first == 0 ? last * 100 : (value == 0 ? 0 : value > 0 ? (last - first / first * 100) : (first - last / first * 100))
             let upDownSign = value == 0 ? "" : value > 0 ? "↑ " : "↓ "
             
-            let text = upDownSign + value.rounded(withType: .gvt).toString() + " % (" + percent.rounded(toPlaces: 0).toString() + " %)"
+            var text = upDownSign + value.rounded(withType: .gvt).toString()
+            text += value > 0 ? " %" : ""
+//            let percent = first == 0 ? 0 : abs(100 / first * (first - last))
+//            text += percent > 0 ? " (" + percent.rounded(toPlaces: 0).toString() + " %)" : ""
             
             cell.changesLabel.text = text
             cell.changesLabel.textColor = value == 0 ? UIColor.Font.darkBlue : value > 0 ? UIColor.Font.green : UIColor.Font.red
         }
-        cell.chartView.setup(chartType: .detail, tradeChartDataSet: chart, name: name, currencyValue: currencyValue)
+        cell.chartView.setup(chartType: .detail, tradeChartDataSet: chart, name: name, currencyValue: currencyValue, chartDurationType: chartDurationType)
         cell.delegate = detailChartTableViewCellProtocol
     }
 }
