@@ -279,9 +279,7 @@ extension ProgramDetailViewController: ProgramPropertiesForTableViewCellViewProt
 
 extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
     func scrollEnable(_ isScrollEnable: Bool) {
-        if #available(iOS 11, *) {
-            tableView.isScrollEnabled = isScrollEnable
-        }
+        tableView.isScrollEnabled = isScrollEnable
     }
     
     func showFullChartDidPressed() {

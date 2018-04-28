@@ -103,12 +103,15 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
-        tabBarController?.delegate = self
-        
         view.backgroundColor = UIColor.Background.darkGray
         tableView.backgroundColor = UIColor.Background.darkGray
         
         refreshControl?.endRefreshing()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.delegate = self
     }
     
     // MARK: - Fetching
