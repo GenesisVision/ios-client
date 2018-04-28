@@ -311,6 +311,7 @@
                 <outlet property="chartView" destination="JvI-96-Xpf" id="ZE9-TV-gL2"/>
                 <outlet property="currencyLabel" destination="uZA-il-Spa" id="geE-yn-qHV"/>
                 <outlet property="favoriteButton" destination="Dy2-tB-PY6" id="lrb-dX-f3f"/>
+                <outlet property="favoriteStackView" destination="F7K-GW-LsK" id="nvK-Qh-Wdp"/>
                 <outlet property="managerNameLabel" destination="AcF-qQ-Zug" id="29G-ZE-9Ju"/>
                 <outlet property="noAvailableTokensLabel" destination="ios-Za-qwD" id="TPb-io-3yF"/>
                 <outlet property="noDataLabel" destination="mzn-bM-hio" id="wv0-a9-B3X"/>

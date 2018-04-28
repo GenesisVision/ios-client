@@ -48,6 +48,8 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
+        cell.favoriteStackView.isHidden = !AuthManager.isLogin()
+        
         if let availableInvestment = investmentProgram.availableInvestment {
             cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
         }

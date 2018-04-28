@@ -22,6 +22,7 @@ class TraderTableViewCell: PlateTableViewCell {
 
     @IBOutlet var favoriteButton: FavoriteButton!
     
+    @IBOutlet var favoriteStackView: UIView!
     @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
