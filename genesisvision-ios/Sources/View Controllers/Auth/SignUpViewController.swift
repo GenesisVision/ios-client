@@ -40,7 +40,7 @@ class SignUpViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var signUpButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

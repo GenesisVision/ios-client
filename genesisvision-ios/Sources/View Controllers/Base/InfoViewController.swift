@@ -13,7 +13,7 @@ class InfoViewController: BaseViewController {
     var viewModel: InfoViewModel?
     
     // MARK: - Buttons
-    @IBOutlet var okButton: UIButton!
+    @IBOutlet var okButton: ActionButton!
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var textLabel: UILabel!
     

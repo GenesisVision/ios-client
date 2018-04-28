@@ -61,7 +61,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             balanceValueLabel.shortView = true
             balanceValueLabel.currency = currency
             balanceValueLabel.shortView = true
-            avgProfitValueLabel.text = avgProfitValue.toString() + "%"
+            avgProfitValueLabel.text = avgProfitValue.toString()
             totalProfitValueLabel.amountValue = totalProfitValue
             
             investorsValueLabel.textColor = UIColor.Font.dark

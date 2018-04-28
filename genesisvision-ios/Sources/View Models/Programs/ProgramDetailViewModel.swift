@@ -44,10 +44,15 @@ final class ProgramDetailViewModel {
                                                              isWithdrawEnable: isWithdrawEnable,
                                                              hasNewRequests: hasNewRequests)
             }
+            
+            if let availableInvestment = investmentProgramDetails?.availableInvestment {
+                self.availableInvestment = availableInvestment
+            }
         }
     }
     
     var viewProperties: ProgramDetailViewProperties?
+    var availableInvestment: Double = 0.0
     
     var isFavorite: Bool {
         return investmentProgramDetails?.isFavorite ?? false
@@ -113,8 +118,8 @@ final class ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let investmentProgramId = investmentProgramId, let currency = investmentProgramDetails?.currency else { return }
-        router.show(routeType: .invest(investmentProgramId: investmentProgramId, currency: currency.rawValue))
+        guard let investmentProgramId = investmentProgramId, let currency = investmentProgramDetails?.currency, let availableToInvest = investmentProgramDetails?.availableInvestment else { return }
+        router.show(routeType: .invest(investmentProgramId: investmentProgramId, currency: currency.rawValue, availableToInvest: availableToInvest))
     }
     
     func withdraw() {

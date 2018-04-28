@@ -141,7 +141,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="70m-8P-mLb">
                                                         <rect key="frame" x="0.0" y="15" width="49" height="38"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-Re-0gb">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-Re-0gb" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="19" height="38"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="38"/>
                                                                 <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -278,7 +278,7 @@
                         </connections>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVo-v5-Sb1" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="470.5" y="148" width="20" height="20"/>
+                        <rect key="frame" x="514" y="27" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="dmZ-lT-5G8"/>
@@ -325,7 +325,6 @@
                 <constraints>
                     <constraint firstItem="oCc-ya-PPZ" firstAttribute="width" secondItem="jVo-v5-Sb1" secondAttribute="width" id="1b9-EV-tye"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7rZ-Os-z6e" secondAttribute="trailing" constant="16" id="2j2-df-LK8"/>
-                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="centerY" secondItem="h6w-Yu-rdi" secondAttribute="centerY" id="ClB-VT-mhs"/>
                     <constraint firstItem="b8S-JW-Qfi" firstAttribute="leading" secondItem="cUJ-C2-fRP" secondAttribute="trailing" constant="8" id="E2a-nB-6Oe"/>
                     <constraint firstItem="oCc-ya-PPZ" firstAttribute="centerY" secondItem="qaK-qS-dLc" secondAttribute="centerY" id="MUu-dA-Af8"/>
                     <constraint firstItem="7rZ-Os-z6e" firstAttribute="top" secondItem="LaC-qf-mgk" secondAttribute="topMargin" constant="16" id="NCm-54-AYr"/>
@@ -333,9 +332,10 @@
                     <constraint firstItem="b8S-JW-Qfi" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="NRs-Md-SuK"/>
                     <constraint firstItem="b8S-JW-Qfi" firstAttribute="width" secondItem="jVo-v5-Sb1" secondAttribute="width" id="Tan-iO-qLT"/>
                     <constraint firstItem="5D2-xI-pGU" firstAttribute="centerY" secondItem="M14-bq-m1p" secondAttribute="centerY" id="UZO-fj-qaS"/>
-                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="leading" secondItem="3DI-Vc-k6f" secondAttribute="trailing" constant="8" id="dJF-a3-yKv"/>
                     <constraint firstItem="VDP-yL-3UK" firstAttribute="centerY" secondItem="GHJ-od-hBI" secondAttribute="centerY" id="dXM-YP-gKl"/>
+                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="top" secondItem="NRW-Wn-zMN" secondAttribute="top" id="g8B-x9-rHZ"/>
                     <constraint firstItem="7rZ-Os-z6e" firstAttribute="leading" secondItem="LaC-qf-mgk" secondAttribute="leadingMargin" constant="16" id="hZ0-pe-LV1"/>
+                    <constraint firstItem="jVo-v5-Sb1" firstAttribute="trailing" secondItem="NRW-Wn-zMN" secondAttribute="trailing" id="jJ0-lh-hbx"/>
                     <constraint firstItem="oCc-ya-PPZ" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="jn3-Nz-nZD"/>
                     <constraint firstItem="5D2-xI-pGU" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="juZ-40-2hf"/>
                     <constraint firstItem="VDP-yL-3UK" firstAttribute="height" secondItem="jVo-v5-Sb1" secondAttribute="height" id="pdm-1V-6Tx"/>

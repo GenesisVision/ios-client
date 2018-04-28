@@ -9,15 +9,15 @@
 import Foundation
 
 enum ProgramDetailRouteType {
-    case invest(investmentProgramId: String, currency: String), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails), trades(investmentProgramId: String), fullChart(investmentProgramDetails: InvestmentProgramDetails)
+    case invest(investmentProgramId: String, currency: String, availableToInvest: Double), withdraw(investmentProgramId: String, investedTokens: Double, currency: String), history(investmentProgramId: String), requests(investmentProgramId: String), description(investmentProgramDetails: InvestmentProgramDetails), trades(investmentProgramId: String), fullChart(investmentProgramDetails: InvestmentProgramDetails)
 }
 
 class ProgramDetailRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramDetailRouteType) {
         switch routeType {
-        case .invest(let investmentProgramId, let currency):
-            invest(with: investmentProgramId, currency: currency)
+        case .invest(let investmentProgramId, let currency, let availableToInvest):
+            invest(with: investmentProgramId, currency: currency, availableToInvest: availableToInvest)
         case .withdraw(let investmentProgramId, let investedTokens, let currency):
             withdraw(with: investmentProgramId, investedTokens: investedTokens, currency: currency)
         case .history(let investmentProgramId):

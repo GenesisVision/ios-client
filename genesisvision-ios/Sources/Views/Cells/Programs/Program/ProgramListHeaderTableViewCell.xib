@@ -31,8 +31,8 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="erN-IL-Qd6">
                         <rect key="frame" x="16" y="16" width="288" height="184.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vCY-sb-zgR">
-                                <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vCY-sb-zgR">
+                                <rect key="frame" x="0.0" y="-44" width="288" height="44"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_program_list_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rWS-VD-skK">
                                         <rect key="frame" x="122" y="0.0" width="44" height="44"/>
@@ -47,17 +47,17 @@
                                 </constraints>
                             </stackView>
                             <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DEW-ZQ-LLZ">
-                                <rect key="frame" x="0.0" y="71" width="288" height="113.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="184.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="HFd-Wh-2mt">
-                                        <rect key="frame" x="130.5" y="0.0" width="27.5" height="57"/>
+                                        <rect key="frame" x="130.5" y="0.0" width="27.5" height="92.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="55"/>
                                         <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMS TO INVEST IN" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXd-jk-mq0">
-                                        <rect key="frame" x="59" y="57" width="170" height="56.5"/>
+                                        <rect key="frame" x="59" y="92.5" width="170" height="92"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

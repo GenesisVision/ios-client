@@ -26,7 +26,7 @@ class ProgramDetailTradesHeaderView: UITableViewHeaderFooterView {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Background.darkGray
     }
     
     // MARK: - Public methods

@@ -20,7 +20,7 @@ class ProgramDescriptionViewController: BaseViewController {
             descriptionTextView.backgroundColor = UIColor.NavBar.grayBackground
         }
     }
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var closeButton: ActionButton!
     
     // MARK: - View Model
     var viewModel: ProgramDescriptionViewModel! {

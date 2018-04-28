@@ -15,7 +15,7 @@ class DashboardDataProvider: DataProvider {
     
     // MARK: - Private methods
     private static func getDashboardProgram(with sorting: InvestorAPI.Sorting_apiInvestorDashboardGet, authorization: String, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorDashboardGet(authorization: authorization, sorting: sorting) { (dashboard, error) in
+        InvestorAPI.apiInvestorDashboardGet(authorization: authorization, sorting: sorting, equityChartLength: Constants.Api.equityChartLength) { (dashboard, error) in
             DataProvider().responseHandler(dashboard, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

@@ -14,12 +14,15 @@ final class ProgramInvestViewModel {
     var investmentProgramId: String?
     
     private var rate: Double = 0.0
-    private var balance: Double = 0.0 {
+    private var availableToInvest: Double = 0.0
+    
+    private var minAvailableToInvest: Double = 0.0 {
         didSet {
-            self.exchangedBalance = balance * self.rate
+            self.exchangedMinAvailableToInvest = minAvailableToInvest * self.rate
         }
     }
-    private var exchangedBalance: Double = 0.0
+    private var exchangedMinAvailableToInvest: Double = 0.0
+    
     var currency: String = "GVT"
     
     private weak var programDetailProtocol: ProgramDetailProtocol?
@@ -27,27 +30,35 @@ final class ProgramInvestViewModel {
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, currency: String, programDetailProtocol: ProgramDetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, currency: String, availableToInvest: Double, programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.currency = currency
         self.programDetailProtocol = programDetailProtocol
+        self.availableToInvest = availableToInvest
     }
     
     // MARK: - Public methods
-    func getBalance(completion: @escaping (_ balance: Double, _ exchangedBalance: Double) -> Void, completionError: @escaping CompletionBlock) {
+    func getAvailableToInvest(completion: @escaping (_ availableToInvest: Double, _ exchangedAvailableToInvest: Double) -> Void, completionError: @escaping CompletionBlock) {
         let toCurrency = RequestRate.To(rawValue: self.currency)
         
         RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
-            if viewModel != nil, let rate = viewModel?.rate {
-                self.rate = rate
+            guard viewModel != nil, let rate = viewModel?.rate else {
+                return completionError(.failure(errorType: .apiError(message: nil)))
             }
             
-            AuthManager.getBalance(completion: { [weak self] (value) in
-                self?.balance = value
-                if let balance = self?.balance, let exchangedBalance = self?.exchangedBalance {
-                    completion(balance, exchangedBalance)
+            self.rate = rate
+            
+            AuthManager.getBalance(completion: { [weak self] (balance) in
+                guard let availableToInvest = self?.availableToInvest  else {
+                    let exchangedMinAvailableToInvest = balance * rate
+                    return completion(balance, exchangedMinAvailableToInvest)
                 }
+                
+                let minAvailableToInvest = min(balance, availableToInvest)
+                let exchangedMinAvailableToInvest = minAvailableToInvest * rate
+                
+                completion(minAvailableToInvest, exchangedMinAvailableToInvest)
                 }, completionError: completionError)
         }, errorCompletion: completionError)
     }

@@ -31,8 +31,8 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="E7a-wh-nA6">
                         <rect key="frame" x="16" y="16" width="288" height="188.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vNr-3h-jIw">
-                                <rect key="frame" x="0.0" y="0.0" width="288" height="44.5"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vNr-3h-jIw">
+                                <rect key="frame" x="0.0" y="-44.5" width="288" height="44.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_dashboard_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jJN-aL-dt0">
                                         <rect key="frame" x="122" y="0.0" width="44" height="44.5"/>
@@ -46,10 +46,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="K0K-ed-FL5">
-                                <rect key="frame" x="0.0" y="71.5" width="288" height="117"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="188.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FS8-Pk-FqC">
-                                        <rect key="frame" x="0.0" y="8.5" width="144" height="100"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="144" height="100"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zo9-I0-13v" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="56" y="0.0" width="32" height="18"/>
@@ -80,7 +80,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="RLg-YI-kVG">
-                                        <rect key="frame" x="144" y="8.5" width="144" height="100"/>
+                                        <rect key="frame" x="144" y="44.5" width="144" height="100"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCY-pN-nN6" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="56" y="0.0" width="32" height="18"/>
@@ -115,7 +115,7 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SmH-r3-7fb" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="119.5" y="178.5" width="20" height="20"/>
+                        <rect key="frame" x="119.5" y="143" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="c3I-fP-v9l"/>
@@ -127,7 +127,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PK-jX-FDX" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="271" y="178.5" width="20" height="20"/>
+                        <rect key="frame" x="271" y="143" width="20" height="20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                         <state key="normal" title="i">

@@ -32,7 +32,7 @@ class ProgramWithdrawViewController: BaseViewController {
     @IBOutlet var amountCurrencyLabel: UILabel!
     
     // MARK: - Buttons
-    @IBOutlet var withdrawButton: UIButton!
+    @IBOutlet var withdrawButton: ActionButton!
     
     // MARK: - Views
     @IBOutlet var numpadView: NumpadView! {

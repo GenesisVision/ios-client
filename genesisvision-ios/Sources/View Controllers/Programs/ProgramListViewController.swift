@@ -18,7 +18,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     var viewModel: InvestmentProgramListViewModel!
     
     // MARK: - Buttons
-    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var signInButton: ActionButton!
     
     // MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -95,7 +95,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
+
+            UIView.setAnimationsEnabled(false)
             self.tableView.reloadData()
+            UIView.setAnimationsEnabled(true)
         }
     }
     

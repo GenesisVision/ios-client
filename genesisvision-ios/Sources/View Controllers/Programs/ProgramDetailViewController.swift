@@ -29,17 +29,17 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Buttons
-    @IBOutlet var investButton: UIButton! {
+    @IBOutlet var investButton: ActionButton! {
         didSet {
             investButton.isHidden = true
         }
     }
-    @IBOutlet var withdrawButton: UIButton! {
+    @IBOutlet var withdrawButton: ActionButton! {
         didSet {
             withdrawButton.isHidden = true
         }
     }
-    @IBOutlet var requestsButton: UIButton! {
+    @IBOutlet var requestsButton: ActionButton! {
         didSet {
             requestsButton.isHidden = true
         }
@@ -100,6 +100,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         requestsButton.isHidden = !viewProperties.hasNewRequests
         
         gradientView.isHidden = false
+        buttonsView.isHidden = false
         
         showInfiniteIndicator(value: false)
         
@@ -108,6 +109,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         } else {
             tableView.contentInset.bottom = 0.0
             gradientView.isHidden = true
+            buttonsView.isHidden = true
         }
         
         guard AuthManager.isLogin() else { return }
@@ -192,7 +194,10 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     @IBAction func investButtonAction(_ sender: UIButton) {
-        viewModel.invest()
+        viewModel.availableInvestment > 0
+            ? viewModel.invest()
+            : showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
+        
     }
     
     @IBAction func withdrawButtonAction(_ sender: UIButton) {

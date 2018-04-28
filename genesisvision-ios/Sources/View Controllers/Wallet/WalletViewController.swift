@@ -185,11 +185,11 @@ extension WalletViewController: ReloadDataProtocol {
 
 extension WalletViewController: WalletHeaderTableViewCellProtocol {
     func depositProgramDidPress() {
-        showAlertWithTitle(title: nil, message: "Coming soon", actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
+        showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
     }
     
     func withdrawProgramDidPress() {
-        showAlertWithTitle(title: nil, message: "Coming soon", actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
+        showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
     }
     
     func updateBalanceDidPress() {

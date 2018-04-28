@@ -27,8 +27,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="421" height="97.666666666666671"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-i5-za2">
-                        <rect key="frame" x="16" y="16" width="389" height="65.666666666666671"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-i5-za2">
+                        <rect key="frame" x="20" y="16" width="381" height="65.666666666666671"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_wallet_transaction_icon" translatesAutoresizingMaskIntoConstraints="NO" id="M4t-3c-09U">
                                 <rect key="frame" x="0.0" y="25.333333333333336" width="13" height="15"/>
@@ -38,7 +38,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eKi-gR-DOq">
-                                <rect key="frame" x="33" y="6" width="37.333333333333343" height="54"/>
+                                <rect key="frame" x="29.000000000000004" y="6" width="37.333333333333343" height="54"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="65o-Vp-HRO">
                                         <rect key="frame" x="0.0" y="0.0" width="37.333333333333336" height="36"/>
@@ -66,7 +66,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Oot-K8-TEM">
-                                <rect key="frame" x="90.333333333333343" y="13" width="298.66666666666663" height="40"/>
+                                <rect key="frame" x="82.333333333333343" y="13" width="298.66666666666663" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akT-vX-0Jg">
                                         <rect key="frame" x="0.0" y="0.0" width="298.66666666666669" height="20"/>
@@ -87,9 +87,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="y8d-i5-za2" secondAttribute="bottom" constant="16" id="5Pa-g5-5ik"/>
-                    <constraint firstAttribute="trailing" secondItem="y8d-i5-za2" secondAttribute="trailing" constant="16" id="sB0-0l-rpB"/>
+                    <constraint firstAttribute="trailing" secondItem="y8d-i5-za2" secondAttribute="trailing" constant="20" id="sB0-0l-rpB"/>
                     <constraint firstItem="y8d-i5-za2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="w9a-bK-W0R"/>
-                    <constraint firstItem="y8d-i5-za2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xYv-BT-UT5"/>
+                    <constraint firstItem="y8d-i5-za2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xYv-BT-UT5"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

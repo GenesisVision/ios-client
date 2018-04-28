@@ -25,8 +25,9 @@ enum TabsType: Int {
 
 class Router {
     // MARK: - Variables
-    private var tournamentViewController: TournamentListViewController!
-    private var programsViewController: ProgramListViewController!
+    var tournamentViewController: TournamentListViewController!
+    var dashboardViewController: DashboardViewController!
+    var programsViewController: ProgramListViewController!
     
     var parentRouter: Router?
     var childRouters: [Router] = []
@@ -42,6 +43,8 @@ class Router {
         var navigationController = BaseNavigationController()
         
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
+            self.dashboardViewController = dashboardViewController
+            
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
@@ -91,6 +94,7 @@ class Router {
             self.tournamentViewController = parentRouter?.tournamentViewController
         } else {
             self.programsViewController = parentRouter?.programsViewController
+            self.dashboardViewController = parentRouter?.dashboardViewController
         }
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
@@ -99,10 +103,10 @@ class Router {
     // MARK: - Private methods
     private func createProgramsNavigationController() {
         guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
-        programsViewController = viewController
+        self.programsViewController = viewController
         let router = InvestmentProgramListRouter(parentRouter: self)
         childRouters.append(router)
-        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: viewController)
+        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
     }
     
     private func createTournamentNavigationController() {
@@ -247,12 +251,12 @@ extension Router {
         return viewController
     }
     
-    func invest(with investmentProgramId: String, currency: String) {
+    func invest(with investmentProgramId: String, currency: String, availableToInvest: Double) {
         guard let vc = currentController() else { return }
         
         guard let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
+        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, currency: currency, availableToInvest: availableToInvest, programDetailProtocol: vc as? ProgramDetailProtocol)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

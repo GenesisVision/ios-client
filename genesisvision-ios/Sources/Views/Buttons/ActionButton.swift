@@ -37,4 +37,10 @@ class ActionButton: UIButton {
         layer.shadowRadius = 6.0
         layer.masksToBounds = true
     }
+    
+    
+    func setEnabled(_ value: Bool) {
+        isUserInteractionEnabled = value
+        backgroundColor = value ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
+    }
 }

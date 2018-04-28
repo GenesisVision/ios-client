@@ -284,7 +284,7 @@ extension DashboardViewModel {
             let totalCount = dashboard.investmentPrograms?.count ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self, delegate: self?.router.currentController() as? ProgramDetailViewControllerProtocol)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self, delegate: self?.router.dashboardViewController)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             

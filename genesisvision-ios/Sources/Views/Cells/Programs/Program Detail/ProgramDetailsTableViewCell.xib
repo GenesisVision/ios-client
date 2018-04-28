@@ -64,12 +64,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5OU-tr-WDp">
                                         <rect key="frame" x="63" y="66.5" width="55" height="36"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="1%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J2B-oQ-gIQ">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Wxt-Vh-GtQ">
                                                 <rect key="frame" x="14" y="0.0" width="27" height="25"/>
-                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
-                                                <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J2B-oQ-gIQ" customClass="BalanceLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="12.5" height="25"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lJK-kx-CfC">
+                                                        <rect key="frame" x="12.5" y="0.0" width="14.5" height="25"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="25"/>
+                                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AVG. PROFIT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6n-jq-AlM">
                                                 <rect key="frame" x="2.5" y="27" width="50" height="9"/>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="9"/>
@@ -128,8 +139,6 @@
                                     <constraint firstItem="Cz1-Rw-rhT" firstAttribute="width" secondItem="AQ0-MD-x6F" secondAttribute="width" id="7F7-Ch-xzv"/>
                                     <constraint firstItem="9jk-hE-FOq" firstAttribute="height" secondItem="zdq-Eh-Vxs" secondAttribute="height" id="Loq-Hi-jKt"/>
                                     <constraint firstItem="5OU-tr-WDp" firstAttribute="width" secondItem="dqX-Hk-ZBQ" secondAttribute="width" id="eg1-60-m77"/>
-                                    <constraint firstItem="zdq-Eh-Vxs" firstAttribute="height" secondItem="J2B-oQ-gIQ" secondAttribute="height" id="hq9-Eu-Qjg"/>
-                                    <constraint firstItem="J2B-oQ-gIQ" firstAttribute="height" secondItem="tTb-dl-S9g" secondAttribute="height" id="t30-zP-96e"/>
                                     <constraint firstItem="AQ0-MD-x6F" firstAttribute="width" secondItem="5OU-tr-WDp" secondAttribute="width" id="xqE-SR-TYU"/>
                                 </constraints>
                                 <connections>

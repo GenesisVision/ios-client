@@ -127,7 +127,7 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         feeSuccessLabel.text = feeSuccess.rounded(withType: .other).toString()
         feeManagementLabel.text = feeManagement.rounded(withType: .other).toString()
         tradesLabel.text = trades.toString()
-        let managersShare = (ownBalance / balance * 100).rounded(withType: .other)
+        let managersShare = balance == 0 ? 0 : (ownBalance / balance * 100).rounded(withType: .other)
         managersShareLabel.text = managersShare.toString()
     }
     

@@ -33,7 +33,7 @@ class SignInViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var signInButton: ActionButton!
     @IBOutlet var forgotPasswordButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
     

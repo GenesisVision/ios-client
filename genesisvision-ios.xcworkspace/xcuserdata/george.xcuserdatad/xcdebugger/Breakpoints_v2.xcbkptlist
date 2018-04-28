@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Models/Programs/ProgramInvestViewModel.swift"
-            timestampString = "546461314.412897"
+            timestampString = "546615879.7070791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "goToBack()"
             landmarkType = "7">
          </BreakpointContent>
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Views/Cells/Programs/Program/TraderTableViewCell.swift"
-            timestampString = "546546318.846909"
+            filePath = "genesisvision-ios/Sources/View Models/Programs/ProgramInvestViewModel.swift"
+            timestampString = "546615879.707267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "favoriteButtonAction(_:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getAvailableToInvest(completion:completionError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Programs/ProgramListViewController.swift"
-            timestampString = "546546318.847306"
+            filePath = "genesisvision-ios/Sources/View Models/Programs/ProgramInvestViewModel.swift"
+            timestampString = "546615879.707319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "programDetailDidChangeFavoriteState(with:value:request:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getAvailableToInvest(completion:completionError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Programs/InvestmentProgramListViewModel.swift"
-            timestampString = "546546318.847365"
+            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardViewModel.swift"
+            timestampString = "546615879.707649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "changeFavorite(value:investmentProgramId:request:completion:)"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "fetch(_:completionError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

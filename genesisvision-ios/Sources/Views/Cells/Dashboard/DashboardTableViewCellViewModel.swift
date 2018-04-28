@@ -24,11 +24,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = investmentProgram.chart, let title = investmentProgram.title, chart.count > 1 {
+        if let chart = investmentProgram.equityChart, let title = investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue, chartDurationType: .day)
+            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue, chartDurationType: .day)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8

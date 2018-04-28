@@ -34,6 +34,10 @@ extension String {
                 static let cancelButtonText = String.Alerts.okButtonText
             }
         }
+        
+        static var noAvailableTokens = "There are currently no tokens available. Please check this program later - someone can withdraw their funds from this program."
+        static var comingSoon = "Coming soon"
+        
     }
     
     struct Titles {

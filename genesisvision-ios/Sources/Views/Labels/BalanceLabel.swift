@@ -29,7 +29,7 @@ class BalanceLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        font = UIFont.getFont(.light, size: 25)
+//        font = UIFont.getFont(.light, size: 25)
         
         textColor = UIColor.Font.dark
         

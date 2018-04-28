@@ -37,6 +37,8 @@ class TraderTableViewCell: PlateTableViewCell {
         }
     }
     
+    @IBOutlet var noAvailableTokensLabel: UILabel!
+    
     @IBOutlet var programTitleLabel: UILabel!
     @IBOutlet var managerNameLabel: UILabel!
     

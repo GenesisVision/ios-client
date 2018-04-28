@@ -48,6 +48,10 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
+        if let availableInvestment = investmentProgram.availableInvestment {
+            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
+        }
+        
         if let currency = investmentProgram.currency {
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }

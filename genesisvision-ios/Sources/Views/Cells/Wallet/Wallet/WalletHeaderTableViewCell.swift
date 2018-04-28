@@ -35,8 +35,8 @@ class WalletHeaderTableViewCell: UITableViewCell {
     }
     
     // MARK: - Buttons
-    @IBOutlet weak var depositButton: UIButton!
-    @IBOutlet weak var withdrawButton: UIButton!
+    @IBOutlet weak var depositButton: ActionButton!
+    @IBOutlet weak var withdrawButton: ActionButton!
     @IBOutlet weak var updateBalanceButton: UIButton!
     
     // MARK: - Lifecycle

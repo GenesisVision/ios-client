@@ -20,17 +20,17 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet var balanceLabel: UILabel! {
+    @IBOutlet var availableToInvestLabel: UILabel! {
         didSet {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllButtonAction))
             tapGesture.numberOfTapsRequired = 1
-            balanceLabel.isUserInteractionEnabled = true
-            balanceLabel.addGestureRecognizer(tapGesture)
+            availableToInvestLabel.isUserInteractionEnabled = true
+            availableToInvestLabel.addGestureRecognizer(tapGesture)
         }
     }
     
     @IBOutlet var balanceCurrencyLabel: UILabel!
-    @IBOutlet var exchangedBalanceLabel: UILabel!
+    @IBOutlet var exchangedAvailableToInvestLabel: UILabel!
     @IBOutlet var exchangedBalanceCurrencyLabel: UILabel!
     
     @IBOutlet var amountLabel: AmountLabel! {
@@ -43,17 +43,17 @@ class ProgramInvestViewController: BaseViewController {
     @IBOutlet var exchangedAmountCurrencyLabel: UILabel!
     
     // MARK: - Buttons
-    @IBOutlet var investButton: UIButton!
+    @IBOutlet var investButton: ActionButton!
     
     // MARK: - Variables
     var balance: Double = 0.0 {
         didSet {
-            self.balanceLabel.text = balance.toString()
+            self.availableToInvestLabel.text = balance.toString()
         }
     }
     var exchangedBalance: Double = 0.0 {
         didSet {
-            self.exchangedBalanceLabel.text = exchangedBalance.toString()
+            self.exchangedAvailableToInvestLabel.text = exchangedBalance.toString()
         }
     }
     
@@ -98,11 +98,16 @@ class ProgramInvestViewController: BaseViewController {
         setupNavigationBar(with: .primary)
         
         investButton(enable: false)
-
-        viewModel.getBalance(completion: { [weak self] (balance, exchangedBalance) in
+        showProgressHUD()
+        
+        viewModel.getAvailableToInvest(completion: { [weak self] (balance, exchangedBalance) in
+            self?.hideAll()
             self?.balance = balance
             self?.exchangedBalance = exchangedBalance
-        }) { (result) in
+            self?.investButton(enable: true)
+        }) { [weak self] (result) in
+            self?.hideAll()
+            
             switch result {
             case .success:
                 break
@@ -118,8 +123,7 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func investButton(enable: Bool) {
-        investButton.isUserInteractionEnabled = enable
-        investButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
+        investButton.setEnabled(enable)
     }
     
     private func investMethod() {

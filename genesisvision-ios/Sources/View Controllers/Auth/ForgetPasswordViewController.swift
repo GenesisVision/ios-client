@@ -24,7 +24,7 @@ class ForgotPasswordViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var resetButtonButton: UIButton!
+    @IBOutlet var resetButtonButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
