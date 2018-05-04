@@ -75,8 +75,8 @@ class PlateTableViewCell: UITableViewCell {
 
     layer.insertSublayer(shape, at: 0)
 
-    backgroundColor = UIColor.clear
-    contentView.backgroundColor = UIColor.clear
+    backgroundColor = .clear
+    contentView.backgroundColor = .clear
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {

@@ -41,9 +41,9 @@ class ProgramDetailsForTableViewCellView: UIStackView {
         avgProfitTitleLabel.text = avgProfitTitle
         totalProfitTitleLabel.text = totalProfitTitle
         
-        investorsTitleLabel.textColor = UIColor.Font.darkBlue
-        balanceTitleLabel.textColor = UIColor.Font.darkBlue
-        avgProfitTitleLabel.textColor = UIColor.Font.darkBlue
+        investorsTitleLabel.textColor = UIColor.Cell.title
+        balanceTitleLabel.textColor = UIColor.Cell.title
+        avgProfitTitleLabel.textColor = UIColor.Cell.title
         
         backgroundColor = .clear
         
@@ -61,16 +61,16 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             balanceValueLabel.shortView = true
             balanceValueLabel.currency = currency
             balanceValueLabel.shortView = true
-            avgProfitValueLabel.text = avgProfitValue.toString()
+            avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.amountValue = totalProfitValue
             
-            investorsValueLabel.textColor = UIColor.Font.dark
-            balanceValueLabel.textColor = UIColor.Font.dark
-            avgProfitValueLabel.textColor = UIColor.Font.dark
+            investorsValueLabel.textColor = UIColor.Cell.title
+            balanceValueLabel.textColor = UIColor.Cell.title
+            avgProfitValueLabel.textColor = UIColor.Cell.title
             
-            totalProfitValueLabel.textColor = totalProfit >= 0 ? UIColor.Font.dark : UIColor.Font.red
+            totalProfitValueLabel.textColor = totalProfit >= 0 ? UIColor.Cell.title : UIColor.Font.red
             totalProfitTitleLabel.text = totalProfit >= 0 ? "TOTAL PROFIT" : "LOSS"
-            totalProfitTitleLabel.textColor = totalProfit >= 0 ? UIColor.Font.darkBlue : UIColor.Font.red
+            totalProfitTitleLabel.textColor = totalProfit >= 0 ? UIColor.Cell.title : UIColor.Font.red
             
             balanceCurrencyLabel.text = currency
             profitCurrencyLabel.text = Constants.currency

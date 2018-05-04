@@ -15,12 +15,14 @@ class FilterAmountTableViewCell: PlateTableViewCell {
     @IBOutlet var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.bold, size: 18)
+            titleLabel.textColor = UIColor.Cell.title
         }
     }
     
     @IBOutlet var subtitleLabel: UILabel! {
         didSet {
             subtitleLabel.font = UIFont.getFont(.regular, size: 14)
+            subtitleLabel.textColor = UIColor.Cell.subtitle
         }
     }
     
@@ -61,7 +63,6 @@ class FilterAmountTableViewCell: PlateTableViewCell {
         sliderView.maxLabelAccessibilityHint = "max"
         sliderView.maxLabelAccessibilityLabel = "max"
         
-        contentView.backgroundColor = UIColor.Background.main
         selectionStyle = .none
     }
 }

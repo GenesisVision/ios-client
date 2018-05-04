@@ -59,7 +59,6 @@ class DetailChartTableViewCell: PlateTableViewCell {
         didSet {
             chartView.delegate = self
             chartView.chartViewProtocol = self
-            chartView.backgroundColor = .clear
             chartView.isUserInteractionEnabled = true
         }
     }
@@ -89,9 +88,9 @@ class DetailChartTableViewCell: PlateTableViewCell {
 
         selectionStyle = .none
         
-        circleView.backgroundColor = UIColor.Font.white
+        circleView.backgroundColor = UIColor.ChartMarker.text
         circleView.layer.cornerRadius = circleView.bounds.height / 2
-        circleView.layer.borderColor = UIColor.Font.dark.cgColor
+        circleView.layer.borderColor = UIColor.ChartMarker.bg.cgColor
         circleView.layer.borderWidth = 0.5
         circleView.clipsToBounds = true
         chartView.addSubview(circleView)
@@ -148,7 +147,6 @@ extension DetailChartTableViewCell: ChartViewDelegate {
         
         markerView.frame = CGRect(x: x, y: 12, width: 90, height: 36)
         
-        markerView.contentView.backgroundColor = UIColor.Font.dark
         markerView.valueLabel.text = entry.y.rounded(withType: .gvt).toString() + " %"
         markerView.dateLabel.text = dateString
         

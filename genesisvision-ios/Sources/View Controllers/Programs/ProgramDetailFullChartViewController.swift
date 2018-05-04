@@ -54,7 +54,6 @@ class ProgramDetailFullChartViewController: BaseViewController {
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = true
-            chartView.backgroundColor = UIColor.Background.main
             chartView.delegate = self
         }
     }
@@ -81,8 +80,6 @@ class ProgramDetailFullChartViewController: BaseViewController {
         }
         
         currencyValueLabel.text = viewModel.getCurrencyValue()
-        
-        view.backgroundColor = UIColor.Font.dark
         
         chartView.setup(chartType: .full, chartDataSet: viewModel.investmentProgramDetails?.chart, name: "Full Chart", currencyValue: viewModel.investmentProgramDetails?.currency?.rawValue)
     }

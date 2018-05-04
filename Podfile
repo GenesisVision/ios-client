@@ -19,4 +19,5 @@ target 'genesisvision-ios' do
     
     pod 'ReachabilitySwift'
     pod 'NotificationBannerSwift'
+    pod 'SimulatorStatusMagic', :configurations => ['debug investor', 'debug manager', 'debug tournament']
 end

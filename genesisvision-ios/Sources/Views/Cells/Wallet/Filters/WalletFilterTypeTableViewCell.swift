@@ -28,7 +28,7 @@ class WalletFilterTypeTableViewCell: PlateTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.darkGray
+        contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
     

@@ -25,7 +25,7 @@ final class ProgramDetailViewModel {
     }
 
     // MARK: - Variables
-    var title: String = "Program Detail"
+    var title: String = "Program Details"
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?

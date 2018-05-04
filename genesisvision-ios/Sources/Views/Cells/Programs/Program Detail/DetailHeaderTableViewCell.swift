@@ -30,7 +30,7 @@ class DetailHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        contentView.backgroundColor = UIColor.NavBar.grayBackground
+        contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
     

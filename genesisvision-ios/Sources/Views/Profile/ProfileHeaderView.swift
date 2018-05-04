@@ -33,7 +33,7 @@ class ProfileHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.Background.darkGray
+        backgroundColor = UIColor.BaseView.bg
     }
     
     // MARK: - Private methdos

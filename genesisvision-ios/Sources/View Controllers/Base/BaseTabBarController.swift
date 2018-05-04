@@ -14,7 +14,7 @@ class BaseTabBarController: UITabBarController {
         super.viewDidLoad()
         
         tabBar.isTranslucent = false
-        tabBar.barTintColor = UIColor.TabBar.background
+        tabBar.barTintColor = UIColor.TabBar.bg
     }
 
     override func viewWillAppear(_ animated: Bool) {

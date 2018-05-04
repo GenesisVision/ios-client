@@ -13,13 +13,25 @@ class DashboardHeaderTableViewCell: UITableViewCell {
     // MARK: - Labels
     @IBOutlet var profitFromProgramsLabel: BalanceLabel! {
         didSet {
-            profitFromProgramsLabel.textColor = UIColor.Header.darkTitle
+            profitFromProgramsLabel.textColor = UIColor.Header.title
+        }
+    }
+    
+    @IBOutlet var profitFromProgramsTitleLabel: UILabel! {
+        didSet {
+            profitFromProgramsTitleLabel.textColor = UIColor.Header.subtitle
         }
     }
     
     @IBOutlet var investedAmountLabel: BalanceLabel! {
         didSet {
-            investedAmountLabel.textColor = UIColor.Header.darkTitle
+            investedAmountLabel.textColor = UIColor.Header.title
+        }
+    }
+    
+    @IBOutlet var investedAmountTitleLabel: UILabel! {
+        didSet {
+            investedAmountTitleLabel.textColor = UIColor.Header.subtitle
         }
     }
     
@@ -39,7 +51,7 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        contentView.backgroundColor = UIColor.Background.darkGray
+        contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
     

@@ -11,9 +11,21 @@ import UIKit.UIView
 class MarkerView: UIView {
     var cornerSize: CGFloat = 6.0
     
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet var contentView: UIView! {
+        didSet {
+            contentView.backgroundColor = UIColor.ChartMarker.bg
+        }
+    }
+    @IBOutlet weak var valueLabel: UILabel! {
+        didSet {
+            valueLabel.textColor = UIColor.ChartMarker.text
+        }
+    }
+    @IBOutlet weak var dateLabel: UILabel! {
+        didSet {
+            dateLabel.textColor = UIColor.ChartMarker.text
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

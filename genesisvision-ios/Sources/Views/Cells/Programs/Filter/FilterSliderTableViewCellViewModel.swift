@@ -32,8 +32,7 @@ extension FilterSliderTableViewCellViewModel: CellViewModel {
     func setup(on cell: FilterAmountTableViewCell) {
         cell.titleLabel.text = filterTitles.title
         cell.subtitleLabel.text = filterTitles.subtitle
-        cell.titleLabel.textColor = UIColor.Slider.title
-        cell.subtitleLabel.textColor = UIColor.Slider.subTitle
+        
         let min = minValue ?? 0
         let max = maxValue ?? 100
         cell.sliderView.minValue = Float(min)

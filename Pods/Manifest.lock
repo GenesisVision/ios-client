@@ -44,6 +44,7 @@ PODS:
   - PKHUD (5.0.0)
   - Protobuf (3.5.0)
   - ReachabilitySwift (4.1.0)
+  - SimulatorStatusMagic (2.1)
   - SnapKit (4.0.0)
   - TTRangeSlider (1.0.5)
 
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - NotificationBannerSwift
   - PKHUD
   - ReachabilitySwift
+  - SimulatorStatusMagic
   - TTRangeSlider
 
 SPEC CHECKSUMS:
@@ -78,9 +80,10 @@ SPEC CHECKSUMS:
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: 591556abcc838b4435ad628a4edf1177cd78ffb6
+PODFILE CHECKSUM: c494dd772d2f6d892e737df2b8c96b24c0bc6c54
 
 COCOAPODS: 1.4.0

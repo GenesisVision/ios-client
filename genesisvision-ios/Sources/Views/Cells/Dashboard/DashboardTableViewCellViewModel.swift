@@ -51,7 +51,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         if let profitFromProgram = investmentProgram.profitFromProgram {
             cell.profitValueLabel.text = profitFromProgram.toString()
-            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Font.dark : UIColor.Font.red
+            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Cell.title : UIColor.Font.red
         }
         
         cell.profitTitleLabel.text = "MY PROFIT"

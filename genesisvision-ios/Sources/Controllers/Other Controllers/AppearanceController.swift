@@ -8,37 +8,31 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import SimulatorStatusMagic
 
-enum ColorStyle {
+enum ThemeType {
+    case `default`, dark
+}
+
+enum NavBarType {
     case white, primary, gray
 }
 
-struct StyleColors {
-    var tintColor = UIColor.NavBar.tint
-    var backgroundColor = UIColor.NavBar.background
-    var textColor = UIColor.Font.dark
-    var subtitleColor = UIColor.Font.medium
-    
-    init(with style: ColorStyle = .white) {
-        switch style {
-        case .primary:
-            self.tintColor = UIColor.Font.white
-            self.backgroundColor = UIColor.primary
-            self.textColor = UIColor.Font.white
-            self.subtitleColor = UIColor.Font.white.withAlphaComponent(0.5)
-        case .gray:
-            self.backgroundColor = UIColor.NavBar.grayBackground
-            self.subtitleColor = UIColor.Font.dark.withAlphaComponent(0.7)
-        default:
-            self.tintColor = UIColor.NavBar.tint
-            self.backgroundColor = UIColor.NavBar.background
-            self.textColor = UIColor.Font.dark
-        }
-    }
+struct NavBarColors {
+    var tintColor: UIColor
+    var backgroundColor: UIColor
+    var textColor: UIColor
+    var subtitleColor: UIColor
 }
 
 struct AppearanceController {
+    static var theme: ThemeType = .default
+    
     static func setupAppearance() {
+        if isDebug {
+            SDStatusBarManager.sharedInstance().enableOverrides()
+        }
+        
         setupNavigationBar()
         setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
@@ -50,8 +44,8 @@ struct AppearanceController {
     }
     
     // NavigationBar
-    static func setupNavigationBar(with style: ColorStyle = .gray) {
-        let colors = StyleColors(with: style)
+    static func setupNavigationBar(with type: NavBarType = .gray) {
+        let colors = UIColor.NavBar.colorScheme(with: type)
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
                                                             NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
@@ -76,7 +70,7 @@ struct AppearanceController {
                                                           NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .selected)
 
         UITabBar.appearance().tintColor = UIColor.TabBar.tint
-        UITabBar.appearance().backgroundColor = UIColor.TabBar.background
+        UITabBar.appearance().backgroundColor = UIColor.TabBar.bg
     }
     
     // MARK: - IQKeyboardManager
@@ -130,8 +124,8 @@ struct AppearanceController {
             PlateTableViewCellAppearance(cornerRadius: 6,
                                          horizontalMarginValue: 8,
                                          verticalMarginValues: 4,
-                                         backgroundColor: UIColor.Font.white,
-                                         selectedBackgroundColor: UIColor.Font.light)
+                                         backgroundColor: UIColor.Cell.bg,
+                                         selectedBackgroundColor: UIColor.Background.gray)
     }
     
     // MARK: - ShadowView

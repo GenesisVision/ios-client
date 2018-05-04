@@ -20,7 +20,7 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
     
     weak var delegate: ProgramPropertiesForTableViewCellViewProtocol?
     
-    // MARK: - Outlets
+    // MARK: - Tooltips
     @IBOutlet var periodDurationTooltip: TooltipButton! {
         didSet {
             periodDurationTooltip.tooltipText = String.Tooltitps.periodDuration
@@ -49,17 +49,39 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         }
     }
     
-    
-    @IBOutlet var periodDurationLabel: UILabel!
+    // MARK: - UILabels
+    @IBOutlet var periodDurationLabel: UILabel! {
+        didSet {
+            periodDurationLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet var periodDurationTitleLabel: UILabel! {
         didSet {
+            periodDurationTitleLabel.textColor = UIColor.Cell.title
             periodDurationTitleLabel.text = "days"
         }
     }
+    @IBOutlet var periodDurationSubtitleLabel: UILabel! {
+        didSet {
+            periodDurationSubtitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
-    @IBOutlet var periodLeftValueLabel: UILabel!
-    @IBOutlet var periodLeftTimeLabel: UILabel!
-    @IBOutlet var periodLeftTitleLabel: UILabel!
+    @IBOutlet var periodLeftValueLabel: UILabel! {
+        didSet {
+            periodLeftValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var periodLeftTimeLabel: UILabel! {
+        didSet {
+            periodLeftTimeLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var periodLeftTitleLabel: UILabel! {
+        didSet {
+            periodLeftTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
     @IBOutlet var untilPeriodImageView: UIImageView! {
         didSet {
@@ -75,9 +97,36 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
         }
     }
     
-    @IBOutlet var feeSuccessLabel: UILabel!
-    @IBOutlet var feeManagementLabel: UILabel!
-    
+    @IBOutlet var feeSuccessLabel: UILabel! {
+        didSet {
+            feeSuccessLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var feeSuccessSubtitleLabel: UILabel! {
+        didSet {
+            feeSuccessSubtitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var feeSuccessPercentLabel: UILabel! {
+        didSet {
+            feeSuccessPercentLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var feeManagementLabel: UILabel! {
+        didSet {
+            feeManagementLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var feeManagementSubtitleLabel: UILabel! {
+        didSet {
+            feeManagementSubtitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var feeManagementPercentLabel: UILabel! {
+        didSet {
+            feeManagementPercentLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet var tradesStackView: UIStackView! {
         didSet {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTrades))
@@ -86,8 +135,31 @@ class ProgramPropertiesForTableViewCellView: UIStackView {
             tradesStackView.addGestureRecognizer(tapGesture)
         }
     }
-    @IBOutlet var tradesLabel: UILabel!
-    @IBOutlet var managersShareLabel: UILabel!
+    @IBOutlet var tradesLabel: UILabel! {
+        didSet {
+            tradesLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var tradesSubtitleLabel: UILabel! {
+        didSet {
+            tradesSubtitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var managersShareLabel: UILabel! {
+        didSet {
+            managersShareLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var managersShareSubtitleLabel: UILabel! {
+        didSet {
+            managersShareSubtitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var managersSharePercentLabel: UILabel! {
+        didSet {
+            managersSharePercentLabel.textColor = UIColor.Cell.title
+        }
+    }
     
     // MARK: - Variables
     var endOfPeriod: Date?

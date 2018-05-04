@@ -151,9 +151,11 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="investedAmountLabel" destination="Kvc-6A-tXE" id="e1H-RM-ghm"/>
+                <outlet property="investedAmountTitleLabel" destination="h0v-tu-1zU" id="TZq-yF-Y0E"/>
                 <outlet property="portfolioInvestedTooltip" destination="1PK-jX-FDX" id="j7D-cC-FRY"/>
                 <outlet property="portfolioProfitTooltip" destination="SmH-r3-7fb" id="Bqp-AZ-bba"/>
                 <outlet property="profitFromProgramsLabel" destination="IgG-xF-5VG" id="yWS-Is-m4a"/>
+                <outlet property="profitFromProgramsTitleLabel" destination="IPD-R4-JtS" id="rc7-xO-zLA"/>
             </connections>
             <point key="canvasLocation" x="34" y="-77.5"/>
         </tableViewCell>

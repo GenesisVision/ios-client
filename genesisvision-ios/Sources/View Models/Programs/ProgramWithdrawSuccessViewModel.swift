@@ -12,9 +12,9 @@ final class ProgramWithdrawSuccessViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.withdrawRequestSuccess
     var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
-    var backgroundColor: UIColor = UIColor.Background.primary
-    var textColor: UIColor = UIColor.Font.white
-    var tintColor: UIColor = UIColor.Font.white
+    var backgroundColor: UIColor = UIColor.InfoView.bg
+    var textColor: UIColor = UIColor.InfoView.text
+    var tintColor: UIColor = UIColor.InfoView.tint
     var textFont: UIFont = UIFont.getFont(.regular, size: 24)
     
     var router: Router!

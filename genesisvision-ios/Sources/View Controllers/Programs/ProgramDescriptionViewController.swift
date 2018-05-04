@@ -17,9 +17,10 @@ class ProgramDescriptionViewController: BaseViewController {
     @IBOutlet weak var managerNameLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView! {
         didSet {
-            descriptionTextView.backgroundColor = UIColor.NavBar.grayBackground
+            descriptionTextView.backgroundColor = .clear
         }
     }
+    
     @IBOutlet weak var closeButton: ActionButton!
     
     // MARK: - View Model
@@ -53,8 +54,6 @@ class ProgramDescriptionViewController: BaseViewController {
         view.addGestureRecognizer(swipeGestureRecognizer)
         
         setupNavigationBar(with: .gray)
-        
-        view.backgroundColor = UIColor.NavBar.grayBackground
         
         fillData()
     }

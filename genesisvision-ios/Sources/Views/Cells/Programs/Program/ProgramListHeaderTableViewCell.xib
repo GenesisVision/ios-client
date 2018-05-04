@@ -78,6 +78,7 @@
             <viewLayoutGuide key="safeArea" id="Z5X-Ov-Vug"/>
             <connections>
                 <outlet property="programListCountLabel" destination="HFd-Wh-2mt" id="25R-fz-evW"/>
+                <outlet property="programListTitleLabel" destination="hXd-jk-mq0" id="ok4-3P-nSF"/>
             </connections>
             <point key="canvasLocation" x="-347" y="137"/>
         </tableViewCell>

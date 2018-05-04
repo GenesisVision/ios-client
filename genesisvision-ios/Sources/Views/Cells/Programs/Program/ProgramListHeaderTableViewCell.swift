@@ -13,7 +13,13 @@ class ProgramListHeaderTableViewCell: UITableViewCell {
     // MARK: - Labels
     @IBOutlet var programListCountLabel: UILabel! {
         didSet {
-            programListCountLabel.textColor = UIColor.Header.darkTitle
+            programListCountLabel.textColor = UIColor.Header.title
+        }
+    }
+    
+    @IBOutlet var programListTitleLabel: UILabel! {
+        didSet {
+            programListTitleLabel.textColor = UIColor.Header.subtitle
         }
     }
     
@@ -21,7 +27,7 @@ class ProgramListHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Background.darkGray
+        contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
     

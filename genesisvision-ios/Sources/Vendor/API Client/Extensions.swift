@@ -171,8 +171,8 @@ extension KeyedDecodingContainerProtocol {
 }
 
 extension UINavigationItem {
-    func setTitle(title: String, subtitle: String, style: ColorStyle = .gray) {
-        let colors = StyleColors(with: style)
+    func setTitle(title: String, subtitle: String, type: NavBarType = .gray) {
+        let colors = UIColor.NavBar.colorScheme(with: type)
         
         let titleLabel = UILabel()
         titleLabel.text = title

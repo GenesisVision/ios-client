@@ -26,7 +26,6 @@ class TraderTableViewCell: PlateTableViewCell {
     @IBOutlet var viewForChartView: UIView!
     @IBOutlet var chartView: ChartView! {
         didSet {
-            chartView.backgroundColor = UIColor.Background.main
             chartView.isUserInteractionEnabled = false
         }
     }
@@ -38,10 +37,23 @@ class TraderTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var noAvailableTokensLabel: UILabel!
+    @IBOutlet var noAvailableTokensLabel: UILabel! {
+        didSet {
+            noAvailableTokensLabel.textColor = UIColor.Cell.redTitle
+            noAvailableTokensLabel.font = UIFont.getFont(.regular, size: 11)
+        }
+    }
     
-    @IBOutlet var programTitleLabel: UILabel!
-    @IBOutlet var managerNameLabel: UILabel!
+    @IBOutlet var programTitleLabel: UILabel! {
+        didSet {
+            programTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var managerNameLabel: UILabel! {
+        didSet {
+            managerNameLabel.textColor = UIColor.Cell.subtitle
+        }
+    }
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     

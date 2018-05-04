@@ -20,8 +20,7 @@ class DashboardTableViewCell: PlateTableViewCell {
     var isEnable: Bool = false {
         didSet {
             updatePeriodLeftValueLabel()
-            contentView.backgroundColor = isEnable ? UIColor.Background.main : UIColor.Background.gray
-            chartView.backgroundColor = isEnable ? UIColor.Background.main : UIColor.Background.gray
+            contentView.backgroundColor = isEnable ? UIColor.Cell.bg : UIColor.Cell.unableBg
         }
     }
     
@@ -38,7 +37,6 @@ class DashboardTableViewCell: PlateTableViewCell {
     @IBOutlet var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = false
-            chartView.backgroundColor = UIColor.Background.main
         }
     }
     
@@ -59,19 +57,47 @@ class DashboardTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var programTitleLabel: UILabel! 
+    @IBOutlet var programTitleLabel: UILabel! {
+        didSet {
+            programTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet var managerNameLabel: UILabel!
     
     @IBOutlet var tokenSymbolLabel: CurrencyLabel!
     
-    @IBOutlet var tokensCountValueLabel: UILabel!
-    @IBOutlet var tokensCountTitleLabel: UILabel!
+    @IBOutlet var tokensCountValueLabel: UILabel! {
+        didSet {
+            tokensCountValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var tokensCountTitleLabel: UILabel! {
+        didSet {
+            tokensCountTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
-    @IBOutlet var profitValueLabel: UILabel!
-    @IBOutlet var profitTitleLabel: UILabel!
+    @IBOutlet var profitValueLabel: UILabel! {
+        didSet {
+            profitValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var profitTitleLabel: UILabel! {
+        didSet {
+            profitTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
-    @IBOutlet var periodLeftValueLabel: UILabel!
-    @IBOutlet var periodLeftTitleLabel: UILabel!
+    @IBOutlet var periodLeftValueLabel: UILabel! {
+        didSet {
+            periodLeftValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var periodLeftTitleLabel: UILabel! {
+        didSet {
+            periodLeftTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     

@@ -20,14 +20,14 @@ class SortHeaderView: UITableViewHeaderFooterView {
     // MARK: - Buttons
     @IBOutlet var sortButton: UIButton! {
         didSet {
-            sortButton.setTitleColor(UIColor.Font.dark, for: .normal)
+            sortButton.setTitleColor(UIColor.Cell.title, for: .normal)
         }
     }
 
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.Background.darkGray
+        contentView.backgroundColor = UIColor.BaseView.bg
     }
     
     // MARK: - Actions

@@ -54,7 +54,7 @@ class FilterSwitchTableViewCell: PlateTableViewCell {
         
         switchControl.addTarget(self, action: #selector(stateChanged(_:)), for: .valueChanged)
         
-        contentView.backgroundColor = UIColor.Background.main
+        contentView.backgroundColor = UIColor.Cell.bg
         selectionStyle = .none
     }
     

@@ -15,15 +15,15 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.Background.darkGray
+        view.backgroundColor = UIColor.BaseView.bg
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
     }
     
     // MARK: - Public methods
-    func setupNavigationBar(with style: ColorStyle = .gray) {
-        let colors = StyleColors(with: style)
+    func setupNavigationBar(with type: NavBarType = .gray) {
+        let colors = UIColor.NavBar.colorScheme(with: type)
         
-        AppearanceController.setupNavigationBar(with: style)
+        AppearanceController.setupNavigationBar(with: type)
         
         navigationController?.navigationBar.tintColor = colors.tintColor
         navigationController?.navigationBar.backgroundColor = colors.tintColor
@@ -48,7 +48,7 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
     }
     
     private func configuredMailComposeViewController() -> MFMailComposeViewController {
-        let colors = StyleColors()
+        let colors = UIColor.NavBar.colorScheme()
         
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
@@ -103,8 +103,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
-        view.backgroundColor = UIColor.Background.darkGray
-        tableView.backgroundColor = UIColor.Background.darkGray
+        view.backgroundColor = UIColor.BaseView.bg
+        tableView.backgroundColor = UIColor.BaseView.bg
         
         refreshControl?.endRefreshing()
     }

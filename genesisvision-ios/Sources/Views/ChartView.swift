@@ -92,7 +92,7 @@ class ChartView: CombinedChartView {
             lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = false
             lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
             
-            let gradientColors = [UIColor.white.cgColor, UIColor.primary.cgColor]
+            let gradientColors = [UIColor.primary.withAlphaComponent(0.0).cgColor, UIColor.primary.cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
             
             lineChartDataSet.fillAlpha = 0.7
@@ -132,6 +132,8 @@ class ChartView: CombinedChartView {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        backgroundColor = .clear
     }
     
     // MARK: - Public methods
@@ -261,6 +263,8 @@ class ChartView: CombinedChartView {
         
         legend.enabled = false
         autoScaleMinMaxEnabled = true
+        
+        animate(xAxisDuration: 0.5)
     }
     
     private func setData(_ values: [TradeChart]?) {
