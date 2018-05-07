@@ -21,7 +21,7 @@ final class InvestmentProgramListViewModel {
     
     // MARK: - Variables
     var title: String = "Programs"
-    
+    var roundNumber: Int = 1
     private var sections: [SectionType] = [.header, .programList]
     
     var router: InvestmentProgramListRouter!
@@ -73,7 +73,32 @@ final class InvestmentProgramListViewModel {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = InvestmentProgramsFilter(managerId: nil, brokerId: nil, brokerTradeServerId: nil, investMaxAmountFrom: nil, investMaxAmountTo: nil, sorting: sorting, name: searchText, levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, profitTotalMin: nil, profitTotalMax: nil, profitTotalPercentMin: nil, profitTotalPercentMax: nil, profitAvgPercentMin: nil, profitAvgPercentMax: nil, profitTotalChange: nil, periodMin: nil, periodMax: nil, showActivePrograms: nil, equityChartLength: equityChartLength, showMyFavorites: nil, skip: skip, take: take)
+        filter = InvestmentProgramsFilter(managerId: nil,
+                                          brokerId: nil,
+                                          brokerTradeServerId: nil,
+                                          investMaxAmountFrom: nil,
+                                          investMaxAmountTo: nil,
+                                          sorting: sorting,
+                                          name: searchText,
+                                          levelMin: nil,
+                                          levelMax: nil,
+                                          profitAvgMin: nil,
+                                          profitAvgMax: nil,
+                                          profitTotalMin: nil,
+                                          profitTotalMax: nil,
+                                          profitTotalPercentMin: nil,
+                                          profitTotalPercentMax: nil,
+                                          profitAvgPercentMin: nil,
+                                          profitAvgPercentMax: nil,
+                                          profitTotalChange: nil,
+                                          periodMin: nil,
+                                          periodMax: nil,
+                                          showActivePrograms: nil,
+                                          equityChartLength: equityChartLength,
+                                          showMyFavorites: nil,
+                                          roundNumber: nil,
+                                          skip: skip,
+                                          take: take)
         
         state = isLogin() ? .programList : .programListWithSignIn
     }
@@ -185,6 +210,10 @@ extension InvestmentProgramListViewModel {
     
     func showFilterVC() {
         router.show(routeType: .showFilterVC(investmentProgramListViewModel: self))
+    }
+    
+    func showTournamentVC() {
+        router.show(routeType: .showTournamentVC(roundNumber: roundNumber))
     }
     
     func showDetail(with investmentProgramId: String) {

@@ -576,9 +576,9 @@ open class InvestorAPI {
      Get investor dashboard
      - GET /api/investor/dashboard
      - examples: [{contentType=application/json, example={
-  "profitFromPrograms" : 6.84685269835264,
-  "totalPortfolioAmount" : 1.1730742509559433,
-  "investedAmount" : 7.457744773683766,
+  "profitFromPrograms" : 1.1730742509559433,
+  "totalPortfolioAmount" : 5.025004791520295,
+  "investedAmount" : 4.965218492984954,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "investedTokens" : 5.637376656633329,
@@ -589,12 +589,14 @@ open class InvestorAPI {
     "investedAmount" : 1.4658129805029452,
     "title" : "title",
     "isWithdrawEnable" : true,
+    "roundNumber" : 6,
     "balance" : 6.027456183070403,
     "logo" : "logo",
     "profitAvgPercent" : 4.145608029883936,
     "currency" : "Undefined",
     "feeSuccess" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "place" : 7,
     "investorsCount" : 7,
     "periodDuration" : 9,
     "feeManagement" : 1.4894159098541704,
@@ -648,6 +650,7 @@ open class InvestorAPI {
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
     } ],
+    "isTournament" : true,
     "isFavorite" : true
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
@@ -659,12 +662,14 @@ open class InvestorAPI {
     "investedAmount" : 1.4658129805029452,
     "title" : "title",
     "isWithdrawEnable" : true,
+    "roundNumber" : 6,
     "balance" : 6.027456183070403,
     "logo" : "logo",
     "profitAvgPercent" : 4.145608029883936,
     "currency" : "Undefined",
     "feeSuccess" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "place" : 7,
     "investorsCount" : 7,
     "periodDuration" : 9,
     "feeManagement" : 1.4894159098541704,
@@ -718,6 +723,7 @@ open class InvestorAPI {
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
     } ],
+    "isTournament" : true,
     "isFavorite" : true
   } ]
 }}]
@@ -770,6 +776,7 @@ open class InvestorAPI {
   "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
   "periodDuration" : 5,
   "gvtRate" : 6.027456183070403,
+  "availableInvestments" : 5.637376656633329,
   "manager" : {
     "country" : "country",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -777,12 +784,12 @@ open class InvestorAPI {
     "username" : "username"
   },
   "level" : 0,
+  "description" : "description",
+  "title" : "title",
   "endOfPeriod" : "2000-01-23T04:56:07.000+00:00",
   "logo" : "logo",
-  "description" : "description",
   "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "title" : "title",
   "gvtWalletAmount" : 1.4658129805029452
 }}]
      
@@ -896,6 +903,7 @@ open class InvestorAPI {
     "profitFromProgram" : 2.3021358869347655,
     "investedAmount" : 5.637376656633329,
     "isWithdrawEnable" : true,
+    "roundNumber" : 9,
     "balance" : 6.027456183070403,
     "logo" : "logo",
     "profitAvgPercent" : 7.386281948385884,
@@ -919,6 +927,7 @@ open class InvestorAPI {
     "isHistoryEnable" : true,
     "isEnabled" : true,
     "profitTotal" : 4.145608029883936,
+    "isTournament" : true,
     "profitDiagram" : {
       "managerFund" : 9.369310271410669,
       "profitIsPositive" : true,
@@ -935,6 +944,7 @@ open class InvestorAPI {
     "login" : "login",
     "programEndDate" : "2000-01-23T04:56:07.000+00:00",
     "currency" : "Undefined",
+    "place" : 6,
     "investorsCount" : 9,
     "feeManagement" : 1.1730742509559433,
     "manager" : {
@@ -1435,19 +1445,21 @@ open class InvestorAPI {
      Get public investment program's list
      - POST /api/investor/investmentPrograms
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 8,
   "investmentPrograms" : [ {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
     "canCloseProgram" : true,
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
+    "roundNumber" : 9,
     "balance" : 6.027456183070403,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
     "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "place" : 6,
     "investorsCount" : 5,
     "periodDuration" : 5,
     "feeManagement" : 7.386281948385884,
@@ -1495,6 +1507,7 @@ open class InvestorAPI {
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
     } ],
+    "isTournament" : true,
     "isFavorite" : true
   }, {
     "startOfPeriod" : "2000-01-23T04:56:07.000+00:00",
@@ -1502,12 +1515,14 @@ open class InvestorAPI {
     "availableInvestment" : 2.027123023002322,
     "description" : "description",
     "title" : "title",
+    "roundNumber" : 9,
     "balance" : 6.027456183070403,
     "logo" : "logo",
     "profitAvgPercent" : 9.301444243932576,
     "currency" : "Undefined",
     "feeSuccess" : 4.145608029883936,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "place" : 6,
     "investorsCount" : 5,
     "periodDuration" : 5,
     "feeManagement" : 7.386281948385884,
@@ -1555,6 +1570,7 @@ open class InvestorAPI {
       "investorFund" : 1.0246457001441578,
       "profit" : 1.4894159098541704
     } ],
+    "isTournament" : true,
     "isFavorite" : true
   } ]
 }}]
@@ -1619,6 +1635,43 @@ open class InvestorAPI {
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Platform status
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func apiInvestorPlatformStatusGet(completion: @escaping ((_ data: PlatformStatus?,_ error: Error?) -> Void)) {
+        apiInvestorPlatformStatusGetWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Platform status
+     - GET /api/investor/platformStatus
+     - examples: [{contentType=application/json, example={
+  "tournamentTotalRounds" : 6,
+  "isTournamentRegistrationActive" : true,
+  "tournamentCurrentRound" : 0,
+  "isTournamentActive" : true
+}}]
+
+     - returns: RequestBuilder<PlatformStatus> 
+     */
+    open class func apiInvestorPlatformStatusGetWithRequestBuilder() -> RequestBuilder<PlatformStatus> {
+        let path = "/api/investor/platformStatus"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<PlatformStatus>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.0)
+  - AutoInsetter (1.2.3)
   - Charts (3.1.0):
     - Charts/Core (= 3.1.0)
   - Charts/Core (3.1.0)
@@ -41,11 +42,15 @@ PODS:
   - NotificationBannerSwift (1.6.2):
     - MarqueeLabel/Swift
     - SnapKit (~> 4.0)
+  - Pageboy (2.4.0)
   - PKHUD (5.0.0)
   - Protobuf (3.5.0)
   - ReachabilitySwift (4.1.0)
   - SimulatorStatusMagic (2.1)
   - SnapKit (4.0.0)
+  - Tabman (1.6.0):
+    - AutoInsetter (~> 1.2.0)
+    - Pageboy (~> 2.4.0)
   - TTRangeSlider (1.0.5)
 
 DEPENDENCIES:
@@ -60,10 +65,12 @@ DEPENDENCIES:
   - PKHUD
   - ReachabilitySwift
   - SimulatorStatusMagic
+  - Tabman (~> 1.0)
   - TTRangeSlider
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  AutoInsetter: 1a8f8ad5e7da8e993970b3809cfb8e8e330f4db1
   Charts: 0b0c96f6118b6ce63f11adbcaa3b31045ee4d772
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
@@ -77,13 +84,15 @@ SPEC CHECKSUMS:
   MarqueeLabel: bf768455fe88d427f71476ebb23f9092b660f40b
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NotificationBannerSwift: 4eceb2add9d5eaa0596c63d49690b4d6476e74ec
+  Pageboy: b04cee5c1315a865fb49321129d12635e8465144
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  Tabman: a9be97d1c75b4b7f40eec416021f614c4ccbb670
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: c494dd772d2f6d892e737df2b8c96b24c0bc6c54
+PODFILE CHECKSUM: e1351b69e98b46e78f5bcc3724f8e1cadf34a0d6
 
 COCOAPODS: 1.4.0

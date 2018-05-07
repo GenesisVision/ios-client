@@ -15,20 +15,53 @@ final class TournamentListViewModel {
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
-    var participantsCount: String = ""
+    var programsCount: String = ""
+    var equityChartLength = Constants.Api.equityChartLength
     var skip = 0
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
-            participantsCount = "\(totalCount) participants"
+            programsCount = "\(totalCount) programs"
         }
     }
-    var searchText = ""
+    private var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
+    var searchText = "" {
+        didSet {
+            filter?.name = searchText
+        }
+    }
     var traderTableViewCellViewModels = [TraderTableViewCellViewModel]()
+    var filter: InvestmentProgramsFilter?
     
     // MARK: - Init
-    init(withRouter router: TournamentRouter) {
+    init(withRouter router: TournamentRouter, roundNumber: Int?) {
         self.router = router
+        filter = InvestmentProgramsFilter(managerId: nil,
+                                          brokerId: nil,
+                                          brokerTradeServerId: nil,
+                                          investMaxAmountFrom: nil,
+                                          investMaxAmountTo: nil,
+                                          sorting: sorting,
+                                          name: searchText,
+                                          levelMin: nil,
+                                          levelMax: nil,
+                                          profitAvgMin: nil,
+                                          profitAvgMax: nil,
+                                          profitTotalMin: nil,
+                                          profitTotalMax: nil,
+                                          profitTotalPercentMin: nil,
+                                          profitTotalPercentMax: nil,
+                                          profitAvgPercentMin: nil,
+                                          profitAvgPercentMax: nil,
+                                          profitTotalChange: nil,
+                                          periodMin: nil,
+                                          periodMax: nil,
+                                          showActivePrograms: nil,
+                                          equityChartLength: equityChartLength,
+                                          showMyFavorites: nil,
+                                          roundNumber: roundNumber,
+                                          skip: skip,
+                                          take: take)
     }
     
     // MARK: - Public methods
@@ -36,12 +69,15 @@ final class TournamentListViewModel {
         return "No result.\n\nPlease try again later."
     }
     
-    func getDetailViewController(with index: Int) -> TournamentDetailViewController? {
+    func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
         guard let model = model(for: index) else {
             return nil
         }
         
-        return router.getDetail(with: model.participantViewModel.id?.uuidString ?? "")
+        let investmentProgram = model.investmentProgram
+        guard let investmentProgramId = investmentProgram.id else { return nil}
+        
+        return router.getDetailViewController(with: investmentProgramId.uuidString)
     }
     
 }
@@ -56,21 +92,21 @@ extension TournamentListViewModel {
     
     /// Return view models for registration header/footer Nib files
     static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [DefaultTableHeaderView.self]
+        return []
     }
     
     // MARK: - Public methods
     func headerTitle(for section: Int) -> String? {
         switch section {
         default:
-            return participantsCount
+            return nil
         }
     }
     
     func headerHeight(for section: Int) -> CGFloat {
         switch section {
         default:
-            return 26.0
+            return 0.0
         }
     }
     
@@ -82,8 +118,8 @@ extension TournamentListViewModel {
 // MARK: - Navigation
 extension TournamentListViewModel {
     // MARK: - Public methods
-    func showDetail(with model: ParticipantViewModel) {
-        router.show(routeType: .showDetail(participantId: model.id?.uuidString ?? ""))
+    func showDetail(with model: InvestmentProgram) {
+        router.show(routeType: .showDetail(investmentProgramId: model.id?.uuidString ?? ""))
     }
 }
 
@@ -144,25 +180,6 @@ extension TournamentListViewModel {
     }
     
     // MARK: - Private methods
-    private func tournamentParticipants(withFilter filter: ParticipantsFilter, completion: @escaping (_ participantsViewModel: ParticipantsViewModel?) -> Void) {
-        TournamentAPI.apiTournamentParticipantsPost(filter: filter) { [weak self] (participantsViewModel, error) in
-            self?.responseHandler(participantsViewModel, error: error, successCompletion: { (participants) in
-                completion(participants)
-            }, errorCompletion: { (error) in
-                completion(nil)
-            })
-        }
-    }
-    
-    private func responseHandler(_ participantsViewModel: ParticipantsViewModel?, error: Error?, successCompletion: @escaping (_ participants: ParticipantsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard participantsViewModel != nil else {
-            return ErrorHandler.handleApiError(error: error, completion: errorCompletion)
-        }
-        
-        successCompletion(participantsViewModel)
-    }
-    
     private func fakeViewModels(completion: (_ traderCellModels: [TraderTableViewCellViewModel]) -> Void) {
         let cellModels = [TraderTableViewCellViewModel]()
         
@@ -178,23 +195,23 @@ extension TournamentListViewModel {
     private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let filter = ParticipantsFilter(skip: skip, take: take, name: name)
+            guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            tournamentParticipants(withFilter: filter, completion: { (participantViewModels) in
-                guard let participantViewModels = participantViewModels else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (investmentProgramsViewModel) in
+                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                var viewModels = [TraderTableViewCellViewModel]()
+                var investmentProgramViewModels = [TraderTableViewCellViewModel]()
                 
-                let totalCount = participantViewModels.total ?? 0
+                let totalCount = investmentPrograms.total ?? 0
                 
-                participantViewModels.participants?.forEach({ (participantViewModel) in
-                    let traderTableViewCellModel = TraderTableViewCellViewModel(participantViewModel: participantViewModel)
-                    viewModels.append(traderTableViewCellModel)
+                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
+                    let traderTableViewCellModel = TraderTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
+                    investmentProgramViewModels.append(traderTableViewCellModel)
                 })
                 
-                completionSuccess(totalCount, viewModels)
+                completionSuccess(totalCount, investmentProgramViewModels)
                 completionError(.success)
-            })
+                }, errorCompletion: completionError)
         case .fake:
             fakeViewModels { (participantViewModels) in
                 completionSuccess(participantViewModels.count, participantViewModels)

@@ -55,10 +55,13 @@ open class InvestmentProgram: Codable {
     public var isOwnProgram: Bool?
     public var canCloseProgram: Bool?
     public var isFavorite: Bool?
+    public var isTournament: Bool?
+    public var roundNumber: Int?
+    public var place: Int?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, equityChart: [ChartByDate]?, manager: ProfilePublicViewModel?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFavorite: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, logo: String?, isEnabled: Bool?, balance: Double?, currency: Currency?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, chart: [Chart]?, equityChart: [ChartByDate]?, manager: ProfilePublicViewModel?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isInvestEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFavorite: Bool?, isTournament: Bool?, roundNumber: Int?, place: Int?) {
         self.id = id
         self.title = title
         self.description = description
@@ -89,6 +92,9 @@ open class InvestmentProgram: Codable {
         self.isOwnProgram = isOwnProgram
         self.canCloseProgram = canCloseProgram
         self.isFavorite = isFavorite
+        self.isTournament = isTournament
+        self.roundNumber = roundNumber
+        self.place = place
     }
     
 
@@ -128,6 +134,9 @@ open class InvestmentProgram: Codable {
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
+        try container.encodeIfPresent(isTournament, forKey: "isTournament")
+        try container.encodeIfPresent(roundNumber, forKey: "roundNumber")
+        try container.encodeIfPresent(place, forKey: "place")
     }
 
     // Decodable protocol methods
@@ -165,6 +174,9 @@ open class InvestmentProgram: Codable {
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
+        isTournament = try container.decodeIfPresent(Bool.self, forKey: "isTournament")
+        roundNumber = try container.decodeIfPresent(Int.self, forKey: "roundNumber")
+        place = try container.decodeIfPresent(Int.self, forKey: "place")
     }
 }
 

@@ -11,16 +11,22 @@ import Foundation
 
 open class ClosePeriodData: Codable {
 
+    public enum InvestmentProgramStatus: String, Codable { 
+        case _none = "None"
+        case forClosingDueToInactivity = "ForClosingDueToInactivity"
+    }
     public var currentPeriod: Period?
     public var tokenHolders: [InvestorAmount]?
     public var canCloseCurrentPeriod: Bool?
+    public var investmentProgramStatus: InvestmentProgramStatus?
 
 
     
-    public init(currentPeriod: Period?, tokenHolders: [InvestorAmount]?, canCloseCurrentPeriod: Bool?) {
+    public init(currentPeriod: Period?, tokenHolders: [InvestorAmount]?, canCloseCurrentPeriod: Bool?, investmentProgramStatus: InvestmentProgramStatus?) {
         self.currentPeriod = currentPeriod
         self.tokenHolders = tokenHolders
         self.canCloseCurrentPeriod = canCloseCurrentPeriod
+        self.investmentProgramStatus = investmentProgramStatus
     }
     
 
@@ -33,6 +39,7 @@ open class ClosePeriodData: Codable {
         try container.encodeIfPresent(currentPeriod, forKey: "currentPeriod")
         try container.encodeIfPresent(tokenHolders, forKey: "tokenHolders")
         try container.encodeIfPresent(canCloseCurrentPeriod, forKey: "canCloseCurrentPeriod")
+        try container.encodeIfPresent(investmentProgramStatus, forKey: "investmentProgramStatus")
     }
 
     // Decodable protocol methods
@@ -43,6 +50,7 @@ open class ClosePeriodData: Codable {
         currentPeriod = try container.decodeIfPresent(Period.self, forKey: "currentPeriod")
         tokenHolders = try container.decodeIfPresent([InvestorAmount].self, forKey: "tokenHolders")
         canCloseCurrentPeriod = try container.decodeIfPresent(Bool.self, forKey: "canCloseCurrentPeriod")
+        investmentProgramStatus = try container.decodeIfPresent(InvestmentProgramStatus.self, forKey: "investmentProgramStatus")
     }
 }
 

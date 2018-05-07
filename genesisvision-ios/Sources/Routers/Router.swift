@@ -114,7 +114,7 @@ class Router {
         tournamentViewController = viewController
         let router = TournamentRouter(parentRouter: self)
         childRouters.append(router)
-        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router)
+        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, roundNumber: nil)
     }
     
 }
@@ -161,6 +161,14 @@ extension Router: RouterProtocol {
 extension Router {
     func currentController() -> UIViewController? {
         return navigationController?.topViewController
+    }
+    
+    func getProgramsVC() -> UIViewController? {
+        guard let tabmanViewController = BaseTabmanViewController.storyboardInstance(name: .programs) else { return nil }
+        let router = Router(parentRouter: self)
+        tabmanViewController.viewModel = TabmanViewModel(withRouter: router)
+        
+        return tabmanViewController
     }
     
     func getProgramsNavigationController() -> UINavigationController? {

@@ -80,10 +80,13 @@ open class InvestmentProgramDetails: Codable {
     public var canCloseProgram: Bool?
     public var canClosePeriod: Bool?
     public var isFavorite: Bool?
+    public var isTournament: Bool?
+    public var roundNumber: Int?
+    public var place: Int?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, programEndDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, chart: [Chart]?, brokerTitle: String?, brokerTradeServerTitle: String?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canClosePeriod: Bool?, isFavorite: Bool?) {
+    public init(id: UUID?, title: String?, description: String?, level: Int?, login: String?, logo: String?, balance: Double?, ownBalance: Double?, currency: Currency?, investedTokens: Double?, investedAmount: Double?, profitFromProgram: Double?, tradesCount: Int?, investorsCount: Int?, periodDuration: Int?, programStartDate: Date?, programEndDate: Date?, startOfPeriod: Date?, endOfPeriod: Date?, profitAvg: Double?, profitTotal: Double?, profitAvgPercent: Double?, profitTotalPercent: Double?, profitTotalChange: ProfitTotalChange?, volumeTotal: Double?, volumeAvg: Double?, volumeTotalChange: VolumeTotalChange?, availableInvestment: Double?, feeSuccess: Double?, feeManagement: Double?, ipfsHash: String?, tradeIpfsHash: String?, isEnabled: Bool?, minAccountBalanceUsd: Double?, minAccountBalance: Double?, chart: [Chart]?, brokerTitle: String?, brokerTradeServerTitle: String?, token: Token?, manager: ProfilePublicViewModel?, profitDiagram: PeriodProfitDiagram?, freeTokens: FreeTokens?, hasNewRequests: Bool?, isHistoryEnable: Bool?, isInvestEnable: Bool?, isWithdrawEnable: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canClosePeriod: Bool?, isFavorite: Bool?, isTournament: Bool?, roundNumber: Int?, place: Int?) {
         self.id = id
         self.title = title
         self.description = description
@@ -134,6 +137,9 @@ open class InvestmentProgramDetails: Codable {
         self.canCloseProgram = canCloseProgram
         self.canClosePeriod = canClosePeriod
         self.isFavorite = isFavorite
+        self.isTournament = isTournament
+        self.roundNumber = roundNumber
+        self.place = place
     }
     
 
@@ -193,6 +199,9 @@ open class InvestmentProgramDetails: Codable {
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
         try container.encodeIfPresent(canClosePeriod, forKey: "canClosePeriod")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
+        try container.encodeIfPresent(isTournament, forKey: "isTournament")
+        try container.encodeIfPresent(roundNumber, forKey: "roundNumber")
+        try container.encodeIfPresent(place, forKey: "place")
     }
 
     // Decodable protocol methods
@@ -250,6 +259,9 @@ open class InvestmentProgramDetails: Codable {
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
         canClosePeriod = try container.decodeIfPresent(Bool.self, forKey: "canClosePeriod")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
+        isTournament = try container.decodeIfPresent(Bool.self, forKey: "isTournament")
+        roundNumber = try container.decodeIfPresent(Int.self, forKey: "roundNumber")
+        place = try container.decodeIfPresent(Int.self, forKey: "place")
     }
 }
 

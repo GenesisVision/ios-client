@@ -10,7 +10,8 @@ import UIKit
 import Kingfisher
 
 struct TraderTableViewCellViewModel {
-    let participantViewModel: ParticipantViewModel
+    let investmentProgram: InvestmentProgram
+    weak var delegate: ProgramDetailViewControllerProtocol?
 }
 
 extension TraderTableViewCellViewModel: CellViewModel {
@@ -18,32 +19,57 @@ extension TraderTableViewCellViewModel: CellViewModel {
         cell.chartView.isHidden = true
         cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
+        cell.delegate = delegate
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = participantViewModel.chart, chart.count > 1 {
+        if let chart = investmentProgram.equityChart, let title = investmentProgram.title, chart.count > 1 {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartDataSet: [], name: participantViewModel.name)
+            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
-        if let name = participantViewModel.name {
-            cell.programTitleLabel.text = name
+        if let title = investmentProgram.title {
+            cell.programTitleLabel.text = title
         }
         
-        cell.currencyLabel.isHidden = true
-        cell.programLogoImageView.levelLabel.isHidden = true
+        if let investmentProgramId = investmentProgram.id?.uuidString {
+            cell.investmentProgramId = investmentProgramId
+        }
+        
+        if let managerName = investmentProgram.manager?.username {
+            cell.managerNameLabel.text = "by " + managerName
+        }
+        
+        if let isFavorite = investmentProgram.isFavorite {
+            cell.favoriteButton.isSelected = isFavorite
+        }
+        
+        cell.favoriteStackView.isHidden = !AuthManager.isLogin()
+        
+        if let availableInvestment = investmentProgram.availableInvestment {
+            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
+        }
+        
+        if let currency = investmentProgram.currency {
+            cell.currencyLabel.text = currency.rawValue.uppercased()
+        }
+        
+        if let level = investmentProgram.level {
+            cell.programLogoImageView.levelLabel.text = level.toString()
+        }
+        
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = participantViewModel.avatar {
+        if let logo = investmentProgram.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(with: "PLACE", investorsCount: participantViewModel.place, balanceTitle: "TRADES", balance: Double(participantViewModel.ordersCount ?? 0), avgProfitTitle: "PROFIT", avgProfit: participantViewModel.totalProfit, totalProfitTitle: "PROFIT", totalProfit: participantViewModel.totalProfitInPercent, currency: nil)
+        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvgPercent, totalProfit: investmentProgram.profitTotal, currency: investmentProgram.currency?.rawValue)
     }
 }

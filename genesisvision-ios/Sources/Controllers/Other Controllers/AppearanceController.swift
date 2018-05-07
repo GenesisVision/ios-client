@@ -29,9 +29,9 @@ struct AppearanceController {
     static var theme: ThemeType = .default
     
     static func setupAppearance() {
-        if isDebug {
-            SDStatusBarManager.sharedInstance().enableOverrides()
-        }
+        isDebug
+            ? SDStatusBarManager.sharedInstance().enableOverrides()
+            : SDStatusBarManager.sharedInstance().disableOverrides()
         
         setupNavigationBar()
         setupTabBar()

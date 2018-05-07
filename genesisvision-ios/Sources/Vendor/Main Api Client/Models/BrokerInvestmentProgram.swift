@@ -11,6 +11,10 @@ import Foundation
 
 open class BrokerInvestmentProgram: Codable {
 
+    public enum Status: String, Codable { 
+        case _none = "None"
+        case forClosingDueToInactivity = "ForClosingDueToInactivity"
+    }
     public var id: UUID?
     public var managerAccountId: UUID?
     public var dateFrom: Date?
@@ -27,10 +31,12 @@ open class BrokerInvestmentProgram: Codable {
     public var login: String?
     public var ipfsHash: String?
     public var tradeIpfsHash: String?
+    public var balance: Double?
+    public var status: Status?
 
 
     
-    public init(id: UUID?, managerAccountId: UUID?, dateFrom: Date?, dateTo: Date?, description: String?, isEnabled: Bool?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, lastPeriod: Period?, login: String?, ipfsHash: String?, tradeIpfsHash: String?) {
+    public init(id: UUID?, managerAccountId: UUID?, dateFrom: Date?, dateTo: Date?, description: String?, isEnabled: Bool?, period: Int?, feeSuccess: Double?, feeManagement: Double?, feeEntrance: Double?, investMinAmount: Double?, investMaxAmount: Double?, lastPeriod: Period?, login: String?, ipfsHash: String?, tradeIpfsHash: String?, balance: Double?, status: Status?) {
         self.id = id
         self.managerAccountId = managerAccountId
         self.dateFrom = dateFrom
@@ -47,6 +53,8 @@ open class BrokerInvestmentProgram: Codable {
         self.login = login
         self.ipfsHash = ipfsHash
         self.tradeIpfsHash = tradeIpfsHash
+        self.balance = balance
+        self.status = status
     }
     
 
@@ -72,6 +80,8 @@ open class BrokerInvestmentProgram: Codable {
         try container.encodeIfPresent(login, forKey: "login")
         try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
         try container.encodeIfPresent(tradeIpfsHash, forKey: "tradeIpfsHash")
+        try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(status, forKey: "status")
     }
 
     // Decodable protocol methods
@@ -95,6 +105,8 @@ open class BrokerInvestmentProgram: Codable {
         login = try container.decodeIfPresent(String.self, forKey: "login")
         ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
         tradeIpfsHash = try container.decodeIfPresent(String.self, forKey: "tradeIpfsHash")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }
 

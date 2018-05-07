@@ -32,10 +32,11 @@ open class InvestmentProgramBuyToken: Codable {
     public var gvtWalletAmount: Double?
     public var periodDuration: Int?
     public var currency: Currency?
+    public var availableInvestments: Double?
 
 
     
-    public init(id: UUID?, logo: String?, description: String?, manager: ProfilePublicViewModel?, level: Int?, title: String?, startOfPeriod: Date?, endOfPeriod: Date?, gvtRate: Double?, gvtWalletAmount: Double?, periodDuration: Int?, currency: Currency?) {
+    public init(id: UUID?, logo: String?, description: String?, manager: ProfilePublicViewModel?, level: Int?, title: String?, startOfPeriod: Date?, endOfPeriod: Date?, gvtRate: Double?, gvtWalletAmount: Double?, periodDuration: Int?, currency: Currency?, availableInvestments: Double?) {
         self.id = id
         self.logo = logo
         self.description = description
@@ -48,6 +49,7 @@ open class InvestmentProgramBuyToken: Codable {
         self.gvtWalletAmount = gvtWalletAmount
         self.periodDuration = periodDuration
         self.currency = currency
+        self.availableInvestments = availableInvestments
     }
     
 
@@ -69,6 +71,7 @@ open class InvestmentProgramBuyToken: Codable {
         try container.encodeIfPresent(gvtWalletAmount, forKey: "gvtWalletAmount")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
         try container.encodeIfPresent(currency, forKey: "currency")
+        try container.encodeIfPresent(availableInvestments, forKey: "availableInvestments")
     }
 
     // Decodable protocol methods
@@ -88,6 +91,7 @@ open class InvestmentProgramBuyToken: Codable {
         gvtWalletAmount = try container.decodeIfPresent(Double.self, forKey: "gvtWalletAmount")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
+        availableInvestments = try container.decodeIfPresent(Double.self, forKey: "availableInvestments")
     }
 }
 

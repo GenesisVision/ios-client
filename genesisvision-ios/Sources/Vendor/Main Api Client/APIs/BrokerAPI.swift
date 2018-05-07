@@ -229,6 +229,7 @@ open class BrokerAPI {
     "depositAmount" : 0.8008281904610115,
     "leverage" : 6,
     "password" : "password",
+    "programDateFrom" : "2000-01-23T04:56:07.000+00:00",
     "requestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
     "currency" : "Undefined",
@@ -238,6 +239,7 @@ open class BrokerAPI {
     "depositAmount" : 0.8008281904610115,
     "leverage" : 6,
     "password" : "password",
+    "programDateFrom" : "2000-01-23T04:56:07.000+00:00",
     "requestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "name" : "name",
     "currency" : "Undefined",
@@ -253,6 +255,7 @@ open class BrokerAPI {
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "login" : "login",
     "investMinAmount" : 7.061401241503109,
+    "balance" : 1.0246457001441578,
     "isEnabled" : true,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "ipfsHash" : "ipfsHash",
@@ -285,7 +288,8 @@ open class BrokerAPI {
       "startBalance" : 2.027123023002322,
       "status" : "Planned"
     },
-    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "status" : "None"
   }, {
     "feeEntrance" : 2.3021358869347655,
     "tradeIpfsHash" : "tradeIpfsHash",
@@ -295,6 +299,7 @@ open class BrokerAPI {
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "login" : "login",
     "investMinAmount" : 7.061401241503109,
+    "balance" : 1.0246457001441578,
     "isEnabled" : true,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "ipfsHash" : "ipfsHash",
@@ -327,7 +332,8 @@ open class BrokerAPI {
       "startBalance" : 2.027123023002322,
       "status" : "Planned"
     },
-    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "managerAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "status" : "None"
   } ]
 }}]
      
@@ -752,7 +758,8 @@ open class BrokerAPI {
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "startBalance" : 2.027123023002322,
     "status" : "Planned"
-  }
+  },
+  "investmentProgramStatus" : "None"
 }}]
      
      - parameter investmentProgramId: (query)  

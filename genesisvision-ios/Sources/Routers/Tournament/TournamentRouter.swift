@@ -7,7 +7,7 @@
 //
 
 enum TournamentRouteType {
-    case showDetail(participantId: String), getDetail(participantId: String)
+    case showDetail(investmentProgramId: String), getDetail(investmentProgramId: String)
 }
 
 class TournamentRouter: Router {
@@ -15,30 +15,11 @@ class TournamentRouter: Router {
     // MARK: - Public methods
     func show(routeType: TournamentRouteType) {
         switch routeType {
-        case .getDetail(let participantId):
-            _ = getDetail(with: participantId)
-        case .showDetail(let participantId):
-            showDetail(with: participantId)
+        case .getDetail(let investmentProgramId):
+            getDetailViewController(with: investmentProgramId)
+        case .showDetail(let investmentProgramId):
+            showProgramDetail(with: investmentProgramId)
         }
-    }
-    
-    func getDetail(with participantId: String) -> TournamentDetailViewController? {
-        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .tournament) else { return nil }
-        let router = TournamentDetailRouter(parentRouter: self)
-        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantId)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
-    
-    // MARK: - Private methods
-    private func showDetail(with participantId: String) {
-        guard let viewController = TournamentDetailViewController.storyboardInstance(name: .tournament) else { return }
-        let router = TournamentDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = TournamentDetailViewModel(withRouter: router, with: participantId)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

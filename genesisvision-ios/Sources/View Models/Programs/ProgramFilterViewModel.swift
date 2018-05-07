@@ -88,6 +88,7 @@ final class ProgramFilterViewModel {
                                                    showActivePrograms: filter.showActivePrograms,
                                                    equityChartLength: filter.equityChartLength,
                                                    showMyFavorites: filter.showMyFavorites,
+                                                   roundNumber: filter.roundNumber,
                                                    skip: filter.skip,
                                                    take: filter.take)
         }

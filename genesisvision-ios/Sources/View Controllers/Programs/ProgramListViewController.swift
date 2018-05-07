@@ -13,6 +13,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
     private var filtersBarButtonItem: UIBarButtonItem?
+    private var tournamentBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel!
@@ -75,6 +76,9 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
         navigationItem.rightBarButtonItem = filtersBarButtonItem
+        
+        tournamentBarButtonItem = UIBarButtonItem(title: "Tournament", style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
+        navigationItem.leftBarButtonItem = tournamentBarButtonItem
         
         title = viewModel.title.uppercased()
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
@@ -140,6 +144,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     @IBAction func filtersButtonAction(_ sender: UIButton) {
         viewModel.showFilterVC()
+    }
+    
+    @IBAction func tournamentButtonAction(_ sender: UIButton) {
+        viewModel.showTournamentVC()
     }
 }
 

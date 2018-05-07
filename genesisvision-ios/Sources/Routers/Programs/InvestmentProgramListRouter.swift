@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case signIn, showProgramDetail(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel)
+    case signIn, showProgramDetail(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(roundNumber: Int)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -21,6 +21,8 @@ class InvestmentProgramListRouter: Router {
             showFilterVC(with: investmentProgramListViewModel)
         case .showProgramDetail(let investmentProgramId):
             showProgramDetail(with: investmentProgramId)
+        case .showTournamentVC(let roundNumber):
+            showTournamentVC(with: roundNumber)
         }
     }
     
@@ -40,5 +42,14 @@ class InvestmentProgramListRouter: Router {
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showTournamentVC(with roundNumber: Int) {
+        guard let tabmanViewController = BaseTabmanViewController.storyboardInstance(name: .tournament) else { return }
+        let router = Router(parentRouter: self)
+        tabmanViewController.viewModel = TabmanViewModel(withRouter: router)
+        
+        tabmanViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(tabmanViewController, animated: true)
     }
 }

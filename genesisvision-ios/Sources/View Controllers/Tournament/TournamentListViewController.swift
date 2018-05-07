@@ -18,8 +18,8 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         didSet {
             searchBar.delegate = self
             searchBar.showsCancelButton = false
-            searchBar.isTranslucent = true
-            searchBar.backgroundColor = UIColor.Background.main
+            searchBar.isTranslucent = false
+            searchBar.backgroundColor = UIColor.BaseView.bg
             searchBar.barTintColor = UIColor.primary
             searchBar.tintColor = UIColor.primary
             searchBar.placeholder = "Search"
@@ -60,7 +60,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         showProgressHUD()
         fetch()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.plain, target:nil, action:nil)
     }
     
     private func reloadData() {
@@ -99,9 +99,9 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        guard let participantViewModel = viewModel.model(for: indexPath.row)?.participantViewModel else { return }
+        guard let investmentProgram = viewModel.model(for: indexPath.row)?.investmentProgram else { return }
         
-        viewModel.showDetail(with: participantViewModel)
+        viewModel.showDetail(with: investmentProgram)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

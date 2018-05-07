@@ -66,7 +66,7 @@ final class Constants {
         static let equityChartLength: Int = 36
         
         struct Main {
-            static let debug = "https://alpha.genesis.vision"
+            static let debug = "https://tost.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         
