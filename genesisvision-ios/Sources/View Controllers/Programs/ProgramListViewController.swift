@@ -12,7 +12,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
-    private var filtersBarButtonItem: UIBarButtonItem?
     private var tournamentBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
@@ -74,14 +73,18 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        filtersBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(filtersButtonAction(_:)))
-        navigationItem.rightBarButtonItem = filtersBarButtonItem
+        bottomViewType = .sortAndFilter
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-        tournamentBarButtonItem = UIBarButtonItem(title: "Tournament", style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
-        navigationItem.leftBarButtonItem = tournamentBarButtonItem
+        tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
+        navigationItem.rightBarButtonItem = tournamentBarButtonItem
+
         
-        title = viewModel.title.uppercased()
+        tabBarItem.title = viewModel.title.uppercased()
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        
+//        let leftNavBarButton = UIBarButtonItem(customView: searchBar)
+//        self.navigationItem.leftBarButtonItem = leftNavBarButton
     }
     
     private func setupTableConfiguration() {
@@ -91,7 +94,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: InvestmentProgramListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -106,16 +108,47 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func updateSortHeaderView() {
-        guard let title = self.viewModel.headerTitle(for: 1) else {
-            return
-        }
-        
-        let header = self.tableView.headerView(forSection: 1) as! SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
+    private func updateSortView() {
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         showProgressHUD()
         fetch()
+    }
+    
+    private func sortMethod() {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
+        
+        var selectedIndexRow = viewModel.getSelectedSortingIndex()
+        let values = viewModel.sortingValues
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
+            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
+            
+            self?.viewModel.changeSorting(at: selectedIndexRow)
+            self?.updateSortView()
+        }
+        
+        applyAction.isEnabled = false
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            
+            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
+                return applyAction.isEnabled = false
+            }
+            
+            applyAction.isEnabled = true
+            selectedIndexRow = index.row
+        }
+        
+        alert.addAction(applyAction)
+        
+        alert.addAction(title: "Cancel", style: .cancel)
+        
+        alert.show()
     }
     
     override func fetch() {
@@ -131,6 +164,14 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
+    override func sortButtonAction() {
+        sortMethod()
+    }
+    
+    override func filterButtonAction() {
+        viewModel.showFilterVC()
+    }
+    
     override func pullToRefresh() {
         super.pullToRefresh()
         
@@ -140,10 +181,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
         viewModel.showSignInVC()
-    }
-    
-    @IBAction func filtersButtonAction(_ sender: UIButton) {
-        viewModel.showFilterVC()
     }
     
     @IBAction func tournamentButtonAction(_ sender: UIButton) {
@@ -174,22 +211,6 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
-        }
-        
-        let header = tableView.dequeueReusableHeaderFooterView() as SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
-        header.delegate = self
-        
-        return header
     }
     
     // MARK: - UITableViewDataSource
@@ -250,45 +271,6 @@ extension ProgramListViewController: ProgramDetailViewControllerProtocol {
     }
 }
 
-// MARK: - SortHeaderViewProtocol
-extension ProgramListViewController: SortHeaderViewProtocol {
-    func sortButtonDidPress() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
-        
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
-            
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortHeaderView()
-        }
-        
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
-            }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
-        }
-        
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
-    }
-}
-
 extension ProgramListViewController {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
@@ -325,7 +307,7 @@ extension ProgramListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        hideKeyboard()
+        searchBar.resignFirstResponder()
         
         guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText || searchText.isEmpty && !viewModel.searchText.isEmpty else {
             return
@@ -337,7 +319,7 @@ extension ProgramListViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        hideKeyboard()
+        searchBar.resignFirstResponder()
         
         searchBar.text = ""
         

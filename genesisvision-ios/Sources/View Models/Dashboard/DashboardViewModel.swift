@@ -8,6 +8,31 @@
 
 import UIKit.UITableViewHeaderFooterView
 
+final class DashboardTabmanViewModel: TabmanViewModel {
+    // MARK: - Init
+    override init(withRouter router: Router) {
+        super.init(withRouter: router)
+        
+        title = "Dashboard"
+        style = .buttonBar
+        isScrollEnabled = false
+    }
+    
+    override func initializeViewControllers() {
+        let router = DashboardRouter(parentRouter: self.router)
+        let viewModel = DashboardViewModel(withRouter: router)
+        
+        for idx in 1...2 {
+            guard let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) else { return }
+            viewModel.activePrograms = idx == 1
+            dashboardViewController.viewModel = viewModel
+            
+            itemTitles.append(viewModel.title)
+            viewControllers.append(dashboardViewController)
+        }
+    }
+}
+
 final class DashboardViewModel {
     
     enum SectionType {
@@ -16,7 +41,9 @@ final class DashboardViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Dashboard"
+    var activePrograms = true
+    
+    var title = "Dashboard"
     
     private var sections: [SectionType] = [.header, .programList]
     
@@ -37,7 +64,14 @@ final class DashboardViewModel {
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
-    var viewModels = [DashboardTableViewCellViewModel]()
+    var viewModels = [DashboardTableViewCellViewModel]() {
+        didSet {
+            self.activeViewModels = viewModels.filter { $0.investmentProgram.isArchived != true }
+            self.archiveViewModels = viewModels.filter { $0.investmentProgram.isArchived == true }
+        }
+    }
+    var activeViewModels = [DashboardTableViewCellViewModel]()
+    var archiveViewModels = [DashboardTableViewCellViewModel]()
     
     var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]
     
@@ -114,7 +148,7 @@ extension DashboardViewModel {
     }
     
     func modelsCount() -> Int {
-        return viewModels.count
+        return activePrograms ? activeViewModels.count : archiveViewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -130,10 +164,14 @@ extension DashboardViewModel {
         }
     }
     
+    func sortTitle() -> String? {
+        return "Sort by " + getSortingValue(sortingKey: sorting)
+    }
+    
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .programList:
-            return "Sort by " + getSortingValue(sortingKey: sorting)
+            return nil
         case .header:
             return nil
         }
@@ -241,13 +279,19 @@ extension DashboardViewModel {
         case .header:
             return modelsCount() > 0 ? DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard) : nil
         case .programList:
-            return viewModels[indexPath.row]
+            return activePrograms ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
         }
     }
     
     func model(at investmentProgramId: String) -> CellViewAnyModel? {
-        if let i = viewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
-            return viewModels[i]
+        if activePrograms {
+            if let i = activeViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+                return activeViewModels[i]
+            }
+        } else {
+            if let i = archiveViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+                return archiveViewModels[i]
+            }
         }
         
         return nil
@@ -267,6 +311,8 @@ extension DashboardViewModel {
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
+//        self.activeViewModels = viewModels.filter { $0.investmentProgram.isArchived != true }
+//        self.archiveViewModels = viewModels.filter { $0.investmentProgram.isArchived == true }
         self.totalCount = totalCount
         self.skip += self.take
         self.reloadDataProtocol?.didReloadData()

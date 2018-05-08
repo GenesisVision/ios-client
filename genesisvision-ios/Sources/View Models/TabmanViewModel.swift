@@ -10,14 +10,19 @@ import UIKit
 import Pageboy
 import Tabman
 
-final class TabmanViewModel {
+protocol TabmanViewModelProtocol {
+    func initializeViewControllers()
+}
+
+class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
-    var title: String = "Tournament"
+    var title: String = ""
     
+    var style: TabmanBar.Style = .buttonBar
+    var isScrollEnabled = true
     var router: Router!
     var viewControllers = [UIViewController]()
     var itemTitles = [String]()
-    weak var pageboyViewControllerDataSource: PageboyViewControllerDataSource?
     
     // MARK: - Init
     init(withRouter router: Router) {
@@ -27,16 +32,7 @@ final class TabmanViewModel {
     }
     
     // MARK: - Public methods
-    
-    // MARK: - Private methods
-    private func initializeViewControllers() {
-        for idx in 1...4 {
-            guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return }
-            let router = TournamentRouter(parentRouter: self.router)
-            let viewModel = TournamentListViewModel(withRouter: router, roundNumber: idx)
-            viewController.viewModel = viewModel
-            itemTitles.append("Round \(idx)")
-            viewControllers.append(viewController)
-        }
+    func initializeViewControllers() {
+        //Set ViewControllers
     }
 }

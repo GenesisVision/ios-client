@@ -164,6 +164,12 @@
 		5EA1749920A0974200905253 /* TradeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1743620A0974100905253 /* TradeChart.swift */; };
 		5EA1749A20A0974200905253 /* ManagerDashboardStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1743720A0974100905253 /* ManagerDashboardStatistic.swift */; };
 		5EA1749B20A0974200905253 /* InvestmentProgramTxInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1743820A0974100905253 /* InvestmentProgramTxInfo.swift */; };
+		5EA7A0F520A0B04C00D895FC /* TournamentTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F420A0B04C00D895FC /* TournamentTabmanViewController.swift */; };
+		5EA7A0F720A0B07600D895FC /* ProgramsTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */; };
+		5EA7A0FA20A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F920A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift */; };
+		5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */; };
+		5EA7A0FE20A0B29300D895FC /* TournamentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FD20A0B29300D895FC /* TournamentViewModel.swift */; };
+		5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */; };
 		5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */; };
 		5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */; };
 		5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB62090AB1000A92B49 /* MarkerView.xib */; };
@@ -552,6 +558,12 @@
 		5EA1743620A0974100905253 /* TradeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeChart.swift; sourceTree = "<group>"; };
 		5EA1743720A0974100905253 /* ManagerDashboardStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerDashboardStatistic.swift; sourceTree = "<group>"; };
 		5EA1743820A0974100905253 /* InvestmentProgramTxInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentProgramTxInfo.swift; sourceTree = "<group>"; };
+		5EA7A0F420A0B04C00D895FC /* TournamentTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTabmanViewController.swift; sourceTree = "<group>"; };
+		5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTabmanViewController.swift; sourceTree = "<group>"; };
+		5EA7A0F920A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTabmanViewController.swift; sourceTree = "<group>"; };
+		5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewController.swift; sourceTree = "<group>"; };
+		5EA7A0FD20A0B29300D895FC /* TournamentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentViewModel.swift; sourceTree = "<group>"; };
+		5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
 		5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		5EAD0AB62090AB1000A92B49 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
@@ -995,6 +1007,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5EA7A0F820A0B08B00D895FC /* Program Details */ = {
+			isa = PBXGroup;
+			children = (
+				5EA7A0F920A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift */,
+				FCC9DD87200E61C0008825EC /* ProgramDetailViewController.swift */,
+				FC5E9049202169DC000E4A90 /* ProgramFilterViewController.swift */,
+				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
+				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
+				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
+				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
+				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
+				5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */,
+				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
+			);
+			path = "Program Details";
+			sourceTree = "<group>";
+		};
 		5EAD0AB1208F7CA900A92B49 /* EasyTipView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,6 +1180,7 @@
 		FC4964192015474B00104CEB /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */,
 				FC4964172015474700104CEB /* DashboardViewController.swift */,
 			);
 			path = Dashboard;
@@ -1254,6 +1284,7 @@
 		FC4C1949203050E400625795 /* Tournament */ = {
 			isa = PBXGroup;
 			children = (
+				5EA7A0FD20A0B29300D895FC /* TournamentViewModel.swift */,
 				FC92CB252030290A00CDBF19 /* TournamentListViewModel.swift */,
 				FC4C1947203050DD00625795 /* TournamentDetailViewModel.swift */,
 			);
@@ -1394,6 +1425,7 @@
 		FC92CB2920304B3100CDBF19 /* Tournament */ = {
 			isa = PBXGroup;
 			children = (
+				5EA7A0F420A0B04C00D895FC /* TournamentTabmanViewController.swift */,
 				FC92CB2720304B2B00CDBF19 /* TournamentListViewController.swift */,
 				FC4C194F2030555700625795 /* TournamentDetailViewController.swift */,
 			);
@@ -1490,6 +1522,7 @@
 		FCBD22BE2019E925000B8E38 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */,
 				5EA173D020A082AE00905253 /* TabmanViewModel.swift */,
 				FCA19A3C201AE35800157AD6 /* WelcomeViewModel.swift */,
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
@@ -1661,7 +1694,6 @@
 				FC4964192015474B00104CEB /* Dashboard */,
 				FC49641C2015489B00104CEB /* Welcome */,
 				FC92CB2920304B3100CDBF19 /* Tournament */,
-				5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1784,16 +1816,9 @@
 		FCC9DD6F200E4C7E008825EC /* Programs */ = {
 			isa = PBXGroup;
 			children = (
+				5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */,
 				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
-				FCC9DD87200E61C0008825EC /* ProgramDetailViewController.swift */,
-				FC5E9049202169DC000E4A90 /* ProgramFilterViewController.swift */,
-				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
-				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
-				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
-				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
-				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
-				5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */,
-				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
+				5EA7A0F820A0B08B00D895FC /* Program Details */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1813,6 +1838,7 @@
 				FCC9DD78200E4CCF008825EC /* BaseTabBarController.swift */,
 				FCC9DD79200E4CCF008825EC /* BaseViewController.swift */,
 				5EB8E9DB207263B100F46A8A /* InfoViewController.swift */,
+				5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2033,6 +2059,7 @@
 				5E1813832061D36700481646 /* UIView+Extensions.swift in Sources */,
 				5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
+				5EA7A0FA20A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				5EA1747D20A0974100905253 /* EndOfNextPeriod.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
@@ -2110,6 +2137,7 @@
 				5EA1747C20A0974100905253 /* ManagerDashboardProgramsFilter.swift in Sources */,
 				FC91379220311CA6002321C7 /* Utils.swift in Sources */,
 				FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */,
+				5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */,
 				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				5EA1746F20A0974100905253 /* ManagerInvestmentPrograms.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
@@ -2147,6 +2175,7 @@
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
 				5EA1749320A0974200905253 /* InvestmentProgramUpdate.swift in Sources */,
 				5EA1745220A0974100905253 /* ErrorViewModel.swift in Sources */,
+				5EA7A0F720A0B07600D895FC /* ProgramsTabmanViewController.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
 				5EA1749B20A0974200905253 /* InvestmentProgramTxInfo.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
@@ -2242,6 +2271,7 @@
 				5EA1749620A0974200905253 /* UploadResult.swift in Sources */,
 				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
 				5EA1744220A0974100905253 /* TradesFilter.swift in Sources */,
+				5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
 				5EA1746A20A0974100905253 /* BrokerTradeServer.swift in Sources */,
@@ -2264,7 +2294,9 @@
 				5EA1745520A0974100905253 /* RegisterInvestorViewModel.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
 				FCA5706A2027395E001942F3 /* UIImage+Placeholder.swift in Sources */,
+				5EA7A0F520A0B04C00D895FC /* TournamentTabmanViewController.swift in Sources */,
 				5E18138A2062487200481646 /* ProgramDetailsTableViewCell.swift in Sources */,
+				5EA7A0FE20A0B29300D895FC /* TournamentViewModel.swift in Sources */,
 				FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */,
 				5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */,
 				FC27226E20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift in Sources */,

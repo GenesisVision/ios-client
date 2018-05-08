@@ -32,6 +32,15 @@ class BaseNavigationController: UINavigationController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return AppearanceController.theme == .dark ? .lightContent : .default
+        guard let topViewController = self.topViewController else {
+            return AppearanceController.theme == .dark ? .lightContent : .default
+        }
+      
+        switch topViewController {
+        case is ProgramInvestViewController, is ProgramWithdrawViewController, is InfoViewController:
+            return .lightContent
+        default:
+            return AppearanceController.theme == .dark ? .lightContent : .default
+        }
     }
 }

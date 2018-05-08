@@ -264,7 +264,9 @@ class ChartView: CombinedChartView {
         legend.enabled = false
         autoScaleMinMaxEnabled = true
         
-        animate(xAxisDuration: 0.5)
+        if chartType != .default {
+            animate(xAxisDuration: 0.5)
+        }
     }
     
     private func setData(_ values: [TradeChart]?) {

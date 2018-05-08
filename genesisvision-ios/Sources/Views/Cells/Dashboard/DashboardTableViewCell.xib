@@ -161,11 +161,11 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oov-St-53Q">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oov-St-53Q">
                                 <rect key="frame" x="0.0" y="220" width="438" height="94"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-rw-8SQ">
-                                        <rect key="frame" x="0.0" y="26" width="140.5" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="140.5" height="68"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NY-7S-3mt" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="54.5" y="0.0" width="32" height="18"/>
@@ -195,7 +195,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2n5-yR-XKt">
-                                        <rect key="frame" x="148.5" y="26" width="141" height="68"/>
+                                        <rect key="frame" x="148.5" y="0.0" width="141" height="68"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-8f-bIQ" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="54.5" y="0.0" width="32" height="18"/>

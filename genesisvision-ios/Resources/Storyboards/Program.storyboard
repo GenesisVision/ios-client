@@ -378,7 +378,7 @@
                                 <rect key="frame" x="0.0" y="166" width="375" height="228"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EXQ-zl-HAW">
-                                        <rect key="frame" x="8" y="39.5" width="359" height="150"/>
+                                        <rect key="frame" x="8" y="40" width="359" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="CYS-mH-rWN">
                                                 <rect key="frame" x="143.5" y="0.0" width="72" height="72"/>
@@ -412,13 +412,13 @@
                                                 <rect key="frame" x="149.5" y="102" width="60" height="48"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bHJ-gg-OLG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.5" width="24" height="48"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="48"/>
                                                         <color key="textColor" red="0.8901960784313725" green="0.92156862745098034" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAq-c5-AYD" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="28" y="0.0" width="32" height="18"/>
+                                                        <rect key="frame" x="28" y="0.5" width="32" height="18"/>
                                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="5qQ-Ob-gYY"/>
@@ -1222,6 +1222,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8B-2K-OEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4301.6000000000004" y="2326.6866566716644"/>
+        </scene>
+        <!--Program Detail Tabman View Controller-->
+        <scene sceneID="Pn3-fv-ghG">
+            <objects>
+                <viewController storyboardIdentifier="ProgramDetailTabmanViewController" id="QIW-XK-euv" customClass="ProgramDetailTabmanViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9pp-bA-PxQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TVw-eJ-b11"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SFH-V3-trE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="778" y="1636"/>
         </scene>
     </scenes>
     <resources>

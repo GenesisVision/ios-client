@@ -20,7 +20,6 @@ class DashboardTableViewCell: PlateTableViewCell {
     var isEnable: Bool = false {
         didSet {
             updatePeriodLeftValueLabel()
-            contentView.backgroundColor = isEnable ? UIColor.Cell.bg : UIColor.Cell.unableBg
         }
     }
     

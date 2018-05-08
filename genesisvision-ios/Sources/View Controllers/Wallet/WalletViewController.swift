@@ -42,6 +42,9 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        bottomViewType = .sort
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        
         updateTitle()
     }
     
@@ -55,7 +58,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: WalletControllerViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: WalletControllerViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -74,13 +76,8 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func updateSortHeaderView() {
-        guard let title = self.viewModel.headerTitle(for: 1) else {
-            return
-        }
-        
-        let header = self.tableView.headerView(forSection: 1) as! SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
+    private func updateSortView() {
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         showProgressHUD()
         fetchTransactions()
@@ -111,7 +108,50 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     private func update(sorting type: TransactionsFilter.ModelType) {
         viewModel.filter?.type = type
-        updateSortHeaderView()
+        updateSortView()
+    }
+    
+    private func sortMethod() {
+        guard let type: TransactionsFilter.ModelType = viewModel.filter?.type else {
+            return
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.primary
+        
+        let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: .all)
+        }
+        let internalAction = UIAlertAction(title: "Internal", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: ._internal)
+        }
+        let externalAction = UIAlertAction(title: "External", style: .default) { [weak self] (UIAlertAction) in
+            self?.update(sorting: .external)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        switch type {
+        case .all:
+            allAction.isEnabled = false
+        case ._internal:
+            internalAction.isEnabled = false
+        case .external:
+            externalAction.isEnabled = false
+        }
+        
+        alert.addAction(allAction)
+        alert.addAction(internalAction)
+        alert.addAction(externalAction)
+        alert.addAction(cancelAction)
+        
+        alert.popoverPresentationController?.sourceView = sortButton
+        alert.popoverPresentationController?.sourceRect = sortButton.bounds
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    override func sortButtonAction() {
+        sortMethod()
     }
     
     // MARK: - Actions
@@ -152,22 +192,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
-        }
-
-        let header = tableView.dequeueReusableHeaderFooterView() as SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
-        header.delegate = self
-
-        return header
     }
 }
 
@@ -225,49 +249,6 @@ extension WalletViewController {
                           NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
 
         return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-
-extension WalletViewController: SortHeaderViewProtocol {
-    func sortButtonDidPress() {
-        guard let type: TransactionsFilter.ModelType = viewModel.filter?.type else {
-            return
-        }
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.primary
-        
-        let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .all)
-        }
-        let internalAction = UIAlertAction(title: "Internal", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: ._internal)
-        }
-        let externalAction = UIAlertAction(title: "External", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .external)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        switch type {
-        case .all:
-            allAction.isEnabled = false
-        case ._internal:
-            internalAction.isEnabled = false
-        case .external:
-            externalAction.isEnabled = false
-        }
-        
-        alert.addAction(allAction)
-        alert.addAction(internalAction)
-        alert.addAction(externalAction)
-        alert.addAction(cancelAction)
-        
-        if let header = tableView.headerView(forSection: 1) {
-            alert.popoverPresentationController?.sourceView = header
-            alert.popoverPresentationController?.sourceRect = header.bounds
-        }
-        
-        present(alert, animated: true, completion: nil)
     }
 }
 

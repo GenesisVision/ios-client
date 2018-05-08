@@ -109,6 +109,9 @@ extension TournamentListViewModel {
             return 0.0
         }
     }
+    func numberOfSections() -> Int {
+        return 1
+    }
     
     func numberOfRows(in section: Int) -> Int {
         return modelsCount()

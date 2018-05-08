@@ -31,6 +31,10 @@ class InfoViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - Private methods
     private func setupUI() {
         if let iconImage = viewModel?.iconImage {

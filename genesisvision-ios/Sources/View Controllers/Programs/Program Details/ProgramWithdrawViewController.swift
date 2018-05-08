@@ -68,6 +68,10 @@ class ProgramWithdrawViewController: BaseViewController {
         setupNavigationBar()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - Private methods
     private func setupUI() {
         setupNavigationBar(with: .primary)

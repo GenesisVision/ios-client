@@ -29,5 +29,7 @@ extension String {
         static var chart: String = "Equity – current condition of a trading account. It is intended for maintaining Manager's opened positions.".localized
         
         static var programDetails: String = totalProfit + "\n············································\n" + avgProfit + "\n············································\n" + balance + "\n············································\n" + investors
+        
+        static var dashboardHeader: String = portfolioProfit + "\n············································\n" + portfolioInvested + "\n············································\n" + portfolioValue
     }
 }

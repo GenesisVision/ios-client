@@ -172,7 +172,6 @@ extension UIColor {
     struct Cell {
         static var separator: UIColor { return Common.separator }
         static var bg: UIColor { return AppearanceController.theme == .dark ? #colorLiteral(red: 0.2941176471, green: 0.3019607843, blue: 0.3137254902, alpha: 1) : Common.white }
-        static var unableBg: UIColor { return AppearanceController.theme == .dark ? Common.darkBlue.withAlphaComponent(0.7) : Common.gray }
         static var selectedBg: UIColor { return AppearanceController.theme == .dark ? Common.darkBlue.withAlphaComponent(0.7) : Common.lightGray }
         
         static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.amountDarkBlue }

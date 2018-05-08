@@ -10,7 +10,7 @@ import UIKit.UIButton
 
 class ActionButton: UIButton {
     
-    var cornerSize: CGFloat = 6.0
+    var cornerSize: CGFloat = Constants.SystemSizes.cornerSize
     var borderSize: CGFloat = 0.0
     var customBorderColor: UIColor? = .white
     var borderAlpha: CGFloat = 1.0
@@ -18,6 +18,10 @@ class ActionButton: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         layer.cornerRadius = cornerSize
         layer.borderColor = customBorderColor?.withAlphaComponent(borderAlpha).cgColor
@@ -37,7 +41,6 @@ class ActionButton: UIButton {
         layer.shadowRadius = 6.0
         layer.masksToBounds = true
     }
-    
     
     func setEnabled(_ value: Bool) {
         isUserInteractionEnabled = value

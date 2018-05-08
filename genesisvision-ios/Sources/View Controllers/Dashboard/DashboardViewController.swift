@@ -15,6 +15,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
 
     // MARK: - Variables
     private var feedbackBarButtonItem: UIBarButtonItem?
+    private var segmentedControl: UISegmentedControl = UISegmentedControl(items: ["Active", "Archive"])
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -57,11 +58,22 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        bottomViewType = .sort
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        
         title = viewModel.title.uppercased()
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
         feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
-        navigationItem.rightBarButtonItem = feedbackBarButtonItem
+//        navigationItem.rightBarButtonItem = feedbackBarButtonItem
+        
+        segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
+        segmentedControl.tintColor = UIColor.primary
+        segmentedControl.selectedSegmentIndex = 0
+        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16)]
+        segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
+        segmentedControl.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
+        navigationItem.titleView = segmentedControl
     }
     
     private func setupTableConfiguration() {
@@ -69,7 +81,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: DashboardViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: InvestmentProgramListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -80,13 +91,8 @@ class DashboardViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func updateSortHeaderView() {
-        guard let title = self.viewModel.headerTitle(for: 1) else {
-            return
-        }
-        
-        let header = self.tableView.headerView(forSection: 1) as! SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
+    private func updateSortView() {
+        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         showProgressHUD()
         fetch()
@@ -111,6 +117,10 @@ class DashboardViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
+    override func sortButtonAction() {
+        sortMethod()
+    }
+    
     // MARK: - Actions
     @IBAction func feedbackButtonAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
@@ -127,6 +137,47 @@ class DashboardViewController: BaseViewControllerWithTableView {
         alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler:nil))
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func segmentSelected(sender: UISegmentedControl) {
+        viewModel.activePrograms = sender.selectedSegmentIndex == 0
+        reloadData()
+    }
+    
+    @objc func sortMethod() {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
+        
+        var selectedIndexRow = viewModel.getSelectedSortingIndex()
+        let values = viewModel.sortingValues
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
+            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
+            
+            self?.viewModel.changeSorting(at: selectedIndexRow)
+            self?.updateSortView()
+        }
+        
+        applyAction.isEnabled = false
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            
+            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
+                return applyAction.isEnabled = false
+            }
+            
+            applyAction.isEnabled = true
+            selectedIndexRow = index.row
+        }
+        
+        alert.addAction(applyAction)
+        
+        alert.addAction(title: "Cancel", style: .cancel)
+        
+        alert.show()
     }
 }
 
@@ -163,22 +214,6 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = cell as? DashboardTableViewCell {
             cell.stopTimer()
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
-        }
-        
-        let header = tableView.dequeueReusableHeaderFooterView() as SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
-        header.delegate = self
-        
-        return header
     }
     
     // MARK: - UITableViewDataSource
@@ -240,44 +275,6 @@ extension DashboardViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         push(viewController: viewControllerToCommit)
-    }
-}
-
-extension DashboardViewController: SortHeaderViewProtocol {
-    func sortButtonDidPress() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
-        
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
-            
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortHeaderView()
-        }
-        
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
-            }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
-        }
-        
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
     }
 }
 

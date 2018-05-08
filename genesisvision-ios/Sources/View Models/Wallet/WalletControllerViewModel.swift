@@ -82,12 +82,15 @@ extension WalletControllerViewModel {
             return transactions.count
         }
     }
+    func sortTitle() -> String? {
+        guard let sort = filter?.type?.rawValue else { return ""}
+        return sort + " Transactions"
+    }
     
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .transactions:
-            guard let sort = filter?.type?.rawValue else { return ""}
-            return sort + " Transactions"
+            return nil
         case .header:
             return nil
         }

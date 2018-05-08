@@ -180,12 +180,16 @@ extension InvestmentProgramListViewModel {
         }
     }
     
+    func sortTitle() -> String? {
+        guard let sort = filter?.sorting else { return "Sort by " }
+        
+        return "Sort by " + getSortingValue(sortingKey: sort)
+    }
+        
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .programList:
-            guard let sort = filter?.sorting else { return "Sort by " }
-            
-            return "Sort by " + getSortingValue(sortingKey: sort)
+            return nil
         case .header:
             return nil
         }

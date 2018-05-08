@@ -89,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="4577" y="905"/>
         </scene>
-        <!--Base Tabman View Controller-->
+        <!--Tournament Tabman View Controller-->
         <scene sceneID="4Tb-7I-fXw">
             <objects>
-                <viewController storyboardIdentifier="BaseTabmanViewController" id="ADh-z4-mFO" customClass="BaseTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TournamentTabmanViewController" id="ADh-z4-mFO" customClass="TournamentTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aO3-oo-Kvg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

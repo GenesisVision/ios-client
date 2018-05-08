@@ -95,7 +95,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
         circleView.clipsToBounds = true
         chartView.addSubview(circleView)
         
-        markerView.layer.cornerRadius = 6.0
+        markerView.layer.cornerRadius = Constants.SystemSizes.cornerSize
         addSubview(markerView)
         
         hideMarker()

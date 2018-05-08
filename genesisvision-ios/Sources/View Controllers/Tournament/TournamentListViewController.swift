@@ -39,17 +39,12 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: TournamentListViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: TournamentListViewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -58,6 +53,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         registerForPreviewing()
         
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        
         showProgressHUD()
         fetch()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.plain, target:nil, action:nil)
@@ -116,26 +112,13 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
-        }
-        
-        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
-        header.headerLabel.font = UIFont.getFont(.regular, size: 15)
-        header.headerLabel.text = title
-        header.headerLabel.textColor = UIColor.Font.medium
-        return header
-    }
-    
-    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
     }
 }
 

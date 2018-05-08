@@ -11,27 +11,45 @@ import UIKit
 class DashboardHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Labels
-    @IBOutlet var profitFromProgramsLabel: BalanceLabel! {
+    @IBOutlet var portfolioProfitLabel: BalanceLabel! {
         didSet {
-            profitFromProgramsLabel.textColor = UIColor.Header.title
+            portfolioProfitLabel.textColor = UIColor.Header.title
         }
     }
     
-    @IBOutlet var profitFromProgramsTitleLabel: UILabel! {
+    @IBOutlet var portfolioProfitTitleLabel: UILabel! {
         didSet {
-            profitFromProgramsTitleLabel.textColor = UIColor.Header.subtitle
+            portfolioProfitTitleLabel.textColor = UIColor.Header.subtitle
         }
     }
     
-    @IBOutlet var investedAmountLabel: BalanceLabel! {
+    @IBOutlet var portfolioInvestedLabel: BalanceLabel! {
         didSet {
-            investedAmountLabel.textColor = UIColor.Header.title
+            portfolioInvestedLabel.textColor = UIColor.Header.title
         }
     }
     
-    @IBOutlet var investedAmountTitleLabel: UILabel! {
+    @IBOutlet var portfolioInvestedTitleLabel: UILabel! {
         didSet {
-            investedAmountTitleLabel.textColor = UIColor.Header.subtitle
+            portfolioInvestedTitleLabel.textColor = UIColor.Header.subtitle
+        }
+    }
+    
+    @IBOutlet var portfolioValueLabel: BalanceLabel! {
+        didSet {
+            portfolioValueLabel.textColor = UIColor.Header.title
+        }
+    }
+    
+    @IBOutlet var portfolioValueTitleLabel: UILabel! {
+        didSet {
+            portfolioValueTitleLabel.textColor = UIColor.Header.subtitle
+        }
+    }
+    
+    @IBOutlet var portfolioInvestedTooltip: TooltipButton! {
+        didSet {
+            portfolioInvestedTooltip.tooltipText = String.Tooltitps.portfolioInvested
         }
     }
     
@@ -41,11 +59,13 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var portfolioInvestedTooltip: TooltipButton! {
+    @IBOutlet var portfolioValueTooltip: TooltipButton! {
         didSet {
-            portfolioInvestedTooltip.tooltipText = String.Tooltitps.portfolioInvested
+            portfolioValueTooltip.tooltipText = String.Tooltitps.portfolioValue
         }
     }
+    
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

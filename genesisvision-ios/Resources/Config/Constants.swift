@@ -66,7 +66,7 @@ final class Constants {
         static let equityChartLength: Int = 36
         
         struct Main {
-            static let debug = "https://tost.genesis.vision"
+            static let debug = "https://alpha.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         
@@ -126,6 +126,7 @@ final class Constants {
     }
     
     struct SystemSizes {
+        static let cornerSize: CGFloat = 6.0
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
 }

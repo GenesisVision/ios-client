@@ -42,6 +42,19 @@ class Router {
         
         var navigationController = BaseNavigationController()
         
+//        if isInvestorApp, let dashboardTabmanViewController = DashboardTabmanViewController.storyboardInstance(name: .dashboard) {
+//            self.dashboardTabmanViewController = dashboardTabmanViewController
+//
+//            navigationController = BaseNavigationController(rootViewController: dashboardTabmanViewController)
+//            let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
+//            childRouters.append(router)
+//            dashboardTabmanViewController.viewModel = DashboardTabmanViewModel(withRouter: router)
+//            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
+//            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
+//            navigationController.tabBarItem.title = "DASHBOARD"
+//            viewControllers.append(navigationController)
+//        }
+        
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
             self.dashboardViewController = dashboardViewController
             

@@ -21,3 +21,8 @@ protocol UIViewControllerWithFetching {
     func fetch()
     func fetchMore()
 }
+
+protocol UIViewControllerWithFilter {
+    func sortButtonAction()
+    func filterButtonAction()
+}

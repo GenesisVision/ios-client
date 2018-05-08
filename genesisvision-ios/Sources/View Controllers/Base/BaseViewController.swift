@@ -78,6 +78,10 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
     }
 }
 
+enum BottomViewType {
+    case none, login, sort, filter, sortAndFilter
+}
+
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
     // MARK: - Veriables
     var tableView: UITableView!
@@ -85,6 +89,56 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
     
+    private var lastContentOffset: CGPoint = .zero
+    
+    var sortButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitle("Sort by profit", for: .normal)
+        btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    var filterButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.tintColor = UIColor.white
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
+        btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    private let bottomStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.spacing = 8.0
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    var bottomViewType: BottomViewType = .none {
+        didSet {
+            sortButton.isHidden = true
+            filterButton.isHidden = true
+            bottomStackView.isHidden = false
+            
+            switch bottomViewType {
+            case .none:
+                bottomStackView.isHidden = true
+            case .sort:
+                sortButton.isHidden = false
+            case .filter:
+                filterButton.isHidden = false
+            case .sortAndFilter:
+                sortButton.isHidden = false
+                filterButton.isHidden = false
+            default:
+                break
+            }
+        }
+    }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +161,30 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.backgroundColor = UIColor.BaseView.bg
         
         refreshControl?.endRefreshing()
+        
+        setupViews()
+        setupAutoLayout()
+    }
+    
+    private func setupViews() {
+        bottomStackView.addArrangedSubview(sortButton)
+        bottomStackView.addArrangedSubview(filterButton)
+        
+        view.addSubview(bottomStackView)
+        
+        bottomViewType = .none
+    }
+    
+    private func setupAutoLayout() {
+        sortButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sortButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        filterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+        bottomStackView.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,6 +239,34 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
 }
 
+extension BaseViewControllerWithTableView: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffset = scrollView.contentOffset
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset.y < scrollView.contentOffset.y) {
+            UIView.animate(withDuration: 0.3) {
+                self.bottomStackView.alpha = 0.0
+            }
+        } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
+            UIView.animate(withDuration: 0.3) {
+                self.bottomStackView.alpha = 1.0
+            }
+        }
+    }
+}
+
+extension BaseViewControllerWithTableView: UIViewControllerWithFilter {
+    @objc func filterButtonAction() {
+        
+    }
+    
+    @objc func sortButtonAction() {
+        
+    }
+}
+    
 extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let tabBarIndex = tabBarController.selectedIndex

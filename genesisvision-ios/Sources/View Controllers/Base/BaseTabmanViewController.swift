@@ -32,12 +32,13 @@ class BaseTabmanViewController: TabmanViewController {
         for itemTitle in viewModel.itemTitles {
             barItems.append(Item(title: itemTitle))
         }
-        
+
         bar.items = barItems
-        bar.style = .buttonBar
+        bar.style = viewModel.style
         bar.location = .top
-        
+
         bar.appearance = TabmanBar.Appearance({ (appearance) in
+            appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
             appearance.style.background = .clear
             appearance.style.showEdgeFade = true
             appearance.indicator.color = UIColor.primary
@@ -60,4 +61,3 @@ extension BaseTabmanViewController: PageboyViewControllerDataSource {
         return .first
     }
 }
-
