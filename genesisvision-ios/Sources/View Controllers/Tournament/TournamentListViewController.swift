@@ -196,3 +196,10 @@ extension TournamentListViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - ReloadDataProtocol
+extension TournamentListViewController: ReloadDataProtocol {
+    func didReloadData() {
+        reloadData()
+    }
+}
+

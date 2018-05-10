@@ -94,6 +94,8 @@ class ProgramInvestViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
+        view.backgroundColor = UIColor.Background.main
+        
         setupNavigationBar(with: .primary)
         
         investButton(enable: false)

@@ -22,18 +22,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translucent="NO" id="1W0-mg-OlJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                    <scopeButtonTitles>
-                                        <string>Title</string>
-                                        <string>Title</string>
-                                    </scopeButtonTitles>
-                                </searchBar>
                                 <connections>
                                     <outlet property="dataSource" destination="4qn-RU-Ufu" id="vv8-Nx-FKJ"/>
                                     <outlet property="delegate" destination="4qn-RU-Ufu" id="wQZ-cu-ubr"/>
@@ -84,7 +72,6 @@
                     <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
                     <connections>
                         <outlet property="gradientView" destination="GKl-na-XEw" id="Bs5-qe-b3o"/>
-                        <outlet property="searchBar" destination="1W0-mg-OlJ" id="BNO-Uu-AKv"/>
                         <outlet property="signInButton" destination="cvZ-bk-mvw" id="laf-Wh-Kd5"/>
                         <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
                     </connections>

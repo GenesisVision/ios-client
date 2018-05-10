@@ -23,6 +23,8 @@ class BaseTabmanViewController: TabmanViewController {
     
     // MARK: - Private methods
     func setup() {
+        view.backgroundColor = UIColor.BaseView.bg
+        
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
         self.dataSource = self
@@ -39,11 +41,23 @@ class BaseTabmanViewController: TabmanViewController {
 
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
-            appearance.style.background = .clear
-            appearance.style.showEdgeFade = true
-            appearance.indicator.color = UIColor.primary
+            appearance.layout.itemDistribution = .centered
+            appearance.layout.interItemSpacing = 8.0
+            appearance.layout.edgeInset = 0.0
+            
             appearance.state.selectedColor = UIColor.primary
-            appearance.text.font = UIFont.getFont(.light, size: 21)
+            appearance.state.shouldHideWhenSingleItem = true
+            
+            appearance.style.imageRenderingMode = .alwaysTemplate
+            appearance.style.showEdgeFade = false
+            appearance.style.background = .solid(color: UIColor.BaseView.bg)
+            
+            appearance.indicator.color = UIColor.primary
+            appearance.indicator.bounces = true
+            appearance.indicator.isProgressive = false
+            appearance.indicator.compresses = false
+            
+            appearance.text.font = UIFont.getFont(.regular, size: 16)
         })
     }
 }

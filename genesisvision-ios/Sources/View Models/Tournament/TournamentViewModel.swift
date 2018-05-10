@@ -18,7 +18,7 @@ final class TournamentViewModel: TabmanViewModel {
         for idx in 1...4 {
             guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return }
             let router = TournamentRouter(parentRouter: self.router)
-            let viewModel = TournamentListViewModel(withRouter: router, roundNumber: idx)
+            let viewModel = TournamentListViewModel(withRouter: router, reloadDataProtocol: viewController, roundNumber: idx)
             viewController.viewModel = viewModel
             itemTitles.append("Round \(idx)")
             viewControllers.append(viewController)

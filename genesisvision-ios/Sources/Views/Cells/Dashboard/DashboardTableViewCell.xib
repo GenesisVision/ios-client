@@ -143,13 +143,16 @@
                                                     <action selector="favoriteButtonAction:" destination="G0j-19-aRK" eventType="touchUpInside" id="B0I-Tj-qtG"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzT-Ox-Mxj" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="6" y="44" width="32" height="18"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nC5-rj-s50" customClass="TournamentPlaceLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="9" y="44" width="26" height="18"/>
+                                                <color key="backgroundColor" red="0.80784313730000001" green="0.7725490196" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzT-Ox-Mxj" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="62" width="34.5" height="0.0"/>
                                                 <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="32" id="JJK-Zp-myg"/>
-                                                    <constraint firstAttribute="height" constant="18" id="XOL-Pw-jCq"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -168,12 +171,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="140.5" height="68"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NY-7S-3mt" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="54.5" y="0.0" width="32" height="18"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="34" height="18"/>
                                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="O42-GP-IPz"/>
-                                                    <constraint firstAttribute="width" constant="32" id="nib-rB-bh2"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -198,12 +197,8 @@
                                         <rect key="frame" x="148.5" y="0.0" width="141" height="68"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-8f-bIQ" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="54.5" y="0.0" width="32" height="18"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="34" height="18"/>
                                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="32" id="m02-aa-FE7"/>
-                                                    <constraint firstAttribute="height" constant="18" id="uSq-X1-hyu"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -293,6 +288,7 @@
                 <outlet property="noDataLabel" destination="i6Y-DK-ndn" id="cQa-p1-sI4"/>
                 <outlet property="periodLeftTitleLabel" destination="US5-xa-Ovc" id="IJJ-TP-5So"/>
                 <outlet property="periodLeftValueLabel" destination="ZCG-vf-c5T" id="7eA-nG-z8E"/>
+                <outlet property="placeLabel" destination="nC5-rj-s50" id="dEo-Ac-kDn"/>
                 <outlet property="profitTitleLabel" destination="gbR-ie-YIm" id="Eru-BI-VTN"/>
                 <outlet property="profitValueLabel" destination="rSB-y4-AYb" id="OiL-dg-kai"/>
                 <outlet property="programLogoImageView" destination="gZn-aF-3g1" id="hn7-lI-N2M"/>

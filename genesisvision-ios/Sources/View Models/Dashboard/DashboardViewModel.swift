@@ -19,17 +19,13 @@ final class DashboardTabmanViewModel: TabmanViewModel {
     }
     
     override func initializeViewControllers() {
-        let router = DashboardRouter(parentRouter: self.router)
+        guard let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) else { return }
+        let navigationController = BaseNavigationController(rootViewController: dashboardViewController)
+        let router = DashboardRouter(parentRouter: self.router, navigationController: navigationController)
         let viewModel = DashboardViewModel(withRouter: router)
-        
-        for idx in 1...2 {
-            guard let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) else { return }
-            viewModel.activePrograms = idx == 1
-            dashboardViewController.viewModel = viewModel
-            
-            itemTitles.append(viewModel.title)
-            viewControllers.append(dashboardViewController)
-        }
+        dashboardViewController.viewModel = viewModel
+        itemTitles.append(viewModel.title)
+        viewControllers.append(navigationController)
     }
 }
 

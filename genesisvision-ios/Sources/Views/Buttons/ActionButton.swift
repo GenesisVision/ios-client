@@ -15,6 +15,7 @@ class ActionButton: UIButton {
     var customBorderColor: UIColor? = .white
     var borderAlpha: CGFloat = 1.0
     var fontSize: CGFloat = 14.0
+    var bgColor: UIColor = UIColor.Button.primary
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +32,7 @@ class ActionButton: UIButton {
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
         setTitleColor(UIColor.Font.white, for: .normal)
         
-        backgroundColor = UIColor.Button.primary
+        backgroundColor = bgColor
     }
     
     func addShadow() {

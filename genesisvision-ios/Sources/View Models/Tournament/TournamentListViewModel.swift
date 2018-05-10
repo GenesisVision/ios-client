@@ -12,12 +12,17 @@ final class TournamentListViewModel {
     // MARK: - Variables
     var title: String = "Tournament"
     var router: TournamentRouter!
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var programsCount: String = ""
     var equityChartLength = Constants.Api.equityChartLength
-    var skip = 0
+    var skip = 0 {
+        didSet {
+            filter?.skip = skip
+        }
+    }
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
@@ -30,12 +35,14 @@ final class TournamentListViewModel {
             filter?.name = searchText
         }
     }
-    var traderTableViewCellViewModels = [TraderTableViewCellViewModel]()
+    var tournamentTableViewCellViewModels = [TournamentTableViewCellViewModel]()
     var filter: InvestmentProgramsFilter?
     
     // MARK: - Init
-    init(withRouter router: TournamentRouter, roundNumber: Int?) {
+    init(withRouter router: TournamentRouter, reloadDataProtocol: ReloadDataProtocol?, roundNumber: Int?) {
         self.router = router
+        self.reloadDataProtocol = reloadDataProtocol
+        
         filter = InvestmentProgramsFilter(managerId: nil,
                                           brokerId: nil,
                                           brokerTradeServerId: nil,
@@ -87,7 +94,7 @@ extension TournamentListViewModel {
     // MARK: - Variables
     /// Return view models for registration cell Nib files
     static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [TraderTableViewCellViewModel.self]
+        return [TournamentTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -148,7 +155,7 @@ extension TournamentListViewModel {
         
         canFetchMoreResults = false
         fetch(withSearchText: searchText, { [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.traderTableViewCellViewModels ?? [TraderTableViewCellViewModel]()
+            var allViewModels = self?.tournamentTableViewCellViewModels ?? [TournamentTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -174,28 +181,30 @@ extension TournamentListViewModel {
     }
     
     func modelsCount() -> Int {
-        return traderTableViewCellViewModels.count
+        return tournamentTableViewCellViewModels.count
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> TraderTableViewCellViewModel? {
-        return traderTableViewCellViewModels[index]
+    func model(for index: Int) -> TournamentTableViewCellViewModel? {
+        return tournamentTableViewCellViewModels[index]
     }
     
     // MARK: - Private methods
-    private func fakeViewModels(completion: (_ traderCellModels: [TraderTableViewCellViewModel]) -> Void) {
-        let cellModels = [TraderTableViewCellViewModel]()
+    private func fakeViewModels(completion: (_ traderCellModels: [TournamentTableViewCellViewModel]) -> Void) {
+        let cellModels = [TournamentTableViewCellViewModel]()
         
         completion(cellModels)
     }
     
-    private func updateFetchedData(totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) {
-        self.traderTableViewCellViewModels = viewModels
+    private func updateFetchedData(totalCount: Int, _ viewModels: [TournamentTableViewCellViewModel]) {
+        self.tournamentTableViewCellViewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
+        self.canFetchMoreResults = true
+        self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TraderTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(withSearchText name: String?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [TournamentTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
@@ -203,13 +212,13 @@ extension TournamentListViewModel {
             ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (investmentProgramsViewModel) in
                 guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                var investmentProgramViewModels = [TraderTableViewCellViewModel]()
+                var investmentProgramViewModels = [TournamentTableViewCellViewModel]()
                 
                 let totalCount = investmentPrograms.total ?? 0
                 
                 investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
-                    let traderTableViewCellModel = TraderTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
-                    investmentProgramViewModels.append(traderTableViewCellModel)
+                    let tournamentTableViewCellViewModel = TournamentTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
+                    investmentProgramViewModels.append(tournamentTableViewCellViewModel)
                 })
                 
                 completionSuccess(totalCount, investmentProgramViewModels)

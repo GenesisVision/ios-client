@@ -1,5 +1,5 @@
 //
-//  TraderTableViewCell.swift
+//  ProgramTableViewCell.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 16.01.18.
@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class TraderTableViewCell: PlateTableViewCell {
+class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
     weak var delegate: ProgramDetailViewControllerProtocol?
@@ -56,6 +56,7 @@ class TraderTableViewCell: PlateTableViewCell {
     }
     
     @IBOutlet var currencyLabel: CurrencyLabel!
+    @IBOutlet var placeLabel: TournamentPlaceLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

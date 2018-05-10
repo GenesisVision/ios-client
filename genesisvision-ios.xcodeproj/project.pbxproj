@@ -371,10 +371,10 @@
 		FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD42200DFA5E008825EC /* Main.storyboard */; };
 		FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5A200DFFB8008825EC /* Profile.storyboard */; };
 		FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5C200DFFDC008825EC /* Programs.storyboard */; };
-		FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */; };
-		FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */; };
+		FCC9DD60200E20DB008825EC /* ProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */; };
+		FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */; };
 		FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD62200E2246008825EC /* CellViewModel.swift */; };
-		FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */; };
+		FCC9DD66200E3AB7008825EC /* TournamentTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD65200E3AB7008825EC /* TournamentTableViewCellViewModel.swift */; };
 		FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */; };
 		FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD74200E4CAE008825EC /* ProfileViewController.swift */; };
 		FCC9DD7A200E4CCF008825EC /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD77200E4CCF008825EC /* BaseNavigationController.swift */; };
@@ -775,10 +775,10 @@
 		FCC9DD42200DFA5E008825EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FCC9DD5A200DFFB8008825EC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		FCC9DD5C200DFFDC008825EC /* Programs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Programs.storyboard; sourceTree = "<group>"; };
-		FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraderTableViewCell.swift; sourceTree = "<group>"; };
-		FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TraderTableViewCell.xib; sourceTree = "<group>"; };
+		FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCell.swift; sourceTree = "<group>"; };
+		FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
 		FCC9DD62200E2246008825EC /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
-		FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraderTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		FCC9DD65200E3AB7008825EC /* TournamentTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramListViewController.swift; sourceTree = "<group>"; };
 		FCC9DD74200E4CAE008825EC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FCC9DD77200E4CCF008825EC /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -1389,9 +1389,9 @@
 				FC27226D20484C7E005225F2 /* ProgramPropertiesForTableViewCellView.swift */,
 				FCFF38FD2046F9CA00BEEDDA /* ProgramDetailsForTableViewCellView.swift */,
 				FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */,
-				FCC9DD65200E3AB7008825EC /* TraderTableViewCellViewModel.swift */,
-				FCC9DD5E200E20DB008825EC /* TraderTableViewCell.swift */,
-				FCC9DD5F200E20DB008825EC /* TraderTableViewCell.xib */,
+				FCC9DD65200E3AB7008825EC /* TournamentTableViewCellViewModel.swift */,
+				FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */,
+				FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */,
 				5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */,
 				5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */,
 				5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */,
@@ -1939,7 +1939,7 @@
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */,
 				5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */,
-				FCC9DD61200E20DB008825EC /* TraderTableViewCell.xib in Resources */,
+				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
 				FCA5705620273528001942F3 /* ProfileFieldTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
 				FC0E201E2044459500872BE5 /* Info.plist in Resources */,
@@ -2131,7 +2131,7 @@
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
-				FCC9DD60200E20DB008825EC /* TraderTableViewCell.swift in Sources */,
+				FCC9DD60200E20DB008825EC /* ProgramTableViewCell.swift in Sources */,
 				FC27226920484BC4005225F2 /* ProgramMoreDetailsTableViewCell.swift in Sources */,
 				5E8340EE207E508F004A29F1 /* ProgramDetailTradesHeaderView.swift in Sources */,
 				5EA1747C20A0974100905253 /* ManagerDashboardProgramsFilter.swift in Sources */,
@@ -2327,7 +2327,7 @@
 				FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
 				5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */,
-				FCC9DD66200E3AB7008825EC /* TraderTableViewCellViewModel.swift in Sources */,
+				FCC9DD66200E3AB7008825EC /* TournamentTableViewCellViewModel.swift in Sources */,
 				FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */,
 				5EA1746520A0974100905253 /* TradesViewModel.swift in Sources */,
 				5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */,

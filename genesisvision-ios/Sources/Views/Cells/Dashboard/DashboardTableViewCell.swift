@@ -64,6 +64,7 @@ class DashboardTableViewCell: PlateTableViewCell {
     @IBOutlet var managerNameLabel: UILabel!
     
     @IBOutlet var tokenSymbolLabel: CurrencyLabel!
+    @IBOutlet var placeLabel: TournamentPlaceLabel!
     
     @IBOutlet var tokensCountValueLabel: UILabel! {
         didSet {

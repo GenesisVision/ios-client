@@ -93,6 +93,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     var sortButton: ActionButton = {
         let btn = ActionButton(type: .system)
+        btn.bgColor = UIColor.BottomView.Sort.bg
+        btn.tintColor = UIColor.BottomView.Sort.tint
         btn.translatesAutoresizingMaskIntoConstraints = true
         btn.setTitle("Sort by profit", for: .normal)
         btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
@@ -101,7 +103,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     var filterButton: ActionButton = {
         let btn = ActionButton(type: .system)
-        btn.tintColor = UIColor.white
+        btn.bgColor = UIColor.BottomView.Filter.bg
+        btn.tintColor = UIColor.BottomView.Filter.tint
         btn.translatesAutoresizingMaskIntoConstraints = true
         btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
         btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
@@ -176,15 +179,15 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     private func setupAutoLayout() {
-        sortButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sortButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         sortButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        filterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        filterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
-        bottomStackView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        bottomStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -325,7 +328,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.Background.main
+        return UIColor.BaseView.bg
     }
     
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {

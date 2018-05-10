@@ -126,7 +126,13 @@ final class Constants {
     }
     
     struct SystemSizes {
+        struct Cell {
+            static let horizontalMarginValue: CGFloat = 8.0
+            static let verticalMarginValues: CGFloat = 4.0
+        }
+        
         static let cornerSize: CGFloat = 6.0
+        
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
 }

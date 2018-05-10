@@ -61,8 +61,8 @@ class DashboardViewController: BaseViewControllerWithTableView {
         bottomViewType = .sort
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-        title = viewModel.title.uppercased()
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+//        title = viewModel.title.uppercased()
+//        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
         feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
 //        navigationItem.rightBarButtonItem = feedbackBarButtonItem

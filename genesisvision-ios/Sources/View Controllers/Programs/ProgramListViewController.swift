@@ -21,17 +21,17 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     @IBOutlet var signInButton: ActionButton!
     
     // MARK: - Outlets
-    @IBOutlet weak var searchBar: UISearchBar! {
-        didSet {
-            searchBar.delegate = self
-            searchBar.showsCancelButton = false
-            searchBar.isTranslucent = false
-            searchBar.backgroundColor = UIColor.BaseView.bg
-            searchBar.barTintColor = UIColor.primary
-            searchBar.tintColor = UIColor.primary
-            searchBar.placeholder = "Search"
-        }
-    }
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+        searchBar.delegate = self
+        searchBar.showsCancelButton = false
+        searchBar.isTranslucent = false
+        searchBar.backgroundColor = UIColor.BaseView.bg
+        searchBar.barTintColor = UIColor.primary
+        searchBar.tintColor = UIColor.primary
+        searchBar.placeholder = "Search"
+        return searchBar
+    }()
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -48,12 +48,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Private methods
@@ -76,15 +70,20 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         bottomViewType = .sortAndFilter
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-        tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_filters_icon"), style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
+        tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_prize_icon"), style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
         navigationItem.rightBarButtonItem = tournamentBarButtonItem
-
         
         tabBarItem.title = viewModel.title.uppercased()
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+//        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
-//        let leftNavBarButton = UIBarButtonItem(customView: searchBar)
-//        self.navigationItem.leftBarButtonItem = leftNavBarButton
+//        let leftBarButtonItem = UIBarButtonItem(customView: searchBar)
+//        navigationItem.leftBarButtonItem = leftBarButtonItem
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        
+        if #available(iOS 11.0, *) {
+            searchBar.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+        }
     }
     
     private func setupTableConfiguration() {

@@ -74,6 +74,8 @@ class ProgramWithdrawViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
+        view.backgroundColor = UIColor.Background.main
+        
         setupNavigationBar(with: .primary)
         
         withdrawButton(enable: false)
@@ -94,7 +96,7 @@ class ProgramWithdrawViewController: BaseViewController {
     
     private func withdrawMethod() {
         hideKeyboard()
-        
+
         guard let text = amountLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter withdraw value, please") }

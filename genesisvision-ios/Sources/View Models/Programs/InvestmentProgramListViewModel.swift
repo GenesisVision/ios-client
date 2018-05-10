@@ -345,8 +345,8 @@ extension InvestmentProgramListViewModel {
                 let totalCount = investmentPrograms.total ?? 0
                 
                 investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
-                    let traderTableViewCellModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
-                    investmentProgramViewModels.append(traderTableViewCellModel)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
+                    investmentProgramViewModels.append(programTableViewCellViewModel)
                 })
                 
                 completionSuccess(totalCount, investmentProgramViewModels)

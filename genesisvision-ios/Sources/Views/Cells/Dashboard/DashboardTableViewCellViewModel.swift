@@ -33,6 +33,23 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
+        if let isTournament = investmentProgram.isTournament {
+            cell.placeLabel.isHidden = !isTournament
+            cell.currencyLabel.isHidden = isTournament
+            
+            if isTournament {
+                cell.plateAppearance = PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
+                                                                    horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                                                    verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                                                    backgroundColor: UIColor.Cell.tournamentBg,
+                                                                    selectedBackgroundColor: UIColor.Cell.tournamentBg)
+            }
+            
+            if let place = investmentProgram.place {
+                cell.placeLabel.text = place.toString()
+            }
+        }
+        
         if let title = investmentProgram.title {
             cell.programTitleLabel.text = title
         }

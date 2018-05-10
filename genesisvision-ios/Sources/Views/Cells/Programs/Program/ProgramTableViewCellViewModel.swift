@@ -15,7 +15,7 @@ struct ProgramTableViewCellViewModel {
 }
 
 extension ProgramTableViewCellViewModel: CellViewModel {
-    func setup(on cell: TraderTableViewCell) {
+    func setup(on cell: ProgramTableViewCell) {
         cell.chartView.isHidden = true
         cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
@@ -38,6 +38,24 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         if let investmentProgramId = investmentProgram.id?.uuidString {
             cell.investmentProgramId = investmentProgramId
+        }
+        
+        
+        if let isTournament = investmentProgram.isTournament {
+            cell.placeLabel.isHidden = !isTournament
+            cell.currencyLabel.isHidden = isTournament
+            
+            if isTournament {
+                cell.plateAppearance = PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
+                                                                    horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                                                    verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                                                    backgroundColor: UIColor.Cell.tournamentBg,
+                                                                    selectedBackgroundColor: UIColor.Cell.tournamentBg)
+            }
+            
+            if let place = investmentProgram.place {
+                cell.placeLabel.text = place.toString()
+            }
         }
         
         if let managerName = investmentProgram.manager?.username {

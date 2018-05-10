@@ -35,12 +35,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="90" height="72"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zo9-I0-13v" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="0.0" width="32" height="18"/>
+                                        <rect key="frame" x="28" y="0.0" width="34" height="18"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="kIu-y8-c5m"/>
-                                            <constraint firstAttribute="width" constant="32" id="nx4-5K-bRS"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -63,12 +59,8 @@
                                 <rect key="frame" x="98" y="0.0" width="90" height="84"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLH-af-bVC" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="0.0" width="32" height="18"/>
+                                        <rect key="frame" x="28" y="0.0" width="34.5" height="18"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="QEU-8M-ETs"/>
-                                            <constraint firstAttribute="width" constant="32" id="mEt-vY-DUH"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -91,12 +83,8 @@
                                 <rect key="frame" x="196" y="0.0" width="90" height="72"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCY-pN-nN6" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="0.0" width="32" height="18"/>
+                                        <rect key="frame" x="28" y="0.0" width="34" height="18"/>
                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="U2W-GN-Xpg"/>
-                                            <constraint firstAttribute="width" constant="32" id="sVP-iK-1Tx"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

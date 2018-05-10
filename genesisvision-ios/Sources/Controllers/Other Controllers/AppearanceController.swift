@@ -122,8 +122,8 @@ struct AppearanceController {
     private static func setupPlateCell() {
         PlateTableViewCell.appearance().plateAppearance =
             PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
-                                         horizontalMarginValue: 8,
-                                         verticalMarginValues: 4,
+                                         horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                         verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
                                          backgroundColor: UIColor.Cell.bg,
                                          selectedBackgroundColor: UIColor.Background.gray)
     }

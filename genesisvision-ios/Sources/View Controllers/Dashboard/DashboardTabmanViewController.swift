@@ -11,13 +11,5 @@ import Tabman
 class DashboardTabmanViewController: BaseTabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bar.delegate = self
-    }
-}
-
-extension DashboardTabmanViewController: TabmanBarDelegate {
-    func bar(shouldSelectItemAt index: Int) -> Bool {
-        return true
     }
 }

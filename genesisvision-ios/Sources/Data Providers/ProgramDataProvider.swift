@@ -34,8 +34,11 @@ class ProgramDataProvider: DataProvider {
             let uuid = UUID(uuidString: investmentProgramId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        let investModel = Invest(investmentProgramId: uuid, amount: amount)
-
+        print(amount)
+        let a = amount.rounded(toPlaces: 2)
+        print(a)
+        let investModel = Invest(investmentProgramId: uuid, amount: amount.rounded(toPlaces: 2))
+        print(investModel.amount)
         InvestorAPI.apiInvestorInvestmentProgramsWithdrawPost(authorization: authorization, model: investModel) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }

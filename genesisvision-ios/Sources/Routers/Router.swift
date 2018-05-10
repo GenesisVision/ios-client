@@ -27,6 +27,7 @@ class Router {
     // MARK: - Variables
     var tournamentViewController: TournamentListViewController!
     var dashboardViewController: DashboardViewController!
+//    var dashboardTabmanViewController: DashboardTabmanViewController!
     var programsViewController: ProgramListViewController!
     
     var parentRouter: Router?
@@ -44,20 +45,19 @@ class Router {
         
 //        if isInvestorApp, let dashboardTabmanViewController = DashboardTabmanViewController.storyboardInstance(name: .dashboard) {
 //            self.dashboardTabmanViewController = dashboardTabmanViewController
-//
-//            navigationController = BaseNavigationController(rootViewController: dashboardTabmanViewController)
 //            let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
 //            childRouters.append(router)
-//            dashboardTabmanViewController.viewModel = DashboardTabmanViewModel(withRouter: router)
-//            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
-//            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
-//            navigationController.tabBarItem.title = "DASHBOARD"
-//            viewControllers.append(navigationController)
+//            let viewModel = DashboardTabmanViewModel(withRouter: router)
+//            dashboardTabmanViewController.viewModel = viewModel
+//            dashboardTabmanViewController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
+//            dashboardTabmanViewController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
+//            dashboardTabmanViewController.tabBarItem.title = "DASHBOARD"
+//            viewControllers.append(dashboardTabmanViewController)
 //        }
         
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
             self.dashboardViewController = dashboardViewController
-            
+
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
             childRouters.append(router)
@@ -108,6 +108,7 @@ class Router {
         } else {
             self.programsViewController = parentRouter?.programsViewController
             self.dashboardViewController = parentRouter?.dashboardViewController
+//            self.dashboardTabmanViewController = parentRouter?.dashboardTabmanViewController
         }
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
@@ -127,7 +128,7 @@ class Router {
         tournamentViewController = viewController
         let router = TournamentRouter(parentRouter: self)
         childRouters.append(router)
-        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, roundNumber: nil)
+        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, reloadDataProtocol: viewController, roundNumber: nil)
     }
     
 }
