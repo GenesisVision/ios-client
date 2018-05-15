@@ -110,6 +110,8 @@ class DashboardTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        currencyLabel.isHidden = true
     }
     
     deinit {
@@ -137,6 +139,16 @@ class DashboardTableViewCell: PlateTableViewCell {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
             RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
         }
+    }
+    
+    func tournamentActive(_ isTournament: Bool) {
+        placeLabel.isHidden = !isTournament
+        
+        plateAppearance = PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
+                                                       horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                                       verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                                       backgroundColor: isTournament ? UIColor.Cell.tournamentBg : UIColor.Cell.bg,
+                                                       selectedBackgroundColor: isTournament ? UIColor.Cell.tournamentBg : UIColor.Cell.bg)
     }
     
     // MARK: - Private methods

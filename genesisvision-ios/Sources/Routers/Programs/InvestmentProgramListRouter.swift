@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case signIn, showProgramDetail(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(roundNumber: Int)
+    case signIn, showProgramDetail(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -21,8 +21,8 @@ class InvestmentProgramListRouter: Router {
             showFilterVC(with: investmentProgramListViewModel)
         case .showProgramDetail(let investmentProgramId):
             showProgramDetail(with: investmentProgramId)
-        case .showTournamentVC(let roundNumber):
-            showTournamentVC(with: roundNumber)
+        case .showTournamentVC(let tournamentTotalRounds, let tournamentCurrentRound):
+            showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound)
         }
     }
     
@@ -44,10 +44,10 @@ class InvestmentProgramListRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showTournamentVC(with roundNumber: Int) {
-        guard let tabmanViewController = TournamentTabmanViewController.storyboardInstance(name: .tournament) else { return }
+    private func showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int) {
+        guard let tabmanViewController = TournamentTabmanViewController.storyboardInstance(name: .tournament), tournamentCurrentRound > 0 else { return }
         let router = Router(parentRouter: self)
-        tabmanViewController.viewModel = TournamentViewModel(withRouter: router)
+        tabmanViewController.viewModel = TournamentViewModel(withRouter: router, viewControllersCount: tournamentTotalRounds, defaultPage: tournamentCurrentRound - 1)
         
         tabmanViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(tabmanViewController, animated: true)

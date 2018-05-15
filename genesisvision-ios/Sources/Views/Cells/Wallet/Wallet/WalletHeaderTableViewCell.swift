@@ -19,8 +19,6 @@ class WalletHeaderTableViewCell: UITableViewCell {
     // MARK: - Variables
     weak var delegate: WalletHeaderTableViewCellProtocol?
     
-    // MARK: - Views
-    @IBOutlet var logoImageView: UIImageView!
     // MARK: - Labels
     @IBOutlet var balanceLabel: UILabel! {
         didSet {
@@ -37,7 +35,6 @@ class WalletHeaderTableViewCell: UITableViewCell {
     // MARK: - Buttons
     @IBOutlet weak var depositButton: ActionButton!
     @IBOutlet weak var withdrawButton: ActionButton!
-    @IBOutlet weak var updateBalanceButton: UIButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -54,10 +51,6 @@ class WalletHeaderTableViewCell: UITableViewCell {
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
         delegate?.withdrawProgramDidPress()
-    }
-    
-    @IBAction func updateBalanceButtonAction(_ sender: Any) {
-        delegate?.updateBalanceDidPress()
     }
 }
 

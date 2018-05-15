@@ -79,7 +79,7 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
 }
 
 enum BottomViewType {
-    case none, login, sort, filter, sortAndFilter
+    case none, signIn, sort, filter, sortAndFilter, signInWithSortAndFilter
 }
 
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
@@ -111,10 +111,28 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         return btn
     }()
     
-    private let bottomStackView: UIStackView = {
+    var signInButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.setTitle("SIGN IN", for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.addTarget(self, action: #selector(signInButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    private let sortAndFilterStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .horizontal
         stackView.spacing = 8.0
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let bottomStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 16.0
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +143,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         didSet {
             sortButton.isHidden = true
             filterButton.isHidden = true
+            signInButton.isHidden = true
             bottomStackView.isHidden = false
             
             switch bottomViewType {
@@ -137,8 +156,12 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
             case .sortAndFilter:
                 sortButton.isHidden = false
                 filterButton.isHidden = false
-            default:
-                break
+            case .signIn:
+                signInButton.isHidden = false
+            case .signInWithSortAndFilter:
+                signInButton.isHidden = false
+                sortButton.isHidden = false
+                filterButton.isHidden = false
             }
         }
     }
@@ -170,8 +193,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     private func setupViews() {
-        bottomStackView.addArrangedSubview(sortButton)
-        bottomStackView.addArrangedSubview(filterButton)
+        sortAndFilterStackView.addArrangedSubview(sortButton)
+        sortAndFilterStackView.addArrangedSubview(filterButton)
+        bottomStackView.addArrangedSubview(signInButton)
+        bottomStackView.addArrangedSubview(sortAndFilterStackView)
         
         view.addSubview(bottomStackView)
         
@@ -179,15 +204,28 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     private func setupAutoLayout() {
-        sortButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        sortButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        filterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        sortButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        sortButton.widthAnchor.constraint(equalToConstant: 198).isActive = true
+        
+        filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        signInButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        signInButton.widthAnchor.constraint(equalToConstant: 198).isActive = true
+        
+        sortAndFilterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
+        sortAndFilterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
+        sortAndFilterStackView.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
+        sortAndFilterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
         bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
-        bottomStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        if #available(iOS 11, *) {
+            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        } else {
+            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -250,17 +288,21 @@ extension BaseViewControllerWithTableView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.lastContentOffset.y < scrollView.contentOffset.y) {
             UIView.animate(withDuration: 0.3) {
-                self.bottomStackView.alpha = 0.0
+                self.sortAndFilterStackView.alpha = 0.0
             }
         } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
             UIView.animate(withDuration: 0.3) {
-                self.bottomStackView.alpha = 1.0
+                self.sortAndFilterStackView.alpha = 1.0
             }
         }
     }
 }
 
-extension BaseViewControllerWithTableView: UIViewControllerWithFilter {
+extension BaseViewControllerWithTableView: UIViewControllerWithBottomView {
+    @objc func signInButtonAction() {
+        
+    }
+    
     @objc func filterButtonAction() {
         
     }

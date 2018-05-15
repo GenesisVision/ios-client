@@ -91,7 +91,7 @@ class ProgramWithdrawViewController: BaseViewController {
     
     private func withdrawButton(enable: Bool) {
         withdrawButton.isUserInteractionEnabled = enable
-        withdrawButton.backgroundColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
+        withdrawButton.bgColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
     }
     
     private func withdrawMethod() {

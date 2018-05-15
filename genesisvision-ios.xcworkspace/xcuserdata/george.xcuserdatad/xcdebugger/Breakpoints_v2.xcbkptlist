@@ -27,125 +27,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Programs/Program Details/ProgramWithdrawViewController.swift"
-            timestampString = "547661616.457631"
+            filePath = "genesisvision-ios/Sources/Controllers/Other Controllers/AuthManager.swift"
+            timestampString = "547727164.39267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "withdrawMethod()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Genesis_Vision.ProgramWithdrawViewController.(withdrawMethod in _B3087893C79EEAD0D91F836BF52A2561)() -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Programs/Program%20Details/ProgramWithdrawViewController.swift"
-                  timestampString = "547661616.802789"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "713">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.ProgramWithdrawViewController.(withdrawMethod in _B3087893C79EEAD0D91F836BF52A2561)() -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Programs/Program%20Details/ProgramWithdrawViewController.swift"
-                  timestampString = "547661616.806959"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "92">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Programs/Program Details/ProgramWithdrawViewController.swift"
-            timestampString = "547661616.457749"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "textLabelDidChange(value:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Data Providers/ProgramDataProvider.swift"
-            timestampString = "547661616.457829"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "withdrawProgram(withAmount:investmentProgramId:errorCompletion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Genesis_Vision.ProgramDataProvider.withdrawProgram(withAmount: Swift.Double, investmentProgramId: Swift.Optional&lt;Swift.String&gt;, errorCompletion: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/Data%20Providers/ProgramDataProvider.swift"
-                  timestampString = "547661616.822997"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "2075">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static Genesis_Vision.ProgramDataProvider.withdrawProgram(withAmount: Swift.Double, investmentProgramId: Swift.Optional&lt;Swift.String&gt;, errorCompletion: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/Data%20Providers/ProgramDataProvider.swift"
-                  timestampString = "547661616.8265181"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Data Providers/ProgramDataProvider.swift"
-            timestampString = "547661616.457895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "withdrawProgram(withAmount:investmentProgramId:errorCompletion:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "getPlatformStatus(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -12,7 +12,6 @@ import UIKit.UIImage
 struct WalletHeaderTableViewCellViewModel {
     let balance: Double
     let usdBalance: Double
-    let imageName: String
     weak var delegate: WalletHeaderTableViewCellProtocol?
 }
 
@@ -21,8 +20,6 @@ extension WalletHeaderTableViewCellViewModel: CellViewModel {
         cell.balanceLabel.text = balance.rounded(withType: .gvt).toString()
         cell.usdBalanceLabel.text = usdBalance.rounded(withType: .other).toString(currency: true)
         cell.delegate = delegate
-        
-        cell.logoImageView.image = UIImage(named: imageName)
     }
 }
 

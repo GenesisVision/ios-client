@@ -1,5 +1,5 @@
 //
-//  CurrencyLabel.swift
+//  RoundedLabel.swift
 //  genesisvision-ios
 //
 //  Created by George on 21/03/2018.
@@ -8,12 +8,12 @@
 
 import UIKit.UILabel
 
-@IBDesignable class RoundedLabel: UILabel {
+class RoundedLabel: UILabel {
     
-    @IBInspectable var topInset: CGFloat = 4.0
-    @IBInspectable var bottomInset: CGFloat = 4.0
-    @IBInspectable var leftInset: CGFloat = 8
-    @IBInspectable var rightInset: CGFloat = 8
+    var topInset: CGFloat = 4.0
+    var bottomInset: CGFloat = 4.0
+    var leftInset: CGFloat = 8
+    var rightInset: CGFloat = 8
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -69,6 +69,23 @@ class WhiteCurrencyLabel: RoundedLabel {
 }
 
 class TournamentPlaceLabel: RoundedLabel {
+    override var text: String? {
+        didSet {
+            let attachment = NSTextAttachment()
+            attachment.image = #imageLiteral(resourceName: "img_trophy_small_icon")
+            attachment.bounds = CGRect(x: 0.0, y: -4.0, width: 15.0, height: 15.0)
+            let attachmentStr = NSAttributedString(attachment: attachment)
+
+            let mutableAttributedString = NSMutableAttributedString()
+            mutableAttributedString.append(attachmentStr)
+            
+            let textString = NSAttributedString(string: text ?? "", attributes: [.font: UIFont.getFont(.bold, size: 11)])
+            mutableAttributedString.append(textString)
+            
+            self.textAlignment = .center
+            self.attributedText = mutableAttributedString
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

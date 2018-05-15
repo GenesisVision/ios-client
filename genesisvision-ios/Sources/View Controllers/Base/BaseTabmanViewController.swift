@@ -72,6 +72,6 @@ extension BaseTabmanViewController: PageboyViewControllerDataSource {
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .first
+        return viewModel.defaultPage
     }
 }

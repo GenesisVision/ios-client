@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '93EAD4F868E8D6E3D2D277EE38DE8BB8'
-               BlueprintName = 'SimulatorStatusMagic'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SimulatorStatusMagic.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "93EAD4F868E8D6E3D2D277EE38DE8BB8"
+               BlueprintName = "SimulatorStatusMagic"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "SimulatorStatusMagic.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

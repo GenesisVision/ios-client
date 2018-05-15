@@ -22,11 +22,17 @@ class TabmanViewModel: TabmanViewModelProtocol {
     var isScrollEnabled = true
     var router: Router!
     var viewControllers = [UIViewController]()
+    
+    var viewControllersCount: Int = 1
+    
     var itemTitles = [String]()
+    var defaultPage: PageboyViewController.Page? = .first
     
     // MARK: - Init
-    init(withRouter router: Router) {
+    init(withRouter router: Router, viewControllersCount: Int = 1, defaultPage: Int = 0) {
         self.router = router
+        self.defaultPage = .at(index: defaultPage)
+        self.viewControllersCount = viewControllersCount
         
         initializeViewControllers()
     }

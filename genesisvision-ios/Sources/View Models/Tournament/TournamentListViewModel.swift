@@ -73,7 +73,7 @@ final class TournamentListViewModel {
     
     // MARK: - Public methods
     func noDataText() -> String {
-        return "No result.\n\nPlease try again later."
+        return "This round will start later."
     }
     
     func getDetailViewController(with index: Int) -> ProgramDetailViewController? {

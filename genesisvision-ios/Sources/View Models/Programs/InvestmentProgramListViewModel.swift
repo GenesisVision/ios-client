@@ -217,7 +217,11 @@ extension InvestmentProgramListViewModel {
     }
     
     func showTournamentVC() {
-        router.show(routeType: .showTournamentVC(roundNumber: roundNumber))
+        PlatformManager.getPlatformStatus(completion: { [weak self] (model) in
+            guard let tournamentTotalRounds = model?.tournamentTotalRounds, let tournamentCurrentRound = model?.tournamentCurrentRound else { return }
+            
+            self?.router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
+        })
     }
     
     func showDetail(with investmentProgramId: String) {

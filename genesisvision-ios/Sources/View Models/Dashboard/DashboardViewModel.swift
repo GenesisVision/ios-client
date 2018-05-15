@@ -10,8 +10,8 @@ import UIKit.UITableViewHeaderFooterView
 
 final class DashboardTabmanViewModel: TabmanViewModel {
     // MARK: - Init
-    override init(withRouter router: Router) {
-        super.init(withRouter: router)
+    override init(withRouter router: Router, viewControllersCount: Int, defaultPage: Int) {
+        super.init(withRouter: router, viewControllersCount: viewControllersCount, defaultPage: defaultPage)
         
         title = "Dashboard"
         style = .buttonBar

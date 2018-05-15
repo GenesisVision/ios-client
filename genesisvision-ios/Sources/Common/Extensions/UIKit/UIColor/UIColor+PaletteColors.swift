@@ -30,6 +30,7 @@ extension UIColor {
         static var powderPink: UIColor { return #colorLiteral(red: 1, green: 0.6470588235, blue: 0.8, alpha: 1) }                              //ffa5cc
         
         static var putty: UIColor { return #colorLiteral(red: 0.8078431373, green: 0.7725490196, blue: 0.6470588235, alpha: 1) }                                   //cec5a5
+        static var puttyWithAlpha: UIColor { return #colorLiteral(red: 0.9411764706, green: 0.9294117647, blue: 0.8941176471, alpha: 1) }                          //f0ede4
         
         static var black: UIColor { return #colorLiteral(red: 0.1254901961, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                   //f44336
         
@@ -189,7 +190,7 @@ extension UIColor {
     struct Cell {
         static var separator: UIColor { return Common.separator }
         static var bg: UIColor { return AppearanceController.theme == .dark ? #colorLiteral(red: 0.2941176471, green: 0.3019607843, blue: 0.3137254902, alpha: 1) : Common.white }
-        static var tournamentBg: UIColor { return Common.putty.withAlphaComponent(0.2) }
+        static var tournamentBg: UIColor { return Common.puttyWithAlpha }
         static var selectedBg: UIColor { return AppearanceController.theme == .dark ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
         
         static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }

@@ -15,7 +15,7 @@
 		5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137D2061D36600481646 /* UIAlertController+Extensions.swift */; };
 		5E1813832061D36700481646 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137E2061D36700481646 /* UIView+Extensions.swift */; };
 		5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137F2061D36700481646 /* DatePickerViewController.swift */; };
-		5E1813872061D40600481646 /* CurrencyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1813862061D40600481646 /* CurrencyLabel.swift */; };
+		5E1813872061D40600481646 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1813862061D40600481646 /* RoundedLabel.swift */; };
 		5E18138A2062487200481646 /* ProgramDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1813882062487200481646 /* ProgramDetailsTableViewCell.swift */; };
 		5E18138B2062487200481646 /* ProgramDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E1813892062487200481646 /* ProgramDetailsTableViewCell.xib */; };
 		5E18138D206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18138C206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift */; };
@@ -186,6 +186,8 @@
 		5EBBECE520626F9700872656 /* ProgramListHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */; };
 		5EBBECE720626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */; };
 		5EBBECE920626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */; };
+		5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */; };
+		5EC0309620A5A786005CBA32 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309520A5A786005CBA32 /* PlatformManager.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */; };
 		5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */; };
@@ -409,7 +411,7 @@
 		5E18137D2061D36600481646 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		5E18137E2061D36700481646 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5E18137F2061D36700481646 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
-		5E1813862061D40600481646 /* CurrencyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyLabel.swift; sourceTree = "<group>"; };
+		5E1813862061D40600481646 /* RoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		5E1813882062487200481646 /* ProgramDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		5E1813892062487200481646 /* ProgramDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		5E18138C206248BE00481646 /* ProgramDetailsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -580,6 +582,8 @@
 		5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramListHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataProvider.swift; sourceTree = "<group>"; };
+		5EC0309520A5A786005CBA32 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCell.swift; sourceTree = "<group>"; };
 		5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCellAppearance.swift; sourceTree = "<group>"; };
@@ -866,7 +870,7 @@
 		5E7FC747207B6342001617FD /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				5E1813862061D40600481646 /* CurrencyLabel.swift */,
+				5E1813862061D40600481646 /* RoundedLabel.swift */,
 				5E367906206BC6DA006E226A /* AmountLabel.swift */,
 				5E7FC745207B6337001617FD /* BalanceLabel.swift */,
 			);
@@ -1031,6 +1035,16 @@
 				5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */,
 			);
 			path = EasyTipView;
+			sourceTree = "<group>";
+		};
+		5EC0309720A5A78E005CBA32 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FCB8DFCE2010F99200698D18 /* AuthManager.swift */,
+				5E89772F206E987B0015FD26 /* ReachabilityManager.swift */,
+				5EC0309520A5A786005CBA32 /* PlatformManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		5EF058D320681F0A00373CBB /* UIKit */ = {
@@ -1669,6 +1683,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC9DD48200DFA5E008825EC /* Other Controllers */,
+				5EC0309720A5A78E005CBA32 /* Managers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1676,9 +1691,7 @@
 		FCC9DD48200DFA5E008825EC /* Other Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FCB8DFCE2010F99200698D18 /* AuthManager.swift */,
 				FC496421201558AD00104CEB /* AppearanceController.swift */,
-				5E89772F206E987B0015FD26 /* ReachabilityManager.swift */,
 			);
 			path = "Other Controllers";
 			sourceTree = "<group>";
@@ -1752,6 +1765,7 @@
 				FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */,
 				FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */,
 				FC900E5D204EC403007E9142 /* AuthDataProvider.swift */,
+				5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */,
 			);
 			path = "Data Providers";
 			sourceTree = "<group>";
@@ -1855,7 +1869,6 @@
 				FCC9DD21200DF2C3008825EC /* Frameworks */,
 				FCC9DD22200DF2C3008825EC /* Resources */,
 				B12814AB2AACD8A70B7A8680 /* [CP] Embed Pods Frameworks */,
-				F5A58FBD5240BFD804AFEF7A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2019,21 +2032,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F5A58FBD5240BFD804AFEF7A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2057,6 +2055,7 @@
 				5EA1747F20A0974200905253 /* ManagerLevelStatistic.swift in Sources */,
 				5EA1743C20A0974100905253 /* TradesAPI.swift in Sources */,
 				5E1813832061D36700481646 /* UIView+Extensions.swift in Sources */,
+				5EC0309620A5A786005CBA32 /* PlatformManager.swift in Sources */,
 				5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */,
 				FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */,
 				5EA7A0FA20A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift in Sources */,
@@ -2120,7 +2119,7 @@
 				FC1410202030168100B71E7F /* ParticipantsViewModel.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* SignUpConfirmationViewModel.swift in Sources */,
-				5E1813872061D40600481646 /* CurrencyLabel.swift in Sources */,
+				5E1813872061D40600481646 /* RoundedLabel.swift in Sources */,
 				5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */,
 				FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */,
 				5E87E765208F638E00141269 /* Tooltips.swift in Sources */,
@@ -2224,6 +2223,7 @@
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				5EA1745120A0974100905253 /* RequestRate.swift in Sources */,
 				FC1410242030168100B71E7F /* TradeServerViewModel.swift in Sources */,
+				5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */,
 				5EA1746120A0974100905253 /* WalletAddressViewModel.swift in Sources */,
 				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,

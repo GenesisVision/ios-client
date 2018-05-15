@@ -25,19 +25,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ff5-Ra-GoC">
-                        <rect key="frame" x="8" y="8" width="443" height="97.5"/>
+                        <rect key="frame" x="20" y="16" width="419" height="81.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EfZ-af-zhd">
-                                <rect key="frame" x="0.0" y="30" width="108" height="38"/>
+                                <rect key="frame" x="0.0" y="22" width="102" height="38"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYk-LV-RXT">
-                                        <rect key="frame" x="36.5" y="0.0" width="35" height="15"/>
+                                        <rect key="frame" x="33.5" y="0.0" width="35" height="15"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPB-oh-D96">
-                                        <rect key="frame" x="36.5" y="23" width="35" height="15"/>
+                                        <rect key="frame" x="33.5" y="23" width="35" height="15"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -45,16 +45,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pQy-Ye-r64">
-                                <rect key="frame" x="112" y="29" width="107.5" height="40"/>
+                                <rect key="frame" x="106" y="21" width="101.5" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uAG-oD-YF9">
-                                        <rect key="frame" x="35" y="0.0" width="37.5" height="16"/>
+                                        <rect key="frame" x="32" y="0.0" width="37.5" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJu-Qm-U4R">
-                                        <rect key="frame" x="36" y="24" width="35" height="16"/>
+                                        <rect key="frame" x="33" y="24" width="35" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -62,16 +62,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gma-Dy-lJS">
-                                <rect key="frame" x="223.5" y="29" width="108" height="40"/>
+                                <rect key="frame" x="211.5" y="21" width="102" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQk-ix-wzo">
-                                        <rect key="frame" x="35" y="0.0" width="37.5" height="16"/>
+                                        <rect key="frame" x="32" y="0.0" width="37.5" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeY-a2-qbx">
-                                        <rect key="frame" x="35" y="24" width="37.5" height="16"/>
+                                        <rect key="frame" x="32" y="24" width="37.5" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -79,16 +79,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-aI-V5s">
-                                <rect key="frame" x="335.5" y="29" width="107.5" height="40"/>
+                                <rect key="frame" x="317.5" y="21" width="101.5" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFj-zP-z8l">
-                                        <rect key="frame" x="35" y="0.0" width="37.5" height="16"/>
+                                        <rect key="frame" x="32" y="0.0" width="37.5" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="16"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XC-uz-iOt">
-                                        <rect key="frame" x="36" y="24" width="35" height="16"/>
+                                        <rect key="frame" x="33" y="24" width="35" height="16"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -99,10 +99,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ff5-Ra-GoC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="4C1-tS-Jnf"/>
-                    <constraint firstAttribute="trailing" secondItem="Ff5-Ra-GoC" secondAttribute="trailing" constant="8" id="IPW-dY-AB9"/>
-                    <constraint firstItem="Ff5-Ra-GoC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="JP8-3o-4r4"/>
-                    <constraint firstAttribute="bottom" secondItem="Ff5-Ra-GoC" secondAttribute="bottom" constant="8" id="icf-7l-Y5Y"/>
+                    <constraint firstItem="Ff5-Ra-GoC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="4C1-tS-Jnf"/>
+                    <constraint firstAttribute="trailing" secondItem="Ff5-Ra-GoC" secondAttribute="trailing" constant="20" id="IPW-dY-AB9"/>
+                    <constraint firstItem="Ff5-Ra-GoC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="JP8-3o-4r4"/>
+                    <constraint firstAttribute="bottom" secondItem="Ff5-Ra-GoC" secondAttribute="bottom" constant="16" id="icf-7l-Y5Y"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

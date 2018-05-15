@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4D18939AED311851FFEEFC8051A6F30F'
-               BlueprintName = 'DZNEmptyDataSet'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'DZNEmptyDataSet.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4D18939AED311851FFEEFC8051A6F30F"
+               BlueprintName = "DZNEmptyDataSet"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "DZNEmptyDataSet.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

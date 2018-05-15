@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6219896F497B12B3B95DF469E4E4EE35'
-               BlueprintName = 'Pods-genesisvision-ios'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods-genesisvision-ios.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6219896F497B12B3B95DF469E4E4EE35"
+               BlueprintName = "Pods-genesisvision-ios"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Pods-genesisvision-ios.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

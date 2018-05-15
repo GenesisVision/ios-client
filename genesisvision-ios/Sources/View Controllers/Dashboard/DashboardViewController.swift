@@ -65,7 +65,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
 //        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
         feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
-//        navigationItem.rightBarButtonItem = feedbackBarButtonItem
+        navigationItem.rightBarButtonItem = feedbackBarButtonItem
         
         segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
         segmentedControl.tintColor = UIColor.primary

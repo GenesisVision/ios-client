@@ -8,7 +8,9 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+#if DEBUG
 import SimulatorStatusMagic
+#endif
 
 enum ThemeType {
     case `default`, dark
@@ -29,9 +31,9 @@ struct AppearanceController {
     static var theme: ThemeType = .default
     
     static func setupAppearance() {
-        isDebug
-            ? SDStatusBarManager.sharedInstance().enableOverrides()
-            : SDStatusBarManager.sharedInstance().disableOverrides()
+        #if DEBUG
+        SDStatusBarManager.sharedInstance().enableOverrides()
+        #endif
         
         setupNavigationBar()
         setupTabBar()

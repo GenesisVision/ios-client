@@ -61,6 +61,19 @@ class ProgramTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        currencyLabel.isHidden = true
+    }
+    
+    // MARK: - Public methods
+    func tournamentActive(_ isTournament: Bool) {
+        placeLabel.isHidden = !isTournament
+        
+        plateAppearance = PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
+                                                       horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                                       verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                                       backgroundColor: isTournament ? UIColor.Cell.tournamentBg : UIColor.Cell.bg,
+                                                       selectedBackgroundColor: isTournament ? UIColor.Cell.tournamentBg : UIColor.Cell.bg)
     }
     
     // MARK: - Actions

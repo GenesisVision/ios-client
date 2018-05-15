@@ -17,9 +17,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: InvestmentProgramListViewModel!
     
-    // MARK: - Buttons
-    @IBOutlet var signInButton: ActionButton!
-    
     // MARK: - Outlets
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
@@ -67,17 +64,19 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        bottomViewType = .sortAndFilter
+        bottomViewType = signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-        tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_prize_icon"), style: .done, target: self, action: #selector(tournamentButtonAction(_:)))
-        navigationItem.rightBarButtonItem = tournamentBarButtonItem
+        PlatformManager.getPlatformStatus(completion: { [weak self] (model) in
+            guard let isTournamentActive = model?.isTournamentActive, isTournamentActive else { return }
+            
+            self?.tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_trophy_icon"), style: .done, target: self, action: #selector(self?.tournamentButtonAction(_:)))
+            self?.tournamentBarButtonItem?.tintColor = UIColor.Tournament.bg
+            self?.navigationItem.rightBarButtonItem = self?.tournamentBarButtonItem
+        })
         
         tabBarItem.title = viewModel.title.uppercased()
-//        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
-        
-//        let leftBarButtonItem = UIBarButtonItem(customView: searchBar)
-//        navigationItem.leftBarButtonItem = leftBarButtonItem
+
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         
@@ -177,11 +176,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    // MARK: - Actions
-    @IBAction func signInButtonAction(_ sender: UIButton) {
+    override func signInButtonAction() {
         viewModel.showSignInVC()
     }
     
+    // MARK: - Actions
     @IBAction func tournamentButtonAction(_ sender: UIButton) {
         viewModel.showTournamentVC()
     }

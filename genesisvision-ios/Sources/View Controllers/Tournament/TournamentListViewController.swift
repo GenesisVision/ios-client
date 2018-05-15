@@ -19,9 +19,6 @@ class TournamentListViewController: BaseViewControllerWithTableView {
             searchBar.delegate = self
             searchBar.showsCancelButton = false
             searchBar.isTranslucent = false
-            searchBar.backgroundColor = UIColor.BaseView.bg
-            searchBar.barTintColor = UIColor.primary
-            searchBar.tintColor = UIColor.primary
             searchBar.placeholder = "Search"
         }
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '92D9E06F67DDD0A11D3866C0F4E0D22C'
-               BlueprintName = 'Tabman'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Tabman.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "92D9E06F67DDD0A11D3866C0F4E0D22C"
+               BlueprintName = "Tabman"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Tabman.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

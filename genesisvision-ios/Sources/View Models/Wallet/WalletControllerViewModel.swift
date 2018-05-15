@@ -110,7 +110,7 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, usdBalance: usdBalance, imageName: logoImageName(), delegate: delegate)
+            return WalletHeaderTableViewCellViewModel(balance: balance, usdBalance: usdBalance, delegate: delegate)
         case .transactions:
             return transactions[indexPath.row]
         }

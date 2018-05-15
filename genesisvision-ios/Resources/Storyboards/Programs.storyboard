@@ -34,45 +34,22 @@
                                     <constraint firstAttribute="height" constant="80" id="W24-2b-0Dv"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZlK-UV-lqh">
-                                <rect key="frame" x="88.5" y="606" width="198" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-bk-mvw" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
-                                        <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="SIGN IN">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signInButtonAction:" destination="4qn-RU-Ufu" eventType="touchUpInside" id="gyk-oD-Hb4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="mVv-EH-5Fw"/>
-                                    <constraint firstAttribute="width" constant="198" id="we6-UK-Yzj"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="nZd-JI-9hr" secondAttribute="top" id="IhV-n4-mgM"/>
-                            <constraint firstItem="FoC-GU-UBn" firstAttribute="bottom" secondItem="ZlK-UV-lqh" secondAttribute="bottom" constant="16" id="SPa-bn-kKf"/>
                             <constraint firstItem="GKl-na-XEw" firstAttribute="trailing" secondItem="FoC-GU-UBn" secondAttribute="trailing" id="YkM-vy-iJA"/>
                             <constraint firstAttribute="bottom" secondItem="GKl-na-XEw" secondAttribute="bottom" id="YmY-5g-8wI"/>
                             <constraint firstItem="GKl-na-XEw" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="o1h-EN-kZk"/>
                             <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
-                            <constraint firstItem="ZlK-UV-lqh" firstAttribute="centerX" secondItem="nZd-JI-9hr" secondAttribute="centerX" id="zvd-Q0-crZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FoC-GU-UBn"/>
                     </view>
                     <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
                     <connections>
                         <outlet property="gradientView" destination="GKl-na-XEw" id="Bs5-qe-b3o"/>
-                        <outlet property="signInButton" destination="cvZ-bk-mvw" id="laf-Wh-Kd5"/>
                         <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
                     </connections>
                 </viewController>

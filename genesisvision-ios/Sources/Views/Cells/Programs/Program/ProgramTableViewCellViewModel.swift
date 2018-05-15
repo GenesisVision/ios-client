@@ -40,24 +40,6 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.investmentProgramId = investmentProgramId
         }
         
-        
-        if let isTournament = investmentProgram.isTournament {
-            cell.placeLabel.isHidden = !isTournament
-            cell.currencyLabel.isHidden = isTournament
-            
-            if isTournament {
-                cell.plateAppearance = PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
-                                                                    horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
-                                                                    verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
-                                                                    backgroundColor: UIColor.Cell.tournamentBg,
-                                                                    selectedBackgroundColor: UIColor.Cell.tournamentBg)
-            }
-            
-            if let place = investmentProgram.place {
-                cell.placeLabel.text = place.toString()
-            }
-        }
-        
         if let managerName = investmentProgram.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
@@ -66,7 +48,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        cell.favoriteStackView.isHidden = !AuthManager.isLogin()
+        cell.favoriteButton.isHidden = !AuthManager.isLogin()
         
         if let availableInvestment = investmentProgram.availableInvestment {
             cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
@@ -89,5 +71,11 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvgPercent, totalProfit: investmentProgram.profitTotal, currency: investmentProgram.currency?.rawValue)
+        
+        cell.tournamentActive(investmentProgram.isTournament ?? false)
+        
+        if let place = investmentProgram.place {
+            cell.placeLabel.text = place.toString()
+        }
     }
 }
