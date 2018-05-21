@@ -23,7 +23,6 @@ class ForgotPasswordRouter: Router {
     private func showForgotPasswordInfo() {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
-        childRouters.append(router)
         viewController.viewModel = ForgotPasswordInfoViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }

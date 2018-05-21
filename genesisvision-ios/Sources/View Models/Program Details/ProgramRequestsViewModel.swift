@@ -30,7 +30,7 @@ final class ProgramRequestsViewModel {
     var viewModels = [ProgramRequestTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.investmentProgramId = investmentProgramId
         self.programDetailProtocol = programDetailProtocol
@@ -63,9 +63,8 @@ extension ProgramRequestsViewModel {
         ProgramRequestDataProvider.cancelRequest(requestId: requestID, completion: completion)
     }
     
-    func goToBack() {
-        programDetailProtocol?.didRequestCanceled()
-        router.goToBack()
+    func didRequestCanceled(_ last: Bool) {
+        programDetailProtocol?.didRequestCanceled(last)
     }
 }
 
@@ -126,7 +125,7 @@ extension ProgramRequestsViewModel {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
-        canFetchMoreResults = true
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     
@@ -143,8 +142,8 @@ extension ProgramRequestsViewModel {
             let totalCount = requests.total ?? 0
             
             requests.requests?.forEach({ (programRequest) in
-                guard let vc = self?.router.currentController() else { return }
-                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, lastRequest: requests.requests?.count == 1, delegate: vc as? ProgramRequestTableViewCellProtocol)
+                guard let programRequestTableViewCellProtocol = self?.router.currentController as? ProgramRequestTableViewCellProtocol else { return }
+                let programRequestTableViewCellModel = ProgramRequestTableViewCellViewModel(request: programRequest, lastRequest: requests.requests?.count == 1, delegate: programRequestTableViewCellProtocol)
                 programRequestViewModels.append(programRequestTableViewCellModel)
             })
             

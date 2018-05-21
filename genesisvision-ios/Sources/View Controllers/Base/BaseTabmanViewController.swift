@@ -10,10 +10,10 @@ import UIKit
 import Tabman
 import Pageboy
 
-class BaseTabmanViewController: TabmanViewController {
+class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
     
     // MARK: - View Model
-    var viewModel: TabmanViewModel!
+    var viewModel: T!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,31 +22,25 @@ class BaseTabmanViewController: TabmanViewController {
     }
     
     // MARK: - Private methods
-    func setup() {
-        view.backgroundColor = UIColor.BaseView.bg
+    private func setup() {
+        viewModel.initializeViewControllers()
         
+        dataSource = self
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
         
-        self.dataSource = self
+        setupUI()
+    }
+    private func setupUI() {
+        view.backgroundColor = UIColor.BaseView.bg
         
-        var barItems = [Item]()
-        
-        for itemTitle in viewModel.itemTitles {
-            barItems.append(Item(title: itemTitle))
-        }
-
-        bar.items = barItems
         bar.style = viewModel.style
         bar.location = .top
-
+        
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
-            appearance.layout.itemDistribution = .centered
-            appearance.layout.interItemSpacing = 8.0
-            appearance.layout.edgeInset = 0.0
             
             appearance.state.selectedColor = UIColor.primary
-            appearance.state.shouldHideWhenSingleItem = true
+            appearance.state.shouldHideWhenSingleItem = viewModel.shouldHideWhenSingleItem
             
             appearance.style.imageRenderingMode = .alwaysTemplate
             appearance.style.showEdgeFade = false
@@ -57,8 +51,31 @@ class BaseTabmanViewController: TabmanViewController {
             appearance.indicator.isProgressive = false
             appearance.indicator.compresses = false
             
-            appearance.text.font = UIFont.getFont(.regular, size: 16)
+            appearance.text.font = UIFont.getFont(.regular, size: 15)
+            
+            switch bar.style {
+            case .buttonBar:
+                appearance.layout.interItemSpacing = 8.0
+                appearance.layout.edgeInset = 0.0
+            default:
+                appearance.layout.interItemSpacing = 20.0
+                appearance.layout.edgeInset = 16.0
+            }
         })
+    }
+}
+
+extension BaseTabmanViewController: TabmanViewModelDelegate {
+    func updatedItems() {
+        var barItems = [Item]()
+        
+        for itemTitle in viewModel.itemTitles {
+            barItems.append(Item(title: itemTitle.uppercased()))
+        }
+        
+        bar.items = barItems
+        
+        setupUI()
     }
 }
 

@@ -225,7 +225,7 @@ extension InvestmentProgramListViewModel {
     }
     
     func showDetail(with investmentProgramId: String) {
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId))
+        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId))
     }
     
     func showDetail(at indexPath: IndexPath) {
@@ -234,7 +234,7 @@ extension InvestmentProgramListViewModel {
         let investmentProgram = model.investmentProgram
         guard let investmentProgramId = investmentProgram.id else { return }
         
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
     }
 }
 

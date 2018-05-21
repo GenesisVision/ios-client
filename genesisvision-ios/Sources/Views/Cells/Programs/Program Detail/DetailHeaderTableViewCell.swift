@@ -24,7 +24,11 @@ class DetailHeaderTableViewCell: UITableViewCell {
     @IBOutlet var currencyLabel: UILabel!
     
     // MARK: - Buttons
-    @IBOutlet weak var descriptionButton: UIButton!
+    @IBOutlet weak var descriptionButton: UIButton! {
+        didSet {
+            descriptionButton.isHidden = true
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

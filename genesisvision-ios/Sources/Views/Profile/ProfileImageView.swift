@@ -20,6 +20,7 @@ class ProfileImageView: UIView {
     @IBOutlet var readMoreImageView: UIImageView! {
         didSet {
             readMoreImageView.image = #imageLiteral(resourceName: "img_program_read_more")
+            readMoreImageView.isHidden = true
         }
     }
     

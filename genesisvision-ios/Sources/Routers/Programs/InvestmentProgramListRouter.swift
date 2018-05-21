@@ -7,7 +7,7 @@
 //
 
 enum ProgramRouteType {
-    case signIn, showProgramDetail(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
+    case signIn, showProgramDetails(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
 }
 
 class InvestmentProgramListRouter: Router {
@@ -19,8 +19,8 @@ class InvestmentProgramListRouter: Router {
             signInAction()
         case .showFilterVC(let investmentProgramListViewModel):
             showFilterVC(with: investmentProgramListViewModel)
-        case .showProgramDetail(let investmentProgramId):
-            showProgramDetail(with: investmentProgramId)
+        case .showProgramDetails(let investmentProgramId):
+            showProgramDetails(with: investmentProgramId)
         case .showTournamentVC(let tournamentTotalRounds, let tournamentCurrentRound):
             showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound)
         }
@@ -30,7 +30,6 @@ class InvestmentProgramListRouter: Router {
     private func signInAction() {
         guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
         let router = SignInRouter(parentRouter: self, navigationController: navigationController)
-        childRouters.append(router)
         viewController.viewModel = SignInViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -46,9 +45,9 @@ class InvestmentProgramListRouter: Router {
     
     private func showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int) {
         guard let tabmanViewController = TournamentTabmanViewController.storyboardInstance(name: .tournament), tournamentCurrentRound > 0 else { return }
-        let router = Router(parentRouter: self)
-        tabmanViewController.viewModel = TournamentViewModel(withRouter: router, viewControllersCount: tournamentTotalRounds, defaultPage: tournamentCurrentRound - 1)
-        
+        let router = TournamentRouter(parentRouter: self)
+        let viewModel = TournamentViewModel(withRouter: router, viewControllersCount: tournamentTotalRounds, defaultPage: tournamentCurrentRound - 1, tabmanViewModelDelegate: tabmanViewController)
+        tabmanViewController.viewModel = viewModel
         tabmanViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(tabmanViewController, animated: true)
     }

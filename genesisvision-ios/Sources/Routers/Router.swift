@@ -27,11 +27,11 @@ class Router {
     // MARK: - Variables
     var tournamentViewController: TournamentListViewController!
     var dashboardViewController: DashboardViewController!
-//    var dashboardTabmanViewController: DashboardTabmanViewController!
     var programsViewController: ProgramListViewController!
     
+    var currentController: UIViewController?
+    
     var parentRouter: Router?
-    var childRouters: [Router] = []
     
     //for authorized user
     weak var rootTabBarController: BaseTabBarController?
@@ -43,24 +43,11 @@ class Router {
         
         var navigationController = BaseNavigationController()
         
-//        if isInvestorApp, let dashboardTabmanViewController = DashboardTabmanViewController.storyboardInstance(name: .dashboard) {
-//            self.dashboardTabmanViewController = dashboardTabmanViewController
-//            let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
-//            childRouters.append(router)
-//            let viewModel = DashboardTabmanViewModel(withRouter: router)
-//            dashboardTabmanViewController.viewModel = viewModel
-//            dashboardTabmanViewController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
-//            dashboardTabmanViewController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
-//            dashboardTabmanViewController.tabBarItem.title = "DASHBOARD"
-//            viewControllers.append(dashboardTabmanViewController)
-//        }
-        
         if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
             self.dashboardViewController = dashboardViewController
 
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
-            childRouters.append(router)
             dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
             navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
@@ -78,7 +65,6 @@ class Router {
         if let walletViewController = WalletViewController.storyboardInstance(name: .wallet) {
             navigationController = BaseNavigationController(rootViewController: walletViewController)
             let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-            childRouters.append(router)
             walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
             navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
@@ -89,7 +75,6 @@ class Router {
         if let profileViewController = ProfileViewController.storyboardInstance(name: .profile) {
             navigationController = BaseNavigationController(rootViewController: profileViewController)
             let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
-            childRouters.append(router)
             profileViewController.viewModel = ProfileViewModel(withRouter: router, textFieldDelegate: profileViewController)
             navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_profile_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_profile_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile_selected").withRenderingMode(.alwaysOriginal)
@@ -103,34 +88,42 @@ class Router {
     // MARK: - Init
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
+
         if isTournamentApp {
             self.tournamentViewController = parentRouter?.tournamentViewController
         } else {
             self.programsViewController = parentRouter?.programsViewController
             self.dashboardViewController = parentRouter?.dashboardViewController
-//            self.dashboardTabmanViewController = parentRouter?.dashboardTabmanViewController
         }
+        
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
+        
+        self.currentController = topViewController()
     }
     
     // MARK: - Private methods
-    private func createProgramsNavigationController() {
-        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
+    private func getProgramsNavigationController() -> UINavigationController? {
+        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
         self.programsViewController = viewController
-        let router = InvestmentProgramListRouter(parentRouter: self)
-        childRouters.append(router)
+        
+        let navigationController = BaseNavigationController(rootViewController: programsViewController)
+        let router = InvestmentProgramListRouter(parentRouter: self, navigationController: navigationController)
         programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
+        
+        return navigationController
     }
     
-    private func createTournamentNavigationController() {
-        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return }
+    private func getTournamentNavigationController() -> UINavigationController? {
+        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return nil }
         tournamentViewController = viewController
-        let router = TournamentRouter(parentRouter: self)
-        childRouters.append(router)
+        
+        let navigationController = BaseNavigationController(rootViewController: tournamentViewController)
+        let router = TournamentListRouter(parentRouter: self, navigationController: navigationController)
         tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, reloadDataProtocol: viewController, roundNumber: nil)
+        
+        return navigationController
     }
-    
 }
 
 //Protocol methods
@@ -166,6 +159,8 @@ extension Router: RouterProtocol {
     }
     
     func setWindowRoot(viewController: UIViewController?) {
+        guard viewController != nil else { return }
+        
         let window = UIApplication.shared.windows[0] as UIWindow
         window.rootViewController = viewController
     }
@@ -173,34 +168,16 @@ extension Router: RouterProtocol {
  
 //Common methods
 extension Router {
-    func currentController() -> UIViewController? {
+    func topViewController() -> UIViewController? {
         return navigationController?.topViewController
     }
     
     func getProgramsVC() -> UIViewController? {
         guard let tabmanViewController = BaseTabmanViewController.storyboardInstance(name: .programs) else { return nil }
         let router = Router(parentRouter: self)
-        tabmanViewController.viewModel = TabmanViewModel(withRouter: router)
+        tabmanViewController.viewModel = TabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
         
         return tabmanViewController
-    }
-    
-    func getProgramsNavigationController() -> UINavigationController? {
-        createProgramsNavigationController()
-        
-        let navigationController = BaseNavigationController(rootViewController: programsViewController)
-        programsViewController.viewModel.router.navigationController = navigationController
-        
-        return navigationController
-    }
-    
-    func getTournamentNavigationController() -> UINavigationController? {
-        createTournamentNavigationController()
-        
-        let navigationController = BaseNavigationController(rootViewController: tournamentViewController)
-        tournamentViewController.viewModel.router.navigationController = navigationController
-        
-        return navigationController
     }
     
     func startAsUnauthorized() {
@@ -215,7 +192,6 @@ extension Router {
             let router = viewModel.router else { return }
         
         router.show(routeType: .signIn)
-        
         
         setWindowRoot(viewController: navigationController)
     }
@@ -250,14 +226,14 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
-    func showProgramDetail(with investmentProgramId: String) {
-        guard let vc = currentController() else { return }
+    func showProgramDetails(with investmentProgramId: String) {
+        guard let vc = currentController, let viewController = ProgramDetailsTabmanViewController.storyboardInstance(name: .program) else { return }
+        viewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
         
-        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return }
-        viewController.delegate = vc as? ProgramDetailViewControllerProtocol
-        
-        let router = ProgramDetailRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController, programPropertiesForTableViewCellViewProtocol: viewController, detailChartTableViewCellProtocol: viewController)
+        let router = ProgramDetailsRouter(parentRouter: self)
+        router.currentController = viewController
+        let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: viewController)
+        viewModel.programDetailsProtocol = viewController
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
@@ -265,34 +241,13 @@ extension Router {
     
     func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return nil }
+        
         let router = ProgramDetailRouter(parentRouter: self)
-        let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController, programPropertiesForTableViewCellViewProtocol: viewController, detailChartTableViewCellProtocol: viewController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController, detailChartTableViewCellProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController
-    }
-    
-    func invest(with investmentProgramId: String, currency: String, availableToInvest: Double) {
-        guard let vc = currentController() else { return }
-        
-        guard let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
-        let router = ProgramInvestRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramInvestViewModel(withRouter: router, investmentProgramId: investmentProgramId, currency: currency, availableToInvest: availableToInvest, programDetailProtocol: vc as? ProgramDetailProtocol)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func withdraw(with investmentProgramId: String, investedTokens: Double, currency: String) {
-        guard let vc = currentController() else { return }
-        
-        guard let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
-        let router = ProgramWithdrawRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency, programDetailProtocol: vc as? ProgramDetailProtocol)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func goToBack() {

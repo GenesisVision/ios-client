@@ -25,16 +25,16 @@ final class ProgramDetailViewModel {
     }
 
     // MARK: - Variables
-    var title: String = "Program Details"
+    var title: String = "Details"
+    
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
-    private weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
     private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
     var chartDurationType: ChartDurationType = .all
     var investmentProgramId: String!
     private var equityChart: [TradeChart]?
-    private var investmentProgramDetails: InvestmentProgramDetails? {
+    public private(set) var investmentProgramDetails: InvestmentProgramDetails? {
         didSet {
             if let isHistoryEnable = investmentProgramDetails?.isHistoryEnable,
                 let isInvestEnable = investmentProgramDetails?.isInvestEnable,
@@ -55,10 +55,6 @@ final class ProgramDetailViewModel {
     var viewProperties: ProgramDetailViewProperties?
     var availableInvestment: Double = 0.0
     
-    var isFavorite: Bool {
-        return investmentProgramDetails?.isFavorite ?? false
-    }
-    
     private var sections: [SectionType] = [.header,
                                            .chart,
                                            .details,
@@ -78,17 +74,27 @@ final class ProgramDetailViewModel {
     
     // MARK: - Init
     init(withRouter router: ProgramDetailRouter,
-         investmentProgramId: String,
+         investmentProgramId: String? = nil,
+         investmentProgramDetails: InvestmentProgramDetails? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil,
-         programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol? = nil,
          detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol? = nil) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        
+        if let investmentProgramId = investmentProgramId {
+            self.investmentProgramId = investmentProgramId
+        }
+        
+        if let investmentProgramDetails = investmentProgramDetails, let investmentProgramId = investmentProgramDetails.id?.uuidString {
+            DispatchQueue.main.async {
+                self.investmentProgramDetails = investmentProgramDetails
+            }
+            self.investmentProgramId = investmentProgramId
+        }
+        
         self.reloadDataProtocol = reloadDataProtocol
-        self.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
         self.detailChartTableViewCellProtocol = detailChartTableViewCellProtocol
         
-        updateChart(with: .all) { [weak self] (result) in
+        self.updateChart(with: .all) { [weak self] (result) in
             self?.reloadDataProtocol?.didReloadData()
         }
     }
@@ -126,40 +132,6 @@ extension ProgramDetailViewModel {
     func withdraw() {
         guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens, let currency = investmentProgramDetails?.currency else { return }
         router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency.rawValue))
-    }
-    
-    
-    func changeFavorite(completion: @escaping CompletionBlock) {
-        guard let investmentProgramId = investmentProgramId,
-            let isFavorite = investmentProgramDetails?.isFavorite else { return }
-        
-        investmentProgramDetails?.isFavorite = !isFavorite
-        ProgramDataProvider.programFavorites(isFavorite: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-                self?.investmentProgramDetails?.isFavorite = isFavorite
-            }
-            
-            completion(result)
-        }
-    }
-    
-    func showHistory() {
-        guard let investmentProgramId = investmentProgramId else { return }
-        router.show(routeType: .history(investmentProgramId: investmentProgramId))
-    }
-    
-    func showTrades() {
-        guard let tradesCount = investmentProgramDetails?.tradesCount, tradesCount > 0, let investmentProgramId = investmentProgramId else { return }
-        router.show(routeType: .trades(investmentProgramId: investmentProgramId))
-    }
-    
-    func showRequests() {
-        guard let investmentProgramId = investmentProgramId else { return }
-        router.show(routeType: .requests(investmentProgramId: investmentProgramId))
     }
     
     func showFullChart() {
@@ -203,11 +175,11 @@ extension ProgramDetailViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: self)
+            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: nil)
         case .chart:
             return DetailChartTableViewCellViewModel(chart: equityChart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, chartDurationType: self.chartDurationType, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
         case .moreDetails:
-            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self, programPropertiesForTableViewCellViewProtocol: programPropertiesForTableViewCellViewProtocol)
+            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self)
         case .details:
             return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
         case .availableToInvest:
@@ -226,13 +198,10 @@ extension ProgramDetailViewModel {
             completion(.success)
         }, errorCompletion: completion)
     }
-}
-
-
-extension ProgramDetailViewModel: DetailHeaderTableViewCellProtocol {
-    func showDescriptionDidPress() {
-        guard let investmentProgramDetails = investmentProgramDetails else { return }
-        router.show(routeType: .description(investmentProgramDetails: investmentProgramDetails))
+    
+    func updateDetails(with investmentProgramDetails: InvestmentProgramDetails) {
+        self.investmentProgramDetails = investmentProgramDetails
+        self.didReloadData()
     }
 }
 

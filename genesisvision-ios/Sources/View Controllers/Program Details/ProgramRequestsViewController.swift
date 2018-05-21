@@ -25,12 +25,12 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setup()
     }
     
     // MARK: - Private methods
@@ -108,7 +108,11 @@ extension ProgramRequestsViewController: ProgramRequestTableViewCellProtocol {
         viewModel.cancel(with: requestID) { [weak self]  (result) in
             switch result {
             case .success:
-                lastRequest ? self?.viewModel.goToBack() : self?.showSuccessHUD(completion: { (success) in self?.fetch() })
+                self?.viewModel.didRequestCanceled(lastRequest)
+                
+                if !lastRequest {
+                    self?.showSuccessHUD(completion: { (success) in self?.fetch() })
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

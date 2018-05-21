@@ -111,7 +111,7 @@ extension ProgramHistoryViewModel {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
-        canFetchMoreResults = true
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     

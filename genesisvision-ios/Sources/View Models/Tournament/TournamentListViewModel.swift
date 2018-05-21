@@ -11,7 +11,7 @@ import UIKit.UITableViewHeaderFooterView
 final class TournamentListViewModel {
     // MARK: - Variables
     var title: String = "Tournament"
-    var router: TournamentRouter!
+    var router: TournamentListRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
@@ -39,7 +39,7 @@ final class TournamentListViewModel {
     var filter: InvestmentProgramsFilter?
     
     // MARK: - Init
-    init(withRouter router: TournamentRouter, reloadDataProtocol: ReloadDataProtocol?, roundNumber: Int?) {
+    init(withRouter router: TournamentListRouter, reloadDataProtocol: ReloadDataProtocol?, roundNumber: Int?) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         

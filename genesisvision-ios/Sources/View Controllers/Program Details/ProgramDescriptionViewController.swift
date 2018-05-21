@@ -15,11 +15,7 @@ class ProgramDescriptionViewController: BaseViewController {
     @IBOutlet weak var programLogoImageView: ProfileImageView!
     @IBOutlet weak var programTitleLabel: UILabel!
     @IBOutlet weak var managerNameLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView! {
-        didSet {
-            descriptionTextView.backgroundColor = .clear
-        }
-    }
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var closeButton: ActionButton!
     
@@ -34,11 +30,6 @@ class ProgramDescriptionViewController: BaseViewController {
         super.viewDidLoad()
 
         setupUI()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        descriptionTextView.setContentOffset(CGPoint.zero, animated: false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,7 +58,7 @@ class ProgramDescriptionViewController: BaseViewController {
         }
         
         programTitleLabel.text = viewModel.getProgramTitle()
-        descriptionTextView.text = viewModel.getProgramDescription()
+        descriptionLabel.text = viewModel.getProgramDescription()
         managerNameLabel.text = viewModel.getProgramManagerUsername()
         
         programLogoImageView.levelLabel.text = viewModel.getProgramLevelText()

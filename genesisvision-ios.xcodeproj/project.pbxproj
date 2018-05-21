@@ -25,6 +25,8 @@
 		5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */; };
 		5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */; };
 		5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */; };
+		5E33E3B420AB20B900A0B9DE /* ProgramDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */; };
+		5E33E3B720AB218A00A0B9DE /* ProgramDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */; };
 		5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E367906206BC6DA006E226A /* AmountLabel.swift */; };
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */; };
@@ -35,6 +37,7 @@
 		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
 		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
 		5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */; };
+		5E6301F820AB1A4900054200 /* TournamentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6301F720AB1A4900054200 /* TournamentRouter.swift */; };
 		5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E696019209362EE00505726 /* FavoriteButton.swift */; };
 		5E6D681D207655A100299408 /* String+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681C207655A100299408 /* String+Constants.swift */; };
 		5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */; };
@@ -264,7 +267,7 @@
 		FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */; };
 		FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */; };
 		FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD67202267910044C3EC /* EnumExtension.swift */; };
-		FC4C193E20304EC900625795 /* TournamentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C193D20304EC900625795 /* TournamentRouter.swift */; };
+		FC4C193E20304EC900625795 /* TournamentListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C193D20304EC900625795 /* TournamentListRouter.swift */; };
 		FC4C194620304F3300625795 /* TournamentDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C194520304F3300625795 /* TournamentDetailRouter.swift */; };
 		FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C1947203050DD00625795 /* TournamentDetailViewModel.swift */; };
 		FC4C19502030555700625795 /* TournamentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C194F2030555700625795 /* TournamentDetailViewController.swift */; };
@@ -421,6 +424,8 @@
 		5E23926E205F67F000CB5AEC /* NeuzeitGro-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Bol.ttf"; sourceTree = "<group>"; };
 		5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Reg.ttf"; sourceTree = "<group>"; };
 		5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Lig.ttf"; sourceTree = "<group>"; };
+		5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsRouter.swift; sourceTree = "<group>"; };
+		5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsViewModel.swift; sourceTree = "<group>"; };
 		5E367906206BC6DA006E226A /* AmountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewModel.swift; sourceTree = "<group>"; };
@@ -431,6 +436,7 @@
 		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
 		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
 		5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewModel.swift; sourceTree = "<group>"; };
+		5E6301F720AB1A4900054200 /* TournamentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRouter.swift; sourceTree = "<group>"; };
 		5E696019209362EE00505726 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
 		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
@@ -667,7 +673,7 @@
 		FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSliderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD67202267910044C3EC /* EnumExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtension.swift; sourceTree = "<group>"; };
-		FC4C193D20304EC900625795 /* TournamentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRouter.swift; sourceTree = "<group>"; };
+		FC4C193D20304EC900625795 /* TournamentListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListRouter.swift; sourceTree = "<group>"; };
 		FC4C194520304F3300625795 /* TournamentDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentDetailRouter.swift; sourceTree = "<group>"; };
 		FC4C1947203050DD00625795 /* TournamentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentDetailViewModel.swift; sourceTree = "<group>"; };
 		FC4C194F2030555700625795 /* TournamentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentDetailViewController.swift; sourceTree = "<group>"; };
@@ -854,6 +860,41 @@
 				5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5E33E3B220AB209700A0B9DE /* Program Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */,
+				FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */,
+				FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */,
+				FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */,
+				FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */,
+				FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */,
+				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
+				5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */,
+				5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */,
+				5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */,
+			);
+			path = "Program Details";
+			sourceTree = "<group>";
+		};
+		5E33E3B520AB216F00A0B9DE /* Program Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */,
+				FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */,
+				FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */,
+				FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */,
+				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
+				FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */,
+				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
+				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
+				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
+				5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */,
+				5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */,
+			);
+			path = "Program Details";
 			sourceTree = "<group>";
 		};
 		5E7B03532067BA3000D8F3BA /* Buttons */ = {
@@ -1273,15 +1314,6 @@
 			isa = PBXGroup;
 			children = (
 				FCA19A2C201ADAB100157AD6 /* InvestmentProgramListRouter.swift */,
-				FCA19A48201AF8ED00157AD6 /* ProgramDetailRouter.swift */,
-				FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */,
-				FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */,
-				FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */,
-				FC83DF66203DA7B600A8F8CE /* ProgramHistoryRouter.swift */,
-				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
-				5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */,
-				5E8340EA207E4660004A29F1 /* ProgramDetailTradesRouter.swift */,
-				5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1289,7 +1321,8 @@
 		FC4C194420304F0D00625795 /* Tournament */ = {
 			isa = PBXGroup;
 			children = (
-				FC4C193D20304EC900625795 /* TournamentRouter.swift */,
+				5E6301F720AB1A4900054200 /* TournamentRouter.swift */,
+				FC4C193D20304EC900625795 /* TournamentListRouter.swift */,
 				FC4C194520304F3300625795 /* TournamentDetailRouter.swift */,
 			);
 			path = Tournament;
@@ -1310,17 +1343,7 @@
 			children = (
 				5EA173CE20A081B800905253 /* ProgramsViewModel.swift */,
 				FCBD22BF2019E960000B8E38 /* InvestmentProgramListViewModel.swift */,
-				FCA19A46201AF8D600157AD6 /* ProgramDetailViewModel.swift */,
 				FC5E9047202167CF000E4A90 /* ProgramFilterViewModel.swift */,
-				FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */,
-				FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */,
-				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
-				FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */,
-				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
-				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
-				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
-				5E8340DF207E3907004A29F1 /* ProgramDetailTradesViewModel.swift */,
-				5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -1496,12 +1519,12 @@
 		FCB17763204568DA00A482B7 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */,
-				FCB177642045690500A482B7 /* DashboardTableViewCell.swift */,
-				FCB177652045690500A482B7 /* DashboardTableViewCell.xib */,
 				5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */,
 				5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */,
 				5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */,
+				FCB177682045691300A482B7 /* DashboardTableViewCellViewModel.swift */,
+				FCB177642045690500A482B7 /* DashboardTableViewCell.swift */,
+				FCB177652045690500A482B7 /* DashboardTableViewCell.xib */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1540,6 +1563,7 @@
 				5EA173D020A082AE00905253 /* TabmanViewModel.swift */,
 				FCA19A3C201AE35800157AD6 /* WelcomeViewModel.swift */,
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
+				5E33E3B520AB216F00A0B9DE /* Program Details */,
 				FC4C194A203050F200625795 /* Programs */,
 				FC4C194E203051B700625795 /* Profile */,
 				FC4C194B203051A100625795 /* Auth */,
@@ -1700,6 +1724,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC9DD76200E4CCF008825EC /* Base */,
+				5EA7A0F820A0B08B00D895FC /* Program Details */,
 				FCC9DD6F200E4C7E008825EC /* Programs */,
 				FCB8DFC72010F64D00698D18 /* Auth */,
 				FCC9DD72200E4C7E008825EC /* Profile */,
@@ -1740,6 +1765,7 @@
 		FCC9DD4E200DFA5E008825EC /* Routers */ = {
 			isa = PBXGroup;
 			children = (
+				5E33E3B220AB209700A0B9DE /* Program Details */,
 				FCA19A3A201AE34900157AD6 /* WelcomeRouter.swift */,
 				FCA19A24201AA8C000157AD6 /* Router.swift */,
 				5EA173D220A0883000905253 /* TabmanRouter.swift */,
@@ -1832,7 +1858,6 @@
 			children = (
 				5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */,
 				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
-				5EA7A0F820A0B08B00D895FC /* Program Details */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -2080,6 +2105,7 @@
 				5EA1748920A0974200905253 /* ManagerRequest.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */,
+				5E33E3B720AB218A00A0B9DE /* ProgramDetailsViewModel.swift in Sources */,
 				5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */,
 				5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
@@ -2110,6 +2136,7 @@
 				5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */,
 				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */,
+				5E6301F820AB1A4900054200 /* TournamentRouter.swift in Sources */,
 				5EA1744620A0974100905253 /* BrokersFilter.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
 				5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */,
@@ -2263,7 +2290,7 @@
 				5E8340EB207E4660004A29F1 /* ProgramDetailTradesRouter.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
-				FC4C193E20304EC900625795 /* TournamentRouter.swift in Sources */,
+				FC4C193E20304EC900625795 /* TournamentListRouter.swift in Sources */,
 				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FC14101F2030168100B71E7F /* ParticipantsSummaryViewModel.swift in Sources */,
 				FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */,
@@ -2330,6 +2357,7 @@
 				FCC9DD66200E3AB7008825EC /* TournamentTableViewCellViewModel.swift in Sources */,
 				FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */,
 				5EA1746520A0974100905253 /* TradesViewModel.swift in Sources */,
+				5E33E3B420AB20B900A0B9DE /* ProgramDetailsRouter.swift in Sources */,
 				5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */,
 				5E8340DE207E38A4004A29F1 /* ProgramDetailTradesViewController.swift in Sources */,
 				5EA1744920A0974100905253 /* InvestmentProgramViewModel.swift in Sources */,

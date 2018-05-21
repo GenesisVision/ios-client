@@ -11,13 +11,11 @@ import Foundation
 struct ProgramMoreDetailsTableViewCellViewModel {
     let investmentProgramDetails: InvestmentProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
-    weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol?
 }
 
 extension ProgramMoreDetailsTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramMoreDetailsTableViewCell) {
 
-        cell.programPropertiesForTableViewCellViewProtocol = programPropertiesForTableViewCellViewProtocol
         cell.programPropertiesView.setup(with: investmentProgramDetails.endOfPeriod,
                                          periodDuration: investmentProgramDetails.periodDuration,
                                          feeSuccess: investmentProgramDetails.feeSuccess,

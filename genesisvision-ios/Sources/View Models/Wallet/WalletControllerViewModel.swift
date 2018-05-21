@@ -45,8 +45,8 @@ final class WalletControllerViewModel {
     // MARK: - Init
     init(withRouter router: WalletRouter) {
         self.router = router
-        self.delegate = router.currentController() as? WalletHeaderTableViewCellProtocol
-        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
+        self.delegate = router.topViewController() as? WalletHeaderTableViewCellProtocol
+        self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
         
         setup()
     }
@@ -252,7 +252,7 @@ extension WalletControllerViewModel {
             let investmentProgramId = investmentProgram.id
             else { return }
         
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
     }
     
     func showProgramList() {

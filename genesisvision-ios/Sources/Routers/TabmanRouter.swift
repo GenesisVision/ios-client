@@ -14,8 +14,5 @@ class TabmanRouter: Router {
     
     // MARK: - Public methods
     func show(routeType: TabmanRouteType) {
-       
     }
-    
-    // MARK: - Private methods
 }

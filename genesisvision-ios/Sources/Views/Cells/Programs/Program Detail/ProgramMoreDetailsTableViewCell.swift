@@ -17,13 +17,7 @@ class ProgramMoreDetailsTableViewCell: PlateTableViewCell {
             availableTokensTooltip.tooltipText = String.Tooltitps.availableTokens
         }
     }
-    
-    weak var programPropertiesForTableViewCellViewProtocol: ProgramPropertiesForTableViewCellViewProtocol? {
-        didSet {
-            programPropertiesView.delegate = programPropertiesForTableViewCellViewProtocol
-        }
-    }
-    
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()

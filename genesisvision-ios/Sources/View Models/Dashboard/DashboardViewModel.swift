@@ -10,22 +10,11 @@ import UIKit.UITableViewHeaderFooterView
 
 final class DashboardTabmanViewModel: TabmanViewModel {
     // MARK: - Init
-    override init(withRouter router: Router, viewControllersCount: Int, defaultPage: Int) {
-        super.init(withRouter: router, viewControllersCount: viewControllersCount, defaultPage: defaultPage)
+    override init(withRouter router: Router, viewControllersCount: Int, defaultPage: Int, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
+        super.init(withRouter: router, viewControllersCount: viewControllersCount, defaultPage: defaultPage, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
         title = "Dashboard"
-        style = .buttonBar
         isScrollEnabled = false
-    }
-    
-    override func initializeViewControllers() {
-        guard let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) else { return }
-        let navigationController = BaseNavigationController(rootViewController: dashboardViewController)
-        let router = DashboardRouter(parentRouter: self.router, navigationController: navigationController)
-        let viewModel = DashboardViewModel(withRouter: router)
-        dashboardViewController.viewModel = viewModel
-        itemTitles.append(viewModel.title)
-        viewControllers.append(navigationController)
     }
 }
 
@@ -87,7 +76,7 @@ final class DashboardViewModel {
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
+        self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
     }
     
     // MARK: - Public methods
@@ -209,7 +198,7 @@ extension DashboardViewModel {
         let investmentProgram = model.investmentProgram
         guard let investmentProgramId = investmentProgram.id else { return }
         
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
     }
     
     func showProgramList() {
@@ -307,10 +296,9 @@ extension DashboardViewModel {
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
-//        self.activeViewModels = viewModels.filter { $0.investmentProgram.isArchived != true }
-//        self.archiveViewModels = viewModels.filter { $0.investmentProgram.isArchived == true }
         self.totalCount = totalCount
         self.skip += self.take
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     

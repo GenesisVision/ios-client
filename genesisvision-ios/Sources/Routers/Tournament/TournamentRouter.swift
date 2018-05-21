@@ -2,24 +2,23 @@
 //  TournamentRouter.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 11.02.18.
+//  Created by George on 15/05/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 enum TournamentRouteType {
-    case showDetail(investmentProgramId: String), getDetail(investmentProgramId: String)
+    
 }
 
-class TournamentRouter: Router {
+class TournamentRouter: TabmanRouter {
     
     // MARK: - Public methods
-    func show(routeType: TournamentRouteType) {
-        switch routeType {
-        case .getDetail(let investmentProgramId):
-            getDetailViewController(with: investmentProgramId)
-        case .showDetail(let investmentProgramId):
-            showProgramDetail(with: investmentProgramId)
-        }
+    func getTournamentVC(roundNumber: Int) -> TournamentListViewController? {
+        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return nil }
+        let tournamentListRouter = TournamentListRouter(parentRouter: self)
+        let viewModel = TournamentListViewModel(withRouter: tournamentListRouter, reloadDataProtocol: viewController, roundNumber: roundNumber)
+        viewController.viewModel = viewModel
+        return viewController
     }
 }
 

@@ -23,7 +23,6 @@ class ProgramInvestRouter: Router {
     private func investmentRequested(investedAmount: Double) {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
-        childRouters.append(router)
         viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router, investedAmount: investedAmount)
         navigationController?.pushViewController(viewController, animated: true)
     }

@@ -14,30 +14,68 @@ protocol TabmanViewModelProtocol {
     func initializeViewControllers()
 }
 
+protocol TabmanViewModelDelegate: class {
+    func updatedItems()
+}
+
 class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
     var title: String = ""
     
-    var style: TabmanBar.Style = .buttonBar
-    var isScrollEnabled = true
-    var router: Router!
-    var viewControllers = [UIViewController]()
+    weak var tabmanViewModelDelegate: TabmanViewModelDelegate?
+    
+    internal var style: TabmanBar.Style = .buttonBar
+    internal var isScrollEnabled = true
+    internal var itemDistribution: TabmanBar.Appearance.Layout.ItemDistribution = .leftAligned
+    internal var shouldHideWhenSingleItem = false
+    internal var router: Router!
     
     var viewControllersCount: Int = 1
+    public private(set) var viewControllers = [UIViewController]()
+    public private(set) var itemTitles = [String]()
     
-    var itemTitles = [String]()
-    var defaultPage: PageboyViewController.Page? = .first
+    public private(set) var defaultPage: PageboyViewController.Page? = .first
     
     // MARK: - Init
-    init(withRouter router: Router, viewControllersCount: Int = 1, defaultPage: Int = 0) {
+    init(withRouter router: Router, viewControllersCount: Int = 1, defaultPage: Int = 0, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
         self.router = router
         self.defaultPage = .at(index: defaultPage)
         self.viewControllersCount = viewControllersCount
-        
-        initializeViewControllers()
+        self.tabmanViewModelDelegate = tabmanViewModelDelegate
     }
     
     // MARK: - Public methods
+    func addItem(_ item: String) {
+        itemTitles.append(item)
+        tabmanViewModelDelegate?.updatedItems()
+    }
+    
+    func addController(_ viewController: UIViewController) {
+        viewControllers.append(viewController)
+        viewControllersCount = viewControllers.count
+        style = viewControllersCount > 4 ? .scrollingButtonBar : .buttonBar
+    }
+    
+    func removeController(_ index: Int) {
+        viewControllers.remove(at: index)
+        itemTitles.remove(at: index)
+        viewControllersCount = viewControllers.count
+        tabmanViewModelDelegate?.updatedItems()
+    }
+    
+    func removeAllControllers() {
+        viewControllers.removeAll()
+        itemTitles.removeAll()
+        viewControllersCount = viewControllers.count
+    }
+        
+    func reloadPages() {
+        if let vc = self.router.currentController as? ProgramDetailsTabmanViewController {
+            vc.reloadPages()
+            vc.didReloadData()
+        }
+    }
+    
     func initializeViewControllers() {
         //Set ViewControllers
     }

@@ -77,6 +77,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         tabBarItem.title = viewModel.title.uppercased()
 
+        setupSearchBar()
+    }
+    
+    private func setupSearchBar() {
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         

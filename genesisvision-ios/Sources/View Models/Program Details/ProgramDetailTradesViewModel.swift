@@ -10,7 +10,7 @@ import UIKit.UITableViewHeaderFooterView
 
 final class ProgramDetailTradesViewModel {
     // MARK: - Variables
-    var title: String = "Trade History"
+    var title: String = "Trades"
     var investmentProgramId: String?
     
     var router: ProgramDetailTradesRouter!
@@ -129,7 +129,7 @@ extension ProgramDetailTradesViewModel {
         self.totalCount = totalCount
         self.tradeServerType = tradeServerType
         self.skip += self.take
-        canFetchMoreResults = true
+        self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     

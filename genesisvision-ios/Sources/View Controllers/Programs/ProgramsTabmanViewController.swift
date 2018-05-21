@@ -6,6 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-class ProgramsTabmanViewController: BaseTabmanViewController {
+class ProgramsTabmanViewController: BaseTabmanViewController<TabmanViewModel> {
     
 }

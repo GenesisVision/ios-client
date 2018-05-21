@@ -6,6 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-class TournamentTabmanViewController: BaseTabmanViewController {
+class TournamentTabmanViewController: BaseTabmanViewController<TournamentViewModel> {
     
 }

@@ -192,6 +192,12 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         setupAutoLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.delegate = self
+    }
+    
+    // MARK: - Private methods
     private func setupViews() {
         sortAndFilterStackView.addArrangedSubview(sortButton)
         sortAndFilterStackView.addArrangedSubview(filterButton)
@@ -228,10 +234,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.delegate = self
-    }
     
     // MARK: - Fetching
     func updateData() {
@@ -311,7 +313,7 @@ extension BaseViewControllerWithTableView: UIViewControllerWithBottomView {
         
     }
 }
-    
+
 extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let tabBarIndex = tabBarController.selectedIndex

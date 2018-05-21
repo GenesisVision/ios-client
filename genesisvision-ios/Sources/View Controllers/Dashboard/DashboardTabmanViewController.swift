@@ -8,7 +8,7 @@
 
 import Tabman
 
-class DashboardTabmanViewController: BaseTabmanViewController {
+class DashboardTabmanViewController: BaseTabmanViewController<TabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -10,21 +10,19 @@
 import UIKit
 import DZNEmptyDataSet
 
-protocol ProgramDetailViewControllerProtocol: class {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool)
-}
-
 class ProgramDetailViewController: BaseViewControllerWithTableView {
 
     let buttonHeight: CGFloat = 45.0
-    let buttonBottom: CGFloat = 34.0
+    let buttonBottom: CGFloat = 40.0
     
     // MARK: - View Model
     var viewModel: ProgramDetailViewModel! {
         didSet {
             title = viewModel.getNickname()
             
-            updateData()
+            if viewModel.investmentProgramDetails == nil {
+                updateData()
+            }
         }
     }
     
@@ -39,17 +37,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             withdrawButton.isHidden = true
         }
     }
-    @IBOutlet var requestsButton: ActionButton! {
-        didSet {
-            requestsButton.isHidden = true
-        }
-    }
-    
-    // MARK: - Variables
-    weak var delegate: ProgramDetailViewControllerProtocol?
-    
-    private var historyBarButtonItem: UIBarButtonItem?
-    private var favoriteBarButtonItem: UIBarButtonItem!
     
     // MARK: - Views
     @IBOutlet var buttonsView: UIView!
@@ -63,8 +50,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        showProgressHUD()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +82,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         
         investButton.isHidden = !viewProperties.isInvestEnable
         withdrawButton.isHidden = !viewProperties.isWithdrawEnable
-        requestsButton.isHidden = !viewProperties.hasNewRequests
         
         gradientView.isHidden = false
         buttonsView.isHidden = false
@@ -110,19 +94,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
             tableView.contentInset.bottom = 0.0
             gradientView.isHidden = true
             buttonsView.isHidden = true
-        }
-        
-        guard AuthManager.isLogin() else { return }
-        
-        historyBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_history"), style: .done, target: self, action: #selector(historyButtonAction(_:)))
-        navigationItem.rightBarButtonItem = viewProperties.isHistoryEnable ? historyBarButtonItem : nil
-        
-        favoriteBarButtonItem = UIBarButtonItem(image: viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(favoriteButtonAction(_:)))
-        
-        if viewProperties.isHistoryEnable, let historyBarButtonItem = historyBarButtonItem, AuthManager.isLogin() {
-            navigationItem.rightBarButtonItems = [historyBarButtonItem, favoriteBarButtonItem]
-        } else {
-            navigationItem.rightBarButtonItem = favoriteBarButtonItem
         }
     }
     
@@ -159,11 +130,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.setupUI()
-            
-            if self.favoriteBarButtonItem != nil {
-                self.favoriteBarButtonItem.image = self.viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-            }
-            
             self.tableView.reloadData()
         }
     }
@@ -173,31 +139,13 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         print(touches)
     }
     
+    // MARK: - Public methods
+    func updateDetails(with investmentProgramDetails: InvestmentProgramDetails) {
+        viewModel.updateDetails(with: investmentProgramDetails)
+        reloadData()
+    }
+    
     // MARK: - IBActions
-    @IBAction func historyButtonAction(_ sender: UIButton) {
-        viewModel.showHistory()
-    }
-    
-    @IBAction func favoriteButtonAction(_ sender: UIButton) {
-        let isFavorite = viewModel.isFavorite
-        favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-        
-        showProgressHUD()
-        viewModel.changeFavorite() { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                if let investmentProgramId = self?.viewModel.investmentProgramId {
-                    self?.delegate?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: !isFavorite, request: false)
-                }
-            case .failure(let errorType):
-                self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-            }
-        }
-    }
-    
     @IBAction func investButtonAction(_ sender: UIButton) {
         viewModel.availableInvestment > 0
             ? viewModel.invest()
@@ -207,10 +155,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         viewModel.withdraw()
-    }
-    
-    @IBAction func requestsButtonAction(_ sender: UIButton) {
-        viewModel.showRequests()
     }
 }
 
@@ -248,32 +192,9 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension ProgramDetailViewController: ProgramDetailProtocol {
-    func didRequestCanceled() {
-        showProgressHUD()
-        fetch()
-    }
-    
-    func didWithdrawn() {
-        showProgressHUD()
-        fetch()
-    }
-    
-    func didInvested() {
-        showProgressHUD()
-        fetch()
-    }
-}
-
 extension ProgramDetailViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
-    }
-}
-
-extension ProgramDetailViewController: ProgramPropertiesForTableViewCellViewProtocol {
-    func showTradesDidPressed() {
-        viewModel.showTrades()
     }
 }
 

@@ -11,5 +11,5 @@ import Foundation
 protocol ProgramDetailProtocol: class {
     func didInvested()
     func didWithdrawn()
-    func didRequestCanceled()
+    func didRequestCanceled(_ last: Bool)
 }
