@@ -67,6 +67,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         bottomViewType = signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
+        if signInButtonEnable {
+            showNewVersionAlertIfNeeded(self)
+        }
+        
         PlatformManager.getPlatformStatus(completion: { [weak self] (model) in
             guard let isTournamentActive = model?.isTournamentActive, isTournamentActive else { return }
             
@@ -234,7 +238,7 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
         let cellPosition = tableView.convert(location, from: view)
         
         guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailViewController(with: indexPath),
+            let vc = viewModel.getDetailsViewController(with: indexPath),
             let cell = tableView.cellForRow(at: indexPath)
             else { return nil }
         

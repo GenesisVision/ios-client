@@ -43,13 +43,14 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         showInfiniteIndicator(value: false)
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
         resetBarButtonItem?.tintColor = UIColor.Button.red
         navigationItem.rightBarButtonItem = resetBarButtonItem
+
     }
     
     private func setupTableConfiguration() {
@@ -117,7 +118,11 @@ extension ProgramFilterViewController: TTRangeSliderDelegate {
         case .level:
             viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
         case .avgProfit:
-            viewModel.updateFilter(profitAvgPercentMin: Int(selectedMinimum), profitAvgPercentMax: Int(selectedMaximum))
+            viewModel.updateFilter(profitAvgPercentMin: Double(selectedMinimum), profitAvgPercentMax: Double(selectedMaximum))
+        case .totalProfit:
+            viewModel.updateFilter(profitTotalMin: Double(selectedMinimum), profitTotalMax: Double(selectedMaximum))
+        case .balance:
+            viewModel.updateFilter(balanceMin: Double(selectedMinimum), balanceMax: Double(selectedMaximum))
         }
     }
 }
@@ -131,6 +136,8 @@ extension ProgramFilterViewController: FilterSwitchTableViewCellProtocol {
             viewModel.updateFilter(showActivePrograms: didChangeSelectedValue)
         case .favoritePrograms:
             viewModel.updateFilter(showMyFavorites: didChangeSelectedValue)
+        case .availableToInvest:
+            viewModel.updateFilter(showAvailableToInvest: didChangeSelectedValue)
         }
     }
 }

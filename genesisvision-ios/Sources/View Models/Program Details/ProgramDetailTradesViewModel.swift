@@ -139,7 +139,7 @@ extension ProgramDetailTradesViewModel {
             guard let investmentProgramId = investmentProgramId,
                 let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            let filter = TradesFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, symbol: nil, sorting: nil, skip: skip, take: take)
+            let filter = TradesFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, symbol: nil, sorting: .byDateDesc, skip: skip, take: take)
             ProgramDataProvider.getProgramTrades(with: filter, completion: { (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)

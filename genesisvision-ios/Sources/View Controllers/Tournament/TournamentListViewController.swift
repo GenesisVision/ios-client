@@ -49,7 +49,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
     private func setup() {
         registerForPreviewing()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         showProgressHUD()
         fetch()
@@ -127,7 +127,7 @@ extension TournamentListViewController: UIViewControllerPreviewingDelegate {
         let cellPosition = tableView.convert(location, from: view)
         
         guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailViewController(with: indexPath.row),
+            let vc = viewModel.getDetailsViewController(with: indexPath.row),
             let cell = tableView.cellForRow(at: indexPath)
             else { return nil }
         

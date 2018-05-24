@@ -52,6 +52,8 @@ final class TournamentListViewModel {
                                           name: searchText,
                                           levelMin: nil,
                                           levelMax: nil,
+                                          balanceUsdMin: nil,
+                                          balanceUsdMax: nil,
                                           profitAvgMin: nil,
                                           profitAvgMax: nil,
                                           profitTotalMin: nil,
@@ -76,7 +78,7 @@ final class TournamentListViewModel {
         return "This round will start later."
     }
     
-    func getDetailViewController(with index: Int) -> ProgramDetailViewController? {
+    func getDetailsViewController(with index: Int) -> ProgramDetailsTabmanViewController? {
         guard let model = model(for: index) else {
             return nil
         }
@@ -84,7 +86,7 @@ final class TournamentListViewModel {
         let investmentProgram = model.investmentProgram
         guard let investmentProgramId = investmentProgram.id else { return nil}
         
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
     
 }

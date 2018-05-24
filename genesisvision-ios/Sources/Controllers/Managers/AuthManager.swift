@@ -82,26 +82,25 @@ class AuthManager {
     }
     
     static func getRate(completion: @escaping (_ rate: RateViewModel?) -> Void) {
-        guard rateViewModel != nil else {
-            RateDataProvider.getTake(completion: { (viewModel) in
-                if viewModel != nil  {
-                    rateViewModel = viewModel
-                }
-                
-                completion(rateViewModel)
-            }, errorCompletion: { (result) in
-                switch result {
-                case .success:
-                    break
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType)
-                }
-            })
-            
+        guard rateViewModel == nil else {
+            completion(rateViewModel)
             return
         }
         
-        completion(rateViewModel)
+        RateDataProvider.getTake(completion: { (viewModel) in
+            if viewModel != nil  {
+                rateViewModel = viewModel
+            }
+            
+            completion(rateViewModel)
+        }, errorCompletion: { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        })
     }
     
     static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void, completionError: @escaping CompletionBlock) {

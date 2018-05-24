@@ -10,13 +10,12 @@ import Foundation
 import TTRangeSlider
 
 enum SliderType: Int {
-    case level, avgProfit
+    case level, avgProfit, totalProfit, balance
 }
 
 enum SwitchType: Int {
-    case activePrograms, favoritePrograms
+    case activePrograms, favoritePrograms, availableToInvest
 }
-
 
 final class ProgramFilterViewModel {
     
@@ -32,14 +31,17 @@ final class ProgramFilterViewModel {
     var title: String = "Filter"
     
     private let sliderTitles = [FilterTitles(title: "", subtitle: "Select Trader Level"),
-                                 FilterTitles(title: "", subtitle: "Select Trader Profit %")]
+                                FilterTitles(title: "", subtitle: "Select Average Profit"),
+                                FilterTitles(title: "", subtitle: "Select Total Profit"),
+                                FilterTitles(title: "", subtitle: "Select Balance")]
     
-    private let switchTitles = [FilterTitles(title: "", subtitle: "Only active programs"),
-                                FilterTitles(title: "", subtitle: "Only favorite programs")]
+    private let switchTitles = [FilterTitles(title: "", subtitle: "Active programs only"),
+                                FilterTitles(title: "", subtitle: "Favorite programs only"),
+                                FilterTitles(title: "", subtitle: "Available to invest only")]
     
     private var sections: [SectionType] = [.slider, .switchControl]
     
-    private var sliderRows: [SliderType] = [.level, .avgProfit]
+    private var sliderRows: [SliderType] = [.level, .avgProfit, .totalProfit, .balance]
     private var switchRows: [SwitchType] = [.activePrograms, .favoritePrograms]
     
     private var router: ProgramFilterRouter!
@@ -74,6 +76,8 @@ final class ProgramFilterViewModel {
                                                    name: filter.name,
                                                    levelMin: filter.levelMin,
                                                    levelMax: filter.levelMax,
+                                                   balanceUsdMin: filter.balanceUsdMin,
+                                                   balanceUsdMax: filter.balanceUsdMax,
                                                    profitAvgMin: filter.profitAvgMin,
                                                    profitAvgMax: filter.profitAvgMax,
                                                    profitTotalMin: filter.profitTotalMin,
@@ -101,28 +105,46 @@ final class ProgramFilterViewModel {
     }
     
     // MARK: - Public methods
-    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil, profitTotalMin: Int? = nil, profitTotalMax: Int? = nil, profitAvgPercentMin: Int? = nil, profitAvgPercentMax: Int? = nil, showActivePrograms: Bool? = nil, showMyFavorites: Bool? = nil) {
+    func updateFilter(levelMin: Int? = nil, levelMax: Int? = nil,
+                      profitAvgPercentMin: Double? = nil, profitAvgPercentMax: Double? = nil,
+                      profitTotalMin: Double? = nil, profitTotalMax: Double? = nil,
+                      balanceMin: Double? = nil, balanceMax: Double? = nil,
+                      showActivePrograms: Bool? = nil,
+                      showMyFavorites: Bool? = nil,
+                      showAvailableToInvest: Bool? = nil) {
         
         if let showMyFavorites = showMyFavorites {
             filter?.showMyFavorites = showMyFavorites
         }
+        
         if let showActivePrograms = showActivePrograms {
             filter?.showActivePrograms = showActivePrograms
         }
         
-        if let levelMin = levelMin, let levelMax = levelMax {
-            filter?.levelMin = levelMin
-            filter?.levelMax = levelMax
+        if let showAvailableToInvest = showAvailableToInvest {
+            print(showAvailableToInvest)
+            //TODO:
+//            filter?.showAvailableToInvest = showAvailableToInvest
         }
         
-        if let profitTotalMin = profitTotalMin, let profitTotalMax = profitTotalMax {
-            filter?.profitTotalMin = profitTotalMin
-            filter?.profitTotalMax = profitTotalMax
+        if let levelMin = levelMin, let levelMax = levelMax {
+            filter?.levelMin = levelMin == PlatformManager.filterConstants.minLevel ? nil : levelMin
+            filter?.levelMax = levelMax == PlatformManager.filterConstants.maxLevel ? nil : levelMax
         }
         
         if let profitAvgPercentMin = profitAvgPercentMin, let profitAvgPercentMax = profitAvgPercentMax {
-            filter?.profitAvgPercentMin = profitAvgPercentMin
-            filter?.profitAvgPercentMax = profitAvgPercentMax
+            filter?.profitAvgPercentMin = profitAvgPercentMin == PlatformManager.filterConstants.minAvgProfit ? nil : profitTotalMin
+            filter?.profitAvgPercentMax = profitAvgPercentMax == PlatformManager.filterConstants.maxAvgProfit ? nil : profitTotalMin
+        }
+        
+        if let profitTotalMin = profitTotalMin, let profitTotalMax = profitTotalMax {
+            filter?.profitTotalMin = profitTotalMin == PlatformManager.filterConstants.minTotalProfit ? nil : profitTotalMin
+            filter?.profitTotalMax = profitTotalMax == PlatformManager.filterConstants.maxTotalProfit ? nil : profitTotalMax
+        }
+        
+        if let balanceMin = balanceMin, let balanceMax = balanceMax {
+            filter?.balanceUsdMin = balanceMin == PlatformManager.filterConstants.minUsdBalance ? nil : balanceMin
+            filter?.balanceUsdMax = balanceMax == PlatformManager.filterConstants.maxUsdBalance ? nil : balanceMax
         }
     }
     
@@ -156,15 +178,21 @@ final class ProgramFilterViewModel {
             
             switch sliderRows[idx] {
             case .level:
-                filter?.levelMin = Constants.Filters.minLevel
-                filter?.levelMax = Constants.Filters.maxLevel
-                viewModel.selectedMinValue = filter?.levelMin
-                viewModel.selectedMaxValue = filter?.levelMax
+                viewModel.selectedMinValue = Double(PlatformManager.filterConstants.minLevel)
+                viewModel.selectedMaxValue = Double(PlatformManager.filterConstants.maxLevel)
+                updateFilter(levelMin: PlatformManager.filterConstants.minLevel, levelMax: PlatformManager.filterConstants.maxLevel)
             case .avgProfit:
-                filter?.profitAvgPercentMin = Constants.Filters.minAvgProfit
-                filter?.profitAvgPercentMax = Constants.Filters.maxAvgProfit
-                viewModel.selectedMinValue = filter?.profitAvgPercentMin
-                viewModel.selectedMaxValue = filter?.profitAvgPercentMax
+                viewModel.selectedMinValue = PlatformManager.filterConstants.minAvgProfit
+                viewModel.selectedMaxValue = PlatformManager.filterConstants.maxAvgProfit
+                updateFilter(profitAvgPercentMin: PlatformManager.filterConstants.minAvgProfit, profitAvgPercentMax: PlatformManager.filterConstants.maxAvgProfit)
+            case .totalProfit:
+                viewModel.selectedMinValue = PlatformManager.filterConstants.minTotalProfit
+                viewModel.selectedMaxValue = PlatformManager.filterConstants.maxTotalProfit
+                updateFilter(profitTotalMin: PlatformManager.filterConstants.minTotalProfit, profitTotalMax: PlatformManager.filterConstants.maxTotalProfit)
+            case .balance:
+                viewModel.selectedMinValue = PlatformManager.filterConstants.minUsdBalance
+                viewModel.selectedMaxValue = PlatformManager.filterConstants.maxUsdBalance
+                updateFilter(balanceMin: PlatformManager.filterConstants.minUsdBalance, balanceMax: PlatformManager.filterConstants.maxUsdBalance)
             }
             
             sliderCellModels[idx] = viewModel
@@ -175,11 +203,13 @@ final class ProgramFilterViewModel {
             
             switch switchRows[idx] {
             case .activePrograms:
-                filter?.showActivePrograms = Constants.Filters.showActivePrograms
+                filter?.showActivePrograms = PlatformManager.filterConstants.showActivePrograms
                 viewModel.isOn = filter?.showActivePrograms
             case .favoritePrograms:
-                filter?.showMyFavorites = Constants.Filters.showMyFavorites
+                filter?.showMyFavorites = PlatformManager.filterConstants.showMyFavorites
                 viewModel.isOn = filter?.showMyFavorites
+            case .availableToInvest:
+                break
             }
             
             switchCellModels[idx] = viewModel
@@ -204,13 +234,42 @@ final class ProgramFilterViewModel {
             let titles = sliderTitles[idx]
             let type = sliderRows[idx]
             
+            let formatter = NumberFormatter()
+            
             switch type {
             case .level:
-                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: Constants.Filters.minLevel, maxValue: Constants.Filters.maxLevel, filterTitles: titles, amountType: type, selectedMinValue: filter?.levelMin, selectedMaxValue: filter?.levelMax, sliderViewTag: idx, delegate: sliderDelegate)
+                var selectedLevelMin: Double?
+                if let levelMin = filter?.levelMin {
+                    selectedLevelMin = Double(levelMin)
+                }
+                
+                var selectedLevelMax: Double?
+                if let levelMax = filter?.levelMax {
+                    selectedLevelMax = Double(levelMax)
+                }
+                
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: Double(PlatformManager.filterConstants.minLevel), maxValue: Double(PlatformManager.filterConstants.maxLevel), filterTitles: titles, amountType: type, selectedMinValue: selectedLevelMin, selectedMaxValue: selectedLevelMax, customFormatter: nil, sliderViewTag: idx, delegate: sliderDelegate)
             case .avgProfit:
-                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: Constants.Filters.minAvgProfit, maxValue: Constants.Filters.maxAvgProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, sliderViewTag: idx, delegate: sliderDelegate)
+                formatter.positiveSuffix = "%"
+                formatter.negativeSuffix = "%"
+                formatter.numberStyle = .decimal
+                formatter.maximumFractionDigits = 0
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: PlatformManager.filterConstants.minAvgProfit, maxValue: PlatformManager.filterConstants.maxAvgProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, customFormatter: formatter, sliderViewTag: idx, delegate: sliderDelegate)
+            case .totalProfit:
+                formatter.positiveSuffix = " GVT"
+                formatter.negativeSuffix = " GVT"
+                formatter.numberStyle = .decimal
+                formatter.maximumFractionDigits = 0
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: PlatformManager.filterConstants.minTotalProfit, maxValue: PlatformManager.filterConstants.maxTotalProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitTotalMin, selectedMaxValue: filter?.profitTotalMax, customFormatter: formatter, sliderViewTag: idx, delegate: sliderDelegate)
+            case .balance:
+                formatter.numberStyle = .currency
+                formatter.locale = Locale(identifier: "en_US")
+                formatter.maximumFractionDigits = 0
+                formatter.maximumIntegerDigits = 2
+                formatter.maximumSignificantDigits = 2
+                sliderCellModel = FilterSliderTableViewCellViewModel(minValue: PlatformManager.filterConstants.minUsdBalance, maxValue: PlatformManager.filterConstants.maxUsdBalance, filterTitles: titles, amountType: type, selectedMinValue: filter?.balanceUsdMin, selectedMaxValue: filter?.balanceUsdMax, customFormatter: formatter, sliderViewTag: idx, delegate: sliderDelegate)
             }
-        
+            
             sliderCellModels.append(sliderCellModel!)
         }
         
@@ -224,6 +283,9 @@ final class ProgramFilterViewModel {
             case .activePrograms:
                 switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showActivePrograms, switchViewTag: idx, delegate: switchDelegate)
             case .favoritePrograms:
+                switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showMyFavorites, switchViewTag: idx, delegate: switchDelegate)
+            case .availableToInvest:
+                //TODO: change isOn value
                 switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showMyFavorites, switchViewTag: idx, delegate: switchDelegate)
             }
             

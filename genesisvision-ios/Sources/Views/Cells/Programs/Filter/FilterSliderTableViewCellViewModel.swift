@@ -15,14 +15,17 @@ struct FilterTitles {
 }
 
 struct FilterSliderTableViewCellViewModel {
-    var minValue: Int?
-    var maxValue: Int?
+    var minValue: Double
+    var maxValue: Double
     
     var filterTitles: FilterTitles
     var amountType: SliderType
     
-    var selectedMinValue: Int?
-    var selectedMaxValue: Int?
+    var selectedMinValue: Double?
+    var selectedMaxValue: Double?
+    
+    var customFormatter: NumberFormatter?
+    
     var sliderViewTag: Int
     
     weak var delegate: TTRangeSliderDelegate?
@@ -33,8 +36,8 @@ extension FilterSliderTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = filterTitles.title
         cell.subtitleLabel.text = filterTitles.subtitle
         
-        let min = minValue ?? 0
-        let max = maxValue ?? 100
+        let min = minValue
+        let max = maxValue
         cell.sliderView.minValue = Float(min)
         cell.sliderView.maxValue = Float(max)
         cell.sliderView.enableStep = sliderViewTag == 0
@@ -42,6 +45,10 @@ extension FilterSliderTableViewCellViewModel: CellViewModel {
         cell.sliderView.selectedMinimum = Float(selectedMinValue ?? min)
         cell.sliderView.selectedMaximum = Float(selectedMaxValue ?? max)
         cell.sliderView.tag = sliderViewTag
+        
+        if let customFormatter = customFormatter {
+            cell.sliderView.numberFormatterOverride = customFormatter
+        }
         
         cell.sliderView.delegate = delegate
     }

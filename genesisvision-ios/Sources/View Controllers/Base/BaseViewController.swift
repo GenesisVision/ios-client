@@ -34,7 +34,7 @@ class BaseViewController: UIViewController {
     
     func hideAll() {
         hideHUD()
-    }
+    }    
 }
 
 extension BaseViewController: MFMailComposeViewControllerDelegate {

@@ -109,8 +109,17 @@ func startTimer() -> Bool {
 func getVersion() -> String {
     let dictionary = Bundle.main.infoDictionary!
     let version = dictionary["CFBundleShortVersionString"] as! String
+    return "\(version)"
+}
+
+func getBuild() -> String {
+    let dictionary = Bundle.main.infoDictionary!
     let build = dictionary["CFBundleVersion"] as! String
-    return "\(version)(\(build))"
+    return "\(build)"
+}
+
+func getFullVersion() -> String {
+    return "\(getVersion())(\(getBuild()))"
 }
 
 func getDeviceInfo() -> String {
@@ -126,5 +135,38 @@ func getDeviceInfo() -> String {
 }
 
 func getFeedbackSubject() -> String {
-    return "iOS Feedback " + getVersion()
+    return "iOS Feedback " + getFullVersion()
+}
+
+func newVersionIsAvailable(_ lastVersion: String) -> Bool {
+    if let skipThisVersion = UserDefaults.standard.object(forKey: Constants.UserDefaults.skipThisVersion) as? String, skipThisVersion == lastVersion {
+        print("SkipThisVersion: \(skipThisVersion)")
+        return false
+    }
+    
+    let currentVersionArray = getVersion().components(separatedBy: ".")
+    let lastVersionArray = lastVersion.components(separatedBy: ".")
+    
+    return versionIsOld(currentVersionArray: currentVersionArray, lastVersionArray: lastVersionArray, idx: 0)
+}
+
+func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx: Int) -> Bool {
+    guard idx < 3, let currentIntVal = Int(currentVersionArray[idx]), let lastIntVal = Int(lastVersionArray[idx]) else { return false }
+    
+    if currentIntVal == lastIntVal {
+        return versionIsOld(currentVersionArray: currentVersionArray, lastVersionArray: lastVersionArray, idx: idx + 1)
+    } else {
+        return currentIntVal < lastIntVal
+    }
+}
+
+func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
+    PlatformManager.getPlatformStatus(completion: { (model) in
+        guard let platformStatus = model,
+            let iOSVersion = platformStatus.iOSVersion,
+            let lastVersion = iOSVersion.lastVersion,
+            newVersionIsAvailable(lastVersion) else { return }
+        
+        viewController.showNewVersionAlert(lastVersion)
+    })
 }

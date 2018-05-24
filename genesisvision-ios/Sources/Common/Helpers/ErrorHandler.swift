@@ -40,7 +40,7 @@ class ErrorHandler {
                 errorViewModel = try JSONDecoder().decode(ErrorViewModel.self, from: jsonData)
             } catch {}
             
-            guard let errorsText = errorViewModel?.errors?.flatMap({$0.message}).joined(separator: "\n") else {
+            guard let errorsText = errorViewModel?.errors?.compactMap({$0.message}).joined(separator: "\n") else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
             

@@ -24,7 +24,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         setup()
     }
@@ -41,7 +41,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
     }
     
     private func setupTableConfiguration() {

@@ -61,9 +61,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
         bottomViewType = .sort
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-//        title = viewModel.title.uppercased()
-//        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
-        
         feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
         navigationItem.rightBarButtonItem = feedbackBarButtonItem
         
@@ -263,7 +260,7 @@ extension DashboardViewController: UIViewControllerPreviewingDelegate {
         let cellPosition = tableView.convert(location, from: view)
         
         guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailViewController(with: indexPath),
+            let vc = viewModel.getDetailsViewController(with: indexPath),
             let cell = tableView.cellForRow(at: indexPath)
             else { return nil }
         

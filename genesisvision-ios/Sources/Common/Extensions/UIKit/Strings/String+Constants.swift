@@ -18,10 +18,22 @@ extension String {
         static var cancelButtonText: String = "Cancel"
         static var okButtonText: String = "OK"
         
+        struct NewVersionUpdate {
+            static var alertTitle: String = "New version is available"
+            static var alertMessage: String = "Please update to version "
+            static var skipThisVersionButtonText: String = "Skip this version"
+            static var updateButtonText: String = "Update"
+        }
+        
         struct Feedback {
             static var alertTitle: String = "You can send your feedback to us with the following options:"
             static var websiteButtonText: String = "Visit feedback website"
             static var emailButtonText: String = "Send email"
+        }
+        
+        struct PrivacySettings {
+            static var alertTitle: String = "Privacy settings"
+            static var settingsButtonText: String = "Settings"
         }
         
         struct ErrorMessages {

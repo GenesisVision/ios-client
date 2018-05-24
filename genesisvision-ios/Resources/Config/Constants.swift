@@ -49,6 +49,7 @@ final class Constants {
     struct Urls {
         static let feedbackWebAddress = "https://feedback.genesis.vision"
         static let feedbackEmailAddress = "support@genesis.vision"
+        static let appStoreAddress = "itms-apps://itunes.apple.com/app/genesis-vision-investor/id1369865290?mt=8"
     }
     
     struct Api {
@@ -80,6 +81,7 @@ final class Constants {
         static let authorizedToken: String = "AuthorizedToken"
         static let timesOpened: String = "TimesOpened"
         static let restrictRotation: String = "RestrictRotation"
+        static let skipThisVersion: String = "skipThisVersion"
     }
     
     struct Keys {
@@ -92,11 +94,18 @@ final class Constants {
         static let minLevel: Int = 1
         static let maxLevel: Int = 7
         
-        static let minAvgProfit: Int = -100
-        static let maxAvgProfit: Int = 1000
+        static let minAvgProfit: Double = -100.0
+        static let maxAvgProfit: Double = 1000.0
+        
+        static let minTotalProfit: Double = -5000.0
+        static let maxTotalProfit: Double = 5000.0
+        
+        static let minUsdBalance: Double = 0.0
+        static let maxUsdBalance: Double = 300000.0
         
         static let showActivePrograms = false
         static let showMyFavorites = false
+        static let showAvailableToInvest = false
         
         static let walletModelTypeDefault: TransactionsFilter.ModelType = .all
     }

@@ -55,7 +55,7 @@ class ProgramWithdrawViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion(), type: .primary)
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion(), type: .primary)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -58,9 +58,19 @@ final class DashboardViewModel {
     var activeViewModels = [DashboardTableViewCellViewModel]()
     var archiveViewModels = [DashboardTableViewCellViewModel]()
     
-    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]
+    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc,
+                                                                      .byLevelDesc, .byLevelAsc,
+                                                                      .byBalanceDesc, .byBalanceAsk,
+                                                                      .byOrdersDesc, .byOrdersAsc,
+                                                                      .byEndOfPeriodDesc, .byEndOfPeriodAsc,
+                                                                      .byTitleDesc, .byTitleAsc]
     
-    var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
+    var sortingValues: [String] = ["profit ⇣", "profit ⇡",
+                                   "level ⇣", "level ⇡",
+                                   "balance ⇣", "balance ⇡",
+                                   "orders ⇣", "orders ⇡",
+                                   "end of period ⇣", "end of period ⇡",
+                                   "title ⇣", "title ⇡"]
     
     struct SortingList {
         var sortingValue: String
@@ -282,7 +292,7 @@ extension DashboardViewModel {
         return nil
     }
     
-    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
         guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
             return nil
         }
@@ -290,7 +300,7 @@ extension DashboardViewModel {
         let investmentProgram = model.investmentProgram
         guard let investmentProgramId = investmentProgram.id else { return nil}
         
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
     
     // MARK: - Private methods

@@ -63,11 +63,30 @@ extension UIViewController {
     }
     
     func showSettingsAlert(_ message: String) {
-        let alert = UIAlertController(title: "Privacy settings", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
+        let alert = UIAlertController(title: String.Alerts.PrivacySettings.alertTitle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String.Alerts.PrivacySettings.settingsButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: UIApplicationOpenSettingsURLString)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showNewVersionAlert(_ newVersion: String) {
+        let message = String.Alerts.NewVersionUpdate.alertMessage + "\(newVersion)"
+        let alert = UIAlertController(title: String.Alerts.NewVersionUpdate.alertTitle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.updateButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
+            self?.openUrl(with: Constants.Urls.appStoreAddress)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.skipThisVersionButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
+            DispatchQueue.main.async {
+                print("Skip this version: " + newVersion)
+                UserDefaults.standard.set(newVersion, forKey: Constants.UserDefaults.skipThisVersion)
+                UserDefaults.standard.synchronize()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
@@ -87,11 +106,11 @@ extension UIViewController {
     }
     
     func openUrl(with urlAddress: String) {
-        if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+        if let url = URL(string: urlAddress), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(url as URL)
+                UIApplication.shared.openURL(url)
             }
         }
     }

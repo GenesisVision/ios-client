@@ -77,7 +77,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func setupNavigationBar() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         guard viewModel.ipfsHash() != nil else {
             print("Incorrect ipfsHashURL")

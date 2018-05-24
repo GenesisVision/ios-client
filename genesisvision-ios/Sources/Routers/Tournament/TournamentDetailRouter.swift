@@ -7,23 +7,14 @@
 //
 
 enum TournamentDetailRouteType {
-    case invest
+
 }
 
 class TournamentDetailRouter: Router {
     
     // MARK: - Public methods
     func show(routeType: TournamentDetailRouteType) {
-        switch routeType {
-        case .invest:
-            invest()
-        }
+        
     }
-    
-    // MARK: - Private methods
-    private func invest() {
-        //TODO: invest
-    }
+
 }
-
-

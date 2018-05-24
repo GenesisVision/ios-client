@@ -7,22 +7,14 @@
 //
 
 enum WalletFilterRouteType {
-    case reset
+   
 }
 
 class WalletFilterRouter: Router {
     
     // MARK: - Public methods
     func show(routeType: WalletFilterRouteType) {
-        switch routeType {
-        case .reset:
-            reset()
-        }
-    }
-    
-    // MARK: - Private methods
-    private func reset() {
-        //TODO: reset
+        
     }
 }
 

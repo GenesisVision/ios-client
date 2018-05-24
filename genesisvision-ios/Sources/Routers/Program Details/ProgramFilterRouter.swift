@@ -7,22 +7,14 @@
 //
 
 enum ProgramFilterRouteType {
-    case reset
+    
 }
 
 class ProgramFilterRouter: Router {
     
     // MARK: - Public methods
     func show(routeType: ProgramFilterRouteType) {
-        switch routeType {
-        case .reset:
-            reset()
-        }
-    }
-    
-    // MARK: - Private methods
-    private func reset() {
-        //TODO: reset
+        
     }
 }
 

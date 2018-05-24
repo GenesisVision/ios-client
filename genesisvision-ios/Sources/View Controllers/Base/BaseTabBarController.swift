@@ -12,6 +12,8 @@ class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        showNewVersionAlertIfNeeded(self)
         
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor.TabBar.bg

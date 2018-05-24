@@ -180,11 +180,6 @@ extension Router {
         return tabmanViewController
     }
     
-    func startAsUnauthorized() {
-        guard let navigationController = getProgramsNavigationController() else { return }
-        setWindowRoot(viewController: navigationController)
-    }
-    
     func startAsForceSignOut() {
         guard let navigationController = getProgramsNavigationController(),
             let programsVC = navigationController.topViewController as? ProgramListViewController,
@@ -198,6 +193,11 @@ extension Router {
     
     func startTournament() {
         guard let navigationController = getTournamentNavigationController() else { return }
+        setWindowRoot(viewController: navigationController)
+    }
+    
+    func startAsUnauthorized() {
+        guard let navigationController = getProgramsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
     }
     
@@ -227,23 +227,18 @@ extension Router {
     }
     
     func showProgramDetails(with investmentProgramId: String) {
-        guard let vc = currentController, let viewController = ProgramDetailsTabmanViewController.storyboardInstance(name: .program) else { return }
+        guard let viewController = getDetailsViewController(with: investmentProgramId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func getDetailsViewController(with investmentProgramId: String) -> ProgramDetailsTabmanViewController? {
+        guard let vc = currentController, let viewController = ProgramDetailsTabmanViewController.storyboardInstance(name: .program) else { return nil }
         viewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
         
         let router = ProgramDetailsRouter(parentRouter: self)
         router.currentController = viewController
         let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: viewController)
         viewModel.programDetailsProtocol = viewController
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func getDetailViewController(with investmentProgramId: String) -> ProgramDetailViewController? {
-        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return nil }
-        
-        let router = ProgramDetailRouter(parentRouter: self)
-        let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController, detailChartTableViewCellProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         

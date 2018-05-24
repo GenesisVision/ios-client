@@ -40,7 +40,7 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
 
         showInfiniteIndicator(value: false)
         

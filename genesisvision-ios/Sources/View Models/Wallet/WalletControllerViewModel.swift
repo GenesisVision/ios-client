@@ -116,18 +116,18 @@ extension WalletControllerViewModel {
         }
     }
     
-    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
         guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
             let investmentProgram = model.walletTransaction.investmentProgram,
             let investmentProgramId = investmentProgram.id
             else { return nil }
         
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
 
     // MARK: - Private methods
     private func setup() {
-        filter = TransactionsFilter(investmentProgramId: nil, type: Constants.Filters.walletModelTypeDefault, skip: skip, take: take)
+        filter = TransactionsFilter(investmentProgramId: nil, type: PlatformManager.filterConstants.walletModelTypeDefault, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }

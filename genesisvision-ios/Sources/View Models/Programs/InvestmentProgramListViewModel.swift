@@ -53,9 +53,20 @@ final class InvestmentProgramListViewModel {
     }
     var investmentProgramViewModels = [ProgramTableViewCellViewModel]()
     
-    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]
+    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc,
+                                                           .byLevelDesc, .byLevelAsc,
+                                                           .byBalanceDesc, .byBalanceAsk,
+                                                           .byOrdersDesc, .byOrdersAsc,
+                                                           .byEndOfPeriodDesc, .byEndOfPeriodAsc,
+                                                           .byTitleDesc, .byTitleAsc]
     
-    var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
+    var sortingValues: [String] = ["profit ⇣", "profit ⇡",
+                                   "level ⇣", "level ⇡",
+                                   "balance ⇣", "balance ⇡",
+                                   "orders ⇣", "orders ⇡",
+                                   "end of period ⇣",
+                                   "end of period ⇡",
+                                   "title ⇣", "title ⇡"]
     
     struct SortingList {
         var sortingValue: String
@@ -82,6 +93,8 @@ final class InvestmentProgramListViewModel {
                                           name: searchText,
                                           levelMin: nil,
                                           levelMax: nil,
+                                          balanceUsdMin: nil,
+                                          balanceUsdMax: nil,
                                           profitAvgMin: nil,
                                           profitAvgMax: nil,
                                           profitTotalMin: nil,
@@ -217,11 +230,9 @@ extension InvestmentProgramListViewModel {
     }
     
     func showTournamentVC() {
-        PlatformManager.getPlatformStatus(completion: { [weak self] (model) in
-            guard let tournamentTotalRounds = model?.tournamentTotalRounds, let tournamentCurrentRound = model?.tournamentCurrentRound else { return }
-            
-            self?.router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
-        })
+        guard let platformStatus = PlatformManager.platformStatus, let tournamentTotalRounds = platformStatus.tournamentTotalRounds, let tournamentCurrentRound = platformStatus.tournamentCurrentRound else { return }
+        
+        router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
     }
     
     func showDetail(with investmentProgramId: String) {
@@ -304,7 +315,7 @@ extension InvestmentProgramListViewModel {
         return nil
     }
     
-    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
         guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
             return nil
         }
@@ -312,7 +323,7 @@ extension InvestmentProgramListViewModel {
         let investmentProgram = model.investmentProgram
         guard let investmentProgramId = investmentProgram.id else { return nil}
         
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
     
     // MARK: - Private methods
