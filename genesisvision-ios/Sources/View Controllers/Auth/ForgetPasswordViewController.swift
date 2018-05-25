@@ -11,7 +11,7 @@ import IQKeyboardManagerSwift
 
 class ForgotPasswordViewController: BaseViewController {
     
-    var viewModel: ForgetPasswordViewModel!
+    var viewModel: AuthForgetPasswordViewModel!
     
     // MARK: - TextFields
     @IBOutlet var emailTextField: DesignableUITextField! {

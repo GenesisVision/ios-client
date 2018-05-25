@@ -10,6 +10,7 @@ extension String {
     struct Info {
         static var signUpConfirmationSuccess: String { return "Please confirm \nyour email.".localized }
         static var forgotPasswordSuccess: String = "We sent a password reset link to the email you specified.\n\nplease follow this link to reset your password.".localized
+        static var changePasswordSuccess: String = "You have been successfully changed your password.".localized
         static var investmentRequestSuccess: String { return "You have been successfully invested <N> GVT in the investment program. Your tokens will be working for you only since the next reporting period.\n\nIn case you decide to cancel the investment before the start of the next reporting period, you will have to pay a commission, and you will get your GVT at the actual GVT exchange rate.".localized }
         static var withdrawRequestSuccess: String { return "At the end of the current trading period the tokens will be returned to the manager and your funds are return to you.".localized }
     }

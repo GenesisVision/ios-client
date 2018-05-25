@@ -1,25 +1,25 @@
 //
-//  SignUpViewController.swift
+//  ChangePasswordViewController.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 18.01.18.
+//  Created by George on 25/05/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 import IQKeyboardManagerSwift
 
-class SignUpViewController: BaseViewController {
-
-    var viewModel: AuthSignUpViewModel!
+class ChangePasswordViewController: BaseViewController {
+    
+    var viewModel: AuthChangePasswordViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var emailTextField: DesignableUITextField! {
+    @IBOutlet var oldPasswordTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
-            emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
-            emailTextField.delegate = self
+            oldPasswordTextField.font = UIFont.getFont(.regular, size: 18)
+            oldPasswordTextField.setClearButtonWhileEditing()
+            oldPasswordTextField.setLeftImageView()
+            oldPasswordTextField.delegate = self
         }
     }
     @IBOutlet var passwordTextField: DesignableUITextField! {
@@ -40,7 +40,7 @@ class SignUpViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var signUpButton: ActionButton!
+    @IBOutlet var changePasswordButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -53,32 +53,32 @@ class SignUpViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-            emailTextField.text = "george@genesis.vision"
-            passwordTextField.text = "qwerty"
-            confirmPasswordTextField.text = "qwerty"
+        oldPasswordTextField.text = "qwerty"
+        passwordTextField.text = "qwerty"
+        confirmPasswordTextField.text = "qwerty"
         #endif
         
         setupUI()
     }
-
+    
     // MARK: - Private methods
     private func setupUI() {
-        emailTextField.setBottomLine()
+        oldPasswordTextField.setBottomLine()
         passwordTextField.setBottomLine()
         confirmPasswordTextField.setBottomLine()
     }
     
     
-    private func sighUpMethod() {
+    private func changePasswordMethod() {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+        viewModel.changePassword(oldPassword: oldPasswordTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
             self?.hideAll()
             
             switch result {
             case .success:
-                self?.viewModel.showConfirmationVC()
+                self?.viewModel.showChangePasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
@@ -86,16 +86,16 @@ class SignUpViewController: BaseViewController {
     }
     
     // MARK: - Actions
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
-        sighUpMethod()
+    @IBAction func changePasswordButtonAction(_ sender: UIButton) {
+        changePasswordMethod()
     }
 }
 
-extension SignUpViewController: UITextFieldDelegate {
+extension ChangePasswordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case confirmPasswordTextField:
-            sighUpMethod()
+            changePasswordMethod()
         default:
             IQKeyboardManager.sharedManager().goNext()
         }
@@ -103,3 +103,4 @@ extension SignUpViewController: UITextFieldDelegate {
         return false
     }
 }
+

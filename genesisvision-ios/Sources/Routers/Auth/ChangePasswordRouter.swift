@@ -1,29 +1,30 @@
 //
-//  ForgotPasswordRouter.swift
+//  ChangePasswordRouter.swift
 //  genesisvision-ios
 //
-//  Created by George on 02/04/2018.
+//  Created by George on 25/05/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum ForgotPasswordRouteType {
-    case forgotPasswordInfo
+enum ChangePasswordRouteType {
+    case changePasswordInfo
 }
 
-class ForgotPasswordRouter: Router {
+class ChangePasswordRouter: Router {
     // MARK: - Public methods
-    func show(routeType: ForgotPasswordRouteType) {
+    func show(routeType: ChangePasswordRouteType) {
         switch routeType {
-        case .forgotPasswordInfo:
-            showForgotPasswordInfo()
+        case .changePasswordInfo:
+            showChangePasswordInfo()
         }
     }
     
     // MARK: - Private methods
-    private func showForgotPasswordInfo() {
+    private func showChangePasswordInfo() {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
-        viewController.viewModel = AuthForgotPasswordInfoViewModel(withRouter: router)
+        viewController.viewModel = AuthChangePasswordInfoViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
+

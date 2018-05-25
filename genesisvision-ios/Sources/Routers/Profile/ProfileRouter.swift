@@ -7,8 +7,7 @@
 //
 
 enum ProfileRouteType {
-    case signOut
-    case forceSignOut
+    case signOut, forceSignOut, changePassword
 }
 
 class ProfileRouter: Router {
@@ -20,6 +19,8 @@ class ProfileRouter: Router {
             signOut()
         case .forceSignOut:
             forceSignOut()
+        case .changePassword:
+            changePassword()
         }
     }
     
@@ -30,5 +31,13 @@ class ProfileRouter: Router {
     
     private func forceSignOut() {
         startAsForceSignOut()
+    }
+    
+    private func changePassword() {
+        guard let viewController = ChangePasswordViewController.storyboardInstance(name: .auth) else { return }
+        let router = ChangePasswordRouter(parentRouter: self, navigationController: navigationController)
+        viewController.viewModel = AuthChangePasswordViewModel(withRouter: router)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

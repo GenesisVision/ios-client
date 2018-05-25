@@ -187,6 +187,10 @@ final class ProfileViewModel {
         saveProfileApi(completion: completion)
     }
     
+    func changePassword() {
+        router.show(routeType: .changePassword)
+    }
+    
     func update(birthdate: Date?) {
         if let idx = editableFields.index(where: { $0.type == .birthday }) {
             guard let birthdate = birthdate else {

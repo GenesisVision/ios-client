@@ -11,7 +11,7 @@ import IQKeyboardManagerSwift
 
 class SignInViewController: BaseViewController {
 
-    var viewModel: SignInViewModel!
+    var viewModel: AuthSignInViewModel!
     
     // MARK: - TextFields
     @IBOutlet var emailTextField: DesignableUITextField! {

@@ -1,12 +1,12 @@
 //
-//  ForgetPasswordViewModel.swift
+//  AuthForgetPasswordViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George on 02/04/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-final class ForgetPasswordViewModel {
+final class AuthForgetPasswordViewModel {
     
     // MARK: - Variables
     var title: String = "Forgot Password?"

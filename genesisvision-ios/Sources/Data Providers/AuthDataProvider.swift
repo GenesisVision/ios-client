@@ -30,6 +30,16 @@ class AuthDataProvider: DataProvider {
             : managerForgotPassword(with: forgotPasswordViewModel, completion: completion)
     }
     
+    static func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        let changePasswordViewModel = ChangePasswordViewModel(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword)
+        
+        isInvestorApp
+            ? investorChangePassword(with: authorization, model: changePasswordViewModel, completion: completion)
+            : managerChangePassword(with: authorization, model: changePasswordViewModel, completion: completion)
+    }
+    
     // MARK: - Private methods
     // MARK: - Sign In
     private static func investorSignIn(with model: LoginViewModel, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
@@ -84,6 +94,19 @@ class AuthDataProvider: DataProvider {
     
     private static func managerForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, completion: @escaping CompletionBlock) {
         ManagerAPI.apiManagerAuthForgotPasswordPost(model: forgotPasswordViewModel) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    // MARK: - Change Password
+    private static func investorChangePassword(with authorization: String, model: ChangePasswordViewModel, completion: @escaping CompletionBlock) {
+        InvestorAPI.apiInvestorAuthChangePasswordPost(authorization: authorization, model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    private static func managerChangePassword(with authorization: String, model: ChangePasswordViewModel, completion: @escaping CompletionBlock) {
+        ManagerAPI.apiManagerAuthChangePasswordPost(authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProfileHeaderViewDelegate: class {
     func chooseProfilePhotoDidPressOnPhoto(_ view: ProfileHeaderView)
+    func changePasswordButtonDidPress(_ sender: UIButton)
 }
 
 class ProfileHeaderView: UIView {
@@ -28,6 +29,7 @@ class ProfileHeaderView: UIView {
     
     // MARK: - Buttons
     @IBOutlet var chooseProfilePhotoButton: ChooseProfilePhotoButton!
+    @IBOutlet var changePasswordButton: UIButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -62,6 +64,10 @@ class ProfileHeaderView: UIView {
     // MARK: - Actions
     @IBAction func chooseButtonAction(_ sender: Any) {
         delegate?.chooseProfilePhotoDidPressOnPhoto(self)
+    }
+    
+    @IBAction func changePasswordButtonAction(_ sender: UIButton) {
+        delegate?.changePasswordButtonDidPress(sender)
     }
     
 }

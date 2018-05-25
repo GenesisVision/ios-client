@@ -280,9 +280,17 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {
+        hideKeyboard()
+        
         showAlertWithTitle(title: nil, message: "Log out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
             self?.viewModel.signOut()
         }, cancelHandler: nil)
+    }
+    
+    @IBAction func changePasswordButtonAction(_ sender: UIButton) {
+        hideKeyboard()
+        
+        viewModel.changePassword()
     }
 }
 
@@ -327,6 +335,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func chooseProfilePhotoDidPressOnPhoto(_ view: ProfileHeaderView) {
         takePhoto()
+    }
+    
+    func changePasswordButtonDidPress(_ sender: UIButton) {
+        changePasswordButtonAction(sender)
     }
 }
 

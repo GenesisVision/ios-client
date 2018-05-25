@@ -1,12 +1,12 @@
 //
-//  SignInViewModel.swift
+//  AuthSignInViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 26.01.18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-final class SignInViewModel {
+final class AuthSignInViewModel {
     
     // MARK: - Variables
     var title: String = "Sign In"
