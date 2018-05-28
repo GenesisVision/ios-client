@@ -52,7 +52,11 @@ class ForgotPasswordViewController: BaseViewController {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.forgotPassword(email: emailTextField.text ?? "") { [weak self] (result) in
+        var email = emailTextField.text ?? ""
+        
+        email = email.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.forgotPassword(email: email) { [weak self] (result) in
             self?.hideAll()
             
             switch result {

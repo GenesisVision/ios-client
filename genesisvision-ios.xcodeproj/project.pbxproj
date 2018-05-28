@@ -180,6 +180,9 @@
 		5EAC11B020B81AD40057A2D2 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */; };
 		5EAC11B220B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B120B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift */; };
 		5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B320B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift */; };
+		5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B520B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift */; };
+		5EAC11B820B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B720B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift */; };
+		5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B920B862400057A2D2 /* AuthTwoFactorSignInRouter.swift */; };
 		5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */; };
 		5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */; };
 		5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB62090AB1000A92B49 /* MarkerView.xib */; };
@@ -586,6 +589,9 @@
 		5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		5EAC11B120B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChangePasswordInfoViewModel.swift; sourceTree = "<group>"; };
 		5EAC11B320B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		5EAC11B520B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInViewModel.swift; sourceTree = "<group>"; };
+		5EAC11B720B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInViewController.swift; sourceTree = "<group>"; };
+		5EAC11B920B862400057A2D2 /* AuthTwoFactorSignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInRouter.swift; sourceTree = "<group>"; };
 		5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
 		5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		5EAD0AB62090AB1000A92B49 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
@@ -1297,6 +1303,7 @@
 				FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */,
 				5EB8E9D720723D7E00F46A8A /* ForgetPasswordRouter.swift */,
 				5EAC11AD20B81A850057A2D2 /* ChangePasswordRouter.swift */,
+				5EAC11B920B862400057A2D2 /* AuthTwoFactorSignInRouter.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1376,6 +1383,7 @@
 				5EB8E9DD2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift */,
 				5EAC11B320B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift */,
 				5EAC11B120B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift */,
+				5EAC11B520B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1565,6 +1573,7 @@
 				FCB8DFC52010F64200698D18 /* SignInViewController.swift */,
 				5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */,
 				5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */,
+				5EAC11B720B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -2273,6 +2282,7 @@
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
+				5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */,
 				FC1410242030168100B71E7F /* TradeServerViewModel.swift in Sources */,
 				5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */,
 				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
@@ -2344,6 +2354,7 @@
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
 				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
 				5E8CDCB220B719DE00300027 /* ErrorMessage.swift in Sources */,
+				5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */,
 				FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */,
 				5E8CDCA520B719DE00300027 /* UpdateProfileViewModel.swift in Sources */,
 				FCB178722046CA0D00A482B7 /* ProgramDataProvider.swift in Sources */,
@@ -2432,6 +2443,7 @@
 				5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,
 				FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */,
+				5EAC11B820B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift in Sources */,
 				FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */,
 				FCB1786E2045C46E00A482B7 /* DataProvider.swift in Sources */,
 				FCA19A41201AE83F00157AD6 /* DashboardViewModel.swift in Sources */,

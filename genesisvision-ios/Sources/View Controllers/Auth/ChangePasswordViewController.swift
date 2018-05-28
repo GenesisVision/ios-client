@@ -73,7 +73,15 @@ class ChangePasswordViewController: BaseViewController {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.changePassword(oldPassword: oldPasswordTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+        var oldPassword = oldPasswordTextField.text ?? ""
+        var password = passwordTextField.text ?? ""
+        var confirmPassword = confirmPasswordTextField.text ?? ""
+        
+        oldPassword = oldPassword.trimmingCharacters(in: .whitespaces)
+        password = password.trimmingCharacters(in: .whitespaces)
+        confirmPassword = confirmPassword.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.changePassword(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword) { [weak self] (result) in
             self?.hideAll()
             
             switch result {

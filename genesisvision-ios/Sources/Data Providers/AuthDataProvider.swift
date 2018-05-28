@@ -8,8 +8,8 @@
 
 class AuthDataProvider: DataProvider {
     // MARK: - Public methods
-    static func signIn(email: String, password: String, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(email: email, password: password, rememberMe: true, twoFactorCode: nil, recoveryCode: nil)
+    static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        let loginViewModel = LoginViewModel(email: email, password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: nil)
         
         isInvestorApp
             ? investorSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)

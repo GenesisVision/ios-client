@@ -14,11 +14,267 @@
         <array key="NeuzeitGro-Bol.ttf">
             <string>NeuzeitGro-Bol</string>
         </array>
+        <array key="NeuzeitGro-Lig.ttf">
+            <string>NeuzeitGro-Lig</string>
+        </array>
         <array key="NeuzeitGro-Reg.ttf">
             <string>NeuzeitGro-Reg</string>
         </array>
     </customFonts>
     <scenes>
+        <!--Auth Two Factor Sign In View Controller-->
+        <scene sceneID="WoQ-zw-QiJ">
+            <objects>
+                <viewController storyboardIdentifier="AuthTwoFactorSignInViewController" id="WWy-hN-MJC" customClass="AuthTwoFactorSignInViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6pI-Ft-fCA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-3E-IDZ">
+                                <rect key="frame" x="16" y="108" width="288" height="75"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Enter code from  Google Authenticator">
+                                        <attributes>
+                                            <color key="NSColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="25" name="NeuzeitGro-Reg"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pkW-s3-nEG" customClass="AmountLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="142" y="199" width="36" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="49B-oe-qn3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="72"/>
+                                <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYv-as-zDF" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="16" y="303" width="288" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="NRj-jd-Owx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="SIGN IN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInButtonAction:" destination="WWy-hN-MJC" eventType="touchUpInside" id="nYS-sO-vak"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0mc-Cd-1eN" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="356" width="320" height="212"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FbP-oK-jRT">
+                                        <rect key="frame" x="6" y="0.0" width="308" height="206"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gPn-bc-4CL">
+                                                <rect key="frame" x="0.0" y="0.0" width="308" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gX-2u-TkQ" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="1">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="rKG-5e-Kzd"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0Z-5D-EWE" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="104.5" y="0.0" width="99" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="2">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="nol-QD-cmq"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opi-sZ-7Lu" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="209.5" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="3">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="Vb4-ee-fiL"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="XT5-qX-rC5"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-h4-KDI">
+                                                <rect key="frame" x="0.0" y="53" width="308" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWm-YY-K1h" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="4">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="4zk-sL-4nN"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czl-s4-GCc" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="104.5" y="0.0" width="99" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="5">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="nEF-Kj-v73"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jze-ze-tK2" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="209.5" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="6">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="mSd-wg-3xR"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="K2Y-hC-6qg">
+                                                <rect key="frame" x="0.0" y="106" width="308" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaC-Te-iC5" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="7">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="krF-wa-fQN"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibx-hO-3vU" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="104.5" y="0.0" width="99" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="8">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="Lc4-Cr-gcn"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qno-Ax-NEU" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="209.5" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="9">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="vb9-or-oE2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="uxR-to-Asy">
+                                                <rect key="frame" x="0.0" y="159" width="308" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lb8-9P-hzh" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title=".">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="separatorButtonAction:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="M3D-o9-lhd"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zsk-pm-YES" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="104.5" y="0.0" width="99" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="0">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="zwk-N7-kpZ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWV-0v-oLj">
+                                                        <rect key="frame" x="209.5" y="0.0" width="98.5" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <color key="tintColor" red="0.0" green="0.73725490199999999" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" image="img_numpad_delete">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="clearButtonAction:" destination="0mc-Cd-1eN" eventType="touchUpInside" id="Hlr-j5-lrb"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="uxR-to-Asy" firstAttribute="height" secondItem="K2Y-hC-6qg" secondAttribute="height" id="FRm-Xo-Eh1"/>
+                                            <constraint firstItem="cZn-h4-KDI" firstAttribute="height" secondItem="gPn-bc-4CL" secondAttribute="height" id="ThY-W2-Ghb"/>
+                                            <constraint firstItem="K2Y-hC-6qg" firstAttribute="height" secondItem="cZn-h4-KDI" secondAttribute="height" id="mx1-Ev-HLn"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="FbP-oK-jRT" secondAttribute="trailing" constant="6" id="7vx-v1-KVO"/>
+                                    <constraint firstAttribute="bottom" secondItem="FbP-oK-jRT" secondAttribute="bottom" constant="6" id="MvE-Tm-Eub"/>
+                                    <constraint firstItem="FbP-oK-jRT" firstAttribute="leading" secondItem="0mc-Cd-1eN" secondAttribute="leading" constant="6" id="QIO-zU-kA4"/>
+                                    <constraint firstItem="FbP-oK-jRT" firstAttribute="top" secondItem="0mc-Cd-1eN" secondAttribute="top" id="SQR-Ox-wI4"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="clearButton" destination="MWV-0v-oLj" id="HUA-LX-izO"/>
+                                    <outlet property="separatorButton" destination="lb8-9P-hzh" id="eST-22-eeQ"/>
+                                    <outletCollection property="numberButtons" destination="6gX-2u-TkQ" collectionClass="NSMutableArray" id="TKe-tD-UyU"/>
+                                    <outletCollection property="numberButtons" destination="P0Z-5D-EWE" collectionClass="NSMutableArray" id="5RB-Vb-vPG"/>
+                                    <outletCollection property="numberButtons" destination="Opi-sZ-7Lu" collectionClass="NSMutableArray" id="xgb-cp-JaA"/>
+                                    <outletCollection property="numberButtons" destination="VWm-YY-K1h" collectionClass="NSMutableArray" id="QgJ-vz-saN"/>
+                                    <outletCollection property="numberButtons" destination="czl-s4-GCc" collectionClass="NSMutableArray" id="icy-bd-6Nb"/>
+                                    <outletCollection property="numberButtons" destination="Jze-ze-tK2" collectionClass="NSMutableArray" id="T73-eZ-Yc4"/>
+                                    <outletCollection property="numberButtons" destination="qno-Ax-NEU" collectionClass="NSMutableArray" id="lCS-rl-Hew"/>
+                                    <outletCollection property="numberButtons" destination="ibx-hO-3vU" collectionClass="NSMutableArray" id="MlC-08-TjL"/>
+                                    <outletCollection property="numberButtons" destination="iaC-Te-iC5" collectionClass="NSMutableArray" id="SIa-xo-qHn"/>
+                                    <outletCollection property="numberButtons" destination="Zsk-pm-YES" collectionClass="NSMutableArray" id="Kpu-jg-D6u"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kyw-PV-myt" firstAttribute="trailing" secondItem="VKl-3E-IDZ" secondAttribute="trailing" constant="16" id="0ms-rA-apr"/>
+                            <constraint firstItem="0mc-Cd-1eN" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" id="50X-7t-Ifg"/>
+                            <constraint firstItem="pkW-s3-nEG" firstAttribute="top" secondItem="VKl-3E-IDZ" secondAttribute="bottom" constant="16" id="6Ed-4A-olj"/>
+                            <constraint firstItem="jYv-as-zDF" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" constant="16" id="Hae-PZ-uop"/>
+                            <constraint firstItem="0mc-Cd-1eN" firstAttribute="top" secondItem="jYv-as-zDF" secondAttribute="bottom" constant="8" id="MFR-kM-nCf"/>
+                            <constraint firstItem="jYv-as-zDF" firstAttribute="top" secondItem="pkW-s3-nEG" secondAttribute="bottom" constant="32" id="OJa-LV-2hS"/>
+                            <constraint firstItem="VKl-3E-IDZ" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" constant="16" id="PAw-uN-esK"/>
+                            <constraint firstItem="kyw-PV-myt" firstAttribute="bottom" secondItem="0mc-Cd-1eN" secondAttribute="bottom" id="Xce-hd-b1l"/>
+                            <constraint firstItem="kyw-PV-myt" firstAttribute="trailing" secondItem="jYv-as-zDF" secondAttribute="trailing" constant="16" id="dhl-My-6AL"/>
+                            <constraint firstItem="pkW-s3-nEG" firstAttribute="centerX" secondItem="6pI-Ft-fCA" secondAttribute="centerX" id="hcr-jW-7XI"/>
+                            <constraint firstItem="kyw-PV-myt" firstAttribute="trailing" secondItem="0mc-Cd-1eN" secondAttribute="trailing" id="las-7b-pTU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kyw-PV-myt"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FGH-QI-eCH"/>
+                    <connections>
+                        <outlet property="authenticatorCodeLabel" destination="pkW-s3-nEG" id="3gw-yG-bxj"/>
+                        <outlet property="numpadView" destination="0mc-Cd-1eN" id="tXS-yR-n8L"/>
+                        <outlet property="signInButton" destination="jYv-as-zDF" id="Alo-uA-olm"/>
+                        <outlet property="titleLabel" destination="VKl-3E-IDZ" id="Tnu-ED-4M8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oGc-Xz-2Ph" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-761.25" y="1235.9154929577464"/>
+        </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="NNr-y2-pp2">
             <objects>
@@ -610,5 +866,6 @@ your email.</string>
     <resources>
         <image name="confirm-email-icon" width="64" height="64"/>
         <image name="img_full_splash_logo" width="120" height="144"/>
+        <image name="img_numpad_delete" width="24" height="18"/>
     </resources>
 </document>

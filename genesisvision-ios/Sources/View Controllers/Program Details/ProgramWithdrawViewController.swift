@@ -38,13 +38,14 @@ class ProgramWithdrawViewController: BaseViewController {
     @IBOutlet var numpadView: NumpadView! {
         didSet {
             numpadView.delegate = self
+            numpadView.type = .currency
         }
     }
     
     // MARK: - Variables
     var enteredAmount: Double = 0.0 {
         didSet {
-            withdrawButton(enable: enteredAmount > 0.0 && enteredAmount <= investedTokens)
+            withdrawButton.setEnabled(enteredAmount > 0.0 && enteredAmount <= investedTokens)
             updateNumPadState(value: amountLabel.text)
         }
     }
@@ -78,7 +79,7 @@ class ProgramWithdrawViewController: BaseViewController {
         
         setupNavigationBar(with: .primary)
         
-        withdrawButton(enable: false)
+        withdrawButton.setEnabled(false)
         
         if let investedTokens = viewModel.investedTokens {
             self.investedTokens = investedTokens
@@ -87,11 +88,6 @@ class ProgramWithdrawViewController: BaseViewController {
         
         self.balanceCurrencyLabel.text = "tokens"
         self.amountCurrencyLabel.text = "tokens"
-    }
-    
-    private func withdrawButton(enable: Bool) {
-        withdrawButton.isUserInteractionEnabled = enable
-        withdrawButton.bgColor = enable ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
     }
     
     private func withdrawMethod() {
@@ -136,7 +132,11 @@ class ProgramWithdrawViewController: BaseViewController {
 }
 
 extension ProgramWithdrawViewController: NumpadViewProtocol {
-    var currency: String {
+    var numbersLimit: Int {
+        return -1
+    }
+    
+    var currency: String? {
         return ""
     }
     

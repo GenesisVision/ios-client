@@ -65,7 +65,13 @@ class SignInViewController: BaseViewController {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
+        var email = emailTextField.text ?? ""
+        var password = passwordTextField.text ?? ""
+        
+        email = email.trimmingCharacters(in: .whitespaces)
+        password = password.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.signIn(email: email, password: password) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -74,7 +80,12 @@ class SignInViewController: BaseViewController {
                     self?.viewModel.startAsAuthorized()
                 })
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                switch errorType {
+                case .requiresTwoFactor:
+                    self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
+                default:
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
             }
         }
     }

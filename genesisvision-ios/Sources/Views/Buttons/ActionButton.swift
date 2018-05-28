@@ -33,7 +33,7 @@ class ActionButton: UIButton {
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
         setTitleColor(textColor, for: .normal)
         
-        backgroundColor = bgColor
+        backgroundColor = isUserInteractionEnabled ? bgColor : bgColor.withAlphaComponent(0.3)
     }
     
     func addShadow() {
@@ -46,6 +46,6 @@ class ActionButton: UIButton {
     
     func setEnabled(_ value: Bool) {
         isUserInteractionEnabled = value
-        backgroundColor = value ? UIColor.Button.primary : UIColor.Button.primary.withAlphaComponent(0.3)
+        backgroundColor = isUserInteractionEnabled ? bgColor : bgColor.withAlphaComponent(0.3)
     }
 }

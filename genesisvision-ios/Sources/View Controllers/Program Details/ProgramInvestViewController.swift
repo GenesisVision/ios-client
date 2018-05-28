@@ -16,6 +16,7 @@ class ProgramInvestViewController: BaseViewController {
     @IBOutlet var numpadView: NumpadView! {
         didSet {
             numpadView.delegate = self
+            numpadView.type = .currency
         }
     }
     
@@ -70,7 +71,7 @@ class ProgramInvestViewController: BaseViewController {
                 }
             }
             
-            investButton(enable: enteredAmount > 0 && enteredAmount <= balance)
+            investButton.setEnabled(enteredAmount > 0 && enteredAmount <= balance)
             updateNumPadState(value: amountLabel.text)
         }
     }
@@ -98,14 +99,13 @@ class ProgramInvestViewController: BaseViewController {
         
         setupNavigationBar(with: .primary)
         
-        investButton(enable: false)
+        investButton.setEnabled(false)
         showProgressHUD()
         
         viewModel.getAvailableToInvest(completion: { [weak self] (balance, exchangedBalance) in
             self?.hideAll()
             self?.balance = balance
             self?.exchangedBalance = exchangedBalance
-            self?.investButton(enable: true)
         }) { [weak self] (result) in
             self?.hideAll()
             
@@ -121,10 +121,6 @@ class ProgramInvestViewController: BaseViewController {
         self.exchangedBalanceCurrencyLabel.text = viewModel.currency
         self.amountCurrencyLabel.text = "GVT"
         self.exchangedAmountCurrencyLabel.text = viewModel.currency
-    }
-    
-    private func investButton(enable: Bool) {
-        investButton.setEnabled(enable)
     }
     
     private func investMethod() {
@@ -169,7 +165,11 @@ class ProgramInvestViewController: BaseViewController {
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
-    var currency: String {
+    var numbersLimit: Int {
+        return -1
+    }
+    
+    var currency: String? {
         return Constants.currency
     }
     

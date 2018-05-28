@@ -10,7 +10,8 @@ import UIKit
 
 protocol NumpadViewProtocol: class {
     var textLabel: UILabel { get }
-    var currency: String { get }
+    var currency: String? { get }
+    var numbersLimit: Int { get }
     
     func textLabelDidChange(value: Double?)
     func onClearClicked(view: NumpadView)
@@ -54,7 +55,7 @@ extension NumpadViewProtocol {
     }
     
     func onNumberClicked(view: NumpadView, value: Int) {
-        guard let text = textLabel.text else { return }
+        guard let text = textLabel.text, currency != nil || text.count < numbersLimit else { return }
         
         if text == "0" {
             textLabel.text = value == 0 ? "0." : value.toString()
@@ -70,19 +71,36 @@ extension NumpadViewProtocol {
             let lastComponents = text.components(separatedBy: ".").last,
             lastComponents.count >= getDecimalCount(for: currency) {
             changedActive(value: false)
+        } else if text.count < numbersLimit {
+            changedActive(value: false)
         } else {
             changedActive(value: true)
         }
     }
 }
 
+enum NumpadViewType {
+    case currency, number
+}
+
 class NumpadView: UIView {
-    
     weak var delegate: NumpadViewProtocol?
+    
+    var type: NumpadViewType = .number
     
     @IBOutlet var numberButtons: [NumpadButton]!
     @IBOutlet var separatorButton: UIButton!
     @IBOutlet var clearButton: UIButton!
+    
+    // MARK: - Lifecycle
+    override func layoutSubviews() {
+        switch type {
+        case .currency:
+            separatorButton.alpha = 1.0
+        case .number:
+            separatorButton.alpha = 0.0
+        }
+    }
     
     var isEnable = true {
         didSet {
@@ -91,8 +109,13 @@ class NumpadView: UIView {
                 button.alpha = isEnable ? 1.0 : 0.3
             }
             
-            separatorButton.isEnabled = isEnable
-            separatorButton.alpha = isEnable ? 1.0 : 0.3
+            switch type {
+            case .currency:
+                separatorButton.isEnabled = isEnable
+                separatorButton.alpha = isEnable ? 1.0 : 0.3
+            case .number:
+                separatorButton.isEnabled = false
+            }
         }
     }
     

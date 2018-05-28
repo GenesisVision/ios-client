@@ -7,7 +7,7 @@
 //
 
 enum SignInRouteType {
-    case startAsAuthorized, signUp, forgotPassword
+    case startAsAuthorized, signUp, forgotPassword, twoFactorSignIn(email: String, password: String)
 }
 
 class SignInRouter: Router {
@@ -21,6 +21,8 @@ class SignInRouter: Router {
             signUpAction()
         case .forgotPassword:
             forgotPasswordAction()
+        case .twoFactorSignIn(let email, let password):
+            twoFactorSignInAction(email: email, password: password)
         }
     }
     
@@ -37,6 +39,13 @@ class SignInRouter: Router {
         guard let viewController = ForgotPasswordViewController.storyboardInstance(name: .auth) else { return }
         let router = ForgotPasswordRouter(parentRouter: self, navigationController: navigationController) 
         viewController.viewModel = AuthForgetPasswordViewModel(withRouter: router)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func twoFactorSignInAction(email: String, password: String) {
+        guard let viewController = AuthTwoFactorSignInViewController.storyboardInstance(name: .auth) else { return }
+        let router = AuthTwoFactorSignInRouter(parentRouter: self, navigationController: navigationController)
+        viewController.viewModel = AuthTwoFactorSignInViewModel(withRouter: router, email: email, password: password)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

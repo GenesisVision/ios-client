@@ -73,7 +73,15 @@ class SignUpViewController: BaseViewController {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.signUp(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", confirmPassword: confirmPasswordTextField.text ?? "") { [weak self] (result) in
+        var email = emailTextField.text ?? ""
+        var password = passwordTextField.text ?? ""
+        var confirmPassword = confirmPasswordTextField.text ?? ""
+        
+        email = email.trimmingCharacters(in: .whitespaces)
+        password = password.trimmingCharacters(in: .whitespaces)
+        confirmPassword = confirmPassword.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.signUp(email: email, password: password, confirmPassword: confirmPassword) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
