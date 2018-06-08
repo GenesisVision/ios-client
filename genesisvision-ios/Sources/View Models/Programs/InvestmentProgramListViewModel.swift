@@ -55,7 +55,7 @@ final class InvestmentProgramListViewModel {
     
     var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc,
                                                            .byLevelDesc, .byLevelAsc,
-                                                           .byBalanceDesc, .byBalanceAsk,
+                                                           .byBalanceDesc, .byBalanceDesc,
                                                            .byOrdersDesc, .byOrdersAsc,
                                                            .byEndOfPeriodDesc, .byEndOfPeriodAsc,
                                                            .byTitleDesc, .byTitleAsc]

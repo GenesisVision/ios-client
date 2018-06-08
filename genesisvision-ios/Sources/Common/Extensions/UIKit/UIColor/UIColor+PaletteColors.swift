@@ -197,4 +197,13 @@ extension UIColor {
         static var redTitle: UIColor { return AppearanceController.theme == .dark ? GV.red : Common.lipstick }
         static var subtitle: UIColor { return Common.primary }
     }
+    
+    struct TwoFactor {
+        static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.dark }
+        static var codeTitle: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.primary }
+        
+        static var pageControllPageIndicatorTint: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
+        static var pageControllCurrentPageIndicatorTint: UIColor { return AppearanceController.theme == .dark ? Common.primary : Common.primary }
+        static var pageControllTint: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
+    }
 }

@@ -13,13 +13,6 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: ProgramRequestsViewModel!
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +28,8 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
+        setupTableConfiguration()
+        
         showProgressHUD()
         fetch()
         setupUI()

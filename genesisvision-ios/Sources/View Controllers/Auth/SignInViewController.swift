@@ -61,7 +61,7 @@ class SignInViewController: BaseViewController {
         passwordTextField.setBottomLine()
     }
     
-    private func sighInMethod() {
+    private func signInMethod() {
         hideKeyboard()
         showProgressHUD()
         
@@ -102,7 +102,7 @@ class SignInViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
-        sighInMethod()
+        signInMethod()
     }
     
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
@@ -118,7 +118,7 @@ extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case passwordTextField:
-            sighInMethod()
+            signInMethod()
         default:
             IQKeyboardManager.sharedManager().goNext()
         }

@@ -44,8 +44,9 @@ class InvestmentProgramListRouter: Router {
     }
     
     private func showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int) {
-        guard let tabmanViewController = TournamentTabmanViewController.storyboardInstance(name: .tournament), tournamentCurrentRound > 0 else { return }
-        let router = TournamentRouter(parentRouter: self)
+        guard tournamentCurrentRound > 0 else { return }
+        let tabmanViewController = TournamentTabmanViewController()
+        let router = TournamentRouter(parentRouter: self, tabmanViewController: tabmanViewController)
         let viewModel = TournamentViewModel(withRouter: router, viewControllersCount: tournamentTotalRounds, defaultPage: tournamentCurrentRound - 1, tabmanViewModelDelegate: tabmanViewController)
         tabmanViewController.viewModel = viewModel
         tabmanViewController.hidesBottomBarWhenPushed = true

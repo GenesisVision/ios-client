@@ -23,17 +23,11 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
     private var ipfsHashBarButtonItem: UIBarButtonItem! {
         return UIBarButtonItem(image: UIImage.NavBar.ipfsList, style: .done, target: self, action: #selector(ipfsHashButtonAction(_:)))
     }
-    
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableConfiguration()
         showInfiniteIndicator(value: false)
     }
     

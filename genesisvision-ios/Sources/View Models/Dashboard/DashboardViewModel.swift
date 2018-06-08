@@ -60,7 +60,7 @@ final class DashboardViewModel {
     
     var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc,
                                                                       .byLevelDesc, .byLevelAsc,
-                                                                      .byBalanceDesc, .byBalanceAsk,
+                                                                      .byBalanceDesc, .byBalanceAsc,
                                                                       .byOrdersDesc, .byOrdersAsc,
                                                                       .byEndOfPeriodDesc, .byEndOfPeriodAsc,
                                                                       .byTitleDesc, .byTitleAsc]
@@ -87,6 +87,8 @@ final class DashboardViewModel {
     init(withRouter router: DashboardRouter) {
         self.router = router
         self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
     }
     
     // MARK: - Public methods
@@ -126,6 +128,17 @@ final class DashboardViewModel {
                 completion(result)
             }
         }
+    }
+    
+    // MARK: - Private methods
+    @objc private func enableTwoFactorNotification(notification: Notification) {
+        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
+        
+        router.showTwoFactorEnable()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
     }
 }
 

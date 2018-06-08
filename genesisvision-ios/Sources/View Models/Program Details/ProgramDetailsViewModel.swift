@@ -67,6 +67,25 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         }) { (result) in }
     }
     
+    func changeFavorite(completion: @escaping CompletionBlock) {
+        guard let investmentProgramId = investmentProgramId,
+            let isFavorite = investmentProgramDetails?.isFavorite else { return }
+        
+        investmentProgramDetails?.isFavorite = !isFavorite
+        ProgramDataProvider.programFavorites(isFavorite: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+                self?.investmentProgramDetails?.isFavorite = isFavorite
+            }
+            
+            completion(result)
+        }
+    }
+    
+    // MARK: - Private methods
     private func setup() {
         if let router = router as? ProgramDetailsRouter, let investmentProgramDetails = investmentProgramDetails {
             if let vc = router.getDetail(with: investmentProgramDetails) {
@@ -74,7 +93,7 @@ final class ProgramDetailsViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title)
             }
             
-           if let vc = router.getDescription(with: investmentProgramDetails) {
+            if let vc = router.getDescription(with: investmentProgramDetails) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
@@ -95,24 +114,6 @@ final class ProgramDetailsViewModel: TabmanViewModel {
             }
             
             reloadPages()
-        }
-    }
-    
-    func changeFavorite(completion: @escaping CompletionBlock) {
-        guard let investmentProgramId = investmentProgramId,
-            let isFavorite = investmentProgramDetails?.isFavorite else { return }
-        
-        investmentProgramDetails?.isFavorite = !isFavorite
-        ProgramDataProvider.programFavorites(isFavorite: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-                self?.investmentProgramDetails?.isFavorite = isFavorite
-            }
-            
-            completion(result)
         }
     }
 }

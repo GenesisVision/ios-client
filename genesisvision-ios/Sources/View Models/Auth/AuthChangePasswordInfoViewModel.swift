@@ -25,7 +25,8 @@ final class AuthChangePasswordInfoViewModel: InfoViewModel {
     }
     
     func goBack() {
-        router.goToRoot()
+        router.closeVC()
+        router.goToBack(animated: false)
     }
 }
 

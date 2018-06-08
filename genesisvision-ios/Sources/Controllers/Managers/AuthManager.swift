@@ -13,6 +13,7 @@ class AuthManager {
     private static var profileViewModel: ProfileFullViewModel?
     private static var walletViewModel: WalletViewModel?
     private static var rateViewModel: RateViewModel?
+    private static var twoFactorStatus: TwoFactorStatus?
     
     static var authorizedToken: String? {
         set(newToken) {
@@ -67,6 +68,10 @@ class AuthManager {
         self.profileViewModel = viewModel
     }
     
+    static func saveTwoFactorStatus(viewModel: TwoFactorStatus) {
+        self.twoFactorStatus = viewModel
+    }
+    
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void, completionError: @escaping CompletionBlock) {
         if let profileViewModel = profileViewModel {
             completion(profileViewModel)
@@ -114,6 +119,16 @@ class AuthManager {
             }
             
             completion(walletViewModel)
+        }, errorCompletion: completionError)
+    }
+    
+    static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus?) -> Void, completionError: @escaping CompletionBlock) {
+        TwoFactorDataProvider.auth2faGetStatus(completion: { (viewModel) in
+            if viewModel != nil  {
+                twoFactorStatus = viewModel
+            }
+            
+            completion(viewModel)
         }, errorCompletion: completionError)
     }
     

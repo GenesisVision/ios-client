@@ -13,9 +13,14 @@ func getFileURL(fileName: String) -> URL? {
     return URL(string: Constants.Api.filePath + fileName)
 }
 
-func feedback(style: UIImpactFeedbackStyle = .light) {
+func impactFeedback(style: UIImpactFeedbackStyle = .light) {
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.impactOccurred()
+}
+
+func notificationFeedback(style: UINotificationFeedbackType = .success) {
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(style)
 }
 
 func networkActivity(show: Bool = true) {
@@ -169,4 +174,25 @@ func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
         
         viewController.showNewVersionAlert(lastVersion)
     })
+}
+
+
+func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
+    AuthManager.getTwoFactorStatus(completion: { (model) in
+        let launchedBefore = UserDefaults.standard.bool(forKey: Constants.UserDefaults.launchedBefore)
+        
+        guard let twoFactorEnabled = model?.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
+        
+        print("First launch")
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.launchedBefore)
+        
+        viewController.showTwoFactorEnableAlert(completion: completion)
+    }) { (result) in
+        switch result {
+        case .success:
+            break
+        case .failure(let errorType):
+            ErrorHandler.handleError(with: errorType)
+        }
+    }
 }

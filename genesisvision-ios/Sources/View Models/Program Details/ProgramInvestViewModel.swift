@@ -12,6 +12,7 @@ final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
     var investmentProgramId: String?
+    var labelPlaceholder: String = "0"
     
     private var rate: Double = 0.0
     private var availableToInvest: Double = 0.0

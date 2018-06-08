@@ -6,13 +6,22 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum TabmanRouteType {
-    
-}
+import Tabman
 
 class TabmanRouter: Router {
+
+    var tabmanViewController: TabmanViewController?
+
+    init(parentRouter: Router?, tabmanViewController: TabmanViewController? = nil) {
+        super.init(parentRouter: parentRouter)
+        self.tabmanViewController = tabmanViewController
+    }
     
-    // MARK: - Public methods
-    func show(routeType: TabmanRouteType) {
+    func next() {
+        tabmanViewController?.scrollToPage(.next, animated: true)
+    }
+    
+    func previous() {
+        tabmanViewController?.scrollToPage(.previous, animated: true)
     }
 }

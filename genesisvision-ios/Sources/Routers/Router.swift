@@ -43,7 +43,8 @@ class Router {
         
         var navigationController = BaseNavigationController()
         
-        if isInvestorApp, let dashboardViewController = DashboardViewController.storyboardInstance(name: .dashboard) {
+        if isInvestorApp {
+            let dashboardViewController = DashboardViewController()
             self.dashboardViewController = dashboardViewController
 
             navigationController = BaseNavigationController(rootViewController: dashboardViewController)
@@ -62,15 +63,14 @@ class Router {
             viewControllers.append(navigationController)
         }
         
-        if let walletViewController = WalletViewController.storyboardInstance(name: .wallet) {
-            navigationController = BaseNavigationController(rootViewController: walletViewController)
-            let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-            walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "WALLET"
-            viewControllers.append(navigationController)
-        }
+        let walletViewController = WalletViewController()
+        navigationController = BaseNavigationController(rootViewController: walletViewController)
+        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
+        navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.title = "WALLET"
+        viewControllers.append(navigationController)
         
         if let profileViewController = ProfileViewController.storyboardInstance(name: .profile) {
             navigationController = BaseNavigationController(rootViewController: profileViewController)
@@ -171,15 +171,7 @@ extension Router {
     func topViewController() -> UIViewController? {
         return navigationController?.topViewController
     }
-    
-    func getProgramsVC() -> UIViewController? {
-        guard let tabmanViewController = BaseTabmanViewController.storyboardInstance(name: .programs) else { return nil }
-        let router = Router(parentRouter: self)
-        tabmanViewController.viewModel = TabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
-        
-        return tabmanViewController
-    }
-    
+   
     func startAsForceSignOut() {
         guard let navigationController = getProgramsNavigationController(),
             let programsVC = navigationController.topViewController as? ProgramListViewController,
@@ -210,6 +202,12 @@ extension Router {
         setWindowRoot(viewController: rootTabBarController)
     }
     
+    func showTwoFactorEnable() {
+        guard let viewController = getTwoFactorEnableViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func getRootTabBar(parent: Router?) -> UITabBarController? {
         if let rootTabBarController = parent?.rootTabBarController {
             return rootTabBarController
@@ -232,21 +230,41 @@ extension Router {
     }
     
     func getDetailsViewController(with investmentProgramId: String) -> ProgramDetailsTabmanViewController? {
-        guard let vc = currentController, let viewController = ProgramDetailsTabmanViewController.storyboardInstance(name: .program) else { return nil }
-        viewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
+        guard let vc = currentController else { return nil }
         
-        let router = ProgramDetailsRouter(parentRouter: self)
-        router.currentController = viewController
-        let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: viewController)
-        viewModel.programDetailsProtocol = viewController
-        viewController.viewModel = viewModel
+        let tabmanViewController = ProgramDetailsTabmanViewController()
+        tabmanViewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
+        
+        let router = ProgramDetailsRouter(parentRouter: self, tabmanViewController: tabmanViewController)
+        router.currentController = tabmanViewController
+        let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: tabmanViewController)
+        viewModel.programDetailsProtocol = tabmanViewController
+        tabmanViewController.viewModel = viewModel
+        tabmanViewController.hidesBottomBarWhenPushed = true
+        
+        return tabmanViewController
+    }
+    
+    func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {
+        let tabmanViewController = AuthTwoFactorTabmanViewController()
+        let router = AuthTwoFactorTabmanRouter(parentRouter: self, tabmanViewController: tabmanViewController)
+        tabmanViewController.viewModel = AuthTwoFactorTabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
+        tabmanViewController.hidesBottomBarWhenPushed = true
+        
+        return tabmanViewController
+    }
+    
+    func getTwoFactorDisableViewController() -> AuthTwoFactorConfirmationViewController? {
+        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(name: .auth) else { return nil }
+        let router = AuthTwoFactorDisableRouter(parentRouter: self)
+        viewController.viewModel = AuthTwoFactorDisableConfirmationViewModel(withRouter: router)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController
     }
     
-    func goToBack() {
-        popViewController(animated: true)
+    func goToBack(animated: Bool = false) {
+        popViewController(animated: animated)
     }
     
     func goToSecond() {
@@ -254,11 +272,11 @@ extension Router {
         popViewController(animated: true)
     }
     
-    func goToRoot() {
-        popToRootViewController(animated: true)
+    func goToRoot(animated: Bool = true) {
+        popToRootViewController(animated: animated)
     }
     
-    func closeVC() {
-        dismiss(animated: true)
+    func closeVC(animated: Bool = true) {
+        dismiss(animated: animated)
     }
 }

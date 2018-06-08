@@ -6,11 +6,15 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit.UIImage
 
 final class AuthTwoFactorSignInViewModel {
     // MARK: - Variables
     var title: String = "Two Factor Authentication"
+    
+    var buttonTitle: String = "Sign In"
+    var titleText: String = String.ViewTitles.TwoFactor.signInTitle
+    var labelPlaceholder: String = ""
 
     private var email: String
     private var password: String
@@ -31,8 +35,8 @@ final class AuthTwoFactorSignInViewModel {
     }
     
     // MARK: - API
-    func signIn(twoFactorCode: String, completion: @escaping CompletionBlock) {
-        AuthDataProvider.signIn(email: email, password: password, twoFactorCode: twoFactorCode, completion: { (token) in
+    func signIn(twoFactorCode: String? = nil, recoveryCode: String? = nil, completion: @escaping CompletionBlock) {
+        AuthDataProvider.signIn(email: email, password: password, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, completion: { (token) in
             AuthManager.authorizedToken = token
             completion(.success)
         }) { (result) in

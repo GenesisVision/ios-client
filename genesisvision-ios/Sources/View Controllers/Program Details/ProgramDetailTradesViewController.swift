@@ -13,13 +13,6 @@ class ProgramDetailTradesViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: ProgramDetailTradesViewModel!
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +39,8 @@ class ProgramDetailTradesViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        setupTableConfiguration()
+        
         setupNavigationBar()
         
         showProgressHUD()

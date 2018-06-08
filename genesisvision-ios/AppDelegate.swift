@@ -33,10 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - Setup
 extension AppDelegate {
     private func setup() {
+        SwaggerClientAPI.basePath = Constants.Api.basePath
         UserDefaults.standard.set(false, forKey: Constants.UserDefaults.restrictRotation)
+        
+        setupFirstScreen()
+
         reachabilityManager = ReachabilityManager()
         AppearanceController.setupAppearance()
-        SwaggerClientAPI.basePath = Constants.Api.basePath
         FirebaseApp.configure()
+    }
+    
+    private func setupFirstScreen() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let welcomeViewController = WelcomeViewController()
+        window?.rootViewController = welcomeViewController
+        window?.makeKeyAndVisible()
     }
 }

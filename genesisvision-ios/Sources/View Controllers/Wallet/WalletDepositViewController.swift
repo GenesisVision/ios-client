@@ -35,7 +35,9 @@ class WalletDepositViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.setupUI()
+                DispatchQueue.main.async {
+                    self?.setupUI()
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
@@ -57,7 +59,6 @@ class WalletDepositViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction func copyButtonAction(_ sender: UIButton) {
-        hideKeyboard()
         showProgressHUD(withNetworkActivity: false)
         
         viewModel.copy { [weak self] (result) in

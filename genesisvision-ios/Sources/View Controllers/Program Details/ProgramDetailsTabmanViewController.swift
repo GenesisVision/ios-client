@@ -19,17 +19,6 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
     
     private var favoriteBarButtonItem: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setup()
-    }
-    
-    // MARK: - Private methods
-    private func setup() {
-        guard AuthManager.isLogin() else { return }
-    }
-    
     // MARK: - IBActions
     @IBAction func favoriteButtonAction(_ sender: UIButton) {
         let isFavorite = viewModel.isFavorite
@@ -62,6 +51,8 @@ extension ProgramDetailsTabmanViewController: ReloadDataProtocol {
 extension ProgramDetailsTabmanViewController: ProgramDetailsProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
+            guard AuthManager.isLogin() else { return }
+            
             guard self.favoriteBarButtonItem != nil else {
                 self.favoriteBarButtonItem = UIBarButtonItem(image: self.viewModel.isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction(_:)))
                 self.navigationItem.rightBarButtonItem = self.favoriteBarButtonItem

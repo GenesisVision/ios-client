@@ -64,11 +64,10 @@ open class InvestorAPI {
      2FA create
      
      - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorAuth2faCreatePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
-        apiInvestorAuth2faCreatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+    open class func apiInvestorAuth2faCreatePost(authorization: String, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
+        apiInvestorAuth2faCreatePostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -83,14 +82,13 @@ open class InvestorAPI {
 }}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
 
      - returns: RequestBuilder<TwoFactorAuthenticator> 
      */
-    open class func apiInvestorAuth2faCreatePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<TwoFactorAuthenticator> {
+    open class func apiInvestorAuth2faCreatePostWithRequestBuilder(authorization: String) -> RequestBuilder<TwoFactorAuthenticator> {
         let path = "/api/investor/auth/2fa/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
@@ -101,7 +99,7 @@ open class InvestorAPI {
 
         let requestBuilder: RequestBuilder<TwoFactorAuthenticator>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -111,7 +109,7 @@ open class InvestorAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiInvestorAuth2faDisablePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func apiInvestorAuth2faDisablePost(authorization: String, model: TwoFactorCodeModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiInvestorAuth2faDisablePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
@@ -127,7 +125,7 @@ open class InvestorAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiInvestorAuth2faDisablePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<Void> {
+    open class func apiInvestorAuth2faDisablePostWithRequestBuilder(authorization: String, model: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
         let path = "/api/investor/auth/2fa/disable"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -555,7 +553,7 @@ open class InvestorAPI {
         case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
-        case byBalanceAsk = "ByBalanceAsk"
+        case byBalanceAsc = "ByBalanceAsc"
         case byBalanceDesc = "ByBalanceDesc"
     }
 

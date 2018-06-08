@@ -34,7 +34,9 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         view.backgroundColor = UIColor.BaseView.bg
         
         bar.style = viewModel.style
-        bar.location = .top
+        bar.location = viewModel.location
+        
+        isScrollEnabled = viewModel.isScrollEnabled
         
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
@@ -47,9 +49,9 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             appearance.style.background = .solid(color: UIColor.BaseView.bg)
             
             appearance.indicator.color = UIColor.primary
-            appearance.indicator.bounces = true
-            appearance.indicator.isProgressive = false
-            appearance.indicator.compresses = false
+            appearance.indicator.bounces = viewModel.bounces
+            appearance.indicator.isProgressive = viewModel.isProgressive
+            appearance.indicator.compresses = viewModel.compresses
             
             appearance.text.font = UIFont.getFont(.regular, size: 15)
             

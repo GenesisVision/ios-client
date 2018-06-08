@@ -47,6 +47,10 @@ extension ProgramDetailTradesTableViewCellViewModel: CellViewModel {
         if let direction = orderModel.direction?.rawValue {
             cell.directionLabel.text = direction
         }
+        
+        if let entry = orderModel.entry {
+            cell.directionLabel.text?.append(" " + entry.rawValue)
+        }
     }
 }
 

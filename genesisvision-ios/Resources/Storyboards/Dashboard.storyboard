@@ -1,60 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes>
-        <!--Dashboard View Controller-->
-        <scene sceneID="A4w-nA-Z8l">
-            <objects>
-                <viewController storyboardIdentifier="DashboardViewController" id="4Iy-NG-MEA" customClass="DashboardViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cJF-Gy-plB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EU9-8d-Mr6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="EU9-8d-Mr6" firstAttribute="top" secondItem="cJF-Gy-plB" secondAttribute="top" id="9md-yh-STr"/>
-                            <constraint firstItem="W5q-Oc-p9n" firstAttribute="trailing" secondItem="EU9-8d-Mr6" secondAttribute="trailing" id="G12-Vs-I7e"/>
-                            <constraint firstAttribute="bottom" secondItem="EU9-8d-Mr6" secondAttribute="bottom" id="kBR-St-8Ja"/>
-                            <constraint firstItem="EU9-8d-Mr6" firstAttribute="leading" secondItem="W5q-Oc-p9n" secondAttribute="leading" id="s9a-w1-zbm"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="W5q-Oc-p9n"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6XZ-lt-BbI"/>
-                    <connections>
-                        <outlet property="tableView" destination="EU9-8d-Mr6" id="bLW-xg-ss4"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d9f-Hh-prd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1582" y="1064"/>
-        </scene>
-        <!--Dashboard Tabman View Controller-->
-        <scene sceneID="GTF-1o-Zyf">
-            <objects>
-                <viewController storyboardIdentifier="DashboardTabmanViewController" id="elu-Jw-EJp" customClass="DashboardTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u6r-Q8-C19">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="7bm-XZ-kdz"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OVn-4L-a8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="863" y="1064"/>
-        </scene>
-    </scenes>
+    <scenes/>
 </document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,37 +11,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Wallet View Controller-->
-        <scene sceneID="H7x-PK-XKm">
-            <objects>
-                <viewController storyboardIdentifier="WalletViewController" id="hYK-hm-a1t" customClass="WalletViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RpL-oe-0nZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEW-FT-LL7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BEW-FT-LL7" firstAttribute="top" secondItem="RpL-oe-0nZ" secondAttribute="top" id="IvW-pV-SfN"/>
-                            <constraint firstItem="gyN-Ia-4Bd" firstAttribute="trailing" secondItem="BEW-FT-LL7" secondAttribute="trailing" id="KSG-Q6-RAY"/>
-                            <constraint firstAttribute="bottom" secondItem="BEW-FT-LL7" secondAttribute="bottom" id="XhI-hG-a6V"/>
-                            <constraint firstItem="BEW-FT-LL7" firstAttribute="leading" secondItem="gyN-Ia-4Bd" secondAttribute="leading" id="vzZ-Hw-H4I"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gyN-Ia-4Bd"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="GId-k5-S3w"/>
-                    <connections>
-                        <outlet property="tableView" destination="BEW-FT-LL7" id="irp-29-tQO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1YP-B0-IaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2374" y="1037"/>
-        </scene>
         <!--Wallet Deposit View Controller-->
         <scene sceneID="0Uv-eN-R9l">
             <objects>

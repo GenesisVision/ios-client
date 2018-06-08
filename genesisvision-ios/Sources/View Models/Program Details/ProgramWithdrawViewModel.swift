@@ -13,6 +13,7 @@ final class ProgramWithdrawViewModel {
     var title: String = "Withdraw"
     var investmentProgramId: String?
     var investedTokens: Double?
+    var labelPlaceholder: String = "0"
     
     private var rate: Double = 0.0
     private var balance: Double = 0.0 {

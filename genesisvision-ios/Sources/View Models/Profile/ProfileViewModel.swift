@@ -35,6 +35,7 @@ final class ProfileViewModel {
     var title: String = "Profile"
     
     private var router: ProfileRouter!
+    public private(set) var twoFactorModel: TwoFactorStatus?
     private var profileModel: ProfileFullViewModel? {
         didSet {
             setupCellViewModel()
@@ -104,10 +105,21 @@ final class ProfileViewModel {
     }
     
     // MARK: - Public methods
-    func getProfile(completion: @escaping CompletionBlock) {
+    func fetchProfile(completion: @escaping CompletionBlock) {
         AuthManager.getProfile(completion: { [weak self] (viewModel) in
             if let profileModel = viewModel {
                 self?.profileModel = profileModel
+                completion(.success)
+            }
+            
+            completion(.failure(errorType: .apiError(message: nil)))
+        }, completionError: completion)
+    }
+    
+    func fetchTwoFactorStatus(completion: @escaping CompletionBlock) {
+        AuthManager.getTwoFactorStatus(completion: { [weak self] (viewModel) in
+            if let twoFactorModel = viewModel {
+                self?.twoFactorModel = twoFactorModel
                 completion(.success)
             }
             
@@ -180,7 +192,7 @@ final class ProfileViewModel {
     func cancelEditProfile(completion: @escaping CompletionBlock) {
         setupCellViewModel()
         profileState = .show
-        getProfile(completion: completion)
+        fetchProfile(completion: completion)
     }
     
     func saveProfile(completion: @escaping CompletionBlock) {
@@ -189,6 +201,10 @@ final class ProfileViewModel {
     
     func changePassword() {
         router.show(routeType: .changePassword)
+    }
+    
+    func enableTwoFactor(_ value: Bool) {
+        router.show(routeType: .enableTwoFactor(value))
     }
     
     func update(birthdate: Date?) {
@@ -246,7 +262,7 @@ final class ProfileViewModel {
     private func setup() {
         NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
         
-        getProfile { (result) in }
+        fetchProfile { (result) in }
     }
     
     private func clearData() {

@@ -13,13 +13,6 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: ProgramHistoryViewModel!
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +37,8 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        setupTableConfiguration()
+        
         setupNavigationBar()
         
         showProgressHUD()

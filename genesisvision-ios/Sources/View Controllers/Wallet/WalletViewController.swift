@@ -13,13 +13,6 @@ class WalletViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +28,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
+        setupTableConfiguration()
+        
         registerForPreviewing()
         
         setupUI()
@@ -90,7 +85,9 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func fetchBalance() {
-        viewModel.fetchBalance { (result) in }
+        viewModel.fetchBalance { [weak self] (result) in
+            self?.reloadData()
+        }
     }
     
     private func fetchTransactions() {

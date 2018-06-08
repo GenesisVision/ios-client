@@ -146,11 +146,10 @@ open class ManagerAPI {
      2FA create
      
      - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiManagerAuth2faCreatePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
-        apiManagerAuth2faCreatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+    open class func apiManagerAuth2faCreatePost(authorization: String, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
+        apiManagerAuth2faCreatePostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -165,14 +164,13 @@ open class ManagerAPI {
 }}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
 
      - returns: RequestBuilder<TwoFactorAuthenticator> 
      */
-    open class func apiManagerAuth2faCreatePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<TwoFactorAuthenticator> {
+    open class func apiManagerAuth2faCreatePostWithRequestBuilder(authorization: String) -> RequestBuilder<TwoFactorAuthenticator> {
         let path = "/api/manager/auth/2fa/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
@@ -183,7 +181,7 @@ open class ManagerAPI {
 
         let requestBuilder: RequestBuilder<TwoFactorAuthenticator>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -193,7 +191,7 @@ open class ManagerAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func apiManagerAuth2faDisablePost(authorization: String, model: PasswordModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func apiManagerAuth2faDisablePost(authorization: String, model: TwoFactorCodeModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
         apiManagerAuth2faDisablePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
@@ -209,7 +207,7 @@ open class ManagerAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func apiManagerAuth2faDisablePostWithRequestBuilder(authorization: String, model: PasswordModel? = nil) -> RequestBuilder<Void> {
+    open class func apiManagerAuth2faDisablePostWithRequestBuilder(authorization: String, model: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
         let path = "/api/manager/auth/2fa/disable"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)

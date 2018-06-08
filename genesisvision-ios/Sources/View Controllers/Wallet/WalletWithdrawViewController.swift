@@ -80,7 +80,7 @@ class WalletWithdrawViewController: BaseViewController {
 
 extension WalletWithdrawViewController: QRCodeReaderViewControllerDelegate {
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        feedback()
+        notificationFeedback()
         
         self.addressTextField.text = result.value
         reader.dismiss(animated: true, completion: nil)

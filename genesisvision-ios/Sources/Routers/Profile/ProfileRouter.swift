@@ -7,7 +7,7 @@
 //
 
 enum ProfileRouteType {
-    case signOut, forceSignOut, changePassword
+    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool)
 }
 
 class ProfileRouter: Router {
@@ -21,6 +21,8 @@ class ProfileRouter: Router {
             forceSignOut()
         case .changePassword:
             changePassword()
+        case .enableTwoFactor(let value):
+            enableTwoFactor(value)
         }
     }
     
@@ -38,6 +40,11 @@ class ProfileRouter: Router {
         let router = ChangePasswordRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthChangePasswordViewModel(withRouter: router)
         viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func enableTwoFactor(_ value: Bool) {
+        guard let viewController = value ? getTwoFactorEnableViewController() : getTwoFactorDisableViewController() else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

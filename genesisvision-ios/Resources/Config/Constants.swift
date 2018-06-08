@@ -82,10 +82,13 @@ final class Constants {
         static let timesOpened: String = "TimesOpened"
         static let restrictRotation: String = "RestrictRotation"
         static let skipThisVersion: String = "skipThisVersion"
+        static let launchedBefore: String = "launchedBefore"
     }
     
     struct Keys {
         static let signOutKey: String = "signOutKey"
+        static let twoFactorEnableKey: String = "twoFactorEnableKey"
+        static let twoFactorChangeKey: String = "twoFactorChangeKey"
         
         static let addedLineLayer: String = "addedLineLayer"
     }

@@ -17,13 +17,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     private var feedbackBarButtonItem: UIBarButtonItem?
     private var segmentedControl: UISegmentedControl = UISegmentedControl(items: ["Active", "Archive"])
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +45,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     // MARK: - Private methods
     private func setup() {
+        setupTableConfiguration()
         registerForPreviewing()
 
         setupUI()

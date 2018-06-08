@@ -6,10 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-//enum ProgramDetailsRouteType {
-//    
-//}
-
 class ProgramDetailsRouter: TabmanRouter {
     // MARK: - Variables
     var programDetailViewController: ProgramDetailViewController?
@@ -39,7 +35,7 @@ class ProgramDetailsRouter: TabmanRouter {
     }
     
     func getTrades(with investmentProgramId: String) -> ProgramDetailTradesViewController? {
-        guard let viewController = ProgramDetailTradesViewController.storyboardInstance(name: .program) else { return nil }
+        let viewController = ProgramDetailTradesViewController()
         let router = ProgramDetailTradesRouter(parentRouter: self)
         let viewModel = ProgramDetailTradesViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
@@ -48,8 +44,7 @@ class ProgramDetailsRouter: TabmanRouter {
     }
     
     func getHistory(with investmentProgramId: String) -> ProgramHistoryViewController? {
-        guard let viewController = ProgramHistoryViewController.storyboardInstance(name: .program) else { return nil }
-        
+        let viewController = ProgramHistoryViewController()
         let router = ProgramHistoryRouter(parentRouter: self)
         let viewModel = ProgramHistoryViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController as? ReloadDataProtocol)
         viewController.viewModel = viewModel
@@ -58,9 +53,9 @@ class ProgramDetailsRouter: TabmanRouter {
     }
     
     func getRequests(with investmentProgramId: String) -> ProgramRequestsViewController? {
-        guard let vc = currentController as? ProgramDetailsTabmanViewController,
-            let viewController = ProgramRequestsViewController.storyboardInstance(name: .program) else { return nil }
+        guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
+        let viewController = ProgramRequestsViewController()
         let router = ProgramRequestsRouter(parentRouter: self)
         router.currentController = viewController
         let viewModel = ProgramRequestsViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc, reloadDataProtocol: viewController as? ReloadDataProtocol)
@@ -80,4 +75,3 @@ class ProgramDetailsRouter: TabmanRouter {
         return viewController
     }
 }
-

@@ -24,6 +24,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             headerView.isHidden = true
         }
     }
+    
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -65,7 +66,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     // MARK: - Private methods
     override func fetch() {
-        viewModel.getProfile { [weak self] (result) in
+        viewModel.fetchProfile { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.hideAll()
                 switch result {
@@ -76,6 +77,17 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
                 case .failure(let errorType):
                     ErrorHandler.handleError(with: errorType, viewController: self)
                 }
+            }
+        }
+        
+        viewModel.fetchTwoFactorStatus { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                guard let twoFactorEnabled = self?.viewModel.twoFactorModel?.twoFactorEnabled else { return }
+               self?.headerView.twoFactorEnable = twoFactorEnabled
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
@@ -292,6 +304,12 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         
         viewModel.changePassword()
     }
+    
+    func enableTwoFactorButtonAction(_ value: Bool) {
+        hideKeyboard()
+        
+        viewModel.enableTwoFactor(value)
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -339,6 +357,10 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     
     func changePasswordButtonDidPress(_ sender: UIButton) {
         changePasswordButtonAction(sender)
+    }
+    
+    func enableTwoFactorButtonDidPress(_ value: Bool) {
+        enableTwoFactorButtonAction(value)
     }
 }
 

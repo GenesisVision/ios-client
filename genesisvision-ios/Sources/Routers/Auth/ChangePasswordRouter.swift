@@ -22,9 +22,9 @@ class ChangePasswordRouter: Router {
     // MARK: - Private methods
     private func showChangePasswordInfo() {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
-        let router = Router(parentRouter: self, navigationController: navigationController)
+        let router = Router(parentRouter: self)
         viewController.viewModel = AuthChangePasswordInfoViewModel(withRouter: router)
-        navigationController?.pushViewController(viewController, animated: true)
+        present(viewController: viewController)
     }
 }
 

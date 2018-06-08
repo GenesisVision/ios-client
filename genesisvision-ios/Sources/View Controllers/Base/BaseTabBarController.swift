@@ -12,11 +12,14 @@ class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        showNewVersionAlertIfNeeded(self)
         
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor.TabBar.bg
+        
+        showNewVersionAlertIfNeeded(self)
+        showTwoFactorEnableAlertIfNeeded(self) { (enable) in
+            //TODO: ???
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

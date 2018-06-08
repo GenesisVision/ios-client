@@ -37,6 +37,7 @@ class ProgramInvestViewController: BaseViewController {
     @IBOutlet var amountLabel: AmountLabel! {
         didSet {
             amountLabel.font = UIFont.getFont(.light, size: 72)
+            amountLabel.text = viewModel.labelPlaceholder
         }
     }
     @IBOutlet var amountCurrencyLabel: UILabel!
@@ -165,6 +166,10 @@ class ProgramInvestViewController: BaseViewController {
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
+    var textPlaceholder: String? {
+        return viewModel.labelPlaceholder
+    }
+    
     var numbersLimit: Int {
         return -1
     }

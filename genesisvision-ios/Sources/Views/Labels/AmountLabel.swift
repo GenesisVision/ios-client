@@ -20,7 +20,7 @@ class AmountLabel: UILabel {
     override var text: String? {
         didSet {
             if let text = text {
-                self.textColor = text != "0" ? UIColor.Font.amountDarkBlue : UIColor.Font.amountPlaceholder
+                self.textColor = (text != "" || text != "··· ···") ? UIColor.Font.amountDarkBlue : UIColor.Font.amountPlaceholder
             }
         }
     }

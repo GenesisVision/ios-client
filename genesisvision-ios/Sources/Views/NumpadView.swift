@@ -10,6 +10,7 @@ import UIKit
 
 protocol NumpadViewProtocol: class {
     var textLabel: UILabel { get }
+    var textPlaceholder: String? { get }
     var currency: String? { get }
     var numbersLimit: Int { get }
     
@@ -22,7 +23,7 @@ protocol NumpadViewProtocol: class {
 
 extension NumpadViewProtocol {
     func onClearClicked(view: NumpadView) {
-        guard let text = textLabel.text, !text.isEmpty else { return }
+        guard let text = textLabel.text, !text.isEmpty, text != textPlaceholder else { return }
         
         if text == "0." {
             textLabel.text?.removeAll()
@@ -31,7 +32,7 @@ extension NumpadViewProtocol {
         }
         
         if textLabel.text == "" {
-            textLabel.text = 0.toString()
+            textLabel.text = textPlaceholder
         }
         
         textLabelDidChange(value: textLabel.text?.doubleValue)
@@ -115,6 +116,14 @@ class NumpadView: UIView {
                 separatorButton.alpha = isEnable ? 1.0 : 0.3
             case .number:
                 separatorButton.isEnabled = false
+            }
+        }
+    }
+    
+    var buttonBackgroundColor: UIColor = UIColor.Button.numpadBackground {
+        didSet {
+            numberButtons.forEach { (button) in
+                button.bgColor = buttonBackgroundColor
             }
         }
     }

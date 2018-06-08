@@ -168,9 +168,35 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.separatorStyle = .none
 
+        addTableViewIfNeeded()
+        setupViews()
+        setupAutoLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.delegate = self
+    }
+    
+    // MARK: - Private methods
+    private func addTableViewIfNeeded() {
+        if tableView == nil {
+            tableView = UITableView(frame: .zero, style: .plain)
+            self.view.addSubview(tableView)
+            
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        }
+    }
+    
+    private func setupViews() {
+        tableView.separatorStyle = .none
+        
         fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
         fetchMoreActivityIndicator.color = UIColor.primary
@@ -183,22 +209,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
-        view.backgroundColor = UIColor.BaseView.bg
         tableView.backgroundColor = UIColor.BaseView.bg
         
         refreshControl?.endRefreshing()
         
-        setupViews()
-        setupAutoLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.delegate = self
-    }
-    
-    // MARK: - Private methods
-    private func setupViews() {
         sortAndFilterStackView.addArrangedSubview(sortButton)
         sortAndFilterStackView.addArrangedSubview(filterButton)
         bottomStackView.addArrangedSubview(signInButton)
@@ -242,7 +256,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     @objc func pullToRefresh() {
-        feedback()
+        impactFeedback()
     }
     
     func fetch() {

@@ -90,6 +90,19 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func showTwoFactorEnableAlert(completion: @escaping (_ enable: Bool) -> Void) {
+        let message = String.Alerts.TwoFactorEnable.alertMessage
+        let alert = UIAlertController(title: String.Alerts.TwoFactorEnable.alertTitle, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.enableButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
+            NotificationCenter.default.post(name: .twoFactorEnable, object: nil)
+            completion(true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.cancelButtonText, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
         alertController.view.tintColor = UIColor.primary
@@ -136,26 +149,17 @@ extension UIViewController {
         HUD.hide()
     }
 
-    func showErrorHUD(title: String?, subtitle: String?) {
-        title != nil || subtitle != nil
-            ? HUD.flash(.labeledError(title: title, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.error)
-            : HUD.flash(.error, onView: self.view, delay: Constants.HudDelay.error)
-    }
-    
     func showErrorHUD(subtitle: String? = nil) {
+        notificationFeedback(style: .warning)
         subtitle != nil
             ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.error)
             : HUD.flash(.error, onView: self.view, delay: Constants.HudDelay.error)
     }
 
-    func showSuccessHUD(title: String?, subtitle: String?) {
+    func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
         title != nil || subtitle != nil
-            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.success)
-            : HUD.flash(.success, onView: self.view, delay: Constants.HudDelay.success)
-    }
-    
-    func showSuccessHUD(completion: ((Bool) -> Void)? = nil) {
-        HUD.flash(.success, onView: self.view, delay: Constants.HudDelay.success, completion: completion)
+            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.success, completion: completion)
+            : HUD.flash(.success, onView: self.view, delay: Constants.HudDelay.success, completion: completion)
     }
 
     func showHUD(type: HUDContentType) {
