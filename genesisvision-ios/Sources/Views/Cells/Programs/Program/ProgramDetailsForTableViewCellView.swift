@@ -53,7 +53,7 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             let totalProfit = totalProfit,
             let currency = currency {
             
-            let avgProfitValue = avgProfit.rounded(withType: .other)
+            let avgProfitValue = avgProfit.rounded(withType: .percent)
             let totalProfitValue = totalProfit.rounded(withType: .gvt)
             
             investorsValueLabel.text = investorsCount.toString()
@@ -73,7 +73,14 @@ class ProgramDetailsForTableViewCellView: UIStackView {
             totalProfitTitleLabel.textColor = totalProfit >= 0 ? UIColor.Cell.title : UIColor.Font.red
             
             balanceCurrencyLabel.text = currency
+            if let currencyType = CurrencyType(currency: currency) {
+                balanceCurrencyLabel.currencyType = currencyType
+            }
+            
             profitCurrencyLabel.text = Constants.currency
+            if let currencyType = CurrencyType(currency: Constants.currency) {
+                profitCurrencyLabel.currencyType = currencyType
+            }
         }
     }
 }

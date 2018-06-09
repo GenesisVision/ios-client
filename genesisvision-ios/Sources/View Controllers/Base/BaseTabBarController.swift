@@ -18,7 +18,6 @@ class BaseTabBarController: UITabBarController {
         
         showNewVersionAlertIfNeeded(self)
         showTwoFactorEnableAlertIfNeeded(self) { (enable) in
-            //TODO: ???
         }
     }
 

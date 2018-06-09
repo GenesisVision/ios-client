@@ -59,8 +59,7 @@ class WalletDepositViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction func copyButtonAction(_ sender: UIButton) {
-        showProgressHUD(withNetworkActivity: false)
-        
+        showProgressHUD()
         viewModel.copy { [weak self] (result) in
             self?.showSuccessHUD()
         }

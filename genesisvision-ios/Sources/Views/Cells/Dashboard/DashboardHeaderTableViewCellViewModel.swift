@@ -26,5 +26,7 @@ extension DashboardHeaderTableViewCellViewModel: CellViewModel {
         if let totalPortfolioAmount = investorDashboard.totalPortfolioAmount {
             cell.portfolioValueLabel.amountValue = totalPortfolioAmount
         }
+        
+        
     }
 }

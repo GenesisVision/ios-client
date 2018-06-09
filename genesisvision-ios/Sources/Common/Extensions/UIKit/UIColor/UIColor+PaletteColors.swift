@@ -45,6 +45,11 @@ extension UIColor {
         static var numpadBackground: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 0.25) }
         static var unselected: UIColor { return #colorLiteral(red: 0.7411764706, green: 0.9098039216, blue: 0.9019607843, alpha: 1) }
         static var separator: UIColor { return #colorLiteral(red: 0.4901960784, green: 0.5764705882, blue: 0.6, alpha: 0.5) }
+        
+        static var usdColor: UIColor { return #colorLiteral(red: 0.5215686275, green: 0.7333333333, blue: 0.3960784314, alpha: 1) }                                //85bb65
+        static var eurColor: UIColor { return #colorLiteral(red: 0, green: 0.2, blue: 0.6, alpha: 1) }                                //003399
+        static var btcColor: UIColor { return #colorLiteral(red: 0.968627451, green: 0.5764705882, blue: 0.1019607843, alpha: 1) }                                //f7931a
+        static var ethColor: UIColor { return #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.2392156863, alpha: 1) }                                //3C3C3D
     }
     
     static var primary: UIColor { return Common.primary }
@@ -127,6 +132,15 @@ extension UIColor {
         
         static var gray: UIColor { return Common.silver }
         static var numpadBackground: UIColor { return Common.numpadBackground }
+    }
+    
+    struct Currency {
+        static var eur: UIColor { return Common.eurColor }
+        static var usd: UIColor { return Common.usdColor }
+        
+        static var eth: UIColor { return Common.ethColor }
+        static var btc: UIColor { return Common.btcColor }
+        static var gvt: UIColor { return Common.primary }
     }
     
     struct Slider {

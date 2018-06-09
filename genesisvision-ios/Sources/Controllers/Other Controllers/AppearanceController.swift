@@ -8,6 +8,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import PKHUD
+
 #if DEBUG
 import SimulatorStatusMagic
 #endif
@@ -43,6 +45,9 @@ struct AppearanceController {
         setupPlateCell()
         setupShadowView()
         setupEasyTipView()
+        
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
     }
     
     // NavigationBar

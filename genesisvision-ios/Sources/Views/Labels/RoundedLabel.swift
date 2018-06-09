@@ -48,11 +48,51 @@ class RoundedLabel: UILabel {
 
 class CurrencyLabel: RoundedLabel {
 
+    var currencyType: CurrencyType = .gvt {
+        didSet {
+            var currencyColor = UIColor.Currency.gvt.cgColor
+            
+            switch currencyType {
+            case .gvt:
+                currencyColor = UIColor.Currency.gvt.cgColor
+            case .btc:
+                currencyColor = UIColor.Currency.btc.cgColor
+            case .eth:
+                currencyColor = UIColor.Currency.eth.cgColor
+            case .eur:
+                currencyColor = UIColor.Currency.eur.cgColor
+            case .usd:
+                currencyColor = UIColor.Currency.usd.cgColor
+            default:
+                break
+            }
+            
+            layer.backgroundColor = currencyColor
+        }
+    }
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.backgroundColor = UIColor.Font.primary.cgColor
+        var currencyColor = UIColor.Currency.gvt.cgColor
+        
+        switch currencyType {
+        case .gvt:
+            currencyColor = UIColor.Currency.gvt.cgColor
+        case .btc:
+            currencyColor = UIColor.Currency.btc.cgColor
+        case .eth:
+            currencyColor = UIColor.Currency.eth.cgColor
+        case .eur:
+            currencyColor = UIColor.Currency.eur.cgColor
+        case .usd:
+            currencyColor = UIColor.Currency.usd.cgColor
+        default:
+            break
+        }
+        
+        layer.backgroundColor = currencyColor
         textColor = UIColor.Font.white
     }
 }

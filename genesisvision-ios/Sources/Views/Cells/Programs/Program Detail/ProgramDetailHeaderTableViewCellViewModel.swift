@@ -36,7 +36,8 @@ extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
             cell.managerLabel.text = "by " + username
         }
         
-        if let currency = investmentProgramDetails.currency {
+        if let currency = investmentProgramDetails.currency, let сurrencyType = CurrencyType(currency: currency) {
+            cell.currencyLabel.currencyType = сurrencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         

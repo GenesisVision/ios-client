@@ -21,24 +21,15 @@ extension Double {
     }
     
     func rounded(withType type: CurrencyType) -> Double {
-        return rounded(toPlaces: type.rawValue)
+        return rounded(toPlaces: type.currencyLenght)
     }
     
     func rounded(withCurrency currencyValue: String?) -> Double {
-        guard let currencyValue = currencyValue, let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue) else {
-            return rounded(withType: .other)
+        guard let currencyValue = currencyValue, let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else {
+            return rounded(withType: .usd)
         }
         
-        switch currency {
-        case .usd, .eur:
-            return rounded(withType: .other)
-        case .eth, .btc:
-            return rounded(withType: .crypto)
-        case .gvt:
-            return rounded(withType: .gvt)
-        default:
-            return rounded(withType: .other)
-        }
+        return rounded(withType: currencyType)
     }
     
     func formatPoints() -> String {

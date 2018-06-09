@@ -15,7 +15,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     // MARK: - TextFields
     @IBOutlet var codeTextField: DesignableUITextField! {
         didSet {
-            codeTextField.placeholder = "Two factor code"
+            codeTextField.placeholder = "Two Factor Code"
             codeTextField.font = UIFont.getFont(.regular, size: 18)
             codeTextField.setClearButtonWhileEditing()
             codeTextField.delegate = self
@@ -24,7 +24,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.placeholder = "Password"
+            passwordTextField.placeholder = "Your Password"
             passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
@@ -34,9 +34,9 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     @IBOutlet weak var recoveryCodeStackView: UIStackView! {
         didSet {
             recoveryCodeStackView.isHidden = true
-            //TODO: Add recovery code to disable method to api
         }
     }
+    
     @IBOutlet weak var recoveryCodeSwitch: UISwitch!
     
     // MARK: - Buttons

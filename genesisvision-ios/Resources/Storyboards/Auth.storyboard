@@ -128,7 +128,7 @@
                                 </constraints>
                             </stackView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eCq-qk-y97">
-                                <rect key="frame" x="255" y="264" width="51" height="31"/>
+                                <rect key="frame" x="253" y="264" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="49" id="lWO-m9-77U"/>
                                     <constraint firstAttribute="height" constant="31" id="zqG-bp-LzN"/>
@@ -140,7 +140,7 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recovery code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xjf-aI-ePr">
-                                <rect key="frame" x="16" y="264" width="231" height="31"/>
+                                <rect key="frame" x="16" y="264" width="229" height="31"/>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
                                 <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -344,13 +344,13 @@
                         <constraints>
                             <constraint firstItem="0mc-Cd-1eN" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" id="50X-7t-Ifg"/>
                             <constraint firstItem="DDW-jq-SUh" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" constant="32" id="CwS-4a-Si3"/>
+                            <constraint firstItem="eCq-qk-y97" firstAttribute="trailing" secondItem="jYv-as-zDF" secondAttribute="trailing" constant="-2" id="D2R-3X-Q0N"/>
                             <constraint firstItem="jYv-as-zDF" firstAttribute="leading" secondItem="kyw-PV-myt" secondAttribute="leading" constant="16" id="Hae-PZ-uop"/>
                             <constraint firstItem="0mc-Cd-1eN" firstAttribute="top" secondItem="jYv-as-zDF" secondAttribute="bottom" constant="8" id="MFR-kM-nCf"/>
                             <constraint firstItem="DDW-jq-SUh" firstAttribute="top" secondItem="kyw-PV-myt" secondAttribute="top" constant="16" id="Mm7-kl-F3n"/>
                             <constraint firstItem="eCq-qk-y97" firstAttribute="leading" secondItem="xjf-aI-ePr" secondAttribute="trailing" constant="8" id="PQJ-te-wFe"/>
                             <constraint firstItem="xjf-aI-ePr" firstAttribute="height" secondItem="eCq-qk-y97" secondAttribute="height" id="Qtv-8v-JjL"/>
                             <constraint firstItem="Rot-vN-3mT" firstAttribute="top" secondItem="pkW-s3-nEG" secondAttribute="bottom" id="TUJ-A9-Zkf"/>
-                            <constraint firstItem="eCq-qk-y97" firstAttribute="trailing" secondItem="jYv-as-zDF" secondAttribute="trailing" id="Uz9-ey-ndK"/>
                             <constraint firstItem="kyw-PV-myt" firstAttribute="bottom" secondItem="0mc-Cd-1eN" secondAttribute="bottom" id="Xce-hd-b1l"/>
                             <constraint firstItem="kyw-PV-myt" firstAttribute="trailing" secondItem="jYv-as-zDF" secondAttribute="trailing" constant="16" id="dhl-My-6AL"/>
                             <constraint firstItem="xjf-aI-ePr" firstAttribute="centerY" secondItem="eCq-qk-y97" secondAttribute="centerY" id="egb-xm-WUC"/>
@@ -857,7 +857,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Deh-vj-w1T">
-                                        <rect key="frame" x="0.0" y="486" width="320" height="52"/>
+                                        <rect key="frame" x="0.0" y="478" width="320" height="52"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POc-v5-peN">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="14"/>
@@ -887,7 +887,7 @@
                                 <constraints>
                                     <constraint firstItem="VSN-24-ISa" firstAttribute="leading" secondItem="zJc-VC-ldM" secondAttribute="leading" id="0eM-WB-5bM"/>
                                     <constraint firstItem="Deh-vj-w1T" firstAttribute="leading" secondItem="zJc-VC-ldM" secondAttribute="leading" id="1cU-OW-RC1"/>
-                                    <constraint firstItem="Deh-vj-w1T" firstAttribute="top" secondItem="xDV-h8-BRx" secondAttribute="bottom" constant="32" id="4gW-Nz-UfQ"/>
+                                    <constraint firstItem="Deh-vj-w1T" firstAttribute="top" secondItem="xDV-h8-BRx" secondAttribute="bottom" constant="24" id="4gW-Nz-UfQ"/>
                                     <constraint firstItem="xDV-h8-BRx" firstAttribute="width" secondItem="ofa-0r-FaI" secondAttribute="height" multiplier="4.95" id="KBa-LL-tQ6"/>
                                     <constraint firstAttribute="trailing" secondItem="CUX-aH-6yE" secondAttribute="trailing" constant="47" id="KgY-OP-ltP"/>
                                     <constraint firstItem="CUX-aH-6yE" firstAttribute="top" secondItem="VSN-24-ISa" secondAttribute="bottom" constant="8" id="Njt-JQ-JUl"/>

@@ -56,7 +56,8 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.profitTitleLabel.text = "MY PROFIT"
         
-        if let currency = investmentProgram.currency {
+        if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: currency) {
+            cell.currencyLabel.currencyType = currencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         

@@ -18,7 +18,7 @@ struct WalletHeaderTableViewCellViewModel {
 extension WalletHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletHeaderTableViewCell) {
         cell.balanceLabel.text = balance.rounded(withType: .gvt).toString()
-        cell.usdBalanceLabel.text = usdBalance.rounded(withType: .other).toString(currency: true)
+        cell.usdBalanceLabel.text = usdBalance.rounded(withType: .usd).toString(currency: true)
         cell.delegate = delegate
     }
 }

@@ -71,9 +71,11 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
                 self?.hideAll()
                 switch result {
                 case .success:
-                    self?.headerView.setup(with: self?.viewModel.getAvatarURL())
-                    self?.headerView.isHidden = false
-                    self?.reloadData()
+                    DispatchQueue.main.async {
+                        self?.headerView.setup(with: self?.viewModel.getAvatarURL())
+                        self?.headerView.isHidden = false
+                        self?.reloadData()
+                    }
                 case .failure(let errorType):
                     ErrorHandler.handleError(with: errorType, viewController: self)
                 }
@@ -84,8 +86,10 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             self?.hideAll()
             switch result {
             case .success:
-                guard let twoFactorEnabled = self?.viewModel.twoFactorModel?.twoFactorEnabled else { return }
-               self?.headerView.twoFactorEnable = twoFactorEnabled
+                DispatchQueue.main.async {
+                    guard let twoFactorEnabled = self?.viewModel.twoFactorModel?.twoFactorEnabled else { return }
+                    self?.headerView.twoFactorEnable = twoFactorEnabled
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }

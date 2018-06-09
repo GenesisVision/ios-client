@@ -208,7 +208,6 @@ extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
     }
     
     func updateChart(with type: ChartDurationType) {
-        showProgressHUD()
         viewModel.updateChart(with: type) { [weak self] (result) in
             self?.hideAll()
             self?.reloadData()

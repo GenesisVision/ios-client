@@ -32,7 +32,7 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBOutlet var balanceCurrencyLabel: UILabel!
     @IBOutlet var exchangedAvailableToInvestLabel: UILabel!
-    @IBOutlet var exchangedBalanceCurrencyLabel: UILabel!
+    @IBOutlet var exchangedBalanceCurrencyLabel: CurrencyLabel!
     
     @IBOutlet var amountLabel: AmountLabel! {
         didSet {
@@ -42,7 +42,7 @@ class ProgramInvestViewController: BaseViewController {
     }
     @IBOutlet var amountCurrencyLabel: UILabel!
     @IBOutlet var exchangedAmountLabel: UILabel!
-    @IBOutlet var exchangedAmountCurrencyLabel: UILabel!
+    @IBOutlet var exchangedAmountCurrencyLabel: CurrencyLabel!
     
     // MARK: - Buttons
     @IBOutlet var investButton: ActionButton!
@@ -122,6 +122,11 @@ class ProgramInvestViewController: BaseViewController {
         self.exchangedBalanceCurrencyLabel.text = viewModel.currency
         self.amountCurrencyLabel.text = "GVT"
         self.exchangedAmountCurrencyLabel.text = viewModel.currency
+        
+        if let currencyType = CurrencyType(currency: viewModel.currency) {
+            self.exchangedBalanceCurrencyLabel.currencyType = currencyType
+            self.exchangedAmountCurrencyLabel.currencyType = currencyType
+        }
     }
     
     private func investMethod() {

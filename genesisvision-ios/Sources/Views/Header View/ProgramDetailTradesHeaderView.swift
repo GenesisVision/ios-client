@@ -27,6 +27,9 @@ class ProgramDetailTradesHeaderView: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = UIColor.BaseView.bg
+        
+        dateOpenLabel.isHidden = false
+        priceOpenLabel.isHidden = false
     }
     
     // MARK: - Public methods

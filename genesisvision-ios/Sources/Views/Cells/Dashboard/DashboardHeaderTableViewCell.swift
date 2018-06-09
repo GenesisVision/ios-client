@@ -11,6 +11,12 @@ import UIKit
 class DashboardHeaderTableViewCell: UITableViewCell {
 
     // MARK: - Labels
+    @IBOutlet var portfolioProfitCurrencyLabel: CurrencyLabel! {
+        didSet {
+            portfolioProfitCurrencyLabel.currencyType = .gvt
+        }
+    }
+    
     @IBOutlet var portfolioProfitLabel: BalanceLabel! {
         didSet {
             portfolioProfitLabel.textColor = UIColor.Header.title
@@ -23,6 +29,12 @@ class DashboardHeaderTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet var portfolioInvestedCurrencyLabel: CurrencyLabel! {
+        didSet {
+            portfolioInvestedCurrencyLabel.currencyType = .gvt
+        }
+    }
+    
     @IBOutlet var portfolioInvestedLabel: BalanceLabel! {
         didSet {
             portfolioInvestedLabel.textColor = UIColor.Header.title
@@ -32,6 +44,12 @@ class DashboardHeaderTableViewCell: UITableViewCell {
     @IBOutlet var portfolioInvestedTitleLabel: UILabel! {
         didSet {
             portfolioInvestedTitleLabel.textColor = UIColor.Header.subtitle
+        }
+    }
+    
+    @IBOutlet var portfolioValueCurrencyLabel: CurrencyLabel! {
+        didSet {
+            portfolioValueCurrencyLabel.currencyType = .usd
         }
     }
     

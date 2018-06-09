@@ -99,6 +99,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
         addSubview(markerView)
         
         hideMarker()
+        hideHUD()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -127,7 +128,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
         print("Segment at index \(sender.selectedSegmentIndex)  selected")
 
         hideMarker()
-        
+        showProgressHUD()
         if let type = ChartDurationType(rawValue: sender.selectedSegmentIndex) {
             delegate?.updateChart(with: type)
         }

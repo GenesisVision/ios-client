@@ -144,7 +144,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXU-Mv-kz6">
-                                                        <rect key="frame" x="175.33333333333331" y="176" width="26.333333333333343" height="26"/>
+                                                        <rect key="frame" x="165.33333333333331" y="166" width="36.333333333333343" height="36"/>
                                                         <color key="backgroundColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="QXU-Mv-kz6" secondAttribute="height" multiplier="1:1" id="Rc8-Of-Gc3"/>
@@ -163,7 +163,7 @@
                                                     <constraint firstItem="gxQ-Fb-cSW" firstAttribute="top" secondItem="87K-BA-J3j" secondAttribute="top" id="IN5-Ud-wIg"/>
                                                     <constraint firstItem="QXU-Mv-kz6" firstAttribute="trailing" secondItem="gxQ-Fb-cSW" secondAttribute="trailing" id="KO9-53-5hh"/>
                                                     <constraint firstAttribute="width" secondItem="87K-BA-J3j" secondAttribute="height" multiplier="1:1" id="TqX-X8-OFh"/>
-                                                    <constraint firstItem="QXU-Mv-kz6" firstAttribute="width" secondItem="87K-BA-J3j" secondAttribute="height" multiplier="16:123" id="UM9-Wh-nsS"/>
+                                                    <constraint firstItem="QXU-Mv-kz6" firstAttribute="width" secondItem="87K-BA-J3j" secondAttribute="height" multiplier="9:50" id="dfK-w8-xcD"/>
                                                     <constraint firstItem="8la-BF-slW" firstAttribute="top" secondItem="gxQ-Fb-cSW" secondAttribute="top" constant="-8" id="pxS-FC-3ku"/>
                                                     <constraint firstAttribute="trailing" secondItem="gxQ-Fb-cSW" secondAttribute="trailing" id="wkx-Dk-isf"/>
                                                 </constraints>

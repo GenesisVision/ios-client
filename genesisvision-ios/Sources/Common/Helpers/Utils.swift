@@ -42,22 +42,9 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
 
 func getDecimalCount(for currencyValue: String?) -> Int {
     guard let currencyValue = currencyValue,
-        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue) else { return 2 }
-    
-    var currencyType: CurrencyType = .gvt
-    
-    switch currency {
-    case .usd, .eur:
-        currencyType = .other
-    case .eth, .btc:
-        currencyType = .crypto
-    case .gvt:
-        currencyType = .gvt
-    default:
-        currencyType = .other
-    }
-    
-    return currencyType.rawValue
+        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else { return 2 }
+
+    return currencyType.currencyLenght
 }
 
 enum LineStyle {
@@ -175,7 +162,6 @@ func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
         viewController.showNewVersionAlert(lastVersion)
     })
 }
-
 
 func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
     AuthManager.getTwoFactorStatus(completion: { (model) in

@@ -54,7 +54,8 @@ extension TournamentTableViewCellViewModel: CellViewModel {
             cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
         }
         
-        if let currency = investmentProgram.currency {
+        if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: Constants.currency) {
+            cell.currencyLabel.currencyType = currencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         

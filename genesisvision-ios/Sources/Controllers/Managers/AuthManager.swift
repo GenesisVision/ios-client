@@ -123,6 +123,10 @@ class AuthManager {
     }
     
     static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus?) -> Void, completionError: @escaping CompletionBlock) {
+        if let twoFactorStatus = twoFactorStatus {
+            completion(twoFactorStatus)
+        }
+        
         TwoFactorDataProvider.auth2faGetStatus(completion: { (viewModel) in
             if viewModel != nil  {
                 twoFactorStatus = viewModel
