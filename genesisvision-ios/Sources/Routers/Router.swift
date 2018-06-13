@@ -269,7 +269,7 @@ extension Router {
     
     func goToSecond() {
         popViewController(animated: false)
-        popViewController(animated: true)
+        popViewController(animated: false)
     }
     
     func goToRoot(animated: Bool = true) {

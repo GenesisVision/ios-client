@@ -29,6 +29,7 @@ final class ProgramInvestSuccessViewModel: InfoViewModel {
     }
     
     func goBack() {
-        router.goToSecond()
+        router.closeVC()
+        router.goToBack(animated: false)
     }
 }

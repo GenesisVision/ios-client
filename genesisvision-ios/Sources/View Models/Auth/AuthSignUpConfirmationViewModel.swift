@@ -25,6 +25,7 @@ final class AuthSignUpConfirmationViewModel: InfoViewModel {
     }
     
     func goBack() {
-        router.goToRoot()
+        router.closeVC()
+        router.goToRoot(animated: false)
     }
 }

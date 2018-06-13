@@ -124,7 +124,7 @@ extension AuthTwoFactorConfirmationViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text, string != "" else { return true }
+        guard textField == codeTextField, let text = textField.text, string != "" else { return true }
         
         if text.count == viewModel.numbersLimit - 1 {
             textField.text?.append(string)

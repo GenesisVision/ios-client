@@ -24,6 +24,6 @@ class ProgramInvestRouter: Router {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router, investedAmount: investedAmount)
-        navigationController?.pushViewController(viewController, animated: true)
+        present(viewController: viewController)
     }
 }

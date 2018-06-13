@@ -25,6 +25,6 @@ class SignUpRouter: Router {
         guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthSignUpConfirmationViewModel(withRouter: router)
-        navigationController?.pushViewController(viewController, animated: true)
+        present(viewController: viewController)
     }
 }

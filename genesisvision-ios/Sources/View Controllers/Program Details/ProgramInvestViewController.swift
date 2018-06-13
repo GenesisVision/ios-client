@@ -32,7 +32,7 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBOutlet var balanceCurrencyLabel: UILabel!
     @IBOutlet var exchangedAvailableToInvestLabel: UILabel!
-    @IBOutlet var exchangedBalanceCurrencyLabel: CurrencyLabel!
+    @IBOutlet var exchangedBalanceCurrencyLabel: UILabel!
     
     @IBOutlet var amountLabel: AmountLabel! {
         didSet {
@@ -124,7 +124,6 @@ class ProgramInvestViewController: BaseViewController {
         self.exchangedAmountCurrencyLabel.text = viewModel.currency
         
         if let currencyType = CurrencyType(currency: viewModel.currency) {
-            self.exchangedBalanceCurrencyLabel.currencyType = currencyType
             self.exchangedAmountCurrencyLabel.currencyType = currencyType
         }
     }
