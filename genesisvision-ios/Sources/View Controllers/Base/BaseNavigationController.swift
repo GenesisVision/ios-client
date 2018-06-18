@@ -10,7 +10,7 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
-    var shadowView: ShadowView!
+//    var shadowView: ShadowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +22,13 @@ class BaseNavigationController: UINavigationController {
         navigationBar.isTranslucent = false
         navigationBar.tintColor = UIColor.NavBar.colorScheme().tintColor
         
-        shadowView = ShadowView()
+//        shadowView = ShadowView()
 //        view.insertSubview(shadowView, belowSubview: navigationBar)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        shadowView.frame = navigationBar.frame
+//        shadowView.frame = navigationBar.frame
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

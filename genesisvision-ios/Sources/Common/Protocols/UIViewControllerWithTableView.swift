@@ -13,13 +13,38 @@ protocol UIViewControllerWithTableView {
     var refreshControl: UIRefreshControl! { get }
 }
 
+protocol Hidable {
+    func hideAll()
+}
+
+extension Hidable where Self: UIViewController {
+    func hideAll() {
+        hideHUD()
+    }
+}
+
 protocol UIViewControllerWithFetching {
     var fetchMoreActivityIndicator: UIActivityIndicatorView! { get }
     
     func updateData()
+    func setupPullToRefresh(title: String?)
     func pullToRefresh()
     func fetch()
     func fetchMore()
+    
+    func showInfiniteIndicator(value: Bool)
+}
+
+extension UIViewControllerWithFetching where Self: UITableViewController {
+    func showInfiniteIndicator(value: Bool) {
+        guard value, fetchMoreActivityIndicator != nil else {
+            tableView.tableFooterView = UIView()
+            return
+        }
+        
+        fetchMoreActivityIndicator.startAnimating()
+        tableView.tableFooterView = fetchMoreActivityIndicator
+    }
 }
 
 protocol UIViewControllerWithBottomView {

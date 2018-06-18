@@ -119,6 +119,10 @@ extension CurrencyType {
 final class Constants {
     struct Urls {
         static let feedbackWebAddress = "https://feedback.genesis.vision"
+        static let termsWebAddress = "https://genesis.vision/terms.html"
+        static let privacyWebAddress = "https://genesis.vision/privacy-policy.html"
+        
+        
         static let feedbackEmailAddress = "support@genesis.vision"
         static let appStoreAddress = "itms-apps://itunes.apple.com/app/genesis-vision-investor/id1369865290?mt=8"
     }

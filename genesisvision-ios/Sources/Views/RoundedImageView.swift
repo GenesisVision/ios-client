@@ -17,7 +17,6 @@ class RoundedImageView: UIImageView {
     var borderAlpha: CGFloat = 1.0
     
     override func draw(_ rect: CGRect) {
-        
         self.layer.cornerRadius = rect.size.width / 2
         self.layer.borderColor = customBorderColor.cgColor
         self.layer.borderWidth = borderSize

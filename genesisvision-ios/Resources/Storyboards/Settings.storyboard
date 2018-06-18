@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="VPk-7y-Byy">
+            <objects>
+                <tableViewController storyboardIdentifier="SettingsViewController" id="2Ya-3a-R2M" customClass="SettingsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="5SI-7c-rA4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="1hw-hx-IPR" customClass="UITableViewHeaderFooterView">
+                            <rect key="frame" x="0.0" y="497" width="375" height="93"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xva-v1-R6B">
+                                    <rect key="frame" x="0.0" y="-16" width="375" height="93"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="App version 1.0a (1021)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lmg-9i-SOi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="11"/>
+                                            <color key="textColor" red="0.80000000000000004" green="0.83529411760000005" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-vI-yn5">
+                                            <rect key="frame" x="0.0" y="50.5" width="375" height="42.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ip4-y4-ivL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="15.5"/>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <state key="normal" title="Terms and Conditions">
+                                                        <color key="titleColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="termsLinkButtonAction:" destination="2Ya-3a-R2M" eventType="touchUpInside" id="4wt-JK-QA4"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNX-Cc-EWf">
+                                                    <rect key="frame" x="0.0" y="27.5" width="375" height="15"/>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <state key="normal" title="Privacy Policy">
+                                                        <color key="titleColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="privacyLinkButtonAction:" destination="2Ya-3a-R2M" eventType="touchUpInside" id="EPS-ES-BU6"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Xva-v1-R6B" firstAttribute="leading" secondItem="1hw-hx-IPR" secondAttribute="leading" id="1hC-KS-ebw"/>
+                                <constraint firstItem="Xva-v1-R6B" firstAttribute="top" secondItem="1hw-hx-IPR" secondAttribute="top" constant="-16" id="84u-dx-Haz"/>
+                                <constraint firstAttribute="bottom" secondItem="Xva-v1-R6B" secondAttribute="bottom" constant="16" id="Iob-hz-VyZ"/>
+                                <constraint firstAttribute="trailing" secondItem="Xva-v1-R6B" secondAttribute="trailing" id="fMS-qo-AUE"/>
+                            </constraints>
+                        </view>
+                        <sections>
+                            <tableViewSection id="Kgj-IH-PKR">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="72" id="KXT-To-6wG" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KXT-To-6wG" id="88n-E5-wXq">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="72"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="gv_logo" translatesAutoresizingMaskIntoConstraints="NO" id="beH-g7-9Tg" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="10.5" width="50" height="50.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="beH-g7-9Tg" secondAttribute="height" multiplier="1:1" id="4X3-vU-Ikm"/>
+                                                        <constraint firstAttribute="height" constant="50" id="LLz-vc-nMP"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bVN-K4-MtS">
+                                                    <rect key="frame" x="82" y="8" width="251" height="55.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45.5" height="24.5"/>
+                                                            <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                            <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-GR-3Fw">
+                                                            <rect key="frame" x="0.0" y="32.5" width="36" height="23"/>
+                                                            <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
+                                                            <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="centerY" secondItem="88n-E5-wXq" secondAttribute="centerY" id="9PC-0D-3uV"/>
+                                                <constraint firstItem="bVN-K4-MtS" firstAttribute="leading" secondItem="beH-g7-9Tg" secondAttribute="trailing" constant="12" id="NAT-0Z-hLU"/>
+                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="88n-E5-wXq" secondAttribute="top" constant="12" id="RJu-ID-tJd"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="beH-g7-9Tg" secondAttribute="bottom" constant="12" id="Tho-Fn-rg0"/>
+                                                <constraint firstAttribute="bottom" secondItem="bVN-K4-MtS" secondAttribute="bottom" constant="8" id="crE-sm-PwB"/>
+                                                <constraint firstAttribute="trailing" secondItem="bVN-K4-MtS" secondAttribute="trailing" constant="8" id="gI0-yw-Mcs"/>
+                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="leading" secondItem="88n-E5-wXq" secondAttribute="leadingMargin" constant="4" id="q90-Bb-hHA"/>
+                                                <constraint firstItem="bVN-K4-MtS" firstAttribute="top" secondItem="88n-E5-wXq" secondAttribute="top" constant="8" id="w40-27-kcp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="b8S-Iz-jbk">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Blk-BK-wBO" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="143" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Blk-BK-wBO" id="eg7-hM-M5p">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xj-P9-IGw">
+                                                    <rect key="frame" x="20" y="-0.5" width="305" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="yDB-ta-e1y"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8Xj-P9-IGw" secondAttribute="trailing" constant="8" id="5H9-Bs-T97"/>
+                                                <constraint firstItem="8Xj-P9-IGw" firstAttribute="leading" secondItem="eg7-hM-M5p" secondAttribute="leadingMargin" constant="4" id="M6w-yq-d7n"/>
+                                                <constraint firstItem="8Xj-P9-IGw" firstAttribute="centerY" secondItem="eg7-hM-M5p" secondAttribute="centerY" id="j9P-Sa-UQQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pht-tP-VVL" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="187" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pht-tP-VVL" id="obL-gB-rDb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGe-Ob-FG1">
+                                                    <rect key="frame" x="306" y="6.5" width="51" height="31"/>
+                                                    <color key="tintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="passcodeSwitchChangedAction:" destination="2Ya-3a-R2M" eventType="valueChanged" id="HR7-Iw-XDx"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XO4-yi-kWb">
+                                                    <rect key="frame" x="20" y="0.0" width="278" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="uJb-aq-hbK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vGe-Ob-FG1" firstAttribute="centerY" secondItem="obL-gB-rDb" secondAttribute="centerY" id="3py-FF-8PG"/>
+                                                <constraint firstItem="vGe-Ob-FG1" firstAttribute="leading" secondItem="XO4-yi-kWb" secondAttribute="trailing" constant="8" id="3ul-HC-74h"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vGe-Ob-FG1" secondAttribute="trailing" constant="4" id="8Cd-Zp-m2i"/>
+                                                <constraint firstItem="XO4-yi-kWb" firstAttribute="leading" secondItem="obL-gB-rDb" secondAttribute="leadingMargin" constant="4" id="8XD-iV-Uua"/>
+                                                <constraint firstItem="XO4-yi-kWb" firstAttribute="centerY" secondItem="obL-gB-rDb" secondAttribute="centerY" id="MfR-rE-6yd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tfs-ZH-Mmd" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="231" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tfs-ZH-Mmd" id="Txu-Rc-0N0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Af-sb-2YP">
+                                                    <rect key="frame" x="306" y="6.5" width="51" height="31"/>
+                                                    <color key="tintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="biometricIDSwitchChangedAction:" destination="2Ya-3a-R2M" eventType="valueChanged" id="yg7-Qg-sDI"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIG-jK-DeE">
+                                                    <rect key="frame" x="20" y="0.0" width="278" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="vBo-my-X1q"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="5Af-sb-2YP" secondAttribute="trailing" constant="4" id="KbQ-Fc-1nf"/>
+                                                <constraint firstItem="5Af-sb-2YP" firstAttribute="leading" secondItem="mIG-jK-DeE" secondAttribute="trailing" constant="8" id="Wab-Fq-HXq"/>
+                                                <constraint firstItem="mIG-jK-DeE" firstAttribute="centerY" secondItem="Txu-Rc-0N0" secondAttribute="centerY" id="jCX-my-wwe"/>
+                                                <constraint firstItem="5Af-sb-2YP" firstAttribute="centerY" secondItem="Txu-Rc-0N0" secondAttribute="centerY" id="xhs-65-HaI"/>
+                                                <constraint firstItem="mIG-jK-DeE" firstAttribute="leading" secondItem="Txu-Rc-0N0" secondAttribute="leadingMargin" constant="4" id="zCC-HS-m7U"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="5ho-iZ-Ot5" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="275" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ho-iZ-Ot5" id="PN5-Rj-van">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gwo-Me-1Wz">
+                                                    <rect key="frame" x="306" y="6.5" width="51" height="31"/>
+                                                    <color key="tintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="twoFactorSwitchChangedAction:" destination="2Ya-3a-R2M" eventType="valueChanged" id="Mzw-EV-21N"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two Factor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-6n-stu">
+                                                    <rect key="frame" x="20" y="0.0" width="278" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="hWN-F8-Bik"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gwo-Me-1Wz" firstAttribute="centerY" secondItem="PN5-Rj-van" secondAttribute="centerY" id="VmI-eF-UAv"/>
+                                                <constraint firstItem="gwo-Me-1Wz" firstAttribute="leading" secondItem="Tcz-6n-stu" secondAttribute="trailing" constant="8" id="Yhv-hg-SwH"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gwo-Me-1Wz" secondAttribute="trailing" constant="4" id="eAq-Ta-Sjs"/>
+                                                <constraint firstItem="Tcz-6n-stu" firstAttribute="leading" secondItem="PN5-Rj-van" secondAttribute="leadingMargin" constant="4" id="gA4-4Z-Jtx"/>
+                                                <constraint firstItem="Tcz-6n-stu" firstAttribute="centerY" secondItem="PN5-Rj-van" secondAttribute="centerY" id="uYe-lU-Mxi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="K4P-NV-KWm">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="abL-4O-wxA" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="355" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="abL-4O-wxA" id="Dgs-HR-Y9g">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6X-VG-nYG">
+                                                    <rect key="frame" x="20" y="0.0" width="335" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="67t-JW-bdx"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I6X-VG-nYG" firstAttribute="leading" secondItem="Dgs-HR-Y9g" secondAttribute="leading" constant="20" id="DQi-Xm-rOm"/>
+                                                <constraint firstAttribute="trailing" secondItem="I6X-VG-nYG" secondAttribute="trailing" constant="20" id="DSe-2T-K75"/>
+                                                <constraint firstItem="I6X-VG-nYG" firstAttribute="centerY" secondItem="Dgs-HR-Y9g" secondAttribute="centerY" id="ktZ-d3-8Mg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="NMe-w9-BZg">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eOe-QA-4m1" customClass="PlateTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="435" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eOe-QA-4m1" id="jYp-0O-Mgo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnJ-Fy-vvU">
+                                                    <rect key="frame" x="20" y="-8.5" width="335" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="tdX-HN-FaH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.87450980389999999" green="0.094117647060000004" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JnJ-Fy-vvU" firstAttribute="centerY" secondItem="jYp-0O-Mgo" secondAttribute="centerY" id="6XB-38-BiI"/>
+                                                <constraint firstItem="JnJ-Fy-vvU" firstAttribute="leading" secondItem="jYp-0O-Mgo" secondAttribute="leadingMargin" constant="4" id="8zJ-hn-gL1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JnJ-Fy-vvU" secondAttribute="trailing" constant="4" id="eHd-Kz-WvX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="2Ya-3a-R2M" id="Oc6-am-jZa"/>
+                            <outlet property="delegate" destination="2Ya-3a-R2M" id="L0G-GZ-vBV"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="biometricCell" destination="tfs-ZH-Mmd" id="BQJ-vI-urV"/>
+                        <outlet property="biometricIDSwitch" destination="5Af-sb-2YP" id="M4h-Lo-bLD"/>
+                        <outlet property="biometricIDTitleLabel" destination="mIG-jK-DeE" id="xJ0-DD-KSA"/>
+                        <outlet property="changePasswordCell" destination="Blk-BK-wBO" id="ZGl-QD-ubq"/>
+                        <outlet property="footerView" destination="1hw-hx-IPR" id="ESx-mS-fT4"/>
+                        <outlet property="passcodeCell" destination="pht-tP-VVL" id="pKh-j4-uhX"/>
+                        <outlet property="passcodeSwitch" destination="vGe-Ob-FG1" id="a28-fn-BAS"/>
+                        <outlet property="privacyLinkButton" destination="SNX-Cc-EWf" id="PX6-hp-CJj"/>
+                        <outlet property="profileEmailLabel" destination="ydq-GR-3Fw" id="N1o-Hu-njC"/>
+                        <outlet property="profileImageView" destination="beH-g7-9Tg" id="gsO-b8-6yN"/>
+                        <outlet property="profileNameLabel" destination="D9d-oA-imM" id="ZIy-Vv-cKH"/>
+                        <outlet property="termsLinkButton" destination="Ip4-y4-ivL" id="fHx-zM-HWN"/>
+                        <outlet property="twoFactorCell" destination="5ho-iZ-Ot5" id="hde-7Y-gDS"/>
+                        <outlet property="twoFactorSwitch" destination="gwo-Me-1Wz" id="YQh-lK-glh"/>
+                        <outlet property="versionLabel" destination="Lmg-9i-SOi" id="k5p-pq-ExK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U5w-5q-aux" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368.5" y="87.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gv_logo" width="96" height="96"/>
+    </resources>
+</document>

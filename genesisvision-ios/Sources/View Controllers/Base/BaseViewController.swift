@@ -10,11 +10,17 @@ import UIKit
 import DZNEmptyDataSet
 import MessageUI
 
-class BaseViewController: UIViewController {
-    
+class BaseViewController: UIViewController, Hidable {
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        commonSetup()
+    }
+}
+
+extension UIViewController {
+    func commonSetup() {
         view.backgroundColor = UIColor.BaseView.bg
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
     }
@@ -31,13 +37,9 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
                                                                    NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
     }
-    
-    func hideAll() {
-        hideHUD()
-    }    
 }
 
-extension BaseViewController: MFMailComposeViewControllerDelegate {
+extension UIViewController: MFMailComposeViewControllerDelegate {
     func sendEmailFeedback() {
         if MFMailComposeViewController.canSendMail() {
             let mailComposeViewController = configuredMailComposeViewController()
@@ -73,7 +75,7 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
                            cancelHandler: nil)
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
@@ -81,7 +83,7 @@ extension BaseViewController: MFMailComposeViewControllerDelegate {
 enum BottomViewType {
     case none, signIn, sort, filter, sortAndFilter, signInWithSortAndFilter
 }
-
+    
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
     // MARK: - Veriables
     var tableView: UITableView!
@@ -277,9 +279,9 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.tableFooterView = fetchMoreActivityIndicator
     }
     
-    override func hideAll() {
-        self.hideHUD()
-        self.refreshControl?.endRefreshing()
+    func hideAll() {
+        hideHUD()
+        refreshControl?.endRefreshing()
     }
     
     func setupPullToRefresh(title: String? = nil) {
@@ -411,5 +413,83 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
         }
         
         return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch).withAlignmentRectInsets(rectInsets)
+    }
+}
+
+class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable {
+    // MARK: - Veriables
+    var fetchMoreActivityIndicator: UIActivityIndicatorView!
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        commonSetup()
+        setupViews()
+    }
+    
+    // MARK: - Fetching
+    func updateData() {
+        showProgressHUD()
+        fetch()
+    }
+    
+    @objc func pullToRefresh() {
+        impactFeedback()
+    }
+    
+    func fetch() {
+        //Fetch first page
+    }
+    
+    func fetchMore() {
+        //Fetch next page
+    }
+    
+    func showInfiniteIndicator(value: Bool) {
+        guard value, fetchMoreActivityIndicator != nil else {
+            tableView.tableFooterView = UIView()
+            return
+        }
+        
+        fetchMoreActivityIndicator.startAnimating()
+        tableView.tableFooterView = fetchMoreActivityIndicator
+    }
+    
+    func hideAll() {
+        hideHUD()
+        refreshControl?.endRefreshing()
+    }
+    
+    func setupPullToRefresh(title: String? = nil) {
+        let tintColor = UIColor.primary
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        
+        if let title = title {
+            tableView.refreshControl?.attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        }
+        tableView.refreshControl?.tintColor = tintColor
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        
+    }
+    
+    private func setupViews() {
+        tableView.separatorStyle = .none
+        
+        fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
+        fetchMoreActivityIndicator.color = UIColor.primary
+        fetchMoreActivityIndicator.startAnimating()
+        tableView.tableFooterView = fetchMoreActivityIndicator
+        
+        tableView.separatorInset.left = 16.0
+        tableView.separatorInset.right = 16.0
+        
+        tableView.backgroundColor = UIColor.BaseView.bg
+        
+        refreshControl?.endRefreshing()
     }
 }

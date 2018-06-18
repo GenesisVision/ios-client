@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum FieldType: String, EnumCollection {
+enum ProfileFieldType: String, EnumCollection {
     case email = "Email"
     
     case firstName = "First Name"
@@ -35,16 +35,10 @@ final class ProfileViewModel {
     var title: String = "Profile"
     
     private var router: ProfileRouter!
-    public private(set) var twoFactorModel: TwoFactorStatus?
-    private var profileModel: ProfileFullViewModel? {
-        didSet {
-            setupCellViewModel()
-        }
-    }
-    
+    private var profileModel: ProfileFullViewModel?
     weak var textFieldDelegate: UITextFieldDelegate?
     
-    var rows: [FieldType] = [.email, .firstName, .middleName, .lastName, .birthday, .gender]
+    var rows: [ProfileFieldType] = [.email, .firstName, .middleName, .lastName, .birthday, .gender]
     
     var editableFields = [EditableField]()
     var pickedImage: UIImage?
@@ -52,7 +46,7 @@ final class ProfileViewModel {
     
     class EditableField {
         var text: String
-        var type: FieldType
+        var type: ProfileFieldType
         var placeholder: String
         var editable: Bool
         var selectable: Bool
@@ -61,7 +55,7 @@ final class ProfileViewModel {
         
         var isValid: (String) -> Bool
         
-        init(text: String, placeholder: String, editable: Bool, selectable: Bool, type: FieldType, keyboardType: UIKeyboardType?, textContentType: UITextContentType?, isValid: @escaping (String) -> Bool) {
+        init(text: String, placeholder: String, editable: Bool, selectable: Bool, type: ProfileFieldType, keyboardType: UIKeyboardType?, textContentType: UITextContentType?, isValid: @escaping (String) -> Bool) {
             self.text = text
             self.placeholder = placeholder
             self.editable = editable
@@ -93,15 +87,12 @@ final class ProfileViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProfileRouter, textFieldDelegate: UITextFieldDelegate) {
+    init(withRouter router: ProfileRouter, profileModel: ProfileFullViewModel, textFieldDelegate: UITextFieldDelegate) {
         self.router = router
         self.textFieldDelegate = textFieldDelegate
+        self.profileModel = profileModel
         
-        setup()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
+        setupCellViewModel()
     }
     
     // MARK: - Public methods
@@ -114,27 +105,6 @@ final class ProfileViewModel {
             
             completion(.failure(errorType: .apiError(message: nil)))
         }, completionError: completion)
-    }
-    
-    func fetchTwoFactorStatus(completion: @escaping CompletionBlock) {
-        AuthManager.getTwoFactorStatus(completion: { [weak self] (viewModel) in
-            if let twoFactorModel = viewModel {
-                self?.twoFactorModel = twoFactorModel
-                completion(.success)
-            }
-            
-            completion(.failure(errorType: .apiError(message: nil)))
-        }, completionError: completion)
-    }
-    
-    func getName() -> String {
-        guard let firstName = profileModel?.firstName,
-            let lastName = profileModel?.lastName
-            else { return "" }
-        
-        let username = firstName + " " + lastName
-        
-        return username
     }
     
     func getAvatarURL() -> URL? {
@@ -167,7 +137,7 @@ final class ProfileViewModel {
         case .fields:
             let field = editableFields[indexPath.row]
             return ProfileFieldTableViewCellViewModel(text: field.text, placeholder: field.placeholder, editable: field.editable, selectable: field.selectable, keyboardType: field.keyboardType, textContentType: field.textContentType, delegate: textFieldDelegate, valueChanged: { [weak self] (text) in
-                let type: FieldType = FieldType(rawValue: field.placeholder)!
+                let type: ProfileFieldType = ProfileFieldType(rawValue: field.placeholder)!
                 switch type {
                 case .firstName:
                     self?.profileModel?.firstName = text
@@ -198,15 +168,7 @@ final class ProfileViewModel {
     func saveProfile(completion: @escaping CompletionBlock) {
         saveProfileApi(completion: completion)
     }
-    
-    func changePassword() {
-        router.show(routeType: .changePassword)
-    }
-    
-    func enableTwoFactor(_ value: Bool) {
-        router.show(routeType: .enableTwoFactor(value))
-    }
-    
+
     func update(birthdate: Date?) {
         if let idx = editableFields.index(where: { $0.type == .birthday }) {
             guard let birthdate = birthdate else {
@@ -231,7 +193,7 @@ final class ProfileViewModel {
         }
     }
     
-    func didSelect(_ indexPath: IndexPath) -> FieldType? {
+    func didSelect(_ indexPath: IndexPath) -> ProfileFieldType? {
         guard profileState == .edit else {
             return nil
         }
@@ -246,36 +208,8 @@ final class ProfileViewModel {
         }
     }
     
-    // MARK: - Navigation
-    func signOut() {
-        clearData()
-        router.show(routeType: .signOut)
-    }
-    
-    
-    @objc private func signOutNotification(notification: Notification) {
-        NotificationCenter.default.removeObserver(self, name: .signOut, object: nil)
-        forceSignOut()
-    }
-    
     // MARK: -  Private methods
-    private func setup() {
-        NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
-        
-        fetchProfile { (result) in }
-    }
-    
-    private func clearData() {
-        AuthManager.signOut()
-        profileModel = nil
-    }
-    
-    private func forceSignOut() {
-        clearData()
-        router.show(routeType: .forceSignOut)
-    }
-    
-    private func getFields() -> [FieldType : String] {
+    private func getFields() -> [ProfileFieldType : String] {
         return [.email : profileModel?.email ?? "",
                 .firstName : profileModel?.firstName ?? "",
                 .middleName : profileModel?.middleName ?? "",
@@ -284,7 +218,7 @@ final class ProfileViewModel {
                 .gender : getGenderValue()]
     }
     
-    private func getKeyboardTypes(for fieldType: FieldType) -> UIKeyboardType {
+    private func getKeyboardTypes(for fieldType: ProfileFieldType) -> UIKeyboardType {
         switch fieldType {
         case .email:
             return .emailAddress
@@ -293,7 +227,7 @@ final class ProfileViewModel {
         }
     }
     
-    private func getTextContentTypes(for fieldType: FieldType) -> UITextContentType? {
+    private func getTextContentTypes(for fieldType: ProfileFieldType) -> UITextContentType? {
         switch fieldType {
         case .firstName:
             return .name
@@ -306,7 +240,7 @@ final class ProfileViewModel {
         }
     }
     
-    private func getEditable(for fieldType: FieldType) -> Bool {
+    private func getEditable(for fieldType: ProfileFieldType) -> Bool {
         guard profileState == .edit else {
             return false
         }
@@ -319,7 +253,7 @@ final class ProfileViewModel {
         }
     }
     
-    private func getSelectable(for fieldType: FieldType) -> Bool {
+    private func getSelectable(for fieldType: ProfileFieldType) -> Bool {
         guard profileState == .edit else {
             return false
         }
@@ -335,7 +269,7 @@ final class ProfileViewModel {
     private func setupCellViewModel() {
         var editableFields: [EditableField] = []
         
-        FieldType.allValues.forEach { (type) in
+        ProfileFieldType.allValues.forEach { (type) in
             let fields = getFields()
             let key = type.rawValue
             

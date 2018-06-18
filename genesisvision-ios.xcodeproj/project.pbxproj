@@ -181,6 +181,7 @@
 		5E87E765208F638E00141269 /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E764208F638E00141269 /* Tooltips.swift */; };
 		5E87E767208F64C200141269 /* TooltipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E766208F64C200141269 /* TooltipButton.swift */; };
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
+		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
 		5EA173CF20A081B800905253 /* ProgramsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CE20A081B800905253 /* ProgramsViewModel.swift */; };
 		5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D020A082AE00905253 /* TabmanViewModel.swift */; };
@@ -217,6 +218,10 @@
 		5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */; };
 		5EC0309620A5A786005CBA32 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309520A5A786005CBA32 /* PlatformManager.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
+		5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */; };
+		5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */; };
+		5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */; };
+		5EC7B88720D16093007720D1 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC7B88620D16093007720D1 /* LocalAuthentication.framework */; };
 		5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */; };
 		5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */; };
 		5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91A2091157500C83F23 /* ShadowView.swift */; };
@@ -604,6 +609,7 @@
 		5E87E764208F638E00141269 /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		5E87E766208F64C200141269 /* TooltipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipButton.swift; sourceTree = "<group>"; };
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA173CE20A081B800905253 /* ProgramsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsViewModel.swift; sourceTree = "<group>"; };
 		5EA173D020A082AE00905253 /* TabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanViewModel.swift; sourceTree = "<group>"; };
@@ -640,6 +646,10 @@
 		5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataProvider.swift; sourceTree = "<group>"; };
 		5EC0309520A5A786005CBA32 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
+		5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		5EC7B88620D16093007720D1 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCell.swift; sourceTree = "<group>"; };
 		5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCellAppearance.swift; sourceTree = "<group>"; };
 		5ED0C91A2091157500C83F23 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
@@ -865,6 +875,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EC7B88720D16093007720D1 /* LocalAuthentication.framework in Frameworks */,
 				03E5CEB1247FC0633F810102 /* Pods_genesisvision_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1177,6 +1188,30 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		5EC7B87D20D147D5007720D1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5EC7B88020D14C7E007720D1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5EC7B88320D15E89007720D1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		5EF058D320681F0A00373CBB /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1199,6 +1234,7 @@
 		B8DB3D95241F1BF35C1AA19C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5EC7B88620D16093007720D1 /* LocalAuthentication.framework */,
 				C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */,
 			);
 			name = Frameworks;
@@ -1667,6 +1703,7 @@
 				FC4C194C203051A800625795 /* Wallet */,
 				FC4C194D203051AF00625795 /* Dashboard */,
 				FC4C1949203050E400625795 /* Tournament */,
+				5EC7B88020D14C7E007720D1 /* Settings */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1740,6 +1777,7 @@
 				5E8340DB207E3279004A29F1 /* Program.storyboard */,
 				FC016C15203B0FD2006956FE /* Tournament.storyboard */,
 				FCC9DD5A200DFFB8008825EC /* Profile.storyboard */,
+				5E942E8820D7BA5A0069343C /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1820,6 +1858,7 @@
 		FCC9DD49200DFA5E008825EC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5EC7B87D20D147D5007720D1 /* Settings */,
 				FCC9DD76200E4CCF008825EC /* Base */,
 				5EA7A0F820A0B08B00D895FC /* Program Details */,
 				FCC9DD6F200E4C7E008825EC /* Programs */,
@@ -1862,6 +1901,7 @@
 		FCC9DD4E200DFA5E008825EC /* Routers */ = {
 			isa = PBXGroup;
 			children = (
+				5EC7B88320D15E89007720D1 /* Settings */,
 				5E33E3B220AB209700A0B9DE /* Program Details */,
 				FCA19A3A201AE34900157AD6 /* WelcomeRouter.swift */,
 				FCA19A24201AA8C000157AD6 /* Router.swift */,
@@ -2042,6 +2082,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
+				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
 				5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */,
@@ -2186,6 +2227,7 @@
 				FC14101B2030168100B71E7F /* NewParticipant.swift in Sources */,
 				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
 				5E18CEA120C566F1008FE5B5 /* PasswordModel.swift in Sources */,
+				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
 				5E18CE8120C566F1008FE5B5 /* NewTradeEvent.swift in Sources */,
@@ -2272,6 +2314,7 @@
 				FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */,
 				5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */,
 				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
+				5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
 				5E18CEC620C566F1008FE5B5 /* WalletInvestmentPrograms.swift in Sources */,
 				5E18CECB20C566F1008FE5B5 /* IOsAppVersion.swift in Sources */,
@@ -2397,6 +2440,7 @@
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
 				5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */,
+				5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */,
 				5E18CED120C566F1008FE5B5 /* TransactionsFilter.swift in Sources */,
 				5E18CEC320C566F1008FE5B5 /* WalletWithdrawRequestModel.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,

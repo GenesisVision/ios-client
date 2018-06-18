@@ -44,6 +44,8 @@ class PlateTableViewCell: UITableViewCell {
         }
     }
 
+    var highlighting: Bool = true
+    
     var roundType: RoundType = .all {
         didSet {
             if oldValue != roundType {
@@ -90,6 +92,7 @@ class PlateTableViewCell: UITableViewCell {
     }
 
     func updateSelection(shouldSelect: Bool) {
+        guard highlighting else { return }
         alpha = shouldSelect ? 0.8 : 1.0
     }
 

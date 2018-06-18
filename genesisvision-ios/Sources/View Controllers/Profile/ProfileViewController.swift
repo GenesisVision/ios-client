@@ -46,11 +46,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         barButtonItem.tintColor = UIColor.Font.primary
         return barButtonItem
     }
-    private var signOutButton: UIBarButtonItem! {
-        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_logout"), style: .done, target: self, action: #selector(signOutButtonAction(_:)))
-        return barButtonItem
-    }
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +58,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         super.viewWillAppear(animated)
         
         headerView.setup(with: viewModel.getAvatarURL())
+        headerView.isHidden = false
+        reloadData()
     }
     
     // MARK: - Private methods
@@ -81,23 +79,9 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
                 }
             }
         }
-        
-        viewModel.fetchTwoFactorStatus { [weak self] (result) in
-            self?.hideAll()
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    guard let twoFactorEnabled = self?.viewModel.twoFactorModel?.twoFactorEnabled else { return }
-                    self?.headerView.twoFactorEnable = twoFactorEnabled
-                }
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
     }
     
     private func setup() {
-        fetch()
         setupUI()
     }
     
@@ -133,8 +117,8 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     private func showProfileStateAction() {
-        navigationItem.leftBarButtonItem = editProfileButton
-        navigationItem.rightBarButtonItem = signOutButton
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = editProfileButton
         headerView.profileState = viewModel.profileState
         tableView.bounces = true
     }
@@ -294,26 +278,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
             }
         }
     }
-    
-    @IBAction func signOutButtonAction(_ sender: UIButton) {
-        hideKeyboard()
-        
-        showAlertWithTitle(title: nil, message: "Log out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
-            self?.viewModel.signOut()
-        }, cancelHandler: nil)
-    }
-    
-    @IBAction func changePasswordButtonAction(_ sender: UIButton) {
-        hideKeyboard()
-        
-        viewModel.changePassword()
-    }
-    
-    func enableTwoFactorButtonAction(_ value: Bool) {
-        hideKeyboard()
-        
-        viewModel.enableTwoFactor(value)
-    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -357,14 +321,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func chooseProfilePhotoDidPressOnPhoto(_ view: ProfileHeaderView) {
         takePhoto()
-    }
-    
-    func changePasswordButtonDidPress(_ sender: UIButton) {
-        changePasswordButtonAction(sender)
-    }
-    
-    func enableTwoFactorButtonDidPress(_ value: Bool) {
-        enableTwoFactorButtonAction(value)
     }
 }
 

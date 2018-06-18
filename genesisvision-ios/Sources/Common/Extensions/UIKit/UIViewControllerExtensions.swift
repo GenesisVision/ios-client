@@ -18,6 +18,7 @@ extension UIViewController {
         case program
         case launch
         case profile
+        case settings
         case programs
         case auth
         case wallet

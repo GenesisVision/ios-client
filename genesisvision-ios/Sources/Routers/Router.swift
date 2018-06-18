@@ -71,14 +71,14 @@ class Router {
         navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
         navigationController.tabBarItem.title = "WALLET"
         viewControllers.append(navigationController)
-        
-        if let profileViewController = ProfileViewController.storyboardInstance(name: .profile) {
-            navigationController = BaseNavigationController(rootViewController: profileViewController)
-            let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
-            profileViewController.viewModel = ProfileViewModel(withRouter: router, textFieldDelegate: profileViewController)
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_profile_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_profile_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "PROFILE"
+
+        if let settingsViewController = SettingsViewController.storyboardInstance(name: .settings) {
+            navigationController = BaseNavigationController(rootViewController: settingsViewController)
+            let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
+            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
+            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.title = "SETTINGS"
             viewControllers.append(navigationController)
         }
         
