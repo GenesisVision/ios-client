@@ -9,9 +9,19 @@
 import UIKit
 import SmileLock
 
+enum PasscodeActionType {
+    case unlocked, enabled, disabled
+}
+
+protocol PasscodeProtocol: class {
+    func passcodeAction(_ action: PasscodeActionType)
+}
+
 class PasscodeViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: PasscodeViewModel!
+    
+    weak var delegate: PasscodeProtocol?
     
     var bgColor: UIColor = .clear
     var passcodeState: PasscodeState = .openApp {
@@ -148,9 +158,14 @@ private extension PasscodeViewController {
                 return
             }
             viewModel.updatePasscode(newPasscode)
+            delegate?.passcodeAction(.enabled)
             dismiss(animated: true, completion: nil)
         case .disable:
             viewModel.updatePasscode(nil)
+            delegate?.passcodeAction(.disabled)
+            dismiss(animated: true, completion: nil)
+        case .lock:
+            delegate?.passcodeAction(.unlocked)
             dismiss(animated: true, completion: nil)
         default:
             dismiss(animated: true, completion: nil)

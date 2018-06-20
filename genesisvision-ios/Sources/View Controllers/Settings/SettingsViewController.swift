@@ -285,3 +285,9 @@ extension SettingsViewController {
         return 1
     }
 }
+
+extension SettingsViewController: PasscodeProtocol {
+    func passcodeAction(_ action: PasscodeActionType) {
+        setupSecurity()
+    }
+}

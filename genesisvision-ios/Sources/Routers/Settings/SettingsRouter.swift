@@ -65,9 +65,15 @@ class SettingsRouter: Router {
         guard let viewController = PasscodeViewController.storyboardInstance(name: .settings), let rootViewController = window.rootViewController else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = PasscodeViewModel(withRouter: router)
+        
+        if let currentController = currentController as? PasscodeProtocol {
+            viewController.delegate = currentController
+        }
+        
         viewController.passcodeState = value ? .enable : .disable
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .overCurrentContext
+        
         rootViewController.present(viewController: viewController)
     }
     
