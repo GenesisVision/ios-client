@@ -47,6 +47,7 @@ PODS:
   - Protobuf (3.5.0)
   - ReachabilitySwift (4.1.0)
   - SimulatorStatusMagic (2.1)
+  - SmileLock (3.0.2)
   - SnapKit (4.0.0)
   - Tabman (1.6.0):
     - AutoInsetter (~> 1.2.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - PKHUD
   - ReachabilitySwift
   - SimulatorStatusMagic
+  - SmileLock
   - Tabman (~> 1.0)
   - TTRangeSlider
 
@@ -90,6 +92,7 @@ SPEC REPOS:
     - Protobuf
     - ReachabilitySwift
     - SimulatorStatusMagic
+    - SmileLock
     - SnapKit
     - Tabman
     - TTRangeSlider
@@ -115,10 +118,11 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
+  SmileLock: c03dc80d208b33731606e996f5c3fed61255cf59
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Tabman: a9be97d1c75b4b7f40eec416021f614c4ccbb670
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
 
-PODFILE CHECKSUM: e1351b69e98b46e78f5bcc3724f8e1cadf34a0d6
+PODFILE CHECKSUM: 114af9aea724a4ff4b16486203a43be9d4817664
 
 COCOAPODS: 1.5.2

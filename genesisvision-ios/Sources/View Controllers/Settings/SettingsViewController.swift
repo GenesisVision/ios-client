@@ -20,7 +20,11 @@ class SettingsViewController: BaseTableViewController {
     
     @IBOutlet weak var passcodeSwitch: UISwitch!
     @IBOutlet weak var biometricIDTitleLabel: UILabel!
-    @IBOutlet weak var biometricIDSwitch: UISwitch!
+    @IBOutlet weak var biometricIDSwitch: UISwitch! {
+        didSet {
+            biometricIDSwitch.isEnabled = false
+        }
+    }
     @IBOutlet weak var twoFactorSwitch: UISwitch!
     
     @IBOutlet weak var versionLabel: UILabel!
@@ -65,9 +69,7 @@ class SettingsViewController: BaseTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        passcodeSwitch.isOn = passcodeEnable
-        biometricIDSwitch.isOn = biometricIDEnable
-        twoFactorSwitch.isOn = twoFactorEnable
+        setupSecurity()
     }
     
     deinit {
@@ -110,7 +112,7 @@ class SettingsViewController: BaseTableViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    guard let twoFactorEnabled = self?.viewModel.twoFactorModel?.twoFactorEnabled else { return }
+                    guard let twoFactorEnabled = self?.viewModel.enableTwoFactor else { return }
                     self?.twoFactorEnable = twoFactorEnabled
                 }
             case .failure(let errorType):
@@ -165,6 +167,19 @@ class SettingsViewController: BaseTableViewController {
         tableView.tableFooterView = footerView
     }
     
+    private func setupSecurity() {
+        passcodeSwitch.isOn = viewModel.enablePasscode
+        biometricIDSwitch.isEnabled = viewModel.enablePasscode
+        biometricIDSwitch.isOn = viewModel.enableBiometricID
+        twoFactorSwitch.isOn = viewModel.enableTwoFactor
+        
+        biometricIDTitleLabel.text = UIDevice().type == .iPhoneX ? "Face ID" : "Touch ID"
+        biometricCell.isHidden = !(AuthManager.isTouchAuthenticationAvailable && viewModel.enablePasscode)
+        if let indexPath = tableView.indexPath(for: biometricCell) {
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
         
@@ -202,19 +217,15 @@ class SettingsViewController: BaseTableViewController {
     
     // MARK: - Actions
     @IBAction func passcodeSwitchChangedAction(_ sender: UISwitch) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.viewModel.enablePasscode(sender.isOn)
-        })
+        viewModel.enablePasscode(sender.isOn)
     }
     
     @IBAction func biometricIDSwitchChangedAction(_ sender: UISwitch) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.viewModel.enableBiometricID(sender.isOn)
-        })
+        viewModel.enableBiometricID(sender.isOn)
     }
     
     @IBAction func twoFactorSwitchChangedAction(_ sender: UISwitch) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
     }
@@ -233,7 +244,7 @@ extension SettingsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let fieldType = viewModel.didSelect(indexPath) else {
+        guard let fieldType = viewModel.rowType(at: indexPath) else {
             return
         }
         
@@ -252,7 +263,18 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? UITableViewAutomaticDimension : 50.0
+        guard let fieldType = viewModel.rowType(at: indexPath) else {
+            return UITableViewAutomaticDimension
+        }
+        
+        switch fieldType {
+        case .profile:
+            return UITableViewAutomaticDimension
+        case .biometricID:
+            return AuthManager.isTouchAuthenticationAvailable && viewModel.enablePasscode ? 50.0 : 0.0
+        default:
+            return 50.0
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -8,6 +8,7 @@ target 'genesisvision-ios' do
     pod 'Alamofire'
     pod 'PKHUD'
     pod 'IQKeyboardManagerSwift'
+    pod 'SmileLock'
     
     pod 'DZNEmptyDataSet'
 

@@ -36,13 +36,39 @@ final class SettingsViewModel {
     // MARK: - Variables
     var title: String = "Settings"
     
-    var enablePasscode: Bool = false
-    var enableBiometricID: Bool = false
+    var enablePasscode: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.passcodeEnable)
+            
+            if !newValue {
+                enableBiometricID = newValue
+            }
+        }
+    }
+    
+    var enableBiometricID: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.biometricEnable)
+        }
+    }
+    
     var enableTwoFactor: Bool = false
     
     private var router: SettingsRouter!
     
-    public private(set) var twoFactorModel: TwoFactorStatus?
+    public private(set) var twoFactorModel: TwoFactorStatus? {
+        didSet {
+            if let twoFactorEnabled = twoFactorModel?.twoFactorEnabled {
+                enableTwoFactor = twoFactorEnabled
+            }
+        }
+    }
     private var profileModel: ProfileFullViewModel?
     
     var sections: [SettingsSectionType] = [.profile, .security, .feedback, .signOut]
@@ -107,7 +133,7 @@ final class SettingsViewModel {
             }, completionError: completion)
     }
     
-    func didSelect(_ indexPath: IndexPath) -> SettingsRowType? {
+    func rowType(at indexPath: IndexPath) -> SettingsRowType? {
         let sectionType = sections[indexPath.section]
         
         guard let rows = rows[sectionType] else { return nil }
@@ -127,6 +153,7 @@ final class SettingsViewModel {
     
     func enablePasscode(_ value: Bool) {
         router.show(routeType: .enablePasscode(value))
+        enablePasscode = value
     }
     
     func enableBiometricID(_ value: Bool) {

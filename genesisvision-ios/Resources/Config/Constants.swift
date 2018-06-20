@@ -129,8 +129,12 @@ final class Constants {
     
     struct Api {
         static let basePath = isTournamentApp
-            ? isDebug ? Tournament.debug : Tournament.release
-            : isDebug ? Main.debug : Main.release
+            ? isDebug
+                ? Tournament.debug
+                : Tournament.release
+            : isDebug
+                ? Main.debug
+                : Main.release
         
         static let ipfsPath = "https://gateway.ipfs.io/ipfs/"
         
@@ -158,6 +162,10 @@ final class Constants {
         static let restrictRotation: String = "RestrictRotation"
         static let skipThisVersion: String = "skipThisVersion"
         static let launchedBefore: String = "launchedBefore"
+        
+        static let passcode: String = "passcode"
+        static let passcodeEnable: String = "passcodeEnable"
+        static let biometricEnable: String = "biometricEnable"
     }
     
     struct Keys {
@@ -191,6 +199,10 @@ final class Constants {
     struct Sorting {
         static let programListDefault: InvestmentProgramsFilter.Sorting = .byProfitDesc
         static let dashboardDefault: InvestorAPI.Sorting_apiInvestorDashboardGet = .byProfitDesc
+    }
+    
+    struct Security {
+        static let passcodeDigit: Int = 6
     }
 
     struct TemplatesCounts {

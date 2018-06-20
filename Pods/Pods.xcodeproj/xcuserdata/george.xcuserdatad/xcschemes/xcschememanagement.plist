@@ -99,15 +99,20 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>SnapKit.xcscheme</key>
+		<key>SmileLock.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>TTRangeSlider.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>21</integer>
 		</dict>
 		<key>TTSegmentedControl.xcscheme</key>
 		<dict>
@@ -117,7 +122,7 @@
 		<key>Tabman.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>20</integer>
 		</dict>
 		<key>TextFieldEffects.xcscheme</key>
 		<dict>

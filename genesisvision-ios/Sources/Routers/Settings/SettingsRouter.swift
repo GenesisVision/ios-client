@@ -6,8 +6,10 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit.UIColor
+
 enum SettingsRouteType {
-    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), enableBiometricID(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy
+    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy
 }
 
 class SettingsRouter: Router {
@@ -25,8 +27,6 @@ class SettingsRouter: Router {
             enableTwoFactor(value)
         case .enablePasscode(let value):
             enablePasscode(value)
-        case .enableBiometricID(let value):
-            enableBiometricID(value)
         case .showProfile(let profileModel):
             showProfile(profileModel)
         case .feedback:
@@ -61,11 +61,14 @@ class SettingsRouter: Router {
     }
     
     private func enablePasscode(_ value: Bool) {
-        
-    }
-    
-    private func enableBiometricID(_ value: Bool) {
-        
+        let window = UIApplication.shared.windows[0] as UIWindow
+        guard let viewController = PasscodeViewController.storyboardInstance(name: .settings), let rootViewController = window.rootViewController else { return }
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        viewController.viewModel = PasscodeViewModel(withRouter: router)
+        viewController.passcodeState = value ? .enable : .disable
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overCurrentContext
+        rootViewController.present(viewController: viewController)
     }
     
     private func showFeedback() {

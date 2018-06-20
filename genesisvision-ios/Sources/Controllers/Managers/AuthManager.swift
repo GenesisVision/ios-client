@@ -191,6 +191,12 @@ extension AuthManager {
         }
     }
     
+    static var isTouchAuthenticationAvailable: Bool {
+        let localAuthenticationContext = LAContext()
+        
+        return localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+    }
+    
     private static func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
         var message = ""
         if #available(iOS 11.0, macOS 10.13, *) {

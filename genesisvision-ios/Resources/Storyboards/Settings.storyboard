@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -95,13 +96,13 @@
                                                     <rect key="frame" x="82" y="8" width="251" height="55.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="45.5" height="24.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
                                                             <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-GR-3Fw">
-                                                            <rect key="frame" x="0.0" y="32.5" width="36" height="23"/>
+                                                            <rect key="frame" x="0.0" y="31.5" width="35.5" height="24"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                                             <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -337,8 +338,98 @@
             </objects>
             <point key="canvasLocation" x="368.5" y="87.5"/>
         </scene>
+        <!--Passcode View Controller-->
+        <scene sceneID="cCf-59-WIr">
+            <objects>
+                <viewController storyboardIdentifier="PasscodeViewController" id="AqE-Iv-qyW" customClass="PasscodeViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a76-iL-bAQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-qq-2se">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U4q-LR-eXa">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbl-GD-bK2">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HIN-3C-wG9">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBQ-uP-6lU">
+                                                        <rect key="frame" x="16" y="30" width="50" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="H3f-6F-VVb"/>
+                                                            <constraint firstAttribute="width" constant="50" id="Jxr-XB-auq"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" image="img_cancel">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="closeButtonAction:" destination="AqE-Iv-qyW" eventType="touchUpInside" id="cpi-3Q-D4Y"/>
+                                                        </connections>
+                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Tu3-C0-acq">
+                                                        <rect key="frame" x="66.5" y="314" width="243.5" height="38"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Passcode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R5b-RT-FVD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="243.5" height="38"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="38"/>
+                                                                <color key="textColor" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Tu3-C0-acq" firstAttribute="centerX" secondItem="HIN-3C-wG9" secondAttribute="centerX" id="MD8-vH-9XX"/>
+                                                    <constraint firstItem="Tu3-C0-acq" firstAttribute="centerY" secondItem="HIN-3C-wG9" secondAttribute="centerY" id="XHH-Eg-dCo"/>
+                                                    <constraint firstItem="Tu3-C0-acq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HIN-3C-wG9" secondAttribute="leading" constant="50" id="arq-Hd-D6m"/>
+                                                    <constraint firstItem="TBQ-uP-6lU" firstAttribute="top" secondItem="HIN-3C-wG9" secondAttribute="top" constant="30" id="oou-LC-Ce6"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tu3-C0-acq" secondAttribute="trailing" constant="50" id="qpL-Tx-zUZ"/>
+                                                    <constraint firstItem="TBQ-uP-6lU" firstAttribute="leading" secondItem="HIN-3C-wG9" secondAttribute="leading" constant="16" id="sNR-Su-zMX"/>
+                                                </constraints>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="dark"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Sbl-GD-bK2" secondAttribute="trailing" id="2aM-DN-Jfi"/>
+                                        <constraint firstItem="Sbl-GD-bK2" firstAttribute="top" secondItem="U4q-LR-eXa" secondAttribute="top" id="O2T-dV-vbJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="Sbl-GD-bK2" secondAttribute="bottom" id="ajb-hW-dRi"/>
+                                        <constraint firstItem="Sbl-GD-bK2" firstAttribute="leading" secondItem="U4q-LR-eXa" secondAttribute="leading" id="mqm-Xg-wrg"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dCc-qq-2se" firstAttribute="top" secondItem="a76-iL-bAQ" secondAttribute="top" id="Djn-xZ-71X"/>
+                            <constraint firstItem="dCc-qq-2se" firstAttribute="leading" secondItem="bUU-cj-zLm" secondAttribute="leading" id="KYd-IK-U5i"/>
+                            <constraint firstItem="bUU-cj-zLm" firstAttribute="trailing" secondItem="dCc-qq-2se" secondAttribute="trailing" id="Ue7-8V-rwl"/>
+                            <constraint firstAttribute="bottom" secondItem="dCc-qq-2se" secondAttribute="bottom" id="koe-cJ-btM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bUU-cj-zLm"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="TBQ-uP-6lU" id="wEc-J1-Gzx"/>
+                        <outlet property="passwordStackView" destination="Tu3-C0-acq" id="mAr-1S-Jcm"/>
+                        <outlet property="titleLabel" destination="R5b-RT-FVD" id="PPy-iG-JER"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4WW-4Q-LcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1078" y="87"/>
+        </scene>
     </scenes>
     <resources>
         <image name="gv_logo" width="96" height="96"/>
+        <image name="img_cancel" width="19" height="19"/>
     </resources>
 </document>

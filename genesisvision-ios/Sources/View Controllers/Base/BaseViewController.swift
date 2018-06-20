@@ -17,6 +17,10 @@ class BaseViewController: UIViewController, Hidable {
 
         commonSetup()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 }
 
 extension UIViewController {
