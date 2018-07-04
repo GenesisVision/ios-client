@@ -212,7 +212,7 @@ final class Constants {
     
     struct Security {
         static let passcodeDigit: Int = 6
-        static let timeInterval: Double = 5.0 //isDebug ? 2.0 : 30.0
+        static let timeInterval: Double = isDebug ? 2.0 : 30.0
     }
 
     struct TemplatesCounts {
