@@ -17,17 +17,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.7</string>
+	<string>0.0.8</string>
 	<key>CFBundleVersion</key>
 	<string>0.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to take a profile photo.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to upload profile photo.</string>
-    <key>NSFaceIDUsageDescription</key>
-    <string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NeuzeitGro-Bla.ttf</string>

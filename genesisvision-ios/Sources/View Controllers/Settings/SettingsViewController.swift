@@ -40,25 +40,6 @@ class SettingsViewController: BaseTableViewController {
     @IBOutlet weak var biometricCell: PlateTableViewCell!
     @IBOutlet weak var twoFactorCell: PlateTableViewCell!
     
-    // MARK: - Variables
-    var passcodeEnable: Bool = false {
-        didSet {
-            passcodeSwitch.isOn = passcodeEnable
-        }
-    }
-    
-    var biometricIDEnable: Bool = false {
-        didSet {
-            biometricIDSwitch.isOn = biometricIDEnable
-        }
-    }
-    
-    var twoFactorEnable: Bool = false {
-        didSet {
-            twoFactorSwitch.isOn = twoFactorEnable
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +116,7 @@ class SettingsViewController: BaseTableViewController {
             case .success:
                 DispatchQueue.main.async {
                     guard let twoFactorEnabled = self?.viewModel.enableTwoFactor else { return }
-                    self?.twoFactorEnable = twoFactorEnabled
+                    self?.twoFactorSwitch.isOn = twoFactorEnabled
                 }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
@@ -145,7 +126,7 @@ class SettingsViewController: BaseTableViewController {
     
     @objc private func twoFactorChangeNotification(notification: Notification) {
         if let enable = notification.userInfo?["enable"] as? Bool {
-            twoFactorEnable = enable
+            viewModel.enableTwoFactor = enable
         }
     }
     
