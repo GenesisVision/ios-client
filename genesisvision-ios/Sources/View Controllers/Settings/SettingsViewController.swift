@@ -70,10 +70,32 @@ class SettingsViewController: BaseTableViewController {
         super.viewWillAppear(animated)
         
         setupSecurity()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .twoFactorChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func setupSecurity() {
+        passcodeSwitch.isOn = viewModel.enablePasscode
+        biometricIDSwitch.isEnabled = viewModel.enablePasscode
+        biometricIDSwitch.isOn = viewModel.enableBiometricID
+        twoFactorSwitch.isOn = viewModel.enableTwoFactor
+        
+        biometricIDTitleLabel.text = viewModel.biometricTitleText
+        biometricCell.isHidden = !viewModel.enableBiometricCell
+        if let indexPath = tableView.indexPath(for: biometricCell) {
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
     }
     
     // MARK: - Private methods
@@ -127,6 +149,10 @@ class SettingsViewController: BaseTableViewController {
         }
     }
     
+    @objc func applicationDidBecomeActive(notification: Notification) {
+        setupSecurity()
+    }
+    
     private func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -165,19 +191,6 @@ class SettingsViewController: BaseTableViewController {
         twoFactorCell.highlighting = false
         
         tableView.tableFooterView = footerView
-    }
-    
-    private func setupSecurity() {
-        passcodeSwitch.isOn = viewModel.enablePasscode
-        biometricIDSwitch.isEnabled = viewModel.enablePasscode
-        biometricIDSwitch.isOn = viewModel.enableBiometricID
-        twoFactorSwitch.isOn = viewModel.enableTwoFactor
-        
-        biometricIDTitleLabel.text = UIDevice().type == .iPhoneX ? "Face ID" : "Touch ID"
-        biometricCell.isHidden = !(AuthManager.isTouchAuthenticationAvailable && viewModel.enablePasscode)
-        if let indexPath = tableView.indexPath(for: biometricCell) {
-            tableView.reloadRows(at: [indexPath], with: .none)
-        }
     }
     
     private func setupTableConfiguration() {
@@ -271,7 +284,7 @@ extension SettingsViewController {
         case .profile:
             return UITableViewAutomaticDimension
         case .biometricID:
-            return AuthManager.isTouchAuthenticationAvailable && viewModel.enablePasscode ? 50.0 : 0.0
+            return viewModel.enableBiometricCell ? 50.0 : 0.0
         default:
             return 50.0
         }
@@ -288,6 +301,15 @@ extension SettingsViewController {
 
 extension SettingsViewController: PasscodeProtocol {
     func passcodeAction(_ action: PasscodeActionType) {
+        switch action {
+        case .enabled:
+            viewModel.enablePasscode = true
+        case .disabled:
+            viewModel.enablePasscode = false
+        default:
+            break
+        }
+        
         setupSecurity()
     }
 }

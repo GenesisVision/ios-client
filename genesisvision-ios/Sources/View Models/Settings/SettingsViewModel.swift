@@ -25,7 +25,6 @@ final class SettingsViewModel {
         case none
     }
     
-    
     enum SettingsSectionType: String {
         case profile
         case security
@@ -35,6 +34,8 @@ final class SettingsViewModel {
     
     // MARK: - Variables
     var title: String = "Settings"
+    
+    let biometricIDAuthManager = BiometricIDAuthManager.shared
     
     var enablePasscode: Bool {
         get {
@@ -51,14 +52,30 @@ final class SettingsViewModel {
     
     var enableBiometricID: Bool {
         get {
+            guard !biometricIDAuthManager.domainStateChanged() else {
+                UserDefaults.standard.set(false, forKey: Constants.UserDefaults.biometricEnable)
+                return false
+            }
+            
             return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
         }
         set {
+            if newValue {
+                biometricIDAuthManager.updateLastDomainState()
+            }
+            
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.biometricEnable)
         }
     }
     
     var enableTwoFactor: Bool = false
+    var enableBiometricCell: Bool {
+        return biometricIDAuthManager.isTouchAuthenticationAvailable && enablePasscode
+    }
+    
+    var biometricTitleText: String {
+        return biometricIDAuthManager.biometricTitleText
+    }
     
     private var router: SettingsRouter!
     
@@ -153,7 +170,6 @@ final class SettingsViewModel {
     
     func enablePasscode(_ value: Bool) {
         router.show(routeType: .enablePasscode(value))
-        enablePasscode = value
     }
     
     func enableBiometricID(_ value: Bool) {

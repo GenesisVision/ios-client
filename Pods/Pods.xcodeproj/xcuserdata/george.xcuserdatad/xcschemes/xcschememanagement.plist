@@ -12,22 +12,22 @@
 		<key>AutoInsetter.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Charts.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>6</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>7</integer>
 		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
 		<dict>
@@ -37,12 +37,12 @@
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>MDFInternationalization.xcscheme</key>
 		<dict>
@@ -52,7 +52,7 @@
 		<key>MarqueeLabel.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>MaterialComponents.xcscheme</key>
 		<dict>
@@ -62,32 +62,32 @@
 		<key>NotificationBannerSwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>12</integer>
 		</dict>
 		<key>PKHUD.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>14</integer>
 		</dict>
 		<key>Pageboy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>13</integer>
 		</dict>
 		<key>Pods-genesisvision-ios.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>15</integer>
 		</dict>
 		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>16</integer>
 		</dict>
 		<key>ReachabilitySwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>17</integer>
 		</dict>
 		<key>SWSegmentedControl.xcscheme</key>
 		<dict>
@@ -97,22 +97,22 @@
 		<key>SimulatorStatusMagic.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>18</integer>
 		</dict>
 		<key>SmileLock.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>19</integer>
 		</dict>
 		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>20</integer>
 		</dict>
 		<key>TTRangeSlider.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>21</integer>
+			<integer>22</integer>
 		</dict>
 		<key>TTSegmentedControl.xcscheme</key>
 		<dict>
@@ -122,7 +122,7 @@
 		<key>Tabman.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>21</integer>
 		</dict>
 		<key>TextFieldEffects.xcscheme</key>
 		<dict>
@@ -147,7 +147,7 @@
 		<key>nanopb.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>11</integer>
 		</dict>
 	</dict>
 </dict>

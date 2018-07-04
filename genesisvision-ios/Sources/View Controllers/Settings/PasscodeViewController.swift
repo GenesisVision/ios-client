@@ -10,7 +10,7 @@ import UIKit
 import SmileLock
 
 enum PasscodeActionType {
-    case unlocked, enabled, disabled
+    case unlocked, enabled, disabled, closed
 }
 
 protocol PasscodeProtocol: class {
@@ -25,7 +25,11 @@ class PasscodeViewController: BaseViewController {
     
     var bgColor: UIColor = .clear
     var passcodeState: PasscodeState = .openApp {
-        didSet {
+        didSet(value) {
+            guard passcodeState != value else {
+                return
+            }
+            
             setupUI()
         }
     }
@@ -37,8 +41,16 @@ class PasscodeViewController: BaseViewController {
     @IBOutlet weak var passwordStackView: UIStackView!
     
     // MARK: - Variables
-    var passwordContainerView: PasswordContainerView!
-    @IBOutlet weak var closeButton: UIButton!
+    var passwordContainerView: PasswordContainerView! {
+        didSet {
+            passwordContainerView.touchAuthenticationEnabled = false
+        }
+    }
+    @IBOutlet weak var closeButton: UIButton! {
+        didSet {
+            closeButton.isHidden = true
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -51,10 +63,15 @@ class PasscodeViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         view.backgroundColor = bgColor
-        
         setupUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+    }
+
     // MARK: - Private methods
     fileprivate func setup() {
         //create PasswordContainerView
@@ -69,6 +86,8 @@ class PasscodeViewController: BaseViewController {
         for inputView in passwordContainerView.passwordInputViews {
             inputView.label.font = viewModel.labelFont
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     private func setupUI() {
@@ -84,11 +103,18 @@ class PasscodeViewController: BaseViewController {
             closeButton.isHidden = false
             hidePasswordView(false)
         case .lock:
-            passwordContainerView.touchAuthenticationEnabled = UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
-
-            if passwordContainerView.touchAuthenticationEnabled {
+            let touchAuthenticationEnabled = viewModel.touchAuthenticationEnabled
+        
+            if viewModel.changedMessageEnable {
+                let texts = viewModel.changedAlertTexts
+                showAlertWithTitle(title: texts.0, message: texts.1, actionTitle: nil, cancelTitle: String.Alerts.okButtonText, handler: nil, cancelHandler: nil)
+            }
+            
+            if touchAuthenticationEnabled {
                 passwordContainerView.touchAuthenticationButton.sendActions(for: .touchUpInside)
             }
+            
+            passwordContainerView.touchAuthenticationEnabled = touchAuthenticationEnabled
             
             hidePasswordView(false)
         case .openApp:
@@ -101,9 +127,14 @@ class PasscodeViewController: BaseViewController {
         titleLabel.isHidden = value
     }
     
+    @objc func willEnterForeground() {
+        setupUI()
+    }
+    
     // MARK: - Actions
     @IBAction func closeButtonAction(_ sender: UIButton) {
         viewModel.closeVC()
+        delegate?.passcodeAction(.closed)
     }
 }
 
@@ -168,6 +199,7 @@ private extension PasscodeViewController {
             delegate?.passcodeAction(.unlocked)
             dismiss(animated: true, completion: nil)
         default:
+            delegate?.passcodeAction(.closed)
             dismiss(animated: true, completion: nil)
         }
     }

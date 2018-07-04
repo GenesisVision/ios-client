@@ -25,38 +25,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if UserDefaults.standard.bool(forKey: Constants.UserDefaults.restrictRotation) {
-            return UIInterfaceOrientationMask.landscape
-        }
-        
-        return UIInterfaceOrientationMask.portrait
+        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.restrictRotation) ? .landscape : .portrait
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        guard let passcodeViewController = passcodeViewController else { return }
+        guard let passcodeViewController = passcodeViewController, topViewController() == passcodeViewController else { return }
         
-        if let resignActiveTime = resignActiveTime, Date().timeIntervalSince(resignActiveTime) < 5 {
+        if let resignActiveTime = resignActiveTime, Date().timeIntervalSince(resignActiveTime) < Constants.Security.timeInterval {
             passcodeViewController.dismiss(animated: true, completion: nil)
+            self.resignActiveTime = nil
         } else {
             passcodeViewController.passcodeState = .lock
         }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        resignActiveTime = Date()
+        if (topViewController() as? PasscodeViewController) != nil {
+            return
+        }
         
-        showPasscodeVC()
+        if UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable) {
+            resignActiveTime = Date()
+            showPasscodeVC()
+        }
     }
 }
 
 // MARK: - Setup
 extension AppDelegate {
     private func showPasscodeVC() {
+        
+        if (topViewController() as? PasscodeViewController) != nil {
+            return
+        }
+        
         if UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable) {
             let window = UIApplication.shared.windows[0] as UIWindow
             if let viewController = PasscodeViewController.storyboardInstance(name: .settings), let vc = window.rootViewController {
                 let router = Router(parentRouter: nil)
                 viewController.viewModel = PasscodeViewModel(withRouter: router)
+                viewController.delegate = self
                 viewController.passcodeState = .openApp
                 viewController.modalTransitionStyle = .crossDissolve
                 viewController.modalPresentationStyle = .overCurrentContext
@@ -84,5 +92,24 @@ extension AppDelegate {
         let welcomeViewController = WelcomeViewController()
         window?.rootViewController = welcomeViewController
         window?.makeKeyAndVisible()
+    }
+    
+    private func topViewController() -> UIViewController? {
+        if let topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                return presentedViewController
+            }
+        }
+        
+        return nil
+    }
+}
+
+extension AppDelegate: PasscodeProtocol {
+    func passcodeAction(_ action: PasscodeActionType) {
+        switch action {
+        default:
+            resignActiveTime = nil
+        }
     }
 }

@@ -26,6 +26,14 @@ import UIKit
     let isDebug = false
 #endif
 
+#if DEBUG
+    let isUITest = ProcessInfo.processInfo.environment["UITest"] != nil
+#else
+    let isUITest = false
+#endif
+
+
+
 enum CompletionResult {
     case success
     case failure(errorType: ErrorMessageType)
@@ -166,6 +174,7 @@ final class Constants {
         static let passcode: String = "passcode"
         static let passcodeEnable: String = "passcodeEnable"
         static let biometricEnable: String = "biometricEnable"
+        static let biometricLastDomainState: String = "biometricLastDomainState"
     }
     
     struct Keys {
@@ -203,6 +212,7 @@ final class Constants {
     
     struct Security {
         static let passcodeDigit: Int = 6
+        static let timeInterval: Double = 5.0 //isDebug ? 2.0 : 30.0
     }
 
     struct TemplatesCounts {

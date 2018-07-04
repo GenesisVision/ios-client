@@ -179,6 +179,8 @@
 		5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858345205FFCF70039E13F /* UIFontExtension.swift */; };
 		5E85834A206014820039E13F /* SortHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E858349206014820039E13F /* SortHeaderView.xib */; };
 		5E85834C2060148E0039E13F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E85834B2060148E0039E13F /* SortHeaderView.swift */; };
+		5E8724CC20E0B7E3007A1E16 /* Genesis_VisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8724CB20E0B7E3007A1E16 /* Genesis_VisionUITests.swift */; };
+		5E8724D820E0BD10007A1E16 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8724D720E0BD10007A1E16 /* SnapshotHelper.swift */; };
 		5E87E75F208F423300141269 /* ScrollableSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */; };
 		5E87E765208F638E00141269 /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E764208F638E00141269 /* Tooltips.swift */; };
 		5E87E767208F64C200141269 /* TooltipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E766208F64C200141269 /* TooltipButton.swift */; };
@@ -219,6 +221,7 @@
 		5EBBECE920626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */; };
 		5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */; };
 		5EC0309620A5A786005CBA32 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309520A5A786005CBA32 /* PlatformManager.swift */; };
+		5EC1E94120E3A91B00AE3560 /* BiometricIDAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */; };
 		5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */; };
@@ -434,6 +437,16 @@
 		FCFF38FE2046F9CA00BEEDDA /* ProgramDetailsForTableViewCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFF38FD2046F9CA00BEEDDA /* ProgramDetailsForTableViewCellView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5E8724CE20E0B7E3007A1E16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC9DD1C200DF2C3008825EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCC9DD23200DF2C3008825EC;
+			remoteInfo = "genesisvision-ios";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug investor.xcconfig"; sourceTree = "<group>"; };
 		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -609,6 +622,10 @@
 		5E858345205FFCF70039E13F /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		5E858349206014820039E13F /* SortHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortHeaderView.xib; sourceTree = "<group>"; };
 		5E85834B2060148E0039E13F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
+		5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Genesis VisionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E8724CB20E0B7E3007A1E16 /* Genesis_VisionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genesis_VisionUITests.swift; sourceTree = "<group>"; };
+		5E8724CD20E0B7E3007A1E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E8724D720E0BD10007A1E16 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableSegmentedControl.swift; sourceTree = "<group>"; };
 		5E87E764208F638E00141269 /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		5E87E766208F64C200141269 /* TooltipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipButton.swift; sourceTree = "<group>"; };
@@ -649,6 +666,7 @@
 		5EBBECE820626FB300872656 /* DashboardHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataProvider.swift; sourceTree = "<group>"; };
 		5EC0309520A5A786005CBA32 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
+		5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuthManager.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -875,6 +893,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5E8724C620E0B7E3007A1E16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FCC9DD21200DF2C3008825EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1145,6 +1170,16 @@
 			path = ProgramDetailTrades;
 			sourceTree = "<group>";
 		};
+		5E8724CA20E0B7E3007A1E16 /* Genesis VisionUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5E8724CB20E0B7E3007A1E16 /* Genesis_VisionUITests.swift */,
+				5E8724D720E0BD10007A1E16 /* SnapshotHelper.swift */,
+				5E8724CD20E0B7E3007A1E16 /* Info.plist */,
+			);
+			path = "Genesis VisionUITests";
+			sourceTree = "<group>";
+		};
 		5E87E763208F638200141269 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1188,6 +1223,7 @@
 				FCB8DFCE2010F99200698D18 /* AuthManager.swift */,
 				5E89772F206E987B0015FD26 /* ReachabilityManager.swift */,
 				5EC0309520A5A786005CBA32 /* PlatformManager.swift */,
+				5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1718,6 +1754,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC9DD26200DF2C3008825EC /* genesisvision-ios */,
+				5E8724CA20E0B7E3007A1E16 /* Genesis VisionUITests */,
 				FCC9DD25200DF2C3008825EC /* Products */,
 				450E0AA731BC9B9D261CAA3B /* Pods */,
 				B8DB3D95241F1BF35C1AA19C /* Frameworks */,
@@ -1728,6 +1765,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC9DD24200DF2C3008825EC /* genesisvision-ios.app */,
+				5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2029,6 +2067,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5E8724C820E0B7E3007A1E16 /* Genesis VisionUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E8724D620E0B7E3007A1E16 /* Build configuration list for PBXNativeTarget "Genesis VisionUITests" */;
+			buildPhases = (
+				5E8724C520E0B7E3007A1E16 /* Sources */,
+				5E8724C620E0B7E3007A1E16 /* Frameworks */,
+				5E8724C720E0B7E3007A1E16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E8724CF20E0B7E3007A1E16 /* PBXTargetDependency */,
+			);
+			name = "Genesis VisionUITests";
+			productName = "Genesis VisionUITests";
+			productReference = 5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		FCC9DD23200DF2C3008825EC /* genesisvision-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FCC9DD36200DF2C3008825EC /* Build configuration list for PBXNativeTarget "genesisvision-ios" */;
@@ -2054,10 +2110,15 @@
 		FCC9DD1C200DF2C3008825EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Genesis Vision";
 				TargetAttributes = {
+					5E8724C820E0B7E3007A1E16 = {
+						CreatedOnToolsVersion = 9.4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FCC9DD23200DF2C3008825EC;
+					};
 					FCC9DD23200DF2C3008825EC = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -2078,11 +2139,19 @@
 			projectRoot = "";
 			targets = (
 				FCC9DD23200DF2C3008825EC /* genesisvision-ios */,
+				5E8724C820E0B7E3007A1E16 /* Genesis VisionUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5E8724C720E0B7E3007A1E16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FCC9DD22200DF2C3008825EC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2206,6 +2275,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5E8724C520E0B7E3007A1E16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E8724CC20E0B7E3007A1E16 /* Genesis_VisionUITests.swift in Sources */,
+				5E8724D820E0BD10007A1E16 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FCC9DD20200DF2C3008825EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2571,6 +2649,7 @@
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,
 				5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,
+				5EC1E94120E3A91B00AE3560 /* BiometricIDAuthManager.swift in Sources */,
 				FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */,
 				5E18CEAE20C566F1008FE5B5 /* ManagerInvestmentPrograms.swift in Sources */,
 				5EAC11B820B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift in Sources */,
@@ -2600,7 +2679,408 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5E8724CF20E0B7E3007A1E16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCC9DD23200DF2C3008825EC /* genesisvision-ios */;
+			targetProxy = 5E8724CE20E0B7E3007A1E16 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		5E8724D020E0B7E3007A1E16 /* Debug Manager */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+			};
+			name = "Debug Manager";
+		};
+		5E8724D120E0B7E3007A1E16 /* Debug Investor */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+			};
+			name = "Debug Investor";
+		};
+		5E8724D220E0B7E3007A1E16 /* Debug Tournament */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+			};
+			name = "Debug Tournament";
+		};
+		5E8724D320E0B7E3007A1E16 /* Release Manager */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Manager";
+		};
+		5E8724D420E0B7E3007A1E16 /* Release Investor */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Investor";
+		};
+		5E8724D520E0B7E3007A1E16 /* Release Tournament */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Genesis VisionUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.genesisvision.Genesis-VisionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "genesisvision-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Tournament";
+		};
 		FC08FA652018932900BC1417 /* Debug Manager */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3052,6 +3532,19 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5E8724D620E0B7E3007A1E16 /* Build configuration list for PBXNativeTarget "Genesis VisionUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E8724D020E0B7E3007A1E16 /* Debug Manager */,
+				5E8724D120E0B7E3007A1E16 /* Debug Investor */,
+				5E8724D220E0B7E3007A1E16 /* Debug Tournament */,
+				5E8724D320E0B7E3007A1E16 /* Release Manager */,
+				5E8724D420E0B7E3007A1E16 /* Release Investor */,
+				5E8724D520E0B7E3007A1E16 /* Release Tournament */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Manager";
+		};
 		FCC9DD1F200DF2C3008825EC /* Build configuration list for PBXProject "genesisvision-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -85,24 +85,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="gv_logo" translatesAutoresizingMaskIntoConstraints="NO" id="beH-g7-9Tg" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10.5" width="50" height="50.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gv_logo" translatesAutoresizingMaskIntoConstraints="NO" id="beH-g7-9Tg" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="11" width="50" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="beH-g7-9Tg" secondAttribute="height" multiplier="1:1" id="4X3-vU-Ikm"/>
                                                         <constraint firstAttribute="height" constant="50" id="LLz-vc-nMP"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bVN-K4-MtS">
-                                                    <rect key="frame" x="82" y="8" width="251" height="55.5"/>
+                                                    <rect key="frame" x="82" y="16" width="251" height="40"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="23.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="17"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
                                                             <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-GR-3Fw">
-                                                            <rect key="frame" x="0.0" y="31.5" width="35.5" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-GR-3Fw">
+                                                            <rect key="frame" x="0.0" y="25" width="35.5" height="15"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                                             <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -111,14 +111,14 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="beH-g7-9Tg" secondAttribute="bottom" constant="10" id="0nN-nN-WmQ"/>
                                                 <constraint firstItem="beH-g7-9Tg" firstAttribute="centerY" secondItem="88n-E5-wXq" secondAttribute="centerY" id="9PC-0D-3uV"/>
                                                 <constraint firstItem="bVN-K4-MtS" firstAttribute="leading" secondItem="beH-g7-9Tg" secondAttribute="trailing" constant="12" id="NAT-0Z-hLU"/>
-                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="88n-E5-wXq" secondAttribute="top" constant="12" id="RJu-ID-tJd"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="beH-g7-9Tg" secondAttribute="bottom" constant="12" id="Tho-Fn-rg0"/>
-                                                <constraint firstAttribute="bottom" secondItem="bVN-K4-MtS" secondAttribute="bottom" constant="8" id="crE-sm-PwB"/>
+                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="88n-E5-wXq" secondAttribute="top" constant="10" id="PkI-a8-lL4"/>
+                                                <constraint firstItem="bVN-K4-MtS" firstAttribute="top" secondItem="88n-E5-wXq" secondAttribute="top" constant="16" id="Xha-Lw-Fdu"/>
                                                 <constraint firstAttribute="trailing" secondItem="bVN-K4-MtS" secondAttribute="trailing" constant="8" id="gI0-yw-Mcs"/>
+                                                <constraint firstAttribute="bottom" secondItem="bVN-K4-MtS" secondAttribute="bottom" constant="16" id="iLT-La-STS"/>
                                                 <constraint firstItem="beH-g7-9Tg" firstAttribute="leading" secondItem="88n-E5-wXq" secondAttribute="leadingMargin" constant="4" id="q90-Bb-hHA"/>
-                                                <constraint firstItem="bVN-K4-MtS" firstAttribute="top" secondItem="88n-E5-wXq" secondAttribute="top" constant="8" id="w40-27-kcp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -373,7 +373,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Tu3-C0-acq">
-                                                        <rect key="frame" x="66.5" y="314" width="243.5" height="38"/>
+                                                        <rect key="frame" x="66.5" y="315.5" width="243.5" height="38"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Passcode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R5b-RT-FVD">
                                                                 <rect key="frame" x="0.0" y="0.0" width="243.5" height="38"/>

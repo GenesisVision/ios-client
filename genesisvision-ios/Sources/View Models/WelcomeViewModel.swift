@@ -24,6 +24,11 @@ final class WelcomeViewModel {
     // MARK: - Public methods
     // MARK: - Navigation
     func start() {
+        
+        if isUITest {
+            AuthManager.signOut()
+        }
+        
         requestReview()
         isTournamentApp
             ? startTournament()
@@ -46,6 +51,8 @@ final class WelcomeViewModel {
     }
     
     private func requestReview() {
+        guard !isDebug else { return }
+        
         let key = Constants.UserDefaults.timesOpened
         var timesOpened = UserDefaults.standard.integer(forKey: key)
         
@@ -57,6 +64,7 @@ final class WelcomeViewModel {
                 SKStoreReviewController.requestReview()
             }
             UserDefaults.standard.removeObject(forKey: key)
+            UserDefaults.standard.synchronize()
         }
         
     }

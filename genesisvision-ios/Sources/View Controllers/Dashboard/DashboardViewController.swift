@@ -14,13 +14,12 @@ class DashboardViewController: BaseViewControllerWithTableView {
     var viewModel: DashboardViewModel!
 
     // MARK: - Variables
-    private var feedbackBarButtonItem: UIBarButtonItem?
     private var segmentedControl: UISegmentedControl = UISegmentedControl(items: ["Active", "Archive"])
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         showProgressHUD()
         setup()
     }
@@ -53,9 +52,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         bottomViewType = .sort
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
-        
-        feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
-        navigationItem.rightBarButtonItem = feedbackBarButtonItem
         
         segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
         segmentedControl.tintColor = UIColor.primary
@@ -112,23 +108,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Actions
-    @IBAction func feedbackButtonAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.primary
-        
-        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
-            self?.openSafariVC(with: Constants.Urls.feedbackWebAddress)
-        }))
-        
-        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.emailButtonText, style: .default, handler: { [weak self] (action) in
-            self?.sendEmailFeedback()
-        }))
-        
-        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler:nil))
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
     @objc func segmentSelected(sender: UISegmentedControl) {
         viewModel.activePrograms = sender.selectedSegmentIndex == 0
         reloadData()

@@ -60,6 +60,11 @@ extension String {
             static var updateButtonText: String = "Update".localized
         }
         
+        struct BiometricIDChanged {
+            static var alertTitle: String = "BiometricID changed".localized
+            static var alertMessage: String = "Please enter Passcode and enable BiometricID in Settings screen".localized
+        }
+        
         struct TwoFactorEnable {
             static var alertTitle: String = "Two Factor Authentication".localized
             static var alertMessage: String = "To protect your funds, we strongly recommend you to enable two factor authentication. \n\nYou can do it at any time from the Profile screen.".localized

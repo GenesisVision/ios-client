@@ -15,13 +15,34 @@ enum PasscodeState {
 final class PasscodeViewModel {
     // MARK: - Variables
     var title: String = "Passcode"
-    var passwordDigit: Int = 6
+    var passwordDigit: Int = 4
     var deleteButtonTitle: String = "Delete"
     var isVibrancyEffect: Bool = true
     var labelFont: UIFont = UIFont.getFont(.regular, size: 29)
     
     var titleLabelText = "Enter Passcode"
     var againTitleLabelText = "Enter Passcode Again"
+    
+    var changedMessageEnable: Bool {
+        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
+        && domainStateChanged
+    }
+    
+    var changedAlertTexts: (String, String) {
+        return (String.Alerts.BiometricIDChanged.alertTitle.replacingOccurrences(of: "BiometricID", with: BiometricIDAuthManager.shared.biometricTitleText), String.Alerts.BiometricIDChanged.alertMessage.replacingOccurrences(of: "BiometricID", with: BiometricIDAuthManager.shared.biometricTitleText))
+    }
+    
+    private var domainStateChanged: Bool {
+        return BiometricIDAuthManager.shared.domainStateChanged()
+    }
+    
+    var touchAuthenticationEnabled: Bool {
+        guard !domainStateChanged else {
+            return false
+        }
+        
+        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable) && BiometricIDAuthManager.shared.isTouchAuthenticationAvailable
+    }
     
     public private(set) var passcode: String? {
         get {
