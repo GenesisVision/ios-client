@@ -22,8 +22,9 @@ class DashboardViewController: BaseViewControllerWithTableView {
         
         showProgressHUD()
         setup()
+        
+        fetch()
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -35,12 +36,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        fetch()
-    }
-    
     // MARK: - Private methods
     private func setup() {
         setupTableConfiguration()
@@ -50,7 +45,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        bottomViewType = .sort
+        bottomViewType = viewModel.bottomViewType
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
@@ -73,7 +68,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
     
@@ -258,13 +253,6 @@ extension DashboardViewController: ProgramDetailViewControllerProtocol {
         showProgressHUD()
         viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.reloadData()
-            default:
-                break
-            }
         }
     }
 }

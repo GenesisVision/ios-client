@@ -128,7 +128,16 @@ class ProgramDataProvider: DataProvider {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         InvestorAPI.apiInvestorInvestmentProgramsFavoritesAddPost(investmentProgramId: uuid, authorization: authorization) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "investmentProgramId" : investmentProgramId])
+                default:
+                    break
+                }
+                
+                completion(result)
+            })
         }
     }
     
@@ -136,7 +145,16 @@ class ProgramDataProvider: DataProvider {
         guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         InvestorAPI.apiInvestorInvestmentProgramsFavoritesRemovePost(investmentProgramId: uuid, authorization: authorization) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "investmentProgramId" : investmentProgramId])
+                default:
+                    break
+                }
+                
+                completion(result)
+            })
         }
     }
 }

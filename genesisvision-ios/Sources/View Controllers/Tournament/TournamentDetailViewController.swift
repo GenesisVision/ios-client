@@ -63,7 +63,7 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 self?.setupNavigationBar()
-                self?.tableView.reloadData()
+                self?.tableView?.reloadData()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }

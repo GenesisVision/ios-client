@@ -9,11 +9,13 @@
 import Foundation
 
 struct ProgramListHeaderTableViewCellViewModel {
+    let title: String
     let programListCount: Int
 }
 
 extension ProgramListHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramListHeaderTableViewCell) {
         cell.programListCountLabel.text = programListCount.toString()
+        cell.programListTitleLabel.text = title
     }
 }

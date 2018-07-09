@@ -373,7 +373,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Tu3-C0-acq">
-                                                        <rect key="frame" x="66.5" y="315.5" width="243.5" height="38"/>
+                                                        <rect key="frame" x="66.5" y="315" width="243.5" height="38"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Passcode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R5b-RT-FVD">
                                                                 <rect key="frame" x="0.0" y="0.0" width="243.5" height="38"/>

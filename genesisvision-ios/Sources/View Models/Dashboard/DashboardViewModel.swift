@@ -8,16 +8,6 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class DashboardTabmanViewModel: TabmanViewModel {
-    // MARK: - Init
-    override init(withRouter router: Router, viewControllersCount: Int, defaultPage: Int, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
-        super.init(withRouter: router, viewControllersCount: viewControllersCount, defaultPage: defaultPage, tabmanViewModelDelegate: tabmanViewModelDelegate)
-        
-        title = "Dashboard"
-        isScrollEnabled = false
-    }
-}
-
 final class DashboardViewModel {
     
     enum SectionType {
@@ -28,7 +18,7 @@ final class DashboardViewModel {
     // MARK: - Variables
     var activePrograms = true
     
-    var title = "Dashboard"
+    var title = "Portfolio"
     
     private var sections: [SectionType] = [.header, .programList]
     
@@ -45,6 +35,11 @@ final class DashboardViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
+    
+    var bottomViewType: BottomViewType {
+        return .sort
+    }
+    
     var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
@@ -89,6 +84,12 @@ final class DashboardViewModel {
         self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
     }
     
     // MARK: - Public methods
@@ -103,10 +104,6 @@ final class DashboardViewModel {
     
     func getSelectedSortingIndex() -> Int {
         return sortingKeys.index(of: sorting) ?? 0
-    }
-    
-    func changeFavorite(value: Bool, at investmentProgramId: String, completion: @escaping CompletionBlock) {
-        
     }
     
     func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
@@ -137,8 +134,12 @@ final class DashboardViewModel {
         router.showTwoFactorEnable()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
+    @objc private func programFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let investmentProgramId = notification.userInfo?["investmentProgramId"] as? String {
+            changeFavorite(value: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+                self?.reloadDataProtocol?.didReloadData()
+            }
+        }
     }
 }
 

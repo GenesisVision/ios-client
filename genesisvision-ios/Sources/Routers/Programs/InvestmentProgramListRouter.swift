@@ -6,11 +6,9 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-enum ProgramRouteType {
-    case signIn, showProgramDetails(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
-}
+import UIKit.UINavigationController
 
-class InvestmentProgramListRouter: Router {
+class InvestmentProgramListRouter: Router, ProgramListRouterProtocol {
     
     // MARK: - Public methods
     func show(routeType: ProgramRouteType) {

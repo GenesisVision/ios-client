@@ -42,7 +42,7 @@ final class ProgramFilterViewModel {
     private var sections: [SectionType] = [.slider, .switchControl]
     
     private var sliderRows: [SliderType] = [.level, .avgProfit, .totalProfit, .balance]
-    private var switchRows: [SwitchType] = [.activePrograms, .favoritePrograms]
+    private var switchRows: [SwitchType] = [.activePrograms]
     
     private var router: ProgramFilterRouter!
     
@@ -285,8 +285,7 @@ final class ProgramFilterViewModel {
             case .favoritePrograms:
                 switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showMyFavorites, switchViewTag: idx, delegate: switchDelegate)
             case .availableToInvest:
-                //TODO: change isOn value
-                switchCellModel = FilterSwitchTableViewCellViewModel(filterTitles: titles, isOn: filter?.showMyFavorites, switchViewTag: idx, delegate: switchDelegate)
+                break
             }
             
             switchCellModels.append(switchCellModel!)

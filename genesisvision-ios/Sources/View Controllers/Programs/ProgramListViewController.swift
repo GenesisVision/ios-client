@@ -15,7 +15,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private var tournamentBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
-    var viewModel: InvestmentProgramListViewModel!
+    var viewModel: ProgramListViewModelProtocol!
     
     // MARK: - Outlets
     lazy var searchBar: UISearchBar = {
@@ -38,7 +38,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Views
-    @IBOutlet var gradientView: GradientView!
+    @IBOutlet var gradientView: GradientView! {
+        didSet {
+            gradientView.isHidden = true
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,9 +51,19 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let viewModel = viewModel as? FavoriteProgramListViewModel, viewModel.needToRefresh {
+            fetch()
+        }
+    }
+    
     // MARK: - Private methods
     private func setupSignInButton() {
-        signInButtonEnable = viewModel.signInButtonEnable()
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            signInButtonEnable = viewModel.signInButtonEnable
+        }
         
         signInButton.isHidden = !signInButtonEnable
         gradientView.isHidden = !signInButtonEnable
@@ -64,7 +78,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        bottomViewType = signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
+        bottomViewType = viewModel.bottomViewType
+        
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         if signInButtonEnable {
@@ -109,7 +124,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self.refreshControl?.endRefreshing()
 
             UIView.setAnimationsEnabled(false)
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
             UIView.setAnimationsEnabled(true)
         }
     }
@@ -175,7 +190,9 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func filterButtonAction() {
-        viewModel.showFilterVC()
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            viewModel.showFilterVC()
+        }
     }
     
     override func pullToRefresh() {
@@ -185,12 +202,16 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func signInButtonAction() {
-        viewModel.showSignInVC()
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            viewModel.showSignInVC()
+        }
     }
     
     // MARK: - Actions
     @IBAction func tournamentButtonAction(_ sender: UIButton) {
-        viewModel.showTournamentVC()
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            viewModel.showTournamentVC()
+        }
     }
 }
 
@@ -266,13 +287,6 @@ extension ProgramListViewController: ProgramDetailViewControllerProtocol {
         showProgressHUD()
         viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.reloadData()
-            default:
-                break
-            }
         }
     }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03E5CEB1247FC0633F810102 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
+		5E067A5420EE3AD5002CA1D1 /* DashboardTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */; };
+		5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */; };
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
 		5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */; };
@@ -187,7 +189,7 @@
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
 		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
-		5EA173CF20A081B800905253 /* ProgramsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CE20A081B800905253 /* ProgramsViewModel.swift */; };
+		5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */; };
 		5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D020A082AE00905253 /* TabmanViewModel.swift */; };
 		5EA173D320A0883000905253 /* TabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D220A0883000905253 /* TabmanRouter.swift */; };
 		5EA7A0F520A0B04C00D895FC /* TournamentTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F420A0B04C00D895FC /* TournamentTabmanViewController.swift */; };
@@ -213,6 +215,9 @@
 		5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D92072590200F46A8A /* InfoViewModel.swift */; };
 		5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9DB207263B100F46A8A /* InfoViewController.swift */; };
 		5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9DD2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift */; };
+		5EB996A420F36D9F00E31D23 /* FavoriteProgramListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */; };
+		5EB996A720F36DE600E31D23 /* ProgramListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */; };
+		5EB996A920F3738600E31D23 /* ProgramListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A820F3738600E31D23 /* ProgramListViewModelProtocol.swift */; };
 		5EBBECE020626F7400872656 /* DashboardHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */; };
 		5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */; };
 		5EBBECE420626F9700872656 /* ProgramListHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */; };
@@ -451,6 +456,8 @@
 		1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug investor.xcconfig"; sourceTree = "<group>"; };
 		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
 		48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release manager.xcconfig"; sourceTree = "<group>"; };
+		5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanRouter.swift; sourceTree = "<group>"; };
+		5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorCreateViewModel.swift; sourceTree = "<group>"; };
@@ -632,7 +639,7 @@
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
-		5EA173CE20A081B800905253 /* ProgramsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsViewModel.swift; sourceTree = "<group>"; };
+		5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EA173D020A082AE00905253 /* TabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanViewModel.swift; sourceTree = "<group>"; };
 		5EA173D220A0883000905253 /* TabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanRouter.swift; sourceTree = "<group>"; };
 		5EA7A0F420A0B04C00D895FC /* TournamentTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTabmanViewController.swift; sourceTree = "<group>"; };
@@ -658,6 +665,9 @@
 		5EB8E9D92072590200F46A8A /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		5EB8E9DB207263B100F46A8A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		5EB8E9DD2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthForgotPasswordInfoViewModel.swift; sourceTree = "<group>"; };
+		5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProgramListRouter.swift; sourceTree = "<group>"; };
+		5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListRouterProtocol.swift; sourceTree = "<group>"; };
+		5EB996A820F3738600E31D23 /* ProgramListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -1217,6 +1227,38 @@
 			path = EasyTipView;
 			sourceTree = "<group>";
 		};
+		5EB996A520F36DAD00E31D23 /* Favorite Programs */ = {
+			isa = PBXGroup;
+			children = (
+				5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */,
+			);
+			path = "Favorite Programs";
+			sourceTree = "<group>";
+		};
+		5EB996AA20F373E100E31D23 /* Favorite Programs */ = {
+			isa = PBXGroup;
+			children = (
+				5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */,
+			);
+			path = "Favorite Programs";
+			sourceTree = "<group>";
+		};
+		5EB996AB20F392DA00E31D23 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */,
+				5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */,
+				5ED0C91A2091157500C83F23 /* ShadowView.swift */,
+				FCE823662016239C000061E8 /* RoundedImageView.swift */,
+				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
+				5E395A2C2065613800A6B779 /* GradientView.swift */,
+				5E181E692067AD1900BF3240 /* NumpadView.swift */,
+				5EAD0AB82090AB2300A92B49 /* MarkerView.swift */,
+				5EAD0AB62090AB1000A92B49 /* MarkerView.xib */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		5EC0309720A5A78E005CBA32 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1465,6 +1507,7 @@
 			isa = PBXGroup;
 			children = (
 				FCA19A42201AE85C00157AD6 /* DashboardRouter.swift */,
+				5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1511,7 +1554,6 @@
 		FC4C194A203050F200625795 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				5EA173CE20A081B800905253 /* ProgramsViewModel.swift */,
 				FCBD22BF2019E960000B8E38 /* InvestmentProgramListViewModel.swift */,
 				FC5E9047202167CF000E4A90 /* ProgramFilterViewModel.swift */,
 			);
@@ -1548,6 +1590,7 @@
 			isa = PBXGroup;
 			children = (
 				FCA19A40201AE83F00157AD6 /* DashboardViewModel.swift */,
+				5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1740,6 +1783,7 @@
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
 				5E33E3B520AB216F00A0B9DE /* Program Details */,
 				FC4C194A203050F200625795 /* Programs */,
+				5EB996AA20F373E100E31D23 /* Favorite Programs */,
 				FC4C194E203051B700625795 /* Profile */,
 				FC4C194B203051A100625795 /* Auth */,
 				FC4C194C203051A800625795 /* Wallet */,
@@ -1845,9 +1889,7 @@
 		FCC9DD44200DFA5E008825EC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5ED0C91A2091157500C83F23 /* ShadowView.swift */,
 				5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */,
-				5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */,
 				5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */,
 				FCC9DD64200E236E008825EC /* Protocols */,
 				FCC9DD45200DFA5E008825EC /* Extensions */,
@@ -1956,6 +1998,7 @@
 				FC4C194120304EEF00625795 /* Dashboard */,
 				FC4C194220304EF800625795 /* Wallet */,
 				FC4C194420304F0D00625795 /* Tournament */,
+				5EB996A520F36DAD00E31D23 /* Favorite Programs */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -1996,18 +2039,11 @@
 			isa = PBXGroup;
 			children = (
 				FC0E20082044352000872BE5 /* Header View */,
-				FCE823662016239C000061E8 /* RoundedImageView.swift */,
 				5E7B03532067BA3000D8F3BA /* Buttons */,
 				FCC9DD52200DFA5E008825EC /* Cells */,
 				FC0E20072044350E00872BE5 /* Profile */,
-				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
-				5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */,
 				5E7FC747207B6342001617FD /* Labels */,
-				5E395A2C2065613800A6B779 /* GradientView.swift */,
-				5E181E692067AD1900BF3240 /* NumpadView.swift */,
-				5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */,
-				5EAD0AB82090AB2300A92B49 /* MarkerView.swift */,
-				5EAD0AB62090AB1000A92B49 /* MarkerView.xib */,
+				5EB996AB20F392DA00E31D23 /* Custom Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2015,6 +2051,7 @@
 		FCC9DD52200DFA5E008825EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */,
 				FCB17763204568DA00A482B7 /* Dashboard */,
 				FCA57067202735BA001942F3 /* Programs */,
 				FCA570652027359F001942F3 /* Profile */,
@@ -2031,6 +2068,8 @@
 				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
 				FC2722E920496FB5005225F2 /* WalletProtocol.swift */,
 				5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */,
+				5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */,
+				5EB996A820F3738600E31D23 /* ProgramListViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2355,6 +2394,7 @@
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
 				5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */,
 				5E18CE8420C566F1008FE5B5 /* BrokersViewModel.swift in Sources */,
+				5EB996A920F3738600E31D23 /* ProgramListViewModelProtocol.swift in Sources */,
 				5E18CEB320C566F1008FE5B5 /* UpdateProfileViewModel.swift in Sources */,
 				5E18CEBE20C566F1008FE5B5 /* ManagerLevelStatistic.swift in Sources */,
 				5EAC11B220B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift in Sources */,
@@ -2409,7 +2449,7 @@
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
 				5E18CED320C566F1008FE5B5 /* InvestmentProgramUpdate.swift in Sources */,
 				5EBBECE020626F7400872656 /* DashboardHeaderTableViewCell.swift in Sources */,
-				5EA173CF20A081B800905253 /* ProgramsViewModel.swift in Sources */,
+				5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				5E18CE8A20C566F1008FE5B5 /* ManagerProfitChart.swift in Sources */,
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
@@ -2424,6 +2464,8 @@
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
+				5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */,
+				5EB996A720F36DE600E31D23 /* ProgramListRouterProtocol.swift in Sources */,
 				5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */,
 				5E18CEC120C566F1008FE5B5 /* ManagerIpfsHash.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
@@ -2529,6 +2571,7 @@
 				5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */,
 				5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */,
 				5E18CED120C566F1008FE5B5 /* TransactionsFilter.swift in Sources */,
+				5EB996A420F36D9F00E31D23 /* FavoriteProgramListRouter.swift in Sources */,
 				5E18CEC320C566F1008FE5B5 /* WalletWithdrawRequestModel.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
 				5E18CE0120C03DED008FE5B5 /* AuthTwoFactorTabmanViewController.swift in Sources */,
@@ -2646,6 +2689,7 @@
 				FC4C51A7204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift in Sources */,
 				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
 				FC4C19502030555700625795 /* TournamentDetailViewController.swift in Sources */,
+				5E067A5420EE3AD5002CA1D1 /* DashboardTabmanRouter.swift in Sources */,
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,
 				5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */,
 				FC431D96201A46C400DDAFC8 /* InvestmentProgramPlainObjectTranslation.swift in Sources */,

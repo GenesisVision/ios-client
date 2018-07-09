@@ -12,4 +12,5 @@ extension Notification.Name {
     static let signOut = Notification.Name(Constants.Keys.signOutKey)
     static let twoFactorEnable = Notification.Name(Constants.Keys.twoFactorEnableKey)
     static let twoFactorChange = Notification.Name(Constants.Keys.twoFactorChangeKey)
+    static let programFavoriteStateChange = Notification.Name(Constants.Keys.programFavoriteStateChangeKey)
 }

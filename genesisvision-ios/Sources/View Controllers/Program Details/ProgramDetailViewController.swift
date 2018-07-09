@@ -130,7 +130,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.setupUI()
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
     

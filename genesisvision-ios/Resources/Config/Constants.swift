@@ -181,6 +181,7 @@ final class Constants {
         static let signOutKey: String = "signOutKey"
         static let twoFactorEnableKey: String = "twoFactorEnableKey"
         static let twoFactorChangeKey: String = "twoFactorChangeKey"
+        static let programFavoriteStateChangeKey: String = "programFavoriteStateChangeKey"
         
         static let addedLineLayer: String = "addedLineLayer"
     }

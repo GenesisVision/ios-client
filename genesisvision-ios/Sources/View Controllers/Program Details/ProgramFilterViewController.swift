@@ -66,7 +66,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
     
@@ -135,7 +135,7 @@ extension ProgramFilterViewController: FilterSwitchTableViewCellProtocol {
         case .activePrograms:
             viewModel.updateFilter(showActivePrograms: didChangeSelectedValue)
         case .favoritePrograms:
-            viewModel.updateFilter(showMyFavorites: didChangeSelectedValue)
+            break
         case .availableToInvest:
             viewModel.updateFilter(showAvailableToInvest: didChangeSelectedValue)
         }

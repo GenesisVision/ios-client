@@ -74,8 +74,11 @@ class TabmanViewModel: TabmanViewModelProtocol {
     }
         
     func reloadPages() {
-        if let vc = self.router.currentController as? ProgramDetailsTabmanViewController {
+        if let vc = self.router.currentController as? TabmanViewController {
             vc.reloadPages()
+        }
+        
+        if let vc = self.router.currentController as? ProgramDetailsTabmanViewController {
             vc.didReloadData()
         }
     }

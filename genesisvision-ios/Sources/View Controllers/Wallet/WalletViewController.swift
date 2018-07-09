@@ -67,7 +67,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
     

@@ -32,6 +32,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
     }
     private func setupUI() {
         view.backgroundColor = UIColor.BaseView.bg
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
         
         bar.style = viewModel.style
         bar.location = viewModel.location

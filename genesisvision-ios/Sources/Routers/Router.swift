@@ -26,7 +26,7 @@ enum TabsType: Int {
 class Router {
     // MARK: - Variables
     var tournamentViewController: TournamentListViewController!
-    var dashboardViewController: DashboardViewController!
+    var dashboardTabmanViewController: DashboardTabmanViewController!
     var programsViewController: ProgramListViewController!
     
     var currentController: UIViewController?
@@ -44,12 +44,13 @@ class Router {
         var navigationController = BaseNavigationController()
         
         if isInvestorApp {
-            let dashboardViewController = DashboardViewController()
-            self.dashboardViewController = dashboardViewController
+            let dashboardTabmanViewController = DashboardTabmanViewController()
+            self.dashboardTabmanViewController = dashboardTabmanViewController
 
-            navigationController = BaseNavigationController(rootViewController: dashboardViewController)
-            let router = DashboardRouter(parentRouter: self, navigationController: navigationController)
-            dashboardViewController.viewModel = DashboardViewModel(withRouter: router)
+            navigationController = BaseNavigationController(rootViewController: dashboardTabmanViewController)
+            let router =  DashboardTabmanRouter(parentRouter: self, tabmanViewController: dashboardTabmanViewController, navigationController: navigationController)
+            let viewModel = DashboardTabmanViewModel(withRouter: router, tabmanViewModelDelegate: dashboardTabmanViewController)
+            dashboardTabmanViewController.viewModel = viewModel
             navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.title = "DASHBOARD"
@@ -93,7 +94,7 @@ class Router {
             self.tournamentViewController = parentRouter?.tournamentViewController
         } else {
             self.programsViewController = parentRouter?.programsViewController
-            self.dashboardViewController = parentRouter?.dashboardViewController
+            self.dashboardTabmanViewController = parentRouter?.dashboardTabmanViewController
         }
         
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
@@ -176,7 +177,7 @@ extension Router {
         guard let navigationController = getProgramsNavigationController(),
             let programsVC = navigationController.topViewController as? ProgramListViewController,
             let viewModel = programsVC.viewModel,
-            let router = viewModel.router else { return }
+            let router = viewModel.router as? InvestmentProgramListRouter else { return }
         
         router.show(routeType: .signIn)
         
@@ -236,7 +237,6 @@ extension Router {
         tabmanViewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
         
         let router = ProgramDetailsRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        router.currentController = tabmanViewController
         let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: tabmanViewController)
         viewModel.programDetailsProtocol = tabmanViewController
         tabmanViewController.viewModel = viewModel

@@ -6,10 +6,10 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Tabman
-
-class DashboardTabmanViewController: BaseTabmanViewController<TabmanViewModel> {
+class DashboardTabmanViewController: BaseTabmanViewController<DashboardTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel.setup()
     }
 }

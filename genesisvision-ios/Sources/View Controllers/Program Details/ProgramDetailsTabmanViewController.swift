@@ -42,7 +42,8 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
 }
 
 extension ProgramDetailsTabmanViewController: ReloadDataProtocol {
-    func didReloadData() {if let viewModel = viewModel {
+    func didReloadData() {
+        if let viewModel = viewModel {
             viewModel.reloadDetails()
         }
     }

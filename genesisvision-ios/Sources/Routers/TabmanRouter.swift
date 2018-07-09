@@ -12,9 +12,10 @@ class TabmanRouter: Router {
 
     var tabmanViewController: TabmanViewController?
 
-    init(parentRouter: Router?, tabmanViewController: TabmanViewController? = nil) {
-        super.init(parentRouter: parentRouter)
+    init(parentRouter: Router?, tabmanViewController: TabmanViewController? = nil, navigationController: UINavigationController? = nil) {
+        super.init(parentRouter: parentRouter, navigationController: navigationController)
         self.tabmanViewController = tabmanViewController
+        self.currentController = tabmanViewController
     }
     
     func next() {
