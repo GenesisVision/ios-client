@@ -43,8 +43,8 @@ class TournamentDetailViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerNibs(for: TournamentDetailViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: TournamentDetailViewModel.viewModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         showInfiniteIndicator(value: false)
         
         setupPullToRefresh()

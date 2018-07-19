@@ -95,12 +95,12 @@ final class TournamentListViewModel {
 extension TournamentListViewModel {
     // MARK: - Variables
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [TournamentTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
     

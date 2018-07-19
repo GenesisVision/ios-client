@@ -61,7 +61,7 @@ class DashboardViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: DashboardViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }

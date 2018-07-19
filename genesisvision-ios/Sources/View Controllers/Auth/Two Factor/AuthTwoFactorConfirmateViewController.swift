@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 
 class AuthTwoFactorConfirmationViewController: BaseViewController {
+    // MARK: - View Model
     var viewModel: AuthTwoFactorConfirmationViewModel!
     
     // MARK: - TextFields
@@ -67,7 +68,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
         codeTextField.setBottomLine()
         passwordTextField.setBottomLine()
         
-        confirmButton.setTitle(viewModel.buttonTitleText.uppercased(), for: .normal)
+        confirmButton.setTitle(viewModel.buttonTitleText, for: .normal)
     }
     
     private func confirmMethod() {

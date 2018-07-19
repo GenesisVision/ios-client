@@ -11,7 +11,6 @@ import UIKit.UIImage
 final class AuthTwoFactorSuccessDisableViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.TwoFactor.twoFactorDisableSuccess
-    var recoveryCodes = [String]()
     
     var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
     var backgroundColor: UIColor = UIColor.InfoView.bg

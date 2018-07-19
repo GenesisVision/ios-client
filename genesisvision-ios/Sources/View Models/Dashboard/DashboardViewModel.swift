@@ -18,7 +18,7 @@ final class DashboardViewModel {
     // MARK: - Variables
     var activePrograms = true
     
-    var title = "Portfolio"
+    var title = "Portfolio".uppercased()
     
     private var sections: [SectionType] = [.header, .programList]
     
@@ -147,12 +147,12 @@ final class DashboardViewModel {
 extension DashboardViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardHeaderTableViewCellViewModel.self, DashboardTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [SortHeaderView.self]
     }
     

@@ -30,7 +30,7 @@ final class AuthTwoFactorEnableConfirmationViewModel: AuthTwoFactorConfirmationV
     
     // MARK: - Variables
     public private(set) var title: String = "Verify"
-    public private(set) var buttonTitleText: String = "Confirm"
+    public private(set) var buttonTitleText: String = "Confirm".uppercased()
     public private(set) var numbersLimit: Int = 6
     
     private var tabmanViewModel: AuthTwoFactorTabmanViewModel!
@@ -47,7 +47,7 @@ final class AuthTwoFactorEnableConfirmationViewModel: AuthTwoFactorConfirmationV
         guard let sharedKey = tabmanViewModel.sharedKey, let twoFactorCode = twoFactorCode else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         TwoFactorDataProvider.auth2faConfirm(twoFactorCode: twoFactorCode, sharedKey: sharedKey, password: password, completion: { (viewModel) in
-            guard let codes = viewModel?.codes else { return completion(nil)}
+            guard let codes = viewModel?.codes else { return completion(nil) }
             
             let recoveryCodes: [String] = codes.map({ return $0.code ?? "" })
             

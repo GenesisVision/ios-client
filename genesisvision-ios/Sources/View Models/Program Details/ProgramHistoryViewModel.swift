@@ -10,7 +10,7 @@ import UIKit
 
 final class ProgramHistoryViewModel {
     // MARK: - Variables
-    var title: String = "History"
+    var title: String = "History".uppercased()
     var investmentProgramId: String?
     
     var router: ProgramHistoryRouter!
@@ -41,7 +41,7 @@ final class ProgramHistoryViewModel {
 extension ProgramHistoryViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [WalletTransactionTableViewCellViewModel.self]
     }
     

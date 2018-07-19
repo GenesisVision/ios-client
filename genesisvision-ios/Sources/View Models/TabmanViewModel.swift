@@ -22,6 +22,8 @@ class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
     var title: String = ""
     
+    var pageboyDataSource: PageboyDataSource!
+    
     weak var tabmanViewModelDelegate: TabmanViewModelDelegate?
     
     internal var style: TabmanBar.Style = .buttonBar
@@ -46,6 +48,8 @@ class TabmanViewModel: TabmanViewModelProtocol {
         self.defaultPage = .at(index: defaultPage)
         self.viewControllersCount = viewControllersCount
         self.tabmanViewModelDelegate = tabmanViewModelDelegate
+        
+        pageboyDataSource = PageboyDataSource(viewModel: self)
     }
     
     // MARK: - Public methods
@@ -57,7 +61,13 @@ class TabmanViewModel: TabmanViewModelProtocol {
     func addController(_ viewController: UIViewController) {
         viewControllers.append(viewController)
         viewControllersCount = viewControllers.count
-        style = viewControllersCount > 4 ? .scrollingButtonBar : .buttonBar
+        
+        switch style {
+        case .buttonBar:
+            style = viewControllersCount > 4 ? .scrollingButtonBar : .buttonBar
+        default:
+            break
+        }
     }
     
     func removeController(_ index: Int) {

@@ -10,7 +10,7 @@ import UIKit.UITableViewHeaderFooterView
 
 final class ProgramDetailTradesViewModel {
     // MARK: - Variables
-    var title: String = "Trades"
+    var title: String = "Trades".uppercased()
     var investmentProgramId: String?
     
     var router: ProgramDetailTradesRouter!
@@ -42,11 +42,11 @@ final class ProgramDetailTradesViewModel {
 extension ProgramDetailTradesViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramDetailTradesTableViewCellViewModel.self]
     }
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [ProgramDetailTradesHeaderView.self]
     }
     

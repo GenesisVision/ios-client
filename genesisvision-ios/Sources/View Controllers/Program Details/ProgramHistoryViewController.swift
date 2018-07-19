@@ -32,7 +32,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: ProgramHistoryViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }

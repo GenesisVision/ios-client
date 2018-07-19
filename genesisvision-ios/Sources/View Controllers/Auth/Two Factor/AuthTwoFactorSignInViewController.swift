@@ -9,7 +9,7 @@
 import UIKit
 
 class AuthTwoFactorSignInViewController: BaseViewController {
-    
+    // MARK: - View Model
     var viewModel: AuthTwoFactorSignInViewModel!
     
     // MARK: - Views
@@ -57,7 +57,7 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     // MARK: - Private methods
     private func setupUI() {
         signInButton.setEnabled(false)
-        signInButton.setTitle(viewModel.buttonTitle.uppercased(), for: .normal)
+        signInButton.setTitle(viewModel.buttonTitle, for: .normal)
         
         titleLabel.text = viewModel.titleText
         titleLabel.textColor = UIColor.TwoFactor.title

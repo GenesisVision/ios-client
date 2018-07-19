@@ -25,7 +25,7 @@ final class ProgramDetailViewModel {
     }
 
     // MARK: - Variables
-    var title: String = "Details"
+    var title: String = "Details".uppercased()
     
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -63,12 +63,12 @@ final class ProgramDetailViewModel {
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramDetailsTableViewCellViewModel.self, ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramMoreDetailsTableViewCellViewModel.self, DetailTextTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [DefaultTableHeaderView.self]
     }
     

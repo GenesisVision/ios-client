@@ -55,7 +55,7 @@ final class ProgramFilterViewModel {
     weak var switchDelegate: FilterSwitchTableViewCellProtocol?
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [FilterSliderTableViewCellViewModel.self, FilterSwitchTableViewCellViewModel.self]
     }
     

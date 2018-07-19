@@ -16,10 +16,10 @@ class AuthDataProvider: DataProvider {
             : managerSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)
     }
     
-    static func signUp(userName: String? = nil, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
+    static func signUp(username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         isInvestorApp
             ? investorSignUp(with: email, password: password, confirmPassword: confirmPassword, completion: completion)
-            : managerSignUp(with: userName!, email: email, password: password, confirmPassword: confirmPassword, completion: completion)
+            : managerSignUp(with: username, email: email, password: password, confirmPassword: confirmPassword, completion: completion)
     }
     
     static func forgotPassword(email: String, completion: @escaping CompletionBlock) {
@@ -77,8 +77,8 @@ class AuthDataProvider: DataProvider {
         }
     }
     
-    private static func managerSignUp(with userName: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        let registerManagerViewModel = RegisterManagerViewModel(userName: userName, email: email, password: password, confirmPassword: confirmPassword)
+    private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
+        let registerManagerViewModel = RegisterManagerViewModel(userName: username, email: email, password: password, confirmPassword: confirmPassword)
         
         ManagerAPI.apiManagerAuthSignUpPost(model: registerManagerViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)

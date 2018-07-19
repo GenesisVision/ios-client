@@ -15,6 +15,23 @@ class ProgramDataProvider: DataProvider {
         getInvestorProgram(with: investmentProgramId, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
     }
     
+    static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let newInvestmentRequest = newInvestmentRequest
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ManagerAPI.apiManagerAccountNewInvestmentRequestPost(authorization: authorization, request: newInvestmentRequest) { (uuid, error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    completion(uuid?.uuidString)
+                case .failure:
+                    errorCompletion(result)
+                }
+            })
+        }
+    }
+    
     static func investProgram(withAmount amount: Double, investmentProgramId: String?, completion: @escaping (_ walletsViewModel: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let investmentProgramId = investmentProgramId,

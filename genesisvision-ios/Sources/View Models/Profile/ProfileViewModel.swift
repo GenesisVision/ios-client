@@ -19,12 +19,8 @@ enum ProfileFieldType: String, EnumCollection {
     case gender = "Gender"
 }
 
-enum ProfileState {
-    case show
-    case edit
-}
-
 final class ProfileViewModel {
+    typealias FieldType = ProfileFieldType
     
     enum SectionType {
         case header
@@ -36,39 +32,15 @@ final class ProfileViewModel {
     
     private var router: ProfileRouter!
     private var profileModel: ProfileFullViewModel?
-    weak var textFieldDelegate: UITextFieldDelegate?
     
-    var rows: [ProfileFieldType] = [.email, .firstName, .middleName, .lastName, .birthday, .gender]
+    var rows: [FieldType] = [.email, .firstName, .middleName, .lastName, .birthday, .gender]
+    var sections: [SectionType] = [.fields]
     
-    var editableFields = [EditableField]()
+    var editableFields = [EditableField<FieldType>]()
     var pickedImage: UIImage?
     var pickedImageURL: URL?
     
-    class EditableField {
-        var text: String
-        var type: ProfileFieldType
-        var placeholder: String
-        var editable: Bool
-        var selectable: Bool
-        var keyboardType: UIKeyboardType?
-        var textContentType: UITextContentType?
-        
-        var isValid: (String) -> Bool
-        
-        init(text: String, placeholder: String, editable: Bool, selectable: Bool, type: ProfileFieldType, keyboardType: UIKeyboardType?, textContentType: UITextContentType?, isValid: @escaping (String) -> Bool) {
-            self.text = text
-            self.placeholder = placeholder
-            self.editable = editable
-            self.selectable = selectable
-            self.type = type
-            self.keyboardType = keyboardType
-            self.textContentType = textContentType
-            self.isValid = isValid
-        }
-    }
-    
-    var sections: [SectionType] = [.fields]
-    var profileState: ProfileState = .show {
+    var editableState: EditableState = .show {
         didSet {
             guard editableFields.count > 0 else { return }
             
@@ -79,11 +51,12 @@ final class ProfileViewModel {
         }
     }
     
-    weak var delegate: ProfileHeaderViewDelegate?
+    weak var textFieldDelegate: UITextFieldDelegate?
+    weak var delegate: PhotoHeaderViewDelegate?
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProfileFieldTableViewCellViewModel.self]
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FieldWithTextFieldTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -136,8 +109,9 @@ final class ProfileViewModel {
             return nil
         case .fields:
             let field = editableFields[indexPath.row]
-            return ProfileFieldTableViewCellViewModel(text: field.text, placeholder: field.placeholder, editable: field.editable, selectable: field.selectable, keyboardType: field.keyboardType, textContentType: field.textContentType, delegate: textFieldDelegate, valueChanged: { [weak self] (text) in
-                let type: ProfileFieldType = ProfileFieldType(rawValue: field.placeholder)!
+            return FieldWithTextFieldTableViewCellViewModel(text: field.text, placeholder: field.placeholder, editable: field.editable, selectable: field.selectable, showAccessory: true, isSecureTextEntry: field.isSecureTextEntry, keyboardType: field.keyboardType, returnKeyType: field.returnKeyType, textContentType: field.textContentType, delegate: textFieldDelegate, valueChanged: { [weak self] (text) in
+                guard let type: FieldType = FieldType(rawValue: field.placeholder) else { return }
+                
                 switch type {
                 case .firstName:
                     self?.profileModel?.firstName = text
@@ -149,19 +123,17 @@ final class ProfileViewModel {
                     break
                 }
             })
-            
         }
     }
     
     func editProfile(completion: @escaping CompletionBlock) {
-        profileState = .edit
+        editableState = .edit
         completion(.success)
     }
     
-    
     func cancelEditProfile(completion: @escaping CompletionBlock) {
         setupCellViewModel()
-        profileState = .show
+        editableState = .show
         fetchProfile(completion: completion)
     }
     
@@ -193,8 +165,8 @@ final class ProfileViewModel {
         }
     }
     
-    func didSelect(_ indexPath: IndexPath) -> ProfileFieldType? {
-        guard profileState == .edit else {
+    func didSelect(_ indexPath: IndexPath) -> FieldType? {
+        guard editableState == .edit else {
             return nil
         }
         
@@ -209,7 +181,7 @@ final class ProfileViewModel {
     }
     
     // MARK: -  Private methods
-    private func getFields() -> [ProfileFieldType : String] {
+    private func getFields() -> [FieldType : String] {
         return [.email : profileModel?.email ?? "",
                 .firstName : profileModel?.firstName ?? "",
                 .middleName : profileModel?.middleName ?? "",
@@ -218,7 +190,7 @@ final class ProfileViewModel {
                 .gender : getGenderValue()]
     }
     
-    private func getKeyboardTypes(for fieldType: ProfileFieldType) -> UIKeyboardType {
+    private func getKeyboardType(for fieldType: FieldType) -> UIKeyboardType {
         switch fieldType {
         case .email:
             return .emailAddress
@@ -226,8 +198,8 @@ final class ProfileViewModel {
             return .default
         }
     }
-    
-    private func getTextContentTypes(for fieldType: ProfileFieldType) -> UITextContentType? {
+
+    private func getTextContentType(for fieldType: FieldType) -> UITextContentType? {
         switch fieldType {
         case .firstName:
             return .name
@@ -240,8 +212,8 @@ final class ProfileViewModel {
         }
     }
     
-    private func getEditable(for fieldType: ProfileFieldType) -> Bool {
-        guard profileState == .edit else {
+    private func getEditable(for fieldType: FieldType) -> Bool {
+        guard editableState == .edit else {
             return false
         }
         
@@ -253,8 +225,8 @@ final class ProfileViewModel {
         }
     }
     
-    private func getSelectable(for fieldType: ProfileFieldType) -> Bool {
-        guard profileState == .edit else {
+    private func getSelectable(for fieldType: FieldType) -> Bool {
+        guard editableState == .edit else {
             return false
         }
         
@@ -267,20 +239,22 @@ final class ProfileViewModel {
     }
     
     private func setupCellViewModel() {
-        var editableFields: [EditableField] = []
+        var editableFields: [EditableField<FieldType>] = []
         
-        ProfileFieldType.allValues.forEach { (type) in
+        FieldType.allValues.forEach { (type) in
             let fields = getFields()
             let key = type.rawValue
             
             let text = fields[type] ?? ""
-            let placeholder = key.capitalized
+            let placeholder = key
             let editable = getEditable(for: type)
             let selectable = getSelectable(for: type)
-            let keyboardType = getKeyboardTypes(for: type)
-            let textContentType = getTextContentTypes(for: type)
+            let isSecureTextEntry = false
+            let keyboardType = getKeyboardType(for: type)
+            let returnKeyType: UIReturnKeyType = .next
+            let textContentType = getTextContentType(for: type)
             
-            let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, selectable: selectable, type: type, keyboardType: keyboardType, textContentType: textContentType, isValid: { (text) -> Bool in
+            let editableField = EditableField(text: text, placeholder: placeholder, editable: editable, selectable: selectable, isSecureTextEntry: isSecureTextEntry, type: type, keyboardType: keyboardType, returnKeyType: returnKeyType, textContentType: textContentType, isValid: { (text) -> Bool in
                 return text.count > 1
             })
             
@@ -325,7 +299,7 @@ final class ProfileViewModel {
             return 
         }
         
-        ProfileDataProvider.updateProfileImage(imageURL: pickedImageURL, completion: { [weak self] (imageID) in
+        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (imageID) in
             self?.profileModel?.avatar = imageID
             self?.updateProfileApi(completion: completion)
         }, errorCompletion: completion)
@@ -353,7 +327,7 @@ final class ProfileViewModel {
             case .success:
                 AuthManager.saveProfileViewModel(viewModel: profileModel)
                 self?.setupCellViewModel()
-                self?.profileState = .show
+                self?.editableState = .show
             case .failure( _):
                 break
             }

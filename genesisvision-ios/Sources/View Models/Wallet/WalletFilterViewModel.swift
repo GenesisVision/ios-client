@@ -33,7 +33,7 @@ final class WalletFilterViewModel {
     private var walletFilterTypeTableViewCellViewModel: WalletFilterTypeTableViewCellViewModel!
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [WalletFilterTypeTableViewCellViewModel.self]
     }
     

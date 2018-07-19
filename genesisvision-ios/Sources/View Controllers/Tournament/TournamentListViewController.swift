@@ -41,7 +41,7 @@ class TournamentListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: TournamentListViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }

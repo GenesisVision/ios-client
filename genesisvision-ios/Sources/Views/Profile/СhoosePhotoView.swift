@@ -1,5 +1,5 @@
 //
-//  ChooseProfilePhotoButton.swift
+//  СhoosePhotoView.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 04.02.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChooseProfilePhotoButton: UIView {
+class СhoosePhotoView: UIView {
     // MARK: - Outlets
     @IBOutlet var shadowView: UIView!
     
@@ -18,6 +18,15 @@ class ChooseProfilePhotoButton: UIView {
     @IBOutlet var choosePhotoButton: UIButton! {
         didSet {
             choosePhotoButton.backgroundColor = .clear
+        }
+    }
+    
+    // MARK: - Variables
+    var state: EditableState = .edit {
+        didSet {
+            choosePhotoButton?.isHidden = state == .show
+            shadowView?.isHidden = state == .show
+            editImageView?.isHidden = state == .show
         }
     }
     
@@ -32,13 +41,10 @@ class ChooseProfilePhotoButton: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    }
-    
-    // MARK: - Public methdods
-    func change(state: ProfileState) {
-        choosePhotoButton.isHidden = state == .show
-        shadowView.isHidden = state == .show
-        editImageView.isHidden = state == .show
+        
+        choosePhotoButton?.isHidden = state == .show
+        shadowView?.isHidden = state == .show
+        editImageView?.isHidden = state == .show
     }
 }
 

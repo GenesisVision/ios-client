@@ -136,13 +136,18 @@ final class Constants {
     }
     
     struct Api {
-        static let basePath = isTournamentApp
-            ? isDebug
-                ? Tournament.debug
-                : Tournament.release
-            : isDebug
-                ? Main.debug
-                : Main.release
+        static let basePath =
+            isTournamentApp
+                ? isDebug
+                    ? Tournament.debug
+                    : Tournament.release
+                : isInvestorApp
+                    ? isDebug
+                        ? Investor.debug
+                        : Investor.release
+                    : isDebug
+                        ? Manager.debug
+                        : Manager.release
         
         static let ipfsPath = "https://gateway.ipfs.io/ipfs/"
         
@@ -153,8 +158,13 @@ final class Constants {
         static let take: Int = 50 //count of templates on 1 page
         static let equityChartLength: Int = 36
         
-        struct Main {
+        struct Investor {
             static let debug = "https://alpha.genesis.vision"
+            static let release = "https://alpha.genesis.vision"
+        }
+        
+        struct Manager {
+            static let debug = "https://black-api.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         

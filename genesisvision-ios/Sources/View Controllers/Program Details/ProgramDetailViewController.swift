@@ -102,8 +102,8 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.registerNibs(for: ProgramDetailViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: ProgramDetailViewModel.viewModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }

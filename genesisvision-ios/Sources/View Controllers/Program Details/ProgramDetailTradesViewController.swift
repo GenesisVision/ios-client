@@ -32,8 +32,8 @@ class ProgramDetailTradesViewController: BaseViewControllerWithTableView {
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: ProgramDetailTradesViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: ProgramDetailTradesViewModel.viewModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }

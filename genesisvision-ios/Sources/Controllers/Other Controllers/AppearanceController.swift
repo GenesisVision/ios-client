@@ -30,7 +30,7 @@ struct NavBarColors {
 }
 
 struct AppearanceController {
-    static var theme: ThemeType = isInvestorApp ? .default : .dark
+    static var theme: ThemeType = .default
     
     static func setupAppearance() {
         #if DEBUG

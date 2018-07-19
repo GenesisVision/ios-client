@@ -1,14 +1,14 @@
 //
-//  ProfileFieldTableViewCell.swift
+//  FieldWithTextViewTableViewCell.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 04.02.18.
+//  Created by George Shaginyan on 12/07/18.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class ProfileFieldTableViewCell: PlateTableViewCell {
+class FieldWithTextViewTableViewCell: PlateTableViewCell {
 
     var valueChanged: ((String) -> Void)?
     
@@ -17,10 +17,9 @@ class ProfileFieldTableViewCell: PlateTableViewCell {
     
     @IBOutlet var accessoryImageView: UIImageView!
     
-    @IBOutlet var textField: DesignableUITextField! {
+    @IBOutlet var textView: UITextView! {
         didSet {
-            textField.setClearButtonWhileEditing()
-            textField.designableTextFieldDelegate = self
+            textView.delegate = self
         }
     }
     
@@ -37,14 +36,10 @@ class ProfileFieldTableViewCell: PlateTableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         
     }
-    
-    @IBAction func descriptionTextViewChanged(_ sender: UITextField) {
-        valueChanged?(sender.text ?? "")
-    }
 }
 
-extension ProfileFieldTableViewCell: DesignableUITextFieldDelegate {
-    func textFieldDidClear() {
-        valueChanged?("")
+extension FieldWithTextViewTableViewCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        valueChanged?(textView.text)
     }
 }

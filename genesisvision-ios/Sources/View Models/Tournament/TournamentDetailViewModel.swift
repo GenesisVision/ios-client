@@ -9,10 +9,35 @@
 import UIKit.UITableViewHeaderFooterView
 
 protocol ViewModelWithTableView {
+    var tableViewDataSourceAndDelegate: TableViewDataSourceAndDelegate! { get }
+    
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
+    
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
+    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+}
+
+extension ViewModelWithTableView {func headerTitle(for section: Int) -> String? {
+        return nil
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func numberOfSections() -> Int {
+        return 0
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 0
+    }
+    
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        return nil
+    }
 }
 
 final class TournamentDetailViewModel {
@@ -38,12 +63,12 @@ final class TournamentDetailViewModel {
     var dataType: DataType = .api
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [TraderDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [DefaultTableHeaderView.self]
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 final class ProgramDescriptionViewModel {
     // MARK: - Variables
-    var title: String = "Strategy"
+    var title: String = "Strategy".uppercased()
     
     var investmentProgramId: String?
     

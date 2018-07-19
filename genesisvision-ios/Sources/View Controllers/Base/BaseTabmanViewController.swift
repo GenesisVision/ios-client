@@ -25,11 +25,12 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
     private func setup() {
         viewModel.initializeViewControllers()
         
-        dataSource = self
+        dataSource = viewModel.pageboyDataSource
         navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         setupUI()
     }
+    
     private func setupUI() {
         view.backgroundColor = UIColor.BaseView.bg
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
@@ -73,25 +74,11 @@ extension BaseTabmanViewController: TabmanViewModelDelegate {
         var barItems = [Item]()
         
         for itemTitle in viewModel.itemTitles {
-            barItems.append(Item(title: itemTitle.uppercased()))
+            barItems.append(Item(title: itemTitle))
         }
         
         bar.items = barItems
         
         setupUI()
-    }
-}
-
-extension BaseTabmanViewController: PageboyViewControllerDataSource {
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewModel.viewControllers.count
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewModel.viewControllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return viewModel.defaultPage
     }
 }

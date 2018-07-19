@@ -60,7 +60,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
-        tableView.registerNibs(for: ProgramFilterViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         showInfiniteIndicator(value: false)
     }
     

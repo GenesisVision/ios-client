@@ -18,7 +18,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     }
     
     // MARK: - Outlets
-    @IBOutlet weak var headerView: ProfileHeaderView! {
+    @IBOutlet weak var headerView: PhotoHeaderView! {
         didSet {
             headerView.delegate = self
             headerView.isHidden = true
@@ -88,7 +88,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     private func setupUI() {
         showProfileStateAction()
         
-        title = viewModel.title.uppercased()
+        title = viewModel.title
         navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         showInfiniteIndicator(value: false)
@@ -98,7 +98,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: ProfileViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -112,53 +112,15 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     private func editProfileStateAction() {
         navigationItem.leftBarButtonItem = saveProfileButton
         navigationItem.rightBarButtonItem = cancelEditProfileButton
-        headerView.profileState = viewModel.profileState
+        headerView.editableState = viewModel.editableState
         tableView.bounces = false
     }
     
     private func showProfileStateAction() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = editProfileButton
-        headerView.profileState = viewModel.profileState
+        headerView.editableState = viewModel.editableState
         tableView.bounces = true
-    }
-    
-    private func takePhoto(type: UIImagePickerControllerSourceType) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = type
-        picker.allowsEditing = true
-        
-        picker.navigationBar.barTintColor = UIColor.Background.main
-        picker.navigationBar.tintColor = UIColor.primary
-        picker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.primary]
-        present(picker, animated: true, completion: nil)
-    }
-    
-    private func takePhoto() {
-        view.endEditing(true)
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.primary
-        
-        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self] (action) in
-            DispatchQueue.main.async {
-                self?.takePhoto(type: .camera)
-            }
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { [weak self] (action) in
-            DispatchQueue.main.async {
-                self?.takePhoto(type: .photoLibrary)
-            }
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
-        
-        alert.popoverPresentationController?.sourceView = headerView.chooseProfilePhotoButton
-        alert.popoverPresentationController?.sourceRect = headerView.chooseProfilePhotoButton.bounds
-        
-        present(alert, animated: true, completion: nil)
     }
     
     private func update(gender value: Bool) {
@@ -318,66 +280,32 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ProfileViewController: ProfileHeaderViewDelegate {
-    func chooseProfilePhotoDidPressOnPhoto(_ view: ProfileHeaderView) {
-        takePhoto()
+extension ProfileViewController: PhotoHeaderViewDelegate {
+    func didPressOnPhotoButton(_ view: PhotoHeaderView) {
+        view.endEditing(true)
+        
+        showImagePicker()
     }
 }
 
-
-extension ProfileViewController: UIImagePickerControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+extension ProfileViewController: ImagePickerPresentable {
+    var choosePhotoButton: UIButton {
+        return headerView.choosePhotoView.choosePhotoButton
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var data: Data?
-        let fileName = "test.jpg"
-        var selectedImage: UIImage?
-
-        if let refURL = info[UIImagePickerControllerReferenceURL] as! URL? {
-            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-                data = UIImageJPEGRepresentation(image, 0.5)
-                selectedImage = image
-            } else {
-                do {
-                    data = try Data(contentsOf: refURL)
-                } catch {
-                    print("Unable to load data: \(error)")
-                }
-
-                if let data = data {
-                    selectedImage = UIImage(data: data)
-                }
-            }
-        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            data = UIImageJPEGRepresentation(image, 0.5)
-            selectedImage = image
-        }
-        
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)
-        
-        do {
-            try data?.write(to: fileURL, options: .atomic)
-        } catch {
-            print("Unable to write data: \(error)")
-        }
-        
-        viewModel.pickedImageURL = fileURL
-        viewModel.pickedImage = selectedImage
+    func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
+        viewModel.pickedImage = pickedImage
+        viewModel.pickedImageURL = pickedImageURL
         
         DispatchQueue.main.async {
-            self.headerView.update(avatar: selectedImage)
+            self.headerView.updateAvatar(url: pickedImageURL)
         }
-    
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let canGoNext = IQKeyboardManager.sharedManager().canGoNext
-        if canGoNext {
+        if IQKeyboardManager.sharedManager().canGoNext {
             IQKeyboardManager.sharedManager().goNext()
         } else {
             IQKeyboardManager.sharedManager().resignFirstResponder()

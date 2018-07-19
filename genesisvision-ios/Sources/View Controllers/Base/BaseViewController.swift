@@ -320,6 +320,27 @@ extension BaseViewControllerWithTableView: UIScrollViewDelegate {
     }
 }
 
+//extension BaseViewControllerWithTableView: UITableViewDelegate, UITableViewDataSource {
+//    
+//    // MARK: - UITableViewDelegate
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let model = viewModel.model(at: indexPath) else {
+//            return UITableViewCell()
+//        }
+//
+//        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+//    }
+//
+//    // MARK: - UITableViewDataSource
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.numberOfRows(in: section)
+//    }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return viewModel.numberOfSections()
+//    }
+//}
+
 extension BaseViewControllerWithTableView: UIViewControllerWithBottomView {
     @objc func signInButtonAction() {
         
@@ -421,7 +442,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
 }
 
 class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable {
-    // MARK: - Veriables
+    // MARK: - Variables
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     
     // MARK: - Lifecycle

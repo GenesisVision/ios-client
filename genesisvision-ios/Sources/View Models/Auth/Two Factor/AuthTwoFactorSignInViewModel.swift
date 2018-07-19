@@ -12,7 +12,7 @@ final class AuthTwoFactorSignInViewModel {
     // MARK: - Variables
     var title: String = "Two Factor Authentication"
     
-    var buttonTitle: String = "Sign In"
+    var buttonTitle: String = "Sign In".uppercased()
     var titleText: String = String.ViewTitles.TwoFactor.signInTitle
     var labelPlaceholder: String = ""
 

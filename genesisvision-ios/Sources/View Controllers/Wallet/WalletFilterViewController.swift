@@ -55,7 +55,7 @@ class WalletFilterViewController: BaseViewControllerWithTableView {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: WalletFilterViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         showInfiniteIndicator(value: false)
     }
     

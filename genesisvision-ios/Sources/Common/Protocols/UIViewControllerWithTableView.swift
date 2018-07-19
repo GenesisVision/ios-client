@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol BaseViewControllerWithViewModel {
+//    associatedtype viewModelType: ViewModelWithTableView
+//    var viewModel: viewModelType { get }
+    
+    var viewModel: ViewModelWithTableView! { get }
+}
+
 protocol UIViewControllerWithTableView {
     var tableView: UITableView! { get }
     var refreshControl: UIRefreshControl! { get }

@@ -22,14 +22,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aFg-fN-Dcc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="blr-FG-pJn" customClass="ProfileHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="blr-FG-pJn" customClass="PhotoHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5e-J1-qFB">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-rQ-dRW" customClass="ChooseProfilePhotoButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-rQ-dRW" customClass="СhoosePhotoView" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="104" y="16" width="168" height="168"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PZf-lb-c2V">
@@ -80,10 +80,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="PZf-lb-c2V" secondAttribute="trailing" id="zN5-41-MYi"/>
                                             </constraints>
                                             <connections>
-                                                <outlet property="choosePhotoButton" destination="h6f-xj-I7n" id="0wd-B0-A5u"/>
-                                                <outlet property="editImageView" destination="gg7-NN-EN1" id="kfd-wJ-4iW"/>
-                                                <outlet property="photoImageView" destination="PZf-lb-c2V" id="JRS-MF-6tG"/>
-                                                <outlet property="shadowView" destination="oLP-66-RUC" id="Q7n-6G-Jr1"/>
+                                                <outlet property="choosePhotoButton" destination="h6f-xj-I7n" id="BKa-Lu-cM3"/>
+                                                <outlet property="editImageView" destination="gg7-NN-EN1" id="eqj-Oo-8CD"/>
+                                                <outlet property="photoImageView" destination="PZf-lb-c2V" id="xAj-Fx-BgD"/>
+                                                <outlet property="shadowView" destination="oLP-66-RUC" id="cMU-5K-GgR"/>
                                             </connections>
                                         </view>
                                     </subviews>
@@ -98,7 +98,7 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="backgroundImageView" destination="C5e-J1-qFB" id="sCa-tK-AP9"/>
-                                        <outlet property="chooseProfilePhotoButton" destination="pPQ-rQ-dRW" id="npK-oA-DFa"/>
+                                        <outlet property="choosePhotoView" destination="pPQ-rQ-dRW" id="zDD-sr-evM"/>
                                     </connections>
                                 </view>
                             </tableView>

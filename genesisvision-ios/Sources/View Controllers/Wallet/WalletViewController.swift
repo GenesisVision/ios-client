@@ -44,7 +44,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func updateTitle() {
-        title = viewModel.title.uppercased()
+        title = viewModel.title
         navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
     }
     
@@ -52,7 +52,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: WalletControllerViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }

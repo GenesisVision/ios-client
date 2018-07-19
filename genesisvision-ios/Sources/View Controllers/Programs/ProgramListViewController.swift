@@ -94,7 +94,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             self?.navigationItem.rightBarButtonItem = self?.tournamentBarButtonItem
         })
         
-        tabBarItem.title = viewModel.title.uppercased()
+        tabBarItem.title = viewModel.title
 
         setupSearchBar()
     }
@@ -114,7 +114,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: InvestmentProgramListViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh()
     }

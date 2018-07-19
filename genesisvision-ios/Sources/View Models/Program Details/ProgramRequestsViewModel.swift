@@ -10,7 +10,7 @@ import UIKit
 
 final class ProgramRequestsViewModel {
     // MARK: - Variables
-    var title: String = "Requests"
+    var title: String = "Requests".uppercased()
     private var investmentProgramId: String!
     private weak var programDetailProtocol: ProgramDetailProtocol?
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -43,7 +43,7 @@ final class ProgramRequestsViewModel {
 extension ProgramRequestsViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramRequestTableViewCellViewModel.self]
     }
     

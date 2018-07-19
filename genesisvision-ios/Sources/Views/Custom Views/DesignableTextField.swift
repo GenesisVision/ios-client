@@ -26,7 +26,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     var rightPadding: CGFloat = 16.0
     let imageWidth: CGFloat = 16.0
     
-    var color: UIColor = UIColor.lightGray
+    var color: UIColor = UIColor.primary
     
     var bottomlineHeight: Double = 1.0
     var bottomlineColor: UIColor = UIColor.TextField.line
@@ -68,7 +68,21 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     
     func setLeftImageView() {
         if let text = text {
-            leftImage = !text.isEmpty ? textContentType == UITextContentType.emailAddress ? #imageLiteral(resourceName: "img_textfield_email_icon") : isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_icon") : nil : textContentType == UITextContentType.emailAddress ? #imageLiteral(resourceName: "img_textfield_email_colored_icon") : isSecureTextEntry ? #imageLiteral(resourceName: "img_textfield_password_colored_icon") : nil
+            leftImage = !text.isEmpty
+                ? textContentType == UITextContentType.emailAddress
+                    ? #imageLiteral(resourceName: "img_textfield_email_icon")
+                    : textContentType == UITextContentType.nickname
+                        ? #imageLiteral(resourceName: "img_tabbar_profile_unselected")
+                        : isSecureTextEntry
+                            ? #imageLiteral(resourceName: "img_textfield_password_icon")
+                            : nil
+                : textContentType == UITextContentType.emailAddress
+                    ? #imageLiteral(resourceName: "img_textfield_email_colored_icon")
+                    : textContentType == UITextContentType.nickname
+                        ? #imageLiteral(resourceName: "img_tabbar_profile_unselected")
+                        : isSecureTextEntry
+                            ? #imageLiteral(resourceName: "img_textfield_password_colored_icon")
+                            : nil
         }
         
         guard let image = leftImage else {

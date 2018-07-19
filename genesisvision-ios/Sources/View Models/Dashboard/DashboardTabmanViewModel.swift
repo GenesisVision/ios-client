@@ -30,4 +30,9 @@ final class DashboardTabmanViewModel: TabmanViewModel {
             reloadPages()
         }
     }
+    
+    // MARK: - Public methods
+    func showCreateProgramVC() {
+        router.showCreateProgramVC()
+    }
 }

@@ -38,8 +38,8 @@ protocol ProgramListViewModelProtocol {
     var sorting: InvestmentProgramsFilter.Sorting { get }
     var sortingKeys: [InvestmentProgramsFilter.Sorting] { get }
     
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     
     func getSelectedSortingIndex() -> Int
     func refresh(completion: @escaping CompletionBlock)
@@ -130,12 +130,12 @@ extension ProgramListViewModelProtocol {
     }
     
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramListHeaderTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [SortHeaderView.self]
     }
     

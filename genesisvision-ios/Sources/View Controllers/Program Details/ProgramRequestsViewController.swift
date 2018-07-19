@@ -44,7 +44,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNibs(for: ProgramRequestsViewModel.cellModelsForRegistration)
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupNavigationBar()
         

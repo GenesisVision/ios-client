@@ -48,8 +48,13 @@ class SignInViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         #if DEBUG
+        if isInvestorApp {
             emailTextField.text = "george@genesis.vision"
             passwordTextField.text = "qwerty"
+        } else {
+            emailTextField.text = "george+1@genesis.vision"
+            passwordTextField.text = "qwerty"
+        }
         #endif
         
         setupUI()
