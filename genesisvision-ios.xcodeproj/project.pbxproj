@@ -172,6 +172,8 @@
 		5E616B5E20F7CED000B3459D /* EditableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E616B5D20F7CED000B3459D /* EditableField.swift */; };
 		5E6301F820AB1A4900054200 /* TournamentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6301F720AB1A4900054200 /* TournamentRouter.swift */; };
 		5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E696019209362EE00505726 /* FavoriteButton.swift */; };
+		5E6C0CF02109A8D900B7F844 /* ManagerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C0CEF2109A8D900B7F844 /* ManagerDetailsViewController.swift */; };
+		5E6C0CF32109AA5500B7F844 /* ManagerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C0CF22109AA5500B7F844 /* ManagerDetailsViewModel.swift */; };
 		5E6D681D207655A100299408 /* String+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681C207655A100299408 /* String+Constants.swift */; };
 		5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */; };
 		5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */; };
@@ -260,6 +262,8 @@
 		5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */; };
 		5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */; };
 		5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */; };
+		5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B478210898810026C123 /* ProfileImageView.swift */; };
+		5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B479210898810026C123 /* СhoosePhotoView.swift */; };
 		5EDA74D92093A34E00E8EA34 /* DetailTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */; };
 		5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */; };
 		5EDA74DC2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */; };
@@ -376,7 +380,6 @@
 		FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */; };
 		FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB252030290A00CDBF19 /* TournamentListViewModel.swift */; };
 		FC92CB2820304B2B00CDBF19 /* TournamentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB2720304B2B00CDBF19 /* TournamentListViewController.swift */; };
-		FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A22201AA07700157AD6 /* ProfileImageView.swift */; };
 		FCA19A25201AA8C000157AD6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A24201AA8C000157AD6 /* Router.swift */; };
 		FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */; };
 		FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A2C201ADAB100157AD6 /* InvestmentProgramListRouter.swift */; };
@@ -399,7 +402,6 @@
 		FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5705A20273560001942F3 /* WalletTransactionTableViewCell.xib */; };
 		FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5705D2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift */; };
 		FCA5706A2027395E001942F3 /* UIImage+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA570692027395E001942F3 /* UIImage+Placeholder.swift */; };
-		FCA5706C2027402F001942F3 /* СhoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5706B2027402F001942F3 /* СhoosePhotoView.swift */; };
 		FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5706F202741A4001942F3 /* UIView+NibLoad.swift */; };
 		FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707120274AC1001942F3 /* Date+DefaultFormat.swift */; };
 		FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707320274BD0001942F3 /* Bundle+Locale.swift */; };
@@ -638,6 +640,8 @@
 		5E616B5D20F7CED000B3459D /* EditableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableField.swift; sourceTree = "<group>"; };
 		5E6301F720AB1A4900054200 /* TournamentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRouter.swift; sourceTree = "<group>"; };
 		5E696019209362EE00505726 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		5E6C0CEF2109A8D900B7F844 /* ManagerDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDetailsViewController.swift; sourceTree = "<group>"; };
+		5E6C0CF22109AA5500B7F844 /* ManagerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDetailsViewModel.swift; sourceTree = "<group>"; };
 		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
 		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
 		5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawSuccessViewModel.swift; sourceTree = "<group>"; };
@@ -728,6 +732,8 @@
 		5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5ED3B478210898810026C123 /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		5ED3B479210898810026C123 /* СhoosePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "СhoosePhotoView.swift"; sourceTree = "<group>"; };
 		5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCell.swift; sourceTree = "<group>"; };
 		5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTextTableViewCell.xib; sourceTree = "<group>"; };
 		5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -853,7 +859,6 @@
 		FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC92CB252030290A00CDBF19 /* TournamentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewModel.swift; sourceTree = "<group>"; };
 		FC92CB2720304B2B00CDBF19 /* TournamentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewController.swift; sourceTree = "<group>"; };
-		FCA19A22201AA07700157AD6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FCA19A2A201ACE0400157AD6 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 		FCA19A2C201ADAB100157AD6 /* InvestmentProgramListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramListRouter.swift; sourceTree = "<group>"; };
@@ -876,7 +881,6 @@
 		FCA5705A20273560001942F3 /* WalletTransactionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTransactionTableViewCell.xib; sourceTree = "<group>"; };
 		FCA5705D2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FCA570692027395E001942F3 /* UIImage+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Placeholder.swift"; sourceTree = "<group>"; };
-		FCA5706B2027402F001942F3 /* СhoosePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СhoosePhotoView.swift"; sourceTree = "<group>"; };
 		FCA5706F202741A4001942F3 /* UIView+NibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NibLoad.swift"; sourceTree = "<group>"; };
 		FCA5707120274AC1001942F3 /* Date+DefaultFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DefaultFormat.swift"; sourceTree = "<group>"; };
 		FCA5707320274BD0001942F3 /* Bundle+Locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Locale.swift"; sourceTree = "<group>"; };
@@ -1230,6 +1234,22 @@
 			path = "Create Program";
 			sourceTree = "<group>";
 		};
+		5E6C0CF12109A8E000B7F844 /* Manager Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E6C0CEF2109A8D900B7F844 /* ManagerDetailsViewController.swift */,
+			);
+			path = "Manager Details";
+			sourceTree = "<group>";
+		};
+		5E6C0CF42109AA5A00B7F844 /* Manager Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E6C0CF22109AA5500B7F844 /* ManagerDetailsViewModel.swift */,
+			);
+			path = "Manager Details";
+			sourceTree = "<group>";
+		};
 		5E7B03532067BA3000D8F3BA /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,6 +1398,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		5ED3B477210898810026C123 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5ED3B478210898810026C123 /* ProfileImageView.swift */,
+				5ED3B479210898810026C123 /* СhoosePhotoView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		5EF058D320681F0A00373CBB /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,15 +1433,6 @@
 				C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FC0E20072044350E00872BE5 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				FCA19A22201AA07700157AD6 /* ProfileImageView.swift */,
-				FCA5706B2027402F001942F3 /* СhoosePhotoView.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		FC0E20082044352000872BE5 /* Header View */ = {
@@ -1768,13 +1788,6 @@
 			path = Tournament;
 			sourceTree = "<group>";
 		};
-		FCA570652027359F001942F3 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		FCA57066202735A8001942F3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,6 +1883,7 @@
 				FC4C194D203051AF00625795 /* Dashboard */,
 				FC4C1949203050E400625795 /* Tournament */,
 				5EC7B88020D14C7E007720D1 /* Settings */,
+				5E6C0CF42109AA5A00B7F844 /* Manager Details */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2037,6 +2051,7 @@
 				FC4964192015474B00104CEB /* Dashboard */,
 				FC49641C2015489B00104CEB /* Welcome */,
 				FC92CB2920304B3100CDBF19 /* Tournament */,
+				5E6C0CF12109A8E000B7F844 /* Manager Details */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2122,10 +2137,10 @@
 		FCC9DD51200DFA5E008825EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5ED3B477210898810026C123 /* Profile */,
 				FC0E20082044352000872BE5 /* Header View */,
 				5E7B03532067BA3000D8F3BA /* Buttons */,
 				FCC9DD52200DFA5E008825EC /* Cells */,
-				FC0E20072044350E00872BE5 /* Profile */,
 				5E7FC747207B6342001617FD /* Labels */,
 				5EB996AB20F392DA00E31D23 /* Custom Views */,
 			);
@@ -2139,7 +2154,6 @@
 				5E616B4420F7B10F00B3459D /* Fields */,
 				FCB17763204568DA00A482B7 /* Dashboard */,
 				FCA57067202735BA001942F3 /* Programs */,
-				FCA570652027359F001942F3 /* Profile */,
 				FCA57066202735A8001942F3 /* Wallet */,
 			);
 			path = Cells;
@@ -2434,6 +2448,7 @@
 				5E7A2FA220C588A100BDA030 /* AuthTwoFactorDisableViewModel.swift in Sources */,
 				5E616B4620F7B22600B3459D /* CreateProgramTabmanRouter.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
+				5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				5E18CE7820C566F1008FE5B5 /* TradesAPI.swift in Sources */,
@@ -2518,6 +2533,7 @@
 				5E8340E0207E3907004A29F1 /* ProgramDetailTradesViewModel.swift in Sources */,
 				5E18CEB120C566F1008FE5B5 /* InvestmentProgramsViewModel.swift in Sources */,
 				5E18CEC220C566F1008FE5B5 /* WalletTransactionsViewModel.swift in Sources */,
+				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,
 				FC016C18203B299C006956FE /* ProgramDetailHeaderTableViewCellViewModel.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
@@ -2580,12 +2596,12 @@
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
 				5E18CE7F20C566F1008FE5B5 /* OpenTradesViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
-				FCA5706C2027402F001942F3 /* СhoosePhotoView.swift in Sources */,
 				5E18CE9320C566F1008FE5B5 /* RegisterInvestorViewModel.swift in Sources */,
 				FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */,
 				FC1410212030168100B71E7F /* ParticipantViewModel.swift in Sources */,
 				5E18CE8D20C566F1008FE5B5 /* RequestRate.swift in Sources */,
 				5E18CEAF20C566F1008FE5B5 /* NewOpenTradesEvent.swift in Sources */,
+				5E6C0CF32109AA5500B7F844 /* ManagerDetailsViewModel.swift in Sources */,
 				5E18CE8320C566F1008FE5B5 /* LoginViewModel.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,
@@ -2686,7 +2702,6 @@
 				FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				FC4C193E20304EC900625795 /* TournamentListRouter.swift in Sources */,
-				FCA19A23201AA07700157AD6 /* ProfileImageView.swift in Sources */,
 				FC14101F2030168100B71E7F /* ParticipantsSummaryViewModel.swift in Sources */,
 				5E18CE9920C566F1008FE5B5 /* PaymentTxInfo.swift in Sources */,
 				FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */,
@@ -2819,6 +2834,7 @@
 				5E8340E5207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.swift in Sources */,
 				5E18CE8F20C566F1008FE5B5 /* AndroidAppVersion.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
+				5E6C0CF02109A8D900B7F844 /* ManagerDetailsViewController.swift in Sources */,
 				5E18CE9820C566F1008FE5B5 /* InvestorAmount.swift in Sources */,
 				5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */,
 				FC4964182015474700104CEB /* DashboardViewController.swift in Sources */,

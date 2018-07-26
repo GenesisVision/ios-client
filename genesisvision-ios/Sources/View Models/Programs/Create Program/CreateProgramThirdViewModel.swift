@@ -13,7 +13,7 @@ enum CreateProgramThirdFieldType: String, EnumCollection {
     case depositAmount = "Deposit Amount (GVT)"
     
     case successFee = "Success Fee %"
-    case mamagementFee = "Management Fee %"
+    case managementFee = "Management Fee %"
     
     case tokenName = "Token Name"
     case tokenSymbol = "Token Symbol"
@@ -38,7 +38,7 @@ final class CreateProgramThirdViewModel: ViewModelWithTableView {
     var temparyNewInvestmentRequest: TemparyNewInvestmentRequest?
     var pickedImageURL: URL?
     
-    var rows: [FieldType] = [.dateFrom, .depositAmount, .successFee, .mamagementFee, .tokenSymbol]
+    var rows: [FieldType] = [.dateFrom, .depositAmount, .successFee, .managementFee, .tokenName, .tokenSymbol]
     var sections: [SectionType] = [.fields]
     
     var editableFields = [EditableField<FieldType>]()
@@ -132,7 +132,7 @@ final class CreateProgramThirdViewModel: ViewModelWithTableView {
                     self?.temparyNewInvestmentRequest?.depositAmount = Double(text)
                 case .successFee:
                     self?.temparyNewInvestmentRequest?.feeSuccess = Double(text)
-                case .mamagementFee:
+                case .managementFee:
                     self?.temparyNewInvestmentRequest?.feeManagement = Double(text)
                 case .tokenName:
                     self?.temparyNewInvestmentRequest?.tokenName = text
@@ -148,14 +148,14 @@ final class CreateProgramThirdViewModel: ViewModelWithTableView {
         return [.dateFrom : "",
                 .depositAmount : "",
                 .successFee : "",
-                .mamagementFee : "",
+                .managementFee : "",
                 .tokenName : "",
                 .tokenSymbol : ""]
     }
     
     private func getKeyboardType(for fieldType: FieldType) -> UIKeyboardType {
         switch fieldType {
-        case .depositAmount, .successFee, .mamagementFee:
+        case .depositAmount, .successFee, .managementFee:
             return .numberPad
         default:
             return .default

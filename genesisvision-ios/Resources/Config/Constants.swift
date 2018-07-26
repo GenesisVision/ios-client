@@ -164,7 +164,7 @@ final class Constants {
         }
         
         struct Manager {
-            static let debug = "https://black-api.genesis.vision"
+            static let debug = "https://alpha.genesis.vision"
             static let release = "https://alpha.genesis.vision"
         }
         

@@ -233,7 +233,7 @@ final class CreateProgramSecondViewModel: ViewModelWithTableView {
                 
                 if let idx = editableFields.index(where: { $0.type == .brokerServer }),
                     let selectedBrokerTradeServer = selectedBrokerTradeServer,
-                    let brokerId = selectedBrokerTradeServer.brokerId,
+                    let brokerId = selectedBrokerTradeServer.id,
                     let name = selectedBrokerTradeServer.name {
                     temparyNewInvestmentRequest?.brokerTradeServerId = brokerId
                     editableFields[idx].text = name
