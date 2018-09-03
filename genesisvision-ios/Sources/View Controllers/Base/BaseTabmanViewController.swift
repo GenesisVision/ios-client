@@ -9,6 +9,7 @@
 import UIKit
 import Tabman
 import Pageboy
+import UIKit.UINavigationController
 
 class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
     

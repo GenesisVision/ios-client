@@ -11,6 +11,14 @@ import DZNEmptyDataSet
 import MessageUI
 
 class BaseViewController: UIViewController, Hidable {
+    var prefersLargeTitles: Bool = true {
+        didSet {
+            if #available(iOS 11.0, *) {
+                navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+            }
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +28,23 @@ class BaseViewController: UIViewController, Hidable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateTheme()
     }
 }
 
 extension UIViewController {
+    func updateTheme() {
+        navigationController?.setNeedsStatusBarAppearanceUpdate()
+        UIView.animate(withDuration: 0.2) {
+            self.view.backgroundColor = UIColor.BaseView.bg
+        }
+
+        setupNavigationBar()
+        AppearanceController.applyTheme()
+    }
+    
     func commonSetup() {
-        view.backgroundColor = UIColor.BaseView.bg
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
     }
     
@@ -215,7 +234,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
-        tableView.backgroundColor = UIColor.BaseView.bg
+        tableView.backgroundColor = .clear
         
         refreshControl?.endRefreshing()
         
@@ -319,27 +338,6 @@ extension BaseViewControllerWithTableView: UIScrollViewDelegate {
         }
     }
 }
-
-//extension BaseViewControllerWithTableView: UITableViewDelegate, UITableViewDataSource {
-//    
-//    // MARK: - UITableViewDelegate
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let model = viewModel.model(at: indexPath) else {
-//            return UITableViewCell()
-//        }
-//
-//        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-//    }
-//
-//    // MARK: - UITableViewDataSource
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.numberOfRows(in: section)
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return viewModel.numberOfSections()
-//    }
-//}
 
 extension BaseViewControllerWithTableView: UIViewControllerWithBottomView {
     @objc func signInButtonAction() {
@@ -445,12 +443,26 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     // MARK: - Variables
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     
+    var prefersLargeTitles: Bool = true {
+        didSet {
+            if #available(iOS 11.0, *) {
+                navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+            }
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         commonSetup()
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateTheme()
     }
     
     // MARK: - Fetching
@@ -498,10 +510,9 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
         }
         tableView.refreshControl?.tintColor = tintColor
         tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        
     }
     
-    private func setupViews() {
+    func setupViews() {
         tableView.separatorStyle = .none
         
         fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -510,10 +521,10 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
         fetchMoreActivityIndicator.startAnimating()
         tableView.tableFooterView = fetchMoreActivityIndicator
         
+        tableView.backgroundColor = .clear
+        
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
-        
-        tableView.backgroundColor = UIColor.BaseView.bg
         
         refreshControl?.endRefreshing()
     }

@@ -41,11 +41,13 @@ class WalletViewController: BaseViewControllerWithTableView {
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         updateTitle()
+        
+        prefersLargeTitles = true
     }
     
     private func updateTitle() {
         title = viewModel.title
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+//        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
     }
     
     private func setupTableConfiguration() {
