@@ -18,6 +18,8 @@ final class SettingsViewModel {
         case biometricID = "Touch ID"
         case twoFactor = "Two Factor"
         
+        case darkTheme = "Dark theme"
+        
         case sendFeedback = "Send Feedback"
         
         case signOut = "Log Out"
@@ -28,6 +30,7 @@ final class SettingsViewModel {
     enum SettingsSectionType: String {
         case profile
         case security
+        case darkTheme
         case feedback
         case signOut
     }
@@ -73,6 +76,15 @@ final class SettingsViewModel {
         return biometricIDAuthManager.isTouchAuthenticationAvailable && enablePasscode
     }
     
+    var enableDarkTheme: Bool {
+        get {
+            return AppearanceController.theme == .darkTheme
+        }
+        set {
+            AppearanceController.theme = newValue ? .darkTheme : .lightTheme
+        }
+    }
+    
     var biometricTitleText: String {
         return biometricIDAuthManager.biometricTitleText
     }
@@ -88,9 +100,10 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
-    var sections: [SettingsSectionType] = [.profile, .security, .feedback, .signOut]
+    var sections: [SettingsSectionType] = [.profile, .security, .darkTheme, .feedback, .signOut]
     var rows: [SettingsSectionType : [SettingsRowType]] = [.profile : [.profile],
                                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
+                                                           .darkTheme : [.darkTheme],
                                                            .feedback : [.sendFeedback],
                                                            .signOut : [.signOut]]
     
@@ -178,6 +191,10 @@ final class SettingsViewModel {
     
     func enableTwoFactor(_ value: Bool) {
         router.show(routeType: .enableTwoFactor(value))
+    }
+    
+    func enableDarkTheme(_ value: Bool) {
+        AppearanceController.theme = value ? .darkTheme : .lightTheme
     }
     
     func sendFeedback() {

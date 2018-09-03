@@ -26,6 +26,7 @@ class SettingsViewController: BaseTableViewController {
         }
     }
     @IBOutlet weak var twoFactorSwitch: UISwitch!
+    @IBOutlet weak var darkThemeSwitch: UISwitch!
     
     @IBOutlet weak var versionLabel: UILabel!
     
@@ -71,6 +72,7 @@ class SettingsViewController: BaseTableViewController {
         biometricIDSwitch.isEnabled = viewModel.enablePasscode
         biometricIDSwitch.isOn = viewModel.enableBiometricID
         twoFactorSwitch.isOn = viewModel.enableTwoFactor
+        darkThemeSwitch.isOn = viewModel.enableDarkTheme
         
         biometricIDTitleLabel.text = viewModel.biometricTitleText
         biometricCell.isHidden = !viewModel.enableBiometricCell
@@ -172,12 +174,12 @@ class SettingsViewController: BaseTableViewController {
         twoFactorCell.highlighting = false
         
         tableView.tableFooterView = footerView
+        
+        prefersLargeTitles = true
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
-        setupPullToRefresh()
     }
     
     override func pullToRefresh() {
@@ -222,6 +224,12 @@ class SettingsViewController: BaseTableViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
+    }
+    
+    @IBAction func darkThemeSwitchChangedAction(_ sender: UISwitch) {
+        viewModel.enableDarkTheme(sender.isOn)
+        updateTheme()
+        reloadData()
     }
     
     @IBAction func termsLinkButtonAction(_ sender: UIButton) {

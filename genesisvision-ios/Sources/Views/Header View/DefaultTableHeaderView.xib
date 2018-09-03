@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,18 +15,35 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtU-OR-Odo">
-                    <rect key="frame" x="16" y="0.0" width="343" height="70"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                    <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Portfolio events" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtU-OR-Odo">
+                    <rect key="frame" x="32" y="24" width="140" height="23"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show all" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXl-fe-7st">
+                    <rect key="frame" x="251" y="26" width="56" height="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="0.50287576687116564" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FNC-tQ-buq">
+                    <rect key="frame" x="323" y="25" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="MUf-Nl-X0r"/>
+                        <constraint firstAttribute="width" constant="20" id="ljO-WG-bow"/>
+                    </constraints>
+                </imageView>
             </subviews>
+            <color key="backgroundColor" red="0.082352941176470587" green="0.11764705882352941" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="GtU-OR-Odo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2oc-ie-480"/>
-                <constraint firstItem="GtU-OR-Odo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="jzi-H1-sa2"/>
-                <constraint firstAttribute="trailing" secondItem="GtU-OR-Odo" secondAttribute="trailing" constant="16" id="nma-FM-Ush"/>
-                <constraint firstAttribute="bottom" secondItem="GtU-OR-Odo" secondAttribute="bottom" id="qI6-7E-Lk3"/>
+                <constraint firstItem="GtU-OR-Odo" firstAttribute="centerY" secondItem="eXl-fe-7st" secondAttribute="centerY" id="Agw-jM-c0j"/>
+                <constraint firstItem="FNC-tQ-buq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Pmo-Qy-uaX"/>
+                <constraint firstItem="eXl-fe-7st" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GtU-OR-Odo" secondAttribute="trailing" constant="8" id="QJP-b7-f1E"/>
+                <constraint firstItem="FNC-tQ-buq" firstAttribute="leading" secondItem="eXl-fe-7st" secondAttribute="trailing" constant="16" id="YFv-pk-f8y"/>
+                <constraint firstItem="GtU-OR-Odo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="bFV-fg-kgR"/>
+                <constraint firstItem="eXl-fe-7st" firstAttribute="centerY" secondItem="FNC-tQ-buq" secondAttribute="centerY" id="wlt-Kq-nLg"/>
+                <constraint firstAttribute="trailing" secondItem="FNC-tQ-buq" secondAttribute="trailing" constant="32" id="y3t-QS-okx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

@@ -184,16 +184,22 @@ final class Constants {
         static let passcode: String = "passcode"
         static let passcodeEnable: String = "passcodeEnable"
         static let biometricEnable: String = "biometricEnable"
+        
         static let biometricLastDomainState: String = "biometricLastDomainState"
+        
+        static let colorTheme: String = "colorTheme"
     }
     
     struct Keys {
         static let signOutKey: String = "signOutKey"
         static let twoFactorEnableKey: String = "twoFactorEnableKey"
+        
         static let twoFactorChangeKey: String = "twoFactorChangeKey"
         static let programFavoriteStateChangeKey: String = "programFavoriteStateChangeKey"
         
         static let addedLineLayer: String = "addedLineLayer"
+        
+        static let themeChangedKey: String = "themeChangedKey"
     }
     
     struct Filters {

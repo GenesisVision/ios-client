@@ -15,4 +15,13 @@ extension UIImage {
     struct NavBar {
         static var ipfsList: UIImage = #imageLiteral(resourceName: "img_ipfs_list")
     }
+
+    func alpha(_ value: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
+
