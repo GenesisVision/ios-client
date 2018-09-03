@@ -259,6 +259,9 @@ final class Constants {
         
         static let cornerSize: CGFloat = 6.0
         
+        static let selectedSegmentedTitle: CGFloat = 23.0
+        static let unselectedSegmentedTitle: CGFloat = 15.0
+        
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
 }

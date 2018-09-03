@@ -18,6 +18,7 @@ class InvestorDashboardPortfolioEventsTableViewCell: UITableViewCell {
         collectionView.isScrollEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(UINib.init(nibName: "PortfolioEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PortfolioEventCollectionViewCell")
     }
 }
@@ -34,17 +35,15 @@ extension InvestorDashboardPortfolioEventsTableViewCell: UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortfolioEventCollectionViewCell", for: indexPath as IndexPath) as! PortfolioEventCollectionViewCell
         
-        
         return cell
     }
 }
 
 extension InvestorDashboardPortfolioEventsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow: CGFloat = 4
-        let hardCodedPadding: CGFloat = 5
-        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
+
+        let itemWidth = 220.0
+        let itemHeight = 150.0
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }

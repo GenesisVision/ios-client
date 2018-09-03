@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jJC-Xt-1uY">
-                    <rect key="frame" x="16" y="30" width="121" height="28"/>
+                    <rect key="frame" x="8" y="30" width="121" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="27" id="4CX-Oj-U8l"/>
                     </constraints>
@@ -29,7 +29,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="jJC-Xt-1uY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="1tD-jQ-plN"/>
+                <constraint firstItem="jJC-Xt-1uY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="1tD-jQ-plN"/>
                 <constraint firstItem="jJC-Xt-1uY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NAQ-oY-GQh"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

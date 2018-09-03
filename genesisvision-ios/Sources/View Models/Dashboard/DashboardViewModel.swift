@@ -19,7 +19,7 @@ final class DashboardViewModel {
     // MARK: - Variables
     var activePrograms = true
     
-    var title = "Dashboard".uppercased()
+    var title = "Dashboard"
     
     private var sections: [SectionType] = [.chart, .portfolioEvents, .programList]
     
@@ -38,7 +38,7 @@ final class DashboardViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .sort
+        return .none
     }
     
     var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
@@ -150,7 +150,6 @@ extension DashboardViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [InvestorDashboardPortfolioTableViewCellViewModel.self,
-                InvestorDashboardProfitTableViewCellViewModel.self,
                 InvestorDashboardPortfolioEventsTableViewCellViewModel.self,
                 DashboardHeaderTableViewCellViewModel.self,
                 DashboardTableViewCellViewModel.self]
@@ -190,8 +189,10 @@ extension DashboardViewModel {
     
     func heightForRow(at indexPath: IndexPath) -> CGFloat {
         switch sections[indexPath.section] {
+        case .chart:
+            return 350.0
         case .portfolioEvents:
-            return 150.0
+            return 160.0
         default:
             return UITableViewAutomaticDimension
         }
@@ -199,17 +200,15 @@ extension DashboardViewModel {
     
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
-        case .portfolioEvents:
-            return 0.0
-        default:
+        case .programList:
             return 44.0
+        default:
+            return 0.0
         }
     }
     
     func headerSegments(for section: Int) -> [String] {
         switch sections[section] {
-        case .chart:
-            return ["Portfolio", "Profit"]
         case .programList:
             return ["Programs", "Funds"]
         default:

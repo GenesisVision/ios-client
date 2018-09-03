@@ -36,6 +36,7 @@ class InvestorDashboardViewController: DashboardViewController {
     
     // MARK: - Private methods
     private func setup() {
+//        title = viewModel.title
         setupTableConfiguration()
         registerForPreviewing()
         
@@ -46,7 +47,8 @@ class InvestorDashboardViewController: DashboardViewController {
         bottomViewType = viewModel.bottomViewType
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
-        prefersLargeTitles = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "BTC", style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Week", style: .done, target: self, action: nil)
     }
     
     private func setupTableConfiguration() {
@@ -87,8 +89,8 @@ class InvestorDashboardViewController: DashboardViewController {
     
     override func pullToRefresh() {
         super.pullToRefresh()
-        
-        fetch()
+        hideAll()
+//        fetch()
     }
     
     override func sortButtonAction() {

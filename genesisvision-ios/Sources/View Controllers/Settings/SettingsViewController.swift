@@ -15,23 +15,68 @@ class SettingsViewController: BaseTableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var profileImageView: RoundedImageView!
-    @IBOutlet weak var profileNameLabel: UILabel!
-    @IBOutlet weak var profileEmailLabel: UILabel!
+    @IBOutlet weak var profileNameLabel: UILabel! {
+        didSet {
+            profileNameLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet weak var profileEmailLabel: UILabel! {
+        didSet {
+            profileEmailLabel.textColor = UIColor.Cell.title
+        }
+    }
+    
+    @IBOutlet weak var changePasswordTitleLabel: UILabel! {
+        didSet {
+            changePasswordTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     
     @IBOutlet weak var passcodeSwitch: UISwitch!
-    @IBOutlet weak var biometricIDTitleLabel: UILabel!
+    @IBOutlet weak var passcodeTitleLabel: UILabel! {
+        didSet {
+            passcodeTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet weak var biometricIDTitleLabel: UILabel! {
+        didSet {
+            biometricIDTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet weak var biometricIDSwitch: UISwitch! {
         didSet {
             biometricIDSwitch.isEnabled = false
         }
     }
     @IBOutlet weak var twoFactorSwitch: UISwitch!
+    @IBOutlet weak var twoFactorTitleLabel: UILabel! {
+        didSet {
+            twoFactorTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet weak var darkThemeSwitch: UISwitch!
-    
+    @IBOutlet weak var darkThemeTitleLabel: UILabel! {
+        didSet {
+            darkThemeTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet weak var sendFeedbackTitleLabel: UILabel! {
+        didSet {
+            sendFeedbackTitleLabel.textColor = UIColor.Cell.title
+        }
+    }
     @IBOutlet weak var versionLabel: UILabel!
     
-    @IBOutlet weak var termsLinkButton: UIButton!
-    @IBOutlet weak var privacyLinkButton: UIButton!
+    @IBOutlet weak var termsLinkButton: UIButton! {
+        didSet {
+            termsLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
+        }
+    }
+    @IBOutlet weak var privacyLinkButton: UIButton! {
+        didSet {
+            privacyLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
+        }
+    }
     
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
     
@@ -54,6 +99,8 @@ class SettingsViewController: BaseTableViewController {
         setupSecurity()
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
+        
+        setupUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -176,6 +223,17 @@ class SettingsViewController: BaseTableViewController {
         tableView.tableFooterView = footerView
         
         prefersLargeTitles = true
+        
+        profileNameLabel.textColor = UIColor.Cell.title
+        profileEmailLabel.textColor = UIColor.Cell.title
+        changePasswordTitleLabel.textColor = UIColor.Cell.title
+        passcodeTitleLabel.textColor = UIColor.Cell.title
+        biometricIDTitleLabel.textColor = UIColor.Cell.title
+        twoFactorTitleLabel.textColor = UIColor.Cell.title
+        darkThemeTitleLabel.textColor = UIColor.Cell.title
+        sendFeedbackTitleLabel.textColor = UIColor.Cell.title
+        termsLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
+        privacyLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
     }
     
     private func setupTableConfiguration() {
@@ -230,6 +288,7 @@ class SettingsViewController: BaseTableViewController {
         viewModel.enableDarkTheme(sender.isOn)
         updateTheme()
         reloadData()
+        setupUI()
     }
     
     @IBAction func termsLinkButtonAction(_ sender: UIButton) {

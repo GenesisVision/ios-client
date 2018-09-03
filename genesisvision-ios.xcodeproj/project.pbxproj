@@ -12,6 +12,7 @@
 		5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */; };
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
+		5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E106386213D69AF008A0E8B /* BaseExtensions.swift */; };
 		5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */; };
 		5E12B38520BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38420BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift */; };
 		5E12B38720BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38620BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift */; };
@@ -144,7 +145,6 @@
 		5E239273205F67F100CB5AEC /* NeuzeitGro-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */; };
 		5E239274205F67F100CB5AEC /* NeuzeitGro-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */; };
 		5E2DC8D4212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */; };
-		5E2DC8D6212C193E0006A674 /* InvestorDashboardProfitTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2DC8D5212C193E0006A674 /* InvestorDashboardProfitTableViewCellViewModel.swift */; };
 		5E2DC8D8212C19540006A674 /* InvestorDashboardPortfolioEventsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2DC8D7212C19540006A674 /* InvestorDashboardPortfolioEventsTableViewCellViewModel.swift */; };
 		5E33E3B420AB20B900A0B9DE /* ProgramDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */; };
 		5E33E3B720AB218A00A0B9DE /* ProgramDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */; };
@@ -176,8 +176,6 @@
 		5E6301F820AB1A4900054200 /* TournamentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6301F720AB1A4900054200 /* TournamentRouter.swift */; };
 		5E6308ED212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308EB212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift */; };
 		5E6308EE212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308EC212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib */; };
-		5E6308F1212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308EF212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.swift */; };
-		5E6308F2212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308F0212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.xib */; };
 		5E6308F5212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308F3212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.swift */; };
 		5E6308F6212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308F4212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib */; };
 		5E6308F9212C079900D15C71 /* PortfolioEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */; };
@@ -498,6 +496,7 @@
 		5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		5E106386213D69AF008A0E8B /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
 		5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorCreateViewModel.swift; sourceTree = "<group>"; };
 		5E12B38420BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorTutorialViewModel.swift; sourceTree = "<group>"; };
 		5E12B38620BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorConfirmateViewModel.swift; sourceTree = "<group>"; };
@@ -630,7 +629,6 @@
 		5E23926F205F67F000CB5AEC /* NeuzeitGro-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Reg.ttf"; sourceTree = "<group>"; };
 		5E239270205F67F000CB5AEC /* NeuzeitGro-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeuzeitGro-Lig.ttf"; sourceTree = "<group>"; };
 		5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		5E2DC8D5212C193E0006A674 /* InvestorDashboardProfitTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardProfitTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E2DC8D7212C19540006A674 /* InvestorDashboardPortfolioEventsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioEventsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsRouter.swift; sourceTree = "<group>"; };
 		5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -662,8 +660,6 @@
 		5E6301F720AB1A4900054200 /* TournamentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRouter.swift; sourceTree = "<group>"; };
 		5E6308EB212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioTableViewCell.swift; sourceTree = "<group>"; };
 		5E6308EC212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestorDashboardPortfolioTableViewCell.xib; sourceTree = "<group>"; };
-		5E6308EF212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardProfitTableViewCell.swift; sourceTree = "<group>"; };
-		5E6308F0212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestorDashboardProfitTableViewCell.xib; sourceTree = "<group>"; };
 		5E6308F3212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioEventsTableViewCell.swift; sourceTree = "<group>"; };
 		5E6308F4212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestorDashboardPortfolioEventsTableViewCell.xib; sourceTree = "<group>"; };
 		5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1896,9 +1892,6 @@
 				5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */,
 				5E6308EB212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift */,
 				5E6308EC212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib */,
-				5E2DC8D5212C193E0006A674 /* InvestorDashboardProfitTableViewCellViewModel.swift */,
-				5E6308EF212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.swift */,
-				5E6308F0212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.xib */,
 				5E2DC8D7212C19540006A674 /* InvestorDashboardPortfolioEventsTableViewCellViewModel.swift */,
 				5E6308F3212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.swift */,
 				5E6308F4212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib */,
@@ -2075,6 +2068,7 @@
 				FC900E5B204EA852007E9142 /* RoundingExtensions.swift */,
 				5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */,
 				5E616B3F20F7880800B3459D /* ImagePickerPresentable.swift */,
+				5E106386213D69AF008A0E8B /* BaseExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2408,7 +2402,6 @@
 				5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */,
 				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
-				5E6308F2212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2533,7 +2526,6 @@
 				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
 				5E18CEA120C566F1008FE5B5 /* PasswordModel.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
-				5E6308F1212C01F400D15C71 /* InvestorDashboardProfitTableViewCell.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC1410222030168100B71E7F /* Tournament.swift in Sources */,
 				5E18CE8120C566F1008FE5B5 /* NewTradeEvent.swift in Sources */,
@@ -2554,6 +2546,7 @@
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
 				5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */,
 				5E616B5420F7BFEB00B3459D /* CreateProgramSuccessViewModel.swift in Sources */,
+				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
 				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC1410152030168100B71E7F /* TournamentAPI.swift in Sources */,
@@ -2749,7 +2742,6 @@
 				5E18CEA020C566F1008FE5B5 /* WalletAddressViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */,
-				5E2DC8D6212C193E0006A674 /* InvestorDashboardProfitTableViewCellViewModel.swift in Sources */,
 				5E18CED720C566F1008FE5B5 /* InvestmentProgramBuyToken.swift in Sources */,
 				5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */,
 				FC900E64204EE0EF007E9142 /* WalletFilterViewModel.swift in Sources */,

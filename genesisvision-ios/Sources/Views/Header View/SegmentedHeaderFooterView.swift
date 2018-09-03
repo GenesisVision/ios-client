@@ -11,6 +11,7 @@ import UIKit
 class SegmentedHeaderFooterView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    let buttonBar = UIView()
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -22,8 +23,23 @@ class SegmentedHeaderFooterView: UITableViewHeaderFooterView {
     func configure(with segments: [String]) {
         segmentedControl.removeAllSegments()
         
+        segmentedControl.backgroundColor = .clear
+        segmentedControl.tintColor = .clear
+        
+        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: Constants.SystemSizes.unselectedSegmentedTitle),
+                              NSAttributedStringKey.foregroundColor: UIColor.Cell.subtitle]
+        let textSelectAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: Constants.SystemSizes.selectedSegmentedTitle),
+                                    NSAttributedStringKey.foregroundColor: UIColor.Cell.title]
+        
+        segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
+        segmentedControl.setTitleTextAttributes(textSelectAttributes, for: .highlighted)
+        segmentedControl.setTitleTextAttributes(textSelectAttributes, for: .selected)
+        
+        
         for (idx, segment) in segments.enumerated() {
             segmentedControl.insertSegment(withTitle: segment, at: idx, animated: true)
         }
+        
+        segmentedControl.selectedSegmentIndex = 0
     }
 }

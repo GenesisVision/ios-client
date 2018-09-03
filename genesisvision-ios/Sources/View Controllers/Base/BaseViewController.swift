@@ -54,8 +54,8 @@ extension UIViewController {
         
         AppearanceController.setupNavigationBar(with: type)
         
-        navigationController?.navigationBar.tintColor = colors.tintColor
-        navigationController?.navigationBar.backgroundColor = colors.tintColor
+        navigationController?.navigationBar.tintColor = colors.textColor
+        navigationController?.navigationBar.backgroundColor = colors.backgroundColor
         navigationController?.navigationBar.barTintColor = colors.backgroundColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
                                                                    NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]

@@ -157,7 +157,7 @@ struct AppearanceController {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
         }
         
-        UINavigationBar.appearance().tintColor = colors.tintColor
+        UINavigationBar.appearance().tintColor = colors.textColor
         UINavigationBar.appearance().backgroundColor = colors.backgroundColor
         
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")

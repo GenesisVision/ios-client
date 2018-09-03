@@ -17,8 +17,7 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationBar.shadowImage = UIImage()
-//        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
         
         navigationBar.isTranslucent = false
 
@@ -49,11 +48,11 @@ class BaseNavigationController: UINavigationController {
     
     // MARK: - Private methods
     @objc private func themeChangedNotification(notification: Notification) {
-//        applyTheme()
+        applyTheme()
     }
     
     private func applyTheme() {
         navigationBar.barTintColor = UIColor.NavBar.colorScheme().backgroundColor
-        navigationBar.tintColor = UIColor.NavBar.colorScheme().tintColor
+        navigationBar.tintColor = UIColor.NavBar.colorScheme().textColor
     }
 }

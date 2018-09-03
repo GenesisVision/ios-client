@@ -14,5 +14,6 @@ struct InvestorDashboardPortfolioTableViewCellViewModel {
 
 extension InvestorDashboardPortfolioTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestorDashboardPortfolioTableViewCell) {
+        cell.configure(with: ["Portfolio", "Profit"])
     }
 }

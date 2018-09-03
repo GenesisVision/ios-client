@@ -359,17 +359,22 @@
                         <outlet property="biometricIDSwitch" destination="5Af-sb-2YP" id="M4h-Lo-bLD"/>
                         <outlet property="biometricIDTitleLabel" destination="mIG-jK-DeE" id="xJ0-DD-KSA"/>
                         <outlet property="changePasswordCell" destination="Blk-BK-wBO" id="ZGl-QD-ubq"/>
+                        <outlet property="changePasswordTitleLabel" destination="8Xj-P9-IGw" id="0qt-o4-r3v"/>
                         <outlet property="darkThemeSwitch" destination="bda-dW-dBp" id="mzg-PO-NJe"/>
+                        <outlet property="darkThemeTitleLabel" destination="7ud-l7-mFQ" id="9Kg-Yd-kUD"/>
                         <outlet property="footerView" destination="1hw-hx-IPR" id="ESx-mS-fT4"/>
                         <outlet property="passcodeCell" destination="pht-tP-VVL" id="pKh-j4-uhX"/>
                         <outlet property="passcodeSwitch" destination="vGe-Ob-FG1" id="a28-fn-BAS"/>
+                        <outlet property="passcodeTitleLabel" destination="XO4-yi-kWb" id="cDC-qr-TRb"/>
                         <outlet property="privacyLinkButton" destination="SNX-Cc-EWf" id="PX6-hp-CJj"/>
                         <outlet property="profileEmailLabel" destination="ydq-GR-3Fw" id="N1o-Hu-njC"/>
                         <outlet property="profileImageView" destination="beH-g7-9Tg" id="gsO-b8-6yN"/>
                         <outlet property="profileNameLabel" destination="D9d-oA-imM" id="ZIy-Vv-cKH"/>
+                        <outlet property="sendFeedbackTitleLabel" destination="I6X-VG-nYG" id="H0W-vg-Fg8"/>
                         <outlet property="termsLinkButton" destination="Ip4-y4-ivL" id="fHx-zM-HWN"/>
                         <outlet property="twoFactorCell" destination="5ho-iZ-Ot5" id="hde-7Y-gDS"/>
                         <outlet property="twoFactorSwitch" destination="gwo-Me-1Wz" id="YQh-lK-glh"/>
+                        <outlet property="twoFactorTitleLabel" destination="Tcz-6n-stu" id="6QF-e9-te0"/>
                         <outlet property="versionLabel" destination="Lmg-9i-SOi" id="k5p-pq-ExK"/>
                     </connections>
                 </tableViewController>

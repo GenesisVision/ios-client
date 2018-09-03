@@ -191,7 +191,6 @@ extension UIColor {
             case .primary:
                 return NavBarColors(tintColor: Common.white, backgroundColor: Common.primary, textColor: Common.white, subtitleColor: Common.white.withAlphaComponent(0.5))
             case .gray:
-                print(AppearanceController.theme)
                 return NavBarColors(tintColor: Common.primary,
                                     backgroundColor: AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.bgGray,
                                     textColor: AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue,
