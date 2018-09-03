@@ -11,16 +11,17 @@ import UIKit.UITableViewHeaderFooterView
 final class DashboardViewModel {
     
     enum SectionType {
-        case header
+        case chart
+        case portfolioEvents
         case programList
     }
     
     // MARK: - Variables
     var activePrograms = true
     
-    var title = "Portfolio".uppercased()
+    var title = "Dashboard".uppercased()
     
-    private var sections: [SectionType] = [.header, .programList]
+    private var sections: [SectionType] = [.chart, .portfolioEvents, .programList]
     
     private var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
@@ -148,12 +149,16 @@ extension DashboardViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardHeaderTableViewCellViewModel.self, DashboardTableViewCellViewModel.self]
+        return [InvestorDashboardPortfolioTableViewCellViewModel.self,
+                InvestorDashboardProfitTableViewCellViewModel.self,
+                InvestorDashboardPortfolioEventsTableViewCellViewModel.self,
+                DashboardHeaderTableViewCellViewModel.self,
+                DashboardTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SortHeaderView.self]
+        return [SegmentedHeaderFooterView.self]
     }
     
     func modelsCount() -> Int {
@@ -161,15 +166,17 @@ extension DashboardViewModel {
     }
     
     func numberOfSections() -> Int {
-        return modelsCount() > 0 ? sections.count : 0
+        return modelsCount() > 0 ? sections.count : 1
     }
     
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
+        case .chart:
+            return 1
+        case .portfolioEvents:
+            return 1
         case .programList:
             return modelsCount()
-        case .header:
-            return 1
         }
     }
     
@@ -178,20 +185,35 @@ extension DashboardViewModel {
     }
     
     func headerTitle(for section: Int) -> String? {
-        switch sections[section] {
-        case .programList:
-            return nil
-        case .header:
-            return nil
+        return nil
+    }
+    
+    func heightForRow(at indexPath: IndexPath) -> CGFloat {
+        switch sections[indexPath.section] {
+        case .portfolioEvents:
+            return 150.0
+        default:
+            return UITableViewAutomaticDimension
         }
     }
     
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
-        case .programList:
-            return 50.0
-        case .header:
+        case .portfolioEvents:
             return 0.0
+        default:
+            return 44.0
+        }
+    }
+    
+    func headerSegments(for section: Int) -> [String] {
+        switch sections[section] {
+        case .chart:
+            return ["Portfolio", "Profit"]
+        case .programList:
+            return ["Programs", "Funds"]
+        default:
+            return []
         }
     }
 }
@@ -279,14 +301,16 @@ extension DashboardViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard let dashboard = dashboard else {
+        guard dashboard != nil else {
             return nil
         }
         
         let type = sections[indexPath.section]
         switch type {
-        case .header:
-            return modelsCount() > 0 ? DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard) : nil
+        case .chart :
+            return InvestorDashboardPortfolioTableViewCellViewModel()
+        case .portfolioEvents:
+            return InvestorDashboardPortfolioEventsTableViewCellViewModel()
         case .programList:
             return activePrograms ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
         }

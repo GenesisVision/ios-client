@@ -14,7 +14,7 @@ import PKHUD
 import SimulatorStatusMagic
 #endif
 
-enum ThemeType {
+enum ThemeType: String {
     case `default`, dark
 }
 
@@ -30,7 +30,77 @@ struct NavBarColors {
 }
 
 struct AppearanceController {
-    static var theme: ThemeType = .default
+    enum Theme: Int {
+        case lightTheme, darkTheme
+        
+        var mainColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.primary
+            case .darkTheme:
+                return UIColor.primary
+            }
+        }
+        
+        //Customizing the Navigation Bar
+        var barStyle: UIBarStyle {
+            switch self {
+            case .lightTheme:
+                return .black
+            case .darkTheme:
+                return .default
+            }
+        }
+
+        var backgroundColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightBackground
+            case .darkTheme:
+                return UIColor.Common.darkBackground
+            }
+        }
+        
+        var secondaryColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+        
+        var titleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightTextPrimary
+            case .darkTheme:
+                return UIColor.Common.darkTextPrimary
+            }
+        }
+        var subtitleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+    }
+    
+    static var theme: Theme {
+        get {
+            let colorTheme = UserDefaults.standard.integer(forKey: Constants.UserDefaults.colorTheme)
+            guard let themeType = Theme(rawValue: colorTheme) else {
+                    return .lightTheme
+            }
+            
+            return themeType
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: Constants.UserDefaults.colorTheme)
+        }
+    }
     
     static func setupAppearance() {
         #if DEBUG
@@ -48,6 +118,32 @@ struct AppearanceController {
         
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
+    }
+    
+    static func applyTheme() {
+        NotificationCenter.default.post(name: .themeChanged, object: nil)
+        
+        let theme = AppearanceController.theme
+        // First persist the selected theme using NSUserDefaults.
+        UserDefaults.standard.set(theme.rawValue, forKey: Constants.UserDefaults.colorTheme)
+        UserDefaults.standard.synchronize()
+        
+        // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
+        let sharedApplication = UIApplication.shared
+        sharedApplication.delegate?.window??.tintColor = UIColor.primary
+        
+        UINavigationBar.appearance().barStyle = theme.barStyle
+        
+        UITabBar.appearance().barStyle = theme.barStyle
+        
+        UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
+        UISwitch.appearance().thumbTintColor = theme.mainColor
+        
+        setupTabBar()
+        setupSegmentedControl()
+        setupPlateCell()
+        setupShadowView()
+        setupEasyTipView()
     }
     
     // NavigationBar

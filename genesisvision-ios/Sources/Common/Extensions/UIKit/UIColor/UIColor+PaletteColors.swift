@@ -15,7 +15,7 @@ extension UIColor {
         static var red: UIColor { return #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1) }
     }
     
-    private struct Common {
+    struct Common {
         static var primary: UIColor { return #colorLiteral(red: 0, green: 0.7411764706, blue: 0.6862745098, alpha: 1) }                                 //00BDAF
         static var topaz: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                   //15bbaf
         static var greenBlue: UIColor { return #colorLiteral(red: 0, green: 0.6705882353, blue: 0.6274509804, alpha: 1) }                               //00aba0
@@ -24,7 +24,26 @@ extension UIColor {
         static var darkSlateBlue: UIColor { return #colorLiteral(red: 0.09803921569, green: 0.3098039216, blue: 0.3960784314, alpha: 1) }                           //194f65
         
         static var dark: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                    //546e7a
+        
+        static var darkBackground: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.1176470588, blue: 0.1450980392, alpha: 1) }                          //151e25
+        static var darkCell: UIColor { return #colorLiteral(red: 0.1137254902, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                //1d252c
+        static var darkDelimiter: UIColor { return #colorLiteral(red: 0.137254902, green: 0.168627451, blue: 0.1921568627, alpha: 1) }                           //232b31
 
+        static var darkTextPrimary: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                         //ffffff
+        static var darkTextSecondary: UIColor { return #colorLiteral(red: 0.4705882353, green: 0.4901960784, blue: 0.5098039216, alpha: 1) }                       //787d82
+        
+        static var lightBackground: UIColor { return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) }                         //f3f3f3
+        static var lightCell: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                               //ffffff
+        static var lightDelimiter: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                          //fafafa
+        
+        static var lightTextPrimary: UIColor { return #colorLiteral(red: 0.1098039216, green: 0.137254902, blue: 0.1647058824, alpha: 1) }                        //1c232a
+        static var lightTextSecondary: UIColor { return #colorLiteral(red: 0.7333333333, green: 0.7411764706, blue: 0.7490196078, alpha: 1) }                      //bbbdbf
+        
+//        <color name="accent">#56b8af</color>
+//        <color name="green">#64c896</color>
+//        <color name="red">#d94b5d</color>
+//        <color name="colorNotFound">#ff00ff</color>
+    
         static var green: UIColor { return #colorLiteral(red: 0.2980392157, green: 0.6862745098, blue: 0.3137254902, alpha: 1) }                                   //4caf50
         static var lipstick: UIColor { return #colorLiteral(red: 0.8745098039, green: 0.09411764706, blue: 0.3960784314, alpha: 1) }                                //df1865
         static var powderPink: UIColor { return #colorLiteral(red: 1, green: 0.6470588235, blue: 0.8, alpha: 1) }                              //ffa5cc
@@ -89,7 +108,7 @@ extension UIColor {
     
     struct Transaction {
         static var greenTransaction: UIColor { return Common.green }
-        static var redTransaction: UIColor { return AppearanceController.theme == .dark ? GV.red : Common.lipstick }
+        static var redTransaction: UIColor { return AppearanceController.theme == .darkTheme ? GV.red : Common.lipstick }
         static var investType: UIColor { return Font.dark }
         static var currency: UIColor { return Font.medium }
         static var date: UIColor { return Font.medium }
@@ -98,8 +117,8 @@ extension UIColor {
     }
     
     struct Header {
-        static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
-        static var subtitle: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
+        static var title: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue }
+        static var subtitle: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue }
     }
     
     struct Font {
@@ -112,7 +131,7 @@ extension UIColor {
         static var light: UIColor { return Common.silver }
         
         static var green: UIColor { return Common.green }
-        static var red: UIColor { return AppearanceController.theme == .dark ? GV.red : Common.lipstick }
+        static var red: UIColor { return AppearanceController.theme == .darkTheme ? GV.red : Common.lipstick }
         static var blue: UIColor { return Common.blue }
         
         static var black: UIColor { return Common.black }
@@ -125,10 +144,10 @@ extension UIColor {
     
     struct Button {
         static var primary: UIColor { return Common.primary }
-        static var darkBorder: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.dark }
+        static var darkBorder: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.dark }
         
         static var green: UIColor { return Common.green }
-        static var red: UIColor { return AppearanceController.theme == .dark ? GV.red : Common.lipstick }
+        static var red: UIColor { return AppearanceController.theme == .darkTheme ? GV.red : Common.lipstick }
         
         static var gray: UIColor { return Common.silver }
         static var numpadBackground: UIColor { return Common.numpadBackground }
@@ -146,22 +165,22 @@ extension UIColor {
     struct Slider {
         static var primary: UIColor { return Common.primary }
         static var line: UIColor { return Common.paleGrey }
-        static var label: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.uglyBlue }
-        static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
-        static var subTitle: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.uglyBlue }
+        static var label: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.uglyBlue }
+        static var title: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue }
+        static var subTitle: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.uglyBlue }
     }
     
     struct TextField {
         static var line: UIColor { return Common.silver }
         static var empty: UIColor { return Common.silver }
         static var filled: UIColor { return Common.primary }
-        static var placeholder: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
+        static var placeholder: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue }
     }
     
     struct TabBar {
-        static var tint: UIColor { return AppearanceController.theme == .dark ? Common.primary : Common.white }
-        static var bg: UIColor { return AppearanceController.theme == .dark ? GV.dark : Common.primary }
-        static var unselected: UIColor { return AppearanceController.theme == .dark ? Common.white.withAlphaComponent(0.5) : Common.unselected }
+        static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.primary : Common.white }
+        static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.primary }
+        static var unselected: UIColor { return AppearanceController.theme == .darkTheme ? Common.white.withAlphaComponent(0.5) : Common.unselected }
     }
     
     struct NavBar {
@@ -172,7 +191,11 @@ extension UIColor {
             case .primary:
                 return NavBarColors(tintColor: Common.white, backgroundColor: Common.primary, textColor: Common.white, subtitleColor: Common.white.withAlphaComponent(0.5))
             case .gray:
-                return NavBarColors(tintColor: Common.primary, backgroundColor: AppearanceController.theme == .dark ? GV.dark : Common.bgGray, textColor: AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue, subtitleColor: AppearanceController.theme == .dark ? GV.white.withAlphaComponent(0.7) : Common.darkSlateBlue.withAlphaComponent(0.7))
+                print(AppearanceController.theme)
+                return NavBarColors(tintColor: Common.primary,
+                                    backgroundColor: AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.bgGray,
+                                    textColor: AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue,
+                                    subtitleColor: AppearanceController.theme == .darkTheme ? GV.white.withAlphaComponent(0.7) : Common.darkSlateBlue.withAlphaComponent(0.7))
             }
         }
     }
@@ -184,13 +207,13 @@ extension UIColor {
     }
     
     struct ChartMarker {
-        static var bg: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
-        static var text: UIColor { return AppearanceController.theme == .dark ? Common.darkSlateBlue : Common.white }
+        static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
+        static var text: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkSlateBlue : Common.white }
     }
     
     struct BaseView {
-        static var bg: UIColor { return AppearanceController.theme == .dark ? GV.dark : Common.bgGray }
-        static var bottomGradientView: UIColor { return AppearanceController.theme == .dark ? GV.dark : Common.white }
+        static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.bgGray }
+        static var bottomGradientView: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.white }
     }
     
     struct Border {
@@ -203,21 +226,21 @@ extension UIColor {
     
     struct Cell {
         static var separator: UIColor { return Common.separator }
-        static var bg: UIColor { return AppearanceController.theme == .dark ? #colorLiteral(red: 0.2941176471, green: 0.3019607843, blue: 0.3137254902, alpha: 1) : Common.white }
+        static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
         static var tournamentBg: UIColor { return Common.puttyWithAlpha }
-        static var selectedBg: UIColor { return AppearanceController.theme == .dark ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
+        static var selectedBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
         
-        static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
-        static var redTitle: UIColor { return AppearanceController.theme == .dark ? GV.red : Common.lipstick }
-        static var subtitle: UIColor { return Common.primary }
+        static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
+        static var redTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextSecondary : Common.lipstick }
+        static var subtitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextSecondary : Common.darkSlateBlue }
     }
     
     struct TwoFactor {
-        static var title: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.dark }
-        static var codeTitle: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.primary }
+        static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.dark }
+        static var codeTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.primary }
         
-        static var pageControllPageIndicatorTint: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
-        static var pageControllCurrentPageIndicatorTint: UIColor { return AppearanceController.theme == .dark ? Common.primary : Common.primary }
-        static var pageControllTint: UIColor { return AppearanceController.theme == .dark ? GV.white : Common.darkSlateBlue }
+        static var pageControllPageIndicatorTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
+        static var pageControllCurrentPageIndicatorTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.primary : Common.primary }
+        static var pageControllTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
     }
 }

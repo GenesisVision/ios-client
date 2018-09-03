@@ -1,18 +1,18 @@
 //
-//  DashboardTabmanRouter.swift
+//  ManagerDashboardTabmanRouter.swift
 //  genesisvision-ios
 //
-//  Created by George on 05/07/2018.
+//  Created by George on 27/07/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-class DashboardTabmanRouter: TabmanRouter {
+class ManagerDashboardTabmanRouter: TabmanRouter {
     // MARK: - Variables
     var programDetailViewController: ProgramDetailViewController?
     
     // MARK: - Public methods
-    func getDashboard() -> InvestorDashboardViewController? {
-        let viewController = InvestorDashboardViewController()
+    func getDashboard() -> ManagerDashboardViewController? {
+        let viewController = ManagerDashboardViewController()
         
         let navigationController = BaseNavigationController(rootViewController: viewController)
         let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
@@ -32,3 +32,4 @@ class DashboardTabmanRouter: TabmanRouter {
         return viewController
     }
 }
+

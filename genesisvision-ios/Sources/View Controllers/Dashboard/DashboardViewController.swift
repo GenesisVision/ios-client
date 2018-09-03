@@ -12,137 +12,6 @@ class DashboardViewController: BaseViewControllerWithTableView {
 
     // MARK: - View Model
     var viewModel: DashboardViewModel!
-
-    // MARK: - Variables
-    private var segmentedControl: UISegmentedControl = UISegmentedControl(items: ["Active", "Archive"])
-    
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        showProgressHUD()
-        setup()
-        
-        fetch()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        for visibleCell in tableView.visibleCells {
-            if let cell = visibleCell as? DashboardTableViewCell {
-                cell.stopTimer()
-            }
-        }
-    }
-    
-    // MARK: - Private methods
-    private func setup() {
-        setupTableConfiguration()
-        registerForPreviewing()
-
-        setupUI()
-    }
-    
-    private func setupUI() {
-        bottomViewType = viewModel.bottomViewType
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
-        
-        segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
-        segmentedControl.tintColor = UIColor.primary
-        segmentedControl.selectedSegmentIndex = 0
-        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16)]
-        segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
-        segmentedControl.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
-        navigationItem.titleView = segmentedControl
-    }
-    
-    private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        
-        setupPullToRefresh()
-    }
-    
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
-        }
-    }
-    
-    private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
-        
-        showProgressHUD()
-        fetch()
-    }
-    
-    override func fetch() {
-        viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
-    }
-    
-    override func sortButtonAction() {
-        sortMethod()
-    }
-    
-    // MARK: - Actions
-    @objc func segmentSelected(sender: UISegmentedControl) {
-        viewModel.activePrograms = sender.selectedSegmentIndex == 0
-        reloadData()
-    }
-    
-    @objc func sortMethod() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
-        
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
-            
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortView()
-        }
-        
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
-            }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
-        }
-        
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
-    }
 }
 
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
@@ -187,6 +56,25 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return viewModel.heightForRow(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section != 1 else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as SegmentedHeaderFooterView
+        header.configure(with: viewModel.headerSegments(for: section))
+
+        return header
     }
 }
 
@@ -239,12 +127,6 @@ extension DashboardViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         push(viewController: viewControllerToCommit)
-    }
-}
-
-extension DashboardViewController: ReloadDataProtocol {
-    func didReloadData() {
-        reloadData()
     }
 }
 

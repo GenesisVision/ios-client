@@ -27,7 +27,7 @@ class DashboardRouter: Router {
     func show(routeType: DashboardRouteType) {
         switch routeType {
         case .showProgramDetails(let investmentProgramId):
-            parentRouter?.showProgramDetails(with: investmentProgramId)
+            showProgramDetails(with: investmentProgramId)
         case .programList:
             showProgramList()
         }

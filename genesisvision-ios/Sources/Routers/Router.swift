@@ -26,7 +26,8 @@ enum TabsType: Int {
 class Router {
     // MARK: - Variables
     var tournamentViewController: TournamentListViewController!
-    var dashboardTabmanViewController: DashboardTabmanViewController!
+    var investorDashboardViewController: InvestorDashboardViewController!
+    var managerDashboardViewController: ManagerDashboardViewController!
     var programsViewController: ProgramListViewController!
     
     var currentController: UIViewController?
@@ -39,23 +40,34 @@ class Router {
     weak var navigationController: UINavigationController?
     
     fileprivate func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let dashboardTabmanViewController = DashboardTabmanViewController()
-        self.dashboardTabmanViewController = dashboardTabmanViewController
+
+        if isInvestorApp {
+            let viewController = InvestorDashboardViewController()
+            self.investorDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        } else {
+            let viewController = ManagerDashboardViewController()
+            self.managerDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        }
         
-        navigationController = BaseNavigationController(rootViewController: dashboardTabmanViewController)
-        let router =  DashboardTabmanRouter(parentRouter: self, tabmanViewController: dashboardTabmanViewController, navigationController: navigationController)
-        let viewModel = DashboardTabmanViewModel(withRouter: router, tabmanViewModelDelegate: dashboardTabmanViewController)
-        dashboardTabmanViewController.viewModel = viewModel
-        navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
+
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
         navigationController.tabBarItem.title = "DASHBOARD"
         viewControllers.append(navigationController)
     }
     
     fileprivate func addPrograms(_ viewControllers: inout [UIViewController]) {
         if let navigationController = getProgramsNavigationController() {
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.title = "PROGRAMS"
             viewControllers.append(navigationController)
         }
@@ -66,8 +78,8 @@ class Router {
         navigationController = BaseNavigationController(rootViewController: walletViewController)
         let router = WalletRouter(parentRouter: self, navigationController: navigationController)
         walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
-        navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
         navigationController.tabBarItem.title = "WALLET"
         viewControllers.append(navigationController)
     }
@@ -77,8 +89,8 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: settingsViewController)
             let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
             settingsViewController.viewModel = SettingsViewModel(withRouter: router)
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.title = "SETTINGS"
             viewControllers.append(navigationController)
         }
@@ -101,12 +113,9 @@ class Router {
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
 
-        if isTournamentApp {
-            self.tournamentViewController = parentRouter?.tournamentViewController
-        } else {
-            self.programsViewController = parentRouter?.programsViewController
-            self.dashboardTabmanViewController = parentRouter?.dashboardTabmanViewController
-        }
+        self.programsViewController = parentRouter?.programsViewController
+        self.investorDashboardViewController = parentRouter?.investorDashboardViewController
+        self.managerDashboardViewController = parentRouter?.managerDashboardViewController
         
         self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
