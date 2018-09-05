@@ -21,6 +21,12 @@ final class DashboardViewModel {
     
     var title = "Dashboard"
     
+    var sortingDelegateManager = SortingDelegateManager()
+    var currencyDelegateManager = CurrencyDelegateManager()
+    var dateRangeDelegateManager = DateRangeDelegateManager()
+    
+    var highToLowValue: Bool = false
+    
     private var sections: [SectionType] = [.chart, .portfolioEvents, .programList]
     
     private var router: DashboardRouter!
@@ -38,10 +44,9 @@ final class DashboardViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .none
+        return .sort
     }
     
-    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
     var investMaxAmountFrom: Double?
     var investMaxAmountTo: Double?
     var searchText = ""
@@ -53,31 +58,6 @@ final class DashboardViewModel {
     }
     var activeViewModels = [DashboardTableViewCellViewModel]()
     var archiveViewModels = [DashboardTableViewCellViewModel]()
-    
-    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc,
-                                                                      .byLevelDesc, .byLevelAsc,
-                                                                      .byBalanceDesc, .byBalanceAsc,
-                                                                      .byOrdersDesc, .byOrdersAsc,
-                                                                      .byEndOfPeriodDesc, .byEndOfPeriodAsc,
-                                                                      .byTitleDesc, .byTitleAsc]
-    
-    var sortingValues: [String] = ["profit ⇣", "profit ⇡",
-                                   "level ⇣", "level ⇡",
-                                   "balance ⇣", "balance ⇡",
-                                   "orders ⇣", "orders ⇡",
-                                   "end of period ⇣", "end of period ⇡",
-                                   "title ⇣", "title ⇡"]
-    
-    struct SortingList {
-        var sortingValue: String
-        var sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet
-    }
-    
-    var sortingList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
-        }
-    }
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -94,19 +74,6 @@ final class DashboardViewModel {
     }
     
     // MARK: - Public methods
-    func getSortingValue(sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet) -> String {
-        guard let index = sortingKeys.index(of: sortingKey) else { return "" }
-        return sortingValues[index]
-    }
-    
-    func changeSorting(at index: Int) {
-        sorting = sortingKeys[index]
-    }
-    
-    func getSelectedSortingIndex() -> Int {
-        return sortingKeys.index(of: sorting) ?? 0
-    }
-    
     func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
             guard let model = model(at: investmentProgramId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -177,10 +144,6 @@ extension DashboardViewModel {
         case .programList:
             return modelsCount()
         }
-    }
-    
-    func sortTitle() -> String? {
-        return "Sort by " + getSortingValue(sortingKey: sorting)
     }
     
     func headerTitle(for section: Int) -> String? {
@@ -340,6 +303,10 @@ extension DashboardViewModel {
         return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
     
+    func highToLowButtonAction() {
+        
+    }
+    
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
@@ -351,7 +318,7 @@ extension DashboardViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        DashboardDataProvider.getProgram(with: sorting, completion: { [weak self] (dashboard) in
+        DashboardDataProvider.getProgram(with: sortingDelegateManager.sorting, completion: { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.dashboard = dashboard
@@ -374,5 +341,148 @@ extension DashboardViewModel {
 extension DashboardViewModel: ReloadDataProtocol {
     func didReloadData() {
         refresh { (result) in }
+    }
+}
+
+protocol TableViewProtocol: class {
+    func didSelectRow(at indexPath: IndexPath)
+}
+
+final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    
+    weak var tableViewProtocol: TableViewProtocol?
+    
+    // MARK: - Variables
+    var highToLowValue: Bool = false
+    
+    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
+    
+    var sortingDescKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc,
+                                                                      .byLevelDesc,
+                                                                      .byBalanceDesc,
+                                                                      .byOrdersDesc,
+                                                                      .byEndOfPeriodDesc,
+                                                                      .byTitleDesc]
+    
+    var sortingAscKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitAsc,
+                                                                      .byLevelAsc,
+                                                                      .byBalanceAsc,
+                                                                      .byOrdersAsc,
+                                                                      .byEndOfPeriodAsc,
+                                                                      .byTitleAsc]
+    
+    var sortingValues: [String] = ["profit",
+                                   "level",
+                                   "balance",
+                                   "orders",
+                                   "end of period",
+                                   "title"]
+    
+    struct SortingList {
+        var sortingValue: String
+        var sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet
+    }
+    
+    var sortingDescList: [SortingList] {
+        return sortingValues.enumerated().map { (index, element) in
+            return SortingList(sortingValue: element, sortingKey: sortingDescKeys[index])
+        }
+    }
+    
+    var sortingAscList: [SortingList] {
+        return sortingValues.enumerated().map { (index, element) in
+            return SortingList(sortingValue: element, sortingKey: sortingAscKeys[index])
+        }
+    }
+    
+    // MARK: - Init
+    override init() {
+        super.init()
+    }
+    
+    // MARK: - Private methods
+    func getSortingValue(sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet) -> String {
+        guard let index = sortingDescKeys.index(of: sortingKey) else { return "" }
+        return sortingValues[index]
+    }
+    
+    func changeSorting(at index: Int) {
+        sorting = highToLowValue ? sortingDescKeys[index] : sortingAscKeys[index]
+    }
+    
+    func getSelectedSortingIndex() -> Int {
+        return sortingDescKeys.index(of: sorting) ?? 0
+    }
+    
+    func sortTitle() -> String? {
+        return "Sort by " + getSortingValue(sortingKey: sorting)
+    }
+    
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        changeSorting(at: indexPath.row)
+        
+        tableViewProtocol?.didSelectRow(at: indexPath)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sortingValues.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = sortingValues[indexPath.row]
+        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        
+        cell.textLabel?.textColor = indexPath.row == getSelectedSortingIndex() ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.7)
+        cell.accessoryType = indexPath.row == getSelectedSortingIndex() ? .checkmark : .none
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+}
+
+final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    override init() {
+        super.init()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "wrre"
+        cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return cell
+    }
+}
+
+final class DateRangeDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    override init() {
+        super.init()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "wrre"
+        cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return cell
     }
 }

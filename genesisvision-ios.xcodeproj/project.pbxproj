@@ -191,6 +191,7 @@
 		5E78F8A52063F530000C13D7 /* ProgramDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */; };
 		5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */; };
 		5E7A2FA220C588A100BDA030 /* AuthTwoFactorDisableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7A2FA120C588A100BDA030 /* AuthTwoFactorDisableViewModel.swift */; };
+		5E7A6A8B214020EE005DEEBD /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */; };
 		5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */; };
 		5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7FC745207B6337001617FD /* BalanceLabel.swift */; };
 		5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E8340DB207E3279004A29F1 /* Program.storyboard */; };
@@ -675,6 +676,7 @@
 		5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewController.swift; sourceTree = "<group>"; };
 		5E78F8A6206426B5000C13D7 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		5E7A2FA120C588A100BDA030 /* AuthTwoFactorDisableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorDisableViewModel.swift; sourceTree = "<group>"; };
+		5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		5E7B034F2067B6A300D8F3BA /* NumpadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadButton.swift; sourceTree = "<group>"; };
 		5E7FC745207B6337001617FD /* BalanceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLabel.swift; sourceTree = "<group>"; };
 		5E8340DB207E3279004A29F1 /* Program.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Program.storyboard; sourceTree = "<group>"; };
@@ -2205,6 +2207,7 @@
 				FCC9DD52200DFA5E008825EC /* Cells */,
 				5E7FC747207B6342001617FD /* Labels */,
 				5EB996AB20F392DA00E31D23 /* Custom Views */,
+				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2605,6 +2608,7 @@
 				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				5E8340E0207E3907004A29F1 /* ProgramDetailTradesViewModel.swift in Sources */,
 				5E18CEB120C566F1008FE5B5 /* InvestmentProgramsViewModel.swift in Sources */,
+				5E7A6A8B214020EE005DEEBD /* BottomSheet.swift in Sources */,
 				5E18CEC220C566F1008FE5B5 /* WalletTransactionsViewModel.swift in Sources */,
 				5E6308ED212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift in Sources */,
 				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,

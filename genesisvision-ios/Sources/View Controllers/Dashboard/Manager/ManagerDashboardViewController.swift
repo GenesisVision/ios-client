@@ -51,7 +51,7 @@ class ManagerDashboardViewController: DashboardViewController {
     
     private func setupUI() {
         bottomViewType = viewModel.bottomViewType
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        sortButton.setTitle(self.viewModel.sortingDelegateManager.sortTitle(), for: .normal)
         
         segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
         segmentedControl.tintColor = UIColor.primary
@@ -78,7 +78,7 @@ class ManagerDashboardViewController: DashboardViewController {
     }
     
     private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        sortButton.setTitle(self.viewModel.sortingDelegateManager.sortTitle(), for: .normal)
         
         showProgressHUD()
         fetch()
@@ -114,39 +114,36 @@ class ManagerDashboardViewController: DashboardViewController {
     }
     
     @objc func sortMethod() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+        let controller = BottomSheetController()
+        controller.containerViewBackgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        controller.textTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        controller.viewActionType = .tappedDismiss
+        controller.overlayBackgroundColor = UIColor.black.withAlphaComponent(0.6)
+        controller.initializeHeight = 400
+        controller.cornerRadius = 15
         
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
+        controller.addNavigationbar { navigationBar in
+            let item = UINavigationItem(title: "")
             
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortView()
+            let rightButton = UIBarButtonItem(title: "Button", style: .plain, target: controller, action: nil)
+            item.rightBarButtonItem = rightButton
+            
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.text = "Title"
+            item.leftBarButtonItem = UIBarButtonItem(customView: label)
+            navigationBar.items = [item]
         }
         
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
-            }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
+        controller.addTableView { [weak self] tableView in
+            tableView.delegate = self?.viewModel.sortingDelegateManager
+            tableView.dataSource = self?.viewModel.sortingDelegateManager
+            tableView.rowHeight = 100
+            tableView.estimatedRowHeight = 100
+            tableView.separatorColor = #colorLiteral(red: 0.1803921569, green: 0.2078431373, blue: 0.2352941176, alpha: 1)
         }
         
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+        controller.present()
     }
 }
 
