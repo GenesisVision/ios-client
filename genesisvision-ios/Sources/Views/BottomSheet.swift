@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BottomSheetControllerProtocol {
+    
+}
+
 public typealias BottomSheetController = BottomSheet.Controller
 typealias BottomSheetTransitionAnimator = BottomSheet.TransitionAnimator
 
@@ -43,9 +47,12 @@ open class BottomSheet {
             get { return containerView.backgroundColor }
         }
         
-        open var textTintColor: UIColor? = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        open var tintColor: UIColor? = UIColor.Cell.title
+        open var titleTextColor: UIColor? = UIColor.Cell.title
+        open var subtitleTextColor: UIColor? = UIColor.Cell.subtitle
         open let overlayView = UIView()
         open let containerView = UIView()
+        open var isScrollEnabledInSheet: Bool = true
         // MARK: - Private property
         fileprivate let overlayViewPanGestureRecognizer: UIPanGestureRecognizer = {
             let gestureRecognizer = UIPanGestureRecognizer()
@@ -72,7 +79,6 @@ open class BottomSheet {
         fileprivate var bar: UIView?
         fileprivate var contentView: UIView?
         fileprivate var scrollView: UIScrollView?
-        fileprivate var isScrollEnabledInSheet: Bool = true
         fileprivate var hasBar: Bool {
             if let _ = bar {
                 return true
@@ -122,7 +128,7 @@ open class BottomSheet {
             let toolbar = UIToolbar()
             toolbar.isTranslucent = false
             toolbar.backgroundColor = containerViewBackgroundColor
-            toolbar.tintColor = textTintColor
+            toolbar.tintColor = tintColor
             toolbar.barTintColor = containerViewBackgroundColor
             containerView.addSubview(toolbar)
             toolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -161,13 +167,67 @@ open class BottomSheet {
         }
         
         // Adds UINavigationbar
-        open func addNavigationbar(_ configurationHandler: ((UINavigationBar) -> Void)? = nil) {
+        open func addNavigationBar(_ title: String? = nil,
+                                   subtitle: String? = nil,
+                                   buttonTitle: String? = nil,
+                                   buttonSelectedTitle: String? = nil,
+                                   normalImage: UIImage = #imageLiteral(resourceName: "img_tabbar_settings_unselected2"),
+                                   selectedImage: UIImage = #imageLiteral(resourceName: "img_textfield_password_colored_icon"),
+                                   buttonAction: Selector? = nil,
+                                   buttonTarget: Any? = nil,
+                                   buttonSelected: Bool = false,
+                                   _  configurationHandler: ((UINavigationBar) -> Void)? = nil) {
+            
             guard !hasBar else { fatalError("UIToolbar or UINavigationBar can only have one") }
             let navigationBar = UINavigationBar()
             navigationBar.isTranslucent = false
             navigationBar.backgroundColor = containerViewBackgroundColor
-            navigationBar.tintColor = textTintColor
+            navigationBar.tintColor = tintColor
             navigationBar.barTintColor = containerViewBackgroundColor
+            
+            let item = UINavigationItem(title: "")
+            
+            if let title = title {
+                let label = UILabel()
+                label.textColor = titleTextColor
+                label.text = title
+                label.font = UIFont.getFont(.bold, size: 19)
+                item.leftBarButtonItem = UIBarButtonItem(customView: label)
+            }
+            
+            if let subtitle = subtitle {
+                let label = UILabel()
+                label.textColor = subtitleTextColor
+                label.text = subtitle
+                label.font = UIFont.getFont(.regular, size: 15)
+                item.rightBarButtonItem = UIBarButtonItem(customView: label)
+            }
+            
+            if let buttonTitle = buttonTitle {
+                let btn = UIButton(type: .system)
+                
+                btn.setImage(buttonSelected ? selectedImage : normalImage, for: .normal)
+                btn.contentHorizontalAlignment = .right
+                
+                btn.isSelected = buttonSelected
+                
+                let spacing = CGFloat(4)
+                btn.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing, 0, spacing)
+                btn.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, -spacing)
+                
+                btn.setTitle(buttonSelected ? buttonSelectedTitle : buttonTitle, for: .normal)
+                btn.tintColor = tintColor
+                btn.sizeToFit()
+                
+                if let buttonAction = buttonAction {
+                    btn.addTarget(buttonTarget, action: buttonAction, for: .touchUpInside)
+                }
+                
+                let rightButton = UIBarButtonItem(customView: btn)
+                item.rightBarButtonItem = rightButton
+            }
+            
+            navigationBar.items = [item]
             
             containerView.addSubview(navigationBar)
             navigationBar.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +307,7 @@ open class BottomSheet {
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let scrollView = UIScrollView()
             scrollView.backgroundColor = containerViewBackgroundColor
-            scrollView.tintColor = textTintColor
+            scrollView.tintColor = tintColor
             containerView.addSubview(scrollView)
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             configurationHandler(scrollView)
@@ -295,7 +355,7 @@ open class BottomSheet {
                 collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
             }
             collectionView.backgroundColor = containerViewBackgroundColor
-            collectionView.tintColor = textTintColor
+            collectionView.tintColor = tintColor
             
             containerView.addSubview(collectionView)
             collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -339,7 +399,7 @@ open class BottomSheet {
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let tableView = UITableView(frame: .zero)
             tableView.backgroundColor = containerViewBackgroundColor
-            tableView.tintColor = textTintColor
+            tableView.tintColor = tintColor
             
             tableView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(tableView)
@@ -482,7 +542,7 @@ private extension BottomSheetController {
         
         let width: CGFloat = 44.0
         let height: CGFloat = 5.0
-        lineView.backgroundColor = textTintColor != nil ? textTintColor!.withAlphaComponent(0.25) : UIColor.white.withAlphaComponent(0.25)
+        lineView.backgroundColor = tintColor != nil ? tintColor!.withAlphaComponent(0.25) : UIColor.white.withAlphaComponent(0.25)
         lineView.clipsToBounds = true
         lineView.layer.cornerRadius = height / 2
         
@@ -498,10 +558,34 @@ private extension BottomSheetController {
     }
     func configureConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        let heightConstraint = NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: initializeHeight)
-        let rightConstraint = NSLayoutConstraint(item: containerView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: containerView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
-        let bottomLayoutConstraint = NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: containerView,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .height,
+                                                  multiplier: 1,
+                                                  constant: initializeHeight)
+        let rightConstraint = NSLayoutConstraint(item: containerView,
+                                                 attribute: .right,
+                                                 relatedBy: .equal,
+                                                 toItem: view,
+                                                 attribute: .right,
+                                                 multiplier: 1,
+                                                 constant: 0)
+        let leftConstraint = NSLayoutConstraint(item: containerView,
+                                                attribute: .left,
+                                                relatedBy: .equal,
+                                                toItem: view,
+                                                attribute: .left,
+                                                multiplier: 1,
+                                                constant: 0)
+        let bottomLayoutConstraint = NSLayoutConstraint(item: containerView,
+                                                        attribute: .bottom,
+                                                        relatedBy: .equal,
+                                                        toItem: view,
+                                                        attribute: .bottom,
+                                                        multiplier: 1,
+                                                        constant: 0)
         view.addConstraints([heightConstraint, rightConstraint, leftConstraint, bottomLayoutConstraint])
         self.containerViewHeightConstraint = heightConstraint
     }

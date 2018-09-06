@@ -11,6 +11,7 @@ import UIKit
 class ManagerDashboardViewController: DashboardViewController {
     
     // MARK: - Variables
+    private var controller = BottomSheetController()
     private var segmentedControl: UISegmentedControl = UISegmentedControl(items: ["Active", "Archive"])
     
     // MARK: - Lifecycle
@@ -114,26 +115,7 @@ class ManagerDashboardViewController: DashboardViewController {
     }
     
     @objc func sortMethod() {
-        let controller = BottomSheetController()
-        controller.containerViewBackgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
-        controller.textTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        controller.viewActionType = .tappedDismiss
-        controller.overlayBackgroundColor = UIColor.black.withAlphaComponent(0.6)
-        controller.initializeHeight = 400
-        controller.cornerRadius = 15
-        
-        controller.addNavigationbar { navigationBar in
-            let item = UINavigationItem(title: "")
-            
-            let rightButton = UIBarButtonItem(title: "Button", style: .plain, target: controller, action: nil)
-            item.rightBarButtonItem = rightButton
-            
-            let label = UILabel()
-            label.textColor = UIColor.white
-            label.text = "Title"
-            item.leftBarButtonItem = UIBarButtonItem(customView: label)
-            navigationBar.items = [item]
-        }
+        controller.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High")
         
         controller.addTableView { [weak self] tableView in
             tableView.delegate = self?.viewModel.sortingDelegateManager

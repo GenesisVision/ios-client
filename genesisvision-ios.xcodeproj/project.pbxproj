@@ -156,6 +156,11 @@
 		5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */; };
 		5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */; };
 		5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */; };
+		5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */; };
+		5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */; };
+		5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E54883321414FD100B2D9FE /* DateRangeView.xib */; };
+		5E5488362141577700B2D9FE /* DateRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5488352141577700B2D9FE /* DateRangeView.swift */; };
+		5E5488382141600100B2D9FE /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5488372141600100B2D9FE /* DateHelper.swift */; };
 		5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */; };
 		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
 		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
@@ -641,6 +646,11 @@
 		5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionRouter.swift; sourceTree = "<group>"; };
 		5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProgressBar.swift; sourceTree = "<group>"; };
 		5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetTableViewCell.swift; sourceTree = "<group>"; };
+		5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioAssetTableViewCell.xib; sourceTree = "<group>"; };
+		5E54883321414FD100B2D9FE /* DateRangeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangeView.xib; sourceTree = "<group>"; };
+		5E5488352141577700B2D9FE /* DateRangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeView.swift; sourceTree = "<group>"; };
+		5E5488372141600100B2D9FE /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		5E5914FD2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopJumpingTableViewOnInsertRows.swift; sourceTree = "<group>"; };
 		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
 		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
@@ -1897,6 +1907,8 @@
 				5E2DC8D7212C19540006A674 /* InvestorDashboardPortfolioEventsTableViewCellViewModel.swift */,
 				5E6308F3212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.swift */,
 				5E6308F4212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib */,
+				5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */,
+				5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -2071,6 +2083,7 @@
 				5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */,
 				5E616B3F20F7880800B3459D /* ImagePickerPresentable.swift */,
 				5E106386213D69AF008A0E8B /* BaseExtensions.swift */,
+				5E5488372141600100B2D9FE /* DateHelper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2208,6 +2221,8 @@
 				5E7FC747207B6342001617FD /* Labels */,
 				5EB996AB20F392DA00E31D23 /* Custom Views */,
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
+				5E5488352141577700B2D9FE /* DateRangeView.swift */,
+				5E54883321414FD100B2D9FE /* DateRangeView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2383,6 +2398,7 @@
 				5E85834A206014820039E13F /* SortHeaderView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
+				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
 				5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */,
 				FC016C16203B0FD2006956FE /* Tournament.storyboard in Resources */,
 				FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */,
@@ -2399,6 +2415,7 @@
 				5E6308F6212C028C00D15C71 /* InvestorDashboardPortfolioEventsTableViewCell.xib in Resources */,
 				FC4C51A5204806370042CEE1 /* ProgramRequestTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
+				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				5E239272205F67F100CB5AEC /* NeuzeitGro-Bol.ttf in Resources */,
@@ -2562,6 +2579,7 @@
 				5E18CEA420C566F1008FE5B5 /* TradesViewModel.swift in Sources */,
 				5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */,
 				5EEE4557210B2377009CF791 /* ManagerDashboardViewController.swift in Sources */,
+				5E5488382141600100B2D9FE /* DateHelper.swift in Sources */,
 				5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */,
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
@@ -2617,6 +2635,7 @@
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				5E18CED820C566F1008FE5B5 /* BrokerInvestmentProgram.swift in Sources */,
 				5E18CE9220C566F1008FE5B5 /* TwoFactorCodeModel.swift in Sources */,
+				5E5488362141577700B2D9FE /* DateRangeView.swift in Sources */,
 				5E18CE7720C566F1008FE5B5 /* RateAPI.swift in Sources */,
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* ProgramTableViewCell.swift in Sources */,
@@ -2746,6 +2765,7 @@
 				5E18CEA020C566F1008FE5B5 /* WalletAddressViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				FC9137902030A4FD002321C7 /* TraderDetailHeaderTableViewCellViewModel.swift in Sources */,
+				5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */,
 				5E18CED720C566F1008FE5B5 /* InvestmentProgramBuyToken.swift in Sources */,
 				5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */,
 				FC900E64204EE0EF007E9142 /* WalletFilterViewModel.swift in Sources */,

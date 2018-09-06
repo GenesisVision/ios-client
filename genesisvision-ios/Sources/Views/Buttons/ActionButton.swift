@@ -8,6 +8,40 @@
 
 import UIKit.UIButton
 
+enum DateRangeButtonType {
+    case selected
+    case unselected
+}
+
+class DateRangeButton: ActionButton {
+    
+    var dateRangeButtonType: DateRangeButtonType = .unselected {
+        didSet {
+            switch dateRangeButtonType {
+            case .selected:
+                bgColor = UIColor.primary
+                textColor = UIColor.Common.lightTextPrimary
+            case .unselected:
+                bgColor = UIColor.Cell.bg
+                textColor = UIColor.Cell.subtitle
+            }
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        cornerRadius = 16
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        cornerRadius = 16
+        dateRangeButtonType = isSelected ? .selected : .unselected
+    }
+}
+
 class ActionButton: UIButton {
     
     var cornerSize: CGFloat = Constants.SystemSizes.cornerSize

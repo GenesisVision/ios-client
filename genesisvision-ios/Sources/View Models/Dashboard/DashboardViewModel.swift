@@ -33,6 +33,24 @@ final class DashboardViewModel {
     private var dashboard: InvestorDashboard?
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var dateRangeType: DateRangeType = .day {
+        didSet {
+            switch dateRangeType {
+            case .custom:
+                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
+                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
+            default:
+                let calendar = Calendar.current
+                let hour = calendar.component(.hour, from: dateRangeTo)
+                let min = calendar.component(.minute, from: dateRangeTo)
+                let sec = calendar.component(.second, from: dateRangeTo)
+                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
+            }
+        }
+    }
+    var dateRangeFrom: Date = Date().previousDate()
+    var dateRangeTo: Date = Date()
+    
     var canFetchMoreResults = true
     var programsCount: String = ""
     var skip = 0
@@ -353,7 +371,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     weak var tableViewProtocol: TableViewProtocol?
     
     // MARK: - Variables
-    var highToLowValue: Bool = false
+    var highToLowValue: Bool = true
     
     var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
     
@@ -438,10 +456,6 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
         cell.accessoryType = indexPath.row == getSelectedSortingIndex() ? .checkmark : .none
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
     }
 }
 
