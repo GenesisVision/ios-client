@@ -13,14 +13,6 @@ protocol DateRangeViewProtocol: class {
     func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date)
 }
 
-enum DateRangeType: Int {
-    case day
-    case week
-    case month
-    case year
-    case custom
-}
-
 class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?

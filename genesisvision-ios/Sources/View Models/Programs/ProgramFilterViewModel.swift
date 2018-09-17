@@ -9,14 +9,6 @@
 import Foundation
 import TTRangeSlider
 
-enum SliderType: Int {
-    case level, avgProfit, totalProfit, balance
-}
-
-enum SwitchType: Int {
-    case activePrograms, favoritePrograms, availableToInvest
-}
-
 final class ProgramFilterViewModel {
     
     // MARK: - View Model

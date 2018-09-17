@@ -13,7 +13,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
    // MARK: - Variables
     var title: String = "Favorite Programs".uppercased()
 
-    internal var sections: [SectionType] = [.header, .programList]
+    internal var sections: [SectionType] = [.programList]
     
     var router: ProgramListRouterProtocol!
     

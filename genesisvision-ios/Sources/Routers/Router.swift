@@ -41,8 +41,7 @@ class Router {
     
     fileprivate func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
 
-        if isInvestorApp {
-            let viewController = InvestorDashboardViewController()
+        if isInvestorApp, let viewController = InvestorDashboardViewController.storyboardInstance(name: .dashboard) {
             self.investorDashboardViewController = viewController
             
             navigationController = BaseNavigationController(rootViewController: viewController)

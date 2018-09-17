@@ -44,7 +44,8 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
             
-            appearance.state.selectedColor = UIColor.primary
+            appearance.state.selectedColor = UIColor.Cell.title
+            appearance.state.color = UIColor.Cell.subtitle
             appearance.state.shouldHideWhenSingleItem = viewModel.shouldHideWhenSingleItem
             
             appearance.style.imageRenderingMode = .alwaysTemplate

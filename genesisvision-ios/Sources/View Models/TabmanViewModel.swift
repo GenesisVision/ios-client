@@ -26,7 +26,7 @@ class TabmanViewModel: TabmanViewModelProtocol {
     
     weak var tabmanViewModelDelegate: TabmanViewModelDelegate?
     
-    internal var style: TabmanBar.Style = .buttonBar
+    internal var style: TabmanBar.Style = .scrollingButtonBar
     internal var location: TabmanBar.Location = .top
     internal var bounces = true
     internal var compresses = false

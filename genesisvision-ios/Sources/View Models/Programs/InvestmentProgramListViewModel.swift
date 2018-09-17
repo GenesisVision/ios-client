@@ -20,7 +20,7 @@ final class InvestmentProgramListViewModel: ProgramListViewModelProtocol {
     
     var sortingDelegateManager = SortingDelegateManager()
     
-    internal var sections: [SectionType] = [.header, .programList]
+    internal var sections: [SectionType] = [.programList]
     
     var router: ProgramListRouterProtocol!
     var state: InvestmentProgramListViewState?

@@ -11,9 +11,6 @@ import UIKit
 class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
-    private var bottomSheetController = BottomSheetController()
-    private var dateRangeView: DateRangeView!
-    
     private var signInButtonEnable: Bool = false
     private var tournamentBarButtonItem: UIBarButtonItem?
     
@@ -99,8 +96,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         tabBarItem.title = viewModel.title
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Week", style: .done, target: self, action: #selector(dateRangeButtonAction))
-        
         setupSearchBar()
     }
     
@@ -117,6 +112,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 16.0 + 16.0 : 0.0
         
+        tableView.isScrollEnabled = false
+        tableView.bounces = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -149,17 +146,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         bottomSheetController.present()
     }
     
-    @objc func dateRangeButtonAction() {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.addNavigationBar("Date range")
-        bottomSheetController.initializeHeight = 379
-        
-        dateRangeView = DateRangeView.viewFromNib()
-        bottomSheetController.addContentsView(dateRangeView)
-        dateRangeView.delegate = self
-        bottomSheetController.present()
-    }
-    
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideAll()
@@ -173,26 +159,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func sortButtonAction() {
-        sortMethod()
-    }
-    
-    override func filterButtonAction() {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
-            viewModel.showFilterVC()
-        }
-    }
-    
     override func pullToRefresh() {
         super.pullToRefresh()
         
         fetch()
-    }
-    
-    override func signInButtonAction() {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
-            viewModel.showSignInVC()
-        }
     }
     
     // MARK: - Actions
@@ -205,6 +175,24 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     @objc func highToLowButtonAction() {
         viewModel.highToLowValue = !viewModel.highToLowValue
         bottomSheetController.dismiss()
+    }
+}
+
+extension ProgramListViewController {
+    override func sortButtonAction() {
+        sortMethod()
+    }
+    
+    override func filterButtonAction() {
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            viewModel.showFilterVC()
+        }
+    }
+    
+    override func signInButtonAction() {
+        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+            viewModel.showSignInVC()
+        }
     }
 }
 
@@ -352,33 +340,19 @@ extension ProgramListViewController: SortingDelegate {
     }
 }
 
-extension ProgramListViewController: DateRangeViewProtocol {
-    func applyButtonDidPress(with dateRangeType: DateRangeType, dateRangeFrom: Date, dateRangeTo: Date) {
-        viewModel.dateRangeFrom = dateRangeFrom
-        viewModel.dateRangeTo = dateRangeTo
-        viewModel.dateRangeType = dateRangeType
-        //        fetch()
+extension ProgramListViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
     }
     
-    func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date) {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
-        
-        if let dateRangeFrom = dateRangeFrom {
-            alert.addDatePicker(mode: .date, date: dateRangeFrom, minimumDate: nil, maximumDate: dateRangeTo.previousDate()) { [weak self] date in
-                DispatchQueue.main.async {
-                    self?.dateRangeView.dateRangeFrom = date
-                }
-            }
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
         } else {
-            alert.addDatePicker(mode: .date, date: dateRangeTo, minimumDate: nil, maximumDate: Date()) { [weak self] date in
-                DispatchQueue.main.async {
-                    self?.dateRangeView.dateRangeTo = date
-                }
-            }
+            scrollView.isScrollEnabled = true
         }
-        
-        alert.addAction(title: "Done", style: .cancel)
-        bottomSheetController.present(viewController: alert)
     }
 }

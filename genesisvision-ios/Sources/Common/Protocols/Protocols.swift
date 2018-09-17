@@ -1,5 +1,5 @@
 //
-//  UIViewControllerWithTableView.swift
+//  Protocols.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 18.01.18.
@@ -52,7 +52,29 @@ extension UIViewControllerWithFetching where Self: UITableViewController {
 }
 
 protocol UIViewControllerWithBottomView {
+    var sortButton: ActionButton { get }
+    var filterButton: ActionButton { get }
+    var signInButton: ActionButton { get }
+    var sortAndFilterStackView: UIStackView { get }
+    var bottomStackView: UIStackView { get }
+    var bottomViewType: BottomViewType { get }
+    
     func sortButtonAction()
     func filterButtonAction()
     func signInButtonAction()
 }
+
+extension UIViewControllerWithBottomView where Self: BaseViewController {
+    func signInButtonAction() {
+        
+    }
+    
+    func filterButtonAction() {
+        
+    }
+    
+    func sortButtonAction() {
+        
+    }
+}
+

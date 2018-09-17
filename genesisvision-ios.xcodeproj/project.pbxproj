@@ -245,6 +245,14 @@
 		5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */; };
 		5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB62090AB1000A92B49 /* MarkerView.xib */; };
 		5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB82090AB2300A92B49 /* MarkerView.swift */; };
+		5EAD3504214FCA1C0057450C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3503214FCA1C0057450C /* Enums.swift */; };
+		5EAD3506214FD2170057450C /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3505214FD2170057450C /* ChartsViewController.swift */; };
+		5EAD3508214FD2200057450C /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3507214FD2200057450C /* EventsViewController.swift */; };
+		5EAD350A214FD2270057450C /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3509214FD2270057450C /* AssetsViewController.swift */; };
+		5EAD350C214FD57F0057450C /* PortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD350B214FD57F0057450C /* PortfolioViewController.swift */; };
+		5EAD350E214FD58D0057450C /* ProfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD350D214FD58D0057450C /* ProfitViewController.swift */; };
+		5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */; };
+		5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3511214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift */; };
 		5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D320723D4A00F46A8A /* AuthForgotPasswordViewModel.swift */; };
 		5EB8E9D620723D6500F46A8A /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */; };
 		5EB8E9D820723D7E00F46A8A /* ForgetPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8E9D720723D7E00F46A8A /* ForgetPasswordRouter.swift */; };
@@ -453,7 +461,7 @@
 		FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */; };
 		FCB8DFC42010F5EC00698D18 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFC32010F5EC00698D18 /* SignUpViewController.swift */; };
 		FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFC52010F64200698D18 /* SignInViewController.swift */; };
-		FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */; };
+		FCB8DFCB2010F6B100698D18 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCA2010F6B100698D18 /* Protocols.swift */; };
 		FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCE2010F99200698D18 /* AuthManager.swift */; };
 		FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD22BF2019E960000B8E38 /* InvestmentProgramListViewModel.swift */; };
 		FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */; };
@@ -744,6 +752,14 @@
 		5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		5EAD0AB62090AB1000A92B49 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		5EAD0AB82090AB2300A92B49 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
+		5EAD3503214FCA1C0057450C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		5EAD3505214FD2170057450C /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		5EAD3507214FD2200057450C /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		5EAD3509214FD2270057450C /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
+		5EAD350B214FD57F0057450C /* PortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController.swift; sourceTree = "<group>"; };
+		5EAD350D214FD58D0057450C /* ProfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitViewController.swift; sourceTree = "<group>"; };
+		5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
+		5EAD3511214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5EB8E9D320723D4A00F46A8A /* AuthForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		5EB8E9D720723D7E00F46A8A /* ForgetPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordRouter.swift; sourceTree = "<group>"; };
@@ -961,7 +977,7 @@
 		FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		FCB8DFC32010F5EC00698D18 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FCB8DFC52010F64200698D18 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithTableView.swift; sourceTree = "<group>"; };
+		FCB8DFCA2010F6B100698D18 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FCB8DFCE2010F99200698D18 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		FCBD22BF2019E960000B8E38 /* InvestmentProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentProgramListViewModel.swift; sourceTree = "<group>"; };
@@ -2086,6 +2102,7 @@
 				FCC9DD46200DFA5E008825EC /* Helpers */,
 				5E616B5D20F7CED000B3459D /* EditableField.swift */,
 				5ED03F2820F900EE00AF5E07 /* DataSourceAndDelegate.swift */,
+				5EAD3503214FCA1C0057450C /* Enums.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2150,6 +2167,13 @@
 				FC49641C2015489B00104CEB /* Welcome */,
 				FC92CB2920304B3100CDBF19 /* Tournament */,
 				5E6C0CF12109A8E000B7F844 /* Manager Details */,
+				5EAD3505214FD2170057450C /* ChartsViewController.swift */,
+				5EAD3507214FD2200057450C /* EventsViewController.swift */,
+				5EAD3509214FD2270057450C /* AssetsViewController.swift */,
+				5EAD350B214FD57F0057450C /* PortfolioViewController.swift */,
+				5EAD350D214FD58D0057450C /* ProfitViewController.swift */,
+				5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */,
+				5EAD3511214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2267,7 +2291,7 @@
 			children = (
 				5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */,
 				FCC9DD8B200E658E008825EC /* ReusableCell.swift */,
-				FCB8DFCA2010F6B100698D18 /* UIViewControllerWithTableView.swift */,
+				FCB8DFCA2010F6B100698D18 /* Protocols.swift */,
 				FC2722E920496FB5005225F2 /* WalletProtocol.swift */,
 				5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */,
 				5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */,
@@ -2672,13 +2696,15 @@
 				5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */,
 				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
+				5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */,
 				5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */,
-				FCB8DFCB2010F6B100698D18 /* UIViewControllerWithTableView.swift in Sources */,
+				FCB8DFCB2010F6B100698D18 /* Protocols.swift in Sources */,
 				5E18CEC620C566F1008FE5B5 /* WalletInvestmentPrograms.swift in Sources */,
 				5E18CECB20C566F1008FE5B5 /* IOsAppVersion.swift in Sources */,
 				5E616B5020F7B73400B3459D /* CreateProgramFirstViewModel.swift in Sources */,
 				5E616B5920F7C37900B3459D /* CreateProgramSecondViewController.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
+				5EAD350A214FD2270057450C /* AssetsViewController.swift in Sources */,
 				5E18CEA920C566F1008FE5B5 /* BrokerTradeServer.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
 				5E18CED320C566F1008FE5B5 /* InvestmentProgramUpdate.swift in Sources */,
@@ -2705,6 +2731,7 @@
 				5E18CEC120C566F1008FE5B5 /* ManagerIpfsHash.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E18CE0720C1952A008FE5B5 /* AuthTwoFactorDisableRouter.swift in Sources */,
+				5EAD350C214FD57F0057450C /* PortfolioViewController.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
 				FC900E60204EDF21007E9142 /* WalletFilterRouter.swift in Sources */,
@@ -2755,9 +2782,11 @@
 				5E18CE9120C566F1008FE5B5 /* NewInvestmentRequest.swift in Sources */,
 				5E18CED220C566F1008FE5B5 /* ProfileFullViewModel.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
+				5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */,
 				5E18CED020C566F1008FE5B5 /* ManagerProfitChartData.swift in Sources */,
 				5E18CEC920C566F1008FE5B5 /* WalletStatistic.swift in Sources */,
 				5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */,
+				5EAD3504214FCA1C0057450C /* Enums.swift in Sources */,
 				5E18CE9D20C566F1008FE5B5 /* NewManager.swift in Sources */,
 				5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
@@ -2785,6 +2814,7 @@
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				5E18CEBB20C566F1008FE5B5 /* ManagerDashboardProgramsFilter.swift in Sources */,
 				5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */,
+				5EAD350E214FD58D0057450C /* ProfitViewController.swift in Sources */,
 				FC92CB262030290A00CDBF19 /* TournamentListViewModel.swift in Sources */,
 				5E18CE9F20C566F1008FE5B5 /* InvestmentProgramRequests.swift in Sources */,
 				FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */,
@@ -2884,6 +2914,7 @@
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
 				5E18CEC520C566F1008FE5B5 /* TwoFactorStatus.swift in Sources */,
 				FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */,
+				5EAD3506214FD2170057450C /* ChartsViewController.swift in Sources */,
 				5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */,
 				5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */,
 				5E18CEB620C566F1008FE5B5 /* ManagerAccountOnlineInfo.swift in Sources */,
@@ -2947,6 +2978,7 @@
 				FC4C1948203050DD00625795 /* TournamentDetailViewModel.swift in Sources */,
 				5E18CEAE20C566F1008FE5B5 /* ManagerInvestmentPrograms.swift in Sources */,
 				5EAC11B820B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift in Sources */,
+				5EAD3508214FD2200057450C /* EventsViewController.swift in Sources */,
 				FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */,
 				FCB1786E2045C46E00A482B7 /* DataProvider.swift in Sources */,
 				FCA19A41201AE83F00157AD6 /* DashboardViewModel.swift in Sources */,

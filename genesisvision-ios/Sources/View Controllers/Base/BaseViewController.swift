@@ -11,6 +11,88 @@ import DZNEmptyDataSet
 import MessageUI
 
 class BaseViewController: UIViewController, Hidable {
+    // MARK: - Variables
+    var bottomSheetController = BottomSheetController()
+    
+    var sortButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.cornerSize = 18.0
+        btn.bgColor = UIColor.BottomView.Sort.bg
+        btn.tintColor = UIColor.BottomView.Sort.tint
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitleColor(UIColor.BottomView.Sort.title, for: .normal)
+        btn.setTitle("Sort by profit", for: .normal)
+        btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    var filterButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.bgColor = UIColor.BottomView.Filter.bg
+        btn.cornerSize = 18.0
+        btn.tintColor = UIColor.BottomView.Filter.tint
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitleColor(UIColor.BottomView.Filter.title, for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
+        btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    var signInButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.setTitle("SIGN IN", for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.addTarget(self, action: #selector(signInButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    let sortAndFilterStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.spacing = 8.0
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let bottomStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 16.0
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    var bottomViewType: BottomViewType = .none {
+        didSet {
+            sortButton.isHidden = true
+            filterButton.isHidden = true
+            signInButton.isHidden = true
+            bottomStackView.isHidden = false
+            
+            switch bottomViewType {
+            case .none:
+                bottomStackView.isHidden = true
+            case .sort:
+                sortButton.isHidden = false
+            case .filter:
+                filterButton.isHidden = false
+            case .sortAndFilter:
+                sortButton.isHidden = false
+                filterButton.isHidden = false
+            case .signIn:
+                signInButton.isHidden = false
+            case .signInWithSortAndFilter:
+                signInButton.isHidden = false
+                sortButton.isHidden = false
+                filterButton.isHidden = false
+            }
+        }
+    }
+    
     var prefersLargeTitles: Bool = true {
         didSet {
             if #available(iOS 11.0, *) {
@@ -30,6 +112,20 @@ class BaseViewController: UIViewController, Hidable {
         super.viewWillAppear(animated)
         
         updateTheme()
+    }
+}
+
+extension BaseViewController: UIViewControllerWithBottomView {
+    @objc func signInButtonAction() {
+        
+    }
+    
+    @objc func filterButtonAction() {
+        
+    }
+    
+    @objc func sortButtonAction() {
+        
     }
 }
 
@@ -102,10 +198,6 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-
-enum BottomViewType {
-    case none, signIn, sort, filter, sortAndFilter, signInWithSortAndFilter
-}
     
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
     // MARK: - Veriables
@@ -116,84 +208,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     private var lastContentOffset: CGPoint = .zero
     
-    var sortButton: ActionButton = {
-        let btn = ActionButton(type: .system)
-        btn.cornerSize = 18.0
-        btn.bgColor = UIColor.BottomView.Sort.bg
-        btn.tintColor = UIColor.BottomView.Sort.tint
-        btn.translatesAutoresizingMaskIntoConstraints = true
-        btn.setTitleColor(UIColor.BottomView.Sort.title, for: .normal)
-        btn.setTitle("Sort by profit", for: .normal)
-        btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
-        return btn
-    }()
-    
-    var filterButton: ActionButton = {
-        let btn = ActionButton(type: .system)
-        btn.bgColor = UIColor.BottomView.Filter.bg
-        btn.cornerSize = 18.0
-        btn.tintColor = UIColor.BottomView.Filter.tint
-        btn.translatesAutoresizingMaskIntoConstraints = true
-        btn.setTitleColor(UIColor.BottomView.Filter.title, for: .normal)
-        btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
-        btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
-        return btn
-    }()
-    
-    var signInButton: ActionButton = {
-        let btn = ActionButton(type: .system)
-        btn.setTitle("SIGN IN", for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints = true
-        btn.addTarget(self, action: #selector(signInButtonAction), for: .touchUpInside)
-        return btn
-    }()
-    
-    private let sortAndFilterStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.axis = .horizontal
-        stackView.spacing = 8.0
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let bottomStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.axis = .vertical
-        stackView.spacing = 16.0
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    var bottomViewType: BottomViewType = .none {
-        didSet {
-            sortButton.isHidden = true
-            filterButton.isHidden = true
-            signInButton.isHidden = true
-            bottomStackView.isHidden = false
-            
-            switch bottomViewType {
-            case .none:
-                bottomStackView.isHidden = true
-            case .sort:
-                sortButton.isHidden = false
-            case .filter:
-                filterButton.isHidden = false
-            case .sortAndFilter:
-                sortButton.isHidden = false
-                filterButton.isHidden = false
-            case .signIn:
-                signInButton.isHidden = false
-            case .signInWithSortAndFilter:
-                signInButton.isHidden = false
-                sortButton.isHidden = false
-                filterButton.isHidden = false
-            }
-        }
-    }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -343,20 +357,6 @@ extension BaseViewControllerWithTableView: UIScrollViewDelegate {
     }
 }
 
-extension BaseViewControllerWithTableView: UIViewControllerWithBottomView {
-    @objc func signInButtonAction() {
-        
-    }
-    
-    @objc func filterButtonAction() {
-        
-    }
-    
-    @objc func sortButtonAction() {
-        
-    }
-}
-
 extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let tabBarIndex = tabBarController.selectedIndex
@@ -367,26 +367,27 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     
         switch tabsType {
         case .dashboard:
-            if let vc = navController.viewControllers.first as? DashboardViewController, let tableView = vc.tableView {
-                scrollTop(tableView: tableView)
+            if let vc = navController.viewControllers.first as? DashboardViewController, let scrollView = vc.scrollView {
+                scrollTop(scrollView)
             }
         case .programList:
             if let vc = navController.viewControllers.first as? ProgramListViewController, let tableView = vc.tableView {
-                scrollTop(tableView: tableView)
+                scrollTop(tableView)
             }
         case .wallet:
             if let vc = navController.viewControllers.first as? WalletViewController, let tableView = vc.tableView {
-                scrollTop(tableView: tableView)
+                scrollTop(tableView)
             }
         case .profile:
             if let vc = navController.viewControllers.first as? ProfileViewController, let tableView = vc.tableView {
-                scrollTop(tableView: tableView)
+                scrollTop(tableView)
             }
         }
     }
     
-    func scrollTop(tableView: UITableView) {
-        tableView.setContentOffset(CGPoint.zero, animated: true)
+    func scrollTop(_ scrollView: UIScrollView) {
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

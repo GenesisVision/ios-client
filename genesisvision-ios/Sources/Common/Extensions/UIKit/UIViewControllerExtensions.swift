@@ -11,21 +11,6 @@ import UIKit.UIViewController
 import PKHUD
 
 extension UIViewController {
-    
-    // MARK: - Stroryboard Instances
-    enum StoryboardNames: String {
-        case main
-        case program
-        case launch
-        case profile
-        case settings
-        case programs
-        case auth
-        case wallet
-        case dashboard
-        case tournament
-    }
-    
     private class func mainStoryboardInstancePrivate<T: UIViewController>(name: String) -> T? {
         let storyboard = UIStoryboard(name: name, bundle: nil)
 

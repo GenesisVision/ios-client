@@ -35,7 +35,7 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     
     // MARK: - Buttons
-    @IBOutlet weak var signInButton: ActionButton!
+//    @IBOutlet weak var signInButton: ActionButton!
     
     // MARK: - Variables
     var enteredValue: String = ""

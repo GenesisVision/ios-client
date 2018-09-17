@@ -8,11 +8,6 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-enum SectionType {
-    case header
-    case programList
-}
-
 protocol ProgramListViewModelProtocol {
     var router: ProgramListRouterProtocol! { get }
     var searchText: String { get set }

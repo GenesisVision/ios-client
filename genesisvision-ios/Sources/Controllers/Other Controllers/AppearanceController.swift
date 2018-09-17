@@ -32,7 +32,7 @@ struct NavBarColors {
 struct AppearanceController {
     enum Theme: Int {
         case lightTheme, darkTheme
-        
+         
         var mainColor: UIColor {
             switch self {
             case .lightTheme:
