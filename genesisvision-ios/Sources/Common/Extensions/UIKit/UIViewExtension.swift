@@ -20,6 +20,16 @@ extension UIView {
         layer.cornerRadius = radius
     }
     
+    func roundCorners(with radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) {
+        contentMode = .scaleAspectFill
+        clipsToBounds = true
+        
+        layer.cornerRadius = radius
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
+        layer.masksToBounds = true
+    }
+    
     func roundWithBorder(_ approximateBorderWidth: CGFloat, color: UIColor = .white) {
         roundCorners()
         let border = makeRoundBorder(approximateBorderWidth, color: color)

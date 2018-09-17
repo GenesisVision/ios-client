@@ -18,12 +18,13 @@ final class InvestmentProgramListViewModel: ProgramListViewModelProtocol {
     var title: String = "Programs"
     var roundNumber: Int = 1
     
+    var sortingDelegateManager = SortingDelegateManager()
+    
     internal var sections: [SectionType] = [.header, .programList]
     
     var router: ProgramListRouterProtocol!
     var state: InvestmentProgramListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
-    
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var programsCount: String = ""
@@ -40,13 +41,32 @@ final class InvestmentProgramListViewModel: ProgramListViewModelProtocol {
         }
     }
 
+    var highToLowValue: Bool = false
+    
+    var dateRangeType: DateRangeType = .day {
+        didSet {
+            switch dateRangeType {
+            case .custom:
+                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
+                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
+            default:
+                let calendar = Calendar.current
+                let hour = calendar.component(.hour, from: dateRangeTo)
+                let min = calendar.component(.minute, from: dateRangeTo)
+                let sec = calendar.component(.second, from: dateRangeTo)
+                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
+            }
+        }
+    }
+    var dateRangeFrom: Date = Date().previousDate()
+    var dateRangeTo: Date = Date()
+    
     var headerTitle = "PROGRAMS TO INVEST IN"
     var bottomViewType: BottomViewType {
         return signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
     }
     
     var filter: InvestmentProgramsFilter?
-    internal var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
     
     var searchText = "" {
         didSet {
@@ -54,32 +74,6 @@ final class InvestmentProgramListViewModel: ProgramListViewModelProtocol {
         }
     }
     var programViewModels: [ProgramTableViewCellViewModel] = [ProgramTableViewCellViewModel]()
-    
-    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc,
-                                                           .byLevelDesc, .byLevelAsc,
-                                                           .byBalanceDesc, .byBalanceDesc,
-                                                           .byOrdersDesc, .byOrdersAsc,
-                                                           .byEndOfPeriodDesc, .byEndOfPeriodAsc,
-                                                           .byTitleDesc, .byTitleAsc]
-    
-    var sortingValues: [String] = ["profit ⇣", "profit ⇡",
-                                   "level ⇣", "level ⇡",
-                                   "balance ⇣", "balance ⇡",
-                                   "orders ⇣", "orders ⇡",
-                                   "end of period ⇣",
-                                   "end of period ⇡",
-                                   "title ⇣", "title ⇡"]
-    
-    struct SortingList {
-        var sortingValue: String
-        var sortingKey: InvestmentProgramsFilter.Sorting
-    }
-    
-    var sortingList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
-        }
-    }
     
     // MARK: - Init
     init(withRouter router: InvestmentProgramListRouter, reloadDataProtocol: ReloadDataProtocol?) {
@@ -91,7 +85,7 @@ final class InvestmentProgramListViewModel: ProgramListViewModelProtocol {
                                           brokerTradeServerId: nil,
                                           investMaxAmountFrom: nil,
                                           investMaxAmountTo: nil,
-                                          sorting: sorting,
+                                          sorting: nil,//TODO: sortingDelegateManager.sorting,
                                           name: searchText,
                                           levelMin: nil,
                                           levelMax: nil,

@@ -30,17 +30,10 @@ class InvestorDashboardViewController: DashboardViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        for visibleCell in tableView.visibleCells {
-            if let cell = visibleCell as? DashboardTableViewCell {
-                cell.stopTimer()
-            }
-        }
     }
     
     // MARK: - Private methods
     private func setup() {
-//        title = viewModel.title
         setupTableConfiguration()
         registerForPreviewing()
         
@@ -74,13 +67,6 @@ class InvestorDashboardViewController: DashboardViewController {
         }
     }
     
-    private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortingDelegateManager.sortTitle(), for: .normal)
-        
-        showProgressHUD()
-        fetch()
-    }
-    
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideAll()
@@ -106,10 +92,10 @@ class InvestorDashboardViewController: DashboardViewController {
     }
     
     // MARK: - Actions
-    @objc func sortMethod() {
+    private func sortMethod() {
         bottomSheetController = BottomSheetController()
 
-        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(InvestorDashboardViewController.highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.delegate = self?.viewModel.sortingDelegateManager
@@ -123,13 +109,20 @@ class InvestorDashboardViewController: DashboardViewController {
     
     @objc func currencyButtonAction() {
         bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("Preferred Currency")
         
         bottomSheetController.addTableView { [weak self] tableView in
+            if let currencyCellModelsForRegistration = self?.viewModel.currencyCellModelsForRegistration {
+                tableView.registerNibs(for: currencyCellModelsForRegistration)
+            }
             tableView.delegate = self?.viewModel.currencyDelegateManager
             tableView.dataSource = self?.viewModel.currencyDelegateManager
             tableView.separatorStyle = .none
         }
         
+        viewModel.currencyDelegateManager.tableViewProtocol = self
         bottomSheetController.present()
     }
     
@@ -139,14 +132,13 @@ class InvestorDashboardViewController: DashboardViewController {
     }
     
     @objc func notificationsButtonAction() {
-//        viewModel.boti
+        viewModel.showNotificationList()
     }
     
     @objc func dateRangeButtonAction() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
-        bottomSheetController.initializeHeight = 400
-        bottomSheetController.isScrollEnabledInSheet = false
+        bottomSheetController.initializeHeight = 379
         
         dateRangeView = DateRangeView.viewFromNib()
         bottomSheetController.addContentsView(dateRangeView)
@@ -161,8 +153,14 @@ extension InvestorDashboardViewController: ReloadDataProtocol {
     }
 }
 
-extension InvestorDashboardViewController: TableViewProtocol {
-    func didSelectRow(at indexPath: IndexPath) {
+extension InvestorDashboardViewController: SortingDelegate {
+    func didSelectSorting(at indexPath: IndexPath) {
+        bottomSheetController.dismiss()
+    }
+}
+
+extension InvestorDashboardViewController: CurrencyDelegate {
+    func didSelectCurrency(at indexPath: IndexPath) {
         bottomSheetController.dismiss()
     }
 }

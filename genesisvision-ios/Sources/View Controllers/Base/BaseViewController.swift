@@ -118,9 +118,11 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     var sortButton: ActionButton = {
         let btn = ActionButton(type: .system)
+        btn.cornerSize = 18.0
         btn.bgColor = UIColor.BottomView.Sort.bg
         btn.tintColor = UIColor.BottomView.Sort.tint
         btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitleColor(UIColor.BottomView.Sort.title, for: .normal)
         btn.setTitle("Sort by profit", for: .normal)
         btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
         return btn
@@ -129,8 +131,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var filterButton: ActionButton = {
         let btn = ActionButton(type: .system)
         btn.bgColor = UIColor.BottomView.Filter.bg
+        btn.cornerSize = 18.0
         btn.tintColor = UIColor.BottomView.Filter.tint
         btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitleColor(UIColor.BottomView.Filter.title, for: .normal)
         btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
         btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
         return btn

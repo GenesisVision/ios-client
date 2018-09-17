@@ -51,7 +51,7 @@ extension TournamentTableViewCellViewModel: CellViewModel {
         cell.favoriteButton.isHidden = !AuthManager.isLogin()
         
         if let availableInvestment = investmentProgram.availableInvestment {
-            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
+//            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
         }
         
         if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: Constants.currency) {

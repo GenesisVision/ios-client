@@ -11,6 +11,9 @@ import UIKit
 class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
+    private var bottomSheetController = BottomSheetController()
+    private var dateRangeView: DateRangeView!
+    
     private var signInButtonEnable: Bool = false
     private var tournamentBarButtonItem: UIBarButtonItem?
     
@@ -80,7 +83,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         bottomViewType = viewModel.bottomViewType
         
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
         
         if signInButtonEnable {
             showNewVersionAlertIfNeeded(self)
@@ -96,6 +99,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         
         tabBarItem.title = viewModel.title
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Week", style: .done, target: self, action: #selector(dateRangeButtonAction))
+        
         setupSearchBar()
     }
     
@@ -129,47 +134,30 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+    private func sortMethod() {
+        bottomSheetController = BottomSheetController()
         
-        showProgressHUD()
-        fetch()
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.delegate = self?.viewModel.sortingDelegateManager
+            tableView.dataSource = self?.viewModel.sortingDelegateManager
+            tableView.separatorStyle = .none
+        }
+        
+        viewModel.sortingDelegateManager.tableViewProtocol = self
+        bottomSheetController.present()
     }
     
-    private func sortMethod() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+    @objc func dateRangeButtonAction() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.addNavigationBar("Date range")
+        bottomSheetController.initializeHeight = 379
         
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
-            
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortView()
-        }
-        
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
-            }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
-        }
-        
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+        dateRangeView = DateRangeView.viewFromNib()
+        bottomSheetController.addContentsView(dateRangeView)
+        dateRangeView.delegate = self
+        bottomSheetController.present()
     }
     
     override func fetch() {
@@ -212,6 +200,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         if let viewModel = viewModel as? InvestmentProgramListViewModel {
             viewModel.showTournamentVC()
         }
+    }
+    
+    @objc func highToLowButtonAction() {
+        viewModel.highToLowValue = !viewModel.highToLowValue
+        bottomSheetController.dismiss()
     }
 }
 
@@ -350,5 +343,42 @@ extension ProgramListViewController: UISearchBarDelegate {
         viewModel.searchText = searchText
         
         updateData()
+    }
+}
+
+extension ProgramListViewController: SortingDelegate {
+    func didSelectSorting(at indexPath: IndexPath) {
+        bottomSheetController.dismiss()
+    }
+}
+
+extension ProgramListViewController: DateRangeViewProtocol {
+    func applyButtonDidPress(with dateRangeType: DateRangeType, dateRangeFrom: Date, dateRangeTo: Date) {
+        viewModel.dateRangeFrom = dateRangeFrom
+        viewModel.dateRangeTo = dateRangeTo
+        viewModel.dateRangeType = dateRangeType
+        //        fetch()
+    }
+    
+    func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date) {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
+        
+        if let dateRangeFrom = dateRangeFrom {
+            alert.addDatePicker(mode: .date, date: dateRangeFrom, minimumDate: nil, maximumDate: dateRangeTo.previousDate()) { [weak self] date in
+                DispatchQueue.main.async {
+                    self?.dateRangeView.dateRangeFrom = date
+                }
+            }
+        } else {
+            alert.addDatePicker(mode: .date, date: dateRangeTo, minimumDate: nil, maximumDate: Date()) { [weak self] date in
+                DispatchQueue.main.async {
+                    self?.dateRangeView.dateRangeTo = date
+                }
+            }
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        bottomSheetController.present(viewController: alert)
     }
 }

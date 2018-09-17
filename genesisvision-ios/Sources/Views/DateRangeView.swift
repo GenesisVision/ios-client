@@ -73,8 +73,16 @@ class DateRangeView: UIView {
     @IBOutlet var dateRangeFromTitleLabel: UILabel!
     @IBOutlet var dateRangeToTitleLabel: UILabel!
     
-    @IBOutlet var dateRangeFromTextField: DesignableUITextField!
-    @IBOutlet var dateRangeToTextField: DesignableUITextField!
+    @IBOutlet var dateRangeFromTextField: DesignableUITextField! {
+        didSet {
+            dateRangeFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+        }
+    }
+    @IBOutlet var dateRangeToTextField: DesignableUITextField! {
+        didSet {
+            dateRangeToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+        }
+    }
     @IBOutlet var applyButton: UIButton! {
         didSet {
             applyButton.setTitleColor(UIColor.Cell.title, for: .normal)
@@ -93,19 +101,30 @@ class DateRangeView: UIView {
         dateRangeToTextField.isUserInteractionEnabled = false
         dateRangeFromTextField.isUserInteractionEnabled = false
         
+        dayButton.isSelected = false
+        weekButton.isSelected = false
+        monthButton.isSelected = false
+        yearButton.isSelected = false
+        customButton.isSelected = false
+        
         switch selectedDateRangeType {
         case .day:
             dateRangeFrom = dateRangeTo.previousDate()
+            dayButton.isSelected = true
         case .week:
             dateRangeFrom = dateRangeTo.removeDays(7)
+            weekButton.isSelected = true
         case .month:
             dateRangeFrom = dateRangeTo.removeMonths(1)
+            monthButton.isSelected = true
         case .year:
             dateRangeFrom = dateRangeTo.removeYears(1)
+            yearButton.isSelected = true
         case .custom:
             dateRangeToTextField.isUserInteractionEnabled = true
             dateRangeFromTextField.isUserInteractionEnabled = true
             dateRangeFrom = dateRangeTo.previousDate()
+            customButton.isSelected = true
         }
     }
     

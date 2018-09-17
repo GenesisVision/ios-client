@@ -8,37 +8,88 @@
 
 import UIKit.UIButton
 
-enum DateRangeButtonType {
-    case selected
-    case unselected
+@IBDesignable class RoundButton: UIButton {
+    @IBInspectable var corner: CGFloat = 16 {
+        didSet {
+            refreshCorners(value: corner)
+        }
+    }
+    
+    @IBInspectable var backgroundImageColor: UIColor = UIColor.init(red: 0, green: 122/255.0, blue: 255/255.0, alpha: 1) {
+        didSet {
+            refreshColor(color: backgroundImageColor)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sharedInit()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        sharedInit()
+    }
+    
+    func sharedInit() {
+        refreshCorners(value: 16)
+        refreshColor(color: UIColor.DateRangeView.selectedBg)
+    }
+    
+    func refreshCorners(value: CGFloat) {
+        layer.cornerRadius = value
+    }
+    
+    func refreshColor(color: UIColor) {
+        let image = createImage(color: color)
+        setBackgroundImage(image, for: UIControlState.normal)
+        clipsToBounds = true
+    }
+    
+    func createImage(color: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 0.0)
+        color.setFill()
+        UIRectFill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        return image
+    }
 }
 
-class DateRangeButton: ActionButton {
+class DateRangeButton: UIButton {
     
-    var dateRangeButtonType: DateRangeButtonType = .unselected {
+    override var buttonType: UIButtonType {
+        return .system
+    }
+    
+    override open var isHighlighted: Bool {
         didSet {
-            switch dateRangeButtonType {
-            case .selected:
-                bgColor = UIColor.primary
-                textColor = UIColor.Common.lightTextPrimary
-            case .unselected:
-                bgColor = UIColor.Cell.bg
-                textColor = UIColor.Cell.subtitle
-            }
+            setBackgroundImage(UIImage.imageWithColor(color: isHighlighted ? UIColor.DateRangeView.selectedBg : UIColor.DateRangeView.unselectedBg), for: .highlighted)
+        }
+    }
+    
+    override open var isSelected: Bool {
+        didSet {
+            setBackgroundImage(UIImage.imageWithColor(color: isSelected ? UIColor.DateRangeView.selectedBg : UIColor.DateRangeView.unselectedBg), for: .selected)
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cornerRadius = 16
+        setTitleColor(UIColor.DateRangeView.unselectedTitle, for: .normal)
+        setTitleColor(UIColor.DateRangeView.selectedTitle, for: .selected)
+        setBackgroundImage(nil, for: .normal)
+//        setBackgroundImage(nil, for: .selected)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        cornerRadius = 16
-        dateRangeButtonType = isSelected ? .selected : .unselected
+        roundCorners(with: 16)
     }
 }
 
@@ -59,15 +110,18 @@ class ActionButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = cornerSize
-        layer.borderColor = customBorderColor?.withAlphaComponent(borderAlpha).cgColor
-        layer.borderWidth = borderSize
-        layer.masksToBounds = true
+        roundCorners(with: cornerSize, borderWidth: borderSize, borderColor: (customBorderColor?.withAlphaComponent(borderAlpha))!)
         
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
         setTitleColor(textColor, for: .normal)
         
         backgroundColor = isUserInteractionEnabled ? bgColor : bgColor.withAlphaComponent(0.3)
+    }
+    
+    override func setTitleColor(_ color: UIColor?, for state: UIControlState) {
+        if let color = color {
+            self.textColor = color
+        }
     }
     
     func addShadow() {

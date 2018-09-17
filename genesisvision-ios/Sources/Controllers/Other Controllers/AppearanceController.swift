@@ -108,13 +108,9 @@ struct AppearanceController {
         #endif
         
         setupNavigationBar()
-        setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
         
-        setupSegmentedControl()
-        setupPlateCell()
-        setupShadowView()
-        setupEasyTipView()
+        applyTheme()
         
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
@@ -136,8 +132,9 @@ struct AppearanceController {
         
         UITabBar.appearance().barStyle = theme.barStyle
         
-        UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
-        UISwitch.appearance().thumbTintColor = theme.mainColor
+        UISwitch.appearance().onTintColor = UIColor.primary
+        UISwitch.appearance().thumbTintColor = UIColor.Cell.switchThumbTint
+        UISwitch.appearance().tintColor = UIColor.Cell.switchTint
         
         setupTabBar()
         setupSegmentedControl()
@@ -163,7 +160,6 @@ struct AppearanceController {
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
     }
-    
     
     // TabBar
     private static func setupTabBar() {

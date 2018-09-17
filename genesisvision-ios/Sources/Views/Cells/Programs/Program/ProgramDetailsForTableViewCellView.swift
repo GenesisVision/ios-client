@@ -17,18 +17,57 @@ class ProgramDetailsForTableViewCellView: UIStackView {
         }
     }
     
-    @IBOutlet var investorsTitleLabel: UILabel!
-    @IBOutlet var balanceTitleLabel: UILabel!
-    @IBOutlet var avgProfitTitleLabel: UILabel!
-    @IBOutlet var totalProfitTitleLabel: UILabel!
+    @IBOutlet var investorsTitleLabel: UILabel! {
+        didSet {
+            investorsTitleLabel.textColor = UIColor.Cell.subtitle
+            investorsTitleLabel.font = UIFont.getFont(.light, size: 13.0)
+        }
+    }
+    @IBOutlet var balanceTitleLabel: UILabel! {
+        didSet {
+            balanceTitleLabel.textColor = UIColor.Cell.subtitle
+            balanceTitleLabel.font = UIFont.getFont(.light, size: 13.0)
+        }
+    }
+    @IBOutlet var avgProfitTitleLabel: UILabel! {
+        didSet {
+            avgProfitTitleLabel.textColor = UIColor.Cell.subtitle
+            avgProfitTitleLabel.font = UIFont.getFont(.light, size: 13.0)
+        }
+    }
+    @IBOutlet var totalProfitTitleLabel: UILabel! {
+        didSet {
+            totalProfitTitleLabel.textColor = UIColor.Cell.subtitle
+            totalProfitTitleLabel.font = UIFont.getFont(.light, size: 13.0)
+        }
+    }
     
     @IBOutlet var balanceCurrencyLabel: CurrencyLabel!
     @IBOutlet var profitCurrencyLabel: CurrencyLabel!
-    
-    @IBOutlet var investorsValueLabel: UILabel!
-    @IBOutlet var balanceValueLabel: BalanceLabel!
-    @IBOutlet var avgProfitValueLabel: BalanceLabel!
-    @IBOutlet var totalProfitValueLabel: BalanceLabel!
+    @IBOutlet var investorsValueLabel: UILabel! {
+        didSet {
+            investorsValueLabel.textColor = UIColor.Cell.title
+            investorsValueLabel.font = UIFont.getFont(.bold, size: 17.0)
+        }
+    }
+    @IBOutlet var balanceValueLabel: BalanceLabel! {
+        didSet {
+            balanceValueLabel.textColor = UIColor.Cell.title
+            balanceValueLabel.font = UIFont.getFont(.bold, size: 17.0)
+        }
+    }
+    @IBOutlet var avgProfitValueLabel: BalanceLabel! {
+        didSet {
+            avgProfitValueLabel.textColor = UIColor.Cell.title
+            avgProfitValueLabel.font = UIFont.getFont(.bold, size: 17.0)
+        }
+    }
+    @IBOutlet var totalProfitValueLabel: BalanceLabel! {
+        didSet {
+            totalProfitValueLabel.textColor = UIColor.Cell.title
+            totalProfitValueLabel.font = UIFont.getFont(.bold, size: 17.0)
+        }
+    }
     
     // MARK: - Public Methods
     func setup(with investorsCountTitle: String? = "INVESTORS", investorsCount: Int?,
@@ -36,51 +75,42 @@ class ProgramDetailsForTableViewCellView: UIStackView {
                avgProfitTitle: String? = "AVG. PROFIT", avgProfit: Double?,
                totalProfitTitle: String? = "TOTAL PROFIT", totalProfit: Double?,
                currency: String?) {
-        investorsTitleLabel.text = investorsCountTitle
+//        investorsTitleLabel.text = investorsCountTitle
         balanceTitleLabel.text = balanceTitle
         avgProfitTitleLabel.text = avgProfitTitle
         totalProfitTitleLabel.text = totalProfitTitle
-        
-        investorsTitleLabel.textColor = UIColor.Cell.title
-        balanceTitleLabel.textColor = UIColor.Cell.title
-        avgProfitTitleLabel.textColor = UIColor.Cell.title
-        
+
         backgroundColor = .clear
-        
+
         if let investorsCount = investorsCount,
             let balance = balance,
             let avgProfit = avgProfit,
             let totalProfit = totalProfit,
             let currency = currency {
-            
+
             let avgProfitValue = avgProfit.rounded(withType: .percent)
             let totalProfitValue = totalProfit.rounded(withType: .gvt)
-            
-            investorsValueLabel.text = investorsCount.toString()
+
+//            investorsValueLabel.text = investorsCount.toString()
             balanceValueLabel.amountValue = balance
             balanceValueLabel.shortView = true
             balanceValueLabel.currency = currency
             balanceValueLabel.shortView = true
             avgProfitValueLabel.text = avgProfitValue.toString() + "%"
             totalProfitValueLabel.amountValue = totalProfitValue
-            
-            investorsValueLabel.textColor = UIColor.Cell.title
-            balanceValueLabel.textColor = UIColor.Cell.title
-            avgProfitValueLabel.textColor = UIColor.Cell.title
-            
-            totalProfitValueLabel.textColor = totalProfit >= 0 ? UIColor.Cell.title : UIColor.Font.red
-            totalProfitTitleLabel.text = totalProfit >= 0 ? "TOTAL PROFIT" : "LOSS"
-            totalProfitTitleLabel.textColor = totalProfit >= 0 ? UIColor.Cell.title : UIColor.Font.red
-            
-            balanceCurrencyLabel.text = currency
-            if let currencyType = CurrencyType(currency: currency) {
-                balanceCurrencyLabel.currencyType = currencyType
-            }
-            
-            profitCurrencyLabel.text = Constants.currency
-            if let currencyType = CurrencyType(currency: Constants.currency) {
-                profitCurrencyLabel.currencyType = currencyType
-            }
+
+
+            totalProfitValueLabel.textColor = totalProfit >= 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+
+//            balanceCurrencyLabel.text = currency
+//            if let currencyType = CurrencyType(currency: currency) {
+//                balanceCurrencyLabel.currencyType = currencyType
+//            }
+
+//            profitCurrencyLabel.text = Constants.currency
+//            if let currencyType = CurrencyType(currency: Constants.currency) {
+//                profitCurrencyLabel.currencyType = currencyType
+//            }
         }
     }
 }

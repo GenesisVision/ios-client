@@ -23,7 +23,6 @@ final class DashboardViewModel {
     
     var sortingDelegateManager = SortingDelegateManager()
     var currencyDelegateManager = CurrencyDelegateManager()
-    var dateRangeDelegateManager = DateRangeDelegateManager()
     
     var highToLowValue: Bool = false
     
@@ -140,6 +139,10 @@ extension DashboardViewModel {
                 DashboardTableViewCellViewModel.self]
     }
     
+    var currencyCellModelsForRegistration: [UITableViewCell.Type] {
+        return [DashboardCurrencyTableViewCell.self]
+    }
+    
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return [SegmentedHeaderFooterView.self]
@@ -229,6 +232,10 @@ extension DashboardViewModel {
     
     func showProgramList() {
         router.show(routeType: .programList)
+    }
+    
+    func showNotificationList() {
+        router.show(routeType: .notificationList)
     }
 }
 
@@ -321,10 +328,6 @@ extension DashboardViewModel {
         return router.getDetailsViewController(with: investmentProgramId.uuidString)
     }
     
-    func highToLowButtonAction() {
-        
-    }
-    
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
         self.viewModels = viewModels
@@ -362,13 +365,13 @@ extension DashboardViewModel: ReloadDataProtocol {
     }
 }
 
-protocol TableViewProtocol: class {
-    func didSelectRow(at indexPath: IndexPath)
+protocol SortingDelegate: class {
+    func didSelectSorting(at indexPath: IndexPath)
 }
 
 final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    weak var tableViewProtocol: TableViewProtocol?
+    weak var tableViewProtocol: SortingDelegate?
     
     // MARK: - Variables
     var highToLowValue: Bool = true
@@ -442,7 +445,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
         
         changeSorting(at: indexPath.row)
         
-        tableViewProtocol?.didSelectRow(at: indexPath)
+        tableViewProtocol?.didSelectSorting(at: indexPath)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortingValues.count
@@ -450,53 +453,89 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = sortingValues[indexPath.row]
-        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        cell.backgroundColor = UIColor.Cell.bg
         
         cell.textLabel?.textColor = indexPath.row == getSelectedSortingIndex() ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.7)
         cell.accessoryType = indexPath.row == getSelectedSortingIndex() ? .checkmark : .none
         
+        cell.selectionStyle = .none
+        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
+            cell.textLabel?.textColor = UIColor.Cell.title
+            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
+            cell.textLabel?.textColor = UIColor.Cell.subtitle
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
+    }
+}
+
+protocol CurrencyDelegate: class {
+    func didSelectCurrency(at indexPath: IndexPath)
 }
 
 final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Variables
+    weak var tableViewProtocol: CurrencyDelegate?
+    
+    var currencyValues: [String] = ["USD", "EUR", "BTC"]
+    var rateValues: [Double] = [6.3, 5.5, 0.0002918]
+    
+    var selectedCurrency: String!
+    
+    // MARK: - Lifecycle
     override init() {
         super.init()
     }
     
+    // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        selectedCurrency = currencyValues[indexPath.row]
+        
+        tableViewProtocol?.didSelectCurrency(at: indexPath)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return currencyValues.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "wrre"
-        cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
-        cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCurrencyTableViewCell", for: indexPath) as? DashboardCurrencyTableViewCell else {
+            let cell = UITableViewCell()
+            return cell
+        }
+        
+        let currency = currencyValues[indexPath.row]
+        let rate = "1 GVT = \(rateValues[indexPath.row]) " + currency
+        let isSelected = currency == selectedCurrency
+        
+        cell.isSelected = isSelected
+        cell.configure(title: currency, rate: rate, selected: isSelected)
+        
         return cell
     }
-}
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
+            cell.currencyTitleLabel.textColor = UIColor.Cell.title
+            cell.currencyRateLabel.textColor = UIColor.Cell.title
+            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
+        }
+    }
 
-final class DateRangeDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    override init() {
-        super.init()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "wrre"
-        cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        cell.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
-        cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        return cell
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
+            cell.currencyTitleLabel.textColor = UIColor.Cell.subtitle
+            cell.currencyRateLabel.textColor = UIColor.Cell.subtitle
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
     }
 }

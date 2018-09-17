@@ -33,14 +33,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     // MARK: - Labels
     @IBOutlet var noDataLabel: UILabel! {
         didSet {
-            noDataLabel.textColor = UIColor.Font.dark
-        }
-    }
-    
-    @IBOutlet var noAvailableTokensLabel: UILabel! {
-        didSet {
-            noAvailableTokensLabel.textColor = UIColor.Cell.redTitle
-            noAvailableTokensLabel.font = UIFont.getFont(.regular, size: 11)
+            noDataLabel.textColor = UIColor.Cell.title
         }
     }
     
@@ -57,6 +50,50 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     @IBOutlet var placeLabel: TournamentPlaceLabel!
+    
+    @IBOutlet var bottomStackView: UIStackView! {
+        didSet {
+            bottomStackView.isHidden = true
+        }
+    }
+    
+    @IBOutlet var statusLabel: RoundedLabel! {
+        didSet {
+            statusLabel.setProperties(font: UIFont.getFont(.regular, size: 13.0),
+                                           textColor: UIColor.Cell.yellowTitle,
+                                           backgroundColor: UIColor.Cell.yellowTitle.withAlphaComponent(0.3),
+                                           edgeInsets: UIEdgeInsets(top: 8.0, left: 20.0, bottom: 8.0, right: 20.0))
+        }
+    }
+    
+    @IBOutlet var changeValueLabel: RoundedLabel! {
+        didSet {
+            changeValueLabel.setProperties(font: UIFont.getFont(.bold, size: 19.0),
+                                           textColor: UIColor.Cell.greenTitle,
+                                           backgroundColor: UIColor.Cell.greenTitle.withAlphaComponent(0.3),
+                                           edgeInsets: UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0))
+        }
+    }
+    
+    @IBOutlet var balanceValueLabel: UILabel! {
+        didSet {
+            balanceValueLabel.textColor = UIColor.Cell.subtitle
+            balanceValueLabel.font = UIFont.getFont(.regular, size: 19.0)
+        }
+    }
+    
+    @IBOutlet var reinvestSwitch: UISwitch!
+    @IBOutlet var reinvestLabel: UILabel! {
+        didSet {
+            reinvestLabel.textColor = UIColor.Cell.title
+        }
+    }
+    @IBOutlet var reinvestTooltip: TooltipButton! {
+        didSet {
+            //TODO: Tooltip text
+            reinvestTooltip.tooltipText = "Reinvest Tooltip"
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

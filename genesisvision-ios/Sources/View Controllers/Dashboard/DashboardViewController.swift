@@ -38,15 +38,15 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
         
-        if let cell = cell as? DashboardTableViewCell {
-            cell.startTimer()
-        }
+//        if let cell = cell as? DashboardTableViewCell {
+//            cell.startTimer()
+//        }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cell = cell as? DashboardTableViewCell {
-            cell.stopTimer()
-        }
+//        if let cell = cell as? DashboardTableViewCell {
+//            cell.stopTimer()
+//        }
     }
     
     // MARK: - UITableViewDataSource

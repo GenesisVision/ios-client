@@ -14,6 +14,7 @@ class ProfileImageView: UIView {
             profilePhotoImageView.contentMode = .scaleAspectFill
             profilePhotoImageView.clipsToBounds = true
             profilePhotoImageView.image = UIImage.placeholder
+            profilePhotoImageView.roundCorners(with: Constants.SystemSizes.cornerSize)
         }
     }
     
@@ -28,7 +29,8 @@ class ProfileImageView: UIView {
         didSet {
             levelLabel.backgroundColor = .clear
             levelLabel.textColor = UIColor.Font.white
-            levelLabel.layer.backgroundColor = UIColor.primary.cgColor
+            levelLabel.layer.backgroundColor = UIColor.Cell.blue.cgColor
+            levelLabel.roundWithBorder(3.0, color: UIColor.Cell.bg)
             levelLabel.font = UIFont.getFont(.bold, size: 15)
         }
     }

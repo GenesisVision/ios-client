@@ -10,38 +10,50 @@ import UIKit.UILabel
 
 class RoundedLabel: UILabel {
     
-    var topInset: CGFloat = 4.0
-    var bottomInset: CGFloat = 4.0
-    var leftInset: CGFloat = 8
-    var rightInset: CGFloat = 8
-    
+    var edgeInsets: UIEdgeInsets!
+
     // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        backgroundColor = .clear
-        font = UIFont.getFont(.bold, size: 10)
-
-        layer.backgroundColor = UIColor.Font.primary.cgColor
-        textColor = UIColor.Font.white
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        self.commonInit()
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    func commonInit(){
+        self.backgroundColor = .clear
+        self.setProperties()
+    }
+    
+    func setProperties(font: UIFont? = UIFont.getFont(.regular, size: 13),
+                       textColor: UIColor? = UIColor.Cell.title,
+                       backgroundColor: UIColor? = UIColor.Cell.title.withAlphaComponent(0.3),
+                       edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)) {
+        self.font = font
+        self.textColor = textColor
+        self.backgroundColor = backgroundColor
+        self.edgeInsets = edgeInsets
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         layer.cornerRadius = bounds.size.height / 2
         layer.masksToBounds = true
     }
     
     override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets.init(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))
     }
     
     override var intrinsicContentSize: CGSize {
         var intrinsicSuperViewContentSize = super.intrinsicContentSize
-        intrinsicSuperViewContentSize.height += topInset + bottomInset
-        intrinsicSuperViewContentSize.width += leftInset + rightInset
+        intrinsicSuperViewContentSize.height += edgeInsets.top + edgeInsets.bottom
+        intrinsicSuperViewContentSize.width += edgeInsets.left + edgeInsets.right
         return intrinsicSuperViewContentSize
     }
 }
@@ -50,24 +62,24 @@ class CurrencyLabel: RoundedLabel {
 
     var currencyType: CurrencyType = .gvt {
         didSet {
-            var currencyColor = UIColor.Currency.gvt.cgColor
+            var currencyColor = UIColor.Currency.gvt
             
             switch currencyType {
             case .gvt:
-                currencyColor = UIColor.Currency.gvt.cgColor
+                currencyColor = UIColor.Currency.gvt
             case .btc:
-                currencyColor = UIColor.Currency.btc.cgColor
+                currencyColor = UIColor.Currency.btc
             case .eth:
-                currencyColor = UIColor.Currency.eth.cgColor
+                currencyColor = UIColor.Currency.eth
             case .eur:
-                currencyColor = UIColor.Currency.eur.cgColor
+                currencyColor = UIColor.Currency.eur
             case .usd:
-                currencyColor = UIColor.Currency.usd.cgColor
+                currencyColor = UIColor.Currency.usd
             default:
                 break
             }
             
-            layer.backgroundColor = currencyColor
+            setProperties(backgroundColor: currencyColor)
         }
     }
     
@@ -103,8 +115,7 @@ class WhiteCurrencyLabel: RoundedLabel {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        layer.backgroundColor = UIColor.Font.white.cgColor
-        textColor = UIColor.Font.primary
+        setProperties(textColor: UIColor.Font.primary, backgroundColor: UIColor.Font.white)
     }
 }
 
@@ -131,7 +142,6 @@ class TournamentPlaceLabel: RoundedLabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.backgroundColor = UIColor.Tournament.bg.cgColor
-        textColor = UIColor.Font.white
+        setProperties(textColor: UIColor.Font.white, backgroundColor: UIColor.Tournament.bg)
     }
 }

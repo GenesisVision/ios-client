@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>DropDown.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

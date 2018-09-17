@@ -60,7 +60,6 @@ class Router {
 
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
         navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.title = "DASHBOARD"
         viewControllers.append(navigationController)
     }
     
@@ -68,7 +67,6 @@ class Router {
         if let navigationController = getProgramsNavigationController() {
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "PROGRAMS"
             viewControllers.append(navigationController)
         }
     }
@@ -80,7 +78,6 @@ class Router {
         walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
         navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.title = "WALLET"
         viewControllers.append(navigationController)
     }
     
@@ -91,7 +88,6 @@ class Router {
             settingsViewController.viewModel = SettingsViewModel(withRouter: router)
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
             navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "SETTINGS"
             viewControllers.append(navigationController)
         }
     }
@@ -247,6 +243,13 @@ extension Router {
     
     func showProgramDetails(with investmentProgramId: String) {
         guard let viewController = getDetailsViewController(with: investmentProgramId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showNotificationList() {
+        //TODO: add NotificationListVC
+        let viewController = BaseViewController()
+        viewController.title = "Notifications"
         navigationController?.pushViewController(viewController, animated: true)
     }
     

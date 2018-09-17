@@ -14,7 +14,7 @@ class FavoriteButton: UIButton {
         super.awakeFromNib()
         
         backgroundColor = UIColor.clear
-        tintColor = UIColor.primary
+        tintColor = UIColor.Common.white
         
         setImage(#imageLiteral(resourceName: "img_favorite_icon"), for: .disabled)
         setImage(#imageLiteral(resourceName: "img_favorite_icon"), for: .normal)

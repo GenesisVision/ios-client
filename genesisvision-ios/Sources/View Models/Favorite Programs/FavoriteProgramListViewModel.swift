@@ -19,6 +19,28 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var sortingDelegateManager = SortingDelegateManager()
+    
+    var highToLowValue: Bool = false
+    
+    var dateRangeType: DateRangeType = .day {
+        didSet {
+            switch dateRangeType {
+            case .custom:
+                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
+                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
+            default:
+                let calendar = Calendar.current
+                let hour = calendar.component(.hour, from: dateRangeTo)
+                let min = calendar.component(.minute, from: dateRangeTo)
+                let sec = calendar.component(.second, from: dateRangeTo)
+                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
+            }
+        }
+    }
+    var dateRangeFrom: Date = Date().previousDate()
+    var dateRangeTo: Date = Date()
+    
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var programsCount: String = ""
@@ -88,7 +110,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
                                           brokerTradeServerId: nil,
                                           investMaxAmountFrom: nil,
                                           investMaxAmountTo: nil,
-                                          sorting: sorting,
+                                          sorting: nil, //TODO: sorting,
                                           name: searchText,
                                           levelMin: nil,
                                           levelMax: nil,

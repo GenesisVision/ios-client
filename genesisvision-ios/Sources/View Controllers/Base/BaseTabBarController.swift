@@ -30,7 +30,7 @@ class BaseTabBarController: UITabBarController {
         if let items = tabBar.items {
             for item in items {
                 if UIDevice.current.userInterfaceIdiom != .pad {
-                    item.titlePositionAdjustment = UIOffsetMake(0, -4)
+                    item.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
                 }
             }
         }

@@ -17,7 +17,9 @@ protocol ProgramListViewModelProtocol {
     var router: ProgramListRouterProtocol! { get }
     var searchText: String { get set }
     var title: String { get }
-    var sortingValues: [String] { get }
+
+    var sortingDelegateManager: SortingDelegateManager { get }
+    
     var sections: [SectionType] { get }
     var bottomViewType: BottomViewType { get } 
     
@@ -30,18 +32,20 @@ protocol ProgramListViewModelProtocol {
     
     var headerTitle: String { get }
     
+    var highToLowValue: Bool { get set }
+    var dateRangeType: DateRangeType { get set }
+    var dateRangeFrom: Date { get set }
+    var dateRangeTo: Date { get set }
+    
     var skip: Int { get set }
     var take: Int { get set }
     var totalCount: Int { get set }
     
     var filter: InvestmentProgramsFilter? { get }
-    var sorting: InvestmentProgramsFilter.Sorting { get }
-    var sortingKeys: [InvestmentProgramsFilter.Sorting] { get }
-    
+
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     
-    func getSelectedSortingIndex() -> Int
     func refresh(completion: @escaping CompletionBlock)
     
     func model(at indexPath: IndexPath) -> CellViewAnyModel?
@@ -49,7 +53,6 @@ protocol ProgramListViewModelProtocol {
     func modelsCount() -> Int
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
-    func sortTitle() -> String?
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
     
@@ -59,7 +62,6 @@ protocol ProgramListViewModelProtocol {
     func fetch(completion: @escaping CompletionBlock)
     func fetchMore(at row: Int) -> Bool
     func fetchMore()
-    func changeSorting(at index: Int)
     
     func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController?
     func changeFavorite(value: Bool, investmentProgramId: String, request: Bool, completion: @escaping CompletionBlock)
@@ -71,25 +73,6 @@ protocol ProgramListViewModelProtocol {
 }
 
 extension ProgramListViewModelProtocol {
-    func getSelectedSortingIndex() -> Int {
-        guard let sorting = filter?.sorting else { return 0 }
-        
-        return sortingKeys.index(of: sorting) ?? 0
-    }
-    
-    func getSortingValue(sortingKey: InvestmentProgramsFilter.Sorting) -> String {
-        guard let index = sortingKeys.index(of: sortingKey) else { return "" }
-        return sortingValues[index]
-    }
-    
-    func getSortingValue(at index: Int) {
-        filter?.sorting = sortingKeys[index]
-    }
-    
-    func changeSorting(at index: Int) {
-        filter?.sorting = sortingKeys[index]
-    }
-    
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
@@ -123,11 +106,6 @@ extension ProgramListViewModelProtocol {
     }
     
     // MARK: - TableView
-    func sortTitle() -> String? {
-        guard let sort = filter?.sorting else { return "Sort by " }
-        
-        return "Sort by " + getSortingValue(sortingKey: sort)
-    }
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {

@@ -10,7 +10,7 @@ import UIKit.UIButton
 
 class TooltipButton: UIButton {
     
-    var customBorderColor: UIColor = UIColor.Font.light
+    var customBorderColor: UIColor = UIColor.Cell.subtitle
     var tooltipText: String = ""
     
     // MARK: - Lifecycle

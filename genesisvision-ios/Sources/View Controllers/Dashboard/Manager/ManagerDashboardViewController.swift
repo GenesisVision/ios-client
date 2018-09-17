@@ -35,11 +35,11 @@ class ManagerDashboardViewController: DashboardViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        for visibleCell in tableView.visibleCells {
-            if let cell = visibleCell as? DashboardTableViewCell {
-                cell.stopTimer()
-            }
-        }
+//        for visibleCell in tableView.visibleCells {
+//            if let cell = visibleCell as? DashboardTableViewCell {
+//                cell.stopTimer()
+//            }
+//        }
     }
     
     // MARK: - Private methods

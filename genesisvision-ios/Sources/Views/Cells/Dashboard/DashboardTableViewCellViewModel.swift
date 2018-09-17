@@ -16,7 +16,8 @@ struct DashboardTableViewCellViewModel {
 }
 
 extension DashboardTableViewCellViewModel: CellViewModel {
-    func setup(on cell: DashboardTableViewCell) {
+    func setup(on cell: ProgramTableViewCell) {
+        cell.bottomStackView.isHidden = false
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden
@@ -40,21 +41,21 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         if let managerName = investmentProgram.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
-        if let tokenSymbol = investmentProgram.token?.tokenSymbol {
-            cell.tokenSymbolLabel.text = tokenSymbol
-        }
+//        if let tokenSymbol = investmentProgram.token?.tokenSymbol {
+//            cell.tokenSymbolLabel.text = tokenSymbol
+//        }
         
-        if let tokensCount = investmentProgram.investedTokens {
-            cell.tokensCountValueLabel.text = tokensCount.toString()
-            cell.investedTokens = tokensCount
-        }
+//        if let tokensCount = investmentProgram.investedTokens {
+//            cell.tokensCountValueLabel.text = tokensCount.toString()
+//            cell.investedTokens = tokensCount
+//        }
         
-        if let profitFromProgram = investmentProgram.profitFromProgram {
-            cell.profitValueLabel.text = profitFromProgram.toString()
-            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Cell.title : UIColor.Font.red
-        }
-        
-        cell.profitTitleLabel.text = "MY PROFIT"
+//        if let profitFromProgram = investmentProgram.profitFromProgram {
+//            cell.profitValueLabel.text = profitFromProgram.toString()
+//            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Cell.title : UIColor.Font.red
+//        }
+//
+//        cell.profitTitleLabel.text = "MY PROFIT"
         
         if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: currency) {
             cell.currencyLabel.currencyType = currencyType
@@ -81,15 +82,15 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        if let isEnabled = investmentProgram.isEnabled {
-            guard let endOfPeriod = investmentProgram.endOfPeriod else { return }
-            
-            cell.endOfPeriod = endOfPeriod
-            
-            cell.isEnable = isEnabled
-        }
-        
-        cell.reloadDataProtocol = reloadDataProtocol
+//        if let isEnabled = investmentProgram.isEnabled {
+//            guard let endOfPeriod = investmentProgram.endOfPeriod else { return }
+//
+//            cell.endOfPeriod = endOfPeriod
+//
+//            cell.isEnable = isEnabled
+//        }
+//
+//        cell.reloadDataProtocol = reloadDataProtocol
         
         cell.tournamentActive(investmentProgram.isTournament ?? false)
         

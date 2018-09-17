@@ -52,7 +52,7 @@ open class BottomSheet {
         open var subtitleTextColor: UIColor? = UIColor.Cell.subtitle
         open let overlayView = UIView()
         open let containerView = UIView()
-        open var isScrollEnabledInSheet: Bool = true
+        open var isScrollEnabled: Bool = false
         // MARK: - Private property
         fileprivate let overlayViewPanGestureRecognizer: UIPanGestureRecognizer = {
             let gestureRecognizer = UIPanGestureRecognizer()
@@ -75,10 +75,15 @@ open class BottomSheet {
             didSet { newState(state) }
         }
         fileprivate var isNeedLayout = true
-        fileprivate var lineView = UIView()
+        fileprivate var lineView = UIView() {
+            didSet {
+                lineView.isUserInteractionEnabled = false
+            }
+        }
         fileprivate var bar: UIView?
         fileprivate var contentView: UIView?
         fileprivate var scrollView: UIScrollView?
+        fileprivate var isScrollEnabledInSheet: Bool = true
         fileprivate var hasBar: Bool {
             if let _ = bar {
                 return true
@@ -171,8 +176,8 @@ open class BottomSheet {
                                    subtitle: String? = nil,
                                    buttonTitle: String? = nil,
                                    buttonSelectedTitle: String? = nil,
-                                   normalImage: UIImage = #imageLiteral(resourceName: "img_tabbar_settings_unselected2"),
-                                   selectedImage: UIImage = #imageLiteral(resourceName: "img_textfield_password_colored_icon"),
+                                   normalImage: UIImage? = nil,
+                                   selectedImage: UIImage? = nil,
                                    buttonAction: Selector? = nil,
                                    buttonTarget: Any? = nil,
                                    buttonSelected: Bool = false,
@@ -204,9 +209,14 @@ open class BottomSheet {
             }
             
             if let buttonTitle = buttonTitle {
-                let btn = UIButton(type: .system)
+                let btn = UIButton(type: .custom)
                 
-                btn.setImage(buttonSelected ? selectedImage : normalImage, for: .normal)
+                if buttonSelected, let selectedImage = selectedImage {
+                    btn.setImage(selectedImage.withRenderingMode(.alwaysTemplate), for: .normal)
+                } else if let normalImage = normalImage {
+                    btn.setImage(normalImage.withRenderingMode(.alwaysTemplate), for: .normal)
+                }
+                
                 btn.contentHorizontalAlignment = .right
                 
                 btn.isSelected = buttonSelected
@@ -265,8 +275,9 @@ open class BottomSheet {
         }
         
         // Adds ContentsView
-        open func addContentsView(_ contentView: UIView) {
+        open func addContentsView(isScrollEnabledInSheet: Bool = true, _ contentView: UIView) {
             guard !hasView else { fatalError("ContainerView can only have one") }
+            self.isScrollEnabledInSheet = isScrollEnabledInSheet
             containerView.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
             let topConstraint = NSLayoutConstraint(item: contentView,
@@ -479,20 +490,30 @@ open class BottomSheet {
                 case .began:
                     scrollView?.isScrollEnabled = false
                 case .changed:
+                    
+                    if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && !isScrollEnabled {
+                        return
+                    }
+                    
                     containerView.frame.origin.y = max(0, containerView.frame.origin.y + point.y)
                     containerViewHeightConstraint?.constant = max(initializeHeight, maxHeight - containerView.frame.origin.y)
                     gestureRecognizer.setTranslation(.zero, in: gestureView)
                 case .ended, .cancelled:
                     scrollView?.isScrollEnabled = true
+                    
                     if containerView.frame.origin.y - originY > moveRange.down {
                         dismiss()
-                    } else if (containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up {
+                    } else if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && isScrollEnabled {
                         present()
                     } else {
                         let animations = {
                             self.containerView.frame.origin.y = originY
                         }
-                        UIView.perform(.delete, on: [], options: [], animations: animations, completion: nil)
+                        UIView.perform(.delete, on: [], options: [], animations: animations, completion: { (value) in
+                            DispatchQueue.main.async {
+                                self.containerViewHeightConstraint?.constant = max(self.initializeHeight, self.maxHeight - self.containerView.frame.origin.y)
+                            }
+                        })
                     }
                 default:
                     break
@@ -530,7 +551,7 @@ open class BottomSheet {
 // MARK: - private
 private extension BottomSheetController {
     func configure() {
-        containerView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.168627451, blue: 0.2, alpha: 1)
+        containerView.backgroundColor = UIColor.Cell.bg
         
         view.frame.size = UIScreen.main.bounds.size
         transitioningDelegate = self
@@ -546,6 +567,7 @@ private extension BottomSheetController {
         lineView.clipsToBounds = true
         lineView.layer.cornerRadius = height / 2
         
+        containerView.isUserInteractionEnabled = true
         containerView.addSubview(lineView)
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
