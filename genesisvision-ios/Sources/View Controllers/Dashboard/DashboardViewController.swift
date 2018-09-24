@@ -20,11 +20,10 @@ class DashboardViewController: BaseViewController {
     @IBOutlet weak var assetsView: UIView!
     
     var eventsViewHeightStart: CGFloat = 150.0
-    var eventsViewHeightChange: CGFloat = 120.0
+    var eventsViewHeightChange: CGFloat = 70.0
     
-    var chartsViewController: ChartsViewController?
-    var eventsViewController: EventsViewController?
-    var assetsViewController: AssetsViewController?
+    var currencyBarButtonItem: UIBarButtonItem!
+    var notificationsBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventsViewHeightConstraint: NSLayoutConstraint!
@@ -36,29 +35,25 @@ class DashboardViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        showProgressHUD()
         setup()
-        
-//        fetch()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AssetsViewController,
             segue.identifier == "AssetsViewControllerSegue" {
-            let viewModel = AssetsTabmanViewModel(withRouter: Router(parentRouter: nil), tabmanViewModelDelegate: nil)
-            vc.viewModel = viewModel
+            vc.viewModel = viewModel.assetsTabmanViewModel
             
-            assetsViewController = vc
+            viewModel.router.assetsViewController = vc
         } else if let vc = segue.destination as? EventsViewController,
             segue.identifier == "EventsViewControllerSegue" {
-            eventsViewController = vc
+            vc.viewModel = viewModel.eventListViewModel
+            
+            viewModel.router.eventsViewController = vc
         } else if let vc = segue.destination as? ChartsViewController,
             segue.identifier == "ChartsViewControllerSegue" {
+            vc.viewModel = viewModel.chartsTabmanViewModel
             
-            let viewModel = ChartsTabmanViewModel(withRouter: Router(parentRouter: nil), tabmanViewModelDelegate: nil)
-            vc.viewModel = viewModel
-            
-            chartsViewController = vc
+            viewModel.router.chartsViewController = vc
         }
     }
     
@@ -66,12 +61,32 @@ class DashboardViewController: BaseViewController {
     private func setup() {
         scrollView.delegate = self
         
+        showProgressHUD()
+        fetch()
+
         setupUI()
+    }
+    private func reloadData() {
+        
+    }
+    
+    private func fetch() {
+        viewModel.refresh { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
     }
     
     private func setupUI() {
-        let currencyBarButtonItem = UIBarButtonItem(title: "BTC", style: .done, target: self, action: #selector(currencyButtonAction))
-        let notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_read_more"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency
+        currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency?.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_read_more"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Week", style: .done, target: self, action: #selector(dateRangeButtonAction))
@@ -100,15 +115,13 @@ class DashboardViewController: BaseViewController {
         bottomSheetController.addNavigationBar("Preferred Currency")
         
         bottomSheetController.addTableView { [weak self] tableView in
-            if let currencyCellModelsForRegistration = self?.viewModel.currencyCellModelsForRegistration {
-                tableView.registerNibs(for: currencyCellModelsForRegistration)
-            }
+            tableView.registerNibs(for: viewModel.currencyCellModelsForRegistration)
             tableView.delegate = self?.viewModel.currencyDelegateManager
             tableView.dataSource = self?.viewModel.currencyDelegateManager
             tableView.separatorStyle = .none
         }
         
-        viewModel.currencyDelegateManager.tableViewProtocol = self
+        viewModel.currencyDelegateManager.currencyDelegate = self
         bottomSheetController.present()
     }
     
@@ -146,100 +159,6 @@ extension DashboardViewController: DateRangeViewProtocol {
     }
 }
 
-//extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    // MARK: - UITableViewDelegate
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        guard viewModel.modelsCount() >= indexPath.row else {
-//            return
-//        }
-//
-//        viewModel.showDetail(at: indexPath)
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let model = viewModel.model(at: indexPath) else {
-//            return UITableViewCell()
-//        }
-//
-//        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-//    }
-//
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
-//
-////        if let cell = cell as? DashboardTableViewCell {
-////            cell.startTimer()
-////        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-////        if let cell = cell as? DashboardTableViewCell {
-////            cell.stopTimer()
-////        }
-//    }
-//
-//    // MARK: - UITableViewDataSource
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.numberOfRows(in: section)
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return viewModel.numberOfSections()
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return viewModel.headerHeight(for: section)
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return viewModel.heightForRow(at: indexPath)
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard section != 1 else {
-//            return nil
-//        }
-//
-//        let header = tableView.dequeueReusableHeaderFooterView() as SegmentedHeaderFooterView
-//        header.configure(with: viewModel.headerSegments(for: section))
-//
-//        return header
-//    }
-//}
-
-//extension DashboardViewController {
-//    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-//        let text = viewModel.noDataText()
-//        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-//                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
-//
-//        return NSAttributedString(string: text, attributes: attributes)
-//    }
-//
-//    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-//        if let imageName = viewModel.noDataImageName() {
-//            return UIImage(named: imageName)
-//        }
-//
-//        return UIImage.noDataPlaceholder
-//    }
-//
-//    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-//        viewModel.showProgramList()
-//    }
-//
-//    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-//        let text = viewModel.noDataButtonTitle()
-//        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-//                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-//
-//        return NSAttributedString(string: text, attributes: attributes)
-//    }
-//}
-
 //extension DashboardViewController: UIViewControllerPreviewingDelegate {
 //    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
 //                           viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -262,35 +181,26 @@ extension DashboardViewController: DateRangeViewProtocol {
 //    }
 //}
 
-//extension DashboardViewController: ProgramDetailViewControllerProtocol {
-//    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
-//        showProgressHUD()
-//        viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
-//            self?.hideAll()
-//        }
-//    }
-//}
-
 extension DashboardViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        print(scrollView.contentOffset)
         let yOffset = scrollView.contentOffset.y
         
-        let h = eventsViewHeightStart + eventsViewHeightChange * yOffset / (eventsViewHeightStart + eventsViewHeightChange)
-        if h <= eventsViewHeightStart + eventsViewHeightChange && h >= eventsViewHeightStart {
-            eventsViewHeightConstraint.constant = eventsViewHeightStart + eventsViewHeightChange * yOffset / (eventsViewHeightStart + eventsViewHeightChange)
-            eventsViewController?.viewDidLayoutSubviews()
+        let newHeight = eventsViewHeightStart + yOffset * 2
+        if newHeight >= eventsViewHeightStart && newHeight <= eventsViewHeightStart + eventsViewHeightChange {
+            eventsViewHeightConstraint.constant = newHeight
+            viewModel.router.eventsViewController?.viewDidLayoutSubviews()
         }
         
-        let chartsH = 350.0 - 200.0 * yOffset / (350.0 - 200.0)
-        if chartsH <= 350.0 && h >= 350.0 - 200.0 {
-            chartsViewHeightConstraint.constant = 350.0 - 200.0 * yOffset / (350.0 - 200.0)
-            chartsViewController?.viewDidLayoutSubviews()
+        let chartsH = 400.0 - 200.0 * yOffset / (400.0 - 200.0)
+        if chartsH >= 400.0 - 200.0 && chartsH <= 400.0 {
+            chartsViewHeightConstraint.constant = chartsH
+            viewModel.router.chartsViewController?.viewDidLayoutSubviews()
         }
         
         if scrollView == self.scrollView {
             if yOffset == assetsView.frame.origin.y {
-                if let pageboyDataSource = assetsViewController?.pageboyDataSource,
+                if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource,
                     let controllers = pageboyDataSource.controllers {
                     for controller in controllers {
                         if let vc = controller as? BaseViewControllerWithTableView {
@@ -311,6 +221,11 @@ extension DashboardViewController: SortingDelegate {
 
 extension DashboardViewController: CurrencyDelegate {
     func didSelectCurrency(at indexPath: IndexPath) {
+        if let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency {
+            currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
+            navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
+        }
+        
         bottomSheetController.dismiss()
     }
 }

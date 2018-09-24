@@ -12,15 +12,18 @@ import Pageboy
 class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
     var controllers: [BaseViewController]!
     
-    init(vc: UIViewController) {
+    init(router: DashboardRouter) {
         super.init()
         
-        if let porfolio = PortfolioViewController.storyboardInstance(name: .dashboard),
-            let profit = ProfitViewController.storyboardInstance(name: .dashboard) {
-            porfolio.vc = vc
-            profit.vc = vc
+        if let porfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard),
+            let profitVC = ProfitViewController.storyboardInstance(name: .dashboard) {
+            porfolioVC.viewModel = PortfolioViewModel(withRouter: router)
+            porfolioVC.vc = router.chartsViewController
+            
+//            profitVC.viewModel = ProfitViewModel(withRouter: router)
+            profitVC.vc = router.chartsViewController
 
-            controllers = [porfolio, profit]
+            controllers = [porfolioVC, profitVC]
         }
     }
     

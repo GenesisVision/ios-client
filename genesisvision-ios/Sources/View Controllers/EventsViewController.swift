@@ -10,7 +10,20 @@ import UIKit
 
 class EventsViewController: BaseViewController {
     // MARK: - Variables
+    var viewModel: EventListViewModel!
+    
     fileprivate var delegateManager: EventsDelegateManager!
+    
+    @IBOutlet weak var headerLabel: UILabel! {
+        didSet {
+            headerLabel.font = UIFont.getFont(.semibold, size: 19)
+        }
+    }
+    @IBOutlet weak var showAllButton: UIButton! {
+        didSet {
+            showAllButton.setTitleColor(UIColor.Cell.title, for: .normal)
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,12 +33,15 @@ class EventsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        delegateManager = EventsDelegateManager()
+        if let viewModel = viewModel {
+            headerLabel.text = viewModel.title
+            
+            delegateManager = EventsDelegateManager(with: viewModel)
+            delegateManager.portfolioEventsDelegate = self
+        }
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            
-//            layout.headerReferenceSize = CGSize(width: 0, height: 50)
         }
         
         collectionView.register(UINib.init(nibName: "PortfolioEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PortfolioEventCollectionViewCell")
@@ -43,54 +59,14 @@ class EventsViewController: BaseViewController {
     
     // MARK: - Public methods
     // MARK: - Private methods
+    // MARK: - Actions
+    @IBAction func showAllButtonAction(_ sender: UISwitch) {
+        viewModel.showAllPortfolioEvents()
+    }
 }
 
-
-final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PortfolioEventCollectionViewCell", for: indexPath as IndexPath) as! PortfolioEventCollectionViewCell
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width * 0.6, height: collectionView.frame.height - 16.0)
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scrollView is UITableView else { return }
-        
-        let yOffset = scrollView.contentOffset.y
-        
-        let window = UIApplication.shared.windows[0] as UIWindow
-        if let dashboardViewController = window.rootViewController as? DashboardViewController,
-            let assetsViewController = dashboardViewController.assetsViewController,
-            let pageboyDataSource = assetsViewController.pageboyDataSource,
-            let controllers = pageboyDataSource.controllers {
-            for controller in controllers {
-                if let vc = controller as? BaseViewControllerWithTableView {
-                    vc.tableView?.isScrollEnabled = yOffset > -44.0
-                }
-            }
-        } else if let rootViewController = window.rootViewController,
-            rootViewController is UINavigationController,
-            let dashboardViewController = rootViewController.childViewControllers.first as? DashboardViewController,
-            let assetsViewController = dashboardViewController.assetsViewController,
-            let pageboyDataSource = assetsViewController.pageboyDataSource,
-            let controllers = pageboyDataSource.controllers {
-            for controller in controllers {
-                if let vc = controller as? BaseViewControllerWithTableView {
-                    vc.tableView?.isScrollEnabled = yOffset > -44.0
-                }
-            }
-        }
+extension EventsViewController: PortfolioEventsDelegate {
+    func didSelectPortfolioEvents(at indexPath: IndexPath) {
+        viewModel.didSelectPortfolioEvents(at: indexPath)
     }
 }

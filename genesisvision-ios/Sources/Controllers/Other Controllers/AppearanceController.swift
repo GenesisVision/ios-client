@@ -31,13 +31,13 @@ struct NavBarColors {
 
 struct AppearanceController {
     enum Theme: Int {
-        case lightTheme, darkTheme
+        case darkTheme, lightTheme
          
         var mainColor: UIColor {
             switch self {
-            case .lightTheme:
-                return UIColor.primary
             case .darkTheme:
+                return UIColor.primary
+            case .lightTheme:
                 return UIColor.primary
             }
         }
@@ -92,7 +92,7 @@ struct AppearanceController {
         get {
             let colorTheme = UserDefaults.standard.integer(forKey: Constants.UserDefaults.colorTheme)
             guard let themeType = Theme(rawValue: colorTheme) else {
-                    return .lightTheme
+                return .darkTheme
             }
             
             return themeType
@@ -120,7 +120,7 @@ struct AppearanceController {
         NotificationCenter.default.post(name: .themeChanged, object: nil)
         
         let theme = AppearanceController.theme
-        // First persist the selected theme using NSUserDefaults.
+        
         UserDefaults.standard.set(theme.rawValue, forKey: Constants.UserDefaults.colorTheme)
         UserDefaults.standard.synchronize()
         

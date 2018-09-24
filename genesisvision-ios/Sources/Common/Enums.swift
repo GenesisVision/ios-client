@@ -6,6 +6,42 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+// MARK: - Charts
+enum ChartType {
+    case `default`, detail, full
+}
+
+enum ChartDurationType: Int {
+    case day, week, month, month3, month6, year, all
+    
+    var allCases: [String] {
+        return ["1d", "1w", "1m", "3m", "6m", "1y", "all"]
+    }
+    
+    func getTimeFrame() -> InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet {
+        var timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.day1
+        
+        switch self {
+        case .day:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.day1
+        case .week:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.week1
+        case .month:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month1
+        case .month3:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month3
+        case .month6:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month6
+        case .year:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.year1
+        case .all:
+            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.all
+        }
+        
+        return timeFrame
+    }
+}
+
 // MARK: - DateRange
 enum DateRangeType: Int {
     case day

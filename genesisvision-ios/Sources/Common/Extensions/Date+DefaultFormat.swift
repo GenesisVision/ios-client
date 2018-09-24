@@ -20,12 +20,13 @@ extension Date {
         let dateFormatter = DateFormatter()
         switch chartDurationType {
         case .day:
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .short
+            dateFormatter.dateFormat = "dd.MM \nhh:mm"
+        case .year:
+            dateFormatter.dateFormat = "dd.MM.yy"
         default:
-            dateFormatter.timeStyle = .none
-            dateFormatter.dateStyle = .short
+            dateFormatter.dateFormat = "dd.MM"
         }
+        
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: date)
     }

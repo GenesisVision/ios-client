@@ -50,8 +50,8 @@ open class BottomSheet {
         open var tintColor: UIColor? = UIColor.Cell.title
         open var titleTextColor: UIColor? = UIColor.Cell.title
         open var subtitleTextColor: UIColor? = UIColor.Cell.subtitle
-        open let overlayView = UIView()
-        open let containerView = UIView()
+        public let overlayView = UIView()
+        public let containerView = UIView()
         open var isScrollEnabled: Bool = false
         // MARK: - Private property
         fileprivate let overlayViewPanGestureRecognizer: UIPanGestureRecognizer = {
@@ -126,7 +126,7 @@ open class BottomSheet {
                 }
             }
         }
-            
+
         // Adds UIToolbar
         open func addToolbar(_ configurationHandler: ((UIToolbar) -> Void)? = nil) {
             guard !hasBar else { fatalError("UIToolbar or UINavigationBar can only have one") }
@@ -463,6 +463,7 @@ open class BottomSheet {
             super.viewDidLayoutSubviews()
             adjustLayout()
         }
+        
         // Action
         open func present(_ sender: AnyObject? = nil) {
             state = .showAll
@@ -557,7 +558,8 @@ private extension BottomSheetController {
         transitioningDelegate = self
         modalPresentationStyle = .overCurrentContext
         modalPresentationCapturesStatusBarAppearance = true
-        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        overlayView.backgroundColor = overlayBackgroundColor
+
         overlayView.frame = UIScreen.main.bounds
         view.addSubview(overlayView)
         
@@ -652,6 +654,7 @@ private extension BottomSheetController {
         }
     }
     func adjustLayout() {
+        containerView.layoutIfNeeded()
         containerView.clipsToBounds = true
         containerView.roundCorners([.topLeft, .topRight], radius: cornerRadius)
         
@@ -667,6 +670,7 @@ private extension BottomSheetController {
         scrollView?.setContentOffset(CGPoint(x: 0, y: -(scrollView?.scrollIndicatorInsets.top ?? 0)), animated: false)
         state = .show
     }
+    
     func configureGesture() {
         //
         overlayViewPanGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))

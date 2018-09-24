@@ -16,16 +16,15 @@ extension UIColor {
     
     struct Common {
         static var primary: UIColor { return #colorLiteral(red: 0, green: 0.7411764706, blue: 0.6862745098, alpha: 1) }                                 //00BDAF
-        static var topaz: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                   //15bbaf
-        static var greenBlue: UIColor { return #colorLiteral(red: 0, green: 0.6705882353, blue: 0.6274509804, alpha: 1) }                               //00aba0
         
-        static var uglyBlue: UIColor { return #colorLiteral(red: 0.1450980392, green: 0.4666666667, blue: 0.5568627451, alpha: 1) }                                //25778E
-        static var darkSlateBlue: UIColor { return #colorLiteral(red: 0.09803921569, green: 0.3098039216, blue: 0.3960784314, alpha: 1) }                           //194f65
+        static var darkBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                          //131E26
+        static var darkCell: UIColor { return #colorLiteral(red: 0.1215686275, green: 0.168627451, blue: 0.2078431373, alpha: 1) }                                //1F2B35
         
-        static var dark: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                    //546e7a
+        static var green: UIColor { return #colorLiteral(red: 0.1725490196, green: 0.8235294118, blue: 0.568627451, alpha: 1) }                                   //2CD291
+        static var red: UIColor { return #colorLiteral(red: 0.9215686275, green: 0.231372549, blue: 0.3529411765, alpha: 1) }                                     //EB3B5A
         
-        static var darkBackground: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.1176470588, blue: 0.1450980392, alpha: 1) }                          //151e25
-        static var darkCell: UIColor { return #colorLiteral(red: 0.1137254902, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                                //1d252c
+        
+        
         static var darkDelimiter: UIColor { return #colorLiteral(red: 0.137254902, green: 0.168627451, blue: 0.1921568627, alpha: 1) }                           //232b31
 
         static var darkButtonBackground: UIColor { return #colorLiteral(red: 0.1921568627, green: 0.2156862745, blue: 0.2431372549, alpha: 1) }                    //31373E
@@ -44,8 +43,7 @@ extension UIColor {
         
         static var switchTint: UIColor { return #colorLiteral(red: 0.1843137255, green: 0.2745098039, blue: 0.2901960784, alpha: 1) }                              //2F464A
 
-        static var green: UIColor { return #colorLiteral(red: 0.1725490196, green: 0.8274509804, blue: 0.5725490196, alpha: 1) }                                   //2CD392
-        static var red: UIColor { return #colorLiteral(red: 0.8745098039, green: 0.09411764706, blue: 0.3960784314, alpha: 1) }                                     //CB3E59
+        
         static var yellow: UIColor { return #colorLiteral(red: 0.8823529412, green: 0.6431372549, blue: 0.2078431373, alpha: 1) }                                  //E1A435
         static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6431372549, blue: 0.7490196078, alpha: 1) }                                    //66A4BF
 
@@ -72,6 +70,16 @@ extension UIColor {
         static var eurColor: UIColor { return #colorLiteral(red: 0, green: 0.2, blue: 0.6, alpha: 1) }                                //003399
         static var btcColor: UIColor { return #colorLiteral(red: 0.968627451, green: 0.5764705882, blue: 0.1019607843, alpha: 1) }                                //f7931a
         static var ethColor: UIColor { return #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.2392156863, alpha: 1) }                                //3C3C3D
+        
+        
+        
+        static var topaz: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                   //15bbaf
+        static var greenBlue: UIColor { return #colorLiteral(red: 0, green: 0.6705882353, blue: 0.6274509804, alpha: 1) }                               //00aba0
+        
+        static var uglyBlue: UIColor { return #colorLiteral(red: 0.1450980392, green: 0.4666666667, blue: 0.5568627451, alpha: 1) }                                //25778E
+        static var darkSlateBlue: UIColor { return #colorLiteral(red: 0.09803921569, green: 0.3098039216, blue: 0.3960784314, alpha: 1) }                           //194f65
+        
+        static var dark: UIColor { return #colorLiteral(red: 0.3294117647, green: 0.431372549, blue: 0.4784313725, alpha: 1) }                                    //546e7a
     }
     
     static var primary: UIColor { return Common.primary }

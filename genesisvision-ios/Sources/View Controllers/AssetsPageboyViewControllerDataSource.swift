@@ -12,21 +12,21 @@ import Pageboy
 class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
     var controllers: [BaseViewController]!
     
-    init(vc: AssetsViewController) {
+    init(router: DashboardRouter) {
         super.init()
         
-        if let programListViewController = ProgramListViewController.storyboardInstance(name: .programs),
-            let favoriteListViewController = ProgramListViewController.storyboardInstance(name: .programs) {
+        if let programListViewController = DashboardProgramListViewController.storyboardInstance(name: .dashboard),
+            let fundListController = DashboardProgramListViewController.storyboardInstance(name: .dashboard) {
+            router.programListViewController = programListViewController
+            router.fundListController = fundListController
             
-            let programsRouter = InvestmentProgramListRouter(parentRouter: nil, navigationController: BaseNavigationController(rootViewController: programListViewController))
-            let programsViewModel = InvestmentProgramListViewModel(withRouter: programsRouter, reloadDataProtocol: programListViewController)
+            let programsViewModel = DashboardProgramListViewModel(withRouter: router)
             programListViewController.viewModel = programsViewModel
             
-            let favoriteRouter = FavoriteProgramListRouter(parentRouter: nil, navigationController: BaseNavigationController(rootViewController: favoriteListViewController), favoriteProgramListViewController: favoriteListViewController)
-            let favoriteViewModel = FavoriteProgramListViewModel(withRouter: favoriteRouter, reloadDataProtocol: favoriteListViewController)
-            favoriteListViewController.viewModel = favoriteViewModel
+            let fundsViewModel = DashboardProgramListViewModel(withRouter: router)
+            fundListController.viewModel = fundsViewModel
             
-            controllers = [programListViewController, favoriteListViewController]
+            controllers = [programListViewController, fundListController]
         }
     }
     

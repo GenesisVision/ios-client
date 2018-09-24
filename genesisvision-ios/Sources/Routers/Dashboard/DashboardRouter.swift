@@ -9,12 +9,19 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(investmentProgramId: String), programList, notificationList
+    case showProgramDetails(investmentProgramId: String), programList, notificationList, allPortfolioEvents
 }
 
 class DashboardRouter: Router {
     
     var dashboardViewController: DashboardViewController!
+    
+    var chartsViewController: ChartsViewController?
+    var eventsViewController: EventsViewController?
+    var assetsViewController: AssetsViewController?
+    
+    var programListViewController: DashboardProgramListViewController?
+    var fundListController: DashboardProgramListViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {
@@ -32,11 +39,18 @@ class DashboardRouter: Router {
             showProgramList()
         case .notificationList:
             showNotificationList()
+        case .allPortfolioEvents:
+            showAllPortfolioEvents()
         }
     }
     
     // MARK: - Private methods
     private func showProgramList() {
         changeTab(withParentRouter: self, to: .programList)
+    }
+    
+    private func showAllPortfolioEvents() {
+        //TODO:
+        print("showAllPortfolioEvents")
     }
 }

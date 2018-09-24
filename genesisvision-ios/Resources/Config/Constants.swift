@@ -101,6 +101,8 @@ final class Constants {
         static let biometricLastDomainState: String = "biometricLastDomainState"
         
         static let colorTheme: String = "colorTheme"
+        
+        static let selectedCurrency: String = "selectedCurrency"
     }
     
     struct Keys {

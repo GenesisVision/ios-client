@@ -9,16 +9,6 @@
 import UIKit
 import Tabman
 
-class ChartsTabmanViewModel: TabmanViewModel {
-    
-    // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
-        
-        style = .scrollingButtonBar
-    }
-}
-
 class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
     // MARK: - Variables
     var pageboyDataSource: ChartsPageboyViewControllerDataSource!
@@ -27,7 +17,9 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        pageboyDataSource = ChartsPageboyViewControllerDataSource(vc: self)
+        if let router = viewModel.router as? DashboardRouter {
+            pageboyDataSource = ChartsPageboyViewControllerDataSource(router: router)
+        }
         
         self.dataSource = pageboyDataSource
         

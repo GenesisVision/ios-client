@@ -28,9 +28,14 @@ final class DashboardViewModel {
     
     private var sections: [SectionType] = [.chart, .portfolioEvents, .programList]
     
-    private var router: DashboardRouter!
+    var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    
+    var assetsTabmanViewModel: AssetsTabmanViewModel?
+    var chartsTabmanViewModel: ChartsTabmanViewModel?
+    var eventListViewModel: EventListViewModel?
+    
     
     var dateRangeType: DateRangeType = .day {
         didSet {
@@ -79,7 +84,11 @@ final class DashboardViewModel {
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
+        self.reloadDataProtocol = router.programListViewController
+        
+        assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil)
+        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil)
+        eventListViewModel = EventListViewModel(withRouter: router)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
@@ -139,8 +148,8 @@ extension DashboardViewModel {
                 DashboardTableViewCellViewModel.self]
     }
     
-    var currencyCellModelsForRegistration: [UITableViewCell.Type] {
-        return [DashboardCurrencyTableViewCell.self]
+    var currencyCellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [DashboardCurrencyTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -349,7 +358,7 @@ extension DashboardViewModel {
             let totalCount = dashboard.investmentPrograms?.count ?? 0
             
             dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self, delegate: self?.router.dashboardViewController.assetsViewController)
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self?.router.programListViewController, delegate: self?.router.programListViewController)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             
@@ -484,7 +493,7 @@ protocol CurrencyDelegate: class {
 
 final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
-    weak var tableViewProtocol: CurrencyDelegate?
+    weak var currencyDelegate: CurrencyDelegate?
     
     var currencyValues: [String] = ["USD", "EUR", "BTC"]
     var rateValues: [Double] = [6.3, 5.5, 0.0002918]
@@ -494,6 +503,8 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     // MARK: - Lifecycle
     override init() {
         super.init()
+        
+        selectedCurrency = UserDefaults.standard.string(forKey: Constants.UserDefaults.selectedCurrency) ?? currencyValues.first
     }
     
     // MARK: - TableViewDelegate
@@ -502,7 +513,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         
         selectedCurrency = currencyValues[indexPath.row]
         
-        tableViewProtocol?.didSelectCurrency(at: indexPath)
+        currencyDelegate?.didSelectCurrency(at: indexPath)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currencyValues.count

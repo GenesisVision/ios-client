@@ -9,16 +9,6 @@
 import UIKit
 import Tabman
 
-class AssetsTabmanViewModel: TabmanViewModel {
-    // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
-        
-        style = .scrollingButtonBar
-        compresses = true
-    }
-}
-
 class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     // MARK: - Variables
     var pageboyDataSource: AssetsPageboyViewControllerDataSource!
@@ -27,13 +17,15 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        pageboyDataSource = AssetsPageboyViewControllerDataSource(vc: self)
+        if let router = viewModel.router as? DashboardRouter {
+            pageboyDataSource = AssetsPageboyViewControllerDataSource(router: router)
+        }
         
         self.dataSource = pageboyDataSource
         
         // configure the bar
         self.bar.items = [Item(title: "Programs"),
-                          Item(title: "Favorites")]
+                          Item(title: "Funds")]
     }
 
     // MARK: - Public methods
@@ -41,7 +33,6 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
 
 }
 
-// MARK: - ProgramDetailViewControllerProtocol
 extension AssetsViewController: ProgramDetailViewControllerProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
