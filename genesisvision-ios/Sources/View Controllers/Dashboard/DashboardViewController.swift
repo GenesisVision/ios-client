@@ -20,13 +20,24 @@ class DashboardViewController: BaseViewController {
     @IBOutlet weak var assetsView: UIView!
     
     var eventsViewHeightStart: CGFloat = 150.0
-    var eventsViewHeightChange: CGFloat = 70.0
+    var eventsViewHeightEnd: CGFloat = 220.0
+    
+    var chartsViewHeightStart: CGFloat = 400.0
+    var chartsViewHeightEnd: CGFloat = 100.0
     
     var currencyBarButtonItem: UIBarButtonItem!
     var notificationsBarButtonItem: UIBarButtonItem!
     
-    @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var eventsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            chartsViewHeightConstraint.constant = chartsViewHeightStart
+        }
+    }
+    @IBOutlet weak var eventsViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            eventsViewHeightConstraint.constant = eventsViewHeightEnd
+        }
+    }
     
     // MARK: - View Model
     var viewModel: DashboardViewModel!
@@ -62,8 +73,6 @@ class DashboardViewController: BaseViewController {
         scrollView.delegate = self
         
         showProgressHUD()
-        fetch()
-
         setupUI()
     }
     private func reloadData() {
@@ -86,10 +95,15 @@ class DashboardViewController: BaseViewController {
     private func setupUI() {
         let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency
         currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency?.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
-        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_program_read_more"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Week", style: .done, target: self, action: #selector(dateRangeButtonAction))
+        let dateRangeButton = UIButton(type: .system)
+        dateRangeButton.setTitle("Week", for: .normal)
+        dateRangeButton.semanticContentAttribute = .forceRightToLeft
+        dateRangeButton.setImage(#imageLiteral(resourceName: "img_arrow_down_icon"), for: .normal)
+        dateRangeButton.addTarget(self, action: #selector(dateRangeButtonAction), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dateRangeButton)
     }
     
     // MARK: - Public methods
@@ -101,6 +115,22 @@ class DashboardViewController: BaseViewController {
         dateRangeView = DateRangeView.viewFromNib()
         bottomSheetController.addContentsView(dateRangeView)
         dateRangeView.delegate = self
+        bottomSheetController.present()
+    }
+    
+    func showRequests() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("In Requests")
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.registerNibs(for: viewModel.inRequestsCellModelsForRegistration)
+            tableView.delegate = self?.viewModel.inRequestsDelegateManager
+            tableView.dataSource = self?.viewModel.inRequestsDelegateManager
+            tableView.separatorStyle = .none
+        }
+        
         bottomSheetController.present()
     }
     
@@ -126,6 +156,26 @@ class DashboardViewController: BaseViewController {
     }
     
     // MARK: - Private methods
+    private func animateChartsView(_ yOffset: CGFloat) {
+        let chartsH = chartsViewHeightStart - yOffset * 2
+        if chartsH >= chartsViewHeightEnd && chartsH <= chartsViewHeightStart {
+            chartsViewHeightConstraint.constant = chartsH
+            viewModel.router.chartsViewController?.viewDidLayoutSubviews()
+        }
+    }
+    
+    private func animateEventsView(_ yOffset: CGFloat) {
+        let newHeight = eventsViewHeightStart + yOffset * 2
+        if newHeight >= eventsViewHeightStart && newHeight <= eventsViewHeightEnd {
+            eventsViewHeightConstraint.constant = newHeight
+            viewModel.router.eventsViewController?.viewDidLayoutSubviews()
+        }
+    }
+    
+    private func animateViews(_ yOffset: CGFloat) {
+        animateChartsView(yOffset)
+        animateEventsView(yOffset)
+    }
 }
 
 extension DashboardViewController: DateRangeViewProtocol {
@@ -183,20 +233,9 @@ extension DashboardViewController: DateRangeViewProtocol {
 
 extension DashboardViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView.contentOffset)
         let yOffset = scrollView.contentOffset.y
         
-        let newHeight = eventsViewHeightStart + yOffset * 2
-        if newHeight >= eventsViewHeightStart && newHeight <= eventsViewHeightStart + eventsViewHeightChange {
-            eventsViewHeightConstraint.constant = newHeight
-            viewModel.router.eventsViewController?.viewDidLayoutSubviews()
-        }
-        
-        let chartsH = 400.0 - 200.0 * yOffset / (400.0 - 200.0)
-        if chartsH >= 400.0 - 200.0 && chartsH <= 400.0 {
-            chartsViewHeightConstraint.constant = chartsH
-            viewModel.router.chartsViewController?.viewDidLayoutSubviews()
-        }
+//        animateViews(yOffset)
         
         if scrollView == self.scrollView {
             if yOffset == assetsView.frame.origin.y {
@@ -219,7 +258,7 @@ extension DashboardViewController: SortingDelegate {
     }
 }
 
-extension DashboardViewController: CurrencyDelegate {
+extension DashboardViewController: CurrencyDelegateManagerProtocol {
     func didSelectCurrency(at indexPath: IndexPath) {
         if let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency {
             currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
@@ -227,5 +266,11 @@ extension DashboardViewController: CurrencyDelegate {
         }
         
         bottomSheetController.dismiss()
+    }
+}
+
+extension DashboardViewController: InRequestsDelegateManagerProtocol {
+    func didTapDeleteButton(at indexPath: IndexPath) {
+        
     }
 }

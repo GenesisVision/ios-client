@@ -54,7 +54,13 @@ class DashboardInRequestsTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        contentView.backgroundColor = UIColor.Cell.bg
+        backgroundColor = UIColor.Cell.bg
+        tintColor = UIColor.Cell.title
+        accessoryView?.backgroundColor = UIColor.Cell.bg
+        
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -63,4 +69,30 @@ class DashboardInRequestsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        for subview in self.subviews {
+            print(String(describing: subview))
+            for subview1 in subview.subviews {
+                print(String(describing: subview1))
+                for subview2 in subview1.subviews {
+                    print(String(describing: subview2))
+                    for sub in subview2.subviews {
+                        print(String(describing: sub))
+                        if String(describing: sub).range(of: "UITableViewCellActionButton") != nil {
+                            for view in sub.subviews {
+                                view.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(10.0)
+                                if String(describing: view).range(of: "UIButtonLabel") != nil {
+                                    if let label = view as? UILabel {
+                                        label.textColor = UIColor.Cell.redTitle
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

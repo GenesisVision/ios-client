@@ -23,6 +23,7 @@ final class DashboardViewModel {
     
     var sortingDelegateManager = SortingDelegateManager()
     var currencyDelegateManager = CurrencyDelegateManager()
+    var inRequestsDelegateManager = InRequestsDelegateManager()
     
     var highToLowValue: Bool = false
     
@@ -35,7 +36,6 @@ final class DashboardViewModel {
     var assetsTabmanViewModel: AssetsTabmanViewModel?
     var chartsTabmanViewModel: ChartsTabmanViewModel?
     var eventListViewModel: EventListViewModel?
-    
     
     var dateRangeType: DateRangeType = .day {
         didSet {
@@ -85,6 +85,7 @@ final class DashboardViewModel {
     init(withRouter router: DashboardRouter) {
         self.router = router
         self.reloadDataProtocol = router.programListViewController
+        self.inRequestsDelegateManager.inRequestsDelegate = router.dashboardViewController
         
         assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil)
         chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil)
@@ -151,6 +152,11 @@ extension DashboardViewModel {
     var currencyCellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
     }
+    
+    var inRequestsCellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [DashboardInRequestsTableViewCellViewModel.self]
+    }
+    
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
@@ -487,13 +493,13 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     }
 }
 
-protocol CurrencyDelegate: class {
+protocol CurrencyDelegateManagerProtocol: class {
     func didSelectCurrency(at indexPath: IndexPath)
 }
 
 final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
-    weak var currencyDelegate: CurrencyDelegate?
+    weak var currencyDelegate: CurrencyDelegateManagerProtocol?
     
     var currencyValues: [String] = ["USD", "EUR", "BTC"]
     var rateValues: [Double] = [6.3, 5.5, 0.0002918]
@@ -548,5 +554,49 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
             cell.currencyRateLabel.textColor = UIColor.Cell.subtitle
             cell.contentView.backgroundColor = UIColor.Cell.bg
         }
+    }
+}
+
+protocol InRequestsDelegateManagerProtocol: class {
+    func didTapDeleteButton(at indexPath: IndexPath)
+}
+
+final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Variables
+    weak var inRequestsDelegate: InRequestsDelegateManagerProtocol?
+    
+    // MARK: - Lifecycle
+    override init() {
+        super.init()
+    }
+    
+    // MARK: - TableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardInRequestsTableViewCell", for: indexPath) as? DashboardInRequestsTableViewCell else {
+            let cell = UITableViewCell()
+            return cell
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let cancelRowAction = UITableViewRowAction(style: .normal, title: "Cancel") { [weak self] (action, indexPath) in
+            self?.inRequestsDelegate?.didTapDeleteButton(at: indexPath)
+            //TODO: or cancel this
+        }
+        cancelRowAction.backgroundColor = UIColor.Cell.redTitle
+        
+        return [cancelRowAction]
     }
 }

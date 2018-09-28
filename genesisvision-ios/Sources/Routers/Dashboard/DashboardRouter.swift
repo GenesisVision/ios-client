@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(investmentProgramId: String), programList, notificationList, allPortfolioEvents
+    case showProgramDetails(investmentProgramId: String), programList, notificationList, allPortfolioEvents, requests
 }
 
 class DashboardRouter: Router {
@@ -41,6 +41,8 @@ class DashboardRouter: Router {
             showNotificationList()
         case .allPortfolioEvents:
             showAllPortfolioEvents()
+        case .requests:
+            showRequests()
         }
     }
     
@@ -51,6 +53,16 @@ class DashboardRouter: Router {
     
     private func showAllPortfolioEvents() {
         //TODO:
-        print("showAllPortfolioEvents")
+        let vc = BaseViewController()
+        //        let router = CreateProgramTabmanRouter(parentRouter: self, tabmanViewController: tabmanViewController)
+        //        let viewModel = CreateProgramTabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
+        //        vc.viewModel = viewModel
+        vc.hidesBottomBarWhenPushed = true
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showRequests() {
+        dashboardViewController.showRequests()
     }
 }

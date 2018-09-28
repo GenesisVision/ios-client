@@ -55,11 +55,12 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = 0.0
         
-        tableView.isScrollEnabled = false
         tableView.bounces = false
         tableView.delegate = self.viewModel?.programListDelegateManager
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        
+        tableView.isScrollEnabled = false
         
         setupPullToRefresh()
     }
@@ -67,6 +68,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
+            self.tableView?.reloadData()
         }
     }
     

@@ -66,6 +66,10 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         rightViewMode = .whileEditing
     }
     
+    func addPadding() {
+        padding = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
+    }
+    
     func setLeftImageView() {
         if let text = text {
             leftImage = !text.isEmpty

@@ -82,8 +82,8 @@ class DateRangeButton: UIButton {
         
         setTitleColor(UIColor.DateRangeView.unselectedTitle, for: .normal)
         setTitleColor(UIColor.DateRangeView.selectedTitle, for: .selected)
+        backgroundColor = UIColor.DateRangeView.unselectedBg
         setBackgroundImage(nil, for: .normal)
-//        setBackgroundImage(nil, for: .selected)
     }
     
     override func layoutSubviews() {

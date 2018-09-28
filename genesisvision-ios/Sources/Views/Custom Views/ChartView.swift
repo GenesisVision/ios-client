@@ -93,7 +93,7 @@ class ChartView: CombinedChartView {
             barChartDataSet.setColor(UIColor.Cell.title)
 //            barChartDataSet.axisDependency = .left
             barChartDataSet.drawValuesEnabled = false
-            barChartDataSet.highlightEnabled = true
+            barChartDataSet.highlightEnabled = false
         }
     }
     

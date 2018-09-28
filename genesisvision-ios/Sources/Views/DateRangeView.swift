@@ -67,17 +67,21 @@ class DateRangeView: UIView {
     
     @IBOutlet var dateRangeFromTextField: DesignableUITextField! {
         didSet {
+            dateRangeFromTextField.addPadding()
             dateRangeFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
     @IBOutlet var dateRangeToTextField: DesignableUITextField! {
         didSet {
+            dateRangeToTextField.addPadding()
             dateRangeToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
     @IBOutlet var applyButton: UIButton! {
         didSet {
+            applyButton.roundCorners(with: 25.0)
             applyButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            applyButton.backgroundColor = UIColor.primary
         }
     }
     

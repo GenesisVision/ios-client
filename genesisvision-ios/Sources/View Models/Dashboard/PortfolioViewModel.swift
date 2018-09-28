@@ -25,6 +25,11 @@ final class PortfolioViewModel {
         
         self.selectedChartAssetsDelegateManager = SelectedChartAssetsDelegateManager(with: selectedChartAssetsViewModels)
     }
+    
+    // MARK: - Methods
+    func showRequests() {
+        router.show(routeType: .requests)
+    }
 }
 
 // MARK: - TableView
@@ -60,12 +65,8 @@ extension PortfolioViewModel {
 
 final class SelectedChartAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
-    weak var currencyDelegate: CurrencyDelegate?
-    
     var selectedChartAssetsViewModels: [String]?
-    
-    var selectedCurrency: String!
-    
+
     // MARK: - Lifecycle
     init(with selectedChartAssetsViewModels: [String]?) {
         super.init()

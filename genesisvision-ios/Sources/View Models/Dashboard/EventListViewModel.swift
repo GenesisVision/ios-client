@@ -8,10 +8,6 @@
 
 import UIKit.UICollectionView
 
-protocol PortfolioEventsDelegate: class {
-    func didSelectPortfolioEvents(at indexPath: IndexPath)
-}
-
 class EventListViewModel {
     enum SectionType {
         case eventList
@@ -22,10 +18,10 @@ class EventListViewModel {
     
     private var sections: [SectionType] = [.eventList]
     
-    var portfolioEventsDelegate: PortfolioEventsDelegate?
     var router: DashboardRouter!
     private var dashboard: InvestorDashboard?
     
+    var eventsDelegateManager: EventsDelegateManager!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var dateRangeType: DateRangeType?
@@ -45,6 +41,8 @@ class EventListViewModel {
     
     init(withRouter router: DashboardRouter) {
         self.router = router
+        
+        eventsDelegateManager = EventsDelegateManager(with: self)
     }
     
     // MARK: - Public methods
@@ -88,9 +86,13 @@ extension EventListViewModel {
     }
 }
 
+protocol EventsDelegateManagerProtocol: class {
+    func didSelectPortfolioEvents(at indexPath: IndexPath)
+}
+
 final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    weak var portfolioEventsDelegate: PortfolioEventsDelegate?
+    weak var portfolioEventsDelegate: EventsDelegateManagerProtocol?
     
     var viewModel: EventListViewModel?
     
@@ -137,7 +139,7 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        portfolioEventsDelegate?.didSelectPortfolioEvents(at: indexPath)
+        viewModel?.didSelectPortfolioEvents(at: indexPath)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

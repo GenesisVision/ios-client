@@ -12,8 +12,6 @@ class EventsViewController: BaseViewController {
     // MARK: - Variables
     var viewModel: EventListViewModel!
     
-    fileprivate var delegateManager: EventsDelegateManager!
-    
     @IBOutlet weak var headerLabel: UILabel! {
         didSet {
             headerLabel.font = UIFont.getFont(.semibold, size: 19)
@@ -35,9 +33,6 @@ class EventsViewController: BaseViewController {
 
         if let viewModel = viewModel {
             headerLabel.text = viewModel.title
-            
-            delegateManager = EventsDelegateManager(with: viewModel)
-            delegateManager.portfolioEventsDelegate = self
         }
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -48,8 +43,8 @@ class EventsViewController: BaseViewController {
         collectionView.isScrollEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         
-        collectionView.delegate = delegateManager
-        collectionView.dataSource = delegateManager
+        collectionView.delegate = viewModel.eventsDelegateManager
+        collectionView.dataSource = viewModel.eventsDelegateManager
     }
 
     override func viewDidLayoutSubviews() {
@@ -62,11 +57,5 @@ class EventsViewController: BaseViewController {
     // MARK: - Actions
     @IBAction func showAllButtonAction(_ sender: UISwitch) {
         viewModel.showAllPortfolioEvents()
-    }
-}
-
-extension EventsViewController: PortfolioEventsDelegate {
-    func didSelectPortfolioEvents(at indexPath: IndexPath) {
-        viewModel.didSelectPortfolioEvents(at: indexPath)
     }
 }

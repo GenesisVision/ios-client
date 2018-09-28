@@ -8,8 +8,18 @@
 
 import UIKit
 
-protocol BottomSheetControllerProtocol {
-    
+protocol BottomSheetControllerProtocol: class {
+    func didHide()
+    func didShowAll()
+}
+
+extension BottomSheetControllerProtocol {
+    func didHide() {
+        
+    }
+    func didShowAll() {
+        
+    }
 }
 
 public typealias BottomSheetController = BottomSheet.Controller
@@ -23,6 +33,11 @@ open class BottomSheet {
             case tappedDismiss
         }
         
+        public enum ViewType {
+            case bottomSheet
+            case bottomView
+        }
+        
         fileprivate enum State {
             case hide
             case show
@@ -30,17 +45,20 @@ open class BottomSheet {
         }
         
         // MARK: - Open property
+        weak var bottomSheetControllerProtocol: BottomSheetControllerProtocol?
         open var cornerRadius: CGFloat = 15.0
         open var initializeHeight: CGFloat = 300 {
             didSet {
                 containerViewHeightConstraint?.constant = initializeHeight
             }
         }
-        open var viewActionType: BottomSheetController.OverlayViewActionType = .tappedDismiss
+        open var viewActionType: OverlayViewActionType = .tappedDismiss
+        open var viewType: ViewType = .bottomSheet
         open var duration: (hide: TimeInterval, show: TimeInterval, showAll: TimeInterval) = (0.3, 0.3, 0.3)
-        open var overlayBackgroundColor: UIColor? {
-            set { overlayView.backgroundColor = newValue }
-            get { return overlayView.backgroundColor }
+        open var overlayBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.6) {
+            didSet {
+                overlayView.backgroundColor = overlayBackgroundColor
+            }
         }
         open var containerViewBackgroundColor: UIColor? {
             set { containerView.backgroundColor = newValue }
@@ -113,6 +131,7 @@ open class BottomSheet {
         // MARK: - Initialize
         public convenience init() {
             self.init(nibName: nil, bundle: nil)
+            
             configure()
             configureConstraints()
         }
@@ -467,9 +486,11 @@ open class BottomSheet {
         // Action
         open func present(_ sender: AnyObject? = nil) {
             state = .showAll
+            bottomSheetControllerProtocol?.didShowAll()
         }
         open func dismiss(_ sender: AnyObject? = nil) {
             state = .hide
+            bottomSheetControllerProtocol?.didHide()
         }
         @objc dynamic func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
             switch viewActionType {

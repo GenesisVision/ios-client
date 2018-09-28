@@ -15,8 +15,6 @@ protocol DetailChartTableViewCellProtocol: class {
     func updateChart(with type: ChartDurationType)
 }
 
-var circleHeight: CGFloat = 6.0
-
 class DetailChartTableViewCell: PlateTableViewCell {
 
     // MARK: - Variables
@@ -25,7 +23,7 @@ class DetailChartTableViewCell: PlateTableViewCell {
     
     // MARK: - Views
     let markerView = MarkerView()
-    let circleView = UIView(frame: CGRect(x: 0, y: 0, width: circleHeight, height: circleHeight))
+    let circleView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.SystemSizes.chartCircleHeight, height: Constants.SystemSizes.chartCircleHeight))
     
     @IBOutlet var viewForChartView: UIView!
     

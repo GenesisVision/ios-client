@@ -22,13 +22,15 @@ extension UIColor {
         
         static var green: UIColor { return #colorLiteral(red: 0.1725490196, green: 0.8235294118, blue: 0.568627451, alpha: 1) }                                   //2CD291
         static var red: UIColor { return #colorLiteral(red: 0.9215686275, green: 0.231372549, blue: 0.3529411765, alpha: 1) }                                     //EB3B5A
+        static var redBg: UIColor { return #colorLiteral(red: 0.1960784314, green: 0.1725490196, blue: 0.2196078431, alpha: 1) }                                   //322C38
         
+        static var lightDelimiter: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                          //fafafa
         
         
         static var darkDelimiter: UIColor { return #colorLiteral(red: 0.137254902, green: 0.168627451, blue: 0.1921568627, alpha: 1) }                           //232b31
 
-        static var darkButtonBackground: UIColor { return #colorLiteral(red: 0.1921568627, green: 0.2156862745, blue: 0.2431372549, alpha: 1) }                    //31373E
-        static var darkTextfieldBackground: UIColor { return #colorLiteral(red: 0.1411764706, green: 0.1647058824, blue: 0.1882352941, alpha: 1) }                 //242A30
+        static var darkButtonBackground: UIColor { return #colorLiteral(red: 0.1058823529, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                    //1B252C
+        static var darkTextfieldBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                 //131E26
         
         static var darkTextPrimary: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                         //ffffff
         static var darkTextSecondary: UIColor { return #colorLiteral(red: 0.4705882353, green: 0.4901960784, blue: 0.5098039216, alpha: 1) }                       //787d82
@@ -36,7 +38,7 @@ extension UIColor {
         
         static var lightBackground: UIColor { return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) }                         //f3f3f3
         static var lightCell: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                               //ffffff
-        static var lightDelimiter: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                          //fafafa
+        
         
         static var lightTextPrimary: UIColor { return #colorLiteral(red: 0.1098039216, green: 0.137254902, blue: 0.1647058824, alpha: 1) }                        //1c232a
         static var lightTextSecondary: UIColor { return #colorLiteral(red: 0.7333333333, green: 0.7411764706, blue: 0.7490196078, alpha: 1) }                      //bbbdbf
@@ -224,6 +226,12 @@ extension UIColor {
         static var tint: UIColor { return Common.white }
     }
     
+    struct ChartCircle {
+        static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.darkBackground }
+        static var border: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter : Common.lightDelimiter }
+    }
+    
+    
     struct ChartMarker {
         static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
         static var text: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkSlateBlue : Common.white }
@@ -250,6 +258,7 @@ extension UIColor {
         
         static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
         static var redTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.red : Common.red }
+        static var redBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.redBg : Common.redBg }
         static var greenTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.green : Common.green }
         static var yellowTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.yellow : Common.yellow }
         static var blue: UIColor { return AppearanceController.theme == .darkTheme ? Common.blue : Common.blue }

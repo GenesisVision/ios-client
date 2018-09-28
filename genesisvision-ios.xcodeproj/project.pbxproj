@@ -224,6 +224,7 @@
 		5E87E75F208F423300141269 /* ScrollableSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */; };
 		5E87E765208F638E00141269 /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E764208F638E00141269 /* Tooltips.swift */; };
 		5E87E767208F64C200141269 /* TooltipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E766208F64C200141269 /* TooltipButton.swift */; };
+		5E887F10215A912A00E4EFA5 /* DashboardInRequestsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E887F0F215A912A00E4EFA5 /* DashboardInRequestsTableViewCellViewModel.swift */; };
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
 		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
@@ -740,6 +741,7 @@
 		5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableSegmentedControl.swift; sourceTree = "<group>"; };
 		5E87E764208F638E00141269 /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		5E87E766208F64C200141269 /* TooltipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipButton.swift; sourceTree = "<group>"; };
+		5E887F0F215A912A00E4EFA5 /* DashboardInRequestsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInRequestsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
@@ -1967,6 +1969,7 @@
 				5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */,
 				5E82C75121429785007A21C3 /* DashboardCurrencyTableViewCell.swift */,
 				5E82C75221429785007A21C3 /* DashboardCurrencyTableViewCell.xib */,
+				5E887F0F215A912A00E4EFA5 /* DashboardInRequestsTableViewCellViewModel.swift */,
 				5E734253214AC7E200C4483E /* DashboardInRequestsTableViewCell.swift */,
 				5E734254214AC7E200C4483E /* DashboardInRequestsTableViewCell.xib */,
 				5ED1141F2159666A00EC5385 /* PortfolioAssetTableViewCellViewModel.swift */,
@@ -2835,6 +2838,7 @@
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
+				5E887F10215A912A00E4EFA5 /* DashboardInRequestsTableViewCellViewModel.swift in Sources */,
 				5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */,
 				5E18CEA520C566F1008FE5B5 /* OrderModel.swift in Sources */,
 				5E18CEBD20C566F1008FE5B5 /* RecoveryCodesViewModel.swift in Sources */,

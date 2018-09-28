@@ -317,12 +317,16 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        print(scrollView.contentOffset.y)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.0
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+        
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
+        
+        if translation.y < 0 {
             scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.0
         } else {
             scrollView.isScrollEnabled = true
