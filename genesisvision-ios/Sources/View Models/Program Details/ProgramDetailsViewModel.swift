@@ -93,11 +93,6 @@ final class ProgramDetailsViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title)
             }
             
-            if let vc = router.getDescription(with: investmentProgramDetails) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
             if let tradesCount = investmentProgramDetails.tradesCount, tradesCount > 0, let vc = router.getTrades(with: investmentProgramId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
@@ -109,6 +104,16 @@ final class ProgramDetailsViewModel: TabmanViewModel {
             }
             
             if let hasNewRequests = investmentProgramDetails.hasNewRequests, hasNewRequests, let vc = router.getRequests(with: investmentProgramId) {
+                self.addController(vc)
+                self.addItem(vc.viewModel.title)
+            }
+            
+            if let vc = router.getBalance(with: investmentProgramId) {
+                self.addController(vc)
+                self.addItem(vc.viewModel.title)
+            }
+            
+            if let vc = router.getProfit(with: investmentProgramId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }

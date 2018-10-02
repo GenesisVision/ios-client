@@ -10,6 +10,9 @@ import UIKit
 
 class DashboardViewController: BaseViewController {
 
+    // MARK: - View Model
+    var viewModel: DashboardViewModel!
+    
     // MARK: - Variables
     var dateRangeView: DateRangeView!
     
@@ -25,8 +28,8 @@ class DashboardViewController: BaseViewController {
     var chartsViewHeightStart: CGFloat = 400.0
     var chartsViewHeightEnd: CGFloat = 100.0
     
-    var currencyBarButtonItem: UIBarButtonItem!
-    var notificationsBarButtonItem: UIBarButtonItem!
+    private var currencyBarButtonItem: UIBarButtonItem!
+    private var notificationsBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint! {
         didSet {
@@ -38,10 +41,7 @@ class DashboardViewController: BaseViewController {
             eventsViewHeightConstraint.constant = eventsViewHeightEnd
         }
     }
-    
-    // MARK: - View Model
-    var viewModel: DashboardViewModel!
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

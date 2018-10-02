@@ -20,6 +20,8 @@ extension UIColor {
         static var darkBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                          //131E26
         static var darkCell: UIColor { return #colorLiteral(red: 0.1215686275, green: 0.168627451, blue: 0.2078431373, alpha: 1) }                                //1F2B35
         
+        static var darkSectionHeader: UIColor { return #colorLiteral(red: 0.06666666667, green: 0.1019607843, blue: 0.1254901961, alpha: 1) }                       //111A20
+        
         static var green: UIColor { return #colorLiteral(red: 0.1725490196, green: 0.8235294118, blue: 0.568627451, alpha: 1) }                                   //2CD291
         static var red: UIColor { return #colorLiteral(red: 0.9215686275, green: 0.231372549, blue: 0.3529411765, alpha: 1) }                                     //EB3B5A
         static var redBg: UIColor { return #colorLiteral(red: 0.1960784314, green: 0.1725490196, blue: 0.2196078431, alpha: 1) }                                   //322C38
@@ -183,6 +185,11 @@ extension UIColor {
         static var subTitle: UIColor { return AppearanceController.theme == .darkTheme ? GV.white : Common.uglyBlue }
     }
     
+    struct ProgressView {
+        static var progressTint: UIColor { return AppearanceController.theme == .darkTheme ? .primary : .primary }
+        static var trackTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter.withAlphaComponent(10.0) : Common.lightDelimiter.withAlphaComponent(10.0) }
+    }
+    
     struct DateRangeView {
         static var unselectedTitle: UIColor { return Common.darkButtonText }
         static var selectedTitle: UIColor { return Common.white }
@@ -255,6 +262,7 @@ extension UIColor {
         static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
         static var tournamentBg: UIColor { return Common.puttyWithAlpha }
         static var selectedBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
+        static var headerBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkSectionHeader : Common.darkSectionHeader }
         
         static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
         static var redTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.red : Common.red }

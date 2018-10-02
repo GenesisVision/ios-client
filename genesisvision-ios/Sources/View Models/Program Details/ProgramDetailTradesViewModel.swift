@@ -67,7 +67,7 @@ extension ProgramDetailTradesViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 44.0
+        return 0.0
     }
 }
 

@@ -33,7 +33,6 @@ class ProgramDetailTradesViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -99,13 +98,6 @@ extension ProgramDetailTradesViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerHeight(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView() as ProgramDetailTradesHeaderView
-        header.configure(isMetaTrader5: viewModel.isMetaTrader5())
-        
-        return header
     }
 }
 

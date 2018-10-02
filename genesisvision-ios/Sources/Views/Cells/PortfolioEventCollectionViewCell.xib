@@ -32,18 +32,18 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlW-NZ-smW">
-                                                        <rect key="frame" x="17" y="17" width="25" height="25"/>
+                                                        <rect key="frame" x="16" y="16" width="26" height="26"/>
                                                         <color key="backgroundColor" red="1" green="0.74117647060000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="UlW-NZ-smW" secondAttribute="height" multiplier="1:1" id="bAQ-eT-UXh"/>
-                                                            <constraint firstAttribute="width" constant="25" id="cwL-Mk-3Tg"/>
+                                                            <constraint firstAttribute="width" constant="26" id="cwL-Mk-3Tg"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jIv-Mp-Ezh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
                                                         <color key="backgroundColor" red="0.066666666669999999" green="0.71764705880000002" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="28" id="oHe-J3-cSy"/>
+                                                            <constraint firstAttribute="width" constant="26" id="oHe-J3-cSy"/>
                                                             <constraint firstAttribute="width" secondItem="jIv-Mp-Ezh" secondAttribute="height" multiplier="1:1" id="sFX-0l-Gmy"/>
                                                         </constraints>
                                                     </imageView>
@@ -58,7 +58,7 @@
                                                     <constraint firstItem="jIv-Mp-Ezh" firstAttribute="leading" secondItem="6Sz-eD-hp5" secondAttribute="leading" id="ux8-1C-zkm"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jki-9l-LrI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jki-9l-LrI" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="58" y="0.0" width="418" height="42"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -66,13 +66,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a68-4p-QAb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a68-4p-QAb" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="58" width="476" height="25.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgf-3X-PxA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgf-3X-PxA" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="476" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

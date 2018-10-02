@@ -116,7 +116,7 @@ extension WalletControllerViewModel {
         }
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
         guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
             let investmentProgram = model.walletTransaction.investmentProgram,
             let investmentProgramId = investmentProgram.id

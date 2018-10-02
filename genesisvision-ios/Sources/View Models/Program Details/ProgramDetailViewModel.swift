@@ -17,15 +17,18 @@ struct ProgramDetailViewProperties {
 
 final class ProgramDetailViewModel {
     enum SectionType {
-        case header
-        case chart
         case details
-        case moreDetails
-        case availableToInvest
+        case investNow
+        case yourInvestment
+    }
+    enum RowType {
+        case manager
+        case strategy
+        case period
     }
 
     // MARK: - Variables
-    var title: String = "Details".uppercased()
+    var title: String = "Info".uppercased()
     
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -55,21 +58,14 @@ final class ProgramDetailViewModel {
     var viewProperties: ProgramDetailViewProperties?
     var availableInvestment: Double = 0.0
     
-    private var sections: [SectionType] = [.header,
-                                           .chart,
-                                           .details,
-                                           .moreDetails,
-                                           .availableToInvest]
+    private var sections: [SectionType] = [.details, .investNow, .yourInvestment]
+    private var rows: [RowType] = [.manager, .strategy, .period]
+    
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramDetailsTableViewCellViewModel.self, ProgramDetailHeaderTableViewCellViewModel.self, DetailChartTableViewCellViewModel.self, ProgramMoreDetailsTableViewCellViewModel.self, DetailTextTableViewCellViewModel.self]
-    }
-    
-    /// Return view models for registration header/footer Nib files
-    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [DefaultTableHeaderView.self]
+        return [DetailManagerTableViewCellViewModel.self, ProgramStrategyTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -105,7 +101,7 @@ final class ProgramDetailViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 0.0
+        return 8.0
     }
     
     func numberOfSections() -> Int {
@@ -117,7 +113,14 @@ final class ProgramDetailViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return 1
+        let sectionType = sections[section]
+        
+        switch sectionType {
+        case .details:
+            return 3
+        default:
+            return 1
+        }
     }
 }
 
@@ -168,22 +171,26 @@ extension ProgramDetailViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard let investmentProgramDetails = investmentProgramDetails else {
+        guard investmentProgramDetails != nil else {
             return nil
         }
         
-        let type = sections[indexPath.section]
-        switch type {
-        case .header:
-            return ProgramDetailHeaderTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, delegate: nil)
-        case .chart:
-            return DetailChartTableViewCellViewModel(chart: equityChart ?? [], name: "", currencyValue: investmentProgramDetails.currency?.rawValue, chartDurationType: self.chartDurationType, detailChartTableViewCellProtocol: detailChartTableViewCellProtocol)
-        case .moreDetails:
-            return ProgramMoreDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: self)
+        let sectionType = sections[indexPath.section]
+        switch sectionType {
         case .details:
-            return ProgramDetailsTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
-        case .availableToInvest:
-            return DetailTextTableViewCellViewModel(investmentProgramDetails: investmentProgramDetails)
+            let rowType = rows[indexPath.row]
+            switch rowType {
+            case .manager:
+                return DetailManagerTableViewCellViewModel()
+            case .strategy:
+                return ProgramStrategyTableViewCellViewModel()
+            case .period:
+                return ProgramPeriodTableViewCellViewModel()
+            }
+        case .investNow:
+            return ProgramInvestNowTableViewCellViewModel()
+        case .yourInvestment:
+            return ProgramYourInvestmentTableViewCellViewModel()
         }
     }
     

@@ -78,7 +78,7 @@ final class TournamentListViewModel {
         return "This round will start later."
     }
     
-    func getDetailsViewController(with index: Int) -> ProgramDetailsTabmanViewController? {
+    func getDetailsViewController(with index: Int) -> ProgramViewController? {
         guard let model = model(for: index) else {
             return nil
         }

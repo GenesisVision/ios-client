@@ -26,6 +26,7 @@ extension String {
         static var portfolioValue: String = "Portfolio value – the value of all your tokens from all managers.".localized
         static var portfolioProfit: String = "Profit – your total profit (in GVT) from all investment programs.".localized
         static var portfolioInvested: String = "Invested – is a total amount of GVTs which were invested in all managers.".localized
+        static var reinvest: String = "".localized
         static var chart: String = "Equity – current condition of a trading account. It is intended for maintaining Manager's opened positions.".localized
         
         static var programDetails: String = totalProfit + "\n············································\n" + avgProfit + "\n············································\n" + balance + "\n············································\n" + investors

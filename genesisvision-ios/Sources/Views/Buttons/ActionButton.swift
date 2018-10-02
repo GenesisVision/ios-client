@@ -103,14 +103,28 @@ class ActionButton: UIButton {
     var bgColor: UIColor = UIColor.Button.primary
     var textColor: UIColor = UIColor.Font.white
     
+    // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        self.commonInit()
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    func commonInit(){
+        roundCorners()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        roundCorners(with: cornerSize, borderWidth: borderSize, borderColor: (customBorderColor?.withAlphaComponent(borderAlpha))!)
         
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
         setTitleColor(textColor, for: .normal)

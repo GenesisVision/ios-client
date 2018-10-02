@@ -67,7 +67,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 arithmeticSign = "+"
             }
             
-            cell.investTypeLabel.text = text
+//            cell.investTypeLabel.text = text
             cell.amountLabel.textColor = textColor
             cell.amountLabel.text = arithmeticSign + amount.rounded(withType: .gvt).toString()
         }
@@ -82,11 +82,11 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.programTitleLabel.isHidden = true
         }
         
-        if let status = walletTransaction.investmentProgramRequest?.status {
-            cell.programStatusLabel.text = status.rawValue
-        } else {
-            cell.programStatusLabel.isHidden = true
-        }
+//        if let status = walletTransaction.investmentProgramRequest?.status {
+//            cell.programStatusLabel.text = status.rawValue
+//        } else {
+//            cell.programStatusLabel.isHidden = true
+//        }
         
         cell.selectionStyle = walletTransaction.investmentProgram != nil ? .default : .none
     }

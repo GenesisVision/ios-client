@@ -332,7 +332,7 @@ extension DashboardViewModel {
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
         guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
             return nil
         }

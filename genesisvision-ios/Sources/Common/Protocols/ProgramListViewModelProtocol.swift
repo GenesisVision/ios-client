@@ -58,7 +58,7 @@ protocol ProgramListViewModelProtocol {
     func fetchMore(at row: Int) -> Bool
     func fetchMore()
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController?
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController?
     func changeFavorite(value: Bool, investmentProgramId: String, request: Bool, completion: @escaping CompletionBlock)
     
     func logoImageName() -> String?
@@ -87,7 +87,7 @@ extension ProgramListViewModelProtocol {
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramDetailsTabmanViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
         guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
             return nil
         }

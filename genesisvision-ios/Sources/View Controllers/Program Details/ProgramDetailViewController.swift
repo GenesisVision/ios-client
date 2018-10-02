@@ -103,8 +103,6 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
-        
         setupPullToRefresh()
     }
     
@@ -181,14 +179,18 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
         return viewModel.headerHeight(for: section)
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
-        }
-        
-        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
-        header.headerLabel.text = title
-        return header
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        guard let title = viewModel.headerTitle(for: section) else {
+//            return nil
+//        }
+//
+//        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+//        header.headerLabel.text = title
+//        return header
+//    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.backgroundColor = UIColor.Cell.headerBg
     }
 }
 
@@ -200,7 +202,7 @@ extension ProgramDetailViewController: ReloadDataProtocol {
 
 extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
     func scrollEnable(_ isScrollEnable: Bool) {
-        tableView.isScrollEnabled = isScrollEnable
+        tableView.isScrollEnabled = false//isScrollEnable
     }
     
     func showFullChartDidPressed() {

@@ -17,7 +17,7 @@ class PortfolioViewController: BaseViewController {
     var vc: UIViewController!
     
     private var bottomAssetsView: UIView?
-    
+    // MARK: - Outlets
     @IBOutlet weak var balanceTitleLabel: UILabel! {
         didSet {
             balanceTitleLabel.textColor = UIColor.Cell.subtitle

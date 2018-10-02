@@ -16,6 +16,11 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
     
     // MARK: - Variables
     weak var programDetailViewControllerProtocol: ProgramDetailViewControllerProtocol?
+    var scrollEnabled: Bool = true {
+        didSet {
+            print("!!!!scrollEnabled \(scrollEnabled)")
+        }
+    }
     
     private var favoriteBarButtonItem: UIBarButtonItem!
     

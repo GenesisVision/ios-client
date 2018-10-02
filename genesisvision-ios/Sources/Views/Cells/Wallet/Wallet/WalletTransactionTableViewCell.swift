@@ -10,31 +10,33 @@ import UIKit
 
 class WalletTransactionTableViewCell: PlateTableViewCell {
 
-    // MARK: - Labels
+    // MARK: - Outlets
+    @IBOutlet var iconImageView: UIImageView! {
+        didSet {
+            iconImageView.roundCorners()
+        }
+    }
+    
+    @IBOutlet var typeImageView: UIImageView! {
+        didSet {
+            typeImageView.roundCorners()
+        }
+    }
+    
     @IBOutlet var investTypeLabel: UILabel! {
         didSet {
             investTypeLabel.textColor = UIColor.Transaction.investType
         }
     }
     
-    @IBOutlet var dateLabel: UILabel! {
+    @IBOutlet var dateLabel: SubtitleLabel!
+    @IBOutlet var amountLabel: SubtitleLabel! {
         didSet {
-            dateLabel.textColor = UIColor.Transaction.date
+            amountLabel.textColor = UIColor.Cell.greenTitle
         }
     }
     
-    @IBOutlet var amountLabel: UILabel! {
-        didSet {
-            amountLabel.textColor = UIColor.Transaction.greenTransaction
-            amountLabel.font = UIFont.getFont(.bold, size: 20)
-        }
-    }
-    
-    @IBOutlet var programTitleLabel: UILabel! {
-        didSet {
-            programTitleLabel.textColor = UIColor.Transaction.programTitle
-        }
-    }
+    @IBOutlet var programTitleLabel: TitleLabel!
     
     @IBOutlet var programStatusLabel: UILabel! {
         didSet {

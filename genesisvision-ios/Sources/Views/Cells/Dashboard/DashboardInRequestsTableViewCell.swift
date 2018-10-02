@@ -13,7 +13,7 @@ class DashboardInRequestsTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet var iconImageView: UIImageView! {
         didSet {
-            iconImageView.roundWithBorder(2.0, color: UIColor.Cell.bg)
+            iconImageView.roundCorners()
         }
     }
     

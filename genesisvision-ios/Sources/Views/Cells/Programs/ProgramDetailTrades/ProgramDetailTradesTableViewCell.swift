@@ -11,27 +11,43 @@ import UIKit
 class ProgramDetailTradesTableViewCell: PlateTableViewCell {
 
     // MARK: - Labels
-    @IBOutlet var dateOpenLabel: UILabel!
-    @IBOutlet var dateCloseLabel: UILabel!
+    @IBOutlet var entryImageView: UIImageView! {
+        didSet {
+            entryImageView.roundCorners()
+        }
+    }
     
-    @IBOutlet var symbolLabel: UILabel!
-    @IBOutlet var volumeLabel: UILabel!
+    @IBOutlet var symbolLabel: UILabel! {
+        didSet {
+            symbolLabel.textColor = UIColor.Cell.title
+            symbolLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
+    @IBOutlet var directionLabel: UILabel! {
+        didSet {
+            directionLabel.textColor = UIColor.Cell.subtitle
+            directionLabel.font = UIFont.getFont(.semibold, size: 12.0)
+        }
+    }
     
-    @IBOutlet var priceOpenLabel: UILabel!
-    @IBOutlet var priceCloseLabel: UILabel!
+    @IBOutlet var balanceLabel: UILabel! {
+        didSet {
+            balanceLabel.textColor = UIColor.Cell.title
+            balanceLabel.font = UIFont.getFont(.semibold, size: 14.0)
+        }
+    }
+    @IBOutlet var profitLabel: UILabel! {
+        didSet {
+            profitLabel.textColor = UIColor.Cell.greenTitle
+            profitLabel.font = UIFont.getFont(.semibold, size: 12.0)
+        }
+    }
     
-    @IBOutlet var profitLabel: UILabel!
-    @IBOutlet var directionLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        contentView.backgroundColor = UIColor.Cell.bg
+        selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

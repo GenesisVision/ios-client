@@ -11,7 +11,7 @@ import UIKit.UINavigationController
 class InvestmentProgramListRouter: Router, ProgramListRouterProtocol {
     
     // MARK: - Public methods
-    func show(routeType: ProgramRouteType) {
+    func show(routeType: ProgramListRouteType) {
         switch routeType {
         case .signIn:
             signInAction()

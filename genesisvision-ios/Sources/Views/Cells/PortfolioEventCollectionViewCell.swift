@@ -13,7 +13,7 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet var iconImageView: UIImageView! {
         didSet {
-            iconImageView.roundWithBorder(2.0, color: UIColor.Cell.bg)
+            iconImageView.roundCorners()
         }
     }
     
@@ -23,32 +23,10 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet var stackView: UIStackView! {
-        didSet {
-            
-        }
-    }
-    
-    @IBOutlet var balanceValueLabel: UILabel! {
-        didSet {
-            balanceValueLabel.font = UIFont.getFont(.bold, size: 27.0)
-            balanceValueLabel.textColor = UIColor.Cell.title
-        }
-    }
-    
-    @IBOutlet var titleLabel: UILabel! {
-        didSet {
-            titleLabel.font = UIFont.getFont(.regular, size: 17.0)
-            titleLabel.textColor = UIColor.Cell.title
-        }
-    }
-    
-    @IBOutlet var dateLabel: UILabel! {
-        didSet {
-            dateLabel.font = UIFont.getFont(.regular, size: 13.0)
-            dateLabel.textColor = UIColor.Cell.subtitle
-        }
-    }
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var balanceValueLabel: TitleLabel!
+    @IBOutlet var titleLabel: TitleLabel!
+    @IBOutlet var dateLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -57,5 +35,4 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
         backgroundColor = UIColor.Cell.bg
         roundCorners(with: Constants.SystemSizes.cornerSize)
     }
-
 }

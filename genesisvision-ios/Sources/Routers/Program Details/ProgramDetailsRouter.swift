@@ -74,4 +74,28 @@ class ProgramDetailsRouter: TabmanRouter {
         
         return viewController
     }
+    
+    func getBalance(with investmentProgramId: String) -> ProgramBalanceViewController? {
+        guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
+        
+        let viewController = ProgramBalanceViewController()
+        let router = ProgramHistoryRouter(parentRouter: self)
+        router.currentController = viewController
+        let viewModel = ProgramBalanceViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: vc)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getProfit(with investmentProgramId: String) -> ProgramProfitViewController? {
+        guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
+        
+        let viewController = ProgramProfitViewController()
+        let router = ProgramHistoryRouter(parentRouter: self)
+        router.currentController = viewController
+        let viewModel = ProgramProfitViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: vc)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
 }

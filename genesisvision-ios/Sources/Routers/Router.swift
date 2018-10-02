@@ -262,19 +262,16 @@ extension Router {
         navigationController?.pushViewController(tabmanViewController, animated: true)
     }
     
-    func getDetailsViewController(with investmentProgramId: String) -> ProgramDetailsTabmanViewController? {
-        guard let vc = currentController else { return nil }
-        
-        let tabmanViewController = ProgramDetailsTabmanViewController()
-        tabmanViewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
-        
-        let router = ProgramDetailsRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: tabmanViewController)
-        viewModel.programDetailsProtocol = tabmanViewController
-        tabmanViewController.viewModel = viewModel
-        tabmanViewController.hidesBottomBarWhenPushed = true
-        
-        return tabmanViewController
+    func getDetailsViewController(with investmentProgramId: String) -> ProgramViewController? {
+//        guard let vc = currentController else { return nil }
+
+        guard let programViewController = ProgramViewController.storyboardInstance(name: .program) else {
+            return nil
+        }
+        programViewController.viewModel = ProgramViewModel(withRouter: self, investmentProgramId: investmentProgramId, programViewController: programViewController)
+
+        programViewController.hidesBottomBarWhenPushed = true
+        return programViewController
     }
     
     func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {

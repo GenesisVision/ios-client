@@ -20,7 +20,7 @@ class FavoriteProgramListRouter: Router, ProgramListRouterProtocol {
     }
     
     // MARK: - Public methods
-    func show(routeType: ProgramRouteType) {
+    func show(routeType: ProgramListRouteType) {
         switch routeType {
         case .showProgramDetails(let investmentProgramId):
             parentRouter?.showProgramDetails(with: investmentProgramId)

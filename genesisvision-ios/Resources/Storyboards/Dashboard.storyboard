@@ -266,7 +266,7 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Wa-tu-itX">
-                                <rect key="frame" x="0.0" y="173" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="172" width="375" height="150"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arV-sE-LM1" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -287,7 +287,7 @@
                             <constraint firstItem="6qM-UF-UBn" firstAttribute="trailing" secondItem="g0E-3N-Zss" secondAttribute="trailing" id="AeL-Te-O0y"/>
                             <constraint firstItem="UKn-A2-Y9T" firstAttribute="trailing" secondItem="g0E-3N-Zss" secondAttribute="trailing" constant="20" id="Bbj-vM-774"/>
                             <constraint firstItem="HyV-oc-0i9" firstAttribute="trailing" secondItem="dEf-uI-5Vy" secondAttribute="trailing" constant="42" id="D9j-8t-ljq"/>
-                            <constraint firstItem="6Wa-tu-itX" firstAttribute="top" secondItem="6qM-UF-UBn" secondAttribute="bottom" constant="9" id="EyY-6G-PfG"/>
+                            <constraint firstItem="6Wa-tu-itX" firstAttribute="top" secondItem="6qM-UF-UBn" secondAttribute="bottom" constant="8" id="EyY-6G-PfG"/>
                             <constraint firstItem="g0E-3N-Zss" firstAttribute="leading" secondItem="UKn-A2-Y9T" secondAttribute="leading" constant="20" id="HxV-ao-qfN"/>
                             <constraint firstItem="6Wa-tu-itX" firstAttribute="leading" secondItem="GYP-ct-H5d" secondAttribute="leading" id="JwG-nt-9oy"/>
                             <constraint firstItem="6qM-UF-UBn" firstAttribute="top" secondItem="g0E-3N-Zss" secondAttribute="bottom" constant="20" id="Qop-53-aZC"/>
