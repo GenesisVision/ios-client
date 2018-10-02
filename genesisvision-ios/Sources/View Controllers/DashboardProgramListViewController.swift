@@ -60,8 +60,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        tableView.isScrollEnabled = false
-        
         setupPullToRefresh()
     }
     

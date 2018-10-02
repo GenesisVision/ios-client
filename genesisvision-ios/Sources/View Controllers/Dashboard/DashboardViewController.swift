@@ -238,13 +238,11 @@ extension DashboardViewController: UIScrollViewDelegate {
 //        animateViews(yOffset)
         
         if scrollView == self.scrollView {
-            if yOffset == assetsView.frame.origin.y {
-                if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource,
-                    let controllers = pageboyDataSource.controllers {
-                    for controller in controllers {
-                        if let vc = controller as? BaseViewControllerWithTableView {
-                            vc.tableView?.isScrollEnabled = true
-                        }
+            if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource,
+                let controllers = pageboyDataSource.controllers {
+                for controller in controllers {
+                    if let vc = controller as? BaseViewControllerWithTableView {
+                        vc.tableView?.isScrollEnabled = yOffset == assetsView.frame.origin.y
                     }
                 }
             }

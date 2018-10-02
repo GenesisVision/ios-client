@@ -31,7 +31,7 @@ final class ProgramBalanceViewModel {
         }
     }
     
-    private var models: [CellViewAnyModel]?
+    private var models: [ProgramBalanceChartTableViewCellViewModel]?
     
     private var sections: [SectionType] = [.chart]
     
@@ -69,36 +69,6 @@ extension ProgramBalanceViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
-            fetchMore()
-        }
-        
-        return skip < totalCount
-    }
-    
-    func fetchMore() {
-        guard skip < totalCount else { return }
-        
-        canFetchMoreResults = false
-        fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [ProgramBalanceChartTableViewCellViewModel]()
-            
-            viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
-            })
-            
-            self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: { (result) in
-                switch result {
-                case .success:
-                    break
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType)
-                }
-        })
-    }
-    
     func refresh(completion: @escaping CompletionBlock) {
         skip = 0
         
@@ -109,12 +79,12 @@ extension ProgramBalanceViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> ProgramBalanceChartTableViewCellViewModel? {
-        return viewModels[index]
+        return models?[index]
     }
     
     // MARK: - Private methods
     private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramBalanceChartTableViewCellViewModel]) {
-        self.viewModels = viewModels
+        self.models = viewModels
         self.totalCount = totalCount
         self.skip += self.take
         self.canFetchMoreResults = true

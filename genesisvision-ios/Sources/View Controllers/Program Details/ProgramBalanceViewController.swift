@@ -82,10 +82,6 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
-    }
-    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)

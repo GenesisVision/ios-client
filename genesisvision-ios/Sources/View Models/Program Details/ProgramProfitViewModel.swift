@@ -32,7 +32,7 @@ final class ProgramProfitViewModel {
         }
     }
     
-    private var models: [CellViewAnyModel]?
+    private var models: [ProgramProfitChartTableViewCellViewModel]?
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -81,6 +81,11 @@ extension ProgramProfitViewModel {
         fetch({ [weak self] (totalCount, viewModels) in
 //            self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
+    }
+    
+    /// Get TableViewCellViewModel for IndexPath
+    func model(for index: Int) -> ProgramProfitChartTableViewCellViewModel? {
+        return models?[index]
     }
 
     // MARK: - Private methods
