@@ -15,7 +15,9 @@ final class PortfolioViewModel {
     
     var selectedChartAssetsViewModels: [String] = ["asdasd", "asdasd"]
     
-    var selectedChartAssetsDelegateManager: SelectedChartAssetsDelegateManager?
+    var selectedChartAssetsDelegateManager: PortfolioSelectedChartAssetsDelegateManager?
+    
+    var dashboardChartValue: DashboardChartValue?
     
     private var router: DashboardRouter!
     
@@ -23,7 +25,7 @@ final class PortfolioViewModel {
     init(withRouter router: DashboardRouter) {
         self.router = router
         
-        self.selectedChartAssetsDelegateManager = SelectedChartAssetsDelegateManager(with: selectedChartAssetsViewModels)
+        self.selectedChartAssetsDelegateManager = PortfolioSelectedChartAssetsDelegateManager(with: selectedChartAssetsViewModels)
     }
     
     // MARK: - Methods
@@ -38,11 +40,6 @@ extension PortfolioViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [PortfolioAssetTableViewCellViewModel.self]
-    }
-    
-    /// Return view models for registration header/footer Nib files
-    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SegmentedHeaderFooterView.self]
     }
     
     func modelsCount() -> Int {
@@ -63,7 +60,7 @@ extension PortfolioViewModel {
 }
 
 
-final class SelectedChartAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
     var selectedChartAssetsViewModels: [String]?
 

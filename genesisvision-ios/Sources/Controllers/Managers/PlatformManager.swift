@@ -22,21 +22,17 @@ struct FilterConstants {
     var showActivePrograms: Bool
     var showMyFavorites: Bool
     var showAvailableToInvest: Bool
-    
-    var walletModelTypeDefault: TransactionsFilter.ModelType
 }
 
 class PlatformManager {
-    public private(set) static var platformStatus: PlatformStatus?
+    public private(set) static var platformInfo: PlatformInfo?
     public private(set) static var filterConstants: FilterConstants = {
         return getFilterConstants(nil)
     }()
     
-    static func getPlatformStatus(completion: @escaping (_ platformStatus: PlatformStatus?) -> Void) {
-        BaseDataProvider.getPlatformStatus(completion: { (viewModel) in
-            platformStatus = viewModel
-            filterConstants = getFilterConstants(platformStatus)
-            
+    static func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
+        BaseDataProvider.getPlatformInfo(completion: { (viewModel) in
+            platformInfo = viewModel
             completion(viewModel)
         }) { (result) in
             switch result {
@@ -48,18 +44,17 @@ class PlatformManager {
         }
     }
     
-    private static func getFilterConstants(_ platformStatus: PlatformStatus?) -> FilterConstants {
+    private static func getFilterConstants(_ platformInfo: PlatformInfo?) -> FilterConstants {
         return FilterConstants(minLevel: Constants.Filters.minLevel,
                                maxLevel: Constants.Filters.maxLevel,
-                               minAvgProfit: platformStatus?.programsMinAvgProfit ?? Constants.Filters.minAvgProfit,
-                               maxAvgProfit: platformStatus?.programsMaxAvgProfit ?? Constants.Filters.maxAvgProfit,
-                               minTotalProfit: platformStatus?.programsMinTotalProfit ?? Constants.Filters.minTotalProfit,
-                               maxTotalProfit: platformStatus?.programsMaxTotalProfit ?? Constants.Filters.maxTotalProfit,
+                               minAvgProfit: Constants.Filters.minAvgProfit,
+                               maxAvgProfit: Constants.Filters.maxAvgProfit,
+                               minTotalProfit: Constants.Filters.minTotalProfit,
+                               maxTotalProfit: Constants.Filters.maxTotalProfit,
                                minUsdBalance: Constants.Filters.minUsdBalance,
                                maxUsdBalance: Constants.Filters.maxUsdBalance,
                                showActivePrograms: Constants.Filters.showActivePrograms,
                                showMyFavorites: Constants.Filters.showMyFavorites,
-                               showAvailableToInvest: Constants.Filters.showAvailableToInvest,
-                               walletModelTypeDefault: Constants.Filters.walletModelTypeDefault)
+                               showAvailableToInvest: Constants.Filters.showAvailableToInvest)
     }
 }

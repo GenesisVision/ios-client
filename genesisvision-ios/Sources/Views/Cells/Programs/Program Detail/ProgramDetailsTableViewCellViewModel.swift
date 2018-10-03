@@ -9,16 +9,11 @@
 import Foundation
 
 struct ProgramDetailsTableViewCellViewModel {
-    let investmentProgramDetails: InvestmentProgramDetails
+    let programDetailsFull: ProgramDetailsFull
 }
 
 extension ProgramDetailsTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramDetailsTableViewCell) {
-        cell.programDetailsView.setup(investorsCount: investmentProgramDetails.investorsCount,
-                                      balance: investmentProgramDetails.balance,
-                                      avgProfit: investmentProgramDetails.profitAvgPercent,
-                                      totalProfit: investmentProgramDetails.profitTotal,
-                                      currency: investmentProgramDetails.currency?.rawValue)
     }
 }
 

@@ -92,9 +92,9 @@ extension TournamentListViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        guard let investmentProgram = viewModel.model(for: indexPath.row)?.investmentProgram else { return }
+        guard let program = viewModel.model(for: indexPath.row)?.program else { return }
         
-        viewModel.showDetail(with: investmentProgram)
+        viewModel.showDetail(with: program)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

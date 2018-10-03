@@ -11,48 +11,80 @@ import Foundation
 
 open class WalletTransaction: Codable {
 
-    public enum ModelType: String, Codable { 
-        case deposit = "Deposit"
-        case withdraw = "Withdraw"
-        case openProgram = "OpenProgram"
-        case investToProgram = "InvestToProgram"
-        case withdrawFromProgram = "WithdrawFromProgram"
-        case profitFromProgram = "ProfitFromProgram"
-        case cancelInvestmentRequest = "CancelInvestmentRequest"
-        case partialInvestmentExecutionRefund = "PartialInvestmentExecutionRefund"
-        case closingProgramRefund = "ClosingProgramRefund"
+    public enum SourceType: String, Codable { 
+        case wallet = "Wallet"
+        case program = "Program"
+        case fund = "Fund"
+        case programRequest = "ProgramRequest"
+        case withdrawalRequest = "WithdrawalRequest"
+        case paymentTransaction = "PaymentTransaction"
     }
-    public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
+    public enum SourceCurrency: String, Codable { 
         case eth = "ETH"
+        case gvt = "GVT"
         case btc = "BTC"
+        case undefined = "Undefined"
+        case ada = "ADA"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+    public enum Action: String, Codable { 
+        case transfer = "Transfer"
+        case programOpen = "ProgramOpen"
+        case programProfit = "ProgramProfit"
+        case programInvest = "ProgramInvest"
+        case programWithdrawal = "ProgramWithdrawal"
+        case programRefundPartialExecution = "ProgramRefundPartialExecution"
+        case programRefundClose = "ProgramRefundClose"
+        case programRequestInvest = "ProgramRequestInvest"
+        case programRequestWithdrawal = "ProgramRequestWithdrawal"
+        case programRequestCancel = "ProgramRequestCancel"
+    }
+    public enum DestinationType: String, Codable { 
+        case wallet = "Wallet"
+        case program = "Program"
+        case fund = "Fund"
+        case programRequest = "ProgramRequest"
+        case withdrawalRequest = "WithdrawalRequest"
+        case paymentTransaction = "PaymentTransaction"
+    }
+    public enum DestinationCurrency: String, Codable { 
+        case eth = "ETH"
+        case gvt = "GVT"
+        case btc = "BTC"
+        case undefined = "Undefined"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
     public var id: UUID?
-    public var type: ModelType?
     public var amount: Double?
+    public var amountConverted: Double?
     public var date: Date?
-    public var walletId: UUID?
-    public var currency: Currency?
-    public var investmentProgram: InvestmentProgramTxInfo?
-    public var investmentProgramRequest: InvestmentProgramRequestTxInfo?
-    public var paymentTx: PaymentTxInfo?
+    public var number: Int64?
+    public var sourceId: UUID?
+    public var sourceType: SourceType?
+    public var sourceCurrency: SourceCurrency?
+    public var action: Action?
+    public var destinationId: UUID?
+    public var destinationType: DestinationType?
+    public var destinationCurrency: DestinationCurrency?
 
 
     
-    public init(id: UUID?, type: ModelType?, amount: Double?, date: Date?, walletId: UUID?, currency: Currency?, investmentProgram: InvestmentProgramTxInfo?, investmentProgramRequest: InvestmentProgramRequestTxInfo?, paymentTx: PaymentTxInfo?) {
+    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?) {
         self.id = id
-        self.type = type
         self.amount = amount
+        self.amountConverted = amountConverted
         self.date = date
-        self.walletId = walletId
-        self.currency = currency
-        self.investmentProgram = investmentProgram
-        self.investmentProgramRequest = investmentProgramRequest
-        self.paymentTx = paymentTx
+        self.number = number
+        self.sourceId = sourceId
+        self.sourceType = sourceType
+        self.sourceCurrency = sourceCurrency
+        self.action = action
+        self.destinationId = destinationId
+        self.destinationType = destinationType
+        self.destinationCurrency = destinationCurrency
     }
     
 
@@ -63,14 +95,17 @@ open class WalletTransaction: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(amount, forKey: "amount")
+        try container.encodeIfPresent(amountConverted, forKey: "amountConverted")
         try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(walletId, forKey: "walletId")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(investmentProgram, forKey: "investmentProgram")
-        try container.encodeIfPresent(investmentProgramRequest, forKey: "investmentProgramRequest")
-        try container.encodeIfPresent(paymentTx, forKey: "paymentTx")
+        try container.encodeIfPresent(number, forKey: "number")
+        try container.encodeIfPresent(sourceId, forKey: "sourceId")
+        try container.encodeIfPresent(sourceType, forKey: "sourceType")
+        try container.encodeIfPresent(sourceCurrency, forKey: "sourceCurrency")
+        try container.encodeIfPresent(action, forKey: "action")
+        try container.encodeIfPresent(destinationId, forKey: "destinationId")
+        try container.encodeIfPresent(destinationType, forKey: "destinationType")
+        try container.encodeIfPresent(destinationCurrency, forKey: "destinationCurrency")
     }
 
     // Decodable protocol methods
@@ -79,14 +114,17 @@ open class WalletTransaction: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
+        amountConverted = try container.decodeIfPresent(Double.self, forKey: "amountConverted")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
-        walletId = try container.decodeIfPresent(UUID.self, forKey: "walletId")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        investmentProgram = try container.decodeIfPresent(InvestmentProgramTxInfo.self, forKey: "investmentProgram")
-        investmentProgramRequest = try container.decodeIfPresent(InvestmentProgramRequestTxInfo.self, forKey: "investmentProgramRequest")
-        paymentTx = try container.decodeIfPresent(PaymentTxInfo.self, forKey: "paymentTx")
+        number = try container.decodeIfPresent(Int64.self, forKey: "number")
+        sourceId = try container.decodeIfPresent(UUID.self, forKey: "sourceId")
+        sourceType = try container.decodeIfPresent(SourceType.self, forKey: "sourceType")
+        sourceCurrency = try container.decodeIfPresent(SourceCurrency.self, forKey: "sourceCurrency")
+        action = try container.decodeIfPresent(Action.self, forKey: "action")
+        destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
+        destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
+        destinationCurrency = try container.decodeIfPresent(DestinationCurrency.self, forKey: "destinationCurrency")
     }
 }
 

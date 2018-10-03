@@ -11,7 +11,7 @@ import UIKit
 final class ProgramRequestsViewModel {
     // MARK: - Variables
     var title: String = "Requests".uppercased()
-    private var investmentProgramId: String!
+    private var programId: String!
     private weak var programDetailProtocol: ProgramDetailProtocol?
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -30,9 +30,9 @@ final class ProgramRequestsViewModel {
     var viewModels = [ProgramRequestTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramRequestsRouter, investmentProgramId: String, programDetailProtocol: ProgramDetailProtocol?, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRequestsRouter, programId: String, programDetailProtocol: ProgramDetailProtocol?, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.programDetailProtocol = programDetailProtocol
         self.reloadDataProtocol = reloadDataProtocol
     }
@@ -130,11 +130,9 @@ extension ProgramRequestsViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramRequestTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        let filter = InvestmentProgramRequestsFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, status: .new, type: nil, skip: skip, take: take)
-        
-        ProgramRequestDataProvider.getRequests(filter: filter) { [weak self] (requests) in
+        ProgramRequestDataProvider.getRequests(skip: skip, take: take) { [weak self] (requests) in
             guard let requests = requests else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             var programRequestViewModels = [ProgramRequestTableViewCellViewModel]()

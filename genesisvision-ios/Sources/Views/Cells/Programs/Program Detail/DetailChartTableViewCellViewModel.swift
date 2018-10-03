@@ -10,7 +10,7 @@ import Foundation
 import UIKit.UIColor
 
 struct DetailChartTableViewCellViewModel {
-    let chart: [TradeChart]
+    let chart: [ChartSimple]
     let name: String
     let currencyValue: String?
     let chartDurationType: ChartDurationType?
@@ -30,7 +30,7 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
         
         cell.chartView.isHidden = false
         cell.noDataLabel.isHidden = true
-        if let first = chart.first?.profit, let last = chart.last?.profit {
+        if let first = chart.first?.value, let last = chart.last?.value {
             let value = last - first
             let upDownSign = value == 0 ? "" : value > 0 ? "↑ " : "↓ "
             
@@ -42,7 +42,7 @@ extension DetailChartTableViewCellViewModel: CellViewModel {
             cell.changesLabel.text = text
             cell.changesLabel.textColor = value == 0 ? UIColor.Font.darkBlue : value > 0 ? UIColor.Font.green : UIColor.Font.red
         }
-        cell.chartView.setup(chartType: .detail, tradeChartDataSet: chart, name: name, currencyValue: currencyValue, chartDurationType: chartDurationType)
+        cell.chartView.setup(chartType: .detail, lineChartData: chart, name: name, currencyValue: currencyValue, chartDurationType: chartDurationType)
         cell.delegate = detailChartTableViewCellProtocol
     }
 }

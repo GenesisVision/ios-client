@@ -319,8 +319,7 @@ final class ProfileViewModel {
                                            address: profileModel.address,
                                            phone: profileModel.phone,
                                            birthday: profileModel.birthday,
-                                           gender: profileModel.gender,
-                                           avatar: profileModel.avatar)
+                                           gender: profileModel.gender)
         
         ProfileDataProvider.updateProfile(model: model) { [weak self] (result) in
             switch result {

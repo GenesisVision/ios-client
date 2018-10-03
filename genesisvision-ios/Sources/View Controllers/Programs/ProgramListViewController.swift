@@ -61,7 +61,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setupSignInButton() {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+        if let viewModel = viewModel as? ProgramListViewModel {
             signInButtonEnable = viewModel.signInButtonEnable
         }
         
@@ -86,13 +86,13 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             showNewVersionAlertIfNeeded(self)
         }
         
-        PlatformManager.getPlatformStatus(completion: { [weak self] (model) in
-            guard let isTournamentActive = model?.isTournamentActive, isTournamentActive else { return }
-            
-            self?.tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_trophy_icon"), style: .done, target: self, action: #selector(self?.tournamentButtonAction(_:)))
-            self?.tournamentBarButtonItem?.tintColor = UIColor.Tournament.bg
-            self?.navigationItem.rightBarButtonItem = self?.tournamentBarButtonItem
-        })
+//        PlatformManager.getPlatformInfo(completion: { [weak self] (model) in
+//            guard let isTournamentActive = model?.isTournamentActive, isTournamentActive else { return }
+//
+//            self?.tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_trophy_icon"), style: .done, target: self, action: #selector(self?.tournamentButtonAction(_:)))
+//            self?.tournamentBarButtonItem?.tintColor = UIColor.Tournament.bg
+//            self?.navigationItem.rightBarButtonItem = self?.tournamentBarButtonItem
+//        })
         
         tabBarItem.title = viewModel.title
 
@@ -167,7 +167,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Actions
     @IBAction func tournamentButtonAction(_ sender: UIButton) {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+        if let viewModel = viewModel as? ProgramListViewModel {
             viewModel.showTournamentVC()
         }
     }
@@ -184,13 +184,13 @@ extension ProgramListViewController {
     }
     
     override func filterButtonAction() {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+        if let viewModel = viewModel as? ProgramListViewModel {
             viewModel.showFilterVC()
         }
     }
     
     override func signInButtonAction() {
-        if let viewModel = viewModel as? InvestmentProgramListViewModel {
+        if let viewModel = viewModel as? ProgramListViewModel {
             viewModel.showSignInVC()
         }
     }
@@ -266,7 +266,7 @@ extension ProgramListViewController: ReloadDataProtocol {
 extension ProgramListViewController: ProgramDetailViewControllerProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

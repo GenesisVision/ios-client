@@ -11,7 +11,7 @@ import Foundation
 final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
-    var investmentProgramId: String?
+    var programId: String?
     var labelPlaceholder: String = "0"
     
     private var rate: Double = 0.0
@@ -31,9 +31,9 @@ final class ProgramInvestViewModel {
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, currency: String, availableToInvest: Double, programDetailProtocol: ProgramDetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, programId: String, currency: String, availableToInvest: Double, programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.currency = currency
         self.programDetailProtocol = programDetailProtocol
         self.availableToInvest = availableToInvest
@@ -41,10 +41,9 @@ final class ProgramInvestViewModel {
     
     // MARK: - Public methods
     func getAvailableToInvest(completion: @escaping (_ availableToInvest: Double, _ exchangedAvailableToInvest: Double) -> Void, completionError: @escaping CompletionBlock) {
-        let toCurrency = RequestRate.To(rawValue: self.currency)
         
-        RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
-            guard viewModel != nil, let rate = viewModel?.rate else {
+        RateDataProvider.getRate(from: "GVT", to: self.currency, completion: { (rate) in
+            guard let rate = rate else {
                 return completionError(.failure(errorType: .apiError(message: nil)))
             }
             
@@ -69,10 +68,8 @@ final class ProgramInvestViewModel {
             return completion(0.0)
         }
         guard self.rate > 0 else {
-            let toCurrency = RequestRate.To(rawValue: self.currency)
-            
-            RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
-                if viewModel != nil, let rate = viewModel?.rate {
+            RateDataProvider.getRate(from: "GVT", to: self.currency, completion: { (rate) in
+                if let rate = rate {
                     self.rate = rate
                 }
                 
@@ -106,15 +103,8 @@ final class ProgramInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        ProgramDataProvider.investProgram(withAmount: value, investmentProgramId: investmentProgramId, completion: { (viewModel) in
-            guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
-                return completion(.failure(errorType: .apiError(message: nil)))
-            }
-            
-            AuthManager.saveWalletViewModel(viewModel: wallet)
-            completion(.success)
-        }) { (result) in
+        ProgramDataProvider.investProgram(withAmount: value, programId: programId, errorCompletion: { (result) in
             completion(result)
-        }
+        })
     }
 }

@@ -105,7 +105,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     }
     
     func showFilterVC() {
-//        router.show(routeType: .showFilterVC(investmentProgramListViewModel: self as! InvestmentProgramListViewModel))
+//        router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
     }
     
     // MARK: - Actions
@@ -161,7 +161,7 @@ extension DashboardProgramListViewController: ReloadDataProtocol {
 extension DashboardProgramListViewController: ProgramDetailViewControllerProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

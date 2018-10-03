@@ -38,7 +38,7 @@ extension AssetsViewController: ProgramDetailViewControllerProtocol {
         showProgressHUD()
         if let programListViewController = pageboyDataSource.controllers.first as? ProgramListViewController,
             let viewModel = programListViewController.viewModel {
-            viewModel.changeFavorite(value: value, investmentProgramId: programID, request: request) { [weak self] (result) in
+            viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
                 self?.hideHUD()
             }
         }

@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct ProgramTableViewCellViewModel {
-    let investmentProgram: InvestmentProgram
+    let program: ProgramDetailsFull
     weak var delegate: ProgramDetailViewControllerProtocol?
 }
 
@@ -23,60 +23,56 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = investmentProgram.equityChart, let title = investmentProgram.title, chart.count > 1 {
-            cell.chartView.isHidden = false
-            cell.viewForChartView.isHidden = cell.chartView.isHidden
-            cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue)
-        }
+//        if let chart = program.equityChart, let title = program.title, chart.count > 1 {
+//            cell.chartView.isHidden = false
+//            cell.viewForChartView.isHidden = cell.chartView.isHidden
+//            cell.noDataLabel.isHidden = true
+//            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: program.currency?.rawValue)
+//        }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
-        if let title = investmentProgram.title {
+        if let title = program.title {
             cell.programTitleLabel.text = title
         }
         
-        if let investmentProgramId = investmentProgram.id?.uuidString {
-            cell.investmentProgramId = investmentProgramId
+        if let programId = program.id?.uuidString {
+            cell.programId = programId
         }
         
-        if let managerName = investmentProgram.manager?.username {
+        if let managerName = program.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
         
-        if let isFavorite = investmentProgram.isFavorite {
+        if let isFavorite = program.personalProgramDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         
         cell.favoriteButton.isHidden = !AuthManager.isLogin()
         
-//        if let availableInvestment = investmentProgram.availableInvestment {
+//        if let availableInvestment = program.availableInvestment {
 //            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
 //        }
         
-        if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: Constants.currency) {
+        if let currency = program.currency, let currencyType = CurrencyType(currency: Constants.currency) {
             cell.currencyLabel.currencyType = currencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
-        if let level = investmentProgram.level {
+        if let level = program.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = investmentProgram.logo {
+        if let logo = program.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        cell.programDetailsView.setup(investorsCount: investmentProgram.investorsCount, balance: investmentProgram.balance, avgProfit: investmentProgram.profitAvgPercent, totalProfit: investmentProgram.profitTotal, currency: investmentProgram.currency?.rawValue)
+        cell.programDetailsView.setup(investorsCount: program.statistic?.investorsCount, balance: program.statistic?.balanceGVT?.amount, avgProfit: program.statistic?.profitPercent, totalProfit: program.statistic?.profitValue, currency: program.currency?.rawValue)
         
-        cell.tournamentActive(investmentProgram.isTournament ?? false)
-        
-        if let place = investmentProgram.place {
-            cell.placeLabel.text = place.toString()
-        }
+        cell.tournamentActive(false)
     }
 }

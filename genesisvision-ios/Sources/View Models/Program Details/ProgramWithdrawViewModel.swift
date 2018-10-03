@@ -11,7 +11,7 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Variables
     var title: String = "Withdraw"
-    var investmentProgramId: String?
+    var programId: String?
     var investedTokens: Double?
     var labelPlaceholder: String = "0"
     
@@ -31,12 +31,12 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
-         investmentProgramId: String,
+         programId: String,
          investedTokens: Double,
          currency: String,
          programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.investedTokens = investedTokens
         self.currency = currency
         self.programDetailProtocol = programDetailProtocol
@@ -62,7 +62,7 @@ final class ProgramWithdrawViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiWithdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        ProgramDataProvider.withdrawProgram(withAmount: amount, investmentProgramId: investmentProgramId) { (result) in
+        ProgramDataProvider.withdrawProgram(withAmount: amount, programId: programId) { (result) in
             completion(result)
         }
     }

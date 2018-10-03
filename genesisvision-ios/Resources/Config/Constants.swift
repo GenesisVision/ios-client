@@ -133,13 +133,11 @@ final class Constants {
         static let showActivePrograms = false
         static let showMyFavorites = false
         static let showAvailableToInvest = false
-        
-        static let walletModelTypeDefault: TransactionsFilter.ModelType = .all
     }
     
     struct Sorting {
-        static let programListDefault: InvestmentProgramsFilter.Sorting = .byProfitDesc
-        static let dashboardDefault: InvestorAPI.Sorting_apiInvestorDashboardGet = .byProfitDesc
+        static let programListDefault: ProgramsAPI.Sorting_v10ProgramsGet = .byProfitDesc
+        static let dashboardDefault: InvestorAPI.Sorting_v10InvestorProgramsGet = .byProfitDesc
     }
     
     struct Security {

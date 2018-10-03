@@ -6,17 +6,21 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import Foundation
+
 class DashboardDataProvider: DataProvider {
-    static func getProgram(with sorting: InvestorAPI.Sorting_apiInvestorDashboardGet, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProgramList(with sorting: InvestorAPI.Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        getDashboardProgram(with: sorting, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
-    }
-    
-    // MARK: - Private methods
-    private static func getDashboardProgram(with sorting: InvestorAPI.Sorting_apiInvestorDashboardGet, authorization: String, completion: @escaping (_ dashboard: InvestorDashboard?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorDashboardGet(authorization: authorization, sorting: sorting, equityChartLength: Constants.Api.equityChartLength) { (dashboard, error) in
-            DataProvider().responseHandler(dashboard, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        InvestorAPI.v10InvestorProgramsGet(authorization: authorization,
+                                           sorting: sorting,
+                                           from: from,
+                                           to: to,
+                                           chartPointsCount: chartPointsCount,
+                                           currencySecondary: currencySecondary,
+                                           skip: skip,
+                                           take: take) { (programList, error) in
+                                            DataProvider().responseHandler(programList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 }

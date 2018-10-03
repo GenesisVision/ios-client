@@ -33,7 +33,7 @@ final class CreateProgramSecondViewModel: ViewModelWithTableView {
     private var router: TabmanRouter!
     
     var temparyNewInvestmentRequest: TemparyNewInvestmentRequest?
-    var brokersViewModel: BrokersViewModel?
+    var brokersViewModel: BrokersInfo?
     
     var selectedBrokerTradeServer: BrokerTradeServer?
     var selectedBrokerServerIndex: Int {

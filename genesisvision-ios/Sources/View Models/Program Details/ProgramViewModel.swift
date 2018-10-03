@@ -8,14 +8,14 @@
 
 final class ProgramViewModel {
     // MARK: - Variables
-    var investmentProgramId: String!
-    var investmentProgramDetails: InvestmentProgramDetails?
+    var programId: String!
+    var programDetailsFull: ProgramDetailsFull?
     
     var router: ProgramRouter!
     
     // MARK: - Init
-    init(withRouter router: Router, investmentProgramId: String, programViewController: ProgramViewController) {
-        self.investmentProgramId = investmentProgramId
+    init(withRouter router: Router, programId: String, programViewController: ProgramViewController) {
+        self.programId = programId
         
         self.router = ProgramRouter(parentRouter: router, navigationController: nil, programViewController: programViewController)
     }

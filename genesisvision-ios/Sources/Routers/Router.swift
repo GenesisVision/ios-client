@@ -124,8 +124,8 @@ class Router {
         self.programsViewController = viewController
         
         let navigationController = BaseNavigationController(rootViewController: programsViewController)
-        let router = InvestmentProgramListRouter(parentRouter: self, navigationController: navigationController)
-        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
+        let router = ProgramListRouter(parentRouter: self, navigationController: navigationController)
+        programsViewController.viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
         
         return navigationController
     }
@@ -192,7 +192,7 @@ extension Router {
         guard let navigationController = getProgramsNavigationController(),
             let programsVC = navigationController.topViewController as? ProgramListViewController,
             let viewModel = programsVC.viewModel,
-            let router = viewModel.router as? InvestmentProgramListRouter else { return }
+            let router = viewModel.router as? ProgramListRouter else { return }
         
         router.show(routeType: .signIn)
         
@@ -240,8 +240,8 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
-    func showProgramDetails(with investmentProgramId: String) {
-        guard let viewController = getDetailsViewController(with: investmentProgramId) else { return }
+    func showProgramDetails(with programId: String) {
+        guard let viewController = getDetailsViewController(with: programId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -262,13 +262,13 @@ extension Router {
         navigationController?.pushViewController(tabmanViewController, animated: true)
     }
     
-    func getDetailsViewController(with investmentProgramId: String) -> ProgramViewController? {
+    func getDetailsViewController(with programId: String) -> ProgramViewController? {
 //        guard let vc = currentController else { return nil }
 
         guard let programViewController = ProgramViewController.storyboardInstance(name: .program) else {
             return nil
         }
-        programViewController.viewModel = ProgramViewModel(withRouter: self, investmentProgramId: investmentProgramId, programViewController: programViewController)
+        programViewController.viewModel = ProgramViewModel(withRouter: self, programId: programId, programViewController: programViewController)
 
         programViewController.hidesBottomBarWhenPushed = true
         return programViewController

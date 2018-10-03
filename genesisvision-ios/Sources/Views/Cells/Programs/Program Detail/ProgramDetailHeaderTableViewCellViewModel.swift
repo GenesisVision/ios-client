@@ -10,33 +10,33 @@ import Foundation
 import Kingfisher
 
 struct ProgramDetailHeaderTableViewCellViewModel {
-    let investmentProgramDetails: InvestmentProgramDetails
+    let programDetailsFull: ProgramDetailsFull
     weak var delegate: DetailHeaderTableViewCellProtocol?
 }
 
 extension ProgramDetailHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailHeaderTableViewCell) {
-        if let level = investmentProgramDetails.level {
+        if let level = programDetailsFull.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = investmentProgramDetails.logo {
+        if let logo = programDetailsFull.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-        if let title = investmentProgramDetails.title {
+        if let title = programDetailsFull.title {
             cell.titleLabel.text = title
         }
         
-        if let username = investmentProgramDetails.manager?.username {
+        if let username = programDetailsFull.manager?.username {
             cell.managerLabel.text = "by " + username
         }
         
-        if let currency = investmentProgramDetails.currency, let сurrencyType = CurrencyType(currency: currency) {
+        if let currency = programDetailsFull.currency, let сurrencyType = CurrencyType(currency: currency.rawValue) {
             cell.currencyLabel.currencyType = сurrencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }

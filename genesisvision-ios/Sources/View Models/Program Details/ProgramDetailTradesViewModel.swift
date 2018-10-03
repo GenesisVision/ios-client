@@ -11,7 +11,7 @@ import UIKit.UITableViewHeaderFooterView
 final class ProgramDetailTradesViewModel {
     // MARK: - Variables
     var title: String = "Trades".uppercased()
-    var investmentProgramId: String?
+    var programId: String?
     
     var router: ProgramDetailTradesRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -21,7 +21,7 @@ final class ProgramDetailTradesViewModel {
     var transactionsCount: String = ""
     var skip = 0
     var take = Constants.Api.take
-    var tradeServerType: TradesViewModel.TradeServerType?
+    var tradeServerType = "" //TODO: Delete it
     var totalCount = 0 {
         didSet {
             transactionsCount = "\(totalCount) trades"
@@ -31,9 +31,9 @@ final class ProgramDetailTradesViewModel {
     var viewModels = [ProgramDetailTradesTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailTradesRouter, investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramDetailTradesRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
     }
 }
@@ -63,7 +63,7 @@ extension ProgramDetailTradesViewModel {
     }
     
     func isMetaTrader5() -> Bool {
-        return tradeServerType == TradesViewModel.TradeServerType.metaTrader5
+        return true
     }
     
     func headerHeight(for section: Int) -> CGFloat {
@@ -124,7 +124,7 @@ extension ProgramDetailTradesViewModel {
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, viewModels: [ProgramDetailTradesTableViewCellViewModel], tradeServerType: TradesViewModel.TradeServerType?) {
+    private func updateFetchedData(totalCount: Int, viewModels: [ProgramDetailTradesTableViewCellViewModel], tradeServerType: String) {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.tradeServerType = tradeServerType
@@ -133,14 +133,13 @@ extension ProgramDetailTradesViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramDetailTradesTableViewCellViewModel], _ tradeServerType: TradesViewModel.TradeServerType?) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramDetailTradesTableViewCellViewModel], _ tradeServerType: String) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let investmentProgramId = investmentProgramId,
-                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            guard let programId = programId,
+                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            let filter = TradesFilter(investmentProgramId: uuid, dateFrom: nil, dateTo: nil, symbol: nil, sorting: .byDateDesc, skip: skip, take: take)
-            ProgramDataProvider.getProgramTrades(with: filter, completion: { (tradesViewModel) in
+            ProgramDataProvider.getProgramTrades(with: programId, completion: { (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -153,7 +152,7 @@ extension ProgramDetailTradesViewModel {
                     viewModels.append(viewModel)
                 })
                 
-                completionSuccess(totalCount, viewModels, tradesViewModel?.tradeServerType)
+                completionSuccess(totalCount, viewModels, "")
                 completionError(.success)
             }, errorCompletion: completionError)
         case .fake:

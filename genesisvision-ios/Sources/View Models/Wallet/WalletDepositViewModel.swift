@@ -55,7 +55,7 @@ final class WalletDepositViewModel {
     // MARK: - Private methods
     private func getAddress(completion: @escaping (_ address: String?) -> Void, completionError: @escaping CompletionBlock) {
         WalletDataProvider.getWalletAddress(completion: { (viewModel) in
-            guard let address = viewModel?.address else {
+            guard let address = viewModel?.wallets?.first?.address else {
                 return completion(nil)
             }
             

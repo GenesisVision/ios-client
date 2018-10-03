@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct DashboardTableViewCellViewModel {
-    let investmentProgram: InvestmentProgramDashboardInvestor
+    let program: ProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: ProgramDetailViewControllerProtocol?
 }
@@ -25,65 +25,65 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = investmentProgram.equityChart, let title = investmentProgram.title, chart.count > 1 {
-            cell.chartView.isHidden = false
-            cell.viewForChartView.isHidden = cell.chartView.isHidden
-            cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: investmentProgram.currency?.rawValue, chartDurationType: .day)
-        }
+//        if let chart = program.chart, let title = program.title, chart.count > 1 {
+//            cell.chartView.isHidden = false
+//            cell.viewForChartView.isHidden = cell.chartView.isHidden
+//            cell.noDataLabel.isHidden = true
+//            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .day)
+//        }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
 
-        if let title = investmentProgram.title {
+        if let title = program.title {
             cell.programTitleLabel.text = title
         }
         
-        if let managerName = investmentProgram.manager?.username {
+        if let managerName = program.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
-//        if let tokenSymbol = investmentProgram.token?.tokenSymbol {
+//        if let tokenSymbol = program.token?.tokenSymbol {
 //            cell.tokenSymbolLabel.text = tokenSymbol
 //        }
         
-//        if let tokensCount = investmentProgram.investedTokens {
+//        if let tokensCount = program.investedTokens {
 //            cell.tokensCountValueLabel.text = tokensCount.toString()
 //            cell.investedTokens = tokensCount
 //        }
         
-//        if let profitFromProgram = investmentProgram.profitFromProgram {
+//        if let profitFromProgram = program.profitFromProgram {
 //            cell.profitValueLabel.text = profitFromProgram.toString()
 //            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Cell.title : UIColor.Font.red
 //        }
 //
 //        cell.profitTitleLabel.text = "MY PROFIT"
         
-        if let currency = investmentProgram.currency, let currencyType = CurrencyType(currency: currency) {
+        if let currency = program.currency, let currencyType = CurrencyType(currency: currency.rawValue) {
             cell.currencyLabel.currencyType = currencyType
             cell.currencyLabel.text = currency.rawValue.uppercased()
         }
         
-        if let investmentProgramId = investmentProgram.id?.uuidString {
-            cell.investmentProgramId = investmentProgramId
+        if let programId = program.id?.uuidString {
+            cell.programId = programId
         }
         
-        if let level = investmentProgram.level {
+        if let level = program.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
         
-        if let isFavorite = investmentProgram.isFavorite {
+        if let isFavorite = program.personalProgramDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = investmentProgram.logo {
+        if let logo = program.logo {
             let logoURL = getFileURL(fileName: logo)
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
         }
         
-//        if let isEnabled = investmentProgram.isEnabled {
-//            guard let endOfPeriod = investmentProgram.endOfPeriod else { return }
+//        if let isEnabled = program.isEnabled {
+//            guard let endOfPeriod = program.endOfPeriod else { return }
 //
 //            cell.endOfPeriod = endOfPeriod
 //
@@ -92,10 +92,6 @@ extension DashboardTableViewCellViewModel: CellViewModel {
 //
 //        cell.reloadDataProtocol = reloadDataProtocol
         
-        cell.tournamentActive(investmentProgram.isTournament ?? false)
-        
-        if let place = investmentProgram.place {
-            cell.placeLabel.text = place.toString()
-        }
+        cell.tournamentActive(false)
     }
 }

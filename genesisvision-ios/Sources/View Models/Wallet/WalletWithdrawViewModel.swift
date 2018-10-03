@@ -12,7 +12,7 @@ final class WalletWithdrawViewModel {
     
     private weak var walletProtocol: WalletProtocol?
     
-    var currency = WalletWithdrawRequestModel.Currency.gvt
+    var currency = CreateWithdrawalRequestModel.Currency.gvt
     
     private var router: WalletWithdrawRouter!
     
@@ -24,8 +24,8 @@ final class WalletWithdrawViewModel {
     
     // MARK: - Public methods
     // MARK: - Navigation
-    func withdraw(with amount: Double, address: String, completion: @escaping CompletionBlock) {
-        apiWithdraw(with: amount, address: address, completion: completion)
+    func withdraw(with amount: Double, address: String, currency: CreateWithdrawalRequestModel.Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
+        apiWithdraw(with: amount, address: address, currency: currency, twoFactorCode: twoFactorCode, completion: completion)
     }
     
     func readQRCode(completion: @escaping CompletionBlock) {
@@ -43,12 +43,12 @@ final class WalletWithdrawViewModel {
     
     // MARK: - Private methods
     // MARK: - API
-    private func apiWithdraw(with amount: Double, address: String, completion: @escaping CompletionBlock) {
+    private func apiWithdraw(with amount: Double, address: String, currency: CreateWithdrawalRequestModel.Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
 
-        let requestModel = WalletWithdrawRequestModel(currency: currency, amount: amount, blockchainAddress: address)
+        let requestModel = CreateWithdrawalRequestModel(amount: amount, currency: currency, address: address, twoFactorCode: twoFactorCode)
         
-        InvestorAPI.apiInvestorWalletWithdrawRequestPost(authorization: token, request: requestModel) { [weak self] (error) in
+        WalletAPI.v10WalletWithdrawRequestNewPost(authorization: token, model: requestModel) { [weak self] (error) in
             self?.responseHandler(error, completion: completion)
         }
     }

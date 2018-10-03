@@ -7,7 +7,7 @@
 //
 
 enum TournamentListRouteType {
-    case showDetail(investmentProgramId: String)
+    case showDetail(programId: String)
 }
 
 class TournamentListRouter: Router {
@@ -15,8 +15,8 @@ class TournamentListRouter: Router {
     // MARK: - Public methods
     func show(routeType: TournamentListRouteType) {
         switch routeType {
-        case .showDetail(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
+        case .showDetail(let programId):
+            showProgramDetails(with: programId)
         }
     }
 }

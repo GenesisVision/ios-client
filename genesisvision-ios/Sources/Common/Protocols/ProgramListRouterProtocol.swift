@@ -7,7 +7,7 @@
 //
 
 enum ProgramListRouteType {
-    case signIn, showProgramDetails(investmentProgramId: String), showFilterVC(investmentProgramListViewModel: InvestmentProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
+    case signIn, showProgramDetails(programId: String), showFilterVC(programListViewModel: ProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
 }
 
 protocol ProgramListRouterProtocol {
@@ -17,8 +17,8 @@ protocol ProgramListRouterProtocol {
 extension ProgramListRouterProtocol where Self: Router {
     func show(routeType: ProgramListRouteType) {
         switch routeType {
-        case .showProgramDetails(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
+        case .showProgramDetails(let programId):
+            showProgramDetails(with: programId)
         default:
             break
         }

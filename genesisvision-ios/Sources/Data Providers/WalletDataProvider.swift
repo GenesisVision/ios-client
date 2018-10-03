@@ -10,51 +10,26 @@ import UIKit
 
 class WalletDataProvider: DataProvider {
     // MARK: - Public methods
-    static func getWallet(completion: @escaping (_ wallet: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWallet(with currency: WalletAPI.Currency_v10WalletByCurrencyGet, completion: @escaping (_ wallet: WalletSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        isInvestorApp
-            ? getInvestorWallet(with: authorization, completion: completion, errorCompletion: errorCompletion)
-            : getManagerWallet(with: authorization, completion: completion, errorCompletion: errorCompletion)
+        WalletAPI.v10WalletByCurrencyGet(currency: currency, authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
     }
     
-    static func getWalletTransactions(with filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWalletTransactions(with assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: WalletAPI.AssetType_v10WalletTransactionsGet? = nil, txAction: WalletAPI.TxAction_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        isInvestorApp
-            ? getInvestorWalletTransactions(with: authorization, filter: filter, completion: completion, errorCompletion: errorCompletion)
-            : getManagerWalletTransactions(with: authorization, filter: filter, completion: completion, errorCompletion: errorCompletion)
+        WalletAPI.v10WalletTransactionsGet(authorization: authorization, assetId: assetId, from: from, to: to, assetType: assetType, txAction: txAction, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
     }
     
-    static func getWalletAddress(completion: @escaping (_ walletAddressViewModel: WalletAddressViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWalletAddress(completion: @escaping (_ walletAddressViewModel: WalletsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        InvestorAPI.apiInvestorWalletAddressGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    // MARK: - Private methods
-    private static func getInvestorWallet(with authorization: String, completion: @escaping (_ wallets: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorWalletGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    private static func getManagerWallet(with authorization: String, completion: @escaping (_ wallets: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerWalletGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    private static func getInvestorWalletTransactions(with authorization: String, filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorWalletTransactionsPost(authorization: authorization, filter: filter) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    private static func getManagerWalletTransactions(with authorization: String, filter: TransactionsFilter, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerWalletTransactionsPost(authorization: authorization, filter: filter) { (viewModel, error) in
+        WalletAPI.v10WalletAddressesGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

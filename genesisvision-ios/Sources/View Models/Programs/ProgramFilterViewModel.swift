@@ -12,7 +12,7 @@ import TTRangeSlider
 final class ProgramFilterViewModel {
     
     // MARK: - View Model
-    private var investmentProgramListViewModel: InvestmentProgramListViewModel?
+    private var programListViewModel: ProgramListViewModel?
     
     enum SectionType {
         case slider
@@ -38,7 +38,7 @@ final class ProgramFilterViewModel {
     
     private var router: ProgramFilterRouter!
     
-    private var filter: InvestmentProgramsFilter?
+    private var filter: ProgramsFilter?
     
     var sliderCellModels = [FilterSliderTableViewCellViewModel]()
     var switchCellModels = [FilterSwitchTableViewCellViewModel]()
@@ -53,13 +53,13 @@ final class ProgramFilterViewModel {
     
     // MARK: - Init
     init(withRouter router: ProgramFilterRouter,
-         investmentProgramListViewModel: InvestmentProgramListViewModel) {
+         programListViewModel: ProgramListViewModel) {
         
         self.router = router
-        self.investmentProgramListViewModel = investmentProgramListViewModel
+        self.programListViewModel = programListViewModel
         
-        if let filter = investmentProgramListViewModel.filter {
-            self.filter = InvestmentProgramsFilter(managerId: filter.managerId,
+        if let filter = programListViewModel.filter {
+            self.filter = ProgramsFilter(managerId: filter.managerId,
                                                    brokerId: filter.brokerId,
                                                    brokerTradeServerId: filter.brokerTradeServerId,
                                                    investMaxAmountFrom: filter.investMaxAmountFrom,
@@ -209,9 +209,9 @@ final class ProgramFilterViewModel {
     }
     
     func apply(completion: @escaping CompletionBlock) {
-        investmentProgramListViewModel?.filter = filter
+        programListViewModel?.filter = filter
 
-        investmentProgramListViewModel?.refresh(completion: completion)
+        programListViewModel?.refresh(completion: completion)
     }
     
     func goToBack() {

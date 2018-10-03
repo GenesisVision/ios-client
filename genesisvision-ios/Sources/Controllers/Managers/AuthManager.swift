@@ -12,7 +12,7 @@ class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
     private static var walletViewModel: WalletViewModel?
-    private static var rateViewModel: RateViewModel?
+    private static var ratesModel: RatesModel?
     private static var twoFactorStatus: TwoFactorStatus?
     
     static var authorizedToken: String? {
@@ -42,7 +42,7 @@ class AuthManager {
         AuthManager.authorizedToken = nil
         AuthManager.profileViewModel = nil
         AuthManager.walletViewModel = nil
-        AuthManager.rateViewModel = nil
+        AuthManager.ratesModel = nil
     }
     
     static func isLogin() -> Bool {
@@ -62,7 +62,7 @@ class AuthManager {
     
     static func getSavedRate(completion: @escaping (_ rate: Double) -> Void) {
         getRate { (viewModel) in
-            completion(rateViewModel?.rate ?? 0.0)
+            completion(ratesModel?.rates?.GVT?.first?.rate ?? 0.0)
         }
     }
     
@@ -98,26 +98,26 @@ class AuthManager {
         }, errorCompletion: completionError)
     }
     
-    static func getRate(completion: @escaping (_ rate: RateViewModel?) -> Void) {
-        guard rateViewModel == nil else {
-            completion(rateViewModel)
+    static func getRate(completion: @escaping (_ rate: RatesModel?) -> Void) {
+        guard ratesModel == nil else {
+            completion(ratesModel)
             return
         }
         
-        RateDataProvider.getTake(completion: { (viewModel) in
+        RateDataProvider.getRate(completion: { (viewModel) in
             if viewModel != nil  {
-                rateViewModel = viewModel
+                ratesModel = viewModel
             }
             
-            completion(rateViewModel)
-        }, errorCompletion: { (result) in
+            completion(ratesModel)
+        }) { (result) in
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType)
             }
-        })
+        }
     }
     
     static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void, completionError: @escaping CompletionBlock) {
@@ -151,8 +151,7 @@ class AuthManager {
     // MARK: - Private methods
     private func updateApiToken(completion: @escaping CompletionBlock)  {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.apiInvestorAuthUpdateTokenGet(authorization: token) { (token, error) in
+        AuthAPI.v10AuthTokenUpdatePost(authorization: token) { (token, error) in
             guard token != nil else {
                 return ErrorHandler.handleApiError(error: error, completion: completion)
             }

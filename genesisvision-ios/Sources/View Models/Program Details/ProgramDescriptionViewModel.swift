@@ -12,45 +12,45 @@ final class ProgramDescriptionViewModel {
     // MARK: - Variables
     var title: String = "Strategy".uppercased()
     
-    var investmentProgramId: String?
+    var programId: String?
     
-    private var investmentProgramDetails: InvestmentProgramDetails?
+    private var programDetailsFull: ProgramDetailsFull?
     
     private var router: ProgramDescriptionRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramDescriptionRouter, investmentProgramDetails: InvestmentProgramDetails?) {
+    init(withRouter router: ProgramDescriptionRouter, programDetailsFull: ProgramDetailsFull?) {
         self.router = router
-        self.investmentProgramDetails = investmentProgramDetails
+        self.programDetailsFull = programDetailsFull
     }
     
     // MARK: - Public methods
     func getProgramTitle() -> String {
-        guard let title = investmentProgramDetails?.title else { return "" }
+        guard let title = programDetailsFull?.title else { return "" }
         
         return title
     }
     
     func getProgramDescription() -> String {
-        guard let description = investmentProgramDetails?.description else { return "" }
+        guard let description = programDetailsFull?.description else { return "" }
         
         return description
     }
     
     func getProgramLogo() -> String {
-        guard let logo = investmentProgramDetails?.logo else { return "" }
+        guard let logo = programDetailsFull?.logo else { return "" }
         
         return logo
     }
     
     func getProgramManagerUsername() -> String {
-        guard let manager = investmentProgramDetails?.manager, let username = manager.username else { return "" }
+        guard let manager = programDetailsFull?.manager, let username = manager.username else { return "" }
         
         return "by " + username
     }
     
     func getProgramLevelText() -> String {
-        guard let level = investmentProgramDetails?.level else { return 0.toString() }
+        guard let level = programDetailsFull?.level else { return 0.toString() }
         
         return level.toString()
     }

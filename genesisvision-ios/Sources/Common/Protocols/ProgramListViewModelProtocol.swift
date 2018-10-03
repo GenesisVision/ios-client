@@ -36,22 +36,20 @@ protocol ProgramListViewModelProtocol {
     var take: Int { get set }
     var totalCount: Int { get set }
     
-    var filter: InvestmentProgramsFilter? { get }
-
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     
     func refresh(completion: @escaping CompletionBlock)
     
     func model(at indexPath: IndexPath) -> CellViewAnyModel?
-    func model(at investmentProgramId: String) -> CellViewAnyModel?
+    func model(at programId: String) -> CellViewAnyModel?
     func modelsCount() -> Int
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
     
-    func showDetail(with investmentProgramId: String)
+    func showDetail(with programId: String)
     func showDetail(at indexPath: IndexPath)
     
     func fetch(completion: @escaping CompletionBlock)
@@ -59,7 +57,7 @@ protocol ProgramListViewModelProtocol {
     func fetchMore()
     
     func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController?
-    func changeFavorite(value: Bool, investmentProgramId: String, request: Bool, completion: @escaping CompletionBlock)
+    func changeFavorite(value: Bool, programId: String, request: Bool, completion: @escaping CompletionBlock)
     
     func logoImageName() -> String?
     func noDataText() -> String
@@ -79,8 +77,8 @@ extension ProgramListViewModelProtocol {
         }
     }
     
-    func model(at investmentProgramId: String) -> CellViewAnyModel? {
-        if let i = programViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+    func model(at programId: String) -> CellViewAnyModel? {
+        if let i = programViewModels.index(where: { $0.program.id?.uuidString == programId }) {
             return programViewModels[i]
         }
         
@@ -92,12 +90,12 @@ extension ProgramListViewModelProtocol {
             return nil
         }
         
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return nil}
+        let program = model.program
+        guard let programId = program.id else { return nil}
         
         guard let router: Router = router as? Router else { return nil }
         
-        return router.getDetailsViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: programId.uuidString)
     }
     
     // MARK: - TableView
@@ -148,37 +146,37 @@ extension ProgramListViewModelProtocol {
     }
     
     // MARK: - Navigation
-    func showDetail(with investmentProgramId: String) {
-        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId))
+    func showDetail(with programId: String) {
+        router.show(routeType: .showProgramDetails(programId: programId))
     }
     
     func showDetail(at indexPath: IndexPath) {
         guard let model: ProgramTableViewCellViewModel = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
         
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return }
+        let program = model.program
+        guard let programId = program.id else { return }
         
-        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
+        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
     }
     
     func showSignInVC() {
-        if let router = router as? InvestmentProgramListRouter {
+        if let router = router as? ProgramListRouter {
             router.show(routeType: .signIn)
         }
     }
     
     func showFilterVC() {
-        if let router = router as? InvestmentProgramListRouter, (self as? InvestmentProgramListViewModel) != nil {
-            router.show(routeType: .showFilterVC(investmentProgramListViewModel: self as! InvestmentProgramListViewModel))
+        if let router = router as? ProgramListRouter, (self as? ProgramListViewModel) != nil {
+            router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
         }
     }
     
     func showTournamentVC() {
-        guard let platformStatus = PlatformManager.platformStatus, let tournamentTotalRounds = platformStatus.tournamentTotalRounds, let tournamentCurrentRound = platformStatus.tournamentCurrentRound else { return }
-        
-        if let router = router as? InvestmentProgramListRouter {
-            router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
-        }
+//        guard let platformInfo = PlatformManager.platformInfo, let tournamentTotalRounds = platformStatus.tournamentTotalRounds, let tournamentCurrentRound = platformInfo.tournamentCurrentRound else { return }
+//
+//        if let router = router as? ProgramListRouter {
+//            router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
+//        }
     }
     
     // MARK: - Nodata
@@ -210,7 +208,7 @@ extension ProgramListViewModelProtocol {
     }
     
     // MARK: - Private methods
-    func responseHandler(_ viewModel: InvestmentProgramsViewModel?, error: Error?, successCompletion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    func responseHandler(_ viewModel: ProgramDetailsFull?, error: Error?, successCompletion: @escaping (_ programsViewModel: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard viewModel != nil else {
             return ErrorHandler.handleApiError(error: error, completion: errorCompletion)

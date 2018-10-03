@@ -42,7 +42,7 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
 
 func getDecimalCount(for currencyValue: String?) -> Int {
     guard let currencyValue = currencyValue,
-        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else { return 2 }
+        let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency.rawValue) else { return 2 }
 
     return currencyType.currencyLenght
 }
@@ -153,9 +153,9 @@ func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx
 }
 
 func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
-    PlatformManager.getPlatformStatus(completion: { (model) in
-        guard let platformStatus = model,
-            let iOSVersion = platformStatus.iOSVersion,
+    PlatformManager.getPlatformInfo(completion: { (model) in
+        guard let platformInfo = model,
+            let iOSVersion = platformInfo.iOSVersion,
             let lastVersion = iOSVersion.lastVersion,
             newVersionIsAvailable(lastVersion) else { return }
         

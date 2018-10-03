@@ -74,8 +74,8 @@ final class DashboardViewModel {
     var searchText = ""
     var viewModels = [DashboardTableViewCellViewModel]() {
         didSet {
-            self.activeViewModels = viewModels.filter { $0.investmentProgram.isArchived != true }
-            self.archiveViewModels = viewModels.filter { $0.investmentProgram.isArchived == true }
+            self.activeViewModels = viewModels.filter { $0.program.status != .archived }
+            self.archiveViewModels = viewModels.filter { $0.program.status == .archived }
         }
     }
     var activeViewModels = [DashboardTableViewCellViewModel]()
@@ -101,19 +101,19 @@ final class DashboardViewModel {
     }
     
     // MARK: - Public methods
-    func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: investmentProgramId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.investmentProgram.isFavorite = value
+            guard let model = model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.program.personalProgramDetails?.isFavorite = value
             completion(.success)
             return
         }
         
-        ProgramDataProvider.programFavorites(isFavorite: !value, investmentProgramId: investmentProgramId) { [weak self] (result) in
+        ProgramDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: investmentProgramId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.investmentProgram.isFavorite = value
+                guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.program.personalProgramDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
                 print(errorType)
@@ -130,8 +130,8 @@ final class DashboardViewModel {
     }
     
     @objc private func programFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let investmentProgramId = notification.userInfo?["investmentProgramId"] as? String {
-            changeFavorite(value: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let programId = notification.userInfo?["programId"] as? String {
+            changeFavorite(value: isFavorite, programId: programId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
@@ -239,10 +239,10 @@ extension DashboardViewModel {
     func showDetail(at indexPath: IndexPath) {
         guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
         
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return }
+        let program = model.program
+        guard let programId = program.id else { return }
         
-        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
+        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
     }
     
     func showProgramList() {
@@ -318,13 +318,13 @@ extension DashboardViewModel {
         }
     }
     
-    func model(at investmentProgramId: String) -> CellViewAnyModel? {
+    func model(at programId: String) -> CellViewAnyModel? {
         if activePrograms {
-            if let i = activeViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+            if let i = activeViewModels.index(where: { $0.program.id?.uuidString == programId }) {
                 return activeViewModels[i]
             }
         } else {
-            if let i = archiveViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+            if let i = archiveViewModels.index(where: { $0.program.id?.uuidString == programId }) {
                 return archiveViewModels[i]
             }
         }
@@ -337,10 +337,10 @@ extension DashboardViewModel {
             return nil
         }
         
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return nil}
+        let program = model.program
+        guard let programId = program.id else { return nil}
         
-        return router.getDetailsViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: programId.uuidString)
     }
     
     // MARK: - Private methods
@@ -354,23 +354,23 @@ extension DashboardViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        DashboardDataProvider.getProgram(with: sortingDelegateManager.sorting, completion: { [weak self] (dashboard) in
-            guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            self?.dashboard = dashboard
-            
-            var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
-            
-            let totalCount = dashboard.investmentPrograms?.count ?? 0
-            
-            dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self?.router.programListViewController, delegate: self?.router.programListViewController)
-                dashboardProgramViewModels.append(dashboardTableViewCellModel)
-            })
-            
-            completionSuccess(totalCount, dashboardProgramViewModels)
-            completionError(.success)
-        }, errorCompletion: completionError)
+//        DashboardDataProvider.getProgram(with: sortingDelegateManager.sorting, completion: { [weak self] (dashboard) in
+//            guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
+//
+//            self?.dashboard = dashboard
+//
+//            var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
+//
+//            let totalCount = dashboard.programs?.count ?? 0
+//
+//            dashboard.programs?.forEach({ (dashboardProgram) in
+//                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(program: dashboardProgram, reloadDataProtocol: self?.router.programListViewController, delegate: self?.router.programListViewController)
+//                dashboardProgramViewModels.append(dashboardTableViewCellModel)
+//            })
+//
+//            completionSuccess(totalCount, dashboardProgramViewModels)
+//            completionError(.success)
+//        }, errorCompletion: completionError)
     }
 }
 
@@ -391,19 +391,19 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     // MARK: - Variables
     var highToLowValue: Bool = true
     
-    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
+    var sorting: InvestorAPI.Sorting_v10InvestorProgramsGet = Constants.Sorting.dashboardDefault
     
-    var sortingDescKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc,
+    var sortingDescKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitDesc,
                                                                       .byLevelDesc,
                                                                       .byBalanceDesc,
-                                                                      .byOrdersDesc,
+                                                                      .byTradesDesc,
                                                                       .byEndOfPeriodDesc,
                                                                       .byTitleDesc]
     
-    var sortingAscKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitAsc,
+    var sortingAscKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitAsc,
                                                                       .byLevelAsc,
                                                                       .byBalanceAsc,
-                                                                      .byOrdersAsc,
+                                                                      .byTradesAsc,
                                                                       .byEndOfPeriodAsc,
                                                                       .byTitleAsc]
     
@@ -416,7 +416,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     
     struct SortingList {
         var sortingValue: String
-        var sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet
+        var sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet
     }
     
     var sortingDescList: [SortingList] {
@@ -437,7 +437,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     }
     
     // MARK: - Private methods
-    func getSortingValue(sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet) -> String {
+    func getSortingValue(sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet) -> String {
         guard let index = sortingDescKeys.index(of: sortingKey) else { return "" }
         return sortingValues[index]
     }

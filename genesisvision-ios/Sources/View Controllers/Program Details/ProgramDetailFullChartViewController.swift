@@ -81,7 +81,7 @@ class ProgramDetailFullChartViewController: BaseViewController {
         
         currencyValueLabel.text = viewModel.getCurrencyValue()
         
-        chartView.setup(chartType: .full, chartDataSet: viewModel.investmentProgramDetails?.chart, name: "Full Chart", currencyValue: viewModel.investmentProgramDetails?.currency?.rawValue)
+//        chartView.setup(chartType: .full, chartDataSet: viewModel.programDetailsFull?.chart, name: "Full Chart", currencyValue: viewModel.programDetailsFull?.currency?.rawValue)
     }
     
     @objc func segmentSelected(sender: ScrollableSegmentedControl) {

@@ -25,7 +25,7 @@ extension Double {
     }
     
     func rounded(withCurrency currencyValue: String?) -> Double {
-        guard let currencyValue = currencyValue, let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else {
+        guard let currencyValue = currencyValue, let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency.rawValue) else {
             return rounded(withType: .usd)
         }
         

@@ -20,7 +20,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         didSet {
             title = viewModel.getNickname()
             
-            if viewModel.investmentProgramDetails == nil {
+            if viewModel.programDetailsFull == nil {
                 updateData()
             }
         }
@@ -138,8 +138,8 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Public methods
-    func updateDetails(with investmentProgramDetails: InvestmentProgramDetails) {
-        viewModel.updateDetails(with: investmentProgramDetails)
+    func updateDetails(with programDetailsFull: ProgramDetailsFull) {
+        viewModel.updateDetails(with: programDetailsFull)
         reloadData()
     }
     

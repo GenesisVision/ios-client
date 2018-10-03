@@ -14,27 +14,27 @@ struct WalletTransactionTableViewCellViewModel {
 
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
-        if let type = walletTransaction.type, let amount = walletTransaction.amount {
+        if let action = walletTransaction.action, let amount = walletTransaction.amount {
             var text: String?
             var textColor: UIColor?
             
             var arithmeticSign = ""
             
             cell.amountLabel.text = ""
-            switch type {
-            case .investToProgram:
+            switch action {
+            case .programInvest:
                 text = "Invest To Program"
                 textColor = UIColor.Font.red
                 arithmeticSign = "-"
-            case .openProgram:
+            case .programOpen:
                 text = "Open Program"
                 textColor = UIColor.Font.light
                 arithmeticSign = ""
-            case .withdrawFromProgram:
+            case .programWithdrawal:
                 text = "Withdraw From Program"
                 textColor = UIColor.Font.primary
                 arithmeticSign = "+"
-            case .profitFromProgram:
+            case .programProfit:
                 text = "Profit From Program"
                 if amount == 0 {
                     textColor = UIColor.Font.medium
@@ -45,26 +45,29 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 } else {
                     textColor = UIColor.Font.red
                 }
-            case .cancelInvestmentRequest:
+            case .programRequestCancel:
                 text = "Cancel Investment Request"
                 textColor = UIColor.Font.primary
                 arithmeticSign = "+"
-            case .partialInvestmentExecutionRefund:
+            case .programRefundPartialExecution:
                 text = "Partial Investment Execution Refund"
                 textColor = UIColor.Font.primary
                 arithmeticSign = "+"
-            case .deposit:
-                text = "Deposit"
+            case .programRequestInvest:
+                text = "Program Request Invest"
                 textColor = UIColor.Font.primary
                 arithmeticSign = "+"
-            case .withdraw:
-                text = "Withdraw"
+            case .programRequestWithdrawal:
+                text = "Program Request Withdrawal"
                 textColor = UIColor.Font.red
                 arithmeticSign = "-"
-            case .closingProgramRefund:
+            case .programRefundClose:
                 text = "Closing Program Refund"
                 textColor = UIColor.Font.primary
                 arithmeticSign = "+"
+            default:
+                print(action)
+                break
             }
             
 //            cell.investTypeLabel.text = text
@@ -76,18 +79,18 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.dateLabel.text = date.defaultFormatString
         }
         
-        if let title = walletTransaction.investmentProgram?.title {
-            cell.programTitleLabel.text = title
-        } else {
-            cell.programTitleLabel.isHidden = true
-        }
+//        if let title = walletTransaction.program?.title {
+//            cell.programTitleLabel.text = title
+//        } else {
+//            cell.programTitleLabel.isHidden = true
+//        }
         
-//        if let status = walletTransaction.investmentProgramRequest?.status {
+//        if let status = walletTransaction.programRequest?.status {
 //            cell.programStatusLabel.text = status.rawValue
 //        } else {
 //            cell.programStatusLabel.isHidden = true
 //        }
         
-        cell.selectionStyle = walletTransaction.investmentProgram != nil ? .default : .none
+        cell.selectionStyle = .none//walletTransaction.program != nil ? .default : .none
     }
 }

@@ -35,21 +35,11 @@ final class ProgramDetailViewModel {
     private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
     var chartDurationType: ChartDurationType = .all
-    var investmentProgramId: String!
-    private var equityChart: [TradeChart]?
-    public private(set) var investmentProgramDetails: InvestmentProgramDetails? {
+    var programId: String!
+    private var equityChart: [ChartSimple]?
+    public private(set) var programDetailsFull: ProgramDetailsFull? {
         didSet {
-            if let isHistoryEnable = investmentProgramDetails?.isHistoryEnable,
-                let isInvestEnable = investmentProgramDetails?.isInvestEnable,
-                let isWithdrawEnable = investmentProgramDetails?.isWithdrawEnable,
-                let hasNewRequests = investmentProgramDetails?.hasNewRequests {
-                self.viewProperties = ProgramDetailViewProperties(isHistoryEnable: isHistoryEnable,
-                                                             isInvestEnable: isInvestEnable,
-                                                             isWithdrawEnable: isWithdrawEnable,
-                                                             hasNewRequests: hasNewRequests)
-            }
-            
-            if let availableInvestment = investmentProgramDetails?.availableInvestment {
+            if let availableInvestment = programDetailsFull?.availableInvestment {
                 self.availableInvestment = availableInvestment
             }
         }
@@ -70,21 +60,21 @@ final class ProgramDetailViewModel {
     
     // MARK: - Init
     init(withRouter router: ProgramDetailRouter,
-         investmentProgramId: String? = nil,
-         investmentProgramDetails: InvestmentProgramDetails? = nil,
+         programId: String? = nil,
+         programDetailsFull: ProgramDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil,
          detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol? = nil) {
         self.router = router
         
-        if let investmentProgramId = investmentProgramId {
-            self.investmentProgramId = investmentProgramId
+        if let programId = programId {
+            self.programId = programId
         }
         
-        if let investmentProgramDetails = investmentProgramDetails, let investmentProgramId = investmentProgramDetails.id?.uuidString {
+        if let programDetailsFull = programDetailsFull, let programId = programDetailsFull.id?.uuidString {
             DispatchQueue.main.async {
-                self.investmentProgramDetails = investmentProgramDetails
+                self.programDetailsFull = programDetailsFull
             }
-            self.investmentProgramId = investmentProgramId
+            self.programId = programId
         }
         
         self.reloadDataProtocol = reloadDataProtocol
@@ -105,7 +95,7 @@ final class ProgramDetailViewModel {
     }
     
     func numberOfSections() -> Int {
-        guard investmentProgramDetails != nil else {
+        guard programDetailsFull != nil else {
             return 0
         }
         
@@ -128,37 +118,37 @@ final class ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let investmentProgramId = investmentProgramId, let currency = investmentProgramDetails?.currency, let availableToInvest = investmentProgramDetails?.availableInvestment else { return }
-        router.show(routeType: .invest(investmentProgramId: investmentProgramId, currency: currency.rawValue, availableToInvest: availableToInvest))
+        guard let programId = programId, let currency = programDetailsFull?.currency, let availableToInvest = programDetailsFull?.availableInvestment else { return }
+        router.show(routeType: .invest(programId: programId, currency: currency.rawValue, availableToInvest: availableToInvest))
     }
     
     func withdraw() {
-        guard let investmentProgramId = investmentProgramId, let investedTokens = investmentProgramDetails?.investedTokens, let currency = investmentProgramDetails?.currency else { return }
-        router.show(routeType: .withdraw(investmentProgramId: investmentProgramId, investedTokens: investedTokens, currency: currency.rawValue))
+        guard let programId = programId, let investedTokens = programDetailsFull?.personalProgramDetails?.value, let currency = programDetailsFull?.currency else { return }
+        router.show(routeType: .withdraw(programId: programId, investedTokens: investedTokens, currency: currency.rawValue))
     }
     
     func showFullChart() {
         UserDefaults.standard.set(true, forKey: Constants.UserDefaults.restrictRotation)
         
-        guard let investmentProgramDetails = investmentProgramDetails else { return }
-        router.show(routeType: .fullChart(investmentProgramDetails: investmentProgramDetails))
+        guard let programDetailsFull = programDetailsFull else { return }
+        router.show(routeType: .fullChart(programDetailsFull: programDetailsFull))
     }
     
     func updateChart(with type: ChartDurationType, completion: @escaping CompletionBlock) {
-        let timeFrame = type.getTimeFrame()
+//        let timeFrame = type.getTimeFrame()
         
-        ProgramDataProvider.getProgramChart(with: timeFrame, investmentProgramId: investmentProgramId, completion: { [weak self] (viewModel) in
-            guard viewModel != nil else {
-                return completion(.failure(errorType: .apiError(message: nil)))
-            }
-            
-            if let chart = viewModel?.chart {
-                self?.equityChart = chart
-                self?.chartDurationType = type
-            }
-            
-            completion(.success)
-        }, errorCompletion: completion)
+//        ProgramDataProvider.getProgramChart(with: timeFrame, programId: programId, completion: { [weak self] (viewModel) in
+//            guard viewModel != nil else {
+//                return completion(.failure(errorType: .apiError(message: nil)))
+//            }
+//
+//            if let chart = viewModel?.chart {
+//                self?.equityChart = chart
+//                self?.chartDurationType = type
+//            }
+//
+//            completion(.success)
+//        }, errorCompletion: completion)
     }
 }
 
@@ -166,12 +156,12 @@ extension ProgramDetailViewModel {
 extension ProgramDetailViewModel {
     // MARK: - Public methods
     func getNickname() -> String {
-        return investmentProgramDetails?.manager?.username ?? ""
+        return programDetailsFull?.manager?.username ?? ""
     }
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard investmentProgramDetails != nil else {
+        guard programDetailsFull != nil else {
             return nil
         }
         
@@ -195,19 +185,19 @@ extension ProgramDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        ProgramDataProvider.getProgram(investmentProgramId: self.investmentProgramId, completion: { [weak self] (viewModel) in
-            guard viewModel != nil else {
-                return completion(.failure(errorType: .apiError(message: nil)))
-            }
-            
-            self?.investmentProgramDetails = viewModel
-            
-            completion(.success)
-        }, errorCompletion: completion)
+//        ProgramDataProvider.getProgram(programId: self.programId, completion: { [weak self] (viewModel) in
+//            guard viewModel != nil else {
+//                return completion(.failure(errorType: .apiError(message: nil)))
+//            }
+//
+//            self?.programDetails = viewModel
+//
+//            completion(.success)
+//        }, errorCompletion: completion)
     }
     
-    func updateDetails(with investmentProgramDetails: InvestmentProgramDetails) {
-        self.investmentProgramDetails = investmentProgramDetails
+    func updateDetails(with programDetailsFull: ProgramDetailsFull) {
+        self.programDetailsFull = programDetailsFull
         self.didReloadData()
     }
 }

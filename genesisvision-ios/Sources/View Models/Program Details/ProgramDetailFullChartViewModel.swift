@@ -11,13 +11,13 @@ import Foundation
 final class ProgramDetailFullChartViewModel {
     // MARK: - Variables
     var router: Router!
-    var investmentProgramDetails: InvestmentProgramDetails?
+    var programDetailsFull: ProgramDetailsFull?
     var chartDurationType: ChartDurationType = .week
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailFullChartRouter, investmentProgramDetails: InvestmentProgramDetails) {
+    init(withRouter router: ProgramDetailFullChartRouter, programDetailsFull: ProgramDetailsFull) {
         self.router = router
-        self.investmentProgramDetails = investmentProgramDetails
+        self.programDetailsFull = programDetailsFull
     }
     
     func dismissVC() {
@@ -27,11 +27,11 @@ final class ProgramDetailFullChartViewModel {
     
     // MARK: - Public methods
     var title: String {
-        return investmentProgramDetails?.title ?? ""
+        return programDetailsFull?.title ?? ""
     }
     
     var subtitle: String? {
-        guard let username = investmentProgramDetails?.manager?.username else {
+        guard let username = programDetailsFull?.manager?.username else {
             return nil
         }
         
@@ -53,7 +53,7 @@ final class ProgramDetailFullChartViewModel {
     }
     
     func getCurrencyValue() -> String {
-        if let currency = investmentProgramDetails?.currency?.rawValue {
+        if let currency = programDetailsFull?.currency?.rawValue {
             return currency
         }
         

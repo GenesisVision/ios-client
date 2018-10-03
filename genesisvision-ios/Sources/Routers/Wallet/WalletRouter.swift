@@ -7,7 +7,7 @@
 //
 
 enum WalletRouteType {
-    case withdraw, deposit, showProgramDetails(investmentProgramId: String), showFilterVC(walletControllerViewModel: WalletControllerViewModel), programList
+    case withdraw, deposit, showProgramDetails(programId: String), showFilterVC(walletControllerViewModel: WalletControllerViewModel), programList
 }
 
 class WalletRouter: Router {
@@ -19,8 +19,8 @@ class WalletRouter: Router {
             withdraw()
         case .deposit:
             deposit()
-        case .showProgramDetails(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
+        case .showProgramDetails(let programId):
+            showProgramDetails(with: programId)
         case .showFilterVC(let walletControllerViewModel):
             showFilterVC(with: walletControllerViewModel)
         case .programList:

@@ -9,7 +9,7 @@
 import Foundation
 
 struct ProgramRequestTableViewCellViewModel {
-    var request: InvestmentProgramRequest
+    var request: ProgramRequest
     var lastRequest: Bool
     weak var delegate: ProgramRequestTableViewCellProtocol?
 }
@@ -25,8 +25,8 @@ extension ProgramRequestTableViewCellViewModel: CellViewModel {
         if let type = request.type?.rawValue {
             cell.typeLabel.text = type
         }
-        if let amount = request.amount {
-            cell.amountLabel.text = amount.rounded(withType: .gvt).toString()
+        if let value = request.value {
+            cell.amountLabel.text = value.rounded(withType: .gvt).toString()
         }
         if let requestID = request.id?.uuidString {
             cell.requestID = requestID

@@ -9,10 +9,13 @@
 import UIKit
 
 class ProgramDataProvider: DataProvider {
-    static func getProgram(investmentProgramId: String, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let authorization = AuthManager.authorizedToken
+    static func getProgram(programId: String, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?, completion: @escaping (_ program: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+//        guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        getInvestorProgram(with: investmentProgramId, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
+        ProgramsAPI.v10ProgramsByIdGet(id: programId, authorization: authorization, currencySecondary: currencySecondary) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
     }
     
     static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
@@ -32,123 +35,103 @@ class ProgramDataProvider: DataProvider {
         }
     }
     
-    static func investProgram(withAmount amount: Double, investmentProgramId: String?, completion: @escaping (_ walletsViewModel: WalletsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func investProgram(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let investmentProgramId = investmentProgramId,
-            let uuid = UUID(uuidString: investmentProgramId)
+            let programId = programId,
+            let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        let investModel = Invest(investmentProgramId: uuid, amount: amount)
-        
-        InvestorAPI.apiInvestorInvestmentProgramsInvestPost(authorization: authorization, model: investModel) { (walletsViewModel, error) in
-            DataProvider().responseHandler(walletsViewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func withdrawProgram(withAmount amount: Double, investmentProgramId: String?, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let investmentProgramId = investmentProgramId,
-            let uuid = UUID(uuidString: investmentProgramId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        print(amount)
-        let a = amount.rounded(toPlaces: 2)
-        print(a)
-        let investModel = Invest(investmentProgramId: uuid, amount: amount.rounded(toPlaces: 2))
-        print(investModel.amount)
-        InvestorAPI.apiInvestorInvestmentProgramsWithdrawPost(authorization: authorization, model: investModel) { (error) in
+        InvestorAPI.v10InvestorProgramsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
     
-    static func getPrograms(with filter: InvestmentProgramsFilter, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func withdrawProgram(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let programId = programId,
+            let uuid = UUID(uuidString: programId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdWithdrawByAmountPost(id: uuid, amount: amount.rounded(toPlaces: 2), authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: errorCompletion)
+        }
+    }
+    
+    static func getPrograms(with levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: UUID? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
         let authorization = AuthManager.authorizedToken
-
+        
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, skip: skip, take: take) { (viewModel, error)
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+        
         isInvestorApp
             ? getInvestorPrograms(with: filter, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
             : getManagerPrograms(with: filter, authorization: authorization, completion: completion, errorCompletion: errorCompletion)
     }
     
-    static func getProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProgramTrades(with programId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        isInvestorApp
-            ? getInvestorProgramTrades(with: filter, completion: completion, errorCompletion: errorCompletion)
-            : getManagerProgramTrades(with: filter, completion: completion, errorCompletion: errorCompletion)
+        guard let programId = programId, let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsByIdTradesGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
     }
     
-    static func getProgramChart(with timeFrame: InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProgramChart(with programId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        getInvestorProgramTradesChart(with: timeFrame, investmentProgramId: investmentProgramId, completion: completion, errorCompletion: errorCompletion)
+//        getInvestorProgramTradesChart(with: timeFrame, programId: programId, completion: completion, errorCompletion: errorCompletion)
     }
     
-    static func programFavorites(isFavorite: Bool, investmentProgramId: String, completion: @escaping CompletionBlock) {
+    static func programFavorites(isFavorite: Bool, programId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         isFavorite
-            ? programFavoritesRemove(with: investmentProgramId, authorization: authorization, completion: completion)
-            : programFavoritesAdd(with: investmentProgramId, authorization: authorization, completion: completion)
+            ? programFavoritesRemove(with: programId, authorization: authorization, completion: completion)
+            : programFavoritesAdd(with: programId, authorization: authorization, completion: completion)
     }
     
     // MARK: - Private methods
-    private static func getInvestorProgram(with investmentProgramId: String, authorization: String?, completion: @escaping (_ program: InvestmentProgramDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    private static func getInvestorPrograms(with filter: ProgramsFilter, authorization: String?, completion: @escaping (_ programsViewModel: ProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        InvestorAPI.apiInvestorInvestmentProgramGet(investmentProgramId: uuid, authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel?.investmentProgram, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
+//        InvestorAPI.apiInvestorProgramsPost(authorization: authorization, filter: filter) { (viewModel, error) in
+//            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+//        }
     }
     
-    private static func getInvestorPrograms(with filter: InvestmentProgramsFilter, authorization: String?, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorInvestmentProgramsPost(authorization: authorization, filter: filter) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
+    private static func getManagerPrograms(with filter: ProgramsFilter, authorization: String?, completion: @escaping (_ programsViewModel: ProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+//        ManagerAPI.apiManagerProgramsPost(authorization: authorization, filter: filter) { (viewModel, error) in
+//            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+//        }
     }
     
-    private static func getManagerPrograms(with filter: InvestmentProgramsFilter, authorization: String?, completion: @escaping (_ investmentProgramsViewModel: InvestmentProgramsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerInvestmentProgramsPost(authorization: authorization, filter: filter) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    
-    private static func getInvestorProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorInvestmentProgramTradesPost(filter: filter) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    private static func getManagerProgramTrades(with filter: TradesFilter, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerInvestmentProgramTradesPost(filter: filter) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    private static func getInvestorProgramTradesChart(with timeFrame: InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    private static func getInvestorProgramTradesChart(with programId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.apiInvestorInvestmentProgramEquityChartGet(investmentProgramId: uuid, timeFrame: timeFrame) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
+//        guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+//
+//        InvestorAPI.apiInvestorProgramEquityChartGet(programId: uuid, timeFrame: timeFrame) { (viewModel, error) in
+//            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+//        }
     }
     
-    private static func getManagerProgramTradesChart(with timeFrame: ManagerAPI.TimeFrame_apiManagerInvestmentProgramEquityChartGet, investmentProgramId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    private static func getManagerProgramTradesChart(with timeFrame: ManagerAPI.TimeFrame_apiManagerProgramEquityChartGet, programId: String, completion: @escaping (_ tradesChartViewModel: TradesChartViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ManagerAPI.apiManagerInvestmentProgramEquityChartGet(investmentProgramId: uuid, timeFrame: timeFrame) { (viewModel, error) in
+        ManagerAPI.apiManagerProgramEquityChartGet(programId: uuid, timeFrame: timeFrame) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 
-    private static func programFavoritesAdd(with investmentProgramId: String, authorization: String, completion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+    private static func programFavoritesAdd(with programId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.apiInvestorInvestmentProgramsFavoritesAddPost(investmentProgramId: uuid, authorization: authorization) { (error) in
+        ProgramsAPI.v10ProgramsByIdFavoriteAddPost(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "investmentProgramId" : investmentProgramId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "programId" : programId])
                 default:
                     break
                 }
@@ -158,14 +141,14 @@ class ProgramDataProvider: DataProvider {
         }
     }
     
-    private static func programFavoritesRemove(with investmentProgramId: String, authorization: String, completion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: investmentProgramId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+    private static func programFavoritesRemove(with programId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.apiInvestorInvestmentProgramsFavoritesRemovePost(investmentProgramId: uuid, authorization: authorization) { (error) in
+        ProgramsAPI.v10ProgramsByIdFavoriteRemovePost(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "investmentProgramId" : investmentProgramId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "programId" : programId])
                 default:
                     break
                 }

@@ -18,28 +18,28 @@ enum ChartDurationType: Int {
         return ["1d", "1w", "1m", "3m", "6m", "1y", "all"]
     }
     
-    func getTimeFrame() -> InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet {
-        var timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.day1
-        
-        switch self {
-        case .day:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.day1
-        case .week:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.week1
-        case .month:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month1
-        case .month3:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month3
-        case .month6:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.month6
-        case .year:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.year1
-        case .all:
-            timeFrame = InvestorAPI.TimeFrame_apiInvestorInvestmentProgramEquityChartGet.all
-        }
-        
-        return timeFrame
-    }
+//    func getTimeFrame() -> InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet {
+//        var timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.day1
+//    
+//        switch self {
+//        case .day:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.day1
+//        case .week:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.week1
+//        case .month:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month1
+//        case .month3:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month3
+//        case .month6:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month6
+//        case .year:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.year1
+//        case .all:
+//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.all
+//        }
+//        
+//        return timeFrame
+//    }
 }
 
 // MARK: - DateRange
@@ -69,7 +69,7 @@ enum CurrencyType: Int {
 }
 
 extension CurrencyType {
-    init?(currency: InvestmentProgramDetails.Currency) {
+    init?(currency: ProgramsAPI.CurrencySecondary_v10ProgramsGet) {
         switch currency {
         case .gvt:
             self.init(rawValue: 0)
@@ -88,7 +88,7 @@ extension CurrencyType {
         }
     }
     
-    init?(currency: InvestmentProgramDashboardInvestor.Currency) {
+    init?(currency: InvestorAPI.Currency_v10InvestorPortfolioChartGet) {
         switch currency {
         case .gvt:
             self.init(rawValue: 0)

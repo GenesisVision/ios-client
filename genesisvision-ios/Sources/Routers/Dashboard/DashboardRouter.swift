@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(investmentProgramId: String), programList, notificationList, allPortfolioEvents, requests
+    case showProgramDetails(programId: String), programList, notificationList, allPortfolioEvents, requests
 }
 
 class DashboardRouter: Router {
@@ -33,8 +33,8 @@ class DashboardRouter: Router {
     // MARK: - Public methods
     func show(routeType: DashboardRouteType) {
         switch routeType {
-        case .showProgramDetails(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
+        case .showProgramDetails(let programId):
+            showProgramDetails(with: programId)
         case .programList:
             showProgramList()
         case .notificationList:

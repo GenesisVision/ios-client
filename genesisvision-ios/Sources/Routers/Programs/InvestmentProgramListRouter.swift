@@ -1,5 +1,5 @@
 //
-//  InvestmentProgramListRouter.swift
+//  ProgramListRouter.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 26.01.18.
@@ -8,17 +8,17 @@
 
 import UIKit.UINavigationController
 
-class InvestmentProgramListRouter: Router, ProgramListRouterProtocol {
+class ProgramListRouter: Router, ProgramListRouterProtocol {
     
     // MARK: - Public methods
     func show(routeType: ProgramListRouteType) {
         switch routeType {
         case .signIn:
             signInAction()
-        case .showFilterVC(let investmentProgramListViewModel):
-            showFilterVC(with: investmentProgramListViewModel)
-        case .showProgramDetails(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
+        case .showFilterVC(let programListViewModel):
+            showFilterVC(with: programListViewModel)
+        case .showProgramDetails(let programId):
+            showProgramDetails(with: programId)
         case .showTournamentVC(let tournamentTotalRounds, let tournamentCurrentRound):
             showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound)
         }
@@ -32,10 +32,10 @@ class InvestmentProgramListRouter: Router, ProgramListRouterProtocol {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showFilterVC(with investmentProgramListViewModel: InvestmentProgramListViewModel) {
+    private func showFilterVC(with programListViewModel: ProgramListViewModel) {
         guard let viewController = ProgramFilterViewController.storyboardInstance(name: .programs) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramFilterViewModel(withRouter: router, investmentProgramListViewModel: investmentProgramListViewModel)
+        let viewModel = ProgramFilterViewModel(withRouter: router, programListViewModel: programListViewModel)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

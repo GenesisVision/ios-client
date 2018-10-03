@@ -73,32 +73,32 @@ final class CreateProgramThirdViewModel: ViewModelWithTableView {
             let period = temparyNewInvestmentRequest.period
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        let newInvestmentRequest = NewInvestmentRequest(brokerTradeServerId: brokerTradeServerId,
-                                                        tradePlatformPassword: tradePlatformPassword,
-                                                        depositAmount: depositAmount,
-                                                        leverage: leverage,
-                                                        tokenName: tokenName,
-                                                        tokenSymbol: tokenSymbol,
-                                                        dateFrom: temparyNewInvestmentRequest.dateFrom,
-                                                        dateTo: temparyNewInvestmentRequest.dateTo,
-                                                        logo: temparyNewInvestmentRequest.logo,
-                                                        title: title,
-                                                        description: temparyNewInvestmentRequest.description,
-                                                        feeManagement: temparyNewInvestmentRequest.feeManagement,
-                                                        feeSuccess: temparyNewInvestmentRequest.feeSuccess,
-                                                        investMinAmount: temparyNewInvestmentRequest.investMinAmount,
-                                                        investMaxAmount: temparyNewInvestmentRequest.investMaxAmount,
-                                                        period: period)
+//        let newInvestmentRequest = NewProgramRequest(brokerTradeServerId: brokerTradeServerId,
+//                                                        tradePlatformPassword: tradePlatformPassword,
+//                                                        depositAmount: depositAmount,
+//                                                        leverage: leverage,
+//                                                        tokenName: tokenName,
+//                                                        tokenSymbol: tokenSymbol,
+//                                                        dateFrom: temparyNewInvestmentRequest.dateFrom,
+//                                                        dateTo: temparyNewInvestmentRequest.dateTo,
+//                                                        logo: temparyNewInvestmentRequest.logo,
+//                                                        title: title,
+//                                                        description: temparyNewInvestmentRequest.description,
+//                                                        feeManagement: temparyNewInvestmentRequest.feeManagement,
+//                                                        feeSuccess: temparyNewInvestmentRequest.feeSuccess,
+//                                                        investMinAmount: temparyNewInvestmentRequest.investMinAmount,
+//                                                        investMaxAmount: temparyNewInvestmentRequest.investMaxAmount,
+//                                                        period: period)
         
-        guard let pickedImageURL = pickedImageURL else {
-            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
-            return
-        }
-        
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (imageID) in
-            newInvestmentRequest.logo = imageID
-            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
-            }, errorCompletion: errorCompletion)
+//        guard let pickedImageURL = pickedImageURL else {
+//            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
+//            return
+//        }
+//
+//        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (imageID) in
+//            newInvestmentRequest.logo = imageID
+//            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
+//            }, errorCompletion: errorCompletion)
     }
     
     // MARK: - TableView

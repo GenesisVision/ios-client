@@ -29,26 +29,26 @@ final class TournamentListViewModel {
             programsCount = "\(totalCount) programs"
         }
     }
-    private var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
+    private var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Constants.Sorting.programListDefault
     var searchText = "" {
         didSet {
             filter?.name = searchText
         }
     }
     var tournamentTableViewCellViewModels = [TournamentTableViewCellViewModel]()
-    var filter: InvestmentProgramsFilter?
+    var filter: ProgramsFilter?
     
     // MARK: - Init
     init(withRouter router: TournamentListRouter, reloadDataProtocol: ReloadDataProtocol?, roundNumber: Int?) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = InvestmentProgramsFilter(managerId: nil,
+        filter = ProgramsFilter(managerId: nil,
                                           brokerId: nil,
                                           brokerTradeServerId: nil,
                                           investMaxAmountFrom: nil,
                                           investMaxAmountTo: nil,
-                                          sorting: sorting,
+                                          sorting: nil,
                                           name: searchText,
                                           levelMin: nil,
                                           levelMax: nil,
@@ -83,10 +83,10 @@ final class TournamentListViewModel {
             return nil
         }
         
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return nil}
+        let program = model.program
+        guard let programId = program.id else { return nil}
         
-        return router.getDetailsViewController(with: investmentProgramId.uuidString)
+        return router.getDetailsViewController(with: programId.uuidString)
     }
     
 }
@@ -130,8 +130,8 @@ extension TournamentListViewModel {
 // MARK: - Navigation
 extension TournamentListViewModel {
     // MARK: - Public methods
-    func showDetail(with model: InvestmentProgram) {
-        router.show(routeType: .showDetail(investmentProgramId: model.id?.uuidString ?? ""))
+    func showDetail(with model: Program) {
+        router.show(routeType: .showDetail(programId: model.id?.uuidString ?? ""))
     }
 }
 
@@ -211,19 +211,19 @@ extension TournamentListViewModel {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (investmentProgramsViewModel) in
-                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (programsViewModel) in
+                guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                var investmentProgramViewModels = [TournamentTableViewCellViewModel]()
+                var programViewModels = [TournamentTableViewCellViewModel]()
                 
-                let totalCount = investmentPrograms.total ?? 0
+                let totalCount = programs.total ?? 0
                 
-                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
-                    let tournamentTableViewCellViewModel = TournamentTableViewCellViewModel(investmentProgram: investmentProgram, delegate: self?.router.programsViewController)
-                    investmentProgramViewModels.append(tournamentTableViewCellViewModel)
+                programs.programs?.forEach({ (program) in
+                    let tournamentTableViewCellViewModel = TournamentTableViewCellViewModel(program: program, delegate: self?.router.programsViewController)
+                    programViewModels.append(tournamentTableViewCellViewModel)
                 })
                 
-                completionSuccess(totalCount, investmentProgramViewModels)
+                completionSuccess(totalCount, programViewModels)
                 completionError(.success)
                 }, errorCompletion: completionError)
         case .fake:

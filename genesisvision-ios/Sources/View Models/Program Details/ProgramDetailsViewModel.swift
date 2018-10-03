@@ -12,18 +12,18 @@ protocol ProgramDetailsProtocol: class {
 
 final class ProgramDetailsViewModel: TabmanViewModel {
     // MARK: - Variables
-    var investmentProgramId: String!
-    var investmentProgramDetails: InvestmentProgramDetails?
-    
+    var programId: String!
+    var programDetailsFull: ProgramDetailsFull?
+    var сurrency: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?
     weak var programDetailsProtocol: ProgramDetailsProtocol?
     
     var isFavorite: Bool {
-        return investmentProgramDetails?.isFavorite ?? false
+        return programDetailsFull?.personalProgramDetails?.isFavorite ?? false
     }
     
     // MARK: - Init
-    init(withRouter router: Router, investmentProgramId: String, tabmanViewModelDelegate: TabmanViewModelDelegate) {
-        self.investmentProgramId = investmentProgramId
+    init(withRouter router: Router, programId: String, tabmanViewModelDelegate: TabmanViewModelDelegate) {
+        self.programId = programId
         
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
@@ -36,9 +36,9 @@ final class ProgramDetailsViewModel: TabmanViewModel {
     func didRequestCanceled(_ last: Bool) {
         guard !last else { return reloadData() }
         
-        ProgramDataProvider.getProgram(investmentProgramId: investmentProgramId, completion: { [weak self] (viewModel) in
+        ProgramDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
-            self?.investmentProgramDetails = viewModel
+            self?.programDetailsFull = viewModel
             self?.reloadDetails()
         }) { (result) in }
     }
@@ -52,15 +52,15 @@ final class ProgramDetailsViewModel: TabmanViewModel {
     }
     
     func reloadDetails() {
-        if let vc = viewControllers.first as? ProgramDetailViewController, let investmentProgramDetails = investmentProgramDetails {
-            vc.viewModel.updateDetails(with: investmentProgramDetails)
+        if let vc = viewControllers.first as? ProgramDetailViewController, let programDetailsFull = programDetailsFull {
+            vc.viewModel.updateDetails(with: programDetailsFull)
         }
     }
     
     func reloadData() {
-        ProgramDataProvider.getProgram(investmentProgramId: investmentProgramId, completion: { [weak self] (viewModel) in
+        ProgramDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
-            self?.investmentProgramDetails = viewModel
+            self?.programDetailsFull = viewModel
             self?.programDetailsProtocol?.didFavoriteStateUpdated()
             self?.removeAllControllers()
             self?.setup()
@@ -68,17 +68,17 @@ final class ProgramDetailsViewModel: TabmanViewModel {
     }
     
     func changeFavorite(completion: @escaping CompletionBlock) {
-        guard let investmentProgramId = investmentProgramId,
-            let isFavorite = investmentProgramDetails?.isFavorite else { return }
+        guard let programId = programId,
+            let isFavorite = programDetailsFull?.personalProgramDetails?.isFavorite else { return }
         
-        investmentProgramDetails?.isFavorite = !isFavorite
-        ProgramDataProvider.programFavorites(isFavorite: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+        programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite
+        ProgramDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 print(errorType)
-                self?.investmentProgramDetails?.isFavorite = isFavorite
+                self?.programDetailsFull?.personalProgramDetails?.isFavorite = isFavorite
             }
             
             completion(result)
@@ -87,33 +87,33 @@ final class ProgramDetailsViewModel: TabmanViewModel {
     
     // MARK: - Private methods
     private func setup() {
-        if let router = router as? ProgramDetailsRouter, let investmentProgramDetails = investmentProgramDetails {
-            if let vc = router.getDetail(with: investmentProgramDetails) {
+        if let router = router as? ProgramDetailsRouter, let programDetailsFull = programDetailsFull {
+            if let vc = router.getDetail(with: programDetailsFull) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
             
-            if let tradesCount = investmentProgramDetails.tradesCount, tradesCount > 0, let vc = router.getTrades(with: investmentProgramId) {
+            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let vc = router.getTrades(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
             
-            if let isHistoryEnable = investmentProgramDetails.isHistoryEnable, isHistoryEnable, let vc = router.getHistory(with: investmentProgramId) {
+            if let isInvested = programDetailsFull.personalProgramDetails?.isInvested, isInvested, let vc = router.getHistory(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
             
-            if let hasNewRequests = investmentProgramDetails.hasNewRequests, hasNewRequests, let vc = router.getRequests(with: investmentProgramId) {
+//            if let availableInvestment = programDetailsFull.availableInvestment, availableInvestment, let vc = router.getRequests(with: programId) {
+//                self.addController(vc)
+//                self.addItem(vc.viewModel.title)
+//            }
+            
+            if let vc = router.getBalance(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
             
-            if let vc = router.getBalance(with: investmentProgramId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
-            if let vc = router.getProfit(with: investmentProgramId) {
+            if let vc = router.getProfit(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }

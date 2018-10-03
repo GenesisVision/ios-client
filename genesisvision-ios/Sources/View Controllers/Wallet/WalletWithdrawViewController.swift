@@ -58,7 +58,9 @@ class WalletWithdrawViewController: BaseViewController {
             else { return showErrorHUD(subtitle: "Enter withdraw amount and data, please") }
         
         showProgressHUD()
-        viewModel.withdraw(with: amount, address: address) { [weak self] (result) in
+        //TODO:!!!!
+        let twoFactorCode = ""
+        viewModel.withdraw(with: amount, address: address, currency: .gvt, twoFactorCode: twoFactorCode) { [weak self] (result) in
             self?.hideAll()
             
             switch result {

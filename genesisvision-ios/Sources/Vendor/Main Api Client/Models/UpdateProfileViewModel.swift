@@ -23,11 +23,10 @@ open class UpdateProfileViewModel: Codable {
     public var phone: String?
     public var birthday: Date?
     public var gender: Bool?
-    public var avatar: String?
 
 
     
-    public init(userName: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?) {
+    public init(userName: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?) {
         self.userName = userName
         self.firstName = firstName
         self.middleName = middleName
@@ -40,7 +39,6 @@ open class UpdateProfileViewModel: Codable {
         self.phone = phone
         self.birthday = birthday
         self.gender = gender
-        self.avatar = avatar
     }
     
 
@@ -62,7 +60,6 @@ open class UpdateProfileViewModel: Codable {
         try container.encodeIfPresent(phone, forKey: "phone")
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(gender, forKey: "gender")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
     }
 
     // Decodable protocol methods
@@ -82,7 +79,6 @@ open class UpdateProfileViewModel: Codable {
         phone = try container.decodeIfPresent(String.self, forKey: "phone")
         birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
         gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
     }
 }
 

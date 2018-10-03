@@ -13,7 +13,7 @@ class DashboardTableViewCell: PlateTableViewCell {
     // MARK: - Variables
     weak var delegate: ProgramDetailViewControllerProtocol?
     
-    var investmentProgramId: String?
+    var programId: String?
     var investedTokens: Double = 0.0
     
     var endOfPeriod: Date?
@@ -121,8 +121,8 @@ class DashboardTableViewCell: PlateTableViewCell {
     // MARK: - Actions
     @IBAction func favoriteButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        guard let investmentProgramId = investmentProgramId else { return }
-        delegate?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: sender.isSelected, request: true)
+        guard let programId = programId else { return }
+        delegate?.programDetailDidChangeFavoriteState(with: programId, value: sender.isSelected, request: true)
     }
     
     // MARK: - Public methods

@@ -55,14 +55,14 @@ class CreateProgramTabmanRouter: TabmanRouter {
         return viewController
     }
 
-    func getCreateProgramSecondVC(with tabmanViewModel: CreateProgramTabmanViewModel, brokersViewModel: BrokersViewModel? = nil) -> CreateProgramSecondViewController? {
-        guard let viewController = CreateProgramSecondViewController.storyboardInstance(name: .programs) else { return  nil }
-        createProgramSecondViewModel = CreateProgramSecondViewModel(withRouter: self, tabmanViewModel: tabmanViewModel, textFieldDelegate: viewController, brokersViewModel: brokersViewModel)
-        viewController.viewModel = createProgramSecondViewModel
-        createProgramSecondViewController = viewController
-        
-        return viewController
-    }
+//    func getCreateProgramSecondVC(with tabmanViewModel: CreateProgramTabmanViewModel, brokersViewModel: BrokersViewModel? = nil) -> CreateProgramSecondViewController? {
+//        guard let viewController = CreateProgramSecondViewController.storyboardInstance(name: .programs) else { return  nil }
+//        createProgramSecondViewModel = CreateProgramSecondViewModel(withRouter: self, tabmanViewModel: tabmanViewModel, textFieldDelegate: viewController, brokersViewModel: brokersViewModel)
+//        viewController.viewModel = createProgramSecondViewModel
+//        createProgramSecondViewController = viewController
+//        
+//        return viewController
+//    }
 
     func getCreateProgramThirdVC(with tabmanViewModel: CreateProgramTabmanViewModel) -> CreateProgramThirdViewController? {
         guard let viewController = CreateProgramThirdViewController.storyboardInstance(name: .programs) else { return  nil }

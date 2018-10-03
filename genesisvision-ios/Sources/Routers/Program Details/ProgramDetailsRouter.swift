@@ -11,12 +11,12 @@ class ProgramDetailsRouter: TabmanRouter {
     var programDetailViewController: ProgramDetailViewController?
     
     // MARK: - Public methods
-    func getDetail(with investmentProgramDetails: InvestmentProgramDetails) -> ProgramDetailViewController? {
+    func getDetail(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailViewController? {
         guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return nil }
         
         let router = ProgramDetailRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramDetailViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails, reloadDataProtocol: viewController, detailChartTableViewCellProtocol: viewController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController, detailChartTableViewCellProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         
@@ -24,76 +24,76 @@ class ProgramDetailsRouter: TabmanRouter {
         return viewController
     }
     
-    func getDescription(with investmentProgramDetails: InvestmentProgramDetails) -> ProgramDescriptionViewController? {
+    func getDescription(with programDetailsFull: ProgramDetailsFull) -> ProgramDescriptionViewController? {
         guard let viewController = ProgramDescriptionViewController.storyboardInstance(name: .program) else { return  nil }
         
         let router = ProgramDescriptionRouter(parentRouter: self)
-        let viewModel = ProgramDescriptionViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
+        let viewModel = ProgramDescriptionViewModel(withRouter: router, programDetailsFull: programDetailsFull)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getTrades(with investmentProgramId: String) -> ProgramDetailTradesViewController? {
+    func getTrades(with programId: String) -> ProgramDetailTradesViewController? {
         let viewController = ProgramDetailTradesViewController()
         let router = ProgramDetailTradesRouter(parentRouter: self)
-        let viewModel = ProgramDetailTradesViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController)
+        let viewModel = ProgramDetailTradesViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getHistory(with investmentProgramId: String) -> ProgramHistoryViewController? {
+    func getHistory(with programId: String) -> ProgramHistoryViewController? {
         let viewController = ProgramHistoryViewController()
         let router = ProgramHistoryRouter(parentRouter: self)
-        let viewModel = ProgramHistoryViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: viewController as? ReloadDataProtocol)
+        let viewModel = ProgramHistoryViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController as? ReloadDataProtocol)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getRequests(with investmentProgramId: String) -> ProgramRequestsViewController? {
+    func getRequests(with programId: String) -> ProgramRequestsViewController? {
         guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
         let viewController = ProgramRequestsViewController()
         let router = ProgramRequestsRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramRequestsViewModel(withRouter: router, investmentProgramId: investmentProgramId, programDetailProtocol: vc, reloadDataProtocol: viewController as? ReloadDataProtocol)
+        let viewModel = ProgramRequestsViewModel(withRouter: router, programId: programId, programDetailProtocol: vc, reloadDataProtocol: viewController as? ReloadDataProtocol)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getFullChart(with investmentProgramDetails: InvestmentProgramDetails) -> ProgramDetailFullChartViewController? {
+    func getFullChart(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailFullChartViewController? {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program) else { return nil }
         
         let router = ProgramDetailFullChartRouter(parentRouter: self)
-        let viewModel = ProgramDetailFullChartViewModel(withRouter: router, investmentProgramDetails: investmentProgramDetails)
+        let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
         viewController.viewModel = viewModel
         viewController.modalTransitionStyle = .crossDissolve
         
         return viewController
     }
     
-    func getBalance(with investmentProgramId: String) -> ProgramBalanceViewController? {
+    func getBalance(with programId: String) -> ProgramBalanceViewController? {
         guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
         let viewController = ProgramBalanceViewController()
         let router = ProgramHistoryRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramBalanceViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: vc)
+        let viewModel = ProgramBalanceViewModel(withRouter: router, programId: programId, reloadDataProtocol: vc)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getProfit(with investmentProgramId: String) -> ProgramProfitViewController? {
+    func getProfit(with programId: String) -> ProgramProfitViewController? {
         guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
         let viewController = ProgramProfitViewController()
         let router = ProgramHistoryRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramProfitViewModel(withRouter: router, investmentProgramId: investmentProgramId, reloadDataProtocol: vc)
+        let viewModel = ProgramProfitViewModel(withRouter: router, programId: programId, reloadDataProtocol: vc)
         viewController.viewModel = viewModel
         
         return viewController

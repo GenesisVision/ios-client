@@ -117,17 +117,17 @@ extension WalletControllerViewModel {
     }
     
     func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
-        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
-            let investmentProgram = model.walletTransaction.investmentProgram,
-            let investmentProgramId = investmentProgram.id
-            else { return nil }
-        
-        return router.getDetailsViewController(with: investmentProgramId.uuidString)
+//        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+//            let program = model.walletTransaction.program,
+//            let programId = program.id
+//            else { return nil }
+        let uuidString = "" //programId.uuidString
+        return router.getDetailsViewController(with: uuidString)
     }
 
     // MARK: - Private methods
     private func setup() {
-        filter = TransactionsFilter(investmentProgramId: nil, type: PlatformManager.filterConstants.walletModelTypeDefault, skip: skip, take: take)
+        filter = TransactionsFilter(programId: nil, type: PlatformManager.filterConstants.walletModelTypeDefault, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }
@@ -210,9 +210,8 @@ extension WalletControllerViewModel {
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(with: nil, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
@@ -247,12 +246,12 @@ extension WalletControllerViewModel {
     }
     
     func showDetail(at indexPath: IndexPath) {
-        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
-            let investmentProgram = model.walletTransaction.investmentProgram,
-            let investmentProgramId = investmentProgram.id
-            else { return }
-        
-        router.show(routeType: .showProgramDetails(investmentProgramId: investmentProgramId.uuidString))
+//        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+//            let program = model.walletTransaction.program,
+//            let programId = program.id
+//            else { return }
+//        
+//        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
     }
     
     func showProgramList() {

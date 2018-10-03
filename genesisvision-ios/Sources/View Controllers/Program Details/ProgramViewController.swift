@@ -62,7 +62,7 @@ class ProgramViewController: BaseViewController {
             tabmanViewController.programDetailViewControllerProtocol = self
             
             let router = ProgramDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: self.viewModel.investmentProgramId, tabmanViewModelDelegate: tabmanViewController)
+            let viewModel = ProgramDetailsViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
             viewModel.programDetailsProtocol = tabmanViewController
             tabmanViewController.viewModel = viewModel
 
@@ -102,8 +102,8 @@ class ProgramViewController: BaseViewController {
             
             switch result {
             case .success:
-                if let investmentProgramId = self?.programDetailsTabmanViewController?.viewModel.investmentProgramId {
-                    self?.programDetailsTabmanViewController?.programDetailViewControllerProtocol?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: !isFavorite, request: false)
+                if let programId = self?.programDetailsTabmanViewController?.viewModel.programId {
+                    self?.programDetailsTabmanViewController?.programDetailViewControllerProtocol?.programDetailDidChangeFavoriteState(with: programId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")

@@ -15,7 +15,7 @@ final class ProgramBalanceViewModel {
     
     // MARK: - Variables
     var title: String = "Balance".uppercased()
-    var investmentProgramId: String?
+    var programId: String?
     
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -36,9 +36,9 @@ final class ProgramBalanceViewModel {
     private var sections: [SectionType] = [.chart]
     
     // MARK: - Init
-    init(withRouter router: Router, investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
     }
 }
@@ -94,11 +94,10 @@ extension ProgramBalanceViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramBalanceChartTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let investmentProgramId = investmentProgramId,
-                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            guard let programId = programId,
+                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            let filter = TransactionsFilter(investmentProgramId: uuid, type: nil, skip: skip, take: take)
-            WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
+            WalletDataProvider.getWalletTransactions(with: uuid, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
                 guard transactionsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

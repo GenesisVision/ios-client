@@ -18,68 +18,23 @@ class PortfolioViewController: BaseViewController {
     
     private var bottomAssetsView: UIView?
     // MARK: - Outlets
-    @IBOutlet weak var balanceTitleLabel: UILabel! {
-        didSet {
-            balanceTitleLabel.textColor = UIColor.Cell.subtitle
-            balanceTitleLabel.isUserInteractionEnabled = false
-        }
-    }
-    @IBOutlet weak var balanceValueLabel: UILabel! {
-        didSet {
-            balanceValueLabel.textColor = UIColor.Cell.title
-            balanceValueLabel.isUserInteractionEnabled = false
-        }
-    }
-    @IBOutlet weak var balanceCurrencyLabel: UILabel! {
-        didSet {
-            balanceCurrencyLabel.textColor = UIColor.Cell.subtitle
-            balanceCurrencyLabel.isUserInteractionEnabled = false
-        }
-    }
-    
-    @IBOutlet weak var changeTitleLabel: UILabel! {
-        didSet {
-            changeTitleLabel.textColor = UIColor.Cell.subtitle
-            changeTitleLabel.isUserInteractionEnabled = false
-        }
-    }
-    @IBOutlet weak var changePercentLabel: UILabel! {
+    @IBOutlet weak var balanceTitleLabel: SubtitleLabel!
+    @IBOutlet weak var balanceValueLabel: TitleLabel!
+    @IBOutlet weak var balanceCurrencyLabel: SubtitleLabel!
+    @IBOutlet weak var changeTitleLabel: SubtitleLabel!
+    @IBOutlet weak var changePercentLabel: TitleLabel! {
         didSet {
             changePercentLabel.textColor = UIColor.Cell.greenTitle
-            changePercentLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var changeValueLabel: UILabel! {
-        didSet {
-            changeValueLabel.textColor = UIColor.Cell.title
-            changeValueLabel.isUserInteractionEnabled = false
-        }
-    }
-    @IBOutlet weak var changeCurrencyLabel: UILabel! {
-        didSet {
-            changeCurrencyLabel.textColor = UIColor.Cell.subtitle
-            changeCurrencyLabel.isUserInteractionEnabled = false
-        }
-    }
-    
+    @IBOutlet weak var changeValueLabel: TitleLabel!
+    @IBOutlet weak var changeCurrencyLabel: SubtitleLabel!
     @IBOutlet weak var inRequestsStackView: UIStackView!
     
     @IBOutlet weak var inRequestsButton: UIButton!
-    @IBOutlet weak var inRequestsTitleLabel: UILabel! {
-        didSet {
-            inRequestsTitleLabel.textColor = UIColor.Cell.subtitle
-        }
-    }
-    @IBOutlet weak var inRequestsValueLabel: UILabel! {
-        didSet {
-            inRequestsValueLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var inRequestsCurrencyLabel: UILabel! {
-        didSet {
-            inRequestsCurrencyLabel.textColor = UIColor.Cell.subtitle
-        }
-    }
+    @IBOutlet weak var inRequestsTitleLabel: SubtitleLabel!
+    @IBOutlet weak var inRequestsValueLabel: TitleLabel!
+    @IBOutlet weak var inRequestsCurrencyLabel: SubtitleLabel!
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
@@ -121,6 +76,7 @@ class PortfolioViewController: BaseViewController {
     func updateViewConstraints(_ yOffset: CGFloat) {
         
     }
+    
     // MARK: - Private methods
     private func setup() {
         
@@ -131,25 +87,12 @@ class PortfolioViewController: BaseViewController {
         tapGesture.numberOfTapsRequired = 1
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
-
         
-        let lineChartData: [TradeChart] = [TradeChart(date: Date(), profit: 31.0),
-                                           TradeChart(date: Date().addDays(1), profit: 24.0),
-                                           TradeChart(date: Date().addDays(2), profit: 23.0),
-                                           TradeChart(date: Date().addDays(3), profit: 16.0),
-                                           TradeChart(date: Date().addDays(4), profit: 20.0),
-                                           TradeChart(date: Date().addDays(5), profit: 35.0)]
-        
-        let barChartData: [TradeChart] = [TradeChart(date: Date(), profit: 51.0),
-                                          TradeChart(date: Date().addDays(1), profit: 14.0),
-                                          TradeChart(date: Date().addDays(2), profit: 13.0),
-                                          TradeChart(date: Date().addDays(3), profit: 26.0),
-                                          TradeChart(date: Date().addDays(4), profit: 50.0),
-                                          TradeChart(date: Date().addDays(5), profit: 15.0)]
-        
-        chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
-        
-        chartView.addSubview(circleView)
+        if let lineChartData = viewModel.dashboardChartValue?.chart, let barChartData = viewModel.dashboardChartValue?.bars {
+            chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
+            
+            chartView.addSubview(circleView)
+        }
     }
     
     

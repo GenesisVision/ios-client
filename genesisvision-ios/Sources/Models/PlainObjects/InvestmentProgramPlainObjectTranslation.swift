@@ -1,5 +1,5 @@
 //
-//  InvestmentProgramPlainObjectTranslation.swift
+//  ProgramPlainObjectTranslation.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 25.01.18.

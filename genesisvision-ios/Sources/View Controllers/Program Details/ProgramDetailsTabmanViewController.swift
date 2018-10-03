@@ -35,8 +35,8 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
             
             switch result {
             case .success:
-                if let investmentProgramId = self?.viewModel.investmentProgramId {
-                    self?.programDetailViewControllerProtocol?.programDetailDidChangeFavoriteState(with: investmentProgramId, value: !isFavorite, request: false)
+                if let programId = self?.viewModel.programId {
+                    self?.programDetailViewControllerProtocol?.programDetailDidChangeFavoriteState(with: programId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")

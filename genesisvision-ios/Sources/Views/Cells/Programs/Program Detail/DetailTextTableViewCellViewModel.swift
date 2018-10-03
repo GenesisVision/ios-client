@@ -9,11 +9,11 @@
 import Foundation
 
 struct DetailTextTableViewCellViewModel {
-    let investmentProgramDetails: InvestmentProgramDetails
+    let programDetailsFull: ProgramDetailsFull
 }
 
 extension DetailTextTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailTextTableViewCell) {
-        cell.availableToInvestLabel.text = investmentProgramDetails.availableInvestment?.rounded(withType: .gvt).toString()
+        cell.availableToInvestLabel.text = programDetailsFull.availableInvestment?.rounded(withType: .gvt).toString()
     }
 }

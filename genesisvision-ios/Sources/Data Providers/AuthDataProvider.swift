@@ -8,8 +8,8 @@
 
 class AuthDataProvider: DataProvider {
     // MARK: - Public methods
-    static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(email: email, password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode)
+    static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        let loginViewModel = LoginViewModel(email: email, password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client)
         
         isInvestorApp
             ? investorSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)
@@ -35,15 +35,16 @@ class AuthDataProvider: DataProvider {
         
         let changePasswordViewModel = ChangePasswordViewModel(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword)
         
-        isInvestorApp
-            ? investorChangePassword(with: authorization, model: changePasswordViewModel, completion: completion)
-            : managerChangePassword(with: authorization, model: changePasswordViewModel, completion: completion)
+        AuthAPI.v10AuthPasswordChangePost(authorization: authorization, model: changePasswordViewModel) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
     }
     
     // MARK: - Private methods
     // MARK: - Sign In
     private static func investorSignIn(with model: LoginViewModel, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorAuthSignInPost(model: model) { (token, error) in
+        
+        AuthAPI.v10AuthSigninInvestorPost(model: model) { (token, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -56,7 +57,8 @@ class AuthDataProvider: DataProvider {
     }
     
     private static func managerSignIn(with model: LoginViewModel, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerAuthSignInPost(model: model) { (token, error) in
+
+        AuthAPI.v10AuthSigninManagerPost(model: model) { (token, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -71,8 +73,8 @@ class AuthDataProvider: DataProvider {
     // MARK: - Sign Up
     private static func investorSignUp(with email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
-        
-        InvestorAPI.apiInvestorAuthSignUpPost(model: registerInvestorViewModel) { (error) in
+    
+        AuthAPI.v10AuthSignupInvestorPost(model: registerInvestorViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
@@ -80,36 +82,22 @@ class AuthDataProvider: DataProvider {
     private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         let registerManagerViewModel = RegisterManagerViewModel(userName: username, email: email, password: password, confirmPassword: confirmPassword)
         
-        ManagerAPI.apiManagerAuthSignUpPost(model: registerManagerViewModel) { (error) in
+        AuthAPI.v10AuthSignupManagerPost(model: registerManagerViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
     // MARK: - Forgot Password
     private static func investorForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, completion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorAuthForgotPasswordPost(model: forgotPasswordViewModel) { (error) in
+        AuthAPI.v10AuthPasswordForgotInvestorPost(model: forgotPasswordViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
     private static func managerForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, completion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerAuthForgotPasswordPost(model: forgotPasswordViewModel) { (error) in
+        AuthAPI.v10AuthPasswordForgotManagerPost(model: forgotPasswordViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
-    
-    // MARK: - Change Password
-    private static func investorChangePassword(with authorization: String, model: ChangePasswordViewModel, completion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorAuthChangePasswordPost(authorization: authorization, model: model) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
-        }
-    }
-    
-    private static func managerChangePassword(with authorization: String, model: ChangePasswordViewModel, completion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerAuthChangePasswordPost(authorization: authorization, model: model) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
-        }
-    }
-    
 }
 

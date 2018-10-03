@@ -64,20 +64,20 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     }
     
     public private(set) var needToRefresh = false
-    var filter: InvestmentProgramsFilter?
-    internal var sorting: InvestmentProgramsFilter.Sorting = Constants.Sorting.programListDefault
+
+    internal var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Constants.Sorting.programListDefault
     
     var searchText = "" {
         didSet {
-            filter?.name = searchText
+//            filter?.name = searchText
         }
     }
     var programViewModels = [ProgramTableViewCellViewModel]()
     
-    var sortingKeys: [InvestmentProgramsFilter.Sorting] = [.byProfitDesc, .byProfitAsc,
+    var sortingKeys: [ProgramsAPI.Sorting_v10ProgramsGet] = [.byProfitDesc, .byProfitAsc,
                                                            .byLevelDesc, .byLevelAsc,
                                                            .byBalanceDesc, .byBalanceDesc,
-                                                           .byOrdersDesc, .byOrdersAsc,
+                                                           .byTradesDesc, .byTradesAsc,
                                                            .byEndOfPeriodDesc, .byEndOfPeriodAsc,
                                                            .byTitleDesc, .byTitleAsc]
     
@@ -91,7 +91,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     struct SortingList {
         var sortingValue: String
-        var sortingKey: InvestmentProgramsFilter.Sorting
+        var sortingKey: ProgramsFilter.Sorting
     }
     
     var sortingList: [SortingList] {
@@ -105,34 +105,34 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = InvestmentProgramsFilter(managerId: nil,
-                                          brokerId: nil,
-                                          brokerTradeServerId: nil,
-                                          investMaxAmountFrom: nil,
-                                          investMaxAmountTo: nil,
-                                          sorting: nil, //TODO: sorting,
-                                          name: searchText,
-                                          levelMin: nil,
-                                          levelMax: nil,
-                                          balanceUsdMin: nil,
-                                          balanceUsdMax: nil,
-                                          profitAvgMin: nil,
-                                          profitAvgMax: nil,
-                                          profitTotalMin: nil,
-                                          profitTotalMax: nil,
-                                          profitTotalPercentMin: nil,
-                                          profitTotalPercentMax: nil,
-                                          profitAvgPercentMin: nil,
-                                          profitAvgPercentMax: nil,
-                                          profitTotalChange: nil,
-                                          periodMin: nil,
-                                          periodMax: nil,
-                                          showActivePrograms: nil,
-                                          equityChartLength: equityChartLength,
-                                          showMyFavorites: true,
-                                          roundNumber: nil,
-                                          skip: skip,
-                                          take: take)
+//        filter = ProgramsFilter(managerId: nil,
+//                                          brokerId: nil,
+//                                          brokerTradeServerId: nil,
+//                                          investMaxAmountFrom: nil,
+//                                          investMaxAmountTo: nil,
+//                                          sorting: nil, //TODO: sorting,
+//                                          name: searchText,
+//                                          levelMin: nil,
+//                                          levelMax: nil,
+//                                          balanceUsdMin: nil,
+//                                          balanceUsdMax: nil,
+//                                          profitAvgMin: nil,
+//                                          profitAvgMax: nil,
+//                                          profitTotalMin: nil,
+//                                          profitTotalMax: nil,
+//                                          profitTotalPercentMin: nil,
+//                                          profitTotalPercentMax: nil,
+//                                          profitAvgPercentMin: nil,
+//                                          profitAvgPercentMax: nil,
+//                                          profitTotalChange: nil,
+//                                          periodMin: nil,
+//                                          periodMax: nil,
+//                                          showActivePrograms: nil,
+//                                          equityChartLength: equityChartLength,
+//                                          showMyFavorites: true,
+//                                          roundNumber: nil,
+//                                          skip: skip,
+//                                          take: take)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -142,12 +142,12 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     }
     
     // MARK: - Public methods
-    func changeFavorite(value: Bool, investmentProgramId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: investmentProgramId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.investmentProgram.isFavorite = value
+            guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.program.isFavorite = value
             
-            if !value, let i = programViewModels.index(where: { $0.investmentProgram.id?.uuidString == investmentProgramId }) {
+            if !value, let i = programViewModels.index(where: { $0.program.id?.uuidString == programId }) {
                 programViewModels.remove(at: i)
                 totalCount = programViewModels.count
             }
@@ -156,11 +156,11 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
             return
         }
         
-        ProgramDataProvider.programFavorites(isFavorite: !value, investmentProgramId: investmentProgramId) { [weak self] (result) in
+        ProgramDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: investmentProgramId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.investmentProgram.isFavorite = value
+                guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.program.isFavorite = value
                 value ? completion(.success) : self?.refresh(completion: completion)
             case .failure(let errorType):
                 print(errorType)
@@ -171,7 +171,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     // MARK: - Private methods
     @objc private func programFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite: Bool = notification.userInfo?["isFavorite"] as? Bool, let investmentProgramId = notification.userInfo?["investmentProgramId"] as? String {
+        if let isFavorite: Bool = notification.userInfo?["isFavorite"] as? Bool, let programId = notification.userInfo?["programId"] as? String {
             
             guard !isFavorite else {
                 refresh { [weak self] (result) in
@@ -181,7 +181,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
                 return
             }
             
-            changeFavorite(value: isFavorite, investmentProgramId: investmentProgramId) { [weak self] (result) in
+            changeFavorite(value: isFavorite, programId: programId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
@@ -241,17 +241,17 @@ extension FavoriteProgramListViewModel {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (investmentProgramsViewModel) in
-                guard let investmentPrograms = investmentProgramsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (programsViewModel) in
+                guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var programViewModels = [ProgramTableViewCellViewModel]()
                 
-                let totalCount = investmentPrograms.total ?? 0
+                let totalCount = programs.total ?? 0
                 
-                investmentPrograms.investmentPrograms?.forEach({ (investmentProgram) in
+                programs.programs?.forEach({ (program) in
                     guard let favoriteProgramListRouter: FavoriteProgramListRouter = self?.router as? FavoriteProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(investmentProgram: investmentProgram, delegate: favoriteProgramListRouter.favoriteProgramListViewController)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: favoriteProgramListRouter.favoriteProgramListViewController)
                     programViewModels.append(programTableViewCellViewModel)
                 })
                 

@@ -52,7 +52,7 @@ class EventListViewModel {
         }
         
         let selectedModel = viewModels[indexPath.row]
-        if let programID = selectedModel.investmentProgram.id?.uuidString {
+        if let programID = selectedModel.program.id?.uuidString {
             router.showProgramDetails(with: programID)
         }
     }
