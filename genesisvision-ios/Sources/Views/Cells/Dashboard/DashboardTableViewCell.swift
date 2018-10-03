@@ -64,7 +64,6 @@ class DashboardTableViewCell: PlateTableViewCell {
     @IBOutlet var managerNameLabel: UILabel!
     
     @IBOutlet var tokenSymbolLabel: CurrencyLabel!
-    @IBOutlet var placeLabel: TournamentPlaceLabel!
     
     @IBOutlet var tokensCountValueLabel: UILabel! {
         didSet {
@@ -99,8 +98,6 @@ class DashboardTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var currencyLabel: CurrencyLabel!
-    
     @IBOutlet var dashboardTooltip: TooltipButton! {
         didSet {
             dashboardTooltip.tooltipText = String.Tooltitps.dashboard
@@ -110,8 +107,6 @@ class DashboardTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        currencyLabel.isHidden = true
     }
     
     deinit {
@@ -139,10 +134,6 @@ class DashboardTableViewCell: PlateTableViewCell {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePeriodLeftValue), userInfo: nil, repeats: true)
             RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
         }
-    }
-    
-    func tournamentActive(_ isTournament: Bool) {
-        placeLabel.isHidden = !isTournament
     }
     
     // MARK: - Private methods

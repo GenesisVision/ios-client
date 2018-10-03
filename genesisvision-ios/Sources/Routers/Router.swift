@@ -25,7 +25,6 @@ enum TabsType: Int {
 
 class Router {
     // MARK: - Variables
-    var tournamentViewController: TournamentListViewController!
     var investorDashboardViewController: InvestorDashboardViewController!
     var managerDashboardViewController: ManagerDashboardViewController!
     var programsViewController: ProgramListViewController!
@@ -129,17 +128,6 @@ class Router {
         
         return navigationController
     }
-    
-    private func getTournamentNavigationController() -> UINavigationController? {
-        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return nil }
-        tournamentViewController = viewController
-        
-        let navigationController = BaseNavigationController(rootViewController: tournamentViewController)
-        let router = TournamentListRouter(parentRouter: self, navigationController: navigationController)
-        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, reloadDataProtocol: viewController, roundNumber: nil)
-        
-        return navigationController
-    }
 }
 
 //Protocol methods
@@ -196,11 +184,6 @@ extension Router {
         
         router.show(routeType: .signIn)
         
-        setWindowRoot(viewController: navigationController)
-    }
-    
-    func startTournament() {
-        guard let navigationController = getTournamentNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
     }
     

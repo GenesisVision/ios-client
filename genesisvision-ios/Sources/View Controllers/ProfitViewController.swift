@@ -14,7 +14,9 @@ class ProfitViewController: BaseViewController {
     var viewModel: ProfitViewModel!
     
     var vc: UIViewController!
+    private var bottomAssetsView: UIView?
     
+    // MARK: - Outlets
     @IBOutlet weak var amountTitleLabel: SubtitleLabel!
     @IBOutlet weak var amountValueLabel: TitleLabel!
     @IBOutlet weak var amountCurrencyLabel: SubtitleLabel!
@@ -22,6 +24,7 @@ class ProfitViewController: BaseViewController {
     @IBOutlet weak var changePercentLabel: TitleLabel! {
         didSet {
             changePercentLabel.textColor = UIColor.Cell.greenTitle
+            changePercentLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
     @IBOutlet weak var changeValueLabel: TitleLabel!
@@ -69,6 +72,10 @@ class ProfitViewController: BaseViewController {
     }
     
     // MARK: - Public methods
+    func updateUI() {
+        setupUI()
+    }
+    
     func updateViewConstraints(_ yOffset: CGFloat) {
         
     }
@@ -83,10 +90,34 @@ class ProfitViewController: BaseViewController {
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
         
-        if let lineChartData = viewModel.dashboardChartValue?.chart, let barChartData = viewModel.dashboardChartValue?.bars {
-            chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
+        chartView.addSubview(circleView)
+    }
+    
+    private func setupUI() {
+        if let dashboardChartValue = viewModel.dashboardChartValue {
             
-            chartView.addSubview(circleView)
+            if let lineChartData = dashboardChartValue.chart, let barChartData = dashboardChartValue.bars {
+                chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
+            }
+            
+            amountTitleLabel.text = "Amount"
+            if let value = dashboardChartValue.value {
+                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            }
+            if let valueCurrency = dashboardChartValue.valueCurrency {
+                amountCurrencyLabel.text = valueCurrency.toString() + " \(getSelectedCurrency())"
+            }
+            
+            changeTitleLabel.text = "Change"
+            if let changePercent = dashboardChartValue.changePercent {
+                changePercentLabel.text = changePercent.toString() + " %"
+            }
+            if let changeValue = dashboardChartValue.changeValue {
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
+            }
+            if let changeValueCurrency = dashboardChartValue.changeValueCurrency {
+                changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"
+            }
         }
     }
     
@@ -129,8 +160,6 @@ class ProfitViewController: BaseViewController {
             self.bottomAssetsView?.removeFromSuperview()
             self.bottomAssetsView = nil
         }
-        
-        hideInRequestStackView(false)
     }
     
     private func showBottomAssetsView() {

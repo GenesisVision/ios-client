@@ -118,30 +118,3 @@ class WhiteCurrencyLabel: RoundedLabel {
         setProperties(textColor: UIColor.Font.primary, backgroundColor: UIColor.Font.white)
     }
 }
-
-class TournamentPlaceLabel: RoundedLabel {
-    override var text: String? {
-        didSet {
-            let attachment = NSTextAttachment()
-            attachment.image = #imageLiteral(resourceName: "img_trophy_small_icon")
-            attachment.bounds = CGRect(x: 0.0, y: -4.0, width: 15.0, height: 15.0)
-            let attachmentStr = NSAttributedString(attachment: attachment)
-
-            let mutableAttributedString = NSMutableAttributedString()
-            mutableAttributedString.append(attachmentStr)
-            
-            let textString = NSAttributedString(string: text ?? "", attributes: [.font: UIFont.getFont(.bold, size: 11)])
-            mutableAttributedString.append(textString)
-            
-            self.textAlignment = .center
-            self.attributedText = mutableAttributedString
-        }
-    }
-    
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setProperties(textColor: UIColor.Font.white, backgroundColor: UIColor.Tournament.bg)
-    }
-}

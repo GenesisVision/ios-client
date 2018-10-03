@@ -8,33 +8,26 @@
 
 import UIKit
 
-protocol WalletHeaderTableViewCellProtocol: class {
-    func depositProgramDidPress()
-    func withdrawProgramDidPress()
-    func updateBalanceDidPress()
-}
 
 class WalletHeaderTableViewCell: UITableViewCell {
-    
-    // MARK: - Variables
-    weak var delegate: WalletHeaderTableViewCellProtocol?
-    
-    // MARK: - Labels
-    @IBOutlet var balanceLabel: UILabel! {
+    // MARK: - Outlets
+    @IBOutlet weak var totalBalanceTitleLabel: SubtitleLabel!
+    @IBOutlet weak var totalBalanceValueLabel: TitleLabel! {
         didSet {
-            balanceLabel.textColor = UIColor.Header.title
+            totalBalanceValueLabel.font = UIFont.getFont(.semibold, size: 26.0)
         }
     }
+    @IBOutlet weak var totalBalanceCurrencyLabel: MediumLabel!
     
-    @IBOutlet var usdBalanceLabel: UILabel! {
-        didSet {
-            usdBalanceLabel.textColor = UIColor.Header.title.withAlphaComponent(0.7)
-        }
-    }
+    @IBOutlet weak var availableProgressView: UIView!
+    @IBOutlet weak var availableTitleLabel: SubtitleLabel!
+    @IBOutlet weak var availableValueLabel: TitleLabel!
+    @IBOutlet weak var availableCurrencyLabel: MediumLabel!
     
-    // MARK: - Buttons
-    @IBOutlet weak var depositButton: ActionButton!
-    @IBOutlet weak var withdrawButton: ActionButton!
+    @IBOutlet weak var investedProgressView: UIView!
+    @IBOutlet weak var investedTitleLabel: SubtitleLabel!
+    @IBOutlet weak var investedValueLabel: TitleLabel!
+    @IBOutlet weak var investedCurrencyLabel: MediumLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -42,15 +35,6 @@ class WalletHeaderTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
-    }
-    
-    // MARK: - Actions
-    @IBAction func depositButtonAction(_ sender: Any) {
-        delegate?.depositProgramDidPress()
-    }
-    
-    @IBAction func withdrawButtonAction(_ sender: Any) {
-        delegate?.withdrawProgramDidPress()
     }
 }
 

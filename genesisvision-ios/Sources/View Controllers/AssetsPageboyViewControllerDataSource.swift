@@ -30,6 +30,18 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
         }
     }
     
+    func update(dashboardSummary: DashboardSummary?) {
+        for controller in controllers {
+            switch controller {
+            case is DashboardProgramListViewController:
+                //TODO:
+                break
+            default:
+                break
+            }
+        }
+    }
+    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return controllers.count
     }

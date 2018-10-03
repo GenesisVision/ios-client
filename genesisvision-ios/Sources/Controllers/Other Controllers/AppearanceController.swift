@@ -148,7 +148,7 @@ struct AppearanceController {
         let colors = UIColor.NavBar.colorScheme(with: type)
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+                                                            NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18)]
         
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
@@ -159,6 +159,8 @@ struct AppearanceController {
         
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
     }
     
     // TabBar

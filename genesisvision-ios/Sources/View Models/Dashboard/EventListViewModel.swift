@@ -19,7 +19,18 @@ class EventListViewModel {
     private var sections: [SectionType] = [.eventList]
     
     var router: DashboardRouter!
-    private var dashboard: InvestorDashboard?
+    var dashboardPortfolioEvents: DashboardPortfolioEvents? {
+        didSet {
+            var dashboardEventsViewModels = [PortfolioEventCollectionViewCellViewModel]()
+            
+            dashboardPortfolioEvents?.events?.forEach({ (event) in
+                let dashboardEventViewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: router?.eventsViewController, dashboardPortfolioEvent: event)
+                dashboardEventsViewModels.append(dashboardEventViewModel)
+            })
+            
+            viewModels = dashboardEventsViewModels
+        }
+    }
     
     var eventsDelegateManager: EventsDelegateManager!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -37,10 +48,11 @@ class EventListViewModel {
         return .none
     }
     
-    var viewModels = [DashboardTableViewCellViewModel]()
+    var viewModels = [PortfolioEventCollectionViewCellViewModel]()
     
-    init(withRouter router: DashboardRouter) {
+    init(withRouter router: DashboardRouter, dashboardPortfolioEvents: DashboardPortfolioEvents?) {
         self.router = router
+        self.dashboardPortfolioEvents = dashboardPortfolioEvents
         
         eventsDelegateManager = EventsDelegateManager(with: self)
     }
@@ -52,8 +64,8 @@ class EventListViewModel {
         }
         
         let selectedModel = viewModels[indexPath.row]
-        if let programID = selectedModel.program.id?.uuidString {
-            router.showProgramDetails(with: programID)
+        if let assetId = selectedModel.dashboardPortfolioEvent.assetId?.uuidString {
+            router.showProgramDetails(with: assetId)
         }
     }
     
@@ -66,7 +78,7 @@ extension EventListViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardTableViewCellViewModel.self]
+        return [PortfolioEventCollectionViewCellViewModel.self]
     }
     
     func modelsCount() -> Int {
@@ -108,7 +120,7 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30//viewModel?.numberOfItems(in: section) ?? 0
+        return viewModel?.numberOfItems(in: section) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TitleLabel: UILabel {
+class CustomLabel: UILabel {
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -21,30 +21,36 @@ class TitleLabel: UILabel {
         self.commonInit()
     }
     
-    func commonInit(){
+    func commonInit() {
+        textColor = UIColor.Cell.title
+        font = UIFont.getFont(.regular, size: 12.0)
+    }
+}
+
+class TitleLabel: CustomLabel {
+    // MARK: - Lifecycle
+    override func commonInit(){
         textColor = UIColor.Cell.title
         font = UIFont.getFont(.semibold, size: 14.0)
     }
 }
 
-class SubtitleLabel: UILabel {
+class SubtitleLabel: CustomLabel {
     // MARK: - Lifecycle
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        self.commonInit()
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.commonInit()
-    }
-    
-    func commonInit(){
+    override func commonInit(){
         textColor = UIColor.Cell.subtitle
-        font = UIFont.getFont(.semibold, size: 12.0)
+        font = UIFont.getFont(.regular, size: 12.0)
     }
 }
+
+class MediumLabel: CustomLabel {
+    // MARK: - Lifecycle
+    override func commonInit(){
+        textColor = UIColor.Cell.subtitle
+        font = UIFont.getFont(.medium, size: 12.0)
+    }
+}
+
 
 class ProgramProfitStatisticTableViewCell: UITableViewCell {
 

@@ -9,92 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardViewModel.swift"
-            timestampString = "560178155.363952"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
-            landmarkName = "updateFetchedData(totalCount:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardViewModel.swift"
-            timestampString = "560178155.364293"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "refresh(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardViewModel.swift"
-            timestampString = "560178155.3643579"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
-            landmarkName = "fetch(_:completionError:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Genesis_Vision.DashboardViewModel.(fetch in _C113E96D6B5F9BE668C4BBEFFEFDACA9)(_: (Swift.Int, Swift.Array&lt;Genesis_Vision.DashboardTableViewCellViewModel&gt;) -&gt; (), completionError: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/Dashboard/DashboardViewModel.swift"
-                  timestampString = "560177873.880851"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "357"
-                  endingLineNumber = "357"
-                  offsetFromSymbolStart = "46">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Genesis_Vision.InvestorDashboard&gt;) -&gt; () in Genesis_Vision.DashboardViewModel.(fetch in _C113E96D6B5F9BE668C4BBEFFEFDACA9)(_: (Swift.Int, Swift.Array&lt;Genesis_Vision.DashboardTableViewCellViewModel&gt;) -&gt; (), completionError: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/Dashboard/DashboardViewModel.swift"
-                  timestampString = "560177873.883839"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "357"
-                  endingLineNumber = "357"
-                  offsetFromSymbolStart = "69">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Models/Dashboard/EventListViewModel.swift"
-            timestampString = "560177338.7862411"
+            timestampString = "560285661.270597"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "scrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Program Details/ProgramViewController.swift"
-            timestampString = "560178155.364506"
+            timestampString = "560285661.2707109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "187"
             endingLineNumber = "187"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "programDetailDidChangeFavoriteState(with:value:request:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -137,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Programs/ProgramListViewController.swift"
-            timestampString = "560178075.022746"
+            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardTabmanViewModel.swift"
+            timestampString = "560285661.271246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "scrollViewDidScroll(_:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "setup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardTabmanViewModel.swift"
+            timestampString = "560285661.2712981"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "init(withRouter:tabmanViewModelDelegate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

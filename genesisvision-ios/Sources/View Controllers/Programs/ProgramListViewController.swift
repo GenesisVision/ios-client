@@ -12,7 +12,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
-    private var tournamentBarButtonItem: UIBarButtonItem?
     
     // MARK: - View Model
     var viewModel: ProgramListViewModelProtocol!
@@ -85,16 +84,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         if signInButtonEnable {
             showNewVersionAlertIfNeeded(self)
         }
-        
-//        PlatformManager.getPlatformInfo(completion: { [weak self] (model) in
-//            guard let isTournamentActive = model?.isTournamentActive, isTournamentActive else { return }
-//
-//            self?.tournamentBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_trophy_icon"), style: .done, target: self, action: #selector(self?.tournamentButtonAction(_:)))
-//            self?.tournamentBarButtonItem?.tintColor = UIColor.Tournament.bg
-//            self?.navigationItem.rightBarButtonItem = self?.tournamentBarButtonItem
-//        })
-        
-        tabBarItem.title = viewModel.title
 
         setupSearchBar()
     }
@@ -166,12 +155,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Actions
-    @IBAction func tournamentButtonAction(_ sender: UIButton) {
-        if let viewModel = viewModel as? ProgramListViewModel {
-            viewModel.showTournamentVC()
-        }
-    }
-    
     @objc func highToLowButtonAction() {
         viewModel.highToLowValue = !viewModel.highToLowValue
         bottomSheetController.dismiss()

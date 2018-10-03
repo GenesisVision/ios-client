@@ -57,7 +57,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             appearance.indicator.isProgressive = viewModel.isProgressive
             appearance.indicator.compresses = viewModel.compresses
             
-            appearance.text.font = UIFont.getFont(.semibold, size: 19)
+            appearance.text.font = viewModel.font
             
             switch bar.style {
             case .buttonBar:

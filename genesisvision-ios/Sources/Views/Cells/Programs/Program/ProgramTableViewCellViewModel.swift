@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct ProgramTableViewCellViewModel {
-    let program: ProgramDetailsFull
+    let program: ProgramDetails
     weak var delegate: ProgramDetailViewControllerProtocol?
 }
 
@@ -54,11 +54,6 @@ extension ProgramTableViewCellViewModel: CellViewModel {
 //            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
 //        }
         
-        if let currency = program.currency, let currencyType = CurrencyType(currency: Constants.currency) {
-            cell.currencyLabel.currencyType = currencyType
-            cell.currencyLabel.text = currency.rawValue.uppercased()
-        }
-        
         if let level = program.level {
             cell.programLogoImageView.levelLabel.text = level.toString()
         }
@@ -72,7 +67,5 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.programDetailsView.setup(investorsCount: program.statistic?.investorsCount, balance: program.statistic?.balanceGVT?.amount, avgProfit: program.statistic?.profitPercent, totalProfit: program.statistic?.profitValue, currency: program.currency?.rawValue)
-        
-        cell.tournamentActive(false)
     }
 }

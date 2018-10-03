@@ -182,3 +182,15 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
         }
     }
 }
+
+func getSelectedCurrency() -> String {
+    if let selectedCurrency = UserDefaults.standard.string(forKey: Constants.UserDefaults.selectedCurrency) {
+        return selectedCurrency
+    }
+    
+    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.usd.rawValue
+}
+
+func updateSelectedCurrency(_ selectedCurrency: String) {
+    UserDefaults.standard.set(selectedCurrency, forKey: Constants.UserDefaults.selectedCurrency)
+}

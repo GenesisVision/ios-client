@@ -1281,7 +1281,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="sP8-nq-dkb">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="img_fav_unselected_icon" id="ug0-Lh-qN8">
+                            <barButtonItem title="Item" image="img_favorite_icon" id="ug0-Lh-qN8">
                                 <connections>
                                     <action selector="favoriteButtonAction:" destination="3k1-6D-WJ7" id="4Zh-Wx-C5d"/>
                                 </connections>
@@ -1435,7 +1435,7 @@
     <resources>
         <image name="img_dropdown_icon" width="13" height="7"/>
         <image name="img_exit_full_screen" width="44" height="44"/>
-        <image name="img_fav_unselected_icon" width="23" height="23"/>
+        <image name="img_favorite_icon" width="23" height="23"/>
         <image name="img_logo" width="100" height="100"/>
         <image name="img_notification_program_icon" width="20" height="23"/>
         <image name="img_numpad_delete" width="24" height="18"/>

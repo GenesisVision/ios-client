@@ -11,6 +11,7 @@ import Kingfisher
 
 struct PortfolioEventCollectionViewCellViewModel {
     weak var reloadDataProtocol: ReloadDataProtocol?
+    let dashboardPortfolioEvent: DashboardPortfolioEvent
 }
 
 extension PortfolioEventCollectionViewCellViewModel: CellViewModel {

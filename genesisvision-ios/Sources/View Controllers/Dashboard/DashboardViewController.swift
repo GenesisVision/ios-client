@@ -74,9 +74,14 @@ class DashboardViewController: BaseViewController {
         
         showProgressHUD()
         setupUI()
+        fetch()
     }
+    
     private func reloadData() {
-        
+        if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
+            notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+            navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
+        }
     }
     
     private func fetch() {
@@ -96,8 +101,8 @@ class DashboardViewController: BaseViewController {
         let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency
         currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency?.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
-        
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
+        
         let dateRangeButton = UIButton(type: .system)
         dateRangeButton.setTitle("Week", for: .normal)
         dateRangeButton.semanticContentAttribute = .forceRightToLeft
@@ -125,7 +130,7 @@ class DashboardViewController: BaseViewController {
         bottomSheetController.addNavigationBar("In Requests")
         
         bottomSheetController.addTableView { [weak self] tableView in
-            tableView.registerNibs(for: viewModel.inRequestsCellModelsForRegistration)
+            tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
             tableView.delegate = self?.viewModel.inRequestsDelegateManager
             tableView.dataSource = self?.viewModel.inRequestsDelegateManager
             tableView.separatorStyle = .none
@@ -145,7 +150,7 @@ class DashboardViewController: BaseViewController {
         bottomSheetController.addNavigationBar("Preferred Currency")
         
         bottomSheetController.addTableView { [weak self] tableView in
-            tableView.registerNibs(for: viewModel.currencyCellModelsForRegistration)
+            tableView.registerNibs(for: viewModel.currencyDelegateManager.currencyCellModelsForRegistration)
             tableView.delegate = self?.viewModel.currencyDelegateManager
             tableView.dataSource = self?.viewModel.currencyDelegateManager
             tableView.separatorStyle = .none

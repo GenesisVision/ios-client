@@ -11,7 +11,7 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
-    private static var walletViewModel: WalletViewModel?
+    private static var walletViewModel: WalletSummary?
     private static var ratesModel: RatesModel?
     private static var twoFactorStatus: TwoFactorStatus?
     
@@ -68,11 +68,11 @@ class AuthManager {
     
     static func getBalance(completion: @escaping (_ balance: Double) -> Void, completionError: @escaping CompletionBlock) {
         getWallet(completion: { (viewModel) in
-            completion(walletViewModel?.amount?.rounded(withType: .gvt) ?? 0.0)
+            completion(walletViewModel?.availableGVT?.rounded(withType: .gvt) ?? 0.0)
         }, completionError: completionError)
     }
     
-    static func saveWalletViewModel(viewModel: WalletViewModel) {
+    static func saveWalletViewModel(viewModel: WalletSummary) {
         self.walletViewModel = viewModel
     }
     
@@ -120,14 +120,16 @@ class AuthManager {
         }
     }
     
-    static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getWallet(completion: @escaping (_ wallet: WalletSummary?) -> Void, completionError: @escaping CompletionBlock) {
         if let walletViewModel = walletViewModel {
             completion(walletViewModel)
         }
         
-        WalletDataProvider.getWallet(completion: { (viewModel) in
+        let currency: WalletAPI.Currency_v10WalletByCurrencyGet = .gvt
+        
+        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
             if viewModel != nil  {
-                walletViewModel = viewModel?.wallets?.first
+                walletViewModel = viewModel
             }
             
             completion(walletViewModel)

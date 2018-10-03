@@ -18,7 +18,6 @@ class DetailTextTableViewCell: PlateTableViewCell {
     }
     
     // MARK: - Labels
-    @IBOutlet var currencyLabel: CurrencyLabel!
     @IBOutlet var availableToInvestLabel: UILabel!
     
     // MARK: - Lifecycle

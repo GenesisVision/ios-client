@@ -66,7 +66,7 @@ class ChartView: CombinedChartView {
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
             
-            lineChartDataSet.mode = .horizontalBezier
+//            lineChartDataSet.mode = .horizontalBezier
         }
     }
     

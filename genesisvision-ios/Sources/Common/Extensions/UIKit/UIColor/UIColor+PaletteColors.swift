@@ -253,14 +253,9 @@ extension UIColor {
         static var forImage: UIColor { return Common.white }
     }
     
-    struct Tournament {
-        static var bg: UIColor { return Common.putty }
-    }
-    
     struct Cell {
         static var separator: UIColor { return Common.separator }
         static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
-        static var tournamentBg: UIColor { return Common.puttyWithAlpha }
         static var selectedBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
         static var headerBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkSectionHeader : Common.darkSectionHeader }
         

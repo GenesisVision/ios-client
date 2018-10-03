@@ -17,7 +17,11 @@ final class ProfitViewModel {
     
     var selectedChartAssetsDelegateManager: ProfitSelectedChartAssetsDelegateManager?
     
-    var dashboardChartValue: DashboardChartValue?
+    var dashboardChartValue: DashboardChartValue? {
+        didSet {
+            //TODO: setupUI()
+        }
+    }
     
     private var router: DashboardRouter!
     
@@ -34,6 +38,10 @@ final class ProfitViewModel {
     }
     
     func showFilterTraders() {
+        
+    }
+    
+    func fetch() {
         
     }
 }

@@ -150,7 +150,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Az4-DU-qer" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Az4-DU-qer" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="22" width="42" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="FW0-18-dvg"/>
@@ -175,7 +175,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qr0-9R-NHZ" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qr0-9R-NHZ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="50" y="0.0" width="42" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -198,7 +198,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7B-kc-dI3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7B-kc-dI3" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="22" width="42" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="fj7-Dh-tXD"/>
@@ -243,7 +243,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-KY-Xwx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-KY-Xwx" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="22" width="171.5" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="pKl-XP-NDy"/>
@@ -304,9 +304,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="350"/>
                     <connections>
-                        <outlet property="balanceCurrencyLabel" destination="Az4-DU-qer" id="Yun-il-AAt"/>
-                        <outlet property="balanceTitleLabel" destination="BFE-Ts-bXz" id="w1X-g1-D5C"/>
-                        <outlet property="balanceValueLabel" destination="CNm-Oi-Xv5" id="abc-bZ-rTf"/>
+                        <outlet property="amountCurrencyLabel" destination="Az4-DU-qer" id="qyU-xg-QQo"/>
+                        <outlet property="amountTitleLabel" destination="BFE-Ts-bXz" id="gne-hO-xrM"/>
+                        <outlet property="amountValueLabel" destination="CNm-Oi-Xv5" id="182-Us-iHm"/>
                         <outlet property="changeCurrencyLabel" destination="D7B-kc-dI3" id="97P-9m-ALl"/>
                         <outlet property="changePercentLabel" destination="Qr0-9R-NHZ" id="3Ke-Ti-KCx"/>
                         <outlet property="changeTitleLabel" destination="o60-Uo-xvB" id="IYS-YY-lBM"/>
@@ -349,7 +349,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fA-Db-MhC" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fA-Db-MhC" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="52" width="42" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -369,7 +369,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRu-WE-7Ic" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRu-WE-7Ic" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="50" y="0.0" width="42" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -383,7 +383,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trv-a1-H8T" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trv-a1-H8T" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="52" width="42" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -478,7 +478,7 @@
                         <outlet property="changePercentLabel" destination="fRu-WE-7Ic" id="uPJ-im-l1W"/>
                         <outlet property="changeTitleLabel" destination="ahE-GU-ZqE" id="lsP-5d-SgJ"/>
                         <outlet property="changeValueLabel" destination="tgc-8G-fqg" id="ck8-Ih-BwW"/>
-                        <outlet property="chartView" destination="zsb-9x-qHG" id="JcL-m9-5KF"/>
+                        <outlet property="chartView" destination="zsb-9x-qHG" id="9OT-wy-nE8"/>
                         <outlet property="chartViewHeightConstraint" destination="BrO-Fz-MGr" id="Qn5-NA-Pgb"/>
                         <outlet property="filterImageView" destination="zjf-Rk-nyC" id="pIk-4I-6kW"/>
                         <outlet property="filterTitleLabel" destination="WH9-ux-zrp" id="O0J-3v-J24"/>

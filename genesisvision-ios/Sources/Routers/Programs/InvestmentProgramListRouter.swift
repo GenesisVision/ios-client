@@ -19,8 +19,6 @@ class ProgramListRouter: Router, ProgramListRouterProtocol {
             showFilterVC(with: programListViewModel)
         case .showProgramDetails(let programId):
             showProgramDetails(with: programId)
-        case .showTournamentVC(let tournamentTotalRounds, let tournamentCurrentRound):
-            showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound)
         }
     }
     
@@ -39,15 +37,5 @@ class ProgramListRouter: Router, ProgramListRouterProtocol {
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int) {
-        guard tournamentCurrentRound > 0 else { return }
-        let tabmanViewController = TournamentTabmanViewController()
-        let router = TournamentRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        let viewModel = TournamentViewModel(withRouter: router, viewControllersCount: tournamentTotalRounds, defaultPage: tournamentCurrentRound - 1, tabmanViewModelDelegate: tabmanViewController)
-        tabmanViewController.viewModel = viewModel
-        tabmanViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(tabmanViewController, animated: true)
     }
 }

@@ -47,8 +47,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         bottomViewType = viewModel.bottomViewType
         
         sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
-
-        tabBarItem.title = viewModel.title
     }
     
     private func setupTableConfiguration() {

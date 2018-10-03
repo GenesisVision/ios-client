@@ -10,11 +10,14 @@ import Foundation
 import Tabman
 
 class ChartsTabmanViewModel: TabmanViewModel {
+    var dashboardPortfolioChartValue: DashboardChartValue?
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
+    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate?, dashboardPortfolioChartValue: DashboardChartValue?) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
+        self.dashboardPortfolioChartValue = dashboardPortfolioChartValue
         style = .scrollingButtonBar
+        font = UIFont.getFont(.semibold, size: 16)
     }
 }

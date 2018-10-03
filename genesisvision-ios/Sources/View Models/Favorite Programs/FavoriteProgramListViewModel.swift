@@ -64,12 +64,12 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     }
     
     public private(set) var needToRefresh = false
-
+    var filter: ProgramsFilter?
     internal var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Constants.Sorting.programListDefault
     
     var searchText = "" {
         didSet {
-//            filter?.name = searchText
+            filter?.name = searchText
         }
     }
     var programViewModels = [ProgramTableViewCellViewModel]()
@@ -91,7 +91,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     struct SortingList {
         var sortingValue: String
-        var sortingKey: ProgramsFilter.Sorting
+        var sortingKey: ProgramsAPI.Sorting_v10ProgramsGet
     }
     
     var sortingList: [SortingList] {
@@ -145,7 +145,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
             guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.program.isFavorite = value
+            model.program.personalProgramDetails?.isFavorite = value
             
             if !value, let i = programViewModels.index(where: { $0.program.id?.uuidString == programId }) {
                 programViewModels.remove(at: i)
@@ -160,7 +160,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.program.isFavorite = value
+                model.program.personalProgramDetails?.isFavorite = value
                 value ? completion(.success) : self?.refresh(completion: completion)
             case .failure(let errorType):
                 print(errorType)
@@ -241,14 +241,14 @@ extension FavoriteProgramListViewModel {
         switch dataType {
         case .api:
             guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (programsViewModel) in
+            ProgramDataProvider.getPrograms(with: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: nil, take: nil, completion: { (programsViewModel) in
                 guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var programViewModels = [ProgramTableViewCellViewModel]()
                 
                 let totalCount = programs.total ?? 0
                 
-                programs.programs?.forEach({ (program) in
+                programs.programs?.forEach({ [weak self] (program) in
                     guard let favoriteProgramListRouter: FavoriteProgramListRouter = self?.router as? FavoriteProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: favoriteProgramListRouter.favoriteProgramListViewController)
@@ -257,7 +257,7 @@ extension FavoriteProgramListViewModel {
                 
                 completionSuccess(totalCount, programViewModels)
                 completionError(.success)
-                }, errorCompletion: completionError)
+            }, errorCompletion: completionError)
         case .fake:
             fakeViewModels { (programViewModels) in
                 completionSuccess(programViewModels.count, programViewModels)

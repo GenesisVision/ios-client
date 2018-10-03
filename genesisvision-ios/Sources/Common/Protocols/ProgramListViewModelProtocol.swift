@@ -36,6 +36,8 @@ protocol ProgramListViewModelProtocol {
     var take: Int { get set }
     var totalCount: Int { get set }
     
+    var filter: ProgramsFilter? { get }
+    
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     
@@ -169,14 +171,6 @@ extension ProgramListViewModelProtocol {
         if let router = router as? ProgramListRouter, (self as? ProgramListViewModel) != nil {
             router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
         }
-    }
-    
-    func showTournamentVC() {
-//        guard let platformInfo = PlatformManager.platformInfo, let tournamentTotalRounds = platformStatus.tournamentTotalRounds, let tournamentCurrentRound = platformInfo.tournamentCurrentRound else { return }
-//
-//        if let router = router as? ProgramListRouter {
-//            router.show(routeType: .showTournamentVC(tournamentTotalRounds: tournamentTotalRounds, tournamentCurrentRound: tournamentCurrentRound))
-//        }
     }
     
     // MARK: - Nodata

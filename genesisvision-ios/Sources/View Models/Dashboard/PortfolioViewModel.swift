@@ -17,13 +17,23 @@ final class PortfolioViewModel {
     
     var selectedChartAssetsDelegateManager: PortfolioSelectedChartAssetsDelegateManager?
     
-    var dashboardChartValue: DashboardChartValue?
+    var dashboardChartValue: DashboardChartValue? {
+        didSet {
+            //TODO: setupUI()
+        }
+    }
+    var dashboardRequests: ProgramRequests? {
+        didSet {
+            //TODO: setupUI()
+        }
+    }
     
     private var router: DashboardRouter!
     
     // MARK: - Init
-    init(withRouter router: DashboardRouter) {
+    init(withRouter router: DashboardRouter, dashboardChartValue: DashboardChartValue?) {
         self.router = router
+        self.dashboardChartValue = dashboardChartValue
         
         self.selectedChartAssetsDelegateManager = PortfolioSelectedChartAssetsDelegateManager(with: selectedChartAssetsViewModels)
     }

@@ -11,7 +11,45 @@ import Foundation
 enum ProgramListViewState {
     case programList, programListWithSignIn
 }
- 
+
+struct ProgramsFilter {
+    public enum ProfitTotalChange: String, Codable {
+        case unchanged = "Unchanged"
+        case up = "Up"
+        case down = "Down"
+    }
+    
+    var managerId: UUID?
+    var brokerId: UUID?
+    var brokerTradeServerId: UUID?
+    var investMaxAmountFrom: Double?
+    var investMaxAmountTo: Double?
+    var sorting: ProgramsAPI.Sorting_v10ProgramsGet?
+    var name: String?
+    var levelMin: Int?
+    var levelMax: Int?
+    var balanceUsdMin: Double?
+    var balanceUsdMax: Double?
+    var profitAvgMin: Double?
+    var profitAvgMax: Double?
+    var profitTotalMin: Double?
+    var profitTotalMax: Double?
+    var profitTotalPercentMin: Double?
+    var profitTotalPercentMax: Double?
+    var profitAvgPercentMin: Double?
+    var profitAvgPercentMax: Double?
+    var profitTotalChange: ProfitTotalChange?
+    var periodMin: Int?
+    var periodMax: Int?
+    var showActivePrograms: Bool?
+    var equityChartLength: Int?
+    var showMyFavorites: Bool?
+    var roundNumber: Int?
+    var skip: Int?
+    var take: Int?
+
+}
+
 final class ProgramListViewModel: ProgramListViewModelProtocol {
     
     // MARK: - Variables
@@ -31,7 +69,7 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
     var equityChartLength = Constants.Api.equityChartLength
     var skip = 0 {
         didSet {
-//            filter?.skip = skip
+            filter?.skip = skip
         }
     }
     var take = Constants.Api.take
@@ -66,11 +104,11 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
         return signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
     }
     
-//    var filter: ProgramsFilter?
+    var filter: ProgramsFilter?
     
     var searchText = "" {
         didSet {
-//            filter?.name = searchText
+            filter?.name = searchText
         }
     }
     var programViewModels: [ProgramTableViewCellViewModel] = [ProgramTableViewCellViewModel]()
@@ -80,35 +118,35 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-//        filter = ProgramsFilter(managerId: nil,
-//                                          brokerId: nil,
-//                                          brokerTradeServerId: nil,
-//                                          investMaxAmountFrom: nil,
-//                                          investMaxAmountTo: nil,
-//                                          sorting: nil,//TODO: sortingDelegateManager.sorting,
-//                                          name: searchText,
-//                                          levelMin: nil,
-//                                          levelMax: nil,
-//                                          balanceUsdMin: nil,
-//                                          balanceUsdMax: nil,
-//                                          profitAvgMin: nil,
-//                                          profitAvgMax: nil,
-//                                          profitTotalMin: nil,
-//                                          profitTotalMax: nil,
-//                                          profitTotalPercentMin: nil,
-//                                          profitTotalPercentMax: nil,
-//                                          profitAvgPercentMin: nil,
-//                                          profitAvgPercentMax: nil,
-//                                          profitTotalChange: nil,
-//                                          periodMin: nil,
-//                                          periodMax: nil,
-//                                          showActivePrograms: nil,
-//                                          equityChartLength: equityChartLength,
-//                                          showMyFavorites: nil,
-//                                          roundNumber: nil,
-//                                          skip: skip,
-//                                          take: take)
-//
+        filter = ProgramsFilter(managerId: nil,
+                                brokerId: nil,
+                                brokerTradeServerId: nil,
+                                investMaxAmountFrom: nil,
+                                investMaxAmountTo: nil,
+                                sorting: nil,//TODO: sortingDelegateManager.sorting,
+                                name: searchText,
+                                levelMin: nil,
+                                levelMax: nil,
+                                balanceUsdMin: nil,
+                                balanceUsdMax: nil,
+                                profitAvgMin: nil,
+                                profitAvgMax: nil,
+                                profitTotalMin: nil,
+                                profitTotalMax: nil,
+                                profitTotalPercentMin: nil,
+                                profitTotalPercentMax: nil,
+                                profitAvgPercentMin: nil,
+                                profitAvgPercentMax: nil,
+                                profitTotalChange: nil,
+                                periodMin: nil,
+                                periodMax: nil,
+                                showActivePrograms: nil,
+                                equityChartLength: equityChartLength,
+                                showMyFavorites: nil,
+                                roundNumber: nil,
+                                skip: skip,
+                                take: take)
+
         state = isLogin() ? .programList : .programListWithSignIn
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
@@ -210,22 +248,20 @@ extension ProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-//            guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            ProgramDataProvider.getPrograms(with: filter, completion: { [weak self] (programsViewModel) in
+            ProgramDataProvider.getPrograms(with: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: nil, take: nil, completion: { [weak self] (programsViewModel) in
                 guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
-
+                
                 var programViewModels = [ProgramTableViewCellViewModel]()
-
+                
                 let totalCount = programs.total ?? 0
-
+                
                 programs.programs?.forEach({ (program) in
                     guard let programListRouter: ProgramListRouter = self?.router as? ProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.programsViewController)
                     programViewModels.append(programTableViewCellViewModel)
                 })
-
+                
                 completionSuccess(totalCount, programViewModels)
                 completionError(.success)
             }, errorCompletion: completionError)

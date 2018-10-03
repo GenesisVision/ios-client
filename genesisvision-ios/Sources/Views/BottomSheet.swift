@@ -215,7 +215,7 @@ open class BottomSheet {
                 let label = UILabel()
                 label.textColor = titleTextColor
                 label.text = title
-                label.font = UIFont.getFont(.bold, size: 19)
+                label.font = UIFont.getFont(.semibold, size: 18)
                 item.leftBarButtonItem = UIBarButtonItem(customView: label)
             }
             
@@ -223,7 +223,7 @@ open class BottomSheet {
                 let label = UILabel()
                 label.textColor = subtitleTextColor
                 label.text = subtitle
-                label.font = UIFont.getFont(.regular, size: 15)
+                label.font = UIFont.getFont(.medium, size: 14)
                 item.rightBarButtonItem = UIBarButtonItem(customView: label)
             }
             

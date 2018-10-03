@@ -24,13 +24,17 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         self.dataSource = pageboyDataSource
         
         // configure the bar
-        self.bar.items = [Item(title: "Programs"),
-                          Item(title: "Funds")]
+        if let programsCount = viewModel.dashboard?.programsCount, let fundsCount = viewModel.dashboard?.fundsCount {
+            self.bar.items = [Item(title: "Programs \(programsCount)"),
+                              Item(title: "Funds \(fundsCount)")]
+        } else {
+            self.bar.items = [Item(title: "Programs"),
+                              Item(title: "Funds")]
+        }
     }
 
     // MARK: - Public methods
     // MARK: - Private methods
-
 }
 
 extension AssetsViewController: ProgramDetailViewControllerProtocol {

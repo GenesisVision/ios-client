@@ -56,12 +56,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
 //        }
 //
 //        cell.profitTitleLabel.text = "MY PROFIT"
-        
-        if let currency = program.currency, let currencyType = CurrencyType(currency: currency.rawValue) {
-            cell.currencyLabel.currencyType = currencyType
-            cell.currencyLabel.text = currency.rawValue.uppercased()
-        }
-        
+    
         if let programId = program.id?.uuidString {
             cell.programId = programId
         }
@@ -89,9 +84,5 @@ extension DashboardTableViewCellViewModel: CellViewModel {
 //
 //            cell.isEnable = isEnabled
 //        }
-//
-//        cell.reloadDataProtocol = reloadDataProtocol
-        
-        cell.tournamentActive(false)
     }
 }

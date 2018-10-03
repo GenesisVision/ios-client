@@ -18,7 +18,7 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
         super.viewDidLoad()
 
         if let router = viewModel.router as? DashboardRouter {
-            pageboyDataSource = ChartsPageboyViewControllerDataSource(router: router)
+            pageboyDataSource = ChartsPageboyViewControllerDataSource(router: router, dashboardPortfolioChartValue: viewModel.dashboardPortfolioChartValue)
         }
         
         self.dataSource = pageboyDataSource

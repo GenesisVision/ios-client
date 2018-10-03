@@ -81,7 +81,7 @@ class ProgramViewController: BaseViewController {
     }
     
     private func setupUI() {
-        favoriteBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_fav_unselected_icon"), style: .done, target: self, action: #selector(favoriteButtonAction))
+        favoriteBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(favoriteButtonAction))
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
         navigationItem.rightBarButtonItems = [notificationsBarButtonItem, favoriteBarButtonItem]
@@ -172,12 +172,12 @@ extension ProgramViewController: ProgramDetailsProtocol {
             guard let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite else { return }
             
             guard self.favoriteBarButtonItem != nil else {
-                self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_fav_selected_icon") : #imageLiteral(resourceName: "img_fav_unselected_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction(_:)))
+                self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction(_:)))
                 self.navigationItem.rightBarButtonItems = [self.notificationsBarButtonItem, self.favoriteBarButtonItem]
                 return
             }
             
-            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_fav_selected_icon") : #imageLiteral(resourceName: "img_fav_unselected_icon")
+            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         }
     }
 }

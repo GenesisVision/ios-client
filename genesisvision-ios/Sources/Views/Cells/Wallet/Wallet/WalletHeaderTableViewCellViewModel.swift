@@ -10,16 +10,45 @@ import Foundation
 import UIKit.UIImage
 
 struct WalletHeaderTableViewCellViewModel {
-    let balance: Double
-    let usdBalance: Double
-    weak var delegate: WalletHeaderTableViewCellProtocol?
+    let wallet: WalletSummary
 }
 
 extension WalletHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletHeaderTableViewCell) {
-        cell.balanceLabel.text = balance.rounded(withType: .gvt).toString()
-        cell.usdBalanceLabel.text = usdBalance.rounded(withType: .usd).toString(currency: true)
-        cell.delegate = delegate
+        cell.totalBalanceTitleLabel.text = "Total balance"
+        if let totalBalanceGVT = wallet.totalBalanceGVT {
+            cell.totalBalanceValueLabel.text = totalBalanceGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let totalBalanceCurrency = wallet.totalBalanceCurrency {
+            cell.totalBalanceCurrencyLabel.text = totalBalanceCurrency.toString() + " \(getSelectedCurrency())"
+        }
+        
+        if let totalBalanceGVT = wallet.totalBalanceGVT, let availableGVT = wallet.availableGVT {
+            let percent = availableGVT / totalBalanceGVT
+            print(percent)
+            //cell.availableProgressView
+        }
+        
+        cell.availableTitleLabel.text = "Available"
+        if let availableGVT = wallet.availableGVT {
+            cell.availableValueLabel.text = availableGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let availableCurrency = wallet.availableCurrency {
+            cell.availableCurrencyLabel.text = availableCurrency.toString() + " \(getSelectedCurrency())"
+        }
+        
+        if let totalBalanceGVT = wallet.totalBalanceGVT, let investedGVT = wallet.investedGVT {
+            let percent = investedGVT / totalBalanceGVT
+            print(percent)
+//            cell.investedProgressView
+        }
+        cell.investedTitleLabel.text = "Invested value"
+        if let investedGVT = wallet.investedGVT {
+            cell.investedValueLabel.text = investedGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let investedCurrency = wallet.investedCurrency {
+            cell.investedCurrencyLabel.text = investedCurrency.toString() + " \(getSelectedCurrency())"
+        }
     }
 }
 

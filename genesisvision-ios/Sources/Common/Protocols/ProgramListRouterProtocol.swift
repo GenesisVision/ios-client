@@ -7,7 +7,7 @@
 //
 
 enum ProgramListRouteType {
-    case signIn, showProgramDetails(programId: String), showFilterVC(programListViewModel: ProgramListViewModel), showTournamentVC(tournamentTotalRounds: Int, tournamentCurrentRound: Int)
+    case signIn, showProgramDetails(programId: String), showFilterVC(programListViewModel: ProgramListViewModel)
 }
 
 protocol ProgramListRouterProtocol {

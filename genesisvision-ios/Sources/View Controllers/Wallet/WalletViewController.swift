@@ -13,6 +13,9 @@ class WalletViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
     
+    private var withdrawBarButtonItem: UIBarButtonItem!
+    private var addFundsBarButtonItem: UIBarButtonItem!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +46,26 @@ class WalletViewController: BaseViewControllerWithTableView {
         updateTitle()
         
         prefersLargeTitles = true
+        
+        withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction))
+        addFundsBarButtonItem = UIBarButtonItem(title: "Add funds", style: .done, target: self, action: #selector(addFundsButtonAction))
+        addFundsBarButtonItem.tintColor = UIColor.primary
+    
+        
+        navigationItem.leftBarButtonItem = withdrawBarButtonItem
+        navigationItem.rightBarButtonItem = addFundsBarButtonItem
+    }
+    
+    @objc private func withdrawButtonAction() {
+        viewModel.withdraw()
+    }
+    
+    @objc private func addFundsButtonAction() {
+        viewModel.deposit()
     }
     
     private func updateTitle() {
-        title = viewModel.title
-//        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
     }
     
     private func setupTableConfiguration() {
@@ -203,30 +221,6 @@ extension WalletViewController: WalletProtocol {
 extension WalletViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
-    }
-}
-
-extension WalletViewController: WalletHeaderTableViewCellProtocol {
-    func depositProgramDidPress() {
-        guard isDebug else {
-            showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
-            return
-        }
-        
-        viewModel.deposit()
-    }
-    
-    func withdrawProgramDidPress() {
-        guard isDebug else {
-            showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
-            return
-        }
-        
-        viewModel.withdraw()
-    }
-    
-    func updateBalanceDidPress() {
-        fetchBalance()
     }
 }
 

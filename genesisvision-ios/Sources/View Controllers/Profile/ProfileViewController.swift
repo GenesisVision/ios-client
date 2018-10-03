@@ -88,7 +88,6 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     private func setupUI() {
         showProfileStateAction()
         
-        title = viewModel.title
         navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         showInfiniteIndicator(value: false)

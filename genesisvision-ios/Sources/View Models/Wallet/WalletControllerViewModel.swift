@@ -8,6 +8,19 @@
 
 import UIKit.UITableViewHeaderFooterView
 
+struct TransactionsFilter {
+    public enum ModelType: String, Codable {
+        case all = "All"
+        case _internal = "Internal"
+        case external = "External"
+    }
+
+    public var programId: UUID?
+    public var type: ModelType?
+    public var skip: Int?
+    public var take: Int?
+}
+
 final class WalletControllerViewModel {
     
     enum SectionType {
@@ -18,22 +31,14 @@ final class WalletControllerViewModel {
     // MARK: - Variables
     var title: String = "Wallet"
     
+    var wallet: WalletSummary?
+    
     private var sections: [SectionType] = [.header, .transactions]
 
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
-    private weak var delegate: WalletHeaderTableViewCellProtocol?
     private weak var reloadDataProtocol: ReloadDataProtocol?
-    
-    private var balance: Double = 0.0 {
-        didSet {
-            self.usdBalance = balance * self.rate
-        }
-    }
-    private var currency: String = Constants.currency
-    private var rate: Double = 0.0
-    private var usdBalance: Double = 0.0
-    
+
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var skip = 0            //offset
@@ -45,15 +50,9 @@ final class WalletControllerViewModel {
     // MARK: - Init
     init(withRouter router: WalletRouter) {
         self.router = router
-        self.delegate = router.topViewController() as? WalletHeaderTableViewCellProtocol
         self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
         
         setup()
-    }
-    
-    // MARK: - Data methods
-    func getBalance() -> Double {
-        return balance
     }
 }
 
@@ -65,10 +64,10 @@ extension WalletControllerViewModel {
                 WalletTransactionTableViewCellViewModel.self]
     }
     
-    /// Return view models for registration header/footer Nib files
-    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SortHeaderView.self]
-    }
+//    /// Return view models for registration header/footer Nib files
+//    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+//        return [SortHeaderView.self]
+//    }
     
     func numberOfSections() -> Int {
         return sections.count
@@ -90,7 +89,7 @@ extension WalletControllerViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .transactions:
-            return nil
+            return "Transaction history"
         case .header:
             return nil
         }
@@ -110,7 +109,8 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, usdBalance: usdBalance, delegate: delegate)
+            guard let wallet = wallet else { return nil }
+            return WalletHeaderTableViewCellViewModel(wallet: wallet)
         case .transactions:
             return transactions[indexPath.row]
         }
@@ -127,7 +127,8 @@ extension WalletControllerViewModel {
 
     // MARK: - Private methods
     private func setup() {
-        filter = TransactionsFilter(programId: nil, type: PlatformManager.filterConstants.walletModelTypeDefault, skip: skip, take: take)
+        //TODO: type: nil
+        filter = TransactionsFilter(programId: nil, type: nil, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }
@@ -135,14 +136,15 @@ extension WalletControllerViewModel {
 // MARK: - Fetch
 extension WalletControllerViewModel {
     func fetchBalance(completion: @escaping CompletionBlock) {
-        AuthManager.getSavedRate { [weak self] (value) in
-            self?.rate = value
+        guard let currency = WalletAPI.Currency_v10WalletByCurrencyGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
+            guard let viewModel = viewModel else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
             
-            AuthManager.getBalance(completion: { [weak self] (value) in
-                self?.balance = value
-                completion(.success)
-            }, completionError: completion)
-        }
+            self.wallet = viewModel
+        }, errorCompletion: completion)
     }
     
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock

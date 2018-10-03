@@ -8,6 +8,38 @@
 
 import UIKit
 
+protocol ViewModelWithTableView {
+    var tableViewDataSourceAndDelegate: TableViewDataSourceAndDelegate! { get }
+    
+    func headerTitle(for section: Int) -> String?
+    func headerHeight(for section: Int) -> CGFloat
+    
+    func numberOfSections() -> Int
+    func numberOfRows(in section: Int) -> Int
+    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+}
+
+extension ViewModelWithTableView {func headerTitle(for section: Int) -> String? {
+    return nil
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func numberOfSections() -> Int {
+        return 0
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 0
+    }
+    
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        return nil
+    }
+}
+
 protocol BaseViewControllerWithViewModel {
     var viewModel: ViewModelWithTableView! { get }
 }

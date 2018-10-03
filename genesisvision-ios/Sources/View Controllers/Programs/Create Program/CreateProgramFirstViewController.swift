@@ -43,17 +43,16 @@ class CreateProgramFirstViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+//        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         showInfiniteIndicator(value: false)
     }
     
     private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = viewModel.tableViewDataSourceAndDelegate
-        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+//        tableView.configure(with: .defaultConfiguration)
+//        tableView.delegate = viewModel.tableViewDataSourceAndDelegate
+//        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
+//        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
     }
     
     private func reloadData() {
@@ -64,7 +63,7 @@ class CreateProgramFirstViewController: BaseViewControllerWithTableView {
     
     // MARK: - Actions
     @IBAction func nextButtonAction(_ sender: UIButton) {
-        viewModel.nextStep()
+//        viewModel.nextStep()
     }
 }
 

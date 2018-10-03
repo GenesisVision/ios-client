@@ -198,7 +198,6 @@ class SettingsViewController: BaseTableViewController {
     }
     
     private func setupUI() {
-        title = viewModel.title
         navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         versionLabel.text = "App version " + getFullVersion()

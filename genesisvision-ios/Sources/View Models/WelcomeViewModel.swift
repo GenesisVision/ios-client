@@ -30,11 +30,9 @@ final class WelcomeViewModel {
         }
         
         requestReview()
-        isTournamentApp
-            ? startTournament()
-            : AuthManager.isLogin()
-                ? startAsAuthorized()
-                : startAsUnauthorized()
+        AuthManager.isLogin()
+            ? startAsAuthorized()
+            : startAsUnauthorized()
     }
     
     // MARK: - Private methods
@@ -44,10 +42,6 @@ final class WelcomeViewModel {
     
     private func startAsUnauthorized() {
         router.show(routeType: .startAsUnauthorized)
-    }
-    
-    private func startTournament() {
-        router.show(routeType: .startTournament)
     }
     
     private func requestReview() {

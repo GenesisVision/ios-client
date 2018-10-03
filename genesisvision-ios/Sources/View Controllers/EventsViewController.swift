@@ -59,3 +59,9 @@ class EventsViewController: BaseViewController {
         viewModel.showAllPortfolioEvents()
     }
 }
+
+extension EventsViewController: ReloadDataProtocol {
+    func didReloadData() {
+        
+    }
+}

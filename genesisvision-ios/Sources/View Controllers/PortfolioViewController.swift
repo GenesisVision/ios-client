@@ -17,28 +17,30 @@ class PortfolioViewController: BaseViewController {
     var vc: UIViewController!
     
     private var bottomAssetsView: UIView?
+    
     // MARK: - Outlets
-    @IBOutlet weak var balanceTitleLabel: SubtitleLabel!
-    @IBOutlet weak var balanceValueLabel: TitleLabel!
-    @IBOutlet weak var balanceCurrencyLabel: SubtitleLabel!
+    @IBOutlet weak var amountTitleLabel: SubtitleLabel!
+    @IBOutlet weak var amountValueLabel: TitleLabel!
+    @IBOutlet weak var amountCurrencyLabel: MediumLabel!
+    
     @IBOutlet weak var changeTitleLabel: SubtitleLabel!
     @IBOutlet weak var changePercentLabel: TitleLabel! {
         didSet {
             changePercentLabel.textColor = UIColor.Cell.greenTitle
+            changePercentLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
     @IBOutlet weak var changeValueLabel: TitleLabel!
-    @IBOutlet weak var changeCurrencyLabel: SubtitleLabel!
-    @IBOutlet weak var inRequestsStackView: UIStackView!
+    @IBOutlet weak var changeCurrencyLabel: MediumLabel!
     
+    @IBOutlet weak var inRequestsStackView: UIStackView!
     @IBOutlet weak var inRequestsButton: UIButton!
     @IBOutlet weak var inRequestsTitleLabel: SubtitleLabel!
     @IBOutlet weak var inRequestsValueLabel: TitleLabel!
-    @IBOutlet weak var inRequestsCurrencyLabel: SubtitleLabel!
+    @IBOutlet weak var inRequestsCurrencyLabel: MediumLabel!
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
-            chartView.backgroundColor = UIColor.BaseView.bg
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
         }
@@ -73,6 +75,10 @@ class PortfolioViewController: BaseViewController {
     }
 
     // MARK: - Public methods
+    func updateUI() {
+        setupUI()
+    }
+    
     func updateViewConstraints(_ yOffset: CGFloat) {
         
     }
@@ -88,13 +94,46 @@ class PortfolioViewController: BaseViewController {
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
         
-        if let lineChartData = viewModel.dashboardChartValue?.chart, let barChartData = viewModel.dashboardChartValue?.bars {
-            chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
-            
-            chartView.addSubview(circleView)
-        }
+        chartView.addSubview(circleView)
     }
     
+    private func setupUI() {
+        if let dashboardChartValue = viewModel.dashboardChartValue {
+            if let lineChartData = dashboardChartValue.chart, let barChartData = dashboardChartValue.bars {
+                chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
+            }
+            
+            amountTitleLabel.text = "Amount"
+            if let value = dashboardChartValue.value {
+                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            }
+            if let valueCurrency = dashboardChartValue.valueCurrency {
+                amountCurrencyLabel.text = valueCurrency.toString() + " \(getSelectedCurrency())"
+            }
+            
+            changeTitleLabel.text = "Change"
+            if let changePercent = dashboardChartValue.changePercent {
+                changePercentLabel.text = changePercent.toString() + " %"
+            }
+            if let changeValue = dashboardChartValue.changeValue {
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
+            }
+            if let changeValueCurrency = dashboardChartValue.changeValueCurrency {
+                changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"
+            }
+        
+            if let dashboardRequests = viewModel.dashboardRequests {
+                inRequestsTitleLabel.text = "In Requests"
+                if let totalValue = dashboardRequests.totalValue {
+                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " GVT"
+                }
+                if let totalValue = dashboardRequests.totalValue, let rate = dashboardChartValue.rate {
+                    let inRequestsCurrency = totalValue * rate
+                    inRequestsCurrencyLabel.text = inRequestsCurrency.toString() + " \(getSelectedCurrency())"
+                }
+            }
+        }
+    }
     
     private func setupSelectedChartAssetsBottomSheetView() {
         bottomSheetController.bottomSheetControllerProtocol = self

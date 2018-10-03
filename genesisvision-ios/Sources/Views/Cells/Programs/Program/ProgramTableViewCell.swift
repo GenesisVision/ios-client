@@ -48,9 +48,6 @@ class ProgramTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var currencyLabel: CurrencyLabel!
-    @IBOutlet var placeLabel: TournamentPlaceLabel!
-    
     @IBOutlet var bottomStackView: UIStackView! {
         didSet {
             bottomStackView.isHidden = true
@@ -98,15 +95,10 @@ class ProgramTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        currencyLabel.isHidden = true
     }
     
     // MARK: - Public methods
-    func tournamentActive(_ isTournament: Bool) {
-        placeLabel.isHidden = !isTournament
-    }
-    
+
     // MARK: - Actions
     @IBAction func favoriteButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
