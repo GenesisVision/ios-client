@@ -80,7 +80,7 @@ class ProgramBalanceChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Cell.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
         
         chartView.addSubview(circleView)

@@ -220,7 +220,7 @@ extension UIColor {
                 return NavBarColors(tintColor: Common.white, backgroundColor: Common.primary, textColor: Common.white, subtitleColor: Common.white.withAlphaComponent(0.5))
             case .gray:
                 return NavBarColors(tintColor: Common.primary,
-                                    backgroundColor: AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.bgGray,
+                                    backgroundColor: AppearanceController.theme == .darkTheme ? .clear : Common.bgGray,
                                     textColor: AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue,
                                     subtitleColor: AppearanceController.theme == .darkTheme ? GV.white.withAlphaComponent(0.7) : Common.darkSlateBlue.withAlphaComponent(0.7))
             }

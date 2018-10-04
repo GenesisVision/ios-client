@@ -160,9 +160,8 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
         let yOffset = scrollView.contentOffset.y
         
         if let assetsViewController = viewModel?.router.assetsViewController,
-            let pageboyDataSource = assetsViewController.pageboyDataSource,
-            let controllers = pageboyDataSource.controllers {
-            for controller in controllers {
+            let pageboyDataSource = assetsViewController.pageboyDataSource {
+            for controller in pageboyDataSource.controllers {
                 if let vc = controller as? BaseViewControllerWithTableView {
                     vc.tableView?.isScrollEnabled = yOffset > -44.0
                 }

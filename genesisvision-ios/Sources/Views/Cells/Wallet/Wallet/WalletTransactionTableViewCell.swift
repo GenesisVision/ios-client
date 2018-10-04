@@ -55,5 +55,6 @@ class WalletTransactionTableViewCell: PlateTableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
+        contentView.backgroundColor = UIColor.BaseView.bg
     }
 }

@@ -10,21 +10,24 @@ import UIKit
 import Pageboy
 
 class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
-    var controllers: [BaseViewController]!
+    var controllers = [BaseViewController]()
 
     init(router: DashboardRouter, dashboardPortfolioChartValue: DashboardChartValue?) {
         super.init()
-        
-        if let porfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard),
-            let profitVC = ProfitViewController.storyboardInstance(name: .dashboard) {
+
+        if let porfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard) {
             porfolioVC.viewModel = PortfolioViewModel(withRouter: router, dashboardChartValue: dashboardPortfolioChartValue)
             porfolioVC.vc = router.chartsViewController
-            
-            profitVC.viewModel = ProfitViewModel(withRouter: router)
-            profitVC.vc = router.chartsViewController
 
-            controllers = [porfolioVC, profitVC]
+            controllers.append(porfolioVC)
         }
+        
+//        if let profitVC = ProfitViewController.storyboardInstance(name: .dashboard) {
+//            profitVC.viewModel = ProfitViewModel(withRouter: router)
+//            profitVC.vc = router.chartsViewController
+//
+//            controllers.append(profitVC)
+//        }
     }
     
     func update(dashboardPortfolioChartValue: DashboardChartValue?, dashboardRequests: ProgramRequests?) {

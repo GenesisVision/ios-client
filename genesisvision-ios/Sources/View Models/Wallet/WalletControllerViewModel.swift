@@ -60,14 +60,13 @@ final class WalletControllerViewModel {
 extension WalletControllerViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletHeaderTableViewCellViewModel.self,
-                WalletTransactionTableViewCellViewModel.self]
+        return [WalletTransactionTableViewCellViewModel.self]
     }
     
-//    /// Return view models for registration header/footer Nib files
-//    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-//        return [SortHeaderView.self]
-//    }
+    /// Return view models for registration header/footer Nib files
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [WalletTableHeaderView.self, DefaultTableHeaderView.self]
+    }
     
     func numberOfSections() -> Int {
         return sections.count
@@ -76,7 +75,7 @@ extension WalletControllerViewModel {
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
         case .header:
-            return 1
+            return 0
         case .transactions:
             return transactions.count
         }
@@ -97,10 +96,10 @@ extension WalletControllerViewModel {
     
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
-        case .transactions:
-            return 50.0
         case .header:
-            return 0.0
+            return 200.0
+        case .transactions:
+            return 86.0
         }
     }
     
@@ -109,8 +108,7 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            guard let wallet = wallet else { return nil }
-            return WalletHeaderTableViewCellViewModel(wallet: wallet)
+            return nil
         case .transactions:
             return transactions[indexPath.row]
         }

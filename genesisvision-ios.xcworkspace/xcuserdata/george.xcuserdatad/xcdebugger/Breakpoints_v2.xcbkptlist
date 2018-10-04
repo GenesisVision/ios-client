@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Models/Dashboard/EventListViewModel.swift"
-            timestampString = "560285661.270597"
+            timestampString = "560358798.0613461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "scrollViewDidScroll(_:)"
-            landmarkType = "7">
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Program Details/ProgramViewController.swift"
-            timestampString = "560285661.2707109"
+            timestampString = "560358798.061429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "programDetailDidChangeFavoriteState(with:value:request:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Program Details/ProgramDetailViewController.swift"
-            timestampString = "560178155.365334"
+            timestampString = "560358798.062317"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardTabmanViewModel.swift"
-            timestampString = "560285661.271246"
+            timestampString = "560358798.062391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardTabmanViewModel.swift"
-            timestampString = "560285661.2712981"
+            timestampString = "560358798.062454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12"

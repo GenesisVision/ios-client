@@ -20,6 +20,7 @@ class ProgramViewController: BaseViewController {
     }
     
     var minHeaderHeight: CGFloat = 300.0
+    var topConstant: CGFloat = 44.0 + 20.0// + 20.0
     
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint! {
         didSet {
@@ -52,6 +53,10 @@ class ProgramViewController: BaseViewController {
 //        self.minHeaderHeight = height / 3
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
             segue.identifier == "ProgramHeaderViewControllerSegue" {
@@ -72,12 +77,11 @@ class ProgramViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-        
-        self.navigationController!.navigationBar.alpha = 0.0
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
     private func setupUI() {
@@ -116,11 +120,16 @@ class ProgramViewController: BaseViewController {
 extension ProgramViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y + 44.0
+        let yOffset = scrollView.contentOffset.y + topConstant
         
         print(yOffset)
         
-        self.navigationController!.navigationBar.alpha = (yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height))
+        let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
+        self.navigationController!.view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(alpha)
+        if alpha > 0.7 {
+            self.navigationController?.view.backgroundColor = .red
+        }
+        
         
         if yOffset > 0 {
             programHeaderViewController?.changeColorAlpha(offset: yOffset)
@@ -138,7 +147,7 @@ extension ProgramViewController: UIScrollViewDelegate {
         if let programDetailsTabmanViewController = programDetailsTabmanViewController {
             programDetailsTabmanViewController.scrollEnabled = false
             
-            if yOffset - (minHeaderHeight - 44.0 - 44.0 - 10.0) == programDetailsTabmanViewController.view.frame.origin.y {
+            if yOffset - (minHeaderHeight - topConstant) == programDetailsTabmanViewController.view.frame.origin.y {
                 programDetailsTabmanViewController.scrollEnabled = true
             }
         }

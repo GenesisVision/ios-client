@@ -10,7 +10,7 @@ import UIKit
 import Pageboy
 
 class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
-    var controllers: [BaseViewController]!
+    var controllers = [BaseViewController]()
     
     init(router: DashboardRouter) {
         super.init()

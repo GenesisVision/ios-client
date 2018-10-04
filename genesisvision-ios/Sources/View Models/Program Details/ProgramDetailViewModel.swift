@@ -185,15 +185,18 @@ extension ProgramDetailViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-//        ProgramDataProvider.getProgram(programId: self.programId, completion: { [weak self] (viewModel) in
-//            guard viewModel != nil else {
-//                return completion(.failure(errorType: .apiError(message: nil)))
-//            }
-//
-//            self?.programDetails = viewModel
-//
-//            completion(.success)
-//        }, errorCompletion: completion)
+        guard let currency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        
+        ProgramDataProvider.getProgram(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            self?.programDetailsFull = viewModel
+            
+            completion(.success)
+        }, errorCompletion: completion)
     }
     
     func updateDetails(with programDetailsFull: ProgramDetailsFull) {

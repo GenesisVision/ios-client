@@ -1,0 +1,73 @@
+//
+//  WalletTableHeaderView.swift
+//  genesisvision-ios
+//
+//  Created by George on 04/10/2018.
+//  Copyright © 2018 Genesis Vision. All rights reserved.
+//
+
+import UIKit
+
+class WalletTableHeaderView: UITableViewHeaderFooterView {
+    // MARK: - Outlets
+    @IBOutlet weak var totalBalanceTitleLabel: SubtitleLabel!
+    @IBOutlet weak var totalBalanceValueLabel: TitleLabel! {
+        didSet {
+            totalBalanceValueLabel.font = UIFont.getFont(.semibold, size: 26.0)
+        }
+    }
+    @IBOutlet weak var totalBalanceCurrencyLabel: MediumLabel!
+    
+    @IBOutlet weak var availableProgressView: UIView!
+    @IBOutlet weak var availableTitleLabel: SubtitleLabel!
+    @IBOutlet weak var availableValueLabel: TitleLabel!
+    @IBOutlet weak var availableCurrencyLabel: MediumLabel!
+    
+    @IBOutlet weak var investedProgressView: UIView!
+    @IBOutlet weak var investedTitleLabel: SubtitleLabel!
+    @IBOutlet weak var investedValueLabel: TitleLabel!
+    @IBOutlet weak var investedCurrencyLabel: MediumLabel!
+    
+    // MARK: - Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.backgroundColor = UIColor.BaseView.bg
+    }
+    
+    func configure(_ wallet: WalletSummary) {
+        totalBalanceTitleLabel.text = "Total balance"
+        if let totalBalanceGVT = wallet.totalBalanceGVT {
+            totalBalanceValueLabel.text = totalBalanceGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let totalBalanceCurrency = wallet.totalBalanceCurrency {
+            totalBalanceCurrencyLabel.text = totalBalanceCurrency.toString() + " \(getSelectedCurrency())"
+        }
+        
+        if let totalBalanceGVT = wallet.totalBalanceGVT, let availableGVT = wallet.availableGVT {
+            let percent = availableGVT / totalBalanceGVT
+            print(percent)
+            //availableProgressView
+        }
+        
+        availableTitleLabel.text = "Available"
+        if let availableGVT = wallet.availableGVT {
+            availableValueLabel.text = availableGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let availableCurrency = wallet.availableCurrency {
+            availableCurrencyLabel.text = availableCurrency.toString() + " \(getSelectedCurrency())"
+        }
+        
+        if let totalBalanceGVT = wallet.totalBalanceGVT, let investedGVT = wallet.investedGVT {
+            let percent = investedGVT / totalBalanceGVT
+            print(percent)
+            //            investedProgressView
+        }
+        investedTitleLabel.text = "Invested value"
+        if let investedGVT = wallet.investedGVT {
+            investedValueLabel.text = investedGVT.rounded(withType: .gvt).toString() + " GVT"
+        }
+        if let investedCurrency = wallet.investedCurrency {
+            investedCurrencyLabel.text = investedCurrency.toString() + " \(getSelectedCurrency())"
+        }
+    }
+}

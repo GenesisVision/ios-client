@@ -57,7 +57,7 @@ struct AppearanceController {
             case .lightTheme:
                 return UIColor.Common.lightBackground
             case .darkTheme:
-                return UIColor.Common.darkBackground
+                return UIColor.Common.darkCell
             }
         }
         

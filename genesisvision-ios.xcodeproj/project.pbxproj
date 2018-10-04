@@ -29,6 +29,8 @@
 		5E152F0F2165283A0029BFDE /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */; };
 		5E152F102165283A0029BFDE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */; };
 		5E152F112165283A0029BFDE /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */; };
+		5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F12216638400029BFDE /* WalletTableHeaderView.xib */; };
+		5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */; };
 		5E1813802061D36700481646 /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137B2061D36500481646 /* Common+Extensions.swift */; };
 		5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137C2061D36600481646 /* PickerViewViewController.swift */; };
 		5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137D2061D36600481646 /* UIAlertController+Extensions.swift */; };
@@ -464,9 +466,6 @@
 		FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5706F202741A4001942F3 /* UIView+NibLoad.swift */; };
 		FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707120274AC1001942F3 /* Date+DefaultFormat.swift */; };
 		FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707320274BD0001942F3 /* Bundle+Locale.swift */; };
-		FCA5707720274D48001942F3 /* WalletHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707520274D48001942F3 /* WalletHeaderTableViewCell.swift */; };
-		FCA5707820274D48001942F3 /* WalletHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5707620274D48001942F3 /* WalletHeaderTableViewCell.xib */; };
-		FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707920274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift */; };
 		FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */; };
 		FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */; };
 		FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */; };
@@ -554,6 +553,8 @@
 		5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		5E152F12216638400029BFDE /* WalletTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableHeaderView.xib; sourceTree = "<group>"; };
+		5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableHeaderView.swift; sourceTree = "<group>"; };
 		5E18137B2061D36500481646 /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5E18137C2061D36600481646 /* PickerViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		5E18137D2061D36600481646 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
@@ -1000,9 +1001,6 @@
 		FCA5706F202741A4001942F3 /* UIView+NibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NibLoad.swift"; sourceTree = "<group>"; };
 		FCA5707120274AC1001942F3 /* Date+DefaultFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DefaultFormat.swift"; sourceTree = "<group>"; };
 		FCA5707320274BD0001942F3 /* Bundle+Locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Locale.swift"; sourceTree = "<group>"; };
-		FCA5707520274D48001942F3 /* WalletHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		FCA5707620274D48001942F3 /* WalletHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderTableViewCell.xib; sourceTree = "<group>"; };
-		FCA5707920274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableHeaderView.xib; sourceTree = "<group>"; };
 		FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableHeaderView.swift; sourceTree = "<group>"; };
 		FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataProvider.swift; sourceTree = "<group>"; };
@@ -1594,6 +1592,8 @@
 				5E8340ED207E508F004A29F1 /* ProgramDetailTradesHeaderView.xib */,
 				5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */,
 				5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */,
+				5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */,
+				5E152F12216638400029BFDE /* WalletTableHeaderView.xib */,
 			);
 			path = "Header View";
 			sourceTree = "<group>";
@@ -1892,9 +1892,6 @@
 		FC900E6C204EE5D6007E9142 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				FCA5707920274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift */,
-				FCA5707520274D48001942F3 /* WalletHeaderTableViewCell.swift */,
-				FCA5707620274D48001942F3 /* WalletHeaderTableViewCell.xib */,
 				FCA5705D2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift */,
 				FCA5705920273560001942F3 /* WalletTransactionTableViewCell.swift */,
 				FCA5705A20273560001942F3 /* WalletTransactionTableViewCell.xib */,
@@ -2453,7 +2450,6 @@
 				FC91378C2030A4DA002321C7 /* DetailChartTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
 				FCB177672045690500A482B7 /* DashboardTableViewCell.xib in Resources */,
-				FCA5707820274D48001942F3 /* WalletHeaderTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
 				5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */,
 				5EA274C321628274008CAF77 /* ProgramProfitChartTableViewCell.xib in Resources */,
@@ -2465,6 +2461,7 @@
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
 				5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */,
+				5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */,
 				FC9137882030A4A8002321C7 /* DetailHeaderTableViewCell.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FC27226A20484BC4005225F2 /* ProgramMoreDetailsTableViewCell.xib in Resources */,
@@ -2634,6 +2631,7 @@
 				5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				5EA274B621628207008CAF77 /* ProgramPeriodTableViewCell.swift in Sources */,
+				5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
 				5ECDB6EA21644A8A00483D90 /* FundStatistic.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
@@ -2641,7 +2639,6 @@
 				5E616B5420F7BFEB00B3459D /* CreateProgramSuccessViewModel.swift in Sources */,
 				5ECDB6E621644A8A00483D90 /* PasswordModel.swift in Sources */,
 				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
-				FCA5707A20274D56001942F3 /* WalletHeaderTableViewCellViewModel.swift in Sources */,
 				5ED114202159666A00EC5385 /* PortfolioAssetTableViewCellViewModel.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				5ECDB6BC21644A8A00483D90 /* FundDetailsListStatistic.swift in Sources */,
@@ -2985,7 +2982,6 @@
 				5ECDB6BB21644A8A00483D90 /* ProgramWithdrawInfo.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */,
-				FCA5707720274D48001942F3 /* WalletHeaderTableViewCell.swift in Sources */,
 				5ECDB71621644A8B00483D90 /* ManagerProfile.swift in Sources */,
 				5E734255214AC7E200C4483E /* DashboardInRequestsTableViewCell.swift in Sources */,
 				5E616B4820F7B25F00B3459D /* CreateProgramRouter.swift in Sources */,

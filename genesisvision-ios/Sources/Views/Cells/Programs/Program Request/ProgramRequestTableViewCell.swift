@@ -40,6 +40,8 @@ class ProgramRequestTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        contentView.backgroundColor = UIColor.BaseView.bg
     }
     
     // MARK: - Actions

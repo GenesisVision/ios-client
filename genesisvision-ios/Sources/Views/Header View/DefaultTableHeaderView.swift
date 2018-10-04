@@ -11,22 +11,25 @@ import UIKit
 
 class DefaultTableHeaderView: UITableViewHeaderFooterView {
 
-    static let font = UIFont.getFont(.bold, size: 25)
+    static let font = UIFont.getFont(.semibold, size: 18)
     
     static var titleInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 
+    @IBOutlet var headerBackgroundView: UIView!
+        
     @IBOutlet var headerLabel: UILabel! {
         didSet {
             headerLabel.font = DefaultTableHeaderView.font
-            headerLabel.textColor = UIColor.Font.dark
+            headerLabel.textColor = UIColor.Cell.title
             headerLabel.layoutMargins = DefaultTableHeaderView.titleInsets
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.Cell.headerBg
+        headerBackgroundView.backgroundColor = UIColor.BaseView.bg
     }
 }

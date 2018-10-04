@@ -13,6 +13,10 @@ class WalletViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
     
+    // MARK: - Outlets
+    var walletTableHeaderViewHeightStart: CGFloat = 200.0
+    var walletTableHeaderViewHeightEnd: CGFloat = 100.0
+    
     private var withdrawBarButtonItem: UIBarButtonItem!
     private var addFundsBarButtonItem: UIBarButtonItem!
     
@@ -40,13 +44,13 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+//        tableView.bounces = false
+        
         bottomViewType = .sort
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         updateTitle()
-        
-        prefersLargeTitles = true
-        
+    
         withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction))
         addFundsBarButtonItem = UIBarButtonItem(title: "Add funds", style: .done, target: self, action: #selector(addFundsButtonAction))
         addFundsBarButtonItem.tintColor = UIColor.primary
@@ -73,6 +77,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh()
     }
@@ -209,6 +214,31 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let header = tableView.dequeueReusableHeaderFooterView() as WalletTableHeaderView
+            if let wallet = viewModel.wallet {
+                header.configure(wallet)
+            }
+            return header
+        case 1:
+            guard let title = viewModel.headerTitle(for: section) else {
+                return nil
+            }
+            
+            let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+            header.headerLabel.text = title
+            return header
+        default:
+            return nil
+        }
     }
 }
 

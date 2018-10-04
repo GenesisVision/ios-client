@@ -24,20 +24,17 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
         self.dataSource = pageboyDataSource
         
         // configure the bar
-        self.bar.items = [Item(title: "Portfolio"),
-                          Item(title: "Profit")]
+        self.bar.items = [Item(title: "Portfolio")]
     }
 
     // MARK: - Public methods
     func updateViewConstraints(_ yOffset: CGFloat) {
-        if let controllers = pageboyDataSource.controllers {
-            for controller in controllers {
-                if let vc = controller as? PortfolioViewController {
-                    vc.updateViewConstraints(yOffset)
-                }
-                if let vc = controller as? ProfitViewController {
-                    vc.updateViewConstraints(yOffset)
-                }
+        for controller in pageboyDataSource.controllers {
+            if let vc = controller as? PortfolioViewController {
+                vc.updateViewConstraints(yOffset)
+            }
+            if let vc = controller as? ProfitViewController {
+                vc.updateViewConstraints(yOffset)
             }
         }
     }

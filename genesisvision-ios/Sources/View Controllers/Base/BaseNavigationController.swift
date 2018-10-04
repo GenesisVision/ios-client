@@ -21,6 +21,11 @@ class BaseNavigationController: UINavigationController {
         
         navigationBar.isTranslucent = false
 
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
+        view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(0.0)
+        
         applyTheme()
         NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
     }

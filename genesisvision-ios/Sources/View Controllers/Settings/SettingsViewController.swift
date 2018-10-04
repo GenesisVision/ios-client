@@ -221,8 +221,6 @@ class SettingsViewController: BaseTableViewController {
         
         tableView.tableFooterView = footerView
         
-        prefersLargeTitles = true
-        
         profileNameLabel.textColor = UIColor.Cell.title
         profileEmailLabel.textColor = UIColor.Cell.title
         changePasswordTitleLabel.textColor = UIColor.Cell.title

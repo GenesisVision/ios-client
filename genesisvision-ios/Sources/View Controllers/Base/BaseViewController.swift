@@ -232,8 +232,23 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
             
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+//            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            
+            if #available(iOS 11, *) {
+                let guide = self.view.safeAreaLayoutGuide
+                NSLayoutConstraint.activate([
+                    tableView.topAnchor.constraintEqualToSystemSpacingBelow(guide.topAnchor, multiplier: 1.0),
+//                    guide.bottomAnchor.constraintEqualToSystemSpacingBelow(tableView.bottomAnchor, multiplier: 1.0)
+                    ])
+                
+            } else {
+                let standardSpacing: CGFloat = 0.0
+                NSLayoutConstraint.activate([
+                    tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
+//                    bottomLayoutGuide.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: standardSpacing)
+                    ])
+            }
         }
     }
     
