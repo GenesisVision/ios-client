@@ -8,18 +8,11 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-struct ProgramDetailViewProperties {
-    var isHistoryEnable: Bool = false
-    var isInvestEnable: Bool = false
-    var isWithdrawEnable: Bool = false
-    var hasNewRequests: Bool = false
-}
-
 final class ProgramDetailViewModel {
     enum SectionType {
         case details
-        case investNow
         case yourInvestment
+        case investNow
     }
     enum RowType {
         case manager
@@ -45,10 +38,9 @@ final class ProgramDetailViewModel {
         }
     }
     
-    var viewProperties: ProgramDetailViewProperties?
     var availableInvestment: Double = 0.0
     
-    private var sections: [SectionType] = [.details, .investNow, .yourInvestment]
+    private var sections: [SectionType] = [.details, .yourInvestment, .investNow]
     private var rows: [RowType] = [.manager, .strategy, .period]
     
     private var models: [CellViewAnyModel]?
@@ -71,9 +63,7 @@ final class ProgramDetailViewModel {
         }
         
         if let programDetailsFull = programDetailsFull, let programId = programDetailsFull.id?.uuidString {
-            DispatchQueue.main.async {
-                self.programDetailsFull = programDetailsFull
-            }
+            self.programDetailsFull = programDetailsFull
             self.programId = programId
         }
         
@@ -171,16 +161,17 @@ extension ProgramDetailViewModel {
             let rowType = rows[indexPath.row]
             switch rowType {
             case .manager:
-                return DetailManagerTableViewCellViewModel()
+                guard let manager = programDetailsFull?.manager else { return nil }
+                return DetailManagerTableViewCellViewModel(manager: manager)
             case .strategy:
-                return ProgramStrategyTableViewCellViewModel()
+                return ProgramStrategyTableViewCellViewModel(descriptionText: programDetailsFull?.description)
             case .period:
-                return ProgramPeriodTableViewCellViewModel()
+                return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
             }
-        case .investNow:
-            return ProgramInvestNowTableViewCellViewModel()
         case .yourInvestment:
-            return ProgramYourInvestmentTableViewCellViewModel()
+            return ProgramYourInvestmentTableViewCellViewModel(value: programDetailsFull?.personalProgramDetails?.value, profit: programDetailsFull?.personalProgramDetails?.profit, isReinvesting: programDetailsFull?.isReinvesting, programYourInvestmentProtocol: self)
+        case .investNow:
+            return ProgramInvestNowTableViewCellViewModel(entryFee: programDetailsFull?.entryFee, successFee: programDetailsFull?.successFee, availableInvestment: programDetailsFull?.availableInvestment, periodEnds: programDetailsFull?.periodEnds, programInvestNowProtocol: self)
         }
     }
     
@@ -210,5 +201,17 @@ extension ProgramDetailViewModel: ReloadDataProtocol {
         fetch { [weak self] (result) in
             self?.reloadDataProtocol?.didReloadData()
         }
+    }
+}
+
+extension ProgramDetailViewModel: ProgramYourInvestmentProtocol {
+    func didTapWithdrawButton() {
+        withdraw()
+    }
+}
+
+extension ProgramDetailViewModel: ProgramInvestNowProtocol {
+    func didTapInvestButton() {
+        invest()
     }
 }

@@ -101,7 +101,7 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
     
     var headerTitle = "PROGRAMS TO INVEST IN"
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithSortAndFilter : .sortAndFilter
+        return signInButtonEnable ? .signInWithFilter : .filter
     }
     
     var filter: ProgramsFilter?

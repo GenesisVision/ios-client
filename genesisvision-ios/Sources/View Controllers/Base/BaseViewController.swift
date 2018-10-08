@@ -13,43 +13,62 @@ import MessageUI
 class BaseViewController: UIViewController, Hidable {
     // MARK: - Variables
     var bottomSheetController = BottomSheetController()
+    var currencyDelegateManager: CurrencyDelegateManager?
+    
+    var currencyTitleButton: StatusButton = {
+        let selectedCurrency = getSelectedCurrency()
+        
+        let currencyTitleButton = StatusButton(type: .system)
+        currencyTitleButton.setTitle(selectedCurrency, for: .normal)
+        currencyTitleButton.setTitleColor(UIColor.Cell.title, for: .normal)
+        currencyTitleButton.bgColor = UIColor.Cell.bg
+        currencyTitleButton.contentEdge = UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20)
+        
+        currencyTitleButton.sizeToFit()
+        
+        return currencyTitleButton
+    }()
     
     var sortButton: ActionButton = {
         let btn = ActionButton(type: .system)
-        btn.cornerSize = 18.0
-        btn.bgColor = UIColor.BottomView.Sort.bg
-        btn.tintColor = UIColor.BottomView.Sort.tint
+        btn.configure(with: .filter(image: nil))
         btn.translatesAutoresizingMaskIntoConstraints = true
-        btn.setTitleColor(UIColor.BottomView.Sort.title, for: .normal)
         btn.setTitle("Sort by profit", for: .normal)
         btn.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
         return btn
     }()
     
+    var dateRangeButton: ActionButton = {
+        let btn = ActionButton(type: .system)
+        btn.configure(with: .filter(image: #imageLiteral(resourceName: "img_date_range_icon")))
+        btn.translatesAutoresizingMaskIntoConstraints = true
+        btn.setTitle("Date range", for: .normal)
+        btn.addTarget(self, action: #selector(dateRangeButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
     var filterButton: ActionButton = {
         let btn = ActionButton(type: .system)
-        btn.bgColor = UIColor.BottomView.Filter.bg
-        btn.cornerSize = 18.0
-        btn.tintColor = UIColor.BottomView.Filter.tint
+        btn.configure(with: .filter(image: #imageLiteral(resourceName: "img_profit_filter_icon")))
+        btn.setTitle("Filters", for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = true
-        btn.setTitleColor(UIColor.BottomView.Filter.title, for: .normal)
-        btn.setImage(#imageLiteral(resourceName: "img_filters_icon"), for: .normal)
         btn.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
         return btn
     }()
     
     var signInButton: ActionButton = {
         let btn = ActionButton(type: .system)
+        btn.configure(with: .normal)
         btn.setTitle("SIGN IN", for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = true
         btn.addTarget(self, action: #selector(signInButtonAction), for: .touchUpInside)
         return btn
     }()
     
-    let sortAndFilterStackView: UIStackView = {
+    let filterStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.axis = .horizontal
-        stackView.spacing = 8.0
+        stackView.axis = .vertical
+        stackView.spacing = 0.0
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,6 +90,7 @@ class BaseViewController: UIViewController, Hidable {
             sortButton.isHidden = true
             filterButton.isHidden = true
             signInButton.isHidden = true
+            dateRangeButton.isHidden = true
             bottomStackView.isHidden = false
             
             switch bottomViewType {
@@ -80,14 +100,12 @@ class BaseViewController: UIViewController, Hidable {
                 sortButton.isHidden = false
             case .filter:
                 filterButton.isHidden = false
-            case .sortAndFilter:
-                sortButton.isHidden = false
-                filterButton.isHidden = false
+            case .dateRange:
+                dateRangeButton.isHidden = false
             case .signIn:
                 signInButton.isHidden = false
-            case .signInWithSortAndFilter:
+            case .signInWithFilter:
                 signInButton.isHidden = false
-                sortButton.isHidden = false
                 filterButton.isHidden = false
             }
         }
@@ -101,6 +119,8 @@ class BaseViewController: UIViewController, Hidable {
         }
     }
     
+    private var lastContentOffset: CGPoint = .zero
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +133,75 @@ class BaseViewController: UIViewController, Hidable {
         
         updateTheme()
     }
+    
+    // MARK: - Public Methods
+    func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
+        currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
+        self.currencyDelegateManager = currencyDelegateManager
+        currencyDelegateManager?.currencyDelegate = self
+        navigationItem.titleView = currencyTitleButton
+    }
+    
+    // MARK: - Private Methods
+    @objc private func currencyButtonAction() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("Preferred Currency")
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.separatorStyle = .none
+            
+            guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
+            tableView.registerNibs(for: currencyDelegateManager.currencyCellModelsForRegistration)
+            tableView.delegate = currencyDelegateManager
+            tableView.dataSource = currencyDelegateManager
+        }
+        
+        bottomSheetController.present()
+    }
+}
+
+extension BaseViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffset = scrollView.contentOffset
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset.y < scrollView.contentOffset.y) {
+            UIView.animate(withDuration: 0.3) {
+                self.filterStackView.alpha = 0.0
+            }
+        } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
+            UIView.animate(withDuration: 0.3) {
+                self.filterStackView.alpha = 1.0
+            }
+        }
+    }
+}
+
+
+extension BaseViewController: CurrencyDelegateManagerProtocol {
+    func didSelectCurrency(at indexPath: IndexPath) {
+        if let selectedCurrency = currencyDelegateManager?.selectedCurrency {
+            currencyTitleButton.setTitle(selectedCurrency, for: .normal)
+            currencyTitleButton.sizeToFit()
+        }
+        
+        bottomSheetController.dismiss()
+    }
+}
+
+extension BaseViewController: CurrencyTitleButtonProtocol {
+    var target: Any? {
+        return self
+    }
+    
+    var action: Selector! {
+        return #selector(currencyButtonAction)
+    }
+    
+    
 }
 
 extension BaseViewController: UIViewControllerWithBottomView {
@@ -125,6 +214,10 @@ extension BaseViewController: UIViewControllerWithBottomView {
     }
     
     @objc func sortButtonAction() {
+        
+    }
+    
+    @objc func dateRangeButtonAction() {
         
     }
 }
@@ -146,15 +239,7 @@ extension UIViewController {
     
     // MARK: - Public methods
     func setupNavigationBar(with type: NavBarType = .gray) {
-        let colors = UIColor.NavBar.colorScheme(with: type)
-        
         AppearanceController.setupNavigationBar(with: type)
-        
-        navigationController?.navigationBar.tintColor = colors.textColor
-        navigationController?.navigationBar.backgroundColor = colors.backgroundColor
-        navigationController?.navigationBar.barTintColor = colors.backgroundColor
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                                   NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
     }
 }
 
@@ -206,8 +291,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
     
-    private var lastContentOffset: CGPoint = .zero
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -232,22 +315,15 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
             
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-//            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
             
             if #available(iOS 11, *) {
                 let guide = self.view.safeAreaLayoutGuide
-                NSLayoutConstraint.activate([
-                    tableView.topAnchor.constraintEqualToSystemSpacingBelow(guide.topAnchor, multiplier: 1.0),
-//                    guide.bottomAnchor.constraintEqualToSystemSpacingBelow(tableView.bottomAnchor, multiplier: 1.0)
-                    ])
+                tableView.topAnchor.constraintEqualToSystemSpacingBelow(guide.topAnchor, multiplier: 1.0).isActive = true
                 
             } else {
                 let standardSpacing: CGFloat = 0.0
-                NSLayoutConstraint.activate([
-                    tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
-//                    bottomLayoutGuide.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: standardSpacing)
-                    ])
+                tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing).isActive = true
             }
         }
     }
@@ -271,10 +347,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         
         refreshControl?.endRefreshing()
         
-        sortAndFilterStackView.addArrangedSubview(sortButton)
-        sortAndFilterStackView.addArrangedSubview(filterButton)
+        filterStackView.addArrangedSubview(sortButton)
+        filterStackView.addArrangedSubview(filterButton)
         bottomStackView.addArrangedSubview(signInButton)
-        bottomStackView.addArrangedSubview(sortAndFilterStackView)
+        bottomStackView.addArrangedSubview(filterStackView)
         
         view.addSubview(bottomStackView)
         
@@ -283,18 +359,21 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     private func setupAutoLayout() {
         sortButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        sortButton.widthAnchor.constraint(equalToConstant: 198).isActive = true
+        sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        dateRangeButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        filterButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         signInButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         signInButton.widthAnchor.constraint(equalToConstant: 198).isActive = true
         
-        sortAndFilterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
-        sortAndFilterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
-        sortAndFilterStackView.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
-        sortAndFilterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        filterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
+        filterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
+        filterStackView.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
+        filterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
         bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
@@ -351,24 +430,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         refreshControl.tintColor = tintColor
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-    }
-}
-
-extension BaseViewControllerWithTableView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastContentOffset = scrollView.contentOffset
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.lastContentOffset.y < scrollView.contentOffset.y) {
-            UIView.animate(withDuration: 0.3) {
-                self.sortAndFilterStackView.alpha = 0.0
-            }
-        } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
-            UIView.animate(withDuration: 0.3) {
-                self.sortAndFilterStackView.alpha = 1.0
-            }
-        }
     }
 }
 

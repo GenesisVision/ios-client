@@ -34,6 +34,8 @@ extension UIColor {
         static var darkButtonBackground: UIColor { return #colorLiteral(red: 0.1058823529, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                    //1B252C
         static var darkTextfieldBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                 //131E26
         
+        static var blackSeparator: UIColor { return #colorLiteral(red: 0.05490196078, green: 0.08235294118, blue: 0.09803921569, alpha: 1) }                          //0E1519
+        
         static var darkTextPrimary: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                         //ffffff
         static var darkTextSecondary: UIColor { return #colorLiteral(red: 0.4705882353, green: 0.4901960784, blue: 0.5098039216, alpha: 1) }                       //787d82
         static var darkButtonText: UIColor { return #colorLiteral(red: 0.662745098, green: 0.6745098039, blue: 0.6901960784, alpha: 1) }                          //787d82
@@ -48,8 +50,9 @@ extension UIColor {
         static var switchTint: UIColor { return #colorLiteral(red: 0.1843137255, green: 0.2745098039, blue: 0.2901960784, alpha: 1) }                              //2F464A
 
         
-        static var yellow: UIColor { return #colorLiteral(red: 0.8823529412, green: 0.6431372549, blue: 0.2078431373, alpha: 1) }                                  //E1A435
+        static var yellow: UIColor { return #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1) }                                  //F5A623
         static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6431372549, blue: 0.7490196078, alpha: 1) }                                    //66A4BF
+        static var purple: UIColor { return #colorLiteral(red: 0.3411764706, green: 0.3450980392, blue: 0.6470588235, alpha: 1) }                                  //5758A5
 
         static var powderPink: UIColor { return #colorLiteral(red: 1, green: 0.6470588235, blue: 0.8, alpha: 1) }                              //ffa5cc
         
@@ -108,16 +111,10 @@ extension UIColor {
     }
     
     struct BottomView {
-        struct Sort {
-            static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
-            static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
-            static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
-        }
-        
         struct Filter {
             static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
-            static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
-            static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
+            static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextfieldBackground : Common.white }
+            static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextfieldBackground : Common.white }
         }
     }
     
@@ -251,6 +248,7 @@ extension UIColor {
     
     struct Border {
         static var forImage: UIColor { return Common.white }
+        static var forButton: UIColor { return Common.lightDelimiter }
     }
     
     struct Cell {
@@ -277,5 +275,57 @@ extension UIColor {
         static var pageControllPageIndicatorTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
         static var pageControllCurrentPageIndicatorTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.primary : Common.primary }
         static var pageControllTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
+    }
+    
+    struct Level {
+        static var first: UIColor { return #colorLiteral(red: 0.2156862745, green: 0.2196078431, blue: 0.4039215686, alpha: 1) }                                    //373867
+        static var second: UIColor { return #colorLiteral(red: 0.2901960784, green: 0.3137254902, blue: 0.5647058824, alpha: 1) }                                   //4A5090
+        static var third: UIColor { return #colorLiteral(red: 0.368627451, green: 0.4156862745, blue: 0.7450980392, alpha: 1) }                                    //5E6ABE
+        static var fourth: UIColor { return #colorLiteral(red: 0.431372549, green: 0.5058823529, blue: 0.8862745098, alpha: 1) }                                   //6E81E2
+        static var fifth: UIColor { return #colorLiteral(red: 0.3137254902, green: 0.5803921569, blue: 0.8196078431, alpha: 1) }                                    //5094D1
+        static var sixth: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6509803922, blue: 0.7568627451, alpha: 1) }                                    //34A6C1
+        static var seventh: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                  //15BBAF
+        
+        static func color(for level: Int) -> UIColor {
+            switch level {
+            case 1:
+                return Level.first
+            case 2:
+                return Level.second
+            case 3:
+                return Level.third
+            case 4:
+                return Level.fourth
+            case 5:
+                return Level.fifth
+            case 6:
+                return Level.sixth
+            case 7:
+                return Level.seventh
+            default:
+                return Level.first
+            }
+        }
+    }
+    
+    struct Status {
+        static var active: UIColor { return Common.white }
+        static var ended: UIColor { return Common.white.withAlphaComponent(0.5) }
+        static var investing: UIColor { return Common.yellow }
+        static var withdrawing: UIColor { return #colorLiteral(red: 0.4352941176, green: 0.4980392157, blue: 0.8901960784, alpha: 1) }                               //6F7FE3
+
+        
+        static func color(for status: String) -> UIColor {
+            switch status {
+            case "Pending":
+                return Status.investing
+            case "Withdrawing":
+                return Status.withdrawing
+            case "Active":
+                return Status.active
+            default:
+                return Status.ended
+            }
+        }
     }
 }

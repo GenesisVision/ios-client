@@ -25,12 +25,12 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-//        if let chart = program.chart, let title = program.title, chart.count > 1 {
-//            cell.chartView.isHidden = false
-//            cell.viewForChartView.isHidden = cell.chartView.isHidden
-//            cell.noDataLabel.isHidden = true
-//            cell.chartView.setup(chartByDateDataSet: chart, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .day)
-//        }
+        if let chart = program.chart, let title = program.title, chart.count > 1 {
+            cell.chartView.isHidden = false
+            cell.viewForChartView.isHidden = cell.chartView.isHidden
+            cell.noDataLabel.isHidden = true
+            cell.chartView.setup(chartType: .default, lineChartData: chart, barChartData: nil, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .all)
+        }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
 
@@ -41,6 +41,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         if let managerName = program.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
+        
+        if let status = program.status {
+            cell.statusButton.setTitle(status.rawValue, for: .normal)
+        }
+        
 //        if let tokenSymbol = program.token?.tokenSymbol {
 //            cell.tokenSymbolLabel.text = tokenSymbol
 //        }
@@ -62,7 +67,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let level = program.level {
-            cell.programLogoImageView.levelLabel.text = level.toString()
+            cell.programLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
         if let isFavorite = program.personalProgramDetails?.isFavorite {
@@ -71,10 +76,9 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logo = program.logo {
-            let logoURL = getFileURL(fileName: logo)
+        if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
+            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
         }
         
 //        if let isEnabled = program.isEnabled {

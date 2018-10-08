@@ -20,10 +20,10 @@ open class WalletTransaction: Codable {
         case paymentTransaction = "PaymentTransaction"
     }
     public enum SourceCurrency: String, Codable { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -49,10 +49,10 @@ open class WalletTransaction: Codable {
         case paymentTransaction = "PaymentTransaction"
     }
     public enum DestinationCurrency: String, Codable { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"

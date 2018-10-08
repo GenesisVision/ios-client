@@ -141,9 +141,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="balanceCurrencyLabel" destination="fFK-DH-9zZ" id="Brm-me-a9w"/>
-                <outlet property="balanceTitleLabel" destination="HVd-UM-4hC" id="hFd-tq-VhP"/>
-                <outlet property="balanceValueLabel" destination="A6w-8f-ggm" id="IWZ-1b-kNG"/>
+                <outlet property="amountCurrencyLabel" destination="fFK-DH-9zZ" id="uHX-1B-rHa"/>
+                <outlet property="amountTitleLabel" destination="HVd-UM-4hC" id="Ogs-UD-5hU"/>
+                <outlet property="amountValueLabel" destination="A6w-8f-ggm" id="Uys-9t-aUZ"/>
                 <outlet property="changeCurrencyLabel" destination="cbI-di-PSD" id="IfF-i7-jRg"/>
                 <outlet property="changePercentLabel" destination="viE-Ix-zg3" id="Qsf-fO-HOu"/>
                 <outlet property="changeTitleLabel" destination="MCa-EV-Icg" id="6Fi-WW-ih2"/>

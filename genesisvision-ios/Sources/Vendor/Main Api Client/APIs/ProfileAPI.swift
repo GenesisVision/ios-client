@@ -12,6 +12,85 @@ import Alamofire
 
 open class ProfileAPI {
     /**
+     Remove avatar
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileAvatarRemovePost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfileAvatarRemovePostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Remove avatar
+     - POST /v1.0/profile/avatar/remove
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfileAvatarRemovePostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v1.0/profile/avatar/remove"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Update avatar
+     
+     - parameter fileId: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileAvatarUpdateByFileIdPost(fileId: String, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfileAvatarUpdateByFileIdPostWithRequestBuilder(fileId: fileId, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update avatar
+     - POST /v1.0/profile/avatar/update/{fileId}
+     
+     - parameter fileId: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfileAvatarUpdateByFileIdPostWithRequestBuilder(fileId: String, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v1.0/profile/avatar/update/{fileId}"
+        path = path.replacingOccurrences(of: "{fileId}", with: "\(fileId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Get full profile
      
      - parameter authorization: (header) JWT access token 
@@ -37,7 +116,9 @@ open class ProfileAPI {
   "city" : "city",
   "documentNumber" : "documentNumber",
   "avatar" : "avatar",
+  "documentsConfirmed" : true,
   "userName" : "userName",
+  "phoneNumberConfirmed" : true,
   "firstName" : "firstName",
   "phone" : "phone",
   "middleName" : "middleName",
@@ -85,12 +166,13 @@ open class ProfileAPI {
      - examples: [{contentType=application/json, example={
   "name" : "name",
   "notificationsCount" : 1,
-  "availableGvt" : 1.1730742509559433,
+  "kycConfirmed" : true,
+  "availableGvt" : 9.369310271410669,
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "avatar" : "avatar",
-  "investedGvt" : 7.457744773683766,
-  "favoritesCount" : 1,
-  "totalBalanceGvt" : 6.84685269835264,
+  "investedGvt" : 9.965781217890562,
+  "favoritesCount" : 4,
+  "totalBalanceGvt" : 5.025004791520295,
   "email" : "email"
 }}]
      
@@ -113,47 +195,6 @@ open class ProfileAPI {
         let requestBuilder: RequestBuilder<ProfileHeaderViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Update avatar
-     
-     - parameter fileId: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileUpdateAvatarByFileIdPost(fileId: String, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileUpdateAvatarByFileIdPostWithRequestBuilder(fileId: fileId, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update avatar
-     - POST /v1.0/profile/update/avatar/{fileId}
-     
-     - parameter fileId: (path)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileUpdateAvatarByFileIdPostWithRequestBuilder(fileId: String, authorization: String) -> RequestBuilder<Void> {
-        var path = "/v1.0/profile/update/avatar/{fileId}"
-        path = path.replacingOccurrences(of: "{fileId}", with: "\(fileId)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**

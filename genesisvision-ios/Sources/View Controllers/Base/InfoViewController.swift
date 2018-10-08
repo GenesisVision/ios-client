@@ -51,11 +51,11 @@ class InfoViewController: BaseViewController {
         
         if let backgroundColor = viewModel?.backgroundColor {
             view.backgroundColor = backgroundColor
-            okButton.textColor = backgroundColor
+            okButton.setTitleColor(backgroundColor, for: .normal)
         }
         
         if let tintColor = viewModel?.tintColor {
-            okButton.bgColor = tintColor
+            okButton.backgroundColor = tintColor
             iconImageView.tintColor = tintColor
         }
         

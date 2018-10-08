@@ -23,4 +23,13 @@ final class ProgramViewModel {
     func showNotifications() {
         router.show(routeType: .notifications)
     }
+    
+    func fetch(completion: @escaping CompletionBlock) {
+        let сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
+        ProgramDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else { return }
+            self?.programDetailsFull = viewModel
+            completion(.success)
+        }, errorCompletion: completion)
+    }
 }

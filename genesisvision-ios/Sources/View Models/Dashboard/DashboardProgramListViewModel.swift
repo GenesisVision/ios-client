@@ -327,9 +327,9 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         
         if translation.y < 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -45.0
         } else {
-            scrollView.isScrollEnabled = true
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
         }
     }
 }

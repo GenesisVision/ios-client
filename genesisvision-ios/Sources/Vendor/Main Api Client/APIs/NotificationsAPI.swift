@@ -38,7 +38,9 @@ open class NotificationsAPI {
     "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "isUnread" : true
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
@@ -46,7 +48,9 @@ open class NotificationsAPI {
     "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "isUnread" : true
   } ]
 }}]
      
@@ -147,7 +151,6 @@ open class NotificationsAPI {
      Add new setting
      
      - parameter authorization: (header) JWT access token 
-     - parameter id: (query)  (optional)
      - parameter programId: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter type: (query)  (optional)
@@ -155,8 +158,8 @@ open class NotificationsAPI {
      - parameter conditionAmount: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10NotificationsSettingsAddPost(authorization: String, id: UUID? = nil, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
-        v10NotificationsSettingsAddPostWithRequestBuilder(authorization: authorization, id: id, programId: programId, managerId: managerId, type: type, conditionType: conditionType, conditionAmount: conditionAmount).execute { (response, error) -> Void in
+    open class func v10NotificationsSettingsAddPost(authorization: String, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsAddPostWithRequestBuilder(authorization: authorization, programId: programId, managerId: managerId, type: type, conditionType: conditionType, conditionAmount: conditionAmount).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -168,7 +171,6 @@ open class NotificationsAPI {
      - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter id: (query)  (optional)
      - parameter programId: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter type: (query)  (optional)
@@ -177,14 +179,13 @@ open class NotificationsAPI {
 
      - returns: RequestBuilder<UUID> 
      */
-    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, id: UUID? = nil, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<UUID> {
+    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<UUID> {
         let path = "/v1.0/notifications/settings/add"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Id": id, 
             "ProgramId": programId, 
             "ManagerId": managerId, 
             "Type": type?.rawValue, 
@@ -192,6 +193,51 @@ open class NotificationsAPI {
             "ConditionAmount": conditionAmount
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Enable/disable setting
+     
+     - parameter id: (path)  
+     - parameter enable: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsSettingsByIdByEnablePost(id: UUID, enable: Bool, authorization: String, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsByIdByEnablePostWithRequestBuilder(id: id, enable: enable, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Enable/disable setting
+     - POST /v1.0/notifications/settings/{id}/{enable}
+     - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
+     
+     - parameter id: (path)  
+     - parameter enable: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<UUID> 
+     */
+    open class func v10NotificationsSettingsByIdByEnablePostWithRequestBuilder(id: UUID, enable: Bool, authorization: String) -> RequestBuilder<UUID> {
+        var path = "/v1.0/notifications/settings/{id}/{enable}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{enable}", with: "\(enable)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -223,6 +269,7 @@ open class NotificationsAPI {
     "level" : 6,
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -230,6 +277,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -239,7 +287,9 @@ open class NotificationsAPI {
     } ],
     "title" : "title",
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
     "settingsCustom" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -247,6 +297,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -258,6 +309,7 @@ open class NotificationsAPI {
     "level" : 6,
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -265,6 +317,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -274,7 +327,9 @@ open class NotificationsAPI {
     } ],
     "title" : "title",
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
     "settingsCustom" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -282,6 +337,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -293,6 +349,7 @@ open class NotificationsAPI {
   "settingsManager" : [ {
     "about" : "about",
     "settingsGeneral" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -300,6 +357,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -309,10 +367,12 @@ open class NotificationsAPI {
     } ],
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
+    "url" : "url",
     "username" : "username"
   }, {
     "about" : "about",
     "settingsGeneral" : [ {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -320,6 +380,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates",
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
+      "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -329,9 +390,11 @@ open class NotificationsAPI {
     } ],
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
+    "url" : "url",
     "username" : "username"
   } ],
   "settingsGeneral" : [ {
+    "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -339,6 +402,7 @@ open class NotificationsAPI {
     "type" : "PlatformNewsAndUpdates",
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
+    "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -365,6 +429,153 @@ open class NotificationsAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<NotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     User settings for manager
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsSettingsManagersByIdGet(id: String, authorization: String, completion: @escaping ((_ data: ManagerNotificationSettingList?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsManagersByIdGetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     User settings for manager
+     - GET /v1.0/notifications/settings/managers/{id}
+     - examples: [{contentType=application/json, example={
+  "about" : "about",
+  "settingsGeneral" : [ {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  }, {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ],
+  "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "avatar" : "avatar",
+  "url" : "url",
+  "username" : "username"
+}}]
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ManagerNotificationSettingList> 
+     */
+    open class func v10NotificationsSettingsManagersByIdGetWithRequestBuilder(id: String, authorization: String) -> RequestBuilder<ManagerNotificationSettingList> {
+        var path = "/v1.0/notifications/settings/managers/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ManagerNotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     User settings for program
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsSettingsProgramsByIdGet(id: String, authorization: String, completion: @escaping ((_ data: ProgramNotificationSettingList?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsProgramsByIdGetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     User settings for program
+     - GET /v1.0/notifications/settings/programs/{id}
+     - examples: [{contentType=application/json, example={
+  "level" : 6,
+  "logo" : "logo",
+  "settingsGeneral" : [ {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  }, {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ],
+  "title" : "title",
+  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "url" : "url",
+  "settingsCustom" : [ {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  }, {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ]
+}}]
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ProgramNotificationSettingList> 
+     */
+    open class func v10NotificationsSettingsProgramsByIdGetWithRequestBuilder(id: String, authorization: String) -> RequestBuilder<ProgramNotificationSettingList> {
+        var path = "/v1.0/notifications/settings/programs/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ProgramNotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

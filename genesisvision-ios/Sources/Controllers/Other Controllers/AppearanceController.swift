@@ -155,12 +155,13 @@ struct AppearanceController {
         }
         
         UINavigationBar.appearance().tintColor = colors.textColor
-        UINavigationBar.appearance().backgroundColor = colors.backgroundColor
         
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
         
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .focused)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .highlighted)
     }
     
     // TabBar

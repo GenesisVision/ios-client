@@ -19,14 +19,14 @@ class ProgramViewController: BaseViewController {
         }
     }
     
-    var minHeaderHeight: CGFloat = 300.0
-    var topConstant: CGFloat = 44.0 + 20.0// + 20.0
-    
-    @IBOutlet weak var headerViewConstraint: NSLayoutConstraint! {
+    var minHeaderHeight: CGFloat = 200.0 {
         didSet {
             self.headerViewConstraint.constant = minHeaderHeight
         }
     }
+    var topConstant: CGFloat = 44.0 + 20.0// + 20.0
+    
+    @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
     var programHeaderViewController: ProgramHeaderViewController?
     var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
@@ -44,13 +44,13 @@ class ProgramViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let height = UIScreen.main.bounds.size.height
+        self.minHeaderHeight = height / 3
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        let height = UIScreen.main.bounds.size.height
-//        self.minHeaderHeight = height / 3
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,6 +77,18 @@ class ProgramViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
+        viewModel.fetch { [weak self] (result) in
+            switch result {
+            case .success:
+                if let programDetailsFull = self?.viewModel.programDetailsFull {
+                    self?.programDetailsTabmanViewController?.viewModel.programDetailsFull = programDetailsFull
+                    self?.programHeaderViewController?.configure(programDetailsFull)
+                }
+            default:
+                break
+            }
+        }
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -117,9 +129,11 @@ class ProgramViewController: BaseViewController {
     }
 }
 
-extension ProgramViewController: UIScrollViewDelegate {
+extension ProgramViewController {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        
         let yOffset = scrollView.contentOffset.y + topConstant
         
         print(yOffset)
@@ -131,8 +145,8 @@ extension ProgramViewController: UIScrollViewDelegate {
         }
         
         
-        if yOffset > 0 {
-            programHeaderViewController?.changeColorAlpha(offset: yOffset)
+        if yOffset >= 0 {
+            programHeaderViewController?.changeColorAlpha(offset: yOffset / minHeaderHeight)
         }
 
         if yOffset < 0 {

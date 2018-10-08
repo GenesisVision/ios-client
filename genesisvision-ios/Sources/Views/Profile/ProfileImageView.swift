@@ -25,13 +25,10 @@ class ProfileImageView: UIView {
         }
     }
     
-    @IBOutlet var levelLabel: UILabel! {
+    @IBOutlet var levelButton: LevelButton! {
         didSet {
-            levelLabel.backgroundColor = .clear
-            levelLabel.textColor = UIColor.Font.white
-            levelLabel.layer.backgroundColor = UIColor.Cell.blue.cgColor
-            levelLabel.roundWithBorder(3.0, color: UIColor.Cell.bg)
-            levelLabel.font = UIFont.getFont(.bold, size: 15)
+            levelButton.roundWithBorder(3.0, color: UIColor.Cell.bg)
+            levelButton.titleLabel?.font = UIFont.getFont(.bold, size: 15)
         }
     }
     

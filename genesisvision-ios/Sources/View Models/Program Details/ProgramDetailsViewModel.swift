@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit.UIColor
+
 protocol ProgramDetailsProtocol: class {
     func didFavoriteStateUpdated()
 }
@@ -27,8 +29,9 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
+        сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
         title = "Program Details"
-        
+        backgroundColor = UIColor.Cell.bg
         reloadData()
     }
     
@@ -53,6 +56,12 @@ final class ProgramDetailsViewModel: TabmanViewModel {
     
     func reloadDetails() {
         if let vc = viewControllers.first as? ProgramDetailViewController, let programDetailsFull = programDetailsFull {
+            vc.viewModel.updateDetails(with: programDetailsFull)
+        }
+    }
+    
+    func updateDetails(_ programDetailsFull: ProgramDetailsFull) {
+        if let vc = viewControllers.first as? ProgramDetailViewController {
             vc.viewModel.updateDetails(with: programDetailsFull)
         }
     }

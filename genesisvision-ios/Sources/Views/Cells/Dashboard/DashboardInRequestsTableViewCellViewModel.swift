@@ -9,7 +9,7 @@
 import Foundation
 
 struct DashboardInRequestsTableViewCellViewModel {
-    
+    let programBalanceChart: ProgramRequest
 }
 
 extension DashboardInRequestsTableViewCellViewModel: CellViewModel {

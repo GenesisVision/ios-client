@@ -13,14 +13,16 @@ open class ValueChartBar: Codable {
 
     public var value: Double?
     public var date: Date?
-    public var assets: [AssetsValue]?
+    public var topAssets: [AssetsValue]?
+    public var otherAssetsValue: OtherAssetsValue?
 
 
     
-    public init(value: Double?, date: Date?, assets: [AssetsValue]?) {
+    public init(value: Double?, date: Date?, topAssets: [AssetsValue]?, otherAssetsValue: OtherAssetsValue?) {
         self.value = value
         self.date = date
-        self.assets = assets
+        self.topAssets = topAssets
+        self.otherAssetsValue = otherAssetsValue
     }
     
 
@@ -32,7 +34,8 @@ open class ValueChartBar: Codable {
 
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(assets, forKey: "assets")
+        try container.encodeIfPresent(topAssets, forKey: "topAssets")
+        try container.encodeIfPresent(otherAssetsValue, forKey: "otherAssetsValue")
     }
 
     // Decodable protocol methods
@@ -42,7 +45,8 @@ open class ValueChartBar: Codable {
 
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
-        assets = try container.decodeIfPresent([AssetsValue].self, forKey: "assets")
+        topAssets = try container.decodeIfPresent([AssetsValue].self, forKey: "topAssets")
+        otherAssetsValue = try container.decodeIfPresent(OtherAssetsValue.self, forKey: "otherAssetsValue")
     }
 }
 

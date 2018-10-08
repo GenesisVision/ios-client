@@ -12,6 +12,7 @@ import Foundation
 open class ManagerNotificationSettingList: Codable {
 
     public var managerId: UUID?
+    public var url: String?
     public var username: String?
     public var avatar: String?
     public var about: String?
@@ -19,8 +20,9 @@ open class ManagerNotificationSettingList: Codable {
 
 
     
-    public init(managerId: UUID?, username: String?, avatar: String?, about: String?, settingsGeneral: [NotificationSettingViewModel]?) {
+    public init(managerId: UUID?, url: String?, username: String?, avatar: String?, about: String?, settingsGeneral: [NotificationSettingViewModel]?) {
         self.managerId = managerId
+        self.url = url
         self.username = username
         self.avatar = avatar
         self.about = about
@@ -35,6 +37,7 @@ open class ManagerNotificationSettingList: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(managerId, forKey: "managerId")
+        try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(username, forKey: "username")
         try container.encodeIfPresent(avatar, forKey: "avatar")
         try container.encodeIfPresent(about, forKey: "about")
@@ -47,6 +50,7 @@ open class ManagerNotificationSettingList: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
         username = try container.decodeIfPresent(String.self, forKey: "username")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
         about = try container.decodeIfPresent(String.self, forKey: "about")

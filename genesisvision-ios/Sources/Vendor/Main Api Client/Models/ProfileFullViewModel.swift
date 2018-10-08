@@ -22,14 +22,16 @@ open class ProfileFullViewModel: Codable {
     public var city: String?
     public var address: String?
     public var phone: String?
+    public var phoneNumberConfirmed: Bool?
     public var birthday: Date?
     public var gender: Bool?
     public var avatar: String?
     public var userName: String?
+    public var documentsConfirmed: Bool?
 
 
     
-    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, birthday: Date?, gender: Bool?, avatar: String?, userName: String?) {
+    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, userName: String?, documentsConfirmed: Bool?) {
         self.id = id
         self.email = email
         self.firstName = firstName
@@ -41,10 +43,12 @@ open class ProfileFullViewModel: Codable {
         self.city = city
         self.address = address
         self.phone = phone
+        self.phoneNumberConfirmed = phoneNumberConfirmed
         self.birthday = birthday
         self.gender = gender
         self.avatar = avatar
         self.userName = userName
+        self.documentsConfirmed = documentsConfirmed
     }
     
 
@@ -65,10 +69,12 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(city, forKey: "city")
         try container.encodeIfPresent(address, forKey: "address")
         try container.encodeIfPresent(phone, forKey: "phone")
+        try container.encodeIfPresent(phoneNumberConfirmed, forKey: "phoneNumberConfirmed")
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(gender, forKey: "gender")
         try container.encodeIfPresent(avatar, forKey: "avatar")
         try container.encodeIfPresent(userName, forKey: "userName")
+        try container.encodeIfPresent(documentsConfirmed, forKey: "documentsConfirmed")
     }
 
     // Decodable protocol methods
@@ -87,10 +93,12 @@ open class ProfileFullViewModel: Codable {
         city = try container.decodeIfPresent(String.self, forKey: "city")
         address = try container.decodeIfPresent(String.self, forKey: "address")
         phone = try container.decodeIfPresent(String.self, forKey: "phone")
+        phoneNumberConfirmed = try container.decodeIfPresent(Bool.self, forKey: "phoneNumberConfirmed")
         birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
         gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
         userName = try container.decodeIfPresent(String.self, forKey: "userName")
+        documentsConfirmed = try container.decodeIfPresent(Bool.self, forKey: "documentsConfirmed")
     }
 }
 

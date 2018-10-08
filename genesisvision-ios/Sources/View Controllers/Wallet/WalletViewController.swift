@@ -14,8 +14,11 @@ class WalletViewController: BaseViewControllerWithTableView {
     var viewModel: WalletControllerViewModel!
     
     // MARK: - Outlets
-    var walletTableHeaderViewHeightStart: CGFloat = 200.0
+    var walletTableHeaderViewHeightStart: CGFloat = 300.0
+    var walletTableHeaderViewHeight: CGFloat = 300.0
     var walletTableHeaderViewHeightEnd: CGFloat = 100.0
+    
+    var walletTableHeaderView: WalletTableHeaderView?
     
     private var withdrawBarButtonItem: UIBarButtonItem!
     private var addFundsBarButtonItem: UIBarButtonItem!
@@ -44,9 +47,9 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-//        tableView.bounces = false
+        addCurrencyTitleButton(viewModel.currencyDelegateManager)
         
-        bottomViewType = .sort
+        bottomViewType = .none
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         updateTitle()
@@ -55,7 +58,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         addFundsBarButtonItem = UIBarButtonItem(title: "Add funds", style: .done, target: self, action: #selector(addFundsButtonAction))
         addFundsBarButtonItem.tintColor = UIColor.primary
     
-        
         navigationItem.leftBarButtonItem = withdrawBarButtonItem
         navigationItem.rightBarButtonItem = addFundsBarButtonItem
     }
@@ -217,7 +219,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
+        switch section {
+        case 0:
+            return walletTableHeaderViewHeight
+        default:
+            return viewModel.headerHeight(for: section)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -227,7 +235,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             if let wallet = viewModel.wallet {
                 header.configure(wallet)
             }
-            return header
+            
+            walletTableHeaderView = header
+            
+            return walletTableHeaderView
         case 1:
             guard let title = viewModel.headerTitle(for: section) else {
                 return nil
@@ -238,6 +249,17 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             return header
         default:
             return nil
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y
+        print(yOffset)
+        if let frame = walletTableHeaderView?.frame {
+            let newHeight = frame.size.height - yOffset
+            if newHeight < walletTableHeaderViewHeightStart || newHeight > walletTableHeaderViewHeightEnd {
+                walletTableHeaderView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: newHeight)
+            }
         }
     }
 }

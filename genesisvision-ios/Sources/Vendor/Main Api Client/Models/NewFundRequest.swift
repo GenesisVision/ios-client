@@ -11,15 +11,6 @@ import Foundation
 
 open class NewFundRequest: Codable {
 
-    public enum Currency: String, Codable { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case usd = "USD"
-        case eur = "EUR"
-    }
     public var exitFee: Double?
     public var managementFee: Double?
     public var assetsParts: [OefAssetPart]?
@@ -28,11 +19,10 @@ open class NewFundRequest: Codable {
     public var logo: String?
     public var brokerAccountTypeId: UUID?
     public var entryFee: Double?
-    public var currency: Currency?
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assetsParts: [OefAssetPart]?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?, currency: Currency?) {
+    public init(exitFee: Double?, managementFee: Double?, assetsParts: [OefAssetPart]?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?) {
         self.exitFee = exitFee
         self.managementFee = managementFee
         self.assetsParts = assetsParts
@@ -41,7 +31,6 @@ open class NewFundRequest: Codable {
         self.logo = logo
         self.brokerAccountTypeId = brokerAccountTypeId
         self.entryFee = entryFee
-        self.currency = currency
     }
     
 
@@ -59,7 +48,6 @@ open class NewFundRequest: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(currency, forKey: "currency")
     }
 
     // Decodable protocol methods
@@ -75,7 +63,6 @@ open class NewFundRequest: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }
 }
 

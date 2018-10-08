@@ -15,14 +15,16 @@ open class ProfilePublic: Codable {
     public var username: String?
     public var avatar: String?
     public var registrationDate: Date?
+    public var url: String?
 
 
     
-    public init(id: UUID?, username: String?, avatar: String?, registrationDate: Date?) {
+    public init(id: UUID?, username: String?, avatar: String?, registrationDate: Date?, url: String?) {
         self.id = id
         self.username = username
         self.avatar = avatar
         self.registrationDate = registrationDate
+        self.url = url
     }
     
 
@@ -36,6 +38,7 @@ open class ProfilePublic: Codable {
         try container.encodeIfPresent(username, forKey: "username")
         try container.encodeIfPresent(avatar, forKey: "avatar")
         try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
+        try container.encodeIfPresent(url, forKey: "url")
     }
 
     // Decodable protocol methods
@@ -47,6 +50,7 @@ open class ProfilePublic: Codable {
         username = try container.decodeIfPresent(String.self, forKey: "username")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
         registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
     }
 }
 

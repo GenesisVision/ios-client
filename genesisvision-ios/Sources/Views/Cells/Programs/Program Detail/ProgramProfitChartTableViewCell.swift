@@ -11,22 +11,22 @@ import Charts
 
 class ProgramProfitChartTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet weak var balanceTitleLabel: UILabel! {
+    @IBOutlet weak var amountTitleLabel: UILabel! {
         didSet {
-            balanceTitleLabel.textColor = UIColor.Cell.subtitle
-            balanceTitleLabel.isUserInteractionEnabled = false
+            amountTitleLabel.textColor = UIColor.Cell.subtitle
+            amountTitleLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var balanceValueLabel: UILabel! {
+    @IBOutlet weak var amountValueLabel: UILabel! {
         didSet {
-            balanceValueLabel.textColor = UIColor.Cell.title
-            balanceValueLabel.isUserInteractionEnabled = false
+            amountValueLabel.textColor = UIColor.Cell.title
+            amountValueLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var balanceCurrencyLabel: UILabel! {
+    @IBOutlet weak var amountCurrencyLabel: UILabel! {
         didSet {
-            balanceCurrencyLabel.textColor = UIColor.Cell.subtitle
-            balanceCurrencyLabel.isUserInteractionEnabled = false
+            amountCurrencyLabel.textColor = UIColor.Cell.subtitle
+            amountCurrencyLabel.isUserInteractionEnabled = false
         }
     }
     

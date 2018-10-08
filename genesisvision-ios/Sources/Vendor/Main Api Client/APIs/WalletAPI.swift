@@ -31,13 +31,13 @@ open class WalletAPI {
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "ETH"
+    "currency" : "Undefined"
   }, {
     "rateToGVT" : 0.8008281904610115,
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "ETH"
+    "currency" : "Undefined"
   } ]
 }}]
      
@@ -66,10 +66,10 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletByCurrencyGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -183,8 +183,8 @@ open class WalletAPI {
     "sourceType" : "Wallet",
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "ETH",
-    "sourceCurrency" : "ETH",
+    "destinationCurrency" : "Undefined",
+    "sourceCurrency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
@@ -196,8 +196,8 @@ open class WalletAPI {
     "sourceType" : "Wallet",
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "ETH",
-    "sourceCurrency" : "ETH",
+    "destinationCurrency" : "Undefined",
+    "sourceCurrency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   } ]
@@ -259,13 +259,13 @@ open class WalletAPI {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "ETH",
+    "currency" : "Undefined",
     "commission" : 6.027456183070403
   }, {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "ETH",
+    "currency" : "Undefined",
     "commission" : 6.027456183070403
   } ],
   "availableToWithdrawal" : 0.8008281904610115

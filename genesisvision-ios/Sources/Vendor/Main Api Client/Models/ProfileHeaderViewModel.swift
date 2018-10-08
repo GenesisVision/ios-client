@@ -20,10 +20,11 @@ open class ProfileHeaderViewModel: Codable {
     public var totalBalanceGvt: Double?
     public var investedGvt: Double?
     public var availableGvt: Double?
+    public var kycConfirmed: Bool?
 
 
     
-    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?) {
+    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?) {
         self.id = id
         self.name = name
         self.email = email
@@ -33,6 +34,7 @@ open class ProfileHeaderViewModel: Codable {
         self.totalBalanceGvt = totalBalanceGvt
         self.investedGvt = investedGvt
         self.availableGvt = availableGvt
+        self.kycConfirmed = kycConfirmed
     }
     
 
@@ -51,6 +53,7 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(totalBalanceGvt, forKey: "totalBalanceGvt")
         try container.encodeIfPresent(investedGvt, forKey: "investedGvt")
         try container.encodeIfPresent(availableGvt, forKey: "availableGvt")
+        try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
     }
 
     // Decodable protocol methods
@@ -67,6 +70,7 @@ open class ProfileHeaderViewModel: Codable {
         totalBalanceGvt = try container.decodeIfPresent(Double.self, forKey: "totalBalanceGvt")
         investedGvt = try container.decodeIfPresent(Double.self, forKey: "investedGvt")
         availableGvt = try container.decodeIfPresent(Double.self, forKey: "availableGvt")
+        kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
     }
 }
 

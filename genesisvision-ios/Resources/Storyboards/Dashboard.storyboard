@@ -40,7 +40,7 @@
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sd-cO-d1I">
-                                        <rect key="frame" x="0.0" y="550" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="550" width="375" height="647"/>
                                         <connections>
                                             <segue destination="akx-6x-Wbf" kind="embed" identifier="AssetsViewControllerSegue" id="Hn1-ap-vSL"/>
                                         </connections>
@@ -65,8 +65,8 @@
                         <constraints>
                             <constraint firstItem="qr8-ra-I8p" firstAttribute="top" secondItem="mez-s6-fig" secondAttribute="top" id="A3c-nr-rFk"/>
                             <constraint firstItem="VyI-4r-Nyn" firstAttribute="width" secondItem="QgQ-09-yI0" secondAttribute="width" id="Vxp-Ve-E9G"/>
+                            <constraint firstItem="1Sd-cO-d1I" firstAttribute="height" secondItem="mez-s6-fig" secondAttribute="height" id="aYH-cP-ZrZ"/>
                             <constraint firstItem="qr8-ra-I8p" firstAttribute="leading" secondItem="mez-s6-fig" secondAttribute="leading" id="b0Y-d1-R1F"/>
-                            <constraint firstItem="1Sd-cO-d1I" firstAttribute="height" secondItem="QgQ-09-yI0" secondAttribute="height" id="pah-Lv-YLt"/>
                             <constraint firstItem="mez-s6-fig" firstAttribute="trailing" secondItem="qr8-ra-I8p" secondAttribute="trailing" id="uMZ-cV-pgN"/>
                             <constraint firstAttribute="bottom" secondItem="qr8-ra-I8p" secondAttribute="bottom" id="yBg-Gj-Hlt"/>
                         </constraints>
@@ -106,7 +106,7 @@
             <objects>
                 <viewController storyboardIdentifier="AssetsViewController" id="akx-6x-Wbf" customClass="AssetsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5MH-tI-QvR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="pZX-ah-1T3"/>
                     </view>

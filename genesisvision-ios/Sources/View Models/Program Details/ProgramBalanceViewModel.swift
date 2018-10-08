@@ -20,18 +20,9 @@ final class ProgramBalanceViewModel {
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var canFetchMoreResults = true
     var dataType: DataType = .api
-    var transactionsCount: String = ""
-    var skip = 0
-    var take = Constants.Api.take
-    var totalCount = 0 {
-        didSet {
-            transactionsCount = "\(totalCount) transactions"
-        }
-    }
-    
-    private var models: [ProgramBalanceChartTableViewCellViewModel]?
+
+    private var programBalanceChart: ProgramBalanceChart?
     
     private var sections: [SectionType] = [.chart]
     
@@ -51,12 +42,8 @@ extension ProgramBalanceViewModel {
         return [ProgramBalanceChartTableViewCellViewModel.self]
     }
     
-    func modelsCount() -> Int {
-        return models?.count ?? 0
-    }
-    
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        return 1
     }
 }
 
@@ -64,55 +51,33 @@ extension ProgramBalanceViewModel {
 extension ProgramBalanceViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
+        fetch(completion)
     }
     
     func refresh(completion: @escaping CompletionBlock) {
-        skip = 0
-        
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
+        fetch(completion)
     }
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> ProgramBalanceChartTableViewCellViewModel? {
-        return models?[index]
+        guard let programBalanceChart = programBalanceChart else { return nil }
+        return ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart)
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramBalanceChartTableViewCellViewModel]) {
-        self.models = viewModels
-        self.totalCount = totalCount
-        self.skip += self.take
-        self.canFetchMoreResults = true
-        self.reloadDataProtocol?.didReloadData()
-    }
-    
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramBalanceChartTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let programId = programId,
-                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            WalletDataProvider.getWalletTransactions(with: uuid, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
-                guard transactionsViewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
+            guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            ProgramDataProvider.getProgramBalanceChart(with: programId, completion: { [weak self] (viewModel) in
+                guard viewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
-                var viewModels = [ProgramBalanceChartTableViewCellViewModel]()
                 
-                let totalCount = transactionsViewModel?.total ?? 0
+                self?.programBalanceChart = viewModel
                 
-                transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
-                    let viewModel = ProgramBalanceChartTableViewCellViewModel()
-                    viewModels.append(viewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
-            }, errorCompletion: completionError)
+                completion(.success)
+            }, errorCompletion: completion)
         case .fake:
             break
         }

@@ -31,6 +31,7 @@ open class NotificationSettingViewModel: Codable {
         case level = "Level"
     }
     public var id: UUID?
+    public var isEnabled: Bool?
     public var programId: UUID?
     public var managerId: UUID?
     public var type: ModelType?
@@ -39,8 +40,9 @@ open class NotificationSettingViewModel: Codable {
 
 
     
-    public init(id: UUID?, programId: UUID?, managerId: UUID?, type: ModelType?, conditionType: ConditionType?, conditionAmount: Double?) {
+    public init(id: UUID?, isEnabled: Bool?, programId: UUID?, managerId: UUID?, type: ModelType?, conditionType: ConditionType?, conditionAmount: Double?) {
         self.id = id
+        self.isEnabled = isEnabled
         self.programId = programId
         self.managerId = managerId
         self.type = type
@@ -56,6 +58,7 @@ open class NotificationSettingViewModel: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(id, forKey: "id")
+        try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(managerId, forKey: "managerId")
         try container.encodeIfPresent(type, forKey: "type")
@@ -69,6 +72,7 @@ open class NotificationSettingViewModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
+        isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")

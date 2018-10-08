@@ -146,7 +146,8 @@ extension DashboardViewModel {
         let take = Constants.Api.take
         let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
         
-        DashboardDataProvider.getDashboardSummary(with: nil, from: dateRangeFrom, to: dateRangeTo, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, chartFrom: dateRangeFrom, chartTo: dateRangeTo, requestsSkip: skip, requestsTake: take, completion: { (dashboard) in
+        return completionError(.success)
+        DashboardDataProvider.getDashboardSummary(with: nil, from: dateRangeFrom, to: dateRangeTo, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, from2: dateRangeFrom, to2: dateRangeTo, requestsSkip: skip, requestsTake: take, completion: { (dashboard) in
 //        DashboardDataProvider.getDashboardSummary(completion: { (dashboard) in
             guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
             completionSuccess(dashboard)
@@ -344,7 +345,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
 }
 
 protocol InRequestsDelegateManagerProtocol: class {
-    func didTapDeleteButton(at indexPath: IndexPath)
+    func didTapCancelButton(at indexPath: IndexPath)
 }
 
 final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -382,7 +383,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let cancelRowAction = UITableViewRowAction(style: .normal, title: "Cancel") { [weak self] (action, indexPath) in
-            self?.inRequestsDelegate?.didTapDeleteButton(at: indexPath)
+            self?.inRequestsDelegate?.didTapCancelButton(at: indexPath)
             //TODO: or cancel this
         }
         cancelRowAction.backgroundColor = UIColor.Cell.redTitle

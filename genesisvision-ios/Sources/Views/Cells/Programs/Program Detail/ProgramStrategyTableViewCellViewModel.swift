@@ -9,11 +9,15 @@
 import Foundation
 
 struct ProgramStrategyTableViewCellViewModel {
-    
+    var descriptionText: String?
 }
 
 extension ProgramStrategyTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramStrategyTableViewCell) {
+        cell.titleLabel.text = "Strategy"
         
+        if let descriptionText = descriptionText {
+            cell.textView.text = descriptionText
+        }
     }
 }

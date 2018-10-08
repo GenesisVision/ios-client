@@ -32,6 +32,7 @@ final class WalletControllerViewModel {
     var title: String = "Wallet"
     
     var wallet: WalletSummary?
+    var currencyDelegateManager = CurrencyDelegateManager()
     
     private var sections: [SectionType] = [.header, .transactions]
 
@@ -97,7 +98,7 @@ extension WalletControllerViewModel {
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
         case .header:
-            return 200.0
+            return 300.0
         case .transactions:
             return 86.0
         }

@@ -9,11 +9,11 @@
 import Foundation
 
 class DashboardDataProvider: DataProvider {
-    static func getDashboardSummary(with assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.ModelType_v10InvestorGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorGet? = nil, skip: Int? = nil, take: Int? = nil, chartCurrency: InvestorAPI.ChartCurrency_v10InvestorGet? = nil, chartFrom: Date? = nil, chartTo: Date? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil, completion: @escaping (_ dashboardSummary: DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getDashboardSummary(with assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.ModelType_v10InvestorGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorGet? = nil, skip: Int? = nil, take: Int? = nil, chartCurrency: InvestorAPI.ChartCurrency_v10InvestorGet? = nil, from2: Date? = nil, to2: Date? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil, completion: @escaping (_ dashboardSummary: DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorGet(authorization: authorization, assetId: assetId, from: from, to: to, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, chartFrom: chartFrom, chartTo: chartTo, requestsSkip: requestsSkip, requestsTake: requestsTake) { (viewModel, error) in
+        InvestorAPI.v10InvestorGet(authorization: authorization, assetId: assetId, from: from, to: to, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, from2: from2, to2: to2, requestsSkip: requestsSkip, requestsTake: requestsTake) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

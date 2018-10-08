@@ -132,8 +132,10 @@ class AuthTwoFactorTutorialViewController: BaseViewController {
     }
 }
 
-extension AuthTwoFactorTutorialViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+extension AuthTwoFactorTutorialViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
     }

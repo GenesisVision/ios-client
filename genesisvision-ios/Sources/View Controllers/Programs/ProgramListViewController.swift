@@ -101,8 +101,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 16.0 + 16.0 : 0.0
         
-        tableView.isScrollEnabled = false
-        tableView.bounces = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -320,22 +318,5 @@ extension ProgramListViewController: UISearchBarDelegate {
 extension ProgramListViewController: SortingDelegate {
     func didSelectSorting(at indexPath: IndexPath) {
         bottomSheetController.dismiss()
-    }
-}
-
-extension ProgramListViewController {
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
-        
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
-    }
-    
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
-        } else {
-            scrollView.isScrollEnabled = true
-        }
     }
 }

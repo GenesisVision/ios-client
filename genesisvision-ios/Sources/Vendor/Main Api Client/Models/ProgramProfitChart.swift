@@ -12,10 +12,10 @@ import Foundation
 open class ProgramProfitChart: Codable {
 
     public enum ProgramCurrency: String, Codable { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -26,36 +26,44 @@ open class ProgramProfitChart: Codable {
     public var trades: Int?
     public var successTradesPercent: Double?
     public var profitFactor: Double?
-    public var maxDrawdown: Double?
-    public var chart: [ChartProgramDetails]?
     public var pnLChart: [ChartSimple]?
-    public var equity: Double?
+    public var periods: [PeriodDate]?
+    public var equityChart: [ChartSimple]?
+    public var balance: Double?
+    public var investors: Int?
     public var sharpeRatio: Double?
     public var sortinoRatio: Double?
     public var calmarRatio: Double?
+    public var maxDrawdown: Double?
     public var totalGvtProfit: Double?
     public var timeframeGvtProfit: Double?
     public var profitChangePercent: Double?
+    public var lastPeriodStarts: Date?
+    public var lastPeriodEnds: Date?
 
 
     
-    public init(totalProgramCurrencyProfit: Double?, timeframeProgramCurrencyProfit: Double?, programCurrency: ProgramCurrency?, trades: Int?, successTradesPercent: Double?, profitFactor: Double?, maxDrawdown: Double?, chart: [ChartProgramDetails]?, pnLChart: [ChartSimple]?, equity: Double?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, profitChangePercent: Double?) {
+    public init(totalProgramCurrencyProfit: Double?, timeframeProgramCurrencyProfit: Double?, programCurrency: ProgramCurrency?, trades: Int?, successTradesPercent: Double?, profitFactor: Double?, pnLChart: [ChartSimple]?, periods: [PeriodDate]?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, profitChangePercent: Double?, lastPeriodStarts: Date?, lastPeriodEnds: Date?) {
         self.totalProgramCurrencyProfit = totalProgramCurrencyProfit
         self.timeframeProgramCurrencyProfit = timeframeProgramCurrencyProfit
         self.programCurrency = programCurrency
         self.trades = trades
         self.successTradesPercent = successTradesPercent
         self.profitFactor = profitFactor
-        self.maxDrawdown = maxDrawdown
-        self.chart = chart
         self.pnLChart = pnLChart
-        self.equity = equity
+        self.periods = periods
+        self.equityChart = equityChart
+        self.balance = balance
+        self.investors = investors
         self.sharpeRatio = sharpeRatio
         self.sortinoRatio = sortinoRatio
         self.calmarRatio = calmarRatio
+        self.maxDrawdown = maxDrawdown
         self.totalGvtProfit = totalGvtProfit
         self.timeframeGvtProfit = timeframeGvtProfit
         self.profitChangePercent = profitChangePercent
+        self.lastPeriodStarts = lastPeriodStarts
+        self.lastPeriodEnds = lastPeriodEnds
     }
     
 
@@ -71,16 +79,20 @@ open class ProgramProfitChart: Codable {
         try container.encodeIfPresent(trades, forKey: "trades")
         try container.encodeIfPresent(successTradesPercent, forKey: "successTradesPercent")
         try container.encodeIfPresent(profitFactor, forKey: "profitFactor")
-        try container.encodeIfPresent(maxDrawdown, forKey: "maxDrawdown")
-        try container.encodeIfPresent(chart, forKey: "chart")
         try container.encodeIfPresent(pnLChart, forKey: "pnLChart")
-        try container.encodeIfPresent(equity, forKey: "equity")
+        try container.encodeIfPresent(periods, forKey: "periods")
+        try container.encodeIfPresent(equityChart, forKey: "equityChart")
+        try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(investors, forKey: "investors")
         try container.encodeIfPresent(sharpeRatio, forKey: "sharpeRatio")
         try container.encodeIfPresent(sortinoRatio, forKey: "sortinoRatio")
         try container.encodeIfPresent(calmarRatio, forKey: "calmarRatio")
+        try container.encodeIfPresent(maxDrawdown, forKey: "maxDrawdown")
         try container.encodeIfPresent(totalGvtProfit, forKey: "totalGvtProfit")
         try container.encodeIfPresent(timeframeGvtProfit, forKey: "timeframeGvtProfit")
         try container.encodeIfPresent(profitChangePercent, forKey: "profitChangePercent")
+        try container.encodeIfPresent(lastPeriodStarts, forKey: "lastPeriodStarts")
+        try container.encodeIfPresent(lastPeriodEnds, forKey: "lastPeriodEnds")
     }
 
     // Decodable protocol methods
@@ -94,16 +106,20 @@ open class ProgramProfitChart: Codable {
         trades = try container.decodeIfPresent(Int.self, forKey: "trades")
         successTradesPercent = try container.decodeIfPresent(Double.self, forKey: "successTradesPercent")
         profitFactor = try container.decodeIfPresent(Double.self, forKey: "profitFactor")
-        maxDrawdown = try container.decodeIfPresent(Double.self, forKey: "maxDrawdown")
-        chart = try container.decodeIfPresent([ChartProgramDetails].self, forKey: "chart")
         pnLChart = try container.decodeIfPresent([ChartSimple].self, forKey: "pnLChart")
-        equity = try container.decodeIfPresent(Double.self, forKey: "equity")
+        periods = try container.decodeIfPresent([PeriodDate].self, forKey: "periods")
+        equityChart = try container.decodeIfPresent([ChartSimple].self, forKey: "equityChart")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        investors = try container.decodeIfPresent(Int.self, forKey: "investors")
         sharpeRatio = try container.decodeIfPresent(Double.self, forKey: "sharpeRatio")
         sortinoRatio = try container.decodeIfPresent(Double.self, forKey: "sortinoRatio")
         calmarRatio = try container.decodeIfPresent(Double.self, forKey: "calmarRatio")
+        maxDrawdown = try container.decodeIfPresent(Double.self, forKey: "maxDrawdown")
         totalGvtProfit = try container.decodeIfPresent(Double.self, forKey: "totalGvtProfit")
         timeframeGvtProfit = try container.decodeIfPresent(Double.self, forKey: "timeframeGvtProfit")
         profitChangePercent = try container.decodeIfPresent(Double.self, forKey: "profitChangePercent")
+        lastPeriodStarts = try container.decodeIfPresent(Date.self, forKey: "lastPeriodStarts")
+        lastPeriodEnds = try container.decodeIfPresent(Date.self, forKey: "lastPeriodEnds")
     }
 }
 

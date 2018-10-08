@@ -46,13 +46,15 @@ open class PlatformAPI {
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "url" : "url"
   }, {
     "count" : 0,
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "url" : "url"
   } ]
 }}]
 

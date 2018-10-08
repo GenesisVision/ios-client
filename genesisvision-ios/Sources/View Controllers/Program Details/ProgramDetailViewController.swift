@@ -40,7 +40,11 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     
     // MARK: - Views
     @IBOutlet var buttonsView: UIView!
-    @IBOutlet var gradientView: GradientView!
+    @IBOutlet var gradientView: GradientView! {
+        didSet {
+            gradientView.isHidden = true
+        }
+    }
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -76,25 +80,7 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
-        
-        guard let viewProperties = viewModel.viewProperties else { return }
-        
-        investButton.isHidden = !viewProperties.isInvestEnable
-        withdrawButton.isHidden = !viewProperties.isWithdrawEnable
-        
-        gradientView.isHidden = false
-        buttonsView.isHidden = false
-        
         showInfiniteIndicator(value: false)
-        
-        if viewProperties.isWithdrawEnable || viewProperties.isInvestEnable || viewProperties.hasNewRequests {
-            tableView.contentInset.bottom = buttonHeight + buttonBottom
-        } else {
-            tableView.contentInset.bottom = 0.0
-            gradientView.isHidden = true
-            buttonsView.isHidden = true
-        }
     }
     
     private func setupTableConfiguration() {

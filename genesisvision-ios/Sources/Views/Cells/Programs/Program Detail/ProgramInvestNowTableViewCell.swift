@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProgramInvestNowProtocol: class {
+    func didTapInvestButton()
+}
+
 class ProgramInvestNowTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet var titleLabel: UILabel! {
@@ -53,21 +57,6 @@ class ProgramInvestNowTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var reinvestTitleLabel: UILabel! {
-        didSet {
-            reinvestTitleLabel.textColor = UIColor.Cell.title
-            reinvestTitleLabel.font = UIFont.getFont(.semibold, size: 14.0)
-        }
-    }
-    
-    @IBOutlet var reinvestTooltip: TooltipButton! {
-        didSet {
-            reinvestTooltip.tooltipText = String.Tooltitps.reinvest
-        }
-    }
-    
-    @IBOutlet var reinvestSwitch: UISwitch!
-    
     @IBOutlet var investButton: ActionButton!
     
     @IBOutlet var investDescriptionLabel: UILabel! {
@@ -76,6 +65,8 @@ class ProgramInvestNowTableViewCell: UITableViewCell {
             investDescriptionLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
+    
+    weak var programInvestNowProtocol: ProgramInvestNowProtocol?
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -87,6 +78,6 @@ class ProgramInvestNowTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
-        
+        programInvestNowProtocol?.didTapInvestButton()
     }
 }

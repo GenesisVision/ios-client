@@ -20,11 +20,11 @@ extension UIView {
         layer.cornerRadius = radius
     }
     
-    func roundCorners(with radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) {
+    func roundCorners(with radius: CGFloat? = nil, borderWidth: CGFloat, borderColor: UIColor) {
         contentMode = .scaleAspectFill
         clipsToBounds = true
         
-        layer.cornerRadius = radius
+        layer.cornerRadius = radius ?? frame.height / 2
         layer.borderColor = borderColor.cgColor
         layer.borderWidth = borderWidth
         layer.masksToBounds = true

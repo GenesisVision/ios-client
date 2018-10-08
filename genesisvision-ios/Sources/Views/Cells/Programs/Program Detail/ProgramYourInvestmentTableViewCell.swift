@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProgramYourInvestmentProtocol: class {
+    func didTapWithdrawButton()
+}
+
 class ProgramYourInvestmentTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet var titleLabel: UILabel! {
@@ -17,14 +21,7 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var statusLabel: RoundedLabel! {
-        didSet {
-            statusLabel.setProperties(font: UIFont.getFont(.semibold, size: 12.0),
-                                      textColor: UIColor.Cell.yellowTitle,
-                                      backgroundColor: UIColor.Cell.yellowTitle.withAlphaComponent(0.3),
-                                      edgeInsets: UIEdgeInsets(top: 8.0, left: 20.0, bottom: 8.0, right: 20.0))
-        }
-    }
+    @IBOutlet var statusButton: StatusButton!
     
     @IBOutlet var investedValueLabel: UILabel! {
         didSet {
@@ -63,7 +60,11 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var withdrawButton: ActionButton!
+    @IBOutlet var withdrawButton: ActionButton! {
+        didSet {
+            withdrawButton.configure(with: .clear)
+        }
+    }
     
     @IBOutlet var withdrawDescriptionLabel: UILabel! {
         didSet {
@@ -71,6 +72,23 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
             withdrawDescriptionLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
+    
+    @IBOutlet var reinvestTitleLabel: UILabel! {
+        didSet {
+            reinvestTitleLabel.textColor = UIColor.Cell.title
+            reinvestTitleLabel.font = UIFont.getFont(.semibold, size: 14.0)
+        }
+    }
+    
+    @IBOutlet var reinvestTooltip: TooltipButton! {
+        didSet {
+            reinvestTooltip.tooltipText = String.Tooltitps.reinvest
+        }
+    }
+    
+    @IBOutlet var reinvestSwitch: UISwitch!
+    
+    weak var programYourInvestmentProtocol: ProgramYourInvestmentProtocol?
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -82,6 +100,6 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
-        
+        programYourInvestmentProtocol?.didTapWithdrawButton()
     }
 }

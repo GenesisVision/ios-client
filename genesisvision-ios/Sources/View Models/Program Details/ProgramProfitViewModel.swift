@@ -21,18 +21,9 @@ final class ProgramProfitViewModel {
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var canFetchMoreResults = true
     var dataType: DataType = .api
-    var transactionsCount: String = ""
-    var skip = 0
-    var take = Constants.Api.take
-    var totalCount = 0 {
-        didSet {
-            transactionsCount = "\(totalCount) transactions"
-        }
-    }
     
-    private var models: [ProgramProfitChartTableViewCellViewModel]?
+    private var programProfitChart: ProgramProfitChart?
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -70,47 +61,39 @@ extension ProgramProfitViewModel {
 extension ProgramProfitViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-//            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
+        fetch(completion)
     }
-
+    
     func refresh(completion: @escaping CompletionBlock) {
-        skip = 0
-        
-        fetch({ [weak self] (totalCount, viewModels) in
-//            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
+        fetch(completion)
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramProfitChartTableViewCellViewModel? {
-        return models?[index]
+    func model(for section: Int) -> CellViewAnyModel? {
+        guard let programProfitChart = programProfitChart else { return nil }
+        
+        switch sections[section] {
+        case .chart:
+            return ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart)
+        case .statistics:
+            return ProgramProfitStatisticTableViewCellViewModel(programProfitChart: programProfitChart)
+        }
     }
-
+    
     // MARK: - Private methods
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramProfitChartTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let programId = programId,
-                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            WalletDataProvider.getWalletTransactions(with: uuid, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
-                guard transactionsViewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
+            guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            ProgramDataProvider.getProgramProfitChart(with: programId, completion: { [weak self] (viewModel) in
+                guard viewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
-                var viewModels = [ProgramProfitChartTableViewCellViewModel]()
                 
-                let totalCount = transactionsViewModel?.total ?? 0
+                self?.programProfitChart = viewModel
                 
-                transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
-                    let viewModel = ProgramProfitChartTableViewCellViewModel()
-                    viewModels.append(viewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
-            }, errorCompletion: completionError)
+                completion(.success)
+                }, errorCompletion: completion)
         case .fake:
             break
         }

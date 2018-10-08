@@ -15,15 +15,17 @@ open class Facet: Codable {
     public var title: String?
     public var description: String?
     public var logo: String?
+    public var url: String?
     public var count: Int?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, logo: String?, count: Int?) {
+    public init(id: UUID?, title: String?, description: String?, logo: String?, url: String?, count: Int?) {
         self.id = id
         self.title = title
         self.description = description
         self.logo = logo
+        self.url = url
         self.count = count
     }
     
@@ -38,6 +40,7 @@ open class Facet: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(count, forKey: "count")
     }
 
@@ -50,6 +53,7 @@ open class Facet: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
         count = try container.decodeIfPresent(Int.self, forKey: "count")
     }
 }

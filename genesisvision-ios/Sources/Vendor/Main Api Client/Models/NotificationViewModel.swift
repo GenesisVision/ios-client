@@ -32,10 +32,12 @@ open class NotificationViewModel: Codable {
     public var programId: UUID?
     public var managerId: UUID?
     public var logo: String?
+    public var url: String?
+    public var isUnread: Bool?
 
 
     
-    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, programId: UUID?, managerId: UUID?, logo: String?) {
+    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, programId: UUID?, managerId: UUID?, logo: String?, url: String?, isUnread: Bool?) {
         self.id = id
         self.text = text
         self.date = date
@@ -43,6 +45,8 @@ open class NotificationViewModel: Codable {
         self.programId = programId
         self.managerId = managerId
         self.logo = logo
+        self.url = url
+        self.isUnread = isUnread
     }
     
 
@@ -59,6 +63,8 @@ open class NotificationViewModel: Codable {
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(managerId, forKey: "managerId")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(url, forKey: "url")
+        try container.encodeIfPresent(isUnread, forKey: "isUnread")
     }
 
     // Decodable protocol methods
@@ -73,6 +79,8 @@ open class NotificationViewModel: Codable {
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
+        isUnread = try container.decodeIfPresent(Bool.self, forKey: "isUnread")
     }
 }
 

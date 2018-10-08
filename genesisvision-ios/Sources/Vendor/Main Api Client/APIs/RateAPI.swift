@@ -71,52 +71,52 @@ open class RateAPI {
   "rates" : {
     "BTC" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "Undefined" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "EUR" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "GVT" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "USD" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "ETH" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ],
     "ADA" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     } ]
   }
 }}]

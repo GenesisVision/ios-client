@@ -10,6 +10,12 @@ import UIKit
 
 class WalletTableHeaderView: UITableViewHeaderFooterView {
     // MARK: - Outlets
+    @IBOutlet weak var separatorView: UIView! {
+        didSet {
+            separatorView.backgroundColor = UIColor.Common.blackSeparator
+        }
+    }
+    
     @IBOutlet weak var totalBalanceTitleLabel: SubtitleLabel!
     @IBOutlet weak var totalBalanceValueLabel: TitleLabel! {
         didSet {
@@ -18,12 +24,23 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
     }
     @IBOutlet weak var totalBalanceCurrencyLabel: MediumLabel!
     
-    @IBOutlet weak var availableProgressView: UIView!
+    @IBOutlet weak var availableProgressView: CircularProgressView! {
+        didSet {
+            availableProgressView.foregroundStrokeColor = UIColor.Common.purple
+            availableProgressView.backgroundStrokeColor = UIColor.Common.purple.withAlphaComponent(0.2)
+        }
+    }
     @IBOutlet weak var availableTitleLabel: SubtitleLabel!
     @IBOutlet weak var availableValueLabel: TitleLabel!
     @IBOutlet weak var availableCurrencyLabel: MediumLabel!
     
-    @IBOutlet weak var investedProgressView: UIView!
+    @IBOutlet weak var investedProgressView: CircularProgressView! {
+        didSet {
+            investedProgressView.foregroundStrokeColor = UIColor.primary
+            investedProgressView.backgroundStrokeColor = UIColor.primary.withAlphaComponent(0.2)
+            investedProgressView.clockwise = false
+        }
+    }
     @IBOutlet weak var investedTitleLabel: SubtitleLabel!
     @IBOutlet weak var investedValueLabel: TitleLabel!
     @IBOutlet weak var investedCurrencyLabel: MediumLabel!
@@ -44,9 +61,8 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         }
         
         if let totalBalanceGVT = wallet.totalBalanceGVT, let availableGVT = wallet.availableGVT {
-            let percent = availableGVT / totalBalanceGVT
-            print(percent)
-            //availableProgressView
+            let percent = 30 / totalBalanceGVT
+            availableProgressView.setProgress(to: percent, withAnimation: true)
         }
         
         availableTitleLabel.text = "Available"
@@ -58,9 +74,8 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         }
         
         if let totalBalanceGVT = wallet.totalBalanceGVT, let investedGVT = wallet.investedGVT {
-            let percent = investedGVT / totalBalanceGVT
-            print(percent)
-            //            investedProgressView
+            let percent = 70 / totalBalanceGVT
+            investedProgressView.setProgress(to: percent, withAnimation: true)
         }
         investedTitleLabel.text = "Invested value"
         if let investedGVT = wallet.investedGVT {

@@ -17,7 +17,7 @@ open class ManagersAPI {
      - parameter id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagersByIdGet(id: UUID, completion: @escaping ((_ data: ManagerProfile?,_ error: Error?) -> Void)) {
+    open class func v10ManagersByIdGet(id: String, completion: @escaping ((_ data: ManagerProfile?,_ error: Error?) -> Void)) {
         v10ManagersByIdGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -33,6 +33,7 @@ open class ManagersAPI {
   "regDate" : "2000-01-23T04:56:07.000+00:00",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "avatar" : "avatar",
+  "url" : "url",
   "username" : "username"
 }}]
      
@@ -40,7 +41,7 @@ open class ManagersAPI {
 
      - returns: RequestBuilder<ManagerProfile> 
      */
-    open class func v10ManagersByIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<ManagerProfile> {
+    open class func v10ManagersByIdGetWithRequestBuilder(id: String) -> RequestBuilder<ManagerProfile> {
         var path = "/v1.0/managers/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -158,8 +159,8 @@ open class ManagersAPI {
      Get investment program/fund requests
      - GET /v1.0/managers/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.683562403749608,
-  "total" : 9,
+  "totalValue" : 3.5571952270680973,
+  "total" : 6,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
@@ -167,7 +168,7 @@ open class ManagersAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "title" : "title",
-    "value" : 9.965781217890562,
+    "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
@@ -177,7 +178,7 @@ open class ManagersAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "title" : "title",
-    "value" : 9.965781217890562,
+    "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -519,8 +520,8 @@ open class ManagersAPI {
      Get investment program/fund requests
      - GET /v1.0/managers/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.683562403749608,
-  "total" : 9,
+  "totalValue" : 3.5571952270680973,
+  "total" : 6,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
@@ -528,7 +529,7 @@ open class ManagersAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "title" : "title",
-    "value" : 9.965781217890562,
+    "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
@@ -538,7 +539,7 @@ open class ManagersAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
     "title" : "title",
-    "value" : 9.965781217890562,
+    "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]

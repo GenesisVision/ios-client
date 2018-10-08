@@ -24,7 +24,7 @@ class RoundedLabel: UILabel {
         self.commonInit()
     }
     
-    func commonInit(){
+    func commonInit() {
         self.backgroundColor = .clear
         self.setProperties()
     }

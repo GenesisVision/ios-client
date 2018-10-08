@@ -29,7 +29,7 @@ class CustomLabel: UILabel {
 
 class TitleLabel: CustomLabel {
     // MARK: - Lifecycle
-    override func commonInit(){
+    override func commonInit() {
         textColor = UIColor.Cell.title
         font = UIFont.getFont(.semibold, size: 14.0)
     }
@@ -37,7 +37,7 @@ class TitleLabel: CustomLabel {
 
 class SubtitleLabel: CustomLabel {
     // MARK: - Lifecycle
-    override func commonInit(){
+    override func commonInit() {
         textColor = UIColor.Cell.subtitle
         font = UIFont.getFont(.regular, size: 12.0)
     }
@@ -45,7 +45,7 @@ class SubtitleLabel: CustomLabel {
 
 class MediumLabel: CustomLabel {
     // MARK: - Lifecycle
-    override func commonInit(){
+    override func commonInit() {
         textColor = UIColor.Cell.subtitle
         font = UIFont.getFont(.medium, size: 12.0)
     }

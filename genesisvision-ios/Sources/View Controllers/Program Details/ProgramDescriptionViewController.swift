@@ -52,16 +52,16 @@ class ProgramDescriptionViewController: BaseViewController {
     private func fillData() {
         programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
         
-        if let logoURL = getFileURL(fileName: viewModel.getProgramLogo()) {
+        if let fileUrl = getFileURL(fileName: viewModel.getProgramLogo()) {
             programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            programLogoImageView.profilePhotoImageView.kf.setImage(with: logoURL, placeholder: UIImage.placeholder)
+            programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
         }
         
         programTitleLabel.text = viewModel.getProgramTitle()
         descriptionLabel.text = viewModel.getProgramDescription()
         managerNameLabel.text = viewModel.getProgramManagerUsername()
         
-        programLogoImageView.levelLabel.text = viewModel.getProgramLevelText()
+        programLogoImageView.levelButton.setTitle(viewModel.getProgramLevelText(), for: .normal)
     }
     
     // MARK: - Actions

@@ -32,7 +32,7 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/balance
      - examples: [{contentType=application/json, example={
   "programCurrencyBalance" : 0.8008281904610115,
-  "programCurrency" : "ETH",
+  "programCurrency" : "Undefined",
   "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "investorsFunds" : 5.962133916683182,
@@ -94,57 +94,43 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
   "profitFactor" : 5.637376656633329,
-  "profitChangePercent" : 6.84685269835264,
-  "calmarRatio" : 1.2315135367772556,
-  "timeframeGvtProfit" : 1.4894159098541704,
+  "profitChangePercent" : 1.0246457001441578,
+  "calmarRatio" : 2.027123023002322,
+  "timeframeGvtProfit" : 1.2315135367772556,
   "timeframeProgramCurrencyProfit" : 6.027456183070403,
   "trades" : 1,
-  "maxDrawdown" : 2.3021358869347655,
-  "equity" : 2.027123023002322,
-  "totalGvtProfit" : 1.0246457001441578,
-  "sortinoRatio" : 7.386281948385884,
+  "maxDrawdown" : 4.145608029883936,
+  "equityChart" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 3.616076749251911
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 3.616076749251911
+  } ],
+  "investors" : 7,
+  "totalGvtProfit" : 7.386281948385884,
+  "sortinoRatio" : 3.616076749251911,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 5.637376656633329
+    "value" : 3.616076749251911
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 5.637376656633329
+    "value" : 3.616076749251911
   } ],
-  "programCurrency" : "ETH",
+  "balance" : 2.3021358869347655,
+  "programCurrency" : "Undefined",
   "totalProgramCurrencyProfit" : 0.8008281904610115,
   "successTradesPercent" : 5.962133916683182,
-  "sharpeRatio" : 4.145608029883936,
-  "chart" : [ {
-    "statistic" : {
-      "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "maxDrawdown" : 3.616076749251911,
-      "investors" : 9,
-      "pnL" : 7.061401241503109,
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00"
-    },
-    "equityChart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
-    } ]
+  "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
+  "periods" : [ {
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "dateFrom" : "2000-01-23T04:56:07.000+00:00"
   }, {
-    "statistic" : {
-      "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "maxDrawdown" : 3.616076749251911,
-      "investors" : 9,
-      "pnL" : 7.061401241503109,
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00"
-    },
-    "equityChart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
-    } ]
-  } ]
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "dateFrom" : "2000-01-23T04:56:07.000+00:00"
+  } ],
+  "sharpeRatio" : 9.301444243932576,
+  "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      
      - parameter id: (path)  
@@ -259,10 +245,10 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsByIdGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -292,20 +278,20 @@ open class ProgramsAPI {
   "statistic" : {
     "profitFactorPercent" : 1.4894159098541704,
     "investedAmount" : 7.386281948385884,
-    "startCurrency" : "ETH",
+    "startCurrency" : "Undefined",
     "tradesSuccessCount" : 1,
     "drawdownPercent" : 3.616076749251911,
     "balanceBase" : {
       "amount" : 5.962133916683182,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     },
     "tradesCount" : 1,
     "balanceGVT" : {
       "amount" : 5.962133916683182,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     },
     "profitPercent" : 7.061401241503109,
-    "investedCurrency" : "ETH",
+    "investedCurrency" : "Undefined",
     "sharpeRatioPercent" : 6.84685269835264,
     "profitValue" : 9.301444243932576,
     "currentValue" : 2.3021358869347655,
@@ -313,7 +299,7 @@ open class ProgramsAPI {
     "startBalance" : 4.145608029883936,
     "balanceSecondary" : {
       "amount" : 5.962133916683182,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     },
     "investorsCount" : 2
   },
@@ -321,6 +307,7 @@ open class ProgramsAPI {
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
+    "url" : "url",
     "username" : "username"
   },
   "level" : 0,
@@ -343,7 +330,7 @@ open class ProgramsAPI {
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "logo" : "logo",
-  "currency" : "ETH",
+  "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "status" : "None"
 }}]
@@ -496,10 +483,10 @@ open class ProgramsAPI {
      * enum for parameter programCurrency
      */
     public enum ProgramCurrency_v10ProgramsGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -509,10 +496,10 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -540,7 +527,7 @@ open class ProgramsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: UUID? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
         v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -557,12 +544,12 @@ open class ProgramsAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "tradesCount" : 2,
       "balanceGVT" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "profitPercent" : 2.3021358869347655,
       "profitValue" : 7.061401241503109,
@@ -570,7 +557,7 @@ open class ProgramsAPI {
       "currentValue" : 5.637376656633329,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "investorsCount" : 3
     },
@@ -578,6 +565,7 @@ open class ProgramsAPI {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
+      "url" : "url",
       "username" : "username"
     },
     "level" : 0,
@@ -593,17 +581,17 @@ open class ProgramsAPI {
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
-    "currency" : "ETH",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dashboardProgramDetails" : {
       "share" : 4.145608029883936
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     } ],
     "status" : "None"
   }, {
@@ -611,12 +599,12 @@ open class ProgramsAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "tradesCount" : 2,
       "balanceGVT" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "profitPercent" : 2.3021358869347655,
       "profitValue" : 7.061401241503109,
@@ -624,7 +612,7 @@ open class ProgramsAPI {
       "currentValue" : 5.637376656633329,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "investorsCount" : 3
     },
@@ -632,6 +620,7 @@ open class ProgramsAPI {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
+      "url" : "url",
       "username" : "username"
     },
     "level" : 0,
@@ -647,17 +636,17 @@ open class ProgramsAPI {
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "logo" : "logo",
-    "currency" : "ETH",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "dashboardProgramDetails" : {
       "share" : 4.145608029883936
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     } ],
     "status" : "None"
   } ]
@@ -683,7 +672,7 @@ open class ProgramsAPI {
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: UUID? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -740,13 +729,15 @@ open class ProgramsAPI {
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "url" : "url"
   }, {
     "count" : 0,
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "url" : "url"
   } ],
   "favoritesCount" : 0
 }}]

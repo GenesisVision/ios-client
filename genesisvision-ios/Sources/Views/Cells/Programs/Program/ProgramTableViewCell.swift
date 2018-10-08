@@ -54,14 +54,7 @@ class ProgramTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var statusLabel: RoundedLabel! {
-        didSet {
-            statusLabel.setProperties(font: UIFont.getFont(.regular, size: 13.0),
-                                           textColor: UIColor.Cell.yellowTitle,
-                                           backgroundColor: UIColor.Cell.yellowTitle.withAlphaComponent(0.3),
-                                           edgeInsets: UIEdgeInsets(top: 8.0, left: 20.0, bottom: 8.0, right: 20.0))
-        }
-    }
+    @IBOutlet var statusButton: StatusButton!
     
     @IBOutlet var changeValueLabel: RoundedLabel! {
         didSet {

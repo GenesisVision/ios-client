@@ -17,8 +17,6 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.shadowImage = UIImage()
-        
         navigationBar.isTranslucent = false
 
         navigationBar.setBackgroundImage(UIImage(), for: .default)

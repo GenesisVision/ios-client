@@ -12,14 +12,15 @@ import Foundation
 open class NewProgramRequest: Codable {
 
     public enum Currency: String, Codable { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
     }
+    public var currency: Currency?
     public var periodLength: Int?
     public var successFee: Double?
     public var stopOutLevel: Double?
@@ -29,11 +30,11 @@ open class NewProgramRequest: Codable {
     public var logo: String?
     public var brokerAccountTypeId: UUID?
     public var entryFee: Double?
-    public var currency: Currency?
 
 
     
-    public init(periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?, currency: Currency?) {
+    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?) {
+        self.currency = currency
         self.periodLength = periodLength
         self.successFee = successFee
         self.stopOutLevel = stopOutLevel
@@ -43,7 +44,6 @@ open class NewProgramRequest: Codable {
         self.logo = logo
         self.brokerAccountTypeId = brokerAccountTypeId
         self.entryFee = entryFee
-        self.currency = currency
     }
     
 
@@ -53,6 +53,7 @@ open class NewProgramRequest: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(periodLength, forKey: "periodLength")
         try container.encodeIfPresent(successFee, forKey: "successFee")
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
@@ -62,7 +63,6 @@ open class NewProgramRequest: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(currency, forKey: "currency")
     }
 
     // Decodable protocol methods
@@ -70,6 +70,7 @@ open class NewProgramRequest: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         periodLength = try container.decodeIfPresent(Int.self, forKey: "periodLength")
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
@@ -79,7 +80,6 @@ open class NewProgramRequest: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }
 }
 

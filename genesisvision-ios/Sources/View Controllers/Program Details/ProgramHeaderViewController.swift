@@ -9,13 +9,32 @@
 import UIKit
 
 class ProgramHeaderViewController: BaseViewController {
+    
+    @IBOutlet weak var headerTitleView: UIView! {
+        didSet {
+            headerTitleView.alpha = 0.0
+        }
+    }
+    
+    @IBOutlet weak var hederTitleImageView: UIImageView! {
+        didSet {
+            hederTitleImageView.roundCorners(with: 6.0)
+        }
+    }
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    
     @IBOutlet weak var bgImageView: UIImageView!
-    @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var gradientView: GradientView! {
+        didSet {
+            gradientView.colors = [UIColor.Cell.bg.withAlphaComponent(0.0).cgColor, UIColor.Cell.bg.cgColor]
+            gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(0.0)
+        }
+    }
     
     @IBOutlet weak var labelsStackView: UIStackView!
     @IBOutlet weak var tagsStackView: UIStackView!
     
-    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var levelButton: ActionButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var tagsLabel: [UILabel]!
     
@@ -24,6 +43,8 @@ class ProgramHeaderViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.Cell.bg
     }
     
     
@@ -37,6 +58,17 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     func changeColorAlpha(offset: CGFloat) {
-        self.labelsStackView.alpha = 1.0 - offset/100
+        self.labelsStackView.alpha = 1.0 - offset
+        self.levelButton.alpha = 1.0 - offset
+        self.bgImageView.alpha = 1.0 - offset
+        self.headerTitleView.alpha = offset - 0.5
+        gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
+    }
+    
+    func configure(_ programDetailsFull: ProgramDetailsFull?) {
+        if let title = programDetailsFull?.title {
+            titleLabel.text = programDetailsFull?.title
+            headerTitleLabel.text = title
+        }
     }
 }

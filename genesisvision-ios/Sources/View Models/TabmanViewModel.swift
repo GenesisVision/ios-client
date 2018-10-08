@@ -30,6 +30,7 @@ class TabmanViewModel: TabmanViewModelProtocol {
     internal var location: TabmanBar.Location = .top
     internal var bounces = true
     internal var compresses = false
+    internal var backgroundColor: UIColor = UIColor.BaseView.bg
     internal var font = UIFont.getFont(.semibold, size: 12)
     internal var isScrollEnabled = true
     internal var isProgressive = false

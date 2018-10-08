@@ -141,7 +141,7 @@ enum CompletionResult {
 
 // MARK: - BottomView
 enum BottomViewType {
-    case none, signIn, sort, filter, sortAndFilter, signInWithSortAndFilter
+    case none, signIn, sort, filter, signInWithFilter, dateRange
 }
 
 // MARK: - TableViewCell

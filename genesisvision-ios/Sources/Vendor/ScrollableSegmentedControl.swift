@@ -592,7 +592,7 @@ public enum ScrollableSegmentedControlSegmentStyle: Int {
             }
         }
         
-        override func configure(){
+        override func configure() {
             super.configure()
             contentView.addSubview(titleLabel)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -635,7 +635,7 @@ public enum ScrollableSegmentedControlSegmentStyle: Int {
             }
         }
         
-        override func configure(){
+        override func configure() {
             super.configure()
             
             contentView.addSubview(imageView)
@@ -702,7 +702,7 @@ public enum ScrollableSegmentedControlSegmentStyle: Int {
             }
         }
         
-        override func configure(){
+        override func configure() {
             super.configure()
             titleLabel.font = BaseSegmentCollectionViewCell.defaultFont
             imageView.contentMode = .scaleAspectFit
@@ -775,7 +775,7 @@ public enum ScrollableSegmentedControlSegmentStyle: Int {
             }
         }
         
-        override func configure(){
+        override func configure() {
             super.configure()
             titleLabel.font = BaseSegmentCollectionViewCell.defaultFont
             imageView.contentMode = .scaleAspectFit

@@ -28,7 +28,6 @@ class DashboardViewController: BaseViewController {
     var chartsViewHeightStart: CGFloat = 400.0
     var chartsViewHeightEnd: CGFloat = 100.0
     
-    private var currencyBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint! {
@@ -80,7 +79,7 @@ class DashboardViewController: BaseViewController {
     private func reloadData() {
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
-            navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
+            navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         }
     }
     
@@ -98,10 +97,9 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setupUI() {
-        let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency
-        currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency?.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
-        navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
+        navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
+        addCurrencyTitleButton(viewModel.currencyDelegateManager)
         
         let dateRangeButton = UIButton(type: .system)
         dateRangeButton.setTitle("Week", for: .normal)
@@ -112,7 +110,7 @@ class DashboardViewController: BaseViewController {
     }
     
     // MARK: - Public methods
-    @objc func dateRangeButtonAction() {
+    override func dateRangeButtonAction() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 379
@@ -141,23 +139,6 @@ class DashboardViewController: BaseViewController {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationList()
-    }
-    
-    @objc func currencyButtonAction() {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300.0
-        
-        bottomSheetController.addNavigationBar("Preferred Currency")
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            tableView.registerNibs(for: viewModel.currencyDelegateManager.currencyCellModelsForRegistration)
-            tableView.delegate = self?.viewModel.currencyDelegateManager
-            tableView.dataSource = self?.viewModel.currencyDelegateManager
-            tableView.separatorStyle = .none
-        }
-        
-        viewModel.currencyDelegateManager.currencyDelegate = self
-        bottomSheetController.present()
     }
     
     // MARK: - Private methods
@@ -236,16 +217,19 @@ extension DashboardViewController: DateRangeViewProtocol {
 //    }
 //}
 
-extension DashboardViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
+extension DashboardViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
         
+        let yOffset = scrollView.contentOffset.y
+        print(yOffset)
 //        animateViews(yOffset)
         
         if scrollView == self.scrollView {
             if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
+                        print(yOffset == assetsView.frame.origin.y)
                         vc.tableView?.isScrollEnabled = yOffset == assetsView.frame.origin.y
                     }
                 }
@@ -260,19 +244,8 @@ extension DashboardViewController: SortingDelegate {
     }
 }
 
-extension DashboardViewController: CurrencyDelegateManagerProtocol {
-    func didSelectCurrency(at indexPath: IndexPath) {
-        if let selectedCurrency = viewModel.currencyDelegateManager.selectedCurrency {
-            currencyBarButtonItem = UIBarButtonItem(title: selectedCurrency.uppercased(), style: .done, target: self, action: #selector(currencyButtonAction))
-            navigationItem.leftBarButtonItems = [notificationsBarButtonItem, currencyBarButtonItem]
-        }
-        
-        bottomSheetController.dismiss()
-    }
-}
-
 extension DashboardViewController: InRequestsDelegateManagerProtocol {
-    func didTapDeleteButton(at indexPath: IndexPath) {
+    func didTapCancelButton(at indexPath: IndexPath) {
         
     }
 }

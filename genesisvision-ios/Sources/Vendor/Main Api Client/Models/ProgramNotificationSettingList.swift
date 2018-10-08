@@ -13,6 +13,7 @@ open class ProgramNotificationSettingList: Codable {
 
     public var programId: UUID?
     public var title: String?
+    public var url: String?
     public var logo: String?
     public var level: Int?
     public var settingsGeneral: [NotificationSettingViewModel]?
@@ -20,9 +21,10 @@ open class ProgramNotificationSettingList: Codable {
 
 
     
-    public init(programId: UUID?, title: String?, logo: String?, level: Int?, settingsGeneral: [NotificationSettingViewModel]?, settingsCustom: [NotificationSettingViewModel]?) {
+    public init(programId: UUID?, title: String?, url: String?, logo: String?, level: Int?, settingsGeneral: [NotificationSettingViewModel]?, settingsCustom: [NotificationSettingViewModel]?) {
         self.programId = programId
         self.title = title
+        self.url = url
         self.logo = logo
         self.level = level
         self.settingsGeneral = settingsGeneral
@@ -38,6 +40,7 @@ open class ProgramNotificationSettingList: Codable {
 
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(settingsGeneral, forKey: "settingsGeneral")
@@ -51,6 +54,7 @@ open class ProgramNotificationSettingList: Codable {
 
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
         settingsGeneral = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsGeneral")

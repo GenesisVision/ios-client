@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CurrencyTitleButtonProtocol {
+    var target: Any? { get }
+    var action: Selector! { get }
+}
+
 protocol ViewModelWithTableView {
     var tableViewDataSourceAndDelegate: TableViewDataSourceAndDelegate! { get }
     
@@ -87,13 +92,14 @@ protocol UIViewControllerWithBottomView {
     var sortButton: ActionButton { get }
     var filterButton: ActionButton { get }
     var signInButton: ActionButton { get }
-    var sortAndFilterStackView: UIStackView { get }
+    var filterStackView: UIStackView { get }
     var bottomStackView: UIStackView { get }
     var bottomViewType: BottomViewType { get }
     
     func sortButtonAction()
     func filterButtonAction()
     func signInButtonAction()
+    func dateRangeButtonAction()
 }
 
 extension UIViewControllerWithBottomView where Self: BaseViewController {
@@ -106,6 +112,10 @@ extension UIViewControllerWithBottomView where Self: BaseViewController {
     }
     
     func sortButtonAction() {
+        
+    }
+    
+    func dateRangeButtonAction() {
         
     }
 }

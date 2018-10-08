@@ -144,25 +144,25 @@ open class FundsAPI {
      - GET /v1.0/funds/{id}/charts/profit
      - examples: [{contentType=application/json, example={
   "profitChangePercent" : 7.386281948385884,
-  "calmarRatio" : 3.616076749251911,
+  "calmarRatio" : 9.301444243932576,
   "timeframeGvtProfit" : 4.145608029883936,
   "timeframeUsdProfit" : 6.027456183070403,
+  "maxDrawdown" : 3.616076749251911,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 5.637376656633329
+    "value" : 3.616076749251911
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 5.637376656633329
+    "value" : 3.616076749251911
   } ],
-  "equity" : 2.3021358869347655,
+  "investors" : 5,
   "totalGvtProfit" : 2.027123023002322,
-  "startInvestors" : 5,
-  "sortinoRatio" : 9.301444243932576,
+  "sortinoRatio" : 7.061401241503109,
   "rebalances" : 1,
-  "endInvestors" : 5,
+  "balance" : 5.962133916683182,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
   "totalUsdProfit" : 0.8008281904610115,
-  "sharpeRatio" : 7.061401241503109,
+  "sharpeRatio" : 2.3021358869347655,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      
@@ -278,10 +278,10 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsByIdGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -310,7 +310,7 @@ open class FundsAPI {
   "statistic" : {
     "balanceGVT" : {
       "amount" : 5.962133916683182,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     },
     "profitPercent" : 5.637376656633329,
     "rebalancingCount" : 2,
@@ -320,7 +320,7 @@ open class FundsAPI {
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
       "amount" : 5.962133916683182,
-      "currency" : "ETH"
+      "currency" : "Undefined"
     },
     "investorsCount" : 7
   },
@@ -328,6 +328,7 @@ open class FundsAPI {
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
+    "url" : "url",
     "username" : "username"
   },
   "description" : "description",
@@ -484,10 +485,10 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsGet: String { 
-        case eth = "ETH"
-        case gvt = "GVT"
-        case btc = "BTC"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
         case usd = "USD"
         case eur = "EUR"
@@ -510,7 +511,7 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: UUID? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
         v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -527,13 +528,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "drawdownPercent" : 5.962133916683182,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "investorsCount" : 5
     },
@@ -541,6 +542,7 @@ open class FundsAPI {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
+      "url" : "url",
       "username" : "username"
     },
     "topFundAssets" : [ {
@@ -567,10 +569,10 @@ open class FundsAPI {
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     } ],
     "status" : "None"
   }, {
@@ -578,13 +580,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "drawdownPercent" : 5.962133916683182,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
-        "currency" : "ETH"
+        "currency" : "Undefined"
       },
       "investorsCount" : 5
     },
@@ -592,6 +594,7 @@ open class FundsAPI {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
+      "url" : "url",
       "username" : "username"
     },
     "topFundAssets" : [ {
@@ -618,10 +621,10 @@ open class FundsAPI {
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 5.637376656633329
+      "value" : 3.616076749251911
     } ],
     "status" : "None"
   } ]
@@ -642,7 +645,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: UUID? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil

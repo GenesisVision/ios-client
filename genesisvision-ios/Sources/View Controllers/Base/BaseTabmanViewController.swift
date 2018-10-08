@@ -33,7 +33,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor.BaseView.bg
+        view.backgroundColor = viewModel.backgroundColor
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
         
         bar.style = viewModel.style
@@ -50,7 +50,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             
             appearance.style.imageRenderingMode = .alwaysTemplate
             appearance.style.showEdgeFade = false
-            appearance.style.background = .solid(color: UIColor.BaseView.bg)
+            appearance.style.background = .solid(color: viewModel.backgroundColor)
             
             appearance.indicator.color = UIColor.primary
             appearance.indicator.bounces = viewModel.bounces
