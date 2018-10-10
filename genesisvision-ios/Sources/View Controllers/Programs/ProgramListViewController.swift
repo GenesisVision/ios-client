@@ -105,7 +105,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func reloadData() {

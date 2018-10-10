@@ -17,6 +17,7 @@ open class WalletWithdrawalInfo: Codable {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }

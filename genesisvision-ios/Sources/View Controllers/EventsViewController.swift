@@ -31,15 +31,15 @@ class EventsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let viewModel = viewModel {
-            headerLabel.text = viewModel.title
-        }
+        viewModel.reloadDataProtocol = self
+        
+        headerLabel.text = viewModel.title
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
         
-        collectionView.register(UINib.init(nibName: "PortfolioEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PortfolioEventCollectionViewCell")
+        collectionView.registerNibs(for: viewModel.cellModelsForRegistration)
         collectionView.isScrollEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         
@@ -62,6 +62,6 @@ class EventsViewController: BaseViewController {
 
 extension EventsViewController: ReloadDataProtocol {
     func didReloadData() {
-        
+        collectionView.reloadData()
     }
 }

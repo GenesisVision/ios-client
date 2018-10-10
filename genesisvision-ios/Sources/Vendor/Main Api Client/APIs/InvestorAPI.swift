@@ -64,6 +64,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -244,6 +245,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -324,6 +326,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -352,21 +355,21 @@ open class InvestorAPI {
      Funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 2,
+  "total" : 1,
   "funds" : [ {
-    "totalAssetsCount" : 0,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "drawdownPercent" : 5.962133916683182,
+      "profitPercent" : 1.4894159098541704,
+      "drawdownPercent" : 6.84685269835264,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 7
     },
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -378,17 +381,16 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },
@@ -406,19 +408,19 @@ open class InvestorAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 0,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "drawdownPercent" : 5.962133916683182,
+      "profitPercent" : 1.4894159098541704,
+      "drawdownPercent" : 6.84685269835264,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 7
     },
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -430,17 +432,16 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },
@@ -539,29 +540,6 @@ open class InvestorAPI {
     }
 
     /**
-     * enum for parameter type
-     */
-    public enum ModelType_v10InvestorGet: String { 
-        case all = "All"
-        case invest = "Invest"
-        case withdraw = "Withdraw"
-        case profit = "Profit"
-        case loss = "Loss"
-        case reinvest = "Reinvest"
-        case canceled = "Canceled"
-        case ended = "Ended"
-    }
-
-    /**
-     * enum for parameter assetType
-     */
-    public enum AssetType_v10InvestorGet: String { 
-        case all = "All"
-        case program = "Program"
-        case fund = "Fund"
-    }
-
-    /**
      * enum for parameter chartCurrency
      */
     public enum ChartCurrency_v10InvestorGet: String { 
@@ -570,6 +548,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -578,24 +557,18 @@ open class InvestorAPI {
      Summary dashboard info
      
      - parameter authorization: (header) JWT access token 
-     - parameter assetId: (query)  (optional)
+     - parameter chartCurrency: (query)  (optional)
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
-     - parameter type: (query)  (optional)
-     - parameter assetType: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter chartCurrency: (query)  (optional)
-     - parameter from2: (query)  (optional)
-     - parameter to2: (query)  (optional)
      - parameter balancePoints: (query)  (optional)
      - parameter programsPoints: (query)  (optional)
+     - parameter eventsTake: (query)  (optional)
      - parameter requestsSkip: (query)  (optional)
      - parameter requestsTake: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorGet(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: ModelType_v10InvestorGet? = nil, assetType: AssetType_v10InvestorGet? = nil, skip: Int? = nil, take: Int? = nil, chartCurrency: ChartCurrency_v10InvestorGet? = nil, from2: Date? = nil, to2: Date? = nil, balancePoints: Int? = nil, programsPoints: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil, completion: @escaping ((_ data: DashboardSummary?,_ error: Error?) -> Void)) {
-        v10InvestorGetWithRequestBuilder(authorization: authorization, assetId: assetId, from: from, to: to, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, from2: from2, to2: to2, balancePoints: balancePoints, programsPoints: programsPoints, requestsSkip: requestsSkip, requestsTake: requestsTake).execute { (response, error) -> Void in
+    open class func v10InvestorGet(authorization: String, chartCurrency: ChartCurrency_v10InvestorGet? = nil, from: Date? = nil, to: Date? = nil, balancePoints: Int? = nil, programsPoints: Int? = nil, eventsTake: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil, completion: @escaping ((_ data: DashboardSummary?,_ error: Error?) -> Void)) {
+        v10InvestorGetWithRequestBuilder(authorization: authorization, chartCurrency: chartCurrency, from: from, to: to, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -645,72 +618,72 @@ open class InvestorAPI {
     "email" : "email"
   },
   "chart" : {
+    "investedProgramsInfo" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "topAssets" : [ {
+        "changePercent" : 1.4658129805029452,
+        "changeValue" : 5.962133916683182,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "avatar" : "avatar",
+        "type" : "All",
+        "title" : "title",
+        "value" : 6.027456183070403
+      }, {
+        "changePercent" : 1.4658129805029452,
+        "changeValue" : 5.962133916683182,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "avatar" : "avatar",
+        "type" : "All",
+        "title" : "title",
+        "value" : 6.027456183070403
+      } ],
+      "value" : 0.8008281904610115,
+      "otherAssetsValue" : {
+        "amount" : 5,
+        "changePercent" : 7.061401241503109,
+        "changeValue" : 9.301444243932576,
+        "value" : 2.3021358869347655
+      }
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "topAssets" : [ {
+        "changePercent" : 1.4658129805029452,
+        "changeValue" : 5.962133916683182,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "avatar" : "avatar",
+        "type" : "All",
+        "title" : "title",
+        "value" : 6.027456183070403
+      }, {
+        "changePercent" : 1.4658129805029452,
+        "changeValue" : 5.962133916683182,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "avatar" : "avatar",
+        "type" : "All",
+        "title" : "title",
+        "value" : 6.027456183070403
+      } ],
+      "value" : 0.8008281904610115,
+      "otherAssetsValue" : {
+        "amount" : 5,
+        "changePercent" : 7.061401241503109,
+        "changeValue" : 9.301444243932576,
+        "value" : 2.3021358869347655
+      }
+    } ],
     "changeValueCurrency" : 1.0246457001441578,
     "valueCurrency" : 4.145608029883936,
-    "rate" : 1.4894159098541704,
-    "changePercent" : 7.386281948385884,
-    "changeValue" : 1.2315135367772556,
-    "chart" : [ {
+    "balanceChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "value" : 2.027123023002322,
-    "bars" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "topAssets" : [ {
-        "changePercent" : 1.4658129805029452,
-        "changeValue" : 5.962133916683182,
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "type" : "All",
-        "title" : "title",
-        "value" : 6.027456183070403
-      }, {
-        "changePercent" : 1.4658129805029452,
-        "changeValue" : 5.962133916683182,
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "type" : "All",
-        "title" : "title",
-        "value" : 6.027456183070403
-      } ],
-      "value" : 0.8008281904610115,
-      "otherAssetsValue" : {
-        "amount" : 5,
-        "changePercent" : 7.061401241503109,
-        "changeValue" : 9.301444243932576,
-        "value" : 2.3021358869347655
-      }
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "topAssets" : [ {
-        "changePercent" : 1.4658129805029452,
-        "changeValue" : 5.962133916683182,
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "type" : "All",
-        "title" : "title",
-        "value" : 6.027456183070403
-      }, {
-        "changePercent" : 1.4658129805029452,
-        "changeValue" : 5.962133916683182,
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "type" : "All",
-        "title" : "title",
-        "value" : 6.027456183070403
-      } ],
-      "value" : 0.8008281904610115,
-      "otherAssetsValue" : {
-        "amount" : 5,
-        "changePercent" : 7.061401241503109,
-        "changeValue" : 9.301444243932576,
-        "value" : 2.3021358869347655
-      }
-    } ]
+    "rate" : 1.4894159098541704,
+    "changePercent" : 7.386281948385884,
+    "changeValue" : 1.2315135367772556,
+    "value" : 2.027123023002322
   },
   "events" : {
     "total" : 7,
@@ -733,42 +706,30 @@ open class InvestorAPI {
 }}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter assetId: (query)  (optional)
+     - parameter chartCurrency: (query)  (optional)
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
-     - parameter type: (query)  (optional)
-     - parameter assetType: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter chartCurrency: (query)  (optional)
-     - parameter from2: (query)  (optional)
-     - parameter to2: (query)  (optional)
      - parameter balancePoints: (query)  (optional)
      - parameter programsPoints: (query)  (optional)
+     - parameter eventsTake: (query)  (optional)
      - parameter requestsSkip: (query)  (optional)
      - parameter requestsTake: (query)  (optional)
 
      - returns: RequestBuilder<DashboardSummary> 
      */
-    open class func v10InvestorGetWithRequestBuilder(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: ModelType_v10InvestorGet? = nil, assetType: AssetType_v10InvestorGet? = nil, skip: Int? = nil, take: Int? = nil, chartCurrency: ChartCurrency_v10InvestorGet? = nil, from2: Date? = nil, to2: Date? = nil, balancePoints: Int? = nil, programsPoints: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil) -> RequestBuilder<DashboardSummary> {
+    open class func v10InvestorGetWithRequestBuilder(authorization: String, chartCurrency: ChartCurrency_v10InvestorGet? = nil, from: Date? = nil, to: Date? = nil, balancePoints: Int? = nil, programsPoints: Int? = nil, eventsTake: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil) -> RequestBuilder<DashboardSummary> {
         let path = "/v1.0/investor"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "AssetId": assetId, 
+            "chartCurrency": chartCurrency?.rawValue, 
             "From": from?.encodeToJSON(), 
             "To": to?.encodeToJSON(), 
-            "Type": type?.rawValue, 
-            "AssetType": assetType?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON(), 
-            "chartCurrency": chartCurrency?.rawValue, 
-            "From": from2?.encodeToJSON(), 
-            "To": to2?.encodeToJSON(), 
             "BalancePoints": balancePoints?.encodeToJSON(), 
             "ProgramsPoints": programsPoints?.encodeToJSON(), 
+            "eventsTake": eventsTake?.encodeToJSON(), 
             "requestsSkip": requestsSkip?.encodeToJSON(), 
             "requestsTake": requestsTake?.encodeToJSON()
         ])
@@ -792,6 +753,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -818,72 +780,72 @@ open class InvestorAPI {
      Portfolio charts
      - GET /v1.0/investor/portfolio/chart
      - examples: [{contentType=application/json, example={
+  "investedProgramsInfo" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "topAssets" : [ {
+      "changePercent" : 1.4658129805029452,
+      "changeValue" : 5.962133916683182,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "type" : "All",
+      "title" : "title",
+      "value" : 6.027456183070403
+    }, {
+      "changePercent" : 1.4658129805029452,
+      "changeValue" : 5.962133916683182,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "type" : "All",
+      "title" : "title",
+      "value" : 6.027456183070403
+    } ],
+    "value" : 0.8008281904610115,
+    "otherAssetsValue" : {
+      "amount" : 5,
+      "changePercent" : 7.061401241503109,
+      "changeValue" : 9.301444243932576,
+      "value" : 2.3021358869347655
+    }
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "topAssets" : [ {
+      "changePercent" : 1.4658129805029452,
+      "changeValue" : 5.962133916683182,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "type" : "All",
+      "title" : "title",
+      "value" : 6.027456183070403
+    }, {
+      "changePercent" : 1.4658129805029452,
+      "changeValue" : 5.962133916683182,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "type" : "All",
+      "title" : "title",
+      "value" : 6.027456183070403
+    } ],
+    "value" : 0.8008281904610115,
+    "otherAssetsValue" : {
+      "amount" : 5,
+      "changePercent" : 7.061401241503109,
+      "changeValue" : 9.301444243932576,
+      "value" : 2.3021358869347655
+    }
+  } ],
   "changeValueCurrency" : 1.0246457001441578,
   "valueCurrency" : 4.145608029883936,
-  "rate" : 1.4894159098541704,
-  "changePercent" : 7.386281948385884,
-  "changeValue" : 1.2315135367772556,
-  "chart" : [ {
+  "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "value" : 2.027123023002322,
-  "bars" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "topAssets" : [ {
-      "changePercent" : 1.4658129805029452,
-      "changeValue" : 5.962133916683182,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "type" : "All",
-      "title" : "title",
-      "value" : 6.027456183070403
-    }, {
-      "changePercent" : 1.4658129805029452,
-      "changeValue" : 5.962133916683182,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "type" : "All",
-      "title" : "title",
-      "value" : 6.027456183070403
-    } ],
-    "value" : 0.8008281904610115,
-    "otherAssetsValue" : {
-      "amount" : 5,
-      "changePercent" : 7.061401241503109,
-      "changeValue" : 9.301444243932576,
-      "value" : 2.3021358869347655
-    }
-  }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "topAssets" : [ {
-      "changePercent" : 1.4658129805029452,
-      "changeValue" : 5.962133916683182,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "type" : "All",
-      "title" : "title",
-      "value" : 6.027456183070403
-    }, {
-      "changePercent" : 1.4658129805029452,
-      "changeValue" : 5.962133916683182,
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "type" : "All",
-      "title" : "title",
-      "value" : 6.027456183070403
-    } ],
-    "value" : 0.8008281904610115,
-    "otherAssetsValue" : {
-      "amount" : 5,
-      "changePercent" : 7.061401241503109,
-      "changeValue" : 9.301444243932576,
-      "value" : 2.3021358869347655
-    }
-  } ]
+  "rate" : 1.4894159098541704,
+  "changePercent" : 7.386281948385884,
+  "changeValue" : 1.2315135367772556,
+  "value" : 2.027123023002322
 }}]
      
      - parameter authorization: (header) JWT access token 
@@ -1074,6 +1036,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1337,6 +1300,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1422,6 +1386,7 @@ open class InvestorAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1486,7 +1451,6 @@ open class InvestorAPI {
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },
@@ -1541,7 +1505,6 @@ open class InvestorAPI {
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },

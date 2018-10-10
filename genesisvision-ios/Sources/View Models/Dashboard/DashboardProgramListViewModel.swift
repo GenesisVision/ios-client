@@ -304,7 +304,7 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
+//        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
     }
     
     // MARK: - UITableViewDataSource
@@ -317,7 +317,6 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
         scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.0
     }
     

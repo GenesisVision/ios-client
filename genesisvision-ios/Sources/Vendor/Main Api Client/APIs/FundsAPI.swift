@@ -283,6 +283,7 @@ open class FundsAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -490,6 +491,7 @@ open class FundsAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -522,21 +524,21 @@ open class FundsAPI {
      Funds list
      - GET /v1.0/funds
      - examples: [{contentType=application/json, example={
-  "total" : 2,
+  "total" : 1,
   "funds" : [ {
-    "totalAssetsCount" : 0,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "drawdownPercent" : 5.962133916683182,
+      "profitPercent" : 1.4894159098541704,
+      "drawdownPercent" : 6.84685269835264,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 7
     },
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -548,17 +550,16 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },
@@ -576,19 +577,19 @@ open class FundsAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 0,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "drawdownPercent" : 5.962133916683182,
+      "profitPercent" : 1.4894159098541704,
+      "drawdownPercent" : 6.84685269835264,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 7
     },
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -600,17 +601,16 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.027456183070403
+      "percent" : 1.0246457001441578
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },

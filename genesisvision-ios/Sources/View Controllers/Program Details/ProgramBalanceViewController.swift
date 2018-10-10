@@ -34,7 +34,9 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
+        
+        showInfiniteIndicator(value: false)
     }
     
     private func setup() {

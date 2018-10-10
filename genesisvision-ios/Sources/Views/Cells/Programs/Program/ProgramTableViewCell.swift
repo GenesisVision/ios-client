@@ -17,7 +17,6 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Views
     @IBOutlet var programLogoImageView: ProfileImageView!
-    @IBOutlet var programDetailsView: ProgramDetailsForTableViewCellView!
     @IBOutlet var stackView: UIStackView!
 
     @IBOutlet var favoriteButton: FavoriteButton!
@@ -31,22 +30,39 @@ class ProgramTableViewCell: PlateTableViewCell {
     }
     
     // MARK: - Labels
-    @IBOutlet var noDataLabel: UILabel! {
-        didSet {
-            noDataLabel.textColor = UIColor.Cell.title
-        }
-    }
+    @IBOutlet var noDataLabel: SubtitleLabel!
     
-    @IBOutlet var programTitleLabel: UILabel! {
+    @IBOutlet var programTitleLabel: TitleLabel!
+    @IBOutlet var managerNameLabel: SubtitleLabel! {
         didSet {
-            programTitleLabel.textColor = UIColor.Cell.title
+            managerNameLabel.textColor = UIColor.primary
         }
     }
-    @IBOutlet var managerNameLabel: UILabel! {
+
+    
+    @IBOutlet var currencyLabel: CurrencyLabel!
+    
+    @IBOutlet var changePercentLabel: TitleLabel! {
         didSet {
-            managerNameLabel.textColor = UIColor.Cell.subtitle
+            changePercentLabel.textColor = UIColor.Cell.greenTitle
         }
     }
+    @IBOutlet var changeValueLabel: SubtitleLabel!
+    
+    @IBOutlet weak var periodLeftProgressView: CircularProgressView! {
+        didSet {
+            periodLeftProgressView.foregroundStrokeColor = UIColor.primary
+            periodLeftProgressView.backgroundStrokeColor = UIColor.primary.withAlphaComponent(0.2)
+        }
+    }
+    @IBOutlet var firstValueLabel: TitleLabel!
+    @IBOutlet var secondValueLabel: TitleLabel!
+    @IBOutlet var thirdValueLabel: TitleLabel!
+    
+    @IBOutlet var firstTitleLabel: SubtitleLabel!
+    @IBOutlet var secondTitleLabel: SubtitleLabel!
+    @IBOutlet var thirdTitleLabel: SubtitleLabel!
+    
     
     @IBOutlet var bottomStackView: UIStackView! {
         didSet {
@@ -56,31 +72,14 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     @IBOutlet var statusButton: StatusButton!
     
-    @IBOutlet var changeValueLabel: RoundedLabel! {
-        didSet {
-            changeValueLabel.setProperties(font: UIFont.getFont(.bold, size: 19.0),
-                                           textColor: UIColor.Cell.greenTitle,
-                                           backgroundColor: UIColor.Cell.greenTitle.withAlphaComponent(0.3),
-                                           edgeInsets: UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0))
-        }
-    }
-    
-    @IBOutlet var balanceValueLabel: UILabel! {
-        didSet {
-            balanceValueLabel.textColor = UIColor.Cell.subtitle
-            balanceValueLabel.font = UIFont.getFont(.regular, size: 19.0)
-        }
-    }
-    
     @IBOutlet var reinvestSwitch: UISwitch!
-    @IBOutlet var reinvestLabel: UILabel! {
+    @IBOutlet var reinvestLabel: TitleLabel! {
         didSet {
-            reinvestLabel.textColor = UIColor.Cell.title
+            reinvestLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
     @IBOutlet var reinvestTooltip: TooltipButton! {
         didSet {
-            //TODO: Tooltip text
             reinvestTooltip.tooltipText = "Reinvest Tooltip"
         }
     }

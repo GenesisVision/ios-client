@@ -71,6 +71,7 @@ open class BottomSheet {
         public let overlayView = UIView()
         public let containerView = UIView()
         open var isScrollEnabled: Bool = false
+        open var lineViewIsHidden: Bool = false
         // MARK: - Private property
         fileprivate let overlayViewPanGestureRecognizer: UIPanGestureRecognizer = {
             let gestureRecognizer = UIPanGestureRecognizer()
@@ -513,9 +514,9 @@ open class BottomSheet {
                     scrollView?.isScrollEnabled = false
                 case .changed:
                     
-                    if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && !isScrollEnabled {
-                        return
-                    }
+//                    if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && !isScrollEnabled {
+//                        return
+//                    }
                     
                     containerView.frame.origin.y = max(0, containerView.frame.origin.y + point.y)
                     containerViewHeightConstraint?.constant = max(initializeHeight, maxHeight - containerView.frame.origin.y)
@@ -589,6 +590,7 @@ private extension BottomSheetController {
         lineView.backgroundColor = tintColor != nil ? tintColor!.withAlphaComponent(0.25) : UIColor.white.withAlphaComponent(0.25)
         lineView.clipsToBounds = true
         lineView.layer.cornerRadius = height / 2
+        lineView.isHidden = lineViewIsHidden
         
         containerView.isUserInteractionEnabled = true
         containerView.addSubview(lineView)

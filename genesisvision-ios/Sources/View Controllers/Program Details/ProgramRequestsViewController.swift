@@ -48,7 +48,7 @@ class ProgramRequestsViewController: BaseViewControllerWithTableView {
         
         setupNavigationBar()
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func reloadData() {

@@ -96,7 +96,7 @@ class ProfitViewController: BaseViewController {
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             
-            if let lineChartData = dashboardChartValue.chart, let barChartData = dashboardChartValue.bars {
+            if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
                 chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
             }
             
@@ -144,9 +144,8 @@ class ProfitViewController: BaseViewController {
     }
     
     private func selectBar(_ entry: ChartDataEntry) {
-        let date = Date(timeIntervalSince1970: entry.x)
-        let dateString = date.dateAndTimeFormatString
-        print(dateString)
+//        let date = Date(timeIntervalSince1970: entry.x)
+//        let dateString = date.dateAndTimeFormatString
         
         showBottomAssetsView()
     }

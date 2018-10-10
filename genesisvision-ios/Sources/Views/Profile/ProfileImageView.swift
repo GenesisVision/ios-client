@@ -25,12 +25,7 @@ class ProfileImageView: UIView {
         }
     }
     
-    @IBOutlet var levelButton: LevelButton! {
-        didSet {
-            levelButton.roundWithBorder(3.0, color: UIColor.Cell.bg)
-            levelButton.titleLabel?.font = UIFont.getFont(.bold, size: 15)
-        }
-    }
+    @IBOutlet var levelButton: LevelButton!
     
     override func layoutSubviews() {
         super.layoutSubviews()

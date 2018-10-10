@@ -64,7 +64,7 @@ final class Constants {
         
         static let ipfsPath = "https://gateway.ipfs.io/ipfs/"
         
-        static let filePath = basePath + "/api/files?id="
+        static let filePath = basePath + "/v1.0/file/"
         
         static let fetchThreshold = 1 // a constant to determine when to fetch the results
 

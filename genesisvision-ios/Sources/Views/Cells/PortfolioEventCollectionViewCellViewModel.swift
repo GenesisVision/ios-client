@@ -25,7 +25,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
         }
         
         if let date = dashboardPortfolioEvent.date {
-            cell.dateLabel.text = date.defaultFormatString
+            cell.dateLabel.text = date.dateAndTimeFormatString
         }
         
         cell.iconImageView.image = UIImage.placeholder
@@ -34,7 +34,6 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
         }
-        
         
         if let type = dashboardPortfolioEvent.type {
             switch type {

@@ -27,6 +27,7 @@ class ChartView: CombinedChartView {
 
     private var barChartData: [ValueChartBar]?
     private var lineChartData: [ChartSimple]?
+    private var balanceChart: [ProgramBalanceChartElement]?
     
     private var name: String?
     private var currencyValue: String = ""
@@ -90,6 +91,7 @@ class ChartView: CombinedChartView {
     func setup(chartType: ChartType = .default,
                lineChartData: [ChartSimple]? = nil,
                barChartData: [ValueChartBar]? = nil,
+               balanceChart: [ProgramBalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
                chartDurationType: ChartDurationType? = nil) {
@@ -98,6 +100,7 @@ class ChartView: CombinedChartView {
         self.name = name
         self.lineChartData = lineChartData
         self.barChartData = barChartData
+        self.balanceChart = balanceChart
         self.currencyValue = currencyValue ?? ""
         self.chartDurationType = chartDurationType ?? .all
 

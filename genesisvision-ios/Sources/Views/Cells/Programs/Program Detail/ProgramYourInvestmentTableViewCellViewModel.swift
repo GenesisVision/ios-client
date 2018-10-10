@@ -11,8 +11,9 @@ import Foundation
 struct ProgramYourInvestmentTableViewCellViewModel {
     let value: Double?
     let profit: Double?
-    
+    let invested: Double?
     let isReinvesting: Bool?
+    let programCurrency: CurrencyType?
     
     weak var programYourInvestmentProtocol: ProgramYourInvestmentProtocol?
 }
@@ -27,14 +28,19 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.reinvestSwitch.isOn = isReinvesting
         }
         
-        if let value = value {
+        if let value = value, let programCurrency = programCurrency {
             cell.valueTitleLabel.text = "value"
-            cell.valueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            cell.valueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
+        }
+        
+        if let invested = invested {
+            cell.investedTitleLabel.text = "invested"
+            cell.investedValueLabel.text = invested.rounded(withType: .gvt).toString() + " GVT"
         }
         
         if let profit = profit {
             cell.profitTitleLabel.text = "profit"
-            cell.profitValueLabel.text = profit.toString() + "%"
+            cell.profitValueLabel.text = profit.rounded(toPlaces: 2).toString() + "%"
         }
         
     }

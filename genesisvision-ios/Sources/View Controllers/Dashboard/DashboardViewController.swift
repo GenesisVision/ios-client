@@ -69,10 +69,16 @@ class DashboardViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        scrollView.delegate = self
+        setupPullToRefresh(scrollView: scrollView)
         
         showProgressHUD()
         setupUI()
+        fetch()
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
         fetch()
     }
     
@@ -85,13 +91,16 @@ class DashboardViewController: BaseViewController {
     
     private func fetch() {
         viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
+            DispatchQueue.main.async {
+                self?.hideAll()
+                self?.viewModel.isLoading = false
+                
+                switch result {
+                case .success:
+                    self?.reloadData()
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self)
+                }
             }
         }
     }
@@ -121,11 +130,12 @@ class DashboardViewController: BaseViewController {
         bottomSheetController.present()
     }
     
-    func showRequests() {
+    func showRequests(_ programRequests: ProgramRequests?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
         bottomSheetController.addNavigationBar("In Requests")
+        viewModel.inRequestsDelegateManager.programRequests = programRequests
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
@@ -169,7 +179,7 @@ extension DashboardViewController: DateRangeViewProtocol {
         viewModel.dateRangeFrom = dateRangeFrom
         viewModel.dateRangeTo = dateRangeTo
         viewModel.dateRangeType = dateRangeType
-        //        fetch()
+        fetch()
     }
     
     func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date) {
@@ -225,11 +235,17 @@ extension DashboardViewController {
         print(yOffset)
 //        animateViews(yOffset)
         
+        if !viewModel.isLoading && yOffset < -100 {
+            showProgressHUD()
+            fetch()
+            return
+        }
+        
         if scrollView == self.scrollView {
             if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-                        print(yOffset == assetsView.frame.origin.y)
+//                        print(yOffset == assetsView.frame.origin.y)
                         vc.tableView?.isScrollEnabled = yOffset == assetsView.frame.origin.y
                     }
                 }

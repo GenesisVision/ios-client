@@ -16,7 +16,7 @@ class ProgramDetailsRouter: TabmanRouter {
         
         let router = ProgramDetailRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramDetailViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController, detailChartTableViewCellProtocol: viewController)
+        let viewModel = ProgramDetailViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         

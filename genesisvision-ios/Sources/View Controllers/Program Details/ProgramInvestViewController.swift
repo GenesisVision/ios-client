@@ -123,7 +123,7 @@ class ProgramInvestViewController: BaseViewController {
         self.amountCurrencyLabel.text = "GVT"
         self.exchangedAmountCurrencyLabel.text = viewModel.currency
         
-        if let currencyType = CurrencyType(currency: viewModel.currency) {
+        if let currencyType = CurrencyType(rawValue: viewModel.currency) {
             self.exchangedAmountCurrencyLabel.currencyType = currencyType
         }
     }

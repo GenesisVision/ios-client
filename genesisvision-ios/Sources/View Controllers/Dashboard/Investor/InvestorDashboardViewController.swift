@@ -30,8 +30,8 @@ class InvestorDashboardViewController: DashboardViewController {
     
     // MARK: - Private methods
     private func setup() {
-        scrollView.delegate = self
-        
+//        scrollView.delegate = self
+
         setupUI()
     }
     

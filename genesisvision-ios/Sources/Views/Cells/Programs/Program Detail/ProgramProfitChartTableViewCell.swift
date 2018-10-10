@@ -11,44 +11,44 @@ import Charts
 
 class ProgramProfitChartTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet weak var amountTitleLabel: UILabel! {
+    @IBOutlet weak var amountTitleLabel: SubtitleLabel! {
         didSet {
             amountTitleLabel.textColor = UIColor.Cell.subtitle
             amountTitleLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var amountValueLabel: UILabel! {
+    @IBOutlet weak var amountValueLabel: TitleLabel! {
         didSet {
             amountValueLabel.textColor = UIColor.Cell.title
             amountValueLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var amountCurrencyLabel: UILabel! {
+    @IBOutlet weak var amountCurrencyLabel: SubtitleLabel! {
         didSet {
             amountCurrencyLabel.textColor = UIColor.Cell.subtitle
             amountCurrencyLabel.isUserInteractionEnabled = false
         }
     }
     
-    @IBOutlet weak var changeTitleLabel: UILabel! {
+    @IBOutlet weak var changeTitleLabel: SubtitleLabel! {
         didSet {
             changeTitleLabel.textColor = UIColor.Cell.subtitle
             changeTitleLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var changePercentLabel: UILabel! {
+    @IBOutlet weak var changePercentLabel: SubtitleLabel! {
         didSet {
             changePercentLabel.textColor = UIColor.Cell.greenTitle
             changePercentLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var changeValueLabel: UILabel! {
+    @IBOutlet weak var changeValueLabel: TitleLabel! {
         didSet {
             changeValueLabel.textColor = UIColor.Cell.title
             changeValueLabel.isUserInteractionEnabled = false
         }
     }
-    @IBOutlet weak var changeCurrencyLabel: UILabel! {
+    @IBOutlet weak var changeCurrencyLabel: SubtitleLabel! {
         didSet {
             changeCurrencyLabel.textColor = UIColor.Cell.subtitle
             changeCurrencyLabel.isUserInteractionEnabled = false

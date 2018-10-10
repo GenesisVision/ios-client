@@ -49,9 +49,19 @@ protocol BaseViewControllerWithViewModel {
     var viewModel: ViewModelWithTableView! { get }
 }
 
-protocol UIViewControllerWithTableView {
+@objc protocol UIViewControllerWithTableView {
     var tableView: UITableView! { get }
-    var refreshControl: UIRefreshControl! { get }
+}
+
+@objc protocol UIViewControllerWithScrollView {
+    var scrollView: UIScrollView! { get }
+}
+
+protocol UIViewControllerWithPullToRefresh {
+    var refreshControl: UIRefreshControl? { get }
+    
+    func setupPullToRefresh(title: String?, scrollView: UIScrollView)
+    func pullToRefresh()
 }
 
 protocol Hidable {
@@ -68,8 +78,6 @@ protocol UIViewControllerWithFetching {
     var fetchMoreActivityIndicator: UIActivityIndicatorView! { get }
     
     func updateData()
-    func setupPullToRefresh(title: String?)
-    func pullToRefresh()
     func fetch()
     func fetchMore()
     

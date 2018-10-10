@@ -17,10 +17,10 @@ class ProgramStrategyTableViewCell: UITableViewCell {
             titleLabel.font = UIFont.getFont(.semibold, size: 14.0)
         }
     }
-    @IBOutlet weak var textView: UITextView! {
+    @IBOutlet weak var descriptionLabel: UILabel! {
         didSet {
-            textView.textColor = UIColor.Cell.title
-            textView.font = UIFont.getFont(.semibold, size: 14.0)
+            descriptionLabel.textColor = UIColor.Cell.title
+            descriptionLabel.font = UIFont.getFont(.semibold, size: 14.0)
         }
     }
     

@@ -11,9 +11,11 @@ import DZNEmptyDataSet
 import MessageUI
 
 class BaseViewController: UIViewController, Hidable {
-    // MARK: - Variables
+    // MARK: - Veriables
     var bottomSheetController = BottomSheetController()
     var currencyDelegateManager: CurrencyDelegateManager?
+    
+    var refreshControl: UIRefreshControl?
     
     var currencyTitleButton: StatusButton = {
         let selectedCurrency = getSelectedCurrency()
@@ -126,6 +128,7 @@ class BaseViewController: UIViewController, Hidable {
         super.viewDidLoad()
 
         commonSetup()
+        refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,6 +163,31 @@ class BaseViewController: UIViewController, Hidable {
         
         bottomSheetController.present()
     }
+    
+    
+    func hideAll() {
+        hideHUD()
+        refreshControl?.endRefreshing()
+    }
+}
+
+extension BaseViewController: UIViewControllerWithPullToRefresh {
+    @objc func pullToRefresh() {
+        impactFeedback()
+    }
+    
+    func setupPullToRefresh(title: String? = nil, scrollView: UIScrollView) {
+        let tintColor = UIColor.primary
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        if let title = title {
+            refreshControl?.attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        }
+        refreshControl?.tintColor = tintColor
+        refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
+    }
 }
 
 extension BaseViewController: UIScrollViewDelegate {
@@ -180,13 +208,14 @@ extension BaseViewController: UIScrollViewDelegate {
     }
 }
 
-
 extension BaseViewController: CurrencyDelegateManagerProtocol {
     func didSelectCurrency(at indexPath: IndexPath) {
         if let selectedCurrency = currencyDelegateManager?.selectedCurrency {
             currencyTitleButton.setTitle(selectedCurrency, for: .normal)
             currencyTitleButton.sizeToFit()
         }
+        
+        pullToRefresh()
         
         bottomSheetController.dismiss()
     }
@@ -200,8 +229,6 @@ extension BaseViewController: CurrencyTitleButtonProtocol {
     var action: Selector! {
         return #selector(currencyButtonAction)
     }
-    
-    
 }
 
 extension BaseViewController: UIViewControllerWithBottomView {
@@ -287,7 +314,6 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
 class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithTableView, UIViewControllerWithFetching {
     // MARK: - Veriables
     var tableView: UITableView!
-    var refreshControl: UIRefreshControl!
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
     
@@ -344,9 +370,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.right = 16.0
         
         tableView.backgroundColor = .clear
-        
-        refreshControl?.endRefreshing()
-        
+
         filterStackView.addArrangedSubview(sortButton)
         filterStackView.addArrangedSubview(filterButton)
         bottomStackView.addArrangedSubview(signInButton)
@@ -392,10 +416,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         fetch()
     }
     
-    @objc func pullToRefresh() {
-        impactFeedback()
-    }
-    
     func fetch() {
         //Fetch first page
     }
@@ -413,24 +433,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         fetchMoreActivityIndicator.startAnimating()
         tableView.tableFooterView = fetchMoreActivityIndicator
     }
-    
-    func hideAll() {
-        hideHUD()
-        refreshControl?.endRefreshing()
-    }
-    
-    func setupPullToRefresh(title: String? = nil) {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        if let title = title {
-            refreshControl.attributedTitle = NSAttributedString(string: title, attributes: attributes)
-        }
-        refreshControl.tintColor = tintColor
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
 }
 
 extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
@@ -443,7 +445,7 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
     
         switch tabsType {
         case .dashboard:
-            if let vc = navController.viewControllers.first as? DashboardViewController, let scrollView = vc.scrollView {
+            if let vc = navController.viewControllers.first as? UIViewControllerWithScrollView, let scrollView = vc.scrollView {
                 scrollTop(scrollView)
             }
         case .programList:
@@ -520,6 +522,26 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
 }
 
+extension BaseTableViewController: UIViewControllerWithPullToRefresh {
+    
+    @objc func pullToRefresh() {
+        impactFeedback()
+    }
+    
+    func setupPullToRefresh(title: String? = nil, scrollView: UIScrollView) {
+        let tintColor = UIColor.primary
+        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        
+        refreshControl = UIRefreshControl()
+        if let title = title {
+            refreshControl?.attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        }
+        refreshControl?.tintColor = tintColor
+        refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
+    }
+}
+
 class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable {
     // MARK: - Variables
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
@@ -552,10 +574,6 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
         fetch()
     }
     
-    @objc func pullToRefresh() {
-        impactFeedback()
-    }
-    
     func fetch() {
         //Fetch first page
     }
@@ -577,20 +595,6 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     func hideAll() {
         hideHUD()
         refreshControl?.endRefreshing()
-    }
-    
-    func setupPullToRefresh(title: String? = nil) {
-        let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
-        
-        refreshControl = UIRefreshControl()
-        tableView.refreshControl = refreshControl
-        
-        if let title = title {
-            tableView.refreshControl?.attributedTitle = NSAttributedString(string: title, attributes: attributes)
-        }
-        tableView.refreshControl?.tintColor = tintColor
-        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
     
     func setupViews() {

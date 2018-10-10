@@ -22,6 +22,17 @@ extension Date {
         return seconds
     }
     
+    func getDateComponents(ofComponent comp: Calendar.Component, fromDate date: Date) -> DateComponents {
+        
+        let currentCalendar = Calendar.current
+        
+        let unitFlags = Set<Calendar.Component>([comp])
+        
+        let dateComponents = currentCalendar.dateComponents(unitFlags, from: date, to: self)
+        
+        return dateComponents
+    }
+    
     public mutating func setTime(hour: Int, min: Int, sec: Int, timeZoneAbbrev: String = "UTC") {
         let x: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
         let cal = Calendar.current
@@ -138,33 +149,33 @@ extension Date {
         
         
         if year >= 2{
-            return "\(year) years ago"
+            return "\(year) years"
         }else if (year >= 1){
-            return "1 year ago"
+            return "1 year"
         }else if (month >= 2) {
-            return "\(month) months ago"
+            return "\(month) months"
         }else if (month >= 1) {
-            return "1 month ago"
+            return "1 month"
         }else  if (week >= 2) {
-            return "\(week) weeks ago"
+            return "\(week) weeks"
         } else if (week >= 1){
-            return "1 week ago"
+            return "1 week"
         } else if (day >= 2) {
-            return "\(day) days ago"
+            return "\(day) days"
         } else if (day >= 1){
-            return "1 day ago"
+            return "1 day"
         } else if (hours >= 2) {
-            return "\(hours) hours ago"
+            return "\(hours) hours"
         } else if (hours >= 1){
-            return "1 hour ago"
+            return "1 hour"
         } else if (minutes >= 2) {
-            return "\(minutes) minutes ago"
+            return "\(minutes) minutes"
         } else if (minutes >= 1){
-            return "1 minute ago"
+            return "1 minute"
         } else if (seconds >= 3) {
-            return "\(seconds) seconds ago"
+            return "\(seconds) seconds"
         } else {
-            return "Just now"
+            return "Now"
         }
         
     }

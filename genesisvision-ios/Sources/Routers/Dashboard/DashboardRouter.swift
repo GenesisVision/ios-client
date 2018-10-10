@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(programId: String), programList, notificationList, allPortfolioEvents, requests
+    case showProgramDetails(programId: String), programList, notificationList, allPortfolioEvents, requests(programRequests: ProgramRequests?)
 }
 
 class DashboardRouter: Router {
@@ -41,8 +41,8 @@ class DashboardRouter: Router {
             showNotificationList()
         case .allPortfolioEvents:
             showAllPortfolioEvents()
-        case .requests:
-            showRequests()
+        case .requests(let programRequests):
+            showRequests(programRequests)
         }
     }
     
@@ -62,7 +62,7 @@ class DashboardRouter: Router {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func showRequests() {
-        dashboardViewController.showRequests()
+    private func showRequests(_ programRequests: ProgramRequests?) {
+        dashboardViewController.showRequests(programRequests)
     }
 }

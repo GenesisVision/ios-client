@@ -25,7 +25,6 @@ final class ProgramDetailViewModel {
     
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
-    private weak var detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol?
     
     var chartDurationType: ChartDurationType = .all
     var programId: String!
@@ -54,8 +53,7 @@ final class ProgramDetailViewModel {
     init(withRouter router: ProgramDetailRouter,
          programId: String? = nil,
          programDetailsFull: ProgramDetailsFull? = nil,
-         reloadDataProtocol: ReloadDataProtocol? = nil,
-         detailChartTableViewCellProtocol: DetailChartTableViewCellProtocol? = nil) {
+         reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
         
         if let programId = programId {
@@ -68,7 +66,6 @@ final class ProgramDetailViewModel {
         }
         
         self.reloadDataProtocol = reloadDataProtocol
-        self.detailChartTableViewCellProtocol = detailChartTableViewCellProtocol
         
         self.updateChart(with: .all) { [weak self] (result) in
             self?.reloadDataProtocol?.didReloadData()
@@ -169,9 +166,9 @@ extension ProgramDetailViewModel {
                 return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
             }
         case .yourInvestment:
-            return ProgramYourInvestmentTableViewCellViewModel(value: programDetailsFull?.personalProgramDetails?.value, profit: programDetailsFull?.personalProgramDetails?.profit, isReinvesting: programDetailsFull?.isReinvesting, programYourInvestmentProtocol: self)
+            return ProgramYourInvestmentTableViewCellViewModel(value: programDetailsFull?.personalProgramDetails?.value, profit: programDetailsFull?.personalProgramDetails?.profit, invested: programDetailsFull?.statistic?.investedAmount, isReinvesting: programDetailsFull?.isReinvesting, programCurrency: CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? ""), programYourInvestmentProtocol: self)
         case .investNow:
-            return ProgramInvestNowTableViewCellViewModel(entryFee: programDetailsFull?.entryFee, successFee: programDetailsFull?.successFee, availableInvestment: programDetailsFull?.availableInvestment, periodEnds: programDetailsFull?.periodEnds, programInvestNowProtocol: self)
+            return ProgramInvestNowTableViewCellViewModel(entryFee: programDetailsFull?.entryFee, successFee: programDetailsFull?.successFee, availableInvestment: programDetailsFull?.availableInvestment, periodEnds: programDetailsFull?.periodEnds, programCurrency: CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? ""), programInvestNowProtocol: self)
         }
     }
     

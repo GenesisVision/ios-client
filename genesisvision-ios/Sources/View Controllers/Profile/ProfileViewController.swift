@@ -99,7 +99,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     override func pullToRefresh() {

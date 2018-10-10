@@ -29,7 +29,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartType: .default, lineChartData: chart, barChartData: nil, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .all)
+            cell.chartView.setup(chartType: .default, lineChartData: chart, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .all)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
@@ -44,23 +44,8 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         if let status = program.status {
             cell.statusButton.setTitle(status.rawValue, for: .normal)
+            cell.statusButton.layoutSubviews()
         }
-        
-//        if let tokenSymbol = program.token?.tokenSymbol {
-//            cell.tokenSymbolLabel.text = tokenSymbol
-//        }
-        
-//        if let tokensCount = program.investedTokens {
-//            cell.tokensCountValueLabel.text = tokensCount.toString()
-//            cell.investedTokens = tokensCount
-//        }
-        
-//        if let profitFromProgram = program.profitFromProgram {
-//            cell.profitValueLabel.text = profitFromProgram.toString()
-//            cell.profitValueLabel.textColor = profitFromProgram >= 0 ? UIColor.Cell.title : UIColor.Font.red
-//        }
-//
-//        cell.profitTitleLabel.text = "MY PROFIT"
     
         if let programId = program.id?.uuidString {
             cell.programId = programId
@@ -68,6 +53,30 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         if let level = program.level {
             cell.programLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+        }
+        
+        if let currency = program.currency {
+            cell.currencyLabel.text = currency.rawValue
+        }
+        
+        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
+            cell.firstTitleLabel.text = "period"
+            cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
+            
+            let today = Date()
+            if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
+                cell.periodLeftProgressView.setProgress(to: Double(periodDuration - minutes) / Double(periodDuration), withAnimation: false)
+            }
+        }
+        
+        if let balance = program.statistic?.balanceGVT?.amount {
+            cell.secondTitleLabel.text = "balance"
+            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " GVT"
+        }
+        
+        if let share = program.dashboardProgramDetails?.share {
+            cell.thirdTitleLabel.text = "share"
+            cell.thirdValueLabel.text = share.rounded(toPlaces: 2).toString() + "%"
         }
         
         if let isFavorite = program.personalProgramDetails?.isFavorite {
@@ -80,13 +89,5 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
         }
-        
-//        if let isEnabled = program.isEnabled {
-//            guard let endOfPeriod = program.endOfPeriod else { return }
-//
-//            cell.endOfPeriod = endOfPeriod
-//
-//            cell.isEnable = isEnabled
-//        }
     }
 }

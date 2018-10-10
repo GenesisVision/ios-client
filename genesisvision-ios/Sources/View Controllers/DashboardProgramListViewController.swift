@@ -58,7 +58,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func reloadData() {
@@ -71,7 +71,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     private func sortMethod() {
         bottomSheetController = BottomSheetController()
         
-        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: #imageLiteral(resourceName: "img_profit_filter_icon"), selectedImage: #imageLiteral(resourceName: "img_profit_filter_desc_icon"), buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.delegate = self?.viewModel.sortingDelegateManager

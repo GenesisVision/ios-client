@@ -61,7 +61,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         }
         
         if let totalBalanceGVT = wallet.totalBalanceGVT, let availableGVT = wallet.availableGVT {
-            let percent = 30 / totalBalanceGVT
+            let percent = availableGVT / totalBalanceGVT
             availableProgressView.setProgress(to: percent, withAnimation: true)
         }
         
@@ -74,7 +74,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         }
         
         if let totalBalanceGVT = wallet.totalBalanceGVT, let investedGVT = wallet.investedGVT {
-            let percent = 70 / totalBalanceGVT
+            let percent = investedGVT / totalBalanceGVT
             investedProgressView.setProgress(to: percent, withAnimation: true)
         }
         investedTitleLabel.text = "Invested value"

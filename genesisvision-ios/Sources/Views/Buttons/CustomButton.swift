@@ -208,10 +208,10 @@ class StatusButton: UIButton {
         semanticContentAttribute = .forceRightToLeft
         
         if let status = titleLabel?.text {
-            let color = UIColor.Status.color(for: status)
-            backgroundColor = color.withAlphaComponent(0.1)
-            setTitleColor(color, for: .normal)
-            tintColor = color
+            let colors = UIColor.Status.colors(for: status)
+            backgroundColor = colors.1
+            setTitleColor(colors.0, for: .normal)
+            tintColor = colors.0
         }
         
         titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
@@ -262,7 +262,7 @@ class LevelButton: UIButton {
     func commonInit() {
         titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
 
-        roundCorners()
+        roundWithBorder(3.0, color: UIColor.Cell.bg)
         
         setTitleColor(UIColor.Cell.title, for: .normal)
         if let level = Int(titleLabel?.text ?? "") {

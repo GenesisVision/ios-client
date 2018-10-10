@@ -88,8 +88,9 @@ class ProgramDetailViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+//        tableView.bounces = false
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     override func fetch() {
@@ -165,16 +166,6 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
         return viewModel.headerHeight(for: section)
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let title = viewModel.headerTitle(for: section) else {
-//            return nil
-//        }
-//
-//        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
-//        header.headerLabel.text = title
-//        return header
-//    }
-    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.backgroundColor = UIColor.Cell.headerBg
     }
@@ -183,22 +174,5 @@ extension ProgramDetailViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProgramDetailViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
-    }
-}
-
-extension ProgramDetailViewController: DetailChartTableViewCellProtocol {
-    func scrollEnable(_ isScrollEnable: Bool) {
-        tableView.isScrollEnabled = false//isScrollEnable
-    }
-    
-    func showFullChartDidPressed() {
-        viewModel.showFullChart()
-    }
-    
-    func updateChart(with type: ChartDurationType) {
-        viewModel.updateChart(with: type) { [weak self] (result) in
-            self?.hideAll()
-            self?.reloadData()
-        }
     }
 }

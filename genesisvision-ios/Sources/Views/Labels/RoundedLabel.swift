@@ -96,6 +96,8 @@ class CurrencyLabel: RoundedLabel {
             currencyColor = UIColor.Currency.btc.cgColor
         case .eth:
             currencyColor = UIColor.Currency.eth.cgColor
+        case .ada:
+            currencyColor = UIColor.Currency.eth.cgColor
         case .eur:
             currencyColor = UIColor.Currency.eur.cgColor
         case .usd:

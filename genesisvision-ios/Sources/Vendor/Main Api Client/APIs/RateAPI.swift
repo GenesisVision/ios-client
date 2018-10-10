@@ -111,6 +111,13 @@ open class RateAPI {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     } ],
+    "USDT" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
     "ADA" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"

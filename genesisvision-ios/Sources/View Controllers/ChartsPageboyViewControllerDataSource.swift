@@ -21,24 +21,15 @@ class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
 
             controllers.append(porfolioVC)
         }
-        
-//        if let profitVC = ProfitViewController.storyboardInstance(name: .dashboard) {
-//            profitVC.viewModel = ProfitViewModel(withRouter: router)
-//            profitVC.vc = router.chartsViewController
-//
-//            controllers.append(profitVC)
-//        }
     }
     
-    func update(dashboardPortfolioChartValue: DashboardChartValue?, dashboardRequests: ProgramRequests?) {
+    func update(dashboardPortfolioChartValue: DashboardChartValue?, programRequests: ProgramRequests?) {
         for controller in controllers {
             switch controller {
             case is PortfolioViewController:
                 (controller as! PortfolioViewController).viewModel.dashboardChartValue = dashboardPortfolioChartValue
-                (controller as! PortfolioViewController).viewModel.dashboardRequests = dashboardRequests
+                (controller as! PortfolioViewController).viewModel.programRequests = programRequests
                 (controller as! PortfolioViewController).updateUI()
-            case is ProfitViewController:
-                break
             default:
                 break
             }

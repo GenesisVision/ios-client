@@ -16,9 +16,11 @@ struct ProgramTableViewCellViewModel {
 
 extension ProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
+        
+        cell.bottomStackView.isHidden = true
         cell.chartView.isHidden = true
-        cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.noDataLabel.isHidden = false
+        cell.viewForChartView.isHidden = cell.chartView.isHidden
         cell.delegate = delegate
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
@@ -27,7 +29,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartType: .default, lineChartData: chart, barChartData: nil, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .all)
+            cell.chartView.setup(chartType: .default, lineChartData: chart, name: title, currencyValue: program.currency?.rawValue, chartDurationType: .all)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
@@ -36,30 +38,44 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programTitleLabel.text = title
         }
         
-        if let programId = program.id?.uuidString {
-            cell.programId = programId
-        }
-        
-        if let status = program.status {
-            cell.statusButton.setTitle(status.rawValue, for: .normal)
-        }
-        
         if let managerName = program.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
         
-        if let isFavorite = program.personalProgramDetails?.isFavorite {
-            cell.favoriteButton.isSelected = isFavorite
+        if let programId = program.id?.uuidString {
+            cell.programId = programId
         }
-        
-        cell.favoriteButton.isHidden = !AuthManager.isLogin()
-        
-//        if let availableInvestment = program.availableInvestment {
-//            cell.noAvailableTokensLabel.isHidden = availableInvestment > 0
-//        }
         
         if let level = program.level {
             cell.programLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+        }
+        
+        if let currency = program.currency {
+            cell.currencyLabel.text = currency.rawValue
+        }
+        
+        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
+            cell.firstTitleLabel.text = "period"
+            cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
+            
+            let today = Date()
+            if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
+                cell.periodLeftProgressView.setProgress(to: Double(periodDuration - minutes) / Double(periodDuration), withAnimation: false)
+            }
+        }
+        
+        if let balance = program.statistic?.balanceGVT?.amount {
+            cell.secondTitleLabel.text = "balance"
+            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " GVT"
+        }
+        
+        if let availableInvestment = program.availableInvestment {
+            cell.thirdTitleLabel.text = "av. to invest"
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " GVT"
+        }
+        
+        if let isFavorite = program.personalProgramDetails?.isFavorite {
+            cell.favoriteButton.isSelected = isFavorite
         }
         
         cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
@@ -68,7 +84,5 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
         }
-        
-        cell.programDetailsView.setup(investorsCount: program.statistic?.investorsCount, balance: program.statistic?.balanceGVT?.amount, avgProfit: program.statistic?.profitPercent, totalProfit: program.statistic?.profitValue, currency: program.currency?.rawValue)
     }
 }

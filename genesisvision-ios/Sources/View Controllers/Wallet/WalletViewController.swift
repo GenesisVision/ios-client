@@ -81,7 +81,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     override func pullToRefresh() {
@@ -254,7 +254,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
-        print(yOffset)
+//        print(yOffset)
         if let frame = walletTableHeaderView?.frame {
             let newHeight = frame.size.height - yOffset
             if newHeight < walletTableHeaderViewHeightStart || newHeight > walletTableHeaderViewHeightEnd {

@@ -250,6 +250,7 @@ open class ProgramsAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -488,6 +489,7 @@ open class ProgramsAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -501,6 +503,7 @@ open class ProgramsAPI {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -574,7 +577,6 @@ open class ProgramsAPI {
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },
@@ -629,7 +631,6 @@ open class ProgramsAPI {
     "title" : "title",
     "url" : "url",
     "personalProgramDetails" : {
-      "hasNotifications" : true,
       "isFavorite" : true,
       "isInvested" : true
     },

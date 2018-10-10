@@ -18,7 +18,7 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
     weak var programDetailViewControllerProtocol: ProgramDetailViewControllerProtocol?
     var scrollEnabled: Bool = true {
         didSet {
-            print("!!!!scrollEnabled \(scrollEnabled)")
+            //TODO:
         }
     }
     

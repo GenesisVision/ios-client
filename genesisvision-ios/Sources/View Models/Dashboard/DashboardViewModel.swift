@@ -15,6 +15,7 @@ final class DashboardViewModel {
     var sortingDelegateManager = SortingDelegateManager()
     var currencyDelegateManager = CurrencyDelegateManager()
     var inRequestsDelegateManager = InRequestsDelegateManager()
+    var isLoading: Bool = false
     
     var highToLowValue: Bool = false
     
@@ -24,7 +25,7 @@ final class DashboardViewModel {
             guard let dashboard = dashboard else { return }
             
             if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
-                pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, dashboardRequests: dashboard.requests)
+                pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, programRequests: dashboard.requests)
             }
             if let vc = router.assetsViewController, let pageboyDataSource = vc.pageboyDataSource {
                 pageboyDataSource.update(dashboardSummary: dashboard)
@@ -32,9 +33,6 @@ final class DashboardViewModel {
             if let vc = router.eventsViewController, let viewModel = vc.viewModel {
                 viewModel.dashboardPortfolioEvents = dashboard.events
             }
-            assetsTabmanViewModel?.dashboard = dashboard
-            chartsTabmanViewModel?.dashboardPortfolioChartValue = dashboard.chart
-            eventListViewModel?.dashboardPortfolioEvents = dashboard.events
         }
     }
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -123,36 +121,27 @@ extension DashboardViewModel {
 // MARK: - Fetch
 extension DashboardViewModel {
     // MARK: - Public methods
-    func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (viewModel) in
-            self?.updateFetchedData(viewModel)
-            }, completionError: completion)
-    }
-    
     func refresh(completion: @escaping CompletionBlock) {
-        fetch(completion: completion)
+        fetch(completion)
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(_ dashboard: DashboardSummary) {
-        self.dashboard = dashboard
-        self.reloadDataProtocol?.didReloadData()
-    }
-    
-    private func fetch(_ completionSuccess: @escaping (_ viewModel: DashboardSummary) -> Void, completionError: @escaping CompletionBlock) {
-        let type: InvestorAPI.ModelType_v10InvestorGet = .all
-        let assetType: InvestorAPI.AssetType_v10InvestorGet = .all
-        let skip = 0
-        let take = Constants.Api.take
-        let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
+    private func fetch(_ completion: @escaping CompletionBlock) {
+        isLoading = true
         
-        return completionError(.success)
-        DashboardDataProvider.getDashboardSummary(with: nil, from: dateRangeFrom, to: dateRangeTo, type: type, assetType: assetType, skip: skip, take: take, chartCurrency: chartCurrency, from2: dateRangeFrom, to2: dateRangeTo, requestsSkip: skip, requestsTake: take, completion: { (dashboard) in
-//        DashboardDataProvider.getDashboardSummary(completion: { (dashboard) in
-            guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            completionSuccess(dashboard)
-            completionError(.success)
-        }, errorCompletion: completionError)
+        let requestsSkip = 0
+        let requestsTake = Constants.Api.take
+        let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
+        let balancePoints = 50
+        let programsPoints = 5
+        let eventsTake = 10
+        
+        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateRangeFrom, to: dateRangeTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
+            guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
+            self?.dashboard = dashboard
+            
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }
 
@@ -162,232 +151,3 @@ extension DashboardViewModel: ReloadDataProtocol {
     }
 }
 
-protocol SortingDelegate: class {
-    func didSelectSorting(at indexPath: IndexPath)
-}
-
-final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    
-    weak var tableViewProtocol: SortingDelegate?
-    
-    // MARK: - Variables
-    var highToLowValue: Bool = true
-    
-    var sorting: InvestorAPI.Sorting_v10InvestorProgramsGet = Constants.Sorting.dashboardDefault
-    
-    var sortingDescKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitDesc,
-                                                                      .byLevelDesc,
-                                                                      .byBalanceDesc,
-                                                                      .byTradesDesc,
-                                                                      .byEndOfPeriodDesc,
-                                                                      .byTitleDesc]
-    
-    var sortingAscKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitAsc,
-                                                                      .byLevelAsc,
-                                                                      .byBalanceAsc,
-                                                                      .byTradesAsc,
-                                                                      .byEndOfPeriodAsc,
-                                                                      .byTitleAsc]
-    
-    var sortingValues: [String] = ["profit",
-                                   "level",
-                                   "balance",
-                                   "orders",
-                                   "end of period",
-                                   "title"]
-    
-    struct SortingList {
-        var sortingValue: String
-        var sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet
-    }
-    
-    var sortingDescList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingDescKeys[index])
-        }
-    }
-    
-    var sortingAscList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingAscKeys[index])
-        }
-    }
-    
-    // MARK: - Init
-    override init() {
-        super.init()
-    }
-    
-    // MARK: - Private methods
-    func getSortingValue(sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet) -> String {
-        guard let index = sortingDescKeys.index(of: sortingKey) else { return "" }
-        return sortingValues[index]
-    }
-    
-    func changeSorting(at index: Int) {
-        sorting = highToLowValue ? sortingDescKeys[index] : sortingAscKeys[index]
-    }
-    
-    func getSelectedSortingIndex() -> Int {
-        return sortingDescKeys.index(of: sorting) ?? 0
-    }
-    
-    func sortTitle() -> String? {
-        return "Sort by " + getSortingValue(sortingKey: sorting)
-    }
-    
-    // MARK: - UITableViewDelegate, UITableViewDataSource
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        changeSorting(at: indexPath.row)
-        
-        tableViewProtocol?.didSelectSorting(at: indexPath)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortingValues.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = sortingValues[indexPath.row]
-        cell.backgroundColor = UIColor.Cell.bg
-        
-        cell.textLabel?.textColor = indexPath.row == getSelectedSortingIndex() ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.7)
-        cell.accessoryType = indexPath.row == getSelectedSortingIndex() ? .checkmark : .none
-        
-        cell.selectionStyle = .none
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
-            cell.textLabel?.textColor = UIColor.Cell.title
-            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
-            cell.textLabel?.textColor = UIColor.Cell.subtitle
-            cell.contentView.backgroundColor = UIColor.Cell.bg
-        }
-    }
-}
-
-protocol CurrencyDelegateManagerProtocol: class {
-    func didSelectCurrency(at indexPath: IndexPath)
-}
-
-final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Variables
-    weak var currencyDelegate: CurrencyDelegateManagerProtocol?
-    
-    var currencyValues: [String] = ["USD", "EUR", "BTC"]
-    var rateValues: [Double] = [6.3, 5.5, 0.0002918]
-    
-    var selectedCurrency: String!
-    
-    var currencyCellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardCurrencyTableViewCellViewModel.self]
-    }
-    
-    // MARK: - Lifecycle
-    override init() {
-        super.init()
-        
-        selectedCurrency = getSelectedCurrency()
-    }
-    
-    // MARK: - TableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        selectedCurrency = currencyValues[indexPath.row]
-        updateSelectedCurrency(selectedCurrency)
-        
-        currencyDelegate?.didSelectCurrency(at: indexPath)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencyValues.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCurrencyTableViewCell", for: indexPath) as? DashboardCurrencyTableViewCell else {
-            let cell = UITableViewCell()
-            return cell
-        }
-        
-        let currency = currencyValues[indexPath.row]
-        let rate = "1 GVT = \(rateValues[indexPath.row]) " + currency
-        let isSelected = currency == selectedCurrency
-        
-        cell.isSelected = isSelected
-        cell.configure(title: currency, rate: rate, selected: isSelected)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
-            cell.currencyTitleLabel.textColor = UIColor.Cell.title
-            cell.currencyRateLabel.textColor = UIColor.Cell.title
-            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
-            cell.currencyTitleLabel.textColor = UIColor.Cell.subtitle
-            cell.currencyRateLabel.textColor = UIColor.Cell.subtitle
-            cell.contentView.backgroundColor = UIColor.Cell.bg
-        }
-    }
-}
-
-protocol InRequestsDelegateManagerProtocol: class {
-    func didTapCancelButton(at indexPath: IndexPath)
-}
-
-final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Variables
-    weak var inRequestsDelegate: InRequestsDelegateManagerProtocol?
-    
-    var inRequestsCellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardInRequestsTableViewCellViewModel.self]
-    }
-    
-    // MARK: - Lifecycle
-    override init() {
-        super.init()
-    }
-    
-    // MARK: - TableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardInRequestsTableViewCell", for: indexPath) as? DashboardInRequestsTableViewCell else {
-            let cell = UITableViewCell()
-            return cell
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let cancelRowAction = UITableViewRowAction(style: .normal, title: "Cancel") { [weak self] (action, indexPath) in
-            self?.inRequestsDelegate?.didTapCancelButton(at: indexPath)
-            //TODO: or cancel this
-        }
-        cancelRowAction.backgroundColor = UIColor.Cell.redTitle
-        
-        return [cancelRowAction]
-    }
-}

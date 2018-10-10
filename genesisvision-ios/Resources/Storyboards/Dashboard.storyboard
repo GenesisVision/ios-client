@@ -79,7 +79,7 @@
                         <outlet property="chartsViewHeightConstraint" destination="3Ck-9b-ZSd" id="CEk-gl-LWo"/>
                         <outlet property="eventsView" destination="UcF-MT-89Y" id="KE0-DT-nuq"/>
                         <outlet property="eventsViewHeightConstraint" destination="ABJ-UX-XTI" id="kkK-7I-gOG"/>
-                        <outlet property="scrollView" destination="qr8-ra-I8p" id="dJw-NF-kOY"/>
+                        <outlet property="scrollView" destination="qr8-ra-I8p" id="Byt-6h-gyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiA-KY-jkC" sceneMemberID="firstResponder"/>

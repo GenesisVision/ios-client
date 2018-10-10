@@ -13,14 +13,12 @@ open class PersonalProgramDetailsList: Codable {
 
     public var isFavorite: Bool?
     public var isInvested: Bool?
-    public var hasNotifications: Bool?
 
 
     
-    public init(isFavorite: Bool?, isInvested: Bool?, hasNotifications: Bool?) {
+    public init(isFavorite: Bool?, isInvested: Bool?) {
         self.isFavorite = isFavorite
         self.isInvested = isInvested
-        self.hasNotifications = hasNotifications
     }
     
 
@@ -32,7 +30,6 @@ open class PersonalProgramDetailsList: Codable {
 
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
-        try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
     }
 
     // Decodable protocol methods
@@ -42,7 +39,6 @@ open class PersonalProgramDetailsList: Codable {
 
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
-        hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
     }
 }
 

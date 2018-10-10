@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProgramHeaderViewController: BaseViewController {
     
@@ -34,8 +35,11 @@ class ProgramHeaderViewController: BaseViewController {
     @IBOutlet weak var labelsStackView: UIStackView!
     @IBOutlet weak var tagsStackView: UIStackView!
     
-    @IBOutlet weak var levelButton: ActionButton!
+    @IBOutlet weak var levelButton: LevelButton!
+    
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var currencyLabel: CurrencyLabel!
+    
     @IBOutlet var tagsLabel: [UILabel]!
     
     @IBOutlet weak var labelsLeadingConstraint: NSLayoutConstraint!
@@ -58,10 +62,14 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     func changeColorAlpha(offset: CGFloat) {
+        print("changeColorAlpha")
+        print(offset)
         self.labelsStackView.alpha = 1.0 - offset
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
-        self.headerTitleView.alpha = offset - 0.5
+        self.currencyLabel.alpha = 1.0 - offset
+        
+        self.headerTitleView.alpha = offset
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }
     
@@ -69,6 +77,21 @@ class ProgramHeaderViewController: BaseViewController {
         if let title = programDetailsFull?.title {
             titleLabel.text = programDetailsFull?.title
             headerTitleLabel.text = title
+        }
+        
+        if let currency = programDetailsFull?.currency {
+            currencyLabel.text = currency.rawValue
+        }
+        
+        bgImageView.image = UIImage.placeholder
+        
+        if let logo = programDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
+            bgImageView.kf.indicatorType = .activity
+            hederTitleImageView.kf.indicatorType = .activity
+            
+            let resource = ImageResource(downloadURL: fileUrl, cacheKey: "my_cache_key")
+            bgImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
+            hederTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
         }
     }
 }

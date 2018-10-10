@@ -34,7 +34,7 @@ class ProgramHistoryViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func setup() {

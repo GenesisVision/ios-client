@@ -17,7 +17,7 @@ extension ProgramStrategyTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Strategy"
         
         if let descriptionText = descriptionText {
-            cell.textView.text = descriptionText
+            cell.descriptionLabel.text = descriptionText
         }
     }
 }

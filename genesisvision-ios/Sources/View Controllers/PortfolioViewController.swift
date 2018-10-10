@@ -99,7 +99,7 @@ class PortfolioViewController: BaseViewController {
     
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
-            if let lineChartData = dashboardChartValue.chart, let barChartData = dashboardChartValue.bars {
+            if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
                 chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
             }
             
@@ -113,7 +113,7 @@ class PortfolioViewController: BaseViewController {
             
             changeTitleLabel.text = "Change"
             if let changePercent = dashboardChartValue.changePercent {
-                changePercentLabel.text = changePercent.toString() + " %"
+                changePercentLabel.text = changePercent.rounded(toPlaces: 2).toString() + " %"
             }
             if let changeValue = dashboardChartValue.changeValue {
                 changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
@@ -122,12 +122,12 @@ class PortfolioViewController: BaseViewController {
                 changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"
             }
         
-            if let dashboardRequests = viewModel.dashboardRequests {
+            if let programRequests = viewModel.programRequests {
                 inRequestsTitleLabel.text = "In Requests"
-                if let totalValue = dashboardRequests.totalValue {
+                if let totalValue = programRequests.totalValue {
                     inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " GVT"
                 }
-                if let totalValue = dashboardRequests.totalValue, let rate = dashboardChartValue.rate {
+                if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate {
                     let inRequestsCurrency = totalValue * rate
                     inRequestsCurrencyLabel.text = inRequestsCurrency.toString() + " \(getSelectedCurrency())"
                 }
@@ -138,6 +138,7 @@ class PortfolioViewController: BaseViewController {
     private func setupSelectedChartAssetsBottomSheetView() {
         bottomSheetController.bottomSheetControllerProtocol = self
         bottomSheetController.addNavigationBar("Assets")
+        bottomSheetController.lineViewIsHidden = true
         
         bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
             tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -169,10 +170,10 @@ class PortfolioViewController: BaseViewController {
     
     private func selectBar(_ entry: ChartDataEntry) {
         let date = Date(timeIntervalSince1970: entry.x)
-        let dateString = date.dateAndTimeFormatString
-        print(dateString)
         
-        showBottomAssetsView()
+        if viewModel.showSelectedChartAssets(date) {
+            showBottomAssetsView()
+        }
     }
     
     @objc private func hideBottomAssetsView() {

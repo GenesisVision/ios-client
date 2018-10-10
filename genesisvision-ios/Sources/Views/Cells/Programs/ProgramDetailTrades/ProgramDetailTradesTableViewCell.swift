@@ -43,8 +43,6 @@ class ProgramDetailTradesTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var dateLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         

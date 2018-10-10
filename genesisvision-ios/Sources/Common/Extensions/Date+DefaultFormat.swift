@@ -49,8 +49,7 @@ extension Date {
     
     var dateAndTimeFormatString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "dd.MM hh:mm"
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }

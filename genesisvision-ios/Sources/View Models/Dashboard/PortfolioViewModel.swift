@@ -13,20 +13,24 @@ final class PortfolioViewModel {
     // MARK: - Variables
     var title = "Portfolio"
     
-    var selectedChartAssetsViewModels: [String] = ["asdasd", "asdasd"]
+    var viewModels = [PortfolioAssetTableViewCellViewModel]()
+    var selectedChartAssets: [AssetsValue]? {
+        didSet {
+            var portfolioAssetTableViewCellViewModels = [PortfolioAssetTableViewCellViewModel]()
+            
+            selectedChartAssets?.forEach({ (selectedChartAsset) in
+                let portfolioAssetTableViewCellViewModel = PortfolioAssetTableViewCellViewModel(selectedChartAssets: selectedChartAsset)
+                portfolioAssetTableViewCellViewModels.append(portfolioAssetTableViewCellViewModel)
+            })
+            
+            viewModels = portfolioAssetTableViewCellViewModels
+        }
+    }
     
     var selectedChartAssetsDelegateManager: PortfolioSelectedChartAssetsDelegateManager?
-    
-    var dashboardChartValue: DashboardChartValue? {
-        didSet {
-            //TODO: setupUI()
-        }
-    }
-    var dashboardRequests: ProgramRequests? {
-        didSet {
-            //TODO: setupUI()
-        }
-    }
+    weak var reloadDataProtocol: ReloadDataProtocol?
+    var dashboardChartValue: DashboardChartValue?
+    var programRequests: ProgramRequests?
     
     private var router: DashboardRouter!
     
@@ -34,13 +38,23 @@ final class PortfolioViewModel {
     init(withRouter router: DashboardRouter, dashboardChartValue: DashboardChartValue?) {
         self.router = router
         self.dashboardChartValue = dashboardChartValue
-        
-        self.selectedChartAssetsDelegateManager = PortfolioSelectedChartAssetsDelegateManager(with: selectedChartAssetsViewModels)
+        self.selectedChartAssetsDelegateManager = PortfolioSelectedChartAssetsDelegateManager(with: self)
     }
     
     // MARK: - Methods
+    func showSelectedChartAssets(_ date: Date) -> Bool {
+        if let result = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
+            self.selectedChartAssets = result.topAssets
+            return true
+        }
+        
+        return false
+    }
+    
     func showRequests() {
-        router.show(routeType: .requests)
+        guard let requests = programRequests?.requests, requests.count > 0 else { return }
+        
+        router.show(routeType: .requests(programRequests: programRequests))
     }
 }
 
@@ -53,7 +67,7 @@ extension PortfolioViewModel {
     }
     
     func modelsCount() -> Int {
-        return selectedChartAssetsViewModels.count
+        return viewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -67,40 +81,8 @@ extension PortfolioViewModel {
     func headerTitle(for section: Int) -> String? {
         return nil
     }
-}
-
-
-final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Variables
-    var selectedChartAssetsViewModels: [String]?
-
-    // MARK: - Lifecycle
-    init(with selectedChartAssetsViewModels: [String]?) {
-        super.init()
-        
-        self.selectedChartAssetsViewModels = selectedChartAssetsViewModels
-    }
     
-    // MARK: - TableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedChartAssetsViewModels?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PortfolioAssetTableViewCell", for: indexPath) as? PortfolioAssetTableViewCell else {
-            let cell = UITableViewCell()
-            return cell
-        }
-        
-        if let selectedChartAssetsViewModel = selectedChartAssetsViewModels?[indexPath.row] {
-            cell.titleLabel.text = selectedChartAssetsViewModel
-        }
-        
-        return cell
+    func model(at indexPath: IndexPath) -> PortfolioAssetTableViewCellViewModel? {
+        return viewModels[indexPath.row]
     }
 }

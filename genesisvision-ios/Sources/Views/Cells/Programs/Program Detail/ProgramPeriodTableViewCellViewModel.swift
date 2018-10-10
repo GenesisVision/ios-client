@@ -18,15 +18,16 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramPeriodTableViewCell) {
         cell.titleLabel.text = "Period"
         
-        if let periodDuration = periodDuration {
-            cell.durationLabel.text = periodDuration.toString()
+        if let periodEnds = periodEnds, let periodStarts = periodStarts, let periodDuration = periodDuration {
+            cell.durationLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
             
-            if let periodEnds = periodEnds {
-                let today = Date()
-                let daysLeft = today.interval(ofComponent: Calendar.Component.day, fromDate: periodEnds)
-                
-                cell.periodLeftLabel.text = daysLeft.toString()
-                cell.progressView.progress = Float((periodDuration - daysLeft) / periodDuration)
+            let periodLeft = periodEnds.timeSinceDate(fromDate: Date())
+            
+            cell.periodLeftLabel.text = periodLeft + " left"
+            
+            let today = Date()
+            if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
+                cell.progressView.progress = Float(periodDuration - minutes) / Float(periodDuration)
             }
         }
     }

@@ -136,8 +136,6 @@ extension ProgramViewController {
         
         let yOffset = scrollView.contentOffset.y + topConstant
         
-        print(yOffset)
-        
         let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
         self.navigationController!.view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(alpha)
         if alpha > 0.7 {
@@ -145,8 +143,9 @@ extension ProgramViewController {
         }
         
         
-        if yOffset >= 0 {
-            programHeaderViewController?.changeColorAlpha(offset: yOffset / minHeaderHeight)
+        if 158 - yOffset >= 0 {
+            print(yOffset)
+            programHeaderViewController?.changeColorAlpha(offset: yOffset / 158)
         }
 
         if yOffset < 0 {

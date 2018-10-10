@@ -184,7 +184,7 @@ extension UIColor {
     
     struct ProgressView {
         static var progressTint: UIColor { return AppearanceController.theme == .darkTheme ? .primary : .primary }
-        static var trackTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter.withAlphaComponent(10.0) : Common.lightDelimiter.withAlphaComponent(10.0) }
+        static var trackTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter.withAlphaComponent(0.1) : Common.lightDelimiter.withAlphaComponent(0.1) }
     }
     
     struct DateRangeView {
@@ -248,7 +248,7 @@ extension UIColor {
     
     struct Border {
         static var forImage: UIColor { return Common.white }
-        static var forButton: UIColor { return Common.lightDelimiter }
+        static var forButton: UIColor { return Common.lightDelimiter.withAlphaComponent(0.25) }
     }
     
     struct Cell {
@@ -313,18 +313,19 @@ extension UIColor {
         static var ended: UIColor { return Common.white.withAlphaComponent(0.5) }
         static var investing: UIColor { return Common.yellow }
         static var withdrawing: UIColor { return #colorLiteral(red: 0.4352941176, green: 0.4980392157, blue: 0.8901960784, alpha: 1) }                               //6F7FE3
-
         
-        static func color(for status: String) -> UIColor {
-            switch status {
+        static func colors(for status: String) -> (UIColor, UIColor) {
+            switch status.capitalized {
             case "Pending":
-                return Status.investing
+                return (Status.investing, Status.investing.withAlphaComponent(0.1))
             case "Withdrawing":
-                return Status.withdrawing
+                return (Status.investing, Status.withdrawing.withAlphaComponent(0.1))
             case "Active":
-                return Status.active
+                return (Status.active, Status.active.withAlphaComponent(0.1))
+            case "Ended", "Closed":
+                return (Status.ended, Status.ended.withAlphaComponent(0.1))
             default:
-                return Status.ended
+                return (Common.lightDelimiter, Common.darkCell)
             }
         }
     }

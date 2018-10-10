@@ -8,47 +8,17 @@
 
 import UIKit
 
-class WalletTransactionTableViewCell: PlateTableViewCell {
+class WalletTransactionTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
-        didSet {
-            iconImageView.roundCorners()
-        }
-    }
-    
     @IBOutlet var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }
     }
-    
-    @IBOutlet var investTypeLabel: UILabel! {
-        didSet {
-            investTypeLabel.textColor = UIColor.Transaction.investType
-        }
-    }
-    
+    @IBOutlet var titleLabel: TitleLabel!
+    @IBOutlet var amountLabel: TitleLabel!
     @IBOutlet var dateLabel: SubtitleLabel!
-    @IBOutlet var amountLabel: SubtitleLabel! {
-        didSet {
-            amountLabel.textColor = UIColor.Cell.greenTitle
-        }
-    }
-    
-    @IBOutlet var programTitleLabel: TitleLabel!
-    
-    @IBOutlet var programStatusLabel: UILabel! {
-        didSet {
-            programStatusLabel.textColor = UIColor.Transaction.programStatus
-        }
-    }
-    
-    @IBOutlet var currencyLabel: UILabel! {
-        didSet {
-            currencyLabel.textColor = UIColor.Transaction.currency
-        }
-    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

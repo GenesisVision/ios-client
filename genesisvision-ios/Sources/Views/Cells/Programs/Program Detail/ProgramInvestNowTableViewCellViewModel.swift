@@ -13,7 +13,7 @@ struct ProgramInvestNowTableViewCellViewModel {
     let successFee: Double?
     let availableInvestment: Double?
     let periodEnds: Date?
-    
+    let programCurrency: CurrencyType?
     weak var programInvestNowProtocol: ProgramInvestNowProtocol?
 }
 
@@ -26,17 +26,17 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         
          if let entryFee = entryFee {
             cell.entryFeeTitleLabel.text = "entry fee"
-            cell.entryFeeValueLabel.text = entryFee.toString() + "%"
+            cell.entryFeeValueLabel.text = entryFee.rounded(toPlaces: 2).toString() + "%"
         }
         
         if let successFee = successFee {
             cell.successFeeTitleLabel.text = "success invest"
-            cell.successFeeValueLabel.text = successFee.toString() + "%"
+            cell.successFeeValueLabel.text = successFee.rounded(toPlaces: 2).toString() + "%"
         }
         
-        if let availableInvestment = availableInvestment {
+        if let availableInvestment = availableInvestment, let programCurrency = programCurrency {
             cell.investTitleLabel.text = "av. to invest"
-            cell.investValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " GVT"
+            cell.investValueLabel.text = availableInvestment.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
         }
         
         if let periodEnds = periodEnds {

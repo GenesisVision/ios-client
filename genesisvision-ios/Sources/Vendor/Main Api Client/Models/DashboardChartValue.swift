@@ -11,8 +11,8 @@ import Foundation
 
 open class DashboardChartValue: Codable {
 
-    public var bars: [ValueChartBar]?
-    public var chart: [ChartSimple]?
+    public var investedProgramsInfo: [ValueChartBar]?
+    public var balanceChart: [ChartSimple]?
     public var value: Double?
     public var valueCurrency: Double?
     public var changePercent: Double?
@@ -22,9 +22,9 @@ open class DashboardChartValue: Codable {
 
 
     
-    public init(bars: [ValueChartBar]?, chart: [ChartSimple]?, value: Double?, valueCurrency: Double?, changePercent: Double?, changeValue: Double?, changeValueCurrency: Double?, rate: Double?) {
-        self.bars = bars
-        self.chart = chart
+    public init(investedProgramsInfo: [ValueChartBar]?, balanceChart: [ChartSimple]?, value: Double?, valueCurrency: Double?, changePercent: Double?, changeValue: Double?, changeValueCurrency: Double?, rate: Double?) {
+        self.investedProgramsInfo = investedProgramsInfo
+        self.balanceChart = balanceChart
         self.value = value
         self.valueCurrency = valueCurrency
         self.changePercent = changePercent
@@ -40,8 +40,8 @@ open class DashboardChartValue: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(bars, forKey: "bars")
-        try container.encodeIfPresent(chart, forKey: "chart")
+        try container.encodeIfPresent(investedProgramsInfo, forKey: "investedProgramsInfo")
+        try container.encodeIfPresent(balanceChart, forKey: "balanceChart")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(valueCurrency, forKey: "valueCurrency")
         try container.encodeIfPresent(changePercent, forKey: "changePercent")
@@ -55,8 +55,8 @@ open class DashboardChartValue: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        bars = try container.decodeIfPresent([ValueChartBar].self, forKey: "bars")
-        chart = try container.decodeIfPresent([ChartSimple].self, forKey: "chart")
+        investedProgramsInfo = try container.decodeIfPresent([ValueChartBar].self, forKey: "investedProgramsInfo")
+        balanceChart = try container.decodeIfPresent([ChartSimple].self, forKey: "balanceChart")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         valueCurrency = try container.decodeIfPresent(Double.self, forKey: "valueCurrency")
         changePercent = try container.decodeIfPresent(Double.self, forKey: "changePercent")

@@ -18,11 +18,15 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         cell.amountTitleLabel.text = "Amount"
         
         if let amountValue = programProfitChart.balance {
-            cell.amountValueLabel.text = amountValue.toString()
+            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " GVT"
+        } else {
+            cell.amountValueLabel.isHidden = true
         }
         
         if let amountCurrency = programProfitChart.totalProgramCurrencyProfit {
             cell.amountCurrencyLabel.text = amountCurrency.toString()
+        } else {
+            cell.amountCurrencyLabel.isHidden = true
         }
         
         
@@ -30,15 +34,29 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         
         if let changePercent = programProfitChart.profitChangePercent {
             cell.changePercentLabel.text = changePercent.toString()
+        } else {
+            cell.changePercentLabel.isHidden = true
         }
         
         if let changeValue = programProfitChart.totalGvtProfit {
-            cell.changeValueLabel.text = changeValue.toString()
+            cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
+        } else {
+            cell.changeValueLabel.isHidden = true
         }
         
         if let changeCurrency = programProfitChart.totalProgramCurrencyProfit {
-            cell.changeCurrencyLabel.text = changeCurrency.toString()
+            let selectedCurrency = getSelectedCurrency()
+            if let currencyType = CurrencyType(rawValue: selectedCurrency) {
+                cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + selectedCurrency
+            }
+        } else {
+            cell.changeCurrencyLabel.isHidden = true
         }
         
+        if let equityChart = programProfitChart.equityChart {
+            cell.chartView.setup(chartType: .default, lineChartData: equityChart)
+        } else {
+            cell.chartView.isHidden = true
+        }
     }
 }

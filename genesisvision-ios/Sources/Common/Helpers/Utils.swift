@@ -40,9 +40,21 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
     return (periodLeftValue, periodLeftTimeString)
 }
 
+func getPeriodDuration(from minutes: Int) -> String? {
+    let hours = minutes / 60
+    let days = hours / 24
+    let weeks = days / 7
+    let months = days / 31
+    
+    let periodLeftTimeString: String = months > 0 ? "months" : weeks > 0 ? "weeks" : days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : ""
+    let periodLeftValue: Int = months > 0 ? months : weeks > 0 ? weeks : days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : -1
+    
+    return periodLeftValue > 0 ? "\(periodLeftValue) " + periodLeftTimeString : nil
+}
+
 func getDecimalCount(for currencyValue: String?) -> Int {
     guard let currencyValue = currencyValue,
-        let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency.rawValue) else { return 2 }
+        let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(rawValue: currency.rawValue) else { return 2 }
 
     return currencyType.currencyLenght
 }

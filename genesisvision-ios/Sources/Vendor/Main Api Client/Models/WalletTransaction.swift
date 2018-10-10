@@ -25,6 +25,7 @@ open class WalletTransaction: Codable {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -54,6 +55,7 @@ open class WalletTransaction: Codable {
         case eth = "ETH"
         case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case usd = "USD"
         case eur = "EUR"
     }
