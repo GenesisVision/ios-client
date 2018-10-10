@@ -240,7 +240,6 @@ extension FavoriteProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
             ProgramDataProvider.getPrograms(with: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: nil, take: nil, completion: { (programsViewModel) in
                 guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 

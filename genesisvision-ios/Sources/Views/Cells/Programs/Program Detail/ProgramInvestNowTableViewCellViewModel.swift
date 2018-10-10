@@ -9,11 +9,7 @@
 import Foundation
 
 struct ProgramInvestNowTableViewCellViewModel {
-    let entryFee: Double?
-    let successFee: Double?
-    let availableInvestment: Double?
-    let periodEnds: Date?
-    let programCurrency: CurrencyType?
+    let programDetailsFull: ProgramDetailsFull?
     weak var programInvestNowProtocol: ProgramInvestNowProtocol?
 }
 
@@ -24,22 +20,22 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Invest Now"
         cell.investButton.setTitle("Invest", for: .normal)
         
-         if let entryFee = entryFee {
+         if let entryFee = programDetailsFull?.entryFee {
             cell.entryFeeTitleLabel.text = "entry fee"
             cell.entryFeeValueLabel.text = entryFee.rounded(toPlaces: 2).toString() + "%"
         }
         
-        if let successFee = successFee {
+        if let successFee = programDetailsFull?.successFee {
             cell.successFeeTitleLabel.text = "success invest"
             cell.successFeeValueLabel.text = successFee.rounded(toPlaces: 2).toString() + "%"
         }
         
-        if let availableInvestment = availableInvestment, let programCurrency = programCurrency {
+        if let availableInvestment = programDetailsFull?.availableInvestment, let programCurrency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") {
             cell.investTitleLabel.text = "av. to invest"
             cell.investValueLabel.text = availableInvestment.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
         }
         
-        if let periodEnds = periodEnds {
+        if let periodEnds = programDetailsFull?.periodEnds {
             cell.investDescriptionLabel.text = "Your request will be processed at the end of the reporting period \(periodEnds.defaultFormatString)"
         }
     }

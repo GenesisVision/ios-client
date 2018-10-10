@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import UIKit
+
 // MARK: - Charts
 enum ChartType {
     case `default`, detail, full
@@ -62,6 +64,20 @@ extension CurrencyType {
         case .usd, .usdt, .eur: return 2
         case .undefined:
             return 2
+        }
+    }
+    
+    public var currencyColor: UIColor {
+        switch self {
+        case .gvt: return UIColor.Currency.gvt
+        case .eth: return UIColor.Currency.eth
+        case .btc: return UIColor.Currency.btc
+        case .ada: return UIColor.Currency.btc
+        case .usd: return UIColor.Currency.usd
+        case .usdt: return UIColor.Currency.usd
+        case .eur: return UIColor.Currency.eur
+        case .undefined:
+            return UIColor.Currency.gvt
         }
     }
 }

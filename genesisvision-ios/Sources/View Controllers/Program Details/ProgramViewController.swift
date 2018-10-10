@@ -39,6 +39,7 @@ class ProgramViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showProgressHUD()
         setup()
     }
     
@@ -78,6 +79,8 @@ class ProgramViewController: BaseViewController {
     // MARK: - Private methods
     private func setup() {
         viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+            
             switch result {
             case .success:
                 if let programDetailsFull = self?.viewModel.programDetailsFull {
@@ -94,13 +97,15 @@ class ProgramViewController: BaseViewController {
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        setupUI()
     }
     
     private func setupUI() {
         favoriteBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(favoriteButtonAction))
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
-        navigationItem.rightBarButtonItems = [notificationsBarButtonItem, favoriteBarButtonItem]
+        navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
     }
     
     @objc func notificationsButtonAction() {
@@ -108,9 +113,10 @@ class ProgramViewController: BaseViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func favoriteButtonAction(_ sender: UIButton) {
+    @objc func favoriteButtonAction() {
         guard let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite else { return }
-        favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
+        self.favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
+        
         
         showProgressHUD()
         self.programDetailsTabmanViewController?.viewModel.changeFavorite() { [weak self] (result) in
@@ -194,8 +200,8 @@ extension ProgramViewController: ProgramDetailsProtocol {
             guard let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite else { return }
             
             guard self.favoriteBarButtonItem != nil else {
-                self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction(_:)))
-                self.navigationItem.rightBarButtonItems = [self.notificationsBarButtonItem, self.favoriteBarButtonItem]
+                self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction))
+                self.navigationItem.rightBarButtonItems = [self.favoriteBarButtonItem, self.notificationsBarButtonItem]
                 return
             }
             

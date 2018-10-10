@@ -42,12 +42,12 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     @IBOutlet var currencyLabel: CurrencyLabel!
     
-    @IBOutlet var changePercentLabel: TitleLabel! {
+    @IBOutlet var profitPercentLabel: TitleLabel! {
         didSet {
-            changePercentLabel.textColor = UIColor.Cell.greenTitle
+            profitPercentLabel.textColor = UIColor.Cell.greenTitle
         }
     }
-    @IBOutlet var changeValueLabel: SubtitleLabel!
+    @IBOutlet var profitValueLabel: SubtitleLabel!
     
     @IBOutlet weak var periodLeftProgressView: CircularProgressView! {
         didSet {

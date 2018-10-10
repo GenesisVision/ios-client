@@ -22,7 +22,7 @@ extension UIColor {
         
         static var darkSectionHeader: UIColor { return #colorLiteral(red: 0.06666666667, green: 0.1019607843, blue: 0.1254901961, alpha: 1) }                       //111A20
         
-        static var green: UIColor { return #colorLiteral(red: 0.1725490196, green: 0.8235294118, blue: 0.568627451, alpha: 1) }                                   //2CD291
+        static var green: UIColor { return #colorLiteral(red: 0.1803921569, green: 0.7411764706, blue: 0.5215686275, alpha: 1) }                                   //2EBD85
         static var red: UIColor { return #colorLiteral(red: 0.9215686275, green: 0.231372549, blue: 0.3529411765, alpha: 1) }                                     //EB3B5A
         static var redBg: UIColor { return #colorLiteral(red: 0.1960784314, green: 0.1725490196, blue: 0.2196078431, alpha: 1) }                                   //322C38
         
@@ -169,7 +169,7 @@ extension UIColor {
         static var eur: UIColor { return Common.eurColor }
         static var usd: UIColor { return Common.usdColor }
         
-        static var eth: UIColor { return Common.ethColor }
+        static var eth: UIColor { return Common.btcColor }
         static var btc: UIColor { return Common.btcColor }
         static var gvt: UIColor { return Common.primary }
     }

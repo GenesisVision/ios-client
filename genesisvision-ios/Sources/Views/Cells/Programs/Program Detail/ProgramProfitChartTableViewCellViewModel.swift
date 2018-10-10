@@ -54,7 +54,7 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         }
         
         if let equityChart = programProfitChart.equityChart {
-            cell.chartView.setup(chartType: .default, lineChartData: equityChart)
+            cell.chartView.setup(lineChartData: equityChart)
         } else {
             cell.chartView.isHidden = true
         }

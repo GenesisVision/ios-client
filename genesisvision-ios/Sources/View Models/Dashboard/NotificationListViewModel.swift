@@ -136,8 +136,7 @@ extension NotificationListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramDetailTradesTableViewCellViewModel], _ tradeServerType: String) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let programId = programId,
-                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             ProgramDataProvider.getProgramTrades(with: programId, completion: { (tradesViewModel) in
                 guard tradesViewModel != nil else {

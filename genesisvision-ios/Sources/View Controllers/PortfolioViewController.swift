@@ -58,7 +58,11 @@ class PortfolioViewController: BaseViewController {
         return circleView
     }()
     
-    @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            chartViewHeightConstraint.constant = 150.0
+        }
+    }
     @IBOutlet weak var inRequeststViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
@@ -83,6 +87,10 @@ class PortfolioViewController: BaseViewController {
         
     }
     
+    func hideChart(_ value: Bool) {
+        chartViewHeightConstraint.constant = value ? 0.0 : 150.0
+    }
+    
     // MARK: - Private methods
     private func setup() {
         
@@ -100,7 +108,7 @@ class PortfolioViewController: BaseViewController {
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
-                chartView.setup(chartType: .detail, lineChartData: lineChartData, barChartData: barChartData, name: nil, currencyValue: nil, chartDurationType: nil)
+                chartView.setup(lineChartData: lineChartData, barChartData: barChartData)
             }
             
             amountTitleLabel.text = "Amount"

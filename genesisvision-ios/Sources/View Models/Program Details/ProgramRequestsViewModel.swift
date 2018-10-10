@@ -130,7 +130,6 @@ extension ProgramRequestsViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramRequestTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
         ProgramRequestDataProvider.getRequests(skip: skip, take: take) { [weak self] (requests) in
             guard let requests = requests else { return completionError(.failure(errorType: .apiError(message: nil))) }

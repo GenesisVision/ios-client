@@ -29,7 +29,7 @@ class RoundedLabel: UILabel {
         self.setProperties()
     }
     
-    func setProperties(font: UIFont? = UIFont.getFont(.regular, size: 13),
+    func setProperties(font: UIFont? = UIFont.getFont(.semibold, size: 12),
                        textColor: UIColor? = UIColor.Cell.title,
                        backgroundColor: UIColor? = UIColor.Cell.title.withAlphaComponent(0.3),
                        edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)) {
@@ -59,55 +59,37 @@ class RoundedLabel: UILabel {
 }
 
 class CurrencyLabel: RoundedLabel {
+    
+    // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    override func commonInit() {
+        super.commonInit()
 
-    var currencyType: CurrencyType = .gvt {
-        didSet {
-            var currencyColor = UIColor.Currency.gvt
-            
-            switch currencyType {
-            case .gvt:
-                currencyColor = UIColor.Currency.gvt
-            case .btc:
-                currencyColor = UIColor.Currency.btc
-            case .eth:
-                currencyColor = UIColor.Currency.eth
-            case .eur:
-                currencyColor = UIColor.Currency.eur
-            case .usd:
-                currencyColor = UIColor.Currency.usd
-            default:
-                break
-            }
-            
-            setProperties(backgroundColor: currencyColor)
+//        backgroundColor = UIColor.Cell.greenTitle.withAlphaComponent(0.1)
+//        textColor = UIColor.Cell.greenTitle
+        
+        if let text = text {
+            let currencyType = CurrencyType(rawValue: text)
+            let currencyColor = currencyType?.currencyColor
+            backgroundColor = currencyColor?.withAlphaComponent(0.1)
+            textColor = currencyColor
         }
     }
     
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        var currencyColor = UIColor.Currency.gvt.cgColor
-        
-        switch currencyType {
-        case .gvt:
-            currencyColor = UIColor.Currency.gvt.cgColor
-        case .btc:
-            currencyColor = UIColor.Currency.btc.cgColor
-        case .eth:
-            currencyColor = UIColor.Currency.eth.cgColor
-        case .ada:
-            currencyColor = UIColor.Currency.eth.cgColor
-        case .eur:
-            currencyColor = UIColor.Currency.eur.cgColor
-        case .usd:
-            currencyColor = UIColor.Currency.usd.cgColor
-        default:
-            break
-        }
-        
-        layer.backgroundColor = currencyColor
-        textColor = UIColor.Font.white
+        self.commonInit()
     }
 }
 

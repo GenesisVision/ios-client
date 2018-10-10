@@ -83,6 +83,22 @@ class DashboardViewController: BaseViewController {
     }
     
     private func reloadData() {
+        if let events = viewModel.dashboard?.events?.events, events.count > 0 {
+            eventsView.isHidden = false
+            eventsViewHeightConstraint.constant = eventsViewHeightEnd
+        } else {
+            eventsView.isHidden = true
+            eventsViewHeightConstraint.constant = 0.0
+        }
+        
+        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
+            viewModel.router.chartsViewController?.hideChart(false)
+            chartsViewHeightConstraint.constant = chartsViewHeightStart
+        } else {
+            viewModel.router.chartsViewController?.hideChart(true)
+            chartsViewHeightConstraint.constant = 220.0
+        }
+        
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
             navigationItem.leftBarButtonItems = [notificationsBarButtonItem]

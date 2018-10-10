@@ -12,28 +12,25 @@ import Pageboy
 class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
     var controllers = [BaseViewController]()
 
+    var portfolioVC: PortfolioViewController?
+    
     init(router: DashboardRouter, dashboardPortfolioChartValue: DashboardChartValue?) {
         super.init()
 
-        if let porfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard) {
-            porfolioVC.viewModel = PortfolioViewModel(withRouter: router, dashboardChartValue: dashboardPortfolioChartValue)
-            porfolioVC.vc = router.chartsViewController
-
-            controllers.append(porfolioVC)
+        if let portfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard) {
+            portfolioVC.viewModel = PortfolioViewModel(withRouter: router, dashboardChartValue: dashboardPortfolioChartValue)
+            portfolioVC.vc = router.chartsViewController
+            
+            controllers.append(portfolioVC)
+            
+            self.portfolioVC = portfolioVC
         }
     }
     
     func update(dashboardPortfolioChartValue: DashboardChartValue?, programRequests: ProgramRequests?) {
-        for controller in controllers {
-            switch controller {
-            case is PortfolioViewController:
-                (controller as! PortfolioViewController).viewModel.dashboardChartValue = dashboardPortfolioChartValue
-                (controller as! PortfolioViewController).viewModel.programRequests = programRequests
-                (controller as! PortfolioViewController).updateUI()
-            default:
-                break
-            }
-        }
+        portfolioVC?.viewModel.dashboardChartValue = dashboardPortfolioChartValue
+        portfolioVC?.viewModel.programRequests = programRequests
+        portfolioVC?.updateUI()
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {

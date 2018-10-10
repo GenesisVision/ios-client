@@ -11,18 +11,29 @@ import Kingfisher
 
 class ProgramHeaderViewController: BaseViewController {
     
-    @IBOutlet weak var headerTitleView: UIView! {
+    @IBOutlet weak var titleBottomConstraint: NSLayoutConstraint! {
         didSet {
-            headerTitleView.alpha = 0.0
+            titleBottomConstraint.constant = 20.0
+        }
+    }
+    @IBOutlet weak var titleLeadingConstraint: NSLayoutConstraint! {
+        didSet {
+            titleLeadingConstraint.constant = 16.0
         }
     }
     
     @IBOutlet weak var hederTitleImageView: UIImageView! {
         didSet {
+            hederTitleImageView.alpha = 0.0
             hederTitleImageView.roundCorners(with: 6.0)
         }
     }
-    @IBOutlet weak var headerTitleLabel: UILabel!
+    
+    @IBOutlet weak var investedImageView: UIImageView! {
+        didSet {
+            self.investedImageView.isHidden = true
+        }
+    }
     
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var gradientView: GradientView! {
@@ -64,19 +75,22 @@ class ProgramHeaderViewController: BaseViewController {
     func changeColorAlpha(offset: CGFloat) {
         print("changeColorAlpha")
         print(offset)
-        self.labelsStackView.alpha = 1.0 - offset
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
-        self.currencyLabel.alpha = 1.0 - offset
+        self.currencyLabel.alpha = 1.0 - offset * 2
+        self.investedImageView.alpha = 1.0 - offset * 2
         
-        self.headerTitleView.alpha = offset
+        self.hederTitleImageView.alpha = offset
+        
+        self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
+        self.titleBottomConstraint.constant = 20.0 - offset * 50.0
+
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }
     
     func configure(_ programDetailsFull: ProgramDetailsFull?) {
         if let title = programDetailsFull?.title {
-            titleLabel.text = programDetailsFull?.title
-            headerTitleLabel.text = title
+            titleLabel.text = title
         }
         
         if let currency = programDetailsFull?.currency {
@@ -92,6 +106,10 @@ class ProgramHeaderViewController: BaseViewController {
             let resource = ImageResource(downloadURL: fileUrl, cacheKey: "my_cache_key")
             bgImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
             hederTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
+        }
+        
+        if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {
+            self.investedImageView.isHidden = !isInvested
         }
     }
 }

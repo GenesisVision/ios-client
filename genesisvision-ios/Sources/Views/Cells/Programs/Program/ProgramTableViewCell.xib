@@ -208,8 +208,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-il-rIy">
                                                 <rect key="frame" x="0.0" y="4" width="94.666666666666671" height="32"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="zeR-YU-5IA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="26" height="16"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zeR-YU-5IA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="16"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOb-Mc-BeD" customClass="CircularProgressView" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -220,7 +220,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-1Z-EZR" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="18" y="0.0" width="8" height="16"/>
+                                                                <rect key="frame" x="24" y="0.0" width="8" height="16"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                                 <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -357,8 +357,6 @@
             <connections>
                 <outlet property="backgroundView" destination="nhC-FL-XlQ" id="bB4-eN-6pX"/>
                 <outlet property="bottomStackView" destination="vYo-Sa-d7W" id="tRg-72-HvW"/>
-                <outlet property="changePercentLabel" destination="waZ-UU-3eb" id="tPT-e1-VeZ"/>
-                <outlet property="changeValueLabel" destination="HIW-Ax-xUy" id="HEp-Sk-21A"/>
                 <outlet property="chartView" destination="JvI-96-Xpf" id="ZE9-TV-gL2"/>
                 <outlet property="currencyLabel" destination="bsn-Ot-TFc" id="p0x-0e-obu"/>
                 <outlet property="favoriteButton" destination="Dy2-tB-PY6" id="lrb-dX-f3f"/>
@@ -368,6 +366,8 @@
                 <outlet property="managerNameLabel" destination="AcF-qQ-Zug" id="29G-ZE-9Ju"/>
                 <outlet property="noDataLabel" destination="mzn-bM-hio" id="wv0-a9-B3X"/>
                 <outlet property="periodLeftProgressView" destination="OOb-Mc-BeD" id="0Ee-we-vnc"/>
+                <outlet property="profitPercentLabel" destination="waZ-UU-3eb" id="rYP-Js-Pp2"/>
+                <outlet property="profitValueLabel" destination="HIW-Ax-xUy" id="kMN-Qf-dp5"/>
                 <outlet property="programLogoImageView" destination="iG3-wO-Vm5" id="VVY-Lb-kcJ"/>
                 <outlet property="programTitleLabel" destination="uuZ-15-n94" id="oar-dk-DrK"/>
                 <outlet property="reinvestLabel" destination="Sih-FJ-okz" id="FRr-A8-qIX"/>

@@ -14,32 +14,41 @@ struct WalletTransactionTableViewCellViewModel {
 
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
-        if let type = walletTransaction.sourceType {
-            cell.titleLabel.text = type.rawValue.capitalized
-        }
+        cell.typeImageView.image = nil
         
-        if let action = walletTransaction.action {
+        if let action = walletTransaction.action, let sourceType = walletTransaction.sourceType, let destinationType = walletTransaction.destinationType, let value = walletTransaction.amount {
+            var sign = ""
+            
             switch action {
-            case .programInvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
-            case .programProfit:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
-            case .programWithdrawal:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
-            case .programRequestWithdrawal:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
-            case .programRequestInvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+            case .transfer:
+                if sourceType == .paymentTransaction, action == .transfer, destinationType == .wallet {
+                    cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                    sign = "+"
+                }
+                
+                if sourceType == .wallet, action == .transfer, destinationType == .withdrawalRequest {
+                    cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    sign = "-"
+                }
+                
+                if sourceType == .withdrawalRequest, action == .transfer, destinationType == .paymentTransaction {
+                    cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    sign = "-"
+                }
             default:
-                cell.typeImageView.image = nil
+                if sourceType == .wallet {
+                    cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    sign = "-"
+                } else if destinationType == .wallet {
+                    cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                    sign = "+"
+                }
             }
-        }
-    
-        if let value = walletTransaction.amount {
-            let sign = value > 0 ? "+" : value < 0 ? "-" : ""
+            
+            cell.titleLabel.text = sourceType.rawValue.capitalized
             cell.amountLabel.text = sign + value.rounded(withType: .gvt).toString() + " GVT"
         }
-        
+    
         if let date = walletTransaction.date {
             cell.dateLabel.text = date.defaultFormatString
         }

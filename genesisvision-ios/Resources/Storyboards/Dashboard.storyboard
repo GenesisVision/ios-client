@@ -257,6 +257,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="62" id="NZw-eO-eQe"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyV-oc-0i9">
                                 <rect key="frame" x="20" y="105" width="213.5" height="62"/>
@@ -312,11 +315,13 @@
                         <outlet property="changeTitleLabel" destination="o60-Uo-xvB" id="IYS-YY-lBM"/>
                         <outlet property="changeValueLabel" destination="qyL-Wb-kul" id="glS-70-N2l"/>
                         <outlet property="chartView" destination="arV-sE-LM1" id="Se3-sT-XHK"/>
+                        <outlet property="chartViewHeightConstraint" destination="Rrc-Nl-wW8" id="gaT-vO-U5i"/>
                         <outlet property="inRequestsButton" destination="HyV-oc-0i9" id="qin-yE-iVI"/>
                         <outlet property="inRequestsCurrencyLabel" destination="YOk-KY-Xwx" id="IFO-jJ-9cR"/>
                         <outlet property="inRequestsStackView" destination="swz-ew-myn" id="WVM-4x-nnu"/>
                         <outlet property="inRequestsTitleLabel" destination="mIn-wM-kPL" id="Kwu-Xl-nDq"/>
                         <outlet property="inRequestsValueLabel" destination="dEf-uI-5Vy" id="gZO-pG-vKq"/>
+                        <outlet property="inRequeststViewHeightConstraint" destination="NZw-eO-eQe" id="Ykp-c9-xSS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FX-ls-mcE" userLabel="First Responder" sceneMemberID="firstResponder"/>

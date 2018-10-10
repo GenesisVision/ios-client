@@ -47,9 +47,9 @@ final class CreateProgramTabmanViewModel: TabmanViewModel {
     }
     
     private func reloadDetails() {
-        if let vc = viewControllers[1] as? CreateProgramSecondViewController, let brokersViewModel = brokersViewModel {
+//        if let vc = viewControllers[1] as? CreateProgramSecondViewController, let brokersViewModel = brokersViewModel {
 //            vc.viewModel.brokersViewModel = brokersViewModel
-        }
+//        }
     }
     
     private func getBrokers() {

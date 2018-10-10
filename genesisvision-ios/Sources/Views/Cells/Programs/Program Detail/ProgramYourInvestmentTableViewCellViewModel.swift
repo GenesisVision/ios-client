@@ -9,12 +9,7 @@
 import Foundation
 
 struct ProgramYourInvestmentTableViewCellViewModel {
-    let value: Double?
-    let profit: Double?
-    let invested: Double?
-    let isReinvesting: Bool?
-    let programCurrency: CurrencyType?
-    
+    let programDetailsFull: ProgramDetailsFull?
     weak var programYourInvestmentProtocol: ProgramYourInvestmentProtocol?
 }
 
@@ -24,21 +19,29 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Your investment"
         cell.reinvestTitleLabel.text = "Auto reinvest"
-        if let isReinvesting = isReinvesting {
+        
+        if let status = programDetailsFull?.personalProgramDetails?.investmentProgramStatus?.rawValue {
+            cell.statusButton.setTitle(status, for: .normal)
+            cell.statusButton.layoutSubviews()
+        } else {
+            cell.statusButton.isHidden = true
+        }
+        
+        if let isReinvesting = programDetailsFull?.isReinvesting {
             cell.reinvestSwitch.isOn = isReinvesting
         }
         
-        if let value = value, let programCurrency = programCurrency {
+        if let value = programDetailsFull?.personalProgramDetails?.value, let programCurrency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") {
             cell.valueTitleLabel.text = "value"
             cell.valueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
         }
         
-        if let invested = invested {
+        if let invested = programDetailsFull?.statistic?.investedAmount {
             cell.investedTitleLabel.text = "invested"
             cell.investedValueLabel.text = invested.rounded(withType: .gvt).toString() + " GVT"
         }
         
-        if let profit = profit {
+        if let profit = programDetailsFull?.personalProgramDetails?.profit {
             cell.profitTitleLabel.text = "profit"
             cell.profitValueLabel.text = profit.rounded(toPlaces: 2).toString() + "%"
         }

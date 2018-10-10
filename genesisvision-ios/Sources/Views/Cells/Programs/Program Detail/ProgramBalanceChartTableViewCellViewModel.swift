@@ -37,7 +37,7 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.changeCurrencyLabel.isHidden = true
         
         if let balanceChart = programBalanceChart.balanceChart {
-            cell.chartView.setup(chartType: .default, balanceChart: balanceChart, chartDurationType: .all)
+            cell.chartView.setup(balanceChart: balanceChart)
         } else {
             cell.chartView.isHidden = true
         }

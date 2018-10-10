@@ -166,9 +166,9 @@ extension ProgramDetailViewModel {
                 return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
             }
         case .yourInvestment:
-            return ProgramYourInvestmentTableViewCellViewModel(value: programDetailsFull?.personalProgramDetails?.value, profit: programDetailsFull?.personalProgramDetails?.profit, invested: programDetailsFull?.statistic?.investedAmount, isReinvesting: programDetailsFull?.isReinvesting, programCurrency: CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? ""), programYourInvestmentProtocol: self)
+            return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, programYourInvestmentProtocol: self)
         case .investNow:
-            return ProgramInvestNowTableViewCellViewModel(entryFee: programDetailsFull?.entryFee, successFee: programDetailsFull?.successFee, availableInvestment: programDetailsFull?.availableInvestment, periodEnds: programDetailsFull?.periodEnds, programCurrency: CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? ""), programInvestNowProtocol: self)
+            return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, programInvestNowProtocol: self)
         }
     }
     
