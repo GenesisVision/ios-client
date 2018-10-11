@@ -100,6 +100,10 @@ final class ProgramInvestViewModel {
         router.goToBack()
     }
     
+    func close() {
+        router.closeVC()
+    }
+    
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {

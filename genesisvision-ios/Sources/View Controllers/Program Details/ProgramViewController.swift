@@ -96,7 +96,7 @@ class ProgramViewController: BaseViewController {
             switch result {
             case .success:
                 if let isFavorite = self?.programDetailsTabmanViewController?.viewModel.isFavorite {
-                    self?.favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
+                    self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
                 }
                 
                 if let programDetailsFull = self?.viewModel.programDetailsFull {
@@ -241,20 +241,20 @@ extension ProgramViewController: ProgramInfoViewControllerProtocol {
 
 extension ProgramViewController: ProgramDetailProtocol {
     func didRequestCanceled(_ last: Bool) {
-        if let viewModel = viewModel {
-            programDetailsTabmanViewController?.viewModel.didRequestCanceled(last)
+        if let viewModel = programDetailsTabmanViewController?.viewModel {
+            viewModel.didRequestCanceled(last)
         }
     }
     
     func didWithdrawn() {
-        if let viewModel = viewModel {
-            programDetailsTabmanViewController?.viewModel.didWithdrawn()
+        if let viewModel = programDetailsTabmanViewController?.viewModel {
+            viewModel.didWithdrawn()
         }
     }
     
     func didInvested() {
-        if let viewModel = viewModel {
-            programDetailsTabmanViewController?.viewModel.didInvested()
+        if let viewModel = programDetailsTabmanViewController?.viewModel {
+            viewModel.didInvested()
         }
     }
 }

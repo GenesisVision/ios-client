@@ -42,7 +42,7 @@ class BaseNavigationController: UINavigationController {
         }
       
         switch topViewController {
-        case is ProgramInvestViewController, is ProgramWithdrawViewController, is InfoViewController:
+        case is InfoViewController:
             return .lightContent
         default:
             return AppearanceController.theme == .darkTheme ? .lightContent : .default

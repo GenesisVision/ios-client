@@ -13,27 +13,42 @@ class ProgramWithdrawViewController: BaseViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - Labels
-    @IBOutlet var balanceLabel: UILabel!  {
+    @IBOutlet var investedTitleLabel: TitleLabel! {
         didSet {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllButtonAction))
-            tapGesture.numberOfTapsRequired = 1
-            balanceLabel.isUserInteractionEnabled = true
-            balanceLabel.addGestureRecognizer(tapGesture)
+            investedTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var investedValueLabel: TitleLabel! {
+        didSet {
+            investedValueLabel.textColor = UIColor.primary
+            investedValueLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel!
+    @IBOutlet var amountToWithdrawValueLabel: TitleLabel! {
+        didSet {
+            amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    @IBOutlet var amountToWithdrawCurrencyLabel: SubtitleLabel! {
+        didSet {
+            amountToWithdrawCurrencyLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var balanceCurrencyLabel: UILabel!
-
-    @IBOutlet var amountLabel: AmountLabel! {
+    @IBOutlet var copyMaxValueButton: UIButton!
+    
+    @IBOutlet var payoutDayTitleLabel: SubtitleLabel! {
         didSet {
-            amountLabel.font = UIFont.getFont(.light, size: 72)
-            amountLabel.text = viewModel.labelPlaceholder
+            payoutDayTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountCurrencyLabel: UILabel!
+    @IBOutlet var payoutDayValueLabel: TitleLabel!
     
     // MARK: - Buttons
     @IBOutlet var withdrawButton: ActionButton!
+    
+    private var closeBarButtonItem: UIBarButtonItem!
     
     // MARK: - Views
     @IBOutlet var numpadView: NumpadView! {
@@ -44,57 +59,47 @@ class ProgramWithdrawViewController: BaseViewController {
     }
     
     // MARK: - Variables
-    var enteredAmount: Double = 0.0 {
+    var amountToWithdrawValue: Double = 0.0 {
         didSet {
-            withdrawButton.setEnabled(enteredAmount > 0.0 && enteredAmount <= investedTokens)
-            updateNumPadState(value: amountLabel.text)
+            withdrawButton.setEnabled(amountToWithdrawValue > 0.0 && amountToWithdrawValue <= investedValue)
+            updateNumPadState(value: amountToWithdrawValueLabel.text)
         }
     }
     
-    var investedTokens: Double = 0.0
+    var investedValue: Double = 0.0
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion(), type: .primary)
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupUI()
-    }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        setupNavigationBar()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        setup()
     }
     
     // MARK: - Private methods
-    private func setupUI() {
-        view.backgroundColor = UIColor.Background.main
-        
-        setupNavigationBar(with: .primary)
+    private func setup() {
+        closeBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction))
+        navigationItem.rightBarButtonItem = closeBarButtonItem
         
         withdrawButton.setEnabled(false)
         
-        if let investedTokens = viewModel.investedTokens {
-            self.investedTokens = investedTokens
-            balanceLabel.text = self.investedTokens.toString()
+        if let investedValue = viewModel.investedValue {
+            self.investedValue = investedValue
+            investedValueLabel.text = self.investedValue.toString()
         }
         
-        self.balanceCurrencyLabel.text = "tokens"
-        self.amountCurrencyLabel.text = "tokens"
+        self.amountToWithdrawCurrencyLabel.text = "tokens"
     }
     
     private func withdrawMethod() {
         hideKeyboard()
 
-        guard let text = amountLabel.text,
+        guard let text = amountToWithdrawValueLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
         
@@ -121,14 +126,18 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
-    @objc private func copyAllButtonAction() {
-        amountLabel.text = investedTokens.toString(withoutFormatter: true)
-        enteredAmount = investedTokens
+    @objc private func closeButtonAction() {
+        viewModel.close()
     }
     
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         withdrawMethod()
+    }
+    
+    @IBAction func copyAllButtonAction(_ sender: UIButton) {
+        amountToWithdrawValueLabel.text = investedValue.toString(withoutFormatter: true)
+        amountToWithdrawValue = investedValue
     }
 }
 
@@ -150,11 +159,11 @@ extension ProgramWithdrawViewController: NumpadViewProtocol {
     }
     
     var textLabel: UILabel {
-        return self.amountLabel
+        return self.amountToWithdrawValueLabel
     }
     
     func textLabelDidChange(value: Double?) {
         numpadView.isEnable = true
-        enteredAmount = value != nil ? value! : 0.0
+        amountToWithdrawValue = value != nil ? value! : 0.0
     }
 }

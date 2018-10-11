@@ -21,48 +21,66 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet var availableToInvestLabel: UILabel! {
+    @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
         didSet {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyAllButtonAction))
-            tapGesture.numberOfTapsRequired = 1
-            availableToInvestLabel.isUserInteractionEnabled = true
-            availableToInvestLabel.addGestureRecognizer(tapGesture)
+            availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var availableToInvestValueLabel: TitleLabel! {
+        didSet {
+            availableToInvestValueLabel.textColor = UIColor.primary
+            availableToInvestValueLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var amountToInvestTitleLabel: SubtitleLabel! 
+    @IBOutlet var amountToInvestValueLabel: TitleLabel! {
+        didSet {
+            amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
+        didSet {
+            amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var balanceCurrencyLabel: UILabel!
-    @IBOutlet var exchangedAvailableToInvestLabel: UILabel!
-    @IBOutlet var exchangedBalanceCurrencyLabel: UILabel!
+    @IBOutlet var copyMaxValueButton: UIButton!
     
-    @IBOutlet var amountLabel: AmountLabel! {
+    @IBOutlet var entryFeeTitleLabel: SubtitleLabel! {
         didSet {
-            amountLabel.font = UIFont.getFont(.light, size: 72)
-            amountLabel.text = viewModel.labelPlaceholder
+            entryFeeTitleLabel.text = "Entry fee"
+            entryFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountCurrencyLabel: UILabel!
-    @IBOutlet var exchangedAmountLabel: UILabel!
-    @IBOutlet var exchangedAmountCurrencyLabel: CurrencyLabel!
+    @IBOutlet var entryFeeValueLabel: TitleLabel!
     
+    @IBOutlet var amountDueTitleLabel: SubtitleLabel! {
+        didSet {
+            amountDueTitleLabel.text = "Amount due"
+            amountDueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var amountDueValueLabel: TitleLabel!
+
     // MARK: - Buttons
     @IBOutlet var investButton: ActionButton!
+
+    private var closeBarButtonItem: UIBarButtonItem!
     
     // MARK: - Variables
-    var balance: Double = 0.0 {
+    var availableToInvestValue: Double = 0.0 {
         didSet {
-            self.availableToInvestLabel.text = balance.toString()
-        }
-    }
-    var exchangedBalance: Double = 0.0 {
-        didSet {
-            self.exchangedAvailableToInvestLabel.text = exchangedBalance.toString()
+            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " GVT"
         }
     }
     
-    var enteredAmount: Double = 0.0 {
+    var amountToInvestValue: Double = 0.0 {
         didSet {
-            viewModel.getExchangedAmount(amount: enteredAmount, completion: { [weak self] (exchangedAmountValue) in
-                self?.exchangedAmountLabel.text = exchangedAmountValue.toString()
+            viewModel.getExchangedAmount(amount: amountToInvestValue, completion: { [weak self] (amountToInvestValueCurrency) in
+                DispatchQueue.main.async {
+                    let selectedCurrency = getSelectedCurrency()
+                    self?.amountToInvestCurrencyLabel.text = "= \(amountToInvestValueCurrency.toString()) \(selectedCurrency)"
+                }
             }) { (result) in
                 switch result {
                 case .success:
@@ -72,8 +90,8 @@ class ProgramInvestViewController: BaseViewController {
                 }
             }
             
-            investButton.setEnabled(enteredAmount > 0 && enteredAmount <= balance)
-            updateNumPadState(value: amountLabel.text)
+            investButton.setEnabled(amountToInvestValue > 0 && amountToInvestValue <= amountToInvestValue)
+            updateNumPadState(value: amountToInvestValueLabel.text)
         }
     }
     
@@ -81,32 +99,26 @@ class ProgramInvestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion(), type: .primary)
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupUI()
-    }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        setupNavigationBar()
+        setup()
     }
     
     // MARK: - Private methods
-    private func setupUI() {
-        view.backgroundColor = UIColor.Background.main
-        
-        setupNavigationBar(with: .primary)
+    private func setup() {
+        closeBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction))
+        navigationItem.rightBarButtonItem = closeBarButtonItem
         
         investButton.setEnabled(false)
         showProgressHUD()
         
-        viewModel.getAvailableToInvest(completion: { [weak self] (balance, exchangedBalance) in
+        viewModel.getAvailableToInvest(completion: { [weak self] (amountToInvestValue, amountToInvestValueCurrency) in
             self?.hideAll()
-            self?.balance = balance
-            self?.exchangedBalance = exchangedBalance
+            self?.availableToInvestValue = amountToInvestValue
         }) { [weak self] (result) in
             self?.hideAll()
             
@@ -117,17 +129,16 @@ class ProgramInvestViewController: BaseViewController {
                 ErrorHandler.handleError(with: errorType)
             }
         }
-        
-        self.balanceCurrencyLabel.text = "GVT"
-        self.exchangedBalanceCurrencyLabel.text = viewModel.currency
-        self.amountCurrencyLabel.text = "GVT"
-        self.exchangedAmountCurrencyLabel.text = viewModel.currency
+    }
+    
+    @objc private func closeButtonAction() {
+        viewModel.close()
     }
     
     private func investMethod() {
         hideKeyboard()
         
-        guard let text = amountLabel.text,
+        guard let text = amountToInvestValueLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
@@ -154,15 +165,16 @@ class ProgramInvestViewController: BaseViewController {
         }
     }
     
-    @objc private func copyAllButtonAction() {
-        amountLabel.text = balance.toString(withoutFormatter: true)
-        enteredAmount = balance
-    }
-    
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
         investMethod()
     }
+    
+    @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
+        amountToInvestValueLabel.text = availableToInvestValue.toString(withoutFormatter: true)
+        amountToInvestValue = availableToInvestValue
+    }
+    
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
@@ -183,15 +195,15 @@ extension ProgramInvestViewController: NumpadViewProtocol {
     }
     
     var textLabel: UILabel {
-        return self.amountLabel
+        return self.amountToInvestValueLabel
     }
     
     var enteredAmountValue: Double {
-        return enteredAmount
+        return amountToInvestValue
     }
     
     func textLabelDidChange(value: Double?) {
         numpadView.isEnable = true
-        enteredAmount = value != nil ? value! : 0.0
+        amountToInvestValue = value != nil ? value! : 0.0
     }
 }

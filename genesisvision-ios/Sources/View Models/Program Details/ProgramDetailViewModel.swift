@@ -111,8 +111,8 @@ extension ProgramInfoViewModel {
     }
     
     func withdraw() {
-        guard let programId = programId, let investedTokens = programDetailsFull?.personalProgramDetails?.value, let currency = programDetailsFull?.currency else { return }
-        router.show(routeType: .withdraw(programId: programId, investedTokens: investedTokens, currency: currency.rawValue))
+        guard let programId = programId, let investedValue = programDetailsFull?.personalProgramDetails?.value, let currency = programDetailsFull?.currency else { return }
+        router.show(routeType: .withdraw(programId: programId, investedValue: investedValue, currency: currency.rawValue))
     }
     
     func showFullChart() {

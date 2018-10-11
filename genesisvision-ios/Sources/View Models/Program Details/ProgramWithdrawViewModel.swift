@@ -12,7 +12,7 @@ final class ProgramWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     var programId: String?
-    var investedTokens: Double?
+    var investedValue: Double?
     var labelPlaceholder: String = "0"
     
     private var rate: Double = 0.0
@@ -32,12 +32,12 @@ final class ProgramWithdrawViewModel {
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
          programId: String,
-         investedTokens: Double,
+         investedValue: Double,
          currency: String,
          programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.programId = programId
-        self.investedTokens = investedTokens
+        self.investedValue = investedValue
         self.currency = currency
         self.programDetailProtocol = programDetailProtocol
     }
@@ -57,6 +57,10 @@ final class ProgramWithdrawViewModel {
     func goToBack() {
         programDetailProtocol?.didWithdrawn()
         router.goToBack()
+    }
+    
+    func close() {
+        router.closeVC()
     }
     
     // MARK: - Private methods

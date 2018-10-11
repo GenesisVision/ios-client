@@ -149,7 +149,7 @@ extension UIColor {
         static var black: UIColor { return Common.black }
         static var white: UIColor { return Common.white }
         
-        static var numPadText: UIColor { return Common.uglyBlue }
+        static var numPadText: UIColor { return Common.lightDelimiter }
         static var amountDarkBlue: UIColor { return Common.darkSlateBlue }
         static var amountPlaceholder: UIColor { return Common.paleGrey }
     }
@@ -162,7 +162,7 @@ extension UIColor {
         static var red: UIColor { return AppearanceController.theme == .darkTheme ? Common.red : Common.red }
         
         static var gray: UIColor { return Common.silver }
-        static var numpadBackground: UIColor { return Common.numpadBackground }
+        static var numpadBackground: UIColor { return Common.darkBackground }
     }
     
     struct Currency {
