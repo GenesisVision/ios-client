@@ -238,7 +238,7 @@ class StatusButton: UIButton {
 
 class LevelButton: UIButton {
     var fontSize: CGFloat = 14.0
-    var bgColor: UIColor = UIColor.Button.primary
+    var borderSize: CGFloat = 3.0
     
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
@@ -262,7 +262,7 @@ class LevelButton: UIButton {
     func commonInit() {
         titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
 
-        roundWithBorder(3.0, color: UIColor.Cell.bg)
+        roundCorners(borderWidth: borderSize, borderColor: UIColor.Cell.bg)
         
         setTitleColor(UIColor.Cell.title, for: .normal)
         if let level = Int(titleLabel?.text ?? "") {

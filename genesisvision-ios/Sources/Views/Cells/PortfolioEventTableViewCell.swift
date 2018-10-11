@@ -37,6 +37,7 @@ class PortfolioEventTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectionStyle = .none
+        backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
     }}

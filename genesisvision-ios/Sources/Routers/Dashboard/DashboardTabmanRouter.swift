@@ -8,7 +8,7 @@
 
 class DashboardTabmanRouter: TabmanRouter {
     // MARK: - Variables
-    var programDetailViewController: ProgramDetailViewController?
+    var programDetailViewController: ProgramInfoViewController?
     
     // MARK: - Public methods
     func getDashboard() -> InvestorDashboardViewController? {

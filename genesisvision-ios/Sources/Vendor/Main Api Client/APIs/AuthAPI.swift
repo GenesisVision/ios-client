@@ -288,9 +288,9 @@ open class AuthAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10AuthPasswordChangePost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func v10AuthPasswordChangePost(authorization: String, model: ChangePasswordViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
         v10AuthPasswordChangePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+            completion(response?.body, error);
         }
     }
 
@@ -298,13 +298,14 @@ open class AuthAPI {
     /**
      Change password
      - POST /v1.0/auth/password/change
+     - examples: [{contentType=application/json, example=""}]
      
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<String> 
      */
-    open class func v10AuthPasswordChangePostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<Void> {
+    open class func v10AuthPasswordChangePostWithRequestBuilder(authorization: String, model: ChangePasswordViewModel? = nil) -> RequestBuilder<String> {
         let path = "/v1.0/auth/password/change"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -316,7 +317,7 @@ open class AuthAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }

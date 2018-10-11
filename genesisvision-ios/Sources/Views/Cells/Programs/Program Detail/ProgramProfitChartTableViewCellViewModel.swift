@@ -17,7 +17,7 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         
         cell.amountTitleLabel.text = "Amount"
         
-        if let amountValue = programProfitChart.balance {
+        if let amountValue = programProfitChart.totalGvtProfit {
             cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " GVT"
         } else {
             cell.amountValueLabel.isHidden = true
@@ -38,13 +38,13 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
             cell.changePercentLabel.isHidden = true
         }
         
-        if let changeValue = programProfitChart.totalGvtProfit {
+        if let changeValue = programProfitChart.timeframeGvtProfit {
             cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
         } else {
             cell.changeValueLabel.isHidden = true
         }
         
-        if let changeCurrency = programProfitChart.totalProgramCurrencyProfit {
+        if let changeCurrency = programProfitChart.timeframeProgramCurrencyProfit {
             let selectedCurrency = getSelectedCurrency()
             if let currencyType = CurrencyType(rawValue: selectedCurrency) {
                 cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + selectedCurrency
@@ -53,9 +53,12 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
             cell.changeCurrencyLabel.isHidden = true
         }
         
-        if let equityChart = programProfitChart.equityChart {
+        if let equityChart = programProfitChart.equityChart, equityChart.count > 0 {
+            cell.chartViewHeightConstraint.constant = 150.0
             cell.chartView.setup(lineChartData: equityChart)
+            cell.chartView.isHidden = false
         } else {
+            cell.chartViewHeightConstraint.constant = 0.0
             cell.chartView.isHidden = true
         }
     }

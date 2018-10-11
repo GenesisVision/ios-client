@@ -168,7 +168,7 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
     func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
             guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.program.personalProgramDetails?.isFavorite = value
+            model.program.personalDetails?.isFavorite = value
             completion(.success)
             return
         }
@@ -178,7 +178,7 @@ final class ProgramListViewModel: ProgramListViewModelProtocol {
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.program.personalProgramDetails?.isFavorite = value
+                model.program.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
                 print(errorType)

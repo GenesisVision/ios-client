@@ -17,19 +17,17 @@ open class NewFundRequest: Codable {
     public var title: String?
     public var description: String?
     public var logo: String?
-    public var brokerAccountTypeId: UUID?
     public var entryFee: Double?
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assetsParts: [OefAssetPart]?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?) {
+    public init(exitFee: Double?, managementFee: Double?, assetsParts: [OefAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?) {
         self.exitFee = exitFee
         self.managementFee = managementFee
         self.assetsParts = assetsParts
         self.title = title
         self.description = description
         self.logo = logo
-        self.brokerAccountTypeId = brokerAccountTypeId
         self.entryFee = entryFee
     }
     
@@ -46,7 +44,6 @@ open class NewFundRequest: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
     }
 
@@ -61,7 +58,6 @@ open class NewFundRequest: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
     }
 }

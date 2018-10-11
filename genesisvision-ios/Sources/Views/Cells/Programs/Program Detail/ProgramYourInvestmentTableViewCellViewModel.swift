@@ -20,7 +20,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Your investment"
         cell.reinvestTitleLabel.text = "Auto reinvest"
         
-        if let status = programDetailsFull?.personalProgramDetails?.investmentProgramStatus?.rawValue {
+        if let status = programDetailsFull?.personalProgramDetails?.status?.rawValue {
             cell.statusButton.setTitle(status, for: .normal)
             cell.statusButton.layoutSubviews()
         } else {

@@ -26,7 +26,10 @@ final class AuthChangePasswordViewModel {
     
     // MARK: - API
     func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        AuthDataProvider.changePassword(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword, completion: completion)
+        AuthDataProvider.changePassword(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword, completion: { (token) in
+            AuthManager.authorizedToken = token
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }
 

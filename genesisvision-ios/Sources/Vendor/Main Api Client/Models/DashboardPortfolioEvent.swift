@@ -18,7 +18,7 @@ open class DashboardPortfolioEvent: Codable {
         case profit = "Profit"
         case loss = "Loss"
         case reinvest = "Reinvest"
-        case canceled = "Canceled"
+        case cancelled = "Cancelled"
         case ended = "Ended"
     }
     public var assetId: UUID?

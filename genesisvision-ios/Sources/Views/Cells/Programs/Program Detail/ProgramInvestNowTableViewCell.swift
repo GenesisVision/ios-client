@@ -72,6 +72,7 @@ class ProgramInvestNowTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }

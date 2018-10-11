@@ -11,7 +11,7 @@ import Kingfisher
 
 struct ProgramTableViewCellViewModel {
     let program: ProgramDetails
-    weak var delegate: ProgramDetailViewControllerProtocol?
+    weak var delegate: ProgramInfoViewControllerProtocol?
 }
 
 extension ProgramTableViewCellViewModel: CellViewModel {
@@ -80,7 +80,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.thirdValueLabel.text = ""
         }
         
-        if let isFavorite = program.personalProgramDetails?.isFavorite {
+        if let isFavorite = program.personalDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         

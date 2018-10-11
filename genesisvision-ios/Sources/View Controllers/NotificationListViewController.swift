@@ -77,7 +77,7 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath.row) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

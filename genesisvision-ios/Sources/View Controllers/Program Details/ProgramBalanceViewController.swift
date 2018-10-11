@@ -17,8 +17,6 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
-        
         setup()
     }
     
@@ -29,7 +27,7 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.allowsSelection = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -78,7 +76,7 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath.row) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

@@ -49,7 +49,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
                 cell.typeImageView.image = nil
             case .reinvest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
-            case .canceled:
+            case .cancelled:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
             case .ended:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")

@@ -19,7 +19,7 @@ class TableViewDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVi
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

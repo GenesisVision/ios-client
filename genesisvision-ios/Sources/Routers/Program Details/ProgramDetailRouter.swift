@@ -27,22 +27,22 @@ class ProgramDetailRouter: Router {
     
     // MARK: - Private methods
     func invest(with programId: String, currency: String, availableToInvest: Double) {
-        guard let programDetailProtocol = parentRouter?.topViewController() as? ProgramDetailsTabmanViewController,
+        guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
             let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
-        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, currency: currency, availableToInvest: availableToInvest, programDetailProtocol: programDetailProtocol)
+        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, currency: currency, availableToInvest: availableToInvest, programDetailProtocol: programViewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func withdraw(with programId: String, investedTokens: Double, currency: String) {
-        guard let programDetailProtocol = parentRouter?.topViewController() as? ProgramDetailsTabmanViewController,
+        guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
             let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramWithdrawRouter(parentRouter: self)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, investedTokens: investedTokens, currency: currency, programDetailProtocol: programDetailProtocol)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, investedTokens: investedTokens, currency: currency, programDetailProtocol: programViewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

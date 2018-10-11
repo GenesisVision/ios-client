@@ -145,7 +145,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
             guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.program.personalProgramDetails?.isFavorite = value
+            model.program.personalDetails?.isFavorite = value
             
             if !value, let i = programViewModels.index(where: { $0.program.id?.uuidString == programId }) {
                 programViewModels.remove(at: i)
@@ -160,7 +160,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.program.personalProgramDetails?.isFavorite = value
+                model.program.personalDetails?.isFavorite = value
                 value ? completion(.success) : self?.refresh(completion: completion)
             case .failure(let errorType):
                 print(errorType)

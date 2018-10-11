@@ -34,7 +34,7 @@ final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDe
         }
         
         
-        return UITableViewCell()
+        return TableViewCell()
     }
 }
 

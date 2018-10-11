@@ -41,8 +41,6 @@ final class AuthSignInViewModel {
         AuthDataProvider.signIn(email: email, password: password, completion: { (token) in
             AuthManager.authorizedToken = token
             completion(.success)
-        }) { (result) in
-            completion(result)
-        }
+        }, errorCompletion: completion)
     }
 }

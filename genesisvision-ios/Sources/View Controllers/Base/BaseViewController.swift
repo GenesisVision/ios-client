@@ -21,6 +21,7 @@ class BaseViewController: UIViewController, Hidable {
         let selectedCurrency = getSelectedCurrency()
         
         let currencyTitleButton = StatusButton(type: .system)
+        currencyTitleButton.frame = CGRect(x: 0, y: 0, width: 73, height: 18)
         currencyTitleButton.setTitle(selectedCurrency, for: .normal)
         currencyTitleButton.setTitleColor(UIColor.Cell.title, for: .normal)
         currencyTitleButton.bgColor = UIColor.Cell.bg
@@ -342,15 +343,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-            
-            if #available(iOS 11, *) {
-                let guide = self.view.safeAreaLayoutGuide
-                tableView.topAnchor.constraintEqualToSystemSpacingBelow(guide.topAnchor, multiplier: 1.0).isActive = true
-                
-            } else {
-                let standardSpacing: CGFloat = 0.0
-                tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing).isActive = true
-            }
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         }
     }
     
@@ -369,7 +362,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0
         
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = UIColor.BaseView.bg
+        tableView.tableHeaderView?.backgroundColor = UIColor.Cell.headerBg
 
         filterStackView.addArrangedSubview(sortButton)
         filterStackView.addArrangedSubview(filterButton)
@@ -606,7 +600,8 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
         fetchMoreActivityIndicator.startAnimating()
         tableView.tableFooterView = fetchMoreActivityIndicator
         
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = UIColor.BaseView.bg
+        tableView.tableHeaderView?.backgroundColor = UIColor.Cell.headerBg
         
         tableView.separatorInset.left = 16.0
         tableView.separatorInset.right = 16.0

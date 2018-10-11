@@ -12,6 +12,55 @@ import Alamofire
 
 open class ManagersAPI {
     /**
+     Manager details
+     
+     - parameter id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagersByIdDetailsGet(id: String, completion: @escaping ((_ data: ManagerProfileDetails?,_ error: Error?) -> Void)) {
+        v10ManagersByIdDetailsGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Manager details
+     - GET /v1.0/managers/{id}/details
+     - examples: [{contentType=application/json, example={
+  "overview" : { },
+  "managerProfile" : {
+    "assets" : [ "assets", "assets" ],
+    "about" : "about",
+    "regDate" : "2000-01-23T04:56:07.000+00:00",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "avatar" : "avatar",
+    "url" : "url",
+    "username" : "username"
+  },
+  "programsCount" : 0,
+  "fundsCount" : 6
+}}]
+     
+     - parameter id: (path)  
+
+     - returns: RequestBuilder<ManagerProfileDetails> 
+     */
+    open class func v10ManagersByIdDetailsGetWithRequestBuilder(id: String) -> RequestBuilder<ManagerProfileDetails> {
+        var path = "/v1.0/managers/{id}/details"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<ManagerProfileDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Manager profile
      
      - parameter id: (path)  

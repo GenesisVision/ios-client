@@ -26,24 +26,24 @@ open class NewProgramRequest: Codable {
     public var successFee: Double?
     public var stopOutLevel: Double?
     public var leverage: Int?
+    public var brokerAccountTypeId: UUID?
     public var title: String?
     public var description: String?
     public var logo: String?
-    public var brokerAccountTypeId: UUID?
     public var entryFee: Double?
 
 
     
-    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, title: String?, description: String?, logo: String?, brokerAccountTypeId: UUID?, entryFee: Double?) {
+    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, title: String?, description: String?, logo: String?, entryFee: Double?) {
         self.currency = currency
         self.periodLength = periodLength
         self.successFee = successFee
         self.stopOutLevel = stopOutLevel
         self.leverage = leverage
+        self.brokerAccountTypeId = brokerAccountTypeId
         self.title = title
         self.description = description
         self.logo = logo
-        self.brokerAccountTypeId = brokerAccountTypeId
         self.entryFee = entryFee
     }
     
@@ -59,10 +59,10 @@ open class NewProgramRequest: Codable {
         try container.encodeIfPresent(successFee, forKey: "successFee")
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(leverage, forKey: "leverage")
+        try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
     }
 
@@ -76,10 +76,10 @@ open class NewProgramRequest: Codable {
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         leverage = try container.decodeIfPresent(Int.self, forKey: "leverage")
+        brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
     }
 }

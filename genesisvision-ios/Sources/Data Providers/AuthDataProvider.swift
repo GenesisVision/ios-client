@@ -30,13 +30,19 @@ class AuthDataProvider: DataProvider {
             : managerForgotPassword(with: forgotPasswordViewModel, completion: completion)
     }
     
-    static func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+    static func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         let changePasswordViewModel = ChangePasswordViewModel(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword)
-        
-        AuthAPI.v10AuthPasswordChangePost(authorization: authorization, model: changePasswordViewModel) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
+        AuthAPI.v10AuthPasswordChangePost(authorization: authorization, model: changePasswordViewModel) { (token, error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    completion(token)
+                case .failure:
+                    errorCompletion(result)
+                }
+            })
         }
     }
     

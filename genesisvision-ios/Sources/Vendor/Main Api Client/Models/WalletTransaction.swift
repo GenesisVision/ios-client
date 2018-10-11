@@ -67,14 +67,16 @@ open class WalletTransaction: Codable {
     public var sourceId: UUID?
     public var sourceType: SourceType?
     public var sourceCurrency: SourceCurrency?
+    public var sourceTitle: String?
     public var action: Action?
     public var destinationId: UUID?
     public var destinationType: DestinationType?
     public var destinationCurrency: DestinationCurrency?
+    public var destinationTitle: String?
 
 
     
-    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?) {
+    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, sourceTitle: String?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?, destinationTitle: String?) {
         self.id = id
         self.amount = amount
         self.amountConverted = amountConverted
@@ -83,10 +85,12 @@ open class WalletTransaction: Codable {
         self.sourceId = sourceId
         self.sourceType = sourceType
         self.sourceCurrency = sourceCurrency
+        self.sourceTitle = sourceTitle
         self.action = action
         self.destinationId = destinationId
         self.destinationType = destinationType
         self.destinationCurrency = destinationCurrency
+        self.destinationTitle = destinationTitle
     }
     
 
@@ -104,10 +108,12 @@ open class WalletTransaction: Codable {
         try container.encodeIfPresent(sourceId, forKey: "sourceId")
         try container.encodeIfPresent(sourceType, forKey: "sourceType")
         try container.encodeIfPresent(sourceCurrency, forKey: "sourceCurrency")
+        try container.encodeIfPresent(sourceTitle, forKey: "sourceTitle")
         try container.encodeIfPresent(action, forKey: "action")
         try container.encodeIfPresent(destinationId, forKey: "destinationId")
         try container.encodeIfPresent(destinationType, forKey: "destinationType")
         try container.encodeIfPresent(destinationCurrency, forKey: "destinationCurrency")
+        try container.encodeIfPresent(destinationTitle, forKey: "destinationTitle")
     }
 
     // Decodable protocol methods
@@ -123,10 +129,12 @@ open class WalletTransaction: Codable {
         sourceId = try container.decodeIfPresent(UUID.self, forKey: "sourceId")
         sourceType = try container.decodeIfPresent(SourceType.self, forKey: "sourceType")
         sourceCurrency = try container.decodeIfPresent(SourceCurrency.self, forKey: "sourceCurrency")
+        sourceTitle = try container.decodeIfPresent(String.self, forKey: "sourceTitle")
         action = try container.decodeIfPresent(Action.self, forKey: "action")
         destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
         destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
         destinationCurrency = try container.decodeIfPresent(DestinationCurrency.self, forKey: "destinationCurrency")
+        destinationTitle = try container.decodeIfPresent(String.self, forKey: "destinationTitle")
     }
 }
 

@@ -62,52 +62,45 @@ class ProgramProfitStatisticTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var tradesCountValueLabel: TitleLabel!
-    @IBOutlet var tradesCountTitleLabel: SubtitleLabel!
+    
+    @IBOutlet var startDateValueLabel: TitleLabel!
+    @IBOutlet var startDateTitleLabel: SubtitleLabel!
+    
+    @IBOutlet var endDateValueLabel: TitleLabel!
+    @IBOutlet var endDateTitleLabel: SubtitleLabel!
     
     @IBOutlet var tradesSuccessCountValueLabel: TitleLabel!
     @IBOutlet var tradesSuccessCountTitleLabel: SubtitleLabel!
     
-    @IBOutlet var investedAmountValueLabel: TitleLabel!
-    @IBOutlet var investedAmountTitleLabel: SubtitleLabel!
+    @IBOutlet var tradesCountValueLabel: TitleLabel!
+    @IBOutlet var tradesCountTitleLabel: SubtitleLabel!
     
-    @IBOutlet var startBalanceValueLabel: TitleLabel!
-    @IBOutlet var startBalanceTitleLabel: SubtitleLabel!
-
-    @IBOutlet var startDateValueLabel: TitleLabel!
-    @IBOutlet var startDateTitleLabel: SubtitleLabel!
+    @IBOutlet var drawdownPercentValueLabel: TitleLabel!
+    @IBOutlet var drawdownPercentTitleLabel: SubtitleLabel!
     
     @IBOutlet var investorsCountValueLabel: TitleLabel!
     @IBOutlet var investorsCountTitleLabel: SubtitleLabel!
-
-    @IBOutlet var drawdownPercentValueLabel: TitleLabel!
-    @IBOutlet var drawdownPercentTitleLabel: SubtitleLabel!
+    
+    @IBOutlet var balanceValueLabel: TitleLabel!
+    @IBOutlet var balanceTitleLabel: SubtitleLabel!
     
     @IBOutlet var sharpeRatioPercentValueLabel: TitleLabel!
     @IBOutlet var sharpeRatioPercentTitleLabel: SubtitleLabel!
     
+    @IBOutlet var calmarRatioPercentValueLabel: TitleLabel!
+    @IBOutlet var calmarRatioPercentTitleLabel: SubtitleLabel!
+    
+    @IBOutlet var sortinoRatioPercentValueLabel: TitleLabel!
+    @IBOutlet var sortinoRatioPercentTitleLabel: SubtitleLabel!
+    
     @IBOutlet var profitFactorPercentValueLabel: TitleLabel!
     @IBOutlet var profitFactorPercentTitleLabel: SubtitleLabel!
-    
-//    @IBOutlet var investedCurrencyValueLabel: TitleLabel!
-//    @IBOutlet var investedCurrencyTitleLabel: SubtitleLabel!
-//
-//    @IBOutlet var startCurrencyValueLabel: TitleLabel!
-//    @IBOutlet var startCurrencyTitleLabel: SubtitleLabel!
-//
-//    @IBOutlet var profitValueLabel: TitleLabel!
-//    @IBOutlet var profitValueTitleLabel: SubtitleLabel!
-//
-//    @IBOutlet var profitPercentValueLabel: TitleLabel!
-//    @IBOutlet var profitPercentTitleLabel: SubtitleLabel!
-//
-//    @IBOutlet var currentValueLabel: TitleLabel!
-//    @IBOutlet var currentValueTitleLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }

@@ -139,6 +139,10 @@ class PortfolioViewController: BaseViewController {
                     let inRequestsCurrency = totalValue * rate
                     inRequestsCurrencyLabel.text = inRequestsCurrency.toString() + " \(getSelectedCurrency())"
                 }
+                
+                if let requests = programRequests.requests {
+                    self.inRequestsButton.isHidden = requests.count == 0
+                }
             }
         }
     }

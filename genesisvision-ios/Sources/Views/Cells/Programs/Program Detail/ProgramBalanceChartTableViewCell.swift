@@ -12,6 +12,11 @@ import Charts
 class ProgramBalanceChartTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
+    @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            chartViewHeightConstraint.constant = 0.0
+        }
+    }
     @IBOutlet weak var amountTitleLabel: SubtitleLabel! {
         didSet {
             amountTitleLabel.textColor = UIColor.Cell.subtitle
@@ -74,6 +79,7 @@ class ProgramBalanceChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
         

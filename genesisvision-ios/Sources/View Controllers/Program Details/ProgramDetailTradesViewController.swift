@@ -17,8 +17,6 @@ class ProgramDetailTradesViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
-        
         setup()
     }
     
@@ -77,7 +75,7 @@ extension ProgramDetailTradesViewController: UITableViewDelegate, UITableViewDat
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath.row) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

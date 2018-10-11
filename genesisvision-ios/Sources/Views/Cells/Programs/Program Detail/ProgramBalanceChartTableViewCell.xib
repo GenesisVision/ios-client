@@ -149,6 +149,7 @@
                 <outlet property="changeTitleLabel" destination="MCa-EV-Icg" id="6Fi-WW-ih2"/>
                 <outlet property="changeValueLabel" destination="i1D-Ru-GVb" id="JWl-zi-ZVS"/>
                 <outlet property="chartView" destination="SjG-41-NUG" id="nVq-cZ-zFI"/>
+                <outlet property="chartViewHeightConstraint" destination="yCq-0W-May" id="crT-09-4fp"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="308.54572713643182"/>
         </tableViewCell>

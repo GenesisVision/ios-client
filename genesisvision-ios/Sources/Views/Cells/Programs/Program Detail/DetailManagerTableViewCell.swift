@@ -33,8 +33,8 @@ class DetailManagerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.BaseView.bg
         backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
         tintColor = UIColor.Cell.title
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none

@@ -13,15 +13,17 @@ open class FundInvestInfo: Codable {
 
     public var title: String?
     public var availableInWallet: Double?
+    public var minInvestmentAmount: Double?
     public var entryFee: Double?
     public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(title: String?, availableInWallet: Double?, entryFee: Double?, periodEnds: Date?, rate: Double?) {
+    public init(title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, periodEnds: Date?, rate: Double?) {
         self.title = title
         self.availableInWallet = availableInWallet
+        self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
         self.periodEnds = periodEnds
         self.rate = rate
@@ -36,6 +38,7 @@ open class FundInvestInfo: Codable {
 
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableInWallet, forKey: "availableInWallet")
+        try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
@@ -48,6 +51,7 @@ open class FundInvestInfo: Codable {
 
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableInWallet = try container.decodeIfPresent(Double.self, forKey: "availableInWallet")
+        minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")

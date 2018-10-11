@@ -74,7 +74,7 @@ final class DashboardProgramListViewModel {
     func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
             guard let model = model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.program.personalProgramDetails?.isFavorite = value
+            model.program.personalDetails?.isFavorite = value
             completion(.success)
             return
         }
@@ -83,7 +83,7 @@ final class DashboardProgramListViewModel {
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.program.personalProgramDetails?.isFavorite = value
+                model.program.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
                 print(errorType)
@@ -297,7 +297,7 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel?.model(at: indexPath) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)

@@ -32,48 +32,31 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
         title = "Program Details"
         backgroundColor = UIColor.Cell.bg
-        reloadData()
     }
     
     // MARK: - Public methods
     func didRequestCanceled(_ last: Bool) {
-        guard !last else { return reloadData() }
-        
-        ProgramDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
-            guard let viewModel = viewModel else { return }
-            self?.programDetailsFull = viewModel
-            self?.reloadDetails()
-        }) { (result) in }
+        setup()
     }
     
     func didInvested() {
-        reloadData()
+        setup()
     }
     
     func didWithdrawn() {
-        reloadData()
+        setup()
     }
     
     func reloadDetails() {
-        if let vc = viewControllers.first as? ProgramDetailViewController, let programDetailsFull = programDetailsFull {
+        if let vc = viewControllers.first as? ProgramInfoViewController, let programDetailsFull = programDetailsFull {
             vc.viewModel.updateDetails(with: programDetailsFull)
         }
     }
     
     func updateDetails(_ programDetailsFull: ProgramDetailsFull) {
-        if let vc = viewControllers.first as? ProgramDetailViewController {
+        if let vc = viewControllers.first as? ProgramInfoViewController {
             vc.viewModel.updateDetails(with: programDetailsFull)
         }
-    }
-    
-    func reloadData() {
-        ProgramDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
-            guard let viewModel = viewModel else { return }
-            self?.programDetailsFull = viewModel
-            self?.programDetailsProtocol?.didFavoriteStateUpdated()
-            self?.removeAllControllers()
-            self?.setup()
-        }) { (result) in }
     }
     
     func changeFavorite(completion: @escaping CompletionBlock) {
@@ -94,8 +77,13 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         }
     }
     
-    // MARK: - Private methods
-    private func setup() {
+    func setup(_ viewModel: ProgramDetailsFull? = nil) {
+        removeAllControllers()
+        
+        if let viewModel = viewModel {
+            self.programDetailsFull = viewModel
+        }
+        
         if let router = router as? ProgramDetailsRouter, let programDetailsFull = programDetailsFull {
             if let vc = router.getDetail(with: programDetailsFull) {
                 self.addController(vc)
@@ -111,11 +99,6 @@ final class ProgramDetailsViewModel: TabmanViewModel {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
-            
-//            if let availableInvestment = programDetailsFull.availableInvestment, availableInvestment, let vc = router.getRequests(with: programId) {
-//                self.addController(vc)
-//                self.addItem(vc.viewModel.title)
-//            }
             
             if let vc = router.getBalance(with: programId) {
                 self.addController(vc)

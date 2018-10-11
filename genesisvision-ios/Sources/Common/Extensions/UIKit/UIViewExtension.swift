@@ -30,13 +30,6 @@ extension UIView {
         layer.masksToBounds = true
     }
     
-    func roundWithBorder(_ approximateBorderWidth: CGFloat, color: UIColor = .white) {
-        roundCorners()
-        let border = makeRoundBorder(approximateBorderWidth, color: color)
-        //TODO: Remove old border
-        layer.addSublayer(border)
-    }
-    
     func addBorder(withBorderWidth borderWidth: CGFloat, color: UIColor = .white) {
         layer.borderWidth = borderWidth
         layer.borderColor = color.cgColor

@@ -37,7 +37,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let programRequests = programRequests?.requests else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         let programRequest = programRequests[indexPath.row]

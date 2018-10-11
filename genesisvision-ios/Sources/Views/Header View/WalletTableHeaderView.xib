@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-xA-Tqd">
-                    <rect key="frame" x="187" y="136.5" width="1" height="137.5"/>
+                    <rect key="frame" x="187" y="134" width="1" height="130"/>
                     <color key="backgroundColor" red="0.054901960784313725" green="0.082352941176470587" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="Ftu-r5-p8b"/>
@@ -27,33 +27,36 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="298"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fAq-fi-d4d">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tt9-9w-obe" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="0.0" width="42" height="27"/>
+                                    <rect key="frame" x="166.5" y="0.0" width="42" height="23.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUL-i7-INW" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="33" width="42" height="27"/>
+                                    <rect key="frame" x="166.5" y="29.5" width="42" height="23.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlW-J4-wHi" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="66" width="42" height="30.5"/>
+                                    <rect key="frame" x="166.5" y="59" width="42" height="25"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="84" id="SkS-mP-4Pu"/>
+                            </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jik-3Q-kUS">
-                            <rect key="frame" x="0.0" y="112.5" width="375" height="185.5"/>
+                            <rect key="frame" x="0.0" y="100" width="375" height="198"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="JwG-Hv-EuR">
-                                    <rect key="frame" x="0.0" y="24" width="187.5" height="137.5"/>
+                                    <rect key="frame" x="0.0" y="34" width="187.5" height="130"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-vx-KJW" customClass="CircularProgressView" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="74" y="0.0" width="40" height="40"/>
@@ -64,32 +67,35 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="NPZ-BK-iIB">
-                                            <rect key="frame" x="73" y="64" width="42" height="73.5"/>
+                                            <rect key="frame" x="75" y="64" width="37.5" height="66"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N71-O1-pc3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meD-ga-EP8" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26.5" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="24" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fg-Sz-NiK" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="53" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="48" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="66" id="q3U-JV-8nS"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="CO4-zh-3xK">
-                                    <rect key="frame" x="187.5" y="24" width="187.5" height="137.5"/>
+                                    <rect key="frame" x="187.5" y="34" width="187.5" height="130"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj5-Ch-egZ" customClass="CircularProgressView" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="74" y="0.0" width="40" height="40"/>
@@ -100,27 +106,30 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4IP-BL-8We">
-                                            <rect key="frame" x="73" y="64" width="42" height="73.5"/>
+                                            <rect key="frame" x="75" y="64" width="37.5" height="66"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUc-FW-D5w" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mR0-wO-bah" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26.5" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="24" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="And-0G-6iT" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="53" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="48" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="66" id="VLC-AT-HsE"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>

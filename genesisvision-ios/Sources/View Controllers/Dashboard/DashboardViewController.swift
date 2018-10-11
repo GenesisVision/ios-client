@@ -9,7 +9,6 @@
 import UIKit
 
 class DashboardViewController: BaseViewController {
-
     // MARK: - View Model
     var viewModel: DashboardViewModel!
     
@@ -67,18 +66,18 @@ class DashboardViewController: BaseViewController {
         }
     }
     
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
+    }
+    
     // MARK: - Private methods
     private func setup() {
         setupPullToRefresh(scrollView: scrollView)
         
         showProgressHUD()
         setupUI()
-        fetch()
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
         fetch()
     }
     

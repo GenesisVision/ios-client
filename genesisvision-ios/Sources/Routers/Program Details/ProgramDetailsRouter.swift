@@ -8,15 +8,15 @@
 
 class ProgramDetailsRouter: TabmanRouter {
     // MARK: - Variables
-    var programDetailViewController: ProgramDetailViewController?
+    var programDetailViewController: ProgramInfoViewController?
     
     // MARK: - Public methods
-    func getDetail(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailViewController? {
-        guard let viewController = ProgramDetailViewController.storyboardInstance(name: .program) else { return nil }
+    func getDetail(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
+        guard let viewController = ProgramInfoViewController.storyboardInstance(name: .program) else { return nil }
         
         let router = ProgramDetailRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramDetailViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController)
+        let viewModel = ProgramInfoViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         
@@ -53,12 +53,10 @@ class ProgramDetailsRouter: TabmanRouter {
     }
     
     func getRequests(with programId: String) -> ProgramRequestsViewController? {
-        guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
-        
         let viewController = ProgramRequestsViewController()
         let router = ProgramRequestsRouter(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ProgramRequestsViewModel(withRouter: router, programId: programId, programDetailProtocol: vc, reloadDataProtocol: viewController as? ReloadDataProtocol)
+        let viewModel = ProgramRequestsViewModel(withRouter: router, programId: programId, programDetailProtocol: nil, reloadDataProtocol: viewController as? ReloadDataProtocol)
         viewController.viewModel = viewModel
         
         return viewController

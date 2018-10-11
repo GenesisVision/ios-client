@@ -36,9 +36,12 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.changeValueLabel.isHidden = true
         cell.changeCurrencyLabel.isHidden = true
         
-        if let balanceChart = programBalanceChart.balanceChart {
+        if let balanceChart = programBalanceChart.balanceChart, balanceChart.count > 0 {
+            cell.chartViewHeightConstraint.constant = 300.0
             cell.chartView.setup(balanceChart: balanceChart)
+            cell.chartView.isHidden = false
         } else {
+            cell.chartViewHeightConstraint.constant = 0.0
             cell.chartView.isHidden = true
         }
     }

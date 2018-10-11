@@ -12,7 +12,7 @@ import Kingfisher
 struct DashboardTableViewCellViewModel {
     let program: ProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
-    weak var delegate: ProgramDetailViewControllerProtocol?
+    weak var delegate: ProgramInfoViewControllerProtocol?
 }
 
 extension DashboardTableViewCellViewModel: CellViewModel {
@@ -42,7 +42,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.managerNameLabel.text = "by " + managerName
         }
         
-        if let status = program.status {
+        if let status = program.personalDetails?.status {
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         }
@@ -79,13 +79,13 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         cell.thirdTitleLabel.text = "share"
-        if let share = program.dashboardProgramDetails?.share {
+        if let share = program.dashboardAssetsDetails?.share {
             cell.thirdValueLabel.text = share.rounded(toPlaces: 2).toString() + "%"
         } else {
             cell.thirdValueLabel.text = ""
         }
         
-        if let isFavorite = program.personalProgramDetails?.isFavorite {
+        if let isFavorite = program.personalDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         

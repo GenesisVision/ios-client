@@ -14,16 +14,18 @@ open class ProgramInvestInfo: Codable {
     public var availableToInvest: Double?
     public var title: String?
     public var availableInWallet: Double?
+    public var minInvestmentAmount: Double?
     public var entryFee: Double?
     public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(availableToInvest: Double?, title: String?, availableInWallet: Double?, entryFee: Double?, periodEnds: Date?, rate: Double?) {
+    public init(availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, periodEnds: Date?, rate: Double?) {
         self.availableToInvest = availableToInvest
         self.title = title
         self.availableInWallet = availableInWallet
+        self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
         self.periodEnds = periodEnds
         self.rate = rate
@@ -39,6 +41,7 @@ open class ProgramInvestInfo: Codable {
         try container.encodeIfPresent(availableToInvest, forKey: "availableToInvest")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableInWallet, forKey: "availableInWallet")
+        try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
@@ -52,6 +55,7 @@ open class ProgramInvestInfo: Codable {
         availableToInvest = try container.decodeIfPresent(Double.self, forKey: "availableToInvest")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableInWallet = try container.decodeIfPresent(Double.self, forKey: "availableInWallet")
+        minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")

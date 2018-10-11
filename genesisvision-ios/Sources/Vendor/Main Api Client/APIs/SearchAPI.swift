@@ -65,15 +65,16 @@ open class SearchAPI {
       "description" : "description",
       "title" : "title",
       "url" : "url",
-      "personalProgramDetails" : {
+      "dashboardAssetsDetails" : {
+        "share" : 4.145608029883936
+      },
+      "personalDetails" : {
         "isFavorite" : true,
-        "isInvested" : true
+        "isInvested" : true,
+        "status" : "Active"
       },
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "dashboardProgramDetails" : {
-        "share" : 4.145608029883936
-      },
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911
@@ -116,15 +117,16 @@ open class SearchAPI {
       "description" : "description",
       "title" : "title",
       "url" : "url",
-      "personalProgramDetails" : {
+      "dashboardAssetsDetails" : {
+        "share" : 4.145608029883936
+      },
+      "personalDetails" : {
         "isFavorite" : true,
-        "isInvested" : true
+        "isInvested" : true,
+        "status" : "Active"
       },
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "dashboardProgramDetails" : {
-        "share" : 4.145608029883936
-      },
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911
@@ -171,18 +173,20 @@ open class SearchAPI {
       "description" : "description",
       "title" : "title",
       "url" : "url",
-      "personalProgramDetails" : {
-        "isFavorite" : true,
-        "isInvested" : true
-      },
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "dashboardAssetsDetails" : {
+        "share" : 4.145608029883936
+      },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isReinvest" : true,
+        "isFavorite" : true,
+        "isInvested" : true,
+        "status" : "Active"
+      },
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "dashboardProgramDetails" : {
-        "share" : 4.145608029883936
-      },
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911
@@ -225,18 +229,20 @@ open class SearchAPI {
       "description" : "description",
       "title" : "title",
       "url" : "url",
-      "personalProgramDetails" : {
-        "isFavorite" : true,
-        "isInvested" : true
-      },
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "dashboardAssetsDetails" : {
+        "share" : 4.145608029883936
+      },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isReinvest" : true,
+        "isFavorite" : true,
+        "isInvested" : true,
+        "status" : "Active"
+      },
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "dashboardProgramDetails" : {
-        "share" : 4.145608029883936
-      },
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911

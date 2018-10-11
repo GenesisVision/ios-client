@@ -192,7 +192,7 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
 
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
@@ -243,8 +243,8 @@ extension ProgramListViewController: ReloadDataProtocol {
     }
 }
 
-// MARK: - ProgramDetailViewControllerProtocol
-extension ProgramListViewController: ProgramDetailViewControllerProtocol {
+// MARK: - ProgramInfoViewControllerProtocol
+extension ProgramListViewController: ProgramInfoViewControllerProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in

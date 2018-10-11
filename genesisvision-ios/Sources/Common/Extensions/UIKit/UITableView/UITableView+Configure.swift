@@ -21,7 +21,7 @@ struct TableViewConfiguration {
     var separatorInsetBottom: CGFloat
     
     init(
-        topInset: CGFloat? = nil,
+        topInset: CGFloat? = 0.0,
         bottomInset: CGFloat? = nil,
         bottomIndicatorInset: CGFloat? = nil,
         estimatedRowHeight: CGFloat = 0,

@@ -55,6 +55,15 @@ extension ProgramProfitViewModel {
     func numberOfRows(in section: Int) -> Int {
         return 1
     }
+    
+    func heightForHeader(in section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return 20.0
+        }
+    }
 }
 
 // MARK: - Fetch

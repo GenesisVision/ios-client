@@ -88,11 +88,12 @@ open class InvestorAPI {
      Data for investing into the fund
      - GET /v1.0/investor/funds/{id}/invest/info/{currency}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 6.027456183070403,
+  "entryFee" : 1.4658129805029452,
   "availableInWallet" : 0.8008281904610115,
-  "rate" : 1.4658129805029452,
+  "rate" : 5.962133916683182,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-  "title" : "title"
+  "title" : "title",
+  "minInvestmentAmount" : 6.027456183070403
 }}]
      
      - parameter id: (path)  
@@ -390,15 +391,16 @@ open class InvestorAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
+    "personalDetails" : {
       "isFavorite" : true,
-      "isInvested" : true
+      "isInvested" : true,
+      "status" : "Active"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -441,15 +443,16 @@ open class InvestorAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
+    "personalDetails" : {
       "isFavorite" : true,
-      "isInvested" : true
+      "isInvested" : true,
+      "status" : "Active"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -891,7 +894,7 @@ open class InvestorAPI {
         case profit = "Profit"
         case loss = "Loss"
         case reinvest = "Reinvest"
-        case canceled = "Canceled"
+        case cancelled = "Cancelled"
         case ended = "Ended"
     }
 
@@ -1060,12 +1063,13 @@ open class InvestorAPI {
      Data for investing into the program
      - GET /v1.0/investor/programs/{id}/invest/info/{currency}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 1.4658129805029452,
+  "entryFee" : 5.962133916683182,
   "availableInWallet" : 6.027456183070403,
-  "rate" : 5.962133916683182,
+  "rate" : 5.637376656633329,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "availableToInvest" : 0.8008281904610115,
-  "title" : "title"
+  "title" : "title",
+  "minInvestmentAmount" : 1.4658129805029452
 }}]
      
      - parameter id: (path)  
@@ -1450,18 +1454,20 @@ open class InvestorAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
-      "isFavorite" : true,
-      "isInvested" : true
-    },
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+    "personalDetails" : {
+      "isReinvest" : true,
+      "isFavorite" : true,
+      "isInvested" : true,
+      "status" : "Active"
+    },
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1504,18 +1510,20 @@ open class InvestorAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
-      "isFavorite" : true,
-      "isInvested" : true
-    },
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+    "personalDetails" : {
+      "isReinvest" : true,
+      "isFavorite" : true,
+      "isInvested" : true,
+      "status" : "Active"
+    },
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911

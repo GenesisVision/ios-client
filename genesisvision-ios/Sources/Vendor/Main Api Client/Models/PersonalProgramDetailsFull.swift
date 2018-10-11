@@ -11,7 +11,7 @@ import Foundation
 
 open class PersonalProgramDetailsFull: Codable {
 
-    public enum InvestmentProgramStatus: String, Codable { 
+    public enum Status: String, Codable { 
         case active = "Active"
         case investing = "Investing"
         case withdrawing = "Withdrawing"
@@ -21,22 +21,20 @@ open class PersonalProgramDetailsFull: Codable {
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
-    public var hasNotifications: Bool?
     public var value: Double?
     public var profit: Double?
-    public var investmentProgramStatus: InvestmentProgramStatus?
+    public var status: Status?
 
 
     
-    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, investmentProgramStatus: InvestmentProgramStatus?) {
+    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, value: Double?, profit: Double?, status: Status?) {
         self.isReinvest = isReinvest
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
-        self.hasNotifications = hasNotifications
         self.value = value
         self.profit = profit
-        self.investmentProgramStatus = investmentProgramStatus
+        self.status = status
     }
     
 
@@ -50,10 +48,9 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
-        try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(investmentProgramStatus, forKey: "investmentProgramStatus")
+        try container.encodeIfPresent(status, forKey: "status")
     }
 
     // Decodable protocol methods
@@ -65,10 +62,9 @@ open class PersonalProgramDetailsFull: Codable {
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
-        hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        investmentProgramStatus = try container.decodeIfPresent(InvestmentProgramStatus.self, forKey: "investmentProgramStatus")
+        status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }
 

@@ -11,14 +11,24 @@ import Foundation
 
 open class PersonalProgramDetailsList: Codable {
 
+    public enum Status: String, Codable { 
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+    public var isReinvest: Bool?
     public var isFavorite: Bool?
     public var isInvested: Bool?
+    public var status: Status?
 
 
     
-    public init(isFavorite: Bool?, isInvested: Bool?) {
+    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, status: Status?) {
+        self.isReinvest = isReinvest
         self.isFavorite = isFavorite
         self.isInvested = isInvested
+        self.status = status
     }
     
 
@@ -28,8 +38,10 @@ open class PersonalProgramDetailsList: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
+        try container.encodeIfPresent(status, forKey: "status")
     }
 
     // Decodable protocol methods
@@ -37,8 +49,10 @@ open class PersonalProgramDetailsList: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
+        status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }
 

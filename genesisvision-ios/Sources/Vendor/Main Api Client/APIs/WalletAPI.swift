@@ -178,29 +178,33 @@ open class WalletAPI {
   "transactions" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "sourceId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "number" : 1,
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
+    "sourceTitle" : "sourceTitle",
+    "sourceCurrency" : "Undefined",
+    "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "number" : 1,
+    "destinationTitle" : "destinationTitle",
     "sourceType" : "Wallet",
     "action" : "Transfer",
     "destinationType" : "Wallet",
     "destinationCurrency" : "Undefined",
-    "sourceCurrency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "sourceId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "number" : 1,
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
+    "sourceTitle" : "sourceTitle",
+    "sourceCurrency" : "Undefined",
+    "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "number" : 1,
+    "destinationTitle" : "destinationTitle",
     "sourceType" : "Wallet",
     "action" : "Transfer",
     "destinationType" : "Wallet",
     "destinationCurrency" : "Undefined",
-    "sourceCurrency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   } ]
 }}]
      

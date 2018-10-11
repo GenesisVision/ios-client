@@ -296,7 +296,7 @@ open class FundsAPI {
      - parameter currencySecondary: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsByIdGet(id: UUID, authorization: String? = nil, currencySecondary: CurrencySecondary_v10FundsByIdGet? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
+    open class func v10FundsByIdGet(id: String, authorization: String? = nil, currencySecondary: CurrencySecondary_v10FundsByIdGet? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
         v10FundsByIdGetWithRequestBuilder(id: id, authorization: authorization, currencySecondary: currencySecondary).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -346,13 +346,12 @@ open class FundsAPI {
     "name" : "name"
   } ],
   "personalFundDetails" : {
-    "hasNotifications" : true,
     "isOwnProgram" : true,
     "value" : 4.145608029883936,
     "profit" : 7.386281948385884,
-    "investmentProgramStatus" : "Active",
     "isFavorite" : true,
-    "isInvested" : true
+    "isInvested" : true,
+    "status" : "Active"
   },
   "url" : "url",
   "exitFee" : 6.027456183070403,
@@ -368,7 +367,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundDetailsFull> 
      */
-    open class func v10FundsByIdGetWithRequestBuilder(id: UUID, authorization: String? = nil, currencySecondary: CurrencySecondary_v10FundsByIdGet? = nil) -> RequestBuilder<FundDetailsFull> {
+    open class func v10FundsByIdGetWithRequestBuilder(id: String, authorization: String? = nil, currencySecondary: CurrencySecondary_v10FundsByIdGet? = nil) -> RequestBuilder<FundDetailsFull> {
         var path = "/v1.0/funds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -509,12 +508,14 @@ open class FundsAPI {
      - parameter facetId: (query)  (optional)
      - parameter isFavorite: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter managerId: (query)  (optional)
+     - parameter programManagerId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -559,15 +560,16 @@ open class FundsAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
+    "personalDetails" : {
       "isFavorite" : true,
-      "isInvested" : true
+      "isInvested" : true,
+      "status" : "Active"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -610,15 +612,16 @@ open class FundsAPI {
     "description" : "description",
     "title" : "title",
     "url" : "url",
-    "personalProgramDetails" : {
+    "dashboardAssetsDetails" : {
+      "share" : 4.145608029883936
+    },
+    "personalDetails" : {
       "isFavorite" : true,
-      "isInvested" : true
+      "isInvested" : true,
+      "status" : "Active"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "dashboardProgramDetails" : {
-      "share" : 4.145608029883936
-    },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -640,12 +643,14 @@ open class FundsAPI {
      - parameter facetId: (query)  (optional)
      - parameter isFavorite: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter managerId: (query)  (optional)
+     - parameter programManagerId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -661,6 +666,8 @@ open class FundsAPI {
             "FacetId": facetId, 
             "IsFavorite": isFavorite, 
             "Ids": ids, 
+            "ManagerId": managerId, 
+            "ProgramManagerId": programManagerId, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -671,6 +678,64 @@ open class FundsAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<FundsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Fund sets
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10FundsSetsGet(authorization: String, completion: @escaping ((_ data: ProgramSets?,_ error: Error?) -> Void)) {
+        v10FundsSetsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Fund sets
+     - GET /v1.0/funds/sets
+     - examples: [{contentType=application/json, example={
+  "sets" : [ {
+    "count" : 0,
+    "description" : "description",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "type" : "Program",
+    "url" : "url"
+  }, {
+    "count" : 0,
+    "description" : "description",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "type" : "Program",
+    "url" : "url"
+  } ],
+  "favoritesCount" : 0
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ProgramSets> 
+     */
+    open class func v10FundsSetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProgramSets> {
+        let path = "/v1.0/funds/sets"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ProgramSets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

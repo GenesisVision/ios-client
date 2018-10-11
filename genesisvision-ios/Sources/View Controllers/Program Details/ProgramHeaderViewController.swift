@@ -11,6 +11,9 @@ import Kingfisher
 
 class ProgramHeaderViewController: BaseViewController {
     
+    @IBOutlet weak var activityIndicatorTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var titleBottomConstraint: NSLayoutConstraint! {
         didSet {
             titleBottomConstraint.constant = 20.0
@@ -22,10 +25,10 @@ class ProgramHeaderViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var hederTitleImageView: UIImageView! {
+    @IBOutlet weak var headerTitleImageView: UIImageView! {
         didSet {
-            hederTitleImageView.alpha = 0.0
-            hederTitleImageView.roundCorners(with: 6.0)
+            headerTitleImageView.alpha = 0.0
+            headerTitleImageView.roundCorners(with: 6.0)
         }
     }
     
@@ -46,7 +49,11 @@ class ProgramHeaderViewController: BaseViewController {
     @IBOutlet weak var labelsStackView: UIStackView!
     @IBOutlet weak var tagsStackView: UIStackView!
     
-    @IBOutlet weak var levelButton: LevelButton!
+    @IBOutlet weak var levelButton: LevelButton! {
+        didSet {
+            levelButton.borderSize = 0.0
+        }
+    }
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var currencyLabel: CurrencyLabel!
@@ -60,8 +67,8 @@ class ProgramHeaderViewController: BaseViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.Cell.bg
+        activityIndicator.startAnimating()
     }
-    
     
     // MARK: - Public methods
     func moveLabels(offset: CGFloat) {
@@ -73,18 +80,16 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     func changeColorAlpha(offset: CGFloat) {
-        print("changeColorAlpha")
-        print(offset)
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
         self.currencyLabel.alpha = 1.0 - offset * 2
         self.investedImageView.alpha = 1.0 - offset * 2
         
-        self.hederTitleImageView.alpha = offset
+        self.headerTitleImageView.alpha = offset
         
         self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
         self.titleBottomConstraint.constant = 20.0 - offset * 50.0
-
+        
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }
     
@@ -101,11 +106,11 @@ class ProgramHeaderViewController: BaseViewController {
         
         if let logo = programDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
-            hederTitleImageView.kf.indicatorType = .activity
+            headerTitleImageView.kf.indicatorType = .activity
             
             let resource = ImageResource(downloadURL: fileUrl, cacheKey: "my_cache_key")
             bgImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
-            hederTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
+            headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
         }
         
         if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {

@@ -1,5 +1,5 @@
 //
-//  ProgramDetailViewModel.swift
+//  ProgramInfoViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 26.01.18.
@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class ProgramDetailViewModel {
+final class ProgramInfoViewModel {
     enum SectionType {
         case details
         case yourInvestment
@@ -66,10 +66,6 @@ final class ProgramDetailViewModel {
         }
         
         self.reloadDataProtocol = reloadDataProtocol
-        
-        self.updateChart(with: .all) { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
-        }
     }
     
     // MARK: - Public methods
@@ -78,7 +74,12 @@ final class ProgramDetailViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 8.0
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return 20.0
+        }
     }
     
     func numberOfSections() -> Int {
@@ -102,7 +103,7 @@ final class ProgramDetailViewModel {
 }
 
 // MARK: - Navigation
-extension ProgramDetailViewModel {
+extension ProgramInfoViewModel {
     // MARK: - Public methods
     func invest() {
         guard let programId = programId, let currency = programDetailsFull?.currency, let availableToInvest = programDetailsFull?.availableInvestment else { return }
@@ -120,27 +121,10 @@ extension ProgramDetailViewModel {
         guard let programDetailsFull = programDetailsFull else { return }
         router.show(routeType: .fullChart(programDetailsFull: programDetailsFull))
     }
-    
-    func updateChart(with type: ChartDurationType, completion: @escaping CompletionBlock) {
-//        let timeFrame = type.getTimeFrame()
-        
-//        ProgramDataProvider.getProgramChart(with: timeFrame, programId: programId, completion: { [weak self] (viewModel) in
-//            guard viewModel != nil else {
-//                return completion(.failure(errorType: .apiError(message: nil)))
-//            }
-//
-//            if let chart = viewModel?.chart {
-//                self?.equityChart = chart
-//                self?.chartDurationType = type
-//            }
-//
-//            completion(.success)
-//        }, errorCompletion: completion)
-    }
 }
 
 // MARK: - Fetch
-extension ProgramDetailViewModel {
+extension ProgramInfoViewModel {
     // MARK: - Public methods
     func getNickname() -> String {
         return programDetailsFull?.manager?.username ?? ""
@@ -193,7 +177,7 @@ extension ProgramDetailViewModel {
     }
 }
 
-extension ProgramDetailViewModel: ReloadDataProtocol {
+extension ProgramInfoViewModel: ReloadDataProtocol {
     func didReloadData() {
         fetch { [weak self] (result) in
             self?.reloadDataProtocol?.didReloadData()
@@ -201,14 +185,20 @@ extension ProgramDetailViewModel: ReloadDataProtocol {
     }
 }
 
-extension ProgramDetailViewModel: ProgramYourInvestmentProtocol {
+extension ProgramInfoViewModel: ProgramYourInvestmentProtocol {
     func didTapWithdrawButton() {
         withdraw()
     }
 }
 
-extension ProgramDetailViewModel: ProgramInvestNowProtocol {
+extension ProgramInfoViewModel: ProgramInvestNowProtocol {
     func didTapInvestButton() {
-        invest()
+        if availableInvestment > 0 {
+            invest()
+        }
+        
+        if let topViewController = router.topViewController() {
+            topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
+        }
     }
 }

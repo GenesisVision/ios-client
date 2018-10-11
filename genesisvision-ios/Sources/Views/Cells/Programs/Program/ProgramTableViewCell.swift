@@ -12,7 +12,7 @@ import Charts
 class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
-    weak var delegate: ProgramDetailViewControllerProtocol?
+    weak var delegate: ProgramInfoViewControllerProtocol?
     var programId: String?
     
     // MARK: - Views
