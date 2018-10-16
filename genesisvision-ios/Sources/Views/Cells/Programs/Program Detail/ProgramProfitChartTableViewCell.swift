@@ -95,7 +95,6 @@ class ProgramProfitChartTableViewCell: UITableViewCell {
 extension ProgramProfitChartTableViewCell: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
-        
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {

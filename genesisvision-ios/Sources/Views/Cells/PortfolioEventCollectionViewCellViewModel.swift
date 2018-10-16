@@ -21,7 +21,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
         }
         
         if let value = dashboardPortfolioEvent.value {
-            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let date = dashboardPortfolioEvent.date {
@@ -38,21 +38,21 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
         if let type = dashboardPortfolioEvent.type {
             switch type {
             case .profit:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
             case .loss:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_close_period")
             case .withdraw:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
-            case .invest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+            case .invest:
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
             case .all:
                 cell.typeImageView.image = nil
             case .reinvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_reinvest")
             case .cancelled:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_close_period")
             case .ended:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_end_of_period")
             }
         }
     }

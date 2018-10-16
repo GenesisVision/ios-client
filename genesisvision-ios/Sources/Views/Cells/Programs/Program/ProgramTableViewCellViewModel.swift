@@ -68,14 +68,14 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.secondTitleLabel.text = "balance"
         if let balance = program.statistic?.balanceGVT?.amount {
-            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " GVT"
+            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.secondValueLabel.text = ""
         }
         
         cell.thirdTitleLabel.text = "av. to invest"
         if let availableInvestment = program.availableInvestment {
-            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " GVT"
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.thirdValueLabel.text = ""
         }
@@ -96,7 +96,11 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " GVT"
+            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        }
+        
+        if let isInvested = program.personalDetails?.isInvested {
+            cell.investedImageView.isHidden = !isInvested
         }
     }
 }

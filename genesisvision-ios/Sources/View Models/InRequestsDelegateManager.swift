@@ -9,9 +9,8 @@
 import UIKit
 
 protocol InRequestsDelegateManagerProtocol: class {
-    func didTapCancelButton(at indexPath: IndexPath)
+    func didCanceledRequest(completionResult: CompletionResult)
 }
-
 
 final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
@@ -28,6 +27,14 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
         super.init()
     }
     
+    // MARK: - Private methods
+    private func cancelRequest(at indexPath: IndexPath) {
+        if let request = programRequests?.requests?[indexPath.row], let canCancel = request.canCancelRequest, let requestid = request.id?.uuidString, canCancel {
+            ProgramRequestDataProvider.cancelRequest(requestId: requestid) { [weak self] (result) in
+                self?.inRequestsDelegate?.didCanceledRequest(completionResult: result)
+            }
+        }
+    }
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -57,8 +64,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let cancelRowAction = UITableViewRowAction(style: .normal, title: "Cancel") { [weak self] (action, indexPath) in
-            self?.inRequestsDelegate?.didTapCancelButton(at: indexPath)
-            //TODO: or cancel this
+            self?.cancelRequest(at: indexPath)
         }
         cancelRowAction.backgroundColor = UIColor.Cell.redTitle
         

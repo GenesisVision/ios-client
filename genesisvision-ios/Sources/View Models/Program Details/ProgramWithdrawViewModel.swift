@@ -12,18 +12,9 @@ final class ProgramWithdrawViewModel {
     // MARK: - Variables
     var title: String = "Withdraw"
     var programId: String?
-    var investedValue: Double?
     var labelPlaceholder: String = "0"
     
-    private var rate: Double = 0.0
-    private var balance: Double = 0.0 {
-        didSet {
-            self.exchangedBalance = balance * self.rate
-        }
-    }
-    
-    private var exchangedBalance: Double = 0.0
-    var currency: String = "GVT"
+    var programWithdrawInfo: ProgramWithdrawInfo?
     
     private weak var programDetailProtocol: ProgramDetailProtocol?
     
@@ -32,17 +23,25 @@ final class ProgramWithdrawViewModel {
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
          programId: String,
-         investedValue: Double,
-         currency: String,
          programDetailProtocol: ProgramDetailProtocol?) {
         self.router = router
         self.programId = programId
-        self.investedValue = investedValue
-        self.currency = currency
         self.programDetailProtocol = programDetailProtocol
     }
     
     // MARK: - Public methods
+    func getInfo(completion: @escaping CompletionBlock, completionError: @escaping CompletionBlock) {
+        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramDataProvider.getProgramWithdrawInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programWithdrawInfo) in
+            guard let programWithdrawInfo = programWithdrawInfo else {
+                return completionError(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            self?.programWithdrawInfo = programWithdrawInfo
+            completion(.success)
+            }, errorCompletion: completionError)
+    }
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {

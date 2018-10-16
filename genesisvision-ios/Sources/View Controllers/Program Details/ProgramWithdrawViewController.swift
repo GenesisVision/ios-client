@@ -13,21 +13,26 @@ class ProgramWithdrawViewController: BaseViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - Labels
-    @IBOutlet var investedTitleLabel: TitleLabel! {
+    @IBOutlet var availableToWithdrawValueTitleLabel: TitleLabel! {
         didSet {
-            investedTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var investedValueLabel: TitleLabel! {
+    @IBOutlet var availableToWithdrawValueLabel: TitleLabel! {
         didSet {
-            investedValueLabel.textColor = UIColor.primary
-            investedValueLabel.font = UIFont.getFont(.regular, size: 14.0)
+            availableToWithdrawValueLabel.textColor = UIColor.primary
+            availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel!
     @IBOutlet var amountToWithdrawValueLabel: TitleLabel! {
         didSet {
             amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    @IBOutlet var amountToWithdrawGVTLabel: SubtitleLabel! {
+        didSet {
+            amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     @IBOutlet var amountToWithdrawCurrencyLabel: SubtitleLabel! {
@@ -48,9 +53,9 @@ class ProgramWithdrawViewController: BaseViewController {
     // MARK: - Buttons
     @IBOutlet var withdrawButton: ActionButton!
     
-    private var closeBarButtonItem: UIBarButtonItem!
-    
     // MARK: - Views
+    var confirmView: InvestWithdrawConfirmView!
+    
     @IBOutlet var numpadView: NumpadView! {
         didSet {
             numpadView.delegate = self
@@ -61,12 +66,15 @@ class ProgramWithdrawViewController: BaseViewController {
     // MARK: - Variables
     var amountToWithdrawValue: Double = 0.0 {
         didSet {
-            withdrawButton.setEnabled(amountToWithdrawValue > 0.0 && amountToWithdrawValue <= investedValue)
-            updateNumPadState(value: amountToWithdrawValueLabel.text)
+            updateUI()
         }
     }
     
-    var investedValue: Double = 0.0
+    var availableToWithdrawValue: Double = 0.0 {
+        didSet {
+            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + Constants.gvtString
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -83,22 +91,53 @@ class ProgramWithdrawViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        closeBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction))
-        navigationItem.rightBarButtonItem = closeBarButtonItem
-        
         withdrawButton.setEnabled(false)
-        
-        if let investedValue = viewModel.investedValue {
-            self.investedValue = investedValue
-            investedValueLabel.text = self.investedValue.toString()
+
+        showProgressHUD()
+        viewModel.getInfo(completion: { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
+    }
+    
+    private func updateUI() {
+        if let availableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
+            self.availableToWithdrawValue = availableToWithdraw
+        }
+
+        if let periodEnds = viewModel.programWithdrawInfo?.periodEnds {
+            self.payoutDayValueLabel.text = periodEnds.onlyDateFormatString
         }
         
-        self.amountToWithdrawCurrencyLabel.text = "tokens"
+        if let rate = viewModel.programWithdrawInfo?.rate {
+            let selectedCurrency = getSelectedCurrency()
+            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
+            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue / rate).rounded(withType: currency).toString()
+            self.amountToWithdrawCurrencyLabel.text = "= " + amountToWithdrawValueCurrencyString + " " + selectedCurrency
+        }
+        
+        let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
+        
+        withdrawButton.setEnabled(withdrawButtonEnabled)
+        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
     private func withdrawMethod() {
-        hideKeyboard()
-
         guard let text = amountToWithdrawValueLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
@@ -109,7 +148,10 @@ class ProgramWithdrawViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showWithdrawRequestedVC()
+                DispatchQueue.main.async {
+                    self?.bottomSheetController.dismiss()
+                    self?.viewModel.goToBack()
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
@@ -130,14 +172,41 @@ class ProgramWithdrawViewController: BaseViewController {
         viewModel.close()
     }
     
+    private func showConfirmVC() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
+        bottomSheetController.initializeHeight = 400
+        
+        confirmView = InvestWithdrawConfirmView.viewFromNib()
+        let periodEnds = viewModel.programWithdrawInfo?.periodEnds
+        let periodEndsString = periodEnds?.defaultFormatString ?? ""
+        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
+                                                          subtitle: subtitle,
+                                                          programLogo: nil,
+                                                          programTitle: viewModel.programWithdrawInfo?.title,
+                                                          managerName: nil,
+                                                          firstTitle: "Amount to withdraw",
+                                                          firstValue: amountToWithdrawValueLabel.text,
+                                                          secondTitle: "Payout day",
+                                                          secondValue: viewModel.programWithdrawInfo?.periodEnds?.onlyDateFormatString,
+                                                          thirdTitle: nil,
+                                                          thirdValue: nil)
+        confirmView.configure(model: confirmViewModel)
+        bottomSheetController.addContentsView(confirmView)
+        confirmView.delegate = self
+        bottomSheetController.present()
+    }
+    
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
-        withdrawMethod()
+        showConfirmVC()
     }
     
     @IBAction func copyAllButtonAction(_ sender: UIButton) {
-        amountToWithdrawValueLabel.text = investedValue.toString(withoutFormatter: true)
-        amountToWithdrawValue = investedValue
+        amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
+        amountToWithdrawValue = availableToWithdrawValue
     }
 }
 
@@ -165,5 +234,16 @@ extension ProgramWithdrawViewController: NumpadViewProtocol {
     func textLabelDidChange(value: Double?) {
         numpadView.isEnable = true
         amountToWithdrawValue = value != nil ? value! : 0.0
+    }
+}
+
+
+extension ProgramWithdrawViewController: InvestWithdrawConfirmViewProtocol {
+    func cancelButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+    
+    func confirmButtonDidPress() {
+        withdrawMethod()
     }
 }

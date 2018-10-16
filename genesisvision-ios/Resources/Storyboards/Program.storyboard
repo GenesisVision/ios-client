@@ -557,6 +557,7 @@
                         <outlet property="amountDueTitleLabel" destination="8yj-d5-v4V" id="YIN-eh-kiZ"/>
                         <outlet property="amountDueValueLabel" destination="0Se-nv-wyH" id="xH1-TW-dRU"/>
                         <outlet property="amountToInvestCurrencyLabel" destination="Q7U-AS-VZK" id="ygl-1p-2jS"/>
+                        <outlet property="amountToInvestGVTLabel" destination="Vye-Wz-Eq8" id="zrb-Pp-bWT"/>
                         <outlet property="amountToInvestTitleLabel" destination="ZaX-Le-hQC" id="OrX-0d-4zB"/>
                         <outlet property="amountToInvestValueLabel" destination="emM-jK-afJ" id="WzN-nU-Yjd"/>
                         <outlet property="availableToInvestTitleLabel" destination="BNO-k2-ojp" id="A5u-Oc-v4a"/>
@@ -929,11 +930,12 @@
                     </view>
                     <connections>
                         <outlet property="amountToWithdrawCurrencyLabel" destination="Irp-TJ-ngH" id="jvt-t6-DlW"/>
+                        <outlet property="amountToWithdrawGVTLabel" destination="Kw5-vU-FSp" id="FKo-kA-Nb8"/>
                         <outlet property="amountToWithdrawTitleLabel" destination="xMX-Oc-pat" id="eZO-2Q-LQq"/>
                         <outlet property="amountToWithdrawValueLabel" destination="CBU-bZ-uNn" id="vnH-B4-dZV"/>
+                        <outlet property="availableToWithdrawValueLabel" destination="htZ-7m-1Nk" id="Knf-hy-2H4"/>
+                        <outlet property="availableToWithdrawValueTitleLabel" destination="TXo-aN-ZUB" id="cB3-Ve-TRy"/>
                         <outlet property="copyMaxValueButton" destination="rfu-9U-hPi" id="OVo-wG-YrH"/>
-                        <outlet property="investedTitleLabel" destination="TXo-aN-ZUB" id="rxC-fk-FxP"/>
-                        <outlet property="investedValueLabel" destination="htZ-7m-1Nk" id="BpI-SW-7V4"/>
                         <outlet property="numpadView" destination="LMV-QU-2FE" id="Nq0-SM-jTD"/>
                         <outlet property="payoutDayTitleLabel" destination="Yy8-ta-ImP" id="A88-4W-AkF"/>
                         <outlet property="payoutDayValueLabel" destination="UXs-dQ-KS9" id="11M-CL-eJk"/>
@@ -1297,6 +1299,7 @@
                     <navigationItem key="navigationItem" id="sP8-nq-dkb"/>
                     <connections>
                         <outlet property="headerViewConstraint" destination="yU5-w9-9Lr" id="k8f-Rc-dGA"/>
+                        <outlet property="programDetailsView" destination="aJP-G5-69Z" id="GgD-PI-dGp"/>
                         <outlet property="scrollView" destination="n6f-iF-vqD" id="3Km-qd-6ua"/>
                     </connections>
                 </viewController>
@@ -1447,6 +1450,7 @@
                         <outlet property="investedImageView" destination="SeJ-X1-Qxk" id="t0R-Pg-P90"/>
                         <outlet property="labelsLeadingConstraint" destination="lRI-5L-ddA" id="EBt-6u-Xru"/>
                         <outlet property="labelsStackView" destination="Eaw-8x-Znh" id="5P0-8O-e5z"/>
+                        <outlet property="levelBgImageView" destination="hhe-DH-fmz" id="06a-xu-38R"/>
                         <outlet property="levelButton" destination="VBQ-Hy-1RL" id="O78-tG-VcR"/>
                         <outlet property="tagsStackView" destination="Vua-gS-IuW" id="PFO-zi-TVO"/>
                         <outlet property="titleBottomConstraint" destination="OUS-VT-bgg" id="iwW-5n-A4A"/>

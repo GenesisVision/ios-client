@@ -59,7 +59,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.currencyLabel.text = currency.rawValue
         }
         
-        cell.firstTitleLabel.text = "period"
+        cell.firstTitleLabel.text = "time left"
         if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
             cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
             
@@ -73,7 +73,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.secondTitleLabel.text = "current value"
         if let balance = program.statistic?.balanceGVT?.amount {
-            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " GVT"
+            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.secondValueLabel.text = ""
         }
@@ -101,7 +101,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " GVT"
+            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        }
+        
+        if let isInvested = program.personalDetails?.isInvested {
+            cell.investedImageView.isHidden = !isInvested
         }
     }
 }

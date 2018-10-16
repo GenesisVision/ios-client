@@ -39,7 +39,7 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
         }
         
         if let value = programRequest.value {
-            cell.amountValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            cell.amountValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let date = programRequest.date {

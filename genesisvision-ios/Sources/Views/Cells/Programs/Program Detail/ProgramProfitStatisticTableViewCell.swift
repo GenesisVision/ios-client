@@ -9,9 +9,11 @@
 import UIKit
 
 class CustomLabel: UILabel {
+
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+        
         self.commonInit()
         
     }

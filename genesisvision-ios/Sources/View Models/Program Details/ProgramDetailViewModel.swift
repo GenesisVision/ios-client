@@ -26,8 +26,13 @@ final class ProgramInfoViewModel {
     private var router: ProgramDetailRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var inRequestsDelegateManager = InRequestsDelegateManager()
+    
     var chartDurationType: ChartDurationType = .all
     var programId: String!
+    var requestSkip = 0
+    var requestTake = Constants.Api.take
+    
     private var equityChart: [ChartSimple]?
     public private(set) var programDetailsFull: ProgramDetailsFull? {
         didSet {
@@ -55,7 +60,7 @@ final class ProgramInfoViewModel {
          programDetailsFull: ProgramDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
-        
+
         if let programId = programId {
             self.programId = programId
         }
@@ -106,13 +111,35 @@ final class ProgramInfoViewModel {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func invest() {
-        guard let programId = programId, let currency = programDetailsFull?.currency, let availableToInvest = programDetailsFull?.availableInvestment else { return }
-        router.show(routeType: .invest(programId: programId, currency: currency.rawValue, availableToInvest: availableToInvest))
+        guard let programId = programId else { return }
+        router.show(routeType: .invest(programId: programId))
     }
     
     func withdraw() {
-        guard let programId = programId, let investedValue = programDetailsFull?.personalProgramDetails?.value, let currency = programDetailsFull?.currency else { return }
-        router.show(routeType: .withdraw(programId: programId, investedValue: investedValue, currency: currency.rawValue))
+        guard let programId = programId else { return }
+        router.show(routeType: .withdraw(programId: programId))
+    }
+    
+    func reinvest(_ value: Bool) {
+        if value {
+            ProgramDataProvider.programReinvestOn(with: self.programId) { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+            }
+        } else {
+            ProgramDataProvider.programReinvestOff(with: self.programId) { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+            }
+        }
     }
     
     func showFullChart() {
@@ -189,15 +216,34 @@ extension ProgramInfoViewModel: ProgramYourInvestmentProtocol {
     func didTapWithdrawButton() {
         withdraw()
     }
+    
+    func didChangeReinvestSwitch(value: Bool) {
+        reinvest(value)
+    }
+    
+    func didTapStatusButton() {
+        guard let programId = programId else { return }
+        
+        ProgramDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (programRequests) in
+            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramDetailsRouter, let viewController = parentRouter.programDetailViewController {
+                viewController.showRequests(programRequests)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
 }
 
 extension ProgramInfoViewModel: ProgramInvestNowProtocol {
     func didTapInvestButton() {
         if availableInvestment > 0 {
             invest()
-        }
-        
-        if let topViewController = router.topViewController() {
+        } else if let topViewController = router.topViewController() {
             topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
         }
     }

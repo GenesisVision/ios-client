@@ -34,6 +34,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqx-Bi-HNK" customClass="StatusButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="224" y="1" width="56" height="30"/>
                                 <state key="normal" title="pending"/>
+                                <connections>
+                                    <action selector="statusButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bYd-Qx-iM4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -115,6 +118,9 @@
                                     <constraint firstAttribute="width" constant="49" id="3Vm-PD-ilf"/>
                                     <constraint firstAttribute="height" constant="31" id="e2N-ap-3sS"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="reinvestSwitchAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="FN5-nR-Grw"/>
+                                </connections>
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqa-Vz-KyD" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="108" y="5.5" width="20" height="20"/>

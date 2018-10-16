@@ -8,16 +8,23 @@
 
 import UIKit
 
+import UIKit
+
 class NotificationListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: ProgramDetailTradesViewModel!
+    var viewModel: NotificationListViewModel!
+    
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
         
         setup()
     }
@@ -38,7 +45,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        setupTableConfiguration()
+        navigationItem.title = viewModel.title
         
         setupNavigationBar()
         
@@ -106,3 +113,4 @@ extension NotificationListViewController: ReloadDataProtocol {
         reloadData()
     }
 }
+

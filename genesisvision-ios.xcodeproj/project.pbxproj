@@ -148,6 +148,7 @@
 		5E1C0867216F5D0E007C45B2 /* RateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C0800216F5D0D007C45B2 /* RateItem.swift */; };
 		5E1C0868216F5D0E007C45B2 /* Broker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C0801216F5D0D007C45B2 /* Broker.swift */; };
 		5E1C086A216F8CE7007C45B2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */; };
+		5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */; };
 		5E2DC8D4212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */; };
 		5E33E3B420AB20B900A0B9DE /* ProgramDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */; };
 		5E33E3B720AB218A00A0B9DE /* ProgramDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */; };
@@ -155,6 +156,8 @@
 		5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */; };
 		5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E367906206BC6DA006E226A /* AmountLabel.swift */; };
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
+		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
+		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
 		5E450AB920656CF000D38CF2 /* ProgramDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */; };
 		5E450ABB206570A900D38CF2 /* ProgramDescriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */; };
 		5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */; };
@@ -298,11 +301,6 @@
 		5EB996A720F36DE600E31D23 /* ProgramListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */; };
 		5EB996A920F3738600E31D23 /* ProgramListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A820F3738600E31D23 /* ProgramListViewModelProtocol.swift */; };
 		5EBBEAEC2100CE2D0034E4CB /* BrokersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBEAEB2100CE2D0034E4CB /* BrokersDataProvider.swift */; };
-		5EBBECE020626F7400872656 /* DashboardHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */; };
-		5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */; };
-		5EBBECE420626F9700872656 /* ProgramListHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */; };
-		5EBBECE520626F9700872656 /* ProgramListHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */; };
-		5EBBECE720626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */; };
 		5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */; };
 		5EC0309620A5A786005CBA32 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0309520A5A786005CBA32 /* PlatformManager.swift */; };
 		5EC1E94120E3A91B00AE3560 /* BiometricIDAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */; };
@@ -363,6 +361,12 @@
 		5EDA74D92093A34E00E8EA34 /* DetailTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */; };
 		5EDA74DA2093A34E00E8EA34 /* DetailTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */; };
 		5EDA74DC2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */; };
+		5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */; };
+		5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */; };
+		5EEC1AC72175F871007D77ED /* AllEventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */; };
+		5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC82175FC9A007D77ED /* NotificationListRouter.swift */; };
+		5EEC1ACB2175FD08007D77ED /* NotificationsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1ACA2175FD08007D77ED /* NotificationsDataProvider.swift */; };
+		5EEC1ACD217628A4007D77ED /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */; };
 		5EEE4557210B2377009CF791 /* ManagerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */; };
 		5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE4558210B2386009CF791 /* ManagerDashboardTabmanViewController.swift */; };
 		5EEE455B210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */; };
@@ -414,11 +418,6 @@
 		FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */; };
 		FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD67202267910044C3EC /* EnumExtension.swift */; };
 		FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */; };
-		FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */; };
-		FC4C519F2048059E0042CEE1 /* ProgramRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */; };
-		FC4C51A4204806370042CEE1 /* ProgramRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C51A2204806370042CEE1 /* ProgramRequestTableViewCell.swift */; };
-		FC4C51A5204806370042CEE1 /* ProgramRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4C51A3204806370042CEE1 /* ProgramRequestTableViewCell.xib */; };
-		FC4C51A7204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C51A6204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift */; };
 		FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */; };
 		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
 		FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */; };
@@ -677,6 +676,7 @@
 		5E1C0800216F5D0D007C45B2 /* RateItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateItem.swift; sourceTree = "<group>"; };
 		5E1C0801216F5D0D007C45B2 /* Broker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broker.swift; sourceTree = "<group>"; };
 		5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardProgramListDelegateManager.swift; sourceTree = "<group>"; };
 		5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsRouter.swift; sourceTree = "<group>"; };
 		5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -684,6 +684,8 @@
 		5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewModel.swift; sourceTree = "<group>"; };
 		5E367906206BC6DA006E226A /* AmountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestWithdrawConfirmView.xib; sourceTree = "<group>"; };
+		5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestWithdrawConfirmView.swift; sourceTree = "<group>"; };
 		5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionViewModel.swift; sourceTree = "<group>"; };
 		5E450ABA206570A900D38CF2 /* ProgramDescriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDescriptionRouter.swift; sourceTree = "<group>"; };
 		5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProgressBar.swift; sourceTree = "<group>"; };
@@ -829,11 +831,6 @@
 		5EB996A620F36DE600E31D23 /* ProgramListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListRouterProtocol.swift; sourceTree = "<group>"; };
 		5EB996A820F3738600E31D23 /* ProgramListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EBBEAEB2100CE2D0034E4CB /* BrokersDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersDataProvider.swift; sourceTree = "<group>"; };
-		5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardHeaderTableViewCell.xib; sourceTree = "<group>"; };
-		5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramListHeaderTableViewCell.xib; sourceTree = "<group>"; };
-		5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EC0309320A5A4B9005CBA32 /* BaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataProvider.swift; sourceTree = "<group>"; };
 		5EC0309520A5A786005CBA32 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuthManager.swift; sourceTree = "<group>"; };
@@ -894,6 +891,12 @@
 		5EDA74D72093A34E00E8EA34 /* DetailTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCell.swift; sourceTree = "<group>"; };
 		5EDA74D82093A34E00E8EA34 /* DetailTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTextTableViewCell.xib; sourceTree = "<group>"; };
 		5EDA74DB2093A35F00E8EA34 /* DetailTextTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewController.swift; sourceTree = "<group>"; };
+		5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewModel.swift; sourceTree = "<group>"; };
+		5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsRouter.swift; sourceTree = "<group>"; };
+		5EEC1AC82175FC9A007D77ED /* NotificationListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListRouter.swift; sourceTree = "<group>"; };
+		5EEC1ACA2175FD08007D77ED /* NotificationsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsDataProvider.swift; sourceTree = "<group>"; };
+		5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardViewController.swift; sourceTree = "<group>"; };
 		5EEE4558210B2386009CF791 /* ManagerDashboardTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanViewController.swift; sourceTree = "<group>"; };
 		5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanViewModel.swift; sourceTree = "<group>"; };
@@ -953,11 +956,6 @@
 		FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD67202267910044C3EC /* EnumExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtension.swift; sourceTree = "<group>"; };
 		FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestsRouter.swift; sourceTree = "<group>"; };
-		FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestsViewController.swift; sourceTree = "<group>"; };
-		FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestsViewModel.swift; sourceTree = "<group>"; };
-		FC4C51A2204806370042CEE1 /* ProgramRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestTableViewCell.swift; sourceTree = "<group>"; };
-		FC4C51A3204806370042CEE1 /* ProgramRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramRequestTableViewCell.xib; sourceTree = "<group>"; };
-		FC4C51A6204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestDataProvider.swift; sourceTree = "<group>"; };
 		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
 		FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramFilterRouter.swift; sourceTree = "<group>"; };
@@ -1317,7 +1315,6 @@
 				FC83DF5E203D895A00A8F8CE /* ProgramInvestViewModel.swift */,
 				FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */,
 				FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */,
-				FC4C519E2048059E0042CEE1 /* ProgramRequestsViewModel.swift */,
 				5E450AB820656CF000D38CF2 /* ProgramDescriptionViewModel.swift */,
 				5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */,
 				5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */,
@@ -1451,7 +1448,6 @@
 				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
 				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
 				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
-				FC4C519C2048057B0042CEE1 /* ProgramRequestsViewController.swift */,
 				5E78F8A42063F530000C13D7 /* ProgramDescriptionViewController.swift */,
 				5E8340DD207E38A4004A29F1 /* ProgramDetailTradesViewController.swift */,
 				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
@@ -1752,6 +1748,8 @@
 				FCA19A42201AE85C00157AD6 /* DashboardRouter.swift */,
 				5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */,
 				5EEE455C210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift */,
+				5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */,
+				5EEC1AC82175FC9A007D77ED /* NotificationListRouter.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1840,9 +1838,6 @@
 		FC4C51A82048064F0042CEE1 /* Program Request */ = {
 			isa = PBXGroup;
 			children = (
-				FC4C51A6204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift */,
-				FC4C51A2204806370042CEE1 /* ProgramRequestTableViewCell.swift */,
-				FC4C51A3204806370042CEE1 /* ProgramRequestTableViewCell.xib */,
 			);
 			path = "Program Request";
 			sourceTree = "<group>";
@@ -1887,9 +1882,6 @@
 				FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */,
 				FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */,
 				FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */,
-				5EBBECE620626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift */,
-				5EBBECE220626F9700872656 /* ProgramListHeaderTableViewCell.swift */,
-				5EBBECE320626F9700872656 /* ProgramListHeaderTableViewCell.xib */,
 			);
 			path = Program;
 			sourceTree = "<group>";
@@ -1955,8 +1947,6 @@
 			isa = PBXGroup;
 			children = (
 				5E5EB53421679D4A00CDA376 /* DashboardTableViewCellViewModel.swift */,
-				5EBBECDE20626F7400872656 /* DashboardHeaderTableViewCell.swift */,
-				5EBBECDF20626F7400872656 /* DashboardHeaderTableViewCell.xib */,
 				5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */,
 				5E6308EB212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.swift */,
 				5E6308EC212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib */,
@@ -2026,6 +2016,8 @@
 				5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */,
 				5EC78817216CE74D000C91E4 /* EventsDelegateManager.swift */,
 				5EC78819216D4787000C91E4 /* PortfolioSelectedChartAssetsDelegateManager.swift */,
+				5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */,
+				5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2197,6 +2189,7 @@
 				5E6C0CF12109A8E000B7F844 /* Manager Details */,
 				5EAD3505214FD2170057450C /* ChartsViewController.swift */,
 				5EAD3507214FD2200057450C /* EventsViewController.swift */,
+				5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */,
 				5EAD3509214FD2270057450C /* AssetsViewController.swift */,
 				5EAD350B214FD57F0057450C /* PortfolioViewController.swift */,
 				5EAD350D214FD58D0057450C /* ProfitViewController.swift */,
@@ -2266,6 +2259,7 @@
 				FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */,
 				FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */,
 				5EBBEAEB2100CE2D0034E4CB /* BrokersDataProvider.swift */,
+				5EEC1ACA2175FD08007D77ED /* NotificationsDataProvider.swift */,
 			);
 			path = "Data Providers";
 			sourceTree = "<group>";
@@ -2295,6 +2289,9 @@
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
 				5E5488352141577700B2D9FE /* DateRangeView.swift */,
 				5E54883321414FD100B2D9FE /* DateRangeView.xib */,
+				5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */,
+				5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */,
+				5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2472,7 +2469,6 @@
 				5EA274B3216281DD008CAF77 /* ProgramStrategyTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
-				5EBBECE120626F7400872656 /* DashboardHeaderTableViewCell.xib in Resources */,
 				5EA274C321628274008CAF77 /* ProgramProfitChartTableViewCell.xib in Resources */,
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
 				5EA274BF21628253008CAF77 /* ProgramYourInvestmentTableViewCell.xib in Resources */,
@@ -2488,14 +2484,13 @@
 				5EA274C721628286008CAF77 /* ProgramProfitStatisticTableViewCell.xib in Resources */,
 				5E152F102165283A0029BFDE /* Montserrat-Regular.ttf in Resources */,
 				5EA274BB2162823F008CAF77 /* ProgramInvestNowTableViewCell.xib in Resources */,
-				5EBBECE520626F9700872656 /* ProgramListHeaderTableViewCell.xib in Resources */,
 				5EC78725216BD458000C91E4 /* NotificationListTableViewCell.xib in Resources */,
 				5E8340EF207E5E39004A29F1 /* ProgramDetailTradesHeaderView.xib in Resources */,
 				FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */,
 				5ED03F3A20FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.xib in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
-				FC4C51A5204806370042CEE1 /* ProgramRequestTableViewCell.xib in Resources */,
+				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
@@ -2634,15 +2629,17 @@
 				5EC78724216BD458000C91E4 /* NotificationListTableViewCell.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
 				5EFCC77021553D58001E1A56 /* DashboardProgramListViewModel.swift in Sources */,
+				5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */,
 				5EC78818216CE74D000C91E4 /* EventsDelegateManager.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */,
 				5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */,
 				5E1C0834216F5D0E007C45B2 /* RegisterManagerViewModel.swift in Sources */,
-				FC4C519F2048059E0042CEE1 /* ProgramRequestsViewModel.swift in Sources */,
 				5E12B38720BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift in Sources */,
 				5E1C0860216F5D0E007C45B2 /* FundInvestInfo.swift in Sources */,
 				5E1C082F216F5D0E007C45B2 /* CreateWithdrawalRequestModel.swift in Sources */,
+				5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */,
+				5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */,
 				5EA274CF2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
@@ -2693,6 +2690,7 @@
 				5ED03F2920F900EE00AF5E07 /* DataSourceAndDelegate.swift in Sources */,
 				5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */,
 				5E6A6BC3216D5EF80082C343 /* PortfolioEventTableViewCellViewModel.swift in Sources */,
+				5EEC1ACD217628A4007D77ED /* NavigationTitleView.swift in Sources */,
 				5E1C0802216F5D0E007C45B2 /* ChartSimple.swift in Sources */,
 				5E1813802061D36700481646 /* Common+Extensions.swift in Sources */,
 				5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */,
@@ -2760,7 +2758,6 @@
 				5EA274AB216268C7008CAF77 /* ProgramViewModel.swift in Sources */,
 				5EC7875C216CC640000C91E4 /* PlatformAPI.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
-				5EBBECE020626F7400872656 /* DashboardHeaderTableViewCell.swift in Sources */,
 				5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
@@ -2824,11 +2821,13 @@
 				FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */,
 				5EA274D72162B5C2008CAF77 /* ProgramPeriodTableViewCellViewModel.swift in Sources */,
 				5E1C0816216F5D0E007C45B2 /* ForgotPasswordViewModel.swift in Sources */,
+				5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */,
 				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,
 				5EC78762216CC640000C91E4 /* ManagersAPI.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				5E1C0820216F5D0E007C45B2 /* RecoveryCode.swift in Sources */,
 				5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */,
+				5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */,
 				5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */,
 				5EAD3504214FCA1C0057450C /* Enums.swift in Sources */,
 				5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */,
@@ -2875,6 +2874,7 @@
 				5E1C0837216F5D0E007C45B2 /* AmountWithCurrency.swift in Sources */,
 				5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */,
 				FCC9DD8E200E67EF008825EC /* UITableView+CellViewModel.swift in Sources */,
+				5EEC1AC72175F871007D77ED /* AllEventsRouter.swift in Sources */,
 				5ECDB71821645C4E00483D90 /* ProfitViewModel.swift in Sources */,
 				FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */,
 				5E1C0855216F5D0E007C45B2 /* ProgramRequests.swift in Sources */,
@@ -2918,12 +2918,10 @@
 				5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */,
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProgramProfitViewController.swift in Sources */,
-				FC4C519D2048057B0042CEE1 /* ProgramRequestsViewController.swift in Sources */,
 				5EC7875A216CC640000C91E4 /* NotificationsAPI.swift in Sources */,
 				FC5E9048202167CF000E4A90 /* ProgramFilterViewModel.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				5E1C0861216F5D0E007C45B2 /* RecoveryCodesViewModel.swift in Sources */,
-				FC4C51A4204806370042CEE1 /* ProgramRequestTableViewCell.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramDetailRouter.swift in Sources */,
 				5E1C0835216F5D0E007C45B2 /* ManagersList.swift in Sources */,
@@ -2961,7 +2959,6 @@
 				5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */,
 				5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */,
 				5ED03F3820FF784A00AF5E07 /* FieldWithTextFieldTableViewCellViewModel.swift in Sources */,
-				5EBBECE420626F9700872656 /* ProgramListHeaderTableViewCell.swift in Sources */,
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				5E7717682153F5A1002624FC /* DashboardProgramListViewController.swift in Sources */,
 				5E1C0812216F5D0E007C45B2 /* LoginViewModel.swift in Sources */,
@@ -2995,7 +2992,6 @@
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
 				FC27232B20498959005225F2 /* QRCodeReaderViewController.swift in Sources */,
 				5EA274CD2162B53B008CAF77 /* ProgramBalanceChartTableViewCellViewModel.swift in Sources */,
-				5EBBECE720626FA900872656 /* ProgramListHeaderTableViewCellViewModel.swift in Sources */,
 				5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */,
 				5E1C085B216F5D0E007C45B2 /* ErrorMessage.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
@@ -3011,7 +3007,6 @@
 				FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */,
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
 				5E1C082D216F5D0E007C45B2 /* FundDetailsListStatistic.swift in Sources */,
-				FC4C51A7204806470042CEE1 /* ProgramRequestTableViewCellViewModel.swift in Sources */,
 				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
 				5E067A5420EE3AD5002CA1D1 /* DashboardTabmanRouter.swift in Sources */,
 				5EA274C621628286008CAF77 /* ProgramProfitStatisticTableViewCell.swift in Sources */,
@@ -3051,6 +3046,7 @@
 				FC140FE42030168100B71E7F /* APIs.swift in Sources */,
 				5E1C082B216F5D0E007C45B2 /* NotificationSettingList.swift in Sources */,
 				5E8340E5207E39B6004A29F1 /* ProgramDetailTradesTableViewCell.swift in Sources */,
+				5EEC1ACB2175FD08007D77ED /* NotificationsDataProvider.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
 				5EA274D52162B5AB008CAF77 /* ProgramInvestNowTableViewCellViewModel.swift in Sources */,
 				5E6C0CF02109A8D900B7F844 /* ManagerDetailsViewController.swift in Sources */,

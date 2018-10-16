@@ -48,7 +48,7 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width * 0.6, height: collectionView.frame.height - 16.0)
+        return CGSize(width: collectionView.frame.width * 0.7, height: collectionView.frame.height - 16.0)
     }
     
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {

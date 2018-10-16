@@ -66,7 +66,7 @@ extension UIColor {
         static var bgGray: UIColor { return #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1) }                                  //e0e0e0
         static var silver: UIColor { return #colorLiteral(red: 0.8, green: 0.8352941176, blue: 0.831372549, alpha: 1) }                                  //ccd5d4
         
-        static var lightGray: UIColor { return #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.9921568627, alpha: 1) }                               //fcfdfd
+        static var lightGray: UIColor { return #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 0.9921568627, alpha: 1) }                               //FDFDFD
         static var white: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                                   //ffffff
         
         static var numpadBackground: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 0.25) }
@@ -265,7 +265,7 @@ extension UIColor {
         static var blue: UIColor { return AppearanceController.theme == .darkTheme ? Common.blue : Common.blue }
         static var subtitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextSecondary : Common.darkSlateBlue }
         static var switchThumbTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.white : Common.white }
-        static var switchTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.switchTint : Common.switchTint }
+        static var switchTint: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter.withAlphaComponent(0.25) : Common.switchTint }
     }
     
     struct TwoFactor {

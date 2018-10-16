@@ -9,44 +9,41 @@
 import Foundation
 
 enum ProgramDetailRouteType {
-    case invest(programId: String, currency: String, availableToInvest: Double), withdraw(programId: String, investedValue: Double, currency: String), fullChart(programDetailsFull: ProgramDetailsFull)
+    case invest(programId: String), withdraw(programId: String), fullChart(programDetailsFull: ProgramDetailsFull)
 }
 
 class ProgramDetailRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramDetailRouteType) {
         switch routeType {
-        case .invest(let programId, let currency, let availableToInvest):
-            invest(with: programId, currency: currency, availableToInvest: availableToInvest)
-        case .withdraw(let programId, let investedValue, let currency):
-            withdraw(with: programId, investedValue: investedValue, currency: currency)
+        case .invest(let programId):
+            invest(with: programId)
+        case .withdraw(let programId):
+            withdraw(with: programId)
         case .fullChart(let programDetailsFull):
             fullChart(with: programDetailsFull)
         }
     }
     
     // MARK: - Private methods
-    func invest(with programId: String, currency: String, availableToInvest: Double) {
+    func invest(with programId: String) {
         guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
             let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
-        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, currency: currency, availableToInvest: availableToInvest, programDetailProtocol: programViewController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programDetailProtocol: programViewController)
         viewController.viewModel = viewModel
-        
-        let navController = BaseNavigationController(rootViewController: viewController)
-        navigationController?.present(viewController: navController)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with programId: String, investedValue: Double, currency: String) {
+    func withdraw(with programId: String) {
         guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
             let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramWithdrawRouter(parentRouter: self)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, investedValue: investedValue, currency: currency, programDetailProtocol: programViewController)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, programDetailProtocol: programViewController)
         viewController.viewModel = viewModel
-        let navController = BaseNavigationController(rootViewController: viewController)
-        navigationController?.present(viewController: navController)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func fullChart(with programDetailsFull: ProgramDetailsFull) {

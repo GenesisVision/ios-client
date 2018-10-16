@@ -13,6 +13,8 @@ class ProgramInvestViewController: BaseViewController {
     var viewModel: ProgramInvestViewModel!
     
     // MARK: - Views
+    var confirmView: InvestWithdrawConfirmView!
+    
     @IBOutlet var numpadView: NumpadView! {
         didSet {
             numpadView.delegate = self
@@ -38,6 +40,11 @@ class ProgramInvestViewController: BaseViewController {
             amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
+    @IBOutlet var amountToInvestGVTLabel: SubtitleLabel! {
+        didSet {
+            amountToInvestGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
     @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
@@ -60,38 +67,25 @@ class ProgramInvestViewController: BaseViewController {
             amountDueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountDueValueLabel: TitleLabel!
+    @IBOutlet var amountDueValueLabel: TitleLabel! {
+        didSet {
+            amountDueValueLabel.text = "0 GVT"
+        }
+    }
 
     // MARK: - Buttons
     @IBOutlet var investButton: ActionButton!
-
-    private var closeBarButtonItem: UIBarButtonItem!
     
     // MARK: - Variables
     var availableToInvestValue: Double = 0.0 {
         didSet {
-            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " GVT"
+            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " " + Constants.gvtString
         }
     }
     
     var amountToInvestValue: Double = 0.0 {
         didSet {
-            viewModel.getExchangedAmount(amount: amountToInvestValue, completion: { [weak self] (amountToInvestValueCurrency) in
-                DispatchQueue.main.async {
-                    let selectedCurrency = getSelectedCurrency()
-                    self?.amountToInvestCurrencyLabel.text = "= \(amountToInvestValueCurrency.toString()) \(selectedCurrency)"
-                }
-            }) { (result) in
-                switch result {
-                case .success:
-                    break
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType)
-                }
-            }
-            
-            investButton.setEnabled(amountToInvestValue > 0 && amountToInvestValue <= amountToInvestValue)
-            updateNumPadState(value: amountToInvestValueLabel.text)
+            updateUI()
         }
     }
     
@@ -110,25 +104,56 @@ class ProgramInvestViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        closeBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction))
-        navigationItem.rightBarButtonItem = closeBarButtonItem
-        
         investButton.setEnabled(false)
-        showProgressHUD()
         
-        viewModel.getAvailableToInvest(completion: { [weak self] (amountToInvestValue, amountToInvestValueCurrency) in
-            self?.hideAll()
-            self?.availableToInvestValue = amountToInvestValue
-        }) { [weak self] (result) in
+        showProgressHUD()
+        viewModel.getInfo(completion: { [weak self] (result) in
             self?.hideAll()
             
             switch result {
             case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
                 break
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
+    }
+    
+    private func updateUI() {
+        if let entryFee = viewModel.programInvestInfo?.entryFee {
+            let entryFeeGVT = entryFee * amountToInvestValue / 100
+            let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
+            let entryFeeString = entryFee.rounded(toPlaces: 0).toString()
+            
+            let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(Constants.gvtString))"
+            self.entryFeeValueLabel.text = entryFeeValueLabelString
+            let amountDueValueString = "\((entryFeeGVT + amountToInvestValue).rounded(withType: .gvt)) \(Constants.gvtString)"
+            self.amountDueValueLabel.text = amountDueValueString
+        }
+        
+        if let availableToInvest = viewModel.programInvestInfo?.availableToInvest {
+            self.availableToInvestValue = availableToInvest
+        }
+            
+        if let rate = viewModel.programInvestInfo?.rate {
+            let selectedCurrency = getSelectedCurrency()
+            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
+            let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
+            self.amountToInvestCurrencyLabel.text = "= " + amountToInvestValueCurrencyString + " " + selectedCurrency
+        }
+        
+        let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue
+        investButton.setEnabled(investButtonEnabled)
+        updateNumPadState(value: amountToInvestValueLabel.text)
     }
     
     @objc private func closeButtonAction() {
@@ -136,23 +161,55 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        hideKeyboard()
-        
-        guard let text = amountToInvestValueLabel.text,
-            let amount = text.doubleValue
-            else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        guard amountToInvestValue > 0 else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
-        viewModel.invest(with: amount) { [weak self] (result) in
+        viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
             case .success:
-                self?.viewModel.showInvestmentRequestedVC(investedAmount: amount)
+                DispatchQueue.main.async {
+                    self?.bottomSheetController.dismiss()
+                    self?.viewModel.goToBack()
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    private func showConfirmVC() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.tintColor = UIColor.Cell.bg
+        bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
+        bottomSheetController.initializeHeight = 450
+        
+        confirmView = InvestWithdrawConfirmView.viewFromNib()
+        let periodEnds = viewModel.programInvestInfo?.periodEnds
+        let periodEndsString = periodEnds?.defaultFormatString ?? ""
+        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
+        
+        var firstValue: String?
+        if let amount = amountToInvestValueLabel.text {
+             firstValue = amount + " GVT"
+        }
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
+                                                          subtitle: subtitle,
+                                                          programLogo: nil,
+                                                          programTitle: viewModel.programInvestInfo?.title,
+                                                          managerName: nil,
+                                                          firstTitle: amountToInvestTitleLabel.text,
+                                                          firstValue: firstValue,
+                                                          secondTitle: entryFeeTitleLabel.text,
+                                                          secondValue: entryFeeValueLabel.text,
+                                                          thirdTitle: amountDueTitleLabel.text,
+                                                          thirdValue: amountDueValueLabel.text)
+        confirmView.configure(model: confirmViewModel)
+        bottomSheetController.addContentsView(confirmView)
+        confirmView.delegate = self
+        bottomSheetController.present()
     }
     
     private func updateNumPadState(value: String?) {
@@ -167,7 +224,7 @@ class ProgramInvestViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
-        investMethod()
+        showConfirmVC()
     }
     
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
@@ -205,5 +262,15 @@ extension ProgramInvestViewController: NumpadViewProtocol {
     func textLabelDidChange(value: Double?) {
         numpadView.isEnable = true
         amountToInvestValue = value != nil ? value! : 0.0
+    }
+}
+
+extension ProgramInvestViewController: InvestWithdrawConfirmViewProtocol {
+    func cancelButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+    
+    func confirmButtonDidPress() {
+        investMethod()
     }
 }

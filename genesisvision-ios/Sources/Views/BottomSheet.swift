@@ -306,7 +306,7 @@ open class BottomSheet {
                                                    toItem: hasBar ? bar : lineView,
                                                    attribute: .bottom,
                                                    multiplier: 1,
-                                                   constant: 8)
+                                                   constant: 0)
             let rightConstraint = NSLayoutConstraint(item: contentView,
                                                      attribute: .right,
                                                      relatedBy: .equal,
@@ -348,7 +348,7 @@ open class BottomSheet {
                                                    toItem: hasBar ? bar : lineView,
                                                    attribute: .bottom,
                                                    multiplier: 1,
-                                                   constant: 8)
+                                                   constant: 0)
             let rightConstraint = NSLayoutConstraint(item: scrollView,
                                                      attribute: .right,
                                                      relatedBy: .equal,
@@ -397,7 +397,7 @@ open class BottomSheet {
                                                    toItem: hasBar ? bar : lineView,
                                                    attribute: .bottom,
                                                    multiplier: 1,
-                                                   constant: 8)
+                                                   constant: 0)
             let rightConstraint = NSLayoutConstraint(item: collectionView,
                                                      attribute: .right,
                                                      relatedBy: .equal,
@@ -441,7 +441,7 @@ open class BottomSheet {
                                                    toItem: hasBar ? bar : lineView,
                                                    attribute: .bottom,
                                                    multiplier: 1,
-                                                   constant: 8)
+                                                   constant: 0)
             let rightConstraint = NSLayoutConstraint(item: tableView,
                                                      attribute: .right,
                                                      relatedBy: .equal,

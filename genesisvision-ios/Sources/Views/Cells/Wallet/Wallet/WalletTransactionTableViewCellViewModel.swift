@@ -46,7 +46,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             }
             
             cell.titleLabel.text = sourceType.rawValue.capitalized
-            cell.amountLabel.text = sign + value.rounded(withType: .gvt).toString() + " GVT"
+            cell.amountLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
     
         if let date = walletTransaction.date {

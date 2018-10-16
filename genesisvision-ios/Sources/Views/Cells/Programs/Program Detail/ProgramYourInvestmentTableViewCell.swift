@@ -10,6 +10,8 @@ import UIKit
 
 protocol ProgramYourInvestmentProtocol: class {
     func didTapWithdrawButton()
+    func didChangeReinvestSwitch(value: Bool)
+    func didTapStatusButton()
 }
 
 class ProgramYourInvestmentTableViewCell: UITableViewCell {
@@ -62,7 +64,7 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     
     @IBOutlet var withdrawButton: ActionButton! {
         didSet {
-            withdrawButton.configure(with: .clear)
+            withdrawButton.configure(with: .darkClear)
         }
     }
     
@@ -83,6 +85,7 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     @IBOutlet var reinvestTooltip: TooltipButton! {
         didSet {
             reinvestTooltip.tooltipText = String.Tooltitps.reinvest
+            reinvestTooltip.isHidden = true
         }
     }
     
@@ -102,5 +105,13 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         programYourInvestmentProtocol?.didTapWithdrawButton()
+    }
+    
+    @IBAction func reinvestSwitchAction(_ sender: UISwitch) {
+        programYourInvestmentProtocol?.didChangeReinvestSwitch(value: sender.isOn)
+    }
+    
+    @IBAction func statusButtonAction(_ sender: UISwitch) {
+        programYourInvestmentProtocol?.didTapStatusButton()
     }
 }

@@ -18,10 +18,10 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
             cell.titleLabel.text = value
         }
         if let value = selectedChartAssets.value {
-            cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         if let value = selectedChartAssets.changeValue {
-            cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+            cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         if let value = selectedChartAssets.changePercent {
             cell.changePercentLabel.text = value.rounded(toPlaces: 2).toString() + "%"

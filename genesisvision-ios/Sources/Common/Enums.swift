@@ -101,7 +101,6 @@ enum BottomViewType {
 
 // MARK: - TableViewCell
 enum SectionType {
-    case header
     case programList
 }
 

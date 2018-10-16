@@ -67,6 +67,24 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         viewModel.updateDetails(with: programDetailsFull)
         reloadData()
     }
+    
+    func showRequests(_ programRequests: ProgramRequests?) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("In Requests")
+        viewModel.inRequestsDelegateManager.inRequestsDelegate = self
+        viewModel.inRequestsDelegateManager.programRequests = programRequests
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
+            tableView.delegate = self?.viewModel.inRequestsDelegateManager
+            tableView.dataSource = self?.viewModel.inRequestsDelegateManager
+            tableView.separatorStyle = .none
+        }
+        
+        bottomSheetController.present()
+    }
 }
 
 extension ProgramInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,5 +120,18 @@ extension ProgramInfoViewController: UITableViewDelegate, UITableViewDataSource 
 extension ProgramInfoViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+    }
+}
+
+extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
+    func didCanceledRequest(completionResult: CompletionResult) {
+        bottomSheetController.dismiss()
+        
+        switch completionResult {
+        case .success:
+            fetch()
+        default:
+            break
+        }
     }
 }

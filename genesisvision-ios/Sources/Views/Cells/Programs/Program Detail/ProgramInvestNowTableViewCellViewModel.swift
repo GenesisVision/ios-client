@@ -30,9 +30,9 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
             cell.successFeeValueLabel.text = successFee.rounded(toPlaces: 2).toString() + "%"
         }
         
-        if let availableInvestment = programDetailsFull?.availableInvestment, let programCurrency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") {
+        if let availableInvestment = programDetailsFull?.availableInvestment {
             cell.investTitleLabel.text = "av. to invest"
-            cell.investValueLabel.text = availableInvestment.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
+            cell.investValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let periodEnds = programDetailsFull?.periodEnds {

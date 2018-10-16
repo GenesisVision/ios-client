@@ -22,7 +22,7 @@ struct TableViewConfiguration {
     
     init(
         topInset: CGFloat? = 0.0,
-        bottomInset: CGFloat? = nil,
+        bottomInset: CGFloat? = 0.0,
         bottomIndicatorInset: CGFloat? = nil,
         estimatedRowHeight: CGFloat = 0,
         rowHeight: CGFloat = UITableViewAutomaticDimension,

@@ -21,7 +21,7 @@ final class ProgramDetailTradesViewModel {
     var transactionsCount: String = ""
     var skip = 0
     var take = Constants.Api.take
-    var tradeServerType = "" //TODO: Delete it
+
     var totalCount = 0 {
         didSet {
             transactionsCount = "\(totalCount) trades"
@@ -75,8 +75,8 @@ extension ProgramDetailTradesViewModel {
 extension ProgramDetailTradesViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels, tradeServerType) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels, tradeServerType: tradeServerType)
+        fetch({ [weak self] (totalCount, viewModels) in
+            self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels)
             }, completionError: completion)
     }
     
@@ -92,14 +92,14 @@ extension ProgramDetailTradesViewModel {
         guard skip < totalCount else { return }
         
         canFetchMoreResults = false
-        fetch({ [weak self] (totalCount, viewModels, tradeServerType) in
+        fetch({ [weak self] (totalCount, viewModels) in
             var allViewModels = self?.viewModels ?? [ProgramDetailTradesTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
             })
             
-            self?.updateFetchedData(totalCount: totalCount, viewModels: allViewModels, tradeServerType: tradeServerType)
+            self?.updateFetchedData(totalCount: totalCount, viewModels: allViewModels)
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -113,8 +113,8 @@ extension ProgramDetailTradesViewModel {
     func refresh(completion: @escaping CompletionBlock) {
         skip = 0
         
-        fetch({ [weak self] (totalCount, viewModels, tradeServerType) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels, tradeServerType: tradeServerType)
+        fetch({ [weak self] (totalCount, viewModels) in
+            self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels)
             }, completionError: completion)
     }
     
@@ -124,16 +124,15 @@ extension ProgramDetailTradesViewModel {
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, viewModels: [ProgramDetailTradesTableViewCellViewModel], tradeServerType: String) {
+    private func updateFetchedData(totalCount: Int, viewModels: [ProgramDetailTradesTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
-        self.tradeServerType = tradeServerType
         self.skip += self.take
         self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramDetailTradesTableViewCellViewModel], _ tradeServerType: String) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramDetailTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
             guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
@@ -151,7 +150,7 @@ extension ProgramDetailTradesViewModel {
                     viewModels.append(viewModel)
                 })
                 
-                completionSuccess(totalCount, viewModels, "")
+                completionSuccess(totalCount, viewModels)
                 completionError(.success)
             }, errorCompletion: completionError)
         case .fake:

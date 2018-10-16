@@ -31,6 +31,7 @@ class ProgramViewController: BaseViewController {
     var programHeaderViewController: ProgramHeaderViewController?
     var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
     
+    @IBOutlet weak var programDetailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
     
@@ -61,6 +62,7 @@ class ProgramViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
             segue.identifier == "ProgramHeaderViewControllerSegue" {
+            self.viewModel?.router?.programHeaderViewController = programHeaderViewController
             self.programHeaderViewController = programHeaderViewController
         } else if let tabmanViewController = segue.destination as? ProgramDetailsTabmanViewController,
             segue.identifier == "ProgramDetailsTabmanViewControllerSegue" {
@@ -71,6 +73,8 @@ class ProgramViewController: BaseViewController {
             let viewModel = ProgramDetailsViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
             viewModel.programDetailsProtocol = self
             tabmanViewController.viewModel = viewModel
+            
+            self.viewModel?.router?.programDetailsTabmanViewController = tabmanViewController
             programDetailsTabmanViewController = tabmanViewController
         }
     }
@@ -122,7 +126,7 @@ class ProgramViewController: BaseViewController {
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
-        navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
+        navigationItem.rightBarButtonItems = [favoriteBarButtonItem]
     }
     
     @objc func notificationsButtonAction() {
@@ -153,17 +157,13 @@ class ProgramViewController: BaseViewController {
 }
 
 extension ProgramViewController {
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         let yOffset = scrollView.contentOffset.y + topConstant
         
         let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
         self.navigationController!.view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(alpha)
-        if alpha > 0.7 {
-            self.navigationController?.view.backgroundColor = .red
-        }
-        
+   
         let headerHeight = headerViewConstraint.constant - 64.0
         if headerHeight - yOffset >= 0 {
             programHeaderViewController?.changeColorAlpha(offset: yOffset / headerHeight)
@@ -191,6 +191,19 @@ extension ProgramViewController {
             
             if yOffset - (minHeaderHeight - topConstant) == programDetailsTabmanViewController.view.frame.origin.y {
                 programDetailsTabmanViewController.scrollEnabled = true
+            }
+        }
+        
+        if scrollView == self.scrollView {
+            if let viewModel = viewModel.router.programDetailsTabmanViewController?.viewModel {
+                for controller in viewModel.viewControllers {
+                    if let vc = controller as? BaseViewControllerWithTableView {
+                        print(programDetailsView.frame.origin.y)
+                        print(yOffset)
+                        
+                        vc.tableView?.isScrollEnabled = yOffset >= programDetailsView.frame.origin.y - 44.0 - 44.0
+                    }
+                }
             }
         }
     }
@@ -224,7 +237,7 @@ extension ProgramViewController: ProgramDetailsProtocol {
             
             guard self.favoriteBarButtonItem != nil else {
                 self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction))
-                self.navigationItem.rightBarButtonItems = [self.favoriteBarButtonItem, self.notificationsBarButtonItem]
+                self.navigationItem.rightBarButtonItems = [self.favoriteBarButtonItem]
                 return
             }
             

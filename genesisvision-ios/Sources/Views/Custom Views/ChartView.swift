@@ -27,7 +27,7 @@ class ChartView: CombinedChartView {
 
     private var barChartData: [ValueChartBar]?
     private var lineChartData: [ChartSimple]?
-    private var balanceChart: [ProgramBalanceChartElement]?
+    private var balanceChartData: [ProgramBalanceChartElement]?
     
     private var name: String?
     private var currencyValue: String = ""
@@ -66,7 +66,6 @@ class ChartView: CombinedChartView {
 
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
-            
 //            lineChartDataSet.mode = .horizontalBezier
         }
     }
@@ -91,7 +90,7 @@ class ChartView: CombinedChartView {
     func setup(chartType: ChartType = .default,
                lineChartData: [ChartSimple]? = nil,
                barChartData: [ValueChartBar]? = nil,
-               balanceChart: [ProgramBalanceChartElement]? = nil,
+               balanceChartData: [ProgramBalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
                chartDurationType: ChartDurationType? = nil) {
@@ -100,7 +99,7 @@ class ChartView: CombinedChartView {
         self.name = name
         self.lineChartData = lineChartData
         self.barChartData = barChartData
-        self.balanceChart = balanceChart
+        self.balanceChartData = balanceChartData
         self.currencyValue = currencyValue ?? ""
         self.chartDurationType = chartDurationType ?? .all
 
@@ -122,6 +121,15 @@ class ChartView: CombinedChartView {
         
         if let barChartData = barChartData {
             data.barData = generateBarChartData(barChartData)
+        }
+        
+        if let balanceChartData = balanceChartData {
+            let lineData = generateBalanceChartData(balanceChartData)
+            data.lineData = lineData
+            
+            data.lineData.calcMinMax()
+            maxLimitValue = data.lineData.getYMax()
+            minLimitValue = data.lineData.getYMin()
         }
         
         xAxis.axisMaximum = data.xMax + (Date().addDays(1).timeIntervalSince1970 - Date().timeIntervalSince1970) / 10
@@ -268,6 +276,33 @@ class ChartView: CombinedChartView {
             animate(xAxisDuration: 0.5)
         }
     }
+    
+    private func generateBalanceChartData(_ values: [ProgramBalanceChartElement]) -> LineChartData {
+        let lineChartData = LineChartData()
+        let profitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].profit ?? 0)
+        }
+        lineChartDataSet = LineChartDataSet(values: profitDataEntry, label: "Profit Chart")
+        lineChartDataSet.setColor(.red)
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].managerFunds ?? 0)
+        }
+        lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
+        lineChartDataSet.setColor(.yellow)
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].investorsFunds ?? 0)
+        }
+        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
+        lineChartDataSet.setColor(.blue)
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        return lineChartData
+    }
+    
     
     private func generateLineChartData(_ values: [ChartSimple]) -> LineChartData {
 

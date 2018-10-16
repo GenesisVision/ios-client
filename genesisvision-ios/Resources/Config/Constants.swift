@@ -167,14 +167,16 @@ final class Constants {
     struct SystemSizes {
         struct Cell {
             static let horizontalMarginValue: CGFloat = 8.0
-            static let verticalMarginValues: CGFloat = 4.0
+            static let verticalMarginValues: CGFloat = 8.0
         }
         
-        static let cornerSize: CGFloat = 6.0
+        static let cornerSize: CGFloat = 16.0
         static var chartCircleHeight: CGFloat = 9.0
         static let selectedSegmentedTitle: CGFloat = 23.0
         static let unselectedSegmentedTitle: CGFloat = 15.0
         
         static let imageViewBorderWidthPercentage: CGFloat = 0.04
     }
+    
+    static let gvtString = "GVT"
 }

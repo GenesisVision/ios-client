@@ -17,7 +17,7 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.amountTitleLabel.text = "Amount"
         
         if let amountValue = programBalanceChart.gvtBalance {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " GVT"
+            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
@@ -36,9 +36,9 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.changeValueLabel.isHidden = true
         cell.changeCurrencyLabel.isHidden = true
         
-        if let balanceChart = programBalanceChart.balanceChart, balanceChart.count > 0 {
-            cell.chartViewHeightConstraint.constant = 300.0
-            cell.chartView.setup(balanceChart: balanceChart)
+        if let balanceChartData = programBalanceChart.balanceChart, balanceChartData.count > 0 {
+            cell.chartViewHeightConstraint.constant = 150.0
+            cell.chartView.setup(balanceChartData: balanceChartData)
             cell.chartView.isHidden = false
         } else {
             cell.chartViewHeightConstraint.constant = 0.0

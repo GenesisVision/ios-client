@@ -107,7 +107,8 @@ struct ActionButtonOptions {
 
 enum ActionButtonStyle {
     case normal
-    case clear
+    case highClear
+    case darkClear
     case filter(image: UIImage?)
     case custom(options: ActionButtonOptions)
 }
@@ -134,8 +135,10 @@ class ActionButton: UIButton {
     
     func configure(with style: ActionButtonStyle) {
         switch style {
-        case .clear:
+        case .darkClear:
             self.options = ActionButtonOptions(borderWidth: 1.0, borderColor: UIColor.Border.forButton, fontSize: nil, bgColor: UIColor.BaseView.bg, textColor: nil, image: nil, rightPosition: nil)
+        case .highClear:
+            self.options = ActionButtonOptions(borderWidth: 1.0, borderColor: UIColor.Cell.bg.withAlphaComponent(0.2), fontSize: nil, bgColor: UIColor.Common.white, textColor: UIColor.Cell.bg, image: nil, rightPosition: nil)
         case .filter(let image):
             self.options = ActionButtonOptions(borderWidth: nil, borderColor: nil, fontSize: nil, bgColor: UIColor.BottomView.Filter.bg, textColor: UIColor.BottomView.Filter.title, image: image, rightPosition: nil)
         case .custom(let options):
@@ -180,7 +183,7 @@ class ActionButton: UIButton {
     
     func setEnabled(_ value: Bool) {
         isUserInteractionEnabled = value
-        backgroundColor = isUserInteractionEnabled ? backgroundColor : backgroundColor?.withAlphaComponent(0.3)
+        commonInit()
     }
 }
 

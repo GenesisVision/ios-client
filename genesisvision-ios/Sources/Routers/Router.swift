@@ -70,7 +70,7 @@ class Router {
     }
     
     fileprivate func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let walletViewController = WalletViewController()
+        guard let walletViewController = WalletViewController.storyboardInstance(name: .wallet) else { return }
         navigationController = BaseNavigationController(rootViewController: walletViewController)
         let router = WalletRouter(parentRouter: self, navigationController: navigationController)
         walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
@@ -229,9 +229,20 @@ extension Router {
     }
     
     func showNotificationList() {
-        //TODO: add NotificationListVC
-        let viewController = BaseViewController()
-        viewController.title = "Notifications"
+        guard let viewController = NotificationListViewController.storyboardInstance(name: .dashboard) else { return }
+        
+        let router = NotificationListRouter(parentRouter: self)
+        viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showPortfolioEvents(with programId: String? = nil) {
+        guard let viewController = AllEventsViewController.storyboardInstance(name: .dashboard) else { return }
+        
+        let router = AllEventsRouter(parentRouter: self)
+        viewController.viewModel = AllEventsViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController)
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -246,8 +257,6 @@ extension Router {
     }
     
     func getDetailsViewController(with programId: String) -> ProgramViewController? {
-//        guard let vc = currentController else { return nil }
-
         guard let programViewController = ProgramViewController.storyboardInstance(name: .program) else {
             return nil
         }

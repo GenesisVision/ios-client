@@ -98,7 +98,7 @@ extension WalletControllerViewModel {
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
         case .header:
-            return 300.0
+            return 250.0
         case .transactions:
             return 86.0
         }

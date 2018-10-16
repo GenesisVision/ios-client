@@ -68,8 +68,7 @@ final class DashboardViewModel {
     init(withRouter router: DashboardRouter) {
         self.router = router
         self.reloadDataProtocol = router.programListViewController
-        self.inRequestsDelegateManager.inRequestsDelegate = router.dashboardViewController
-        
+
         assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil, dashboard: dashboard)
         chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil, dashboardPortfolioChartValue: dashboard?.chart)
         eventListViewModel = EventListViewModel(withRouter: router, dashboardPortfolioEvents: dashboard?.events)
@@ -81,6 +80,8 @@ final class DashboardViewModel {
         NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
     }
     
+    // MARK: - Public methods
+
     // MARK: - Private methods
     @objc private func enableTwoFactorNotification(notification: Notification) {
         NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
@@ -132,7 +133,7 @@ extension DashboardViewModel {
         let requestsSkip = 0
         let requestsTake = Constants.Api.take
         let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
-        let balancePoints = 50
+        let balancePoints = 10
         let programsPoints = 5
         let eventsTake = 10
         

@@ -24,25 +24,25 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xcz-AC-Erz">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="298"/>
+                    <rect key="frame" x="20" y="0.0" width="335" height="298"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fAq-fi-d4d">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="84"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tt9-9w-obe" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="0.0" width="42" height="23.5"/>
+                                    <rect key="frame" x="146.5" y="0.0" width="42" height="23.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUL-i7-INW" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="29.5" width="42" height="23.5"/>
+                                    <rect key="frame" x="146.5" y="29.5" width="42" height="23.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlW-J4-wHi" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="166.5" y="59" width="42" height="25"/>
+                                    <rect key="frame" x="146.5" y="59" width="42" height="25"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -53,13 +53,13 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jik-3Q-kUS">
-                            <rect key="frame" x="0.0" y="100" width="375" height="198"/>
+                            <rect key="frame" x="0.0" y="100" width="335" height="198"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="JwG-Hv-EuR">
-                                    <rect key="frame" x="0.0" y="34" width="187.5" height="130"/>
+                                    <rect key="frame" x="0.0" y="34" width="167.5" height="130"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-vx-KJW" customClass="CircularProgressView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="74" y="0.0" width="40" height="40"/>
+                                            <rect key="frame" x="64" y="0.0" width="40" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="XWi-vx-KJW" secondAttribute="height" multiplier="1:1" id="G7g-iN-9pj"/>
@@ -67,7 +67,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="NPZ-BK-iIB">
-                                            <rect key="frame" x="75" y="64" width="37.5" height="66"/>
+                                            <rect key="frame" x="65" y="64" width="37.5" height="66"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N71-O1-pc3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
@@ -95,10 +95,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="CO4-zh-3xK">
-                                    <rect key="frame" x="187.5" y="34" width="187.5" height="130"/>
+                                    <rect key="frame" x="167.5" y="34" width="167.5" height="130"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj5-Ch-egZ" customClass="CircularProgressView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="74" y="0.0" width="40" height="40"/>
+                                            <rect key="frame" x="64" y="0.0" width="40" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Dj5-Ch-egZ" secondAttribute="height" multiplier="1:1" id="9P8-va-UBk"/>
@@ -106,7 +106,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4IP-BL-8We">
-                                            <rect key="frame" x="75" y="64" width="37.5" height="66"/>
+                                            <rect key="frame" x="65" y="64" width="37.5" height="66"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUc-FW-D5w" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
@@ -140,13 +140,13 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="xcz-AC-Erz" firstAttribute="leading" secondItem="Eq4-UW-zDG" secondAttribute="leading" id="4wu-GL-OtW"/>
+                <constraint firstItem="xcz-AC-Erz" firstAttribute="leading" secondItem="Eq4-UW-zDG" secondAttribute="leading" constant="20" id="4wu-GL-OtW"/>
                 <constraint firstItem="W5y-xA-Tqd" firstAttribute="bottom" secondItem="1Fg-Sz-NiK" secondAttribute="bottom" id="5FH-cf-0d8"/>
                 <constraint firstItem="W5y-xA-Tqd" firstAttribute="centerX" secondItem="xcz-AC-Erz" secondAttribute="centerX" id="7ij-9O-0y8"/>
                 <constraint firstItem="xcz-AC-Erz" firstAttribute="top" secondItem="HcM-09-upK" secondAttribute="top" id="B2o-J5-792"/>
                 <constraint firstAttribute="bottom" secondItem="xcz-AC-Erz" secondAttribute="bottom" id="FgR-Vc-Zrg"/>
                 <constraint firstItem="W5y-xA-Tqd" firstAttribute="top" secondItem="XWi-vx-KJW" secondAttribute="top" id="KzZ-NC-bnk"/>
-                <constraint firstItem="Eq4-UW-zDG" firstAttribute="trailing" secondItem="xcz-AC-Erz" secondAttribute="trailing" id="Rlt-8T-3Si"/>
+                <constraint firstItem="Eq4-UW-zDG" firstAttribute="trailing" secondItem="xcz-AC-Erz" secondAttribute="trailing" constant="20" id="Rlt-8T-3Si"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Eq4-UW-zDG"/>

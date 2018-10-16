@@ -18,7 +18,7 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         cell.amountTitleLabel.text = "Amount"
         
         if let amountValue = programProfitChart.totalGvtProfit {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " GVT"
+            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
@@ -39,7 +39,7 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         }
         
         if let changeValue = programProfitChart.timeframeGvtProfit {
-            cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
+            cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.changeValueLabel.isHidden = true
         }

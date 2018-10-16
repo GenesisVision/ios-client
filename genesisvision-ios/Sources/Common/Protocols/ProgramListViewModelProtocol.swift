@@ -72,8 +72,6 @@ extension ProgramListViewModelProtocol {
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
-        case .header:
-            return ProgramListHeaderTableViewCellViewModel(title: headerTitle, programListCount: totalCount)
         case .programList:
             return programViewModels[indexPath.row]
         }
@@ -104,7 +102,7 @@ extension ProgramListViewModelProtocol {
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramListHeaderTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
+        return [ProgramTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -124,16 +122,12 @@ extension ProgramListViewModelProtocol {
         switch sections[section] {
         case .programList:
             return modelsCount()
-        case .header:
-            return 1
         }
     }
     
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .programList:
-            return nil
-        case .header:
             return nil
         }
     }
@@ -142,8 +136,6 @@ extension ProgramListViewModelProtocol {
         switch sections[section] {
         case .programList:
             return 50.0
-        case .header:
-            return 0.0
         }
     }
     

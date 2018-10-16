@@ -14,12 +14,15 @@ class NotificationListTableViewCell: UITableViewCell {
     @IBOutlet var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
+            iconImageView.image = #imageLiteral(resourceName: "icon_notification_star")
         }
     }
     
-    @IBOutlet var unreadImageView: UIImageView! {
+    @IBOutlet var unreadView: UIView! {
         didSet {
-            unreadImageView.roundCorners()
+            unreadView.roundCorners()
+            unreadView.backgroundColor = UIColor.Cell.redTitle
+            unreadView.isHidden = true
         }
     }
     
@@ -37,16 +40,20 @@ class NotificationListTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var detailButton: UIButton!
+    @IBOutlet var detailButton: UIButton! {
+        didSet {
+            detailButton.isHidden = true
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.Cell.bg
-        backgroundColor = UIColor.Cell.bg
+        backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
         tintColor = UIColor.Cell.title
-        accessoryView?.backgroundColor = UIColor.Cell.bg
+        accessoryView?.backgroundColor = UIColor.BaseView.bg
         
         selectionStyle = .none
     }

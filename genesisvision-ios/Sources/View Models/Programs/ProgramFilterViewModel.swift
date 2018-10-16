@@ -248,8 +248,8 @@ final class ProgramFilterViewModel {
                 formatter.maximumFractionDigits = 0
                 sliderCellModel = FilterSliderTableViewCellViewModel(minValue: PlatformManager.filterConstants.minAvgProfit, maxValue: PlatformManager.filterConstants.maxAvgProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitAvgPercentMin, selectedMaxValue: filter?.profitAvgPercentMax, customFormatter: formatter, sliderViewTag: idx, delegate: sliderDelegate)
             case .totalProfit:
-                formatter.positiveSuffix = " GVT"
-                formatter.negativeSuffix = " GVT"
+                formatter.positiveSuffix = " \(Constants.gvtString)"
+                formatter.negativeSuffix = " \(Constants.gvtString)"
                 formatter.numberStyle = .decimal
                 formatter.maximumFractionDigits = 0
                 sliderCellModel = FilterSliderTableViewCellViewModel(minValue: PlatformManager.filterConstants.minTotalProfit, maxValue: PlatformManager.filterConstants.maxTotalProfit, filterTitles: titles, amountType: type, selectedMinValue: filter?.profitTotalMin, selectedMaxValue: filter?.profitTotalMax, customFormatter: formatter, sliderViewTag: idx, delegate: sliderDelegate)

@@ -76,4 +76,18 @@ extension UIView {
     func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
         HUD.flash(type, onView: self, delay: delay ?? Constants.HudDelay.default)
     }
+    
+    func typedSuperview<T: UIView>() -> T? {
+        var parent = superview
+        
+        while parent != nil {
+            if let view = parent as? T {
+                return view
+            } else {
+                parent = parent?.superview
+            }
+        }
+        
+        return nil
+    }
 }

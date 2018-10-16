@@ -10,7 +10,6 @@ import UIKit
 
 class DashboardProgramListViewController: BaseViewControllerWithTableView {
     
-    // MARK: - Variables
     // MARK: - View Model
     var viewModel: DashboardProgramListViewModel!
     
@@ -47,13 +46,15 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         bottomViewType = viewModel.bottomViewType
         
         sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
+        
+        tableView.isScrollEnabled = false
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = 0.0
+        tableView.contentInset.bottom = -44.0
         
-        tableView.bounces = false
+        tableView.bounces = true
         tableView.delegate = self.viewModel?.programListDelegateManager
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)

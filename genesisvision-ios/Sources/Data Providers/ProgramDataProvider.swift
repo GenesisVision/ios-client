@@ -11,30 +11,51 @@ import UIKit
 class ProgramDataProvider: DataProvider {
     static func getProgram(programId: String, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?, completion: @escaping (_ program: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-//        guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsAPI.v10ProgramsByIdGet(id: programId, authorization: authorization, currencySecondary: currencySecondary) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-//    static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-//        guard let authorization = AuthManager.authorizedToken,
-//            let newInvestmentRequest = newInvestmentRequest
-//            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-//
-//        ManagerAPI.apiManagerAccountNewInvestmentRequestPost(authorization: authorization, request: newInvestmentRequest) { (uuid, error) in
-//            DataProvider().responseHandler(error, completion: { (result) in
-//                switch result {
-//                case .success:
-//                    completion(uuid?.uuidString)
-//                case .failure:
-//                    errorCompletion(result)
-//                }
-//            })
-//        }
-//    }
+    static func getProgramInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet, completion: @escaping (_ programInvestInfo: ProgramInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdInvestInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (programInvestInfo, error) in
+            DataProvider().responseHandler(programInvestInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
     
+    static func getProgramWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ programWithdrawInfo: ProgramWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (programWithdrawInfo, error) in
+            DataProvider().responseHandler(programWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getFundInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorFundsByIdInvestInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundInvestInfo, error) in
+            DataProvider().responseHandler(fundInvestInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getFundWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundWithdrawInfo, error) in
+            DataProvider().responseHandler(fundWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
     static func investProgram(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
@@ -98,6 +119,51 @@ class ProgramDataProvider: DataProvider {
             ? programFavoritesRemove(with: programId, authorization: authorization, completion: completion)
             : programFavoritesAdd(with: programId, authorization: authorization, completion: completion)
     }
+    
+    static func programReinvestOn(with programId: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdReinvestOnPost(id: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func programReinvestOff(with programId: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+
+        InvestorAPI.v10InvestorProgramsByIdReinvestOffPost(id: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func getRequests(with programId: String, skip: Int, take: Int, completion: @escaping (_ programRequests: ProgramRequests?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdRequestsBySkipByTakeGet(id: uuid, skip: skip, take: take, authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    //    static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    //        guard let authorization = AuthManager.authorizedToken,
+    //            let newInvestmentRequest = newInvestmentRequest
+    //            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    //
+    //        ManagerAPI.apiManagerAccountNewInvestmentRequestPost(authorization: authorization, request: newInvestmentRequest) { (uuid, error) in
+    //            DataProvider().responseHandler(error, completion: { (result) in
+    //                switch result {
+    //                case .success:
+    //                    completion(uuid?.uuidString)
+    //                case .failure:
+    //                    errorCompletion(result)
+    //                }
+    //            })
+    //        }
+    //    }
+    
     
     // MARK: - Private methods
 

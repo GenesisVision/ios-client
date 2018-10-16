@@ -113,10 +113,10 @@ class PortfolioViewController: BaseViewController {
             
             amountTitleLabel.text = "Amount"
             if let value = dashboardChartValue.value {
-                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " GVT"
+                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }
-            if let valueCurrency = dashboardChartValue.valueCurrency {
-                amountCurrencyLabel.text = valueCurrency.toString() + " \(getSelectedCurrency())"
+            if let valueCurrency = dashboardChartValue.valueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
+                amountCurrencyLabel.text = valueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
             }
             
             changeTitleLabel.text = "Change"
@@ -124,20 +124,21 @@ class PortfolioViewController: BaseViewController {
                 changePercentLabel.text = changePercent.rounded(toPlaces: 2).toString() + " %"
             }
             if let changeValue = dashboardChartValue.changeValue {
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " GVT"
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }
-            if let changeValueCurrency = dashboardChartValue.changeValueCurrency {
-                changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"
+            if let changeValueCurrency = dashboardChartValue.changeValueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
+                changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
             }
         
             if let programRequests = viewModel.programRequests {
                 inRequestsTitleLabel.text = "In Requests"
                 if let totalValue = programRequests.totalValue {
-                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " GVT"
+                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
                 }
-                if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate {
+                
+                if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                     let inRequestsCurrency = totalValue * rate
-                    inRequestsCurrencyLabel.text = inRequestsCurrency.toString() + " \(getSelectedCurrency())"
+                    inRequestsCurrencyLabel.text = inRequestsCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
                 }
                 
                 if let requests = programRequests.requests {

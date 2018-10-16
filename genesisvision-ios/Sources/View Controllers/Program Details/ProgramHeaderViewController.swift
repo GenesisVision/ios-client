@@ -49,6 +49,7 @@ class ProgramHeaderViewController: BaseViewController {
     @IBOutlet weak var labelsStackView: UIStackView!
     @IBOutlet weak var tagsStackView: UIStackView!
     
+    @IBOutlet weak var levelBgImageView: UIImageView!
     @IBOutlet weak var levelButton: LevelButton! {
         didSet {
             levelButton.borderSize = 0.0
@@ -80,6 +81,7 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     func changeColorAlpha(offset: CGFloat) {
+        self.levelBgImageView.alpha = 1.0 - offset
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
         self.currencyLabel.alpha = 1.0 - offset * 2
@@ -108,7 +110,7 @@ class ProgramHeaderViewController: BaseViewController {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             
-            let resource = ImageResource(downloadURL: fileUrl, cacheKey: "my_cache_key")
+            let resource = ImageResource(downloadURL: fileUrl, cacheKey: logo)
             bgImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
             headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
         }

@@ -52,16 +52,6 @@ class ProgramDetailsRouter: TabmanRouter {
         return viewController
     }
     
-    func getRequests(with programId: String) -> ProgramRequestsViewController? {
-        let viewController = ProgramRequestsViewController()
-        let router = ProgramRequestsRouter(parentRouter: self)
-        router.currentController = viewController
-        let viewModel = ProgramRequestsViewModel(withRouter: router, programId: programId, programDetailProtocol: nil, reloadDataProtocol: viewController as? ReloadDataProtocol)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
-    
     func getFullChart(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailFullChartViewController? {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program) else { return nil }
         

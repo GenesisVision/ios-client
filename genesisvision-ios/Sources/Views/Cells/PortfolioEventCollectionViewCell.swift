@@ -35,4 +35,12 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
         backgroundColor = UIColor.Cell.bg
         roundCorners(with: Constants.SystemSizes.cornerSize)
     }
+    
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        
+        layer.masksToBounds = true
+        layer.cornerRadius = Constants.SystemSizes.cornerSize
+    }
 }

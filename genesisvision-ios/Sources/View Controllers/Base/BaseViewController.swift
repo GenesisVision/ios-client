@@ -17,19 +17,9 @@ class BaseViewController: UIViewController, Hidable {
     
     var refreshControl: UIRefreshControl?
     
-    var currencyTitleButton: StatusButton = {
-        let selectedCurrency = getSelectedCurrency()
-        
-        let currencyTitleButton = StatusButton(type: .system)
-        currencyTitleButton.frame = CGRect(x: 0, y: 0, width: 73, height: 18)
-        currencyTitleButton.setTitle(selectedCurrency, for: .normal)
-        currencyTitleButton.setTitleColor(UIColor.Cell.title, for: .normal)
-        currencyTitleButton.bgColor = UIColor.Cell.bg
-        currencyTitleButton.contentEdge = UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20)
-        
-        currencyTitleButton.sizeToFit()
-        
-        return currencyTitleButton
+    var navigationTitleView: NavigationTitleView = {
+        let view = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        return view
     }()
     
     var sortButton: ActionButton = {
@@ -140,10 +130,11 @@ class BaseViewController: UIViewController, Hidable {
     
     // MARK: - Public Methods
     func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
-        currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
+        navigationTitleView.currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
         self.currencyDelegateManager = currencyDelegateManager
         currencyDelegateManager?.currencyDelegate = self
-        navigationItem.titleView = currencyTitleButton
+        
+        navigationItem.titleView = navigationTitleView
     }
     
     // MARK: - Private Methods
@@ -212,8 +203,8 @@ extension BaseViewController: UIScrollViewDelegate {
 extension BaseViewController: CurrencyDelegateManagerProtocol {
     func didSelectCurrency(at indexPath: IndexPath) {
         if let selectedCurrency = currencyDelegateManager?.selectedCurrency {
-            currencyTitleButton.setTitle(selectedCurrency, for: .normal)
-            currencyTitleButton.sizeToFit()
+            navigationTitleView.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
+            navigationTitleView.currencyTitleButton.sizeToFit()
         }
         
         pullToRefresh()

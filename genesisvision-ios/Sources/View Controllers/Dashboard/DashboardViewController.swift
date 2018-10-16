@@ -15,7 +15,11 @@ class DashboardViewController: BaseViewController {
     // MARK: - Variables
     var dateRangeView: DateRangeView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.delegate = self
+        }
+    }
     
     @IBOutlet weak var chartsView: UIView!
     @IBOutlet weak var eventsView: UIView!
@@ -121,6 +125,8 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setupUI() {
+        bottomViewType = .none
+        
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         addCurrencyTitleButton(viewModel.currencyDelegateManager)
@@ -131,6 +137,7 @@ class DashboardViewController: BaseViewController {
         dateRangeButton.setImage(#imageLiteral(resourceName: "img_arrow_down_icon"), for: .normal)
         dateRangeButton.addTarget(self, action: #selector(dateRangeButtonAction), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dateRangeButton)
+//        scrollView.bounces = false
     }
     
     // MARK: - Public methods
@@ -151,6 +158,7 @@ class DashboardViewController: BaseViewController {
         
         bottomSheetController.addNavigationBar("In Requests")
         viewModel.inRequestsDelegateManager.programRequests = programRequests
+        viewModel.inRequestsDelegateManager.inRequestsDelegate = self
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
@@ -164,6 +172,8 @@ class DashboardViewController: BaseViewController {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationList()
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
     }
     
     // MARK: - Private methods
@@ -191,6 +201,8 @@ class DashboardViewController: BaseViewController {
 
 extension DashboardViewController: DateRangeViewProtocol {
     func applyButtonDidPress(with dateRangeType: DateRangeType, dateRangeFrom: Date, dateRangeTo: Date) {
+        bottomSheetController.dismiss()
+        
         viewModel.dateRangeFrom = dateRangeFrom
         viewModel.dateRangeTo = dateRangeTo
         viewModel.dateRangeType = dateRangeType
@@ -220,34 +232,13 @@ extension DashboardViewController: DateRangeViewProtocol {
     }
 }
 
-//extension DashboardViewController: UIViewControllerPreviewingDelegate {
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-//                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-//
-//        let cellPosition = tableView.convert(location, from: view)
-//
-//        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-//            let vc = viewModel.getDetailsViewController(with: indexPath),
-//            let cell = tableView.cellForRow(at: indexPath)
-//            else { return nil }
-//
-//        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-//        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
-//
-//        return vc
-//    }
-//
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//        push(viewController: viewControllerToCommit)
-//    }
-//}
-
 extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
+        navigationTitleView.scrollViewDidScroll(scrollView, threshold: -30.0)
+        
         let yOffset = scrollView.contentOffset.y
-        print(yOffset)
 //        animateViews(yOffset)
         
         if !viewModel.isLoading && yOffset < -100 {
@@ -260,8 +251,7 @@ extension DashboardViewController {
             if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-//                        print(yOffset == assetsView.frame.origin.y)
-                        vc.tableView?.isScrollEnabled = yOffset == assetsView.frame.origin.y
+                        vc.tableView?.isScrollEnabled = yOffset >= assetsView.frame.origin.y
                     }
                 }
             }
@@ -276,7 +266,14 @@ extension DashboardViewController: SortingDelegate {
 }
 
 extension DashboardViewController: InRequestsDelegateManagerProtocol {
-    func didTapCancelButton(at indexPath: IndexPath) {
+    func didCanceledRequest(completionResult: CompletionResult) {
+        bottomSheetController.dismiss()
         
+        switch completionResult {
+        case .success:
+            fetch()
+        default:
+            break
+        }
     }
 }

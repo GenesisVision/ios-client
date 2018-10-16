@@ -14,6 +14,12 @@ class WalletViewController: BaseViewControllerWithTableView {
     var viewModel: WalletControllerViewModel!
     
     // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
+    
     var walletTableHeaderViewHeightStart: CGFloat = 300.0
     var walletTableHeaderViewHeight: CGFloat = 300.0
     var walletTableHeaderViewHeightEnd: CGFloat = 100.0
@@ -38,8 +44,6 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
-        setupTableConfiguration()
-        
         registerForPreviewing()
         
         setupUI()
@@ -253,14 +257,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-//        print(yOffset)
-        if let frame = walletTableHeaderView?.frame {
-            let newHeight = frame.size.height - yOffset
-            if newHeight < walletTableHeaderViewHeightStart || newHeight > walletTableHeaderViewHeightEnd {
-                walletTableHeaderView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: newHeight)
-            }
-        }
+        navigationTitleView.scrollViewDidScroll(scrollView, threshold: -30.0)
     }
 }
 

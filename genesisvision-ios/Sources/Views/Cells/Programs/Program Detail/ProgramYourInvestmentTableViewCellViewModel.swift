@@ -38,7 +38,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         if let invested = programDetailsFull?.statistic?.investedAmount {
             cell.investedTitleLabel.text = "invested"
-            cell.investedValueLabel.text = invested.rounded(withType: .gvt).toString() + " GVT"
+            cell.investedValueLabel.text = invested.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let profit = programDetailsFull?.personalProgramDetails?.profit {
