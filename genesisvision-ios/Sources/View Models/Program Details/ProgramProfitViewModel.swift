@@ -20,6 +20,7 @@ final class ProgramProfitViewModel {
     
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private weak var chartViewProtocol: ChartViewProtocol?
     
     var dataType: DataType = .api
     
@@ -27,11 +28,23 @@ final class ProgramProfitViewModel {
     
     private var sections: [SectionType] = [.chart, .statistics]
     
+    private var programProfitChartTableViewCellViewModel:  ProgramProfitChartTableViewCellViewModel?
+    private var programProfitStatisticTableViewCellViewModel: ProgramProfitStatisticTableViewCellViewModel?
+    
     // MARK: - Init
     init(withRouter router: Router, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
+        self.chartViewProtocol = router.currentController as? ChartViewProtocol
+    }
+    
+    // MARK: - Public methods
+    func selectChartSimple(_ date: Date) {
+        if let result = programProfitChart?.equityChart?.first(where: { $0.date == date }) {
+            print("selectChartSimple")
+            print(result)
+        }
     }
 }
 
@@ -83,9 +96,11 @@ extension ProgramProfitViewModel {
         
         switch sections[section] {
         case .chart:
-            return ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart)
+            self.programProfitChartTableViewCellViewModel = ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart, chartViewProtocol: self.chartViewProtocol)
+            return programProfitChartTableViewCellViewModel
         case .statistics:
-            return ProgramProfitStatisticTableViewCellViewModel(programProfitChart: programProfitChart)
+            self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(programProfitChart: programProfitChart)
+            return programProfitStatisticTableViewCellViewModel
         }
     }
     

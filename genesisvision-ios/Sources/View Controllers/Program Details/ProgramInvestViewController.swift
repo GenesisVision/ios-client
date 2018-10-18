@@ -25,6 +25,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
         didSet {
+            availableToInvestTitleLabel.text = "Avalible to invest"
             availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -34,7 +35,11 @@ class ProgramInvestViewController: BaseViewController {
             availableToInvestValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountToInvestTitleLabel: SubtitleLabel! 
+    @IBOutlet var amountToInvestTitleLabel: SubtitleLabel! {
+        didSet {
+            amountToInvestTitleLabel.text = "Amount to invest"
+        }
+    }
     @IBOutlet var amountToInvestValueLabel: TitleLabel! {
         didSet {
             amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)

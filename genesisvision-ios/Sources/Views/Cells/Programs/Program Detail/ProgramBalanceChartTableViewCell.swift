@@ -11,6 +11,8 @@ import Charts
 
 class ProgramBalanceChartTableViewCell: UITableViewCell {
 
+    weak var chartViewProtocol: ChartViewProtocol?
+    
     // MARK: - Outlets
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
         didSet {
@@ -57,7 +59,7 @@ class ProgramBalanceChartTableViewCell: UITableViewCell {
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
-            chartView.backgroundColor = UIColor.BaseView.bg
+            chartView.backgroundColor = .red//UIColor.BaseView.bg
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
         }
@@ -89,11 +91,15 @@ class ProgramBalanceChartTableViewCell: UITableViewCell {
 
 extension ProgramBalanceChartTableViewCell: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        circleView.isHidden = false
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
         
+        let date = Date(timeIntervalSince1970: entry.x)
+        chartViewProtocol?.chartValueSelected(date: date)
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         circleView.isHidden = true
+        chartViewProtocol?.chartValueNothingSelected()
     }
 }

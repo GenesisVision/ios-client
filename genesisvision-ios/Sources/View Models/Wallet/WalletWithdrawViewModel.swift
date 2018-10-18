@@ -16,6 +16,18 @@ final class WalletWithdrawViewModel {
     
     private var router: WalletWithdrawRouter!
     
+    var selectedWalletCurrency: String?
+    var selectedWalletCurrencyIndex: Int {
+//        guard let selectedWalletCurrency = selectedWalletCurrency,
+//            let walletCurrencies = brokersViewModel?.brokers,
+//            let idx = brokers.index(where: {$0.brokerId == selectedBrokerTradeServer.brokerId}) else {
+//                return 0
+//        }
+//
+//        return idx
+        return 0
+    }
+    
     // MARK: - Init
     init(withRouter router: WalletWithdrawRouter, walletProtocol: WalletProtocol) {
         self.router = router
@@ -23,6 +35,39 @@ final class WalletWithdrawViewModel {
     }
     
     // MARK: - Public methods
+    func updateWalletCurrencyIndex(_ selectedIndex: Int) {
+//        guard let brokersViewModel = brokersViewModel,
+//            let brokers = brokersViewModel.brokers else {
+//                return
+//        }
+//
+//        for found in brokers.enumerated() {
+//            if found.offset == selectedIndex {
+//                selectedBrokerTradeServer = found.element
+//
+//                if let idx = editableFields.index(where: { $0.type == .brokerServer }),
+//                    let selectedBrokerTradeServer = selectedBrokerTradeServer,
+//                    let brokerId = selectedBrokerTradeServer.id,
+//                    let name = selectedBrokerTradeServer.name {
+//                    temparyNewInvestmentRequest?.brokerTradeServerId = brokerId
+//                    editableFields[idx].text = name
+//                }
+//            }
+//        }
+    }
+    
+    // MARK: - Picker View Values
+    func walletCurrencyValues() -> [String] {
+//        guard let brokersViewModel = brokersViewModel,
+//            let brokers = brokersViewModel.brokers else {
+//                return []
+//        }
+//
+//        return brokers.map { $0.name ?? "" }
+        
+        return []
+    }
+    
     // MARK: - Navigation
     func withdraw(with amount: Double, address: String, currency: CreateWithdrawalRequestModel.Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
         apiWithdraw(with: amount, address: address, currency: currency, twoFactorCode: twoFactorCode, completion: completion)

@@ -94,6 +94,12 @@ class NumpadView: UIView {
     @IBOutlet var clearButton: UIButton!
     
     // MARK: - Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = UIColor.BaseView.bg
+    }
+    
     override func layoutSubviews() {
         switch type {
         case .currency:
@@ -120,7 +126,7 @@ class NumpadView: UIView {
         }
     }
     
-    var buttonBackgroundColor: UIColor = UIColor.Button.numpadBackground {
+    var buttonBackgroundColor: UIColor = UIColor.BaseView.bg  {
         didSet {
             numberButtons.forEach { (button) in
                 button.bgColor = buttonBackgroundColor

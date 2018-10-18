@@ -15,6 +15,7 @@ class ProgramWithdrawViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToWithdrawValueTitleLabel: TitleLabel! {
         didSet {
+            availableToWithdrawValueTitleLabel.text = "You invested in program"
             availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -24,7 +25,11 @@ class ProgramWithdrawViewController: BaseViewController {
             availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel!
+    @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel! {
+        didSet {
+            amountToWithdrawTitleLabel.text = "Amount to withdraw"
+        }
+    }
     @IBOutlet var amountToWithdrawValueLabel: TitleLabel! {
         didSet {
             amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
@@ -45,6 +50,7 @@ class ProgramWithdrawViewController: BaseViewController {
     
     @IBOutlet var payoutDayTitleLabel: SubtitleLabel! {
         didSet {
+            payoutDayTitleLabel.text = "Payout day"
             payoutDayTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }

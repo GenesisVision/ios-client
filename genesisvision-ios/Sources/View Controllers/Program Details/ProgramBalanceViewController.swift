@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class ProgramBalanceViewController: BaseViewControllerWithTableView {
     
@@ -88,4 +89,13 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-
+extension ProgramBalanceViewController: ChartViewProtocol {
+    func chartValueNothingSelected() {
+        print("chartValueNothingSelected")
+    }
+    
+    func chartValueSelected(date: Date) {
+        print("chartValueSelected")
+        viewModel.selectProgramBalanceChartElement(date)
+    }
+}

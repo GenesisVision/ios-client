@@ -9,236 +9,18 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Bol.ttf">
+            <string>NeuzeitGro-Bol</string>
+        </array>
+        <array key="NeuzeitGro-Lig.ttf">
+            <string>NeuzeitGro-Lig</string>
+        </array>
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Wallet Deposit View Controller-->
-        <scene sceneID="0Uv-eN-R9l">
-            <objects>
-                <viewController storyboardIdentifier="WalletDepositViewController" id="qdb-Mr-Z0x" customClass="WalletDepositViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mh4-4T-uiq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For depositing just send the desired amount of GVT to this address. Or use the QR code below:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9H-hf-YmA">
-                                <rect key="frame" x="16" y="36" width="343" height="57.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is your GVT wallet address:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vY-67-jMc">
-                                <rect key="frame" x="16" y="540" width="343" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="NOL-PN-Ieb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cT0-Yn-wNw">
-                                <rect key="frame" x="32" y="93.5" width="311" height="311"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="cT0-Yn-wNw" secondAttribute="height" multiplier="1:1" id="W9T-ai-z7V"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GzB-Zh-lec">
-                                <rect key="frame" x="16" y="569" width="343" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="iwB-xb-wTy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ixF-Oh-QGH">
-                                <rect key="frame" x="88.5" y="606" width="198" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9a-W1-tCn" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
-                                        <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="COPY">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="copyButtonAction:" destination="qdb-Mr-Z0x" eventType="touchUpInside" id="LxE-mh-EbJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="198" id="4Xg-0h-6rw"/>
-                                    <constraint firstAttribute="height" constant="45" id="cf9-WL-kPV"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="cT0-Yn-wNw" firstAttribute="top" secondItem="d9H-hf-YmA" secondAttribute="bottom" id="13o-gl-RDf"/>
-                            <constraint firstItem="cT0-Yn-wNw" firstAttribute="leading" secondItem="Zvn-ly-7IQ" secondAttribute="leading" constant="32" id="2ZS-yB-OHw"/>
-                            <constraint firstItem="GzB-Zh-lec" firstAttribute="leading" secondItem="Zvn-ly-7IQ" secondAttribute="leading" constant="16" id="3B9-q9-hvC"/>
-                            <constraint firstItem="Zvn-ly-7IQ" firstAttribute="trailing" secondItem="GzB-Zh-lec" secondAttribute="trailing" constant="16" id="ATp-Ne-hk2"/>
-                            <constraint firstItem="d9H-hf-YmA" firstAttribute="leading" secondItem="Zvn-ly-7IQ" secondAttribute="leading" constant="16" id="HiY-qu-G3J"/>
-                            <constraint firstItem="d9H-hf-YmA" firstAttribute="top" secondItem="Zvn-ly-7IQ" secondAttribute="top" constant="16" id="LDw-fW-Ejf"/>
-                            <constraint firstItem="Zvn-ly-7IQ" firstAttribute="trailing" secondItem="cT0-Yn-wNw" secondAttribute="trailing" constant="32" id="QkR-vn-NOF"/>
-                            <constraint firstItem="6vY-67-jMc" firstAttribute="trailing" secondItem="d9H-hf-YmA" secondAttribute="trailing" id="Tev-ne-KGS"/>
-                            <constraint firstItem="ixF-Oh-QGH" firstAttribute="centerX" secondItem="mh4-4T-uiq" secondAttribute="centerX" id="a7m-S7-lYI"/>
-                            <constraint firstItem="6vY-67-jMc" firstAttribute="leading" secondItem="d9H-hf-YmA" secondAttribute="leading" id="hMN-ea-MYG"/>
-                            <constraint firstItem="ixF-Oh-QGH" firstAttribute="top" secondItem="GzB-Zh-lec" secondAttribute="bottom" constant="16" id="hkB-Ye-PHs"/>
-                            <constraint firstItem="6vY-67-jMc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cT0-Yn-wNw" secondAttribute="bottom" constant="8" id="kW4-3P-VZY"/>
-                            <constraint firstItem="Zvn-ly-7IQ" firstAttribute="bottom" secondItem="ixF-Oh-QGH" secondAttribute="bottom" constant="16" id="pBa-Yi-36L"/>
-                            <constraint firstItem="GzB-Zh-lec" firstAttribute="top" secondItem="6vY-67-jMc" secondAttribute="bottom" constant="8" id="yq1-Wg-6SS"/>
-                            <constraint firstItem="Zvn-ly-7IQ" firstAttribute="trailing" secondItem="d9H-hf-YmA" secondAttribute="trailing" constant="16" id="zcs-F9-7Ue"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Zvn-ly-7IQ"/>
-                    </view>
-                    <connections>
-                        <outlet property="addressLabel" destination="GzB-Zh-lec" id="ZeS-BP-UuC"/>
-                        <outlet property="qrImageView" destination="cT0-Yn-wNw" id="ZS4-9c-jHi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sEo-Va-uI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2373.5999999999999" y="1754.5727136431785"/>
-        </scene>
-        <!--Wallet Withdraw View Controller-->
-        <scene sceneID="6fW-uE-BlH">
-            <objects>
-                <viewController storyboardIdentifier="WalletWithdrawViewController" id="eDQ-04-PTh" customClass="WalletWithdrawViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="66I-GZ-yyF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YS-aw-sCA" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="88.5" y="347" width="198" height="45"/>
-                                <color key="backgroundColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="198" id="EFF-qw-s09"/>
-                                    <constraint firstAttribute="height" constant="45" id="pIs-R3-faV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <state key="normal" title="CAMERA">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="readQRCodeButtonAction:" destination="eDQ-04-PTh" eventType="touchUpInside" id="rIL-bU-H3Q"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wqy-gM-wlc" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="32" y="82.5" width="311" height="60"/>
-                                <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="y2X-6L-oRd"/>
-                                </constraints>
-                                <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or use your camera to read a QR code:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9M-Au-kcM">
-                                <rect key="frame" x="32" y="313" width="311" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the desired amount of GVT you would like to withdraw:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxI-wD-FZh">
-                                <rect key="frame" x="32" y="36" width="311" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the wallet address you would like to withdraw:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmF-wO-lng">
-                                <rect key="frame" x="32" y="174.5" width="311" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.12549019610000001" green="0.1450980392" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="center" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-Le-taI" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="32" y="221" width="311" height="60"/>
-                                <color key="tintColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" red="0.3294117647" green="0.43137254899999999" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bxa-Ej-R2v">
-                                <rect key="frame" x="88.5" y="606" width="198" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYS-6R-I0y" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="WITHDRAW">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="withdrawButtonAction:" destination="eDQ-04-PTh" eventType="touchUpInside" id="BCc-RV-kYe"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="198" id="9Zl-M0-74u"/>
-                                    <constraint firstAttribute="height" constant="45" id="aB7-i7-F8J"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="h2t-Le-taI" firstAttribute="top" secondItem="RmF-wO-lng" secondAttribute="bottom" constant="8" id="0qB-WP-j4E"/>
-                            <constraint firstItem="cxI-wD-FZh" firstAttribute="leading" secondItem="d2Z-yx-RVV" secondAttribute="leading" constant="32" id="9yB-do-GSM"/>
-                            <constraint firstItem="3YS-aw-sCA" firstAttribute="top" secondItem="U9M-Au-kcM" secondAttribute="bottom" constant="16" id="Aym-A7-uIY"/>
-                            <constraint firstItem="U9M-Au-kcM" firstAttribute="top" secondItem="h2t-Le-taI" secondAttribute="bottom" constant="32" id="BqP-iv-2O4"/>
-                            <constraint firstItem="cxI-wD-FZh" firstAttribute="top" secondItem="d2Z-yx-RVV" secondAttribute="top" constant="16" id="E0O-R7-GrT"/>
-                            <constraint firstItem="U9M-Au-kcM" firstAttribute="trailing" secondItem="h2t-Le-taI" secondAttribute="trailing" id="KBv-qi-nqb"/>
-                            <constraint firstItem="Wqy-gM-wlc" firstAttribute="leading" secondItem="cxI-wD-FZh" secondAttribute="leading" id="LHK-8n-fpn"/>
-                            <constraint firstItem="RmF-wO-lng" firstAttribute="trailing" secondItem="cxI-wD-FZh" secondAttribute="trailing" id="Mwo-Pd-6AI"/>
-                            <constraint firstItem="Wqy-gM-wlc" firstAttribute="trailing" secondItem="cxI-wD-FZh" secondAttribute="trailing" id="QQb-j9-HOf"/>
-                            <constraint firstItem="3YS-aw-sCA" firstAttribute="centerX" secondItem="U9M-Au-kcM" secondAttribute="centerX" id="Qb7-T2-pcg"/>
-                            <constraint firstItem="h2t-Le-taI" firstAttribute="trailing" secondItem="Wqy-gM-wlc" secondAttribute="trailing" id="Upi-Fd-GYn"/>
-                            <constraint firstItem="bxa-Ej-R2v" firstAttribute="centerX" secondItem="66I-GZ-yyF" secondAttribute="centerX" id="ZHG-fr-YeZ"/>
-                            <constraint firstItem="RmF-wO-lng" firstAttribute="top" secondItem="Wqy-gM-wlc" secondAttribute="bottom" constant="32" id="bSw-xs-TLQ"/>
-                            <constraint firstItem="U9M-Au-kcM" firstAttribute="leading" secondItem="h2t-Le-taI" secondAttribute="leading" id="dpj-Hs-e7q"/>
-                            <constraint firstItem="h2t-Le-taI" firstAttribute="leading" secondItem="Wqy-gM-wlc" secondAttribute="leading" id="fli-05-8bi"/>
-                            <constraint firstItem="d2Z-yx-RVV" firstAttribute="bottom" secondItem="bxa-Ej-R2v" secondAttribute="bottom" constant="16" id="gS5-Sm-XVg"/>
-                            <constraint firstItem="RmF-wO-lng" firstAttribute="leading" secondItem="cxI-wD-FZh" secondAttribute="leading" id="iYg-1I-8el"/>
-                            <constraint firstAttribute="trailing" secondItem="cxI-wD-FZh" secondAttribute="trailing" constant="32" id="jng-Kg-Zg2"/>
-                            <constraint firstItem="Wqy-gM-wlc" firstAttribute="top" secondItem="cxI-wD-FZh" secondAttribute="bottom" constant="8" id="lHt-MV-xUo"/>
-                            <constraint firstItem="h2t-Le-taI" firstAttribute="height" secondItem="Wqy-gM-wlc" secondAttribute="height" id="yJe-QB-6Vs"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="d2Z-yx-RVV"/>
-                    </view>
-                    <connections>
-                        <outlet property="addressTextField" destination="h2t-Le-taI" id="twH-xY-n5F"/>
-                        <outlet property="amountTextField" destination="Wqy-gM-wlc" id="YdR-7p-piH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aQ7-fp-jGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3170" y="1755"/>
-        </scene>
         <!--Wallet View Controller-->
         <scene sceneID="fB2-i3-MLJ">
             <objects>
@@ -337,5 +119,758 @@
             </objects>
             <point key="canvasLocation" x="3169" y="1037"/>
         </scene>
+        <!--Wallet Withdraw View Controller-->
+        <scene sceneID="ZdW-N2-tlB">
+            <objects>
+                <viewController storyboardIdentifier="WalletWithdrawViewController" id="yVr-CK-XRL" customClass="WalletWithdrawViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nku-Nm-2sX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gja-0L-Wbv">
+                                <rect key="frame" x="0.0" y="36" width="375" height="311.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="81g-0E-Wx5">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="311.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="SJA-Kd-SpO">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="218.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="eNo-g1-l5r">
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="17.5"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rrl-Yh-XKJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="169" height="17.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTi-Th-tnK" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="119" height="17.5"/>
+                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lb-JE-qMw" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="127" y="0.0" width="42" height="17.5"/>
+                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                        <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rdo-51-mta">
+                                                        <rect key="frame" x="0.0" y="49.5" width="315" height="56"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCA-vi-qAP" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="15"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="15" id="Mvn-63-m1R"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Uq-Yn-e8p">
+                                                                <rect key="frame" x="0.0" y="23" width="315" height="24"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NUb-Tl-Edv">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="24"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-6N-me7">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sX-3v-YMZ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="8.5" height="24"/>
+                                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLI-Ch-CE4" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                                        <rect key="frame" x="16.5" y="0.0" width="29.5" height="24"/>
+                                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6q-An-Uhf">
+                                                                        <rect key="frame" x="275" y="0.0" width="40" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="40" id="RDk-14-Kbe"/>
+                                                                        </constraints>
+                                                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="0.0" maxY="8"/>
+                                                                        <state key="normal" title="Max">
+                                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="copyMaxValueButtonAction:" destination="yVr-CK-XRL" eventType="touchUpInside" id="8Mo-Ma-RXU"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCc-Oh-ghG">
+                                                                <rect key="frame" x="0.0" y="55" width="315" height="1"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="GbP-Fy-6UG"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="56" id="WYj-9s-i1C"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5tu-si-bgh">
+                                                        <rect key="frame" x="0.0" y="137.5" width="315" height="81"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a wallet currency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-3Q-jc8" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="15"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="15" id="ub0-KZ-vzF"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imp-nT-GTx">
+                                                                <rect key="frame" x="0.0" y="23" width="315" height="26"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvJ-N3-cPb">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="26"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TG8-BJ-q3f" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="26"/>
+                                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-V2-8iL">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="26"/>
+                                                                                <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="8" maxY="0.0"/>
+                                                                                <state key="normal" image="img_scroll_arrow_down">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="selectedWalletCurrencyButtonAction:" destination="yVr-CK-XRL" eventType="touchUpInside" id="LCn-9d-ynD"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="hQe-V2-8iL" firstAttribute="leading" secondItem="vvJ-N3-cPb" secondAttribute="leading" id="3tP-rd-1SJ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="hQe-V2-8iL" secondAttribute="trailing" id="9GE-K8-DCb"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="TG8-BJ-q3f" secondAttribute="trailing" id="Nah-xO-Lr1"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="TG8-BJ-q3f" secondAttribute="bottom" id="ZKG-Kc-fZP"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="hQe-V2-8iL" secondAttribute="bottom" id="dcE-0l-jZb"/>
+                                                                            <constraint firstItem="hQe-V2-8iL" firstAttribute="top" secondItem="vvJ-N3-cPb" secondAttribute="top" id="wEh-Ss-YzV"/>
+                                                                            <constraint firstItem="TG8-BJ-q3f" firstAttribute="top" secondItem="vvJ-N3-cPb" secondAttribute="top" id="yKJ-nB-5w9"/>
+                                                                            <constraint firstItem="TG8-BJ-q3f" firstAttribute="leading" secondItem="vvJ-N3-cPb" secondAttribute="leading" id="z9n-cd-qaD"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hp-Cl-cQj">
+                                                                <rect key="frame" x="0.0" y="57" width="315" height="1"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="GtQ-oE-ZlL"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="= 0 BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evk-cn-Hr9" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="66" width="315" height="15"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="81" id="3C4-Xf-2rS"/>
+                                                            <constraint firstItem="evk-cn-Hr9" firstAttribute="height" secondItem="Ucb-3Q-jc8" secondAttribute="height" id="FJY-qu-NvW"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="o75-fI-AMM">
+                                                <rect key="frame" x="0.0" y="282.5" width="315" height="29"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hpu-90-ir1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Withdraw address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4M-WY-5xc">
+                                                                <rect key="frame" x="0.0" y="1.5" width="255" height="17"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ct8-G0-1hh">
+                                                                <rect key="frame" x="255" y="0.0" width="60" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="rij-kJ-8F2"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <state key="normal" title="Scan QR">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="readQRCodeButtonAction:" destination="yVr-CK-XRL" eventType="touchUpInside" id="lv6-Ul-Ay9"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="Hwh-Zg-hCv"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B07-AX-mAb">
+                                                        <rect key="frame" x="0.0" y="28" width="315" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="5Wp-yK-aJY"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="81g-0E-Wx5" secondAttribute="trailing" constant="30" id="F3u-1L-YI1"/>
+                                    <constraint firstItem="81g-0E-Wx5" firstAttribute="top" secondItem="Gja-0L-Wbv" secondAttribute="top" id="UNo-w4-Fjz"/>
+                                    <constraint firstItem="81g-0E-Wx5" firstAttribute="leading" secondItem="Gja-0L-Wbv" secondAttribute="leading" constant="30" id="vSF-jK-YXM"/>
+                                    <constraint firstAttribute="bottom" secondItem="81g-0E-Wx5" secondAttribute="bottom" id="vxd-cx-r4G"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fhn-EN-S6r">
+                                <rect key="frame" x="30" y="108.5" width="275" height="24"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Cl7-4W-ejQ">
+                                <rect key="frame" x="0.0" y="537" width="375" height="41"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="q10-fv-28O">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="41"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WDh-Rj-CfC">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="16.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dUh-bd-Q3Y" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="16.5"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tNq-ow-tmH" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="195.5" y="0.0" width="119.5" height="16.5"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qyq-Pa-1sO">
+                                                <rect key="frame" x="0.0" y="24.5" width="315" height="16.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Withdrawing" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="avn-M9-wYs" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="261.5" height="16.5"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8gE-ft-06a" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="269.5" y="0.0" width="45.5" height="16.5"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="q10-fv-28O" firstAttribute="leading" secondItem="Cl7-4W-ejQ" secondAttribute="leading" constant="30" id="Wsh-ej-1QV"/>
+                                    <constraint firstItem="q10-fv-28O" firstAttribute="top" secondItem="Cl7-4W-ejQ" secondAttribute="top" id="XAO-1o-aT7"/>
+                                    <constraint firstAttribute="trailing" secondItem="q10-fv-28O" secondAttribute="trailing" constant="30" id="aTK-7s-zdb"/>
+                                    <constraint firstAttribute="bottom" secondItem="q10-fv-28O" secondAttribute="bottom" id="tHk-tY-4Vr"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB3-Nk-Mi7" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="20" y="602" width="335" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="t7w-0G-KAS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="withdrawButtonAction:" destination="yVr-CK-XRL" eventType="touchUpInside" id="xrJ-4S-XTO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.074509803920000006" green="0.1176470588" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gja-0L-Wbv" firstAttribute="trailing" secondItem="Lj6-O0-Ijt" secondAttribute="trailing" id="37I-l2-uGx"/>
+                            <constraint firstItem="Fhn-EN-S6r" firstAttribute="trailing" secondItem="NUb-Tl-Edv" secondAttribute="trailing" id="BfJ-pO-gUd"/>
+                            <constraint firstItem="Lj6-O0-Ijt" firstAttribute="trailing" secondItem="nB3-Nk-Mi7" secondAttribute="trailing" constant="20" id="C3n-Bb-jTk"/>
+                            <constraint firstItem="Lj6-O0-Ijt" firstAttribute="bottom" secondItem="nB3-Nk-Mi7" secondAttribute="bottom" constant="20" id="Fyb-IJ-PoW"/>
+                            <constraint firstItem="Gja-0L-Wbv" firstAttribute="top" secondItem="Lj6-O0-Ijt" secondAttribute="top" constant="16" id="GjO-NM-QPi"/>
+                            <constraint firstItem="Fhn-EN-S6r" firstAttribute="top" secondItem="NUb-Tl-Edv" secondAttribute="top" id="JhT-1x-wxM"/>
+                            <constraint firstItem="Cl7-4W-ejQ" firstAttribute="leading" secondItem="Lj6-O0-Ijt" secondAttribute="leading" id="O7w-Nu-M0c"/>
+                            <constraint firstItem="Fhn-EN-S6r" firstAttribute="bottom" secondItem="NUb-Tl-Edv" secondAttribute="bottom" id="YHO-BQ-UWP"/>
+                            <constraint firstItem="nB3-Nk-Mi7" firstAttribute="leading" secondItem="Lj6-O0-Ijt" secondAttribute="leading" constant="20" id="cwQ-hB-Eky"/>
+                            <constraint firstItem="Cl7-4W-ejQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gja-0L-Wbv" secondAttribute="bottom" constant="8" id="fVt-kf-Gbc"/>
+                            <constraint firstItem="Fhn-EN-S6r" firstAttribute="leading" secondItem="NUb-Tl-Edv" secondAttribute="leading" id="hYx-5e-nT6"/>
+                            <constraint firstItem="Cl7-4W-ejQ" firstAttribute="trailing" secondItem="Lj6-O0-Ijt" secondAttribute="trailing" id="pck-dc-ulS"/>
+                            <constraint firstItem="Gja-0L-Wbv" firstAttribute="leading" secondItem="Lj6-O0-Ijt" secondAttribute="leading" id="yCh-zg-S7N"/>
+                            <constraint firstItem="nB3-Nk-Mi7" firstAttribute="top" secondItem="Cl7-4W-ejQ" secondAttribute="bottom" constant="24" id="zGZ-Zw-164"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Lj6-O0-Ijt"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressTextField" destination="I4M-WY-5xc" id="V9A-co-IHP"/>
+                        <outlet property="amountToWithdrawCurrencyLabel" destination="evk-cn-Hr9" id="kii-4c-TRk"/>
+                        <outlet property="amountToWithdrawGVTLabel" destination="eLI-Ch-CE4" id="AXu-VU-cPI"/>
+                        <outlet property="amountToWithdrawTextField" destination="Fhn-EN-S6r" id="oap-9N-t2U"/>
+                        <outlet property="amountToWithdrawTitleLabel" destination="dCA-vi-qAP" id="Ecy-LJ-WEx"/>
+                        <outlet property="amountToWithdrawValueLabel" destination="1sX-3v-YMZ" id="smu-3a-jwr"/>
+                        <outlet property="availableInWalletValueLabel" destination="5Lb-JE-qMw" id="3Iw-91-aUR"/>
+                        <outlet property="availableInWalletValueTitleLabel" destination="vTi-Th-tnK" id="hZl-k2-0l8"/>
+                        <outlet property="copyMaxValueButton" destination="F6q-An-Uhf" id="Ska-sA-L4s"/>
+                        <outlet property="feeTitleLabel" destination="dUh-bd-Q3Y" id="xW4-LO-8di"/>
+                        <outlet property="feeValueLabel" destination="tNq-ow-tmH" id="Nr6-5p-1Ja"/>
+                        <outlet property="selectedWalletCurrencyButton" destination="hQe-V2-8iL" id="fyM-7h-c1t"/>
+                        <outlet property="selectedWalletCurrencyTitleLabel" destination="Ucb-3Q-jc8" id="Fih-j9-U2z"/>
+                        <outlet property="selectedWalletCurrencyValueLabel" destination="TG8-BJ-q3f" id="q2u-nV-B0a"/>
+                        <outlet property="withdrawingTitleLabel" destination="avn-M9-wYs" id="bXf-4N-0cI"/>
+                        <outlet property="withdrawingValueLabel" destination="8gE-ft-06a" id="mip-4u-g7I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZM-vW-9Le" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="1754.5727136431785"/>
+        </scene>
+        <!--Wallet Deposit View Controller-->
+        <scene sceneID="Xaf-Li-YsT">
+            <objects>
+                <viewController storyboardIdentifier="WalletDepositViewController" id="hib-N9-WaH" customClass="WalletDepositViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0j-YK-F4n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-Tk-fZX">
+                                <rect key="frame" x="0.0" y="36" width="375" height="169"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Pyg-kE-pMh">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="169"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ww8-gU-nGs">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="56"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a wallet currency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkP-cp-tSS" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="71l-gD-8Rr"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASq-NZ-Uwc">
+                                                        <rect key="frame" x="0.0" y="23" width="315" height="24"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNS-BV-0II">
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="24"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-lN-YVr" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="24"/>
+                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdh-pH-Ygv">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="24"/>
+                                                                        <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="8" maxY="0.0"/>
+                                                                        <state key="normal" image="img_scroll_arrow_down">
+                                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="selectedWalletCurrencyButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="NYO-Fd-fQv"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="RhY-lN-YVr" firstAttribute="leading" secondItem="JNS-BV-0II" secondAttribute="leading" id="8jf-dN-gv6"/>
+                                                                    <constraint firstItem="zdh-pH-Ygv" firstAttribute="leading" secondItem="JNS-BV-0II" secondAttribute="leading" id="G0r-b4-aKG"/>
+                                                                    <constraint firstItem="zdh-pH-Ygv" firstAttribute="top" secondItem="JNS-BV-0II" secondAttribute="top" id="MzH-hn-M7A"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="zdh-pH-Ygv" secondAttribute="bottom" id="VBi-aT-LW8"/>
+                                                                    <constraint firstItem="RhY-lN-YVr" firstAttribute="top" secondItem="JNS-BV-0II" secondAttribute="top" id="ZJg-Xd-wjA"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="RhY-lN-YVr" secondAttribute="trailing" id="ckg-Yy-CYo"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="zdh-pH-Ygv" secondAttribute="trailing" id="qDT-Xa-5cy"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="RhY-lN-YVr" secondAttribute="bottom" id="ru9-sd-rgO"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3LZ-jz-WWW">
+                                                        <rect key="frame" x="0.0" y="55" width="315" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="Sce-R8-kJa"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="56" id="aYa-FV-KFC"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hul-nn-s3T">
+                                                <rect key="frame" x="0.0" y="88" width="315" height="81"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will send" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-hM-1fj" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="lof-cP-ibl"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ACz-2l-Cfa">
+                                                        <rect key="frame" x="0.0" y="23" width="315" height="26"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="G54-bZ-UFp">
+                                                                <rect key="frame" x="0.0" y="0.0" width="46" height="26"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjk-zq-hjb" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="8.5" height="26"/>
+                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXk-ht-NCd" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="16.5" y="0.0" width="29.5" height="26"/>
+                                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EpH-Xw-dqY">
+                                                        <rect key="frame" x="0.0" y="57" width="315" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="Kvf-17-fkg"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="= 0 BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1W-Cc-w05" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="66" width="315" height="15"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="81" id="dJS-T9-BDq"/>
+                                                    <constraint firstItem="H1W-Cc-w05" firstAttribute="height" secondItem="mXT-hM-1fj" secondAttribute="height" id="diU-HC-SHo"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Pyg-kE-pMh" secondAttribute="trailing" constant="30" id="aaw-hs-If4"/>
+                                    <constraint firstItem="Pyg-kE-pMh" firstAttribute="leading" secondItem="GZ4-Tk-fZX" secondAttribute="leading" constant="30" id="kPM-32-YFv"/>
+                                    <constraint firstItem="Pyg-kE-pMh" firstAttribute="top" secondItem="GZ4-Tk-fZX" secondAttribute="top" id="vhp-Ur-l7q"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pyg-kE-pMh" secondAttribute="bottom" id="zTJ-q5-e7G"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6b-D9-Z3r">
+                                <rect key="frame" x="30" y="147" width="315" height="26"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="YD7-dv-zdm">
+                                <rect key="frame" x="0.0" y="409.5" width="375" height="168.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-9P-RUw">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="168.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
+                                                <rect key="frame" x="97.5" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="5Gy-Vf-ufx"/>
+                                                    <constraint firstAttribute="height" constant="120" id="HmD-e9-K1p"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="153.5" y="152" width="8" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="VWZ-9P-RUw" firstAttribute="top" secondItem="YD7-dv-zdm" secondAttribute="top" id="TP1-Se-8eL"/>
+                                    <constraint firstAttribute="bottom" secondItem="VWZ-9P-RUw" secondAttribute="bottom" id="chC-qj-6wq"/>
+                                    <constraint firstItem="VWZ-9P-RUw" firstAttribute="leading" secondItem="YD7-dv-zdm" secondAttribute="leading" constant="30" id="dDA-od-ajx"/>
+                                    <constraint firstAttribute="trailing" secondItem="VWZ-9P-RUw" secondAttribute="trailing" constant="30" id="reA-LS-kD8"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-J6-Vd4" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="20" y="602" width="335" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="c3u-K0-Htx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Copy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="copyButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="YpO-M7-yyr"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9f-JJ-t4w" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="455" width="375" height="212"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="g2Y-9g-7eI">
+                                        <rect key="frame" x="6" y="0.0" width="363" height="206"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="cEj-Ql-Hcg">
+                                                <rect key="frame" x="0.0" y="0.0" width="363" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb3-JJ-dVb" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="1">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="04w-DU-hih"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-2e-QgS" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="123" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="2">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="Fh4-mm-sCU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEJ-mf-8z5" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="246" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="3">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="ocL-6u-RRP"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="1Mq-wM-wu6"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="w73-oK-5qH">
+                                                <rect key="frame" x="0.0" y="53" width="363" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNI-0w-BoB" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="4">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="TgT-Ee-vvU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-dm-1iB" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="123" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="5">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="c7m-ip-YV8"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-vP-crR" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="246" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="6">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="NwH-Qo-b09"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hn0-yf-n0O">
+                                                <rect key="frame" x="0.0" y="106" width="363" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBK-Yx-8Du" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="7">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="P3I-5a-KJd"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0g-0o-KZm" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="123" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="8">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="zCt-Vb-Vas"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ri-RN-sf0" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="246" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="9">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="Prm-Dg-PYd"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="1Ya-00-esf">
+                                                <rect key="frame" x="0.0" y="159" width="363" height="47"/>
+                                                <subviews>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c73-U9-TYq" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title=".">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="separatorButtonAction:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="8jg-se-8fK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evd-3g-XRr" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="123" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <state key="normal" title="0">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="buttons:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="SFu-VO-AJ0"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5Z-yt-X1O">
+                                                        <rect key="frame" x="246" y="0.0" width="117" height="47"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                        <color key="tintColor" red="0.0" green="0.73725490199999999" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" image="img_numpad_delete">
+                                                            <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="clearButtonAction:" destination="H9f-JJ-t4w" eventType="touchUpInside" id="3Yq-fC-yI2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="w73-oK-5qH" firstAttribute="height" secondItem="cEj-Ql-Hcg" secondAttribute="height" id="18v-kX-9iR"/>
+                                            <constraint firstItem="1Ya-00-esf" firstAttribute="height" secondItem="hn0-yf-n0O" secondAttribute="height" id="htZ-Jl-wFH"/>
+                                            <constraint firstItem="hn0-yf-n0O" firstAttribute="height" secondItem="w73-oK-5qH" secondAttribute="height" id="kdn-cA-1gf"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="g2Y-9g-7eI" firstAttribute="leading" secondItem="H9f-JJ-t4w" secondAttribute="leading" constant="6" id="5op-Dg-7yz"/>
+                                    <constraint firstAttribute="trailing" secondItem="g2Y-9g-7eI" secondAttribute="trailing" constant="6" id="9E9-Sk-brG"/>
+                                    <constraint firstItem="g2Y-9g-7eI" firstAttribute="top" secondItem="H9f-JJ-t4w" secondAttribute="top" id="Fr1-cI-AVF"/>
+                                    <constraint firstAttribute="bottom" secondItem="g2Y-9g-7eI" secondAttribute="bottom" constant="6" id="MH7-Am-jul"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="clearButton" destination="z5Z-yt-X1O" id="Qu4-aQ-Jor"/>
+                                    <outlet property="separatorButton" destination="c73-U9-TYq" id="vDy-vd-0Ut"/>
+                                    <outletCollection property="numberButtons" destination="vb3-JJ-dVb" collectionClass="NSMutableArray" id="XoU-UI-xby"/>
+                                    <outletCollection property="numberButtons" destination="ijj-2e-QgS" collectionClass="NSMutableArray" id="ous-m3-Jbm"/>
+                                    <outletCollection property="numberButtons" destination="TEJ-mf-8z5" collectionClass="NSMutableArray" id="BtE-dZ-On0"/>
+                                    <outletCollection property="numberButtons" destination="VNI-0w-BoB" collectionClass="NSMutableArray" id="es8-Jn-B0Y"/>
+                                    <outletCollection property="numberButtons" destination="ngg-dm-1iB" collectionClass="NSMutableArray" id="YOr-gv-6ML"/>
+                                    <outletCollection property="numberButtons" destination="oFe-vP-crR" collectionClass="NSMutableArray" id="8Yc-jt-ipN"/>
+                                    <outletCollection property="numberButtons" destination="4Ri-RN-sf0" collectionClass="NSMutableArray" id="lgF-96-f4L"/>
+                                    <outletCollection property="numberButtons" destination="g0g-0o-KZm" collectionClass="NSMutableArray" id="cYK-iM-Eyu"/>
+                                    <outletCollection property="numberButtons" destination="XBK-Yx-8Du" collectionClass="NSMutableArray" id="gai-2s-nys"/>
+                                    <outletCollection property="numberButtons" destination="evd-3g-XRr" collectionClass="NSMutableArray" id="2sE-zX-U8c"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.074509803920000006" green="0.1176470588" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="H9f-JJ-t4w" secondAttribute="bottom" id="0bl-ZI-i0b"/>
+                            <constraint firstItem="sU7-lt-Ncn" firstAttribute="bottom" secondItem="0fG-J6-Vd4" secondAttribute="bottom" constant="20" id="1A0-YF-oWA"/>
+                            <constraint firstItem="0fG-J6-Vd4" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" constant="20" id="8JF-Jv-HLO"/>
+                            <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="0fG-J6-Vd4" secondAttribute="trailing" constant="20" id="EGT-yv-5Nk"/>
+                            <constraint firstItem="H6b-D9-Z3r" firstAttribute="leading" secondItem="ACz-2l-Cfa" secondAttribute="leading" id="GIM-wq-e44"/>
+                            <constraint firstAttribute="trailing" secondItem="H9f-JJ-t4w" secondAttribute="trailing" id="KG0-Fc-KkE"/>
+                            <constraint firstItem="H6b-D9-Z3r" firstAttribute="top" secondItem="ACz-2l-Cfa" secondAttribute="top" id="Pbf-rQ-xmn"/>
+                            <constraint firstItem="YD7-dv-zdm" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="aoJ-55-fzz"/>
+                            <constraint firstItem="H6b-D9-Z3r" firstAttribute="trailing" secondItem="ACz-2l-Cfa" secondAttribute="trailing" id="eQ1-b7-59Y"/>
+                            <constraint firstItem="YD7-dv-zdm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GZ4-Tk-fZX" secondAttribute="bottom" constant="8" id="elY-KC-nEv"/>
+                            <constraint firstItem="H6b-D9-Z3r" firstAttribute="bottom" secondItem="ACz-2l-Cfa" secondAttribute="bottom" id="ktx-9o-Sg0"/>
+                            <constraint firstItem="GZ4-Tk-fZX" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="t25-sp-yND"/>
+                            <constraint firstItem="0fG-J6-Vd4" firstAttribute="top" secondItem="YD7-dv-zdm" secondAttribute="bottom" constant="24" id="tF7-cz-UdW"/>
+                            <constraint firstItem="GZ4-Tk-fZX" firstAttribute="top" secondItem="sU7-lt-Ncn" secondAttribute="top" constant="16" id="uhY-ER-73Q"/>
+                            <constraint firstItem="GZ4-Tk-fZX" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="vct-PB-d0d"/>
+                            <constraint firstItem="H9f-JJ-t4w" firstAttribute="leading" secondItem="h0j-YK-F4n" secondAttribute="leading" id="wfq-Jm-tVb"/>
+                            <constraint firstItem="YD7-dv-zdm" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="xaE-sU-XbG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sU7-lt-Ncn"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="HmD-7K-hAh" id="evr-v9-7w5"/>
+                        <outlet property="amountToDepositCurrencyLabel" destination="H1W-Cc-w05" id="DoK-hH-1kx"/>
+                        <outlet property="amountToDepositGVTLabel" destination="TXk-ht-NCd" id="V86-Md-Jbz"/>
+                        <outlet property="amountToDepositTextField" destination="H6b-D9-Z3r" id="8iM-nZ-CSu"/>
+                        <outlet property="amountToDepositTitleLabel" destination="mXT-hM-1fj" id="III-RU-BGm"/>
+                        <outlet property="amountToDepositValueLabel" destination="vjk-zq-hjb" id="1tL-vb-WiD"/>
+                        <outlet property="copyButton" destination="0fG-J6-Vd4" id="ZdH-r2-I9a"/>
+                        <outlet property="qrImageView" destination="EoU-jq-OAo" id="zlE-lo-Qdz"/>
+                        <outlet property="selectedWalletCurrencyButton" destination="zdh-pH-Ygv" id="ek2-oz-doi"/>
+                        <outlet property="selectedWalletCurrencyTitleLabel" destination="LkP-cp-tSS" id="joZ-Lu-doF"/>
+                        <outlet property="selectedWalletCurrencyValueLabel" destination="RhY-lN-YVr" id="Tkp-jH-nl0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iJr-FZ-h6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="1755"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="img_numpad_delete" width="24" height="18"/>
+        <image name="img_scroll_arrow_down" width="11" height="7"/>
+    </resources>
 </document>

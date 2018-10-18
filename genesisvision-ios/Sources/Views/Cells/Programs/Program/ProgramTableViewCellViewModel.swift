@@ -29,7 +29,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(lineChartData: chart)
+            cell.chartView.setup(chartType: .default, lineChartData: chart)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8

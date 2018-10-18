@@ -18,6 +18,9 @@ class ProgramRouter: Router {
     var programHeaderViewController: ProgramHeaderViewController?
     var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
     
+    var programBalanceViewController: ProgramBalanceViewController?
+    var programProfitViewController: ProgramProfitViewController?
+    
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, programViewController: ProgramViewController) {
         super.init(parentRouter: parentRouter, navigationController: navigationController)

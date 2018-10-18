@@ -67,7 +67,7 @@ class ProgramDetailsRouter: TabmanRouter {
         guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
         let viewController = ProgramBalanceViewController()
-        let router = ProgramHistoryRouter(parentRouter: self)
+        let router = Router(parentRouter: self)
         router.currentController = viewController
         let viewModel = ProgramBalanceViewModel(withRouter: router, programId: programId, reloadDataProtocol: vc)
         viewController.viewModel = viewModel
@@ -79,7 +79,7 @@ class ProgramDetailsRouter: TabmanRouter {
         guard let vc = currentController as? ProgramDetailsTabmanViewController else { return nil }
         
         let viewController = ProgramProfitViewController()
-        let router = ProgramHistoryRouter(parentRouter: self)
+        let router = Router(parentRouter: self)
         router.currentController = viewController
         let viewModel = ProgramProfitViewModel(withRouter: router, programId: programId, reloadDataProtocol: vc)
         viewController.viewModel = viewModel

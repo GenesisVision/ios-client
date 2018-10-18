@@ -10,10 +10,13 @@ import Foundation
 
 struct ProgramProfitChartTableViewCellViewModel {
     let programProfitChart: ProgramProfitChart
+    weak var chartViewProtocol: ChartViewProtocol?
 }
 
 extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramProfitChartTableViewCell) {
+        
+        cell.chartViewProtocol = chartViewProtocol
         
         cell.amountTitleLabel.text = "Amount"
         

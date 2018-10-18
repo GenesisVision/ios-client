@@ -19,6 +19,7 @@ final class ProgramBalanceViewModel {
     
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private weak var chartViewProtocol: ChartViewProtocol?
     
     var dataType: DataType = .api
 
@@ -26,11 +27,22 @@ final class ProgramBalanceViewModel {
     
     private var sections: [SectionType] = [.chart]
     
+    private var programBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
+    
     // MARK: - Init
     init(withRouter router: Router, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
+        self.chartViewProtocol = router.currentController as? ChartViewProtocol
+    }
+    
+    // MARK: - Public methods
+    func selectProgramBalanceChartElement(_ date: Date) {
+        if let result = programBalanceChart?.balanceChart?.first(where: { $0.date == date }) {
+            print("selectProgramBalanceChartElement")
+            print(result)
+        }
     }
 }
 
@@ -61,7 +73,10 @@ extension ProgramBalanceViewModel {
     /// Get TableViewCellViewModel for IndexPath
     func model(for index: Int) -> ProgramBalanceChartTableViewCellViewModel? {
         guard let programBalanceChart = programBalanceChart else { return nil }
-        return ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart)
+        
+        let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
+        
+        return programBalanceChartTableViewCellViewModel
     }
     
     // MARK: - Private methods

@@ -8,11 +8,6 @@
 
 import Charts
 
-protocol ChartViewProtocol: class {
-    func didHideMarker()
-    func didChangeMarker()
-}
-
 class MyFillFormatter: IFillFormatter {
     func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
         return dataProvider.maxHighlightDistance
@@ -32,7 +27,7 @@ class ChartView: CombinedChartView {
     private var name: String?
     private var currencyValue: String = ""
     
-    private var chartType: ChartType = .default
+    private var chartType: ChartType = .detail
     private var chartDurationType: ChartDurationType!
     
     private var minLimitLine: ChartLimitLine!
@@ -45,28 +40,28 @@ class ChartView: CombinedChartView {
         didSet {
             lineChartDataSet.setColor(UIColor.primary)
             lineChartDataSet.lineWidth = 1.5
-            
+
             lineChartDataSet.drawFilledEnabled = chartType != .default
             lineChartDataSet.fillFormatter = MyFillFormatter()
-            
+
             let gradientColors = [UIColor.primary.withAlphaComponent(0.3).cgColor, UIColor.primary.withAlphaComponent(0.0).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
-            
+
             lineChartDataSet.fillAlpha = 0.3
             lineChartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
-            
+
             lineChartDataSet.drawCirclesEnabled = false
             lineChartDataSet.drawIconsEnabled = false
-            
+
             lineChartDataSet.highlightEnabled = true
             lineChartDataSet.highlightColor = UIColor.Font.dark
             lineChartDataSet.setDrawHighlightIndicators(true)
             lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = false
-            lineChartDataSet.drawVerticalHighlightIndicatorEnabled = false
+            lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
 
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
-//            lineChartDataSet.mode = .horizontalBezier
+            lineChartDataSet.mode = .horizontalBezier
         }
     }
     
@@ -87,7 +82,7 @@ class ChartView: CombinedChartView {
     }
     
     // MARK: - Public methods
-    func setup(chartType: ChartType = .default,
+    func setup(chartType: ChartType = .detail,
                lineChartData: [ChartSimple]? = nil,
                barChartData: [ValueChartBar]? = nil,
                balanceChartData: [ProgramBalanceChartElement]? = nil,
@@ -143,9 +138,9 @@ class ChartView: CombinedChartView {
         switch recognizer.state {
         case .ended, .cancelled:
             highlightValue(nil, callDelegate: false)
-            chartViewProtocol?.didHideMarker()
+            chartViewProtocol?.chartValueNothingSelected()
         case .changed:
-            chartViewProtocol?.didChangeMarker()
+//            chartViewProtocol?.chartValueSelected(entry: Date())
             break
         default:
             break
@@ -168,7 +163,7 @@ class ChartView: CombinedChartView {
         scaleXEnabled = chartType == .full
         scaleYEnabled = chartType == .full
         doubleTapToZoomEnabled = chartType == .full
-        dragEnabled = chartType == .full
+        dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
 
         highlightPerTapEnabled = chartType != .default
@@ -284,6 +279,7 @@ class ChartView: CombinedChartView {
         }
         lineChartDataSet = LineChartDataSet(values: profitDataEntry, label: "Profit Chart")
         lineChartDataSet.setColor(.red)
+        lineChartDataSet.highlightEnabled = false
         lineChartData.addDataSet(lineChartDataSet)
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -291,13 +287,16 @@ class ChartView: CombinedChartView {
         }
         lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(.yellow)
+        lineChartDataSet.highlightEnabled = false
         lineChartData.addDataSet(lineChartDataSet)
+        
         
         let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].investorsFunds ?? 0)
         }
         lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(.blue)
+        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartData.addDataSet(lineChartDataSet)
         
         return lineChartData

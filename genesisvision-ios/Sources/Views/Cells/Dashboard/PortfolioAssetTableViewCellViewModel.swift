@@ -14,6 +14,8 @@ struct PortfolioAssetTableViewCellViewModel {
 
 extension PortfolioAssetTableViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioAssetTableViewCell) {
+        cell.coloredView.isHidden = true
+        
         if let value = selectedChartAssets.title {
             cell.titleLabel.text = value
         }

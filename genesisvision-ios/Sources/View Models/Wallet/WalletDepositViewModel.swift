@@ -10,7 +10,7 @@ import UIKit
 
 final class WalletDepositViewModel {
     // MARK: - Variables
-    var title: String = "Deposit"
+    var title: String = "Add funds"
 
     private var router: WalletDepositRouter!
     

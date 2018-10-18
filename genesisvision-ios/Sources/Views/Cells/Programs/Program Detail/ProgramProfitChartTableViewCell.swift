@@ -9,7 +9,14 @@
 import UIKit
 import Charts
 
+protocol ChartViewProtocol: class {
+    func chartValueSelected(date: Date)
+    func chartValueNothingSelected()
+}
+
 class ProgramProfitChartTableViewCell: UITableViewCell {
+    weak var chartViewProtocol: ChartViewProtocol?
+    
     // MARK: - Outlets
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
         didSet {
@@ -64,7 +71,6 @@ class ProgramProfitChartTableViewCell: UITableViewCell {
         didSet {
             chartView.backgroundColor = UIColor.BaseView.bg
             chartView.isUserInteractionEnabled = true
-            chartView.delegate = self
         }
     }
     
@@ -88,16 +94,23 @@ class ProgramProfitChartTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
         
+        chartView.delegate = self
+        
         chartView.addSubview(circleView)
     }
 }
 
 extension ProgramProfitChartTableViewCell: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        circleView.isHidden = false
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
+        
+        let date = Date(timeIntervalSince1970: entry.x)
+        chartViewProtocol?.chartValueSelected(date: date)
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         circleView.isHidden = true
+        chartViewProtocol?.chartValueNothingSelected()
     }
 }

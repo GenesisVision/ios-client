@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class ProgramProfitViewController: BaseViewControllerWithTableView {
     
@@ -103,3 +104,13 @@ extension ProgramProfitViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
+extension ProgramProfitViewController: ChartViewProtocol {
+    func chartValueNothingSelected() {
+        print("chartValueNothingSelected")
+    }
+    
+    func chartValueSelected(date: Date) {
+        print("chartValueSelected")
+        viewModel.selectChartSimple(date)
+    }
+}

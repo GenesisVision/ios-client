@@ -10,11 +10,14 @@ import Foundation
 
 struct ProgramBalanceChartTableViewCellViewModel {
     let programBalanceChart: ProgramBalanceChart
+    weak var chartViewProtocol: ChartViewProtocol?
 }
 
 extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramBalanceChartTableViewCell) {
         cell.amountTitleLabel.text = "Amount"
+        
+        cell.chartViewProtocol = chartViewProtocol
         
         if let amountValue = programBalanceChart.gvtBalance {
             cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
