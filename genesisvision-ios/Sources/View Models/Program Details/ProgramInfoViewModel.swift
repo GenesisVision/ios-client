@@ -23,7 +23,7 @@ final class ProgramInfoViewModel {
     // MARK: - Variables
     var title: String = "Info".uppercased()
     
-    private var router: ProgramDetailRouter
+    private var router: ProgramInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var inRequestsDelegateManager = InRequestsDelegateManager()
@@ -51,11 +51,11 @@ final class ProgramInfoViewModel {
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailManagerTableViewCellViewModel.self, ProgramStrategyTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self]
+        return [DetailManagerTableViewCellViewModel.self, DefaultTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self]
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailRouter,
+    init(withRouter router: ProgramInfoRouter,
          programId: String? = nil,
          programDetailsFull: ProgramDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
@@ -100,9 +100,23 @@ final class ProgramInfoViewModel {
         
         switch sectionType {
         case .details:
-            return 3
+            return rows.count
         default:
             return 1
+        }
+    }
+    
+    func didSelectRow(at indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+        case .details:
+            switch rows[indexPath.row] {
+            case .manager:
+                showManagerVC()
+            default:
+                break
+            }
+        default:
+            break
         }
     }
 }
@@ -110,6 +124,11 @@ final class ProgramInfoViewModel {
 // MARK: - Navigation
 extension ProgramInfoViewModel {
     // MARK: - Public methods
+    func showManagerVC() {
+        guard let managerId = programDetailsFull?.manager?.id?.uuidString else { return }
+        router.show(routeType: .manager(managerId: managerId))
+    }
+    
     func invest() {
         guard let programId = programId else { return }
         router.show(routeType: .invest(programId: programId))
@@ -122,7 +141,7 @@ extension ProgramInfoViewModel {
     
     func reinvest(_ value: Bool) {
         if value {
-            ProgramDataProvider.programReinvestOn(with: self.programId) { (result) in
+            ProgramsDataProvider.programReinvestOn(with: self.programId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -131,7 +150,7 @@ extension ProgramInfoViewModel {
                 }
             }
         } else {
-            ProgramDataProvider.programReinvestOff(with: self.programId) { (result) in
+            ProgramsDataProvider.programReinvestOff(with: self.programId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -172,7 +191,7 @@ extension ProgramInfoViewModel {
                 guard let manager = programDetailsFull?.manager else { return nil }
                 return DetailManagerTableViewCellViewModel(manager: manager)
             case .strategy:
-                return ProgramStrategyTableViewCellViewModel(descriptionText: programDetailsFull?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programDetailsFull?.description)
             case .period:
                 return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
             }
@@ -187,7 +206,7 @@ extension ProgramInfoViewModel {
         guard let currency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         
-        ProgramDataProvider.getProgram(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.getProgram(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
@@ -224,8 +243,8 @@ extension ProgramInfoViewModel: ProgramYourInvestmentProtocol {
     func didTapStatusButton() {
         guard let programId = programId else { return }
         
-        ProgramDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (programRequests) in
-            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramDetailsRouter, let viewController = parentRouter.programDetailViewController {
+        ProgramsDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (programRequests) in
+            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramDetailsRouter, let viewController = parentRouter.programInfoViewController {
                 viewController.showRequests(programRequests)
             }
         }) { (result) in

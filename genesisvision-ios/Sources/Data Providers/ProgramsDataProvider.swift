@@ -1,5 +1,5 @@
 //
-//  ProgramDataProvider.swift
+//  ProgramsDataProvider.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 28.02.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramDataProvider: DataProvider {
+class ProgramsDataProvider: DataProvider {
     static func getProgram(programId: String, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?, completion: @escaping (_ program: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -78,11 +78,11 @@ class ProgramDataProvider: DataProvider {
         }
     }
     
-    static func getPrograms(with levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getPrograms(levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         let authorization = AuthManager.authorizedToken
         
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

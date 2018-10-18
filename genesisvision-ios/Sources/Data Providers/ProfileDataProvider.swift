@@ -17,10 +17,10 @@ class ProfileDataProvider: DataProvider {
         }
     }
     
-    static func updateProfile(model: UpdateProfileViewModel, completion: @escaping CompletionBlock) {
+    static func updateProfile(model: UpdatePersonalDetailViewModel, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProfileAPI.v10ProfileUpdatePost(authorization: authorization, model: model) { (error) in
+        ProfileAPI.v10ProfilePersonalUpdatePost(authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

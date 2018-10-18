@@ -20,6 +20,10 @@ open class ProgramRequest: Codable {
         case executed = "Executed"
         case cancelled = "Cancelled"
     }
+    public enum ProgramType: String, Codable { 
+        case program = "Program"
+        case fund = "Fund"
+    }
     public var id: UUID?
     public var programId: UUID?
     public var date: Date?
@@ -28,11 +32,13 @@ open class ProgramRequest: Codable {
     public var status: Status?
     public var logo: String?
     public var title: String?
+    public var color: String?
     public var canCancelRequest: Bool?
+    public var programType: ProgramType?
 
 
     
-    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, canCancelRequest: Bool?) {
+    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
         self.id = id
         self.programId = programId
         self.date = date
@@ -41,7 +47,9 @@ open class ProgramRequest: Codable {
         self.status = status
         self.logo = logo
         self.title = title
+        self.color = color
         self.canCancelRequest = canCancelRequest
+        self.programType = programType
     }
     
 
@@ -59,7 +67,9 @@ open class ProgramRequest: Codable {
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(canCancelRequest, forKey: "canCancelRequest")
+        try container.encodeIfPresent(programType, forKey: "programType")
     }
 
     // Decodable protocol methods
@@ -75,7 +85,9 @@ open class ProgramRequest: Codable {
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         canCancelRequest = try container.decodeIfPresent(Bool.self, forKey: "canCancelRequest")
+        programType = try container.decodeIfPresent(ProgramType.self, forKey: "programType")
     }
 }
 

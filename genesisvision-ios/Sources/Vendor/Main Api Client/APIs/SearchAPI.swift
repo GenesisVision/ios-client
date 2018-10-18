@@ -46,6 +46,7 @@ open class SearchAPI {
         },
         "investorsCount" : 7
       },
+      "color" : "color",
       "manager" : {
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -98,6 +99,7 @@ open class SearchAPI {
         },
         "investorsCount" : 7
       },
+      "color" : "color",
       "manager" : {
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -161,6 +163,7 @@ open class SearchAPI {
         },
         "investorsCount" : 3
       },
+      "color" : "color",
       "manager" : {
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -217,6 +220,7 @@ open class SearchAPI {
         },
         "investorsCount" : 3
       },
+      "color" : "color",
       "manager" : {
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

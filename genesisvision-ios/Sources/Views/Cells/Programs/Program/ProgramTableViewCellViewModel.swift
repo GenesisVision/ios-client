@@ -11,7 +11,7 @@ import Kingfisher
 
 struct ProgramTableViewCellViewModel {
     let program: ProgramDetails
-    weak var delegate: ProgramInfoViewControllerProtocol?
+    weak var delegate: ProgramProtocol?
 }
 
 extension ProgramTableViewCellViewModel: CellViewModel {
@@ -84,11 +84,15 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        cell.programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
+        cell.programLogoImageView.profilePhotoImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
         
         if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
+        }
+        
+        if let color = program.color {
+            cell.programLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
         
         if let profitPercent = program.statistic?.profitPercent {

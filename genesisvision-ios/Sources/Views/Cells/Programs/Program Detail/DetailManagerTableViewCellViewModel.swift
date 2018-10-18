@@ -22,11 +22,11 @@ extension DetailManagerTableViewCellViewModel: CellViewModel {
             cell.managerNameLabel.text = username
         }
         
-        cell.managerImageView.image = UIImage.placeholder
+        cell.managerImageView.image = #imageLiteral(resourceName: "img_manager_placeholder")
         
         if let fileName = manager.avatar, let fileUrl = getFileURL(fileName: fileName) {
             cell.managerImageView.kf.indicatorType = .activity
-            cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            cell.managerImageView.kf.setImage(with: fileUrl, placeholder: #imageLiteral(resourceName: "img_manager_placeholder"))
         }
     }
 }

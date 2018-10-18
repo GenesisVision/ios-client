@@ -38,58 +38,6 @@ class Router {
     
     weak var navigationController: UINavigationController?
     
-    fileprivate func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-
-        if isInvestorApp, let viewController = InvestorDashboardViewController.storyboardInstance(name: .dashboard) {
-            self.investorDashboardViewController = viewController
-            
-            navigationController = BaseNavigationController(rootViewController: viewController)
-            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
-            viewController.viewModel = DashboardViewModel(withRouter: router)
-        } else {
-            let viewController = ManagerDashboardViewController()
-            self.managerDashboardViewController = viewController
-            
-            navigationController = BaseNavigationController(rootViewController: viewController)
-            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
-            viewController.viewModel = DashboardViewModel(withRouter: router)
-        }
-        
-
-        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
-        viewControllers.append(navigationController)
-    }
-    
-    fileprivate func addPrograms(_ viewControllers: inout [UIViewController]) {
-        if let navigationController = getProgramsNavigationController() {
-            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
-            viewControllers.append(navigationController)
-        }
-    }
-    
-    fileprivate func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        guard let walletViewController = WalletViewController.storyboardInstance(name: .wallet) else { return }
-        navigationController = BaseNavigationController(rootViewController: walletViewController)
-        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
-        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
-        viewControllers.append(navigationController)
-    }
-    
-    fileprivate func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        if let settingsViewController = SettingsViewController.storyboardInstance(name: .settings) {
-            navigationController = BaseNavigationController(rootViewController: settingsViewController)
-            let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
-            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
-            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
-            viewControllers.append(navigationController)
-        }
-    }
-    
     var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
         
@@ -127,6 +75,58 @@ class Router {
         programsViewController.viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
         
         return navigationController
+    }
+    
+    private func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        
+        if isInvestorApp, let viewController = InvestorDashboardViewController.storyboardInstance(name: .dashboard) {
+            self.investorDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        } else {
+            let viewController = ManagerDashboardViewController()
+            self.managerDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        }
+        
+        
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
+        viewControllers.append(navigationController)
+    }
+    
+    private func addPrograms(_ viewControllers: inout [UIViewController]) {
+        if let navigationController = getProgramsNavigationController() {
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
+            viewControllers.append(navigationController)
+        }
+    }
+    
+    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        guard let walletViewController = WalletViewController.storyboardInstance(name: .wallet) else { return }
+        navigationController = BaseNavigationController(rootViewController: walletViewController)
+        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
+        viewControllers.append(navigationController)
+    }
+    
+    private func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        if let settingsViewController = SettingsViewController.storyboardInstance(name: .settings) {
+            navigationController = BaseNavigationController(rootViewController: settingsViewController)
+            let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
+            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
+            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
+            viewControllers.append(navigationController)
+        }
     }
 }
 

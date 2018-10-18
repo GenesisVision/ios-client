@@ -13,14 +13,16 @@ open class PlatformInfo: Codable {
 
     public var iOSVersion: IOsAppVersion?
     public var androidVersion: AndroidAppVersion?
-    public var facets: [Facet]?
+    public var programsFacets: [Facet]?
+    public var fundsFacets: [Facet]?
 
 
     
-    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, facets: [Facet]?) {
+    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [Facet]?, fundsFacets: [Facet]?) {
         self.iOSVersion = iOSVersion
         self.androidVersion = androidVersion
-        self.facets = facets
+        self.programsFacets = programsFacets
+        self.fundsFacets = fundsFacets
     }
     
 
@@ -32,7 +34,8 @@ open class PlatformInfo: Codable {
 
         try container.encodeIfPresent(iOSVersion, forKey: "iOSVersion")
         try container.encodeIfPresent(androidVersion, forKey: "androidVersion")
-        try container.encodeIfPresent(facets, forKey: "facets")
+        try container.encodeIfPresent(programsFacets, forKey: "programsFacets")
+        try container.encodeIfPresent(fundsFacets, forKey: "fundsFacets")
     }
 
     // Decodable protocol methods
@@ -42,7 +45,8 @@ open class PlatformInfo: Codable {
 
         iOSVersion = try container.decodeIfPresent(IOsAppVersion.self, forKey: "iOSVersion")
         androidVersion = try container.decodeIfPresent(AndroidAppVersion.self, forKey: "androidVersion")
-        facets = try container.decodeIfPresent([Facet].self, forKey: "facets")
+        programsFacets = try container.decodeIfPresent([Facet].self, forKey: "programsFacets")
+        fundsFacets = try container.decodeIfPresent([Facet].self, forKey: "fundsFacets")
     }
 }
 

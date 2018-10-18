@@ -105,57 +105,15 @@ open class ManagersAPI {
     }
 
     /**
-     Update fund assets parts
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ManagersFundsByIdAssetsUpdatePost(id: UUID, authorization: String, model: AssetsPartsChangeRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ManagersFundsByIdAssetsUpdatePostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update fund assets parts
-     - POST /v1.0/managers/funds/{id}/assets/update
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ManagersFundsByIdAssetsUpdatePostWithRequestBuilder(id: UUID, authorization: String, model: AssetsPartsChangeRequest? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/managers/funds/{id}/assets/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
      Close existing investment program/fund
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter twoFactorCode: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagersFundsByIdClosePost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ManagersFundsByIdClosePostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10ManagersFundsByIdClosePost(id: UUID, authorization: String, twoFactorCode: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagersFundsByIdClosePostWithRequestBuilder(id: id, authorization: authorization, twoFactorCode: twoFactorCode).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -167,17 +125,21 @@ open class ManagersAPI {
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter twoFactorCode: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10ManagersFundsByIdClosePostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func v10ManagersFundsByIdClosePostWithRequestBuilder(id: UUID, authorization: String, twoFactorCode: String? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/managers/funds/{id}/close"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "twoFactorCode": twoFactorCode
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -213,6 +175,8 @@ open class ManagersAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -223,6 +187,8 @@ open class ManagersAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -428,10 +394,11 @@ open class ManagersAPI {
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter twoFactorCode: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagersProgramsByIdClosePost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ManagersProgramsByIdClosePostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10ManagersProgramsByIdClosePost(id: UUID, authorization: String, twoFactorCode: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagersProgramsByIdClosePostWithRequestBuilder(id: id, authorization: authorization, twoFactorCode: twoFactorCode).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -443,17 +410,21 @@ open class ManagersAPI {
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter twoFactorCode: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10ManagersProgramsByIdClosePostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func v10ManagersProgramsByIdClosePostWithRequestBuilder(id: UUID, authorization: String, twoFactorCode: String? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/managers/programs/{id}/close"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "twoFactorCode": twoFactorCode
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -574,6 +545,8 @@ open class ManagersAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -584,6 +557,8 @@ open class ManagersAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",

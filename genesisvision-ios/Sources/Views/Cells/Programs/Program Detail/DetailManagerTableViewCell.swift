@@ -37,6 +37,5 @@ class DetailManagerTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.BaseView.bg
         tintColor = UIColor.Cell.title
         accessoryView?.backgroundColor = UIColor.BaseView.bg
-        selectionStyle = .none
     }
 }

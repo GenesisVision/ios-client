@@ -135,6 +135,9 @@ open class NotificationsAPI {
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
+        case fundNewsAndUpdates = "FundNewsAndUpdates"
+        case fundEndOfPeriod = "FundEndOfPeriod"
+        case fundRebalancing = "FundRebalancing"
         case managerNewProgram = "ManagerNewProgram"
     }
 
@@ -246,6 +249,70 @@ open class NotificationsAPI {
         let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     User settings for fund
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsSettingsFundsByIdGet(id: String, authorization: String, completion: @escaping ((_ data: FundNotificationSettingList?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsFundsByIdGetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     User settings for fund
+     - GET /v1.0/notifications/settings/funds/{id}
+     - examples: [{contentType=application/json, example={
+  "logo" : "logo",
+  "settingsGeneral" : [ {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  }, {
+    "isEnabled" : true,
+    "conditionAmount" : 0.8008281904610115,
+    "conditionType" : "Empty",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "PlatformNewsAndUpdates",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ],
+  "title" : "title",
+  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "url" : "url"
+}}]
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<FundNotificationSettingList> 
+     */
+    open class func v10NotificationsSettingsFundsByIdGetWithRequestBuilder(id: String, authorization: String) -> RequestBuilder<FundNotificationSettingList> {
+        var path = "/v1.0/notifications/settings/funds/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<FundNotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -409,6 +476,87 @@ open class NotificationsAPI {
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  } ],
+  "settingsFund" : [ {
+    "level" : 6,
+    "logo" : "logo",
+    "settingsGeneral" : [ {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    }, {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    } ],
+    "title" : "title",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "settingsCustom" : [ {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    }, {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    } ]
+  }, {
+    "level" : 6,
+    "logo" : "logo",
+    "settingsGeneral" : [ {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    }, {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    } ],
+    "title" : "title",
+    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "settingsCustom" : [ {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    }, {
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : "Empty",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "PlatformNewsAndUpdates",
+      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    } ]
   } ]
 }}]
      

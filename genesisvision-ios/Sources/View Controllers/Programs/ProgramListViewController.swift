@@ -243,8 +243,8 @@ extension ProgramListViewController: ReloadDataProtocol {
     }
 }
 
-// MARK: - ProgramInfoViewControllerProtocol
-extension ProgramListViewController: ProgramInfoViewControllerProtocol {
+// MARK: - ProgramProtocol
+extension ProgramListViewController: ProgramProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in

@@ -17,29 +17,21 @@ class ProgramDetailTradesTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet var symbolLabel: UILabel! {
+    @IBOutlet var symbolLabel: TitleLabel! {
         didSet {
-            symbolLabel.textColor = UIColor.Cell.title
             symbolLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
-    @IBOutlet var directionLabel: UILabel! {
-        didSet {
-            directionLabel.textColor = UIColor.Cell.subtitle
-            directionLabel.font = UIFont.getFont(.semibold, size: 12.0)
-        }
-    }
+    @IBOutlet var directionLabel: SubtitleLabel!
     
-    @IBOutlet var balanceLabel: UILabel! {
+    @IBOutlet var balanceLabel: TitleLabel! {
         didSet {
-            balanceLabel.textColor = UIColor.Cell.title
             balanceLabel.font = UIFont.getFont(.semibold, size: 14.0)
         }
     }
-    @IBOutlet var profitLabel: UILabel! {
+    @IBOutlet var profitLabel: SubtitleLabel! {
         didSet {
             profitLabel.textColor = UIColor.Cell.greenTitle
-            profitLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }
     }
     

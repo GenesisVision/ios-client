@@ -64,7 +64,7 @@ final class ProgramDetailsViewModel: TabmanViewModel {
             let isFavorite = programDetailsFull?.personalProgramDetails?.isFavorite else { return }
         
         programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite
-        ProgramDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
                 break
@@ -85,7 +85,7 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         }
         
         if let router = router as? ProgramDetailsRouter, let programDetailsFull = programDetailsFull {
-            if let vc = router.getDetail(with: programDetailsFull) {
+            if let vc = router.getInfo(with: programDetailsFull) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }

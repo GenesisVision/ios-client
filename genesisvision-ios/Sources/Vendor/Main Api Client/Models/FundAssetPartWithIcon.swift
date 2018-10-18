@@ -13,16 +13,16 @@ open class FundAssetPartWithIcon: Codable {
 
     public var icon: String?
     public var name: String?
-    public var symbol: String?
-    public var assetPart: Double?
+    public var asset: String?
+    public var percent: Double?
 
 
     
-    public init(icon: String?, name: String?, symbol: String?, assetPart: Double?) {
+    public init(icon: String?, name: String?, asset: String?, percent: Double?) {
         self.icon = icon
         self.name = name
-        self.symbol = symbol
-        self.assetPart = assetPart
+        self.asset = asset
+        self.percent = percent
     }
     
 
@@ -34,8 +34,8 @@ open class FundAssetPartWithIcon: Codable {
 
         try container.encodeIfPresent(icon, forKey: "icon")
         try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(symbol, forKey: "symbol")
-        try container.encodeIfPresent(assetPart, forKey: "assetPart")
+        try container.encodeIfPresent(asset, forKey: "asset")
+        try container.encodeIfPresent(percent, forKey: "percent")
     }
 
     // Decodable protocol methods
@@ -45,8 +45,8 @@ open class FundAssetPartWithIcon: Codable {
 
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
         name = try container.decodeIfPresent(String.self, forKey: "name")
-        symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
-        assetPart = try container.decodeIfPresent(Double.self, forKey: "assetPart")
+        asset = try container.decodeIfPresent(String.self, forKey: "asset")
+        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
     }
 }
 

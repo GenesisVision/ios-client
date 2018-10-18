@@ -62,7 +62,7 @@ extension CurrencyType {
         case .gvt: return 4
         case .eth, .btc, .ada: return 8
         case .usd, .usdt, .eur: return 2
-        case .undefined:
+        default:
             return 2
         }
     }
@@ -76,7 +76,7 @@ extension CurrencyType {
         case .usd: return UIColor.Currency.usd
         case .usdt: return UIColor.Currency.usd
         case .eur: return UIColor.Currency.eur
-        case .undefined:
+        default:
             return UIColor.Currency.gvt
         }
     }
@@ -108,6 +108,7 @@ enum SectionType {
 enum StoryboardNames: String {
     case main
     case program
+    case manager
     case launch
     case profile
     case settings

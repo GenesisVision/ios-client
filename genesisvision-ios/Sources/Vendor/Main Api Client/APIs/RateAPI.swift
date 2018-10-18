@@ -14,6 +14,48 @@ open class RateAPI {
     /**
      Get rate
      
+     - parameter exchange: (path)  
+     - parameter from: (path)  
+     - parameter to: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10RateByExchangeByFromByToGet(exchange: String, from: String, to: String, completion: @escaping ((_ data: Double?,_ error: Error?) -> Void)) {
+        v10RateByExchangeByFromByToGetWithRequestBuilder(exchange: exchange, from: from, to: to).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get rate
+     - GET /v1.0/rate/{exchange}/{from}/{to}
+     - examples: [{contentType=application/json, example=0.8008281904610115}]
+     
+     - parameter exchange: (path)  
+     - parameter from: (path)  
+     - parameter to: (path)  
+
+     - returns: RequestBuilder<Double> 
+     */
+    open class func v10RateByExchangeByFromByToGetWithRequestBuilder(exchange: String, from: String, to: String) -> RequestBuilder<Double> {
+        var path = "/v1.0/rate/{exchange}/{from}/{to}"
+        path = path.replacingOccurrences(of: "{exchange}", with: "\(exchange)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Double>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get rate
+     
      - parameter from: (path)  
      - parameter to: (path)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -97,6 +139,20 @@ open class RateAPI {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     } ],
+    "BCH" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "XRP" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
     "USD" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
@@ -112,6 +168,20 @@ open class RateAPI {
       "currency" : "Undefined"
     } ],
     "USDT" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "DOGE" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "LTC" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     }, {

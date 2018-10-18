@@ -35,7 +35,8 @@ open class AuthAPI {
   }, {
     "code" : "code",
     "isActive" : true
-  } ]
+  } ],
+  "authToken" : "authToken"
 }}]
      
      - parameter authorization: (header) JWT access token 
@@ -207,7 +208,8 @@ open class AuthAPI {
   }, {
     "code" : "code",
     "isActive" : true
-  } ]
+  } ],
+  "authToken" : "authToken"
 }}]
      
      - parameter authorization: (header) JWT access token 
@@ -256,7 +258,8 @@ open class AuthAPI {
   }, {
     "code" : "code",
     "isActive" : true
-  } ]
+  } ],
+  "authToken" : "authToken"
 }}]
      
      - parameter authorization: (header) JWT access token 
@@ -426,7 +429,7 @@ open class AuthAPI {
     }
 
     /**
-     Request phone number verification code
+     Get phone number verification code
      
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -439,7 +442,7 @@ open class AuthAPI {
 
 
     /**
-     Request phone number verification code
+     Get phone number verification code
      - POST /v1.0/auth/phone/code
      - examples: [{contentType=application/json, example=0}]
      
@@ -468,11 +471,11 @@ open class AuthAPI {
      Verify phone number
      
      - parameter authorization: (header) JWT access token 
-     - parameter token: (query)  (optional)
+     - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10AuthPhoneVerifyPost(authorization: String, token: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10AuthPhoneVerifyPostWithRequestBuilder(authorization: authorization, token: token).execute { (response, error) -> Void in
+    open class func v10AuthPhoneVerifyPost(authorization: String, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10AuthPhoneVerifyPostWithRequestBuilder(authorization: authorization, code: code).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -483,18 +486,18 @@ open class AuthAPI {
      - POST /v1.0/auth/phone/verify
      
      - parameter authorization: (header) JWT access token 
-     - parameter token: (query)  (optional)
+     - parameter code: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10AuthPhoneVerifyPostWithRequestBuilder(authorization: String, token: String? = nil) -> RequestBuilder<Void> {
+    open class func v10AuthPhoneVerifyPostWithRequestBuilder(authorization: String, code: String? = nil) -> RequestBuilder<Void> {
         let path = "/v1.0/auth/phone/verify"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "token": token
+            "code": code
         ])
         
         let nillableHeaders: [String: Any?] = [

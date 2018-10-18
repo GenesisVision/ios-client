@@ -13,7 +13,7 @@ open class NewFundRequest: Codable {
 
     public var exitFee: Double?
     public var managementFee: Double?
-    public var assetsParts: [OefAssetPart]?
+    public var assetsParts: [FundAssetPart]?
     public var title: String?
     public var description: String?
     public var logo: String?
@@ -21,7 +21,7 @@ open class NewFundRequest: Codable {
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assetsParts: [OefAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?) {
+    public init(exitFee: Double?, managementFee: Double?, assetsParts: [FundAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?) {
         self.exitFee = exitFee
         self.managementFee = managementFee
         self.assetsParts = assetsParts
@@ -54,7 +54,7 @@ open class NewFundRequest: Codable {
 
         exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
         managementFee = try container.decodeIfPresent(Double.self, forKey: "managementFee")
-        assetsParts = try container.decodeIfPresent([OefAssetPart].self, forKey: "assetsParts")
+        assetsParts = try container.decodeIfPresent([FundAssetPart].self, forKey: "assetsParts")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

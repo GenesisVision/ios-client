@@ -26,6 +26,10 @@ open class WalletTransaction: Codable {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -56,6 +60,10 @@ open class WalletTransaction: Codable {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }

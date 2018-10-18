@@ -41,13 +41,12 @@ open class PlatformAPI {
     "lastVersion" : "lastVersion",
     "minVersion" : "minVersion"
   },
-  "facets" : [ {
+  "programsFacets" : [ {
     "count" : 0,
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
     "url" : "url"
   }, {
     "count" : 0,
@@ -55,7 +54,21 @@ open class PlatformAPI {
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
+    "url" : "url"
+  } ],
+  "fundsFacets" : [ {
+    "count" : 0,
+    "description" : "description",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "url" : "url"
+  }, {
+    "count" : 0,
+    "description" : "description",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
     "url" : "url"
   } ]
 }}]

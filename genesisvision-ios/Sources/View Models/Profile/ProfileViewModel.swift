@@ -308,18 +308,20 @@ final class ProfileViewModel {
     private func updateProfileApi(completion: @escaping CompletionBlock) {
         guard let profileModel = profileModel else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        let model = UpdateProfileViewModel(userName: profileModel.userName,
+        let model = UpdatePersonalDetailViewModel(
                                            firstName: profileModel.firstName,
                                            middleName: profileModel.middleName,
                                            lastName: profileModel.lastName,
-                                           documentType: profileModel.documentType,
-                                           documentNumber: profileModel.documentNumber,
+                                           birthday: profileModel.birthday,
+                                           citizenship: nil,
+                                           gender: profileModel.gender,
+                                           documentId: nil,
+                                           phoneNumber: profileModel.phone,
                                            country: profileModel.country,
                                            city: profileModel.city,
                                            address: profileModel.address,
-                                           phone: profileModel.phone,
-                                           birthday: profileModel.birthday,
-                                           gender: profileModel.gender)
+                                           index: nil
+                                           )
         
         ProfileDataProvider.updateProfile(model: model) { [weak self] (result) in
             switch result {

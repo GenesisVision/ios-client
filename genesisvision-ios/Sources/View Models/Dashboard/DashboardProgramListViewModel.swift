@@ -79,7 +79,7 @@ final class DashboardProgramListViewModel {
             return
         }
         
-        ProgramDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }

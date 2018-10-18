@@ -112,11 +112,12 @@ open class ProfileAPI {
   "country" : "country",
   "address" : "address",
   "gender" : true,
-  "documentType" : "documentType",
   "city" : "city",
-  "documentNumber" : "documentNumber",
+  "verificationStatus" : "NotVerified",
+  "citizenship" : "citizenship",
+  "about" : "about",
+  "index" : "index",
   "avatar" : "avatar",
-  "documentsConfirmed" : true,
   "userName" : "userName",
   "phoneNumberConfirmed" : true,
   "firstName" : "firstName",
@@ -195,6 +196,46 @@ open class ProfileAPI {
         let requestBuilder: RequestBuilder<ProfileHeaderViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Update user personal details
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfilePersonalUpdatePost(authorization: String, model: UpdatePersonalDetailViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfilePersonalUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update user personal details
+     - POST /v1.0/profile/personal/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfilePersonalUpdatePostWithRequestBuilder(authorization: String, model: UpdatePersonalDetailViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/profile/personal/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**

@@ -94,7 +94,7 @@ extension ProgramProfitViewModel {
         switch dataType {
         case .api:
             guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramDataProvider.getProgramProfitChart(with: programId, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getProgramProfitChart(with: programId, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

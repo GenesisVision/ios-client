@@ -18,6 +18,10 @@ open class ProgramDetailsFull: Codable {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -45,6 +49,7 @@ open class ProgramDetailsFull: Codable {
     public var id: UUID?
     public var logo: String?
     public var url: String?
+    public var color: String?
     public var description: String?
     public var title: String?
     public var status: Status?
@@ -52,7 +57,7 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, description: String?, title: String?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -67,6 +72,7 @@ open class ProgramDetailsFull: Codable {
         self.id = id
         self.logo = logo
         self.url = url
+        self.color = color
         self.description = description
         self.title = title
         self.status = status
@@ -94,6 +100,7 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(url, forKey: "url")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(status, forKey: "status")
@@ -119,6 +126,7 @@ open class ProgramDetailsFull: Codable {
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         status = try container.decodeIfPresent(Status.self, forKey: "status")

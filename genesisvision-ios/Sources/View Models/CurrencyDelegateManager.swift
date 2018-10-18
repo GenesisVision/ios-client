@@ -16,8 +16,8 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     // MARK: - Variables
     weak var currencyDelegate: CurrencyDelegateManagerProtocol?
     
-    var currencyValues: [String] = ["USD", "EUR", "BTC"]
-    var rateValues: [Double] = [6.3, 5.5, 0.0002918]
+    var currencyValues = [String]()
+    var rateValues = [Double]()
     
     var selectedCurrency: String!
     
@@ -30,6 +30,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         super.init()
         
         selectedCurrency = getSelectedCurrency()
+        
     }
     
     // MARK: - TableViewDelegate

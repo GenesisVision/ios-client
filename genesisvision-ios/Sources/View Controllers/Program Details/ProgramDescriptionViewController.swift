@@ -50,7 +50,7 @@ class ProgramDescriptionViewController: BaseViewController {
     }
     
     private func fillData() {
-        programLogoImageView.profilePhotoImageView.image = UIImage.placeholder
+        programLogoImageView.profilePhotoImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
         
         if let fileUrl = getFileURL(fileName: viewModel.getProgramLogo()) {
             programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity

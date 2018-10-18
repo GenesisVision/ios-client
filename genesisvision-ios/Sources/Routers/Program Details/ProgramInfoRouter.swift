@@ -1,5 +1,5 @@
 //
-//  ProgramDetailRouter.swift
+//  ProgramInfoRouter.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 26.01.18.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum ProgramDetailRouteType {
-    case invest(programId: String), withdraw(programId: String), fullChart(programDetailsFull: ProgramDetailsFull)
+enum ProgramInfoRouteType {
+    case invest(programId: String), withdraw(programId: String), fullChart(programDetailsFull: ProgramDetailsFull), manager(managerId: String)
 }
 
-class ProgramDetailRouter: Router {
+class ProgramInfoRouter: Router {
     // MARK: - Public methods
-    func show(routeType: ProgramDetailRouteType) {
+    func show(routeType: ProgramInfoRouteType) {
         switch routeType {
         case .invest(let programId):
             invest(with: programId)
@@ -22,6 +22,8 @@ class ProgramDetailRouter: Router {
             withdraw(with: programId)
         case .fullChart(let programDetailsFull):
             fullChart(with: programDetailsFull)
+        case .manager(let managerId):
+            manager(with: managerId)
         }
     }
     
@@ -32,6 +34,15 @@ class ProgramDetailRouter: Router {
         
         let router = ProgramInvestRouter(parentRouter: self)
         let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programDetailProtocol: programViewController)
+        viewController.viewModel = viewModel
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func manager(with managerId: String) {
+        guard let viewController = ManagerViewController.storyboardInstance(name: .manager) else { return }
+        
+        let router = ManagerRouter(parentRouter: self, navigationController: navigationController, managerViewController: viewController)
+        let viewModel = ManagerViewModel(withRouter: router, managerId: managerId, managerViewController: viewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

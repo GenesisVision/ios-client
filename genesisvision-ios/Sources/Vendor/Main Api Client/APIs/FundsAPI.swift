@@ -14,11 +14,10 @@ open class FundsAPI {
     /**
      Get all supported assets for funds
      
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsAssetsGet(authorization: String, completion: @escaping ((_ data: PlatformAssets?,_ error: Error?) -> Void)) {
-        v10FundsAssetsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func v10FundsAssetsGet(completion: @escaping ((_ data: PlatformAssets?,_ error: Error?) -> Void)) {
+        v10FundsAssetsGetWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -29,39 +28,85 @@ open class FundsAPI {
      - GET /v1.0/funds/assets
      - examples: [{contentType=application/json, example={
   "assets" : [ {
-    "symbol" : "symbol",
+    "color" : "color",
     "name" : "name",
     "icon" : "icon",
     "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "asset" : "asset"
   }, {
-    "symbol" : "symbol",
+    "color" : "color",
     "name" : "name",
     "icon" : "icon",
     "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "asset" : "asset"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<PlatformAssets> 
      */
-    open class func v10FundsAssetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<PlatformAssets> {
+    open class func v10FundsAssetsGetWithRequestBuilder() -> RequestBuilder<PlatformAssets> {
         let path = "/v1.0/funds/assets"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<PlatformAssets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Fund assets info
+     
+     - parameter id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10FundsByIdAssetsGet(id: UUID, completion: @escaping ((_ data: FundAssetsListInfo?,_ error: Error?) -> Void)) {
+        v10FundsByIdAssetsGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Fund assets info
+     - GET /v1.0/funds/{id}/assets
+     - examples: [{contentType=application/json, example={
+  "assets" : [ {
+    "name" : "name",
+    "icon" : "icon",
+    "currentPercent" : 6.027456183070403,
+    "asset" : "asset",
+    "targetPercent" : 0.8008281904610115
+  }, {
+    "name" : "name",
+    "icon" : "icon",
+    "currentPercent" : 6.027456183070403,
+    "asset" : "asset",
+    "targetPercent" : 0.8008281904610115
+  } ]
+}}]
+     
+     - parameter id: (path)  
+
+     - returns: RequestBuilder<FundAssetsListInfo> 
+     */
+    open class func v10FundsByIdAssetsGetWithRequestBuilder(id: UUID) -> RequestBuilder<FundAssetsListInfo> {
+        var path = "/v1.0/funds/{id}/assets"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<FundAssetsListInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -160,6 +205,7 @@ open class FundsAPI {
   "sortinoRatio" : 7.061401241503109,
   "rebalances" : 1,
   "balance" : 5.962133916683182,
+  "rate" : 1.2315135367772556,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
   "totalUsdProfit" : 0.8008281904610115,
   "sharpeRatio" : 2.3021358869347655,
@@ -284,6 +330,10 @@ open class FundsAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -325,6 +375,7 @@ open class FundsAPI {
     },
     "investorsCount" : 7
   },
+  "color" : "color",
   "manager" : {
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -335,15 +386,15 @@ open class FundsAPI {
   "description" : "description",
   "title" : "title",
   "currentAssets" : [ {
-    "assetPart" : 5.962133916683182,
-    "symbol" : "symbol",
     "icon" : "icon",
-    "name" : "name"
+    "name" : "name",
+    "asset" : "asset",
+    "percent" : 5.962133916683182
   }, {
-    "assetPart" : 5.962133916683182,
-    "symbol" : "symbol",
     "icon" : "icon",
-    "name" : "name"
+    "name" : "name",
+    "asset" : "asset",
+    "percent" : 5.962133916683182
   } ],
   "personalFundDetails" : {
     "isOwnProgram" : true,
@@ -389,83 +440,6 @@ open class FundsAPI {
     }
 
     /**
-     Rebalancing history
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FundsByIdRebalancingGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: RebalancesViewModel?,_ error: Error?) -> Void)) {
-        v10FundsByIdRebalancingGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Rebalancing history
-     - GET /v1.0/funds/{id}/rebalancing
-     - examples: [{contentType=application/json, example={
-  "total" : 6,
-  "rebalances" : [ {
-    "parts" : [ {
-      "assetPart" : 0.8008281904610115,
-      "symbol" : "symbol",
-      "name" : "name"
-    }, {
-      "assetPart" : 0.8008281904610115,
-      "symbol" : "symbol",
-      "name" : "name"
-    } ],
-    "from" : "2000-01-23T04:56:07.000+00:00",
-    "to" : "2000-01-23T04:56:07.000+00:00"
-  }, {
-    "parts" : [ {
-      "assetPart" : 0.8008281904610115,
-      "symbol" : "symbol",
-      "name" : "name"
-    }, {
-      "assetPart" : 0.8008281904610115,
-      "symbol" : "symbol",
-      "name" : "name"
-    } ],
-    "from" : "2000-01-23T04:56:07.000+00:00",
-    "to" : "2000-01-23T04:56:07.000+00:00"
-  } ]
-}}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-
-     - returns: RequestBuilder<RebalancesViewModel> 
-     */
-    open class func v10FundsByIdRebalancingGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<RebalancesViewModel> {
-        var path = "/v1.0/funds/{id}/rebalancing"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
-        ])
-        
-
-        let requestBuilder: RequestBuilder<RebalancesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      * enum for parameter sorting
      */
     public enum Sorting_v10FundsGet: String { 
@@ -491,6 +465,10 @@ open class FundsAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -541,6 +519,7 @@ open class FundsAPI {
       },
       "investorsCount" : 7
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -593,6 +572,7 @@ open class FundsAPI {
       },
       "investorsCount" : 7
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -705,7 +685,6 @@ open class FundsAPI {
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
     "url" : "url"
   }, {
     "count" : 0,
@@ -713,7 +692,6 @@ open class FundsAPI {
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
     "url" : "url"
   } ],
   "favoritesCount" : 0

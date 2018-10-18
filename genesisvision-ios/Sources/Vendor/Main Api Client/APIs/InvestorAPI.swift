@@ -65,6 +65,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -146,6 +150,8 @@ open class InvestorAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -156,6 +162,8 @@ open class InvestorAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -247,6 +255,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -328,6 +340,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -372,6 +388,7 @@ open class InvestorAPI {
       },
       "investorsCount" : 7
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -424,6 +441,7 @@ open class InvestorAPI {
       },
       "investorsCount" : 7
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -552,6 +570,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -589,6 +611,8 @@ open class InvestorAPI {
     "requests" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "canCancelRequest" : true,
+      "programType" : "Program",
+      "color" : "color",
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
@@ -599,6 +623,8 @@ open class InvestorAPI {
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "canCancelRequest" : true,
+      "programType" : "Program",
+      "color" : "color",
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
@@ -757,6 +783,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1040,6 +1070,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1204,6 +1238,8 @@ open class InvestorAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1214,6 +1250,8 @@ open class InvestorAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1305,6 +1343,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1391,6 +1433,10 @@ open class InvestorAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1442,6 +1488,7 @@ open class InvestorAPI {
       },
       "investorsCount" : 3
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1498,6 +1545,7 @@ open class InvestorAPI {
       },
       "investorsCount" : 3
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1637,6 +1685,8 @@ open class InvestorAPI {
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1647,6 +1697,8 @@ open class InvestorAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
+    "programType" : "Program",
+    "color" : "color",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",

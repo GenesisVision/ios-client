@@ -13,13 +13,15 @@ open class NotificationSettingList: Codable {
 
     public var settingsGeneral: [NotificationSettingViewModel]?
     public var settingsProgram: [ProgramNotificationSettingList]?
+    public var settingsFund: [ProgramNotificationSettingList]?
     public var settingsManager: [ManagerNotificationSettingList]?
 
 
     
-    public init(settingsGeneral: [NotificationSettingViewModel]?, settingsProgram: [ProgramNotificationSettingList]?, settingsManager: [ManagerNotificationSettingList]?) {
+    public init(settingsGeneral: [NotificationSettingViewModel]?, settingsProgram: [ProgramNotificationSettingList]?, settingsFund: [ProgramNotificationSettingList]?, settingsManager: [ManagerNotificationSettingList]?) {
         self.settingsGeneral = settingsGeneral
         self.settingsProgram = settingsProgram
+        self.settingsFund = settingsFund
         self.settingsManager = settingsManager
     }
     
@@ -32,6 +34,7 @@ open class NotificationSettingList: Codable {
 
         try container.encodeIfPresent(settingsGeneral, forKey: "settingsGeneral")
         try container.encodeIfPresent(settingsProgram, forKey: "settingsProgram")
+        try container.encodeIfPresent(settingsFund, forKey: "settingsFund")
         try container.encodeIfPresent(settingsManager, forKey: "settingsManager")
     }
 
@@ -42,6 +45,7 @@ open class NotificationSettingList: Codable {
 
         settingsGeneral = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsGeneral")
         settingsProgram = try container.decodeIfPresent([ProgramNotificationSettingList].self, forKey: "settingsProgram")
+        settingsFund = try container.decodeIfPresent([ProgramNotificationSettingList].self, forKey: "settingsFund")
         settingsManager = try container.decodeIfPresent([ManagerNotificationSettingList].self, forKey: "settingsManager")
     }
 }

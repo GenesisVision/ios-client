@@ -17,18 +17,26 @@ open class RatesModelRates: Codable {
     public var BTC: [RateItem]?
     public var ADA: [RateItem]?
     public var USDT: [RateItem]?
+    public var XRP: [RateItem]?
+    public var BCH: [RateItem]?
+    public var LTC: [RateItem]?
+    public var DOGE: [RateItem]?
     public var USD: [RateItem]?
     public var EUR: [RateItem]?
 
 
     
-    public init(undefined: [RateItem]?, GVT: [RateItem]?, ETH: [RateItem]?, BTC: [RateItem]?, ADA: [RateItem]?, USDT: [RateItem]?, USD: [RateItem]?, EUR: [RateItem]?) {
+    public init(undefined: [RateItem]?, GVT: [RateItem]?, ETH: [RateItem]?, BTC: [RateItem]?, ADA: [RateItem]?, USDT: [RateItem]?, XRP: [RateItem]?, BCH: [RateItem]?, LTC: [RateItem]?, DOGE: [RateItem]?, USD: [RateItem]?, EUR: [RateItem]?) {
         self.undefined = undefined
         self.GVT = GVT
         self.ETH = ETH
         self.BTC = BTC
         self.ADA = ADA
         self.USDT = USDT
+        self.XRP = XRP
+        self.BCH = BCH
+        self.LTC = LTC
+        self.DOGE = DOGE
         self.USD = USD
         self.EUR = EUR
     }
@@ -46,6 +54,10 @@ open class RatesModelRates: Codable {
         try container.encodeIfPresent(BTC, forKey: "BTC")
         try container.encodeIfPresent(ADA, forKey: "ADA")
         try container.encodeIfPresent(USDT, forKey: "USDT")
+        try container.encodeIfPresent(XRP, forKey: "XRP")
+        try container.encodeIfPresent(BCH, forKey: "BCH")
+        try container.encodeIfPresent(LTC, forKey: "LTC")
+        try container.encodeIfPresent(DOGE, forKey: "DOGE")
         try container.encodeIfPresent(USD, forKey: "USD")
         try container.encodeIfPresent(EUR, forKey: "EUR")
     }
@@ -61,6 +73,10 @@ open class RatesModelRates: Codable {
         BTC = try container.decodeIfPresent([RateItem].self, forKey: "BTC")
         ADA = try container.decodeIfPresent([RateItem].self, forKey: "ADA")
         USDT = try container.decodeIfPresent([RateItem].self, forKey: "USDT")
+        XRP = try container.decodeIfPresent([RateItem].self, forKey: "XRP")
+        BCH = try container.decodeIfPresent([RateItem].self, forKey: "BCH")
+        LTC = try container.decodeIfPresent([RateItem].self, forKey: "LTC")
+        DOGE = try container.decodeIfPresent([RateItem].self, forKey: "DOGE")
         USD = try container.decodeIfPresent([RateItem].self, forKey: "USD")
         EUR = try container.decodeIfPresent([RateItem].self, forKey: "EUR")
     }

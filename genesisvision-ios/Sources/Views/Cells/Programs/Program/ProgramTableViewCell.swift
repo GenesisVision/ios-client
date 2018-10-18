@@ -9,10 +9,14 @@
 import UIKit
 import Charts
 
+protocol ProgramProtocol: class {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool)
+}
+
 class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
-    weak var delegate: ProgramInfoViewControllerProtocol?
+    weak var delegate: ProgramProtocol?
     var programId: String?
     
     // MARK: - Views

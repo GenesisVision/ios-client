@@ -8,19 +8,19 @@
 
 class ProgramDetailsRouter: TabmanRouter {
     // MARK: - Variables
-    var programDetailViewController: ProgramInfoViewController?
+    var programInfoViewController: ProgramInfoViewController?
     
     // MARK: - Public methods
-    func getDetail(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
+    func getInfo(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
         guard let viewController = ProgramInfoViewController.storyboardInstance(name: .program) else { return nil }
         
-        let router = ProgramDetailRouter(parentRouter: self)
+        let router = ProgramInfoRouter(parentRouter: self)
         router.currentController = viewController
         let viewModel = ProgramInfoViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         
-        programDetailViewController = viewController
+        programInfoViewController = viewController
         return viewController
     }
     

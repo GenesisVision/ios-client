@@ -1,24 +1,17 @@
 //
-//  DashboardProgramListViewController.swift
+//  ManagerProgramListViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 20/09/2018.
+//  Created by George on 18/10/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class DashboardProgramListViewController: BaseViewControllerWithTableView {
+class ManagerProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: DashboardProgramListViewModel!
-    
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
+    var viewModel: ManagerProgramListViewModel!
     
     // MARK: - Views
     
@@ -37,8 +30,9 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
+        setupTableConfiguration()
         registerForPreviewing()
-
+        
         setupUI()
     }
     
@@ -114,7 +108,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension DashboardProgramListViewController {
+extension ManagerProgramListViewController {
     override func sortButtonAction() {
         sortMethod()
     }
@@ -127,7 +121,7 @@ extension DashboardProgramListViewController {
 }
 
 // MARK: - UIViewControllerPreviewingDelegate
-extension DashboardProgramListViewController: UIViewControllerPreviewingDelegate {
+extension ManagerProgramListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
         
@@ -150,23 +144,13 @@ extension DashboardProgramListViewController: UIViewControllerPreviewingDelegate
 }
 
 // MARK: - ReloadDataProtocol
-extension DashboardProgramListViewController: ReloadDataProtocol {
+extension ManagerProgramListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
     }
 }
 
-// MARK: - ProgramInfoViewControllerProtocol
-extension DashboardProgramListViewController: ProgramInfoViewControllerProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
-        showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
-            self?.hideAll()
-        }
-    }
-}
-
-extension DashboardProgramListViewController {
+extension ManagerProgramListViewController {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
@@ -192,8 +176,18 @@ extension DashboardProgramListViewController {
     }
 }
 
-extension DashboardProgramListViewController: SortingDelegate {
+extension ManagerProgramListViewController: SortingDelegate {
     func didSelectSorting(at indexPath: IndexPath) {
         bottomSheetController.dismiss()
+    }
+}
+
+// MARK: - ProgramProtocol
+extension ManagerProgramListViewController: ProgramProtocol {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+            self?.hideAll()
+        }
     }
 }

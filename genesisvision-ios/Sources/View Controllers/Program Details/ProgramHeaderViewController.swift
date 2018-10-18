@@ -47,8 +47,6 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     @IBOutlet weak var labelsStackView: UIStackView!
-    @IBOutlet weak var tagsStackView: UIStackView!
-    
     @IBOutlet weak var levelBgImageView: UIImageView!
     @IBOutlet weak var levelButton: LevelButton! {
         didSet {
@@ -56,10 +54,12 @@ class ProgramHeaderViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.font = UIFont.getFont(.semibold, size: 26.0)
+        }
+    }
     @IBOutlet weak var currencyLabel: CurrencyLabel!
-    
-    @IBOutlet var tagsLabel: [UILabel]!
     
     @IBOutlet weak var labelsLeadingConstraint: NSLayoutConstraint!
     
@@ -104,15 +104,21 @@ class ProgramHeaderViewController: BaseViewController {
             currencyLabel.text = currency.rawValue
         }
         
-        bgImageView.image = UIImage.placeholder
+        bgImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
+        headerTitleImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
+        
+        if let color = programDetailsFull?.color {
+            bgImageView.backgroundColor = UIColor.hexColor(color)
+            headerTitleImageView.backgroundColor = UIColor.hexColor(color)
+        }
         
         if let logo = programDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             
             let resource = ImageResource(downloadURL: fileUrl, cacheKey: logo)
-            bgImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
-            headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.placeholder)
+            bgImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
+            headerTitleImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
         }
         
         if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {

@@ -31,7 +31,7 @@ final class ProgramInvestViewModel {
     func getInfo(completion: @escaping CompletionBlock, completionError: @escaping CompletionBlock) {
         guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramDataProvider.getProgramInvestInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programInvestInfo) in
+        ProgramsDataProvider.getProgramInvestInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programInvestInfo) in
             guard let programInvestInfo = programInvestInfo else {
                 return completionError(.failure(errorType: .apiError(message: nil)))
             }
@@ -63,7 +63,7 @@ final class ProgramInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        ProgramDataProvider.investProgram(withAmount: value, programId: programId, errorCompletion: { (result) in
+        ProgramsDataProvider.investProgram(withAmount: value, programId: programId, errorCompletion: { (result) in
             completion(result)
         })
     }

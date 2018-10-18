@@ -11,13 +11,17 @@ import Foundation
 
 open class ProfileFullViewModel: Codable {
 
+    public enum VerificationStatus: String, Codable { 
+        case notVerified = "NotVerified"
+        case verified = "Verified"
+        case underReview = "UnderReview"
+        case rejected = "Rejected"
+    }
     public var id: UUID?
     public var email: String?
     public var firstName: String?
     public var middleName: String?
     public var lastName: String?
-    public var documentType: String?
-    public var documentNumber: String?
     public var country: String?
     public var city: String?
     public var address: String?
@@ -26,19 +30,20 @@ open class ProfileFullViewModel: Codable {
     public var birthday: Date?
     public var gender: Bool?
     public var avatar: String?
+    public var about: String?
     public var userName: String?
-    public var documentsConfirmed: Bool?
+    public var index: String?
+    public var citizenship: String?
+    public var verificationStatus: VerificationStatus?
 
 
     
-    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, documentType: String?, documentNumber: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, userName: String?, documentsConfirmed: Bool?) {
+    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, verificationStatus: VerificationStatus?) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.middleName = middleName
         self.lastName = lastName
-        self.documentType = documentType
-        self.documentNumber = documentNumber
         self.country = country
         self.city = city
         self.address = address
@@ -47,8 +52,11 @@ open class ProfileFullViewModel: Codable {
         self.birthday = birthday
         self.gender = gender
         self.avatar = avatar
+        self.about = about
         self.userName = userName
-        self.documentsConfirmed = documentsConfirmed
+        self.index = index
+        self.citizenship = citizenship
+        self.verificationStatus = verificationStatus
     }
     
 
@@ -63,8 +71,6 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(firstName, forKey: "firstName")
         try container.encodeIfPresent(middleName, forKey: "middleName")
         try container.encodeIfPresent(lastName, forKey: "lastName")
-        try container.encodeIfPresent(documentType, forKey: "documentType")
-        try container.encodeIfPresent(documentNumber, forKey: "documentNumber")
         try container.encodeIfPresent(country, forKey: "country")
         try container.encodeIfPresent(city, forKey: "city")
         try container.encodeIfPresent(address, forKey: "address")
@@ -73,8 +79,11 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(gender, forKey: "gender")
         try container.encodeIfPresent(avatar, forKey: "avatar")
+        try container.encodeIfPresent(about, forKey: "about")
         try container.encodeIfPresent(userName, forKey: "userName")
-        try container.encodeIfPresent(documentsConfirmed, forKey: "documentsConfirmed")
+        try container.encodeIfPresent(index, forKey: "index")
+        try container.encodeIfPresent(citizenship, forKey: "citizenship")
+        try container.encodeIfPresent(verificationStatus, forKey: "verificationStatus")
     }
 
     // Decodable protocol methods
@@ -87,8 +96,6 @@ open class ProfileFullViewModel: Codable {
         firstName = try container.decodeIfPresent(String.self, forKey: "firstName")
         middleName = try container.decodeIfPresent(String.self, forKey: "middleName")
         lastName = try container.decodeIfPresent(String.self, forKey: "lastName")
-        documentType = try container.decodeIfPresent(String.self, forKey: "documentType")
-        documentNumber = try container.decodeIfPresent(String.self, forKey: "documentNumber")
         country = try container.decodeIfPresent(String.self, forKey: "country")
         city = try container.decodeIfPresent(String.self, forKey: "city")
         address = try container.decodeIfPresent(String.self, forKey: "address")
@@ -97,8 +104,11 @@ open class ProfileFullViewModel: Codable {
         birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
         gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
+        about = try container.decodeIfPresent(String.self, forKey: "about")
         userName = try container.decodeIfPresent(String.self, forKey: "userName")
-        documentsConfirmed = try container.decodeIfPresent(Bool.self, forKey: "documentsConfirmed")
+        index = try container.decodeIfPresent(String.self, forKey: "index")
+        citizenship = try container.decodeIfPresent(String.self, forKey: "citizenship")
+        verificationStatus = try container.decodeIfPresent(VerificationStatus.self, forKey: "verificationStatus")
     }
 }
 

@@ -119,6 +119,7 @@ open class ProgramsAPI {
   } ],
   "balance" : 2.3021358869347655,
   "programCurrency" : "Undefined",
+  "rate" : 1.4894159098541704,
   "totalProgramCurrencyProfit" : 0.8008281904610115,
   "successTradesPercent" : 5.962133916683182,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -251,6 +252,10 @@ open class ProgramsAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -304,6 +309,7 @@ open class ProgramsAPI {
     },
     "investorsCount" : 2
   },
+  "color" : "color",
   "manager" : {
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -489,6 +495,10 @@ open class ProgramsAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -503,6 +513,10 @@ open class ProgramsAPI {
         case btc = "BTC"
         case ada = "ADA"
         case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -565,6 +579,7 @@ open class ProgramsAPI {
       },
       "investorsCount" : 3
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -621,6 +636,7 @@ open class ProgramsAPI {
       },
       "investorsCount" : 3
     },
+    "color" : "color",
     "manager" : {
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -740,7 +756,6 @@ open class ProgramsAPI {
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
     "url" : "url"
   }, {
     "count" : 0,
@@ -748,7 +763,6 @@ open class ProgramsAPI {
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
-    "type" : "Program",
     "url" : "url"
   } ],
   "favoritesCount" : 0

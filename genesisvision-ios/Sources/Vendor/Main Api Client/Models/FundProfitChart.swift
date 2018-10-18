@@ -26,10 +26,11 @@ open class FundProfitChart: Codable {
     public var profitChangePercent: Double?
     public var lastPeriodStarts: Date?
     public var lastPeriodEnds: Date?
+    public var rate: Double?
 
 
     
-    public init(totalUsdProfit: Double?, timeframeUsdProfit: Double?, rebalances: Int?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, profitChangePercent: Double?, lastPeriodStarts: Date?, lastPeriodEnds: Date?) {
+    public init(totalUsdProfit: Double?, timeframeUsdProfit: Double?, rebalances: Int?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, profitChangePercent: Double?, lastPeriodStarts: Date?, lastPeriodEnds: Date?, rate: Double?) {
         self.totalUsdProfit = totalUsdProfit
         self.timeframeUsdProfit = timeframeUsdProfit
         self.rebalances = rebalances
@@ -45,6 +46,7 @@ open class FundProfitChart: Codable {
         self.profitChangePercent = profitChangePercent
         self.lastPeriodStarts = lastPeriodStarts
         self.lastPeriodEnds = lastPeriodEnds
+        self.rate = rate
     }
     
 
@@ -69,6 +71,7 @@ open class FundProfitChart: Codable {
         try container.encodeIfPresent(profitChangePercent, forKey: "profitChangePercent")
         try container.encodeIfPresent(lastPeriodStarts, forKey: "lastPeriodStarts")
         try container.encodeIfPresent(lastPeriodEnds, forKey: "lastPeriodEnds")
+        try container.encodeIfPresent(rate, forKey: "rate")
     }
 
     // Decodable protocol methods
@@ -91,6 +94,7 @@ open class FundProfitChart: Codable {
         profitChangePercent = try container.decodeIfPresent(Double.self, forKey: "profitChangePercent")
         lastPeriodStarts = try container.decodeIfPresent(Date.self, forKey: "lastPeriodStarts")
         lastPeriodEnds = try container.decodeIfPresent(Date.self, forKey: "lastPeriodEnds")
+        rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }
 

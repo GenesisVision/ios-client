@@ -6,16 +6,12 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import UIKit.UIBarButtonItem
-
-protocol ProgramInfoViewControllerProtocol: class {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool)
-}
+import UIKit
 
 class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetailsViewModel> {
     
     // MARK: - Variables
-    weak var programDetailViewControllerProtocol: ProgramInfoViewControllerProtocol?
+    weak var programInfoViewControllerProtocol: ProgramProtocol?
     var scrollEnabled: Bool = true {
         didSet {
             //TODO:

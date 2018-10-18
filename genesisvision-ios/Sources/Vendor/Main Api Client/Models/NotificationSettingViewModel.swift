@@ -23,6 +23,9 @@ open class NotificationSettingViewModel: Codable {
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
+        case fundNewsAndUpdates = "FundNewsAndUpdates"
+        case fundEndOfPeriod = "FundEndOfPeriod"
+        case fundRebalancing = "FundRebalancing"
         case managerNewProgram = "ManagerNewProgram"
     }
     public enum ConditionType: String, Codable { 

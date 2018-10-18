@@ -49,16 +49,12 @@ open class FileAPI {
     /**
      Upload document
      
-     - parameter contentType: (query)  (optional)
-     - parameter contentDisposition: (query)  (optional)
-     - parameter headers: (query)  (optional)
-     - parameter length: (query)  (optional)
-     - parameter name: (query)  (optional)
-     - parameter fileName: (query)  (optional)
+     - parameter authorization: (header) JWT access token 
+     - parameter uploadedFile: (form) Upload File 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FileDocumentUploadPost(contentType: String? = nil, contentDisposition: String? = nil, headers: [String:String]? = nil, length: Int64? = nil, name: String? = nil, fileName: String? = nil, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
-        v10FileDocumentUploadPostWithRequestBuilder(contentType: contentType, contentDisposition: contentDisposition, headers: headers, length: length, name: name, fileName: fileName).execute { (response, error) -> Void in
+    open class func v10FileDocumentUploadPost(authorization: String, uploadedFile: URL, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
+        v10FileDocumentUploadPostWithRequestBuilder(authorization: authorization, uploadedFile: uploadedFile).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -71,34 +67,31 @@ open class FileAPI {
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 }}]
      
-     - parameter contentType: (query)  (optional)
-     - parameter contentDisposition: (query)  (optional)
-     - parameter headers: (query)  (optional)
-     - parameter length: (query)  (optional)
-     - parameter name: (query)  (optional)
-     - parameter fileName: (query)  (optional)
+     - parameter authorization: (header) JWT access token 
+     - parameter uploadedFile: (form) Upload File 
 
      - returns: RequestBuilder<UploadResult> 
      */
-    open class func v10FileDocumentUploadPostWithRequestBuilder(contentType: String? = nil, contentDisposition: String? = nil, headers: [String:String]? = nil, length: Int64? = nil, name: String? = nil, fileName: String? = nil) -> RequestBuilder<UploadResult> {
+    open class func v10FileDocumentUploadPostWithRequestBuilder(authorization: String, uploadedFile: URL) -> RequestBuilder<UploadResult> {
         let path = "/v1.0/file/document/upload"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let formParams: [String:Any?] = [
+            "uploadedFile": uploadedFile
+        ]
+
+        let nonNullParameters = APIHelper.rejectNil(formParams)
+        let parameters = APIHelper.convertBoolToString(nonNullParameters)
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "ContentType": contentType, 
-            "ContentDisposition": contentDisposition, 
-            "Headers": headers, 
-            "Length": length?.encodeToJSON(), 
-            "Name": name, 
-            "FileName": fileName
-        ])
-        
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<UploadResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**

@@ -156,7 +156,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
             return
         }
         
-        ProgramDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
             switch result {
             case .success:
                 guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -240,7 +240,7 @@ extension FavoriteProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            ProgramDataProvider.getPrograms(with: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: nil, take: nil, completion: { (programsViewModel) in
+            ProgramsDataProvider.getPrograms(isFavorite: true, skip: skip, take: take, completion: { (programsViewModel) in
                 guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 var programViewModels = [ProgramTableViewCellViewModel]()

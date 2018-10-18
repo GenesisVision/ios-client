@@ -91,13 +91,13 @@ final class CreateProgramThirdViewModel {//: ViewModelWithTableView {
 ////                                                        period: period)
 //
 ////        guard let pickedImageURL = pickedImageURL else {
-////            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
+////            ProgramsDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
 ////            return
 ////        }
 ////
 ////        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (imageID) in
 ////            newInvestmentRequest.logo = imageID
-////            ProgramDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
+////            ProgramsDataProvider.createProgram(with: newInvestmentRequest, completion: completion, errorCompletion: errorCompletion)
 ////            }, errorCompletion: errorCompletion)
 //    }
 //

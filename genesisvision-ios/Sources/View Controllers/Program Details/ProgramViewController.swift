@@ -67,7 +67,7 @@ class ProgramViewController: BaseViewController {
         } else if let tabmanViewController = segue.destination as? ProgramDetailsTabmanViewController,
             segue.identifier == "ProgramDetailsTabmanViewControllerSegue" {
             
-            tabmanViewController.programDetailViewControllerProtocol = self
+            tabmanViewController.programInfoViewControllerProtocol = self
             
             let router = ProgramDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
             let viewModel = ProgramDetailsViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
@@ -146,7 +146,7 @@ class ProgramViewController: BaseViewController {
             switch result {
             case .success:
                 if let programId = self?.programDetailsTabmanViewController?.viewModel.programId {
-                    self?.programDetailsTabmanViewController?.programDetailViewControllerProtocol?.programDetailDidChangeFavoriteState(with: programId, value: !isFavorite, request: false)
+                    self?.programDetailsTabmanViewController?.programInfoViewControllerProtocol?.programDetailDidChangeFavoriteState(with: programId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
@@ -246,7 +246,7 @@ extension ProgramViewController: ProgramDetailsProtocol {
     }
 }
 
-extension ProgramViewController: ProgramInfoViewControllerProtocol {
+extension ProgramViewController: ProgramProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         
     }

@@ -13,18 +13,20 @@ open class PlatformAsset: Codable {
 
     public var id: UUID?
     public var name: String?
-    public var symbol: String?
+    public var asset: String?
     public var description: String?
     public var icon: String?
+    public var color: String?
 
 
     
-    public init(id: UUID?, name: String?, symbol: String?, description: String?, icon: String?) {
+    public init(id: UUID?, name: String?, asset: String?, description: String?, icon: String?, color: String?) {
         self.id = id
         self.name = name
-        self.symbol = symbol
+        self.asset = asset
         self.description = description
         self.icon = icon
+        self.color = color
     }
     
 
@@ -36,9 +38,10 @@ open class PlatformAsset: Codable {
 
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(symbol, forKey: "symbol")
+        try container.encodeIfPresent(asset, forKey: "asset")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(icon, forKey: "icon")
+        try container.encodeIfPresent(color, forKey: "color")
     }
 
     // Decodable protocol methods
@@ -48,9 +51,10 @@ open class PlatformAsset: Codable {
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         name = try container.decodeIfPresent(String.self, forKey: "name")
-        symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
+        asset = try container.decodeIfPresent(String.self, forKey: "asset")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
     }
 }
 

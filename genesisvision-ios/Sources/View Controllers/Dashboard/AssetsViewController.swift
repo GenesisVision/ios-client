@@ -37,7 +37,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     // MARK: - Private methods
 }
 
-extension AssetsViewController: ProgramInfoViewControllerProtocol {
+extension AssetsViewController: ProgramProtocol {
     func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
         if let programListViewController = pageboyDataSource.controllers.first as? ProgramListViewController,

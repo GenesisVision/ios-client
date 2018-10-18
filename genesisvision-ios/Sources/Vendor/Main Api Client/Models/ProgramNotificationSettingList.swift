@@ -11,24 +11,24 @@ import Foundation
 
 open class ProgramNotificationSettingList: Codable {
 
+    public var level: Int?
+    public var settingsCustom: [NotificationSettingViewModel]?
     public var programId: UUID?
     public var title: String?
     public var url: String?
     public var logo: String?
-    public var level: Int?
     public var settingsGeneral: [NotificationSettingViewModel]?
-    public var settingsCustom: [NotificationSettingViewModel]?
 
 
     
-    public init(programId: UUID?, title: String?, url: String?, logo: String?, level: Int?, settingsGeneral: [NotificationSettingViewModel]?, settingsCustom: [NotificationSettingViewModel]?) {
+    public init(level: Int?, settingsCustom: [NotificationSettingViewModel]?, programId: UUID?, title: String?, url: String?, logo: String?, settingsGeneral: [NotificationSettingViewModel]?) {
+        self.level = level
+        self.settingsCustom = settingsCustom
         self.programId = programId
         self.title = title
         self.url = url
         self.logo = logo
-        self.level = level
         self.settingsGeneral = settingsGeneral
-        self.settingsCustom = settingsCustom
     }
     
 
@@ -38,13 +38,13 @@ open class ProgramNotificationSettingList: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(settingsCustom, forKey: "settingsCustom")
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(settingsGeneral, forKey: "settingsGeneral")
-        try container.encodeIfPresent(settingsCustom, forKey: "settingsCustom")
     }
 
     // Decodable protocol methods
@@ -52,13 +52,13 @@ open class ProgramNotificationSettingList: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        level = try container.decodeIfPresent(Int.self, forKey: "level")
+        settingsCustom = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsCustom")
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
         settingsGeneral = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsGeneral")
-        settingsCustom = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsCustom")
     }
 }
 
