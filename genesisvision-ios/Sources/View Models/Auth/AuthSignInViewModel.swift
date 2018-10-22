@@ -9,7 +9,7 @@
 final class AuthSignInViewModel {
     
     // MARK: - Variables
-    var title: String = "Sign In"
+    var title: String = "Sign in"
     
     private var router: SignInRouter!
     

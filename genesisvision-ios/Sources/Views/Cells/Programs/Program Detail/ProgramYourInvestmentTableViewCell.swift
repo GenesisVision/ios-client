@@ -65,13 +65,7 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     @IBOutlet var withdrawButton: ActionButton! {
         didSet {
             withdrawButton.configure(with: .darkClear)
-        }
-    }
-    
-    @IBOutlet var withdrawDescriptionLabel: UILabel! {
-        didSet {
-            withdrawDescriptionLabel.textColor = UIColor.Cell.subtitle
-            withdrawDescriptionLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            withdrawButton.setEnabled(AuthManager.isLogin())
         }
     }
     
@@ -90,6 +84,8 @@ class ProgramYourInvestmentTableViewCell: UITableViewCell {
     }
     
     @IBOutlet var reinvestSwitch: UISwitch!
+    
+    @IBOutlet var disclaimerLabel: SubtitleLabel!
     
     weak var programYourInvestmentProtocol: ProgramYourInvestmentProtocol?
     

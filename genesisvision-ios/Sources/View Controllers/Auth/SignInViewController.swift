@@ -37,6 +37,13 @@ class SignInViewController: BaseViewController {
         }
     }
     
+    @IBOutlet var forgotButton: UIButton! {
+        didSet {
+            forgotButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            forgotButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
+    
     private var signUpBarButtonItem: UIBarButtonItem!
     
     // MARK: - Lifecycle

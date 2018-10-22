@@ -52,7 +52,7 @@ class BaseViewController: UIViewController, Hidable {
     var signInButton: ActionButton = {
         let btn = ActionButton(type: .system)
         btn.configure(with: .normal)
-        btn.setTitle("SIGN IN", for: .normal)
+        btn.setTitle("Sign in", for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = true
         btn.addTarget(self, action: #selector(signInButtonAction), for: .touchUpInside)
         return btn

@@ -11,6 +11,10 @@ final class ProgramViewModel {
     var programId: String!
     var programDetailsFull: ProgramDetailsFull?
     
+    var isFavorite: Bool {
+        return programDetailsFull?.personalProgramDetails?.isFavorite ?? false
+    }
+    
     var router: ProgramRouter!
     
     // MARK: - Init
@@ -32,4 +36,26 @@ final class ProgramViewModel {
             completion(.success)
         }, errorCompletion: completion)
     }
+    
+    // MARK: - Public methods
+    func changeFavorite(completion: @escaping CompletionBlock) {
+        guard
+            let personalProgramDetails = programDetailsFull?.personalProgramDetails,
+            let isFavorite = personalProgramDetails.isFavorite,
+            let programId = programId
+            else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite
+            case .failure(let errorType):
+                print(errorType)
+                self?.programDetailsFull?.personalProgramDetails?.isFavorite = isFavorite
+            }
+            
+            completion(result)
+        }
+    }
+    
 }

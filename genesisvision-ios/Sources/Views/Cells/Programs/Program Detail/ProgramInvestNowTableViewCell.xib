@@ -94,7 +94,7 @@
                             <action selector="investButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cee-Ai-nZ2"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                         <rect key="frame" x="20" y="344.5" width="280" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
@@ -119,10 +119,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="disclaimerLabel" destination="A0B-Yt-WF2" id="7We-7O-uMi"/>
                 <outlet property="entryFeeTitleLabel" destination="ves-4M-lWr" id="Nbm-dy-Xo4"/>
                 <outlet property="entryFeeValueLabel" destination="dYQ-Ch-qJE" id="6CM-R2-4UJ"/>
                 <outlet property="investButton" destination="GrT-YF-Trs" id="4bl-pn-fBD"/>
-                <outlet property="investDescriptionLabel" destination="A0B-Yt-WF2" id="rve-oy-Hsg"/>
                 <outlet property="investTitleLabel" destination="DDX-1s-uOu" id="ubC-YA-V4n"/>
                 <outlet property="investValueLabel" destination="1Ce-8c-cVW" id="boN-AM-uVc"/>
                 <outlet property="successFeeTitleLabel" destination="aka-N3-lBO" id="nRI-nY-VOg"/>

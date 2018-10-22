@@ -54,7 +54,7 @@ class CreateProgramThirdViewController: BaseViewControllerWithTableView {
     
     private func selectDateFrom() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        alert.view.tintColor = UIColor.primary
         
         alert.addDatePicker(mode: .dateAndTime, date: viewModel.temparyNewInvestmentRequest?.dateFrom, minimumDate: nil, maximumDate: nil) { [weak self] date in
 //            self?.viewModel.update(dateFrom: date)

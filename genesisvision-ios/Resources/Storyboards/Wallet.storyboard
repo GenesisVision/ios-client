@@ -298,7 +298,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hpu-90-ir1">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Withdraw address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4M-WY-5xc">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Withdraw address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4M-WY-5xc" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="1.5" width="255" height="17"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -446,6 +446,7 @@
                         <outlet property="copyMaxValueButton" destination="F6q-An-Uhf" id="Ska-sA-L4s"/>
                         <outlet property="feeTitleLabel" destination="dUh-bd-Q3Y" id="xW4-LO-8di"/>
                         <outlet property="feeValueLabel" destination="tNq-ow-tmH" id="Nr6-5p-1Ja"/>
+                        <outlet property="scanQRButton" destination="Ct8-G0-1hh" id="9fO-tG-JU9"/>
                         <outlet property="selectedWalletCurrencyButton" destination="hQe-V2-8iL" id="fyM-7h-c1t"/>
                         <outlet property="selectedWalletCurrencyTitleLabel" destination="Ucb-3Q-jc8" id="Fih-j9-U2z"/>
                         <outlet property="selectedWalletCurrencyValueLabel" destination="TG8-BJ-q3f" id="q2u-nV-B0a"/>
@@ -605,22 +606,31 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="YD7-dv-zdm">
-                                <rect key="frame" x="0.0" y="404.5" width="375" height="168.5"/>
+                                <rect key="frame" x="0.0" y="342" width="375" height="231"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-9P-RUw">
-                                        <rect key="frame" x="30" y="0.0" width="315" height="168.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-9P-RUw">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="231"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
                                                 <rect key="frame" x="97.5" y="0.0" width="120" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="5Gy-Vf-ufx"/>
-                                                    <constraint firstAttribute="height" constant="120" id="HmD-e9-K1p"/>
+                                                    <constraint firstAttribute="width" secondItem="EoU-jq-OAo" secondAttribute="height" multiplier="1:1" id="EX9-Bb-XaG"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="153.5" y="152" width="8" height="16.5"/>
+                                                <rect key="frame" x="153.5" y="152" width="8" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="f1y-MQ-6Th"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs8-8t-Pzx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="20.5" y="202" width="274.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -648,7 +658,7 @@
                                     <action selector="copyButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="YpO-M7-yyr"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9f-JJ-t4w" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9f-JJ-t4w" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="455" width="375" height="212"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="g2Y-9g-7eI">
@@ -859,6 +869,7 @@
                         <outlet property="amountToDepositTitleLabel" destination="mXT-hM-1fj" id="III-RU-BGm"/>
                         <outlet property="amountToDepositValueLabel" destination="vjk-zq-hjb" id="1tL-vb-WiD"/>
                         <outlet property="copyButton" destination="0fG-J6-Vd4" id="ZdH-r2-I9a"/>
+                        <outlet property="disclaimerLabel" destination="Fs8-8t-Pzx" id="hHV-Nz-bWl"/>
                         <outlet property="qrImageView" destination="EoU-jq-OAo" id="zlE-lo-Qdz"/>
                         <outlet property="selectedWalletCurrencyButton" destination="zdh-pH-Ygv" id="ek2-oz-doi"/>
                         <outlet property="selectedWalletCurrencyTitleLabel" destination="LkP-cp-tSS" id="joZ-Lu-doF"/>

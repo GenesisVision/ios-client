@@ -57,7 +57,12 @@ class ProgramInvestViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton!
+    @IBOutlet var copyMaxValueButton: UIButton! {
+        didSet {
+            copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
     
     @IBOutlet var entryFeeTitleLabel: SubtitleLabel! {
         didSet {
@@ -67,13 +72,13 @@ class ProgramInvestViewController: BaseViewController {
     }
     @IBOutlet var entryFeeValueLabel: TitleLabel!
     
-    @IBOutlet var gvFeeTitleLabel: SubtitleLabel! {
+    @IBOutlet var gvCommissionTitleLabel: SubtitleLabel! {
         didSet {
-            gvFeeTitleLabel.text = "GV commission"
-            gvFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            gvCommissionTitleLabel.text = "GV commission"
+            gvCommissionTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var gvFeeValueLabel: TitleLabel!
+    @IBOutlet var gvCommissionValueLabel: TitleLabel!
     
     @IBOutlet var investmentAmountTitleLabel: SubtitleLabel! {
         didSet {
@@ -143,30 +148,28 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func updateUI() {
-        if let entryFee = viewModel.programInvestInfo?.entryFee {
+        if let entryFee = viewModel.programInvestInfo?.entryFee, let gvCommission = viewModel.programInvestInfo?.gvCommission {
             let entryFeeGVT = entryFee * amountToInvestValue / 100
             let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
-            let entryFeeString = entryFee.rounded(toPlaces: 0).toString()
+            let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
             
             let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(Constants.gvtString))"
             self.entryFeeValueLabel.text = entryFeeValueLabelString
 
-            let gvFee = 0.5
-            let gvFeeGVT = gvFee * amountToInvestValue / 100
-            let gvFeeGVTString = gvFeeGVT.rounded(withType: .gvt).toString()
-            let gvFeeString = gvFee.rounded(toPlaces: 0).toString()
+            let gvCommissionGVT = gvCommission * amountToInvestValue / 100
+            let gvCommissionGVTString = gvCommissionGVT.rounded(withType: .gvt).toString()
+            let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
             
-            let gvFeeValueLabelString = gvFeeString + "% (\(gvFeeGVTString) \(Constants.gvtString))"
-            self.gvFeeValueLabel.text = gvFeeValueLabelString
-            
-            let amountDueValueString = "\((entryFeeGVT + gvFeeGVT + amountToInvestValue).rounded(withType: .gvt)) \(Constants.gvtString)"
-            self.investmentAmountValueLabel.text = amountDueValueString
+            let gvCommissionValueLabelString = gvCommissionString + "% (\(gvCommissionGVTString) \(Constants.gvtString))"
+            self.gvCommissionValueLabel.text = gvCommissionValueLabelString
+            let investmentAmountValue = (amountToInvestValue - entryFeeGVT - gvCommissionGVT).rounded(withType: .gvt).toString()
+            self.investmentAmountValueLabel.text = investmentAmountValue + " " + Constants.gvtString
         }
         
         if let availableToInvest = viewModel.programInvestInfo?.availableToInvest {
             self.availableToInvestValue = availableToInvest
         }
-            
+        
         if let rate = viewModel.programInvestInfo?.rate {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
@@ -206,7 +209,7 @@ class ProgramInvestViewController: BaseViewController {
         bottomSheetController = BottomSheetController()
         bottomSheetController.tintColor = UIColor.Cell.bg
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 450
+        bottomSheetController.initializeHeight = 500.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         let periodEnds = viewModel.programInvestInfo?.periodEnds
@@ -227,8 +230,8 @@ class ProgramInvestViewController: BaseViewController {
                                                           firstValue: firstValue,
                                                           secondTitle: entryFeeTitleLabel.text,
                                                           secondValue: entryFeeValueLabel.text,
-                                                          thirdTitle: gvFeeTitleLabel.text,
-                                                          thirdValue: gvFeeValueLabel.text,
+                                                          thirdTitle: gvCommissionTitleLabel.text,
+                                                          thirdValue: gvCommissionValueLabel.text,
                                                           fourthTitle: investmentAmountTitleLabel.text,
                                                           fourthValue: investmentAmountValueLabel.text)
         confirmView.configure(model: confirmViewModel)
@@ -260,6 +263,10 @@ class ProgramInvestViewController: BaseViewController {
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
+    var amountLimit: Double? {
+        return availableToInvestValue
+    }
+    
     var textPlaceholder: String? {
         return viewModel.labelPlaceholder
     }
@@ -285,8 +292,10 @@ extension ProgramInvestViewController: NumpadViewProtocol {
     }
     
     func textLabelDidChange(value: Double?) {
+        guard let value = value, value <= availableToInvestValue else { return }
+        
         numpadView.isEnable = true
-        amountToInvestValue = value != nil ? value! : 0.0
+        amountToInvestValue = value
     }
 }
 

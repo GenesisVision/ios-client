@@ -83,7 +83,19 @@ class WalletWithdrawViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton!
+    @IBOutlet var copyMaxValueButton: UIButton! {
+        didSet {
+            copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
+    
+    @IBOutlet var scanQRButton: UIButton! {
+        didSet {
+            scanQRButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            scanQRButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
     
     @IBOutlet var feeTitleLabel: SubtitleLabel! {
         didSet {
@@ -249,7 +261,7 @@ class WalletWithdrawViewController: BaseViewController {
     
     @IBAction func selectedWalletCurrencyButtonAction(_ sender: UIButton) {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        alert.view.tintColor = UIColor.primary
         
         var selectedIndexRow = viewModel.selectedWalletCurrencyIndex
         let values = viewModel.walletCurrencyValues()

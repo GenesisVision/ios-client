@@ -11,7 +11,7 @@ import UIKit
 
 final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
    // MARK: - Variables
-    var title: String = "Favorite Programs".uppercased()
+    var title: String = "Favorite programs".uppercased()
 
     internal var sections: [SectionType] = [.programList]
     

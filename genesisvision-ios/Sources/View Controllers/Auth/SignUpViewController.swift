@@ -66,7 +66,38 @@ class SignUpViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var signUpButton: ActionButton!
+    @IBOutlet var privacyPolicyButton: UIButton! {
+        didSet {
+            privacyPolicyButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            privacyPolicyButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var notAmericanButton: UIButton! {
+        didSet {
+            notAmericanButton.isUserInteractionEnabled = false
+            notAmericanButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            notAmericanButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    
+    @IBOutlet var privacyPolicySwitchButton: UIButton! {
+        didSet {
+            privacyPolicySwitchButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            privacyPolicySwitchButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var notAmericanSwitchButton: UIButton! {
+        didSet {
+            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
+    
+    @IBOutlet var signUpButton: ActionButton! {
+        didSet {
+            signUpButton.setEnabled(false)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -130,6 +161,19 @@ class SignUpViewController: BaseViewController {
     // MARK: - Actions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         sighUpMethod()
+    }
+    
+    @IBAction func showPrivacyButtonAction(_ sender: UIButton) {
+        viewModel.showPrivacy()
+    }
+    
+    @IBAction func notAmericanButtonAction(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func switchButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && notAmericanSwitchButton.isSelected)
     }
 }
 

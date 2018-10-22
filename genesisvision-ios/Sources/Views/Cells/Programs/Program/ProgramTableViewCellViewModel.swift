@@ -80,6 +80,9 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.thirdValueLabel.text = ""
         }
         
+        
+        cell.favoriteButton.isHidden = !AuthManager.isLogin()
+        
         if let isFavorite = program.personalDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }

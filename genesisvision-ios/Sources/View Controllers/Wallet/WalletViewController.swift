@@ -145,7 +145,7 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.primary
+//        alert.view.tintColor = UIColor.primary
         
         let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
             self?.update(sorting: .all)

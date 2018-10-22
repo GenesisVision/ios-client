@@ -42,9 +42,11 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         
         currencyDelegate?.didSelectCurrency(at: indexPath)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currencyValues.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCurrencyTableViewCell", for: indexPath) as? DashboardCurrencyTableViewCell else {
             let cell = UITableViewCell()

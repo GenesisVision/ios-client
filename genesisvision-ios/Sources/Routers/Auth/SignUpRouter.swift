@@ -7,7 +7,7 @@
 //
 
 enum SignUpRouteType {
-    case confirmation
+    case confirmation, privacy
 }
 
 class SignUpRouter: Router {
@@ -17,6 +17,8 @@ class SignUpRouter: Router {
         switch routeType {
         case .confirmation:
             confirmationAction()
+        case .privacy:
+            showPrivacy()
         }
     }
     

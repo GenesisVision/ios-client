@@ -16,6 +16,9 @@ class TableViewCell: UITableViewCell {
         
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
+        
+        tintColor = UIColor.Cell.title
+        accessoryView?.backgroundColor = UIColor.BaseView.bg
     }
 }
 

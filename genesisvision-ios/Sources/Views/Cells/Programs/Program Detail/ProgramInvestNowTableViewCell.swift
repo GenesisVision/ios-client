@@ -57,14 +57,13 @@ class ProgramInvestNowTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var investButton: ActionButton!
-    
-    @IBOutlet var investDescriptionLabel: UILabel! {
+    @IBOutlet var investButton: ActionButton! {
         didSet {
-            investDescriptionLabel.textColor = UIColor.Cell.subtitle
-            investDescriptionLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            investButton.setEnabled(AuthManager.isLogin())
         }
     }
+    
+    @IBOutlet var disclaimerLabel: SubtitleLabel!
     
     weak var programInvestNowProtocol: ProgramInvestNowProtocol?
     

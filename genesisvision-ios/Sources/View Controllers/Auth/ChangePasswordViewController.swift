@@ -72,9 +72,9 @@ class ChangePasswordViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
     }
-    
     
     private func changePasswordMethod() {
         hideKeyboard()

@@ -28,6 +28,8 @@ open class ProgramRequest: Codable {
     public var programId: UUID?
     public var date: Date?
     public var value: Double?
+    /** Used only in fund withdraw request */
+    public var fundWithdrawPercent: Double?
     public var type: ModelType?
     public var status: Status?
     public var logo: String?
@@ -38,11 +40,12 @@ open class ProgramRequest: Codable {
 
 
     
-    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
+    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
         self.id = id
         self.programId = programId
         self.date = date
         self.value = value
+        self.fundWithdrawPercent = fundWithdrawPercent
         self.type = type
         self.status = status
         self.logo = logo
@@ -63,6 +66,7 @@ open class ProgramRequest: Codable {
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(value, forKey: "value")
+        try container.encodeIfPresent(fundWithdrawPercent, forKey: "fundWithdrawPercent")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -81,6 +85,7 @@ open class ProgramRequest: Codable {
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
+        fundWithdrawPercent = try container.decodeIfPresent(Double.self, forKey: "fundWithdrawPercent")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

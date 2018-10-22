@@ -20,16 +20,20 @@ open class PersonalFundDetailsFull: Codable {
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
+    public var canInvest: Bool?
+    public var canWithdraw: Bool?
     public var value: Double?
     public var profit: Double?
     public var status: Status?
 
 
     
-    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, value: Double?, profit: Double?, status: Status?) {
+    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, value: Double?, profit: Double?, status: Status?) {
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
+        self.canInvest = canInvest
+        self.canWithdraw = canWithdraw
         self.value = value
         self.profit = profit
         self.status = status
@@ -45,6 +49,8 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
+        try container.encodeIfPresent(canInvest, forKey: "canInvest")
+        try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(profit, forKey: "profit")
         try container.encodeIfPresent(status, forKey: "status")
@@ -58,6 +64,8 @@ open class PersonalFundDetailsFull: Codable {
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
+        canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
+        canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         status = try container.decodeIfPresent(Status.self, forKey: "status")

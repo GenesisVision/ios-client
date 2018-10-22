@@ -11,13 +11,13 @@ import Foundation
 
 open class FundAssetPart: Codable {
 
-    public var assetId: UUID?
+    public var id: UUID?
     public var percent: Double?
 
 
     
-    public init(assetId: UUID?, percent: Double?) {
-        self.assetId = assetId
+    public init(id: UUID?, percent: Double?) {
+        self.id = id
         self.percent = percent
     }
     
@@ -28,7 +28,7 @@ open class FundAssetPart: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(assetId, forKey: "assetId")
+        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(percent, forKey: "percent")
     }
 
@@ -37,7 +37,7 @@ open class FundAssetPart: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         percent = try container.decodeIfPresent(Double.self, forKey: "percent")
     }
 }

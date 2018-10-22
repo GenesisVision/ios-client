@@ -11,6 +11,20 @@ import Foundation
 
 open class DashboardPortfolioEvent: Codable {
 
+    public enum Currency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public enum ModelType: String, Codable { 
         case all = "All"
         case invest = "Invest"
@@ -25,16 +39,18 @@ open class DashboardPortfolioEvent: Codable {
     public var date: Date?
     public var title: String?
     public var value: Double?
+    public var currency: Currency?
     public var type: ModelType?
     public var logo: String?
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, type: ModelType?, logo: String?) {
+    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?) {
         self.assetId = assetId
         self.date = date
         self.title = title
         self.value = value
+        self.currency = currency
         self.type = type
         self.logo = logo
     }
@@ -50,6 +66,7 @@ open class DashboardPortfolioEvent: Codable {
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(value, forKey: "value")
+        try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(logo, forKey: "logo")
     }
@@ -63,6 +80,7 @@ open class DashboardPortfolioEvent: Codable {
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
     }

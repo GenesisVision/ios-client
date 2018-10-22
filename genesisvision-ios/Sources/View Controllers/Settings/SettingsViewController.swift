@@ -165,10 +165,9 @@ class SettingsViewController: BaseTableViewController {
     private func setupUI() {
         setupSecurity()
         
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
         
-        navigationItem.title = viewModel.title
         signOutBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_logout"), style: .done, target: self, action: #selector(signOutMethod))
         navigationItem.rightBarButtonItem = signOutBarButtonItem
         
@@ -197,7 +196,7 @@ class SettingsViewController: BaseTableViewController {
     
     private func feedbackMethod() {
         let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.primary
+//        alert.view.tintColor = UIColor.primary
         
         alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
             self?.viewModel.sendFeedback()

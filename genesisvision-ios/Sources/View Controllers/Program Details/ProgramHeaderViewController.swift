@@ -90,7 +90,9 @@ class ProgramHeaderViewController: BaseViewController {
         self.headerTitleImageView.alpha = offset
         
         self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
-        self.titleBottomConstraint.constant = 20.0 - offset * 50.0
+        self.titleBottomConstraint.constant = 20.0 - offset * 46.0
+        
+        self.titleLabel.font = UIFont.getFont(.semibold, size: 26.0 - 10.0 * offset)
         
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }

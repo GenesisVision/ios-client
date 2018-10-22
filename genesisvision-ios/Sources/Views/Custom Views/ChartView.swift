@@ -110,8 +110,8 @@ class ChartView: CombinedChartView {
             data.lineData = generateLineChartData(lineChartData)
             
             data.lineData.calcMinMax()
-            maxLimitValue = data.lineData.getYMax()
-            minLimitValue = data.lineData.getYMin()
+            maxLimitValue = data.lineData.getYMax().rounded(toPlaces: 2)
+            minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
         
         if let barChartData = barChartData {
@@ -123,8 +123,8 @@ class ChartView: CombinedChartView {
             data.lineData = lineData
             
             data.lineData.calcMinMax()
-            maxLimitValue = data.lineData.getYMax()
-            minLimitValue = data.lineData.getYMin()
+            maxLimitValue = data.lineData.getYMax().rounded(toPlaces: 2)
+            minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
         
         xAxis.axisMaximum = data.xMax + (Date().addDays(1).timeIntervalSince1970 - Date().timeIntervalSince1970) / 10

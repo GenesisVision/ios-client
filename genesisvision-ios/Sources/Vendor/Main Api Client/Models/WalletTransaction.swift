@@ -16,6 +16,7 @@ open class WalletTransaction: Codable {
         case program = "Program"
         case fund = "Fund"
         case programRequest = "ProgramRequest"
+        case fundRequest = "FundRequest"
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
     }
@@ -50,6 +51,7 @@ open class WalletTransaction: Codable {
         case program = "Program"
         case fund = "Fund"
         case programRequest = "ProgramRequest"
+        case fundRequest = "FundRequest"
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
     }

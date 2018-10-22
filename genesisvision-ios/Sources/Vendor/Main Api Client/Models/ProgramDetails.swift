@@ -42,7 +42,7 @@ open class ProgramDetails: Codable {
     public var availableInvestment: Double?
     public var statistic: ProgramDetailsListStatistic?
     /** Fields for authorized user */
-    public var personalDetails: PersonalProgramDetailsList?
+    public var personalDetails: PersonalProgramDetailsFull?
     public var id: UUID?
     public var logo: String?
     public var url: String?
@@ -57,7 +57,7 @@ open class ProgramDetails: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, statistic: ProgramDetailsListStatistic?, personalDetails: PersonalProgramDetailsList?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, statistic: ProgramDetailsListStatistic?, personalDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -117,7 +117,7 @@ open class ProgramDetails: Codable {
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
-        personalDetails = try container.decodeIfPresent(PersonalProgramDetailsList.self, forKey: "personalDetails")
+        personalDetails = try container.decodeIfPresent(PersonalProgramDetailsFull.self, forKey: "personalDetails")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")

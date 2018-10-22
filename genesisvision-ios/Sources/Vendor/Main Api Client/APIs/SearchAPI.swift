@@ -30,7 +30,7 @@ open class SearchAPI {
      - GET /v1.0/search
      - examples: [{contentType=application/json, example={
   "funds" : {
-    "total" : 1,
+    "total" : 9,
     "funds" : [ {
       "totalAssetsCount" : 1,
       "statistic" : {
@@ -38,13 +38,13 @@ open class SearchAPI {
           "amount" : 5.962133916683182,
           "currency" : "Undefined"
         },
-        "profitPercent" : 1.4894159098541704,
-        "drawdownPercent" : 6.84685269835264,
+        "profitPercent" : 7.457744773683766,
+        "drawdownPercent" : 1.1730742509559433,
         "balanceSecondary" : {
           "amount" : 5.962133916683182,
           "currency" : "Undefined"
         },
-        "investorsCount" : 7
+        "investorsCount" : 4
       },
       "color" : "color",
       "manager" : {
@@ -57,19 +57,24 @@ open class SearchAPI {
       "topFundAssets" : [ {
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.0246457001441578
+        "percent" : 6.84685269835264
       }, {
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.0246457001441578
+        "percent" : 6.84685269835264
       } ],
       "description" : "description",
       "title" : "title",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 4.145608029883936
+        "share" : 1.2315135367772556
       },
       "personalDetails" : {
+        "isOwnProgram" : true,
+        "canWithdraw" : true,
+        "canInvest" : true,
+        "value" : 5.025004791520295,
+        "profit" : 9.965781217890562,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Active"
@@ -91,13 +96,13 @@ open class SearchAPI {
           "amount" : 5.962133916683182,
           "currency" : "Undefined"
         },
-        "profitPercent" : 1.4894159098541704,
-        "drawdownPercent" : 6.84685269835264,
+        "profitPercent" : 7.457744773683766,
+        "drawdownPercent" : 1.1730742509559433,
         "balanceSecondary" : {
           "amount" : 5.962133916683182,
           "currency" : "Undefined"
         },
-        "investorsCount" : 7
+        "investorsCount" : 4
       },
       "color" : "color",
       "manager" : {
@@ -110,19 +115,24 @@ open class SearchAPI {
       "topFundAssets" : [ {
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.0246457001441578
+        "percent" : 6.84685269835264
       }, {
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.0246457001441578
+        "percent" : 6.84685269835264
       } ],
       "description" : "description",
       "title" : "title",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 4.145608029883936
+        "share" : 1.2315135367772556
       },
       "personalDetails" : {
+        "isOwnProgram" : true,
+        "canWithdraw" : true,
+        "canInvest" : true,
+        "value" : 5.025004791520295,
+        "profit" : 9.965781217890562,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Active"
@@ -140,7 +150,7 @@ open class SearchAPI {
     } ]
   },
   "programs" : {
-    "total" : 7,
+    "total" : 1,
     "programs" : [ {
       "periodDuration" : 6,
       "statistic" : {
@@ -178,11 +188,16 @@ open class SearchAPI {
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "dashboardAssetsDetails" : {
-        "share" : 4.145608029883936
+        "share" : 1.2315135367772556
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
+        "isOwnProgram" : true,
+        "canWithdraw" : true,
         "isReinvest" : true,
+        "canInvest" : true,
+        "value" : 4.145608029883936,
+        "profit" : 7.386281948385884,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Active"
@@ -235,11 +250,16 @@ open class SearchAPI {
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "dashboardAssetsDetails" : {
-        "share" : 4.145608029883936
+        "share" : 1.2315135367772556
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
+        "isOwnProgram" : true,
+        "canWithdraw" : true,
         "isReinvest" : true,
+        "canInvest" : true,
+        "value" : 4.145608029883936,
+        "profit" : 7.386281948385884,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Active"
@@ -258,7 +278,7 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 4,
+    "total" : 6,
     "managers" : [ {
       "assets" : [ "assets", "assets" ],
       "about" : "about",

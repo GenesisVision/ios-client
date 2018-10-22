@@ -17,12 +17,26 @@ final class WalletDepositViewModel {
     private var address: String = ""
     private var qrImage: UIImage?
     
+    var walletsInfo: WalletsInfo?
+    var selectedWallet: WalletInfo?
+    
     // MARK: - Init
     init(withRouter router: WalletDepositRouter) {
         self.router = router
     }
     
     // MARK: - Public methods
+    func getInfo(completion: @escaping CompletionBlock) {
+        WalletDataProvider.getWalletAddresses(completion: { [weak self] (walletsInfo) in
+            guard let walletsInfo = walletsInfo else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            self?.walletsInfo = walletsInfo
+            completion(.success)
+            }, errorCompletion: completion)
+    }
+    
     func getAddress() -> String {
         return address
     }

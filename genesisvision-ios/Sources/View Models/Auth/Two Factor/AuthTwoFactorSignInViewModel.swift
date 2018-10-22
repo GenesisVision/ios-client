@@ -10,9 +10,9 @@ import UIKit.UIImage
 
 final class AuthTwoFactorSignInViewModel {
     // MARK: - Variables
-    var title: String = "Two Factor Authentication"
+    var title: String = "Two factor authentication"
     
-    var buttonTitle: String = "Sign In".uppercased()
+    var buttonTitle: String = "Sign in"
     var titleText: String = String.ViewTitles.TwoFactor.signInTitle
     var labelPlaceholder: String = ""
 

@@ -85,10 +85,6 @@ class SettingsRouter: Router {
         navigationController?.openSafariVC(with: Constants.Urls.termsWebAddress)
     }
     
-    private func showPrivacy() {
-        navigationController?.openSafariVC(with: Constants.Urls.privacyWebAddress)
-    }
-    
     private func showProfile(_ profileModel: ProfileFullViewModel) {
         guard let viewController = ProfileViewController.storyboardInstance(name: .profile) else { return }
         let router = ProfileRouter(parentRouter: self, navigationController: navigationController)

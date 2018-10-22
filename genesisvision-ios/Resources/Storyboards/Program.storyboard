@@ -587,8 +587,8 @@
                         <outlet property="copyMaxValueButton" destination="Tdv-eA-6M1" id="7ij-2e-CH6"/>
                         <outlet property="entryFeeTitleLabel" destination="cZI-Wf-lih" id="34D-9A-hlh"/>
                         <outlet property="entryFeeValueLabel" destination="syP-KK-E6j" id="2Ki-Do-P0R"/>
-                        <outlet property="gvCommissionTitleLabel" destination="DX3-qz-DYW" id="Nyx-bv-7mK"/>
-                        <outlet property="gvCommissionValueLabel" destination="vTN-AA-wsg" id="PiT-y6-6Xe"/>
+                        <outlet property="gvCommissionTitleLabel" destination="DX3-qz-DYW" id="Uih-LT-IPw"/>
+                        <outlet property="gvCommissionValueLabel" destination="vTN-AA-wsg" id="DIx-aP-Edt"/>
                         <outlet property="investButton" destination="Uun-QE-fnC" id="Rzl-5M-kQT"/>
                         <outlet property="investmentAmountTitleLabel" destination="8yj-d5-v4V" id="1q0-R8-dGM"/>
                         <outlet property="investmentAmountValueLabel" destination="0Se-nv-wyH" id="Aag-Qw-HKQ"/>
@@ -1396,19 +1396,19 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-8x-Znh">
-                                        <rect key="frame" x="16" y="150" width="382" height="86"/>
+                                        <rect key="frame" x="16" y="150" width="353" height="86"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-Bs-zl1">
-                                                <rect key="frame" x="0.0" y="0.0" width="254.66666666666666" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="78" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VW-0g-mFo" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="226.66666666666666" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_invested_icon" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-X1-Qxk">
-                                                        <rect key="frame" x="234.66666666666666" y="19.666666666666657" width="20" height="11"/>
+                                                        <rect key="frame" x="58" y="19.666666666666657" width="20" height="11"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="dNF-7J-5hx"/>
                                                             <constraint firstAttribute="height" constant="11" id="qEd-2m-zsN"/>
@@ -1442,8 +1442,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Eaw-8x-Znh" secondAttribute="trailing" constant="16" id="Fne-0p-PRs"/>
                                     <constraint firstItem="Ve2-gG-cNO" firstAttribute="leading" secondItem="42F-Jq-OHD" secondAttribute="leading" id="Jal-E0-hFJ"/>
+                                    <constraint firstItem="VBQ-Hy-1RL" firstAttribute="leading" secondItem="Eaw-8x-Znh" secondAttribute="trailing" id="JpN-Dl-lDL"/>
                                     <constraint firstItem="42F-Jq-OHD" firstAttribute="leading" secondItem="RGX-oA-Pvb" secondAttribute="leading" id="NSQ-xx-jQ4"/>
                                     <constraint firstItem="fvX-Ah-bEA" firstAttribute="centerX" secondItem="RGX-oA-Pvb" secondAttribute="centerX" id="O8d-Uu-fdE"/>
                                     <constraint firstAttribute="bottom" secondItem="Eaw-8x-Znh" secondAttribute="bottom" constant="20" id="OUS-VT-bgg"/>

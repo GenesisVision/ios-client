@@ -46,7 +46,12 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton!
+    @IBOutlet var copyMaxValueButton: UIButton! {
+        didSet {
+            copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
     
     @IBOutlet var payoutDayTitleLabel: SubtitleLabel! {
         didSet {
@@ -212,6 +217,10 @@ class ProgramWithdrawViewController: BaseViewController {
 }
 
 extension ProgramWithdrawViewController: NumpadViewProtocol {
+    var amountLimit: Double? {
+        return availableToWithdrawValue
+    }
+    
     var textPlaceholder: String? {
         return viewModel.labelPlaceholder
     }
@@ -233,8 +242,10 @@ extension ProgramWithdrawViewController: NumpadViewProtocol {
     }
     
     func textLabelDidChange(value: Double?) {
+        guard let value = value, value <= availableToWithdrawValue else { return }
+        
         numpadView.isEnable = true
-        amountToWithdrawValue = value != nil ? value! : 0.0
+        amountToWithdrawValue = value
     }
 }
 

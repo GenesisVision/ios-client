@@ -59,24 +59,6 @@ final class ProgramDetailsViewModel: TabmanViewModel {
         }
     }
     
-    func changeFavorite(completion: @escaping CompletionBlock) {
-        guard let programId = programId,
-            let isFavorite = programDetailsFull?.personalProgramDetails?.isFavorite else { return }
-        
-        programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite
-        ProgramsDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-                self?.programDetailsFull?.personalProgramDetails?.isFavorite = isFavorite
-            }
-            
-            completion(result)
-        }
-    }
-    
     func setup(_ viewModel: ProgramDetailsFull? = nil) {
         removeAllControllers()
         

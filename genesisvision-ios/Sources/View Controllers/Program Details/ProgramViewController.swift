@@ -12,6 +12,7 @@ class ProgramViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: ProgramViewModel!
     var isLoading: Bool = false
+
     // MARK: - Variables
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
@@ -99,7 +100,7 @@ class ProgramViewController: BaseViewController {
             
             switch result {
             case .success:
-                if let isFavorite = self?.programDetailsTabmanViewController?.viewModel.isFavorite {
+                if AuthManager.isLogin(), let isFavorite = self?.viewModel?.isFavorite {
                     self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
                 }
                 
@@ -120,7 +121,9 @@ class ProgramViewController: BaseViewController {
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
-        if let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite {
+        guard AuthManager.isLogin() else { return }
+        
+        if let isFavorite = self.viewModel?.isFavorite {
             favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(favoriteButtonAction))
         }
         
@@ -135,12 +138,12 @@ class ProgramViewController: BaseViewController {
     
     // MARK: - IBActions
     @objc func favoriteButtonAction() {
-        guard let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite else { return }
+        guard let isFavorite = self.viewModel?.isFavorite else { return }
         self.favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         
         
         showProgressHUD()
-        self.programDetailsTabmanViewController?.viewModel.changeFavorite() { [weak self] (result) in
+        self.viewModel?.changeFavorite() { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
@@ -233,7 +236,7 @@ extension ProgramViewController: ProgramDetailsProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
             guard AuthManager.isLogin() else { return }
-            guard let isFavorite = self.programDetailsTabmanViewController?.viewModel.isFavorite else { return }
+            guard let isFavorite = self.viewModel?.isFavorite else { return }
             
             guard self.favoriteBarButtonItem != nil else {
                 self.favoriteBarButtonItem = UIBarButtonItem(image: isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon"), style: .done, target: self, action: #selector(self.favoriteButtonAction))

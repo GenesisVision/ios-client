@@ -47,10 +47,17 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
+    @IBOutlet var disclaimerLabel: SubtitleLabel!
+    
     @IBOutlet var qrImageView: UIImageView!
     @IBOutlet var addressLabel: TitleLabel!
     
-    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var copyButton: UIButton! {
+        didSet {
+            copyButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            copyButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
     
     @IBOutlet weak var amountToDepositTextField: UITextField! {
         didSet {
@@ -94,17 +101,21 @@ class WalletDepositViewController: BaseViewController {
     private func updateUI() {
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
+        
+        if let selectedCurrency =  viewModel.selectedWallet?.currency, selectedCurrency != .gvt {
+            disclaimerLabel.text = "After processing the \(selectedCurrency.rawValue) transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
+        }
     }
     
     // MARK: - Actions
     @IBAction func copyButtonAction(_ sender: UIButton) {
         showProgressHUD()
         viewModel.copy { [weak self] (result) in
-            self?.showSuccessHUD()
+            self?.hideAll()
         }
     }
     
     @IBAction func selectedWalletCurrencyButtonAction(_ sender: UIButton) {
-        //TODO: show wallets
+        
     }
 }

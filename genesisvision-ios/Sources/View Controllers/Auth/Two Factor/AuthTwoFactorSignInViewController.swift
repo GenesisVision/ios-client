@@ -17,8 +17,6 @@ class AuthTwoFactorSignInViewController: BaseViewController {
         didSet {
             numpadView.delegate = self
             numpadView.type = .number
-            numpadView.backgroundColor = UIColor.BaseView.bg
-            numpadView.buttonBackgroundColor = UIColor.Background.main            
         }
     }
     
@@ -31,7 +29,8 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     }
     
     @IBOutlet weak var recoveryCodeSwitch: UISwitch!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var recoveryCodeTitleLabel: TitleLabel!
     @IBOutlet weak var logoImageView: UIImageView!
     
     // MARK: - Buttons
@@ -101,6 +100,10 @@ class AuthTwoFactorSignInViewController: BaseViewController {
 }
 
 extension AuthTwoFactorSignInViewController: NumpadViewProtocol {
+    var amountLimit: Double? {
+        return nil
+    }
+    
     var textPlaceholder: String? {
         return viewModel.labelPlaceholder
     }

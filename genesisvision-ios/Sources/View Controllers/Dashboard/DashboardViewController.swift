@@ -211,7 +211,7 @@ extension DashboardViewController: DateRangeViewProtocol {
     
     func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date) {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        alert.view.tintColor = UIColor.primary
         
         if let dateRangeFrom = dateRangeFrom {
             alert.addDatePicker(mode: .date, date: dateRangeFrom, minimumDate: nil, maximumDate: dateRangeTo.previousDate()) { [weak self] date in

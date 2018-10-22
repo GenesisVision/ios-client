@@ -15,6 +15,8 @@ struct ProgramYourInvestmentTableViewCellViewModel {
 
 extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramYourInvestmentTableViewCell) {
+        cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
+        
         cell.programYourInvestmentProtocol = programYourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Your investment"

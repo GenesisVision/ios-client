@@ -94,10 +94,11 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "entryFee" : 1.4658129805029452,
   "availableInWallet" : 0.8008281904610115,
-  "rate" : 5.962133916683182,
+  "rate" : 5.637376656633329,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
-  "minInvestmentAmount" : 6.027456183070403
+  "minInvestmentAmount" : 6.027456183070403,
+  "gvCommission" : 5.962133916683182
 }}]
      
      - parameter id: (path)  
@@ -145,13 +146,14 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 3.5571952270680973,
-  "total" : 6,
+  "totalValue" : 6.965117697638846,
+  "total" : 3,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -164,6 +166,7 @@ open class InvestorAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -202,34 +205,34 @@ open class InvestorAPI {
     }
 
     /**
-     Withdrawal from investment program/fund
+     Withdraw from fund. Percent is % of investor total money.
      
      - parameter id: (path)  
-     - parameter amount: (path)  
+     - parameter percent: (path)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorFundsByIdWithdrawByAmountPost(id: UUID, amount: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10InvestorFundsByIdWithdrawByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10InvestorFundsByIdWithdrawByPercentPost(id: UUID, percent: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: id, percent: percent, authorization: authorization).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Withdrawal from investment program/fund
-     - POST /v1.0/investor/funds/{id}/withdraw/{amount}
+     Withdraw from fund. Percent is % of investor total money.
+     - POST /v1.0/investor/funds/{id}/withdraw/{percent}
      
      - parameter id: (path)  
-     - parameter amount: (path)  
+     - parameter percent: (path)  
      - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10InvestorFundsByIdWithdrawByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String) -> RequestBuilder<Void> {
-        var path = "/v1.0/investor/funds/{id}/withdraw/{amount}"
+    open class func v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: UUID, percent: Double, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v1.0/investor/funds/{id}/withdraw/{percent}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{amount}", with: "\(amount)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{percent}", with: "\(percent)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -372,7 +375,7 @@ open class InvestorAPI {
      Funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 9,
   "funds" : [ {
     "totalAssetsCount" : 1,
     "statistic" : {
@@ -380,13 +383,13 @@ open class InvestorAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4894159098541704,
-      "drawdownPercent" : 6.84685269835264,
+      "profitPercent" : 7.457744773683766,
+      "drawdownPercent" : 1.1730742509559433,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 7
+      "investorsCount" : 4
     },
     "color" : "color",
     "manager" : {
@@ -399,19 +402,24 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.0246457001441578
+      "percent" : 6.84685269835264
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.0246457001441578
+      "percent" : 6.84685269835264
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
+      "canInvest" : true,
+      "value" : 5.025004791520295,
+      "profit" : 9.965781217890562,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -433,13 +441,13 @@ open class InvestorAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4894159098541704,
-      "drawdownPercent" : 6.84685269835264,
+      "profitPercent" : 7.457744773683766,
+      "drawdownPercent" : 1.1730742509559433,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 7
+      "investorsCount" : 4
     },
     "color" : "color",
     "manager" : {
@@ -452,19 +460,24 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.0246457001441578
+      "percent" : 6.84685269835264
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.0246457001441578
+      "percent" : 6.84685269835264
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
+      "canInvest" : true,
+      "value" : 5.025004791520295,
+      "profit" : 9.965781217890562,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -606,13 +619,14 @@ open class InvestorAPI {
   "programsCount" : 6,
   "fundsCount" : 8,
   "requests" : {
-    "totalValue" : 3.5571952270680973,
-    "total" : 6,
+    "totalValue" : 6.965117697638846,
+    "total" : 3,
     "requests" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
+      "fundWithdrawPercent" : 6.438423552598547,
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
@@ -625,6 +639,7 @@ open class InvestorAPI {
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
+      "fundWithdrawPercent" : 6.438423552598547,
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "type" : "Invest",
@@ -720,6 +735,7 @@ open class InvestorAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
+      "currency" : "Undefined",
       "title" : "title",
       "type" : "All",
       "value" : 6.84685269835264
@@ -727,6 +743,7 @@ open class InvestorAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
+      "currency" : "Undefined",
       "title" : "title",
       "type" : "All",
       "value" : 6.84685269835264
@@ -966,6 +983,7 @@ open class InvestorAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
+    "currency" : "Undefined",
     "title" : "title",
     "type" : "All",
     "value" : 6.84685269835264
@@ -973,6 +991,7 @@ open class InvestorAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
+    "currency" : "Undefined",
     "title" : "title",
     "type" : "All",
     "value" : 6.84685269835264
@@ -1099,11 +1118,12 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "entryFee" : 5.962133916683182,
   "availableInWallet" : 6.027456183070403,
-  "rate" : 5.637376656633329,
+  "rate" : 2.3021358869347655,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "availableToInvest" : 0.8008281904610115,
   "title" : "title",
-  "minInvestmentAmount" : 1.4658129805029452
+  "minInvestmentAmount" : 1.4658129805029452,
+  "gvCommission" : 5.637376656633329
 }}]
      
      - parameter id: (path)  
@@ -1233,13 +1253,14 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 3.5571952270680973,
-  "total" : 6,
+  "totalValue" : 6.965117697638846,
+  "total" : 3,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1252,6 +1273,7 @@ open class InvestorAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1290,7 +1312,7 @@ open class InvestorAPI {
     }
 
     /**
-     Withdrawal from investment program/fund
+     Withdraw from investment program
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -1305,7 +1327,7 @@ open class InvestorAPI {
 
 
     /**
-     Withdrawal from investment program/fund
+     Withdraw from investment program
      - POST /v1.0/investor/programs/{id}/withdraw/{amount}
      
      - parameter id: (path)  
@@ -1465,7 +1487,7 @@ open class InvestorAPI {
      Dashboard program list
      - GET /v1.0/investor/programs
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1503,11 +1525,16 @@ open class InvestorAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
       "isReinvest" : true,
+      "canInvest" : true,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -1560,11 +1587,16 @@ open class InvestorAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
       "isReinvest" : true,
+      "canInvest" : true,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -1680,13 +1712,14 @@ open class InvestorAPI {
      Get all requests
      - GET /v1.0/investor/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 3.5571952270680973,
-  "total" : 6,
+  "totalValue" : 6.965117697638846,
+  "total" : 3,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",
@@ -1699,6 +1732,7 @@ open class InvestorAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
+    "fundWithdrawPercent" : 6.438423552598547,
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "Invest",

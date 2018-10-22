@@ -264,7 +264,7 @@ extension DashboardProgramListViewModel {
             
             programsList.programs?.forEach({ (program) in
                 let dashboardTableViewCellModel = DashboardTableViewCellViewModel(program: program, reloadDataProtocol: self?.router.programListViewController, delegate:
-                    self?.router.assetsViewController)
+                    self?.router.programListViewController)
                 dashboardProgramViewModels.append(dashboardTableViewCellModel)
             })
             

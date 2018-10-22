@@ -33,12 +33,13 @@ open class FundDetailsFull: Codable {
     public var color: String?
     public var description: String?
     public var title: String?
+    public var ipfsHash: String?
     public var status: Status?
     public var manager: ProfilePublic?
 
 
     
-    public init(entryFee: Double?, exitFee: Double?, managementFee: Double?, currentAssets: [FundAssetPartWithIcon]?, statistic: FundStatistic?, personalFundDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, status: Status?, manager: ProfilePublic?) {
+    public init(entryFee: Double?, exitFee: Double?, managementFee: Double?, currentAssets: [FundAssetPartWithIcon]?, statistic: FundStatistic?, personalFundDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
         self.entryFee = entryFee
         self.exitFee = exitFee
         self.managementFee = managementFee
@@ -51,6 +52,7 @@ open class FundDetailsFull: Codable {
         self.color = color
         self.description = description
         self.title = title
+        self.ipfsHash = ipfsHash
         self.status = status
         self.manager = manager
     }
@@ -74,6 +76,7 @@ open class FundDetailsFull: Codable {
         try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(manager, forKey: "manager")
     }
@@ -95,6 +98,7 @@ open class FundDetailsFull: Codable {
         color = try container.decodeIfPresent(String.self, forKey: "color")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
     }

@@ -20,6 +20,7 @@ class BaseNavigationController: UINavigationController {
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
+        navigationBar.barTintColor = UIColor.BaseView.bg
         view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(0.0)
         
         applyTheme()

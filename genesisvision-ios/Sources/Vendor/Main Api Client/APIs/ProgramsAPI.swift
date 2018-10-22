@@ -325,9 +325,11 @@ open class ProgramsAPI {
   "title" : "title",
   "personalProgramDetails" : {
     "isOwnProgram" : true,
+    "canWithdraw" : true,
     "isReinvest" : true,
-    "value" : 7.457744773683766,
-    "profit" : 1.1730742509559433,
+    "canInvest" : true,
+    "value" : 4.145608029883936,
+    "profit" : 7.386281948385884,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Active"
@@ -335,6 +337,7 @@ open class ProgramsAPI {
   "url" : "url",
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+  "ipfsHash" : "ipfsHash",
   "logo" : "logo",
   "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -556,7 +559,7 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -594,11 +597,16 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
       "isReinvest" : true,
+      "canInvest" : true,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -651,11 +659,16 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.145608029883936
+      "share" : 1.2315135367772556
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "isOwnProgram" : true,
+      "canWithdraw" : true,
       "isReinvest" : true,
+      "canInvest" : true,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"

@@ -9,7 +9,7 @@
 final class AuthChangePasswordViewModel {
     
     // MARK: - Variables
-    var title: String = "Change Password"
+    var title: String = "Change password"
     
     private var router: ChangePasswordRouter!
     

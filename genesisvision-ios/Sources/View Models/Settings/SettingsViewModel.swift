@@ -22,7 +22,7 @@ final class SettingsViewModel {
         
         case termsAndConditions = "Terms and Conditions"
         case privacyPolicy = "Privacy Policy"
-        case contactUs = "Contact us"
+        case contactUs = "Contact Us"
         
         case none
     }

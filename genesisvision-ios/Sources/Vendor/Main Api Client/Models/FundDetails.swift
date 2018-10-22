@@ -24,7 +24,7 @@ open class FundDetails: Codable {
     public var topFundAssets: [FundAssetPercent]?
     public var statistic: FundDetailsListStatistic?
     /** Fields for authorized user */
-    public var personalDetails: PersonalFundDetailsList?
+    public var personalDetails: PersonalFundDetailsFull?
     public var id: UUID?
     public var logo: String?
     public var url: String?
@@ -39,7 +39,7 @@ open class FundDetails: Codable {
 
 
     
-    public init(totalAssetsCount: Int?, topFundAssets: [FundAssetPercent]?, statistic: FundDetailsListStatistic?, personalDetails: PersonalFundDetailsList?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
+    public init(totalAssetsCount: Int?, topFundAssets: [FundAssetPercent]?, statistic: FundDetailsListStatistic?, personalDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
         self.totalAssetsCount = totalAssetsCount
         self.topFundAssets = topFundAssets
         self.statistic = statistic
@@ -87,7 +87,7 @@ open class FundDetails: Codable {
         totalAssetsCount = try container.decodeIfPresent(Int.self, forKey: "totalAssetsCount")
         topFundAssets = try container.decodeIfPresent([FundAssetPercent].self, forKey: "topFundAssets")
         statistic = try container.decodeIfPresent(FundDetailsListStatistic.self, forKey: "statistic")
-        personalDetails = try container.decodeIfPresent(PersonalFundDetailsList.self, forKey: "personalDetails")
+        personalDetails = try container.decodeIfPresent(PersonalFundDetailsFull.self, forKey: "personalDetails")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")

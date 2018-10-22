@@ -16,17 +16,19 @@ open class ProgramInvestInfo: Codable {
     public var availableInWallet: Double?
     public var minInvestmentAmount: Double?
     public var entryFee: Double?
+    public var gvCommission: Double?
     public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, periodEnds: Date?, rate: Double?) {
+    public init(availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, periodEnds: Date?, rate: Double?) {
         self.availableToInvest = availableToInvest
         self.title = title
         self.availableInWallet = availableInWallet
         self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
+        self.gvCommission = gvCommission
         self.periodEnds = periodEnds
         self.rate = rate
     }
@@ -43,6 +45,7 @@ open class ProgramInvestInfo: Codable {
         try container.encodeIfPresent(availableInWallet, forKey: "availableInWallet")
         try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(gvCommission, forKey: "gvCommission")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
@@ -57,6 +60,7 @@ open class ProgramInvestInfo: Codable {
         availableInWallet = try container.decodeIfPresent(Double.self, forKey: "availableInWallet")
         minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        gvCommission = try container.decodeIfPresent(Double.self, forKey: "gvCommission")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
