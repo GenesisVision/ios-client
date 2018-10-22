@@ -104,6 +104,14 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     }
     
     // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        self.textColor = UIColor.TextField.title
+        self.placeholderColor = UIColor.TextField.placeholder
+        self.font = UIFont.getFont(.regular, size: 16)
+    }
+    
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }

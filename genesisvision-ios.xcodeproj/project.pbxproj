@@ -49,6 +49,7 @@
 		5E2DC8D4212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */; };
 		5E33E3B420AB20B900A0B9DE /* ProgramDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */; };
 		5E33E3B720AB218A00A0B9DE /* ProgramDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */; };
+		5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */; };
 		5E36652220D948B700195CBE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652120D948B700195CBE /* PasscodeViewController.swift */; };
 		5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */; };
 		5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E367906206BC6DA006E226A /* AmountLabel.swift */; };
@@ -592,6 +593,7 @@
 		5E2DC8D3212C19350006A674 /* InvestorDashboardPortfolioTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardPortfolioTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E33E3B320AB20B900A0B9DE /* ProgramDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsRouter.swift; sourceTree = "<group>"; };
 		5E33E3B620AB218A00A0B9DE /* ProgramDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsViewModel.swift; sourceTree = "<group>"; };
+		5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		5E36652120D948B700195CBE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewModel.swift; sourceTree = "<group>"; };
 		5E367906206BC6DA006E226A /* AmountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
@@ -2370,6 +2372,7 @@
 				FCA57067202735BA001942F3 /* Programs */,
 				FCA57066202735A8001942F3 /* Wallet */,
 				5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */,
+				5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */,
 				5EE0077121789A7B0045B890 /* Manager */,
 				5EA274D22162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift */,
 			);
@@ -2696,6 +2699,7 @@
 				5EE008482178A5230045B890 /* NotificationSettingViewModel.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
 				5EFCC77021553D58001E1A56 /* DashboardProgramListViewModel.swift in Sources */,
+				5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */,
 				5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */,
 				5EC78818216CE74D000C91E4 /* EventsDelegateManager.swift in Sources */,
 				5EE008592178A5230045B890 /* AssetsValue.swift in Sources */,

@@ -13,7 +13,7 @@ class ProfileImageView: UIView {
         didSet {
             profilePhotoImageView.contentMode = .scaleAspectFill
             profilePhotoImageView.clipsToBounds = true
-            profilePhotoImageView.image = UIImage.placeholder
+            profilePhotoImageView.image = UIImage.profilePlaceholder
             profilePhotoImageView.roundCorners(with: 6.0)
         }
     }

@@ -297,10 +297,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="61j-9s-2lI">
-                                <rect key="frame" x="0.0" y="532.33333333333337" width="414" height="40.666666666666629"/>
+                                <rect key="frame" x="0.0" y="503" width="414" height="65"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EXQ-zl-HAW">
-                                        <rect key="frame" x="30" y="0.0" width="354" height="40.666666666666664"/>
+                                        <rect key="frame" x="30" y="0.0" width="354" height="65"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CYS-mH-rWN">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="16.333333333333332"/>
@@ -319,8 +319,25 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="58d-B0-FXm">
+                                                <rect key="frame" x="0.0" y="24.333333333333371" width="354" height="16.333333333333329"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DX3-qz-DYW" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="16.333333333333332"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vTN-AA-wsg" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="126" y="0.0" width="228" height="16.333333333333332"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cTl-cX-qR9">
-                                                <rect key="frame" x="0.0" y="24.333333333333258" width="354" height="16.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="48.666666666666629" width="354" height="16.333333333333329"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8yj-d5-v4V" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="118" height="16.333333333333332"/>
@@ -348,10 +365,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uun-QE-fnC" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="20" y="597" width="374" height="45"/>
+                                <rect key="frame" x="20" y="592" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="pue-Wo-2v4"/>
+                                    <constraint firstAttribute="height" constant="50" id="pue-Wo-2v4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Continue">
@@ -561,8 +578,6 @@
                         <viewLayoutGuide key="safeArea" id="F8v-KL-HF4"/>
                     </view>
                     <connections>
-                        <outlet property="amountDueTitleLabel" destination="8yj-d5-v4V" id="YIN-eh-kiZ"/>
-                        <outlet property="amountDueValueLabel" destination="0Se-nv-wyH" id="xH1-TW-dRU"/>
                         <outlet property="amountToInvestCurrencyLabel" destination="Q7U-AS-VZK" id="ygl-1p-2jS"/>
                         <outlet property="amountToInvestGVTLabel" destination="Vye-Wz-Eq8" id="zrb-Pp-bWT"/>
                         <outlet property="amountToInvestTitleLabel" destination="ZaX-Le-hQC" id="OrX-0d-4zB"/>
@@ -572,7 +587,11 @@
                         <outlet property="copyMaxValueButton" destination="Tdv-eA-6M1" id="7ij-2e-CH6"/>
                         <outlet property="entryFeeTitleLabel" destination="cZI-Wf-lih" id="34D-9A-hlh"/>
                         <outlet property="entryFeeValueLabel" destination="syP-KK-E6j" id="2Ki-Do-P0R"/>
+                        <outlet property="gvCommissionTitleLabel" destination="DX3-qz-DYW" id="Nyx-bv-7mK"/>
+                        <outlet property="gvCommissionValueLabel" destination="vTN-AA-wsg" id="PiT-y6-6Xe"/>
                         <outlet property="investButton" destination="Uun-QE-fnC" id="Rzl-5M-kQT"/>
+                        <outlet property="investmentAmountTitleLabel" destination="8yj-d5-v4V" id="1q0-R8-dGM"/>
+                        <outlet property="investmentAmountValueLabel" destination="0Se-nv-wyH" id="Aag-Qw-HKQ"/>
                         <outlet property="numpadView" destination="k4A-Kz-3qk" id="KJb-Ca-ihR"/>
                     </connections>
                 </viewController>
@@ -696,7 +715,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="yuR-VB-V9S">
-                                <rect key="frame" x="0.0" y="556.66666666666663" width="414" height="16.333333333333371"/>
+                                <rect key="frame" x="0.0" y="551.66666666666663" width="414" height="16.333333333333371"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AvR-Ah-34w">
                                         <rect key="frame" x="30" y="0.0" width="354" height="16.333333333333332"/>
@@ -730,10 +749,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rno-bv-Y9B" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="20" y="597" width="374" height="45"/>
+                                <rect key="frame" x="20" y="592" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="6Vf-L6-bmd"/>
+                                    <constraint firstAttribute="height" constant="50" id="6Vf-L6-bmd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Continue">

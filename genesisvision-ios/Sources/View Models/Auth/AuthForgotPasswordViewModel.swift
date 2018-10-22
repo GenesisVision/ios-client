@@ -9,7 +9,7 @@
 final class AuthForgetPasswordViewModel {
     
     // MARK: - Variables
-    var title: String = "Forgot Password?"
+    var title: String = "Forgot password"
     
     private var router: ForgotPasswordRouter!
     

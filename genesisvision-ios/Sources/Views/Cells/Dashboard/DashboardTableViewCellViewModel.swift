@@ -29,7 +29,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(lineChartData: chart)
+            cell.chartView.setup(chartType: .default, lineChartData: chart)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
@@ -89,11 +89,11 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        cell.programLogoImageView.profilePhotoImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
+        cell.programLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
+            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
         if let color = program.color {

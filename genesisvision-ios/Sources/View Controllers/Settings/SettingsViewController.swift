@@ -14,77 +14,44 @@ class SettingsViewController: BaseTableViewController {
     var viewModel: SettingsViewModel!
     
     // MARK: - Outlets
-    @IBOutlet weak var profileImageView: RoundedImageView!
-    @IBOutlet weak var profileNameLabel: UILabel! {
+    @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
-            profileNameLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var profileEmailLabel: UILabel! {
-        didSet {
-            profileEmailLabel.textColor = UIColor.Cell.title
+            profileImageView.roundCorners()
         }
     }
     
-    @IBOutlet weak var changePasswordTitleLabel: UILabel! {
+    @IBOutlet weak var profileNameLabel: TitleLabel! {
         didSet {
-            changePasswordTitleLabel.textColor = UIColor.Cell.title
+            profileNameLabel.font = UIFont.getFont(.semibold, size: 26)
         }
     }
     
+    @IBOutlet weak var profileEmailLabel: SubtitleLabel!
+    @IBOutlet weak var changePasswordTitleLabel: TitleLabel!
     @IBOutlet weak var passcodeSwitch: UISwitch!
-    @IBOutlet weak var passcodeTitleLabel: UILabel! {
-        didSet {
-            passcodeTitleLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var biometricIDTitleLabel: UILabel! {
-        didSet {
-            biometricIDTitleLabel.textColor = UIColor.Cell.title
-        }
-    }
+    @IBOutlet weak var passcodeTitleLabel: TitleLabel!
+    @IBOutlet weak var biometricIDTitleLabel: TitleLabel!
     @IBOutlet weak var biometricIDSwitch: UISwitch! {
         didSet {
             biometricIDSwitch.isEnabled = false
         }
     }
     @IBOutlet weak var twoFactorSwitch: UISwitch!
-    @IBOutlet weak var twoFactorTitleLabel: UILabel! {
-        didSet {
-            twoFactorTitleLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var darkThemeSwitch: UISwitch!
-    @IBOutlet weak var darkThemeTitleLabel: UILabel! {
-        didSet {
-            darkThemeTitleLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var sendFeedbackTitleLabel: UILabel! {
-        didSet {
-            sendFeedbackTitleLabel.textColor = UIColor.Cell.title
-        }
-    }
-    @IBOutlet weak var versionLabel: UILabel!
-    
-    @IBOutlet weak var termsLinkButton: UIButton! {
-        didSet {
-            termsLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
-        }
-    }
-    @IBOutlet weak var privacyLinkButton: UIButton! {
-        didSet {
-            privacyLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
-        }
-    }
+    @IBOutlet weak var twoFactorTitleLabel: TitleLabel!
+    @IBOutlet weak var termsTitleLabel: TitleLabel!
+    @IBOutlet weak var privacyTitleLabel: TitleLabel!
+    @IBOutlet weak var sendFeedbackTitleLabel: TitleLabel!
+    @IBOutlet weak var versionLabel: SubtitleLabel!
     
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
     
+    private var signOutBarButtonItem: UIBarButtonItem!
+    
     // MARK: - Cells
-    @IBOutlet weak var changePasswordCell: PlateTableViewCell!
-    @IBOutlet weak var passcodeCell: PlateTableViewCell!
-    @IBOutlet weak var biometricCell: PlateTableViewCell!
-    @IBOutlet weak var twoFactorCell: PlateTableViewCell!
+    @IBOutlet weak var changePasswordCell: SettingsTableViewCell!
+    @IBOutlet weak var passcodeCell: SettingsTableViewCell!
+    @IBOutlet weak var biometricCell: SettingsTableViewCell!
+    @IBOutlet weak var twoFactorCell: SettingsTableViewCell!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -95,8 +62,6 @@ class SettingsViewController: BaseTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupSecurity()
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         
@@ -119,10 +84,10 @@ class SettingsViewController: BaseTableViewController {
         biometricIDSwitch.isEnabled = viewModel.enablePasscode
         biometricIDSwitch.isOn = viewModel.enableBiometricID
         twoFactorSwitch.isOn = viewModel.enableTwoFactor
-        darkThemeSwitch.isOn = viewModel.enableDarkTheme
         
         biometricIDTitleLabel.text = viewModel.biometricTitleText
         biometricCell.isHidden = !viewModel.enableBiometricCell
+        
         if let indexPath = tableView.indexPath(for: biometricCell) {
             tableView.reloadRows(at: [indexPath], with: .none)
         }
@@ -136,11 +101,11 @@ class SettingsViewController: BaseTableViewController {
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
-                        self?.profileImageView.image = UIImage.placeholder
+                        self?.profileImageView.image = UIImage.profilePlaceholder
                         
                         if let url = self?.viewModel.avatarURL {
                             self?.profileImageView.kf.indicatorType = .activity
-                            self?.profileImageView.kf.setImage(with: url, placeholder: UIImage.placeholder)
+                            self?.profileImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
                         }
                         
                         if let name = self?.viewModel.fullName {
@@ -198,39 +163,20 @@ class SettingsViewController: BaseTableViewController {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        setupSecurity()
+        
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        
+        navigationItem.title = viewModel.title
+        signOutBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_logout"), style: .done, target: self, action: #selector(signOutMethod))
+        navigationItem.rightBarButtonItem = signOutBarButtonItem
         
         versionLabel.text = "App version " + getFullVersion()
         
         showInfiniteIndicator(value: false)
         
-        changePasswordCell.roundType = .top
-        changePasswordCell.shouldHaveVerticalMargin = false
-        
-        passcodeCell.roundType = .none
-        passcodeCell.shouldHaveVerticalMargin = false
-        passcodeCell.highlighting = false
-        
-        biometricCell.roundType = .none
-        biometricCell.shouldHaveVerticalMargin = false
-        biometricCell.highlighting = false
-        
-        twoFactorCell.roundType = .bottom
-        twoFactorCell.shouldHaveVerticalMargin = false
-        twoFactorCell.highlighting = false
-        
         tableView.tableFooterView = footerView
-        
-        profileNameLabel.textColor = UIColor.Cell.title
-        profileEmailLabel.textColor = UIColor.Cell.title
-        changePasswordTitleLabel.textColor = UIColor.Cell.title
-        passcodeTitleLabel.textColor = UIColor.Cell.title
-        biometricIDTitleLabel.textColor = UIColor.Cell.title
-        twoFactorTitleLabel.textColor = UIColor.Cell.title
-        darkThemeTitleLabel.textColor = UIColor.Cell.title
-        sendFeedbackTitleLabel.textColor = UIColor.Cell.title
-        termsLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
-        privacyLinkButton.setTitleColor(UIColor.Cell.title, for: .normal)
     }
     
     private func setupTableConfiguration() {
@@ -243,7 +189,7 @@ class SettingsViewController: BaseTableViewController {
         fetch()
     }
 
-    private func signOutMethod() {
+    @objc private func signOutMethod() {
         showAlertWithTitle(title: nil, message: "Log out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
             self?.viewModel.signOut()
             }, cancelHandler: nil)
@@ -280,21 +226,6 @@ class SettingsViewController: BaseTableViewController {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
     }
-    
-    @IBAction func darkThemeSwitchChangedAction(_ sender: UISwitch) {
-        viewModel.enableDarkTheme(sender.isOn)
-        updateTheme()
-        reloadData()
-        setupUI()
-    }
-    
-    @IBAction func termsLinkButtonAction(_ sender: UIButton) {
-        viewModel.showTerms()
-    }
-    
-    @IBAction func privacyLinkButtonAction(_ sender: UIButton) {
-        viewModel.showPrivacy()
-    }
 }
 
 extension SettingsViewController {
@@ -311,10 +242,12 @@ extension SettingsViewController {
             viewModel.showProfile()
         case .changePassword:
             viewModel.changePassword()
-        case .sendFeedback:
+        case .termsAndConditions:
+            viewModel.showTerms()
+        case .privacyPolicy:
+            viewModel.showPrivacy()
+        case .contactUs:
             feedbackMethod()
-        case .signOut:
-            signOutMethod()
         default:
             break
         }
@@ -329,18 +262,20 @@ extension SettingsViewController {
         case .profile:
             return UITableViewAutomaticDimension
         case .biometricID:
-            return viewModel.enableBiometricCell ? 50.0 : 0.0
+            return viewModel.enableBiometricCell ? 60.0 : 0.0
         default:
-            return 50.0
+            return UITableViewAutomaticDimension
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 1 : 0
+        return viewModel.headerHeight(for: section)
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.Cell.headerBg
+        return view
     }
 }
 

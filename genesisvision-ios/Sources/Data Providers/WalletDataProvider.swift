@@ -26,6 +26,14 @@ class WalletDataProvider: DataProvider {
         }
     }
     
+    static func getWalletWithdrawInfo(completion: @escaping (_ withdrawalSummary: WithdrawalSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        WalletAPI.v10WalletWithdrawInfoGet(authorization: authorization) { (withdrawalSummary, error) in
+            DataProvider().responseHandler(withdrawalSummary, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getWalletAddress(completion: @escaping (_ walletAddressViewModel: WalletsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         

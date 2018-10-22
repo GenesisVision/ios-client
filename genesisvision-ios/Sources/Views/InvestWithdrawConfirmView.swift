@@ -25,6 +25,9 @@ struct InvestWithdrawConfirmModel {
     
     let thirdTitle: String?
     let thirdValue: String?
+    
+    let fourthTitle: String?
+    let fourthValue: String?
 }
 
 protocol InvestWithdrawConfirmViewProtocol: class {
@@ -106,6 +109,20 @@ class InvestWithdrawConfirmView: UIView {
     }
     @IBOutlet weak var thirdStackView: UIStackView!
     
+    @IBOutlet weak var fourthTitleLabel: SubtitleLabel! {
+        didSet {
+            fourthTitleLabel.font = UIFont.getFont(.regular, size: 12.0)
+            fourthTitleLabel.textColor = UIColor.Cell.bg.withAlphaComponent(0.4)
+        }
+    }
+    @IBOutlet weak var fourthValueLabel: TitleLabel! {
+        didSet {
+            fourthValueLabel.font = UIFont.getFont(.regular, size: 16.0)
+            fourthValueLabel.textColor = UIColor.Cell.bg
+        }
+    }
+    @IBOutlet weak var fourthStackView: UIStackView!
+    
     @IBOutlet weak var cancelButton: ActionButton! {
         didSet {
             cancelButton.configure(with: .highClear)
@@ -134,6 +151,9 @@ class InvestWithdrawConfirmView: UIView {
     
         thirdTitleLabel.text = model.thirdTitle
         thirdValueLabel.text = model.thirdValue
+        
+        fourthTitleLabel.text = model.fourthTitle
+        fourthValueLabel.text = model.fourthValue
         
         programLogoImageView.profilePhotoImageView.image = model.programLogo
     }

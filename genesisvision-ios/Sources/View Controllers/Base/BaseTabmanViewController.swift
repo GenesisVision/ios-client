@@ -27,7 +27,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         viewModel.initializeViewControllers()
         
         dataSource = viewModel.pageboyDataSource
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
         
         setupUI()
     }

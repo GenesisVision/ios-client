@@ -14,6 +14,10 @@ final class WalletWithdrawViewModel {
     
     var currency = CreateWithdrawalRequestModel.Currency.gvt
     
+    var withdrawalSummary: WithdrawalSummary?
+    var selectedWallet: WalletWithdrawalInfo?
+    var estimatedAmount: Double?
+    
     private var router: WalletWithdrawRouter!
     
     var selectedWalletCurrency: String?
@@ -56,6 +60,7 @@ final class WalletWithdrawViewModel {
 //        }
     }
     
+    
     // MARK: - Picker View Values
     func walletCurrencyValues() -> [String] {
 //        guard let brokersViewModel = brokersViewModel,
@@ -66,6 +71,18 @@ final class WalletWithdrawViewModel {
 //        return brokers.map { $0.name ?? "" }
         
         return []
+    }
+    
+    // MARK: - Public methods
+    func getInfo(completion: @escaping CompletionBlock) {
+        WalletDataProvider.getWalletWithdrawInfo(completion: { [weak self] (withdrawalSummary) in
+            guard let withdrawalSummary = withdrawalSummary else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            self?.withdrawalSummary = withdrawalSummary
+            completion(.success)
+            }, errorCompletion: completion)
     }
     
     // MARK: - Navigation

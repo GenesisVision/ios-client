@@ -30,17 +30,17 @@ final class ProgramWithdrawViewModel {
     }
     
     // MARK: - Public methods
-    func getInfo(completion: @escaping CompletionBlock, completionError: @escaping CompletionBlock) {
-        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
+    func getInfo(completion: @escaping CompletionBlock) {
+        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsDataProvider.getProgramWithdrawInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programWithdrawInfo) in
             guard let programWithdrawInfo = programWithdrawInfo else {
-                return completionError(.failure(errorType: .apiError(message: nil)))
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
             
             self?.programWithdrawInfo = programWithdrawInfo
             completion(.success)
-            }, errorCompletion: completionError)
+            }, errorCompletion: completion)
     }
     
     // MARK: - Navigation

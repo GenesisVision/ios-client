@@ -14,19 +14,26 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     var viewModel: AuthTwoFactorConfirmationViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var codeTitleLabel: SubtitleLabel! {
+        didSet {
+            codeTitleLabel.text = "Code"
+        }
+    }
     @IBOutlet var codeTextField: DesignableUITextField! {
         didSet {
             codeTextField.placeholder = "Two Factor Code"
-            codeTextField.font = UIFont.getFont(.regular, size: 18)
             codeTextField.setClearButtonWhileEditing()
             codeTextField.delegate = self
         }
     }
-    
+    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+        didSet {
+            passwordTitleLabel.text = "Password"
+        }
+    }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.placeholder = "Your Password"
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
@@ -50,7 +57,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +72,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        codeTextField.setBottomLine()
-        passwordTextField.setBottomLine()
+        
         
         confirmButton.setTitle(viewModel.buttonTitleText, for: .normal)
     }

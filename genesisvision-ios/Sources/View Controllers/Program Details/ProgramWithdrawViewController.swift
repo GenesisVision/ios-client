@@ -111,14 +111,7 @@ class ProgramWithdrawViewController: BaseViewController {
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
-        }) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
+        })
     }
     
     private func updateUI() {
@@ -198,7 +191,9 @@ class ProgramWithdrawViewController: BaseViewController {
                                                           secondTitle: "Payout day",
                                                           secondValue: viewModel.programWithdrawInfo?.periodEnds?.onlyDateFormatString,
                                                           thirdTitle: nil,
-                                                          thirdValue: nil)
+                                                          thirdValue: nil,
+                                                          fourthTitle: nil,
+                                                          fourthValue: nil)
         confirmView.configure(model: confirmViewModel)
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self

@@ -75,7 +75,7 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func updateTitle() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     private func setupTableConfiguration() {

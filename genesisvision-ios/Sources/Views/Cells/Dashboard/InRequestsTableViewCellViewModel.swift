@@ -18,11 +18,11 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
             cell.titleLabel.text = title
         }
         
-        cell.iconImageView.image = UIImage.placeholder
+        cell.iconImageView.image = UIImage.programPlaceholder
         
         if let fileName = programRequest.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
-            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
         if let type = programRequest.type {

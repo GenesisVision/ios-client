@@ -53,6 +53,7 @@ class ProgramInvestViewController: BaseViewController {
     @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
+            amountToInvestCurrencyLabel.isHidden = true
         }
     }
     
@@ -66,15 +67,23 @@ class ProgramInvestViewController: BaseViewController {
     }
     @IBOutlet var entryFeeValueLabel: TitleLabel!
     
-    @IBOutlet var amountDueTitleLabel: SubtitleLabel! {
+    @IBOutlet var gvFeeTitleLabel: SubtitleLabel! {
         didSet {
-            amountDueTitleLabel.text = "Amount due"
-            amountDueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            gvFeeTitleLabel.text = "GV commission"
+            gvFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountDueValueLabel: TitleLabel! {
+    @IBOutlet var gvFeeValueLabel: TitleLabel!
+    
+    @IBOutlet var investmentAmountTitleLabel: SubtitleLabel! {
         didSet {
-            amountDueValueLabel.text = "0 GVT"
+            investmentAmountTitleLabel.text = "Investment amount"
+            investmentAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var investmentAmountValueLabel: TitleLabel! {
+        didSet {
+            investmentAmountValueLabel.text = "0 GVT"
         }
     }
 
@@ -141,8 +150,17 @@ class ProgramInvestViewController: BaseViewController {
             
             let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(Constants.gvtString))"
             self.entryFeeValueLabel.text = entryFeeValueLabelString
-            let amountDueValueString = "\((entryFeeGVT + amountToInvestValue).rounded(withType: .gvt)) \(Constants.gvtString)"
-            self.amountDueValueLabel.text = amountDueValueString
+
+            let gvFee = 0.5
+            let gvFeeGVT = gvFee * amountToInvestValue / 100
+            let gvFeeGVTString = gvFeeGVT.rounded(withType: .gvt).toString()
+            let gvFeeString = gvFee.rounded(toPlaces: 0).toString()
+            
+            let gvFeeValueLabelString = gvFeeString + "% (\(gvFeeGVTString) \(Constants.gvtString))"
+            self.gvFeeValueLabel.text = gvFeeValueLabelString
+            
+            let amountDueValueString = "\((entryFeeGVT + gvFeeGVT + amountToInvestValue).rounded(withType: .gvt)) \(Constants.gvtString)"
+            self.investmentAmountValueLabel.text = amountDueValueString
         }
         
         if let availableToInvest = viewModel.programInvestInfo?.availableToInvest {
@@ -209,8 +227,10 @@ class ProgramInvestViewController: BaseViewController {
                                                           firstValue: firstValue,
                                                           secondTitle: entryFeeTitleLabel.text,
                                                           secondValue: entryFeeValueLabel.text,
-                                                          thirdTitle: amountDueTitleLabel.text,
-                                                          thirdValue: amountDueValueLabel.text)
+                                                          thirdTitle: gvFeeTitleLabel.text,
+                                                          thirdValue: gvFeeValueLabel.text,
+                                                          fourthTitle: investmentAmountTitleLabel.text,
+                                                          fourthValue: investmentAmountValueLabel.text)
         confirmView.configure(model: confirmViewModel)
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self

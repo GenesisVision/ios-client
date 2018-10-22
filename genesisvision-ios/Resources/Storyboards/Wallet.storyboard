@@ -350,7 +350,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Cl7-4W-ejQ">
-                                <rect key="frame" x="0.0" y="537" width="375" height="41"/>
+                                <rect key="frame" x="0.0" y="532" width="375" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="q10-fv-28O">
                                         <rect key="frame" x="30" y="0.0" width="315" height="41"/>
@@ -401,10 +401,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB3-Nk-Mi7" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="20" y="602" width="335" height="45"/>
+                                <rect key="frame" x="20" y="597" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="t7w-0G-KAS"/>
+                                    <constraint firstAttribute="height" constant="50" id="t7w-0G-KAS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Continue">
@@ -449,6 +449,7 @@
                         <outlet property="selectedWalletCurrencyButton" destination="hQe-V2-8iL" id="fyM-7h-c1t"/>
                         <outlet property="selectedWalletCurrencyTitleLabel" destination="Ucb-3Q-jc8" id="Fih-j9-U2z"/>
                         <outlet property="selectedWalletCurrencyValueLabel" destination="TG8-BJ-q3f" id="q2u-nV-B0a"/>
+                        <outlet property="withdrawButton" destination="nB3-Nk-Mi7" id="det-bi-VEP"/>
                         <outlet property="withdrawingTitleLabel" destination="avn-M9-wYs" id="bXf-4N-0cI"/>
                         <outlet property="withdrawingValueLabel" destination="8gE-ft-06a" id="mip-4u-g7I"/>
                     </connections>
@@ -604,7 +605,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="YD7-dv-zdm">
-                                <rect key="frame" x="0.0" y="409.5" width="375" height="168.5"/>
+                                <rect key="frame" x="0.0" y="404.5" width="375" height="168.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-9P-RUw">
                                         <rect key="frame" x="30" y="0.0" width="315" height="168.5"/>
@@ -634,10 +635,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-J6-Vd4" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="20" y="602" width="335" height="45"/>
+                                <rect key="frame" x="20" y="597" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="c3u-K0-Htx"/>
+                                    <constraint firstAttribute="height" constant="50" id="c3u-K0-Htx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Copy">

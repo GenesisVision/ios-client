@@ -45,7 +45,7 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {

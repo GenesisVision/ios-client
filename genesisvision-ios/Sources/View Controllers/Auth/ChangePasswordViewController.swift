@@ -14,27 +14,36 @@ class ChangePasswordViewController: BaseViewController {
     var viewModel: AuthChangePasswordViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var oldPasswordTitleLabel: SubtitleLabel! {
+        didSet {
+            oldPasswordTitleLabel.text = "Old password"
+        }
+    }
     @IBOutlet var oldPasswordTextField: DesignableUITextField! {
         didSet {
-            oldPasswordTextField.font = UIFont.getFont(.regular, size: 18)
             oldPasswordTextField.setClearButtonWhileEditing()
-            oldPasswordTextField.setLeftImageView()
             oldPasswordTextField.delegate = self
+        }
+    }
+    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+        didSet {
+            passwordTitleLabel.text = "New password"
         }
     }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
+        }
+    }
+    @IBOutlet var confirmPasswordTitleLabel: SubtitleLabel! {
+        didSet {
+            confirmPasswordTitleLabel.text = "Repeat password"
         }
     }
     @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
         didSet {
-            confirmPasswordTextField.font = UIFont.getFont(.regular, size: 18)
             confirmPasswordTextField.setClearButtonWhileEditing()
-            confirmPasswordTextField.setLeftImageView()
             confirmPasswordTextField.delegate = self
         }
     }
@@ -46,7 +55,7 @@ class ChangePasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +72,7 @@ class ChangePasswordViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        oldPasswordTextField.setBottomLine()
-        passwordTextField.setBottomLine()
-        confirmPasswordTextField.setBottomLine()
+
     }
     
     

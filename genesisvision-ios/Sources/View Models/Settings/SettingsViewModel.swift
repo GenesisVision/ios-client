@@ -20,9 +20,9 @@ final class SettingsViewModel {
         
         case darkTheme = "Dark theme"
         
-        case sendFeedback = "Send Feedback"
-        
-        case signOut = "Log Out"
+        case termsAndConditions = "Terms and Conditions"
+        case privacyPolicy = "Privacy Policy"
+        case contactUs = "Contact us"
         
         case none
     }
@@ -32,7 +32,6 @@ final class SettingsViewModel {
         case security
         case darkTheme
         case feedback
-        case signOut
     }
     
     // MARK: - Variables
@@ -100,12 +99,10 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
-    var sections: [SettingsSectionType] = [.profile, .security, .darkTheme, .feedback, .signOut]
+    var sections: [SettingsSectionType] = [.profile, .security, .feedback]
     var rows: [SettingsSectionType : [SettingsRowType]] = [.profile : [.profile],
                                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
-                                                           .darkTheme : [.darkTheme],
-                                                           .feedback : [.sendFeedback],
-                                                           .signOut : [.signOut]]
+                                                           .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
     
     var fullName: String? {
         let firstName = self.profileModel?.firstName ?? ""
@@ -169,6 +166,15 @@ final class SettingsViewModel {
         guard let rows = rows[sectionType] else { return nil }
         
         return rows[indexPath.row]
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return 20.0
+        }
     }
     
     // MARK: - Navigation

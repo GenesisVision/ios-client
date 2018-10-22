@@ -22,7 +22,7 @@ class ProgramDescriptionViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: ProgramDescriptionViewModel! {
         didSet {
-            navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+            navigationItem.title = viewModel.title
         }
     }
     
@@ -50,11 +50,11 @@ class ProgramDescriptionViewController: BaseViewController {
     }
     
     private func fillData() {
-        programLogoImageView.profilePhotoImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
+        programLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let fileUrl = getFileURL(fileName: viewModel.getProgramLogo()) {
             programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
         programTitleLabel.text = viewModel.getProgramTitle()

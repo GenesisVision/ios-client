@@ -13,38 +13,54 @@ class SignUpViewController: BaseViewController {
 
     var viewModel: AuthSignUpViewModel!
     
-    // MARK: - TextFields
-    @IBOutlet var usernameTextField: DesignableUITextField! {
+    // MARK: - Outlets
+    @IBOutlet var usernameStackView: UIStackView! {
         didSet {
-            usernameTextField.font = UIFont.getFont(.regular, size: 18)
-            usernameTextField.setClearButtonWhileEditing()
-            usernameTextField.setLeftImageView()
-            usernameTextField.delegate = self
-            usernameTextField.isHidden = isInvestorApp
+            usernameStackView.isHidden = isInvestorApp
         }
     }
     
+    @IBOutlet var usernameTitleLabel: SubtitleLabel! {
+        didSet {
+            usernameTitleLabel.text = "Username"
+        }
+    }
+    @IBOutlet var usernameTextField: DesignableUITextField! {
+        didSet {
+            usernameTextField.setClearButtonWhileEditing()
+            usernameTextField.delegate = self
+        }
+    }
+    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
+        }
+    }
+    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+        didSet {
+            passwordTitleLabel.text = "Password"
         }
     }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
+        }
+    }
+    @IBOutlet var confirmTitleLabel: SubtitleLabel! {
+        didSet {
+            confirmTitleLabel.text = "Confirm password"
         }
     }
     @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
         didSet {
-            confirmPasswordTextField.font = UIFont.getFont(.regular, size: 18)
             confirmPasswordTextField.setClearButtonWhileEditing()
-            confirmPasswordTextField.setLeftImageView()
             confirmPasswordTextField.delegate = self
         }
     }
@@ -56,15 +72,13 @@ class SignUpViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         #if DEBUG
-        
-        
             if isInvestorApp {
                 usernameTextField.text = ""
                 emailTextField.text = "george@genesis.vision"
@@ -83,10 +97,7 @@ class SignUpViewController: BaseViewController {
 
     // MARK: - Private methods
     private func setupUI() {
-        usernameTextField.setBottomLine()
-        emailTextField.setBottomLine()
-        passwordTextField.setBottomLine()
-        confirmPasswordTextField.setBottomLine()
+        
     }
     
     

@@ -10,7 +10,9 @@ import UIKit.UIImage
 
 extension UIImage {
     static var placeholder: UIImage =  #imageLiteral(resourceName: "img_logo")
-    static var noDataPlaceholder: UIImage = #imageLiteral(resourceName: "img_full_splash_logo")
+    static var programPlaceholder: UIImage =  #imageLiteral(resourceName: "img_program_placeholder")
+    static var profilePlaceholder: UIImage =  #imageLiteral(resourceName: "img_manager_placeholder")
+    static var noDataPlaceholder: UIImage = #imageLiteral(resourceName: "img_splash_logo_icon")
     
     struct NavBar {
         static var ipfsList: UIImage = #imageLiteral(resourceName: "img_ipfs_list")

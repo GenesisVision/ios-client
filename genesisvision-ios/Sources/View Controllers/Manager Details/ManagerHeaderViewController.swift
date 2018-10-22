@@ -93,15 +93,16 @@ class ManagerHeaderViewController: BaseViewController {
             subtitleLabel.text = regDate.onlyDateFormatString
         }
         
-        bgImageView.image = #imageLiteral(resourceName: "img_manager_placeholder")
+        bgImageView.image = UIImage.profilePlaceholder
+        headerTitleImageView.image = UIImage.profilePlaceholder
         
         if let logo = managerProfileDetails?.managerProfile?.avatar, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             
             let resource = ImageResource(downloadURL: fileUrl, cacheKey: logo)
-            bgImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_manager_placeholder"))
-            headerTitleImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_manager_placeholder"))
+            bgImageView.kf.setImage(with: resource, placeholder: UIImage.profilePlaceholder)
+            headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.profilePlaceholder)
         }
     }
 }

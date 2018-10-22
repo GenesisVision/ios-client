@@ -14,11 +14,14 @@ class ForgotPasswordViewController: BaseViewController {
     var viewModel: AuthForgetPasswordViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
     }
@@ -30,7 +33,7 @@ class ForgotPasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +48,7 @@ class ForgotPasswordViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        emailTextField.setBottomLine()
+        
     }
     
     private func resetButtonMethod() {

@@ -104,8 +104,8 @@ class ProgramHeaderViewController: BaseViewController {
             currencyLabel.text = currency.rawValue
         }
         
-        bgImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
-        headerTitleImageView.image = #imageLiteral(resourceName: "img_program_placeholder")
+        bgImageView.image = UIImage.programPlaceholder
+        headerTitleImageView.image = UIImage.programPlaceholder
         
         if let color = programDetailsFull?.color {
             bgImageView.backgroundColor = UIColor.hexColor(color)
@@ -117,8 +117,8 @@ class ProgramHeaderViewController: BaseViewController {
             headerTitleImageView.kf.indicatorType = .activity
             
             let resource = ImageResource(downloadURL: fileUrl, cacheKey: logo)
-            bgImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
-            headerTitleImageView.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "img_program_placeholder"))
+            bgImageView.kf.setImage(with: resource, placeholder: UIImage.programPlaceholder)
+            headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.programPlaceholder)
         }
         
         if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {

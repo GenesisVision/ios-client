@@ -12,7 +12,6 @@ import AVFoundation
 class WalletWithdrawViewController: BaseViewController {
     
     // MARK: - Variables
-    private var withdrawButton: ActionButton?
     private var readQRCodeButton: UIButton?
     
     lazy var readerVC: QRCodeReaderViewController = {
@@ -114,6 +113,11 @@ class WalletWithdrawViewController: BaseViewController {
         }
     }
     
+    @IBOutlet var withdrawButton: ActionButton!
+    
+    // MARK: - Views
+    var confirmView: InvestWithdrawConfirmView!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +132,22 @@ class WalletWithdrawViewController: BaseViewController {
     // MARK: - Private methods
     private func setup() {
         navigationItem.title = viewModel.title
+        
+        withdrawButton.setEnabled(false)
+        
+        showProgressHUD()
+        viewModel.getInfo(completion: { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        })
     }
     
     private func updateUI() {
@@ -151,8 +171,43 @@ class WalletWithdrawViewController: BaseViewController {
 //        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
-    // MARK: - Actions
-    @IBAction func withdrawButtonAction(_ sender: UIButton) {
+    private func showConfirmVC() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
+        bottomSheetController.initializeHeight = 400
+        
+        confirmView = InvestWithdrawConfirmView.viewFromNib()
+        
+        var commissionValue = ""
+        if let commission = viewModel.selectedWallet?.commission {
+            commissionValue = commission.toString()
+        }
+        
+        var estimatedAmountValue = ""
+        if let estimatedAmount = viewModel.estimatedAmount {
+            estimatedAmountValue = estimatedAmount.toString()
+        }
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
+                                                          subtitle: "Check again because the transaction cannot be reversed",
+                                                          programLogo: nil,
+                                                          programTitle: nil,
+                                                          managerName: nil,
+                                                          firstTitle: "Withdraw amount",
+                                                          firstValue: amountToWithdrawValueLabel.text,
+                                                          secondTitle: "To address",
+                                                          secondValue: addressTextField.text,
+                                                          thirdTitle: "Estimated amount",
+                                                          thirdValue: estimatedAmountValue,
+                                                          fourthTitle: "Fee",
+                                                          fourthValue: commissionValue)
+        confirmView.configure(model: confirmViewModel)
+        bottomSheetController.addContentsView(confirmView)
+        confirmView.delegate = self
+        bottomSheetController.present()
+    }
+    
+    private func withdrawMethod() {
         hideKeyboard()
         
         guard let amountToWithdrawText = amountToWithdrawTextField.text,
@@ -173,6 +228,11 @@ class WalletWithdrawViewController: BaseViewController {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    // MARK: - Actions
+    @IBAction func withdrawButtonAction(_ sender: UIButton) {
+        showConfirmVC()
     }
     
     @IBAction func readQRCodeButtonAction(_ sender: UIButton) {
@@ -224,5 +284,15 @@ extension WalletWithdrawViewController: QRCodeReaderViewControllerDelegate {
     
     func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
         print("Switching capturing to: \(newCaptureDevice.device.localizedName)")
+    }
+}
+
+extension WalletWithdrawViewController: InvestWithdrawConfirmViewProtocol {
+    func cancelButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+    
+    func confirmButtonDidPress() {
+        withdrawMethod()
     }
 }

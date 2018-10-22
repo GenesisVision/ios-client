@@ -14,29 +14,36 @@ class SignInViewController: BaseViewController {
     var viewModel: AuthSignInViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
     }
-    
+    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+        didSet {
+            passwordTitleLabel.text = "Password"
+        }
+    }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
     }
+    
+    private var signUpBarButtonItem: UIBarButtonItem!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +64,10 @@ class SignInViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        emailTextField.setBottomLine()
-        passwordTextField.setBottomLine()
+        navigationItem.title = viewModel.title
+        
+        signUpBarButtonItem = UIBarButtonItem(title: "Sign up", style: .done, target: self, action: #selector(showSignUpVC))
+        navigationItem.rightBarButtonItem = signUpBarButtonItem
     }
     
     private func signInMethod() {
@@ -90,7 +99,7 @@ class SignInViewController: BaseViewController {
         }
     }
     
-    private func showSignUpVC() {
+    @objc private func showSignUpVC() {
         hideKeyboard()
         viewModel.showSignUpVC()
     }
@@ -107,10 +116,6 @@ class SignInViewController: BaseViewController {
     
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         showForgotPasswordVC()
-    }
-    
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
-        showSignUpVC()
     }
 }
 

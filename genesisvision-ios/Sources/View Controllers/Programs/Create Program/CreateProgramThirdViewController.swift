@@ -34,7 +34,7 @@ class CreateProgramThirdViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
         
         showInfiniteIndicator(value: false)
     }

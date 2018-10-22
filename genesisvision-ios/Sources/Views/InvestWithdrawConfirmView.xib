@@ -54,7 +54,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="QOh-o9-cGm">
-                    <rect key="frame" x="30" y="110" width="315" height="174"/>
+                    <rect key="frame" x="30" y="110" width="315" height="240"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pA8-jt-yXM">
                             <rect key="frame" x="0.0" y="-4" width="136.5" height="4"/>
@@ -168,6 +168,23 @@
                                 </label>
                             </subviews>
                         </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nkr-6e-Lmm">
+                            <rect key="frame" x="0.0" y="198" width="39.5" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHw-Gx-bU0" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="31" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kx4-Ob-vFj" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="22.5" width="39.5" height="19.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KkY-ZL-UXZ">
@@ -222,6 +239,9 @@
                 <outlet property="firstStackView" destination="nSa-wX-fgY" id="r6L-Pi-w0G"/>
                 <outlet property="firstTitleLabel" destination="DgK-bX-1B8" id="Xls-gi-2X9"/>
                 <outlet property="firstValueLabel" destination="EUS-9G-ALT" id="dfb-w1-tGj"/>
+                <outlet property="fourthStackView" destination="nkr-6e-Lmm" id="sxA-Bd-vKy"/>
+                <outlet property="fourthTitleLabel" destination="MHw-Gx-bU0" id="uk5-co-17g"/>
+                <outlet property="fourthValueLabel" destination="Kx4-Ob-vFj" id="DSY-oW-xHH"/>
                 <outlet property="managerNameLabel" destination="VNf-Yz-Xsz" id="2NW-6o-iCe"/>
                 <outlet property="programLogoImageView" destination="CrE-c1-RXa" id="ZPB-YJ-PPf"/>
                 <outlet property="programTitleLabel" destination="7Dn-QY-cuT" id="JrH-J0-kMy"/>
