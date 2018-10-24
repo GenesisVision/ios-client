@@ -93,13 +93,13 @@ open class ProgramsAPI {
      Program profit chart
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
-  "profitFactor" : 5.637376656633329,
-  "profitChangePercent" : 1.0246457001441578,
-  "calmarRatio" : 2.027123023002322,
-  "timeframeGvtProfit" : 1.2315135367772556,
-  "timeframeProgramCurrencyProfit" : 6.027456183070403,
-  "trades" : 1,
-  "maxDrawdown" : 4.145608029883936,
+  "profitFactor" : 4.145608029883936,
+  "profitChangePercent" : 5.025004791520295,
+  "calmarRatio" : 6.84685269835264,
+  "timeframeGvtProfit" : 4.965218492984954,
+  "timeframeProgramCurrencyProfit" : 9.301444243932576,
+  "trades" : 3,
+  "maxDrawdown" : 7.457744773683766,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -107,9 +107,9 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "investors" : 7,
-  "totalGvtProfit" : 7.386281948385884,
-  "sortinoRatio" : 3.616076749251911,
+  "investors" : 1,
+  "totalGvtProfit" : 1.1730742509559433,
+  "sortinoRatio" : 1.4894159098541704,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -117,11 +117,11 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "balance" : 2.3021358869347655,
+  "balance" : 7.386281948385884,
   "programCurrency" : "Undefined",
-  "rate" : 1.4894159098541704,
-  "totalProgramCurrencyProfit" : 0.8008281904610115,
-  "successTradesPercent" : 5.962133916683182,
+  "rate" : 9.965781217890562,
+  "totalProgramCurrencyProfit" : 7.061401241503109,
+  "successTradesPercent" : 2.027123023002322,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
   "periods" : [ {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
@@ -130,7 +130,7 @@ open class ProgramsAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00"
   } ],
-  "sharpeRatio" : 9.301444243932576,
+  "sharpeRatio" : 1.0246457001441578,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      

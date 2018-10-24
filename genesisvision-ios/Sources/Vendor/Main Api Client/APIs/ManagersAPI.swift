@@ -385,7 +385,7 @@ open class ManagersAPI {
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagersFundsByIdWithdrawInfoByCurrencyGet(id: UUID, currency: Currency_v10ManagersFundsByIdWithdrawInfoByCurrencyGet, authorization: String, completion: @escaping ((_ data: FundWithdrawInfo?,_ error: Error?) -> Void)) {
+    open class func v10ManagersFundsByIdWithdrawInfoByCurrencyGet(id: UUID, currency: Currency_v10ManagersFundsByIdWithdrawInfoByCurrencyGet, authorization: String, completion: @escaping ((_ data: ManagerFundWithdrawInfo?,_ error: Error?) -> Void)) {
         v10ManagersFundsByIdWithdrawInfoByCurrencyGetWithRequestBuilder(id: id, currency: currency, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -396,20 +396,21 @@ open class ManagersAPI {
      Data for withdrawal from fund
      - GET /v1.0/managers/funds/{id}/withdraw/info/{currency}
      - examples: [{contentType=application/json, example={
-  "exitFee" : 0.8008281904610115,
-  "rate" : 1.4658129805029452,
+  "exitFee" : 6.027456183070403,
+  "rate" : 5.962133916683182,
+  "withheldInvestment" : 0.8008281904610115,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
-  "availableToWithdraw" : 6.027456183070403
+  "availableToWithdraw" : 1.4658129805029452
 }}]
      
      - parameter id: (path)  
      - parameter currency: (path)  
      - parameter authorization: (header) JWT access token 
 
-     - returns: RequestBuilder<FundWithdrawInfo> 
+     - returns: RequestBuilder<ManagerFundWithdrawInfo> 
      */
-    open class func v10ManagersFundsByIdWithdrawInfoByCurrencyGetWithRequestBuilder(id: UUID, currency: Currency_v10ManagersFundsByIdWithdrawInfoByCurrencyGet, authorization: String) -> RequestBuilder<FundWithdrawInfo> {
+    open class func v10ManagersFundsByIdWithdrawInfoByCurrencyGetWithRequestBuilder(id: UUID, currency: Currency_v10ManagersFundsByIdWithdrawInfoByCurrencyGet, authorization: String) -> RequestBuilder<ManagerFundWithdrawInfo> {
         var path = "/v1.0/managers/funds/{id}/withdraw/info/{currency}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
@@ -423,7 +424,7 @@ open class ManagersAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<FundWithdrawInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ManagerFundWithdrawInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

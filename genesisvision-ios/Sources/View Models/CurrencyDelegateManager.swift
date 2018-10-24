@@ -16,10 +16,11 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     // MARK: - Variables
     weak var currencyDelegate: CurrencyDelegateManagerProtocol?
     
-    var currencyValues = [String]()
-    var rateValues = [Double]()
+    var tableView: UITableView?
+    var rates: [RateItem] = []
     
-    var selectedCurrency: String!
+    var selectedRate: RateItem?
+    var selectedIndex: Int = 0
     
     var currencyCellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
@@ -29,22 +30,34 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     override init() {
         super.init()
         
-        selectedCurrency = getSelectedCurrency()
-        
+        AuthManager.getSavedRates { (rates) in
+            guard let rates = rates else { return }
+            self.rates = rates
+            
+            self.updateSelectedIndex()
+            
+//            self.tableView?.reloadData()
+        }
+    }
+    
+    func updateSelectedIndex() {
+        let selectedCurrency = getSelectedCurrency()
+        self.selectedIndex = rates.firstIndex(where: { return $0.currency?.rawValue == selectedCurrency } ) ?? 0
     }
     
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        selectedCurrency = currencyValues[indexPath.row]
-        updateSelectedCurrency(selectedCurrency)
+        if let selectedCurrency = rates[indexPath.row].currency?.rawValue {
+            updateSelectedCurrency(selectedCurrency)
+        }
         
         currencyDelegate?.didSelectCurrency(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencyValues.count
+        return rates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,30 +66,14 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
             return cell
         }
         
-        let currency = currencyValues[indexPath.row]
-        let rate = "1 GVT = \(rateValues[indexPath.row]) " + currency
-        let isSelected = currency == selectedCurrency
-        
-        cell.isSelected = isSelected
-        cell.configure(title: currency, rate: rate, selected: isSelected)
+        let isSelected = indexPath.row == selectedIndex
+        let rate = rates[indexPath.row]
+        let currencyValue = rate.currency?.rawValue ?? ""
+        let currencyRate = rate.rate ?? 0.0
+
+        cell.configure(currencyValue: currencyValue, currencyRate: currencyRate, selected: isSelected)
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
-            cell.currencyTitleLabel.textColor = UIColor.Cell.title
-            cell.currencyRateLabel.textColor = UIColor.Cell.title
-            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath) as? DashboardCurrencyTableViewCell, cell.accessoryType == .none {
-            cell.currencyTitleLabel.textColor = UIColor.Cell.subtitle
-            cell.currencyRateLabel.textColor = UIColor.Cell.subtitle
-            cell.contentView.backgroundColor = UIColor.Cell.bg
-        }
     }
 }
 

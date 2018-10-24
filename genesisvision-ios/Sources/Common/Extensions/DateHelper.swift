@@ -135,8 +135,8 @@ extension Date {
     
     
     func timeSinceDate(fromDate: Date) -> String {
-        let earliest = self < fromDate ? self  : fromDate
-        let latest = (earliest == self) ? fromDate : self
+        let earliest = fromDate
+        let latest = self
         
         let components:DateComponents = Calendar.current.dateComponents([.minute,.hour,.day,.weekOfYear,.month,.year,.second], from: earliest, to: latest)
         let year = components.year  ?? 0
@@ -150,13 +150,13 @@ extension Date {
         
         if year >= 2{
             return "\(year) years"
-        }else if (year >= 1){
+        } else if (year >= 1){
             return "1 year"
-        }else if (month >= 2) {
+        } else if (month >= 2) {
             return "\(month) months"
-        }else if (month >= 1) {
+        } else if (month >= 1) {
             return "1 month"
-        }else  if (week >= 2) {
+        } else  if (week >= 2) {
             return "\(week) weeks"
         } else if (week >= 1){
             return "1 week"
@@ -175,7 +175,7 @@ extension Date {
         } else if (seconds >= 3) {
             return "\(seconds) seconds"
         } else {
-            return "Now"
+            return ""
         }
         
     }

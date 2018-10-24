@@ -26,8 +26,10 @@ extension UIColor {
         static var red: UIColor { return #colorLiteral(red: 0.9215686275, green: 0.231372549, blue: 0.3529411765, alpha: 1) }                                     //EB3B5A
         static var redBg: UIColor { return #colorLiteral(red: 0.1960784314, green: 0.1725490196, blue: 0.2196078431, alpha: 1) }                                   //322C38
         
-        static var lightDelimiter: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                          //fafafa
+        static var lightChart: UIColor { return #colorLiteral(red: 0.5176470588, green: 0.8392156863, blue: 0.8156862745, alpha: 1) }                              //84D6D0
+        static var darkChart: UIColor { return #colorLiteral(red: 0.1294117647, green: 0.2745098039, blue: 0.3137254902, alpha: 1) }                               //214650
         
+        static var lightDelimiter: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }                          //fafafa
         
         static var darkDelimiter: UIColor { return #colorLiteral(red: 0.137254902, green: 0.168627451, blue: 0.1921568627, alpha: 1) }                           //232b31
 
@@ -233,6 +235,13 @@ extension UIColor {
         static var tint: UIColor { return Common.white }
     }
     
+    struct Chart {
+        static var light: UIColor { return Common.lightChart }
+        static var middle: UIColor { return Common.primary }
+        static var dark: UIColor { return Common.darkChart }
+        
+    }
+    
     struct ChartCircle {
         static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.darkBackground }
         static var border: UIColor { return AppearanceController.theme == .darkTheme ? Common.lightDelimiter : Common.lightDelimiter }
@@ -320,10 +329,10 @@ extension UIColor {
         
         static func colors(for status: String) -> (UIColor, UIColor) {
             switch status.capitalized {
-            case "Pending":
+            case "Investing":
                 return (Status.investing, Status.investing.withAlphaComponent(0.1))
             case "Withdrawing":
-                return (Status.investing, Status.withdrawing.withAlphaComponent(0.1))
+                return (Status.withdrawing, Status.withdrawing.withAlphaComponent(0.1))
             case "Active":
                 return (Status.active, Status.active.withAlphaComponent(0.1))
             case "Ended", "Closed":

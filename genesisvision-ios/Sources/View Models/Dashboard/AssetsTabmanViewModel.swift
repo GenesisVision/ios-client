@@ -10,17 +10,11 @@ import Foundation
 import Tabman
 
 class AssetsTabmanViewModel: TabmanViewModel {
-    var dashboard: DashboardSummary? {
-        didSet {
-            //TODO: update item string
-        }
-    }
-    
+
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate?, dashboard: DashboardSummary?) {
+    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
-        self.dashboard = dashboard
         style = .scrollingButtonBar
         font = UIFont.getFont(.semibold, size: 16)
     }

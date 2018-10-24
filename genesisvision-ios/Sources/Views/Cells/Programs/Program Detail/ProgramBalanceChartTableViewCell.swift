@@ -59,7 +59,6 @@ class ProgramBalanceChartTableViewCell: UITableViewCell {
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
-            chartView.backgroundColor = .red//UIColor.BaseView.bg
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
         }

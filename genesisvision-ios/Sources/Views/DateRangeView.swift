@@ -77,13 +77,7 @@ class DateRangeView: UIView {
             dateRangeToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
-    @IBOutlet var applyButton: UIButton! {
-        didSet {
-            applyButton.roundCorners(with: 25.0)
-            applyButton.setTitleColor(UIColor.Cell.title, for: .normal)
-            applyButton.backgroundColor = UIColor.primary
-        }
-    }
+    @IBOutlet var applyButton: ActionButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

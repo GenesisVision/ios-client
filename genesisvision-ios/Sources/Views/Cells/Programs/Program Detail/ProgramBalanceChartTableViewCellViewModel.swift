@@ -25,11 +25,8 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
             cell.amountValueLabel.isHidden = true
         }
         
-        if let amountCurrency = programBalanceChart.programCurrencyBalance {
-            let selectedCurrency = getSelectedCurrency()
-            if let currencyType = CurrencyType(rawValue: selectedCurrency) {
-                cell.amountCurrencyLabel.text = amountCurrency.rounded(withType: currencyType).toString() + " " + selectedCurrency
-            }
+        if let amountCurrency = programBalanceChart.programCurrencyBalance, let programCurrency = programBalanceChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
+            cell.amountCurrencyLabel.text = amountCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.amountCurrencyLabel.isHidden = true
         }
@@ -40,7 +37,7 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.changeCurrencyLabel.isHidden = true
         
         if let balanceChartData = programBalanceChart.balanceChart, balanceChartData.count > 0 {
-            cell.chartViewHeightConstraint.constant = 150.0
+            cell.chartViewHeightConstraint.constant = 300.0
             cell.chartView.setup(balanceChartData: balanceChartData)
             cell.chartView.isHidden = false
         } else {

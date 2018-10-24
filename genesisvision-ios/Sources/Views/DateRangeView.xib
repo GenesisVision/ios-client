@@ -164,7 +164,7 @@
                         <constraint firstItem="GfK-zO-ULL" firstAttribute="width" secondItem="lKy-Nn-mkf" secondAttribute="width" id="zfy-W5-yZR"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-RE-Tty">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-RE-Tty" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                     <rect key="frame" x="20" y="243" width="335" height="50"/>
                     <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>

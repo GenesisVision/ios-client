@@ -56,7 +56,7 @@ class DashboardViewController: BaseViewController {
             segue.identifier == "AssetsViewControllerSegue" {
             vc.viewModel = viewModel.assetsTabmanViewModel
             
-            viewModel.router.assetsViewController = vc
+            viewModel.router.dashboardAssetsViewController = vc
         } else if let vc = segue.destination as? EventsViewController,
             segue.identifier == "EventsViewControllerSegue" {
             vc.viewModel = viewModel.eventListViewModel
@@ -125,11 +125,13 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setupUI() {
+        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        
         bottomViewType = .none
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
-        addCurrencyTitleButton(viewModel.currencyDelegateManager)
+        addCurrencyTitleButton(CurrencyDelegateManager())
         
         let dateRangeButton = UIButton(type: .system)
         dateRangeButton.setTitle("Week", for: .normal)
@@ -236,7 +238,7 @@ extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
-        navigationTitleView.scrollViewDidScroll(scrollView, threshold: -30.0)
+        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
 //        animateViews(yOffset)
@@ -248,7 +250,7 @@ extension DashboardViewController {
         }
         
         if scrollView == self.scrollView {
-            if let pageboyDataSource = viewModel.router.assetsViewController?.pageboyDataSource {
+            if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
                         vc.tableView?.isScrollEnabled = yOffset >= assetsView.frame.origin.y

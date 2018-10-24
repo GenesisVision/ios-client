@@ -137,7 +137,7 @@ extension ProgramDetailTradesViewModel {
         case .api:
             guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            ProgramsDataProvider.getProgramTrades(with: programId, completion: { (tradesViewModel) in
+            ProgramsDataProvider.getTrades(with: programId, completion: { (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

@@ -13,7 +13,6 @@ final class DashboardViewModel {
     var title = "Dashboard"
     
     var sortingDelegateManager = SortingDelegateManager()
-    var currencyDelegateManager = CurrencyDelegateManager()
     var inRequestsDelegateManager = InRequestsDelegateManager()
     var isLoading: Bool = false
     
@@ -27,7 +26,7 @@ final class DashboardViewModel {
             if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
                 pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, programRequests: dashboard.requests)
             }
-            if let vc = router.assetsViewController, let pageboyDataSource = vc.pageboyDataSource {
+            if let vc = router.dashboardAssetsViewController, let pageboyDataSource = vc.pageboyDataSource {
                 pageboyDataSource.update(dashboardSummary: dashboard)
             }
             if let vc = router.eventsViewController, let viewModel = vc.viewModel {
@@ -68,9 +67,8 @@ final class DashboardViewModel {
     init(withRouter router: DashboardRouter) {
         self.router = router
         self.reloadDataProtocol = router.programListViewController
-
-        assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil, dashboard: dashboard)
-        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: nil, dashboardPortfolioChartValue: dashboard?.chart)
+        assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router)
+        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, dashboardPortfolioChartValue: dashboard?.chart)
         eventListViewModel = EventListViewModel(withRouter: router, dashboardPortfolioEvents: dashboard?.events)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)

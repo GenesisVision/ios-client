@@ -11,16 +11,11 @@ import UIKit
 class DashboardCurrencyTableViewCell: UITableViewCell {
 
     // MARK: - Variables
-    @IBOutlet weak var currencyTitleLabel: UILabel! {
+    @IBOutlet weak var currencyTitleLabel: TitleLabel!
+    @IBOutlet weak var currencyRateLabel: SubtitleLabel!
+    @IBOutlet weak var selectedImageView: UIImageView! {
         didSet {
-            currencyTitleLabel.textColor = UIColor.Cell.subtitle
-            currencyRateLabel.font = UIFont.getFont(.regular, size: 15.0)
-        }
-    }
-    @IBOutlet weak var currencyRateLabel: UILabel! {
-        didSet {
-            currencyRateLabel.textColor = UIColor.Cell.subtitle
-            currencyRateLabel.font = UIFont.getFont(.regular, size: 15.0)
+            selectedImageView.image = #imageLiteral(resourceName: "img_radio_unselected_icon")
         }
     }
     
@@ -41,11 +36,10 @@ class DashboardCurrencyTableViewCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func configure(title: String, rate: String, selected: Bool) {
-        currencyTitleLabel.text = title
-        currencyRateLabel.text = rate
-        currencyTitleLabel.textColor = selected ? UIColor.Cell.title : UIColor.Cell.subtitle
-        currencyRateLabel.textColor = selected ? UIColor.Cell.title : UIColor.Cell.subtitle
-        accessoryType = selected ? .checkmark : .none
+    func configure(currencyValue: String, currencyRate: Double, selected: Bool) {
+        let text = "1 GVT = \(currencyRate) " + currencyValue
+        currencyTitleLabel.text = currencyValue
+        currencyRateLabel.text = text
+        selectedImageView.image = selected ? #imageLiteral(resourceName: "img_radio_selected_icon") : #imageLiteral(resourceName: "img_radio_unselected_icon")
     }
 }

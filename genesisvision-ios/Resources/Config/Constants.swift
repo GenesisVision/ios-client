@@ -68,7 +68,7 @@ final class Constants {
         
         static let fetchThreshold = 1 // a constant to determine when to fetch the results
 
-        static let take: Int = 50 //count of templates on 1 page
+        static let take: Int = 10 //count of templates on 1 page
         static let equityChartLength: Int = 36
         
         struct Investor {

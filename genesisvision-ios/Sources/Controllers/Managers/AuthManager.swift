@@ -60,9 +60,10 @@ class AuthManager {
         UserDefaults.standard.synchronize()
     }
     
-    static func getSavedRate(completion: @escaping (_ rate: Double) -> Void) {
-        getRate { (viewModel) in
-            completion(ratesModel?.rates?.GVT?.first?.rate ?? 0.0)
+    static func getSavedRates(completion: @escaping (_ rates: [RateItem]?) -> Void) {
+        getRates { (viewModel) in
+            guard let viewModel = viewModel else { return completion(nil) }
+            completion(viewModel.rates?.GVT)
         }
     }
     
@@ -98,19 +99,21 @@ class AuthManager {
         }, errorCompletion: completionError)
     }
     
-    static func getRate(completion: @escaping (_ rate: RatesModel?) -> Void) {
+    static func getRates(completion: @escaping (_ rate: RatesModel?) -> Void) {
         guard ratesModel == nil else {
             completion(ratesModel)
             return
         }
         
-        RateDataProvider.getRate(completion: { (viewModel) in
+        RateDataProvider.getRates(completion: { (viewModel) in
             if viewModel != nil  {
                 ratesModel = viewModel
             }
             
             completion(ratesModel)
         }) { (result) in
+            print("!!!!!!!!!!!!!!!!!")
+            print(result)
             switch result {
             case .success:
                 break

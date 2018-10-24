@@ -60,10 +60,13 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         cell.firstTitleLabel.text = "time left"
-        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
-            cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
-            
+        if let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
+
             let today = Date()
+            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
+            
+            cell.firstValueLabel.text = periodLeft.isEmpty ? "0" : periodLeft + " left"
+            
             if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
                 cell.periodLeftProgressView.setProgress(to: Double(periodDuration - minutes) / Double(periodDuration), withAnimation: false)
             }
@@ -97,7 +100,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         if let color = program.color {
-                cell.programLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+            cell.programLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
 
         if let profitPercent = program.statistic?.profitPercent {

@@ -189,10 +189,10 @@ class ActionButton: UIButton {
 
 class StatusButton: UIButton {
 
-    var fontSize: CGFloat = 14.0
+    var fontSize: CGFloat = 12.0
     var bgColor: UIColor = UIColor.Button.primary
     var textColor: UIColor = UIColor.Cell.title
-    var contentEdge = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+    var contentEdge = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
     
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
@@ -207,20 +207,21 @@ class StatusButton: UIButton {
     }
     
     func commonInit() {
-        setImage(#imageLiteral(resourceName: "img_arrow_down_icon"), for: .normal)
-        semanticContentAttribute = .forceRightToLeft
-        
         if let status = titleLabel?.text {
+            isUserInteractionEnabled = !(status == "Active" || status == "Ended")
+            
+            setImage(isUserInteractionEnabled ? #imageLiteral(resourceName: "img_arrow_down_icon") : nil, for: .normal)
+            semanticContentAttribute = .forceRightToLeft
+            
             let colors = UIColor.Status.colors(for: status)
             backgroundColor = colors.1
             setTitleColor(colors.0, for: .normal)
             tintColor = colors.0
         }
         
-        titleLabel?.font = UIFont.getFont(.bold, size: fontSize)
+        titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
         
         var spacing: CGFloat = 0.0
-        
         if image(for: .normal) != nil {
             spacing = semanticContentAttribute == .forceRightToLeft ? -4.0 : 4.0
         }

@@ -188,11 +188,11 @@ open class FundsAPI {
      Fund profit chart
      - GET /v1.0/funds/{id}/charts/profit
      - examples: [{contentType=application/json, example={
-  "profitChangePercent" : 7.386281948385884,
-  "calmarRatio" : 9.301444243932576,
-  "timeframeGvtProfit" : 4.145608029883936,
-  "timeframeUsdProfit" : 6.027456183070403,
-  "maxDrawdown" : 3.616076749251911,
+  "profitChangePercent" : 5.944895607614016,
+  "calmarRatio" : 1.284659006116532,
+  "timeframeGvtProfit" : 6.878052220127876,
+  "timeframeUsdProfit" : 6.683562403749608,
+  "maxDrawdown" : 2.8841621266687802,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -200,15 +200,15 @@ open class FundsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "investors" : 5,
-  "totalGvtProfit" : 2.027123023002322,
-  "sortinoRatio" : 7.061401241503109,
-  "rebalances" : 1,
-  "balance" : 5.962133916683182,
-  "rate" : 1.2315135367772556,
+  "investors" : 6,
+  "totalGvtProfit" : 6.778324963048013,
+  "sortinoRatio" : 6.965117697638846,
+  "rebalances" : 8,
+  "balance" : 9.018348186070783,
+  "rate" : 6.704019297950036,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
-  "totalUsdProfit" : 0.8008281904610115,
-  "sharpeRatio" : 2.3021358869347655,
+  "totalUsdProfit" : 9.369310271410669,
+  "sharpeRatio" : 3.5571952270680973,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      

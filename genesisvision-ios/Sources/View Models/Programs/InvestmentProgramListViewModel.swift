@@ -250,7 +250,7 @@ extension ProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            ProgramsDataProvider.getPrograms(levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
+            ProgramsDataProvider.get(levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programsList = programsList

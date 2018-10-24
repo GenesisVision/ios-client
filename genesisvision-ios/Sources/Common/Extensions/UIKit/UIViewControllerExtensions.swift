@@ -135,11 +135,11 @@ extension UIViewController {
     func hideHUD() {
         self.view.hideHUD()
     }
-
+    
     func showErrorHUD(subtitle: String? = nil) {
         self.view.showErrorHUD(subtitle: subtitle)
     }
-
+    
     func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
         self.view.showSuccessHUD(title: title, subtitle: subtitle, completion: completion)
     }
@@ -250,3 +250,23 @@ extension UIViewController {
         
     }
 }
+
+//extension UIViewControllerWithBottomSheet {
+//    func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+//        showBottomSheet(type: .success, title: title, subtitle: subtitle)
+//    }
+//
+//    func showErrorHUD(subtitle: String? = nil) {
+//        showBottomSheet(type: .error, subtitle: subtitle)
+//    }
+//
+//    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+//
+//        self.bottomSheetController.initializeHeight = 350
+//        let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
+//        errorBottomSheetView.configure(type: .error, title: title, subtitle: subtitle)
+//        errorBottomSheetView.bottomSheetController = self.bottomSheetController
+//        self.bottomSheetController.addContentsView(errorBottomSheetView)
+//        self.bottomSheetController.present()
+//    }
+//}

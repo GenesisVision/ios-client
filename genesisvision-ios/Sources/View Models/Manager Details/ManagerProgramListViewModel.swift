@@ -225,7 +225,7 @@ extension ManagerProgramListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
-        ProgramsDataProvider.getPrograms(managerId: managerId, skip: skip, take: take, completion: { [weak self] (programsList) in
+        ProgramsDataProvider.get(managerId: managerId, skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.programsList = programsList

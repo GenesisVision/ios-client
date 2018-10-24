@@ -296,6 +296,9 @@ open class BottomSheet {
         
         // Adds ContentsView
         open func addContentsView(isScrollEnabledInSheet: Bool = true, _ contentView: UIView) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
             guard !hasView else { fatalError("ContainerView can only have one") }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             containerView.addSubview(contentView)
@@ -334,6 +337,9 @@ open class BottomSheet {
         
         // Adds UIScrollView
         open func addScrollView(isScrollEnabledInSheet: Bool = true, configurationHandler: ((UIScrollView) -> Void)) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
             guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let scrollView = UIScrollView()
@@ -376,6 +382,9 @@ open class BottomSheet {
         
         // Adds UICollectionView
         open func addCollectionView(isScrollEnabledInSheet: Bool = true, flowLayout: UICollectionViewFlowLayout? = nil, configurationHandler: ((UICollectionView) -> Void)) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
             guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let collectionView: UICollectionView
@@ -426,6 +435,9 @@ open class BottomSheet {
         
         // Adds UITableView
         open func addTableView(isScrollEnabledInSheet: Bool = true, configurationHandler: ((UITableView) -> Void)) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
             guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let tableView = UITableView(frame: .zero)

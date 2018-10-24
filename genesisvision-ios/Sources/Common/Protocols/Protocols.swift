@@ -74,6 +74,10 @@ extension Hidable where Self: UIViewController {
     }
 }
 
+protocol UIViewControllerWithBottomSheet {
+    var bottomSheetController: BottomSheetController! { get }
+}
+
 protocol UIViewControllerWithFetching {
     var fetchMoreActivityIndicator: UIActivityIndicatorView! { get }
     

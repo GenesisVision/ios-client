@@ -10,17 +10,17 @@ import UIKit
 import DZNEmptyDataSet
 import MessageUI
 
-class BaseViewController: UIViewController, Hidable {
+class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomSheet {
     // MARK: - Veriables
-    var bottomSheetController = BottomSheetController()
+    var bottomSheetController: BottomSheetController! = {
+        return BottomSheetController()
+    }()
+    
     var currencyDelegateManager: CurrencyDelegateManager?
     
     var refreshControl: UIRefreshControl?
     
-    var navigationTitleView: NavigationTitleView = {
-        let view = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        return view
-    }()
+    var navigationTitleView: NavigationTitleView?
     
     var sortButton: ActionButton = {
         let btn = ActionButton(type: .system)
@@ -71,7 +71,7 @@ class BaseViewController: UIViewController, Hidable {
     let bottomStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
-        stackView.spacing = 16.0
+        stackView.spacing = 8.0
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,26 +125,36 @@ class BaseViewController: UIViewController, Hidable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateCurrencyButtonTitle()
+        
         updateTheme()
     }
     
     // MARK: - Public Methods
     func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
-        navigationTitleView.currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
+        navigationTitleView?.currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
         self.currencyDelegateManager = currencyDelegateManager
         currencyDelegateManager?.currencyDelegate = self
         
         navigationItem.titleView = navigationTitleView
     }
     
+    func updateCurrencyButtonTitle() {
+        let selectedCurrency = getSelectedCurrency()
+        navigationTitleView?.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
+        navigationTitleView?.currencyTitleButton.sizeToFit()
+    }
+    
     // MARK: - Private Methods
     @objc private func currencyButtonAction() {
+        currencyDelegateManager?.updateSelectedIndex()
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
-        bottomSheetController.addNavigationBar("Preferred Currency")
+        bottomSheetController.addNavigationBar("Preferred currency")
         
         bottomSheetController.addTableView { [weak self] tableView in
+            currencyDelegateManager?.tableView = tableView
             tableView.separatorStyle = .none
             
             guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
@@ -202,11 +212,7 @@ extension BaseViewController: UIScrollViewDelegate {
 
 extension BaseViewController: CurrencyDelegateManagerProtocol {
     func didSelectCurrency(at indexPath: IndexPath) {
-        if let selectedCurrency = currencyDelegateManager?.selectedCurrency {
-            navigationTitleView.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
-            navigationTitleView.currencyTitleButton.sizeToFit()
-        }
-        
+        updateCurrencyButtonTitle()
         pullToRefresh()
         
         bottomSheetController.dismiss()
@@ -358,8 +364,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 
         filterStackView.addArrangedSubview(sortButton)
         filterStackView.addArrangedSubview(filterButton)
-        bottomStackView.addArrangedSubview(signInButton)
         bottomStackView.addArrangedSubview(filterStackView)
+        bottomStackView.addArrangedSubview(signInButton)
         
         view.addSubview(bottomStackView)
         
@@ -376,20 +382,20 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
-        signInButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        signInButton.widthAnchor.constraint(equalToConstant: 198).isActive = true
+        signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        signInButton.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor).isActive = true
+//        signInButton.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
         
         filterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
         filterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
-        filterStackView.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
         filterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
-        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         if #available(iOS 11, *) {
-            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         } else {
-            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         }
         
     }
@@ -527,8 +533,12 @@ extension BaseTableViewController: UIViewControllerWithPullToRefresh {
     }
 }
 
-class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable {
+class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable, UIViewControllerWithBottomSheet {
     // MARK: - Variables
+    var bottomSheetController: BottomSheetController! = {
+        return BottomSheetController()
+    }()
+    
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     
     var prefersLargeTitles: Bool = true {

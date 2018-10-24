@@ -15,6 +15,12 @@ struct ProgramInvestNowTableViewCellViewModel {
 
 extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramInvestNowTableViewCell) {
+        cell.investButton.setEnabled(false)
+        
+        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest {
+            cell.investButton.setEnabled(canInvest)
+        }
+        
         if let currency = programDetailsFull?.currency, let periodEnds = programDetailsFull?.periodEnds {
              cell.disclaimerLabel.text = "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to \(currency.rawValue). Accrual of \(currency.rawValue) to the account manager will only occur at the end of the reporting period \(periodEnds.defaultFormatString)."
         }
@@ -30,7 +36,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         }
         
         if let successFee = programDetailsFull?.successFee {
-            cell.successFeeTitleLabel.text = "success invest"
+            cell.successFeeTitleLabel.text = "success fee"
             cell.successFeeValueLabel.text = successFee.rounded(toPlaces: 2).toString() + "%"
         }
         

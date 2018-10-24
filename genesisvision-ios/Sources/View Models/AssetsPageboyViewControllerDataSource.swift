@@ -12,21 +12,32 @@ import Pageboy
 class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
     var controllers = [BaseViewController]()
     
-    init(router: DashboardRouter) {
+    init(router: Router) {
         super.init()
         
-        if let programListViewController = DashboardProgramListViewController.storyboardInstance(name: .dashboard),
-            let fundListController = DashboardProgramListViewController.storyboardInstance(name: .dashboard) {
+        if let router = router as? DashboardRouter {
+            let programListViewController = DashboardProgramListViewController()
+            let fundListViewController = DashboardProgramListViewController()
+            
             router.programListViewController = programListViewController
-            router.fundListController = fundListController
+            router.fundListViewController = fundListViewController
             
             let programsViewModel = DashboardProgramListViewModel(withRouter: router)
             programListViewController.viewModel = programsViewModel
             
             let fundsViewModel = DashboardProgramListViewModel(withRouter: router)
-            fundListController.viewModel = fundsViewModel
+            fundListViewController.viewModel = fundsViewModel
             
-            controllers = [programListViewController, fundListController]
+            controllers = [programListViewController, fundListViewController]
+        } else {
+            guard let programListViewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
+            router.programsViewController = programListViewController
+            
+            let programListRouter = ProgramListRouter(parentRouter: router)
+            let programsViewModel = ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController)
+            programListViewController.viewModel = programsViewModel
+            
+            controllers = [programListViewController]
         }
     }
     

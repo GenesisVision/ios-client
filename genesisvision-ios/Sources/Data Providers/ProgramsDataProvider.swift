@@ -9,7 +9,16 @@
 import UIKit
 
 class ProgramsDataProvider: DataProvider {
-    static func getProgram(programId: String, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?, completion: @escaping (_ program: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        let authorization = AuthManager.authorizedToken
+        
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func get(programId: String, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?, completion: @escaping (_ program: ProgramDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
         
         ProgramsAPI.v10ProgramsByIdGet(id: programId, authorization: authorization, currencySecondary: currencySecondary) { (viewModel, error) in
@@ -17,7 +26,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getProgramInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet, completion: @escaping (_ programInvestInfo: ProgramInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet, completion: @escaping (_ programInvestInfo: ProgramInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -27,7 +36,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getProgramWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ programWithdrawInfo: ProgramWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ programWithdrawInfo: ProgramWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -37,26 +46,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getFundInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.v10InvestorFundsByIdInvestInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundInvestInfo, error) in
-            DataProvider().responseHandler(fundInvestInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func getFundWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundWithdrawInfo, error) in
-            DataProvider().responseHandler(fundWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    static func investProgram(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func invest(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
             let uuid = UUID(uuidString: programId)
@@ -67,7 +57,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func withdrawProgram(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func withdraw(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
             let uuid = UUID(uuidString: programId)
@@ -78,16 +68,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getPrograms(levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        let authorization = AuthManager.authorizedToken
-        
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func getProgramTrades(with programId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(with programId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let programId = programId, let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -96,7 +77,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getProgramProfitChart(with programId: String, completion: @escaping (_ tradesChartViewModel: ProgramProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProfitChart(with programId: String, completion: @escaping (_ tradesChartViewModel: ProgramProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsAPI.v10ProgramsByIdChartsProfitGet(id: uuid) { (viewModel, error) in
@@ -104,7 +85,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getProgramBalanceChart(with programId: String, completion: @escaping (_ tradesChartViewModel: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getBalanceChart(with programId: String, completion: @escaping (_ tradesChartViewModel: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsAPI.v10ProgramsByIdChartsBalanceGet(id: uuid) { (viewModel, error) in
@@ -120,7 +101,7 @@ class ProgramsDataProvider: DataProvider {
             : programFavoritesAdd(with: programId, authorization: authorization, completion: completion)
     }
     
-    static func programReinvestOn(with programId: String, completion: @escaping CompletionBlock) {
+    static func reinvestOn(with programId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
@@ -129,7 +110,7 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func programReinvestOff(with programId: String, completion: @escaping CompletionBlock) {
+    static func reinvestOff(with programId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
 

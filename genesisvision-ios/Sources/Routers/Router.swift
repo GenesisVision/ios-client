@@ -28,6 +28,9 @@ class Router {
     var investorDashboardViewController: InvestorDashboardViewController!
     var managerDashboardViewController: ManagerDashboardViewController!
     var programsViewController: ProgramListViewController!
+    var fundsViewController: ProgramListViewController!
+
+    var assetsViewController: AssetsViewController!
     
     var currentController: UIViewController?
     
@@ -55,7 +58,8 @@ class Router {
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
 
-        self.programsViewController = parentRouter?.programsViewController
+//        self.programsViewController = parentRouter?.programsViewController
+        self.assetsViewController = parentRouter?.assetsViewController
         self.investorDashboardViewController = parentRouter?.investorDashboardViewController
         self.managerDashboardViewController = parentRouter?.managerDashboardViewController
         
@@ -67,12 +71,13 @@ class Router {
     
     // MARK: - Private methods
     private func getProgramsNavigationController() -> UINavigationController? {
-        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
-        self.programsViewController = viewController
+        let assetsVC = AssetsViewController()
+        self.assetsViewController = assetsVC
         
-        let navigationController = BaseNavigationController(rootViewController: programsViewController)
-        let router = ProgramListRouter(parentRouter: self, navigationController: navigationController)
-        programsViewController.viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
+        let navigationController = BaseNavigationController(rootViewController: assetsViewController)
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        let viewModel = AssetsTabmanViewModel(withRouter: router)
+        assetsViewController.viewModel = viewModel
         
         return navigationController
     }

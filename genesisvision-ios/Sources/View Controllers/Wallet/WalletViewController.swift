@@ -51,7 +51,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        addCurrencyTitleButton(viewModel.currencyDelegateManager)
+        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        addCurrencyTitleButton(CurrencyDelegateManager())
         
         bottomViewType = .none
         sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
@@ -257,7 +258,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        navigationTitleView.scrollViewDidScroll(scrollView, threshold: -30.0)
+        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
     }
 }
 

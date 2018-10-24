@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramDetailsViewModel.swift"
-            timestampString = "561927026.121309"
+            filePath = "genesisvision-ios/Sources/Controllers/Managers/AuthManager.swift"
+            timestampString = "562044783.717539"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "isFavorite"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Program Details/ProgramViewController.swift"
-            timestampString = "561927026.122281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "programDetailDidChangeFavoriteState(with:value:request:)"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "getRates(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Data Providers/ProgramsDataProvider.swift"
-            timestampString = "561927026.1225049"
+            filePath = "genesisvision-ios/Sources/Controllers/Managers/AuthManager.swift"
+            timestampString = "562044783.717888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "programFavoritesRemove(with:authorization:completion:)"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "getRates(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

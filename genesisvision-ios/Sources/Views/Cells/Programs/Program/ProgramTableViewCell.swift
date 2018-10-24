@@ -79,8 +79,7 @@ class ProgramTableViewCell: PlateTableViewCell {
         }
     }
     
-    @IBOutlet weak var statusButton: StatusButton!
-    
+    @IBOutlet weak var statusButton: StatusButton! 
     @IBOutlet weak var reinvestSwitch: UISwitch!
     @IBOutlet weak var reinvestLabel: TitleLabel! {
         didSet {

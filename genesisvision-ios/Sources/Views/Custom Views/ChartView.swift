@@ -38,13 +38,13 @@ class ChartView: CombinedChartView {
     
     private var lineChartDataSet: LineChartDataSet! {
         didSet {
-            lineChartDataSet.setColor(UIColor.primary)
+            lineChartDataSet.setColor(UIColor.Cell.greenTitle)
             lineChartDataSet.lineWidth = 1.5
 
             lineChartDataSet.drawFilledEnabled = chartType != .default
             lineChartDataSet.fillFormatter = MyFillFormatter()
 
-            let gradientColors = [UIColor.primary.withAlphaComponent(0.3).cgColor, UIColor.primary.withAlphaComponent(0.0).cgColor]
+            let gradientColors = [UIColor.Cell.greenTitle.withAlphaComponent(0.3).cgColor, UIColor.Cell.greenTitle.withAlphaComponent(0.0).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
 
             lineChartDataSet.fillAlpha = 0.3
@@ -157,7 +157,7 @@ class ChartView: CombinedChartView {
         }
         
         if chartType == .default, let firstValue = lineChartData?.first?.value, let lastValue = lineChartData?.last?.value {
-            lineChartDataSet.setColor(firstValue > lastValue ? UIColor.Font.red : UIColor.primary)
+            lineChartDataSet.setColor(firstValue > lastValue ? UIColor.Cell.redTitle : UIColor.Cell.greenTitle)
         }
 
         scaleXEnabled = chartType == .full
@@ -190,6 +190,7 @@ class ChartView: CombinedChartView {
             maxLimitLine.lineWidth = 1
             maxLimitLine.lineDashLengths = [1.0, 8.0]
             maxLimitLine.labelPosition = .rightBottom
+            maxLimitLine.drawLabelEnabled = false
             maxLimitLine.valueTextColor = UIColor.Cell.title
             maxLimitLine.lineColor = UIColor.Cell.subtitle
             maxLimitLine.valueFont = UIFont.getFont(.regular, size: 10.0)
@@ -199,6 +200,7 @@ class ChartView: CombinedChartView {
             minLimitLine.lineWidth = 1
             minLimitLine.lineDashLengths = [1.0, 8.0]
             minLimitLine.labelPosition = .rightTop
+            minLimitLine.drawLabelEnabled = false
             minLimitLine.valueTextColor = UIColor.Cell.title
             minLimitLine.lineColor = UIColor.Cell.subtitle
             minLimitLine.valueFont = UIFont.getFont(.regular, size: 10.0)
@@ -274,29 +276,50 @@ class ChartView: CombinedChartView {
     
     private func generateBalanceChartData(_ values: [ProgramBalanceChartElement]) -> LineChartData {
         let lineChartData = LineChartData()
+        
         let profitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].profit ?? 0)
+            let profit = values[i].profit ?? 0.0
+            let investorsFunds = values[i].investorsFunds ?? 0.0
+            let managerFunds = values[i].managerFunds ?? 0.0
+            let yValue = profit + investorsFunds + managerFunds
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(values: profitDataEntry, label: "Profit Chart")
-        lineChartDataSet.setColor(.red)
+        lineChartDataSet.setColor(UIColor.Chart.dark)
+        lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
+        lineChartDataSet.fillAlpha = 1.0
+        lineChartDataSet.fillFormatter = nil
+        lineChartDataSet.drawFilledEnabled = true
+        lineChartDataSet.highlightEnabled = true
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            let investorsFunds = values[i].investorsFunds ?? 0.0
+            let managerFunds = values[i].managerFunds ?? 0.0
+            let yValue = investorsFunds + managerFunds
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+        }
+        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
+        lineChartDataSet.setColor(UIColor.Chart.middle)
+        lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.middle.cgColor)
+        lineChartDataSet.fillAlpha = 1.0
+        lineChartDataSet.fillFormatter = nil
+        lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartData.addDataSet(lineChartDataSet)
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].managerFunds ?? 0)
+            let yValue = values[i].managerFunds ?? 0.0
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
-        lineChartDataSet.setColor(.yellow)
+        lineChartDataSet.setColor(UIColor.Chart.dark)
+        lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
+        lineChartDataSet.fillAlpha = 1.0
+        lineChartDataSet.fillFormatter = nil
+        lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
-        lineChartData.addDataSet(lineChartDataSet)
-        
-        
-        let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].investorsFunds ?? 0)
-        }
-        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
-        lineChartDataSet.setColor(.blue)
-        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartData.addDataSet(lineChartDataSet)
         
         return lineChartData

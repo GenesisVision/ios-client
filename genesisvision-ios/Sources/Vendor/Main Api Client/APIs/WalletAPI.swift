@@ -182,33 +182,81 @@ open class WalletAPI {
   "transactions" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "sourceId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "sourceWithdrawalInfo" : {
+      "canResendEmail" : true,
+      "canCancelRequest" : true,
+      "wallet" : "wallet",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceTitle" : "sourceTitle",
     "sourceCurrency" : "Undefined",
+    "sourceProgramInfo" : {
+      "title" : "title"
+    },
     "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "destinationWithdrawalInfo" : {
+      "canResendEmail" : true,
+      "canCancelRequest" : true,
+      "wallet" : "wallet",
+      "status" : "New"
+    },
     "number" : 1,
-    "destinationTitle" : "destinationTitle",
     "sourceType" : "Wallet",
+    "sourceBlockchainInfo" : {
+      "hash" : "hash",
+      "status" : "Undefined"
+    },
     "action" : "Transfer",
     "destinationType" : "Wallet",
     "destinationCurrency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "destinationBlockchainInfo" : {
+      "hash" : "hash",
+      "status" : "Undefined"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "destinationProgramInfo" : {
+      "title" : "title"
+    }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "sourceId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "sourceWithdrawalInfo" : {
+      "canResendEmail" : true,
+      "canCancelRequest" : true,
+      "wallet" : "wallet",
+      "status" : "New"
+    },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceTitle" : "sourceTitle",
     "sourceCurrency" : "Undefined",
+    "sourceProgramInfo" : {
+      "title" : "title"
+    },
     "destinationId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "destinationWithdrawalInfo" : {
+      "canResendEmail" : true,
+      "canCancelRequest" : true,
+      "wallet" : "wallet",
+      "status" : "New"
+    },
     "number" : 1,
-    "destinationTitle" : "destinationTitle",
     "sourceType" : "Wallet",
+    "sourceBlockchainInfo" : {
+      "hash" : "hash",
+      "status" : "Undefined"
+    },
     "action" : "Transfer",
     "destinationType" : "Wallet",
     "destinationCurrency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "destinationBlockchainInfo" : {
+      "hash" : "hash",
+      "status" : "Undefined"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "destinationProgramInfo" : {
+      "title" : "title"
+    }
   } ]
 }}]
      

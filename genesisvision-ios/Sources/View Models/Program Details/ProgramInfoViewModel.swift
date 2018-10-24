@@ -39,12 +39,19 @@ final class ProgramInfoViewModel {
             if let availableInvestment = programDetailsFull?.availableInvestment {
                 self.availableInvestment = availableInvestment
             }
+            
+            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested {
+                if !sections.contains(.yourInvestment) {
+                    sections.insert(.yourInvestment, at: 1)
+                }
+                
+            }
         }
     }
     
     var availableInvestment: Double = 0.0
     
-    private var sections: [SectionType] = [.details, .yourInvestment, .investNow]
+    private var sections: [SectionType] = [.details, .investNow]
     private var rows: [RowType] = [.manager, .strategy, .period]
     
     private var models: [CellViewAnyModel]?
@@ -141,7 +148,7 @@ extension ProgramInfoViewModel {
     
     func reinvest(_ value: Bool) {
         if value {
-            ProgramsDataProvider.programReinvestOn(with: self.programId) { (result) in
+            ProgramsDataProvider.reinvestOn(with: self.programId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -150,7 +157,7 @@ extension ProgramInfoViewModel {
                 }
             }
         } else {
-            ProgramsDataProvider.programReinvestOff(with: self.programId) { (result) in
+            ProgramsDataProvider.reinvestOff(with: self.programId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -159,13 +166,6 @@ extension ProgramInfoViewModel {
                 }
             }
         }
-    }
-    
-    func showFullChart() {
-        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.restrictRotation)
-        
-        guard let programDetailsFull = programDetailsFull else { return }
-        router.show(routeType: .fullChart(programDetailsFull: programDetailsFull))
     }
 }
 
@@ -206,7 +206,7 @@ extension ProgramInfoViewModel {
         guard let currency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         
-        ProgramsDataProvider.getProgram(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.get(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

@@ -17,35 +17,11 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let router = viewModel.router as? DashboardRouter {
-            pageboyDataSource = AssetsPageboyViewControllerDataSource(router: router)
-        }
+        pageboyDataSource = AssetsPageboyViewControllerDataSource(router: viewModel.router)
         
         self.dataSource = pageboyDataSource
-        
-        // configure the bar
-        if let programsCount = viewModel.dashboard?.programsCount, let fundsCount = viewModel.dashboard?.fundsCount {
-            self.bar.items = [Item(title: "Programs \(programsCount)"),
-                              Item(title: "Funds \(fundsCount)")]
-        } else {
+
             self.bar.items = [Item(title: "Programs"),
                               Item(title: "Funds")]
-        }
-    }
-
-    // MARK: - Public methods
-    // MARK: - Private methods
-}
-
-extension AssetsViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
-        showProgressHUD()
-        if let programListViewController = pageboyDataSource.controllers.first as? ProgramListViewController,
-            let viewModel = programListViewController.viewModel {
-            viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
-                self?.hideHUD()
-            }
-        }
     }
 }
-

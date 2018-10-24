@@ -111,7 +111,6 @@ final class NavigationTitleView: UIView {
     ///   - scrollView: The scroll-view object in which the scrolling occurred.
     ///   - threshold: The minimum distance that must be scrolled before the title view will begin scrolling up into view
     func scrollViewDidScroll(_ scrollView: UIScrollView, threshold: CGFloat = 0) {
-        guard scrollView.contentOffset.y > 0 else { return }
         contentOffset = scrollView.contentOffset.y - threshold
     }
     

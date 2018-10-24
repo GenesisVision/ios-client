@@ -30,7 +30,7 @@ final class ProgramViewModel {
     
     func fetch(completion: @escaping CompletionBlock) {
         let сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
-        ProgramsDataProvider.getProgram(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.get(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
             self?.programDetailsFull = viewModel
             completion(.success)

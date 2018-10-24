@@ -944,10 +944,10 @@ your email.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKQ-0h-Iff">
-                                        <rect key="frame" x="0.0" y="560" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="560" width="320" height="80"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hyD-wG-wyv">
-                                                <rect key="frame" x="30" y="0.0" width="260" height="88"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hyD-wG-wyv">
+                                                <rect key="frame" x="30" y="0.0" width="260" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cei-h2-KP3">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
@@ -984,7 +984,7 @@ your email.</string>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-BS-eVQ">
-                                                        <rect key="frame" x="0.0" y="48" width="260" height="40"/>
+                                                        <rect key="frame" x="0.0" y="40" width="260" height="40"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jP2-x0-1Dl">
                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>

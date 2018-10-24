@@ -19,13 +19,16 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Period"
         
         if let periodEnds = periodEnds, let periodStarts = periodStarts, let periodDuration = periodDuration {
-            cell.durationLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
-            
-            let periodLeft = periodEnds.timeSinceDate(fromDate: Date())
-            
-            cell.periodLeftLabel.text = periodLeft + " left"
+            let duration = periodEnds.timeSinceDate(fromDate: periodStarts)
+            print(duration)
+            cell.durationLabel.text = duration
             
             let today = Date()
+            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
+            
+            cell.periodLeftLabel.text = periodLeft.isEmpty ? "The period is over." : periodLeft + " left"
+            
+            
             if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
                 cell.progressView.progress = Float(periodDuration - minutes) / Float(periodDuration)
             }

@@ -18,10 +18,10 @@ class DashboardRouter: Router {
     
     var chartsViewController: ChartsViewController?
     var eventsViewController: EventsViewController?
-    var assetsViewController: AssetsViewController?
+    var dashboardAssetsViewController: AssetsViewController?
     
     var programListViewController: DashboardProgramListViewController?
-    var fundListController: DashboardProgramListViewController?
+    var fundListViewController: DashboardProgramListViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {

@@ -72,7 +72,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
-        bottomSheetController.addNavigationBar("In Requests")
+        bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
         viewModel.inRequestsDelegateManager.programRequests = programRequests
         

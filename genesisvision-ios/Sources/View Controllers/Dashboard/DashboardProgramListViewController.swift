@@ -70,8 +70,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func sortMethod() {
-        bottomSheetController = BottomSheetController()
-        
         bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: #imageLiteral(resourceName: "img_profit_filter_icon"), selectedImage: #imageLiteral(resourceName: "img_profit_filter_desc_icon"), buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in

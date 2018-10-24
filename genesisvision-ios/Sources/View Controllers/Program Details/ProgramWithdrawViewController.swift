@@ -153,7 +153,6 @@ class ProgramWithdrawViewController: BaseViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self?.bottomSheetController.dismiss()
                     self?.viewModel.goToBack()
                 }
             case .failure(let errorType):
@@ -256,6 +255,7 @@ extension ProgramWithdrawViewController: InvestWithdrawConfirmViewProtocol {
     }
     
     func confirmButtonDidPress() {
+        bottomSheetController.dismiss()
         withdrawMethod()
     }
 }

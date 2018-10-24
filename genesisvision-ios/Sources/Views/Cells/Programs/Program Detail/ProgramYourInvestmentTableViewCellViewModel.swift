@@ -15,6 +15,12 @@ struct ProgramYourInvestmentTableViewCellViewModel {
 
 extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramYourInvestmentTableViewCell) {
+        cell.withdrawButton.setEnabled(false)
+        
+        if let canWithdraw = programDetailsFull?.personalProgramDetails?.canWithdraw {
+            cell.withdrawButton.setEnabled(canWithdraw)
+        }
+        
         cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
         
         cell.programYourInvestmentProtocol = programYourInvestmentProtocol
@@ -33,17 +39,17 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.reinvestSwitch.isOn = isReinvesting
         }
         
+        
         if let value = programDetailsFull?.personalProgramDetails?.value, let programCurrency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") {
+            cell.investedTitleLabel.text = "invested"
+            cell.investedValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            
             cell.valueTitleLabel.text = "value"
             cell.valueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
         }
         
-        if let invested = programDetailsFull?.statistic?.investedAmount {
-            cell.investedTitleLabel.text = "invested"
-            cell.investedValueLabel.text = invested.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        }
-        
         if let profit = programDetailsFull?.personalProgramDetails?.profit {
+            print(profit)
             cell.profitTitleLabel.text = "profit"
             cell.profitValueLabel.text = profit.rounded(toPlaces: 2).toString() + "%"
         }

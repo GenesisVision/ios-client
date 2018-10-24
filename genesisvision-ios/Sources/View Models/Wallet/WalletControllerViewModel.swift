@@ -32,7 +32,6 @@ final class WalletControllerViewModel {
     var title: String = "Wallet"
     
     var wallet: WalletSummary?
-    var currencyDelegateManager = CurrencyDelegateManager()
     
     private var sections: [SectionType] = [.header, .transactions]
 

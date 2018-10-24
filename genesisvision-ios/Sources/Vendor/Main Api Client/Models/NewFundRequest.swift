@@ -13,7 +13,7 @@ open class NewFundRequest: Codable {
 
     public var exitFee: Double?
     public var managementFee: Double?
-    public var assetsParts: [FundAssetPart]?
+    public var assets: [FundAssetPart]?
     public var title: String?
     public var description: String?
     public var logo: String?
@@ -21,10 +21,10 @@ open class NewFundRequest: Codable {
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assetsParts: [FundAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?) {
+    public init(exitFee: Double?, managementFee: Double?, assets: [FundAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?) {
         self.exitFee = exitFee
         self.managementFee = managementFee
-        self.assetsParts = assetsParts
+        self.assets = assets
         self.title = title
         self.description = description
         self.logo = logo
@@ -40,7 +40,7 @@ open class NewFundRequest: Codable {
 
         try container.encodeIfPresent(exitFee, forKey: "exitFee")
         try container.encodeIfPresent(managementFee, forKey: "managementFee")
-        try container.encodeIfPresent(assetsParts, forKey: "assetsParts")
+        try container.encodeIfPresent(assets, forKey: "assets")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -54,7 +54,7 @@ open class NewFundRequest: Codable {
 
         exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
         managementFee = try container.decodeIfPresent(Double.self, forKey: "managementFee")
-        assetsParts = try container.decodeIfPresent([FundAssetPart].self, forKey: "assetsParts")
+        assets = try container.decodeIfPresent([FundAssetPart].self, forKey: "assets")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

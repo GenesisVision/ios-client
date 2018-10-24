@@ -77,16 +77,20 @@ open class WalletTransaction: Codable {
     public var sourceId: UUID?
     public var sourceType: SourceType?
     public var sourceCurrency: SourceCurrency?
-    public var sourceTitle: String?
+    public var sourceProgramInfo: ProgramInfo?
+    public var sourceBlockchainInfo: BlockchainInfo?
+    public var sourceWithdrawalInfo: WithdrawalInfo?
     public var action: Action?
     public var destinationId: UUID?
     public var destinationType: DestinationType?
     public var destinationCurrency: DestinationCurrency?
-    public var destinationTitle: String?
+    public var destinationProgramInfo: ProgramInfo?
+    public var destinationBlockchainInfo: BlockchainInfo?
+    public var destinationWithdrawalInfo: WithdrawalInfo?
 
 
     
-    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, sourceTitle: String?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?, destinationTitle: String?) {
+    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, sourceProgramInfo: ProgramInfo?, sourceBlockchainInfo: BlockchainInfo?, sourceWithdrawalInfo: WithdrawalInfo?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?, destinationProgramInfo: ProgramInfo?, destinationBlockchainInfo: BlockchainInfo?, destinationWithdrawalInfo: WithdrawalInfo?) {
         self.id = id
         self.amount = amount
         self.amountConverted = amountConverted
@@ -95,12 +99,16 @@ open class WalletTransaction: Codable {
         self.sourceId = sourceId
         self.sourceType = sourceType
         self.sourceCurrency = sourceCurrency
-        self.sourceTitle = sourceTitle
+        self.sourceProgramInfo = sourceProgramInfo
+        self.sourceBlockchainInfo = sourceBlockchainInfo
+        self.sourceWithdrawalInfo = sourceWithdrawalInfo
         self.action = action
         self.destinationId = destinationId
         self.destinationType = destinationType
         self.destinationCurrency = destinationCurrency
-        self.destinationTitle = destinationTitle
+        self.destinationProgramInfo = destinationProgramInfo
+        self.destinationBlockchainInfo = destinationBlockchainInfo
+        self.destinationWithdrawalInfo = destinationWithdrawalInfo
     }
     
 
@@ -118,12 +126,16 @@ open class WalletTransaction: Codable {
         try container.encodeIfPresent(sourceId, forKey: "sourceId")
         try container.encodeIfPresent(sourceType, forKey: "sourceType")
         try container.encodeIfPresent(sourceCurrency, forKey: "sourceCurrency")
-        try container.encodeIfPresent(sourceTitle, forKey: "sourceTitle")
+        try container.encodeIfPresent(sourceProgramInfo, forKey: "sourceProgramInfo")
+        try container.encodeIfPresent(sourceBlockchainInfo, forKey: "sourceBlockchainInfo")
+        try container.encodeIfPresent(sourceWithdrawalInfo, forKey: "sourceWithdrawalInfo")
         try container.encodeIfPresent(action, forKey: "action")
         try container.encodeIfPresent(destinationId, forKey: "destinationId")
         try container.encodeIfPresent(destinationType, forKey: "destinationType")
         try container.encodeIfPresent(destinationCurrency, forKey: "destinationCurrency")
-        try container.encodeIfPresent(destinationTitle, forKey: "destinationTitle")
+        try container.encodeIfPresent(destinationProgramInfo, forKey: "destinationProgramInfo")
+        try container.encodeIfPresent(destinationBlockchainInfo, forKey: "destinationBlockchainInfo")
+        try container.encodeIfPresent(destinationWithdrawalInfo, forKey: "destinationWithdrawalInfo")
     }
 
     // Decodable protocol methods
@@ -139,12 +151,16 @@ open class WalletTransaction: Codable {
         sourceId = try container.decodeIfPresent(UUID.self, forKey: "sourceId")
         sourceType = try container.decodeIfPresent(SourceType.self, forKey: "sourceType")
         sourceCurrency = try container.decodeIfPresent(SourceCurrency.self, forKey: "sourceCurrency")
-        sourceTitle = try container.decodeIfPresent(String.self, forKey: "sourceTitle")
+        sourceProgramInfo = try container.decodeIfPresent(ProgramInfo.self, forKey: "sourceProgramInfo")
+        sourceBlockchainInfo = try container.decodeIfPresent(BlockchainInfo.self, forKey: "sourceBlockchainInfo")
+        sourceWithdrawalInfo = try container.decodeIfPresent(WithdrawalInfo.self, forKey: "sourceWithdrawalInfo")
         action = try container.decodeIfPresent(Action.self, forKey: "action")
         destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
         destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
         destinationCurrency = try container.decodeIfPresent(DestinationCurrency.self, forKey: "destinationCurrency")
-        destinationTitle = try container.decodeIfPresent(String.self, forKey: "destinationTitle")
+        destinationProgramInfo = try container.decodeIfPresent(ProgramInfo.self, forKey: "destinationProgramInfo")
+        destinationBlockchainInfo = try container.decodeIfPresent(BlockchainInfo.self, forKey: "destinationBlockchainInfo")
+        destinationWithdrawalInfo = try container.decodeIfPresent(WithdrawalInfo.self, forKey: "destinationWithdrawalInfo")
     }
 }
 

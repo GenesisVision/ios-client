@@ -20,18 +20,21 @@ class ProgramPeriodTableViewCell: UITableViewCell {
         didSet {
             titleLabel.textColor = UIColor.Cell.subtitle
             titleLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            titleLabel.text = ""
         }
     }
     @IBOutlet var durationLabel: UILabel! {
         didSet {
             durationLabel.textColor = UIColor.Cell.title
             durationLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            durationLabel.text = ""
         }
     }
     @IBOutlet var periodLeftLabel: UILabel! {
         didSet {
             periodLeftLabel.textColor = UIColor.Cell.title
             periodLeftLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            periodLeftLabel.text = ""
         }
     }
     
