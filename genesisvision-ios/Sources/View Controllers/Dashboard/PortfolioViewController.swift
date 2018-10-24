@@ -156,8 +156,12 @@ class PortfolioViewController: BaseViewController {
         bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
             tableView.separatorStyle = .none
             tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-            tableView.delegate = self?.viewModel.selectedChartAssetsDelegateManager
-            tableView.dataSource = self?.viewModel.selectedChartAssetsDelegateManager
+            
+            if let selectedChartAssetsDelegateManager = self?.viewModel.selectedChartAssetsDelegateManager {
+                selectedChartAssetsDelegateManager.tableView = tableView
+                tableView.delegate = selectedChartAssetsDelegateManager
+                tableView.dataSource = selectedChartAssetsDelegateManager
+            }
         }
     }
     
@@ -182,11 +186,16 @@ class PortfolioViewController: BaseViewController {
         }
     }
     
-    private func selectBar(_ entry: ChartDataEntry) {
+    private func selectChart(_ entry: ChartDataEntry) {
         let date = Date(timeIntervalSince1970: entry.x)
         
-        if viewModel.showSelectedChartAssets(date) {
-            showBottomAssetsView()
+        if let valueChartBar = viewModel.selectChart(date) {
+            if let topAssets = valueChartBar.topAssets {
+                print(topAssets)
+                showBottomAssetsView()
+            }
+            
+            
         }
     }
     
@@ -240,7 +249,7 @@ extension PortfolioViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
         
-        selectBar(entry)
+        selectChart(entry)
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {

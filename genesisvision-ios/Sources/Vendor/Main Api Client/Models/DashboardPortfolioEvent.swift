@@ -26,11 +26,11 @@ open class DashboardPortfolioEvent: Codable {
         case eur = "EUR"
     }
     public enum ModelType: String, Codable { 
+        case loss = "Loss"
+        case profit = "Profit"
         case all = "All"
         case invest = "Invest"
         case withdraw = "Withdraw"
-        case profit = "Profit"
-        case loss = "Loss"
         case reinvest = "Reinvest"
         case cancelled = "Cancelled"
         case ended = "Ended"

@@ -49,4 +49,14 @@ class WalletDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
+    static func createWithdrawalRequest(with amount: Double, address: String, currency: CreateWithdrawalRequestModel.Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        let requestModel = CreateWithdrawalRequestModel(amount: amount, currency: currency, address: address, twoFactorCode: twoFactorCode)
+        
+        WalletAPI.v10WalletWithdrawRequestNewPost(authorization: authorization, model: requestModel) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
 }

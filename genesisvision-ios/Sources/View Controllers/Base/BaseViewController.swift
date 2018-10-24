@@ -158,7 +158,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
             tableView.separatorStyle = .none
             
             guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
-            tableView.registerNibs(for: currencyDelegateManager.currencyCellModelsForRegistration)
+            tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
             tableView.delegate = currencyDelegateManager
             tableView.dataSource = currencyDelegateManager
         }
@@ -166,6 +166,18 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.present()
     }
     
+    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.initializeHeight = 300.0
+        bottomSheetController.viewActionType = .tappedDismiss
+        
+        let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
+        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle)
+        errorBottomSheetView.bottomSheetController = self.bottomSheetController
+        bottomSheetController.addContentsView(errorBottomSheetView)
+        bottomSheetController.present()
+    }
     
     func hideAll() {
         hideHUD()

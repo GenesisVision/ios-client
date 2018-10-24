@@ -18,6 +18,13 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
         }
     }
     
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        self.bounces = false
+    }
+    
     // MARK: - Public Methods
     func setup(_ programDetailsFull: ProgramDetailsFull?) {
         viewModel.setup(programDetailsFull)

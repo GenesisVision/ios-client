@@ -26,6 +26,7 @@ open class ManagerPortfolioEvent: Codable {
         case eur = "EUR"
     }
     public enum ModelType: String, Codable { 
+        case all = "All"
         case assetStarted = "AssetStarted"
         case programPeriodStats = "ProgramPeriodStats"
         case programPeriodEnds = "ProgramPeriodEnds"

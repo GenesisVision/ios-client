@@ -1,17 +1,24 @@
 //
-//  ManagerProgramListViewController.swift
+//  DashboardFundListViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 18/10/2018.
+//  Created by George on 25/10/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class ManagerProgramListViewController: BaseViewControllerWithTableView {
+class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: ManagerProgramListViewModel!
+    var viewModel: DashboardProgramListViewModel!
+    
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     
     // MARK: - Views
     
@@ -30,7 +37,6 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
-        setupTableConfiguration()
         registerForPreviewing()
         
         setupUI()
@@ -97,7 +103,7 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
     }
     
     func showFilterVC() {
-//        router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
+        //        router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
     }
     
     // MARK: - Actions
@@ -107,20 +113,20 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension ManagerProgramListViewController {
+extension DashboardFundListViewController {
     override func sortButtonAction() {
         sortMethod()
     }
     
     override func filterButtonAction() {
-//        if let viewModel = viewModel {
-//            viewModel.showFilterVC()
-//        }
+        //        if let viewModel = viewModel {
+        //            viewModel.showFilterVC()
+        //        }
     }
 }
 
 // MARK: - UIViewControllerPreviewingDelegate
-extension ManagerProgramListViewController: UIViewControllerPreviewingDelegate {
+extension DashboardFundListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
         
@@ -143,13 +149,23 @@ extension ManagerProgramListViewController: UIViewControllerPreviewingDelegate {
 }
 
 // MARK: - ReloadDataProtocol
-extension ManagerProgramListViewController: ReloadDataProtocol {
+extension DashboardFundListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
     }
 }
 
-extension ManagerProgramListViewController {
+// MARK: - ProgramProtocol
+extension DashboardFundListViewController: ProgramProtocol {
+    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+            self?.hideAll()
+        }
+    }
+}
+
+extension DashboardFundListViewController {
     override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = viewModel.noDataText()
         let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
@@ -175,19 +191,10 @@ extension ManagerProgramListViewController {
     }
 }
 
-extension ManagerProgramListViewController: SortingDelegate {
+extension DashboardFundListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
         fetch()
     }
 }
 
-// MARK: - ProgramProtocol
-extension ManagerProgramListViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
-        showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
-            self?.hideAll()
-        }
-    }
-}

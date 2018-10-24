@@ -55,9 +55,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="currencyRateLabel" destination="oGQ-y3-MLw" id="IsL-ob-P9y"/>
-                <outlet property="currencyTitleLabel" destination="dgj-HC-Lyi" id="FBi-3K-TUY"/>
                 <outlet property="selectedImageView" destination="w3o-y3-hvD" id="f68-nz-BAA"/>
+                <outlet property="subtitleLabel" destination="oGQ-y3-MLw" id="Ci9-2O-jbS"/>
+                <outlet property="titleLabel" destination="dgj-HC-Lyi" id="d3D-7F-FPB"/>
             </connections>
             <point key="canvasLocation" x="34" y="64"/>
         </tableViewCell>

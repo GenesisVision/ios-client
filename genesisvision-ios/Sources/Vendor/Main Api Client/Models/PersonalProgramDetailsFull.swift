@@ -23,21 +23,25 @@ open class PersonalProgramDetailsFull: Codable {
     public var isOwnProgram: Bool?
     public var canInvest: Bool?
     public var canWithdraw: Bool?
+    public var hasNotifications: Bool?
     public var value: Double?
     public var profit: Double?
+    public var invested: Double?
     public var status: Status?
 
 
     
-    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, value: Double?, profit: Double?, status: Status?) {
+    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, status: Status?) {
         self.isReinvest = isReinvest
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
+        self.hasNotifications = hasNotifications
         self.value = value
         self.profit = profit
+        self.invested = invested
         self.status = status
     }
     
@@ -54,8 +58,10 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
         try container.encodeIfPresent(canInvest, forKey: "canInvest")
         try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
+        try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(invested, forKey: "invested")
         try container.encodeIfPresent(status, forKey: "status")
     }
 
@@ -70,8 +76,10 @@ open class PersonalProgramDetailsFull: Codable {
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
         canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
         canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
+        hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
+        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }

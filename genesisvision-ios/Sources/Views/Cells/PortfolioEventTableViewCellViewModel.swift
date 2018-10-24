@@ -42,7 +42,7 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
             }
         }
             
-        if let title = dashboardPortfolioEvent.title {
+        if let title = dashboardPortfolioEvent.description {
             cell.titleLabel.text = title
         }
         

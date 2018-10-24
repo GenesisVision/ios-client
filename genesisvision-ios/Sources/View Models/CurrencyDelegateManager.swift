@@ -22,7 +22,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     var selectedRate: RateItem?
     var selectedIndex: Int = 0
     
-    var currencyCellModelsForRegistration: [CellViewAnyModel.Type] {
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
     }
     
@@ -35,8 +35,6 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
             self.rates = rates
             
             self.updateSelectedIndex()
-            
-//            self.tableView?.reloadData()
         }
     }
     
@@ -70,8 +68,9 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         let rate = rates[indexPath.row]
         let currencyValue = rate.currency?.rawValue ?? ""
         let currencyRate = rate.rate ?? 0.0
-
-        cell.configure(currencyValue: currencyValue, currencyRate: currencyRate, selected: isSelected)
+        let subtitle = "1 GVT = \(currencyRate) " + currencyValue
+        
+        cell.configure(title: currencyValue, subtitle: subtitle, selected: isSelected)
         
         return cell
     }

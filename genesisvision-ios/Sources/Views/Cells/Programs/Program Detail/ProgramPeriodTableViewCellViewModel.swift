@@ -20,7 +20,6 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
         
         if let periodEnds = periodEnds, let periodStarts = periodStarts, let periodDuration = periodDuration {
             let duration = periodEnds.timeSinceDate(fromDate: periodStarts)
-            print(duration)
             cell.durationLabel.text = duration
             
             let today = Date()

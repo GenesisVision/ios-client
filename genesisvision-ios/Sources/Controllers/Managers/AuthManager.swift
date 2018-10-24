@@ -99,6 +99,21 @@ class AuthManager {
         }, errorCompletion: completionError)
     }
     
+    static func twoFactorEnabled(completion: @escaping (Bool) -> Void) {
+        getTwoFactorStatus(completion: { (model) in
+            completion(true)
+        }) { (result) in
+            switch result {
+            case .success:
+                completion(false)
+                break
+            case .failure(let errorType):
+                completion(false)
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
+    
     static func getRates(completion: @escaping (_ rate: RatesModel?) -> Void) {
         guard ratesModel == nil else {
             completion(ratesModel)
@@ -112,8 +127,6 @@ class AuthManager {
             
             completion(ratesModel)
         }) { (result) in
-            print("!!!!!!!!!!!!!!!!!")
-            print(result)
             switch result {
             case .success:
                 break
@@ -139,16 +152,15 @@ class AuthManager {
         }, errorCompletion: completionError)
     }
     
-    static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus) -> Void, completionError: @escaping CompletionBlock) {
         if let twoFactorStatus = twoFactorStatus {
             completion(twoFactorStatus)
         }
         
         TwoFactorDataProvider.auth2faGetStatus(completion: { (viewModel) in
-            if viewModel != nil  {
-                twoFactorStatus = viewModel
-            }
+            guard let viewModel = viewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
+            twoFactorStatus = viewModel
             completion(viewModel)
         }, errorCompletion: completionError)
     }

@@ -54,6 +54,8 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func reloadData() {
@@ -84,6 +86,25 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         }
         
         bottomSheetController.present()
+    }
+    
+    override func fetch() {
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
     }
 }
 

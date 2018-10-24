@@ -151,12 +151,8 @@ final class SettingsViewModel {
     
     func fetchTwoFactorStatus(completion: @escaping CompletionBlock) {
         AuthManager.getTwoFactorStatus(completion: { [weak self] (viewModel) in
-            if let twoFactorModel = viewModel {
-                self?.twoFactorModel = twoFactorModel
-                completion(.success)
-            }
-            
-            completion(.failure(errorType: .apiError(message: nil)))
+            self?.twoFactorModel = viewModel
+            completion(.success)
             }, completionError: completion)
     }
     

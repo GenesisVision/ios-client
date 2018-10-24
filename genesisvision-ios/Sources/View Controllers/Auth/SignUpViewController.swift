@@ -69,21 +69,34 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var privacyPolicyButton: UIButton! {
         didSet {
             privacyPolicyButton.setTitleColor(UIColor.Cell.title, for: .normal)
-            privacyPolicyButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+            privacyPolicyButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
+            privacyPolicyButton.setTitle("I accept the Privacy Policy", for: .normal)
         }
     }
-    @IBOutlet var notAmericanButton: UIButton! {
+    @IBOutlet var termsButton: UIButton! {
         didSet {
-            notAmericanButton.isUserInteractionEnabled = false
-            notAmericanButton.setTitleColor(UIColor.Cell.title, for: .normal)
-            notAmericanButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+            termsButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            termsButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
+            termsButton.setTitle("I accept the Terms of Service", for: .normal)
+        }
+    }
+    @IBOutlet var notAmericanLabel: SubtitleLabel! {
+        didSet {
+            notAmericanLabel.textColor = UIColor.Cell.title
+            notAmericanLabel.text = "I certify that I am not a resident or citizen of USA"
         }
     }
     
     @IBOutlet var privacyPolicySwitchButton: UIButton! {
         didSet {
-            privacyPolicySwitchButton.setTitleColor(UIColor.Cell.title, for: .normal)
-            privacyPolicySwitchButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+            privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
+    @IBOutlet var termsSwitchButton: UIButton! {
+        didSet {
+            termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
         }
     }
     @IBOutlet var notAmericanSwitchButton: UIButton! {
@@ -167,13 +180,13 @@ class SignUpViewController: BaseViewController {
         viewModel.showPrivacy()
     }
     
-    @IBAction func notAmericanButtonAction(_ sender: UIButton) {
-        
+    @IBAction func showTermsButtonAction(_ sender: UIButton) {
+        viewModel.showTerms()
     }
     
     @IBAction func switchButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && notAmericanSwitchButton.isSelected)
+        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && termsSwitchButton.isSelected && notAmericanSwitchButton.isSelected)
     }
 }
 

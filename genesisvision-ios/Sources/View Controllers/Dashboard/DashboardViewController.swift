@@ -262,8 +262,9 @@ extension DashboardViewController {
 }
 
 extension DashboardViewController: SortingDelegate {
-    func didSelectSorting(at indexPath: IndexPath) {
+    func didSelectSorting() {
         bottomSheetController.dismiss()
+        fetch()
     }
 }
 

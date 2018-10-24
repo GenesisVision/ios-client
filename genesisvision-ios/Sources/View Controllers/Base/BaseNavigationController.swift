@@ -54,7 +54,7 @@ class BaseNavigationController: UINavigationController {
     }
     
     private func applyTheme() {
-        navigationBar.barTintColor = UIColor.NavBar.colorScheme().backgroundColor
-        navigationBar.tintColor = UIColor.NavBar.colorScheme().textColor
+//        navigationBar.barTintColor = UIColor.NavBar.colorScheme().backgroundColor
+//        navigationBar.tintColor = UIColor.NavBar.colorScheme().textColor
     }
 }

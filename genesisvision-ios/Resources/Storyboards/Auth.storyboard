@@ -944,10 +944,10 @@ your email.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKQ-0h-Iff">
-                                        <rect key="frame" x="0.0" y="560" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="560" width="320" height="120"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hyD-wG-wyv">
-                                                <rect key="frame" x="30" y="0.0" width="260" height="80"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hyD-wG-wyv">
+                                                <rect key="frame" x="30" y="0.0" width="260" height="120"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cei-h2-KP3">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
@@ -983,20 +983,49 @@ your email.</string>
                                                             <constraint firstAttribute="height" constant="40" id="kTu-cz-5zQ"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-BS-eVQ">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cau-bC-icg">
                                                         <rect key="frame" x="0.0" y="40" width="260" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jP2-x0-1Dl">
+                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-8X-vbv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="ZmO-57-m9g"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="rue-jF-4qd"/>
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                <state key="normal" title="Not american" image="img_arrow_right_icon"/>
+                                                                <state key="normal" title="Privacy policy" image="img_arrow_right_icon"/>
                                                                 <connections>
-                                                                    <action selector="notAmericanButtonAction:" destination="m8t-Sa-Hfl" eventType="touchUpInside" id="0Ya-7g-OTb"/>
+                                                                    <action selector="showTermsButtonAction:" destination="m8t-Sa-Hfl" eventType="touchUpInside" id="2dC-Md-JpO"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-ET-BgW">
+                                                                <rect key="frame" x="220" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="Xpe-ET-BgW" secondAttribute="height" multiplier="1:1" id="78t-LF-Fk1"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="mYB-eI-NFQ"/>
+                                                                </constraints>
+                                                                <color key="tintColor" red="0.074509803920000006" green="0.1176470588" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                                <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <state key="normal" image="img_checkbox_unselected_icon"/>
+                                                                <state key="selected" image="img_checkbox_selected_icon"/>
+                                                                <connections>
+                                                                    <action selector="switchButtonAction:" destination="m8t-Sa-Hfl" eventType="touchUpInside" id="qhL-X0-QD9"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="8z2-LC-nEU"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-BS-eVQ">
+                                                        <rect key="frame" x="0.0" y="80" width="260" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I certify that I am not a resident or citizen of USA" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c86-4P-39g" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaQ-Nc-Lud">
                                                                 <rect key="frame" x="220" y="0.0" width="40" height="40"/>
                                                                 <constraints>
@@ -1080,13 +1109,15 @@ your email.</string>
                         <outlet property="confirmTitleLabel" destination="45w-bF-Nrj" id="4r9-F2-xKk"/>
                         <outlet property="emailTextField" destination="q4Z-he-Gy5" id="wMO-ax-FJh"/>
                         <outlet property="emailTitleLabel" destination="fKL-jt-rBp" id="zkR-FB-Uo1"/>
-                        <outlet property="notAmericanButton" destination="jP2-x0-1Dl" id="xUr-so-RDe"/>
+                        <outlet property="notAmericanLabel" destination="c86-4P-39g" id="WpN-aC-TO6"/>
                         <outlet property="notAmericanSwitchButton" destination="MaQ-Nc-Lud" id="Klx-kl-Tep"/>
                         <outlet property="passwordTextField" destination="mkk-1Y-xdJ" id="NHf-Rw-9gt"/>
                         <outlet property="passwordTitleLabel" destination="kBc-D7-stt" id="yxd-Gh-t23"/>
                         <outlet property="privacyPolicyButton" destination="cxy-Bb-1Vk" id="X4f-ht-SX1"/>
                         <outlet property="privacyPolicySwitchButton" destination="S6k-UB-XTA" id="XJe-kS-rJr"/>
                         <outlet property="signUpButton" destination="IA4-KX-bxP" id="Pp8-z7-Q4L"/>
+                        <outlet property="termsButton" destination="Hzv-8X-vbv" id="gS3-wL-fWR"/>
+                        <outlet property="termsSwitchButton" destination="Xpe-ET-BgW" id="8D4-Id-bGc"/>
                         <outlet property="usernameStackView" destination="hST-cd-D4b" id="ve8-tE-Nck"/>
                         <outlet property="usernameTextField" destination="5ZY-wo-VD1" id="bAY-kl-Wuy"/>
                         <outlet property="usernameTitleLabel" destination="3fT-MC-pGB" id="83Z-cw-j4S"/>

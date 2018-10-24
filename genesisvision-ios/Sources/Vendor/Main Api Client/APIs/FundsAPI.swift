@@ -397,11 +397,13 @@ open class FundsAPI {
     "percent" : 5.962133916683182
   } ],
   "personalFundDetails" : {
+    "hasNotifications" : true,
     "isOwnProgram" : true,
     "canWithdraw" : true,
     "canInvest" : true,
-    "value" : 5.025004791520295,
-    "profit" : 9.965781217890562,
+    "value" : 9.965781217890562,
+    "profit" : 9.369310271410669,
+    "invested" : 6.683562403749608,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Active"
@@ -506,21 +508,21 @@ open class FundsAPI {
      Funds list
      - GET /v1.0/funds
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 8,
   "funds" : [ {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 7.457744773683766,
-      "drawdownPercent" : 1.1730742509559433,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 4
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -533,24 +535,26 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -566,19 +570,19 @@ open class FundsAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 7.457744773683766,
-      "drawdownPercent" : 1.1730742509559433,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 4
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -591,24 +595,26 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"

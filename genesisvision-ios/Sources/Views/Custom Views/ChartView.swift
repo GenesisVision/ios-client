@@ -15,9 +15,16 @@ class MyFillFormatter: IFillFormatter {
     
 }
 
+protocol ChartMarkerProtocol: class {
+    func didHideMarker()
+    func didChangeMarker()
+}
+
+
 class ChartView: CombinedChartView {
 
     // MARK: - Variables
+    weak var chartMarkerProtocol: ChartMarkerProtocol?
     weak var chartViewProtocol: ChartViewProtocol?
 
     private var barChartData: [ValueChartBar]?
@@ -70,7 +77,7 @@ class ChartView: CombinedChartView {
             barChartDataSet.setColor(UIColor.Cell.title)
 //            barChartDataSet.axisDependency = .left
             barChartDataSet.drawValuesEnabled = false
-            barChartDataSet.highlightEnabled = false
+            barChartDataSet.highlightEnabled = true
         }
     }
     
@@ -138,9 +145,9 @@ class ChartView: CombinedChartView {
         switch recognizer.state {
         case .ended, .cancelled:
             highlightValue(nil, callDelegate: false)
-            chartViewProtocol?.chartValueNothingSelected()
+            chartMarkerProtocol?.didHideMarker()
         case .changed:
-//            chartViewProtocol?.chartValueSelected(entry: Date())
+           chartMarkerProtocol?.didChangeMarker()
             break
         default:
             break

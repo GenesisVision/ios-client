@@ -17,6 +17,7 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.bounces = false
         if let router = viewModel.router as? DashboardRouter {
             pageboyDataSource = ChartsPageboyViewControllerDataSource(router: router, dashboardPortfolioChartValue: viewModel.dashboardPortfolioChartValue)
         }

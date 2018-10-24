@@ -179,7 +179,7 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
     AuthManager.getTwoFactorStatus(completion: { (model) in
         let launchedBefore = UserDefaults.standard.bool(forKey: Constants.UserDefaults.launchedBefore)
         
-        guard let twoFactorEnabled = model?.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
+        guard let twoFactorEnabled = model.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
         
         print("First launch")
         UserDefaults.standard.set(true, forKey: Constants.UserDefaults.launchedBefore)

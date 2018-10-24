@@ -16,7 +16,7 @@ struct PortfolioEventCollectionViewCellViewModel {
 
 extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventCollectionViewCell) {
-        if let title = dashboardPortfolioEvent.title {
+        if let title = dashboardPortfolioEvent.description {
             cell.titleLabel.text = title
         }
         
@@ -28,11 +28,11 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             cell.dateLabel.text = date.dateAndTimeFormatString
         }
         
-        cell.iconImageView.image = UIImage.placeholder
+        cell.iconImageView.image = UIImage.eventPlaceholder
         
         if let fileName = dashboardPortfolioEvent.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
-            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
         }
         
         if let type = dashboardPortfolioEvent.type {

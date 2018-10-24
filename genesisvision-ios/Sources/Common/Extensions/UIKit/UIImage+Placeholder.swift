@@ -12,6 +12,8 @@ extension UIImage {
     static var placeholder: UIImage =  #imageLiteral(resourceName: "img_logo")
     static var programPlaceholder: UIImage =  #imageLiteral(resourceName: "img_program_placeholder")
     static var profilePlaceholder: UIImage =  #imageLiteral(resourceName: "img_manager_placeholder")
+    static var eventPlaceholder: UIImage =  #imageLiteral(resourceName: "img_wallet_transaction_icon")
+    
     static var noDataPlaceholder: UIImage = #imageLiteral(resourceName: "img_splash_logo_icon")
     
     struct NavBar {

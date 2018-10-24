@@ -13,7 +13,36 @@ class WalletDepositViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: WalletDepositViewModel!
     
+    // MARK: - Variables
+    var amountToDepositValue: Double = 0.0 {
+        didSet {
+            updateUI()
+        }
+    }
+    
     // MARK: - Outlets
+    @IBOutlet weak var numpadHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            numpadHeightConstraint.constant = 0.0
+        }
+    }
+    @IBOutlet var numpadBackView: UIView! {
+        didSet {
+            numpadBackView.isHidden = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideNumpadView))
+            tapGesture.numberOfTapsRequired = 1
+            numpadBackView.isUserInteractionEnabled = true
+            numpadBackView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    @IBOutlet var numpadView: NumpadView! {
+        didSet {
+            numpadView.delegate = self
+            numpadView.type = .currency
+        }
+    }
+    
     @IBOutlet var amountToDepositTitleLabel: SubtitleLabel! {
         didSet {
             amountToDepositTitleLabel.text = "You will send"
@@ -24,16 +53,20 @@ class WalletDepositViewController: BaseViewController {
             amountToDepositValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToDepositGVTLabel: SubtitleLabel! {
-        didSet {
-            amountToDepositGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
-        }
-    }
+    
     @IBOutlet var amountToDepositCurrencyLabel: SubtitleLabel! {
         didSet {
-            amountToDepositCurrencyLabel.textColor = UIColor.Cell.title
+            amountToDepositCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
+    
+    @IBOutlet var amountToDepositGVTTitleLabel: SubtitleLabel! {
+        didSet {
+            amountToDepositGVTTitleLabel.text = "Approximate amount"
+            amountToDepositGVTTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var amountToDepositGVTValueLabel: TitleLabel!
     
     @IBOutlet var selectedWalletCurrencyButton: UIButton!
     @IBOutlet var selectedWalletCurrencyTitleLabel: SubtitleLabel! {
@@ -47,7 +80,11 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel!
+    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+        didSet {
+            disclaimerLabel.font = UIFont.getFont(.regular, size: 10.0)
+        }
+    }
     
     @IBOutlet var qrImageView: UIImageView!
     @IBOutlet var addressLabel: TitleLabel!
@@ -56,12 +93,6 @@ class WalletDepositViewController: BaseViewController {
         didSet {
             copyButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
-        }
-    }
-    
-    @IBOutlet weak var amountToDepositTextField: UITextField! {
-        didSet {
-            amountToDepositTextField.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
@@ -77,7 +108,7 @@ class WalletDepositViewController: BaseViewController {
         navigationItem.title = viewModel.title
         
         showProgressHUD()
-        viewModel.fetch(completion: { [weak self] (result) in
+        viewModel.getInfo(completion: { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -88,34 +119,119 @@ class WalletDepositViewController: BaseViewController {
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
-        }) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
+        })
+    }
+    
+    private func updateUI() {
+        
+        
+        addressLabel.text = viewModel.getAddress()
+        qrImageView.image = viewModel.getQRImage()
+        
+        if let selectedWallet = viewModel.selectedWallet, let currency = selectedWallet.currency, let rateToGVT = selectedWallet.rateToGVT {
+            let currency = CurrencyType(rawValue: currency.rawValue) ?? .gvt
+            
+            amountToDepositCurrencyLabel.text = currency.rawValue
+            
+            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            
+            if let description = selectedWallet.description {
+                selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue
+            }
+            
+            if currency != .gvt {
+                disclaimerLabel.isHidden = false
+                disclaimerLabel.text = "After processing the \(currency.rawValue) transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
+            } else {
+                disclaimerLabel.isHidden = true
             }
         }
     }
     
-    private func updateUI() {
-        addressLabel.text = viewModel.getAddress()
-        qrImageView.image = viewModel.getQRImage()
+    @objc private func hideNumpadView() {
+        numpadHeightConstraint.constant = 0.0
+        numpadBackView.setNeedsUpdateConstraints()
+        numpadBackView.isHidden = true
         
-        if let selectedCurrency =  viewModel.selectedWallet?.currency, selectedCurrency != .gvt {
-            disclaimerLabel.text = "After processing the \(selectedCurrency.rawValue) transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
-        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.numpadBackView.layoutIfNeeded()
+        })
     }
     
     // MARK: - Actions
+    @IBAction func showNumPadButtonAction(_ sender: UIButton) {
+        numpadHeightConstraint.constant = 212.0
+        numpadBackView.setNeedsUpdateConstraints()
+        numpadBackView.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.numpadBackView.layoutIfNeeded()
+        })
+    }
+    
     @IBAction func copyButtonAction(_ sender: UIButton) {
         showProgressHUD()
         viewModel.copy { [weak self] (result) in
             self?.hideAll()
+            self?.showBottomSheet(type: .success, title: "Your wallet-pane number was copied to the clipboard successfully.")
         }
     }
     
     @IBAction func selectedWalletCurrencyButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         
+        var selectedIndexRow = viewModel.selectedWalletCurrencyIndex
+        let values = viewModel.walletCurrencyValues()
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            selectedIndexRow = index.row
+            self?.viewModel.updateWalletCurrencyIndex(selectedIndexRow)
+            
+            self?.updateUI()
+        }
+        
+        alert.addAction(title: "Cancel", style: .cancel)
+        
+        alert.show()
+    }
+}
+
+extension WalletDepositViewController: NumpadViewProtocol {
+    var amountLimit: Double? {
+        return nil
+    }
+    
+    var textPlaceholder: String? {
+        return viewModel.labelPlaceholder
+    }
+    
+    var numbersLimit: Int {
+        return -1
+    }
+    
+    var currency: String? {
+        return Constants.currency
+    }
+    
+    func changedActive(value: Bool) {
+        numpadView.isEnable = value
+    }
+    
+    var textLabel: UILabel {
+        return self.amountToDepositValueLabel
+    }
+    
+    var enteredAmountValue: Double {
+        return amountToDepositValue
+    }
+    
+    func textLabelDidChange(value: Double?) {
+        guard let value = value else { return }
+        
+        numpadView.isEnable = true
+        amountToDepositValue = value
     }
 }

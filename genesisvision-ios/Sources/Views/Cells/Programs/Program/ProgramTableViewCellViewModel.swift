@@ -59,12 +59,17 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
             
             let today = Date()
+            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
+            
+            cell.firstValueLabel.text = periodLeft.isEmpty ? "0" : periodLeft
+
             if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
                 cell.periodLeftProgressView.setProgress(to: Double(periodDuration - minutes) / Double(periodDuration), withAnimation: false)
             }
         } else {
             cell.firstValueLabel.text = ""
         }
+        
         
         cell.secondTitleLabel.text = "balance"
         if let balance = program.statistic?.balanceGVT?.amount {

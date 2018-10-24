@@ -28,6 +28,10 @@ final class AuthSignUpViewModel {
         router.show(routeType: .privacy)
     }
     
+    func showTerms() {
+        router.show(routeType: .terms)
+    }
+    
     // MARK: - API
     func signUp(username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
         AuthDataProvider.signUp(username: username, email: email, password: password, confirmPassword: confirmPassword, completion: completion)

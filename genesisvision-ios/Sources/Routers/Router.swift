@@ -261,6 +261,10 @@ extension Router {
         navigationController?.openSafariVC(with: Constants.Urls.privacyWebAddress)
     }
     
+    func showTerms() {
+        navigationController?.openSafariVC(with: Constants.Urls.termsWebAddress)
+    }
+    
     func getDetailsViewController(with programId: String) -> ProgramViewController? {
         guard let programViewController = ProgramViewController.storyboardInstance(name: .program) else {
             return nil

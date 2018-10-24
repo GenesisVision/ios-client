@@ -88,4 +88,43 @@ open class PlatformAPI {
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
+    /**
+     Platform statistic
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10PlatformStatisticGet(completion: @escaping ((_ data: PlatformStatistic?,_ error: Error?) -> Void)) {
+        v10PlatformStatisticGetWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Platform statistic
+     - GET /v1.0/platform/statistic
+     - examples: [{contentType=application/json, example={
+  "totalProfit" : 2.3021358869347655,
+  "investmentAmount" : 5.962133916683182,
+  "profitWeek" : 1.4658129805029452,
+  "totalInvestorsProfit" : 5.637376656633329,
+  "investors" : 6,
+  "managers" : 0
+}}]
+
+     - returns: RequestBuilder<PlatformStatistic> 
+     */
+    open class func v10PlatformStatisticGetWithRequestBuilder() -> RequestBuilder<PlatformStatistic> {
+        let path = "/v1.0/platform/statistic"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<PlatformStatistic>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
 }

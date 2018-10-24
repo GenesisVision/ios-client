@@ -292,6 +292,7 @@ open class ProgramsAPI {
       "currency" : "Undefined"
     },
     "tradesCount" : 1,
+    "hasNotifications" : true,
     "balanceGVT" : {
       "amount" : 5.962133916683182,
       "currency" : "Undefined"
@@ -324,12 +325,14 @@ open class ProgramsAPI {
   "isReinvesting" : true,
   "title" : "title",
   "personalProgramDetails" : {
+    "hasNotifications" : true,
     "isOwnProgram" : true,
     "canWithdraw" : true,
     "isReinvest" : true,
     "canInvest" : true,
     "value" : 4.145608029883936,
     "profit" : 7.386281948385884,
+    "invested" : 1.2315135367772556,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Active"
@@ -597,16 +600,18 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "isReinvest" : true,
       "canInvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -659,16 +664,18 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "isReinvest" : true,
       "canInvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"

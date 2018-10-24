@@ -11,12 +11,17 @@ import UIKit.UITableView
 final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
     var viewModel: PortfolioViewModel?
+    var tableView: UITableView?
     
     // MARK: - Lifecycle
     init(with viewModel: PortfolioViewModel?) {
         super.init()
         
         self.viewModel = viewModel
+    }
+    
+    func reloadData() {
+        tableView?.reloadData()
     }
     
     // MARK: - TableViewDelegate

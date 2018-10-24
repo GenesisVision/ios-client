@@ -39,10 +39,10 @@ class ProgramProfitViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        bottomViewType = .dateRange
+        
         setupTableConfiguration()
         setupNavigationBar()
-        
-        bottomViewType = .dateRange
         
         showProgressHUD()
         fetch()
@@ -107,10 +107,22 @@ extension ProgramProfitViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProgramProfitViewController: ChartViewProtocol {
     func chartValueNothingSelected() {
         print("chartValueNothingSelected")
+        tableView.isScrollEnabled = true
     }
     
     func chartValueSelected(date: Date) {
         print("chartValueSelected")
         viewModel.selectChartSimple(date)
+        tableView.isScrollEnabled = false
+    }
+}
+
+extension ProgramProfitViewController: ChartMarkerProtocol {
+    func didHideMarker() {
+        tableView.isScrollEnabled = true
+    }
+    
+    func didChangeMarker() {
+        tableView.isScrollEnabled = false
     }
 }

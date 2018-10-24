@@ -375,21 +375,21 @@ open class InvestorAPI {
      Funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 8,
   "funds" : [ {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 7.457744773683766,
-      "drawdownPercent" : 1.1730742509559433,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 4
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -402,24 +402,26 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -435,19 +437,19 @@ open class InvestorAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 7.457744773683766,
-      "drawdownPercent" : 1.1730742509559433,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 4
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -460,24 +462,26 @@ open class InvestorAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.84685269835264
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -738,7 +742,7 @@ open class InvestorAPI {
       "description" : "description",
       "currency" : "Undefined",
       "title" : "title",
-      "type" : "All",
+      "type" : "Loss",
       "value" : 6.84685269835264
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -747,7 +751,7 @@ open class InvestorAPI {
       "description" : "description",
       "currency" : "Undefined",
       "title" : "title",
-      "type" : "All",
+      "type" : "Loss",
       "value" : 6.84685269835264
     } ]
   }
@@ -937,11 +941,11 @@ open class InvestorAPI {
      * enum for parameter type
      */
     public enum ModelType_v10InvestorPortfolioEventsGet: String { 
+        case loss = "Loss"
+        case profit = "Profit"
         case all = "All"
         case invest = "Invest"
         case withdraw = "Withdraw"
-        case profit = "Profit"
-        case loss = "Loss"
         case reinvest = "Reinvest"
         case cancelled = "Cancelled"
         case ended = "Ended"
@@ -988,7 +992,7 @@ open class InvestorAPI {
     "description" : "description",
     "currency" : "Undefined",
     "title" : "title",
-    "type" : "All",
+    "type" : "Loss",
     "value" : 6.84685269835264
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -997,7 +1001,7 @@ open class InvestorAPI {
     "description" : "description",
     "currency" : "Undefined",
     "title" : "title",
-    "type" : "All",
+    "type" : "Loss",
     "value" : 6.84685269835264
   } ]
 }}]
@@ -1529,16 +1533,18 @@ open class InvestorAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "isReinvest" : true,
       "canInvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -1591,16 +1597,18 @@ open class InvestorAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.2315135367772556
+      "share" : 1.0246457001441578
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "hasNotifications" : true,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "isReinvest" : true,
       "canInvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"

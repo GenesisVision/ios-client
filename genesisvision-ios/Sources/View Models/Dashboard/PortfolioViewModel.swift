@@ -27,6 +27,12 @@ final class PortfolioViewModel {
         }
     }
     
+    var valueChartBar: ValueChartBar? {
+        didSet {
+            self.selectedChartAssets = valueChartBar?.topAssets
+        }
+    }
+    
     var selectedChartAssetsDelegateManager: PortfolioSelectedChartAssetsDelegateManager?
     weak var reloadDataProtocol: ReloadDataProtocol?
     var dashboardChartValue: DashboardChartValue?
@@ -42,13 +48,14 @@ final class PortfolioViewModel {
     }
     
     // MARK: - Methods
-    func showSelectedChartAssets(_ date: Date) -> Bool {
+    func selectChart(_ date: Date) -> ValueChartBar? {
         if let result = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
-            self.selectedChartAssets = result.topAssets
-            return true
+            self.valueChartBar = result
+            self.selectedChartAssetsDelegateManager?.reloadData()
+            return self.valueChartBar
         }
         
-        return false
+        return nil
     }
     
     func showRequests() {

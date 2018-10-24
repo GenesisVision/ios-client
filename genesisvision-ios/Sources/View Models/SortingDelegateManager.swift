@@ -9,7 +9,7 @@
 import UIKit.UITableView
 
 protocol SortingDelegate: class {
-    func didSelectSorting(at indexPath: IndexPath)
+    func didSelectSorting()
 }
 
 final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -59,6 +59,10 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
         }
     }
     
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [DashboardCurrencyTableViewCellViewModel.self]
+    }
+    
     // MARK: - Init
     override init() {
         super.init()
@@ -88,37 +92,24 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
         
         changeSorting(at: indexPath.row)
         
-        tableViewProtocol?.didSelectSorting(at: indexPath)
+        tableViewProtocol?.didSelectSorting()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortingValues.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = sortingValues[indexPath.row]
-        cell.backgroundColor = UIColor.Cell.bg
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCurrencyTableViewCell", for: indexPath) as? DashboardCurrencyTableViewCell else {
+            let cell = UITableViewCell()
+            return cell
+        }
         
-        cell.textLabel?.textColor = indexPath.row == getSelectedSortingIndex() ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.7)
-        cell.accessoryType = indexPath.row == getSelectedSortingIndex() ? .checkmark : .none
-        cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "img_radio_selected_icon"))
-        
-        cell.selectionStyle = .none
+        let title = sortingValues[indexPath.row]
+        let isSelected = indexPath.row == getSelectedSortingIndex()
+        cell.configure(title: title, selected: isSelected)
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
-            cell.textLabel?.textColor = UIColor.Cell.title
-            cell.contentView.backgroundColor = UIColor.Cell.title.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell  = tableView.cellForRow(at: indexPath), cell.accessoryType == .none {
-            cell.textLabel?.textColor = UIColor.Cell.subtitle
-            cell.contentView.backgroundColor = UIColor.Cell.bg
-        }
     }
 }
 

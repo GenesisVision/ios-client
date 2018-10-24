@@ -47,6 +47,7 @@ open class ProgramStatistic: Codable {
     public var profitValue: Double?
     public var drawdownPercent: Double?
     public var investorsCount: Int?
+    public var hasNotifications: Bool?
     public var startDate: Date?
     public var startBalance: Double?
     public var startCurrency: StartCurrency?
@@ -59,7 +60,7 @@ open class ProgramStatistic: Codable {
 
 
     
-    public init(balanceBase: AmountWithCurrency?, balanceGVT: AmountWithCurrency?, balanceSecondary: AmountWithCurrency?, currentValue: Double?, profitPercent: Double?, profitValue: Double?, drawdownPercent: Double?, investorsCount: Int?, startDate: Date?, startBalance: Double?, startCurrency: StartCurrency?, investedAmount: Double?, investedCurrency: InvestedCurrency?, tradesCount: Int?, tradesSuccessCount: Int?, profitFactorPercent: Double?, sharpeRatioPercent: Double?) {
+    public init(balanceBase: AmountWithCurrency?, balanceGVT: AmountWithCurrency?, balanceSecondary: AmountWithCurrency?, currentValue: Double?, profitPercent: Double?, profitValue: Double?, drawdownPercent: Double?, investorsCount: Int?, hasNotifications: Bool?, startDate: Date?, startBalance: Double?, startCurrency: StartCurrency?, investedAmount: Double?, investedCurrency: InvestedCurrency?, tradesCount: Int?, tradesSuccessCount: Int?, profitFactorPercent: Double?, sharpeRatioPercent: Double?) {
         self.balanceBase = balanceBase
         self.balanceGVT = balanceGVT
         self.balanceSecondary = balanceSecondary
@@ -68,6 +69,7 @@ open class ProgramStatistic: Codable {
         self.profitValue = profitValue
         self.drawdownPercent = drawdownPercent
         self.investorsCount = investorsCount
+        self.hasNotifications = hasNotifications
         self.startDate = startDate
         self.startBalance = startBalance
         self.startCurrency = startCurrency
@@ -94,6 +96,7 @@ open class ProgramStatistic: Codable {
         try container.encodeIfPresent(profitValue, forKey: "profitValue")
         try container.encodeIfPresent(drawdownPercent, forKey: "drawdownPercent")
         try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
+        try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
         try container.encodeIfPresent(startDate, forKey: "startDate")
         try container.encodeIfPresent(startBalance, forKey: "startBalance")
         try container.encodeIfPresent(startCurrency, forKey: "startCurrency")
@@ -118,6 +121,7 @@ open class ProgramStatistic: Codable {
         profitValue = try container.decodeIfPresent(Double.self, forKey: "profitValue")
         drawdownPercent = try container.decodeIfPresent(Double.self, forKey: "drawdownPercent")
         investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
+        hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
         startDate = try container.decodeIfPresent(Date.self, forKey: "startDate")
         startBalance = try container.decodeIfPresent(Double.self, forKey: "startBalance")
         startCurrency = try container.decodeIfPresent(StartCurrency.self, forKey: "startCurrency")

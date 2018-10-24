@@ -260,13 +260,4 @@ extension UIViewController {
 //        showBottomSheet(type: .error, subtitle: subtitle)
 //    }
 //
-//    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
-//
-//        self.bottomSheetController.initializeHeight = 350
-//        let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
-//        errorBottomSheetView.configure(type: .error, title: title, subtitle: subtitle)
-//        errorBottomSheetView.bottomSheetController = self.bottomSheetController
-//        self.bottomSheetController.addContentsView(errorBottomSheetView)
-//        self.bottomSheetController.present()
-//    }
 //}

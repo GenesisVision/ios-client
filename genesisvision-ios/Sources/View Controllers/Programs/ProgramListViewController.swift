@@ -119,11 +119,16 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func sortMethod() {
+        bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
-            tableView.delegate = self?.viewModel.sortingDelegateManager
-            tableView.dataSource = self?.viewModel.sortingDelegateManager
+            if let sortingDelegateManager = self?.viewModel.sortingDelegateManager {
+                tableView.registerNibs(for: sortingDelegateManager.cellModelsForRegistration)
+                tableView.delegate = sortingDelegateManager
+                tableView.dataSource = sortingDelegateManager
+            }
+            
             tableView.separatorStyle = .none
         }
         
@@ -153,6 +158,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - Actions
     @objc func highToLowButtonAction() {
         viewModel.highToLowValue = !viewModel.highToLowValue
+        fetch()
         bottomSheetController.dismiss()
     }
 }
@@ -314,7 +320,8 @@ extension ProgramListViewController: UISearchBarDelegate {
 }
 
 extension ProgramListViewController: SortingDelegate {
-    func didSelectSorting(at indexPath: IndexPath) {
+    func didSelectSorting() {
         bottomSheetController.dismiss()
+        fetch()
     }
 }

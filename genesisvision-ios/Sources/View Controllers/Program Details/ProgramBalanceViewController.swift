@@ -39,6 +39,7 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        bottomViewType = .dateRange
         setupTableConfiguration()
         
         setupNavigationBar()
@@ -91,11 +92,22 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
 
 extension ProgramBalanceViewController: ChartViewProtocol {
     func chartValueNothingSelected() {
-        print("chartValueNothingSelected")
+        tableView.isScrollEnabled = true
     }
     
     func chartValueSelected(date: Date) {
         print("chartValueSelected")
+        tableView.isScrollEnabled = false
         viewModel.selectProgramBalanceChartElement(date)
+    }
+}
+
+extension ProgramBalanceViewController: ChartMarkerProtocol {
+    func didHideMarker() {
+        tableView.isScrollEnabled = true
+    }
+    
+    func didChangeMarker() {
+        tableView.isScrollEnabled = false
     }
 }
