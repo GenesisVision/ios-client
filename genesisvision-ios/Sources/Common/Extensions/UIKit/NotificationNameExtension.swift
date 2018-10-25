@@ -13,6 +13,7 @@ extension Notification.Name {
     static let twoFactorEnable = Notification.Name(Constants.Keys.twoFactorEnableKey)
     static let twoFactorChange = Notification.Name(Constants.Keys.twoFactorChangeKey)
     static let programFavoriteStateChange = Notification.Name(Constants.Keys.programFavoriteStateChangeKey)
+    static let fundFavoriteStateChange = Notification.Name(Constants.Keys.fundFavoriteStateChangeKey)
     
     static let themeChanged = Notification.Name(Constants.Keys.themeChangedKey)
 }

@@ -1,33 +1,32 @@
 //
-//  DashboardProgramListViewModel.swift
+//  DashboardFundListViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 21/09/2018.
+//  Created by George on 25/10/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit.UITableView
 
-final class DashboardProgramListViewModel {
+final class DashboardFundListViewModel {
     
     enum SectionType {
-        case programList
+        case fundList
     }
     
     // MARK: - Variables
-    var activePrograms = true
-    
-    var title = "Programs"
+    var title = "Funds"
     
     var sortingDelegateManager = SortingDelegateManager()
-    var programListDelegateManager: DashboardProgramListDelegateManager!
+    var fundListDelegateManager: DashboardFundListDelegateManager!
     
+    var activeFunds: Bool = true
     var highToLowValue: Bool = false
     
-    private var sections: [SectionType] = [.programList]
+    private var sections: [SectionType] = [.fundList]
     
     private var router: DashboardRouter!
-    private var programsList: ProgramsList?
+    private var fundList: FundsList?
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -40,7 +39,7 @@ final class DashboardProgramListViewModel {
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
-            title = totalCount > 0 ? "Programs \(totalCount)" : "Programs"
+            title = totalCount > 0 ? "Funds \(totalCount)" : "Funds"
         }
     }
     
@@ -50,8 +49,8 @@ final class DashboardProgramListViewModel {
     
     var viewModels = [DashboardTableViewCellViewModel]() {
         didSet {
-            self.activeViewModels = viewModels.filter { $0.program?.status != .archived }
-            self.archiveViewModels = viewModels.filter { $0.program?.status == .archived }
+            self.activeViewModels = viewModels.filter { $0.fund?.status != .archived }
+            self.archiveViewModels = viewModels.filter { $0.fund?.status == .archived }
         }
     }
     var activeViewModels = [DashboardTableViewCellViewModel]()
@@ -60,42 +59,42 @@ final class DashboardProgramListViewModel {
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        self.reloadDataProtocol = router.programListViewController
+        self.reloadDataProtocol = router.fundListViewController
         
-        programListDelegateManager = DashboardProgramListDelegateManager(with: self)
-        NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
+        fundListDelegateManager = DashboardFundListDelegateManager(with: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
     }
     
     // MARK: - Public methods
-    func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, fundId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.program?.personalDetails?.isFavorite = value
+            guard let model = model(at: fundId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.fund?.personalDetails?.isFavorite = value
             completion(.success)
             return
         }
         
-        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
-            switch result {
-            case .success:
-                guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.program?.personalDetails?.isFavorite = value
-                completion(.success)
-            case .failure(let errorType):
-                print(errorType)
-                completion(result)
-            }
-        }
+//        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
+//            switch result {
+//            case .success:
+//                guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+//                model.fund?.personalDetails?.isFavorite = value
+//                completion(.success)
+//            case .failure(let errorType):
+//                print(errorType)
+//                completion(result)
+//            }
+//        }
     }
     
     // MARK: - Private methods
-    @objc private func programFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let programId = notification.userInfo?["programId"] as? String {
-            changeFavorite(value: isFavorite, programId: programId) { [weak self] (result) in
+    @objc private func fundFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let fundId = notification.userInfo?["fundId"] as? String {
+            changeFavorite(value: isFavorite, fundId: fundId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
@@ -103,7 +102,7 @@ final class DashboardProgramListViewModel {
 }
 
 // MARK: - TableView
-extension DashboardProgramListViewModel {
+extension DashboardFundListViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -111,7 +110,7 @@ extension DashboardProgramListViewModel {
     }
     
     func modelsCount() -> Int {
-        return activePrograms ? activeViewModels.count : archiveViewModels.count
+        return activeFunds ? activeViewModels.count : archiveViewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -128,14 +127,14 @@ extension DashboardProgramListViewModel {
 }
 
 // MARK: - Navigation
-extension DashboardProgramListViewModel {
+extension DashboardFundListViewModel {
     func logoImageName() -> String? {
         let imageName = "img_dashboard_logo"
         return imageName
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs yet.."
+        return "you don’t have \nany funds yet.."
     }
     
     func noDataImageName() -> String? {
@@ -143,26 +142,26 @@ extension DashboardProgramListViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
+        let text = "Browse funds"
         return text.uppercased()
     }
     
     func showDetail(at indexPath: IndexPath) {
-        guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
-        
-        let program = model.program
-        guard let programId = program?.id else { return }
-        
-        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
+//        guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
+//
+//        let fund = model.fund
+//        guard let fundId = fund.id else { return }
+//
+//        router.show(routeType: .showFundDetails(fundId: fundId.uuidString))
     }
     
-    func showProgramList() {
-        router.show(routeType: .programList)
+    func showFundList() {
+//        router.show(routeType: .fundList)
     }
 }
 
 // MARK: - Fetch
-extension DashboardProgramListViewModel {
+extension DashboardFundListViewModel {
     // MARK: - Public methods
     func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
@@ -210,20 +209,20 @@ extension DashboardProgramListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard programsList != nil else {
+        guard fundList != nil else {
             return nil
         }
         
-        return activePrograms ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
+        return activeFunds ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
     }
     
-    func model(at programId: String) -> CellViewAnyModel? {
-        if activePrograms {
-            if let i = activeViewModels.index(where: { $0.program?.id?.uuidString == programId }) {
+    func model(at fundId: String) -> CellViewAnyModel? {
+        if activeFunds {
+            if let i = activeViewModels.index(where: { $0.fund?.id?.uuidString == fundId }) {
                 return activeViewModels[i]
             }
         } else {
-            if let i = archiveViewModels.index(where: { $0.program?.id?.uuidString == programId }) {
+            if let i = archiveViewModels.index(where: { $0.fund?.id?.uuidString == fundId }) {
                 return archiveViewModels[i]
             }
         }
@@ -232,14 +231,17 @@ extension DashboardProgramListViewModel {
     }
     
     func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
-        guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
-            return nil
-        }
+//        guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
+//            return nil
+//        }
+//
+//        let fund = model.fund
+//        guard let fundId = fund.id else { return nil}
+//
+//        return router.getDetailsViewController(with: fundId.uuidString)
         
-        let program = model.program
-        guard let programId = program?.id else { return nil}
         
-        return router.getDetailsViewController(with: programId.uuidString)
+        return nil
     }
     
     // MARK: - Private methods
@@ -252,24 +254,25 @@ extension DashboardProgramListViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        
-        DashboardDataProvider.getProgramList(with: InvestorAPI.Sorting_v10InvestorProgramsGet(rawValue: sortingDelegateManager.sorting.rawValue), completion: { [weak self] (programsList) in
-            guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardDataProvider.getFundList(with: InvestorAPI.Sorting_v10InvestorFundsGet(rawValue: sortingDelegateManager.sorting.rawValue), completion: { [weak self] (fundsList) in
+            guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            self?.programsList = programsList
+            self?.fundList = fundsList
             
-            var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
+            var dashboardFundViewModels = [DashboardTableViewCellViewModel]()
             
-            let totalCount = programsList.programs?.count ?? 0
+            let totalCount = fundsList.funds?.count ?? 0
             
-            programsList.programs?.forEach({ (program) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(program: program, fund: nil, reloadDataProtocol: self?.router.programListViewController, delegate:
-                    self?.router.programListViewController)
-                dashboardProgramViewModels.append(dashboardTableViewCellModel)
+            fundsList.funds?.forEach({ (fund) in
+                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(program: nil, fund: fund, reloadDataProtocol: self?.router.fundListViewController, delegate:
+                    self?.router.fundListViewController)
+                dashboardFundViewModels.append(dashboardTableViewCellModel)
             })
             
-            completionSuccess(totalCount, dashboardProgramViewModels)
+            completionSuccess(totalCount, dashboardFundViewModels)
             completionError(.success)
             }, errorCompletion: completionError)
     }
 }
+

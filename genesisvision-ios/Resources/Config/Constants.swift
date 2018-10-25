@@ -112,6 +112,7 @@ final class Constants {
         
         static let twoFactorChangeKey: String = "twoFactorChangeKey"
         static let programFavoriteStateChangeKey: String = "programFavoriteStateChangeKey"
+        static let fundFavoriteStateChangeKey: String = "fundFavoriteStateChangeKey"
         
         static let addedLineLayer: String = "addedLineLayer"
         

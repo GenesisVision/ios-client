@@ -29,6 +29,10 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
     func setup(_ programDetailsFull: ProgramDetailsFull?) {
         viewModel.setup(programDetailsFull)
     }
+    
+    func setup(_ fundDetailsFull: FundDetailsFull?) {
+        viewModel.setupFund(fundDetailsFull)
+    }
 }
 
 extension ProgramDetailsTabmanViewController: ReloadDataProtocol {

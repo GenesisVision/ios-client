@@ -152,6 +152,11 @@
 		5E0AD0DE21811AF300DC76AA /* ChartSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD06521811AF200DC76AA /* ChartSimple.swift */; };
 		5E0AD0DF21811AF300DC76AA /* RebalancingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD06621811AF200DC76AA /* RebalancingModel.swift */; };
 		5E0AD0E12181374F00DC76AA /* DashboardFundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */; };
+		5E0AD0E3218138A800DC76AA /* DashboardFundListDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E2218138A800DC76AA /* DashboardFundListDelegateManager.swift */; };
+		5E0AD0E52181392F00DC76AA /* DashboardFundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E42181392F00DC76AA /* DashboardFundListViewModel.swift */; };
+		5E0AD0E721813E1700DC76AA /* Fund.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E621813E1700DC76AA /* Fund.storyboard */; };
+		5E0AD0EC21813EE300DC76AA /* FundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0EB21813EE300DC76AA /* FundListViewController.swift */; };
+		5E0AD0EF21813F3800DC76AA /* FundDetailsTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0EE21813F3800DC76AA /* FundDetailsTabmanViewController.swift */; };
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
 		5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E106386213D69AF008A0E8B /* BaseExtensions.swift */; };
@@ -302,7 +307,6 @@
 		5EA274DD2162DF33008CAF77 /* ProgramProfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274DC2162DF33008CAF77 /* ProgramProfitViewController.swift */; };
 		5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274DE2162F0D6008CAF77 /* ProgramBalanceViewModel.swift */; };
 		5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274E02162F113008CAF77 /* ProgramProfitViewModel.swift */; };
-		5EA7A0F720A0B07600D895FC /* ProgramsTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */; };
 		5EA7A0FA20A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F920A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift */; };
 		5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */; };
 		5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */; };
@@ -714,6 +718,11 @@
 		5E0AD06521811AF200DC76AA /* ChartSimple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSimple.swift; sourceTree = "<group>"; };
 		5E0AD06621811AF200DC76AA /* RebalancingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebalancingModel.swift; sourceTree = "<group>"; };
 		5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundListViewController.swift; sourceTree = "<group>"; };
+		5E0AD0E2218138A800DC76AA /* DashboardFundListDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundListDelegateManager.swift; sourceTree = "<group>"; };
+		5E0AD0E42181392F00DC76AA /* DashboardFundListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundListViewModel.swift; sourceTree = "<group>"; };
+		5E0AD0E621813E1700DC76AA /* Fund.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Fund.storyboard; sourceTree = "<group>"; };
+		5E0AD0EB21813EE300DC76AA /* FundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundListViewController.swift; sourceTree = "<group>"; };
+		5E0AD0EE21813F3800DC76AA /* FundDetailsTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundDetailsTabmanViewController.swift; sourceTree = "<group>"; };
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		5E106386213D69AF008A0E8B /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
@@ -866,7 +875,6 @@
 		5EA274DC2162DF33008CAF77 /* ProgramProfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramProfitViewController.swift; sourceTree = "<group>"; };
 		5EA274DE2162F0D6008CAF77 /* ProgramBalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramBalanceViewModel.swift; sourceTree = "<group>"; };
 		5EA274E02162F113008CAF77 /* ProgramProfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramProfitViewModel.swift; sourceTree = "<group>"; };
-		5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA7A0F920A0B0AD00D895FC /* ProgramDetailsTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailsTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -1163,6 +1171,22 @@
 				A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5E0AD0E821813E8700DC76AA /* Funds */ = {
+			isa = PBXGroup;
+			children = (
+				5E0AD0EB21813EE300DC76AA /* FundListViewController.swift */,
+			);
+			path = Funds;
+			sourceTree = "<group>";
+		};
+		5E0AD0ED21813F1C00DC76AA /* Fund Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E0AD0EE21813F3800DC76AA /* FundDetailsTabmanViewController.swift */,
+			);
+			path = "Fund Details";
 			sourceTree = "<group>";
 		};
 		5E12B38120BEEAF300302730 /* Two Factor */ = {
@@ -1937,6 +1961,7 @@
 				5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */,
 				5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */,
 				5EFCC76F21553D58001E1A56 /* DashboardProgramListViewModel.swift */,
+				5E0AD0E42181392F00DC76AA /* DashboardFundListViewModel.swift */,
 				5ED1141721594ED900EC5385 /* EventListViewModel.swift */,
 				5ED114192159545900EC5385 /* ChartsTabmanViewModel.swift */,
 				5ED1141B2159549500EC5385 /* AssetsTabmanViewModel.swift */,
@@ -2136,6 +2161,7 @@
 				5EC78817216CE74D000C91E4 /* EventsDelegateManager.swift */,
 				5EC78819216D4787000C91E4 /* PortfolioSelectedChartAssetsDelegateManager.swift */,
 				5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */,
+				5E0AD0E2218138A800DC76AA /* DashboardFundListDelegateManager.swift */,
 				5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */,
 			);
 			path = "View Models";
@@ -2210,6 +2236,7 @@
 				FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */,
 				FCC9DD5C200DFFDC008825EC /* Programs.storyboard */,
 				5E8340DB207E3279004A29F1 /* Program.storyboard */,
+				5E0AD0E621813E1700DC76AA /* Fund.storyboard */,
 				5EE0076D217881AA0045B890 /* Manager.storyboard */,
 				FCC9DD5A200DFFB8008825EC /* Profile.storyboard */,
 				5E942E8820D7BA5A0069343C /* Settings.storyboard */,
@@ -2308,6 +2335,8 @@
 				FC49641C2015489B00104CEB /* Welcome */,
 				5E6C0CF12109A8E000B7F844 /* Manager Details */,
 				5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */,
+				5E0AD0ED21813F1C00DC76AA /* Fund Details */,
+				5E0AD0E821813E8700DC76AA /* Funds */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2450,7 +2479,6 @@
 		FCC9DD6F200E4C7E008825EC /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				5EA7A0F620A0B07600D895FC /* ProgramsTabmanViewController.swift */,
 				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
 				5E616B3920F7672200B3459D /* Create Program */,
 			);
@@ -2573,6 +2601,7 @@
 				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
 				5EA274B721628207008CAF77 /* ProgramPeriodTableViewCell.xib in Resources */,
+				5E0AD0E721813E1700DC76AA /* Fund.storyboard in Resources */,
 				5E152F0E2165283A0029BFDE /* Montserrat-Bold.ttf in Resources */,
 				5E152F0D2165283A0029BFDE /* Montserrat-Medium.ttf in Resources */,
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
@@ -2829,6 +2858,7 @@
 				5EE007612178720D0045B890 /* ManagerProgramListViewController.swift in Sources */,
 				5E1813872061D40600481646 /* RoundedLabel.swift in Sources */,
 				5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */,
+				5E0AD0EC21813EE300DC76AA /* FundListViewController.swift in Sources */,
 				5E12B38920BEEB5F00302730 /* AuthTwoFactorSuccessEnableViewModel.swift in Sources */,
 				5E085F47215E7D9B00950042 /* ProgramViewController.swift in Sources */,
 				5E616B5C20F7C37900B3459D /* CreateProgramTabmanViewController.swift in Sources */,
@@ -2919,7 +2949,6 @@
 				FCA19A2D201ADAB100157AD6 /* InvestmentProgramListRouter.swift in Sources */,
 				5E0AD06721811AF200DC76AA /* FundAssetPartDetails.swift in Sources */,
 				5E616B5B20F7C37900B3459D /* CreateProgramFirstViewController.swift in Sources */,
-				5EA7A0F720A0B07600D895FC /* ProgramsTabmanViewController.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* InvestmentProgramListViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				5E0AD0AA21811AF200DC76AA /* BalanceChartElement.swift in Sources */,
@@ -2958,6 +2987,7 @@
 				5E0AD0A521811AF200DC76AA /* NewProgramRequest.swift in Sources */,
 				5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */,
 				5E0AD0BC21811AF200DC76AA /* ErrorViewModel.swift in Sources */,
+				5E0AD0EF21813F3800DC76AA /* FundDetailsTabmanViewController.swift in Sources */,
 				5EE007702178849E0045B890 /* ManagerProgramListRouter.swift in Sources */,
 				5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */,
 				5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */,
@@ -2991,6 +3021,7 @@
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */,
 				5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */,
+				5E0AD0E3218138A800DC76AA /* DashboardFundListDelegateManager.swift in Sources */,
 				5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */,
 				5E0AD06A21811AF200DC76AA /* OefAssetPart.swift in Sources */,
 				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
@@ -3205,6 +3236,7 @@
 				5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */,
 				5E0AD0AB21811AF200DC76AA /* ProfileFullViewModel.swift in Sources */,
 				FC4964182015474700104CEB /* DashboardViewController.swift in Sources */,
+				5E0AD0E52181392F00DC76AA /* DashboardFundListViewModel.swift in Sources */,
 				5E0AD08921811AF200DC76AA /* TwoFactorAuthenticator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

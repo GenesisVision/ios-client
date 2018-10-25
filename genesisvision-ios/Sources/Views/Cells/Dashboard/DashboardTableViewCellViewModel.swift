@@ -10,7 +10,8 @@ import Foundation
 import Kingfisher
 
 struct DashboardTableViewCellViewModel {
-    let program: ProgramDetails
+    let program: ProgramDetails?
+    let fund: FundDetails?
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: ProgramProtocol?
 }
@@ -25,6 +26,17 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
+        if let program = program {
+            setup(with: program, on: cell)
+        } else if let fund = fund {
+            setup(with: fund, on: cell)
+        }
+    }
+    func setup(with fund: FundDetails, on cell: ProgramTableViewCell) {
+        //TODO:
+    }
+    
+    func setup(with program: ProgramDetails, on cell: ProgramTableViewCell) {
         if let chart = program.chart {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
@@ -33,7 +45,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
-
+        
         if let title = program.title {
             cell.programTitleLabel.text = title
         }
@@ -46,7 +58,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         }
-    
+        
         if let programId = program.id?.uuidString {
             cell.programId = programId
         }
@@ -61,7 +73,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         
         cell.firstTitleLabel.text = "time left"
         if let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
-
+            
             let today = Date()
             let periodLeft = periodEnds.timeSinceDate(fromDate: today)
             
@@ -102,7 +114,7 @@ extension DashboardTableViewCellViewModel: CellViewModel {
         if let color = program.color {
             cell.programLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
-
+        
         if let profitPercent = program.statistic?.profitPercent {
             cell.profitPercentLabel.text = profitPercent.rounded(toPlaces: 2).toString() + "%"
         }
