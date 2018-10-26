@@ -182,11 +182,11 @@ extension ManagerProgramListViewController: SortingDelegate {
     }
 }
 
-// MARK: - ProgramProtocol
-extension ManagerProgramListViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+// MARK: - FavoriteStateChangeProtocol
+extension ManagerProgramListViewController: FavoriteStateChangeProtocol {
+    func didChangeFavoriteState(with assetId: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, assetId: assetId, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

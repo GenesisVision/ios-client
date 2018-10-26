@@ -41,6 +41,11 @@ open class PlatformAPI {
     "lastVersion" : "lastVersion",
     "minVersion" : "minVersion"
   },
+  "programsInfo" : {
+    "managerProgramInvestment" : 6.027456183070403,
+    "managerFundInvestment" : 1.4658129805029452,
+    "periods" : [ 5, 5 ]
+  },
   "programsFacets" : [ {
     "count" : 0,
     "description" : "description",
@@ -70,7 +75,8 @@ open class PlatformAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
-  } ]
+  } ],
+  "currencies" : [ "currencies", "currencies" ]
 }}]
 
      - returns: RequestBuilder<PlatformInfo> 

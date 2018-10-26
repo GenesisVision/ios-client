@@ -101,18 +101,20 @@ enum BottomViewType {
 
 // MARK: - TableViewCell
 enum SectionType {
-    case programList
+    case assetList
 }
 
 // MARK: - Stroryboard Instances
 enum StoryboardNames: String {
     case main
     case program
+    case fund
     case manager
     case launch
     case profile
     case settings
     case programs
+    case funds
     case auth
     case wallet
     case dashboard

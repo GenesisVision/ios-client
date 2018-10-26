@@ -206,6 +206,8 @@ class WalletWithdrawViewController: BaseViewController {
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
             }
+            
+            availableInWalletValueTitleLabel.text = currency == .gvt ? "You will get" : "Approximate amount"
         }
         
         if let availableToWithdrawal = viewModel.withdrawalSummary?.availableToWithdrawal {

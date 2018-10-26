@@ -152,10 +152,11 @@ open class ManagerAPI {
      Manager events
      - GET /v1.0/manager/events
      - examples: [{contentType=application/json, example={
-  "total" : 2,
+  "total" : 7,
   "events" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "programType" : "Program",
+    "periodNumber" : 2,
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -168,6 +169,7 @@ open class ManagerAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "programType" : "Program",
+    "periodNumber" : 2,
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -713,21 +715,21 @@ open class ManagerAPI {
      Manager funds
      - GET /v1.0/manager/funds
      - examples: [{contentType=application/json, example={
-  "total" : 8,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 5.025004791520295,
+      "drawdownPercent" : 9.965781217890562,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -740,26 +742,28 @@ open class ManagerAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 4.965218492984954
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 4.965218492984954
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "personalDetails" : {
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 9.965781217890562,
-      "profit" : 9.369310271410669,
-      "invested" : 6.683562403749608,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -775,19 +779,19 @@ open class ManagerAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 1,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 5.025004791520295,
+      "drawdownPercent" : 9.965781217890562,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -800,26 +804,28 @@ open class ManagerAPI {
     "topFundAssets" : [ {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 4.965218492984954
     }, {
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 4.965218492984954
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "personalDetails" : {
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "value" : 9.965781217890562,
-      "profit" : 9.369310271410669,
-      "invested" : 6.683562403749608,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Active"
@@ -1000,11 +1006,11 @@ open class ManagerAPI {
     "type" : "Program"
   } ],
   "fundChart" : {
-    "profitChangePercent" : 5.944895607614016,
-    "calmarRatio" : 1.284659006116532,
-    "timeframeGvtProfit" : 6.878052220127876,
-    "timeframeUsdProfit" : 6.683562403749608,
-    "maxDrawdown" : 2.8841621266687802,
+    "profitChangePercent" : 6.704019297950036,
+    "calmarRatio" : 2.8841621266687802,
+    "timeframeGvtProfit" : 5.944895607614016,
+    "timeframeUsdProfit" : 8.762042012749001,
+    "maxDrawdown" : 6.778324963048013,
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1012,15 +1018,15 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "investors" : 6,
-    "totalGvtProfit" : 6.778324963048013,
-    "sortinoRatio" : 6.965117697638846,
-    "rebalances" : 8,
-    "balance" : 9.018348186070783,
-    "rate" : 6.704019297950036,
+    "investors" : 3,
+    "totalGvtProfit" : 6.878052220127876,
+    "sortinoRatio" : 1.284659006116532,
+    "rebalances" : 9,
+    "balance" : 6.438423552598547,
+    "rate" : 3.353193347011243,
     "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "totalUsdProfit" : 9.369310271410669,
-    "sharpeRatio" : 3.5571952270680973,
+    "totalUsdProfit" : 6.683562403749608,
+    "sharpeRatio" : 6.965117697638846,
     "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
   },
   "requests" : {
@@ -1038,10 +1044,11 @@ open class ManagerAPI {
     "status" : "New"
   },
   "events" : {
-    "total" : 2,
+    "total" : 7,
     "events" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "programType" : "Program",
+      "periodNumber" : 2,
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
@@ -1054,6 +1061,7 @@ open class ManagerAPI {
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "programType" : "Program",
+      "periodNumber" : 2,
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
@@ -1066,13 +1074,13 @@ open class ManagerAPI {
     } ]
   },
   "programChart" : {
-    "profitFactor" : 4.145608029883936,
-    "profitChangePercent" : 5.025004791520295,
-    "calmarRatio" : 6.84685269835264,
-    "timeframeGvtProfit" : 4.965218492984954,
-    "timeframeProgramCurrencyProfit" : 9.301444243932576,
-    "trades" : 3,
-    "maxDrawdown" : 7.457744773683766,
+    "profitFactor" : 7.386281948385884,
+    "profitChangePercent" : 9.965781217890562,
+    "calmarRatio" : 7.457744773683766,
+    "timeframeGvtProfit" : 5.025004791520295,
+    "timeframeProgramCurrencyProfit" : 3.616076749251911,
+    "trades" : 2,
+    "maxDrawdown" : 1.1730742509559433,
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1081,8 +1089,8 @@ open class ManagerAPI {
       "value" : 3.616076749251911
     } ],
     "investors" : 1,
-    "totalGvtProfit" : 1.1730742509559433,
-    "sortinoRatio" : 1.4894159098541704,
+    "totalGvtProfit" : 4.965218492984954,
+    "sortinoRatio" : 6.84685269835264,
     "pnLChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1090,11 +1098,11 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "balance" : 7.386281948385884,
+    "balance" : 1.2315135367772556,
     "programCurrency" : "Undefined",
-    "rate" : 9.965781217890562,
-    "totalProgramCurrencyProfit" : 7.061401241503109,
-    "successTradesPercent" : 2.027123023002322,
+    "rate" : 9.369310271410669,
+    "totalProgramCurrencyProfit" : 9.301444243932576,
+    "successTradesPercent" : 4.145608029883936,
     "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
     "periods" : [ {
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
@@ -1103,7 +1111,7 @@ open class ManagerAPI {
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00"
     } ],
-    "sharpeRatio" : 1.0246457001441578,
+    "sharpeRatio" : 1.4894159098541704,
     "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
   }
 }}]
@@ -1676,7 +1684,7 @@ open class ManagerAPI {
      Manager programs
      - GET /v1.0/manager/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 7,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1714,15 +1722,17 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
-      "hasNotifications" : true,
-      "isOwnProgram" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
+      "pendingOutput" : 1.4894159098541704,
+      "hasNotifications" : true,
+      "pendingInput" : 1.0246457001441578,
+      "isOwnProgram" : true,
+      "isReinvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,
@@ -1778,15 +1788,17 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
-      "hasNotifications" : true,
-      "isOwnProgram" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
+      "pendingOutput" : 1.4894159098541704,
+      "hasNotifications" : true,
+      "pendingInput" : 1.0246457001441578,
+      "isOwnProgram" : true,
+      "isReinvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,

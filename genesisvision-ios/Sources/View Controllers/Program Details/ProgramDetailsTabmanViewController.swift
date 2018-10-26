@@ -11,7 +11,7 @@ import UIKit
 class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetailsViewModel> {
     
     // MARK: - Variables
-    weak var programInfoViewControllerProtocol: ProgramProtocol?
+    weak var programInfoViewControllerProtocol: FavoriteStateChangeProtocol?
     var scrollEnabled: Bool = true {
         didSet {
             //TODO:
@@ -28,10 +28,6 @@ class ProgramDetailsTabmanViewController: BaseTabmanViewController<ProgramDetail
     // MARK: - Public Methods
     func setup(_ programDetailsFull: ProgramDetailsFull?) {
         viewModel.setup(programDetailsFull)
-    }
-    
-    func setup(_ fundDetailsFull: FundDetailsFull?) {
-        viewModel.setupFund(fundDetailsFull)
     }
 }
 

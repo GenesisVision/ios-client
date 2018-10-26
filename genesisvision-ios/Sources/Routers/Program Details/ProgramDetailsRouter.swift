@@ -12,7 +12,7 @@ class ProgramDetailsRouter: TabmanRouter {
     
     // MARK: - Public methods
     func getInfo(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
-        guard let viewController = ProgramInfoViewController.storyboardInstance(name: .program) else { return nil }
+        let viewController = ProgramInfoViewController()
         
         let router = ProgramInfoRouter(parentRouter: self)
         router.currentController = viewController
@@ -21,16 +21,6 @@ class ProgramDetailsRouter: TabmanRouter {
         viewController.hidesBottomBarWhenPushed = true
         
         programInfoViewController = viewController
-        return viewController
-    }
-    
-    func getDescription(with programDetailsFull: ProgramDetailsFull) -> ProgramDescriptionViewController? {
-        guard let viewController = ProgramDescriptionViewController.storyboardInstance(name: .program) else { return  nil }
-        
-        let router = ProgramDescriptionRouter(parentRouter: self)
-        let viewModel = ProgramDescriptionViewModel(withRouter: router, programDetailsFull: programDetailsFull)
-        viewController.viewModel = viewModel
-        
         return viewController
     }
     
@@ -43,7 +33,7 @@ class ProgramDetailsRouter: TabmanRouter {
         return viewController
     }
     
-    func getHistory(with programId: String) -> ProgramHistoryViewController? {
+    func getEvents(with programId: String) -> ProgramHistoryViewController? {
         let viewController = ProgramHistoryViewController()
         let router = ProgramHistoryRouter(parentRouter: self)
         let viewModel = ProgramHistoryViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController as? ReloadDataProtocol)

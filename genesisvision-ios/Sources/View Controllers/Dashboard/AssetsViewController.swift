@@ -17,7 +17,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Assets"
+        navigationItem.title = "Assets"
         
         pageboyDataSource = AssetsPageboyViewControllerDataSource(router: viewModel.router)
         
@@ -33,6 +33,11 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         if !(viewModel.router is DashboardRouter) {
             self.navigationController?.isNavigationBarHidden = true
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

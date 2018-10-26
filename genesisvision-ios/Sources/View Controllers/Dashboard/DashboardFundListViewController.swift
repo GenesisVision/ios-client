@@ -11,7 +11,7 @@ import UIKit
 class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: DashboardProgramListViewModel!
+    var viewModel: DashboardFundListViewModel!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -55,8 +55,8 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         tableView.contentInset.bottom = -44.0
         
         tableView.bounces = true
-        tableView.delegate = self.viewModel?.programListDelegateManager
-        tableView.dataSource = self.viewModel?.programListDelegateManager
+        tableView.delegate = self.viewModel?.fundListDelegateManager
+        tableView.dataSource = self.viewModel?.fundListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         setupPullToRefresh(scrollView: tableView)
@@ -155,11 +155,11 @@ extension DashboardFundListViewController: ReloadDataProtocol {
     }
 }
 
-// MARK: - ProgramProtocol
-extension DashboardFundListViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+// MARK: - FavoriteStateChangeProtocol
+extension DashboardFundListViewController: FavoriteStateChangeProtocol {
+    func didChangeFavoriteState(with assetId: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, assetId: assetId, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

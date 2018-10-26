@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(programId: String), programList, notificationList, allPortfolioEvents(programId: String?), requests(programRequests: ProgramRequests?)
+    case showProgramDetails(programId: String), showFundDetails(fundId: String), programList, notificationList, allPortfolioEvents(programId: String?), requests(programRequests: ProgramRequests?)
 }
 
 class DashboardRouter: Router {
@@ -21,7 +21,7 @@ class DashboardRouter: Router {
     var dashboardAssetsViewController: AssetsViewController?
     
     var programListViewController: DashboardProgramListViewController?
-    var fundListViewController: DashboardProgramListViewController?
+    var fundListViewController: DashboardFundListViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {
@@ -35,6 +35,8 @@ class DashboardRouter: Router {
         switch routeType {
         case .showProgramDetails(let programId):
             showProgramDetails(with: programId)
+        case .showFundDetails(let fundId):
+            showFundDetails(with: fundId)
         case .programList:
             showProgramList()
         case .notificationList:

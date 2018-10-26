@@ -62,18 +62,18 @@ final class ManagerProgramListViewModel {
         programListDelegateManager = ManagerProgramListDelegateManager(with: self)
     }
     // MARK: - Public methods
-    func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             model.program.personalDetails?.isFavorite = value
             completion(.success)
             return
         }
         
-        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let model = self?.model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 model.program.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
@@ -230,16 +230,16 @@ extension ManagerProgramListViewModel {
             
             self?.programsList = programsList
             
-            var programViewModels = [ProgramTableViewCellViewModel]()
+            var viewModels = [ProgramTableViewCellViewModel]()
             
             let totalCount = programsList.total ?? 0
             
             programsList.programs?.forEach({ (program) in
                 let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: nil)
-                programViewModels.append(programTableViewCellViewModel)
+                viewModels.append(programTableViewCellViewModel)
             })
             
-            completionSuccess(totalCount, programViewModels)
+            completionSuccess(totalCount, viewModels)
             completionError(.success)
             }, errorCompletion: completionError)
     }

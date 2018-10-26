@@ -14,7 +14,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private var signInButtonEnable: Bool = false
     
     // MARK: - View Model
-    var viewModel: ProgramListViewModelProtocol!
+    var viewModel: ListViewModelProtocol!
     
     // MARK: - Outlets
     lazy var searchBar: UISearchBar = {
@@ -247,11 +247,11 @@ extension ProgramListViewController: ReloadDataProtocol {
     }
 }
 
-// MARK: - ProgramProtocol
-extension ProgramListViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+// MARK: - FavoriteStateChangeProtocol
+extension ProgramListViewController: FavoriteStateChangeProtocol {
+    func didChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, assetId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

@@ -326,6 +326,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var tableView: UITableView!
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
+    var tableViewStyle: UITableView.Style = .grouped
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -344,7 +345,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Private methods
     private func addTableViewIfNeeded() {
         if tableView == nil {
-            tableView = UITableView(frame: .zero, style: .plain)
+            tableView = UITableView(frame: .zero, style: tableViewStyle)
             self.view.addSubview(tableView)
             
             tableView.translatesAutoresizingMaskIntoConstraints = false

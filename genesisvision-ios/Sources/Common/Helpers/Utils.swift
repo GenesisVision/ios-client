@@ -34,7 +34,7 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
     let hours = minutes / 60
     let days = hours / 24
     
-    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : seconds >= 0 ? "seconds" : nil
+    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "min" : seconds >= 0 ? "sec" : nil
     let periodLeftValue: Int = days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : seconds >= 0 ? seconds : -1
     
     return (periodLeftValue, periodLeftTimeString)
@@ -46,7 +46,7 @@ func getPeriodDuration(from minutes: Int) -> String? {
     let weeks = days / 7
     let months = days / 31
     
-    let periodLeftTimeString: String = months > 0 ? "months" : weeks > 0 ? "weeks" : days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : ""
+    let periodLeftTimeString: String = months > 0 ? "months" : weeks > 0 ? "weeks" : days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "min" : ""
     let periodLeftValue: Int = months > 0 ? months : weeks > 0 ? weeks : days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : -1
     
     return periodLeftValue > 0 ? "\(periodLeftValue) " + periodLeftTimeString : nil

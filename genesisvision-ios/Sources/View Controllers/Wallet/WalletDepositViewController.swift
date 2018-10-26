@@ -123,8 +123,6 @@ class WalletDepositViewController: BaseViewController {
     }
     
     private func updateUI() {
-        
-        
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
         
@@ -142,8 +140,10 @@ class WalletDepositViewController: BaseViewController {
             if currency != .gvt {
                 disclaimerLabel.isHidden = false
                 disclaimerLabel.text = "After processing the \(currency.rawValue) transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
+                amountToDepositGVTTitleLabel.text = "Approximate amount"
             } else {
                 disclaimerLabel.isHidden = true
+                amountToDepositGVTTitleLabel.text = "You will get"
             }
         }
     }

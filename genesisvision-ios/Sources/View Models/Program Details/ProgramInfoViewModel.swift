@@ -196,9 +196,9 @@ extension ProgramInfoViewModel {
                 return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
             }
         case .yourInvestment:
-            return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, programYourInvestmentProtocol: self)
+            return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, yourInvestmentProtocol: self)
         case .investNow:
-            return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, programInvestNowProtocol: self)
+            return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
         }
     }
     
@@ -231,7 +231,7 @@ extension ProgramInfoViewModel: ReloadDataProtocol {
     }
 }
 
-extension ProgramInfoViewModel: ProgramYourInvestmentProtocol {
+extension ProgramInfoViewModel: YourInvestmentProtocol {
     func didTapWithdrawButton() {
         withdraw()
     }
@@ -258,7 +258,7 @@ extension ProgramInfoViewModel: ProgramYourInvestmentProtocol {
     }
 }
 
-extension ProgramInfoViewModel: ProgramInvestNowProtocol {
+extension ProgramInfoViewModel: InvestNowProtocol {
     func didTapInvestButton() {
         if availableInvestment > 0 {
             invest()

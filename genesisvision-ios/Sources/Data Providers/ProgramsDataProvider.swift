@@ -93,12 +93,12 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func programFavorites(isFavorite: Bool, programId: String, completion: @escaping CompletionBlock) {
+    static func favorites(isFavorite: Bool, assetId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         isFavorite
-            ? programFavoritesRemove(with: programId, authorization: authorization, completion: completion)
-            : programFavoritesAdd(with: programId, authorization: authorization, completion: completion)
+            ? programFavoritesRemove(with: assetId, authorization: authorization, completion: completion)
+            : programFavoritesAdd(with: assetId, authorization: authorization, completion: completion)
     }
     
     static func reinvestOn(with programId: String, completion: @escaping CompletionBlock) {
@@ -147,15 +147,14 @@ class ProgramsDataProvider: DataProvider {
     
     
     // MARK: - Private methods
-
-    private static func programFavoritesAdd(with programId: String, authorization: String, completion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+    private static func programFavoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsAPI.v10ProgramsByIdFavoriteAddPost(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "programId" : programId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "programId" : assetId])
                 default:
                     break
                 }
@@ -165,14 +164,14 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    private static func programFavoritesRemove(with programId: String, authorization: String, completion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+    private static func programFavoritesRemove(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsAPI.v10ProgramsByIdFavoriteRemovePost(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "programId" : programId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "programId" : assetId])
                 default:
                     break
                 }

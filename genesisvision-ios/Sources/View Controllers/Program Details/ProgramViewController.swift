@@ -32,7 +32,7 @@ class ProgramViewController: BaseViewController {
     var programHeaderViewController: ProgramHeaderViewController?
     var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
     
-    @IBOutlet weak var programDetailsView: UIView!
+    @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
     
@@ -48,6 +48,7 @@ class ProgramViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.isNavigationBarHidden = false
         let height = UIScreen.main.bounds.size.height
         self.minHeaderHeight = height / 3
     }
@@ -72,7 +73,7 @@ class ProgramViewController: BaseViewController {
             
             let router = ProgramDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
             let viewModel = ProgramDetailsViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
-            viewModel.programDetailsProtocol = self
+            viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
             
             self.viewModel?.router?.programDetailsTabmanViewController = tabmanViewController
@@ -149,7 +150,7 @@ class ProgramViewController: BaseViewController {
             switch result {
             case .success:
                 if let programId = self?.programDetailsTabmanViewController?.viewModel.programId {
-                    self?.programDetailsTabmanViewController?.programInfoViewControllerProtocol?.programDetailDidChangeFavoriteState(with: programId, value: !isFavorite, request: false)
+                    self?.programDetailsTabmanViewController?.programInfoViewControllerProtocol?.didChangeFavoriteState(with: programId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
@@ -201,10 +202,10 @@ extension ProgramViewController {
             if let viewModel = viewModel.router.programDetailsTabmanViewController?.viewModel {
                 for controller in viewModel.viewControllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-                        print(programDetailsView.frame.origin.y)
+                        print(detailsView.frame.origin.y)
                         print(yOffset)
                         
-                        vc.tableView?.isScrollEnabled = yOffset >= programDetailsView.frame.origin.y - 44.0 - 44.0
+                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - 44.0 - 44.0
                     }
                 }
             }
@@ -232,7 +233,7 @@ extension ProgramViewController {
     }
 }
 
-extension ProgramViewController: ProgramDetailsProtocol {
+extension ProgramViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
             guard AuthManager.isLogin() else { return }
@@ -249,13 +250,14 @@ extension ProgramViewController: ProgramDetailsProtocol {
     }
 }
 
-extension ProgramViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+// MARK: - FavoriteStateChangeProtocol
+extension ProgramViewController: FavoriteStateChangeProtocol {
+    func didChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         
     }
 }
 
-extension ProgramViewController: ProgramDetailProtocol {
+extension ProgramViewController: DetailProtocol {
     func didRequestCanceled(_ last: Bool) {
         if let viewModel = programDetailsTabmanViewController?.viewModel {
             viewModel.didRequestCanceled(last)

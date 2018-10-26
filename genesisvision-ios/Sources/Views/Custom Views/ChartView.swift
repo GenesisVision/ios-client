@@ -12,7 +12,6 @@ class MyFillFormatter: IFillFormatter {
     func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
         return dataProvider.maxHighlightDistance
     }
-    
 }
 
 protocol ChartMarkerProtocol: class {
@@ -29,7 +28,8 @@ class ChartView: CombinedChartView {
 
     private var barChartData: [ValueChartBar]?
     private var lineChartData: [ChartSimple]?
-    private var balanceChartData: [ProgramBalanceChartElement]?
+    private var programBalanceChartData: [ProgramBalanceChartElement]?
+    private var fundBalanceChartData: [BalanceChartElement]?
     
     private var name: String?
     private var currencyValue: String = ""
@@ -48,7 +48,7 @@ class ChartView: CombinedChartView {
             lineChartDataSet.setColor(UIColor.Cell.greenTitle)
             lineChartDataSet.lineWidth = 1.5
 
-            lineChartDataSet.drawFilledEnabled = chartType != .default
+            lineChartDataSet.drawFilledEnabled = true
             lineChartDataSet.fillFormatter = MyFillFormatter()
 
             let gradientColors = [UIColor.Cell.greenTitle.withAlphaComponent(0.3).cgColor, UIColor.Cell.greenTitle.withAlphaComponent(0.0).cgColor]
@@ -75,9 +75,8 @@ class ChartView: CombinedChartView {
     private var barChartDataSet: BarChartDataSet! {
         didSet {
             barChartDataSet.setColor(UIColor.Cell.title)
-//            barChartDataSet.axisDependency = .left
             barChartDataSet.drawValuesEnabled = false
-            barChartDataSet.highlightEnabled = true
+            barChartDataSet.highlightEnabled = false
         }
     }
     
@@ -92,7 +91,8 @@ class ChartView: CombinedChartView {
     func setup(chartType: ChartType = .detail,
                lineChartData: [ChartSimple]? = nil,
                barChartData: [ValueChartBar]? = nil,
-               balanceChartData: [ProgramBalanceChartElement]? = nil,
+               programBalanceChartData: [ProgramBalanceChartElement]? = nil,
+               fundBalanceChartData: [BalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
                chartDurationType: ChartDurationType? = nil) {
@@ -101,7 +101,8 @@ class ChartView: CombinedChartView {
         self.name = name
         self.lineChartData = lineChartData
         self.barChartData = barChartData
-        self.balanceChartData = balanceChartData
+        self.programBalanceChartData = programBalanceChartData
+        self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
         self.chartDurationType = chartDurationType ?? .all
 
@@ -125,8 +126,17 @@ class ChartView: CombinedChartView {
             data.barData = generateBarChartData(barChartData)
         }
         
-        if let balanceChartData = balanceChartData {
-            let lineData = generateBalanceChartData(balanceChartData)
+        if let programBalanceChartData = programBalanceChartData {
+            let lineData = generateProgramBalanceChartData(programBalanceChartData)
+            data.lineData = lineData
+            
+            data.lineData.calcMinMax()
+            maxLimitValue = data.lineData.getYMax().rounded(toPlaces: 2)
+            minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
+        }
+        
+        if let fundBalanceChartData = fundBalanceChartData {
+            let lineData = generateFundBalanceChartData(fundBalanceChartData)
             data.lineData = lineData
             
             data.lineData.calcMinMax()
@@ -144,10 +154,8 @@ class ChartView: CombinedChartView {
     @objc func handleTap(recognizer: UIGestureRecognizer) {
         switch recognizer.state {
         case .ended, .cancelled:
-            highlightValue(nil, callDelegate: false)
-            chartMarkerProtocol?.didHideMarker()
+            highlightValue(nil, callDelegate: true)
         case .changed:
-           chartMarkerProtocol?.didChangeMarker()
             break
         default:
             break
@@ -173,7 +181,7 @@ class ChartView: CombinedChartView {
         dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
 
-        highlightPerTapEnabled = chartType != .default
+        highlightPerTapEnabled = false
         highlightPerDragEnabled = chartType != .default
 
         let rightAxisFormatter = NumberFormatter()
@@ -271,7 +279,7 @@ class ChartView: CombinedChartView {
         autoScaleMinMaxEnabled = true
         
         drawBarShadowEnabled = false
-        highlightFullBarEnabled = true
+        highlightFullBarEnabled = false
 
         drawOrder = [DrawOrder.bar.rawValue,
                      DrawOrder.line.rawValue]
@@ -281,7 +289,7 @@ class ChartView: CombinedChartView {
         }
     }
     
-    private func generateBalanceChartData(_ values: [ProgramBalanceChartElement]) -> LineChartData {
+    private func generateProgramBalanceChartData(_ values: [ProgramBalanceChartElement]) -> LineChartData {
         let lineChartData = LineChartData()
         
         let profitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -297,7 +305,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = true
+        lineChartDataSet.highlightEnabled = false
         lineChartData.addDataSet(lineChartDataSet)
         
         let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -314,6 +322,40 @@ class ChartView: CombinedChartView {
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
         lineChartDataSet.highlightEnabled = chartType != .default
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            let yValue = values[i].managerFunds ?? 0.0
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+        }
+        lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
+        lineChartDataSet.setColor(UIColor.Chart.dark)
+        lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
+        lineChartDataSet.fillAlpha = 1.0
+        lineChartDataSet.fillFormatter = nil
+        lineChartDataSet.drawFilledEnabled = true
+        lineChartDataSet.highlightEnabled = false
+        lineChartData.addDataSet(lineChartDataSet)
+        
+        return lineChartData
+    }
+    
+    private func generateFundBalanceChartData(_ values: [BalanceChartElement]) -> LineChartData {
+        let lineChartData = LineChartData()
+        
+        let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
+            let investorsFunds = values[i].investorsFunds ?? 0.0
+            let managerFunds = values[i].managerFunds ?? 0.0
+            let yValue = investorsFunds + managerFunds
+            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+        }
+        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
+        lineChartDataSet.setColor(UIColor.Chart.middle)
+        lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.middle.cgColor)
+        lineChartDataSet.fillAlpha = 1.0
+        lineChartDataSet.fillFormatter = nil
+        lineChartDataSet.drawFilledEnabled = true
+        lineChartDataSet.highlightEnabled = false
         lineChartData.addDataSet(lineChartDataSet)
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in

@@ -8,6 +8,15 @@
 
 import UIKit
 
+//old ProgramProtocol
+protocol FavoriteStateChangeProtocol: class {
+    func didChangeFavoriteState(with programID: String, value: Bool, request: Bool)
+}
+
+protocol FavoriteStateUpdatedProtocol: class {
+    func didFavoriteStateUpdated()
+}
+
 protocol CurrencyTitleButtonProtocol {
     var target: Any? { get }
     var action: Selector! { get }

@@ -54,10 +54,10 @@ class InvestWithdrawConfirmView: UIView {
     
     @IBOutlet weak var programLogoImageView: ProfileImageView!
 
-    @IBOutlet weak var programTitleLabel: TitleLabel! {
+    @IBOutlet weak var assetTitleLabel: TitleLabel! {
         didSet {
-            programTitleLabel.font = UIFont.getFont(.regular, size: 16.0)
-            programTitleLabel.textColor = UIColor.Cell.bg
+            assetTitleLabel.font = UIFont.getFont(.regular, size: 16.0)
+            assetTitleLabel.textColor = UIColor.Cell.bg
         }
     }
     @IBOutlet weak var managerNameLabel: SubtitleLabel! {
@@ -140,7 +140,7 @@ class InvestWithdrawConfirmView: UIView {
         titleLabel.text = model.title
         subtitleLabel.text = model.subtitle
         
-        programTitleLabel.text = model.programTitle
+        titleLabel.text = model.programTitle
         managerNameLabel.text = model.managerName
         
         firstTitleLabel.text = model.firstTitle

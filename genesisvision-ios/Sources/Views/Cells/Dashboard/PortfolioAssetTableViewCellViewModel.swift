@@ -26,7 +26,7 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
             cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         if let value = selectedChartAssets.changePercent {
-            cell.changePercentLabel.text = value.rounded(toPlaces: 2).toString() + "%"
+            cell.changePercentLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
     }
 }

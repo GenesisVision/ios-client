@@ -33,14 +33,23 @@ class PortfolioViewController: BaseViewController {
     @IBOutlet weak var changeValueLabel: TitleLabel!
     @IBOutlet weak var changeCurrencyLabel: MediumLabel!
     
-    @IBOutlet weak var inRequestsStackView: UIStackView!
-    @IBOutlet weak var inRequestsButton: UIButton!
+    @IBOutlet weak var inRequestsStackView: UIStackView! {
+        didSet {
+            inRequestsStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var inRequestsButton: UIButton! {
+        didSet {
+            inRequestsButton.isHidden = true
+        }
+    }
     @IBOutlet weak var inRequestsTitleLabel: SubtitleLabel!
     @IBOutlet weak var inRequestsValueLabel: TitleLabel!
     @IBOutlet weak var inRequestsCurrencyLabel: MediumLabel!
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
+            chartView.isHidden = true
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
         }
@@ -61,6 +70,7 @@ class PortfolioViewController: BaseViewController {
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
         didSet {
             chartViewHeightConstraint.constant = 150.0
+            chartView.isHidden = true
         }
     }
     @IBOutlet weak var inRequeststViewHeightConstraint: NSLayoutConstraint!
@@ -89,6 +99,7 @@ class PortfolioViewController: BaseViewController {
     
     func hideChart(_ value: Bool) {
         chartViewHeightConstraint.constant = value ? 0.0 : 150.0
+        chartView.isHidden = value
     }
     
     // MARK: - Private methods
@@ -121,7 +132,7 @@ class PortfolioViewController: BaseViewController {
             
             changeTitleLabel.text = "Change"
             if let changePercent = dashboardChartValue.changePercent {
-                changePercentLabel.text = changePercent.rounded(toPlaces: 2).toString() + " %"
+                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + " %"
             }
             if let changeValue = dashboardChartValue.changeValue {
                 changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
@@ -139,10 +150,6 @@ class PortfolioViewController: BaseViewController {
                 if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                     let inRequestsCurrency = totalValue * rate
                     inRequestsCurrencyLabel.text = inRequestsCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
-                }
-                
-                if let requests = programRequests.requests {
-                    self.inRequestsButton.isHidden = requests.count == 0
                 }
             }
         }
@@ -176,8 +183,8 @@ class PortfolioViewController: BaseViewController {
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    private func hideInRequestStackView(_ value: Bool) {
-        circleView.isHidden = !value
+    func hideInRequestStackView(_ value: Bool) {
+        if let programRequests = viewModel.programRequests, let requests = programRequests.requests, requests.count == 0, inRequestsStackView.isHidden { return }
         
         UIView.animate(withDuration: 0.3) {
             self.inRequestsButton.isHidden = value
@@ -209,11 +216,15 @@ class PortfolioViewController: BaseViewController {
             self.bottomAssetsView = nil
         }
         
+        circleView.isHidden = true
+        
         hideInRequestStackView(false)
     }
     
     private func showBottomAssetsView() {
         if self.bottomAssetsView == nil {
+            circleView.isHidden = false
+            
             hideInRequestStackView(true)
         }
 
@@ -259,6 +270,7 @@ extension PortfolioViewController: ChartViewDelegate {
 
 extension PortfolioViewController: BottomSheetControllerProtocol {
     func didHide() {
+        circleView.isHidden = false
         hideInRequestStackView(false)
         chartView.highlightValues([])
     }

@@ -25,7 +25,7 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
             let today = Date()
             let periodLeft = periodEnds.timeSinceDate(fromDate: today)
             
-            cell.periodLeftLabel.text = periodLeft.isEmpty ? "The period is over." : periodLeft + " left"
+            cell.periodLeftLabel.text = periodLeft.isEmpty ? "The period is over" : periodLeft + " left"
             
             
             if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {

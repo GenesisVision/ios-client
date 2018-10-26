@@ -234,6 +234,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="assetTitleLabel" destination="7Dn-QY-cuT" id="JrH-J0-kMy"/>
                 <outlet property="cancelButton" destination="nQA-V9-aqF" id="38B-ns-Upx"/>
                 <outlet property="confirmButton" destination="xKs-LQ-o5Z" id="1dv-Ua-4gz"/>
                 <outlet property="firstStackView" destination="nSa-wX-fgY" id="r6L-Pi-w0G"/>
@@ -244,7 +245,6 @@
                 <outlet property="fourthValueLabel" destination="Kx4-Ob-vFj" id="DSY-oW-xHH"/>
                 <outlet property="managerNameLabel" destination="VNf-Yz-Xsz" id="2NW-6o-iCe"/>
                 <outlet property="programLogoImageView" destination="CrE-c1-RXa" id="ZPB-YJ-PPf"/>
-                <outlet property="programTitleLabel" destination="7Dn-QY-cuT" id="JrH-J0-kMy"/>
                 <outlet property="secondStackView" destination="LDj-nS-xkq" id="ycY-jT-Bh0"/>
                 <outlet property="secondTitleLabel" destination="Ecc-YQ-OiC" id="3xu-FI-TlP"/>
                 <outlet property="secondValueLabel" destination="rrT-iH-suy" id="8tX-Un-qNo"/>

@@ -45,7 +45,7 @@ final class ProgramViewModel {
             let programId = programId
             else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsDataProvider.programFavorites(isFavorite: isFavorite, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.favorites(isFavorite: isFavorite, assetId: programId) { [weak self] (result) in
             switch result {
             case .success:
                 self?.programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite

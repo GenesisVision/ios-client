@@ -43,6 +43,10 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
     func hideChart(_ value: Bool) {
         pageboyDataSource.portfolioVC?.hideChart(value)
     }
+    
+    func hideInRequests(_ value: Bool) {
+        pageboyDataSource.portfolioVC?.hideInRequestStackView(value)
+    }
 
     // MARK: - Private methods
     

@@ -81,6 +81,7 @@ open class WalletTransaction: Codable {
     public var sourceBlockchainInfo: BlockchainInfo?
     public var sourceWithdrawalInfo: WithdrawalInfo?
     public var action: Action?
+    public var information: String?
     public var destinationId: UUID?
     public var destinationType: DestinationType?
     public var destinationCurrency: DestinationCurrency?
@@ -90,7 +91,7 @@ open class WalletTransaction: Codable {
 
 
     
-    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, sourceProgramInfo: ProgramInfo?, sourceBlockchainInfo: BlockchainInfo?, sourceWithdrawalInfo: WithdrawalInfo?, action: Action?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?, destinationProgramInfo: ProgramInfo?, destinationBlockchainInfo: BlockchainInfo?, destinationWithdrawalInfo: WithdrawalInfo?) {
+    public init(id: UUID?, amount: Double?, amountConverted: Double?, date: Date?, number: Int64?, sourceId: UUID?, sourceType: SourceType?, sourceCurrency: SourceCurrency?, sourceProgramInfo: ProgramInfo?, sourceBlockchainInfo: BlockchainInfo?, sourceWithdrawalInfo: WithdrawalInfo?, action: Action?, information: String?, destinationId: UUID?, destinationType: DestinationType?, destinationCurrency: DestinationCurrency?, destinationProgramInfo: ProgramInfo?, destinationBlockchainInfo: BlockchainInfo?, destinationWithdrawalInfo: WithdrawalInfo?) {
         self.id = id
         self.amount = amount
         self.amountConverted = amountConverted
@@ -103,6 +104,7 @@ open class WalletTransaction: Codable {
         self.sourceBlockchainInfo = sourceBlockchainInfo
         self.sourceWithdrawalInfo = sourceWithdrawalInfo
         self.action = action
+        self.information = information
         self.destinationId = destinationId
         self.destinationType = destinationType
         self.destinationCurrency = destinationCurrency
@@ -130,6 +132,7 @@ open class WalletTransaction: Codable {
         try container.encodeIfPresent(sourceBlockchainInfo, forKey: "sourceBlockchainInfo")
         try container.encodeIfPresent(sourceWithdrawalInfo, forKey: "sourceWithdrawalInfo")
         try container.encodeIfPresent(action, forKey: "action")
+        try container.encodeIfPresent(information, forKey: "information")
         try container.encodeIfPresent(destinationId, forKey: "destinationId")
         try container.encodeIfPresent(destinationType, forKey: "destinationType")
         try container.encodeIfPresent(destinationCurrency, forKey: "destinationCurrency")
@@ -155,6 +158,7 @@ open class WalletTransaction: Codable {
         sourceBlockchainInfo = try container.decodeIfPresent(BlockchainInfo.self, forKey: "sourceBlockchainInfo")
         sourceWithdrawalInfo = try container.decodeIfPresent(WithdrawalInfo.self, forKey: "sourceWithdrawalInfo")
         action = try container.decodeIfPresent(Action.self, forKey: "action")
+        information = try container.decodeIfPresent(String.self, forKey: "information")
         destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
         destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
         destinationCurrency = try container.decodeIfPresent(DestinationCurrency.self, forKey: "destinationCurrency")

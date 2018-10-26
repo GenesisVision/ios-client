@@ -14,18 +14,21 @@ class DetailManagerTableViewCell: UITableViewCell {
     @IBOutlet var managerImageView: UIImageView! {
         didSet {
             managerImageView.roundCorners()
+            managerImageView.isUserInteractionEnabled = false
         }
     }
     @IBOutlet var managerNameLabel: UILabel! {
         didSet {
             managerNameLabel.textColor = UIColor.Cell.title
             managerNameLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            managerNameLabel.isUserInteractionEnabled = false
         }
     }
     @IBOutlet var dateLabel: UILabel! {
         didSet {
             dateLabel.textColor = UIColor.Cell.subtitle
             dateLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            dateLabel.isUserInteractionEnabled = false
         }
     }
     

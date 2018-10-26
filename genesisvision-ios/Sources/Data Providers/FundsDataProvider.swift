@@ -26,9 +26,9 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func getInvestInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestInfo(fundId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId)
+            let uuid = UUID(uuidString: fundId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         InvestorAPI.v10InvestorFundsByIdInvestInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundInvestInfo, error) in
@@ -36,9 +36,9 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func getWithdrawInfo(programId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWithdrawInfo(fundId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId)
+            let uuid = UUID(uuidString: fundId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundWithdrawInfo, error) in
@@ -67,4 +67,73 @@ class FundsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
+    
+    static func getProfitChart(with fundId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ tradesChartViewModel: FundProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdChartsProfitGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getBalanceChart(with fundId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ tradesChartViewModel: FundBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdChartsBalanceGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func favorites(isFavorite: Bool, assetId: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        isFavorite
+            ? favoritesRemove(with: assetId, authorization: authorization, completion: completion)
+            : favoritesAdd(with: assetId, authorization: authorization, completion: completion)
+    }
+    
+    static func getRequests(with fundId: String, skip: Int, take: Int, completion: @escaping (_ programRequests: ProgramRequests?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorProgramsByIdRequestsBySkipByTakeGet(id: uuid, skip: skip, take: take, authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Private methods
+    private static func favoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdFavoriteAddPost(id: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    NotificationCenter.default.post(name: .fundFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "fundId" : assetId])
+                default:
+                    break
+                }
+                
+                completion(result)
+            })
+        }
+    }
+    
+    private static func favoritesRemove(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdFavoriteRemovePost(id: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    NotificationCenter.default.post(name: .fundFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "fundId" : assetId])
+                default:
+                    break
+                }
+                
+                completion(result)
+            })
+        }
+    }
+
 }

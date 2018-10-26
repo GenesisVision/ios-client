@@ -33,7 +33,7 @@ class ProgramInfoRouter: Router {
             let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
-        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programDetailProtocol: programViewController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, detailProtocol: programViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -52,7 +52,7 @@ class ProgramInfoRouter: Router {
             let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramWithdrawRouter(parentRouter: self)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, programDetailProtocol: programViewController)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, detailProtocol: programViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

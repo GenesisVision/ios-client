@@ -14,7 +14,7 @@ struct ProgramProfitChartTableViewCellViewModel {
 }
 
 extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProgramProfitChartTableViewCell) {
+    func setup(on cell: DetailProfitChartTableViewCell) {
         
         cell.chartViewProtocol = chartViewProtocol
         

@@ -9,13 +9,15 @@
 import Foundation
 import UIKit
 
-final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
+final class FavoriteProgramListViewModel: ListViewModelProtocol {
+    var type: ListType = .programList
+    
    // MARK: - Variables
     var title: String = "Favorite programs".uppercased()
 
-    internal var sections: [SectionType] = [.programList]
+    internal var sections: [SectionType] = [.assetList]
     
-    var router: ProgramListRouterProtocol!
+    var router: ListRouterProtocol!
     
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -43,7 +45,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
-    var programsCount: String = ""
+    var count: String = ""
     var equityChartLength = Constants.Api.equityChartLength
     var skip = 0 {
         didSet {
@@ -53,7 +55,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
-            programsCount = "\(totalCount) programs"
+            count = "\(totalCount) programs"
         }
     }
     
@@ -72,7 +74,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
             filter?.name = searchText
         }
     }
-    var programViewModels = [ProgramTableViewCellViewModel]()
+    var viewModels = [CellViewAnyModel]()
     
     var sortingKeys: [ProgramsAPI.Sorting_v10ProgramsGet] = [.byProfitDesc, .byProfitAsc,
                                                            .byLevelDesc, .byLevelAsc,
@@ -142,24 +144,24 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     }
     
     // MARK: - Public methods
-    func changeFavorite(value: Bool, programId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             model.program.personalDetails?.isFavorite = value
             
-            if !value, let i = programViewModels.index(where: { $0.program.id?.uuidString == programId }) {
-                programViewModels.remove(at: i)
-                totalCount = programViewModels.count
+            if var viewModels = viewModels as? [ProgramTableViewCellViewModel], !value, let i = viewModels.index(where: { $0.program.id?.uuidString == assetId }) {
+                viewModels.remove(at: i)
+                totalCount = viewModels.count
             }
             
             completion(.success)
             return
         }
         
-        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
+        ProgramsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: programId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let model = self?.model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 model.program.personalDetails?.isFavorite = value
                 value ? completion(.success) : self?.refresh(completion: completion)
             case .failure(let errorType):
@@ -171,7 +173,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
     
     // MARK: - Private methods
     @objc private func programFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite: Bool = notification.userInfo?["isFavorite"] as? Bool, let programId = notification.userInfo?["programId"] as? String {
+        if let isFavorite: Bool = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["programId"] as? String {
             
             guard !isFavorite else {
                 refresh { [weak self] (result) in
@@ -181,7 +183,7 @@ final class FavoriteProgramListViewModel: ProgramListViewModelProtocol {
                 return
             }
             
-            changeFavorite(value: isFavorite, programId: programId) { [weak self] (result) in
+            changeFavorite(value: isFavorite, assetId: assetId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
@@ -202,13 +204,13 @@ extension FavoriteProgramListViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.programViewModels ?? [ProgramTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [ProgramTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
             })
             
-            self?.updateFetchedData(totalProgramCount: totalCount, allViewModels)
+            self?.updateFetchedData(totalProgramCount: totalCount, allViewModels as! [ProgramTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -229,7 +231,7 @@ extension FavoriteProgramListViewModel {
     }
     
     private func updateFetchedData(totalProgramCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
-        self.programViewModels = viewModels
+        self.viewModels = viewModels
         self.totalCount = totalProgramCount
         self.skip += self.take
         self.canFetchMoreResults = true
@@ -243,7 +245,7 @@ extension FavoriteProgramListViewModel {
             ProgramsDataProvider.get(isFavorite: true, skip: skip, take: take, completion: { (programsViewModel) in
                 guard let programs = programsViewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                var programViewModels = [ProgramTableViewCellViewModel]()
+                var viewModels = [ProgramTableViewCellViewModel]()
                 
                 let totalCount = programs.total ?? 0
                 
@@ -251,17 +253,14 @@ extension FavoriteProgramListViewModel {
                     guard let favoriteProgramListRouter: FavoriteProgramListRouter = self?.router as? FavoriteProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: favoriteProgramListRouter.favoriteProgramListViewController)
-                    programViewModels.append(programTableViewCellViewModel)
+                    viewModels.append(programTableViewCellViewModel)
                 })
                 
-                completionSuccess(totalCount, programViewModels)
+                completionSuccess(totalCount, viewModels)
                 completionError(.success)
             }, errorCompletion: completionError)
         case .fake:
-            fakeViewModels { (programViewModels) in
-                completionSuccess(programViewModels.count, programViewModels)
-                completionError(.success)
-            }
+            break
         }
     }
 }

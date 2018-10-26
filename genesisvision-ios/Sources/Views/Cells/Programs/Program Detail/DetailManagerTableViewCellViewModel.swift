@@ -15,7 +15,7 @@ struct DetailManagerTableViewCellViewModel {
 extension DetailManagerTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailManagerTableViewCell) {
         if let registrationDate = manager.registrationDate {
-            cell.dateLabel.text = registrationDate.onlyDateFormatString
+            cell.dateLabel.text = "since " + registrationDate.onlyDateFormatString
         }
         
         if let username = manager.username {

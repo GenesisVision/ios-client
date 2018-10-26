@@ -16,17 +16,17 @@ final class ProgramWithdrawViewModel {
     
     var programWithdrawInfo: ProgramWithdrawInfo?
     
-    private weak var programDetailProtocol: ProgramDetailProtocol?
+    private weak var detailProtocol: DetailProtocol?
     
     private var router: ProgramWithdrawRouter!
     
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
          programId: String,
-         programDetailProtocol: ProgramDetailProtocol?) {
+         detailProtocol: DetailProtocol?) {
         self.router = router
         self.programId = programId
-        self.programDetailProtocol = programDetailProtocol
+        self.detailProtocol = detailProtocol
     }
     
     // MARK: - Public methods
@@ -48,13 +48,8 @@ final class ProgramWithdrawViewModel {
         apiWithdraw(with: amount, completion: completion)
     }
     
-    func showWithdrawRequestedVC() {
-        programDetailProtocol?.didWithdrawn()
-        router.show(routeType: .withdrawRequested)
-    }
-    
     func goToBack() {
-        programDetailProtocol?.didWithdrawn()
+        detailProtocol?.didWithdrawn()
         router.goToBack()
     }
     

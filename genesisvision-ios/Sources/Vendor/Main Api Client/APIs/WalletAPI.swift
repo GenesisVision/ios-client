@@ -214,6 +214,7 @@ open class WalletAPI {
       "hash" : "hash",
       "status" : "Undefined"
     },
+    "information" : "information",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "destinationProgramInfo" : {
       "title" : "title"
@@ -253,6 +254,7 @@ open class WalletAPI {
       "hash" : "hash",
       "status" : "Undefined"
     },
+    "information" : "information",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "destinationProgramInfo" : {
       "title" : "title"
@@ -293,6 +295,66 @@ open class WalletAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<WalletTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Wallet pending transactions
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletTransactionsPendingGet(authorization: String, completion: @escaping ((_ data: WalletPendingTransactionsViewModel?,_ error: Error?) -> Void)) {
+        v10WalletTransactionsPendingGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Wallet pending transactions
+     - GET /v1.0/wallet/transactions/pending
+     - examples: [{contentType=application/json, example={
+  "total" : 6,
+  "transactions" : [ {
+    "lastUpdated" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "dateCreated" : "2000-01-23T04:56:07.000+00:00",
+    "address" : "address",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Deposit",
+    "hash" : "hash"
+  }, {
+    "lastUpdated" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "dateCreated" : "2000-01-23T04:56:07.000+00:00",
+    "address" : "address",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Deposit",
+    "hash" : "hash"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<WalletPendingTransactionsViewModel> 
+     */
+    open class func v10WalletTransactionsPendingGetWithRequestBuilder(authorization: String) -> RequestBuilder<WalletPendingTransactionsViewModel> {
+        let path = "/v1.0/wallet/transactions/pending"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletPendingTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

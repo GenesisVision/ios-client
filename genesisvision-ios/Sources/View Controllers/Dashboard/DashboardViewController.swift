@@ -102,6 +102,13 @@ class DashboardViewController: BaseViewController {
             chartsViewHeightConstraint.constant = 220.0
         }
         
+        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
+            viewModel.router.chartsViewController?.hideInRequests(false)
+        } else {
+            viewModel.router.chartsViewController?.hideInRequests(true)
+            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
+        }
+        
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
             navigationItem.leftBarButtonItems = [notificationsBarButtonItem]

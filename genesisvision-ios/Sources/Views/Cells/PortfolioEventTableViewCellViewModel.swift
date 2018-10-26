@@ -14,11 +14,11 @@ struct PortfolioEventTableViewCellViewModel {
 
 extension PortfolioEventTableViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventTableViewCell) {
-        cell.iconImageView.image = UIImage.placeholder
+        cell.iconImageView.image = UIImage.eventPlaceholder
         
         if let fileName = dashboardPortfolioEvent.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
-            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.placeholder)
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
         }
         
         if let type = dashboardPortfolioEvent.type {

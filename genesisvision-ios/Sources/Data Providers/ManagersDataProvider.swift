@@ -9,14 +9,14 @@
 class ManagersDataProvider: DataProvider {
     static func getManagerProfile(managerId: String, completion: @escaping (_ managerProfile: ManagerProfile?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        ManagersAPI.v10ManagersByIdGet(id: managerId) { (viewModel, error) in
+        ManagerAPI.v10ManagerByIdGet(id: managerId) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     static func getManagerProfileDetails(managerId: String, completion: @escaping (_ managerProfileDetails: ManagerProfileDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        ManagersAPI.v10ManagersByIdDetailsGet(id: managerId) { (viewModel, error) in
+        ManagerAPI.v10ManagerByIdDetailsGet(id: managerId) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

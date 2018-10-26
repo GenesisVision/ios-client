@@ -93,13 +93,13 @@ open class ProgramsAPI {
      Program profit chart
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
-  "profitFactor" : 4.145608029883936,
-  "profitChangePercent" : 5.025004791520295,
-  "calmarRatio" : 6.84685269835264,
-  "timeframeGvtProfit" : 4.965218492984954,
-  "timeframeProgramCurrencyProfit" : 9.301444243932576,
-  "trades" : 3,
-  "maxDrawdown" : 7.457744773683766,
+  "profitFactor" : 7.386281948385884,
+  "profitChangePercent" : 9.965781217890562,
+  "calmarRatio" : 7.457744773683766,
+  "timeframeGvtProfit" : 5.025004791520295,
+  "timeframeProgramCurrencyProfit" : 3.616076749251911,
+  "trades" : 2,
+  "maxDrawdown" : 1.1730742509559433,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -108,8 +108,8 @@ open class ProgramsAPI {
     "value" : 3.616076749251911
   } ],
   "investors" : 1,
-  "totalGvtProfit" : 1.1730742509559433,
-  "sortinoRatio" : 1.4894159098541704,
+  "totalGvtProfit" : 4.965218492984954,
+  "sortinoRatio" : 6.84685269835264,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -117,11 +117,11 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "balance" : 7.386281948385884,
+  "balance" : 1.2315135367772556,
   "programCurrency" : "Undefined",
-  "rate" : 9.965781217890562,
-  "totalProgramCurrencyProfit" : 7.061401241503109,
-  "successTradesPercent" : 2.027123023002322,
+  "rate" : 9.369310271410669,
+  "totalProgramCurrencyProfit" : 9.301444243932576,
+  "successTradesPercent" : 4.145608029883936,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
   "periods" : [ {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
@@ -130,7 +130,7 @@ open class ProgramsAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00"
   } ],
-  "sharpeRatio" : 1.0246457001441578,
+  "sharpeRatio" : 1.4894159098541704,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      
@@ -325,11 +325,13 @@ open class ProgramsAPI {
   "isReinvesting" : true,
   "title" : "title",
   "personalProgramDetails" : {
-    "hasNotifications" : true,
-    "isOwnProgram" : true,
     "canWithdraw" : true,
-    "isReinvest" : true,
     "canInvest" : true,
+    "pendingOutput" : 1.4894159098541704,
+    "hasNotifications" : true,
+    "pendingInput" : 1.0246457001441578,
+    "isOwnProgram" : true,
+    "isReinvest" : true,
     "value" : 4.145608029883936,
     "profit" : 7.386281948385884,
     "invested" : 1.2315135367772556,
@@ -562,7 +564,7 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 7,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -600,15 +602,17 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
-      "hasNotifications" : true,
-      "isOwnProgram" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
+      "pendingOutput" : 1.4894159098541704,
+      "hasNotifications" : true,
+      "pendingInput" : 1.0246457001441578,
+      "isOwnProgram" : true,
+      "isReinvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,
@@ -664,15 +668,17 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 1.0246457001441578
+      "share" : 6.84685269835264
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
-      "hasNotifications" : true,
-      "isOwnProgram" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
+      "pendingOutput" : 1.4894159098541704,
+      "hasNotifications" : true,
+      "pendingInput" : 1.0246457001441578,
+      "isOwnProgram" : true,
+      "isReinvest" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,

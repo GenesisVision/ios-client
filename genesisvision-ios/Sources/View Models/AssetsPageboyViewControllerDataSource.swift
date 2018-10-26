@@ -17,7 +17,9 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
         
         if let router = router as? DashboardRouter {
             let programListViewController = DashboardProgramListViewController()
-            let fundListViewController = DashboardProgramListViewController()
+            let fundListViewController = DashboardFundListViewController()
+            
+            programListViewController.tableViewStyle = .plain
             
             router.programListViewController = programListViewController
             router.fundListViewController = fundListViewController
@@ -25,7 +27,7 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             let programsViewModel = DashboardProgramListViewModel(withRouter: router)
             programListViewController.viewModel = programsViewModel
             
-            let fundsViewModel = DashboardProgramListViewModel(withRouter: router)
+            let fundsViewModel = DashboardFundListViewModel(withRouter: router)
             fundListViewController.viewModel = fundsViewModel
             
             controllers = [programListViewController, fundListViewController]
@@ -37,7 +39,14 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             let programsViewModel = ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController)
             programListViewController.viewModel = programsViewModel
             
-            controllers = [programListViewController]
+            guard let fundListViewController = FundListViewController.storyboardInstance(name: .funds) else { return }
+            router.fundsViewController = fundListViewController
+            
+            let fundListRouter = FundListRouter(parentRouter: router)
+            let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController)
+            fundListViewController.viewModel = fundsViewModel
+            
+            controllers = [programListViewController, fundListViewController]
         }
     }
     

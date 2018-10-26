@@ -14,12 +14,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     var viewModel: DashboardProgramListViewModel!
     
     // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     // MARK: - Views
     
     // MARK: - Lifecycle
@@ -43,6 +37,8 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        setupTableConfiguration()
+        
         bottomViewType = viewModel.bottomViewType
         
         sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
@@ -51,10 +47,10 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = -44.0
+//        tableView.configure(with: .defaultConfiguration)
+//        tableView.contentInset.bottom = -44.0
         
-        tableView.bounces = true
+        tableView.bounces = false
         tableView.delegate = self.viewModel?.programListDelegateManager
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -155,11 +151,11 @@ extension DashboardProgramListViewController: ReloadDataProtocol {
     }
 }
 
-// MARK: - ProgramProtocol
-extension DashboardProgramListViewController: ProgramProtocol {
-    func programDetailDidChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
+// MARK: - FavoriteStateChangeProtocol
+extension DashboardProgramListViewController: FavoriteStateChangeProtocol {
+    func didChangeFavoriteState(with assetId: String, value: Bool, request: Bool) {
         showProgressHUD()
-        viewModel.changeFavorite(value: value, programId: programID, request: request) { [weak self] (result) in
+        viewModel.changeFavorite(value: value, assetId: assetId, request: request) { [weak self] (result) in
             self?.hideAll()
         }
     }

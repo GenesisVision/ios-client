@@ -13,7 +13,7 @@ struct ProgramProfitStatisticTableViewCellViewModel {
 }
 
 extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProgramProfitStatisticTableViewCell) {
+    func setup(on cell: DetailProfitStatisticTableViewCell) {
         cell.titleLabel.text = "Statistics"
         
         cell.balanceTitleLabel.text = "Balance"
@@ -43,32 +43,32 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
         
         cell.tradesSuccessCountTitleLabel.text = "Success trades"
         if let amountValue = programProfitChart.successTradesPercent {
-            cell.tradesSuccessCountValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.tradesSuccessCountValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
         
         cell.profitFactorPercentTitleLabel.text = "Profit factor"
         if let amountValue = programProfitChart.profitFactor {
-            cell.profitFactorPercentValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.profitFactorPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
         if let amountValue = programProfitChart.sharpeRatio {
-            cell.sharpeRatioPercentValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.sharpeRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
         if let amountValue = programProfitChart.calmarRatio {
-            cell.calmarRatioPercentValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.calmarRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
         if let amountValue = programProfitChart.sortinoRatio {
-            cell.sortinoRatioPercentValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.sortinoRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"
         if let amountValue = programProfitChart.maxDrawdown {
-            cell.drawdownPercentValueLabel.text = amountValue.rounded(toPlaces: 2).toString() + " %"
+            cell.drawdownPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
         }
     }
 }

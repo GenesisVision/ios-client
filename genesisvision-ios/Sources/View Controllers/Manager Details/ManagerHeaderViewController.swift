@@ -90,7 +90,7 @@ class ManagerHeaderViewController: BaseViewController {
         }
         
         if let regDate = managerProfileDetails?.managerProfile?.regDate {
-            subtitleLabel.text = regDate.onlyDateFormatString
+            subtitleLabel.text = "Member since " + regDate.onlyDateFormatString
         }
         
         bgImageView.image = UIImage.profilePlaceholder

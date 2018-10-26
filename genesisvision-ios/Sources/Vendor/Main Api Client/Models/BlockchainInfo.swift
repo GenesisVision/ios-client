@@ -19,7 +19,7 @@ open class BlockchainInfo: Codable {
         case confirmedAndValidated = "ConfirmedAndValidated"
         case pendingAddInWallet = "PendingAddInWallet"
         case error = "Error"
-        case canceled = "Canceled"
+        case cancelled = "Cancelled"
     }
     public var hash: String?
     public var status: Status?

@@ -8,20 +8,14 @@
 
 import UIKit.UIColor
 
-protocol ProgramDetailsProtocol: class {
-    func didFavoriteStateUpdated()
-}
-
 final class ProgramDetailsViewModel: TabmanViewModel {
     // MARK: - Variables
     var programId: String!
-    var fundId: String!
     
     var programDetailsFull: ProgramDetailsFull?
-    var fundDetailsFull: FundDetailsFull?
 
     var сurrency: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?
-    weak var programDetailsProtocol: ProgramDetailsProtocol?
+    weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
     
     var isFavorite: Bool {
         return programDetailsFull?.personalProgramDetails?.isFavorite ?? false
@@ -76,16 +70,6 @@ final class ProgramDetailsViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title)
             }
             
-            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let vc = router.getTrades(with: programId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
-            if let isInvested = programDetailsFull.personalProgramDetails?.isInvested, isInvested, let vc = router.getHistory(with: programId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
             if let vc = router.getBalance(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
@@ -96,39 +80,12 @@ final class ProgramDetailsViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title)
             }
             
-            reloadPages()
-        }
-    }
-    
-    func setupFund(_ viewModel: FundDetailsFull? = nil) {
-        removeAllControllers()
-        
-        if let viewModel = viewModel {
-            self.fundDetailsFull = viewModel
-        }
-        
-        if let router = router as? ProgramDetailsRouter, let programDetailsFull = programDetailsFull {
-            if let vc = router.getInfo(with: programDetailsFull) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
             if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let vc = router.getTrades(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }
             
-            if let isInvested = programDetailsFull.personalProgramDetails?.isInvested, isInvested, let vc = router.getHistory(with: programId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
-            if let vc = router.getBalance(with: programId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
-            
-            if let vc = router.getProfit(with: programId) {
+            if let isInvested = programDetailsFull.personalProgramDetails?.isInvested, isInvested, let vc = router.getEvents(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title)
             }

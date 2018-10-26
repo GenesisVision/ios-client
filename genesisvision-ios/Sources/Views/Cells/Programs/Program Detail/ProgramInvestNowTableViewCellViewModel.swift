@@ -10,11 +10,11 @@ import Foundation
 
 struct ProgramInvestNowTableViewCellViewModel {
     let programDetailsFull: ProgramDetailsFull?
-    weak var programInvestNowProtocol: ProgramInvestNowProtocol?
+    weak var investNowProtocol: InvestNowProtocol?
 }
 
 extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProgramInvestNowTableViewCell) {
+    func setup(on cell: InvestNowTableViewCell) {
         cell.investButton.setEnabled(false)
         
         if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest {
@@ -25,19 +25,19 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
              cell.disclaimerLabel.text = "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to \(currency.rawValue). Accrual of \(currency.rawValue) to the account manager will only occur at the end of the reporting period \(periodEnds.defaultFormatString)."
         }
         
-        cell.programInvestNowProtocol = programInvestNowProtocol
+        cell.investNowProtocol = investNowProtocol
         
         cell.titleLabel.text = "Invest Now"
         cell.investButton.setTitle("Invest", for: .normal)
         
          if let entryFee = programDetailsFull?.entryFee {
             cell.entryFeeTitleLabel.text = "entry fee"
-            cell.entryFeeValueLabel.text = entryFee.rounded(toPlaces: 2).toString() + "%"
+            cell.entryFeeValueLabel.text = entryFee.rounded(withType: .undefined).toString() + "%"
         }
         
         if let successFee = programDetailsFull?.successFee {
             cell.successFeeTitleLabel.text = "success fee"
-            cell.successFeeValueLabel.text = successFee.rounded(toPlaces: 2).toString() + "%"
+            cell.successFeeValueLabel.text = successFee.rounded(withType: .undefined).toString() + "%"
         }
         
         if let availableInvestment = programDetailsFull?.availableInvestment {

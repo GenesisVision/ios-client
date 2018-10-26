@@ -47,14 +47,16 @@ final class DashboardFundListViewModel {
         return .sort
     }
     
-    var viewModels = [DashboardTableViewCellViewModel]() {
+    var viewModels = [CellViewAnyModel]() {
         didSet {
-            self.activeViewModels = viewModels.filter { $0.fund?.status != .archived }
-            self.archiveViewModels = viewModels.filter { $0.fund?.status == .archived }
+            guard let viewModels = viewModels as? [DashboardFundTableViewCellViewModel] else { return }
+            
+            self.activeViewModels = viewModels.filter { $0.fund.status != .archived }
+            self.archiveViewModels = viewModels.filter { $0.fund.status == .archived }
         }
     }
-    var activeViewModels = [DashboardTableViewCellViewModel]()
-    var archiveViewModels = [DashboardTableViewCellViewModel]()
+    var activeViewModels = [DashboardFundTableViewCellViewModel]()
+    var archiveViewModels = [DashboardFundTableViewCellViewModel]()
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -70,31 +72,31 @@ final class DashboardFundListViewModel {
     }
     
     // MARK: - Public methods
-    func changeFavorite(value: Bool, fundId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+    func changeFavorite(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: fundId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.fund?.personalDetails?.isFavorite = value
+            guard let model = model(at: assetId) as? DashboardFundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.fund.personalDetails?.isFavorite = value
             completion(.success)
             return
         }
         
-//        ProgramsDataProvider.programFavorites(isFavorite: !value, programId: programId) { [weak self] (result) in
-//            switch result {
-//            case .success:
-//                guard let model = self?.model(at: programId) as? DashboardTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-//                model.fund?.personalDetails?.isFavorite = value
-//                completion(.success)
-//            case .failure(let errorType):
-//                print(errorType)
-//                completion(result)
-//            }
-//        }
+        FundsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
+            switch result {
+            case .success:
+                guard let model = self?.model(at: assetId) as? DashboardFundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.fund.personalDetails?.isFavorite = value
+                completion(.success)
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
     }
     
     // MARK: - Private methods
     @objc private func fundFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let fundId = notification.userInfo?["fundId"] as? String {
-            changeFavorite(value: isFavorite, fundId: fundId) { [weak self] (result) in
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["fundId"] as? String {
+            changeFavorite(value: isFavorite, assetId: assetId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
@@ -106,7 +108,7 @@ extension DashboardFundListViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardTableViewCellViewModel.self]
+        return [DashboardFundTableViewCellViewModel.self]
     }
     
     func modelsCount() -> Int {
@@ -147,12 +149,12 @@ extension DashboardFundListViewModel {
     }
     
     func showDetail(at indexPath: IndexPath) {
-//        guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
-//
-//        let fund = model.fund
-//        guard let fundId = fund.id else { return }
-//
-//        router.show(routeType: .showFundDetails(fundId: fundId.uuidString))
+        guard let model: DashboardFundTableViewCellViewModel = model(at: indexPath) as? DashboardFundTableViewCellViewModel else { return }
+
+        let fund = model.fund
+        guard let fundId = fund.id else { return }
+
+        router.show(routeType: .showFundDetails(fundId: fundId.uuidString))
     }
     
     func showFundList() {
@@ -182,13 +184,13 @@ extension DashboardFundListViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [DashboardTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [DashboardFundTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
             })
             
-            self?.updateFetchedData(totalCount: totalCount, allViewModels)
+            self?.updateFetchedData(totalCount: totalCount, allViewModels as! [DashboardFundTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -218,11 +220,11 @@ extension DashboardFundListViewModel {
     
     func model(at fundId: String) -> CellViewAnyModel? {
         if activeFunds {
-            if let i = activeViewModels.index(where: { $0.fund?.id?.uuidString == fundId }) {
+            if let i = activeViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
                 return activeViewModels[i]
             }
         } else {
-            if let i = archiveViewModels.index(where: { $0.fund?.id?.uuidString == fundId }) {
+            if let i = archiveViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
                 return archiveViewModels[i]
             }
         }
@@ -231,7 +233,7 @@ extension DashboardFundListViewModel {
     }
     
     func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
-//        guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
+//        guard let model = model(at: indexPath) as? DashboardFundTableViewCellViewModel else {
 //            return nil
 //        }
 //
@@ -245,7 +247,7 @@ extension DashboardFundListViewModel {
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
+    private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
@@ -253,19 +255,19 @@ extension DashboardFundListViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
 
         DashboardDataProvider.getFundList(with: InvestorAPI.Sorting_v10InvestorFundsGet(rawValue: sortingDelegateManager.sorting.rawValue), completion: { [weak self] (fundsList) in
             guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.fundList = fundsList
             
-            var dashboardFundViewModels = [DashboardTableViewCellViewModel]()
+            var dashboardFundViewModels = [DashboardFundTableViewCellViewModel]()
             
             let totalCount = fundsList.funds?.count ?? 0
             
             fundsList.funds?.forEach({ (fund) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(program: nil, fund: fund, reloadDataProtocol: self?.router.fundListViewController, delegate:
+                let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: self?.router.fundListViewController, delegate:
                     self?.router.fundListViewController)
                 dashboardFundViewModels.append(dashboardTableViewCellModel)
             })

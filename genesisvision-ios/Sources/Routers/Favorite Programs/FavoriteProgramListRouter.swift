@@ -8,7 +8,7 @@
 
 import UIKit.UINavigationController
 
-class FavoriteProgramListRouter: Router, ProgramListRouterProtocol {
+class FavoriteProgramListRouter: Router, ListRouterProtocol {
     
     var favoriteProgramListViewController: ProgramListViewController!
     
@@ -20,7 +20,7 @@ class FavoriteProgramListRouter: Router, ProgramListRouterProtocol {
     }
     
     // MARK: - Public methods
-    func show(routeType: ProgramListRouteType) {
+    func show(routeType: ListRouteType) {
         switch routeType {
         case .showProgramDetails(let programId):
             parentRouter?.showProgramDetails(with: programId)

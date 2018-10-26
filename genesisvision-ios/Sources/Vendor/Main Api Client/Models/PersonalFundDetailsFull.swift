@@ -26,11 +26,13 @@ open class PersonalFundDetailsFull: Codable {
     public var value: Double?
     public var profit: Double?
     public var invested: Double?
+    public var pendingInput: Double?
+    public var pendingOutput: Double?
     public var status: Status?
 
 
     
-    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, status: Status?) {
+    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -40,6 +42,8 @@ open class PersonalFundDetailsFull: Codable {
         self.value = value
         self.profit = profit
         self.invested = invested
+        self.pendingInput = pendingInput
+        self.pendingOutput = pendingOutput
         self.status = status
     }
     
@@ -59,6 +63,8 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(profit, forKey: "profit")
         try container.encodeIfPresent(invested, forKey: "invested")
+        try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
+        try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
         try container.encodeIfPresent(status, forKey: "status")
     }
 
@@ -76,6 +82,8 @@ open class PersonalFundDetailsFull: Codable {
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         invested = try container.decodeIfPresent(Double.self, forKey: "invested")
+        pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
+        pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }

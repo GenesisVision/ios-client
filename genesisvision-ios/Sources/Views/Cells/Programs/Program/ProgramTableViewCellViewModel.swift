@@ -11,7 +11,7 @@ import Kingfisher
 
 struct ProgramTableViewCellViewModel {
     let program: ProgramDetails
-    weak var delegate: ProgramProtocol?
+    weak var delegate: FavoriteStateChangeProtocol?
 }
 
 extension ProgramTableViewCellViewModel: CellViewModel {
@@ -35,7 +35,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
         if let title = program.title {
-            cell.programTitleLabel.text = title
+            cell.titleLabel.text = title
         }
         
         if let managerName = program.manager?.username {
@@ -43,18 +43,18 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let programId = program.id?.uuidString {
-            cell.programId = programId
+            cell.assetId = programId
         }
         
         if let level = program.level {
-            cell.programLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+            cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
         if let currency = program.currency {
             cell.currencyLabel.text = currency.rawValue
         }
         
-        cell.firstTitleLabel.text = "period"
+        cell.firstTitleLabel.text = "Period"
         if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
             cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
             
@@ -71,14 +71,14 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         
-        cell.secondTitleLabel.text = "balance"
-        if let balance = program.statistic?.balanceGVT?.amount {
-            cell.secondValueLabel.text = balance.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        cell.secondTitleLabel.text = "Balance"
+        if let balance = program.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+            cell.secondValueLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }
         
-        cell.thirdTitleLabel.text = "av. to invest"
+        cell.thirdTitleLabel.text = "Av. to invest"
         if let availableInvestment = program.availableInvestment {
             cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
@@ -92,19 +92,19 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        cell.programLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
+        cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
-            cell.programLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
-            cell.programLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+            cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
+            cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
         if let color = program.color {
-            cell.programLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
         
         if let profitPercent = program.statistic?.profitPercent {
-            cell.profitPercentLabel.text = profitPercent.rounded(toPlaces: 2).toString() + "%"
+            cell.profitPercentLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
         }
         
         if let profitValue = program.statistic?.profitValue {

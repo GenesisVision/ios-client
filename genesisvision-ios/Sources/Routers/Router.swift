@@ -28,7 +28,7 @@ class Router {
     var investorDashboardViewController: InvestorDashboardViewController!
     var managerDashboardViewController: ManagerDashboardViewController!
     var programsViewController: ProgramListViewController!
-    var fundsViewController: ProgramListViewController!
+    var fundsViewController: FundListViewController!
 
     var assetsViewController: AssetsViewController!
     
@@ -58,7 +58,8 @@ class Router {
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
 
-//        self.programsViewController = parentRouter?.programsViewController
+        self.programsViewController = parentRouter?.programsViewController
+        self.fundsViewController = parentRouter?.fundsViewController
         self.assetsViewController = parentRouter?.assetsViewController
         self.investorDashboardViewController = parentRouter?.investorDashboardViewController
         self.managerDashboardViewController = parentRouter?.managerDashboardViewController
@@ -70,7 +71,7 @@ class Router {
     }
     
     // MARK: - Private methods
-    private func getProgramsNavigationController() -> UINavigationController? {
+    private func getAssetsNavigationController() -> UINavigationController? {
         let assetsVC = AssetsViewController()
         self.assetsViewController = assetsVC
         
@@ -105,7 +106,7 @@ class Router {
     }
     
     private func addPrograms(_ viewControllers: inout [UIViewController]) {
-        if let navigationController = getProgramsNavigationController() {
+        if let navigationController = getAssetsNavigationController() {
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list").withRenderingMode(.alwaysOriginal)
             viewControllers.append(navigationController)
         }
@@ -178,7 +179,7 @@ extension Router {
     }
    
     func startAsForceSignOut() {
-        guard let navigationController = getProgramsNavigationController(),
+        guard let navigationController = getAssetsNavigationController(),
             let programsVC = navigationController.topViewController as? ProgramListViewController,
             let viewModel = programsVC.viewModel,
             let router = viewModel.router as? ProgramListRouter else { return }
@@ -189,7 +190,7 @@ extension Router {
     }
     
     func startAsUnauthorized() {
-        guard let navigationController = getProgramsNavigationController() else { return }
+        guard let navigationController = getAssetsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
     }
     
@@ -226,6 +227,11 @@ extension Router {
     
     func showProgramDetails(with programId: String) {
         guard let viewController = getDetailsViewController(with: programId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showFundDetails(with fundId: String) {
+        guard let viewController = getFundDetailsViewController(with: fundId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -273,6 +279,16 @@ extension Router {
 
         programViewController.hidesBottomBarWhenPushed = true
         return programViewController
+    }
+    
+    func getFundDetailsViewController(with fundId: String) -> FundViewController? {
+        guard let fundViewController = FundViewController.storyboardInstance(name: .fund) else {
+            return nil
+        }
+        fundViewController.viewModel = FundViewModel(withRouter: self, fundId: fundId, fundViewController: fundViewController)
+        
+        fundViewController.hidesBottomBarWhenPushed = true
+        return fundViewController
     }
     
     func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {
