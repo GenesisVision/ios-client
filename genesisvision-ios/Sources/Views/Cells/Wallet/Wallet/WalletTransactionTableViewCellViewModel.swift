@@ -14,7 +14,7 @@ struct WalletTransactionTableViewCellViewModel {
 
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
-        cell.typeImageView.image = nil
+        cell.typeImageView.image = #imageLiteral(resourceName: "img_wallet_transaction_icon")
         
         if let action = walletTransaction.action, let sourceType = walletTransaction.sourceType, let destinationType = walletTransaction.destinationType, let value = walletTransaction.amount {
             var sign = ""
@@ -45,12 +45,21 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                 }
             }
             
-            cell.titleLabel.text = sourceType.rawValue.capitalized
             cell.amountLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        } else {
+            cell.amountLabel.text = ""
+        }
+        
+        if let information = walletTransaction.information {
+            cell.titleLabel.text = information
+        } else {
+            cell.titleLabel.text = ""
         }
     
         if let date = walletTransaction.date {
             cell.dateLabel.text = date.defaultFormatString
+        } else {
+            cell.dateLabel.text = ""
         }
         
         cell.selectionStyle = .none

@@ -142,6 +142,22 @@ extension FundInfoViewController: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = UIColor.Cell.headerBg
         return view
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath), indexPath.section == 0, indexPath.row == 0 {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
+    }
 }
 
 extension FundInfoViewController: ReloadDataProtocol {

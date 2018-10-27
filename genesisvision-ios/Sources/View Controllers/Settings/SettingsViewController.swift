@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class SettingsViewController: BaseTableViewController {
+class SettingsViewController: BaseTableViewController, UINavigationControllerDelegate {
     // MARK: - View Model
     var viewModel: SettingsViewModel!
     
@@ -20,6 +20,13 @@ class SettingsViewController: BaseTableViewController {
         }
     }
     
+    @IBOutlet weak var profileAddImageView: UIImageView! {
+        didSet {
+            profileAddImageView.roundCorners()
+        }
+    }
+    @IBOutlet weak var changePhotoButton: UIButton!
+    
     @IBOutlet weak var profileNameLabel: TitleLabel! {
         didSet {
             profileNameLabel.font = UIFont.getFont(.semibold, size: 26)
@@ -27,20 +34,56 @@ class SettingsViewController: BaseTableViewController {
     }
     
     @IBOutlet weak var profileEmailLabel: SubtitleLabel!
-    @IBOutlet weak var changePasswordTitleLabel: TitleLabel!
+    @IBOutlet weak var changePasswordTitleLabel: TitleLabel! {
+        didSet {
+            changePasswordTitleLabel.text = SettingsViewModel.SettingsRowType.changePassword.rawValue
+            changePasswordTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     @IBOutlet weak var passcodeSwitch: UISwitch!
-    @IBOutlet weak var passcodeTitleLabel: TitleLabel!
-    @IBOutlet weak var biometricIDTitleLabel: TitleLabel!
+    @IBOutlet weak var passcodeTitleLabel: TitleLabel! {
+        didSet {
+            passcodeTitleLabel.text = SettingsViewModel.SettingsRowType.passcode.rawValue
+            passcodeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var biometricIDTitleLabel: TitleLabel! {
+        didSet {
+            biometricIDTitleLabel.text = SettingsViewModel.SettingsRowType.biometricID.rawValue
+            biometricIDTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     @IBOutlet weak var biometricIDSwitch: UISwitch! {
         didSet {
             biometricIDSwitch.isEnabled = false
         }
     }
     @IBOutlet weak var twoFactorSwitch: UISwitch!
-    @IBOutlet weak var twoFactorTitleLabel: TitleLabel!
-    @IBOutlet weak var termsTitleLabel: TitleLabel!
-    @IBOutlet weak var privacyTitleLabel: TitleLabel!
-    @IBOutlet weak var sendFeedbackTitleLabel: TitleLabel!
+    @IBOutlet weak var twoFactorTitleLabel: TitleLabel! {
+        didSet {
+            twoFactorTitleLabel.text = SettingsViewModel.SettingsRowType.twoFactor.rawValue
+            twoFactorTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var termsTitleLabel: TitleLabel! {
+        didSet {
+            termsTitleLabel.text = SettingsViewModel.SettingsRowType.termsAndConditions.rawValue
+            termsTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var privacyTitleLabel: TitleLabel! {
+        didSet {
+            privacyTitleLabel.text = SettingsViewModel.SettingsRowType.privacyPolicy.rawValue
+            privacyTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var sendFeedbackTitleLabel: TitleLabel! {
+        didSet {
+            sendFeedbackTitleLabel.text = SettingsViewModel.SettingsRowType.contactUs.rawValue
+            sendFeedbackTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    
     @IBOutlet weak var versionLabel: SubtitleLabel!
     
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
@@ -48,10 +91,14 @@ class SettingsViewController: BaseTableViewController {
     private var signOutBarButtonItem: UIBarButtonItem!
     
     // MARK: - Cells
-    @IBOutlet weak var changePasswordCell: SettingsTableViewCell!
-    @IBOutlet weak var passcodeCell: SettingsTableViewCell!
-    @IBOutlet weak var biometricCell: SettingsTableViewCell!
-    @IBOutlet weak var twoFactorCell: SettingsTableViewCell!
+    @IBOutlet weak var changePasswordCell: TableViewCell!
+    @IBOutlet weak var passcodeCell: TableViewCell!
+    @IBOutlet weak var biometricCell: TableViewCell!
+    @IBOutlet weak var twoFactorCell: TableViewCell!
+    
+    @IBOutlet weak var termsCell: TableViewCell!
+    @IBOutlet weak var privacyCell: TableViewCell!
+    @IBOutlet weak var contactUsCell: TableViewCell!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -96,31 +143,14 @@ class SettingsViewController: BaseTableViewController {
     // MARK: - Private methods
     override func fetch() {
         viewModel.fetchProfile { [weak self] (result) in
-            DispatchQueue.main.async {
-                self?.hideAll()
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        self?.profileImageView.image = UIImage.profilePlaceholder
-                        
-                        if let url = self?.viewModel.avatarURL {
-                            self?.profileImageView.kf.indicatorType = .activity
-                            self?.profileImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
-                        }
-                        
-                        if let name = self?.viewModel.fullName {
-                            self?.profileNameLabel.isHidden = false
-                            self?.profileNameLabel.text = name
-                        } else {
-                            self?.profileNameLabel.isHidden = true
-                        }
-                        
-                        self?.profileEmailLabel.text = self?.viewModel.email
-                        self?.reloadData()
-                    }
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType, viewController: self)
+            self?.hideAll()
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
                 }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
         
@@ -138,6 +168,26 @@ class SettingsViewController: BaseTableViewController {
         }
     }
     
+    private func updateUI() {
+        profileImageView.image = UIImage.profilePlaceholder
+        
+        if let url = viewModel.avatarURL {
+            profileImageView.kf.indicatorType = .activity
+            profileImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
+            
+            profileAddImageView.isHidden = true
+        }
+        
+        if let name = viewModel.fullName {
+            profileNameLabel.text = name
+        } else {
+            profileNameLabel.text = "Profile"
+        }
+        
+        profileEmailLabel.text = viewModel.email
+        tableView?.reloadData()
+    }
+    
     @objc private func twoFactorChangeNotification(notification: Notification) {
         if let enable = notification.userInfo?["enable"] as? Bool {
             viewModel.enableTwoFactor = enable
@@ -146,12 +196,6 @@ class SettingsViewController: BaseTableViewController {
     
     @objc func applicationDidBecomeActive(notification: Notification) {
         setupSecurity()
-    }
-    
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
-        }
     }
     
     private func setup() {
@@ -176,6 +220,7 @@ class SettingsViewController: BaseTableViewController {
         showInfiniteIndicator(value: false)
         
         tableView.tableFooterView = footerView
+        tableView.backgroundColor = UIColor.Cell.headerBg
     }
     
     private func setupTableConfiguration() {
@@ -225,6 +270,10 @@ class SettingsViewController: BaseTableViewController {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
     }
+    
+    @IBAction func changePhotoButtonAction(_ sender: UISwitch) {
+        showImagePicker()
+    }
 }
 
 extension SettingsViewController {
@@ -237,8 +286,6 @@ extension SettingsViewController {
         }
         
         switch fieldType {
-        case .profile:
-            viewModel.showProfile()
         case .changePassword:
             viewModel.changePassword()
         case .termsAndConditions:
@@ -263,18 +310,41 @@ extension SettingsViewController {
         case .biometricID:
             return viewModel.enableBiometricCell ? 60.0 : 0.0
         default:
-            return UITableViewAutomaticDimension
+            return 60.0
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerHeight(for: section)
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor.Cell.headerBg
         return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let rowType = viewModel.rowType(at: indexPath) {
+            switch rowType {
+            case .changePassword, .termsAndConditions, .privacyPolicy, .contactUs:
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
     }
 }
 
@@ -290,5 +360,38 @@ extension SettingsViewController: PasscodeProtocol {
         }
         
         setupSecurity()
+    }
+}
+
+extension SettingsViewController: ImagePickerPresentable {
+    var choosePhotoButton: UIButton {
+        return changePhotoButton
+    }
+    
+    func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
+        viewModel.pickedImage = pickedImage
+        viewModel.pickedImageURL = pickedImageURL
+        
+        let oldImage = profileImageView.image
+        showProgressHUD()
+        viewModel.saveProfilePhoto { [weak self] (result) in
+            self?.hideAll()
+            DispatchQueue.main.async {
+                self?.profileImageView.image = nil
+            }
+            
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.profileAddImageView.isHidden = true
+                    self?.profileImageView.image = pickedImage
+                }
+            case .failure(let errorType):
+                print(errorType)
+                DispatchQueue.main.async {
+                    self?.profileImageView.image = oldImage ?? UIImage.profilePlaceholder
+                }
+            }
+        }
     }
 }

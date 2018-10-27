@@ -64,7 +64,7 @@ class ChartView: CombinedChartView {
             lineChartDataSet.highlightColor = UIColor.Font.dark
             lineChartDataSet.setDrawHighlightIndicators(true)
             lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = false
-            lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
+            lineChartDataSet.drawVerticalHighlightIndicatorEnabled = false
 
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
@@ -171,10 +171,6 @@ class ChartView: CombinedChartView {
             }
         }
         
-        if chartType == .default, let firstValue = lineChartData?.first?.value, let lastValue = lineChartData?.last?.value {
-            lineChartDataSet.setColor(firstValue > lastValue ? UIColor.Cell.redTitle : UIColor.Cell.greenTitle)
-        }
-
         scaleXEnabled = chartType == .full
         scaleYEnabled = chartType == .full
         doubleTapToZoomEnabled = chartType == .full
@@ -306,6 +302,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
         let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -321,6 +318,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartDataSet.highlightEnabled = chartType != .default
         lineChartData.addDataSet(lineChartDataSet)
         
@@ -335,6 +333,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
         return lineChartData
@@ -356,6 +355,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -369,6 +369,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
         return lineChartData
@@ -382,6 +383,8 @@ class ChartView: CombinedChartView {
         }
         
         lineChartDataSet = LineChartDataSet(values: totalDataEntry, label: "Line Profit")
+        
+        setNegativeOrPositiveColor()
         
         return LineChartData(dataSet: lineChartDataSet)
     }
@@ -404,5 +407,23 @@ class ChartView: CombinedChartView {
         }
         
         return barChartData
+    }
+    
+    private func setNegativeOrPositiveColor() {
+        if let firstValue = lineChartData?.first?.value, let lastValue = lineChartData?.last?.value {
+            let negative = firstValue > lastValue
+            let lineColor = negative ? UIColor.Cell.redTitle : UIColor.Cell.greenTitle
+            lineChartDataSet.setColor(lineColor)
+            
+            let gradientColors = [lineColor.withAlphaComponent(0.3).cgColor, lineColor.withAlphaComponent(0.0).cgColor]
+            let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+            
+            lineChartDataSet.fillAlpha = 0.3
+            lineChartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
+            
+            if negative {
+                lineChartDataSet.fillFormatter = DefaultFillFormatter()
+            }
+        }
     }
 }

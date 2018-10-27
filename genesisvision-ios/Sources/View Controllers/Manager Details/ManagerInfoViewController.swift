@@ -91,6 +91,10 @@ extension ManagerInfoViewController: UITableViewDelegate, UITableViewDataSource 
         return viewModel.headerHeight(for: section)
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor.Cell.headerBg

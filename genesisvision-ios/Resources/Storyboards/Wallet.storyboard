@@ -29,7 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="e7C-Qd-goF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="e7C-Qd-goF">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
@@ -38,7 +38,7 @@
                         <constraints>
                             <constraint firstItem="e7C-Qd-goF" firstAttribute="leading" secondItem="x8x-Ns-OwD" secondAttribute="leading" id="6ve-O9-dfA"/>
                             <constraint firstItem="x8x-Ns-OwD" firstAttribute="trailing" secondItem="e7C-Qd-goF" secondAttribute="trailing" id="HVi-Tv-qBq"/>
-                            <constraint firstItem="x8x-Ns-OwD" firstAttribute="bottom" secondItem="e7C-Qd-goF" secondAttribute="bottom" id="SE4-AK-zbX"/>
+                            <constraint firstAttribute="bottom" secondItem="e7C-Qd-goF" secondAttribute="bottom" id="SE4-AK-zbX"/>
                             <constraint firstItem="e7C-Qd-goF" firstAttribute="top" secondItem="x8x-Ns-OwD" secondAttribute="top" id="o2K-Rb-Ogs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x8x-Ns-OwD"/>

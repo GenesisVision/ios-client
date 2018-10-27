@@ -25,13 +25,6 @@ class ProgramListRouter: Router, ListRouterProtocol {
     }
     
     // MARK: - Private methods
-    private func signInAction() {
-        guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
-        let router = SignInRouter(parentRouter: self, navigationController: navigationController)
-        viewController.viewModel = AuthSignInViewModel(withRouter: router)
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
     private func showFilterVC(with programListViewModel: ProgramListViewModel) {
         guard let viewController = ProgramFilterViewController.storyboardInstance(name: .programs) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)

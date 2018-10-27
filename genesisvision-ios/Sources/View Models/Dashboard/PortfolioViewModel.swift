@@ -27,12 +27,6 @@ final class PortfolioViewModel {
         }
     }
     
-    var valueChartBar: ValueChartBar? {
-        didSet {
-            self.selectedChartAssets = valueChartBar?.topAssets
-        }
-    }
-    
     var selectedChartAssetsDelegateManager: PortfolioSelectedChartAssetsDelegateManager?
     weak var reloadDataProtocol: ReloadDataProtocol?
     var dashboardChartValue: DashboardChartValue?
@@ -48,14 +42,21 @@ final class PortfolioViewModel {
     }
     
     // MARK: - Methods
-    func selectChart(_ date: Date) -> ValueChartBar? {
-        if let result = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
-            self.valueChartBar = result
+    func selectChart(_ date: Date) -> (ValueChartBar?, ChartSimple?) {
+        var investedProgramsInfo: ValueChartBar? = nil
+        var balanceChart: ChartSimple? = nil
+        
+        if let selected = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
+            self.selectedChartAssets = selected.topAssets
+            investedProgramsInfo = selected
             self.selectedChartAssetsDelegateManager?.reloadData()
-            return self.valueChartBar
         }
         
-        return nil
+        if let selected = dashboardChartValue?.balanceChart?.first(where: { $0.date == date }) {
+            balanceChart = selected
+        }
+        
+        return (investedProgramsInfo, balanceChart)
     }
     
     func showRequests() {

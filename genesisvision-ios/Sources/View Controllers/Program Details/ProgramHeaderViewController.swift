@@ -80,6 +80,13 @@ class ProgramHeaderViewController: BaseViewController {
         }
     }
     
+    func reduceView() {
+        
+    }
+    func increaseView() {
+        
+    }
+    
     func changeColorAlpha(offset: CGFloat) {
         self.levelBgImageView.alpha = 1.0 - offset
         self.levelButton.alpha = 1.0 - offset

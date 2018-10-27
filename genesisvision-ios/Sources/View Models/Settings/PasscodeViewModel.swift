@@ -16,12 +16,15 @@ final class PasscodeViewModel {
     // MARK: - Variables
     var title: String = "Passcode"
     var passwordDigit: Int = 4
-    var deleteButtonTitle: String = "Delete"
-    var isVibrancyEffect: Bool = true
-    var labelFont: UIFont = UIFont.getFont(.regular, size: 29)
+    var isVibrancyEffect: Bool = false
+    var numButtonFont: UIFont = UIFont.getFont(.ultraLight, size: 32)
     
-    var titleLabelText = "Enter Passcode"
-    var againTitleLabelText = "Enter Passcode Again"
+    var createText = "Think of a passcode to enter the application"
+    
+    var enterText = "Enter passcode or use Touch ID"
+    var enterAgainText = "Enter passcode again"
+    var enableText = "Enter Passcode to enable it"
+    var disableText = "Enter passcode to disable it"
     
     var changedMessageEnable: Bool {
         return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)

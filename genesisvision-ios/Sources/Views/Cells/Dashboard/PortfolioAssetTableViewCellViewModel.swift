@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit.UIColor
 
 struct PortfolioAssetTableViewCellViewModel {
     let selectedChartAssets: AssetsValue
@@ -24,9 +24,11 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
         }
         if let value = selectedChartAssets.changeValue {
             cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.changeValueLabel.textColor = value == 0 ? UIColor.Cell.title : value > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         if let value = selectedChartAssets.changePercent {
             cell.changePercentLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.changePercentLabel.textColor = value == 0 ? UIColor.Cell.title : value > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
     }
 }

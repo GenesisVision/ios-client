@@ -44,8 +44,8 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
-        registerForPreviewing()
-        
+//        registerForPreviewing()
+
         setupUI()
         fetch()
     }
@@ -146,7 +146,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        alert.view.tintColor = UIColor.primary
         
         let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
             self?.update(sorting: .all)
@@ -183,6 +182,16 @@ class WalletViewController: BaseViewControllerWithTableView {
         sortMethod()
     }
     
+    private func showWalletTransaction(model: WalletTransaction) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300
+        
+        let view = WalletTransactionView.viewFromNib()
+        view.configure(model)
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
+    }
+    
     // MARK: - Actions
     @IBAction func filtersButtonAction(_ sender: UIButton) {
         viewModel.filters()
@@ -195,11 +204,11 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else {
-            return
-        }
+        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
         
-        viewModel.showDetail(at: indexPath)
+        guard let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel else { return }
+        
+        showWalletTransaction(model: model.walletTransaction)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -257,6 +266,18 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
+    }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
     }
@@ -304,25 +325,25 @@ extension WalletViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
 }
-
-extension WalletViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        let cellPosition = tableView.convert(location, from: view)
-        
-        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailsViewController(with: indexPath),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return nil }
-        
-        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
-        
-        return vc
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        push(viewController: viewControllerToCommit)
-    }
-}
+//
+//extension WalletViewController: UIViewControllerPreviewingDelegate {
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+//                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+//
+//        let cellPosition = tableView.convert(location, from: view)
+//
+//        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
+//            let vc = viewModel.getDetailsViewController(with: indexPath),
+//            let cell = tableView.cellForRow(at: indexPath)
+//            else { return nil }
+//
+//        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
+//        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
+//
+//        return vc
+//    }
+//
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+//        push(viewController: viewControllerToCommit)
+//    }
+//}

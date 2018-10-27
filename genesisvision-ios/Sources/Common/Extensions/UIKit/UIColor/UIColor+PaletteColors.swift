@@ -73,6 +73,7 @@ extension UIColor {
         static var white: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                                   //ffffff
         
         static var numpadBackground: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.9215686275, blue: 0.9294117647, alpha: 0.25) }
+        static var numpadDotsBackground: UIColor { return #colorLiteral(red: 0.1647058824, green: 0.2, blue: 0.231372549, alpha: 1) }                   //2A333B
         static var unselected: UIColor { return #colorLiteral(red: 0.7411764706, green: 0.9098039216, blue: 0.9019607843, alpha: 1) }
         static var separator: UIColor { return #colorLiteral(red: 0.4901960784, green: 0.5764705882, blue: 0.6, alpha: 0.5) }
         
@@ -221,10 +222,10 @@ extension UIColor {
             case .primary:
                 return NavBarColors(tintColor: Common.white, backgroundColor: Common.primary, textColor: Common.white, subtitleColor: Common.white.withAlphaComponent(0.5))
             case .gray:
-                return NavBarColors(tintColor: Common.primary,
-                                    backgroundColor: AppearanceController.theme == .darkTheme ? .clear : Common.bgGray,
-                                    textColor: AppearanceController.theme == .darkTheme ? GV.white : Common.darkSlateBlue,
-                                    subtitleColor: AppearanceController.theme == .darkTheme ? GV.white.withAlphaComponent(0.7) : Common.darkSlateBlue.withAlphaComponent(0.7))
+                return NavBarColors(tintColor: AppearanceController.theme == .darkTheme ? UIColor.Cell.title : Common.primary,
+                                    backgroundColor: AppearanceController.theme == .darkTheme ? UIColor.BaseView.bg : Common.bgGray,
+                                    textColor: AppearanceController.theme == .darkTheme ? UIColor.Cell.title : Common.darkSlateBlue,
+                                    subtitleColor: AppearanceController.theme == .darkTheme ? UIColor.Cell.subtitle : Common.darkSlateBlue.withAlphaComponent(0.7))
             }
         }
     }

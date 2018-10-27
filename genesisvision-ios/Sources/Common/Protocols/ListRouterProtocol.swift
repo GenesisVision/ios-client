@@ -17,6 +17,8 @@ protocol ListRouterProtocol {
 extension ListRouterProtocol where Self: Router {
     func show(routeType: ListRouteType) {
         switch routeType {
+        case .signIn:
+            signInAction()
         case .showProgramDetails(let programId):
             showProgramDetails(with: programId)
         case .showFundDetails(let fundId):

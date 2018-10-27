@@ -21,7 +21,12 @@ extension Double {
     }
     
     func rounded(withType type: CurrencyType) -> Double {
-        return rounded(toPlaces: type.currencyLenght)
+        switch type {
+        case .gvt:
+            return rounded(toPlaces: self > 1.0 ? 0 : 1)
+        default:
+            return rounded(toPlaces: type.currencyLenght)
+        }
     }
     
     func rounded(withCurrency currencyValue: String?) -> Double {

@@ -169,15 +169,15 @@ extension FundListViewController {
     }
     
     override func filterButtonAction() {
-//        if let viewModel = viewModel as? FundListViewModel {
-//            viewModel.showFilterVC()
-//        }
+        if let viewModel = viewModel as? FundListViewModel {
+            viewModel.showFilterVC()
+        }
     }
     
     override func signInButtonAction() {
-//        if let viewModel = viewModel as? FundListViewModel {
-//            viewModel.showSignInVC()
-//        }
+        if let viewModel = viewModel as? FundListViewModel {
+            viewModel.showSignInVC()
+        }
     }
 }
 

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Delete.png",
+      "filename" : "img_numpad_delete.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Delete@2x.png",
+      "filename" : "img_numpad_delete@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Delete@3x.png",
+      "filename" : "img_numpad_delete@3x.png",
       "scale" : "3x"
     }
   ],

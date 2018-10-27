@@ -13,16 +13,16 @@ final class SettingsViewModel {
     enum SettingsRowType: String, EnumCollection {
         case profile = "Profile"
         
-        case changePassword = "Change Password"
+        case changePassword = "Change password"
         case passcode = "Passcode"
         case biometricID = "Touch ID"
-        case twoFactor = "Two Factor"
+        case twoFactor = "Two-factor authentication"
         
         case darkTheme = "Dark theme"
         
-        case termsAndConditions = "Terms and Conditions"
-        case privacyPolicy = "Privacy Policy"
-        case contactUs = "Contact Us"
+        case termsAndConditions = "Terms and conditions"
+        case privacyPolicy = "Privacy policy"
+        case contactUs = "Contact us"
         
         case none
     }
@@ -36,6 +36,9 @@ final class SettingsViewModel {
     
     // MARK: - Variables
     var title: String = "Settings"
+    
+    var pickedImage: UIImage?
+    var pickedImageURL: URL?
     
     let biometricIDAuthManager = BiometricIDAuthManager.shared
     
@@ -231,6 +234,26 @@ final class SettingsViewModel {
     private func forceSignOut() {
         clearData()
         router.show(routeType: .forceSignOut)
+    }
+    
+    func saveProfilePhoto(completion: @escaping CompletionBlock) {
+        guard let pickedImageURL = pickedImageURL else {
+            return completion(.failure(errorType: .apiError(message: nil)))
+        }
+        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.profileModel?.avatar = uuidString
+                    completion(.success)
+                case .failure(let errorType):
+                    print(errorType)
+                    break
+                }
+            })
+        }, errorCompletion: completion)
     }
     
     @objc private func signOutNotification(notification: Notification) {

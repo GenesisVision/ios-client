@@ -50,12 +50,6 @@ class ProgramInvestViewController: BaseViewController {
             amountToInvestGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
-        didSet {
-            amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
-            amountToInvestCurrencyLabel.isHidden = true
-        }
-    }
     
     @IBOutlet var copyMaxValueButton: UIButton! {
         didSet {
@@ -174,7 +168,6 @@ class ProgramInvestViewController: BaseViewController {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
             let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
-            self.amountToInvestCurrencyLabel.text = "= " + amountToInvestValueCurrencyString + " " + selectedCurrency
         }
         
         let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue

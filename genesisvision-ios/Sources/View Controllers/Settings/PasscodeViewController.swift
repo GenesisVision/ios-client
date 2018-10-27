@@ -1,4 +1,4 @@
-//
+ //
 //  PasscodeViewController.swift
 //  genesisvision-ios
 //
@@ -37,13 +37,32 @@ class PasscodeViewController: BaseViewController {
     var attempts: Int = 0
     var newPasscode: String!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var passwordStackView: UIStackView!
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.isHidden = true
+            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
+    @IBOutlet weak var subtitleLabel: TitleLabel! {
+        didSet {
+            subtitleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
     
+    @IBOutlet weak var passwordStackView: UIStackView!
+    @IBOutlet weak var blurView: UIVisualEffectView! {
+        didSet {
+            blurView.isHidden = false
+        }
+    }
+
     // MARK: - Variables
     var passwordContainerView: PasswordContainerView! {
         didSet {
             passwordContainerView.touchAuthenticationEnabled = false
+            passwordContainerView.backgroundColor = .clear
+            passwordContainerView.tintColor = UIColor.Common.numpadDotsBackground
+            passwordContainerView.highlightedColor = UIColor.primary
         }
     }
     @IBOutlet weak var closeButton: UIButton! {
@@ -77,32 +96,59 @@ class PasscodeViewController: BaseViewController {
         //create PasswordContainerView
         passwordContainerView = PasswordContainerView.create(in: passwordStackView, digit: viewModel.passwordDigit)
         passwordContainerView.delegate = self
-        passwordContainerView.deleteButtonLocalizedTitle = viewModel.deleteButtonTitle
+        passwordContainerView.deleteButton.setImage(#imageLiteral(resourceName: "img_numpad_delete"), for: .normal)
+        passwordContainerView.deleteButtonLocalizedTitle = ""
         
         //customize password UI
         passwordContainerView.isVibrancyEffect = viewModel.isVibrancyEffect
         
-        // customize font
+        passwordContainerView.passwordDotView.strokeColor = UIColor.Border.forButton
+        passwordContainerView.passwordDotView.fillColor = UIColor.primary
+        
+        passwordContainerView.touchAuthenticationButton.tintColor = UIColor.Border.forButton
         for inputView in passwordContainerView.passwordInputViews {
-            inputView.label.font = viewModel.labelFont
+            inputView.label.font = viewModel.numButtonFont
+            inputView.circleBackgroundColor = .clear
+            inputView.borderColor = .clear
+            inputView.textColor = UIColor.Font.numPadText
+            inputView.highlightTextColor = UIColor.primary
+            inputView.highlightBackgroundColor = .clear
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
-    private func setupUI() {
-        guard passwordContainerView != nil, closeButton != nil, titleLabel != nil else {
+    private
+    func setupUI() {
+        view.backgroundColor = .clear//UIColor.BaseView.bg
+        titleLabel.text = viewModel.title
+        
+        guard passwordContainerView != nil, closeButton != nil, subtitleLabel != nil else {
             return
         }
         
-        closeButton.isHidden = true
         passwordContainerView.touchAuthenticationEnabled = false
         
         switch passcodeState {
-        case .enable, .disable:
+        case .enable:
+            subtitleLabel.text = viewModel.enableText
+            subtitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            subtitleLabel.textColor = UIColor.Cell.subtitle
+            
             closeButton.isHidden = false
+            titleLabel.isHidden = false
+            hidePasswordView(false)
+        case .disable:
+            subtitleLabel.text = viewModel.disableText
+            subtitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            subtitleLabel.textColor = UIColor.Cell.subtitle
+            
+            closeButton.isHidden = false
+            titleLabel.isHidden = false
             hidePasswordView(false)
         case .lock:
+            subtitleLabel.text = viewModel.enterText
+            
             let touchAuthenticationEnabled = viewModel.touchAuthenticationEnabled
         
             if viewModel.changedMessageEnable {
@@ -124,7 +170,7 @@ class PasscodeViewController: BaseViewController {
     
     private func hidePasswordView(_ value: Bool) {
         passwordContainerView.isHidden = value
-        titleLabel.isHidden = value
+        subtitleLabel.isHidden = value
     }
     
     @objc func willEnterForeground() {
@@ -185,7 +231,9 @@ private extension PasscodeViewController {
         case .enable:
             guard attempts == 2 else {
                 passwordContainerView.clearInput()
-                titleLabel.text = viewModel.againTitleLabelText
+                subtitleLabel.text = viewModel.enterAgainText
+                subtitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+                subtitleLabel.textColor = UIColor.Cell.subtitle
                 return
             }
             viewModel.updatePasscode(newPasscode)
@@ -208,8 +256,18 @@ private extension PasscodeViewController {
         print("*️⃣ failure!")
         attempts = 0
         newPasscode = nil
-        titleLabel.text = viewModel.titleLabelText
         passwordContainerView.wrongPassword()
+        
+        switch passcodeState {
+        case .enable:
+            subtitleLabel.text = viewModel.enableText
+        case .disable:
+            subtitleLabel.text = viewModel.disableText
+        case .lock:
+            subtitleLabel.text = viewModel.enterText
+        case .openApp:
+            break
+        }
     }
 }
 

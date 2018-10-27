@@ -207,6 +207,8 @@
 		5E5BC080218343E7009E4BA3 /* FundWithdrawInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC00E218343E6009E4BA3 /* FundWithdrawInfo.swift */; };
 		5E5BC081218343E7009E4BA3 /* Broker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC00F218343E7009E4BA3 /* Broker.swift */; };
 		5E5BC082218343E7009E4BA3 /* ManagerOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC010218343E7009E4BA3 /* ManagerOverview.swift */; };
+		5E5BC08821836C00009E4BA3 /* WalletTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */; };
+		5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */; };
 		5E5C66EC207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */; };
 		5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */; };
 		5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */; };
@@ -791,6 +793,9 @@
 		5E5BC00E218343E6009E4BA3 /* FundWithdrawInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundWithdrawInfo.swift; sourceTree = "<group>"; };
 		5E5BC00F218343E7009E4BA3 /* Broker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broker.swift; sourceTree = "<group>"; };
 		5E5BC010218343E7009E4BA3 /* ManagerOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerOverview.swift; sourceTree = "<group>"; };
+		5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionView.swift; sourceTree = "<group>"; };
+		5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletTransactionView.xib; sourceTree = "<group>"; };
+		5E5BC08A21849290009E4BA3 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5E5C66EB207FAF5D0076F630 /* ProgramDetailFullChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartRouter.swift; sourceTree = "<group>"; };
 		5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewController.swift; sourceTree = "<group>"; };
 		5E5C66EF207FAF790076F630 /* ProgramDetailFullChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailFullChartViewModel.swift; sourceTree = "<group>"; };
@@ -1425,6 +1430,7 @@
 		5E23926C205F67F000CB5AEC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5E5BC08A21849290009E4BA3 /* Montserrat-ExtraLight.ttf */,
 				5E152F09216528380029BFDE /* Montserrat-Bold.ttf */,
 				5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */,
 				5E152F08216528380029BFDE /* Montserrat-Medium.ttf */,
@@ -2510,6 +2516,8 @@
 		FCC9DD51200DFA5E008825EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */,
+				5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */,
 				5ED3B477210898810026C123 /* Profile */,
 				FC0E20082044352000872BE5 /* Header View */,
 				5E7B03532067BA3000D8F3BA /* Buttons */,
@@ -2701,6 +2709,7 @@
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5ED03F3620FF784A00AF5E07 /* FieldWithTextViewTableViewCell.xib in Resources */,
+				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				5E6308EE212C01E300D15C71 /* InvestorDashboardPortfolioTableViewCell.xib in Resources */,
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
@@ -3121,6 +3130,7 @@
 				5E181E6A2067AD1900BF3240 /* NumpadView.swift in Sources */,
 				FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */,
 				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
+				5E5BC08821836C00009E4BA3 /* WalletTransactionView.swift in Sources */,
 				5E085F49215E802100950042 /* ProgramHeaderViewController.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* ProgramDetailTradesTableViewCellViewModel.swift in Sources */,

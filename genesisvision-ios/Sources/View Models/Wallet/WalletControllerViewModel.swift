@@ -136,12 +136,14 @@ extension WalletControllerViewModel {
     func fetchBalance(completion: @escaping CompletionBlock) {
         guard let currency = WalletAPI.Currency_v10WalletByCurrencyGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
+        WalletDataProvider.getWallet(with: currency, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
             
-            self.wallet = viewModel
+            self?.wallet = viewModel
+            
+            completion(.success)
         }, errorCompletion: completion)
     }
     

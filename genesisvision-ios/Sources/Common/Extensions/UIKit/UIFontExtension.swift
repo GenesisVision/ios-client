@@ -14,9 +14,12 @@ extension UIFont {
     static var mediumName = "Montserrat-Medium"
     static var semiBoldName = "Montserrat-SemiBold"
     static var lightName = "Montserrat-Light"
+    static var extraLightName = "Montserrat-ExtraLight"
     
     static func getFont(_ weight: Weight, size fontSize: CGFloat) -> UIFont {
         switch weight {
+        case .ultraLight:
+            return UIFont(name: UIFont.extraLightName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize, weight: .ultraLight)
         case .light:
             return UIFont(name: UIFont.lightName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize, weight: .light)
         case .regular:

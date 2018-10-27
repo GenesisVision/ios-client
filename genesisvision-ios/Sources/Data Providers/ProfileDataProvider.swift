@@ -24,4 +24,12 @@ class ProfileDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
+    static func updateProfileAvatar(fileId: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProfileAPI.v10ProfileAvatarUpdateByFileIdPost(fileId: fileId, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
 }

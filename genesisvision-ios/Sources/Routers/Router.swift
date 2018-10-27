@@ -225,6 +225,13 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
+    func signInAction() {
+        guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
+        let router = SignInRouter(parentRouter: self, navigationController: navigationController)
+        viewController.viewModel = AuthSignInViewModel(withRouter: router)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showProgramDetails(with programId: String) {
         guard let viewController = getDetailsViewController(with: programId) else { return }
         navigationController?.pushViewController(viewController, animated: true)

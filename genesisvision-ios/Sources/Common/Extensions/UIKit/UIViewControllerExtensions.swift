@@ -79,7 +79,7 @@ extension UIViewController {
     func showTwoFactorEnableAlert(completion: @escaping (_ enable: Bool) -> Void) {
         let message = String.Alerts.TwoFactorEnable.alertMessage
         let alertController = UIAlertController(title: String.Alerts.TwoFactorEnable.alertTitle, message: message, preferredStyle: .alert)
-        alertController.view.tintColor = UIColor.primary
+//        alertController.view.tintColor = UIColor.primary
         
         alertController.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.enableButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
             NotificationCenter.default.post(name: .twoFactorEnable, object: nil)
@@ -92,7 +92,7 @@ extension UIViewController {
     
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
-        alertController.view.tintColor = UIColor.primary
+//        alertController.view.tintColor = UIColor.primary
         
         present(alertController, animated: true, completion: nil)
         
@@ -168,8 +168,8 @@ extension UIViewController {
     
     func openSafariVC(with url: URL) {
         let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
-        safariViewController.preferredBarTintColor = UIColor.Background.main
-        safariViewController.preferredControlTintColor = UIColor.primary
+        safariViewController.preferredBarTintColor = UIColor.BaseView.bg
+//        safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }

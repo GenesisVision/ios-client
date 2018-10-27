@@ -41,4 +41,8 @@ class PortfolioEventTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
+    }
 }

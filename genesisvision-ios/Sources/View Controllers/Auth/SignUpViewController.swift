@@ -68,6 +68,7 @@ class SignUpViewController: BaseViewController {
     // MARK: - Buttons
     @IBOutlet var privacyPolicyButton: UIButton! {
         didSet {
+            privacyPolicyButton.tintColor = UIColor.Cell.title
             privacyPolicyButton.setTitleColor(UIColor.Cell.title, for: .normal)
             privacyPolicyButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
             privacyPolicyButton.setTitle("I accept the Privacy Policy", for: .normal)
@@ -75,6 +76,7 @@ class SignUpViewController: BaseViewController {
     }
     @IBOutlet var termsButton: UIButton! {
         didSet {
+            termsButton.tintColor = UIColor.Cell.title
             termsButton.setTitleColor(UIColor.Cell.title, for: .normal)
             termsButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
             termsButton.setTitle("I accept the Terms of Service", for: .normal)

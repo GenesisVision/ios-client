@@ -11,14 +11,27 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textLabel?.font = UIFont.getFont(.regular, size: 14.0)
+        textLabel?.textColor = UIColor.Cell.title
+        
+        detailTextLabel?.font = UIFont.getFont(.regular, size: 12.0)
+        detailTextLabel?.textColor = UIColor.Cell.subtitle
+        
+        contentView.backgroundColor = UIColor.BaseView.bg
+        backgroundColor = UIColor.BaseView.bg
+        tintColor = UIColor.Cell.title
+        accessoryView?.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
-        
-        tintColor = UIColor.Cell.title
-        accessoryView?.backgroundColor = UIColor.BaseView.bg
     }
 }
 

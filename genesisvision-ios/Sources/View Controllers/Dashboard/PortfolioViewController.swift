@@ -196,18 +196,28 @@ class PortfolioViewController: BaseViewController {
     private func selectChart(_ entry: ChartDataEntry) {
         let date = Date(timeIntervalSince1970: entry.x)
         
-        if let valueChartBar = viewModel.selectChart(date) {
-            if let topAssets = valueChartBar.topAssets {
-                print(topAssets)
-                showBottomAssetsView()
-            }
-            
+        let results = viewModel.selectChart(date)
+        
+        if let valueChartBar = results.0, let topAssets = valueChartBar.topAssets {
+            print(topAssets)
+            showBottomAssetsView()
+        } else {
+            hideBottomAssetsView()
+        }
+        
+        if let chartSimple = results.1, let value = chartSimple.value {
+            print(value)
+        } else {
             
         }
     }
     
     @objc private func hideBottomAssetsView() {
-        guard bottomAssetsView != nil else { return }
+        if bottomAssetsView == nil {
+            circleView.isHidden = true
+        }
+        
+        circleView.isHidden = true
         
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomAssetsView?.alpha = 0.0
@@ -215,8 +225,6 @@ class PortfolioViewController: BaseViewController {
             self.bottomAssetsView?.removeFromSuperview()
             self.bottomAssetsView = nil
         }
-        
-        circleView.isHidden = true
         
         hideInRequestStackView(false)
     }
@@ -258,6 +266,7 @@ class PortfolioViewController: BaseViewController {
 
 extension PortfolioViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        circleView.isHidden = false
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
         
         selectChart(entry)

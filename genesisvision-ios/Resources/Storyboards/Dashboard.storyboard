@@ -232,10 +232,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-o9-rIW">
-                                                <rect key="frame" x="0.0" y="25" width="10.5" height="37"/>
+                                                <rect key="frame" x="0.0" y="25" width="101.5" height="37"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEf-uI-5Vy" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="10.5" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0sadsadassd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEf-uI-5Vy" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="2Ik-Kf-yaw"/>
                                                         </constraints>
@@ -244,7 +244,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-KY-Xwx" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="22" width="10.5" height="15"/>
+                                                        <rect key="frame" x="0.0" y="22" width="101.5" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="pKl-XP-NDy"/>
                                                         </constraints>
@@ -258,9 +258,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyV-oc-0i9">
-                                <rect key="frame" x="20" y="105" width="52.5" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyV-oc-0i9">
+                                <rect key="frame" x="20" y="102" width="137.5" height="62"/>
                                 <state key="normal" image="img_inRequests"/>
                                 <connections>
                                     <action selector="inRequestsButtonAction:" destination="cfZ-FO-xK2" eventType="touchUpInside" id="B6x-fl-w40"/>
@@ -287,11 +286,16 @@
                         <constraints>
                             <constraint firstItem="wKZ-Mm-Uzb" firstAttribute="top" secondItem="UKn-A2-Y9T" secondAttribute="top" constant="20" id="FhR-AX-4Dj"/>
                             <constraint firstItem="6Wa-tu-itX" firstAttribute="leading" secondItem="GYP-ct-H5d" secondAttribute="leading" id="JwG-nt-9oy"/>
+                            <constraint firstItem="HyV-oc-0i9" firstAttribute="top" secondItem="swz-ew-myn" secondAttribute="top" id="LUp-4G-McU"/>
+                            <constraint firstItem="HyV-oc-0i9" firstAttribute="leading" secondItem="swz-ew-myn" secondAttribute="leading" id="Y2Q-Bh-fNI"/>
                             <constraint firstItem="UKn-A2-Y9T" firstAttribute="trailing" secondItem="wKZ-Mm-Uzb" secondAttribute="trailing" constant="20" id="a4l-cj-1Pw"/>
                             <constraint firstItem="UKn-A2-Y9T" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Wa-tu-itX" secondAttribute="bottom" constant="20" id="bMe-Pf-POB"/>
+                            <constraint firstItem="HyV-oc-0i9" firstAttribute="centerY" secondItem="swz-ew-myn" secondAttribute="centerY" id="hN6-Zt-wbR"/>
                             <constraint firstItem="6Wa-tu-itX" firstAttribute="top" secondItem="wKZ-Mm-Uzb" secondAttribute="bottom" constant="8" id="hyx-Jv-Oal"/>
                             <constraint firstItem="wKZ-Mm-Uzb" firstAttribute="leading" secondItem="UKn-A2-Y9T" secondAttribute="leading" constant="20" id="iEI-BH-Qnh"/>
+                            <constraint firstItem="HyV-oc-0i9" firstAttribute="trailing" secondItem="dEf-uI-5Vy" secondAttribute="trailing" constant="36" id="kFA-7q-2Oj"/>
                             <constraint firstItem="6Wa-tu-itX" firstAttribute="trailing" secondItem="GYP-ct-H5d" secondAttribute="trailing" id="rdE-fW-f3m"/>
+                            <constraint firstItem="HyV-oc-0i9" firstAttribute="bottom" secondItem="swz-ew-myn" secondAttribute="bottom" id="yKl-oz-kKP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UKn-A2-Y9T"/>
                     </view>

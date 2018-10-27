@@ -16,12 +16,11 @@ class BaseDataProvider: DataProvider {
         }
     }
     
-    static func uploadImage(imageURL: URL, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        FileAPI.v10FileUploadPost(uploadedFile: imageURL) { (uploadResultModel, error) in
-            DataProvider().responseHandler(uploadResultModel, error: error, successCompletion: { (viewModel) in
-                let uuid = uploadResultModel?.id?.uuidString
-                completion(uuid)
-            }, errorCompletion: errorCompletion)
+    static func uploadImage(imageURL: URL, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FileAPI.v10FileUploadPost(uploadedFile: imageURL, authorization: authorization) { (model, error) in
+            DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 }

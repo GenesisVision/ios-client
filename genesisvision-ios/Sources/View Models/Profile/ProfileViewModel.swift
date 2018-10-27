@@ -294,15 +294,12 @@ final class ProfileViewModel {
     }
     
     private func saveProfileApi(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
+        guard pickedImageURL != nil else {
             self.updateProfileApi(completion: completion)
-            return 
+            return
         }
         
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (imageID) in
-            self?.profileModel?.avatar = imageID
-            self?.updateProfileApi(completion: completion)
-        }, errorCompletion: completion)
+        completion(.success)
     }
     
     private func updateProfileApi(completion: @escaping CompletionBlock) {

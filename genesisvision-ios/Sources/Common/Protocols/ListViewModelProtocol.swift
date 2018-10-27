@@ -99,15 +99,31 @@ extension ListViewModelProtocol {
     }
     
     func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController? {
-        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
-            return nil
+        switch type {
+        case .programList:
+            guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
+                return nil
+            }
+            
+            let program = model.program
+            guard let programId = program.id else { return nil}
+            guard let router = router as? Router else { return nil }
+            
+            return router.getDetailsViewController(with: programId.uuidString)
+        
+        case .fundList:
+                guard let model = model(at: indexPath) as? FundTableViewCellViewModel else {
+                    return nil
+                }
+                
+                let fund = model.fund
+                guard let fundId = fund.id else { return nil}
+                guard let router = router as? Router else { return nil }
+                
+                return router.getFundDetailsViewController(with: fundId.uuidString)
         }
         
-        let program = model.program
-        guard let programId = program.id else { return nil}
-        guard let router = router as? Router else { return nil }
-        
-        return router.getDetailsViewController(with: programId.uuidString)
+        return nil
     }
     
     // MARK: - TableView
@@ -194,9 +210,7 @@ extension ListViewModelProtocol {
     }
     
     func showSignInVC() {
-        if let router = router as? ProgramListRouter {
-            router.show(routeType: .signIn)
-        }
+        router.show(routeType: .signIn)
     }
     
     func showFilterVC() {
