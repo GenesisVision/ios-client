@@ -14,31 +14,35 @@ struct PortfolioEventTableViewCellViewModel {
 
 extension PortfolioEventTableViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventTableViewCell) {
-        cell.iconImageView.image = UIImage.eventPlaceholder
+        cell.iconImageView.image = UIImage.programPlaceholder
+        
+        if let color = dashboardPortfolioEvent.color {
+            cell.iconImageView.backgroundColor = UIColor.hexColor(color)
+        }
         
         if let fileName = dashboardPortfolioEvent.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
-            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
         if let type = dashboardPortfolioEvent.type {
             switch type {
             case .profit:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
             case .loss:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_close_period")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
             case .withdraw:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
             case .invest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
             case .all:
                 cell.typeImageView.image = nil
             case .reinvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_reinvest")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_reinvest")
             case .cancelled:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_close_period")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_canceled")
             case .ended:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_end_of_period")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_program_finished")
             }
         }
             

@@ -47,7 +47,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var dateTo: Date?
     
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signIn : .dateRange
+        return signInButtonEnable ? .signInWithDateRange : .dateRange
     }
     
     var searchText = "" {

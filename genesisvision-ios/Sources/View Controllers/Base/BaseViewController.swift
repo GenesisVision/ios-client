@@ -105,6 +105,9 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
             case .signInWithFilter:
                 signInButton.isHidden = false
                 filterButton.isHidden = false
+            case .signInWithDateRange:
+                signInButton.isHidden = false
+                dateRangeButton.isHidden = false
             }
         }
     }
@@ -256,7 +259,7 @@ extension BaseViewController: DateRangeViewProtocol {
     
     func showDatePicker(with dateFrom: Date?, dateTo: Date) {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
         
         if let dateFrom = dateFrom {
             alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: dateTo.previousDate()) { [weak self] date in
@@ -377,7 +380,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     var tableView: UITableView!
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var previousViewController: UIViewController?
-    var tableViewStyle: UITableView.Style = .grouped
+    var tableViewStyle: UITableView.Style = .plain
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -428,6 +431,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 
         filterStackView.addArrangedSubview(sortButton)
         filterStackView.addArrangedSubview(filterButton)
+        filterStackView.addArrangedSubview(dateRangeButton)
         bottomStackView.addArrangedSubview(filterStackView)
         bottomStackView.addArrangedSubview(signInButton)
         

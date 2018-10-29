@@ -94,7 +94,7 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
   "profitFactor" : 7.386281948385884,
-  "profitChangePercent" : 1.2315135367772556,
+  "profitChangePercent" : 1.4894159098541704,
   "calmarRatio" : 1.1730742509559433,
   "timeframeGvtProfit" : 9.965781217890562,
   "timeframeProgramCurrencyProfit" : 3.616076749251911,
@@ -117,7 +117,7 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "balance" : 1.0246457001441578,
+  "balance" : 1.2315135367772556,
   "programCurrency" : "Undefined",
   "rate" : 9.369310271410669,
   "totalProgramCurrencyProfit" : 9.301444243932576,

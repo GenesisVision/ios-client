@@ -37,7 +37,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cv5-v1-ILX" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cv5-v1-ILX" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="279" y="68.5" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="H8f-nB-qBD"/>

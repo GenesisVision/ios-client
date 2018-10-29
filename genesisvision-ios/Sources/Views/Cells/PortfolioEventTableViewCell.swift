@@ -25,10 +25,9 @@ class PortfolioEventTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: TitleLabel!
     @IBOutlet var dateLabel: SubtitleLabel!
-    @IBOutlet var amountLabel: SubtitleLabel! {
+    @IBOutlet var amountLabel: TitleLabel! {
         didSet {
             amountLabel.font = UIFont.getFont(.semibold, size: 12.0)
-            amountLabel.textColor = UIColor.Cell.greenTitle
         }
     }
     

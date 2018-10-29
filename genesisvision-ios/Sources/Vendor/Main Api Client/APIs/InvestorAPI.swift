@@ -400,10 +400,12 @@ open class InvestorAPI {
       "username" : "username"
     },
     "topFundAssets" : [ {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
     }, {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
@@ -462,10 +464,12 @@ open class InvestorAPI {
       "username" : "username"
     },
     "topFundAssets" : [ {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
     }, {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954

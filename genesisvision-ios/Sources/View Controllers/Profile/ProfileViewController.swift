@@ -135,7 +135,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     private func selectGender() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
        
         let maleAction = UIAlertAction(title: "Male", style: .default) { [weak self] (UIAlertAction) in
             self?.update(gender: true)
@@ -168,7 +168,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
     
     private func selectBirthdate() {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-//        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
         
         var components = DateComponents()
         components.year = -Constants.Profile.minYear

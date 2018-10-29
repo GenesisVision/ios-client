@@ -28,7 +28,7 @@ final class FundAssetsViewModel {
         }
     }
     
-    var viewModels = [FundAssetsTableViewCellViewModel]()
+    var viewModels = [FundAssetTableViewCellViewModel]()
     
     // MARK: - Init
     init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
@@ -47,7 +47,7 @@ extension FundAssetsViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FundAssetsTableViewCellViewModel.self]
+        return [FundAssetTableViewCellViewModel.self]
     }
     
     func numberOfSections() -> Int {
@@ -93,7 +93,7 @@ extension FundAssetsViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [FundAssetsTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [FundAssetTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -119,12 +119,12 @@ extension FundAssetsViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> FundAssetsTableViewCellViewModel? {
+    func model(for index: Int) -> FundAssetTableViewCellViewModel? {
         return viewModels[index]
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, viewModels: [FundAssetsTableViewCellViewModel]) {
+    private func updateFetchedData(totalCount: Int, viewModels: [FundAssetTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
@@ -132,7 +132,7 @@ extension FundAssetsViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundAssetsTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundAssetTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
             guard let fundId = fundId else { return completionError(.failure(errorType: .apiError(message: nil))) }
@@ -141,12 +141,12 @@ extension FundAssetsViewModel {
                 guard assetsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
-                var viewModels = [FundAssetsTableViewCellViewModel]()
+                var viewModels = [FundAssetTableViewCellViewModel]()
                 
                 let totalCount = assetsViewModel?.assets?.count ?? 0
                 
                 assetsViewModel?.assets?.forEach({ (assetInfo) in
-                    let viewModel = FundAssetsTableViewCellViewModel(fundAssetInfo: assetInfo)
+                    let viewModel = FundAssetTableViewCellViewModel(fundAssetInfo: assetInfo)
                     viewModels.append(viewModel)
                 })
                 

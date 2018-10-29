@@ -49,8 +49,6 @@ class ProgramViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
-        let height = UIScreen.main.bounds.size.height
-        self.minHeaderHeight = height / 3
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -178,9 +176,6 @@ extension ProgramViewController {
         
         let yOffset = scrollView.contentOffset.y + topConstant
         
-        let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
-        self.navigationController!.view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(alpha)
-   
         let headerHeight = headerViewConstraint.constant - 64.0
         if headerHeight - yOffset >= 0 {
             programHeaderViewController?.changeColorAlpha(offset: yOffset / headerHeight)

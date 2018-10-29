@@ -16,9 +16,9 @@ extension Date {
         return dateFormatter.string(from: self)
     }
    
-    static func getFormatStringForChart(for date: Date, chartDurationType: ChartDurationType) -> String {
+    static func getFormatStringForChart(for date: Date, dateRangeType: DateRangeType) -> String {
         let dateFormatter = DateFormatter()
-        switch chartDurationType {
+        switch dateRangeType {
         case .day:
             dateFormatter.dateFormat = "dd.MM \nhh:mm"
         case .year:

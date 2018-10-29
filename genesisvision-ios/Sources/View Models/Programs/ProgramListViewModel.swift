@@ -50,7 +50,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var dateFrom: Date?
     var dateTo: Date?
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signIn : .dateRange
+        return signInButtonEnable ? .signInWithDateRange : .dateRange
     }
     
     var searchText = "" {

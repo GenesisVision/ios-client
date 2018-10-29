@@ -146,7 +146,8 @@ class DashboardViewController: BaseViewController {
         addCurrencyTitleButton(CurrencyDelegateManager())
         
         let dateRangeButton = UIButton(type: .system)
-        dateRangeButton.setTitle("Week", for: .normal)
+        let title = dateRangeView?.selectedDateRangeType.getString() ?? ""
+        dateRangeButton.setTitle(title, for: .normal)
         dateRangeButton.semanticContentAttribute = .forceRightToLeft
         dateRangeButton.setImage(#imageLiteral(resourceName: "img_arrow_down_icon"), for: .normal)
         dateRangeButton.addTarget(self, action: #selector(dateRangeButtonAction), for: .touchUpInside)

@@ -241,7 +241,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     
     private func feedbackMethod() {
         let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
-//        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
         
         alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
             self?.viewModel.sendFeedback()

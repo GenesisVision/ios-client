@@ -119,7 +119,7 @@ class PortfolioViewController: BaseViewController {
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
-                chartView.setup(lineChartData: lineChartData, barChartData: barChartData)
+                chartView.setup(lineChartData: lineChartData, barChartData: barChartData, dateRangeType: dateRangeView?.selectedDateRangeType)
             }
             
             amountTitleLabel.text = "Amount"
@@ -213,12 +213,6 @@ class PortfolioViewController: BaseViewController {
     }
     
     @objc private func hideBottomAssetsView() {
-        if bottomAssetsView == nil {
-            circleView.isHidden = true
-        }
-        
-        circleView.isHidden = true
-        
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomAssetsView?.alpha = 0.0
         }) { (result) in
@@ -274,12 +268,14 @@ extension PortfolioViewController: ChartViewDelegate {
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         hideBottomAssetsView()
+        circleView.isHidden = true
+        
     }
 }
 
 extension PortfolioViewController: BottomSheetControllerProtocol {
     func didHide() {
-        circleView.isHidden = false
+        circleView.isHidden = true
         hideInRequestStackView(false)
         chartView.highlightValues([])
     }

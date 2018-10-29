@@ -35,7 +35,7 @@ class ChartView: CombinedChartView {
     private var currencyValue: String = ""
     
     private var chartType: ChartType = .detail
-    private var chartDurationType: ChartDurationType!
+    private var dateRangeType: DateRangeType!
     
     private var minLimitLine: ChartLimitLine!
     private var maxLimitLine: ChartLimitLine!
@@ -95,7 +95,7 @@ class ChartView: CombinedChartView {
                fundBalanceChartData: [BalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
-               chartDurationType: ChartDurationType? = nil) {
+               dateRangeType: DateRangeType? = nil) {
         
         self.chartType = chartType
         self.name = name
@@ -104,7 +104,7 @@ class ChartView: CombinedChartView {
         self.programBalanceChartData = programBalanceChartData
         self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
-        self.chartDurationType = chartDurationType ?? .all
+        self.dateRangeType = dateRangeType ?? .week
 
         updateData()
         
@@ -253,12 +253,12 @@ class ChartView: CombinedChartView {
         xAxis.valueFormatter = DefaultAxisValueFormatter(block: {(index, _) in
             let date = Date(timeIntervalSince1970: index)
             
-            let timeInterval = date.timeIntervalSinceNow
-            if timeInterval / 60 / 60 < 24 {
-                return "Today"
-            }
+//            let timeInterval = date.timeIntervalSinceNow
+//            if timeInterval / 60 / 60 < 24 {
+//                return "Today"
+//            }
             
-            let dateString = Date.getFormatStringForChart(for: date, chartDurationType: self.chartDurationType)
+            let dateString = Date.getFormatStringForChart(for: date, dateRangeType: self.dateRangeType)
             return dateString
         })
 
@@ -395,16 +395,15 @@ class ChartView: CombinedChartView {
         }
         
         barChartDataSet = BarChartDataSet(values: totalDataEntry, label: "Bar profit")
-
-        let barChartData = BarChartData(dataSet: barChartDataSet)
-        if let chartDurationType = chartDurationType {
-            switch chartDurationType {
-            case .day:
-                barChartData.barWidth = 10.0
-            default:
-                barChartData.barWidth = (Date().addDays(1).timeIntervalSince1970 - Date().timeIntervalSince1970) / 10
-            }
+        
+        var width = 10
+        
+        if let lastDate = values.last?.date, let firstDate = values.first?.date {
+            width = lastDate.interval(ofComponent: .second, fromDate: firstDate) / 60
         }
+        
+        let barChartData = BarChartData(dataSet: barChartDataSet)
+        barChartData.barWidth = 1.0 * Double(width)
         
         return barChartData
     }
@@ -418,12 +417,8 @@ class ChartView: CombinedChartView {
             let gradientColors = [lineColor.withAlphaComponent(0.3).cgColor, lineColor.withAlphaComponent(0.0).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
             
-            lineChartDataSet.fillAlpha = 0.3
+            lineChartDataSet.fillAlpha = 0.5
             lineChartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
-            
-            if negative {
-                lineChartDataSet.fillFormatter = DefaultFillFormatter()
-            }
         }
     }
 }

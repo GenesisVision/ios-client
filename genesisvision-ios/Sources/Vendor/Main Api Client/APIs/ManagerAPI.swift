@@ -741,10 +741,12 @@ open class ManagerAPI {
       "username" : "username"
     },
     "topFundAssets" : [ {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
     }, {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
@@ -803,10 +805,12 @@ open class ManagerAPI {
       "username" : "username"
     },
     "topFundAssets" : [ {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
     }, {
+      "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
       "percent" : 4.965218492984954
@@ -1036,10 +1040,11 @@ open class ManagerAPI {
     "type" : "Program"
   } ],
   "fundChart" : {
-    "calmarRatio" : 2.8841621266687802,
-    "timeframeGvtProfit" : 5.944895607614016,
+    "profitChangePercent" : 6.965117697638846,
+    "calmarRatio" : 6.778324963048013,
+    "timeframeGvtProfit" : 6.704019297950036,
     "timeframeUsdProfit" : 8.762042012749001,
-    "maxDrawdown" : 6.778324963048013,
+    "maxDrawdown" : 6.878052220127876,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1049,13 +1054,13 @@ open class ManagerAPI {
       "value" : 3.616076749251911
     } ],
     "investors" : 3,
-    "totalGvtProfit" : 6.878052220127876,
-    "sortinoRatio" : 1.284659006116532,
+    "totalGvtProfit" : 5.944895607614016,
+    "sortinoRatio" : 2.8841621266687802,
     "rebalances" : 9,
     "balance" : 6.438423552598547,
-    "rate" : 6.704019297950036,
+    "rate" : 3.353193347011243,
     "totalUsdProfit" : 6.683562403749608,
-    "sharpeRatio" : 6.965117697638846
+    "sharpeRatio" : 1.284659006116532
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1105,7 +1110,7 @@ open class ManagerAPI {
   },
   "programChart" : {
     "profitFactor" : 7.386281948385884,
-    "profitChangePercent" : 1.2315135367772556,
+    "profitChangePercent" : 1.4894159098541704,
     "calmarRatio" : 1.1730742509559433,
     "timeframeGvtProfit" : 9.965781217890562,
     "timeframeProgramCurrencyProfit" : 3.616076749251911,
@@ -1128,7 +1133,7 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "balance" : 1.0246457001441578,
+    "balance" : 1.2315135367772556,
     "programCurrency" : "Undefined",
     "rate" : 9.369310271410669,
     "totalProgramCurrencyProfit" : 9.301444243932576,

@@ -11,6 +11,11 @@ import UIKit
 class WalletTransactionTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
+    @IBOutlet var iconImageView: UIImageView! {
+        didSet {
+            iconImageView.roundCorners()
+        }
+    }
     @IBOutlet var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()

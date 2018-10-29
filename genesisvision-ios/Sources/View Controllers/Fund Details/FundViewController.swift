@@ -20,11 +20,7 @@ class FundViewController: BaseViewController {
         }
     }
     
-    var minHeaderHeight: CGFloat = 200.0 {
-        didSet {
-            self.headerViewConstraint.constant = minHeaderHeight
-        }
-    }
+    var minHeaderHeight: CGFloat = 200.0
     var topConstant: CGFloat = 44.0 + 20.0// + 20.0
     
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
@@ -48,10 +44,8 @@ class FundViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.headerViewConstraint.constant = minHeaderHeight
         self.navigationController?.isNavigationBarHidden = false
-        
-        let height = UIScreen.main.bounds.size.height
-        self.minHeaderHeight = height / 3
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -174,11 +168,10 @@ extension FundViewController {
 //        if scrollView.contentOffset.y >= 94.0 {
 //            scrollView.contentOffset.y = 94.0
 //        }
-        
+        print("!!!!!!!!!!!!")
+        print(scrollView.contentOffset.y)
+        print("!!!!!!!!!!!!")
         let yOffset = scrollView.contentOffset.y + topConstant
-        
-        let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
-        self.navigationController!.view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(alpha)
    
         let headerHeight = headerViewConstraint.constant - 64.0
         if headerHeight - yOffset >= 0 {

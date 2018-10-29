@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Charts
 enum ChartType {
-    case `default`, detail, full
+    case `default`, detail, full, dashboard
 }
 
 enum ChartDurationType: Int {
@@ -51,6 +51,21 @@ enum DateRangeType: Int {
     case month
     case year
     case custom
+    
+    func getString() -> String {
+        switch self {
+        case .day:
+            return "Day"
+        case .week:
+            return "Week"
+        case .month:
+            return "Month"
+        case .custom:
+            return "Custom"
+        default:
+            return ""
+        }
+    }
 }
 
 // MARK: - Currency
@@ -96,7 +111,7 @@ enum CompletionResult {
 
 // MARK: - BottomView
 enum BottomViewType {
-    case none, signIn, sort, filter, signInWithFilter, dateRange
+    case none, signIn, sort, filter, signInWithFilter, dateRange, signInWithDateRange
 }
 
 // MARK: - TableViewCell

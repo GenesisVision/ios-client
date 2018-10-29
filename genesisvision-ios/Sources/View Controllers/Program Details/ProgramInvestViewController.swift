@@ -17,8 +17,6 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
-            numpadView.isUserInteractionEnabled = true
-            numpadView.backgroundColor = UIColor.BaseView.bg
             numpadView.delegate = self
             numpadView.type = .currency
         }

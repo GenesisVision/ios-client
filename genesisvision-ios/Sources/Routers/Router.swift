@@ -71,7 +71,7 @@ class Router {
     }
     
     // MARK: - Private methods
-    private func getAssetsNavigationController() -> UINavigationController? {
+    private func getAssetsNavigationController() -> BaseNavigationController? {
         let assetsVC = AssetsViewController()
         self.assetsViewController = assetsVC
         
@@ -179,14 +179,9 @@ extension Router {
     }
    
     func startAsForceSignOut() {
-        guard let navigationController = getAssetsNavigationController(),
-            let programsVC = navigationController.topViewController as? ProgramListViewController,
-            let viewModel = programsVC.viewModel,
-            let router = viewModel.router as? ProgramListRouter else { return }
-        
-        router.show(routeType: .signIn)
-        
+        guard let navigationController = getAssetsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
+        signInAction(navigationController)
     }
     
     func startAsUnauthorized() {
@@ -225,11 +220,16 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
-    func signInAction() {
+    func signInAction(_ navigationController: BaseNavigationController? = nil) {
         guard let viewController = SignInViewController.storyboardInstance(name: .auth) else { return }
         let router = SignInRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthSignInViewModel(withRouter: router)
-        navigationController?.pushViewController(viewController, animated: true)
+        if let navigationController = navigationController {
+            navigationController.pushViewController(viewController, animated: true)
+        } else {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        
     }
     
     func showProgramDetails(with programId: String) {

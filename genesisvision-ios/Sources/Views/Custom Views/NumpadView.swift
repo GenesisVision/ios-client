@@ -105,6 +105,7 @@ class NumpadView: UIView {
         super.awakeFromNib()
         
         backgroundColor = UIColor.BaseView.bg
+        isUserInteractionEnabled = true
     }
     
     override func layoutSubviews() {

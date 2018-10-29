@@ -18,6 +18,7 @@ open class FundProfitChart: Codable {
     public var equityChart: [ChartSimple]?
     public var balance: Double?
     public var investors: Int?
+    public var profitChangePercent: Double?
     public var sharpeRatio: Double?
     public var sortinoRatio: Double?
     public var calmarRatio: Double?
@@ -28,7 +29,7 @@ open class FundProfitChart: Codable {
 
 
     
-    public init(totalUsdProfit: Double?, timeframeUsdProfit: Double?, rebalances: Int?, creationDate: Date?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, rate: Double?) {
+    public init(totalUsdProfit: Double?, timeframeUsdProfit: Double?, rebalances: Int?, creationDate: Date?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, profitChangePercent: Double?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, rate: Double?) {
         self.totalUsdProfit = totalUsdProfit
         self.timeframeUsdProfit = timeframeUsdProfit
         self.rebalances = rebalances
@@ -36,6 +37,7 @@ open class FundProfitChart: Codable {
         self.equityChart = equityChart
         self.balance = balance
         self.investors = investors
+        self.profitChangePercent = profitChangePercent
         self.sharpeRatio = sharpeRatio
         self.sortinoRatio = sortinoRatio
         self.calmarRatio = calmarRatio
@@ -59,6 +61,7 @@ open class FundProfitChart: Codable {
         try container.encodeIfPresent(equityChart, forKey: "equityChart")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(investors, forKey: "investors")
+        try container.encodeIfPresent(profitChangePercent, forKey: "profitChangePercent")
         try container.encodeIfPresent(sharpeRatio, forKey: "sharpeRatio")
         try container.encodeIfPresent(sortinoRatio, forKey: "sortinoRatio")
         try container.encodeIfPresent(calmarRatio, forKey: "calmarRatio")
@@ -80,6 +83,7 @@ open class FundProfitChart: Codable {
         equityChart = try container.decodeIfPresent([ChartSimple].self, forKey: "equityChart")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         investors = try container.decodeIfPresent(Int.self, forKey: "investors")
+        profitChangePercent = try container.decodeIfPresent(Double.self, forKey: "profitChangePercent")
         sharpeRatio = try container.decodeIfPresent(Double.self, forKey: "sharpeRatio")
         sortinoRatio = try container.decodeIfPresent(Double.self, forKey: "sortinoRatio")
         calmarRatio = try container.decodeIfPresent(Double.self, forKey: "calmarRatio")
