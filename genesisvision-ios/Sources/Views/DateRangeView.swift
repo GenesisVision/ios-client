@@ -9,29 +9,29 @@
 import UIKit
 
 protocol DateRangeViewProtocol: class {
-    func applyButtonDidPress(with dateRangeType: DateRangeType, dateRangeFrom: Date, dateRangeTo: Date)
-    func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date)
+    func applyButtonDidPress(with dateFrom: Date, dateTo: Date)
+    func showDatePicker(with dateFrom: Date?, dateTo: Date)
 }
 
 class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?
     
-    var selectedDateRangeType: DateRangeType = .day {
+    var selectedDateRangeType: DateRangeType = .week {
         didSet {
-            dateRangeTo = Date()
+            dateTo = Date()
             updateDateFromMethod()
         }
     }
     
-    var dateRangeFrom: Date = Date().previousDate() {
+    var dateFrom: Date = Date().removeDays(7) {
         didSet {
-            dateRangeFromTextField.text = dateRangeFrom.onlyDateFormatString
+            dateFromTextField.text = dateFrom.onlyDateFormatString
         }
     }
-    var dateRangeTo: Date = Date() {
+    var dateTo: Date = Date() {
         didSet {
-            dateRangeToTextField.text = dateRangeTo.onlyDateFormatString
+            dateToTextField.text = dateTo.onlyDateFormatString
         }
     }
     
@@ -62,19 +62,19 @@ class DateRangeView: UIView {
         }
     }
     
-    @IBOutlet var dateRangeFromTitleLabel: UILabel!
-    @IBOutlet var dateRangeToTitleLabel: UILabel!
+    @IBOutlet var dateFromTitleLabel: UILabel!
+    @IBOutlet var dateToTitleLabel: UILabel!
     
-    @IBOutlet var dateRangeFromTextField: DesignableUITextField! {
+    @IBOutlet var dateFromTextField: DesignableUITextField! {
         didSet {
-            dateRangeFromTextField.addPadding()
-            dateRangeFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+            dateFromTextField.addPadding()
+            dateFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
-    @IBOutlet var dateRangeToTextField: DesignableUITextField! {
+    @IBOutlet var dateToTextField: DesignableUITextField! {
         didSet {
-            dateRangeToTextField.addPadding()
-            dateRangeToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+            dateToTextField.addPadding()
+            dateToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
     @IBOutlet var applyButton: ActionButton!
@@ -83,13 +83,13 @@ class DateRangeView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectedDateRangeType = .day
+        selectedDateRangeType = .week
     }
     
     // MARK: - Private methods
     private func updateDateFromMethod() {
-        dateRangeToTextField.isUserInteractionEnabled = false
-        dateRangeFromTextField.isUserInteractionEnabled = false
+        dateToTextField.isUserInteractionEnabled = false
+        dateFromTextField.isUserInteractionEnabled = false
         
         dayButton.isSelected = false
         weekButton.isSelected = false
@@ -99,23 +99,41 @@ class DateRangeView: UIView {
         
         switch selectedDateRangeType {
         case .day:
-            dateRangeFrom = dateRangeTo.previousDate()
+            dateFrom = dateTo.previousDate()
             dayButton.isSelected = true
         case .week:
-            dateRangeFrom = dateRangeTo.removeDays(7)
+            dateFrom = dateTo.removeDays(7)
             weekButton.isSelected = true
         case .month:
-            dateRangeFrom = dateRangeTo.removeMonths(1)
+            dateFrom = dateTo.removeMonths(1)
             monthButton.isSelected = true
         case .year:
-            dateRangeFrom = dateRangeTo.removeYears(1)
+            dateFrom = dateTo.removeYears(1)
             yearButton.isSelected = true
         case .custom:
-            dateRangeToTextField.isUserInteractionEnabled = true
-            dateRangeFromTextField.isUserInteractionEnabled = true
-            dateRangeFrom = dateRangeTo.previousDate()
+            dateToTextField.isUserInteractionEnabled = true
+            dateFromTextField.isUserInteractionEnabled = true
+            dateFrom = dateTo.removeDays(7)
             customButton.isSelected = true
         }
+        
+        updateTime()
+    }
+    
+    private func updateTime() {
+        dateTo.setTime(hour: 0, min: 0, sec: 0)
+        dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//        switch selectedDateRangeType {
+//        case .custom:
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//            dateFrom.setTime(hour: 23, min: 59, sec: 59)
+//        default:
+//            let calendar = Calendar.current
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//        }
     }
     
     // MARK: - Actions
@@ -126,10 +144,10 @@ class DateRangeView: UIView {
             return
         }
         
-        if sender == dateRangeFromTextField {
-            delegate?.showDatePicker(with: dateRangeFrom, dateRangeTo: dateRangeTo)
+        if sender == dateFromTextField {
+            delegate?.showDatePicker(with: dateFrom, dateTo: dateTo)
         } else {
-            delegate?.showDatePicker(with: nil, dateRangeTo: dateRangeTo)
+            delegate?.showDatePicker(with: nil, dateTo: dateTo)
         }
     }
     
@@ -139,6 +157,6 @@ class DateRangeView: UIView {
     }
     
     @IBAction func applyButtonAction(_ sender: UIButton) {
-        delegate?.applyButtonDidPress(with: selectedDateRangeType, dateRangeFrom: dateRangeFrom, dateRangeTo: dateRangeTo)
+        delegate?.applyButtonDidPress(with: dateFrom, dateTo: dateTo)
     }
 }

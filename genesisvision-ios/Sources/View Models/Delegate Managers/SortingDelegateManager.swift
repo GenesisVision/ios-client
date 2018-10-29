@@ -12,91 +12,202 @@ protocol SortingDelegate: class {
     func didSelectSorting()
 }
 
+enum SortingType {
+    case programs, funds, dashboardPrograms, dashboardFunds, trades
+}
+
+class SortingManager: NSObject {
+
+    var sortingType: SortingType = .programs
+    
+    var highToLowValue: Bool = true
+    var selectedIndex: Int = 0
+    
+    var sortingValues: [String]!
+    
+    init(_ sortingType: SortingType) {
+        super.init()
+        
+        self.sortingType = sortingType
+        
+        setup()
+    }
+    
+    // MARK: - Private methods
+    private func getSelectedSortingValue() -> String {
+        return sortingValues[selectedIndex]
+    }
+    
+    private func getProgramsSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        case "level":
+            return highToLowValue ? .byLevelDesc : .byLevelAsc
+        case "balance":
+            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
+        case "drawdown":
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case "end of period":
+            return highToLowValue ? .byEndOfPeriodDesc : .byEndOfPeriodAsc
+        case "trades":
+            return highToLowValue ? .byTradesDesc : .byTradesAsc
+        case "investors":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "title":
+            return highToLowValue ? .byTitleDesc : .byTitleAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        }
+    }
+    
+    private func getFundsSelectedSorting() -> FundsAPI.Sorting_v10FundsGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        case "balance":
+            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
+        case "investors":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "drawdown":
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case "title":
+            return highToLowValue ? .byTitleDesc : .byTitleAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        }
+    }
+    
+    private func getDashboardProgramsSelectedSorting() -> InvestorAPI.Sorting_v10InvestorProgramsGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        case "level":
+            return highToLowValue ? .byLevelDesc : .byLevelAsc
+        case "balance":
+            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
+        case "drawdown":
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case "end of period":
+            return highToLowValue ? .byEndOfPeriodDesc : .byEndOfPeriodAsc
+        case "trades":
+            return highToLowValue ? .byTradesDesc : .byTradesAsc
+        case "investors":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "title":
+            return highToLowValue ? .byTitleDesc : .byTitleAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        }
+    }
+    
+    private func getDashboardFundsSelectedSorting() -> InvestorAPI.Sorting_v10InvestorFundsGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        case "balance":
+            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
+        case "investors":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "drawdown":
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case "title":
+            return highToLowValue ? .byTitleDesc : .byTitleAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        }
+    }
+    
+    
+    private func getTradesSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsByIdTradesGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "date":
+            return highToLowValue ? .byDateDesc : .byDateAsk
+        case "ticket":
+            return highToLowValue ? .byTicketDesc : .byTicketAsk
+        case "symbol":
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsk
+        case "direction":
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsk
+        default:
+            return highToLowValue ? .byDateDesc : .byDateAsk
+        }
+    }
+    
+    private func setup() {
+        switch sortingType {
+        case .programs, .dashboardPrograms:
+            sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title"]
+        case .funds, .dashboardFunds:
+            sortingValues = ["profit", "balance", "investors", "drawdown", "title"]
+        case .trades:
+            sortingValues = ["date", "ticket", "symbol", "direction"]
+        }
+    }
+    
+    // MARK: - Public methods
+    func changeSorting(at index: Int) {
+        selectedIndex = index
+    }
+    
+    func sortTitle() -> String? {
+        return "Sort by " + getSelectedSortingValue()
+    }
+    
+    func getSelectedSorting() -> Any {
+        switch sortingType {
+        case .programs:
+            return getProgramsSelectedSorting()
+        case .funds:
+            return getFundsSelectedSorting()
+        case .dashboardPrograms:
+            return getDashboardProgramsSelectedSorting()
+        case .dashboardFunds:
+            return getDashboardFundsSelectedSorting()
+        case .trades:
+            return getTradesSelectedSorting()
+        }
+    }
+}
+
 final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var tableViewProtocol: SortingDelegate?
     
-    // MARK: - Variables
-    var highToLowValue: Bool = true
-    
-    var sorting: InvestorAPI.Sorting_v10InvestorProgramsGet = Constants.Sorting.dashboardDefault
-    
-    var sortingDescKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitDesc,
-                                                                         .byLevelDesc,
-                                                                         .byBalanceDesc,
-                                                                         .byTradesDesc,
-                                                                         .byEndOfPeriodDesc,
-                                                                         .byTitleDesc]
-    
-    var sortingAscKeys: [InvestorAPI.Sorting_v10InvestorProgramsGet] = [.byProfitAsc,
-                                                                        .byLevelAsc,
-                                                                        .byBalanceAsc,
-                                                                        .byTradesAsc,
-                                                                        .byEndOfPeriodAsc,
-                                                                        .byTitleAsc]
-    
-    var sortingValues: [String] = ["profit",
-                                   "level",
-                                   "balance",
-                                   "orders",
-                                   "end of period",
-                                   "title"]
-    
-    struct SortingList {
-        var sortingValue: String
-        var sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet
-    }
-    
-    var sortingDescList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingDescKeys[index])
-        }
-    }
-    
-    var sortingAscList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingAscKeys[index])
-        }
-    }
+    var sortingManager: SortingManager?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
     }
     
     // MARK: - Init
-    override init() {
+    init(_ sortingType: SortingType) {
         super.init()
-    }
-    
-    // MARK: - Private methods
-    func getSortingValue(sortingKey: InvestorAPI.Sorting_v10InvestorProgramsGet) -> String {
-        guard let index = sortingDescKeys.index(of: sortingKey) else { return "" }
-        return sortingValues[index]
-    }
-    
-    func changeSorting(at index: Int) {
-        sorting = highToLowValue ? sortingDescKeys[index] : sortingAscKeys[index]
-    }
-    
-    func getSelectedSortingIndex() -> Int {
-        return sortingDescKeys.index(of: sorting) ?? 0
-    }
-    
-    func sortTitle() -> String? {
-        return "Sort by " + getSortingValue(sortingKey: sorting)
+        
+        sortingManager = SortingManager(sortingType)
     }
     
     // MARK: - UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        changeSorting(at: indexPath.row)
+        sortingManager?.changeSorting(at: indexPath.row)
         
         tableViewProtocol?.didSelectSorting()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortingValues.count
+        return sortingManager?.sortingValues.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,11 +216,23 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
             return cell
         }
         
-        let title = sortingValues[indexPath.row]
-        let isSelected = indexPath.row == getSelectedSortingIndex()
+        let title = sortingManager?.sortingValues[indexPath.row]
+        let isSelected = indexPath.row == sortingManager?.selectedIndex
         cell.configure(title: title, selected: isSelected)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
     }
 }
 

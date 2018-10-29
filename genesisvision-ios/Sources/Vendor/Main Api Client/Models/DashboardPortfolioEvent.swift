@@ -42,11 +42,12 @@ open class DashboardPortfolioEvent: Codable {
     public var currency: Currency?
     public var type: ModelType?
     public var logo: String?
+    public var color: String?
     public var description: String?
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?, description: String?) {
+    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?) {
         self.assetId = assetId
         self.date = date
         self.title = title
@@ -54,6 +55,7 @@ open class DashboardPortfolioEvent: Codable {
         self.currency = currency
         self.type = type
         self.logo = logo
+        self.color = color
         self.description = description
     }
     
@@ -71,6 +73,7 @@ open class DashboardPortfolioEvent: Codable {
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(description, forKey: "description")
     }
 
@@ -86,6 +89,7 @@ open class DashboardPortfolioEvent: Codable {
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         description = try container.decodeIfPresent(String.self, forKey: "description")
     }
 }

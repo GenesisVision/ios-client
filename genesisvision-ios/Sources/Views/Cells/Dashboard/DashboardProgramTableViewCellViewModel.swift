@@ -17,7 +17,7 @@ struct DashboardProgramTableViewCellViewModel {
 
 extension DashboardProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
-        cell.bottomStackView.isHidden = false
+        cell.dashboardBottomStackView.isHidden = false
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden

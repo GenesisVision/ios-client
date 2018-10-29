@@ -16,22 +16,23 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     var viewModel: ProgramInfoViewModel!
     
     // MARK: - Views
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.isScrollEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
-        
         setup()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tableView.isScrollEnabled = true
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -41,6 +42,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setup() {
         setupUI()
+        setupTableConfiguration()
     }
     
     private func setupUI() {
@@ -49,7 +51,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
+    
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -158,6 +160,21 @@ extension ProgramInfoViewController: UITableViewDelegate, UITableViewDataSource 
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.BaseView.bg
             cell.accessoryView?.backgroundColor = UIColor.BaseView.bg
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+//            print("down")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+        } else {
+//            print("up")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
         }
     }
 }

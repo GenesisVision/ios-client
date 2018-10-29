@@ -110,7 +110,7 @@ class ProfitViewController: BaseViewController {
             
             changeTitleLabel.text = "Change"
             if let changePercent = dashboardChartValue.changePercent {
-                changePercentLabel.text = changePercent.toString() + " %"
+                changePercentLabel.text = changePercent.toString() + "%"
             }
             if let changeValue = dashboardChartValue.changeValue {
                 changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString

@@ -35,6 +35,7 @@ open class ManagerPortfolioEvent: Codable {
         case managerInvest = "ManagerInvest"
         case managerWithdraw = "ManagerWithdraw"
         case assetFinished = "AssetFinished"
+        case entranceFee = "EntranceFee"
     }
     public enum ProgramType: String, Codable { 
         case program = "Program"
@@ -50,12 +51,13 @@ open class ManagerPortfolioEvent: Codable {
     public var type: ModelType?
     public var programType: ProgramType?
     public var logo: String?
+    public var color: String?
     public var description: String?
     public var periodNumber: Int?
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, feeValue: Double?, profitPercent: Double?, currency: Currency?, type: ModelType?, programType: ProgramType?, logo: String?, description: String?, periodNumber: Int?) {
+    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, feeValue: Double?, profitPercent: Double?, currency: Currency?, type: ModelType?, programType: ProgramType?, logo: String?, color: String?, description: String?, periodNumber: Int?) {
         self.assetId = assetId
         self.date = date
         self.title = title
@@ -66,6 +68,7 @@ open class ManagerPortfolioEvent: Codable {
         self.type = type
         self.programType = programType
         self.logo = logo
+        self.color = color
         self.description = description
         self.periodNumber = periodNumber
     }
@@ -87,6 +90,7 @@ open class ManagerPortfolioEvent: Codable {
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(programType, forKey: "programType")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(periodNumber, forKey: "periodNumber")
     }
@@ -106,6 +110,7 @@ open class ManagerPortfolioEvent: Codable {
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         programType = try container.decodeIfPresent(ProgramType.self, forKey: "programType")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         periodNumber = try container.decodeIfPresent(Int.self, forKey: "periodNumber")
     }

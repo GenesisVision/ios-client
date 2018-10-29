@@ -95,7 +95,6 @@ open class InvestorAPI {
   "entryFee" : 1.4658129805029452,
   "availableInWallet" : 0.8008281904610115,
   "rate" : 5.637376656633329,
-  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
   "minInvestmentAmount" : 6.027456183070403,
   "gvCommission" : 5.962133916683182
@@ -287,7 +286,6 @@ open class InvestorAPI {
      - examples: [{contentType=application/json, example={
   "exitFee" : 0.8008281904610115,
   "rate" : 1.4658129805029452,
-  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
   "availableToWithdraw" : 6.027456183070403
 }}]
@@ -327,6 +325,8 @@ open class InvestorAPI {
         case byDrawdownDesc = "ByDrawdownDesc"
         case byInvestorsAsc = "ByInvestorsAsc"
         case byInvestorsDesc = "ByInvestorsDesc"
+        case byNewAsc = "ByNewAsc"
+        case byNewDesc = "ByNewDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
         case byBalanceAsc = "ByBalanceAsc"
@@ -658,6 +658,7 @@ open class InvestorAPI {
     } ]
   },
   "profileHeader" : {
+    "isTwoFactorEnabled" : true,
     "name" : "name",
     "notificationsCount" : 1,
     "kycConfirmed" : true,
@@ -741,6 +742,7 @@ open class InvestorAPI {
     "total" : 7,
     "events" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
+      "color" : "color",
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
       "description" : "description",
@@ -750,6 +752,7 @@ open class InvestorAPI {
       "value" : 6.84685269835264
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
+      "color" : "color",
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
       "description" : "description",
@@ -991,6 +994,7 @@ open class InvestorAPI {
   "total" : 7,
   "events" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "description" : "description",
@@ -1000,6 +1004,7 @@ open class InvestorAPI {
     "value" : 6.84685269835264
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "description" : "description",
@@ -1450,6 +1455,8 @@ open class InvestorAPI {
         case byInvestorsAsc = "ByInvestorsAsc"
         case byInvestorsDesc = "ByInvestorsDesc"
         case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
+        case byNewDesc = "ByNewDesc"
+        case byNewAsc = "ByNewAsc"
         case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"

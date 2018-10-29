@@ -15,7 +15,7 @@ class FundWithdrawViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToWithdrawValueTitleLabel: TitleLabel! {
         didSet {
-            availableToWithdrawValueTitleLabel.text = "You invested in fund"
+            availableToWithdrawValueTitleLabel.text = "Current invested value"
             availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -37,6 +37,7 @@ class FundWithdrawViewController: BaseViewController {
     }
     @IBOutlet var amountToWithdrawGVTLabel: SubtitleLabel! {
         didSet {
+            amountToWithdrawGVTLabel.text = "%"
             amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
@@ -48,6 +49,7 @@ class FundWithdrawViewController: BaseViewController {
     
     @IBOutlet var copyMaxValueButton: UIButton! {
         didSet {
+            copyMaxValueButton.isHidden = true
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
         }
@@ -69,6 +71,8 @@ class FundWithdrawViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
+            numpadView.backgroundColor = UIColor.BaseView.bg
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -124,18 +128,11 @@ class FundWithdrawViewController: BaseViewController {
             self.availableToWithdrawValue = availableToWithdraw
         }
 
-        if let periodEnds = viewModel.fundWithdrawInfo?.periodEnds {
-            self.payoutDayValueLabel.text = periodEnds.onlyDateFormatString
-        }
         
-        if let rate = viewModel.fundWithdrawInfo?.rate {
-            let selectedCurrency = getSelectedCurrency()
-            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue / rate).rounded(withType: currency).toString()
-            self.amountToWithdrawCurrencyLabel.text = "= " + amountToWithdrawValueCurrencyString + " " + selectedCurrency
-        }
+        let amountToWithdrawValueCurrencyString = (availableToWithdrawValue / 100 * amountToWithdrawValue).rounded(withType: .gvt).toString()
+        self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
         
-        let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
+        let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue * 100 <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
         updateNumPadState(value: amountToWithdrawValueLabel.text)
@@ -178,22 +175,19 @@ class FundWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 400
+        bottomSheetController.initializeHeight = 226.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-        let periodEnds = viewModel.fundWithdrawInfo?.periodEnds
-        let periodEndsString = periodEnds?.defaultFormatString ?? ""
-        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
-        
+    
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
-                                                          subtitle: subtitle,
+                                                          subtitle: nil,
                                                           programLogo: nil,
-                                                          programTitle: viewModel.fundWithdrawInfo?.title,
+                                                          programTitle: nil,
                                                           managerName: nil,
                                                           firstTitle: "Amount to withdraw",
                                                           firstValue: amountToWithdrawValueLabel.text,
-                                                          secondTitle: "Payout day",
-                                                          secondValue: viewModel.fundWithdrawInfo?.periodEnds?.onlyDateFormatString,
+                                                          secondTitle: nil,
+                                                          secondValue: nil,
                                                           thirdTitle: nil,
                                                           thirdValue: nil,
                                                           fourthTitle: nil,

@@ -17,58 +17,58 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Statistics"
         
         cell.balanceTitleLabel.text = "Balance"
-        if let amountValue = programProfitChart.balance {
-            cell.balanceValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        if let value = programProfitChart.balance {
+            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"
-        if let amountValue = programProfitChart.investors {
-            cell.investorsCountValueLabel.text = amountValue.toString()
+        if let value = programProfitChart.investors {
+            cell.investorsCountValueLabel.text = value.toString()
         }
         
         cell.startDateTitleLabel.text = "Last period starts"
-        if let amountValue = programProfitChart.lastPeriodStarts {
-            cell.startDateValueLabel.text = amountValue.toString()
+        if let value = programProfitChart.lastPeriodStarts {
+            cell.startDateValueLabel.text = value.toString()
         }
         
         cell.endDateTitleLabel.text = "Last period ends"
-        if let amountValue = programProfitChart.lastPeriodEnds {
-            cell.endDateValueLabel.text = amountValue.toString()
+        if let value = programProfitChart.lastPeriodEnds {
+            cell.endDateValueLabel.text = value.toString()
         }
 
         cell.tradesCountTitleLabel.text = "Trades count"
-        if let amountValue = programProfitChart.trades {
-            cell.tradesCountValueLabel.text = amountValue.toString()
+        if let value = programProfitChart.trades {
+            cell.tradesCountValueLabel.text = value.toString()
         }
         
         cell.tradesSuccessCountTitleLabel.text = "Success trades"
-        if let amountValue = programProfitChart.successTradesPercent {
-            cell.tradesSuccessCountValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.successTradesPercent {
+            cell.tradesSuccessCountValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
         
         cell.profitFactorPercentTitleLabel.text = "Profit factor"
-        if let amountValue = programProfitChart.profitFactor {
-            cell.profitFactorPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.profitFactor {
+            cell.profitFactorPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
-        if let amountValue = programProfitChart.sharpeRatio {
-            cell.sharpeRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.sharpeRatio {
+            cell.sharpeRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
-        if let amountValue = programProfitChart.calmarRatio {
-            cell.calmarRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.calmarRatio {
+            cell.calmarRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
-        if let amountValue = programProfitChart.sortinoRatio {
-            cell.sortinoRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.sortinoRatio {
+            cell.sortinoRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"
-        if let amountValue = programProfitChart.maxDrawdown {
-            cell.drawdownPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = programProfitChart.maxDrawdown {
+            cell.drawdownPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
     }
 }

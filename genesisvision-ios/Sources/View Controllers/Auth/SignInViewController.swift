@@ -58,8 +58,8 @@ class SignInViewController: BaseViewController {
 
         #if DEBUG
         if isInvestorApp {
-            emailTextField.text = "george@genesis.vision"
-            passwordTextField.text = "qwerty"
+            emailTextField.text = "george+1@genesis.vision"
+            passwordTextField.text = "qwerty123"
         } else {
             emailTextField.text = "george+1@genesis.vision"
             passwordTextField.text = "qwerty"

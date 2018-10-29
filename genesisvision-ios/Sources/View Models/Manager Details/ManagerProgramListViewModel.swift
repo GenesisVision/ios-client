@@ -20,9 +20,9 @@ final class ManagerProgramListViewModel {
     var managerId: String!
     var managerProfileDetails: ManagerProfileDetails?
     
-    var title = "Programs".uppercased()
+    var title = "Programs"
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     var programListDelegateManager: ManagerProgramListDelegateManager!
     
     var highToLowValue: Bool = false
@@ -34,9 +34,8 @@ final class ManagerProgramListViewModel {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateRangeType: DateRangeType?
-    var dateRangeFrom: Date?
-    var dateRangeTo: Date?
+    var dateFrom: Date?
+    var dateTo: Date?
     
     var canFetchMoreResults = true
     var skip = 0
@@ -59,6 +58,7 @@ final class ManagerProgramListViewModel {
         self.managerId = managerId
         self.reloadDataProtocol = router.managerProgramsViewController
         
+        sortingDelegateManager = SortingDelegateManager(.programs)
         programListDelegateManager = ManagerProgramListDelegateManager(with: self)
     }
     // MARK: - Public methods
@@ -80,6 +80,12 @@ final class ManagerProgramListViewModel {
                 print(errorType)
                 completion(result)
             }
+        }
+    }
+    
+    func hideHeader(value: Bool = true) {
+        if let parentRouter = router.parentRouter, let managerRouter = parentRouter.parentRouter as? ManagerRouter {
+            managerRouter.managerViewController.hideHeader(value)
         }
     }
 }
@@ -112,12 +118,12 @@ extension ManagerProgramListViewModel {
 // MARK: - Navigation
 extension ManagerProgramListViewModel {
     func logoImageName() -> String? {
-        let imageName = "img_dashboard_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs yet.."
+        return "manager don’t have \nany programs yet.."
     }
     
     func noDataImageName() -> String? {
@@ -125,8 +131,7 @@ extension ManagerProgramListViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
-        return text.uppercased()
+        return "Update"
     }
     
     func showDetail(at indexPath: IndexPath) {
@@ -248,7 +253,8 @@ extension ManagerProgramListViewModel {
 final class ManagerProgramListDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var viewModel: ManagerProgramListViewModel?
-    
+    weak var delegate: DelegateManagerProtocol?
+
     init(with viewModel: ManagerProgramListViewModel) {
         super.init()
         
@@ -274,7 +280,6 @@ final class ManagerProgramListDelegateManager: NSObject, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
     }
     
     // MARK: - UITableViewDataSource
@@ -284,5 +289,22 @@ final class ManagerProgramListDelegateManager: NSObject, UITableViewDelegate, UI
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel?.numberOfSections() ?? 0
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewDidScroll(scrollView)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+            //            print("down")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+        } else {
+            //            print("up")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
+        }
     }
 }

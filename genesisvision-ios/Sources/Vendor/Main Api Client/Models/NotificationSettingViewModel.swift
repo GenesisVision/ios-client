@@ -35,7 +35,7 @@ open class NotificationSettingViewModel: Codable {
     }
     public var id: UUID?
     public var isEnabled: Bool?
-    public var programId: UUID?
+    public var assetId: UUID?
     public var managerId: UUID?
     public var type: ModelType?
     public var conditionType: ConditionType?
@@ -43,10 +43,10 @@ open class NotificationSettingViewModel: Codable {
 
 
     
-    public init(id: UUID?, isEnabled: Bool?, programId: UUID?, managerId: UUID?, type: ModelType?, conditionType: ConditionType?, conditionAmount: Double?) {
+    public init(id: UUID?, isEnabled: Bool?, assetId: UUID?, managerId: UUID?, type: ModelType?, conditionType: ConditionType?, conditionAmount: Double?) {
         self.id = id
         self.isEnabled = isEnabled
-        self.programId = programId
+        self.assetId = assetId
         self.managerId = managerId
         self.type = type
         self.conditionType = conditionType
@@ -62,7 +62,7 @@ open class NotificationSettingViewModel: Codable {
 
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(isEnabled, forKey: "isEnabled")
-        try container.encodeIfPresent(programId, forKey: "programId")
+        try container.encodeIfPresent(assetId, forKey: "assetId")
         try container.encodeIfPresent(managerId, forKey: "managerId")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(conditionType, forKey: "conditionType")
@@ -76,7 +76,7 @@ open class NotificationSettingViewModel: Codable {
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
+        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         conditionType = try container.decodeIfPresent(ConditionType.self, forKey: "conditionType")

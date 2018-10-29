@@ -201,10 +201,10 @@
             <connections>
                 <outlet property="applyButton" destination="AOa-RE-Tty" id="Frc-K2-bgz"/>
                 <outlet property="customButton" destination="zIA-sH-9SR" id="qsC-wY-CoB"/>
-                <outlet property="dateRangeFromTextField" destination="lKy-Nn-mkf" id="B8H-W8-g6Q"/>
-                <outlet property="dateRangeFromTitleLabel" destination="Xrx-PS-E2r" id="aEh-o0-gTk"/>
-                <outlet property="dateRangeToTextField" destination="GfK-zO-ULL" id="kyc-pB-fBd"/>
-                <outlet property="dateRangeToTitleLabel" destination="72r-dl-Y5Z" id="kus-tL-aNq"/>
+                <outlet property="dateFromTextField" destination="lKy-Nn-mkf" id="2s1-8f-oZL"/>
+                <outlet property="dateFromTitleLabel" destination="Xrx-PS-E2r" id="vUm-gV-PNT"/>
+                <outlet property="dateToTextField" destination="GfK-zO-ULL" id="qVl-N3-qGQ"/>
+                <outlet property="dateToTitleLabel" destination="72r-dl-Y5Z" id="RUD-8x-Soc"/>
                 <outlet property="dayButton" destination="DHu-Qx-60P" id="IEp-aZ-bzc"/>
                 <outlet property="monthButton" destination="cdc-Xd-pbs" id="b2e-uF-gvH"/>
                 <outlet property="weekButton" destination="C9D-Su-Fcp" id="a2G-FG-h5y"/>

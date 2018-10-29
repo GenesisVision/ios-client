@@ -30,7 +30,7 @@ class FundViewController: BaseViewController {
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
     var fundHeaderViewController: FundHeaderViewController?
-    var fundDetailsTabmanViewController: FundDetailsTabmanViewController?
+    var fundDetailsTabmanViewController: FundTabmanViewController?
     
     @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
@@ -67,13 +67,13 @@ class FundViewController: BaseViewController {
             segue.identifier == "FundHeaderViewControllerSegue" {
             self.viewModel?.router?.fundHeaderViewController = fundHeaderViewController
             self.fundHeaderViewController = fundHeaderViewController
-        } else if let tabmanViewController = segue.destination as? FundDetailsTabmanViewController,
-            segue.identifier == "FundDetailsTabmanViewControllerSegue" {
+        } else if let tabmanViewController = segue.destination as? FundTabmanViewController,
+            segue.identifier == "FundTabmanViewControllerSegue" {
             
             tabmanViewController.fundInfoViewControllerProtocol = self
             
-            let router = FundDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = FundDetailsViewModel(withRouter: router, fundId: self.viewModel.fundId, tabmanViewModelDelegate: tabmanViewController)
+            let router = FundTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
+            let viewModel = FundTabmanViewModel(withRouter: router, fundId: self.viewModel.fundId, tabmanViewModelDelegate: tabmanViewController)
             viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
             
@@ -159,11 +159,22 @@ class FundViewController: BaseViewController {
             }
         }
     }
+    
+    func hideHeader(_ value: Bool) {
+        let scrollOffset = CGPoint(x: 0.0, y: value ? 94.0 : 0.0)
+        scrollView.setContentOffset(scrollOffset, animated: true)
+        scrollView.isScrollEnabled = !value
+    }
 }
 
 extension FundViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
+        
+//        if scrollView.contentOffset.y >= 94.0 {
+//            scrollView.contentOffset.y = 94.0
+//        }
+        
         let yOffset = scrollView.contentOffset.y + topConstant
         
         let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)

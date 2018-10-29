@@ -19,7 +19,7 @@ final class DashboardProgramListViewModel {
     
     var title = "Programs"
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     var programListDelegateManager: DashboardProgramListDelegateManager!
     
     var highToLowValue: Bool = false
@@ -31,9 +31,9 @@ final class DashboardProgramListViewModel {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateRangeType: DateRangeType?
-    var dateRangeFrom: Date?
-    var dateRangeTo: Date?
+    var dateFrom: Date?
+    var dateTo: Date?
+    var chartPointsCount = 50
     
     var canFetchMoreResults = true
     var skip = 0
@@ -65,6 +65,8 @@ final class DashboardProgramListViewModel {
         self.reloadDataProtocol = router.programListViewController
         
         programListDelegateManager = DashboardProgramListDelegateManager(with: self)
+        sortingDelegateManager = SortingDelegateManager(.dashboardPrograms)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
     
@@ -132,7 +134,7 @@ extension DashboardProgramListViewModel {
 // MARK: - Navigation
 extension DashboardProgramListViewModel {
     func logoImageName() -> String? {
-        let imageName = "img_dashboard_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
@@ -146,7 +148,7 @@ extension DashboardProgramListViewModel {
     
     func noDataButtonTitle() -> String {
         let text = "Browse programs"
-        return text.uppercased()
+        return text
     }
     
     func showDetail(at indexPath: IndexPath) {
@@ -255,7 +257,8 @@ extension DashboardProgramListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        DashboardDataProvider.getProgramList(with: InvestorAPI.Sorting_v10InvestorProgramsGet(rawValue: sortingDelegateManager.sorting.rawValue), completion: { [weak self] (programsList) in
+        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.programsList = programsList

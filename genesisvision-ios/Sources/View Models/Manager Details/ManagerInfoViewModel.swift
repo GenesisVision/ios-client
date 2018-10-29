@@ -18,7 +18,7 @@ final class ManagerInfoViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Info".uppercased()
+    var title: String = "Info"
     
     private var router: ManagerInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?

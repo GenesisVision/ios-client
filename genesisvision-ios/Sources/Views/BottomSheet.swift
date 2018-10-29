@@ -263,7 +263,6 @@ open class BottomSheet {
             }
             
             navigationBar.items = [item]
-            
             containerView.addSubview(navigationBar)
             navigationBar.translatesAutoresizingMaskIntoConstraints = false
             let topConstraint = NSLayoutConstraint(item: navigationBar,

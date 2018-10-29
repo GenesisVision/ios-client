@@ -17,16 +17,18 @@ open class PlatformInfo: Codable {
     public var fundsFacets: [Facet]?
     public var programsInfo: ProgramsInfo?
     public var currencies: [String]?
+    public var platformCurrencies: [PlatformCurrency]?
 
 
     
-    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [Facet]?, fundsFacets: [Facet]?, programsInfo: ProgramsInfo?, currencies: [String]?) {
+    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [Facet]?, fundsFacets: [Facet]?, programsInfo: ProgramsInfo?, currencies: [String]?, platformCurrencies: [PlatformCurrency]?) {
         self.iOSVersion = iOSVersion
         self.androidVersion = androidVersion
         self.programsFacets = programsFacets
         self.fundsFacets = fundsFacets
         self.programsInfo = programsInfo
         self.currencies = currencies
+        self.platformCurrencies = platformCurrencies
     }
     
 
@@ -42,6 +44,7 @@ open class PlatformInfo: Codable {
         try container.encodeIfPresent(fundsFacets, forKey: "fundsFacets")
         try container.encodeIfPresent(programsInfo, forKey: "programsInfo")
         try container.encodeIfPresent(currencies, forKey: "currencies")
+        try container.encodeIfPresent(platformCurrencies, forKey: "platformCurrencies")
     }
 
     // Decodable protocol methods
@@ -55,6 +58,7 @@ open class PlatformInfo: Codable {
         fundsFacets = try container.decodeIfPresent([Facet].self, forKey: "fundsFacets")
         programsInfo = try container.decodeIfPresent(ProgramsInfo.self, forKey: "programsInfo")
         currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
+        platformCurrencies = try container.decodeIfPresent([PlatformCurrency].self, forKey: "platformCurrencies")
     }
 }
 

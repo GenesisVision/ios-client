@@ -132,7 +132,7 @@ class PortfolioViewController: BaseViewController {
             
             changeTitleLabel.text = "Change"
             if let changePercent = dashboardChartValue.changePercent {
-                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + " %"
+                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
             }
             if let changeValue = dashboardChartValue.changeValue {
                 changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString

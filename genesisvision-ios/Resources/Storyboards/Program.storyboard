@@ -989,7 +989,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJP-G5-69Z">
                                         <rect key="frame" x="0.0" y="256" width="414" height="774"/>
                                         <connections>
-                                            <segue destination="zVm-9p-YBk" kind="embed" identifier="ProgramDetailsTabmanViewControllerSegue" id="zzZ-2A-SvL"/>
+                                            <segue destination="zVm-9p-YBk" kind="embed" identifier="ProgramTabmanViewControllerSegue" id="zzZ-2A-SvL"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -1026,10 +1026,10 @@
             </objects>
             <point key="canvasLocation" x="1665.217391304348" y="1862.9464285714284"/>
         </scene>
-        <!--Program Details Tabman View Controller-->
+        <!--Program Tabman View Controller-->
         <scene sceneID="k3p-Re-RlL">
             <objects>
-                <viewController storyboardIdentifier="ProgramDetailsTabmanViewController" id="zVm-9p-YBk" customClass="ProgramDetailsTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgramTabmanViewController" id="zVm-9p-YBk" customClass="ProgramTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xsW-TK-J5p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1202,7 +1202,7 @@
     <resources>
         <image name="img_exit_full_screen" width="44" height="44"/>
         <image name="img_invested_icon" width="20" height="11"/>
-        <image name="img_numpad_delete" width="24" height="18"/>
+        <image name="img_numpad_delete" width="26" height="18"/>
         <image name="img_program_level_bg" width="55" height="161"/>
     </resources>
 </document>

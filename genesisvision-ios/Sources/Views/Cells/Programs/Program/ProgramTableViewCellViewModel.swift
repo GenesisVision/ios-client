@@ -17,7 +17,6 @@ struct ProgramTableViewCellViewModel {
 extension ProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
         
-        cell.bottomStackView.isHidden = true
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden
@@ -105,6 +104,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         if let profitPercent = program.statistic?.profitPercent {
             cell.profitPercentLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
+            cell.profitPercentLabel.textColor = profitPercent >= 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         if let profitValue = program.statistic?.profitValue {

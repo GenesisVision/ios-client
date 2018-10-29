@@ -12,11 +12,12 @@ final class DashboardViewModel {
     // MARK: - Variables
     var title = "Dashboard"
     
-    var sortingDelegateManager = SortingDelegateManager()
     var inRequestsDelegateManager = InRequestsDelegateManager()
     var isLoading: Bool = false
     
-    var highToLowValue: Bool = false
+    var skip = 0
+    var eventsTake = 10
+    var requestsTake = 50
     
     var router: DashboardRouter!
     var dashboard: DashboardSummary? {
@@ -40,24 +41,8 @@ final class DashboardViewModel {
     var chartsTabmanViewModel: ChartsTabmanViewModel?
     var eventListViewModel: EventListViewModel?
     
-    var dateRangeType: DateRangeType = .day {
-        didSet {
-            switch dateRangeType {
-            case .custom:
-                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
-                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
-            default:
-                let calendar = Calendar.current
-                let hour = calendar.component(.hour, from: dateRangeTo)
-                let min = calendar.component(.minute, from: dateRangeTo)
-                let sec = calendar.component(.second, from: dateRangeTo)
-                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
-            }
-        }
-    }
-    
-    var dateRangeFrom: Date = Date().previousDate()
-    var dateRangeTo: Date = Date()
+    var dateFrom: Date?
+    var dateTo: Date?
     
     var bottomViewType: BottomViewType {
         return .sort
@@ -91,7 +76,7 @@ final class DashboardViewModel {
 // MARK: - Navigation
 extension DashboardViewModel {
     func logoImageName() -> String? {
-        let imageName = "img_dashboard_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
@@ -105,7 +90,7 @@ extension DashboardViewModel {
     
     func noDataButtonTitle() -> String {
         let text = "Browse programs"
-        return text.uppercased()
+        return text
     }
     
     func showProgramList() {
@@ -121,21 +106,34 @@ extension DashboardViewModel {
 extension DashboardViewModel {
     // MARK: - Public methods
     func refresh(completion: @escaping CompletionBlock) {
+        updatePlatformInfo()
+        updateList()
         fetch(completion)
     }
     
     // MARK: - Private methods
+    private func updatePlatformInfo() {
+        PlatformManager.getPlatformInfo(completion: { (model) in })
+    }
+    
+    private func updateList() {
+        router.programListViewController?.viewModel?.dateFrom = dateFrom
+        router.programListViewController?.viewModel?.dateTo = dateTo
+        router.programListViewController?.fetch()
+        
+        router.fundListViewController?.viewModel?.dateFrom = dateFrom
+        router.fundListViewController?.viewModel?.dateTo = dateTo
+        router.fundListViewController?.fetch()
+    }
+    
     private func fetch(_ completion: @escaping CompletionBlock) {
         isLoading = true
         
-        let requestsSkip = 0
-        let requestsTake = Constants.Api.take
         let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
-        let balancePoints = 10
-        let programsPoints = 5
-        let eventsTake = 10
+        let balancePoints = 30
+        let programsPoints = 7
         
-        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateRangeFrom, to: dateRangeTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
+        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateFrom, to: dateTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: skip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
             self?.dashboard = dashboard
             

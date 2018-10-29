@@ -7,6 +7,7 @@
 //
 
 import UIKit.UITableViewHeaderFooterView
+
 enum ListType {
     case programList
     case fundList
@@ -19,7 +20,7 @@ protocol ListViewModelProtocol {
     var searchText: String { get set }
     var title: String { get }
 
-    var sortingDelegateManager: SortingDelegateManager { get }
+    var sortingDelegateManager: SortingDelegateManager! { get }
     
     var sections: [SectionType] { get }
     var bottomViewType: BottomViewType { get } 
@@ -29,20 +30,17 @@ protocol ListViewModelProtocol {
     var canFetchMoreResults: Bool { get set }
     var dataType: DataType { get }
     var count: String { get }
-    var equityChartLength: Int { get }
+    var chartPointsCount: Int { get }
     
-    var headerTitle: String { get }
-    
-    var highToLowValue: Bool { get set }
-    var dateRangeType: DateRangeType { get set }
-    var dateRangeFrom: Date { get set }
-    var dateRangeTo: Date { get set }
+    var dateFrom: Date? { get set }
+    var dateTo: Date? { get set }
+
+    var mask: String? { get set }
+    var isFavorite: Bool { get set }
     
     var skip: Int { get set }
     var take: Int { get set }
     var totalCount: Int { get set }
-    
-    var filter: ProgramsFilter? { get }
     
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
@@ -122,8 +120,6 @@ extension ListViewModelProtocol {
                 
                 return router.getFundDetailsViewController(with: fundId.uuidString)
         }
-        
-        return nil
     }
     
     // MARK: - TableView
@@ -221,7 +217,7 @@ extension ListViewModelProtocol {
     
     // MARK: - Nodata
     func logoImageName() -> String? {
-        let imageName = "img_program_list_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
@@ -234,7 +230,7 @@ extension ListViewModelProtocol {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "update".uppercased()
+        let text = "Update"
         return text
     }
     

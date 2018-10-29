@@ -32,7 +32,7 @@ open class NotificationViewModel: Codable {
     public var text: String?
     public var date: Date?
     public var type: ModelType?
-    public var programId: UUID?
+    public var assetId: UUID?
     public var managerId: UUID?
     public var logo: String?
     public var url: String?
@@ -40,12 +40,12 @@ open class NotificationViewModel: Codable {
 
 
     
-    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, programId: UUID?, managerId: UUID?, logo: String?, url: String?, isUnread: Bool?) {
+    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, isUnread: Bool?) {
         self.id = id
         self.text = text
         self.date = date
         self.type = type
-        self.programId = programId
+        self.assetId = assetId
         self.managerId = managerId
         self.logo = logo
         self.url = url
@@ -63,7 +63,7 @@ open class NotificationViewModel: Codable {
         try container.encodeIfPresent(text, forKey: "text")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(programId, forKey: "programId")
+        try container.encodeIfPresent(assetId, forKey: "assetId")
         try container.encodeIfPresent(managerId, forKey: "managerId")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(url, forKey: "url")
@@ -79,7 +79,7 @@ open class NotificationViewModel: Codable {
         text = try container.decodeIfPresent(String.self, forKey: "text")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
+        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")

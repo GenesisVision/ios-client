@@ -29,7 +29,7 @@ class ManagerViewController: BaseViewController {
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
     var managerHeaderViewController: ManagerHeaderViewController?
-    var managerDetailsTabmanViewController: ManagerDetailsTabmanViewController?
+    var managerDetailsTabmanViewController: ManagerTabmanViewController?
     
     @IBOutlet weak var managerDetailsView: UIView!
     
@@ -62,11 +62,11 @@ class ManagerViewController: BaseViewController {
             segue.identifier == "ManagerHeaderViewControllerSegue" {
             self.viewModel?.router?.managerHeaderViewController = managerHeaderViewController
             self.managerHeaderViewController = managerHeaderViewController
-        } else if let tabmanViewController = segue.destination as? ManagerDetailsTabmanViewController,
-            segue.identifier == "ManagerDetailsTabmanViewControllerSegue" {
+        } else if let tabmanViewController = segue.destination as? ManagerTabmanViewController,
+            segue.identifier == "ManagerTabmanViewControllerSegue" {
             
-            let router = ManagerDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = ManagerDetailsViewModel(withRouter: router, managerId: self.viewModel.managerId, tabmanViewModelDelegate: tabmanViewController)
+            let router = ManagerTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
+            let viewModel = ManagerTabmanViewModel(withRouter: router, managerId: self.viewModel.managerId, tabmanViewModelDelegate: tabmanViewController)
             tabmanViewController.viewModel = viewModel
             
             self.viewModel?.router?.managerDetailsTabmanViewController = tabmanViewController
@@ -111,11 +111,23 @@ class ManagerViewController: BaseViewController {
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
+    
+    // MARK: - Public methods
+    func hideHeader(_ value: Bool) {
+        let scrollOffset = CGPoint(x: 0.0, y: value ? 94.0 : 0.0)
+        scrollView.setContentOffset(scrollOffset, animated: true)
+        scrollView.isScrollEnabled = !value
+    }
 }
 
 extension ManagerViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
+        
+//        if scrollView.contentOffset.y >= 94.0 {
+//            scrollView.contentOffset.y = 94.0
+//        }
+        
         let yOffset = scrollView.contentOffset.y + topConstant
         
         let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)

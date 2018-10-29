@@ -58,4 +58,14 @@ final class ProgramViewModel {
         }
     }
     
+    func setScrollEnable(_ value: Bool) {
+//        if let viewModel = router.programDetailsTabmanViewController?.viewModel {
+//            for controller in viewModel.viewControllers {
+//                if let vc = controller as? BaseViewControllerWithTableView {
+//                    vc.tableView?.isScrollEnabled = value
+//                }
+//            }
+//        }
+    }
+    
 }

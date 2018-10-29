@@ -21,7 +21,7 @@ final class PasscodeViewModel {
     
     var createText = "Think of a passcode to enter the application"
     
-    var enterText = "Enter passcode or use Touch ID"
+    var enterText = "Enter passcode"
     var enterAgainText = "Enter passcode again"
     var enableText = "Enter Passcode to enable it"
     var disableText = "Enter passcode to disable it"

@@ -125,8 +125,8 @@ struct AppearanceController {
         UserDefaults.standard.synchronize()
         
         // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
-//        let sharedApplication = UIApplication.shared
-//        sharedApplication.delegate?.window??.tintColor = UIColor.primary
+        let sharedApplication = UIApplication.shared
+        sharedApplication.delegate?.window??.tintColor = UIColor.primary
         
         UINavigationBar.appearance().barStyle = theme.barStyle
         

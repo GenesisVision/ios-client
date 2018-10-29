@@ -33,36 +33,39 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             cell.amountCurrencyLabel.isHidden = true
         }
         
-        
-        cell.changeTitleLabel.text = "Change"
-        
-        if let changePercent = fundProfitChart.profitChangePercent {
-            cell.changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + " %"
-        } else {
-            cell.changePercentLabel.isHidden = true
-        }
-        
-        if let changeValue = fundProfitChart.timeframeGvtProfit {
-            cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        } else {
-            cell.changeValueLabel.isHidden = true
-        }
-        
-        if let changeCurrency = fundProfitChart.timeframeUsdProfit {
-            let currencyType: CurrencyType = .usd
-            
-            cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-        } else {
-            cell.changeCurrencyLabel.isHidden = true
-        }
-        
         if let equityChart = fundProfitChart.equityChart, equityChart.count > 0 {
             cell.chartViewHeightConstraint.constant = 150.0
             cell.chartView.setup(lineChartData: equityChart)
             cell.chartView.isHidden = false
+            
+            cell.changeTitleLabel.text = "Change"
+            if let firstValue = equityChart.first?.value, let lastValue = equityChart.last?.value {
+                let changePercent = lastValue / firstValue * 100
+                cell.changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
+            }
+            
+            if let changeValue = fundProfitChart.timeframeGvtProfit {
+                cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            } else {
+                cell.changeValueLabel.isHidden = true
+            }
+            
+            if let changeCurrency = fundProfitChart.timeframeUsdProfit {
+                let currencyType: CurrencyType = .usd
+                
+                cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            } else {
+                cell.changeCurrencyLabel.isHidden = true
+            }
+            
         } else {
             cell.chartViewHeightConstraint.constant = 0.0
             cell.chartView.isHidden = true
+            
+            cell.changeTitleLabel.isHidden = true
+            cell.changePercentLabel.isHidden = true
+            cell.changeValueLabel.isHidden = true
+            cell.changeCurrencyLabel.isHidden = true
         }
     }
 }

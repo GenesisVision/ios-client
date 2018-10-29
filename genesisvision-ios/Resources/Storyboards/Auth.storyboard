@@ -1020,7 +1020,7 @@ your email.</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-BS-eVQ">
                                                         <rect key="frame" x="0.0" y="80" width="260" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I certify that I am not a resident or citizen of USA" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c86-4P-39g" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I certify that I am not a resident or citizen of the USA" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c86-4P-39g" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1523,7 +1523,7 @@ your email.</string>
                                                                 <rect key="frame" x="0.0" y="23" width="260" height="24"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             </textField>
                                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2h-Pm-59m">
                                                                 <rect key="frame" x="0.0" y="55" width="260" height="1"/>
@@ -1634,7 +1634,7 @@ your email.</string>
         <image name="img_checkbox_selected_icon" width="24" height="24"/>
         <image name="img_checkbox_unselected_icon" width="24" height="24"/>
         <image name="img_google_authenticator" width="64" height="64"/>
-        <image name="img_numpad_delete" width="24" height="18"/>
+        <image name="img_numpad_delete" width="26" height="18"/>
         <image name="img_splash_logo_icon" width="100" height="118"/>
         <image name="img_splash_top_bg" width="375" height="155"/>
     </resources>

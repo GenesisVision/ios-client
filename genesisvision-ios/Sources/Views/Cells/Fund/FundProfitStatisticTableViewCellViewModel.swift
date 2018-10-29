@@ -17,51 +17,43 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Statistics"
         
         cell.balanceTitleLabel.text = "Balance"
-        if let amountValue = fundProfitChart.balance {
-            cell.balanceValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        if let value = fundProfitChart.balance {
+            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"
-        if let amountValue = fundProfitChart.investors {
-            cell.investorsCountValueLabel.text = amountValue.toString()
+        if let value = fundProfitChart.investors {
+            cell.investorsCountValueLabel.text = value.toString()
         }
         
-        cell.startDateTitleLabel.text = "Last period starts"
-        if let amountValue = fundProfitChart.lastPeriodStarts {
-            cell.startDateValueLabel.text = amountValue.toString()
+        cell.startDateTitleLabel.text = "Start date"
+        if let value = fundProfitChart.creationDate {
+            cell.startDateValueLabel.text = value.toString()
         }
         
-        cell.endDateTitleLabel.text = "Last period ends"
-        if let amountValue = fundProfitChart.lastPeriodEnds {
-            cell.endDateValueLabel.text = amountValue.toString()
-        }
-
-        cell.tradesCountTitleLabel.text = "Rebalances"
-        if let amountValue = fundProfitChart.rebalances {
-            cell.tradesCountValueLabel.text = amountValue.toString()
-        }
-        
+        cell.endDateStackView.isHidden = true
+        cell.tradesCountStackView.isHidden = true
         cell.tradesSuccessCountStackView.isHidden = true
         cell.profitFactorPercentStackView.isHidden = true
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
-        if let amountValue = fundProfitChart.sharpeRatio {
-            cell.sharpeRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = fundProfitChart.sharpeRatio {
+            cell.sharpeRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
-        if let amountValue = fundProfitChart.calmarRatio {
-            cell.calmarRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = fundProfitChart.calmarRatio {
+            cell.calmarRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
-        if let amountValue = fundProfitChart.sortinoRatio {
-            cell.sortinoRatioPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = fundProfitChart.sortinoRatio {
+            cell.sortinoRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"
-        if let amountValue = fundProfitChart.maxDrawdown {
-            cell.drawdownPercentValueLabel.text = amountValue.rounded(withType: .undefined).toString() + " %"
+        if let value = fundProfitChart.maxDrawdown {
+            cell.drawdownPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
         }
     }
 }

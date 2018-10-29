@@ -30,7 +30,7 @@ final class WalletDepositViewModel {
     
     var walletsInfo: WalletsInfo? {
         didSet {
-            self.selectedWallet = walletsInfo?.wallets?.first
+            self.selectedWallet = walletsInfo?.wallets?.first(where: { $0.currency == .gvt })
         }
     }
     var selectedWallet: WalletInfo? {

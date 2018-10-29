@@ -8,10 +8,7 @@
 
 class RateDataProvider: DataProvider {
     // MARK: - Public methods
-    static func getRates(completion: @escaping (_ ratesModel: RatesModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let from = ["GVT"]
-        let to = ["ETH", "BTC", "ADA", "USDT", "XRP", "BCH", "LTC", "DOGE", "USD", "EUR"]
-//        let to = ["ETH", "BTC", "ADA", "USD", "EUR"]
+    static func getRates(from: [String]? = nil, to: [String]? = nil, completion: @escaping (_ ratesModel: RatesModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         RateAPI.v10RateGet(from: from, to: to) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

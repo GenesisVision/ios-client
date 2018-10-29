@@ -17,7 +17,7 @@ final class DashboardFundListViewModel {
     // MARK: - Variables
     var title = "Funds"
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     var fundListDelegateManager: DashboardFundListDelegateManager!
     
     var activeFunds: Bool = true
@@ -30,9 +30,8 @@ final class DashboardFundListViewModel {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateRangeType: DateRangeType?
-    var dateRangeFrom: Date?
-    var dateRangeTo: Date?
+    var dateFrom: Date?
+    var dateTo: Date?
     
     var canFetchMoreResults = true
     var skip = 0
@@ -44,7 +43,7 @@ final class DashboardFundListViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .sort
+        return .dateRange
     }
     
     var viewModels = [CellViewAnyModel]() {
@@ -64,6 +63,7 @@ final class DashboardFundListViewModel {
         self.reloadDataProtocol = router.fundListViewController
         
         fundListDelegateManager = DashboardFundListDelegateManager(with: self)
+        sortingDelegateManager = SortingDelegateManager(.funds)
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
     
@@ -131,7 +131,7 @@ extension DashboardFundListViewModel {
 // MARK: - Navigation
 extension DashboardFundListViewModel {
     func logoImageName() -> String? {
-        let imageName = "img_dashboard_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
@@ -145,7 +145,7 @@ extension DashboardFundListViewModel {
     
     func noDataButtonTitle() -> String {
         let text = "Browse funds"
-        return text.uppercased()
+        return text
     }
     
     func showDetail(at indexPath: IndexPath) {
@@ -232,18 +232,15 @@ extension DashboardFundListViewModel {
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
-//        guard let model = model(at: indexPath) as? DashboardFundTableViewCellViewModel else {
-//            return nil
-//        }
-//
-//        let fund = model.fund
-//        guard let fundId = fund.id else { return nil}
-//
-//        return router.getDetailsViewController(with: fundId.uuidString)
-        
-        
-        return nil
+    func getDetailsViewController(with indexPath: IndexPath) -> FundViewController? {
+        guard let model = model(at: indexPath) as? DashboardFundTableViewCellViewModel else {
+            return nil
+        }
+
+        let fund = model.fund
+        guard let fundId = fund.id else { return nil}
+
+        return router.getFundDetailsViewController(with: fundId.uuidString)
     }
     
     // MARK: - Private methods
@@ -257,7 +254,8 @@ extension DashboardFundListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
 
-        DashboardDataProvider.getFundList(with: InvestorAPI.Sorting_v10InvestorFundsGet(rawValue: sortingDelegateManager.sorting.rawValue), completion: { [weak self] (fundsList) in
+        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundsList) in
             guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.fundList = fundsList

@@ -17,6 +17,8 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
+            numpadView.backgroundColor = UIColor.BaseView.bg
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -164,11 +166,11 @@ class ProgramInvestViewController: BaseViewController {
             self.availableToInvestValue = availableToInvest
         }
         
-        if let rate = viewModel.programInvestInfo?.rate {
-            let selectedCurrency = getSelectedCurrency()
-            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
-        }
+//        if let rate = viewModel.programInvestInfo?.rate {
+//            let selectedCurrency = getSelectedCurrency()
+//            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
+//            let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
+//        }
         
         let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue
         investButton.setEnabled(investButtonEnabled)
@@ -216,7 +218,7 @@ class ProgramInvestViewController: BaseViewController {
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
                                                           subtitle: subtitle,
                                                           programLogo: nil,
-                                                          programTitle: viewModel.programInvestInfo?.title,
+                                                          programTitle: nil,
                                                           managerName: nil,
                                                           firstTitle: amountToInvestTitleLabel.text,
                                                           firstValue: firstValue,

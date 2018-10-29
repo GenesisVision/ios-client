@@ -16,7 +16,7 @@ class FundRouter: Router {
     var fundViewController: FundViewController!
     
     var fundHeaderViewController: FundHeaderViewController?
-    var fundDetailsTabmanViewController: FundDetailsTabmanViewController?
+    var fundDetailsTabmanViewController: FundTabmanViewController?
     
     var fundBalanceViewController: FundBalanceViewController?
     var fundProfitViewController: FundProfitViewController?

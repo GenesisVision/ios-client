@@ -17,7 +17,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     weak var currencyDelegate: CurrencyDelegateManagerProtocol?
     
     var tableView: UITableView?
-    var rates: [RateItem] = []
+    var currencies: [PlatformCurrency] = []
     
     var selectedRate: RateItem?
     var selectedIndex: Int = 0
@@ -29,25 +29,26 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     // MARK: - Lifecycle
     override init() {
         super.init()
-        
-        AuthManager.getSavedRates { (rates) in
-            guard let rates = rates else { return }
-            self.rates = rates
-            
+    }
+    
+    func loadCurrencies() {
+        if let platformCurrencies = PlatformManager.platformInfo?.platformCurrencies {
+            self.currencies = platformCurrencies
             self.updateSelectedIndex()
+            self.tableView?.reloadData()
         }
     }
     
     func updateSelectedIndex() {
         let selectedCurrency = getSelectedCurrency()
-        self.selectedIndex = rates.firstIndex(where: { return $0.currency?.rawValue == selectedCurrency } ) ?? 0
+        self.selectedIndex = currencies.firstIndex(where: { return $0.name == selectedCurrency } ) ?? 0
     }
     
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let selectedCurrency = rates[indexPath.row].currency?.rawValue {
+        if let selectedCurrency = currencies[indexPath.row].name {
             updateSelectedCurrency(selectedCurrency)
         }
         
@@ -55,7 +56,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rates.count
+        return currencies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,9 +66,9 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         }
         
         let isSelected = indexPath.row == selectedIndex
-        let rate = rates[indexPath.row]
-        let currencyValue = rate.currency?.rawValue ?? ""
-        let currencyRate = rate.rate ?? 0.0
+        let currency = currencies[indexPath.row]
+        let currencyValue = currency.name ?? ""
+        let currencyRate = currency.rateToGvt ?? 0.0
         let subtitle = "1 GVT = \(currencyRate) " + currencyValue
         
         cell.configure(title: currencyValue, subtitle: subtitle, selected: isSelected)

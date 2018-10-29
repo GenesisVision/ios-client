@@ -15,10 +15,10 @@ final class ProgramProfitViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Profit".uppercased()
+    var title: String = "Profit"
     var programId: String?
     
-    var router: Router!
+    var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var chartViewProtocol: ChartViewProtocol?
     
@@ -32,7 +32,7 @@ final class ProgramProfitViewModel {
     private var programProfitStatisticTableViewCellViewModel: ProgramProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: Router, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
@@ -45,6 +45,10 @@ final class ProgramProfitViewModel {
             print("selectChartSimple")
             print(result)
         }
+    }
+    
+    func hideHeader(value: Bool = true) {
+        router.programViewController.hideHeader(value)
     }
 }
 

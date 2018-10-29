@@ -20,7 +20,7 @@ final class FundInfoViewModel {
     }
 
     // MARK: - Variables
-    var title: String = "Info".uppercased()
+    var title: String = "Info"
     
     private var router: FundInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -35,16 +35,11 @@ final class FundInfoViewModel {
     private var equityChart: [ChartSimple]?
     public private(set) var fundDetailsFull: FundDetailsFull? {
         didSet {
-//            if let availableInvestment = fundDetailsFull?.availableInvestment {
-//                self.availableInvestment = availableInvestment
-//            }
-            
-            if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested, isInvested {
+//            if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested, isInvested {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
                 }
-                
-            }
+//            }
         }
     }
     
@@ -214,10 +209,6 @@ extension FundInfoViewModel: YourInvestmentProtocol {
 
 extension FundInfoViewModel: InvestNowProtocol {
     func didTapInvestButton() {
-//        if availableInvestment > 0 {
-//            invest()
-//        } else if let topViewController = router.topViewController() {
-//            topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
-//        }
+        invest()
     }
 }

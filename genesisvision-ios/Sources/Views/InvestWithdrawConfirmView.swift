@@ -67,6 +67,8 @@ class InvestWithdrawConfirmView: UIView {
         }
     }
     
+    @IBOutlet weak var assetStackView: UIStackView!
+    
     @IBOutlet weak var firstTitleLabel: SubtitleLabel! {
         didSet {
             firstTitleLabel.font = UIFont.getFont(.regular, size: 12.0)
@@ -137,23 +139,53 @@ class InvestWithdrawConfirmView: UIView {
     
     // MARK: - Public Methods
     func configure(model: InvestWithdrawConfirmModel) {
-        titleLabel.text = model.title
-        subtitleLabel.text = model.subtitle
+        if let text = model.title {
+            titleLabel.text = text
+        } else {
+            titleLabel.isHidden = true
+        }
         
-        titleLabel.text = model.programTitle
-        managerNameLabel.text = model.managerName
+        if let text = model.subtitle {
+            subtitleLabel.text = text
+        } else {
+            subtitleLabel.isHidden = true
+        }
         
-        firstTitleLabel.text = model.firstTitle
-        firstValueLabel.text = model.firstValue
+        if let programTitle = model.programTitle, let managerName = model.managerName {
+            assetTitleLabel.text = programTitle
+            managerNameLabel.text = managerName
+        } else {
+            assetStackView.isHidden = true
+        }
         
-        secondTitleLabel.text = model.secondTitle
-        secondValueLabel.text = model.secondValue
-    
-        thirdTitleLabel.text = model.thirdTitle
-        thirdValueLabel.text = model.thirdValue
         
-        fourthTitleLabel.text = model.fourthTitle
-        fourthValueLabel.text = model.fourthValue
+        if let title = model.firstTitle, let value = model.firstValue {
+            firstTitleLabel.text = title
+            firstValueLabel.text = value
+        } else {
+            firstStackView.isHidden = true
+        }
+        
+        if let title = model.secondTitle, let value = model.secondValue {
+            secondTitleLabel.text = title
+            secondValueLabel.text = value
+        } else {
+            secondStackView.isHidden = true
+        }
+        
+        if let title = model.thirdTitle, let value = model.thirdValue {
+            thirdTitleLabel.text = title
+            thirdValueLabel.text = value
+        } else {
+            thirdStackView.isHidden = true
+        }
+        
+        if let title = model.fourthTitle, let value = model.fourthValue {
+            fourthTitleLabel.text = title
+            fourthValueLabel.text = value
+        } else {
+            fourthStackView.isHidden = true
+        }
         
         programLogoImageView.profilePhotoImageView.image = model.programLogo
     }

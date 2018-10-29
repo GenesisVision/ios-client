@@ -12,44 +12,6 @@ enum ProgramListViewState {
     case programList, programListWithSignIn
 }
 
-struct ProgramsFilter {
-    public enum ProfitTotalChange: String, Codable {
-        case unchanged = "Unchanged"
-        case up = "Up"
-        case down = "Down"
-    }
-    
-    var managerId: UUID?
-    var brokerId: UUID?
-    var brokerTradeServerId: UUID?
-    var investMaxAmountFrom: Double?
-    var investMaxAmountTo: Double?
-    var sorting: ProgramsAPI.Sorting_v10ProgramsGet?
-    var name: String?
-    var levelMin: Int?
-    var levelMax: Int?
-    var balanceUsdMin: Double?
-    var balanceUsdMax: Double?
-    var profitAvgMin: Double?
-    var profitAvgMax: Double?
-    var profitTotalMin: Double?
-    var profitTotalMax: Double?
-    var profitTotalPercentMin: Double?
-    var profitTotalPercentMax: Double?
-    var profitAvgPercentMin: Double?
-    var profitAvgPercentMax: Double?
-    var profitTotalChange: ProfitTotalChange?
-    var periodMin: Int?
-    var periodMax: Int?
-    var showActivePrograms: Bool?
-    var equityChartLength: Int?
-    var showMyFavorites: Bool?
-    var roundNumber: Int?
-    var skip: Int?
-    var take: Int?
-
-}
-
 final class ProgramListViewModel: ListViewModelProtocol {
     var type: ListType = .programList
     
@@ -57,7 +19,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var title: String = "Programs"
     var roundNumber: Int = 1
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     
     internal var sections: [SectionType] = [.assetList]
     
@@ -67,12 +29,15 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var equityChartLength = Constants.Api.equityChartLength
-    var skip = 0 {
-        didSet {
-            filter?.skip = skip
-        }
-    }
+    var chartPointsCount = Constants.Api.equityChartLength
+    
+    var levelMin = 1
+    var levelMax = 7
+    
+    var mask: String?
+    var isFavorite: Bool = false
+    
+    var skip = 0
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
@@ -82,36 +47,15 @@ final class ProgramListViewModel: ListViewModelProtocol {
 
     private var programsList: ProgramsList?
     
-    var highToLowValue: Bool = false
-    
-    var dateRangeType: DateRangeType = .day {
-        didSet {
-            switch dateRangeType {
-            case .custom:
-                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
-                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
-            default:
-                let calendar = Calendar.current
-                let hour = calendar.component(.hour, from: dateRangeTo)
-                let min = calendar.component(.minute, from: dateRangeTo)
-                let sec = calendar.component(.second, from: dateRangeTo)
-                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
-            }
-        }
-    }
-    var dateRangeFrom: Date = Date().previousDate()
-    var dateRangeTo: Date = Date()
-    
-    var headerTitle = "PROGRAMS TO INVEST IN"
+    var dateFrom: Date?
+    var dateTo: Date?
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithFilter : .filter
+        return signInButtonEnable ? .signIn : .dateRange
     }
-    
-    var filter: ProgramsFilter?
     
     var searchText = "" {
         didSet {
-            filter?.name = searchText
+            mask = searchText
         }
     }
     var viewModels = [CellViewAnyModel]()
@@ -121,36 +65,8 @@ final class ProgramListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = ProgramsFilter(managerId: nil,
-                                brokerId: nil,
-                                brokerTradeServerId: nil,
-                                investMaxAmountFrom: nil,
-                                investMaxAmountTo: nil,
-                                sorting: nil,//TODO: sortingDelegateManager.sorting,
-                                name: searchText,
-                                levelMin: nil,
-                                levelMax: nil,
-                                balanceUsdMin: nil,
-                                balanceUsdMax: nil,
-                                profitAvgMin: nil,
-                                profitAvgMax: nil,
-                                profitTotalMin: nil,
-                                profitTotalMax: nil,
-                                profitTotalPercentMin: nil,
-                                profitTotalPercentMax: nil,
-                                profitAvgPercentMin: nil,
-                                profitAvgPercentMax: nil,
-                                profitTotalChange: nil,
-                                periodMin: nil,
-                                periodMax: nil,
-                                showActivePrograms: nil,
-                                equityChartLength: equityChartLength,
-                                showMyFavorites: nil,
-                                roundNumber: nil,
-                                skip: skip,
-                                take: take)
-
         state = isLogin() ? .programList : .programListWithSignIn
+        sortingDelegateManager = SortingDelegateManager(.programs)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -160,6 +76,10 @@ final class ProgramListViewModel: ListViewModelProtocol {
     }
     
     // MARK: - Public methods
+    func noDataText() -> String {
+        return "You do not have any programs yet"
+    }
+    
     func isLogin() -> Bool {
         return AuthManager.isLogin()
     }
@@ -251,7 +171,10 @@ extension ProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            ProgramsDataProvider.get(levelMin: nil, levelMax: nil, profitAvgMin: nil, profitAvgMax: nil, sorting: nil, programCurrency: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
+            let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+            let currencySecondary = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) ?? .btc
+            
+            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: nil, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: nil, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programsList = programsList

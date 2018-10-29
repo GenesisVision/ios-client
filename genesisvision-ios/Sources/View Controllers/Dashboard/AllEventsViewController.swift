@@ -29,6 +29,8 @@ class AllEventsViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -37,6 +39,8 @@ class AllEventsViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        
+        tableView.allowsSelection = viewModel.allowsSelection
         
         setupPullToRefresh(scrollView: tableView)
     }

@@ -209,13 +209,11 @@ open class RateAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = [URLQueryItem]()
-        for item in from ?? [] {
-            url?.queryItems?.append(URLQueryItem(name: "from", value: item))
-        }
-        for item in to ?? [] {
-            url?.queryItems?.append(URLQueryItem(name: "to", value: item))
-        }
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "from": from, 
+            "to": to
+        ])
+        
 
         let requestBuilder: RequestBuilder<RatesModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 

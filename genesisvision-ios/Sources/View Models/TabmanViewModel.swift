@@ -90,7 +90,7 @@ class TabmanViewModel: TabmanViewModelProtocol {
             vc.reloadPages()
         }
         
-        if let vc = self.router.currentController as? ProgramDetailsTabmanViewController {
+        if let vc = self.router.currentController as? ProgramTabmanViewController {
             vc.didReloadData()
         }
     }

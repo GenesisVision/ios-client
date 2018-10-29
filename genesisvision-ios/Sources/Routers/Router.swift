@@ -251,12 +251,9 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showPortfolioEvents(with programId: String? = nil) {
-        guard let viewController = AllEventsViewController.storyboardInstance(name: .dashboard) else { return }
+    func showEvents(with assetId: String? = nil) {
+        guard let viewController = getEventsViewController(with: assetId) else { return }
         
-        let router = AllEventsRouter(parentRouter: self)
-        viewController.viewModel = AllEventsViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController)
-        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -276,6 +273,14 @@ extension Router {
     
     func showTerms() {
         navigationController?.openSafariVC(with: Constants.Urls.termsWebAddress)
+    }
+    
+    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true) -> AllEventsViewController? {
+        guard let viewController = AllEventsViewController.storyboardInstance(name: .dashboard) else { return nil }
+        
+        viewController.viewModel = AllEventsViewModel(withRouter: router ?? AllEventsRouter(parentRouter: self), assetId: assetId, reloadDataProtocol: viewController, allowsSelection: allowsSelection)
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
     
     func getDetailsViewController(with programId: String) -> ProgramViewController? {

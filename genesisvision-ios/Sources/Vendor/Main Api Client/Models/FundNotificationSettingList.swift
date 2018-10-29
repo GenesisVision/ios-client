@@ -11,7 +11,7 @@ import Foundation
 
 open class FundNotificationSettingList: Codable {
 
-    public var programId: UUID?
+    public var assetId: UUID?
     public var title: String?
     public var url: String?
     public var logo: String?
@@ -19,8 +19,8 @@ open class FundNotificationSettingList: Codable {
 
 
     
-    public init(programId: UUID?, title: String?, url: String?, logo: String?, settingsGeneral: [NotificationSettingViewModel]?) {
-        self.programId = programId
+    public init(assetId: UUID?, title: String?, url: String?, logo: String?, settingsGeneral: [NotificationSettingViewModel]?) {
+        self.assetId = assetId
         self.title = title
         self.url = url
         self.logo = logo
@@ -34,7 +34,7 @@ open class FundNotificationSettingList: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(programId, forKey: "programId")
+        try container.encodeIfPresent(assetId, forKey: "assetId")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -46,7 +46,7 @@ open class FundNotificationSettingList: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
+        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

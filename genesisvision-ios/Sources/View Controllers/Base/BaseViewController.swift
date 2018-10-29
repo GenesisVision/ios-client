@@ -10,7 +10,12 @@ import UIKit
 import DZNEmptyDataSet
 import MessageUI
 
-class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomSheet {
+class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomSheet, NodataProtocol {
+    var noDataTitle: String? = nil
+    var noDataImage: UIImage? = nil
+    var noDataButtonTitle: String? = nil
+    var dateRangeView: DateRangeView!
+    
     // MARK: - Veriables
     var bottomSheetController: BottomSheetController! = {
         return BottomSheetController()
@@ -118,6 +123,8 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dateRangeView = DateRangeView.viewFromNib()
+        updateData(with: dateRangeView.dateFrom, dateTo: dateRangeView.dateTo)
         commonSetup()
         refreshControl?.endRefreshing()
     }
@@ -125,12 +132,20 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateCurrencyButtonTitle()
-        
         updateTheme()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateCurrencyButtonTitle()
+    }
+    
     // MARK: - Public Methods
+    func updateData(with dateFrom: Date, dateTo: Date) {
+        //fetch()
+    }
+    
     func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
         navigationTitleView?.currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
         self.currencyDelegateManager = currencyDelegateManager
@@ -143,6 +158,15 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         let selectedCurrency = getSelectedCurrency()
         navigationTitleView?.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
         navigationTitleView?.currencyTitleButton.sizeToFit()
+    }
+    
+    @objc func dateRangeButtonAction() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.addNavigationBar("Date range")
+        bottomSheetController.initializeHeight = 379
+        bottomSheetController.addContentsView(dateRangeView)
+        dateRangeView.delegate = self
+        bottomSheetController.present()
     }
     
     // MARK: - Private Methods
@@ -158,6 +182,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
             tableView.separatorStyle = .none
             
             guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
+            currencyDelegateManager.loadCurrencies()
             tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
             tableView.delegate = currencyDelegateManager
             tableView.dataSource = currencyDelegateManager
@@ -222,6 +247,36 @@ extension BaseViewController: UIScrollViewDelegate {
     }
 }
 
+extension BaseViewController: DateRangeViewProtocol {
+    func applyButtonDidPress(with dateFrom: Date, dateTo: Date) {
+        bottomSheetController.dismiss()
+
+        updateData(with: dateFrom, dateTo: dateTo)
+    }
+    
+    func showDatePicker(with dateFrom: Date?, dateTo: Date) {
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.primary
+        
+        if let dateFrom = dateFrom {
+            alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: dateTo.previousDate()) { [weak self] date in
+                DispatchQueue.main.async {
+                    self?.dateRangeView.dateFrom = date
+                }
+            }
+        } else {
+            alert.addDatePicker(mode: .date, date: dateTo, minimumDate: nil, maximumDate: Date()) { [weak self] date in
+                DispatchQueue.main.async {
+                    self?.dateRangeView.dateTo = date
+                }
+            }
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        bottomSheetController.present(viewController: alert)
+    }
+}
+
 extension BaseViewController: CurrencyDelegateManagerProtocol {
     func didSelectCurrency(at indexPath: IndexPath) {
         updateCurrencyButtonTitle()
@@ -251,10 +306,6 @@ extension BaseViewController: UIViewControllerWithBottomView {
     }
     
     @objc func sortButtonAction() {
-        
-    }
-    
-    @objc func dateRangeButtonAction() {
         
     }
 }
@@ -437,6 +488,10 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         fetchMoreActivityIndicator.startAnimating()
         tableView.tableFooterView = fetchMoreActivityIndicator
     }
+    
+    func register3dTouch() {
+        
+    }
 }
 
 extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
@@ -481,9 +536,10 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
 // MARK: - EmptyData
 extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = ""
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
+        let text = noDataTitle ?? ""
+        
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.nodata,
+                          NSAttributedStringKey.font : UIFont.getFont(.regular, size: 14)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -494,7 +550,7 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     }
     
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return UIImage.noDataPlaceholder
+        return noDataImage ?? UIImage.noDataPlaceholder
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
@@ -523,6 +579,14 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
         }
         
         return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch).withAlignmentRectInsets(rectInsets)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = noDataButtonTitle ?? ""
+        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Cell.title,
+                          NSAttributedStringKey.font : UIFont.getFont(.regular, size: 14)]
+        
+        return NSAttributedString(string: text, attributes: attributes)
     }
 }
 

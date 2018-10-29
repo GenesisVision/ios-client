@@ -108,7 +108,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         super.init(coder: aDecoder)!
         
         self.textColor = UIColor.TextField.title
-        self.placeholderColor = UIColor.TextField.title
+        self.placeholderColor = UIColor.Cell.subtitle
         self.font = UIFont.getFont(.regular, size: 16)
     }
     

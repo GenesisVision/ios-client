@@ -15,7 +15,6 @@ class EventListViewModel {
     
     // MARK: - Variables
     var title = "Portfolio Events"
-    var programId: String?
     
     private var sections: [SectionType] = [.eventList]
     
@@ -38,24 +37,10 @@ class EventListViewModel {
     var eventsDelegateManager: EventsDelegateManager!
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateRangeType: DateRangeType?
-    var dateRangeFrom: Date?
-    var dateRangeTo: Date?
-    
-    var canFetchMoreResults = true
-    var skip = 0
-    var take = Constants.Api.take
-    var totalCount = 0
-    
-    var bottomViewType: BottomViewType {
-        return .none
-    }
-    
     var viewModels = [PortfolioEventCollectionViewCellViewModel]()
     
-    init(withRouter router: DashboardRouter, programId: String? = nil, dashboardPortfolioEvents: DashboardPortfolioEvents?) {
+    init(withRouter router: DashboardRouter, dashboardPortfolioEvents: DashboardPortfolioEvents?) {
         self.router = router
-        self.programId = programId
         self.dashboardPortfolioEvents = dashboardPortfolioEvents
         
         eventsDelegateManager = EventsDelegateManager(with: self)
@@ -74,7 +59,7 @@ class EventListViewModel {
     }
     
     func showAllPortfolioEvents() {
-        router.show(routeType: .allPortfolioEvents(programId: programId))
+        router.show(routeType: .allEvents)
     }
 }
 

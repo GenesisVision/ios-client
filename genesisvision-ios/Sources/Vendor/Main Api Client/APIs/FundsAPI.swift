@@ -188,11 +188,11 @@ open class FundsAPI {
      Fund profit chart
      - GET /v1.0/funds/{id}/charts/profit
      - examples: [{contentType=application/json, example={
-  "profitChangePercent" : 6.704019297950036,
   "calmarRatio" : 2.8841621266687802,
   "timeframeGvtProfit" : 5.944895607614016,
   "timeframeUsdProfit" : 8.762042012749001,
   "maxDrawdown" : 6.778324963048013,
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -205,11 +205,9 @@ open class FundsAPI {
   "sortinoRatio" : 1.284659006116532,
   "rebalances" : 9,
   "balance" : 6.438423552598547,
-  "rate" : 3.353193347011243,
-  "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
+  "rate" : 6.704019297950036,
   "totalUsdProfit" : 6.683562403749608,
-  "sharpeRatio" : 6.965117697638846,
-  "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
+  "sharpeRatio" : 6.965117697638846
 }}]
      
      - parameter id: (path)  
@@ -456,6 +454,8 @@ open class FundsAPI {
         case byDrawdownDesc = "ByDrawdownDesc"
         case byInvestorsAsc = "ByInvestorsAsc"
         case byInvestorsDesc = "ByInvestorsDesc"
+        case byNewAsc = "ByNewAsc"
+        case byNewDesc = "ByNewDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
         case byBalanceAsc = "ByBalanceAsc"
@@ -705,14 +705,14 @@ open class FundsAPI {
      - GET /v1.0/funds/sets
      - examples: [{contentType=application/json, example={
   "sets" : [ {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

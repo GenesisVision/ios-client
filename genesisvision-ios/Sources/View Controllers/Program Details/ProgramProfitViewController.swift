@@ -23,6 +23,8 @@ class ProgramProfitViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -113,16 +115,6 @@ extension ProgramProfitViewController: ChartViewProtocol {
     func chartValueSelected(date: Date) {
         print("chartValueSelected")
         viewModel.selectChartSimple(date)
-        tableView.isScrollEnabled = false
-    }
-}
-
-extension ProgramProfitViewController: ChartMarkerProtocol {
-    func didHideMarker() {
-        tableView.isScrollEnabled = true
-    }
-    
-    func didChangeMarker() {
         tableView.isScrollEnabled = false
     }
 }

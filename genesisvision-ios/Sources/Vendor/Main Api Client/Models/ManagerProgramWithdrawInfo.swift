@@ -12,18 +12,18 @@ import Foundation
 open class ManagerProgramWithdrawInfo: Codable {
 
     public var withheldInvestment: Double?
+    public var periodEnds: Date?
     public var title: String?
     public var availableToWithdraw: Double?
-    public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(withheldInvestment: Double?, title: String?, availableToWithdraw: Double?, periodEnds: Date?, rate: Double?) {
+    public init(withheldInvestment: Double?, periodEnds: Date?, title: String?, availableToWithdraw: Double?, rate: Double?) {
         self.withheldInvestment = withheldInvestment
+        self.periodEnds = periodEnds
         self.title = title
         self.availableToWithdraw = availableToWithdraw
-        self.periodEnds = periodEnds
         self.rate = rate
     }
     
@@ -35,9 +35,9 @@ open class ManagerProgramWithdrawInfo: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(withheldInvestment, forKey: "withheldInvestment")
+        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableToWithdraw, forKey: "availableToWithdraw")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
 
@@ -47,9 +47,9 @@ open class ManagerProgramWithdrawInfo: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         withheldInvestment = try container.decodeIfPresent(Double.self, forKey: "withheldInvestment")
+        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableToWithdraw = try container.decodeIfPresent(Double.self, forKey: "availableToWithdraw")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }

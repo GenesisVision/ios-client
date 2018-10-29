@@ -85,7 +85,7 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var notAmericanLabel: SubtitleLabel! {
         didSet {
             notAmericanLabel.textColor = UIColor.Cell.title
-            notAmericanLabel.text = "I certify that I am not a resident or citizen of USA"
+            notAmericanLabel.text = "I certify that I am not a resident or citizen of the USA"
         }
     }
     

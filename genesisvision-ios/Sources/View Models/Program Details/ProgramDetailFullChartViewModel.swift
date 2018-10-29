@@ -10,12 +10,12 @@ import Foundation
 
 final class ProgramDetailFullChartViewModel {
     // MARK: - Variables
-    var router: Router!
+    var router: ProgramRouter!
     var programDetailsFull: ProgramDetailsFull?
     var chartDurationType: ChartDurationType = .week
     
     // MARK: - Init
-    init(withRouter router: ProgramDetailFullChartRouter, programDetailsFull: ProgramDetailsFull) {
+    init(withRouter router: ProgramRouter, programDetailsFull: ProgramDetailsFull) {
         self.router = router
         self.programDetailsFull = programDetailsFull
     }

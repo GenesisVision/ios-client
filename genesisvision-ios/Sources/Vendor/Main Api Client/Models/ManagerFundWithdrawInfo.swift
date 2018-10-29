@@ -15,17 +15,15 @@ open class ManagerFundWithdrawInfo: Codable {
     public var exitFee: Double?
     public var title: String?
     public var availableToWithdraw: Double?
-    public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(withheldInvestment: Double?, exitFee: Double?, title: String?, availableToWithdraw: Double?, periodEnds: Date?, rate: Double?) {
+    public init(withheldInvestment: Double?, exitFee: Double?, title: String?, availableToWithdraw: Double?, rate: Double?) {
         self.withheldInvestment = withheldInvestment
         self.exitFee = exitFee
         self.title = title
         self.availableToWithdraw = availableToWithdraw
-        self.periodEnds = periodEnds
         self.rate = rate
     }
     
@@ -40,7 +38,6 @@ open class ManagerFundWithdrawInfo: Codable {
         try container.encodeIfPresent(exitFee, forKey: "exitFee")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableToWithdraw, forKey: "availableToWithdraw")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
 
@@ -53,7 +50,6 @@ open class ManagerFundWithdrawInfo: Codable {
         exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableToWithdraw = try container.decodeIfPresent(Double.self, forKey: "availableToWithdraw")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }

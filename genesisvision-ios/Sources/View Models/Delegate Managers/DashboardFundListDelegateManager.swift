@@ -11,6 +11,7 @@ import UIKit.UITableView
 final class DashboardFundListDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var viewModel: DashboardFundListViewModel?
+    weak var delegate: DelegateManagerProtocol?
     
     init(with viewModel: DashboardFundListViewModel) {
         super.init()
@@ -42,11 +43,30 @@ final class DashboardFundListDelegateManager: NSObject, UITableViewDelegate, UIT
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRows(in: section) ?? 0
+        let numberOfRows = viewModel?.numberOfRows(in: section) ?? 0
+        tableView.isScrollEnabled = numberOfRows > 0
+        return numberOfRows
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel?.numberOfSections() ?? 0
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewDidScroll(scrollView)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+//            print("down")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        } else {
+//            print("up")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+        }
     }
 }
 

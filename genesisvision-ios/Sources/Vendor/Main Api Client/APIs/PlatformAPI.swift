@@ -42,19 +42,19 @@ open class PlatformAPI {
     "minVersion" : "minVersion"
   },
   "programsInfo" : {
-    "managerProgramInvestment" : 6.027456183070403,
-    "managerFundInvestment" : 1.4658129805029452,
-    "periods" : [ 5, 5 ]
+    "managerProgramInvestment" : 0.8008281904610115,
+    "managerFundInvestment" : 6.027456183070403,
+    "periods" : [ 1, 1 ]
   },
   "programsFacets" : [ {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -62,19 +62,26 @@ open class PlatformAPI {
     "url" : "url"
   } ],
   "fundsFacets" : [ {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
+  } ],
+  "platformCurrencies" : [ {
+    "rateToGvt" : 5.962133916683182,
+    "name" : "name"
+  }, {
+    "rateToGvt" : 5.962133916683182,
+    "name" : "name"
   } ],
   "currencies" : [ "currencies", "currencies" ]
 }}]

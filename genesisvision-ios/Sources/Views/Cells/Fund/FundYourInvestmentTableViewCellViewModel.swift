@@ -27,12 +27,14 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Your investment"
         
-        if let status = fundDetailsFull?.personalFundDetails?.status?.rawValue {
-            cell.statusButton.setTitle(status, for: .normal)
+        if let status = fundDetailsFull?.personalFundDetails?.status, status != .investing, status != .withdrawing {
+            cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         } else {
             cell.statusButton.isHidden = true
         }
+        
+        cell.disclaimerLabel.isHidden = true
         
         cell.reinvestSwitch.isHidden = true
         cell.reinvestTitleLabel.isHidden = true

@@ -143,6 +143,7 @@ class WalletWithdrawViewController: BaseViewController {
     
     @IBOutlet weak var twoFactorTextField: DesignableUITextField! {
         didSet {
+            twoFactorTextField.placeholder = "Two factor code"
             twoFactorTextField.keyboardType = .numberPad
         }
     }
@@ -290,6 +291,7 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
+        amountToWithdrawValueLabel.text = availableInWalletValue.toString()
         amountToWithdrawValue = availableInWalletValue
     }
     

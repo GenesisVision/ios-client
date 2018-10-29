@@ -6,8 +6,6 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
-
 import UIKit.UINavigationController
 
 enum ManagerProgramListRouteType {

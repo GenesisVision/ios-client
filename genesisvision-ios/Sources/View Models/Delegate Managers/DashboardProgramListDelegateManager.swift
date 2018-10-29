@@ -11,6 +11,7 @@ import UIKit.UITableView
 final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var viewModel: DashboardProgramListViewModel?
+    weak var delegate: DelegateManagerProtocol?
     
     init(with viewModel: DashboardProgramListViewModel) {
         super.init()
@@ -42,7 +43,9 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRows(in: section) ?? 0
+        let numberOfRows = viewModel?.numberOfRows(in: section) ?? 0
+        tableView.isScrollEnabled = numberOfRows > 0
+        return numberOfRows
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,34 +53,19 @@ final class DashboardProgramListDelegateManager: NSObject, UITableViewDelegate, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
+        delegate?.delegateManagerScrollViewDidScroll(scrollView)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
     }
     
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        print("scrollViewDidScrollToTop")
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndScrollingAnimation")
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("remove finger")
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        print("scrollViewDidZoom")
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("iOS stoped table view")
-    }
-    
-    func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
-        print("scrollViewDidChangeAdjustedContentInset")
-    }
-    
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        print("scrollViewDidEndZooming")
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+//            print("down")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        } else {
+//            print("up")
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+        }
     }
 }

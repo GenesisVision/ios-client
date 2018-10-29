@@ -343,7 +343,7 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Two factor code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xPx-pH-7rg" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xPx-pH-7rg" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="23" width="260" height="24"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1144,7 +1144,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="img_numpad_delete" width="24" height="18"/>
+        <image name="img_numpad_delete" width="26" height="18"/>
         <image name="img_scroll_arrow_down" width="11" height="7"/>
     </resources>
 </document>

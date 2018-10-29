@@ -232,10 +232,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-o9-rIW">
-                                                <rect key="frame" x="0.0" y="25" width="101.5" height="37"/>
+                                                <rect key="frame" x="0.0" y="25" width="10.5" height="37"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0sadsadassd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEf-uI-5Vy" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEf-uI-5Vy" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="10.5" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="2Ik-Kf-yaw"/>
                                                         </constraints>
@@ -244,7 +244,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-KY-Xwx" customClass="MediumLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="22" width="101.5" height="15"/>
+                                                        <rect key="frame" x="0.0" y="22" width="10.5" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="pKl-XP-NDy"/>
                                                         </constraints>
@@ -259,7 +259,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyV-oc-0i9">
-                                <rect key="frame" x="20" y="102" width="137.5" height="62"/>
+                                <rect key="frame" x="20" y="102" width="46.5" height="62"/>
                                 <state key="normal" image="img_inRequests"/>
                                 <connections>
                                     <action selector="inRequestsButtonAction:" destination="cfZ-FO-xK2" eventType="touchUpInside" id="B6x-fl-w40"/>

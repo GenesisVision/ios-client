@@ -46,6 +46,7 @@ extension UIColor {
         static var lightBackground: UIColor { return #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) }                         //f3f3f3
         static var lightCell: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }                               //ffffff
         
+        static var nodata: UIColor { return #colorLiteral(red: 0.3529411765, green: 0.3803921569, blue: 0.4039215686, alpha: 1) }                                  //5A6167
         
         static var lightTextPrimary: UIColor { return #colorLiteral(red: 0.1098039216, green: 0.137254902, blue: 0.1647058824, alpha: 1) }                        //1c232a
         static var lightTextSecondary: UIColor { return #colorLiteral(red: 0.7333333333, green: 0.7411764706, blue: 0.7490196078, alpha: 1) }                      //bbbdbf
@@ -140,6 +141,7 @@ extension UIColor {
     struct Font {
         static var primary: UIColor { return Common.primary }
         
+        static var nodata: UIColor { return Common.nodata }
         static var dark: UIColor { return Common.darkSlateBlue }
         static var darkBlue: UIColor { return Common.uglyBlue }
         

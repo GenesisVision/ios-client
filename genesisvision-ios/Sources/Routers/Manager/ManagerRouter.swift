@@ -15,7 +15,7 @@ class ManagerRouter: Router {
     var managerViewController: ManagerViewController!
     
     var managerHeaderViewController: ManagerHeaderViewController?
-    var managerDetailsTabmanViewController: ManagerDetailsTabmanViewController?
+    var managerDetailsTabmanViewController: ManagerTabmanViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, managerViewController: ManagerViewController) {

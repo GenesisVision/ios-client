@@ -11,22 +11,28 @@ import Foundation
 
 open class Facet: Codable {
 
+    public enum SortType: String, Codable { 
+        case new = "New"
+        case top = "Top"
+        case weeklyTop = "WeeklyTop"
+        case popular = "Popular"
+    }
     public var id: UUID?
     public var title: String?
     public var description: String?
     public var logo: String?
     public var url: String?
-    public var count: Int?
+    public var sortType: SortType?
 
 
     
-    public init(id: UUID?, title: String?, description: String?, logo: String?, url: String?, count: Int?) {
+    public init(id: UUID?, title: String?, description: String?, logo: String?, url: String?, sortType: SortType?) {
         self.id = id
         self.title = title
         self.description = description
         self.logo = logo
         self.url = url
-        self.count = count
+        self.sortType = sortType
     }
     
 
@@ -41,7 +47,7 @@ open class Facet: Codable {
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(count, forKey: "count")
+        try container.encodeIfPresent(sortType, forKey: "sortType")
     }
 
     // Decodable protocol methods
@@ -54,7 +60,7 @@ open class Facet: Codable {
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")
-        count = try container.decodeIfPresent(Int.self, forKey: "count")
+        sortType = try container.decodeIfPresent(SortType.self, forKey: "sortType")
     }
 }
 

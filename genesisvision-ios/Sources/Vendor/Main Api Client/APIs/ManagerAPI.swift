@@ -117,6 +117,7 @@ open class ManagerAPI {
         case managerInvest = "ManagerInvest"
         case managerWithdraw = "ManagerWithdraw"
         case assetFinished = "AssetFinished"
+        case entranceFee = "EntranceFee"
     }
 
     /**
@@ -157,27 +158,29 @@ open class ManagerAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "programType" : "Program",
     "periodNumber" : 2,
+    "color" : "color",
+    "description" : "description",
+    "title" : "title",
+    "type" : "All",
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "description" : "description",
     "currency" : "Undefined",
     "feeValue" : 5.962133916683182,
-    "title" : "title",
-    "type" : "All",
     "value" : 1.4658129805029452
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "programType" : "Program",
     "periodNumber" : 2,
+    "color" : "color",
+    "description" : "description",
+    "title" : "title",
+    "type" : "All",
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "description" : "description",
     "currency" : "Undefined",
     "feeValue" : 5.962133916683182,
-    "title" : "title",
-    "type" : "All",
     "value" : 1.4658129805029452
   } ]
 }}]
@@ -349,7 +352,6 @@ open class ManagerAPI {
   "entryFee" : 1.4658129805029452,
   "availableInWallet" : 0.8008281904610115,
   "rate" : 5.637376656633329,
-  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
   "minInvestmentAmount" : 6.027456183070403,
   "gvCommission" : 5.962133916683182
@@ -585,7 +587,6 @@ open class ManagerAPI {
   "exitFee" : 6.027456183070403,
   "rate" : 5.962133916683182,
   "withheldInvestment" : 0.8008281904610115,
-  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
   "availableToWithdraw" : 1.4658129805029452
 }}]
@@ -961,16 +962,45 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter type
+     */
+    public enum ModelType_v10ManagerGet: String { 
+        case all = "All"
+        case assetStarted = "AssetStarted"
+        case programPeriodStats = "ProgramPeriodStats"
+        case programPeriodEnds = "ProgramPeriodEnds"
+        case investorInvest = "InvestorInvest"
+        case investorWithdraw = "InvestorWithdraw"
+        case managerInvest = "ManagerInvest"
+        case managerWithdraw = "ManagerWithdraw"
+        case assetFinished = "AssetFinished"
+        case entranceFee = "EntranceFee"
+    }
+
+    /**
+     * enum for parameter assetType
+     */
+    public enum AssetType_v10ManagerGet: String { 
+        case all = "All"
+        case program = "Program"
+        case fund = "Fund"
+    }
+
+    /**
      Manager dashboard
      
      - parameter authorization: (header) JWT access token 
-     - parameter eventsTake: (query)  (optional)
-     - parameter requestsSkip: (query)  (optional)
-     - parameter requestsTake: (query)  (optional)
+     - parameter assetId: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter assetType: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerGet(authorization: String, eventsTake: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil, completion: @escaping ((_ data: ManagerDashboard?,_ error: Error?) -> Void)) {
-        v10ManagerGetWithRequestBuilder(authorization: authorization, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake).execute { (response, error) -> Void in
+    open class func v10ManagerGet(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: ModelType_v10ManagerGet? = nil, assetType: AssetType_v10ManagerGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ManagerDashboard?,_ error: Error?) -> Void)) {
+        v10ManagerGetWithRequestBuilder(authorization: authorization, assetId: assetId, from: from, to: to, type: type, assetType: assetType, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1006,11 +1036,11 @@ open class ManagerAPI {
     "type" : "Program"
   } ],
   "fundChart" : {
-    "profitChangePercent" : 6.704019297950036,
     "calmarRatio" : 2.8841621266687802,
     "timeframeGvtProfit" : 5.944895607614016,
     "timeframeUsdProfit" : 8.762042012749001,
     "maxDrawdown" : 6.778324963048013,
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1023,11 +1053,9 @@ open class ManagerAPI {
     "sortinoRatio" : 1.284659006116532,
     "rebalances" : 9,
     "balance" : 6.438423552598547,
-    "rate" : 3.353193347011243,
-    "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
+    "rate" : 6.704019297950036,
     "totalUsdProfit" : 6.683562403749608,
-    "sharpeRatio" : 6.965117697638846,
-    "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
+    "sharpeRatio" : 6.965117697638846
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1049,38 +1077,40 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "programType" : "Program",
       "periodNumber" : 2,
+      "color" : "color",
+      "description" : "description",
+      "title" : "title",
+      "type" : "All",
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "description" : "description",
       "currency" : "Undefined",
       "feeValue" : 5.962133916683182,
-      "title" : "title",
-      "type" : "All",
       "value" : 1.4658129805029452
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "programType" : "Program",
       "periodNumber" : 2,
+      "color" : "color",
+      "description" : "description",
+      "title" : "title",
+      "type" : "All",
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "description" : "description",
       "currency" : "Undefined",
       "feeValue" : 5.962133916683182,
-      "title" : "title",
-      "type" : "All",
       "value" : 1.4658129805029452
     } ]
   },
   "programChart" : {
     "profitFactor" : 7.386281948385884,
-    "profitChangePercent" : 9.965781217890562,
-    "calmarRatio" : 7.457744773683766,
-    "timeframeGvtProfit" : 5.025004791520295,
+    "profitChangePercent" : 1.2315135367772556,
+    "calmarRatio" : 1.1730742509559433,
+    "timeframeGvtProfit" : 9.965781217890562,
     "timeframeProgramCurrencyProfit" : 3.616076749251911,
     "trades" : 2,
-    "maxDrawdown" : 1.1730742509559433,
+    "maxDrawdown" : 4.965218492984954,
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1089,8 +1119,8 @@ open class ManagerAPI {
       "value" : 3.616076749251911
     } ],
     "investors" : 1,
-    "totalGvtProfit" : 4.965218492984954,
-    "sortinoRatio" : 6.84685269835264,
+    "totalGvtProfit" : 5.025004791520295,
+    "sortinoRatio" : 7.457744773683766,
     "pnLChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -1098,7 +1128,7 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "balance" : 1.2315135367772556,
+    "balance" : 1.0246457001441578,
     "programCurrency" : "Undefined",
     "rate" : 9.369310271410669,
     "totalProgramCurrencyProfit" : 9.301444243932576,
@@ -1111,28 +1141,36 @@ open class ManagerAPI {
       "dateTo" : "2000-01-23T04:56:07.000+00:00",
       "dateFrom" : "2000-01-23T04:56:07.000+00:00"
     } ],
-    "sharpeRatio" : 1.4894159098541704,
+    "sharpeRatio" : 6.84685269835264,
     "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
   }
 }}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter eventsTake: (query)  (optional)
-     - parameter requestsSkip: (query)  (optional)
-     - parameter requestsTake: (query)  (optional)
+     - parameter assetId: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter assetType: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ManagerDashboard> 
      */
-    open class func v10ManagerGetWithRequestBuilder(authorization: String, eventsTake: Int? = nil, requestsSkip: Int? = nil, requestsTake: Int? = nil) -> RequestBuilder<ManagerDashboard> {
+    open class func v10ManagerGetWithRequestBuilder(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, type: ModelType_v10ManagerGet? = nil, assetType: AssetType_v10ManagerGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ManagerDashboard> {
         let path = "/v1.0/manager"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "eventsTake": eventsTake?.encodeToJSON(), 
-            "requestsSkip": requestsSkip?.encodeToJSON(), 
-            "requestsTake": requestsTake?.encodeToJSON()
+            "AssetId": assetId, 
+            "From": from?.encodeToJSON(), 
+            "To": to?.encodeToJSON(), 
+            "Type": type?.rawValue, 
+            "AssetType": assetType?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
         ])
         
         let nillableHeaders: [String: Any?] = [

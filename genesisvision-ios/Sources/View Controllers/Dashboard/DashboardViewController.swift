@@ -11,10 +11,8 @@ import UIKit
 class DashboardViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: DashboardViewModel!
-    
+
     // MARK: - Variables
-    var dateRangeView: DateRangeView!
-    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.delegate = self
@@ -76,6 +74,13 @@ class DashboardViewController: BaseViewController {
         fetch()
     }
     
+    override func updateData(with dateFrom: Date, dateTo: Date) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
+        fetch()
+    }
+    
     // MARK: - Private methods
     private func setup() {
         setupPullToRefresh(scrollView: scrollView)
@@ -94,20 +99,20 @@ class DashboardViewController: BaseViewController {
             eventsViewHeightConstraint.constant = 0.0
         }
         
-        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
+//        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
             viewModel.router.chartsViewController?.hideChart(false)
             chartsViewHeightConstraint.constant = chartsViewHeightStart
-        } else {
-            viewModel.router.chartsViewController?.hideChart(true)
-            chartsViewHeightConstraint.constant = 220.0
-        }
+//        } else {
+//            viewModel.router.chartsViewController?.hideChart(true)
+//            chartsViewHeightConstraint.constant = 250.0
+//        }
         
-        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
+//        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
             viewModel.router.chartsViewController?.hideInRequests(false)
-        } else {
-            viewModel.router.chartsViewController?.hideInRequests(true)
-            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
-        }
+//        } else {
+//            viewModel.router.chartsViewController?.hideInRequests(true)
+//            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
+//        }
         
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
@@ -134,7 +139,7 @@ class DashboardViewController: BaseViewController {
     private func setupUI() {
         navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         
-        bottomViewType = .none
+        bottomViewType = .dateRange
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
@@ -150,17 +155,6 @@ class DashboardViewController: BaseViewController {
     }
     
     // MARK: - Public methods
-    override func dateRangeButtonAction() {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.addNavigationBar("Date range")
-        bottomSheetController.initializeHeight = 379
-        
-        dateRangeView = DateRangeView.viewFromNib()
-        bottomSheetController.addContentsView(dateRangeView)
-        dateRangeView.delegate = self
-        bottomSheetController.present()
-    }
-    
     func showRequests(_ programRequests: ProgramRequests?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
@@ -208,39 +202,6 @@ class DashboardViewController: BaseViewController {
     }
 }
 
-extension DashboardViewController: DateRangeViewProtocol {
-    func applyButtonDidPress(with dateRangeType: DateRangeType, dateRangeFrom: Date, dateRangeTo: Date) {
-        bottomSheetController.dismiss()
-        
-        viewModel.dateRangeFrom = dateRangeFrom
-        viewModel.dateRangeTo = dateRangeTo
-        viewModel.dateRangeType = dateRangeType
-        fetch()
-    }
-    
-    func showDatePicker(with dateRangeFrom: Date?, dateRangeTo: Date) {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-//        alert.view.tintColor = UIColor.primary
-        
-        if let dateRangeFrom = dateRangeFrom {
-            alert.addDatePicker(mode: .date, date: dateRangeFrom, minimumDate: nil, maximumDate: dateRangeTo.previousDate()) { [weak self] date in
-                DispatchQueue.main.async {
-                    self?.dateRangeView.dateRangeFrom = date
-                }
-            }
-        } else {
-            alert.addDatePicker(mode: .date, date: dateRangeTo, minimumDate: nil, maximumDate: Date()) { [weak self] date in
-                DispatchQueue.main.async {
-                    self?.dateRangeView.dateRangeTo = date
-                }
-            }
-        }
-        
-        alert.addAction(title: "Done", style: .cancel)
-        bottomSheetController.present(viewController: alert)
-    }
-}
-
 extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
@@ -250,16 +211,18 @@ extension DashboardViewController {
         let yOffset = scrollView.contentOffset.y
 //        animateViews(yOffset)
         
-        if !viewModel.isLoading && yOffset < -100 {
-            showProgressHUD()
-            fetch()
-            return
-        }
+//        if !viewModel.isLoading && yOffset < -100 {
+//            showProgressHUD()
+//            fetch()
+//            return
+//        }
         
         if scrollView == self.scrollView {
             if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
+                        vc.register3dTouch()
+
                         vc.tableView?.isScrollEnabled = yOffset >= assetsView.frame.origin.y
                     }
                 }

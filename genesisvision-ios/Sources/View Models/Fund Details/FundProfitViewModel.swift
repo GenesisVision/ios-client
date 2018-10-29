@@ -15,10 +15,10 @@ final class FundProfitViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Profit".uppercased()
+    var title: String = "Profit"
     var fundId: String?
     
-    var router: Router!
+    var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var chartViewProtocol: ChartViewProtocol?
     
@@ -32,7 +32,7 @@ final class FundProfitViewModel {
     private var fundProfitStatisticTableViewCellViewModel: FundProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: Router, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.fundId = fundId
         self.reloadDataProtocol = reloadDataProtocol
@@ -45,6 +45,10 @@ final class FundProfitViewModel {
             print("selectChartSimple")
             print(result)
         }
+    }
+    
+    func hideHeader(value: Bool = true) {
+        router.fundViewController.hideHeader(value)
     }
 }
 

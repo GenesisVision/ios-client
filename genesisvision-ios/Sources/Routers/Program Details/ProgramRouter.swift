@@ -16,7 +16,7 @@ class ProgramRouter: Router {
     var programViewController: ProgramViewController!
     
     var programHeaderViewController: ProgramHeaderViewController?
-    var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
+    var programDetailsTabmanViewController: ProgramTabmanViewController?
     
     var programBalanceViewController: ProgramBalanceViewController?
     var programProfitViewController: ProgramProfitViewController?

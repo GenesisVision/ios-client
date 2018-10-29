@@ -31,6 +31,7 @@ open class RequestBuilder<T> {
         self.isBody = isBody
         self.headers = headers
 
+        print(URLString)
         addHeaders(SwaggerClientAPI.customHeaders)
     }
 

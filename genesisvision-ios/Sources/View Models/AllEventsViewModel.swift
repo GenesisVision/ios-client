@@ -11,11 +11,12 @@ import UIKit.UITableViewHeaderFooterView
 final class AllEventsViewModel {
     // MARK: - Variables
     var title: String = "Events"
-    var programId: String?
+    var assetId: String?
     
-    var router: AllEventsRouter!
+    var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var allowsSelection: Bool = true
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var eventsCount: String = ""
@@ -30,10 +31,19 @@ final class AllEventsViewModel {
     var viewModels = [PortfolioEventTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: AllEventsRouter, programId: String? = nil, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String? = nil, reloadDataProtocol: ReloadDataProtocol?, allowsSelection: Bool = true) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
+        self.allowsSelection = allowsSelection
         self.reloadDataProtocol = reloadDataProtocol
+    }
+    
+    func hideHeader(value: Bool = true) {
+        if let router = router as? ProgramRouter {
+            router.programViewController.hideHeader(value)
+        } else if let router = router as? FundRouter {
+            router.fundViewController.hideHeader(value)
+        }
     }
 }
 
@@ -141,7 +151,7 @@ extension AllEventsViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [PortfolioEventTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            DashboardDataProvider.getDashboardPortfolioEvents(with: programId, skip: skip, take: take, completion: { (portfolioEvents) in
+            DashboardDataProvider.getDashboardPortfolioEvents(with: assetId, skip: skip, take: take, completion: { (portfolioEvents) in
                 guard portfolioEvents != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

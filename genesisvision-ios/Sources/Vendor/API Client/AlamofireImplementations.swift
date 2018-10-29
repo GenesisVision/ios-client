@@ -107,7 +107,6 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     }
 
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
-        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
@@ -310,7 +309,6 @@ public enum AlamofireDecodableRequestBuilderError: Error {
 open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilder<T> {
 
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
-        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }

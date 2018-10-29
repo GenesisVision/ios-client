@@ -94,12 +94,12 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
   "profitFactor" : 7.386281948385884,
-  "profitChangePercent" : 9.965781217890562,
-  "calmarRatio" : 7.457744773683766,
-  "timeframeGvtProfit" : 5.025004791520295,
+  "profitChangePercent" : 1.2315135367772556,
+  "calmarRatio" : 1.1730742509559433,
+  "timeframeGvtProfit" : 9.965781217890562,
   "timeframeProgramCurrencyProfit" : 3.616076749251911,
   "trades" : 2,
-  "maxDrawdown" : 1.1730742509559433,
+  "maxDrawdown" : 4.965218492984954,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -108,8 +108,8 @@ open class ProgramsAPI {
     "value" : 3.616076749251911
   } ],
   "investors" : 1,
-  "totalGvtProfit" : 4.965218492984954,
-  "sortinoRatio" : 6.84685269835264,
+  "totalGvtProfit" : 5.025004791520295,
+  "sortinoRatio" : 7.457744773683766,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -117,7 +117,7 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "balance" : 1.2315135367772556,
+  "balance" : 1.0246457001441578,
   "programCurrency" : "Undefined",
   "rate" : 9.369310271410669,
   "totalProgramCurrencyProfit" : 9.301444243932576,
@@ -130,7 +130,7 @@ open class ProgramsAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00"
   } ],
-  "sharpeRatio" : 1.4894159098541704,
+  "sharpeRatio" : 6.84685269835264,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      
@@ -486,6 +486,8 @@ open class ProgramsAPI {
         case byInvestorsAsc = "ByInvestorsAsc"
         case byInvestorsDesc = "ByInvestorsDesc"
         case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
+        case byNewDesc = "ByNewDesc"
+        case byNewAsc = "ByNewAsc"
         case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
@@ -777,14 +779,14 @@ open class ProgramsAPI {
      - GET /v1.0/programs/sets
      - examples: [{contentType=application/json, example={
   "sets" : [ {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
-    "count" : 0,
+    "sortType" : "New",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

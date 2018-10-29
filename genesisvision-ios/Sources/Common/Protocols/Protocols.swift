@@ -8,6 +8,17 @@
 
 import UIKit
 
+protocol NodataProtocol {
+    var noDataTitle: String? { get }
+    var noDataImage: UIImage? { get }
+    var noDataButtonTitle: String? { get }
+}
+
+protocol DelegateManagerProtocol: class {
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
+    func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
+}
+
 //old ProgramProtocol
 protocol FavoriteStateChangeProtocol: class {
     func didChangeFavoriteState(with programID: String, value: Bool, request: Bool)

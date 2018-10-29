@@ -77,9 +77,16 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        noDataTitle = viewModel.noDataText()
+        noDataButtonTitle = viewModel.noDataButtonTitle()
+        if let imageName = viewModel.noDataImageName() {
+            noDataImage = UIImage(named: imageName)
+        }
+        
         bottomViewType = viewModel.bottomViewType
         
-        sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
+        let sortTitle = self.viewModel?.sortingDelegateManager.sortingManager?.sortTitle()
+        sortButton.setTitle(sortTitle, for: .normal)
         
         if signInButtonEnable {
             showNewVersionAlertIfNeeded(self)
@@ -119,8 +126,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func sortMethod() {
+        guard let sortingManager = viewModel.sortingDelegateManager.sortingManager else { return }
+        
         bottomSheetController = BottomSheetController()
-        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
             if let sortingDelegateManager = self?.viewModel.sortingDelegateManager {
@@ -155,9 +164,19 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
+    override func updateData(with dateFrom: Date, dateTo: Date) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
+        fetch()
+    }
+    
     // MARK: - Actions
     @objc func highToLowButtonAction() {
-        viewModel.highToLowValue = !viewModel.highToLowValue
+        if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
+            sortingManager.highToLowValue = !sortingManager.highToLowValue
+        }
+        
         fetch()
         bottomSheetController.dismiss()
     }
@@ -254,32 +273,6 @@ extension ProgramListViewController: FavoriteStateChangeProtocol {
         viewModel.changeFavorite(value: value, assetId: programID, request: request) { [weak self] (result) in
             self?.hideAll()
         }
-    }
-}
-
-extension ProgramListViewController {
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        if let imageName = viewModel.noDataImageName() {
-            return UIImage(named: imageName)
-        }
-        
-        return UIImage.noDataPlaceholder
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = viewModel.noDataButtonTitle()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
     }
 }
 

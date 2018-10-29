@@ -237,7 +237,7 @@ class ChartView: CombinedChartView {
         rightAxis.labelFont = UIFont.getFont(.light, size: 13)
 
         //yZeroLine
-        rightAxis.drawZeroLineEnabled = chartType == .default
+        rightAxis.drawZeroLineEnabled = false//chartType == .default
         rightAxis.zeroLineColor = UIColor.Cell.separator
         rightAxis.zeroLineWidth = 1.0
         rightAxis.zeroLineDashLengths = chartType == .default ? [2.0, 2.0] : [2.0, 6.0]

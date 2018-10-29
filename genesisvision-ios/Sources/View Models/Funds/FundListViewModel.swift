@@ -13,12 +13,13 @@ enum FundListViewState {
 }
 
 final class FundListViewModel: ListViewModelProtocol {
+    
     // MARK: - Variables
     var type: ListType = .fundList
     var title: String = "Funds"
     var roundNumber: Int = 1
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     
     internal var sections: [SectionType] = [.assetList]
     
@@ -28,12 +29,8 @@ final class FundListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var equityChartLength = Constants.Api.equityChartLength
-    var skip = 0 {
-        didSet {
-            filter?.skip = skip
-        }
-    }
+    var chartPointsCount = Constants.Api.equityChartLength
+    var skip = 0
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
@@ -41,38 +38,21 @@ final class FundListViewModel: ListViewModelProtocol {
         }
     }
 
+    var mask: String?
+    var isFavorite: Bool = false
+    
     private var fundsList: FundsList?
+
+    var dateFrom: Date?
+    var dateTo: Date?
     
-    var highToLowValue: Bool = false
-    
-    var dateRangeType: DateRangeType = .day {
-        didSet {
-            switch dateRangeType {
-            case .custom:
-                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
-                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
-            default:
-                let calendar = Calendar.current
-                let hour = calendar.component(.hour, from: dateRangeTo)
-                let min = calendar.component(.minute, from: dateRangeTo)
-                let sec = calendar.component(.second, from: dateRangeTo)
-                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
-            }
-        }
-    }
-    var dateRangeFrom: Date = Date().previousDate()
-    var dateRangeTo: Date = Date()
-    
-    var headerTitle = "PROGRAMS TO INVEST IN"
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithFilter : .filter
+        return signInButtonEnable ? .signIn : .dateRange
     }
-    
-    var filter: ProgramsFilter?
     
     var searchText = "" {
         didSet {
-            filter?.name = searchText
+            mask = searchText
         }
     }
     var viewModels = [CellViewAnyModel]()
@@ -82,36 +62,8 @@ final class FundListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        filter = ProgramsFilter(managerId: nil,
-                                brokerId: nil,
-                                brokerTradeServerId: nil,
-                                investMaxAmountFrom: nil,
-                                investMaxAmountTo: nil,
-                                sorting: nil,//TODO: sortingDelegateManager.sorting,
-                                name: searchText,
-                                levelMin: nil,
-                                levelMax: nil,
-                                balanceUsdMin: nil,
-                                balanceUsdMax: nil,
-                                profitAvgMin: nil,
-                                profitAvgMax: nil,
-                                profitTotalMin: nil,
-                                profitTotalMax: nil,
-                                profitTotalPercentMin: nil,
-                                profitTotalPercentMax: nil,
-                                profitAvgPercentMin: nil,
-                                profitAvgPercentMax: nil,
-                                profitTotalChange: nil,
-                                periodMin: nil,
-                                periodMax: nil,
-                                showActivePrograms: nil,
-                                equityChartLength: equityChartLength,
-                                showMyFavorites: nil,
-                                roundNumber: nil,
-                                skip: skip,
-                                take: take)
-
         state = isLogin() ? .fundList : .fundListWithSignIn
+        sortingDelegateManager = SortingDelegateManager(.funds)
         
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
@@ -121,6 +73,10 @@ final class FundListViewModel: ListViewModelProtocol {
     }
     
     // MARK: - Public methods
+    func noDataText() -> String {
+        return "You do not have any funds yet"
+    }
+    
     func isLogin() -> Bool {
         return AuthManager.isLogin()
     }
@@ -212,7 +168,11 @@ extension FundListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            FundsDataProvider.get(sorting: nil, currencySecondary: nil, statisticDateFrom: nil, statisticDateTo: nil, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
+            
+            let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+            let currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) ?? .btc
+            
+            FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: 13, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
                 guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.fundsList = fundsList

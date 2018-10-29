@@ -26,6 +26,16 @@ class FundsDataProvider: DataProvider {
         }
     }
     
+    static func getAssets(fundId: String, completion: @escaping (_ fundAssetsListInfo: FundAssetsListInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let uuid = UUID(uuidString: fundId)
+            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdAssetsGet(id: uuid) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getInvestInfo(fundId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: fundId)

@@ -71,7 +71,7 @@ public class QRCodeReaderViewController: UIViewController {
 
     super.init(nibName: nil, bundle: nil)
 
-    view.backgroundColor = .black
+    view.backgroundColor = UIColor.primary
 
     codeReader.didFindCode = { [weak self] resultAsObject in
       if let weakSelf = self {

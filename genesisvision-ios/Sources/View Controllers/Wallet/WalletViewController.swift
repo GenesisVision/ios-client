@@ -51,6 +51,12 @@ class WalletViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        noDataTitle = viewModel.noDataText()
+        noDataButtonTitle = viewModel.noDataButtonTitle()
+        if let imageName = viewModel.noDataImageName() {
+            noDataImage = UIImage(named: imageName)
+        }
+        
         navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         addCurrencyTitleButton(CurrencyDelegateManager())
         
@@ -294,56 +300,3 @@ extension WalletViewController: ReloadDataProtocol {
         reloadData()
     }
 }
-
-extension WalletViewController {
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        if let imageName = viewModel.noDataImageName() {
-            return UIImage(named: imageName)
-        }
-        
-        return UIImage.noDataPlaceholder
-    }
-    
-    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        viewModel.showProgramList()
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = viewModel.noDataButtonTitle()
-        
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-//
-//extension WalletViewController: UIViewControllerPreviewingDelegate {
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-//                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-//
-//        let cellPosition = tableView.convert(location, from: view)
-//
-//        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-//            let vc = viewModel.getDetailsViewController(with: indexPath),
-//            let cell = tableView.cellForRow(at: indexPath)
-//            else { return nil }
-//
-//        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-//        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
-//
-//        return vc
-//    }
-//
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//        push(viewController: viewControllerToCommit)
-//    }
-//}

@@ -9,6 +9,22 @@
 import UIKit
 import Charts
 
+class FundAssetView: UIView {
+    @IBOutlet weak var assetLogoImageView: UIImageView! {
+        didSet {
+            assetLogoImageView.roundCorners()
+        }
+    }
+    @IBOutlet weak var assetPercentLabel: TitleLabel!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        backgroundColor = UIColor.white.withAlphaComponent(0.02)
+        roundCorners(with: 8)
+    }
+}
+
 class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
@@ -21,7 +37,6 @@ class ProgramTableViewCell: PlateTableViewCell {
 
     @IBOutlet weak var favoriteButton: FavoriteButton!
     
-    @IBOutlet weak var favoriteStackView: UIView!
     @IBOutlet weak var viewForChartView: UIView!
     @IBOutlet weak var chartView: ChartView! {
         didSet {
@@ -69,9 +84,35 @@ class ProgramTableViewCell: PlateTableViewCell {
     @IBOutlet weak var thirdTitleLabel: SubtitleLabel!
     
     
-    @IBOutlet weak var bottomStackView: UIStackView! {
+    @IBOutlet weak var dashboardBottomStackView: UIStackView! {
         didSet {
-            bottomStackView.isHidden = true
+            dashboardBottomStackView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var fundBottomStackView: UIStackView! {
+        didSet {
+            fundBottomStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var firstFunAssetView: FundAssetView! {
+        didSet {
+            firstFunAssetView.isHidden = true
+        }
+    }
+    @IBOutlet weak var secondFunAssetView: FundAssetView! {
+        didSet {
+            secondFunAssetView.isHidden = true
+        }
+    }
+    @IBOutlet weak var thirdFunAssetView: FundAssetView! {
+        didSet {
+            thirdFunAssetView.isHidden = true
+        }
+    }
+    @IBOutlet weak var otherFunAssetView: FundAssetView! {
+        didSet {
+            otherFunAssetView.isHidden = true
         }
     }
     

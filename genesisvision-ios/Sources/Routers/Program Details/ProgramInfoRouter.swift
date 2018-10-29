@@ -59,7 +59,7 @@ class ProgramInfoRouter: Router {
     
     private func fullChart(with programDetailsFull: ProgramDetailsFull) {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program) else { return }
-        let router = ProgramDetailFullChartRouter(parentRouter: self, navigationController: navigationController)
+        let router = self.parentRouter?.parentRouter as! ProgramRouter
         let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
         viewController.viewModel = viewModel
         viewController.modalTransitionStyle = .crossDissolve

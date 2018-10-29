@@ -276,7 +276,7 @@ extension WalletControllerViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
-        return text.uppercased()
+        let text = ""
+        return text
     }
 }

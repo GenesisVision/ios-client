@@ -19,6 +19,7 @@ class FundInfoViewController: BaseViewControllerWithTableView {
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
+            tableView.isScrollEnabled = false
         }
     }
     

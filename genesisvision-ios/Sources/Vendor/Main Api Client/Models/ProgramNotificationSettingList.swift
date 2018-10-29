@@ -13,7 +13,7 @@ open class ProgramNotificationSettingList: Codable {
 
     public var level: Int?
     public var settingsCustom: [NotificationSettingViewModel]?
-    public var programId: UUID?
+    public var assetId: UUID?
     public var title: String?
     public var url: String?
     public var logo: String?
@@ -21,10 +21,10 @@ open class ProgramNotificationSettingList: Codable {
 
 
     
-    public init(level: Int?, settingsCustom: [NotificationSettingViewModel]?, programId: UUID?, title: String?, url: String?, logo: String?, settingsGeneral: [NotificationSettingViewModel]?) {
+    public init(level: Int?, settingsCustom: [NotificationSettingViewModel]?, assetId: UUID?, title: String?, url: String?, logo: String?, settingsGeneral: [NotificationSettingViewModel]?) {
         self.level = level
         self.settingsCustom = settingsCustom
-        self.programId = programId
+        self.assetId = assetId
         self.title = title
         self.url = url
         self.logo = logo
@@ -40,7 +40,7 @@ open class ProgramNotificationSettingList: Codable {
 
         try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(settingsCustom, forKey: "settingsCustom")
-        try container.encodeIfPresent(programId, forKey: "programId")
+        try container.encodeIfPresent(assetId, forKey: "assetId")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -54,7 +54,7 @@ open class ProgramNotificationSettingList: Codable {
 
         level = try container.decodeIfPresent(Int.self, forKey: "level")
         settingsCustom = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsCustom")
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
+        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

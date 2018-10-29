@@ -69,6 +69,8 @@ class ProgramWithdrawViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
+            numpadView.backgroundColor = UIColor.BaseView.bg
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -178,7 +180,7 @@ class ProgramWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 400
+        bottomSheetController.initializeHeight = 300.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         let periodEnds = viewModel.programWithdrawInfo?.periodEnds

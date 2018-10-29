@@ -13,7 +13,7 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     var type: ListType = .programList
     
    // MARK: - Variables
-    var title: String = "Favorite programs".uppercased()
+    var title: String = "Favorite programs"
 
     internal var sections: [SectionType] = [.assetList]
     
@@ -21,37 +21,19 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var sortingDelegateManager = SortingDelegateManager()
+    var sortingDelegateManager: SortingDelegateManager!
     
-    var highToLowValue: Bool = false
+    var dateFrom: Date?
+    var dateTo: Date?
     
-    var dateRangeType: DateRangeType = .day {
-        didSet {
-            switch dateRangeType {
-            case .custom:
-                dateRangeTo.setTime(hour: 0, min: 0, sec: 0)
-                dateRangeFrom.setTime(hour: 23, min: 59, sec: 59)
-            default:
-                let calendar = Calendar.current
-                let hour = calendar.component(.hour, from: dateRangeTo)
-                let min = calendar.component(.minute, from: dateRangeTo)
-                let sec = calendar.component(.second, from: dateRangeTo)
-                dateRangeFrom.setTime(hour: hour, min: min, sec: sec)
-            }
-        }
-    }
-    var dateRangeFrom: Date = Date().previousDate()
-    var dateRangeTo: Date = Date()
+    var mask: String?
+    var isFavorite: Bool = false
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var equityChartLength = Constants.Api.equityChartLength
-    var skip = 0 {
-        didSet {
-            filter?.skip = skip
-        }
-    }
+    var chartPointsCount = Constants.Api.equityChartLength
+    var skip = 0
     var take = Constants.Api.take
     var totalCount = 0 {
         didSet {
@@ -66,12 +48,12 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     }
     
     public private(set) var needToRefresh = false
-    var filter: ProgramsFilter?
+    
     internal var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Constants.Sorting.programListDefault
     
     var searchText = "" {
         didSet {
-            filter?.name = searchText
+            mask = searchText
         }
     }
     var viewModels = [CellViewAnyModel]()
@@ -107,35 +89,7 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-//        filter = ProgramsFilter(managerId: nil,
-//                                          brokerId: nil,
-//                                          brokerTradeServerId: nil,
-//                                          investMaxAmountFrom: nil,
-//                                          investMaxAmountTo: nil,
-//                                          sorting: nil, //TODO: sorting,
-//                                          name: searchText,
-//                                          levelMin: nil,
-//                                          levelMax: nil,
-//                                          balanceUsdMin: nil,
-//                                          balanceUsdMax: nil,
-//                                          profitAvgMin: nil,
-//                                          profitAvgMax: nil,
-//                                          profitTotalMin: nil,
-//                                          profitTotalMax: nil,
-//                                          profitTotalPercentMin: nil,
-//                                          profitTotalPercentMax: nil,
-//                                          profitAvgPercentMin: nil,
-//                                          profitAvgPercentMax: nil,
-//                                          profitTotalChange: nil,
-//                                          periodMin: nil,
-//                                          periodMax: nil,
-//                                          showActivePrograms: nil,
-//                                          equityChartLength: equityChartLength,
-//                                          showMyFavorites: true,
-//                                          roundNumber: nil,
-//                                          skip: skip,
-//                                          take: take)
-        
+        sortingDelegateManager = SortingDelegateManager(.programs)
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
     

@@ -17,6 +17,8 @@ class FundInvestViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
+            numpadView.backgroundColor = UIColor.BaseView.bg
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -53,7 +55,6 @@ class FundInvestViewController: BaseViewController {
     @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
-            amountToInvestCurrencyLabel.isHidden = true
         }
     }
     
@@ -208,20 +209,17 @@ class FundInvestViewController: BaseViewController {
         bottomSheetController = BottomSheetController()
         bottomSheetController.tintColor = UIColor.Cell.bg
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 500.0
+        bottomSheetController.initializeHeight = 480.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-        let periodEnds = viewModel.fundInvestInfo?.periodEnds
-        let periodEndsString = periodEnds?.defaultFormatString ?? ""
-        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
-        
+
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {
              firstValue = amount + " GVT"
         }
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
-                                                          subtitle: subtitle,
+                                                          subtitle: nil,
                                                           programLogo: nil,
                                                           programTitle: viewModel.fundInvestInfo?.title,
                                                           managerName: nil,

@@ -33,22 +33,22 @@ open class NotificationsAPI {
   "total" : 0,
   "notifications" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "url" : "url",
     "isUnread" : true
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "url" : "url",
     "isUnread" : true
   } ]
@@ -154,15 +154,15 @@ open class NotificationsAPI {
      Add new setting
      
      - parameter authorization: (header) JWT access token 
-     - parameter programId: (query)  (optional)
+     - parameter assetId: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter type: (query)  (optional)
      - parameter conditionType: (query)  (optional)
      - parameter conditionAmount: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10NotificationsSettingsAddPost(authorization: String, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
-        v10NotificationsSettingsAddPostWithRequestBuilder(authorization: authorization, programId: programId, managerId: managerId, type: type, conditionType: conditionType, conditionAmount: conditionAmount).execute { (response, error) -> Void in
+    open class func v10NotificationsSettingsAddPost(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+        v10NotificationsSettingsAddPostWithRequestBuilder(authorization: authorization, assetId: assetId, managerId: managerId, type: type, conditionType: conditionType, conditionAmount: conditionAmount).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -174,7 +174,7 @@ open class NotificationsAPI {
      - examples: [{contentType=application/json, example="046b6c7f-0b8a-43b9-b35d-6489e6daee91"}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter programId: (query)  (optional)
+     - parameter assetId: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter type: (query)  (optional)
      - parameter conditionType: (query)  (optional)
@@ -182,14 +182,14 @@ open class NotificationsAPI {
 
      - returns: RequestBuilder<UUID> 
      */
-    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, programId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<UUID> {
+    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<UUID> {
         let path = "/v1.0/notifications/settings/add"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "ProgramId": programId, 
+            "AssetId": assetId, 
             "ManagerId": managerId, 
             "Type": type?.rawValue, 
             "ConditionType": conditionType?.rawValue, 
@@ -269,26 +269,26 @@ open class NotificationsAPI {
      User settings for fund
      - GET /v1.0/notifications/settings/funds/{id}
      - examples: [{contentType=application/json, example={
+  "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",
   "settingsGeneral" : [ {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   }, {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   } ],
   "title" : "title",
-  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "url" : "url"
 }}]
      
@@ -334,103 +334,103 @@ open class NotificationsAPI {
      - examples: [{contentType=application/json, example={
   "settingsProgram" : [ {
     "level" : 6,
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "title" : "title",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "url" : "url",
     "settingsCustom" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ]
   }, {
     "level" : 6,
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "title" : "title",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "url" : "url",
     "settingsCustom" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ]
   } ],
   "settingsManager" : [ {
     "about" : "about",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
@@ -439,21 +439,21 @@ open class NotificationsAPI {
   }, {
     "about" : "about",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
@@ -461,102 +461,66 @@ open class NotificationsAPI {
     "username" : "username"
   } ],
   "settingsGeneral" : [ {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   }, {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   } ],
   "settingsFund" : [ {
-    "level" : 6,
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "title" : "title",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "url" : "url",
-    "settingsCustom" : [ {
-      "isEnabled" : true,
-      "conditionAmount" : 0.8008281904610115,
-      "conditionType" : "Empty",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }, {
-      "isEnabled" : true,
-      "conditionAmount" : 0.8008281904610115,
-      "conditionType" : "Empty",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    "url" : "url"
   }, {
-    "level" : 6,
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
       "conditionAmount" : 0.8008281904610115,
       "conditionType" : "Empty",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      "type" : "PlatformNewsAndUpdates"
     } ],
     "title" : "title",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "url" : "url",
-    "settingsCustom" : [ {
-      "isEnabled" : true,
-      "conditionAmount" : 0.8008281904610115,
-      "conditionType" : "Empty",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }, {
-      "isEnabled" : true,
-      "conditionAmount" : 0.8008281904610115,
-      "conditionType" : "Empty",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "PlatformNewsAndUpdates",
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    "url" : "url"
   } ]
 }}]
      
@@ -601,21 +565,21 @@ open class NotificationsAPI {
      - examples: [{contentType=application/json, example={
   "about" : "about",
   "settingsGeneral" : [ {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   }, {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   } ],
   "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "avatar" : "avatar",
@@ -665,43 +629,43 @@ open class NotificationsAPI {
      - GET /v1.0/notifications/settings/programs/{id}
      - examples: [{contentType=application/json, example={
   "level" : 6,
+  "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",
   "settingsGeneral" : [ {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   }, {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   } ],
   "title" : "title",
-  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "url" : "url",
   "settingsCustom" : [ {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   }, {
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    "type" : "PlatformNewsAndUpdates"
   } ]
 }}]
      

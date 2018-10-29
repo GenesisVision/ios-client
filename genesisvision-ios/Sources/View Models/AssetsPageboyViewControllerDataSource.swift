@@ -18,8 +18,8 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
         if let router = router as? DashboardRouter {
             let programListViewController = DashboardProgramListViewController()
             let fundListViewController = DashboardFundListViewController()
-            
             programListViewController.tableViewStyle = .plain
+            fundListViewController.tableViewStyle = .plain
             
             router.programListViewController = programListViewController
             router.fundListViewController = fundListViewController
@@ -30,7 +30,7 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             let fundsViewModel = DashboardFundListViewModel(withRouter: router)
             fundListViewController.viewModel = fundsViewModel
             
-            controllers = [programListViewController, fundListViewController]
+            controllers = [fundListViewController, programListViewController]
         } else {
             guard let programListViewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
             router.programsViewController = programListViewController
@@ -46,7 +46,7 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController)
             fundListViewController.viewModel = fundsViewModel
             
-            controllers = [programListViewController, fundListViewController]
+            controllers = [fundListViewController, programListViewController]
         }
     }
     

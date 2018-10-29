@@ -23,6 +23,8 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -60,7 +62,7 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
             
             switch result {
             case .success:
-                self?.reloadData()
+                break
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
@@ -102,12 +104,8 @@ extension FundBalanceViewController: ChartViewProtocol {
     }
 }
 
-extension FundBalanceViewController: ChartMarkerProtocol {
-    func didHideMarker() {
-        tableView.isScrollEnabled = true
-    }
-    
-    func didChangeMarker() {
-        tableView.isScrollEnabled = false
+extension FundBalanceViewController: ReloadDataProtocol {
+    func didReloadData() {
+        reloadData()
     }
 }

@@ -21,7 +21,7 @@ final class ProgramInfoViewModel {
     }
 
     // MARK: - Variables
-    var title: String = "Info".uppercased()
+    var title: String = "Info"
     
     private var router: ProgramInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -124,6 +124,12 @@ final class ProgramInfoViewModel {
             }
         default:
             break
+        }
+    }
+    
+    func hideHeader(value: Bool = true) {
+        if let detailsRouter = router.parentRouter, let programRouter = detailsRouter.parentRouter as? ProgramRouter {
+            programRouter.programViewController.hideHeader(value)
         }
     }
 }
@@ -244,7 +250,7 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
         guard let programId = programId else { return }
         
         ProgramsDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (programRequests) in
-            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramDetailsRouter, let viewController = parentRouter.programInfoViewController {
+            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramTabmanRouter, let viewController = parentRouter.programInfoViewController {
                 viewController.showRequests(programRequests)
             }
         }) { (result) in

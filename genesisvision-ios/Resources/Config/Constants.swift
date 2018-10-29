@@ -139,7 +139,10 @@ final class Constants {
     
     struct Sorting {
         static let programListDefault: ProgramsAPI.Sorting_v10ProgramsGet = .byProfitDesc
-        static let dashboardDefault: InvestorAPI.Sorting_v10InvestorProgramsGet = .byProfitDesc
+        static let dashboardProgramDefault: InvestorAPI.Sorting_v10InvestorProgramsGet = .byProfitDesc
+        
+        static let fundListDefault: FundsAPI.Sorting_v10FundsGet = .byProfitDesc
+        static let dashboardFundDefault: InvestorAPI.Sorting_v10InvestorFundsGet = .byProfitDesc
     }
     
     struct Security {

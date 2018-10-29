@@ -11,25 +11,25 @@ import Foundation
 
 open class ProgramInvestInfo: Codable {
 
+    public var periodEnds: Date?
     public var availableToInvest: Double?
     public var title: String?
     public var availableInWallet: Double?
     public var minInvestmentAmount: Double?
     public var entryFee: Double?
     public var gvCommission: Double?
-    public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, periodEnds: Date?, rate: Double?) {
+    public init(periodEnds: Date?, availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?) {
+        self.periodEnds = periodEnds
         self.availableToInvest = availableToInvest
         self.title = title
         self.availableInWallet = availableInWallet
         self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
         self.gvCommission = gvCommission
-        self.periodEnds = periodEnds
         self.rate = rate
     }
     
@@ -40,13 +40,13 @@ open class ProgramInvestInfo: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(availableToInvest, forKey: "availableToInvest")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableInWallet, forKey: "availableInWallet")
         try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(gvCommission, forKey: "gvCommission")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
 
@@ -55,13 +55,13 @@ open class ProgramInvestInfo: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableToInvest = try container.decodeIfPresent(Double.self, forKey: "availableToInvest")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableInWallet = try container.decodeIfPresent(Double.self, forKey: "availableInWallet")
         minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         gvCommission = try container.decodeIfPresent(Double.self, forKey: "gvCommission")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }

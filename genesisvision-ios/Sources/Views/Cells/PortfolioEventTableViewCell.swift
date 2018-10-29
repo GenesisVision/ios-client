@@ -27,6 +27,7 @@ class PortfolioEventTableViewCell: UITableViewCell {
     @IBOutlet var dateLabel: SubtitleLabel!
     @IBOutlet var amountLabel: SubtitleLabel! {
         didSet {
+            amountLabel.font = UIFont.getFont(.semibold, size: 12.0)
             amountLabel.textColor = UIColor.Cell.greenTitle
         }
     }
@@ -40,9 +41,5 @@ class PortfolioEventTableViewCell: UITableViewCell {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        
     }
 }

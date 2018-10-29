@@ -149,23 +149,23 @@ extension Date {
         
         
         if year >= 2{
-            return "\(year) years"
+            return "\(year) y"
         } else if (year >= 1){
             return "1 year"
         } else if (month >= 2) {
-            return "\(month) months"
+            return "\(month) m"
         } else if (month >= 1) {
             return "1 month"
         } else  if (week >= 2) {
-            return "\(week) weeks"
+            return "\(week) w"
         } else if (week >= 1){
             return "1 week"
         } else if (day >= 2) {
-            return "\(day) days"
+            return "\(day) d"
         } else if (day >= 1){
             return "1 day"
         } else if (hours >= 2) {
-            return "\(hours) hours"
+            return "\(hours) h"
         } else if (hours >= 1){
             return "1 hour"
         } else if (minutes >= 2) {

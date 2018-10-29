@@ -20,6 +20,7 @@ class EventsViewController: BaseViewController {
     @IBOutlet weak var showAllButton: UIButton! {
         didSet {
             showAllButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            showAllButton.tintColor = UIColor.Cell.title
         }
     }
     

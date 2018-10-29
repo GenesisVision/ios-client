@@ -12,15 +12,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: DashboardFundListViewModel!
-    
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
-    // MARK: - Views
+    var firstTimeSetup3dTouch: Bool = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,29 +23,36 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        fetch()
     }
     
     // MARK: - Private methods
     private func setup() {
-        registerForPreviewing()
-        
+        viewModel.fundListDelegateManager.delegate = self
+        register3dTouch()
         setupUI()
+        
+        showProgressHUD()
     }
     
     private func setupUI() {
+        noDataTitle = viewModel.noDataText()
+        noDataButtonTitle = viewModel.noDataButtonTitle()
+        if let imageName = viewModel.noDataImageName() {
+            noDataImage = UIImage(named: imageName)
+        }
+        
+        setupTableConfiguration()
+        
         bottomViewType = viewModel.bottomViewType
         
-        sortButton.setTitle(self.viewModel?.sortingDelegateManager.sortTitle(), for: .normal)
-        
-        tableView.isScrollEnabled = false
+        let sortTitle = self.viewModel?.sortingDelegateManager.sortingManager?.sortTitle()
+        sortButton.setTitle(sortTitle, for: .normal)
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = -44.0
-        
+        tableView.isScrollEnabled = false
         tableView.bounces = true
         tableView.delegate = self.viewModel?.fundListDelegateManager
         tableView.dataSource = self.viewModel?.fundListDelegateManager
@@ -70,17 +69,29 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     }
     
     private func sortMethod() {
+        guard let sortingManager = viewModel.sortingDelegateManager.sortingManager else { return }
+        
         bottomSheetController = BottomSheetController()
-        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: #imageLiteral(resourceName: "img_profit_filter_icon"), selectedImage: #imageLiteral(resourceName: "img_profit_filter_desc_icon"), buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: viewModel.highToLowValue)
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: #imageLiteral(resourceName: "img_profit_filter_icon"), selectedImage: #imageLiteral(resourceName: "img_profit_filter_desc_icon"), buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
-            tableView.delegate = self?.viewModel.sortingDelegateManager
-            tableView.dataSource = self?.viewModel.sortingDelegateManager
             tableView.separatorStyle = .none
+            
+            guard let sortingDelegateManager = self?.viewModel.sortingDelegateManager else { return }
+            tableView.registerNibs(for: sortingDelegateManager.cellModelsForRegistration)
+            tableView.delegate = sortingDelegateManager
+            tableView.dataSource = sortingDelegateManager
         }
         
         viewModel.sortingDelegateManager.tableViewProtocol = self
         bottomSheetController.present()
+    }
+    
+    // MARK: - Public methods
+    override func register3dTouch() {
+        if !firstTimeSetup3dTouch {
+            firstTimeSetup3dTouch = registerForPreviewing()
+        }
     }
     
     override func fetch() {
@@ -108,7 +119,11 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Actions
     @objc func highToLowButtonAction() {
-        viewModel.highToLowValue = !viewModel.highToLowValue
+        if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
+            sortingManager.highToLowValue = !sortingManager.highToLowValue
+        }
+        
+        fetch()
         bottomSheetController.dismiss()
     }
 }
@@ -165,32 +180,6 @@ extension DashboardFundListViewController: FavoriteStateChangeProtocol {
     }
 }
 
-extension DashboardFundListViewController {
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        if let imageName = viewModel.noDataImageName() {
-            return UIImage(named: imageName)
-        }
-        
-        return UIImage.noDataPlaceholder
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = viewModel.noDataButtonTitle()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-
 extension DashboardFundListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
@@ -198,3 +187,12 @@ extension DashboardFundListViewController: SortingDelegate {
     }
 }
 
+extension DashboardFundListViewController: DelegateManagerProtocol {
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDidScroll(scrollView)
+    }
+    
+    func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewWillBeginDragging(scrollView)
+    }
+}

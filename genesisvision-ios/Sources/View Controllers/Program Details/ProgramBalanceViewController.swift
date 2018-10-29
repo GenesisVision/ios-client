@@ -23,6 +23,8 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -99,15 +101,5 @@ extension ProgramBalanceViewController: ChartViewProtocol {
         print("chartValueSelected")
         tableView.isScrollEnabled = false
         viewModel.selectProgramBalanceChartElement(date)
-    }
-}
-
-extension ProgramBalanceViewController: ChartMarkerProtocol {
-    func didHideMarker() {
-        tableView.isScrollEnabled = true
-    }
-    
-    func didChangeMarker() {
-        tableView.isScrollEnabled = false
     }
 }

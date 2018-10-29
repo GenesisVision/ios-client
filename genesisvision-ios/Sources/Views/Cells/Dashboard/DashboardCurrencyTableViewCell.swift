@@ -14,6 +14,7 @@ class DashboardCurrencyTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.isHidden = true
+            titleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var subtitleLabel: SubtitleLabel! {

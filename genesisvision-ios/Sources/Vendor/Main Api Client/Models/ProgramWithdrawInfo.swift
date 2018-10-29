@@ -11,17 +11,17 @@ import Foundation
 
 open class ProgramWithdrawInfo: Codable {
 
+    public var periodEnds: Date?
     public var title: String?
     public var availableToWithdraw: Double?
-    public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(title: String?, availableToWithdraw: Double?, periodEnds: Date?, rate: Double?) {
+    public init(periodEnds: Date?, title: String?, availableToWithdraw: Double?, rate: Double?) {
+        self.periodEnds = periodEnds
         self.title = title
         self.availableToWithdraw = availableToWithdraw
-        self.periodEnds = periodEnds
         self.rate = rate
     }
     
@@ -32,9 +32,9 @@ open class ProgramWithdrawInfo: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableToWithdraw, forKey: "availableToWithdraw")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
 
@@ -43,9 +43,9 @@ open class ProgramWithdrawInfo: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableToWithdraw = try container.decodeIfPresent(Double.self, forKey: "availableToWithdraw")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }

@@ -10,10 +10,10 @@ import UIKit
 
 final class ProgramHistoryViewModel {
     // MARK: - Variables
-    var title: String = "History".uppercased()
+    var title: String = "History"
     var programId: String?
     
-    var router: ProgramHistoryRouter!
+    var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
@@ -30,10 +30,14 @@ final class ProgramHistoryViewModel {
     var viewModels = [WalletTransactionTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramHistoryRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
+    }
+
+    func hideHeader(value: Bool = true) {
+        router.programViewController.hideHeader(value)
     }
 }
 

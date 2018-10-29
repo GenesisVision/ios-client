@@ -17,8 +17,8 @@ struct DashboardFundTableViewCellViewModel {
 
 extension DashboardFundTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
+        setupFundBottomView(on: cell)
         
-        cell.bottomStackView.isHidden = true
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
         cell.viewForChartView.isHidden = cell.chartView.isHidden
@@ -100,6 +100,42 @@ extension DashboardFundTableViewCellViewModel: CellViewModel {
         
         if let isInvested = fund.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested
+        }
+    }
+    
+    func setupFundBottomView(on cell: ProgramTableViewCell) {
+        guard let totalAssetsCount = fund.totalAssetsCount, totalAssetsCount > 0, let topFundAssets = fund.topFundAssets else { return }
+        
+        cell.fundBottomStackView.isHidden = false
+        
+        if let logo = topFundAssets[0].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[0].percent {
+            cell.firstFunAssetView.isHidden = false
+            cell.firstFunAssetView.assetLogoImageView.kf.indicatorType = .activity
+            cell.firstFunAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
+            
+            cell.firstFunAssetView.assetPercentLabel.text = percent.rounded(withType: .undefined).toString() + "%"
+        }
+        
+        
+        if totalAssetsCount > 1, let logo = topFundAssets[1].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[1].percent {
+            cell.secondFunAssetView.isHidden = false
+            cell.secondFunAssetView.assetLogoImageView.kf.indicatorType = .activity
+            cell.secondFunAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
+            
+            cell.secondFunAssetView.assetPercentLabel.text = percent.rounded(withType: .undefined).toString() + "%"
+        }
+        
+        if totalAssetsCount > 2, let logo = topFundAssets[2].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[2].percent {
+            cell.thirdFunAssetView.isHidden = false
+            cell.thirdFunAssetView.assetLogoImageView.kf.indicatorType = .activity
+            cell.thirdFunAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
+            
+            cell.thirdFunAssetView.assetPercentLabel.text = percent.rounded(withType: .undefined).toString() + "%"
+        }
+        
+        if totalAssetsCount > 3 {
+            cell.otherFunAssetView.isHidden = false
+            cell.otherFunAssetView.assetPercentLabel.text = "+\(totalAssetsCount - 3)"
         }
     }
 }

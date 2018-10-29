@@ -30,7 +30,7 @@ class ProgramViewController: BaseViewController {
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
     var programHeaderViewController: ProgramHeaderViewController?
-    var programDetailsTabmanViewController: ProgramDetailsTabmanViewController?
+    var programDetailsTabmanViewController: ProgramTabmanViewController?
     
     @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
@@ -66,13 +66,13 @@ class ProgramViewController: BaseViewController {
             segue.identifier == "ProgramHeaderViewControllerSegue" {
             self.viewModel?.router?.programHeaderViewController = programHeaderViewController
             self.programHeaderViewController = programHeaderViewController
-        } else if let tabmanViewController = segue.destination as? ProgramDetailsTabmanViewController,
-            segue.identifier == "ProgramDetailsTabmanViewControllerSegue" {
+        } else if let tabmanViewController = segue.destination as? ProgramTabmanViewController,
+            segue.identifier == "ProgramTabmanViewControllerSegue" {
             
             tabmanViewController.programInfoViewControllerProtocol = self
             
-            let router = ProgramDetailsRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = ProgramDetailsViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
+            let router = ProgramTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
+            let viewModel = ProgramTabmanViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
             viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
             
@@ -85,6 +85,14 @@ class ProgramViewController: BaseViewController {
         super.pullToRefresh()
         
         fetch()
+    }
+    
+    // MARK: - Public methods
+    func hideHeader(_ value: Bool) {
+        let scrollOffset = CGPoint(x: 0.0, y: value ? 94.0 : 0.0)
+        scrollView.setContentOffset(scrollOffset, animated: true)
+//        scrollView.isScrollEnabled = !value
+        viewModel.setScrollEnable(value)
     }
     
     // MARK: - Private methods
@@ -163,6 +171,11 @@ class ProgramViewController: BaseViewController {
 extension ProgramViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
+        
+//        if scrollView.contentOffset.y >= 94.0 {
+//            scrollView.contentOffset.y = 94.0
+//        }
+        
         let yOffset = scrollView.contentOffset.y + topConstant
         
         let alpha = yOffset / (self.scrollView.contentSize.height - self.scrollView.frame.size.height + topConstant)
@@ -190,22 +203,19 @@ extension ProgramViewController {
             }
         }
         
-        if let programDetailsTabmanViewController = programDetailsTabmanViewController {
-            programDetailsTabmanViewController.scrollEnabled = false
-            
-            if yOffset - (minHeaderHeight - topConstant) == programDetailsTabmanViewController.view.frame.origin.y {
-                programDetailsTabmanViewController.scrollEnabled = true
-            }
-        }
+//        if let programDetailsTabmanViewController = programDetailsTabmanViewController {
+//            programDetailsTabmanViewController.scrollEnabled = false
+//
+//            if yOffset - (minHeaderHeight - topConstant) == programDetailsTabmanViewController.view.frame.origin.y {
+//                programDetailsTabmanViewController.scrollEnabled = true
+//            }
+//        }
         
         if scrollView == self.scrollView {
             if let viewModel = viewModel.router.programDetailsTabmanViewController?.viewModel {
                 for controller in viewModel.viewControllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-                        print(detailsView.frame.origin.y)
-                        print(yOffset)
-                        
-                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - 44.0 - 44.0
+                        vc.tableView?.isScrollEnabled = scrollView.contentOffset.y >= 94.0
                     }
                 }
             }

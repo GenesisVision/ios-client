@@ -16,18 +16,16 @@ open class FundInvestInfo: Codable {
     public var minInvestmentAmount: Double?
     public var entryFee: Double?
     public var gvCommission: Double?
-    public var periodEnds: Date?
     public var rate: Double?
 
 
     
-    public init(title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, periodEnds: Date?, rate: Double?) {
+    public init(title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?) {
         self.title = title
         self.availableInWallet = availableInWallet
         self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
         self.gvCommission = gvCommission
-        self.periodEnds = periodEnds
         self.rate = rate
     }
     
@@ -43,7 +41,6 @@ open class FundInvestInfo: Codable {
         try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(gvCommission, forKey: "gvCommission")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(rate, forKey: "rate")
     }
 
@@ -57,7 +54,6 @@ open class FundInvestInfo: Codable {
         minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         gvCommission = try container.decodeIfPresent(Double.self, forKey: "gvCommission")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
     }
 }

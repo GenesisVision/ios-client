@@ -165,6 +165,7 @@ open class ProfileAPI {
      Get header profile
      - GET /v1.0/profile/header
      - examples: [{contentType=application/json, example={
+  "isTwoFactorEnabled" : true,
   "name" : "name",
   "notificationsCount" : 1,
   "kycConfirmed" : true,
@@ -276,6 +277,43 @@ open class ProfileAPI {
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileVerificationTokenPost(authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        v10ProfileVerificationTokenPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - POST /v1.0/profile/verification/token
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func v10ProfileVerificationTokenPostWithRequestBuilder(authorization: String) -> RequestBuilder<String> {
+        let path = "/v1.0/profile/verification/token"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }
