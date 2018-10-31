@@ -52,10 +52,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let viewModel = viewModel as? FavoriteProgramListViewModel, viewModel.needToRefresh {
-            fetch()
-        }
     }
     
     // MARK: - Private methods
@@ -71,8 +67,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func setup() {
         registerForPreviewing()
         
-        showProgressHUD()
-        fetch()
         setupUI()
     }
     
@@ -168,6 +162,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         
+        showProgressHUD()
         fetch()
     }
     
@@ -177,8 +172,10 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
-        fetch()
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
+        fetch()
     }
 }
 
@@ -315,6 +312,8 @@ extension ProgramListViewController: UISearchBarDelegate {
 extension ProgramListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }

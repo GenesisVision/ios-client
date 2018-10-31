@@ -127,6 +127,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        self.placeholderColor = UIColor.Cell.subtitle
+        
         borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - bottomlineHeight, width: Double(self.frame.width), height: bottomlineHeight)
     }
     

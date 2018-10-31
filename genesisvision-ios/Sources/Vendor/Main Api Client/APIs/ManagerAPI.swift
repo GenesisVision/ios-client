@@ -402,18 +402,20 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.965117697638846,
-  "total" : 3,
+  "totalValue" : 1.284659006116532,
+  "total" : 6,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -422,11 +424,13 @@ open class ManagerAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -660,18 +664,18 @@ open class ManagerAPI {
      * enum for parameter sorting
      */
     public enum Sorting_v10ManagerFundsGet: String { 
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case byShareAsc = "ByShareAsc"
-        case byShareDesc = "ByShareDesc"
-        case byInvestmentsAsc = "ByInvestmentsAsc"
-        case byInvestmentsDesc = "ByInvestmentsDesc"
-        case byWithdrawalsAsc = "ByWithdrawalsAsc"
-        case byWithdrawalsDesc = "ByWithdrawalsDesc"
-        case byBalanceAsc = "ByBalanceAsc"
-        case byBalanceDesc = "ByBalanceDesc"
         case byProfitAsc = "ByProfitAsc"
         case byProfitDesc = "ByProfitDesc"
+        case byDrawdownAsc = "ByDrawdownAsc"
+        case byDrawdownDesc = "ByDrawdownDesc"
+        case byInvestorsAsc = "ByInvestorsAsc"
+        case byInvestorsDesc = "ByInvestorsDesc"
+        case byNewAsc = "ByNewAsc"
+        case byNewDesc = "ByNewDesc"
+        case byTitleAsc = "ByTitleAsc"
+        case byTitleDesc = "ByTitleDesc"
+        case byBalanceAsc = "ByBalanceAsc"
+        case byBalanceDesc = "ByBalanceDesc"
     }
 
     /**
@@ -769,7 +773,7 @@ open class ManagerAPI {
       "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -833,7 +837,7 @@ open class ManagerAPI {
       "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1067,11 +1071,13 @@ open class ManagerAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -1411,18 +1417,20 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.965117697638846,
-  "total" : 3,
+  "totalValue" : 1.284659006116532,
+  "total" : 6,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -1431,11 +1439,13 @@ open class ManagerAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -1669,20 +1679,26 @@ open class ManagerAPI {
      * enum for parameter sorting
      */
     public enum Sorting_v10ManagerProgramsGet: String { 
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case byShareAsc = "ByShareAsc"
-        case byShareDesc = "ByShareDesc"
-        case byInvestmentsAsc = "ByInvestmentsAsc"
-        case byInvestmentsDesc = "ByInvestmentsDesc"
-        case byWithdrawalsAsc = "ByWithdrawalsAsc"
-        case byWithdrawalsDesc = "ByWithdrawalsDesc"
-        case byTimeLeftAsc = "ByTimeLeftAsc"
-        case byTimeLeftDesc = "ByTimeLeftDesc"
-        case byBalanceAsc = "ByBalanceAsc"
-        case byBalanceDesc = "ByBalanceDesc"
+        case byLevelAsc = "ByLevelAsc"
+        case byLevelDesc = "ByLevelDesc"
         case byProfitAsc = "ByProfitAsc"
         case byProfitDesc = "ByProfitDesc"
+        case byDrawdownAsc = "ByDrawdownAsc"
+        case byDrawdownDesc = "ByDrawdownDesc"
+        case byTradesAsc = "ByTradesAsc"
+        case byTradesDesc = "ByTradesDesc"
+        case byInvestorsAsc = "ByInvestorsAsc"
+        case byInvestorsDesc = "ByInvestorsDesc"
+        case byNewDesc = "ByNewDesc"
+        case byNewAsc = "ByNewAsc"
+        case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
+        case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
+        case byTitleAsc = "ByTitleAsc"
+        case byTitleDesc = "ByTitleDesc"
+        case byBalanceAsc = "ByBalanceAsc"
+        case byBalanceDesc = "ByBalanceDesc"
+        case byCurrDesc = "ByCurrDesc"
+        case byCurrAsc = "ByCurrAsc"
     }
 
     /**
@@ -1781,7 +1797,7 @@ open class ManagerAPI {
       "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "currency" : "Undefined",
@@ -1847,7 +1863,7 @@ open class ManagerAPI {
       "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "currency" : "Undefined",
@@ -1999,18 +2015,20 @@ open class ManagerAPI {
      Get all requests
      - GET /v1.0/manager/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.965117697638846,
-  "total" : 3,
+  "totalValue" : 1.284659006116532,
+  "total" : 6,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
@@ -2019,11 +2037,13 @@ open class ManagerAPI {
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "fundWithdrawPercent" : 6.438423552598547,
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "valueGvt" : 6.438423552598547,
+    "fundWithdrawPercent" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 9.018348186070783,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"

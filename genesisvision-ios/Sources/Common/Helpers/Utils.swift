@@ -52,9 +52,8 @@ func getPeriodDuration(from minutes: Int) -> String? {
     return periodLeftValue > 0 ? "\(periodLeftValue) " + periodLeftTimeString : nil
 }
 
-func getDecimalCount(for currencyValue: String?) -> Int {
-    guard let currencyValue = currencyValue,
-        let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(rawValue: currency.rawValue) else { return 2 }
+func getDecimalCount(for currencyType: CurrencyType?) -> Int {
+    guard let currencyType = currencyType else { return 2 }
 
     return currencyType.currencyLenght
 }
@@ -165,7 +164,7 @@ func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx
 }
 
 func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
-    PlatformManager.getPlatformInfo(completion: { (model) in
+    PlatformManager.shared.getPlatformInfo(completion: { (model) in
         guard let platformInfo = model,
             let iOSVersion = platformInfo.iOSVersion,
             let lastVersion = iOSVersion.lastVersion,

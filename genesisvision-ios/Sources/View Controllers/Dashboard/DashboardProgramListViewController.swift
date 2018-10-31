@@ -122,8 +122,10 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
-        fetch()
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
+        fetch()
     }
 }
 
@@ -182,6 +184,8 @@ extension DashboardProgramListViewController: FavoriteStateChangeProtocol {
 extension DashboardProgramListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }

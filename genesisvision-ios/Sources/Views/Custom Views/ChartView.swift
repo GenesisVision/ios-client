@@ -35,7 +35,10 @@ class ChartView: CombinedChartView {
     private var currencyValue: String = ""
     
     private var chartType: ChartType = .detail
+    
     private var dateRangeType: DateRangeType!
+    private var dateFrom: Date?
+    private var dateTo: Date?
     
     private var minLimitLine: ChartLimitLine!
     private var maxLimitLine: ChartLimitLine!
@@ -68,7 +71,7 @@ class ChartView: CombinedChartView {
 
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
-            lineChartDataSet.mode = .horizontalBezier
+            lineChartDataSet.mode = chartType == .default ? .horizontalBezier : .linear
         }
     }
     
@@ -95,7 +98,9 @@ class ChartView: CombinedChartView {
                fundBalanceChartData: [BalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
-               dateRangeType: DateRangeType? = nil) {
+               dateRangeType: DateRangeType? = .week,
+               dateFrom: Date? = nil,
+               dateTo: Date? = nil ) {
         
         self.chartType = chartType
         self.name = name
@@ -104,7 +109,9 @@ class ChartView: CombinedChartView {
         self.programBalanceChartData = programBalanceChartData
         self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
-        self.dateRangeType = dateRangeType ?? .week
+        self.dateRangeType = dateRangeType
+        self.dateFrom = dateFrom
+        self.dateTo = dateTo
 
         updateData()
         
@@ -144,8 +151,12 @@ class ChartView: CombinedChartView {
             minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
         
-        xAxis.axisMaximum = data.xMax + (Date().addDays(1).timeIntervalSince1970 - Date().timeIntervalSince1970) / 10
-        xAxis.axisMinimum = data.xMin - (Date().addDays(1).timeIntervalSince1970 - Date().timeIntervalSince1970) / 10
+//        if let dateFrom = dateFrom, let dateTo = dateTo {
+//            let width = Date(timeIntervalSince1970: data.xMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: data.xMin)) / 60
+//                
+//            xAxis.axisMaximum = dateTo.timeIntervalSince1970 + Double(width)
+//            xAxis.axisMinimum = dateFrom.timeIntervalSince1970 - Double(width)
+//        }
         
         self.data = data
     }
@@ -154,7 +165,9 @@ class ChartView: CombinedChartView {
     @objc func handleTap(recognizer: UIGestureRecognizer) {
         switch recognizer.state {
         case .ended, .cancelled:
-            highlightValue(nil, callDelegate: true)
+            if chartType != .dashboard {
+                 highlightValue(nil, callDelegate: true)
+            }
         case .changed:
             break
         default:
@@ -177,7 +190,7 @@ class ChartView: CombinedChartView {
         dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
 
-        highlightPerTapEnabled = false
+        highlightPerTapEnabled = chartType == .dashboard
         highlightPerDragEnabled = chartType != .default
 
         let rightAxisFormatter = NumberFormatter()
@@ -249,21 +262,21 @@ class ChartView: CombinedChartView {
 
         xAxis.axisLineWidth = 0.0
         xAxis.axisLineColor = UIColor.Font.dark
-
+        
+        xAxis.avoidFirstLastClippingEnabled = false
+        xAxis.drawLimitLinesBehindDataEnabled = true
+        xAxis.granularityEnabled = true
+//        xAxis.granularity = 10
+        
         xAxis.valueFormatter = DefaultAxisValueFormatter(block: {(index, _) in
             let date = Date(timeIntervalSince1970: index)
             
-//            let timeInterval = date.timeIntervalSinceNow
-//            if timeInterval / 60 / 60 < 24 {
-//                return "Today"
-//            }
-            
             let dateString = Date.getFormatStringForChart(for: date, dateRangeType: self.dateRangeType)
+            
             return dateString
         })
-
-//        xAxis.labelRotationAngle = 0.3
-        xAxis.labelFont = UIFont.getFont(.light, size: 13)
+        xAxis.labelCount = getXLabelCount(with: self.dateRangeType)
+        xAxis.labelFont = UIFont.getFont(.light, size: 10)
         xAxis.labelTextColor = UIColor.Cell.subtitle
         xAxis.labelPosition = .bottom
         
@@ -396,14 +409,8 @@ class ChartView: CombinedChartView {
         
         barChartDataSet = BarChartDataSet(values: totalDataEntry, label: "Bar profit")
         
-        var width = 10
-        
-        if let lastDate = values.last?.date, let firstDate = values.first?.date {
-            width = lastDate.interval(ofComponent: .second, fromDate: firstDate) / 60
-        }
-        
         let barChartData = BarChartData(dataSet: barChartDataSet)
-        barChartData.barWidth = 1.0 * Double(width)
+        barChartData.barWidth = Double(width)
         
         return barChartData
     }
@@ -419,6 +426,21 @@ class ChartView: CombinedChartView {
             
             lineChartDataSet.fillAlpha = 0.5
             lineChartDataSet.fill = Fill(linearGradient: gradient, angle: 90)
+        }
+    }
+    
+    private func getXLabelCount(with dateRangeType: DateRangeType) -> Int {
+        switch dateRangeType {
+        case .day:
+            return 6
+        case .week:
+            return 7
+        case .month:
+            return 5
+        case .year:
+            return 6
+        case .custom:
+            return 6
         }
     }
 }

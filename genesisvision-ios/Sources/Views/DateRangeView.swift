@@ -19,19 +19,18 @@ class DateRangeView: UIView {
     
     var selectedDateRangeType: DateRangeType = .week {
         didSet {
-            dateTo = Date()
-            updateDateFromMethod()
+            changeDateRangeType()
         }
     }
     
-    var dateFrom: Date = Date().removeDays(7) {
+    var dateFrom: Date? {
         didSet {
-            dateFromTextField.text = dateFrom.onlyDateFormatString
+            dateFromTextField.text = dateFrom?.onlyDateFormatString
         }
     }
-    var dateTo: Date = Date() {
+    var dateTo: Date? {
         didSet {
-            dateToTextField.text = dateTo.onlyDateFormatString
+            dateToTextField.text = dateTo?.onlyDateFormatString
         }
     }
     
@@ -84,10 +83,13 @@ class DateRangeView: UIView {
         super.awakeFromNib()
         
         selectedDateRangeType = .week
+        correctTime()
     }
     
     // MARK: - Private methods
-    private func updateDateFromMethod() {
+    private func changeDateRangeType() {
+        dateTo = Date()
+        
         dateToTextField.isUserInteractionEnabled = false
         dateFromTextField.isUserInteractionEnabled = false
         
@@ -99,48 +101,62 @@ class DateRangeView: UIView {
         
         switch selectedDateRangeType {
         case .day:
-            dateFrom = dateTo.previousDate()
+            dateFrom = dateTo?.previousDate()
             dayButton.isSelected = true
         case .week:
-            dateFrom = dateTo.removeDays(7)
+            dateFrom = dateTo?.removeDays(7)
             weekButton.isSelected = true
         case .month:
-            dateFrom = dateTo.removeMonths(1)
+            dateFrom = dateTo?.removeMonths(1)
             monthButton.isSelected = true
         case .year:
-            dateFrom = dateTo.removeYears(1)
+            dateFrom = dateTo?.removeYears(1)
             yearButton.isSelected = true
         case .custom:
+            if dateFrom == nil {
+                dateFrom = dateTo?.removeDays(7)
+            }
             dateToTextField.isUserInteractionEnabled = true
             dateFromTextField.isUserInteractionEnabled = true
-            dateFrom = dateTo.removeDays(7)
             customButton.isSelected = true
         }
-        
-        updateTime()
     }
     
-    private func updateTime() {
-        dateTo.setTime(hour: 0, min: 0, sec: 0)
-        dateFrom.setTime(hour: 0, min: 0, sec: 0)
-//        switch selectedDateRangeType {
-//        case .custom:
-//            dateTo.setTime(hour: 0, min: 0, sec: 0)
-//            dateFrom.setTime(hour: 23, min: 59, sec: 59)
-//        default:
-//            let calendar = Calendar.current
-//            let hour = calendar.component(.hour, from: dateTo)
-//            let min = calendar.component(.minute, from: dateTo)
-//            let sec = calendar.component(.second, from: dateTo)
-//            dateFrom.setTime(hour: hour, min: min, sec: sec)
-//        }
+    private func correctTime() {
+        guard var dateFrom = self.dateFrom, var dateTo = self.dateTo else { return }
+        
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        
+        switch selectedDateRangeType {
+        case .custom:
+            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+            dateTo.setTime(hour: 0, min: 0, sec: 0)
+            
+            let hour = calendar.component(.hour, from: dateTo)
+            let min = calendar.component(.minute, from: dateTo)
+            let sec = calendar.component(.second, from: dateTo)
+            dateFrom.setTime(hour: hour, min: min, sec: sec)
+            dateTo.setTime(hour: hour, min: min, sec: sec)
+            dateFrom = dateFrom.removeDays(1)
+        default:
+            let hour = calendar.component(.hour, from: dateTo)
+            let min = calendar.component(.minute, from: dateTo)
+            let sec = calendar.component(.second, from: dateTo)
+            dateFrom.setTime(hour: hour, min: min, sec: sec)
+            dateTo.setTime(hour: hour, min: min, sec: sec)
+        }
+        
+        PlatformManager.shared.dateRangeType = selectedDateRangeType
+        PlatformManager.shared.dateFrom = dateFrom
+        PlatformManager.shared.dateTo = dateTo
     }
     
     // MARK: - Actions
     @IBAction func textFieldEditing(sender: UITextField) {
         sender.resignFirstResponder()
         
-        guard selectedDateRangeType == .custom else {
+        guard selectedDateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
             return
         }
         
@@ -157,6 +173,10 @@ class DateRangeView: UIView {
     }
     
     @IBAction func applyButtonAction(_ sender: UIButton) {
+        correctTime()
+        
+        guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return }
+        
         delegate?.applyButtonDidPress(with: dateFrom, dateTo: dateTo)
     }
 }

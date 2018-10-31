@@ -72,7 +72,7 @@ class FundWithdrawViewController: BaseViewController {
     @IBOutlet var numpadView: NumpadView! {
         didSet {
             numpadView.delegate = self
-            numpadView.type = .currency
+            numpadView.type = .number
         }
     }
     
@@ -133,7 +133,7 @@ class FundWithdrawViewController: BaseViewController {
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue * 100 <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
-        updateNumPadState(value: amountToWithdrawValueLabel.text)
+//        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
     private func withdrawMethod() {
@@ -156,15 +156,15 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     
-    private func updateNumPadState(value: String?) {
-        if let text = value, text.range(of: ".") != nil,
-            let lastComponents = text.components(separatedBy: ".").last,
-            lastComponents.count >= getDecimalCount(for: currency) {
-            changedActive(value: false)
-        } else {
-            changedActive(value: true)
-        }
-    }
+//    private func updateNumPadState(value: String?) {
+//        if let text = value, text.range(of: ".") != nil,
+//            let lastComponents = text.components(separatedBy: ".").last,
+//            lastComponents.count >= getDecimalCount(for: currency) {
+//            changedActive(value: false)
+//        } else {
+//            changedActive(value: true)
+//        }
+//    }
     
     @objc private func closeButtonAction() {
         viewModel.close()
@@ -209,19 +209,19 @@ class FundWithdrawViewController: BaseViewController {
 
 extension FundWithdrawViewController: NumpadViewProtocol {
     var amountLimit: Double? {
-        return availableToWithdrawValue
+        return availableToWithdrawValue / 100
     }
     
     var textPlaceholder: String? {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
-        return -1
+    var numbersLimit: Int? {
+        return nil
     }
     
-    var currency: String? {
-        return ""
+    var currency: CurrencyType? {
+        return nil
     }
     
     func changedActive(value: Bool) {

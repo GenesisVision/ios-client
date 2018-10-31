@@ -35,6 +35,10 @@ open class DashboardPortfolioEvent: Codable {
         case cancelled = "Cancelled"
         case ended = "Ended"
     }
+    public enum AssetType: String, Codable { 
+        case program = "Program"
+        case fund = "Fund"
+    }
     public var assetId: UUID?
     public var date: Date?
     public var title: String?
@@ -44,10 +48,11 @@ open class DashboardPortfolioEvent: Codable {
     public var logo: String?
     public var color: String?
     public var description: String?
+    public var assetType: AssetType?
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?) {
+    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?, assetType: AssetType?) {
         self.assetId = assetId
         self.date = date
         self.title = title
@@ -57,6 +62,7 @@ open class DashboardPortfolioEvent: Codable {
         self.logo = logo
         self.color = color
         self.description = description
+        self.assetType = assetType
     }
     
 
@@ -75,6 +81,7 @@ open class DashboardPortfolioEvent: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(description, forKey: "description")
+        try container.encodeIfPresent(assetType, forKey: "assetType")
     }
 
     // Decodable protocol methods
@@ -91,6 +98,7 @@ open class DashboardPortfolioEvent: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         color = try container.decodeIfPresent(String.self, forKey: "color")
         description = try container.decodeIfPresent(String.self, forKey: "description")
+        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
     }
 }
 

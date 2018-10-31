@@ -11,6 +11,20 @@ import Foundation
 
 open class ProgramRequest: Codable {
 
+    public enum Currency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public enum ModelType: String, Codable { 
         case invest = "Invest"
         case withdrawal = "Withdrawal"
@@ -28,6 +42,8 @@ open class ProgramRequest: Codable {
     public var programId: UUID?
     public var date: Date?
     public var value: Double?
+    public var valueGvt: Double?
+    public var currency: Currency?
     /** Used only in fund withdraw request */
     public var fundWithdrawPercent: Double?
     public var type: ModelType?
@@ -40,11 +56,13 @@ open class ProgramRequest: Codable {
 
 
     
-    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
+    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, valueGvt: Double?, currency: Currency?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
         self.id = id
         self.programId = programId
         self.date = date
         self.value = value
+        self.valueGvt = valueGvt
+        self.currency = currency
         self.fundWithdrawPercent = fundWithdrawPercent
         self.type = type
         self.status = status
@@ -66,6 +84,8 @@ open class ProgramRequest: Codable {
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(value, forKey: "value")
+        try container.encodeIfPresent(valueGvt, forKey: "valueGvt")
+        try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(fundWithdrawPercent, forKey: "fundWithdrawPercent")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(status, forKey: "status")
@@ -85,6 +105,8 @@ open class ProgramRequest: Codable {
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
+        valueGvt = try container.decodeIfPresent(Double.self, forKey: "valueGvt")
+        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         fundWithdrawPercent = try container.decodeIfPresent(Double.self, forKey: "fundWithdrawPercent")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         status = try container.decodeIfPresent(Status.self, forKey: "status")

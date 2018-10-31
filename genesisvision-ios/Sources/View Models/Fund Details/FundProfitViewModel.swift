@@ -24,6 +24,10 @@ final class FundProfitViewModel {
     
     var dataType: DataType = .api
     
+    var dateFrom: Date?
+    var dateTo: Date?
+    var maxPointCount: Int = Constants.Api.maxPoint
+    
     private var fundProfitChart: FundProfitChart?
     
     private var sections: [SectionType] = [.chart, .statistics]
@@ -113,13 +117,14 @@ extension FundProfitViewModel {
         switch dataType {
         case .api:
             guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getProfitChart(with: fundId, completion: { [weak self] (viewModel) in
+            FundsDataProvider.getProfitChart(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
                 
                 self?.fundProfitChart = viewModel
                 
+                self?.reloadDataProtocol?.didReloadData()
                 completion(.success)
                 }, errorCompletion: completion)
         case .fake:

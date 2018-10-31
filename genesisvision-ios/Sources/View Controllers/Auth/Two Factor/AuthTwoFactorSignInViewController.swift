@@ -21,20 +21,31 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet weak var authenticatorCodeLabel: UILabel! {
+    @IBOutlet weak var authenticatorCodeLabel: TitleLabel! {
         didSet {
-            authenticatorCodeLabel.font = UIFont.getFont(.light, size: 72)
+            authenticatorCodeLabel.font = UIFont.getFont(.medium, size: 32)
             authenticatorCodeLabel.text = viewModel.labelPlaceholder
         }
     }
     
     @IBOutlet weak var recoveryCodeSwitch: UISwitch!
-    @IBOutlet weak var titleLabel: TitleLabel!
-    @IBOutlet weak var recoveryCodeTitleLabel: TitleLabel!
+    @IBOutlet weak var recoveryCodeTitleLabel: TitleLabel! {
+        didSet {
+            recoveryCodeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.text = "Enter the 2F authentication code "
+            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
+    @IBOutlet weak var underLineView: UIView! {
+        didSet {
+            underLineView.backgroundColor = UIColor.Border.forButton
+        }
+    }
     @IBOutlet weak var logoImageView: UIImageView!
-    
-    // MARK: - Buttons
-//    @IBOutlet weak var signInButton: ActionButton!
     
     // MARK: - Variables
     var enteredValue: String = ""
@@ -108,11 +119,11 @@ extension AuthTwoFactorSignInViewController: NumpadViewProtocol {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return viewModel.numbersLimit
     }
     
-    var currency: String? {
+    var currency: CurrencyType? {
         return nil
     }
     

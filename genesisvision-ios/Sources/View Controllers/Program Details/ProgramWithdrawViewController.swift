@@ -83,7 +83,7 @@ class ProgramWithdrawViewController: BaseViewController {
     
     var availableToWithdrawValue: Double = 0.0 {
         didSet {
-            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + Constants.gvtString
+            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + viewModel.programCurrency.rawValue
         }
     }
     
@@ -120,6 +120,9 @@ class ProgramWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
+        
+        amountToWithdrawGVTLabel.text = viewModel.programCurrency.rawValue
+        
         if let availableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
             self.availableToWithdrawValue = availableToWithdraw
         }
@@ -138,7 +141,7 @@ class ProgramWithdrawViewController: BaseViewController {
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
-        updateNumPadState(value: amountToWithdrawValueLabel.text)
+//        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
     private func withdrawMethod() {
@@ -161,15 +164,15 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
-    private func updateNumPadState(value: String?) {
-        if let text = value, text.range(of: ".") != nil,
-            let lastComponents = text.components(separatedBy: ".").last,
-            lastComponents.count >= getDecimalCount(for: currency) {
-            changedActive(value: false)
-        } else {
-            changedActive(value: true)
-        }
-    }
+//    private func updateNumPadState(value: String?) {
+//        if let text = value, text.range(of: ".") != nil,
+//            let lastComponents = text.components(separatedBy: ".").last,
+//            lastComponents.count >= getDecimalCount(for: currency) {
+//            changedActive(value: false)
+//        } else {
+//            changedActive(value: true)
+//        }
+//    }
     
     @objc private func closeButtonAction() {
         viewModel.close()
@@ -178,12 +181,11 @@ class ProgramWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 300.0
+        bottomSheetController.initializeHeight = 370.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-        let periodEnds = viewModel.programWithdrawInfo?.periodEnds
-        let periodEndsString = periodEnds?.defaultFormatString ?? ""
-        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
+        
+        let subtitle = "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet"
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
                                                           subtitle: subtitle,
@@ -224,12 +226,12 @@ extension ProgramWithdrawViewController: NumpadViewProtocol {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return -1
     }
     
-    var currency: String? {
-        return ""
+    var currency: CurrencyType? {
+        return viewModel.programCurrency
     }
     
     func changedActive(value: Bool) {

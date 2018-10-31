@@ -14,6 +14,14 @@ class PortfolioAssetTableViewCell: UITableViewCell {
     @IBOutlet weak var coloredView: UIView! {
         didSet {
             coloredView.roundCorners(with: 2.0)
+            coloredView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var assetLogoImageView: UIImageView! {
+        didSet {
+            assetLogoImageView.roundCorners()
+            assetLogoImageView.isHidden = true
         }
     }
     

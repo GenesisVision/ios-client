@@ -108,7 +108,7 @@ class PortfolioViewController: BaseViewController {
         //Selected Chart Assets Bottom Sheet View
         setupSelectedChartAssetsBottomSheetView()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideBottomAssetsView))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(deselectChart))
         tapGesture.numberOfTapsRequired = 1
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
@@ -119,7 +119,7 @@ class PortfolioViewController: BaseViewController {
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
-                chartView.setup(lineChartData: lineChartData, barChartData: barChartData, dateRangeType: dateRangeView?.selectedDateRangeType)
+                chartView.setup(chartType: .dashboard, lineChartData: lineChartData, barChartData: barChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             }
             
             amountTitleLabel.text = "Amount"
@@ -157,12 +157,13 @@ class PortfolioViewController: BaseViewController {
     
     private func setupSelectedChartAssetsBottomSheetView() {
         bottomSheetController.bottomSheetControllerProtocol = self
-        bottomSheetController.addNavigationBar("Assets")
+        bottomSheetController.addNavigationBar("Assets", subtitle: "")
         bottomSheetController.lineViewIsHidden = true
         
         bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
             tableView.separatorStyle = .none
             tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+            tableView.allowsSelection = false
             
             if let selectedChartAssetsDelegateManager = self?.viewModel.selectedChartAssetsDelegateManager {
                 selectedChartAssetsDelegateManager.tableView = tableView
@@ -192,6 +193,10 @@ class PortfolioViewController: BaseViewController {
             self.view.layoutIfNeeded()
         }
     }
+    @objc private func deselectChart() {
+        hideBottomAssetsView()
+        circleView.isHidden = true
+    }
     
     private func selectChart(_ entry: ChartDataEntry) {
         let date = Date(timeIntervalSince1970: entry.x)
@@ -212,7 +217,7 @@ class PortfolioViewController: BaseViewController {
         }
     }
     
-    @objc private func hideBottomAssetsView() {
+    private func hideBottomAssetsView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomAssetsView?.alpha = 0.0
         }) { (result) in
@@ -224,6 +229,11 @@ class PortfolioViewController: BaseViewController {
     }
     
     private func showBottomAssetsView() {
+        if let rightBarLabel = bottomSheetController.rightBarLabel {
+            let date = self.viewModel.selectedValueChartBar?.date
+            rightBarLabel.text = date?.dateAndTimeFormatString
+        }
+        
         if self.bottomAssetsView == nil {
             circleView.isHidden = false
             

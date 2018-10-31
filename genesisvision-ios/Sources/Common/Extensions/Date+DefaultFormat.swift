@@ -20,7 +20,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         switch dateRangeType {
         case .day:
-            dateFormatter.dateFormat = "dd.MM \nhh:mm"
+            dateFormatter.dateFormat = "hh:mma"
         case .year:
             dateFormatter.dateFormat = "dd.MM.yy"
         default:
@@ -49,7 +49,7 @@ extension Date {
     
     var dateAndTimeFormatString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM hh:mm"
+        dateFormatter.dateFormat = "dd.MM hh:mm a"
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }

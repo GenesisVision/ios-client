@@ -12,11 +12,7 @@ import TTRangeSlider
 class ProgramFilterViewController: BaseViewControllerWithTableView {
 
     // MARK: - View Model
-    var viewModel: ProgramFilterViewModel! {
-        didSet {
-            viewModel.setup(sliderDelegate: self, switchDelegate: self)
-        }
-    }
+    var viewModel: ProgramFilterViewModel!
     
     // MARK: - Variables
     private var resetBarButtonItem: UIBarButtonItem?
@@ -43,7 +39,7 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        navigationItem.title = viewModel.title
+//        navigationItem.title = viewModel.title
         
         showInfiniteIndicator(value: false)
         
@@ -57,10 +53,10 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = applyButton.frame.height + 16.0 + 16.0
         
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
         tableView.bounces = false
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+//        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         showInfiniteIndicator(value: false)
     }
     
@@ -74,70 +70,70 @@ class ProgramFilterViewController: BaseViewControllerWithTableView {
     @IBAction func applyButtonAction(_ sender: UIButton) {
         showProgressHUD()
         
-        viewModel.apply { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                self?.viewModel.goToBack()
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
+//        viewModel.apply { [weak self] (result) in
+//            self?.hideAll()
+//
+//            switch result {
+//            case .success:
+//                self?.viewModel.goToBack()
+//            case .failure(let errorType):
+//                ErrorHandler.handleError(with: errorType, viewController: self)
+//            }
+//        }
     }
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
-        viewModel.reset()
+//        viewModel.reset()
         reloadData()
     }
 }
 
-extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSource {
-    
+//extension ProgramFilterViewController: UITableViewDelegate, UITableViewDataSource {
+
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = viewModel.model(for: indexPath)
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let model = viewModel.model(for: indexPath)
+//        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+//    }
     
     // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
-    }
-}
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.numberOfRows(in: section)
+//    }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return viewModel.numberOfSections()
+//    }
+//}
 
 extension ProgramFilterViewController: TTRangeSliderDelegate {
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
-        let type: SliderType = SliderType(rawValue: sender.tag)!
+//        let type: SliderType = SliderType(rawValue: sender.tag)!
         
-        switch type {
-        case .level:
-            viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
-        case .avgProfit:
-            viewModel.updateFilter(profitAvgPercentMin: Double(selectedMinimum), profitAvgPercentMax: Double(selectedMaximum))
-        case .totalProfit:
-            viewModel.updateFilter(profitTotalMin: Double(selectedMinimum), profitTotalMax: Double(selectedMaximum))
-        case .balance:
-            viewModel.updateFilter(balanceMin: Double(selectedMinimum), balanceMax: Double(selectedMaximum))
-        }
+//        switch type {
+//        case .level:
+//            viewModel.updateFilter(levelMin: Int(selectedMinimum), levelMax: Int(selectedMaximum))
+//        case .avgProfit:
+//            viewModel.updateFilter(profitAvgPercentMin: Double(selectedMinimum), profitAvgPercentMax: Double(selectedMaximum))
+//        case .totalProfit:
+//            viewModel.updateFilter(profitTotalMin: Double(selectedMinimum), profitTotalMax: Double(selectedMaximum))
+//        case .balance:
+//            viewModel.updateFilter(balanceMin: Double(selectedMinimum), balanceMax: Double(selectedMaximum))
+//        }
     }
 }
 
 extension ProgramFilterViewController: FilterSwitchTableViewCellProtocol {
     func switchControl(_ sender: UISwitch!, didChangeSelectedValue: Bool) {
-        let type: SwitchType = SwitchType(rawValue: sender.tag)!
+//        let type: SwitchType = SwitchType(rawValue: sender.tag)!
         
-        switch type {
-        case .activePrograms:
-            viewModel.updateFilter(showActivePrograms: didChangeSelectedValue)
-        case .favoritePrograms:
-            break
-        case .availableToInvest:
-            viewModel.updateFilter(showAvailableToInvest: didChangeSelectedValue)
-        }
+//        switch type {
+//        case .activePrograms:
+//            viewModel.updateFilter(showActivePrograms: didChangeSelectedValue)
+//        case .favoritePrograms:
+//            break
+//        case .availableToInvest:
+//            viewModel.updateFilter(showAvailableToInvest: didChangeSelectedValue)
+//        }
     }
 }

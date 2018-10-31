@@ -12,6 +12,7 @@ import Foundation
 open class PersonalFundDetailsFull: Codable {
 
     public enum Status: String, Codable { 
+        case pending = "Pending"
         case active = "Active"
         case investing = "Investing"
         case withdrawing = "Withdrawing"

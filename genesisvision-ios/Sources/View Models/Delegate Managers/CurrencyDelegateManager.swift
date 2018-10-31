@@ -32,10 +32,14 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     }
     
     func loadCurrencies() {
-        if let platformCurrencies = PlatformManager.platformInfo?.platformCurrencies {
-            self.currencies = platformCurrencies
-            self.updateSelectedIndex()
-            self.tableView?.reloadData()
+        PlatformManager.shared.getPlatformInfo { (platformInfo) in
+            guard let platformInfo = platformInfo else { return }
+            
+            if let platformCurrencies = platformInfo.platformCurrencies {
+                self.currencies = platformCurrencies
+                self.updateSelectedIndex()
+                self.tableView?.reloadData()
+            }
         }
     }
     

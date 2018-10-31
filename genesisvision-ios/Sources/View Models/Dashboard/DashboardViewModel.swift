@@ -113,7 +113,7 @@ extension DashboardViewModel {
     
     // MARK: - Private methods
     private func updatePlatformInfo() {
-        PlatformManager.getPlatformInfo(completion: { (model) in })
+        PlatformManager.shared.getPlatformInfo(completion: { (model) in })
     }
     
     private func updateList() {

@@ -83,7 +83,7 @@ open class SearchAPI {
         "invested" : 9.018348186070783,
         "isFavorite" : true,
         "isInvested" : true,
-        "status" : "Active"
+        "status" : "Pending"
       },
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -147,7 +147,7 @@ open class SearchAPI {
         "invested" : 9.018348186070783,
         "isFavorite" : true,
         "isInvested" : true,
-        "status" : "Active"
+        "status" : "Pending"
       },
       "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -216,7 +216,7 @@ open class SearchAPI {
         "invested" : 1.2315135367772556,
         "isFavorite" : true,
         "isInvested" : true,
-        "status" : "Active"
+        "status" : "Pending"
       },
       "logo" : "logo",
       "currency" : "Undefined",
@@ -282,7 +282,7 @@ open class SearchAPI {
         "invested" : 1.2315135367772556,
         "isFavorite" : true,
         "isInvested" : true,
-        "status" : "Active"
+        "status" : "Pending"
       },
       "logo" : "logo",
       "currency" : "Undefined",

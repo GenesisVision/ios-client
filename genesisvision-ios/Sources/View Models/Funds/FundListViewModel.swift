@@ -172,9 +172,9 @@ extension FundListViewModel {
             let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
             let currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) ?? .btc
             
-            FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: 13, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
+            FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
                 guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-                
+                print(fundsList)
                 self?.fundsList = fundsList
                 
                 var viewModels = [FundTableViewCellViewModel]()

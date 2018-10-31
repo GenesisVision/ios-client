@@ -29,7 +29,7 @@ extension FundTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartType: .default, lineChartData: chart)
+            cell.chartView.setup(chartType: .default, lineChartData: chart, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
@@ -51,9 +51,9 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.periodLeftProgressView.isHidden = true
         
-        cell.firstTitleLabel.text = "Balance"
+        cell.firstTitleLabel.text = "Size"
         if let balance = fund.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.firstValueLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.firstValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.firstValueLabel.text = ""
         }
@@ -80,20 +80,22 @@ extension FundTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
+        if let color = fund.color {
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+        }
+        
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.fundPlaceholder
         
         if let logo = fund.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
-        }
-        
-        if let color = fund.color {
-            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
         if let profitPercent = fund.statistic?.profitPercent {
-            cell.profitPercentLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
-            cell.profitPercentLabel.textColor = profitPercent >= 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+            let sign = profitPercent > 0 ? "+" : ""
+            cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
+            cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         cell.profitValueLabel.isHidden = true

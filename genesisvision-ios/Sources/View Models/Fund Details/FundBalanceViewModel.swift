@@ -23,6 +23,10 @@ final class FundBalanceViewModel {
     
     var dataType: DataType = .api
 
+    var dateFrom: Date?
+    var dateTo: Date?
+    var maxPointCount: Int = Constants.Api.maxPoint
+    
     private var fundBalanceChart: FundBalanceChart?
     
     private var sections: [SectionType] = [.chart]
@@ -88,13 +92,13 @@ extension FundBalanceViewModel {
         switch dataType {
         case .api:
             guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getBalanceChart(with: fundId, completion: { [weak self] (viewModel) in
+            FundsDataProvider.getBalanceChart(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
                 
                 self?.fundBalanceChart = viewModel
-                
+                self?.reloadDataProtocol?.didReloadData()
                 completion(.success)
             }, errorCompletion: completion)
         case .fake:

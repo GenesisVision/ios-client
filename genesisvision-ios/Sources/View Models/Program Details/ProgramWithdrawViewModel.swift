@@ -11,7 +11,8 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Variables
     var title: String = "Withdraw"
-    var programId: String?
+    var programId: String
+    var programCurrency: CurrencyType
     var labelPlaceholder: String = "0"
     
     var programWithdrawInfo: ProgramWithdrawInfo?
@@ -23,15 +24,17 @@ final class ProgramWithdrawViewModel {
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
          programId: String,
+         programCurrency: CurrencyType,
          detailProtocol: DetailProtocol?) {
         self.router = router
         self.programId = programId
+        self.programCurrency = programCurrency
         self.detailProtocol = detailProtocol
     }
     
     // MARK: - Public methods
     func getInfo(completion: @escaping CompletionBlock) {
-        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         ProgramsDataProvider.getWithdrawInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programWithdrawInfo) in
             guard let programWithdrawInfo = programWithdrawInfo else {

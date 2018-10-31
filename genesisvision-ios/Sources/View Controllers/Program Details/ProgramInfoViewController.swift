@@ -18,8 +18,6 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.isScrollEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,8 +29,6 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        tableView.isScrollEnabled = true
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -51,7 +47,8 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-    
+        
+        tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -170,10 +167,8 @@ extension ProgramInfoViewController: UITableViewDelegate, UITableViewDataSource 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-//            print("down")
             scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
         } else {
-//            print("up")
             scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
         }
     }

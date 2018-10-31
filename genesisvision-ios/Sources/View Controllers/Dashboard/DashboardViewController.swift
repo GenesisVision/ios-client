@@ -99,20 +99,20 @@ class DashboardViewController: BaseViewController {
             eventsViewHeightConstraint.constant = 0.0
         }
         
-//        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
+        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
             viewModel.router.chartsViewController?.hideChart(false)
             chartsViewHeightConstraint.constant = chartsViewHeightStart
-//        } else {
-//            viewModel.router.chartsViewController?.hideChart(true)
-//            chartsViewHeightConstraint.constant = 250.0
-//        }
+        } else {
+            viewModel.router.chartsViewController?.hideChart(true)
+            chartsViewHeightConstraint.constant = 250.0
+        }
         
-//        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
+        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
             viewModel.router.chartsViewController?.hideInRequests(false)
-//        } else {
-//            viewModel.router.chartsViewController?.hideInRequests(true)
-//            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
-//        }
+        } else {
+            viewModel.router.chartsViewController?.hideInRequests(true)
+            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
+        }
         
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))

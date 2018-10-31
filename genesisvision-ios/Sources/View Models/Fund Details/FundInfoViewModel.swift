@@ -35,11 +35,11 @@ final class FundInfoViewModel {
     private var equityChart: [ChartSimple]?
     public private(set) var fundDetailsFull: FundDetailsFull? {
         didSet {
-//            if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested, isInvested {
+            if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested, isInvested {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
                 }
-//            }
+            }
         }
     }
     

@@ -22,10 +22,11 @@ open class ProfileHeaderViewModel: Codable {
     public var availableGvt: Double?
     public var kycConfirmed: Bool?
     public var isTwoFactorEnabled: Bool?
+    public var isNewUser: Bool?
 
 
     
-    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?, isTwoFactorEnabled: Bool?) {
+    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
         self.id = id
         self.name = name
         self.email = email
@@ -37,6 +38,7 @@ open class ProfileHeaderViewModel: Codable {
         self.availableGvt = availableGvt
         self.kycConfirmed = kycConfirmed
         self.isTwoFactorEnabled = isTwoFactorEnabled
+        self.isNewUser = isNewUser
     }
     
 
@@ -57,6 +59,7 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(availableGvt, forKey: "availableGvt")
         try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
         try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
+        try container.encodeIfPresent(isNewUser, forKey: "isNewUser")
     }
 
     // Decodable protocol methods
@@ -75,6 +78,7 @@ open class ProfileHeaderViewModel: Codable {
         availableGvt = try container.decodeIfPresent(Double.self, forKey: "availableGvt")
         kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
         isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")
+        isNewUser = try container.decodeIfPresent(Bool.self, forKey: "isNewUser")
     }
 }
 

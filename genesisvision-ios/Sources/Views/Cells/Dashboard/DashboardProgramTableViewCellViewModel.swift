@@ -29,7 +29,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartType: .default, lineChartData: chart)
+            cell.chartView.setup(chartType: .default, lineChartData: chart, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
@@ -92,19 +92,22 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.favoriteButton.isSelected = isFavorite
         }
         
+        if let color = program.color {
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+        }
+        
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
-        }
-        
-        if let color = program.color {
-            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
         if let profitPercent = program.statistic?.profitPercent {
-            cell.profitPercentLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
+            let sign = profitPercent > 0 ? "+" : ""
+            cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
+            cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         if let profitValue = program.statistic?.profitValue {

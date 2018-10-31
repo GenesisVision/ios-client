@@ -63,7 +63,7 @@ class ProgramsDataProvider: DataProvider {
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdWithdrawByAmountPost(id: uuid, amount: amount.rounded(toPlaces: 2), authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorProgramsByIdWithdrawByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

@@ -122,9 +122,11 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
-        
-        fetch()
+       
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
+        fetch()
     }
 }
 
@@ -183,6 +185,8 @@ extension DashboardFundListViewController: FavoriteStateChangeProtocol {
 extension DashboardFundListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }

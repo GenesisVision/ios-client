@@ -164,15 +164,9 @@ class ProgramInvestViewController: BaseViewController {
             self.availableToInvestValue = availableToInvest
         }
         
-//        if let rate = viewModel.programInvestInfo?.rate {
-//            let selectedCurrency = getSelectedCurrency()
-//            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-//            let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
-//        }
-        
         let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue
         investButton.setEnabled(investButtonEnabled)
-        updateNumPadState(value: amountToInvestValueLabel.text)
+//        updateNumPadState(value: amountToInvestValueLabel.text)
     }
     
     @objc private func closeButtonAction() {
@@ -232,15 +226,15 @@ class ProgramInvestViewController: BaseViewController {
         bottomSheetController.present()
     }
     
-    private func updateNumPadState(value: String?) {
-        if let text = value, text.range(of: ".") != nil,
-            let lastComponents = text.components(separatedBy: ".").last,
-            lastComponents.count >= getDecimalCount(for: currency) {
-            changedActive(value: false)
-        } else {
-            changedActive(value: true)
-        }
-    }
+//    private func updateNumPadState(value: String?) {
+//        if let text = value, text.range(of: ".") != nil,
+//            let lastComponents = text.components(separatedBy: ".").last,
+//            lastComponents.count >= getDecimalCount(for: .gvt) {
+//            changedActive(value: false)
+//        } else {
+//            changedActive(value: true)
+//        }
+//    }
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
@@ -263,12 +257,12 @@ extension ProgramInvestViewController: NumpadViewProtocol {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return -1
     }
     
-    var currency: String? {
-        return Constants.currency
+    var currency: CurrencyType? {
+        return nil
     }
     
     func changedActive(value: Bool) {

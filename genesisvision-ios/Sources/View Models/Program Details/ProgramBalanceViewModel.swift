@@ -23,6 +23,10 @@ final class ProgramBalanceViewModel {
     
     var dataType: DataType = .api
 
+    var dateFrom: Date?
+    var dateTo: Date?
+    var maxPointCount: Int = Constants.Api.maxPoint
+    
     private var programBalanceChart: ProgramBalanceChart?
     
     private var sections: [SectionType] = [.chart]
@@ -88,13 +92,14 @@ extension ProgramBalanceViewModel {
         switch dataType {
         case .api:
             guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getBalanceChart(with: programId, completion: { [weak self] (viewModel) in
+            
+            ProgramsDataProvider.getBalanceChart(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
                 
                 self?.programBalanceChart = viewModel
-                
+                self?.reloadDataProtocol?.didReloadData()
                 completion(.success)
             }, errorCompletion: completion)
         case .fake:

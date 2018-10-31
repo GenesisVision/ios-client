@@ -76,7 +76,7 @@ class FundHeaderViewController: BaseViewController {
         self.bgImageView.alpha = 1.0 - offset
         self.investedImageView.alpha = 1.0 - offset * 2
         
-        self.headerTitleImageView.alpha = offset
+        self.headerTitleImageView.alpha = offset - 0.2
         
         self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
         self.titleBottomConstraint.constant = 20.0 - offset * 10.0

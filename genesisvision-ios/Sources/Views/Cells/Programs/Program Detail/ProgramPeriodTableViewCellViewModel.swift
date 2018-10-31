@@ -18,7 +18,7 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramPeriodTableViewCell) {
         cell.titleLabel.text = "Period"
         
-        if let periodEnds = periodEnds, let periodStarts = periodStarts, let periodDuration = periodDuration {
+        if let periodEnds = periodEnds, let periodStarts = periodStarts {
             let duration = periodEnds.timeSinceDate(fromDate: periodStarts)
             cell.durationLabel.text = duration
             
@@ -27,8 +27,7 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
             
             cell.periodLeftLabel.text = periodLeft.isEmpty ? "The period is over" : periodLeft + " left"
             
-            
-            if let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
+            if let periodDuration = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate:periodStarts).minute, let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
                 cell.progressView.progress = Float(periodDuration - minutes) / Float(periodDuration)
             }
         }

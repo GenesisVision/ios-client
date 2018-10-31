@@ -70,9 +70,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         registerForPreviewing()
-        
-        showProgressHUD()
-        fetch()
+
         setupUI()
     }
     
@@ -168,6 +166,7 @@ class FundListViewController: BaseViewControllerWithTableView {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         
+        showProgressHUD()
         fetch()
     }
     
@@ -177,8 +176,10 @@ class FundListViewController: BaseViewControllerWithTableView {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
-        fetch()
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
+        fetch()
     }
 }
 
@@ -217,7 +218,7 @@ extension FundListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let model = viewModel.model(at: indexPath) else {
             return TableViewCell()
         }
-        
+
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
@@ -315,6 +316,8 @@ extension FundListViewController: UISearchBarDelegate {
 extension FundListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }

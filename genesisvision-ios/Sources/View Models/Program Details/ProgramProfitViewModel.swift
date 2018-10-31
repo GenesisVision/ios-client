@@ -24,6 +24,10 @@ final class ProgramProfitViewModel {
     
     var dataType: DataType = .api
     
+    var dateFrom: Date?
+    var dateTo: Date?
+    var maxPointCount: Int = Constants.Api.maxPoint
+    
     private var programProfitChart: ProgramProfitChart?
     
     private var sections: [SectionType] = [.chart, .statistics]
@@ -113,13 +117,13 @@ extension ProgramProfitViewModel {
         switch dataType {
         case .api:
             guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getProfitChart(with: programId, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getProfitChart(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }
                 
                 self?.programProfitChart = viewModel
-                
+                self?.reloadDataProtocol?.didReloadData()
                 completion(.success)
                 }, errorCompletion: completion)
         case .fake:

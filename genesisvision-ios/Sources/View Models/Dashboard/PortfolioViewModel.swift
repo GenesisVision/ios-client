@@ -14,14 +14,22 @@ final class PortfolioViewModel {
     var title = "Portfolio"
     
     var viewModels = [PortfolioAssetTableViewCellViewModel]()
-    var selectedChartAssets: [AssetsValue]? {
+    
+    var selectedValueChartBar: ValueChartBar? {
         didSet {
             var portfolioAssetTableViewCellViewModels = [PortfolioAssetTableViewCellViewModel]()
             
-            selectedChartAssets?.forEach({ (selectedChartAsset) in
-                let portfolioAssetTableViewCellViewModel = PortfolioAssetTableViewCellViewModel(selectedChartAssets: selectedChartAsset)
+            if let topAssets = selectedValueChartBar?.topAssets {
+                topAssets.forEach({ (assetsValue) in
+                    let portfolioAssetTableViewCellViewModel = PortfolioAssetTableViewCellViewModel(assetsValue: assetsValue, otherAssetsValue: nil)
+                    portfolioAssetTableViewCellViewModels.append(portfolioAssetTableViewCellViewModel)
+                })
+            }
+            
+            if let otherAssetsValue = selectedValueChartBar?.otherAssetsValue {
+                let portfolioAssetTableViewCellViewModel = PortfolioAssetTableViewCellViewModel(assetsValue: nil, otherAssetsValue: otherAssetsValue)
                 portfolioAssetTableViewCellViewModels.append(portfolioAssetTableViewCellViewModel)
-            })
+            }
             
             viewModels = portfolioAssetTableViewCellViewModels
         }
@@ -43,12 +51,10 @@ final class PortfolioViewModel {
     
     // MARK: - Methods
     func selectChart(_ date: Date) -> (ValueChartBar?, ChartSimple?) {
-        var investedProgramsInfo: ValueChartBar? = nil
         var balanceChart: ChartSimple? = nil
         
-        if let selected = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
-            self.selectedChartAssets = selected.topAssets
-            investedProgramsInfo = selected
+        if let selectedValueChartBar = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
+            self.selectedValueChartBar = selectedValueChartBar
             self.selectedChartAssetsDelegateManager?.reloadData()
         }
         
@@ -56,7 +62,7 @@ final class PortfolioViewModel {
             balanceChart = selected
         }
         
-        return (investedProgramsInfo, balanceChart)
+        return (selectedValueChartBar, balanceChart)
     }
     
     func showRequests() {

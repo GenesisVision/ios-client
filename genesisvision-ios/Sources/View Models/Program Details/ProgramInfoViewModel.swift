@@ -148,8 +148,8 @@ extension ProgramInfoViewModel {
     }
     
     func withdraw() {
-        guard let programId = programId else { return }
-        router.show(routeType: .withdraw(programId: programId))
+        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        router.show(routeType: .withdraw(programId: programId, programCurrency: programCurrency))
     }
     
     func reinvest(_ value: Bool) {

@@ -11,8 +11,8 @@ import UIKit
 protocol NumpadViewProtocol: class {
     var textLabel: UILabel { get }
     var textPlaceholder: String? { get }
-    var currency: String? { get }
-    var numbersLimit: Int { get }
+    var currency: CurrencyType? { get }
+    var numbersLimit: Int? { get }
     var amountLimit: Double? { get }
     
     func textLabelDidChange(value: Double?)
@@ -58,7 +58,12 @@ extension NumpadViewProtocol {
     
     func onNumberClicked(view: NumpadView, value: Int) {
         let valueString: String = value.toString()
-        guard let text = textLabel.text, currency != nil || text.count < numbersLimit else { return }
+        guard let text = textLabel.text else { return }
+        
+        if currency == nil, let numbersLimit = numbersLimit, text.count < numbersLimit {
+            return
+        }
+        
         let amountString = text + valueString
         
         if let amountLimit = amountLimit, let amount = Double(amountString), amount > amountLimit {
@@ -72,14 +77,17 @@ extension NumpadViewProtocol {
         }
         
         textLabelDidChange(value: textLabel.text?.doubleValue)
+        if let text = textLabel.text {
+            updateNumPadState(text)
+        }
     }
     
-    func updateNumPadState(text: String) {
+    func updateNumPadState(_ text: String) {
         if text.range(of: ".") != nil,
             let lastComponents = text.components(separatedBy: ".").last,
             lastComponents.count >= getDecimalCount(for: currency) {
             changedActive(value: false)
-        } else if text.count < numbersLimit {
+        } else if let numbersLimit = numbersLimit, text.count < numbersLimit {
             changedActive(value: false)
         } else {
             changedActive(value: true)

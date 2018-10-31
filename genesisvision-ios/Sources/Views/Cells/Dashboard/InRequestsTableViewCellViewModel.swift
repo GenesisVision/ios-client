@@ -32,11 +32,11 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
         if let type = programRequest.type {
             switch type {
             case .invest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
                 cell.statusLabel.text = "Invest"
                 cell.amountValueLabel.text = "-"
             case .withdrawal:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
                 cell.statusLabel.text = "Withdraw"
                 cell.amountValueLabel.text = "+"
             }

@@ -117,25 +117,25 @@ class WalletTransactionView: UIView {
             switch action {
             case .transfer:
                 if sourceType == .paymentTransaction, action == .transfer, destinationType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                    typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
                     sign = "+"
                 }
                 
                 if sourceType == .wallet, action == .transfer, destinationType == .withdrawalRequest {
-                    typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
                     sign = "-"
                 }
                 
                 if sourceType == .withdrawalRequest, action == .transfer, destinationType == .paymentTransaction {
-                    typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
                     sign = "-"
                 }
             default:
                 if sourceType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
                     sign = "-"
                 } else if destinationType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                    typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
                     sign = "+"
                 }
             }

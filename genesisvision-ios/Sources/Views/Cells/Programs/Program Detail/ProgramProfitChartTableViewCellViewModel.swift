@@ -55,7 +55,7 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         
         if let equityChart = programProfitChart.equityChart, equityChart.count > 0 {
             cell.chartViewHeightConstraint.constant = 150.0
-            cell.chartView.setup(lineChartData: equityChart)
+            cell.chartView.setup(lineChartData: equityChart, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             cell.chartView.isHidden = false
         } else {
             cell.chartViewHeightConstraint.constant = 0.0

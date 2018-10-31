@@ -21,12 +21,12 @@ class FundViewController: BaseViewController {
     }
     
     var minHeaderHeight: CGFloat = 200.0
-    var topConstant: CGFloat = 44.0 + 20.0// + 20.0
+    var topConstant: CGFloat = 0.0
     
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
-    var fundHeaderViewController: FundHeaderViewController?
-    var fundDetailsTabmanViewController: FundTabmanViewController?
+    var headerViewController: FundHeaderViewController?
+    var detailsTabmanViewController: FundTabmanViewController?
     
     @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
@@ -57,10 +57,10 @@ class FundViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let fundHeaderViewController = segue.destination as? FundHeaderViewController,
+        if let headerViewController = segue.destination as? FundHeaderViewController,
             segue.identifier == "FundHeaderViewControllerSegue" {
-            self.viewModel?.router?.fundHeaderViewController = fundHeaderViewController
-            self.fundHeaderViewController = fundHeaderViewController
+            self.viewModel?.router?.fundHeaderViewController = headerViewController
+            self.headerViewController = headerViewController
         } else if let tabmanViewController = segue.destination as? FundTabmanViewController,
             segue.identifier == "FundTabmanViewControllerSegue" {
             
@@ -72,7 +72,7 @@ class FundViewController: BaseViewController {
             tabmanViewController.viewModel = viewModel
             
             self.viewModel?.router?.fundDetailsTabmanViewController = tabmanViewController
-            fundDetailsTabmanViewController = tabmanViewController
+            detailsTabmanViewController = tabmanViewController
         }
     }
     
@@ -101,8 +101,8 @@ class FundViewController: BaseViewController {
                 }
                 
                 if let fundDetailsFull = self?.viewModel.fundDetailsFull {
-                    self?.fundDetailsTabmanViewController?.setup(fundDetailsFull)
-                    self?.fundHeaderViewController?.configure(fundDetailsFull)
+                    self?.detailsTabmanViewController?.setup(fundDetailsFull)
+                    self?.headerViewController?.configure(fundDetailsFull)
                 }
             default:
                 break
@@ -111,6 +111,9 @@ class FundViewController: BaseViewController {
     }
     
     private func setupUI() {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        topConstant = 44.0 + statusBarHeight
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -144,8 +147,8 @@ class FundViewController: BaseViewController {
             
             switch result {
             case .success:
-                if let fundId = self?.fundDetailsTabmanViewController?.viewModel.fundId {
-                    self?.fundDetailsTabmanViewController?.fundInfoViewControllerProtocol?.didChangeFavoriteState(with: fundId, value: !isFavorite, request: false)
+                if let fundId = self?.detailsTabmanViewController?.viewModel.fundId {
+                    self?.detailsTabmanViewController?.fundInfoViewControllerProtocol?.didChangeFavoriteState(with: fundId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
@@ -155,9 +158,8 @@ class FundViewController: BaseViewController {
     }
     
     func hideHeader(_ value: Bool) {
-        let scrollOffset = CGPoint(x: 0.0, y: value ? 94.0 : 0.0)
+        let scrollOffset = CGPoint(x: 0.0, y: value ? minHeaderHeight - topConstant * 2 : -topConstant)
         scrollView.setContentOffset(scrollOffset, animated: true)
-        scrollView.isScrollEnabled = !value
     }
 }
 
@@ -165,26 +167,24 @@ extension FundViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
-//        if scrollView.contentOffset.y >= 94.0 {
-//            scrollView.contentOffset.y = 94.0
-//        }
-        print("!!!!!!!!!!!!")
-        print(scrollView.contentOffset.y)
-        print("!!!!!!!!!!!!")
+        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
+            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
+            return
+        }
+        
         let yOffset = scrollView.contentOffset.y + topConstant
-   
-        let headerHeight = headerViewConstraint.constant - 64.0
-        if headerHeight - yOffset >= 0 {
-            fundHeaderViewController?.changeColorAlpha(offset: yOffset / headerHeight)
+        
+        let headerHeight = headerViewConstraint.constant - topConstant
+        if headerHeight - yOffset >= 0 && yOffset >= 0 {
+            headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
         }
 
         if yOffset < 0 {
             self.headerViewConstraint.constant += abs(yOffset)
 
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                self.scrollView.panGestureRecognizer.isEnabled = false
-                self.scrollView.panGestureRecognizer.isEnabled = true
-
+//                self.scrollView.panGestureRecognizer.isEnabled = false
+//                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }
@@ -194,23 +194,12 @@ extension FundViewController {
                 self.headerViewConstraint.constant = minHeaderHeight
             }
         }
-        
-        if let fundDetailsTabmanViewController = fundDetailsTabmanViewController {
-            fundDetailsTabmanViewController.scrollEnabled = false
-            
-            if yOffset - (minHeaderHeight - topConstant) == fundDetailsTabmanViewController.view.frame.origin.y {
-                fundDetailsTabmanViewController.scrollEnabled = true
-            }
-        }
-        
+
         if scrollView == self.scrollView {
             if let viewModel = viewModel.router.fundDetailsTabmanViewController?.viewModel {
                 for controller in viewModel.viewControllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-                        print(detailsView.frame.origin.y)
-                        print(yOffset)
-                        
-                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - 44.0 - 44.0
+                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - topConstant * 2
                     }
                 }
             }
@@ -219,19 +208,19 @@ extension FundViewController {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader()
+            animateHeader(minHeaderHeight)
         }
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader()
+            animateHeader(minHeaderHeight)
         }
     }
-    
-    func animateHeader() {
+
+    func animateHeader(_ minHeaderHeight: CGFloat) {
         self.headerViewConstraint.constant = minHeaderHeight
-        
+
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -264,19 +253,19 @@ extension FundViewController: FavoriteStateChangeProtocol {
 
 extension FundViewController: DetailProtocol {
     func didRequestCanceled(_ last: Bool) {
-        if let viewModel = fundDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didRequestCanceled(last)
         }
     }
     
     func didWithdrawn() {
-        if let viewModel = fundDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didWithdrawn()
         }
     }
     
     func didInvested() {
-        if let viewModel = fundDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didInvested()
         }
     }

@@ -174,6 +174,7 @@ open class ProfileAPI {
   "avatar" : "avatar",
   "investedGvt" : 9.965781217890562,
   "favoritesCount" : 4,
+  "isNewUser" : true,
   "totalBalanceGvt" : 5.025004791520295,
   "email" : "email"
 }}]

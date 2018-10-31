@@ -35,9 +35,9 @@ extension ProgramTradesTableViewCellViewModel: CellViewModel {
         if let entry = orderModel.entry {
             switch entry {
             case ._in, ._inout:
-                cell.entryImageView.image = #imageLiteral(resourceName: "img_entry_arrow_down")
+                cell.entryImageView.image = #imageLiteral(resourceName: "img_event_profit")
             case .out, .outBy:
-                cell.entryImageView.image = #imageLiteral(resourceName: "img_entry_arrow_up")
+                cell.entryImageView.image = #imageLiteral(resourceName: "img_event_loss")
             }
         }
     }

@@ -851,45 +851,32 @@
                                     <action selector="showNumPadButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="cfH-A6-QgN"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xon-Jj-JS1">
-                                <rect key="frame" x="30" y="295" width="260" height="183"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-U4-1oT">
+                                <rect key="frame" x="50" y="222" width="220" height="256"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-U4-1oT">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="183"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
-                                                <rect key="frame" x="70" y="0.0" width="120" height="120"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="5Gy-Vf-ufx"/>
-                                                    <constraint firstAttribute="width" secondItem="EoU-jq-OAo" secondAttribute="height" multiplier="1:1" id="EX9-Bb-XaG"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="126" y="128" width="8" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="f1y-MQ-6Th"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs8-8t-Pzx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="3.5" y="154" width="253" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="EoU-jq-OAo" secondAttribute="height" multiplier="1:1" id="EX9-Bb-XaG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="106" y="228" width="8" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="f1y-MQ-6Th"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs8-8t-Pzx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="254" width="220" height="2"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Hbd-U4-1oT" firstAttribute="leading" secondItem="Xon-Jj-JS1" secondAttribute="leading" id="0tE-m4-yed"/>
-                                    <constraint firstAttribute="trailing" secondItem="Hbd-U4-1oT" secondAttribute="trailing" id="UsU-Uh-UZn"/>
-                                    <constraint firstItem="Hbd-U4-1oT" firstAttribute="top" secondItem="Xon-Jj-JS1" secondAttribute="top" id="o7p-fu-p6C"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hbd-U4-1oT" secondAttribute="bottom" id="q7u-EK-7zr"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-J6-Vd4" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="20" y="498" width="280" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1105,18 +1092,18 @@
                             <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="0fG-J6-Vd4" secondAttribute="trailing" constant="20" id="EGT-yv-5Nk"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="trailing" secondItem="ACz-2l-Cfa" secondAttribute="trailing" id="IvH-aK-fsS"/>
                             <constraint firstItem="btr-BA-QEG" firstAttribute="top" secondItem="h0j-YK-F4n" secondAttribute="top" id="Ohz-FL-KWL"/>
-                            <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="Xon-Jj-JS1" secondAttribute="trailing" constant="30" id="adH-XU-4fp"/>
+                            <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="Hbd-U4-1oT" secondAttribute="trailing" constant="50" id="TJL-rC-yca"/>
+                            <constraint firstItem="Hbd-U4-1oT" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" constant="50" id="Us4-k5-h7M"/>
                             <constraint firstItem="btr-BA-QEG" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="cf5-Jq-SHH"/>
-                            <constraint firstItem="Xon-Jj-JS1" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" constant="30" id="dkF-bh-Lji"/>
-                            <constraint firstItem="0fG-J6-Vd4" firstAttribute="top" secondItem="Xon-Jj-JS1" secondAttribute="bottom" constant="20" id="jZI-TE-CNX"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="leading" secondItem="ACz-2l-Cfa" secondAttribute="leading" id="lLM-py-NLu"/>
+                            <constraint firstItem="0fG-J6-Vd4" firstAttribute="top" secondItem="Hbd-U4-1oT" secondAttribute="bottom" constant="20" id="nqC-yR-EIT"/>
                             <constraint firstItem="btr-BA-QEG" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="rg5-fX-HRC"/>
                             <constraint firstItem="GZ4-Tk-fZX" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="t25-sp-yND"/>
-                            <constraint firstItem="Xon-Jj-JS1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GZ4-Tk-fZX" secondAttribute="bottom" id="tzb-lg-t88"/>
                             <constraint firstItem="GZ4-Tk-fZX" firstAttribute="top" secondItem="sU7-lt-Ncn" secondAttribute="top" id="uhY-ER-73Q"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="top" secondItem="ACz-2l-Cfa" secondAttribute="top" id="uvq-XN-4aL"/>
                             <constraint firstItem="GZ4-Tk-fZX" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="vct-PB-d0d"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="bottom" secondItem="ACz-2l-Cfa" secondAttribute="bottom" id="xHc-Rt-vyw"/>
+                            <constraint firstItem="Hbd-U4-1oT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GZ4-Tk-fZX" secondAttribute="bottom" constant="20" id="zwy-nz-DU2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sU7-lt-Ncn"/>
                     </view>

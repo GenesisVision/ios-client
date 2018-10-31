@@ -51,6 +51,10 @@ class ForgotPasswordViewController: BaseViewController {
         
     }
     
+    private func showForgotPasswordInfoVC() {
+        showBottomSheet(type: .success, title: "We sent a password reset link to the email you specified. Please follow this link to reset your password.")
+    }
+    
     private func resetButtonMethod() {
         hideKeyboard()
         showProgressHUD()
@@ -64,7 +68,7 @@ class ForgotPasswordViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showForgotPasswordInfoVC()
+                self?.showForgotPasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

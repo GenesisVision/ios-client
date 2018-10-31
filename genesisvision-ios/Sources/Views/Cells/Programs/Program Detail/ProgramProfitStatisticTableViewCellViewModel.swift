@@ -48,22 +48,23 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
         
         cell.profitFactorPercentTitleLabel.text = "Profit factor"
         if let value = programProfitChart.profitFactor {
-            cell.profitFactorPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.profitFactorPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
         if let value = programProfitChart.sharpeRatio {
-            cell.sharpeRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.sharpeRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
         if let value = programProfitChart.calmarRatio {
-            cell.calmarRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.calmarRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
+            
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
         if let value = programProfitChart.sortinoRatio {
-            cell.sortinoRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.sortinoRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"

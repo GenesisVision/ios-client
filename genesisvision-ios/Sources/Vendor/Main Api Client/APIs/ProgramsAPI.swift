@@ -337,7 +337,7 @@ open class ProgramsAPI {
     "invested" : 1.2315135367772556,
     "isFavorite" : true,
     "isInvested" : true,
-    "status" : "Active"
+    "status" : "Pending"
   },
   "url" : "url",
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -485,14 +485,16 @@ open class ProgramsAPI {
         case byTradesDesc = "ByTradesDesc"
         case byInvestorsAsc = "ByInvestorsAsc"
         case byInvestorsDesc = "ByInvestorsDesc"
-        case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
         case byNewDesc = "ByNewDesc"
         case byNewAsc = "ByNewAsc"
+        case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
         case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
         case byTitleAsc = "ByTitleAsc"
         case byTitleDesc = "ByTitleDesc"
         case byBalanceAsc = "ByBalanceAsc"
         case byBalanceDesc = "ByBalanceDesc"
+        case byCurrDesc = "ByCurrDesc"
+        case byCurrAsc = "ByCurrAsc"
     }
 
     /**
@@ -620,7 +622,7 @@ open class ProgramsAPI {
       "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "currency" : "Undefined",
@@ -686,7 +688,7 @@ open class ProgramsAPI {
       "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "currency" : "Undefined",

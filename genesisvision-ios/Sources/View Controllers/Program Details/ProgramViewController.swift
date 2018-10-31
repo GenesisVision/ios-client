@@ -20,17 +20,13 @@ class ProgramViewController: BaseViewController {
         }
     }
     
-    var minHeaderHeight: CGFloat = 200.0 {
-        didSet {
-            self.headerViewConstraint.constant = minHeaderHeight
-        }
-    }
-    var topConstant: CGFloat = 44.0 + 20.0// + 20.0
+    var minHeaderHeight: CGFloat = 200.0
+    var topConstant: CGFloat = 0.0
     
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
     
-    var programHeaderViewController: ProgramHeaderViewController?
-    var programDetailsTabmanViewController: ProgramTabmanViewController?
+    var headerViewController: ProgramHeaderViewController?
+    var detailsTabmanViewController: ProgramTabmanViewController?
     
     @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
@@ -48,6 +44,7 @@ class ProgramViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.headerViewConstraint.constant = minHeaderHeight
         self.navigationController?.isNavigationBarHidden = false
     }
     
@@ -63,7 +60,7 @@ class ProgramViewController: BaseViewController {
         if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
             segue.identifier == "ProgramHeaderViewControllerSegue" {
             self.viewModel?.router?.programHeaderViewController = programHeaderViewController
-            self.programHeaderViewController = programHeaderViewController
+            self.headerViewController = programHeaderViewController
         } else if let tabmanViewController = segue.destination as? ProgramTabmanViewController,
             segue.identifier == "ProgramTabmanViewControllerSegue" {
             
@@ -75,7 +72,7 @@ class ProgramViewController: BaseViewController {
             tabmanViewController.viewModel = viewModel
             
             self.viewModel?.router?.programDetailsTabmanViewController = tabmanViewController
-            programDetailsTabmanViewController = tabmanViewController
+            detailsTabmanViewController = tabmanViewController
         }
     }
     
@@ -112,8 +109,8 @@ class ProgramViewController: BaseViewController {
                 }
                 
                 if let programDetailsFull = self?.viewModel.programDetailsFull {
-                    self?.programDetailsTabmanViewController?.setup(programDetailsFull)
-                    self?.programHeaderViewController?.configure(programDetailsFull)
+                    self?.detailsTabmanViewController?.setup(programDetailsFull)
+                    self?.headerViewController?.configure(programDetailsFull)
                 }
             default:
                 break
@@ -122,6 +119,9 @@ class ProgramViewController: BaseViewController {
     }
     
     private func setupUI() {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        topConstant = 44.0 + statusBarHeight
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -155,8 +155,8 @@ class ProgramViewController: BaseViewController {
             
             switch result {
             case .success:
-                if let programId = self?.programDetailsTabmanViewController?.viewModel.programId {
-                    self?.programDetailsTabmanViewController?.programInfoViewControllerProtocol?.didChangeFavoriteState(with: programId, value: !isFavorite, request: false)
+                if let programId = self?.detailsTabmanViewController?.viewModel.programId {
+                    self?.detailsTabmanViewController?.programInfoViewControllerProtocol?.didChangeFavoriteState(with: programId, value: !isFavorite, request: false)
                 }
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
@@ -170,24 +170,24 @@ extension ProgramViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
-//        if scrollView.contentOffset.y >= 94.0 {
-//            scrollView.contentOffset.y = 94.0
-//        }
+        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
+            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
+            return
+        }
         
         let yOffset = scrollView.contentOffset.y + topConstant
         
-        let headerHeight = headerViewConstraint.constant - 64.0
-        if headerHeight - yOffset >= 0 {
-            programHeaderViewController?.changeColorAlpha(offset: yOffset / headerHeight)
+        let headerHeight = headerViewConstraint.constant - topConstant
+        if headerHeight - yOffset >= 0 && yOffset >= 0 {
+            headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
         }
-
+        
         if yOffset < 0 {
             self.headerViewConstraint.constant += abs(yOffset)
-
+            
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                self.scrollView.panGestureRecognizer.isEnabled = false
-                self.scrollView.panGestureRecognizer.isEnabled = true
-
+                //                self.scrollView.panGestureRecognizer.isEnabled = false
+                //                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }
@@ -198,19 +198,11 @@ extension ProgramViewController {
             }
         }
         
-//        if let programDetailsTabmanViewController = programDetailsTabmanViewController {
-//            programDetailsTabmanViewController.scrollEnabled = false
-//
-//            if yOffset - (minHeaderHeight - topConstant) == programDetailsTabmanViewController.view.frame.origin.y {
-//                programDetailsTabmanViewController.scrollEnabled = true
-//            }
-//        }
-        
         if scrollView == self.scrollView {
             if let viewModel = viewModel.router.programDetailsTabmanViewController?.viewModel {
                 for controller in viewModel.viewControllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
-                        vc.tableView?.isScrollEnabled = scrollView.contentOffset.y >= 94.0
+                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - topConstant * 2
                     }
                 }
             }
@@ -219,17 +211,17 @@ extension ProgramViewController {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader()
+            animateHeader(minHeaderHeight)
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader()
+            animateHeader(minHeaderHeight)
         }
     }
     
-    func animateHeader() {
+    func animateHeader(_ minHeaderHeight: CGFloat) {
         self.headerViewConstraint.constant = minHeaderHeight
         
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
@@ -264,19 +256,19 @@ extension ProgramViewController: FavoriteStateChangeProtocol {
 
 extension ProgramViewController: DetailProtocol {
     func didRequestCanceled(_ last: Bool) {
-        if let viewModel = programDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didRequestCanceled(last)
         }
     }
     
     func didWithdrawn() {
-        if let viewModel = programDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didWithdrawn()
         }
     }
     
     func didInvested() {
-        if let viewModel = programDetailsTabmanViewController?.viewModel {
+        if let viewModel = detailsTabmanViewController?.viewModel {
             viewModel.didInvested()
         }
     }

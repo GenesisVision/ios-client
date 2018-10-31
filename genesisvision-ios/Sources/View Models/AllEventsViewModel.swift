@@ -81,8 +81,14 @@ extension AllEventsViewModel {
         }
         
         let selectedModel = viewModels[indexPath.row]
-        if let assetId = selectedModel.dashboardPortfolioEvent.assetId?.uuidString {
-            router.showProgramDetails(with: assetId)
+        let event = selectedModel.dashboardPortfolioEvent
+        if let assetId = event.assetId?.uuidString, let assetType = event.assetType {
+            switch assetType {
+            case .program:
+                router.showProgramDetails(with: assetId)
+            case .fund:
+                router.showFundDetails(with: assetId)
+            }
         }
     }
 }

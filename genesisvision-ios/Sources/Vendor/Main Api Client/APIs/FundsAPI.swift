@@ -407,7 +407,7 @@ open class FundsAPI {
     "invested" : 9.018348186070783,
     "isFavorite" : true,
     "isInvested" : true,
-    "status" : "Active"
+    "status" : "Pending"
   },
   "url" : "url",
   "exitFee" : 6.027456183070403,
@@ -564,7 +564,7 @@ open class FundsAPI {
       "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -628,7 +628,7 @@ open class FundsAPI {
       "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
-      "status" : "Active"
+      "status" : "Pending"
     },
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

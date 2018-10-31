@@ -15,21 +15,12 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     var viewModel: ManagerInfoViewModel!
     
     // MARK: - Views
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-            tableView.isScrollEnabled = false
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupNavigationBar()
         
         setup()
     }
@@ -40,6 +31,8 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
+        setupNavigationBar()
+        setupTableConfiguration()
         setupUI()
     }
     
@@ -48,6 +41,7 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
+        tableView.isScrollEnabled = false
         tableView.configure(with: .defaultConfiguration)
         
         tableView.delegate = self
@@ -100,6 +94,19 @@ extension ManagerInfoViewController: UITableViewDelegate, UITableViewDataSource 
         let view = UIView()
         view.backgroundColor = UIColor.Cell.headerBg
         return view
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+        } else {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
+        }
     }
 }
 

@@ -20,17 +20,19 @@ open class AssetsValue: Codable {
     public var id: UUID?
     public var title: String?
     public var avatar: String?
+    public var color: String?
     public var value: Double?
     public var changePercent: Double?
     public var changeValue: Double?
 
 
     
-    public init(type: ModelType?, id: UUID?, title: String?, avatar: String?, value: Double?, changePercent: Double?, changeValue: Double?) {
+    public init(type: ModelType?, id: UUID?, title: String?, avatar: String?, color: String?, value: Double?, changePercent: Double?, changeValue: Double?) {
         self.type = type
         self.id = id
         self.title = title
         self.avatar = avatar
+        self.color = color
         self.value = value
         self.changePercent = changePercent
         self.changeValue = changeValue
@@ -47,6 +49,7 @@ open class AssetsValue: Codable {
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(avatar, forKey: "avatar")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(changePercent, forKey: "changePercent")
         try container.encodeIfPresent(changeValue, forKey: "changeValue")
@@ -61,6 +64,7 @@ open class AssetsValue: Codable {
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         changePercent = try container.decodeIfPresent(Double.self, forKey: "changePercent")
         changeValue = try container.decodeIfPresent(Double.self, forKey: "changeValue")

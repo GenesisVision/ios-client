@@ -39,7 +39,7 @@ extension FundBalanceChartTableViewCellViewModel: CellViewModel {
         
         if let balanceChartData = fundBalanceChart.balanceChart, balanceChartData.count > 0 {
             cell.chartViewHeightConstraint.constant = 300.0
-            cell.chartView.setup(fundBalanceChartData: balanceChartData)
+            cell.chartView.setup(fundBalanceChartData: balanceChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             cell.chartView.isHidden = false
         } else {
             cell.chartViewHeightConstraint.constant = 0.0

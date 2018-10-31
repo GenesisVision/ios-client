@@ -76,7 +76,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     let bottomStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
-        stackView.spacing = 8.0
+        stackView.spacing = 16.0
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +127,10 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         super.viewDidLoad()
 
         dateRangeView = DateRangeView.viewFromNib()
-        updateData(with: dateRangeView.dateFrom, dateTo: dateRangeView.dateTo)
+        if let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo {
+            updateData(with: dateFrom, dateTo: dateTo)
+        }
+        
         commonSetup()
         refreshControl?.endRefreshing()
     }
@@ -176,7 +179,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     @objc private func currencyButtonAction() {
         currencyDelegateManager?.updateSelectedIndex()
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300.0
+        bottomSheetController.initializeHeight = 250.0
         
         bottomSheetController.addNavigationBar("Preferred currency")
         
@@ -445,7 +448,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        dateRangeButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        dateRangeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
         filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
@@ -465,7 +468,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         } else {
             bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         }
-        
     }
     
     

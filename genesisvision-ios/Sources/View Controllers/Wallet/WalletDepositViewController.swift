@@ -123,6 +123,7 @@ class WalletDepositViewController: BaseViewController {
     }
     
     private func updateUI() {
+        addressLabel.isHidden = false
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
         
@@ -208,12 +209,16 @@ extension WalletDepositViewController: NumpadViewProtocol {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return -1
     }
     
-    var currency: String? {
-        return Constants.currency
+    var currency: CurrencyType? {
+        if let currency = viewModel.selectedWallet?.currency {
+            return CurrencyType(rawValue: currency.rawValue)
+        }
+        
+        return nil
     }
     
     func changedActive(value: Bool) {

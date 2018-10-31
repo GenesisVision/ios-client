@@ -6,6 +6,8 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import Foundation
+
 struct FilterConstants {
     var minLevel: Int
     var maxLevel: Int
@@ -25,14 +27,65 @@ struct FilterConstants {
 }
 
 class PlatformManager {
-    public private(set) static var platformInfo: PlatformInfo?
-    public private(set) static var filterConstants: FilterConstants = {
-        return getFilterConstants(nil)
-    }()
+    static let shared = PlatformManager()
     
-    static func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
-        BaseDataProvider.getPlatformInfo(completion: { (viewModel) in
-            platformInfo = viewModel
+    var dateRangeType: DateRangeType = .week
+    
+//    var dateRangeFrom: Date = Date().removeDays(7) {
+//        didSet {
+//            updateTime()
+//        }
+//    }
+//    var dateRangeTo: Date = Date() {
+//        didSet {
+//            updateTime()
+//        }
+//    }
+    
+    var dateFrom: Date?
+    var dateTo: Date?
+    
+    public private(set) var platformInfo: PlatformInfo?
+    public private(set) var filterConstants: FilterConstants?
+    
+    init() {
+        filterConstants = getFilterConstants(nil)
+    }
+    
+//    private func updateTime() {
+//        dateFrom = dateRangeFrom
+//        dateTo = dateRangeTo
+//        
+//        var calendar = Calendar.current
+//        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+//        
+//        switch dateRangeType {
+//        case .custom:
+//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//            
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//            dateFrom = dateFrom.removeDays(1)
+//        default:
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//        }
+//    }
+    
+    func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
+        if let platformInfo = platformInfo {
+            completion(platformInfo)
+        }
+        
+        BaseDataProvider.getPlatformInfo(completion: { [weak self] (viewModel) in
+            self?.platformInfo = viewModel
             completion(viewModel)
         }) { (result) in
             switch result {
@@ -44,7 +97,7 @@ class PlatformManager {
         }
     }
     
-    private static func getFilterConstants(_ platformInfo: PlatformInfo?) -> FilterConstants {
+    private func getFilterConstants(_ platformInfo: PlatformInfo?) -> FilterConstants {
         return FilterConstants(minLevel: Constants.Filters.minLevel,
                                maxLevel: Constants.Filters.maxLevel,
                                minAvgProfit: Constants.Filters.minAvgProfit,

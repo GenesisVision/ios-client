@@ -355,12 +355,12 @@ extension WalletWithdrawViewController: NumpadViewProtocol {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return -1
     }
     
-    var currency: String? {
-        return Constants.currency
+    var currency: CurrencyType? {
+        return currency
     }
     
     func changedActive(value: Bool) {

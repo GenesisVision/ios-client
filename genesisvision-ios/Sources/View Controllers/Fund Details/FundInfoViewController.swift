@@ -50,7 +50,6 @@ class FundInfoViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -157,6 +156,19 @@ extension FundInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+        } else {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
         }
     }
 }

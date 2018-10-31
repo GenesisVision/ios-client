@@ -68,6 +68,10 @@ open class BottomSheet {
         open var tintColor: UIColor? = UIColor.Cell.title
         open var titleTextColor: UIColor? = UIColor.Cell.title
         open var subtitleTextColor: UIColor? = UIColor.Cell.subtitle
+        
+        open var rightBarLabel: UILabel?
+        open var leftBarLabel: UILabel?
+        
         public let overlayView = UIView()
         public let containerView = UIView()
         open var isScrollEnabled: Bool = false
@@ -218,19 +222,21 @@ open class BottomSheet {
             let item = UINavigationItem(title: "")
             
             if let title = title {
-                let label = UILabel()
-                label.textColor = titleTextColor
-                label.text = title
-                label.font = UIFont.getFont(.semibold, size: 18)
-                item.leftBarButtonItem = UIBarButtonItem(customView: label)
+                leftBarLabel = UILabel()
+                leftBarLabel?.textColor = titleTextColor
+                leftBarLabel?.text = title
+                leftBarLabel?.font = UIFont.getFont(.semibold, size: 18)
+                item.leftBarButtonItem = UIBarButtonItem(customView: leftBarLabel!)
             }
             
             if let subtitle = subtitle {
-                let label = UILabel()
-                label.textColor = subtitleTextColor
-                label.text = subtitle
-                label.font = UIFont.getFont(.medium, size: 14)
-                item.rightBarButtonItem = UIBarButtonItem(customView: label)
+                rightBarLabel = UILabel()
+                rightBarLabel?.frame = CGRect(x: 0, y: 0, width: 120, height: 21.0)
+                rightBarLabel?.textColor = subtitleTextColor
+                rightBarLabel?.textAlignment = .right
+                rightBarLabel?.text = subtitle
+                rightBarLabel?.font = UIFont.getFont(.regular, size: 14)
+                item.rightBarButtonItem = UIBarButtonItem(customView: rightBarLabel!)
             }
             
             if let buttonTitle = buttonTitle {

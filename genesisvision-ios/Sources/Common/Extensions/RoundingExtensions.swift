@@ -20,11 +20,14 @@ extension Double {
         return (self * decimalValue).rounded() / decimalValue
     }
     
-    func rounded(withType type: CurrencyType) -> Double {
+    func rounded(withType type: CurrencyType, specialForGVT: Bool? = false) -> Double {
         switch type {
         case .gvt:
-            return rounded(toPlaces: type.currencyLenght)
-//            return rounded(toPlaces: self > 1.0 ? 0 : 1)
+            guard let specialForGVT = specialForGVT, specialForGVT else {
+                return rounded(toPlaces: type.currencyLenght)
+            }
+            
+            return rounded(toPlaces: self > 1.0 ? 0 : 1)
         default:
             return rounded(toPlaces: type.currencyLenght)
         }

@@ -74,6 +74,14 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
         
         fetch()
     }
+    
+    override func updateData(with dateFrom: Date, dateTo: Date) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
+        showProgressHUD()
+        fetch()
+    }
 }
 
 extension FundBalanceViewController: UITableViewDelegate, UITableViewDataSource {

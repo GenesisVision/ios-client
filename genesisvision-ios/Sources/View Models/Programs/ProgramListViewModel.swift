@@ -174,7 +174,7 @@ extension ProgramListViewModel {
             let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
             let currencySecondary = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) ?? .btc
             
-            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: nil, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: nil, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
+            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: nil, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: mask, facetId: nil, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programsList = programsList

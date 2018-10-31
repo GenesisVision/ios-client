@@ -33,12 +33,16 @@ extension Date {
         return dateComponents
     }
     
-    public mutating func setTime(hour: Int, min: Int, sec: Int, timeZoneAbbrev: String = "UTC") {
+    public mutating func setTime(day: Int? = nil, hour: Int, min: Int, sec: Int) {
         let x: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
-        let cal = Calendar.current
+        
+        let cal = Calendar(identifier: .iso8601)
         var components = cal.dateComponents(x, from: self)
         
-        components.timeZone = TimeZone(abbreviation: timeZoneAbbrev)
+        if let day = day {
+            components.day = day
+        }
+        
         components.hour = hour
         components.minute = min
         components.second = sec

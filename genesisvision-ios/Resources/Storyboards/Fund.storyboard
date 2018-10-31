@@ -33,16 +33,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GJe-Fv-DdI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="256" id="j2f-Y9-D64"/>
+                                            <constraint firstAttribute="height" constant="200" id="j2f-Y9-D64"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="nGj-la-rHE" kind="embed" identifier="FundHeaderViewControllerSegue" id="igc-Ny-6qk"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2F-EX-Ze4">
-                                        <rect key="frame" x="0.0" y="256" width="414" height="774"/>
+                                        <rect key="frame" x="0.0" y="200" width="414" height="774"/>
                                         <connections>
                                             <segue destination="lna-th-c7X" kind="embed" identifier="FundTabmanViewControllerSegue" id="R28-Vm-Yhm"/>
                                         </connections>
@@ -100,28 +100,28 @@
             <objects>
                 <viewController storyboardIdentifier="FundHeaderViewController" id="nGj-la-rHE" customClass="FundHeaderViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dAn-eX-MGA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFK-NM-AUb">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mS4-7F-KtL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hn-jJ-GqD" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lyR-Kv-fke">
-                                        <rect key="frame" x="-16" y="199" width="24" height="24"/>
+                                        <rect key="frame" x="-16" y="143" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="9S3-eH-LG6"/>
                                             <constraint firstAttribute="width" secondItem="lyR-Kv-fke" secondAttribute="height" multiplier="1:1" id="HUH-Ml-Ny9"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XgB-Fp-BsF">
-                                        <rect key="frame" x="16" y="186" width="390" height="50"/>
+                                        <rect key="frame" x="16" y="130" width="390" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UKd-5M-VaL">
                                                 <rect key="frame" x="0.0" y="0.0" width="78" height="50"/>
@@ -144,7 +144,7 @@
                                         </subviews>
                                     </stackView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="qcS-Rd-Rcm">
-                                        <rect key="frame" x="197" y="-20" width="20" height="20"/>
+                                        <rect key="frame" x="197" y="-28" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="EIf-1w-An1"/>
                                             <constraint firstAttribute="width" constant="20" id="Nen-z6-0kw"/>
@@ -166,7 +166,7 @@
                                     <constraint firstItem="mS4-7F-KtL" firstAttribute="leading" secondItem="aFK-NM-AUb" secondAttribute="leading" id="eZh-62-7ZS"/>
                                     <constraint firstItem="XgB-Fp-BsF" firstAttribute="leading" secondItem="aFK-NM-AUb" secondAttribute="leading" constant="16" id="gk1-yS-xYk"/>
                                     <constraint firstItem="2hn-jJ-GqD" firstAttribute="leading" secondItem="mS4-7F-KtL" secondAttribute="leading" id="oQz-8h-LXb"/>
-                                    <constraint firstItem="qcS-Rd-Rcm" firstAttribute="top" secondItem="aFK-NM-AUb" secondAttribute="top" constant="-20" id="rDL-LX-d7k"/>
+                                    <constraint firstItem="qcS-Rd-Rcm" firstAttribute="top" secondItem="aFK-NM-AUb" secondAttribute="top" constant="-28" id="rDL-LX-d7k"/>
                                     <constraint firstItem="2hn-jJ-GqD" firstAttribute="trailing" secondItem="mS4-7F-KtL" secondAttribute="trailing" id="sXh-xk-h1O"/>
                                 </constraints>
                             </view>

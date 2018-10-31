@@ -97,7 +97,7 @@ class ProfitViewController: BaseViewController {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             
             if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
-                chartView.setup(lineChartData: lineChartData, barChartData: barChartData, dateRangeType: dateRangeView?.selectedDateRangeType)
+                chartView.setup(lineChartData: lineChartData, barChartData: barChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             }
             
             amountTitleLabel.text = "Amount"
