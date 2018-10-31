@@ -71,7 +71,16 @@ class ChartView: CombinedChartView {
 
             lineChartDataSet.drawValuesEnabled = false
             lineChartDataSet.drawCircleHoleEnabled = false
-            lineChartDataSet.mode = chartType == .default ? .horizontalBezier : .linear
+            switch chartType {
+            case .balance, .profit:
+                lineChartDataSet.mode = .cubicBezier
+            case .default:
+                lineChartDataSet.mode = .horizontalBezier
+            case .dashboard:
+                lineChartDataSet.mode = .linear
+            default:
+                lineChartDataSet.mode = .horizontalBezier
+            }
         }
     }
     
@@ -432,7 +441,7 @@ class ChartView: CombinedChartView {
     private func getXLabelCount(with dateRangeType: DateRangeType) -> Int {
         switch dateRangeType {
         case .day:
-            return 6
+            return 5
         case .week:
             return 7
         case .month:

@@ -43,8 +43,11 @@ open class PlatformAPI {
   },
   "programsInfo" : {
     "managerProgramInvestment" : 0.8008281904610115,
-    "managerFundInvestment" : 6.027456183070403,
-    "periods" : [ 1, 1 ]
+    "managerFundInvestment" : 5.962133916683182,
+    "managerMaxExitFee" : 5.637376656633329,
+    "managerMaxSuccessFee" : 1.4658129805029452,
+    "periods" : [ 2, 2 ],
+    "managerMaxEntryFee" : 6.027456183070403
   },
   "programsFacets" : [ {
     "sortType" : "New",
@@ -77,10 +80,10 @@ open class PlatformAPI {
     "url" : "url"
   } ],
   "platformCurrencies" : [ {
-    "rateToGvt" : 5.962133916683182,
+    "rateToGvt" : 7.061401241503109,
     "name" : "name"
   }, {
-    "rateToGvt" : 5.962133916683182,
+    "rateToGvt" : 7.061401241503109,
     "name" : "name"
   } ],
   "currencies" : [ "currencies", "currencies" ]

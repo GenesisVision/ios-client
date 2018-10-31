@@ -51,11 +51,11 @@ final class ManagerTabmanViewModel: TabmanViewModel {
             
             if let managerId = managerProfileDetails.managerProfile?.id?.uuidString, let programs = router.getPrograms(with: managerId), let funds = router.getFunds(with: managerId) {
                 
-                self.addController(programs)
-                self.addItem(programs.viewModel.title.uppercased())
-                
                 self.addController(funds)
                 self.addItem(funds.viewModel.title.uppercased())
+                
+                self.addController(programs)
+                self.addItem(programs.viewModel.title.uppercased())
             }
             
             reloadPages()

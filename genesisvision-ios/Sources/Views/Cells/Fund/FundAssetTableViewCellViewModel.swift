@@ -22,22 +22,28 @@ extension FundAssetTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
         }
         
-        if let name = fundAssetInfo.name {
+        if let name = fundAssetInfo.asset {
             cell.nameLabel.text = name
         } else {
             cell.nameLabel.text = ""
         }
         
-        if let asset = fundAssetInfo.asset {
+        if let asset = fundAssetInfo.symbol {
             cell.assetLabel.text = "(\(asset))"
         } else {
             cell.assetLabel.text = ""
         }
         
-        if let targetPercent = fundAssetInfo.targetPercent {
-            cell.assetPercentLabel.text = targetPercent.rounded(withType: .undefined).toString() + "%"
+        if let targetPercent = fundAssetInfo.target {
+            cell.targetPercentLabel.text = targetPercent.rounded(withType: .undefined).toString() + "%"
         } else {
-            cell.assetPercentLabel.text = ""
+            cell.targetPercentLabel.text = ""
+        }
+        
+        if let currenctPercent = fundAssetInfo.current {
+            cell.currentPercentLabel.text = currenctPercent.rounded(withType: .undefined).toString() + "%"
+        } else {
+            cell.currentPercentLabel.text = ""
         }
     }
 }

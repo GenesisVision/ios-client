@@ -12,19 +12,19 @@ import Foundation
 open class FundAssetInfo: Codable {
 
     public var asset: String?
-    public var name: String?
+    public var symbol: String?
     public var icon: String?
-    public var targetPercent: Double?
-    public var currentPercent: Double?
+    public var target: Double?
+    public var current: Double?
 
 
     
-    public init(asset: String?, name: String?, icon: String?, targetPercent: Double?, currentPercent: Double?) {
+    public init(asset: String?, symbol: String?, icon: String?, target: Double?, current: Double?) {
         self.asset = asset
-        self.name = name
+        self.symbol = symbol
         self.icon = icon
-        self.targetPercent = targetPercent
-        self.currentPercent = currentPercent
+        self.target = target
+        self.current = current
     }
     
 
@@ -35,10 +35,10 @@ open class FundAssetInfo: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(asset, forKey: "asset")
-        try container.encodeIfPresent(name, forKey: "name")
+        try container.encodeIfPresent(symbol, forKey: "symbol")
         try container.encodeIfPresent(icon, forKey: "icon")
-        try container.encodeIfPresent(targetPercent, forKey: "targetPercent")
-        try container.encodeIfPresent(currentPercent, forKey: "currentPercent")
+        try container.encodeIfPresent(target, forKey: "target")
+        try container.encodeIfPresent(current, forKey: "current")
     }
 
     // Decodable protocol methods
@@ -47,10 +47,10 @@ open class FundAssetInfo: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         asset = try container.decodeIfPresent(String.self, forKey: "asset")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
+        symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
-        targetPercent = try container.decodeIfPresent(Double.self, forKey: "targetPercent")
-        currentPercent = try container.decodeIfPresent(Double.self, forKey: "currentPercent")
+        target = try container.decodeIfPresent(Double.self, forKey: "target")
+        current = try container.decodeIfPresent(Double.self, forKey: "current")
     }
 }
 

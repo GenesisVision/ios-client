@@ -34,6 +34,7 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh(scrollView: tableView)
         
@@ -104,11 +105,17 @@ extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1.0
+        return 44.0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView() as FundAssetsHeaderView
+        header.configure(firstTitle: "Asset (symbol)", thirdTitle: "Target", fourthTitle: "Current")
+        return header
     }
 }
 

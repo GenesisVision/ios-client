@@ -10,7 +10,7 @@ import UIKit.UITableViewHeaderFooterView
 
 final class FundAssetsViewModel {
     // MARK: - Variables
-    var title: String = "Assets"
+    var title: String = "Structure"
     var fundId: String?
     
     var router: FundRouter!
@@ -48,6 +48,10 @@ extension FundAssetsViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [FundAssetTableViewCellViewModel.self]
+    }
+    
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [FundAssetsHeaderView.self]
     }
     
     func numberOfSections() -> Int {

@@ -13,6 +13,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: DashboardProgramListViewModel!
     var firstTimeSetup3dTouch: Bool = false
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

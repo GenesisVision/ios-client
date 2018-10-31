@@ -294,19 +294,19 @@ final class ManagerFundListDelegateManager: NSObject, UITableViewDelegate, UITab
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.delegateManagerScrollViewDidScroll(scrollView)
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+//        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
-        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
-            //            print("down")
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
-        } else {
-            //            print("up")
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
-        }
+//        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+//        if translation.y > 0 {
+//            //            print("down")
+//            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+//        } else {
+//            //            print("up")
+//            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
+//        }
     }
 }
 

@@ -77,17 +77,17 @@ open class FundsAPI {
      - GET /v1.0/funds/{id}/assets
      - examples: [{contentType=application/json, example={
   "assets" : [ {
-    "name" : "name",
+    "symbol" : "symbol",
+    "current" : 6.027456183070403,
     "icon" : "icon",
-    "currentPercent" : 6.027456183070403,
     "asset" : "asset",
-    "targetPercent" : 0.8008281904610115
+    "target" : 0.8008281904610115
   }, {
-    "name" : "name",
+    "symbol" : "symbol",
+    "current" : 6.027456183070403,
     "icon" : "icon",
-    "currentPercent" : 6.027456183070403,
     "asset" : "asset",
-    "targetPercent" : 0.8008281904610115
+    "target" : 0.8008281904610115
   } ]
 }}]
      

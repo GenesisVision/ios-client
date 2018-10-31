@@ -30,18 +30,6 @@ class PlatformManager {
     static let shared = PlatformManager()
     
     var dateRangeType: DateRangeType = .week
-    
-//    var dateRangeFrom: Date = Date().removeDays(7) {
-//        didSet {
-//            updateTime()
-//        }
-//    }
-//    var dateRangeTo: Date = Date() {
-//        didSet {
-//            updateTime()
-//        }
-//    }
-    
     var dateFrom: Date?
     var dateTo: Date?
     
@@ -51,33 +39,6 @@ class PlatformManager {
     init() {
         filterConstants = getFilterConstants(nil)
     }
-    
-//    private func updateTime() {
-//        dateFrom = dateRangeFrom
-//        dateTo = dateRangeTo
-//        
-//        var calendar = Calendar.current
-//        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
-//        
-//        switch dateRangeType {
-//        case .custom:
-//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
-//            dateTo.setTime(hour: 0, min: 0, sec: 0)
-//            
-//            let hour = calendar.component(.hour, from: dateTo)
-//            let min = calendar.component(.minute, from: dateTo)
-//            let sec = calendar.component(.second, from: dateTo)
-//            dateFrom.setTime(hour: hour, min: min, sec: sec)
-//            dateTo.setTime(hour: hour, min: min, sec: sec)
-//            dateFrom = dateFrom.removeDays(1)
-//        default:
-//            let hour = calendar.component(.hour, from: dateTo)
-//            let min = calendar.component(.minute, from: dateTo)
-//            let sec = calendar.component(.second, from: dateTo)
-//            dateFrom.setTime(hour: hour, min: min, sec: sec)
-//            dateTo.setTime(hour: hour, min: min, sec: sec)
-//        }
-//    }
     
     func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
         if let platformInfo = platformInfo {

@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Charts
 enum ChartType {
-    case `default`, detail, full, dashboard
+    case `default`, detail, full, dashboard, balance, profit
 }
 
 enum ChartDurationType: Int {
@@ -19,29 +19,6 @@ enum ChartDurationType: Int {
     var allCases: [String] {
         return ["1d", "1w", "1m", "3m", "6m", "1y", "all"]
     }
-    
-//    func getTimeFrame() -> InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet {
-//        var timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.day1
-//    
-//        switch self {
-//        case .day:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.day1
-//        case .week:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.week1
-//        case .month:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month1
-//        case .month3:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month3
-//        case .month6:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.month6
-//        case .year:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.year1
-//        case .all:
-//            timeFrame = InvestorAPI.TimeFrame_apiInvestorProgramEquityChartGet.all
-//        }
-//        
-//        return timeFrame
-//    }
 }
 
 // MARK: - DateRange
@@ -60,10 +37,10 @@ enum DateRangeType: Int {
             return "Week"
         case .month:
             return "Month"
+        case .year:
+            return "Year"
         case .custom:
             return "Custom"
-        default:
-            return ""
         }
     }
 }

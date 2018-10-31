@@ -16,11 +16,27 @@ class FundAssetTableViewCell: TableViewCell {
         }
     }
     
-    @IBOutlet weak var nameLabel: TitleLabel!
+    @IBOutlet weak var nameLabel: TitleLabel! {
+        didSet {
+            nameLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var assetLabel: SubtitleLabel! {
+        didSet {
+            assetLabel.font = UIFont.getFont(.regular, size: 13.0)
+        }
+    }
     
-    @IBOutlet weak var assetLabel: SubtitleLabel!
-    
-    @IBOutlet weak var assetPercentLabel: TitleLabel!
+    @IBOutlet weak var targetPercentLabel: TitleLabel! {
+        didSet {
+            targetPercentLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var currentPercentLabel: TitleLabel! {
+        didSet {
+            currentPercentLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -128,6 +128,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
 
         dateRangeView = DateRangeView.viewFromNib()
         if let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo {
+            updateDateRangeButton()
             updateData(with: dateFrom, dateTo: dateTo)
         }
         
@@ -257,7 +258,22 @@ extension BaseViewController: DateRangeViewProtocol {
     func applyButtonDidPress(with dateFrom: Date, dateTo: Date) {
         bottomSheetController.dismiss()
 
+        updateDateRangeButton()
         updateData(with: dateFrom, dateTo: dateTo)
+    }
+    
+    private func updateDateRangeButton() {
+        let dateRangeType = PlatformManager.shared.dateRangeType
+        
+        switch dateRangeType {
+        case .custom:
+            guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return }
+            
+            let title = Date.getFormatStringForChart(for: dateFrom, dateRangeType: dateRangeType) + "-" + Date.getFormatStringForChart(for: dateTo, dateRangeType: dateRangeType)
+            dateRangeButton.setTitle(title, for: .normal)
+        default:
+            dateRangeButton.setTitle(dateRangeType.getString(), for: .normal)
+        }
     }
     
     func showDatePicker(with dateFrom: Date?, dateTo: Date) {
