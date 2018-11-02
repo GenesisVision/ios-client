@@ -52,7 +52,9 @@ class ForgotPasswordViewController: BaseViewController {
     }
     
     private func showForgotPasswordInfoVC() {
-        showBottomSheet(type: .success, title: "We sent a password reset link to the email you specified. Please follow this link to reset your password.")
+        showBottomSheet(type: .success, title: viewModel.text) { [weak self] (success) in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func resetButtonMethod() {

@@ -326,6 +326,9 @@
                                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNv-XR-PkX">
                                                                         <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <connections>
+                                                                            <action selector="reinvestSwitchAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="lF7-rK-oGj"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                             </stackView>

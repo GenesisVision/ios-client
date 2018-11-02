@@ -54,7 +54,7 @@ extension DashboardFundTableViewCellViewModel: CellViewModel {
         
         cell.firstTitleLabel.text = "Balance"
         if let balance = fund.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.firstValueLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.firstValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.firstValueLabel.text = ""
         }

@@ -144,7 +144,7 @@ extension DashboardFundListViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse funds"
+        let text = "Browse assets"
         return text
     }
     
@@ -158,7 +158,7 @@ extension DashboardFundListViewModel {
     }
     
     func showFundList() {
-//        router.show(routeType: .fundList)
+        router.show(routeType: .assetList)
     }
 }
 

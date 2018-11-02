@@ -51,7 +51,7 @@ typealias CurrencyType = ProgramsAPI.CurrencySecondary_v10ProgramsGet
 extension CurrencyType {
     public var currencyLenght: Int {
         switch self {
-        case .gvt: return 4
+        case .gvt: return 8
         case .eth, .btc, .ada: return 8
         case .usd, .usdt, .eur: return 2
         default:

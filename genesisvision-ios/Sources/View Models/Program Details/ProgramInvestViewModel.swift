@@ -12,6 +12,8 @@ final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
     var programId: String?
+    var programCurrency: CurrencyType?
+    
     var labelPlaceholder: String = "0"
     
     var programInvestInfo: ProgramInvestInfo?
@@ -21,9 +23,10 @@ final class ProgramInvestViewModel {
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, programId: String, detailProtocol: DetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
         self.router = router
         self.programId = programId
+        self.programCurrency = programCurrency
         self.detailProtocol = detailProtocol
     }
     

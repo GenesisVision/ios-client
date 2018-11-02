@@ -13,10 +13,12 @@ struct DashboardProgramTableViewCellViewModel {
     let program: ProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
+    weak var reinvestProtocol: ReinvestProtocol?
 }
 
 extension DashboardProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
+        cell.reinvestProtocol = reinvestProtocol
         cell.dashboardBottomStackView.isHidden = false
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
@@ -24,6 +26,10 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         cell.delegate = delegate
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
+        
+        if let isReinvesting = program.personalDetails?.isReinvest {
+            cell.reinvestSwitch.isOn = isReinvesting
+        }
         
         if let chart = program.chart {
             cell.chartView.isHidden = false
@@ -76,7 +82,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         
         cell.secondTitleLabel.text = "Current value"
         if let balance = program.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.secondValueLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }

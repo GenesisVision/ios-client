@@ -29,15 +29,17 @@ class WalletDepositViewController: BaseViewController {
     @IBOutlet var numpadBackView: UIView! {
         didSet {
             numpadBackView.isHidden = true
+            numpadBackView.isUserInteractionEnabled = true
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideNumpadView))
             tapGesture.numberOfTapsRequired = 1
-            numpadBackView.isUserInteractionEnabled = true
+            tapGesture.delegate = self
             numpadBackView.addGestureRecognizer(tapGesture)
         }
     }
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -147,6 +149,8 @@ class WalletDepositViewController: BaseViewController {
                 amountToDepositGVTTitleLabel.text = "You will get"
             }
         }
+        
+        self.view.layoutIfNeeded()
     }
     
     @objc private func hideNumpadView() {
@@ -194,7 +198,7 @@ class WalletDepositViewController: BaseViewController {
             self?.updateUI()
         }
         
-        alert.addAction(title: "Cancel", style: .cancel)
+        alert.addAction(title: "Ok", style: .cancel)
         
         alert.show()
     }
@@ -238,5 +242,12 @@ extension WalletDepositViewController: NumpadViewProtocol {
         
         numpadView.isEnable = true
         amountToDepositValue = value
+    }
+}
+
+extension WalletDepositViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
+
     }
 }

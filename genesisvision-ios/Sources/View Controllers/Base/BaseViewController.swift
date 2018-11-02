@@ -73,6 +73,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         return stackView
     }()
     
+    
     let bottomStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
@@ -82,6 +83,8 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    var bottomStackViewHiddable: Bool = true
     
     var bottomViewType: BottomViewType = .none {
         didSet {
@@ -177,6 +180,45 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     // MARK: - Private Methods
+    internal func setupAutoLayout() {
+        sortButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        dateRangeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        signInButton.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor).isActive = true
+        
+        filterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
+        filterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
+        filterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        
+        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        if #available(iOS 11, *) {
+            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        } else {
+            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        }
+    }
+    
+    internal func addBottomView() {
+        filterStackView.addArrangedSubview(sortButton)
+        filterStackView.addArrangedSubview(filterButton)
+        filterStackView.addArrangedSubview(dateRangeButton)
+        bottomStackView.addArrangedSubview(filterStackView)
+        bottomStackView.addArrangedSubview(signInButton)
+        view.addSubview(bottomStackView)
+        
+        bottomViewType = .none
+        
+        setupAutoLayout()
+    }
+    
     @objc private func currencyButtonAction() {
         currencyDelegateManager?.updateSelectedIndex()
         bottomSheetController = BottomSheetController()
@@ -198,14 +240,14 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.present()
     }
     
-    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = 300.0
+        bottomSheetController.initializeHeight = initializeHeight ?? 300.0
         bottomSheetController.viewActionType = .tappedDismiss
         
         let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
-        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle)
+        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle, completion: completion)
         errorBottomSheetView.bottomSheetController = self.bottomSheetController
         bottomSheetController.addContentsView(errorBottomSheetView)
         bottomSheetController.present()
@@ -238,17 +280,27 @@ extension BaseViewController: UIViewControllerWithPullToRefresh {
 
 extension BaseViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard bottomStackViewHiddable else { return }
+        
         self.lastContentOffset = scrollView.contentOffset
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard bottomStackViewHiddable else { return }
+        
         if (self.lastContentOffset.y < scrollView.contentOffset.y) {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.filterStackView.alpha = 0.0
+            }) { (success) in
+                self.filterStackView.isUserInteractionEnabled = false
+                self.bottomStackView.isUserInteractionEnabled = false
             }
         } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.filterStackView.alpha = 1.0
+            }) { (success) in
+                self.filterStackView.isUserInteractionEnabled = true
+                self.bottomStackView.isUserInteractionEnabled = true
             }
         }
     }
@@ -407,7 +459,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
 
         addTableViewIfNeeded()
         setupViews()
-        setupAutoLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -448,44 +499,8 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         tableView.backgroundColor = UIColor.BaseView.bg
         tableView.tableHeaderView?.backgroundColor = UIColor.Cell.headerBg
 
-        filterStackView.addArrangedSubview(sortButton)
-        filterStackView.addArrangedSubview(filterButton)
-        filterStackView.addArrangedSubview(dateRangeButton)
-        bottomStackView.addArrangedSubview(filterStackView)
-        bottomStackView.addArrangedSubview(signInButton)
-        
-        view.addSubview(bottomStackView)
-        
-        bottomViewType = .none
+        addBottomView()
     }
-    
-    private func setupAutoLayout() {
-        sortButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        
-        dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        dateRangeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        
-        signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        signInButton.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor).isActive = true
-//        signInButton.bottomAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 0).isActive = true
-        
-        filterStackView.leftAnchor.constraint(equalTo: bottomStackView.leftAnchor, constant: 0).isActive = true
-        filterStackView.rightAnchor.constraint(equalTo: bottomStackView.rightAnchor, constant: 0).isActive = true
-        filterStackView.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        
-        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        if #available(iOS 11, *) {
-            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        } else {
-            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        }
-    }
-    
     
     // MARK: - Fetching
     func updateData() {
@@ -529,7 +544,7 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
             if let vc = navController.viewControllers.first as? UIViewControllerWithScrollView, let scrollView = vc.scrollView {
                 scrollTop(scrollView)
             }
-        case .programList:
+        case .assetList:
             if let vc = navController.viewControllers.first as? ProgramListViewController, let tableView = vc.tableView {
                 scrollTop(tableView)
             }

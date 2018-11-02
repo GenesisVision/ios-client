@@ -30,7 +30,7 @@ class WalletRouter: Router {
     
     // MARK: - Private methods
     private func showProgramList() {
-        changeTab(withParentRouter: self, to: .programList)
+        changeTab(withParentRouter: self, to: .assetList)
     }
     
     private func withdraw() {

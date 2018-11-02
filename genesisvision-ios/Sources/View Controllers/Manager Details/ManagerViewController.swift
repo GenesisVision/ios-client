@@ -165,12 +165,16 @@ extension ManagerViewController {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
     
     func animateHeader(_ minHeaderHeight: CGFloat) {

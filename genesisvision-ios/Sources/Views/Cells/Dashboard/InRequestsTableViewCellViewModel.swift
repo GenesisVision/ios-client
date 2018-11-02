@@ -41,15 +41,11 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
                 cell.amountValueLabel.text = "+"
             }
             
-            if let value = programRequest.value {
+            if let value = programRequest.value, let programCurrency = programRequest.currency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
                 let text = cell.amountValueLabel.text ?? ""
-                cell.amountValueLabel.text = text + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+                cell.amountValueLabel.text = text + value.rounded(withType: currency).toString() + " \(currency.rawValue)"
             }
         }
-        
-//        if let status = programRequest.status {
-//            cell.statusLabel.text = status.rawValue
-//        }
         
         if let date = programRequest.date {
             cell.dateLabel.text = date.onlyDateFormatString

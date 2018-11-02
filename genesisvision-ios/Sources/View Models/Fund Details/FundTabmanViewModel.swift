@@ -75,12 +75,12 @@ final class FundTabmanViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
-            if let vc = router.getBalance(with: fundId) {
+            if let vc = router.getProfit(with: fundId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
-            if let vc = router.getProfit(with: fundId) {
+            if let vc = router.getBalance(with: fundId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }

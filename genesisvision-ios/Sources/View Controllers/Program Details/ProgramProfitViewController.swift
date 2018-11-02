@@ -116,13 +116,12 @@ extension ProgramProfitViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension ProgramProfitViewController: ChartViewProtocol {
     func chartValueNothingSelected() {
-        print("chartValueNothingSelected")
         tableView.isScrollEnabled = true
+        tableView.panGestureRecognizer.isEnabled = true
     }
     
     func chartValueSelected(date: Date) {
-        print("chartValueSelected")
-        viewModel.selectChartSimple(date)
         tableView.isScrollEnabled = false
+        tableView.panGestureRecognizer.isEnabled = false
     }
 }

@@ -10,7 +10,7 @@ final class AuthForgetPasswordViewModel {
     
     // MARK: - Variables
     var title: String = "Forgot password"
-    
+    let text = "We sent a password reset link to the email you specified. \nPlease follow this link to reset your password."
     private var router: ForgotPasswordRouter!
     
     // MARK: - Init

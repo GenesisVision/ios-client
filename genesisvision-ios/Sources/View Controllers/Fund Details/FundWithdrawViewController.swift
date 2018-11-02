@@ -71,6 +71,7 @@ class FundWithdrawViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
             numpadView.type = .number
         }

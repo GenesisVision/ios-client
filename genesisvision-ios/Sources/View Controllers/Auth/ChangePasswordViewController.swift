@@ -62,9 +62,9 @@ class ChangePasswordViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-        oldPasswordTextField.text = "qwerty"
-        passwordTextField.text = "qwerty"
-        confirmPasswordTextField.text = "qwerty"
+        oldPasswordTextField.text = "qwerty123"
+        passwordTextField.text = "qwerty123"
+        confirmPasswordTextField.text = "qwerty123"
         #endif
         
         setupUI()
@@ -93,10 +93,16 @@ class ChangePasswordViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showChangePasswordInfoVC()
+                self?.showChangePasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
+        }
+    }
+    
+    private func showChangePasswordInfoVC() {
+        showBottomSheet(type: .success, title: viewModel.text) { [weak self] (success) in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     

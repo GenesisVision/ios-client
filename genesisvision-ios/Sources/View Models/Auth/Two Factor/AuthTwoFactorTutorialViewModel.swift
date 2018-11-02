@@ -10,7 +10,7 @@ import UIKit.UIImage
 
 final class AuthTwoFactorTutorialViewModel {
     // MARK: - Variables
-    var title: String = "How to".uppercased()
+    var title: String = "How to"
     var numberOfPages = 5
     
     private var tabmanViewModel: AuthTwoFactorTabmanViewModel!

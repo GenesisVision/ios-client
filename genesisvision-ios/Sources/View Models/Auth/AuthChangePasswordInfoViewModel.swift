@@ -11,7 +11,7 @@ import UIKit.UIImage
 final class AuthChangePasswordInfoViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.changePasswordSuccess
-    var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
+    var iconImage: UIImage? = #imageLiteral(resourceName: "email-confirmed-icon")
     var backgroundColor: UIColor = UIColor.InfoView.bg
     var textColor: UIColor = UIColor.InfoView.text
     var tintColor: UIColor = UIColor.InfoView.tint

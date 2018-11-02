@@ -33,11 +33,6 @@
 		5E12B38F20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38E20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift */; };
 		5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */; };
 		5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */; };
-		5E152F0D2165283A0029BFDE /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F08216528380029BFDE /* Montserrat-Medium.ttf */; };
-		5E152F0E2165283A0029BFDE /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F09216528380029BFDE /* Montserrat-Bold.ttf */; };
-		5E152F0F2165283A0029BFDE /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */; };
-		5E152F102165283A0029BFDE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */; };
-		5E152F112165283A0029BFDE /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */; };
 		5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F12216638400029BFDE /* WalletTableHeaderView.xib */; };
 		5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */; };
 		5E1813802061D36700481646 /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137B2061D36500481646 /* Common+Extensions.swift */; };
@@ -54,6 +49,12 @@
 		5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CE0820C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift */; };
 		5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */; };
 		5E1C086A216F8CE7007C45B2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */; };
+		5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC08A21849290009E4BA3 /* Montserrat-ExtraLight.ttf */; };
+		5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F09216528380029BFDE /* Montserrat-Bold.ttf */; };
+		5E1CF81E218B71D100541C70 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */; };
+		5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F08216528380029BFDE /* Montserrat-Medium.ttf */; };
+		5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */; };
+		5E1CF821218B71D100541C70 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */; };
 		5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */; };
 		5E27EC48218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */; };
 		5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */; };
@@ -2708,18 +2709,19 @@
 				5EA274CB21628297008CAF77 /* DetailBalanceChartTableViewCell.xib in Resources */,
 				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
+				5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */,
 				5EA274B721628207008CAF77 /* ProgramPeriodTableViewCell.xib in Resources */,
 				5E0AD0E721813E1700DC76AA /* Fund.storyboard in Resources */,
-				5E152F0E2165283A0029BFDE /* Montserrat-Bold.ttf in Resources */,
-				5E152F0D2165283A0029BFDE /* Montserrat-Medium.ttf in Resources */,
+				5E1CF821218B71D100541C70 /* Montserrat-SemiBold.ttf in Resources */,
 				5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */,
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
+				5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5ED03F3620FF784A00AF5E07 /* FieldWithTextViewTableViewCell.xib in Resources */,
+				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
-				5E152F0F2165283A0029BFDE /* Montserrat-SemiBold.ttf in Resources */,
 				5E82C75421429785007A21C3 /* DashboardCurrencyTableViewCell.xib in Resources */,
 				5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
@@ -2741,20 +2743,20 @@
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
-				5E152F102165283A0029BFDE /* Montserrat-Regular.ttf in Resources */,
 				5EA274BB2162823F008CAF77 /* InvestNowTableViewCell.xib in Resources */,
 				5EC78725216BD458000C91E4 /* NotificationListTableViewCell.xib in Resources */,
+				5E1CF81E218B71D100541C70 /* Montserrat-Light.ttf in Resources */,
 				FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */,
 				5ED03F3A20FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.xib in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
+				5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */,
-				5E152F112165283A0029BFDE /* Montserrat-Light.ttf in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
 				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,

@@ -28,6 +28,9 @@ final class AllEventsViewModel {
         }
     }
     
+    var dateFrom: Date?
+    var dateTo: Date?
+    
     var viewModels = [PortfolioEventTableViewCellViewModel]()
     
     // MARK: - Init
@@ -157,7 +160,7 @@ extension AllEventsViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [PortfolioEventTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            DashboardDataProvider.getDashboardPortfolioEvents(with: assetId, skip: skip, take: take, completion: { (portfolioEvents) in
+            DashboardDataProvider.getDashboardPortfolioEvents(with: assetId, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { (portfolioEvents) in
                 guard portfolioEvents != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

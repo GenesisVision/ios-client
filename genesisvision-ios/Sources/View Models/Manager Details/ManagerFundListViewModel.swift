@@ -47,7 +47,7 @@ final class ManagerFundListViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .sort
+        return .dateRange
     }
     
     var viewModels = [FundTableViewCellViewModel]()
@@ -230,7 +230,10 @@ extension ManagerFundListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        FundsDataProvider.get(managerId: managerId, skip: skip, take: take, completion: { [weak self] (fundsList) in
+        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        let currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) ?? .btc
+        
+        FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
             guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.fundsList = fundsList
@@ -280,7 +283,7 @@ final class ManagerFundListDelegateManager: NSObject, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
+//        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
     }
     
     // MARK: - UITableViewDataSource

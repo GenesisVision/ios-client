@@ -17,6 +17,7 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -142,6 +143,10 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func updateUI() {
+        if let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount {
+            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
+        }
+        
         if let entryFee = viewModel.programInvestInfo?.entryFee, let gvCommission = viewModel.programInvestInfo?.gvCommission {
             let entryFeeGVT = entryFee * amountToInvestValue / 100
             let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
@@ -160,13 +165,12 @@ class ProgramInvestViewController: BaseViewController {
             self.investmentAmountValueLabel.text = investmentAmountValue + " " + Constants.gvtString
         }
         
-        if let availableToInvest = viewModel.programInvestInfo?.availableToInvest {
-            self.availableToInvestValue = availableToInvest
+        if let availableToInvest = viewModel.programInvestInfo?.availableToInvest, let availableInWallet = viewModel.programInvestInfo?.availableInWallet {
+            self.availableToInvestValue = min(availableInWallet, availableToInvest)
         }
         
         let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue
         investButton.setEnabled(investButtonEnabled)
-//        updateNumPadState(value: amountToInvestValueLabel.text)
     }
     
     @objc private func closeButtonAction() {
@@ -174,7 +178,7 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        guard amountToInvestValue > 0 else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        guard let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount, amountToInvestValue > minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
         viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
@@ -195,12 +199,14 @@ class ProgramInvestViewController: BaseViewController {
         bottomSheetController = BottomSheetController()
         bottomSheetController.tintColor = UIColor.Cell.bg
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 500.0
+        bottomSheetController.initializeHeight = 520.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-        let periodEnds = viewModel.programInvestInfo?.periodEnds
-        let periodEndsString = periodEnds?.defaultFormatString ?? ""
-        let subtitle = "Your request will be processed at the end of the reporting period " + periodEndsString
+        
+        var subtitle = ""
+        if let currency = viewModel.programCurrency, let periodEnds = viewModel.programInvestInfo?.periodEnds {
+            subtitle = "After tapping the \"Confirm\" button, the invested GVT will be immediately converted to \(currency.rawValue). Accrual of \(currency.rawValue) to the account manager will only occur at the end of the reporting period \(periodEnds.defaultFormatString)."
+        }
         
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {
@@ -225,16 +231,6 @@ class ProgramInvestViewController: BaseViewController {
         confirmView.delegate = self
         bottomSheetController.present()
     }
-    
-//    private func updateNumPadState(value: String?) {
-//        if let text = value, text.range(of: ".") != nil,
-//            let lastComponents = text.components(separatedBy: ".").last,
-//            lastComponents.count >= getDecimalCount(for: .gvt) {
-//            changedActive(value: false)
-//        } else {
-//            changedActive(value: true)
-//        }
-//    }
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,21 +27,11 @@
                                     <outlet property="delegate" destination="4qn-RU-Ufu" id="wQZ-cu-ubr"/>
                                 </connections>
                             </tableView>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-na-XEw" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="W24-2b-0Dv"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="top" secondItem="FoC-GU-UBn" secondAttribute="top" id="DN2-iC-Q4D"/>
                             <constraint firstItem="FoC-GU-UBn" firstAttribute="trailing" secondItem="Wb8-gJ-vWJ" secondAttribute="trailing" id="HGQ-rz-ovf"/>
-                            <constraint firstItem="GKl-na-XEw" firstAttribute="trailing" secondItem="FoC-GU-UBn" secondAttribute="trailing" id="YkM-vy-iJA"/>
-                            <constraint firstAttribute="bottom" secondItem="GKl-na-XEw" secondAttribute="bottom" id="YmY-5g-8wI"/>
-                            <constraint firstItem="GKl-na-XEw" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="o1h-EN-kZk"/>
                             <constraint firstAttribute="bottom" secondItem="Wb8-gJ-vWJ" secondAttribute="bottom" id="o6o-xQ-pq8"/>
                             <constraint firstItem="Wb8-gJ-vWJ" firstAttribute="leading" secondItem="FoC-GU-UBn" secondAttribute="leading" id="zZp-C0-9uX"/>
                         </constraints>
@@ -49,7 +39,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="8W6-T4-aZM"/>
                     <connections>
-                        <outlet property="gradientView" destination="GKl-na-XEw" id="Bs5-qe-b3o"/>
                         <outlet property="tableView" destination="Wb8-gJ-vWJ" id="gJH-0p-cqt"/>
                     </connections>
                 </viewController>

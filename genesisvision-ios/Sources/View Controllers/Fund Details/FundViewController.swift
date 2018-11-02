@@ -210,12 +210,16 @@ extension FundViewController {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
 
     func animateHeader(_ minHeaderHeight: CGFloat) {
@@ -271,3 +275,11 @@ extension FundViewController: DetailProtocol {
     }
 }
 
+// MARK: - ReloadDataProtocol
+extension FundViewController: ReloadDataProtocol {
+    func didReloadData() {
+        if let fundDetailsFull = viewModel.fundDetailsFull {
+            headerViewController?.configure(fundDetailsFull)
+        }
+    }
+}

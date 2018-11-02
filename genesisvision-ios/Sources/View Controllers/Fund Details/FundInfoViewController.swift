@@ -52,6 +52,7 @@ class FundInfoViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.bounces = false
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         

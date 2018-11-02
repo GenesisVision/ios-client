@@ -13,15 +13,12 @@ class InvestorDashboardViewController: DashboardViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        showProgressHUD()
-//        setup()
-        
-//        fetch()
+        bottomViewType = .dateRange
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        bottomViewType = .dateRange
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -30,7 +27,6 @@ class InvestorDashboardViewController: DashboardViewController {
     
     // MARK: - Private methods
     private func setup() {
-//        scrollView.delegate = self
 
         setupUI()
     }
@@ -43,30 +39,8 @@ class InvestorDashboardViewController: DashboardViewController {
     }
     
     private func reloadData() {
-        DispatchQueue.main.async {
-            //TODO: update all views: charts, events, assets
-        }
+
     }
-    
-//    override func fetch() {
-//        viewModel.refresh { [weak self] (result) in
-//            self?.hideAll()
-//
-//            switch result {
-//            case .success:
-//                self?.reloadData()
-//            case .failure(let errorType):
-//                ErrorHandler.handleError(with: errorType, viewController: self)
-//            }
-//        }
-//    }
-    
-//    override func pullToRefresh() {
-//        super.pullToRefresh()
-//        hideAll()
-//        //update daterange and fetch
-////        fetch()
-//    }
 }
 
 extension InvestorDashboardViewController: ReloadDataProtocol {

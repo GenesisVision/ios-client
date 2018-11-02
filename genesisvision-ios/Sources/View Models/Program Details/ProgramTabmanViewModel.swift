@@ -70,12 +70,12 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
-            if let vc = router.getBalance(with: programId) {
+            if let vc = router.getProfit(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
-            if let vc = router.getProfit(with: programId) {
+            if let vc = router.getBalance(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }

@@ -9,15 +9,15 @@
 import Foundation
 
 enum ProgramInfoRouteType {
-    case invest(programId: String), withdraw(programId: String, programCurrency: CurrencyType), fullChart(programDetailsFull: ProgramDetailsFull), manager(managerId: String)
+    case invest(programId: String, programCurrency: CurrencyType), withdraw(programId: String, programCurrency: CurrencyType), fullChart(programDetailsFull: ProgramDetailsFull), manager(managerId: String)
 }
 
 class ProgramInfoRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramInfoRouteType) {
         switch routeType {
-        case .invest(let programId):
-            invest(with: programId)
+        case .invest(let programId, let programCurrency):
+            invest(with: programId, programCurrency: programCurrency)
         case .withdraw(let programId, let programCurrency):
             withdraw(with: programId, programCurrency: programCurrency)
         case .fullChart(let programDetailsFull):
@@ -28,12 +28,12 @@ class ProgramInfoRouter: Router {
     }
     
     // MARK: - Private methods
-    func invest(with programId: String) {
+    func invest(with programId: String, programCurrency: CurrencyType) {
         guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
             let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
-        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, detailProtocol: programViewController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

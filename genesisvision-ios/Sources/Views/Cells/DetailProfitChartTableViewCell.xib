@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CCH-kx-uRh">
-                        <rect key="frame" x="36" y="35" width="248" height="62"/>
+                        <rect key="frame" x="20" y="35" width="280" height="62"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="psq-OJ-RWa">
-                                <rect key="frame" x="0.0" y="0.0" width="124" height="62"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="psq-OJ-RWa">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9B-xQ-mpN" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="15"/>
@@ -35,7 +35,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3UM-Oo-7rO">
-                                        <rect key="frame" x="0.0" y="25" width="42" height="37"/>
+                                        <rect key="frame" x="0.0" y="23" width="42" height="37"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SA1-OV-daF" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="18"/>
@@ -59,8 +59,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hZ7-E9-ZaD">
-                                <rect key="frame" x="124" y="0.0" width="124" height="62"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hZ7-E9-ZaD">
+                                <rect key="frame" x="140" y="0.0" width="140" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pLJ-y3-aeD">
                                         <rect key="frame" x="0.0" y="0.0" width="92" height="15"/>
@@ -83,7 +83,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="QSr-hF-y53">
-                                        <rect key="frame" x="0.0" y="25" width="42" height="37"/>
+                                        <rect key="frame" x="0.0" y="23" width="42" height="37"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abY-JN-FxC" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="18"/>
@@ -130,13 +130,13 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CCH-kx-uRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="2N5-h5-8fq"/>
                     <constraint firstItem="co6-SI-WEY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CAY-0l-my7"/>
                     <constraint firstItem="co6-SI-WEY" firstAttribute="top" secondItem="CCH-kx-uRh" secondAttribute="bottom" constant="20" id="Dda-J4-M83"/>
+                    <constraint firstItem="CCH-kx-uRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="HwP-36-RcS"/>
+                    <constraint firstAttribute="trailing" secondItem="CCH-kx-uRh" secondAttribute="trailing" constant="20" id="Ltz-dF-jmb"/>
                     <constraint firstItem="CCH-kx-uRh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="24" id="Vdp-Ip-LGm"/>
                     <constraint firstAttribute="bottom" secondItem="co6-SI-WEY" secondAttribute="bottom" constant="20" id="WKD-tF-ovf"/>
                     <constraint firstAttribute="trailing" secondItem="co6-SI-WEY" secondAttribute="trailing" id="bof-O0-HgA"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="CCH-kx-uRh" secondAttribute="trailing" constant="20" id="fcT-pT-kfz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

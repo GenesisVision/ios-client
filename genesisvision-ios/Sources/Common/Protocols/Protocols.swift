@@ -14,9 +14,40 @@ protocol NodataProtocol {
     var noDataButtonTitle: String? { get }
 }
 
+protocol YourInvestmentProtocol: class {
+    func didTapWithdrawButton()
+    func didTapStatusButton()
+    func didChangeReinvestSwitch(value: Bool)
+}
+
+extension YourInvestmentProtocol {
+    func didTapWithdrawButton() {
+        
+    }
+    func didTapStatusButton() {
+        
+    }
+    
+    func didChangeReinvestSwitch(value: Bool) {
+        
+    }
+}
+
+protocol ReinvestProtocol: class {
+    func didChangeReinvestSwitch(value: Bool, assetId: String)
+}
+
+extension ReinvestProtocol {
+    func didChangeReinvestSwitch(value: Bool, indexPath: IndexPath) {
+        
+    }
+}
+
 protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    
 }
 
 //old ProgramProtocol
@@ -125,7 +156,7 @@ protocol UIViewControllerWithBottomView {
     var filterButton: ActionButton { get }
     var signInButton: ActionButton { get }
     var filterStackView: UIStackView { get }
-    var bottomStackView: UIStackView { get }
+    var bottomStackView: UIStackView! { get }
     var bottomViewType: BottomViewType { get }
     
     func sortButtonAction()

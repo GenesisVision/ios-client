@@ -60,21 +60,22 @@ class AuthTwoFactorTutorialViewController: BaseViewController {
             topLabel.lineBreakMode = .byWordWrapping
             topLabel.numberOfLines = 3
             topLabel.textAlignment = .center
-            topLabel.font = UIFont.getFont(.regular, size: 19.0)
-            topLabel.textColor = UIColor.TwoFactor.title
+            topLabel.font = UIFont.getFont(.regular, size: 14.0)
+            topLabel.textColor = UIColor.Cell.subtitle
             topLabel.text = tutorialTopTitles[idx]
             topLabel.sizeToFit()
             
             let image = UIImage(named: "img_2fa_tutorial_\(idx).png")
             let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: 0, y: 0, width: 146, height: 260)
             imageView.contentMode = .scaleAspectFit
             
             let bottomLabel = UILabel(frame: .zero)
             bottomLabel.lineBreakMode = .byWordWrapping
             bottomLabel.numberOfLines = 3
             bottomLabel.textAlignment = .center
-            bottomLabel.font = UIFont.getFont(.regular, size: 19.0)
-            bottomLabel.textColor = UIColor.TwoFactor.title
+            bottomLabel.font = UIFont.getFont(.regular, size: 14.0)
+            bottomLabel.textColor = UIColor.Cell.subtitle
             bottomLabel.text = tutorialBottomTitles[idx]
             bottomLabel.sizeToFit()
             
@@ -121,7 +122,7 @@ class AuthTwoFactorTutorialViewController: BaseViewController {
         pageControl.numberOfPages = viewModel.numberOfPages
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor.TwoFactor.pageControllTint
-        pageControl.pageIndicatorTintColor = UIColor.TwoFactor.pageControllPageIndicatorTint
+        pageControl.pageIndicatorTintColor = UIColor.Common.numpadDotsBackground
         pageControl.currentPageIndicatorTintColor = UIColor.TwoFactor.pageControllCurrentPageIndicatorTint
         pageControl.addTarget(self, action: #selector(changePage(sender:)), for: .valueChanged)
     }

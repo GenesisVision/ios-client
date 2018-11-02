@@ -26,7 +26,7 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
         super.viewWillAppear(animated)
         
         viewModel.hideHeader()
-        fetch()
+        showProgressHUD()
     }
     
     // MARK: - Private methods
@@ -71,9 +71,13 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
         bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: #imageLiteral(resourceName: "img_profit_filter_icon"), selectedImage: #imageLiteral(resourceName: "img_profit_filter_desc_icon"), buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
-            tableView.delegate = self?.viewModel.sortingDelegateManager
-            tableView.dataSource = self?.viewModel.sortingDelegateManager
             tableView.separatorStyle = .none
+            
+            if let sortingDelegateManager = self?.viewModel.sortingDelegateManager {
+                tableView.registerNibs(for: sortingDelegateManager.cellModelsForRegistration)
+                tableView.delegate = sortingDelegateManager
+                tableView.dataSource = sortingDelegateManager
+            }
         }
         
         viewModel.sortingDelegateManager.tableViewProtocol = self
@@ -109,8 +113,18 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
-        fetch()
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
+        fetch()
+    }
+    
+    override func updateData(with dateFrom: Date, dateTo: Date) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
+        showProgressHUD()
+        fetch()
     }
 }
 
@@ -159,6 +173,8 @@ extension ManagerProgramListViewController: ReloadDataProtocol {
 extension ManagerProgramListViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }
@@ -174,6 +190,10 @@ extension ManagerProgramListViewController: FavoriteStateChangeProtocol {
 }
 
 extension ManagerProgramListViewController: DelegateManagerProtocol {
+    func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+    }
+    
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
         self.scrollViewDidScroll(scrollView)
     }

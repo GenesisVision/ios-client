@@ -89,12 +89,12 @@ extension DashboardViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
+        let text = "Browse assets"
         return text
     }
     
     func showProgramList() {
-        router.show(routeType: .programList)
+        router.show(routeType: .assetList)
     }
     
     func showNotificationList() {

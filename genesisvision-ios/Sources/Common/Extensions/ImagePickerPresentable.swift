@@ -41,7 +41,7 @@ extension ImagePickerPresentable where Self: UIViewController {
         ImagePickerHelper.shared.delegate = self
         
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        optionMenu.view.tintColor = UIColor.BaseView.bg
+        optionMenu.view.tintColor = UIColor.Cell.headerBg
         
         if let action = self.pickerControllerActionFor(for: .camera, title: "Take Photo") {
             optionMenu.addAction(action)

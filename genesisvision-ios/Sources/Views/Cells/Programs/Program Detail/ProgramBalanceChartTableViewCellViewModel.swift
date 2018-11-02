@@ -31,18 +31,19 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
             cell.amountCurrencyLabel.isHidden = true
         }
         
-        cell.changeTitleLabel.isHidden = true
-        cell.changePercentLabel.isHidden = true
-        cell.changeValueLabel.isHidden = true
-        cell.changeCurrencyLabel.isHidden = true
-        
         if let balanceChartData = programBalanceChart.balanceChart, balanceChartData.count > 0 {
-            cell.chartViewHeightConstraint.constant = 300.0
+            cell.chartViewHeightConstraint.constant = 200.0
             cell.chartView.setup(programBalanceChartData: balanceChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             cell.chartView.isHidden = false
         } else {
             cell.chartViewHeightConstraint.constant = 0.0
             cell.chartView.isHidden = true
         }
+        
+        cell.managersFundsTitleLabel.text = "Manager funds"
+        cell.investorsFundsTitleLabel.text = "Investors funds"
+        cell.profitTitleLabel.text = "Profit"
+        
+        cell.chartModel = programBalanceChart
     }
 }

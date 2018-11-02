@@ -54,8 +54,8 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.firstTitleLabel.text = "Period"
-        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds {
-            cell.firstValueLabel.text = periodEnds.timeSinceDate(fromDate: periodStarts)
+        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
+            cell.firstValueLabel.text = periodDuration + periodDuration > 1 ? " days" : " day"
             
             let today = Date()
             let periodLeft = periodEnds.timeSinceDate(fromDate: today)
@@ -72,7 +72,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.secondTitleLabel.text = "Balance"
         if let balance = program.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.secondValueLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }

@@ -8,25 +8,10 @@
 
 import UIKit
 
-protocol YourInvestmentProtocol: class {
-    func didTapWithdrawButton()
-    func didChangeReinvestSwitch(value: Bool)
-    func didTapStatusButton()
-}
-
-extension YourInvestmentProtocol {
-    func didTapWithdrawButton() {
-        
-    }
-    func didChangeReinvestSwitch(value: Bool) {
-        
-    }
-    func didTapStatusButton() {
-        
-    }
-}
-
 class YourInvestmentTableViewCell: UITableViewCell {
+    // MARK: - Variables
+    weak var yourInvestmentProtocol: YourInvestmentProtocol?
+
     // MARK: - Outlets
     @IBOutlet var titleLabel: UILabel! {
         didSet {
@@ -98,8 +83,6 @@ class YourInvestmentTableViewCell: UITableViewCell {
     @IBOutlet var reinvestSwitch: UISwitch!
     
     @IBOutlet var disclaimerLabel: SubtitleLabel!
-    
-    weak var yourInvestmentProtocol: YourInvestmentProtocol?
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

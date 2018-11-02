@@ -16,8 +16,11 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
         cell.iconImageView.image = #imageLiteral(resourceName: "img_wallet_transaction_icon")
         cell.typeImageView.image = nil
+
+        cell.amountLabel.text = ""
         
-        if let action = walletTransaction.action, let sourceType = walletTransaction.sourceType, let destinationType = walletTransaction.destinationType, let value = walletTransaction.amount {
+        if let action = walletTransaction.action, let sourceType = walletTransaction.sourceType, let destinationType = walletTransaction.destinationType, let value = walletTransaction.amount, let sourceCurrency = walletTransaction.sourceCurrency {
+            
             var sign = ""
             
             switch action {
@@ -44,11 +47,17 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
                     cell.typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
                     sign = "+"
                 }
+                
+                if let currency = CurrencyType(rawValue: sourceCurrency.rawValue) {
+                        cell.amountLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+                }
+                
+                cell.amountLabel.textColor = value == 0
+                    ? UIColor.Cell.subtitle
+                    : value > 0
+                    ? UIColor.Cell.greenTitle
+                    : UIColor.Cell.redTitle
             }
-            
-            cell.amountLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        } else {
-            cell.amountLabel.text = ""
         }
         
         if let information = walletTransaction.information {

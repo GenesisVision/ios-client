@@ -142,8 +142,8 @@ extension ProgramInfoViewModel {
     }
     
     func invest() {
-        guard let programId = programId else { return }
-        router.show(routeType: .invest(programId: programId))
+        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        router.show(routeType: .invest(programId: programId, programCurrency: programCurrency))
     }
     
     func withdraw() {
@@ -151,7 +151,7 @@ extension ProgramInfoViewModel {
         router.show(routeType: .withdraw(programId: programId, programCurrency: programCurrency))
     }
     
-    func reinvest(_ value: Bool) {
+    private func reinvest(_ value: Bool) {
         if value {
             ProgramsDataProvider.reinvestOn(with: self.programId) { (result) in
                 switch result {

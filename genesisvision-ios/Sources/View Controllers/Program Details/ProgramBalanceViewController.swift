@@ -100,11 +100,11 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
 extension ProgramBalanceViewController: ChartViewProtocol {
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
+        tableView.panGestureRecognizer.isEnabled = true
     }
     
     func chartValueSelected(date: Date) {
-        print("chartValueSelected")
         tableView.isScrollEnabled = false
-        viewModel.selectProgramBalanceChartElement(date)
+        tableView.panGestureRecognizer.isEnabled = false
     }
 }

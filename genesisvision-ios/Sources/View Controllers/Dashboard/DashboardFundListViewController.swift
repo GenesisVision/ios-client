@@ -43,15 +43,13 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         
         setupTableConfiguration()
         
-        bottomViewType = viewModel.bottomViewType
-        
         let sortTitle = self.viewModel?.sortingDelegateManager.sortingManager?.sortTitle()
         sortButton.setTitle(sortTitle, for: .normal)
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = -44.0
+        tableView.contentInset.bottom = 60
         tableView.isScrollEnabled = false
         tableView.bounces = true
         tableView.delegate = self.viewModel?.fundListDelegateManager
@@ -77,10 +75,11 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.separatorStyle = .none
             
-            guard let sortingDelegateManager = self?.viewModel.sortingDelegateManager else { return }
-            tableView.registerNibs(for: sortingDelegateManager.cellModelsForRegistration)
-            tableView.delegate = sortingDelegateManager
-            tableView.dataSource = sortingDelegateManager
+            if let sortingDelegateManager = self?.viewModel.sortingDelegateManager {
+                tableView.registerNibs(for: sortingDelegateManager.cellModelsForRegistration)
+                tableView.delegate = sortingDelegateManager
+                tableView.dataSource = sortingDelegateManager
+            }
         }
         
         viewModel.sortingDelegateManager.tableViewProtocol = self
@@ -192,11 +191,21 @@ extension DashboardFundListViewController: SortingDelegate {
 }
 
 extension DashboardFundListViewController: DelegateManagerProtocol {
+    func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+    }
+    
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
         self.scrollViewDidScroll(scrollView)
     }
     
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.scrollViewWillBeginDragging(scrollView)
+    }
+}
+
+extension DashboardFundListViewController {
+    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        viewModel.showFundList()
     }
 }

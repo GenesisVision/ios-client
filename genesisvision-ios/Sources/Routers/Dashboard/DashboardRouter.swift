@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(programId: String), showFundDetails(fundId: String), programList, notificationList, allEvents, requests(programRequests: ProgramRequests?)
+    case showProgramDetails(programId: String), showFundDetails(fundId: String), assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?)
 }
 
 class DashboardRouter: Router {
@@ -37,8 +37,8 @@ class DashboardRouter: Router {
             showProgramDetails(with: programId)
         case .showFundDetails(let fundId):
             showFundDetails(with: fundId)
-        case .programList:
-            showProgramList()
+        case .assetList:
+            showAssetList()
         case .notificationList:
             showNotificationList()
         case .allEvents:
@@ -49,8 +49,8 @@ class DashboardRouter: Router {
     }
     
     // MARK: - Private methods
-    private func showProgramList() {
-        changeTab(withParentRouter: self, to: .programList)
+    private func showAssetList() {
+        changeTab(withParentRouter: self, to: .assetList)
     }
     
     private func showRequests(_ programRequests: ProgramRequests?) {

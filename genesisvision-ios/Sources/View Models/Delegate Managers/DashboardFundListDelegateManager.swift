@@ -38,7 +38,7 @@ final class DashboardFundListDelegateManager: NSObject, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
+        delegate?.delegateManagerTableView(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     // MARK: - UITableViewDataSource

@@ -184,10 +184,27 @@ class ChartView: CombinedChartView {
         }
     }
     
+    @objc func handlePan(recognizer: UIGestureRecognizer) {
+        switch recognizer.state {
+        case .ended, .cancelled:
+            if chartType != .dashboard {
+                highlightValue(nil, callDelegate: true)
+            }
+        case .changed:
+            break
+        default:
+            break
+        }
+    }
+    
     private func setup() {
         if let gestureRecognizers = gestureRecognizers {
             for recognizer in gestureRecognizers {
                 if recognizer is UIPanGestureRecognizer {
+                    recognizer.addTarget(self, action: #selector(handlePan(recognizer:)))
+                }
+                
+                if recognizer is UITapGestureRecognizer {
                     recognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
                 }
             }
@@ -199,7 +216,7 @@ class ChartView: CombinedChartView {
         dragEnabled = chartType != .default
         pinchZoomEnabled = chartType == .full
 
-        highlightPerTapEnabled = chartType == .dashboard
+        highlightPerTapEnabled = chartType != .default
         highlightPerDragEnabled = chartType != .default
 
         let rightAxisFormatter = NumberFormatter()
@@ -223,7 +240,7 @@ class ChartView: CombinedChartView {
             maxLimitLine.lineWidth = 1
             maxLimitLine.lineDashLengths = [1.0, 8.0]
             maxLimitLine.labelPosition = .rightBottom
-            maxLimitLine.drawLabelEnabled = false
+            maxLimitLine.drawLabelEnabled = true
             maxLimitLine.valueTextColor = UIColor.Cell.title
             maxLimitLine.lineColor = UIColor.Cell.subtitle
             maxLimitLine.valueFont = UIFont.getFont(.regular, size: 10.0)
@@ -233,7 +250,7 @@ class ChartView: CombinedChartView {
             minLimitLine.lineWidth = 1
             minLimitLine.lineDashLengths = [1.0, 8.0]
             minLimitLine.labelPosition = .rightTop
-            minLimitLine.drawLabelEnabled = false
+            minLimitLine.drawLabelEnabled = true
             minLimitLine.valueTextColor = UIColor.Cell.title
             minLimitLine.lineColor = UIColor.Cell.subtitle
             minLimitLine.valueFont = UIFont.getFont(.regular, size: 10.0)
@@ -323,7 +340,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
@@ -339,9 +356,8 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = true
         lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
-        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartData.addDataSet(lineChartDataSet)
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
@@ -354,7 +370,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = true
         lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
@@ -376,7 +392,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = chartType != .default
         lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
@@ -390,7 +406,7 @@ class ChartView: CombinedChartView {
         lineChartDataSet.fillAlpha = 1.0
         lineChartDataSet.fillFormatter = nil
         lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.highlightEnabled = false
+        lineChartDataSet.highlightEnabled = true
         lineChartDataSet.drawVerticalHighlightIndicatorEnabled = true
         lineChartData.addDataSet(lineChartDataSet)
         
@@ -419,6 +435,8 @@ class ChartView: CombinedChartView {
         barChartDataSet = BarChartDataSet(values: totalDataEntry, label: "Bar profit")
         
         let barChartData = BarChartData(dataSet: barChartDataSet)
+        
+        let width = Date(timeIntervalSince1970: barChartData.xMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: barChartData.xMin)) / 60
         barChartData.barWidth = Double(width)
         
         return barChartData

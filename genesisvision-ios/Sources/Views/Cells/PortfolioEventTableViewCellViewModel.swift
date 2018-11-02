@@ -50,8 +50,8 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
             cell.titleLabel.text = title
         }
         
-        if let value = dashboardPortfolioEvent.value {
-            cell.amountLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        if let value = dashboardPortfolioEvent.value, let currency = dashboardPortfolioEvent.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) {
+            cell.amountLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
             cell.amountLabel.textColor = value == 0
                 ? UIColor.Cell.subtitle
                 : value > 0

@@ -42,9 +42,10 @@ final class AuthTwoFactorCreateViewModel {
                 else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.sharedKey = sharedKey
-            qrCode.size = CGSize(width: 200, height: 200)
-            qrCode.color = CIColor(cgColor: UIColor.Font.black.cgColor)
-            qrCode.backgroundColor = CIColor(cgColor: UIColor.BaseView.bg.cgColor)
+            
+            qrCode.size = CGSize(width: 300, height: 300)
+            qrCode.color = CIColor(cgColor: UIColor.BaseView.bg.cgColor)
+            qrCode.backgroundColor = CIColor(cgColor: UIColor.Cell.title.cgColor)
             self?.qrImage = qrCode.image
             completion(.success)
             }, completionError: completionError)

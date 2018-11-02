@@ -38,6 +38,7 @@ class ProfitViewController: BaseViewController {
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
+            chartView.backgroundColor = UIColor.BaseView.bg
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
         }

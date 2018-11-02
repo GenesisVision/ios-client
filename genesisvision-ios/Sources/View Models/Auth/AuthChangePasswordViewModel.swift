@@ -12,6 +12,7 @@ final class AuthChangePasswordViewModel {
     var title: String = "Change password"
     
     private var router: ChangePasswordRouter!
+    let text = "Password successfully changed"
     
     // MARK: - Init
     init(withRouter router: ChangePasswordRouter) {

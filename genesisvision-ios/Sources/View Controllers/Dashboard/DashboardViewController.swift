@@ -78,16 +78,20 @@ class DashboardViewController: BaseViewController {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         
+        showProgressHUD()
         fetch()
     }
     
     // MARK: - Private methods
     private func setup() {
         setupPullToRefresh(scrollView: scrollView)
+        bottomViewType = .dateRange
+        bottomStackViewHiddable = false
+        addBottomView()
+        
+        setupUI()
         
         showProgressHUD()
-        setupUI()
-        fetch()
     }
     
     private func reloadData() {
@@ -139,20 +143,9 @@ class DashboardViewController: BaseViewController {
     private func setupUI() {
         navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         
-        bottomViewType = .dateRange
-        
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         addCurrencyTitleButton(CurrencyDelegateManager())
-        
-        let dateRangeButton = UIButton(type: .system)
-        let title = dateRangeView?.selectedDateRangeType.getString() ?? ""
-        dateRangeButton.setTitle(title, for: .normal)
-        dateRangeButton.semanticContentAttribute = .forceRightToLeft
-        dateRangeButton.setImage(#imageLiteral(resourceName: "img_arrow_down_icon"), for: .normal)
-        dateRangeButton.addTarget(self, action: #selector(dateRangeButtonAction), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dateRangeButton)
-//        scrollView.bounces = false
     }
     
     // MARK: - Public methods
@@ -211,13 +204,7 @@ extension DashboardViewController {
         
         let yOffset = scrollView.contentOffset.y
 //        animateViews(yOffset)
-        
-//        if !viewModel.isLoading && yOffset < -100 {
-//            showProgressHUD()
-//            fetch()
-//            return
-//        }
-        
+
         if scrollView == self.scrollView {
             if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {
@@ -235,6 +222,8 @@ extension DashboardViewController {
 extension DashboardViewController: SortingDelegate {
     func didSelectSorting() {
         bottomSheetController.dismiss()
+        
+        showProgressHUD()
         fetch()
     }
 }
@@ -245,7 +234,8 @@ extension DashboardViewController: InRequestsDelegateManagerProtocol {
         
         switch completionResult {
         case .success:
-            fetch()
+            self.showProgressHUD()
+            self.fetch()
         default:
             break
         }

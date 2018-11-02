@@ -47,7 +47,7 @@ final class ManagerProgramListViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .sort
+        return .dateRange
     }
     
     var viewModels = [ProgramTableViewCellViewModel]()
@@ -230,7 +230,7 @@ extension ManagerProgramListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
-        ProgramsDataProvider.get(managerId: managerId, skip: skip, take: take, completion: { [weak self] (programsList) in
+        ProgramsDataProvider.get(statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, managerId: managerId,  skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.programsList = programsList
@@ -280,6 +280,7 @@ final class ManagerProgramListDelegateManager: NSObject, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     
     // MARK: - UITableViewDataSource

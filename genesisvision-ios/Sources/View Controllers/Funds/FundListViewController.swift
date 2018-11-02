@@ -35,14 +35,7 @@ class FundListViewController: BaseViewControllerWithTableView {
             setupTableConfiguration()
         }
     }
-    
-    // MARK: - Views
-    @IBOutlet var gradientView: GradientView! {
-        didSet {
-            gradientView.isHidden = true
-        }
-    }
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +58,6 @@ class FundListViewController: BaseViewControllerWithTableView {
         }
         
         signInButton.isHidden = !signInButtonEnable
-        gradientView.isHidden = !signInButtonEnable
     }
     
     private func setup() {

@@ -90,9 +90,6 @@ class DateRangeView: UIView {
     private func changeDateRangeType() {
         dateTo = Date()
         
-        dateToTextField.isUserInteractionEnabled = false
-        dateFromTextField.isUserInteractionEnabled = false
-        
         dayButton.isSelected = false
         weekButton.isSelected = false
         monthButton.isSelected = false
@@ -155,6 +152,8 @@ class DateRangeView: UIView {
     // MARK: - Actions
     @IBAction func textFieldEditing(sender: UITextField) {
         sender.resignFirstResponder()
+        
+        changeDateRangeTypeButtonAction(customButton)
         
         guard selectedDateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
             return

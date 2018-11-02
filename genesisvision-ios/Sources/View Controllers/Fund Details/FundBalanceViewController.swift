@@ -30,7 +30,7 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
+        tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -103,12 +103,12 @@ extension FundBalanceViewController: UITableViewDelegate, UITableViewDataSource 
 extension FundBalanceViewController: ChartViewProtocol {
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
+        tableView.panGestureRecognizer.isEnabled = true
     }
     
     func chartValueSelected(date: Date) {
-        print("chartValueSelected")
         tableView.isScrollEnabled = false
-        viewModel.selectFundBalanceChartElement(date)
+        tableView.panGestureRecognizer.isEnabled = false
     }
 }
 

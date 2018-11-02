@@ -166,10 +166,16 @@ class SignUpViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showConfirmationVC()
+                self?.showSignUpInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
+        }
+    }
+    
+    private func showSignUpInfoVC() {
+        showBottomSheet(type: .success, title: viewModel.text) { [weak self] (success) in
+            self?.navigationController?.popToRootViewController(animated: true)
         }
     }
     

@@ -17,12 +17,13 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
         cell.investButton.setEnabled(false)
         
-        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest {
+        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest, programDetailsFull?.availableInvestment != 0 {
             cell.investButton.setEnabled(canInvest)
         }
         
-        if let currency = programDetailsFull?.currency, let periodEnds = programDetailsFull?.periodEnds {
-             cell.disclaimerLabel.text = "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to \(currency.rawValue). Accrual of \(currency.rawValue) to the account manager will only occur at the end of the reporting period \(periodEnds.defaultFormatString)."
+        if let periodEnds = programDetailsFull?.periodEnds {
+            let periodEndsString = periodEnds.defaultFormatString
+             cell.disclaimerLabel.text = "Your request will be processed at the end of the reporting period " + periodEndsString
         }
         
         cell.investNowProtocol = investNowProtocol

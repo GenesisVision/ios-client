@@ -143,6 +143,7 @@ extension ProgramTradesViewModel {
             guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
 
             let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+            
             ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)

@@ -49,6 +49,7 @@ class PortfolioViewController: BaseViewController {
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
+            chartView.backgroundColor = UIColor.BaseView.bg
             chartView.isHidden = true
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self
@@ -80,6 +81,8 @@ class PortfolioViewController: BaseViewController {
         super.viewDidLoad()
 
         setup()
+        
+        bottomViewType = .dateRange
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,7 +125,7 @@ class PortfolioViewController: BaseViewController {
                 chartView.setup(chartType: .dashboard, lineChartData: lineChartData, barChartData: barChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
             }
             
-            amountTitleLabel.text = "Amount"
+            amountTitleLabel.text = "Value"
             if let value = dashboardChartValue.value {
                 amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }

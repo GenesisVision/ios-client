@@ -9,14 +9,7 @@
 import UIKit
 import Charts
 
-class FundAssetView: UIView {
-    @IBOutlet weak var assetLogoImageView: UIImageView! {
-        didSet {
-            assetLogoImageView.roundCorners()
-        }
-    }
-    @IBOutlet weak var assetPercentLabel: TitleLabel!
-    
+class RoundedBackgroundView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -24,11 +17,22 @@ class FundAssetView: UIView {
         roundCorners(with: 8)
     }
 }
+    
+class FundAssetView: RoundedBackgroundView {
+    @IBOutlet weak var assetLogoImageView: UIImageView! {
+        didSet {
+            assetLogoImageView.roundCorners()
+        }
+    }
+    @IBOutlet weak var assetPercentLabel: TitleLabel!
+}
 
 class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
     weak var delegate: FavoriteStateChangeProtocol?
+    weak var reinvestProtocol: ReinvestProtocol?
+    
     var assetId: String?
     
     // MARK: - Views
@@ -142,5 +146,11 @@ class ProgramTableViewCell: PlateTableViewCell {
         sender.isSelected = !sender.isSelected
         guard let assetId = assetId else { return }
         delegate?.didChangeFavoriteState(with: assetId, value: sender.isSelected, request: true)
+    }
+    
+    @IBAction func reinvestSwitchAction(_ sender: UISwitch) {
+        if let assetId = assetId {
+            reinvestProtocol?.didChangeReinvestSwitch(value: sender.isOn, assetId: assetId)
+        }
     }
 }

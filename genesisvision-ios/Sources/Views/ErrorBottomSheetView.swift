@@ -25,7 +25,7 @@ class ErrorBottomSheetView: UIView {
     
     var bottomSheetController: BottomSheetController?
     var errorType: ErrorBottomSheetViewType?
-    var completion: ((Bool) -> Void)?
+    var successCompletionBlock: SuccessCompletionBlock?
     
     // MARK: - IBOutlets
     @IBOutlet var topBackgroundImageView: UIImageView!
@@ -53,8 +53,8 @@ class ErrorBottomSheetView: UIView {
     }
     
     // MARK: - Private methods
-    func configure(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
-        self.completion = completion
+    func configure(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: SuccessCompletionBlock? = nil) {
+        self.successCompletionBlock = completion
         
         switch type {
         case .error:
@@ -85,8 +85,8 @@ class ErrorBottomSheetView: UIView {
     @IBAction func okButtonAction(_ sender: UIButton) {
         bottomSheetController?.dismiss()
         
-        if let completion = completion {
-            completion(true)
+        if let successCompletionBlock = successCompletionBlock {
+            successCompletionBlock(true)
         }
     }
 }

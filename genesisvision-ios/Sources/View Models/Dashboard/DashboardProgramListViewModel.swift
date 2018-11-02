@@ -45,7 +45,7 @@ final class DashboardProgramListViewModel {
     }
     
     var bottomViewType: BottomViewType {
-        return .sort
+        return .dateRange
     }
     
     var viewModels = [CellViewAnyModel]() {
@@ -104,6 +104,28 @@ final class DashboardProgramListViewModel {
             }
         }
     }
+    
+    private func reinvest(_ value: Bool, programId: String) {
+        if value {
+            ProgramsDataProvider.reinvestOn(with: programId) { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+            }
+        } else {
+            ProgramsDataProvider.reinvestOff(with: programId) { (result) in
+                switch result {
+                case .success:
+                    break
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - TableView
@@ -147,7 +169,7 @@ extension DashboardProgramListViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
+        let text = "Browse assets"
         return text
     }
     
@@ -161,7 +183,7 @@ extension DashboardProgramListViewModel {
     }
     
     func showProgramList() {
-        router.show(routeType: .programList)
+        router.show(routeType: .assetList)
     }
 }
 
@@ -269,12 +291,18 @@ extension DashboardProgramListViewModel {
             
             programsList.programs?.forEach({ (program) in
                 let dashboardTableViewCellModel = DashboardProgramTableViewCellViewModel(program: program, reloadDataProtocol: self?.router.programListViewController, delegate:
-                    self?.router.programListViewController)
+                    self?.router.programListViewController, reinvestProtocol: self)
                 viewModels.append(dashboardTableViewCellModel)
             })
             
             completionSuccess(totalCount, viewModels)
             completionError(.success)
             }, errorCompletion: completionError)
+    }
+}
+
+extension DashboardProgramListViewModel: ReinvestProtocol {
+    func didChangeReinvestSwitch(value: Bool, assetId: String) {
+        reinvest(value, programId: assetId)
     }
 }

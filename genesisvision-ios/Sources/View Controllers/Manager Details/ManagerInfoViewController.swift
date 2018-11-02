@@ -43,7 +43,7 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.isScrollEnabled = false
         tableView.configure(with: .defaultConfiguration)
-        
+        tableView.bounces = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none

@@ -36,30 +36,67 @@ class DetailBalanceChartTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var changeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var roundedBackgroundView: RoundedBackgroundView! {
         didSet {
-            changeTitleLabel.textColor = UIColor.Cell.subtitle
+            roundedBackgroundView.isHidden = true
         }
     }
-    @IBOutlet weak var changePercentLabel: SubtitleLabel! {
+        
+    @IBOutlet weak var investorsFundsTitleLabel: SubtitleLabel! {
         didSet {
-            changePercentLabel.textColor = UIColor.Cell.greenTitle
+            investorsFundsTitleLabel.isHidden = true
+            investorsFundsTitleLabel.textColor = UIColor.Cell.subtitle
         }
     }
-    @IBOutlet weak var changeValueLabel: TitleLabel! {
+    @IBOutlet weak var investorsFundsValueLabel: TitleLabel! {
         didSet {
-            changeValueLabel.textColor = UIColor.Cell.title
+            investorsFundsValueLabel.isHidden = true
+            investorsFundsValueLabel.textColor = UIColor.Cell.title
         }
     }
-    @IBOutlet weak var changeCurrencyLabel: SubtitleLabel! {
+    
+    @IBOutlet weak var managersFundsTitleLabel: SubtitleLabel! {
         didSet {
-            changeCurrencyLabel.textColor = UIColor.Cell.subtitle
+            managersFundsTitleLabel.isHidden = true
+            managersFundsTitleLabel.textColor = UIColor.Cell.subtitle
+        }
+    }
+    @IBOutlet weak var managersFundsValueLabel: TitleLabel! {
+        didSet {
+            managersFundsValueLabel.isHidden = true
+            managersFundsValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    
+    @IBOutlet weak var profitStackView: UIStackView! {
+        didSet {
+            profitStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var profitTitleLabel: SubtitleLabel! {
+        didSet {
+            profitTitleLabel.isHidden = true
+            profitTitleLabel.textColor = UIColor.Cell.subtitle
+        }
+    }
+    @IBOutlet weak var profitValueLabel: TitleLabel! {
+        didSet {
+            profitValueLabel.isHidden = true
+            profitValueLabel.textColor = UIColor.Cell.title
+        }
+    }
+    
+    @IBOutlet weak var dateValueLabel: SubtitleLabel! {
+        didSet {
+            dateValueLabel.isHidden = true
+            dateValueLabel.textColor = UIColor.Cell.subtitle
         }
     }
     
     @IBOutlet weak var chartView: ChartView! {
         didSet {
-            chartView.isUserInteractionEnabled = true
+            chartView.backgroundColor = UIColor.BaseView.bg
+            chartView.isUserInteractionEnabled = false
             chartView.delegate = self
         }
     }
@@ -75,6 +112,8 @@ class DetailBalanceChartTableViewCell: UITableViewCell {
         
         return circleView
     }()
+
+    var chartModel: Any?
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -86,6 +125,10 @@ class DetailBalanceChartTableViewCell: UITableViewCell {
         
         chartView.addSubview(circleView)
     }
+    
+    func configure(model: Any) {
+        self.chartModel = model
+    }
 }
 
 extension DetailBalanceChartTableViewCell: ChartViewDelegate {
@@ -95,10 +138,86 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
         
         let date = Date(timeIntervalSince1970: entry.x)
         chartViewProtocol?.chartValueSelected(date: date)
+        
+        if let model = chartModel as? FundBalanceChart {
+            if let result = model.balanceChart?.first(where: { $0.date == date }) {
+                roundedBackgroundView.isHidden = false
+                
+                if let managerFunds = result.managerFunds {
+                    managersFundsTitleLabel.isHidden = false
+                    managersFundsValueLabel.isHidden = false
+                    
+                    managersFundsValueLabel.text = managerFunds.rounded(withType: .gvt).toString()
+                    managersFundsValueLabel.sizeToFit()
+                }
+                
+                if let investorsFunds = result.investorsFunds {
+                    investorsFundsTitleLabel.isHidden = false
+                    investorsFundsValueLabel.isHidden = false
+                    
+                    investorsFundsValueLabel.text = investorsFunds.rounded(withType: .gvt).toString()
+                    investorsFundsValueLabel.sizeToFit()
+                }
+                
+                if let date = result.date {
+                    dateValueLabel.isHidden = false
+                    dateValueLabel.text = date.dateAndTimeFormatString
+                    dateValueLabel.sizeToFit()
+                }
+            }
+        } else if let model = chartModel as? ProgramBalanceChart {
+            if let result = model.balanceChart?.first(where: { $0.date == date }) {
+                guard let programCurrency = model.programCurrency else { return }
+                let currency = CurrencyType(rawValue: programCurrency.rawValue) ?? .gvt
+                
+                roundedBackgroundView.isHidden = false
+                
+                if let profit = result.profit {
+                    profitStackView.isHidden = false
+                    profitTitleLabel.isHidden = false
+                    profitValueLabel.isHidden = false
+                    
+                    profitValueLabel.text = profit.rounded(withType: currency).toString()
+                }
+                
+                if let managerFunds = result.managerFunds {
+                    managersFundsTitleLabel.isHidden = false
+                    managersFundsValueLabel.isHidden = false
+                    
+                    managersFundsValueLabel.text = managerFunds.rounded(withType: currency).toString()
+                }
+                
+                if let investorsFunds = result.investorsFunds {
+                    investorsFundsTitleLabel.isHidden = false
+                    investorsFundsValueLabel.isHidden = false
+                    
+                    investorsFundsValueLabel.text = investorsFunds.rounded(withType: currency).toString()
+                }
+                
+                if let date = result.date {
+                    dateValueLabel.isHidden = false
+                    dateValueLabel.text = date.dateAndTimeFormatString
+                }
+            }
+        }
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         circleView.isHidden = true
         chartViewProtocol?.chartValueNothingSelected()
+        
+        roundedBackgroundView.isHidden = true
+        
+        profitStackView.isHidden = true
+        profitTitleLabel.isHidden = true
+        profitValueLabel.isHidden = true
+        
+        managersFundsTitleLabel.isHidden = true
+        managersFundsValueLabel.isHidden = true
+        
+        investorsFundsTitleLabel.isHidden = true
+        investorsFundsValueLabel.isHidden = true
+        
+        dateValueLabel.isHidden = true
     }
 }

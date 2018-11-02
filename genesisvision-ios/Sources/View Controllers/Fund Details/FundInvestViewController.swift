@@ -17,6 +17,7 @@ class FundInvestViewController: BaseViewController {
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -25,7 +26,7 @@ class FundInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Avalible to invest"
+            availableToInvestTitleLabel.text = "Avalible in wallet"
             availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -147,6 +148,10 @@ class FundInvestViewController: BaseViewController {
     }
     
     private func updateUI() {
+        if let minInvestmentAmount = viewModel.fundInvestInfo?.minInvestmentAmount {
+            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
+        }
+        
         if let entryFee = viewModel.fundInvestInfo?.entryFee, let gvCommission = viewModel.fundInvestInfo?.gvCommission {
             let entryFeeGVT = entryFee * amountToInvestValue / 100
             let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
@@ -172,13 +177,12 @@ class FundInvestViewController: BaseViewController {
         if let rate = viewModel.fundInvestInfo?.rate {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToInvestValueCurrencyString = (amountToInvestValue / rate).rounded(withType: currency).toString()
+            let amountToInvestValueCurrencyString = (amountToInvestValue * rate).rounded(withType: currency).toString()
             self.amountToInvestCurrencyLabel.text = "= " + amountToInvestValueCurrencyString + " " + selectedCurrency
         }
         
         let investButtonEnabled = amountToInvestValue > 0 && amountToInvestValue <= availableToInvestValue
         investButton.setEnabled(investButtonEnabled)
-//        updateNumPadState(value: amountToInvestValueLabel.text)
     }
     
     @objc private func closeButtonAction() {
@@ -234,16 +238,6 @@ class FundInvestViewController: BaseViewController {
         confirmView.delegate = self
         bottomSheetController.present()
     }
-    
-//    private func updateNumPadState(value: String?) {
-//        if let text = value, text.range(of: ".") != nil,
-//            let lastComponents = text.components(separatedBy: ".").last,
-//            lastComponents.count >= getDecimalCount(for: currency) {
-//            changedActive(value: false)
-//        } else {
-//            changedActive(value: true)
-//        }
-//    }
     
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {

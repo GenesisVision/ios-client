@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -331,41 +331,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="8xV-0S-xid">
-                                <rect key="frame" x="16" y="36" width="288" height="442"/>
+                                <rect key="frame" x="20" y="36" width="280" height="442"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-sX-QNA">
-                                        <rect key="frame" x="144" y="0.0" width="0.0" height="105"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-sX-QNA" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="0.0" width="0.0" height="182"/>
                                         <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="19"/>
                                         <color key="textColor" red="0.3411764706" green="0.39607843139999999" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-Cq-kUJ">
-                                        <rect key="frame" x="119" y="121" width="50" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="dsG-ih-3ze"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                        <color key="textColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bSH-ke-isx">
-                                        <rect key="frame" x="4" y="162" width="280" height="280"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDo-19-dbI" customClass="RoundedBackgroundView" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="198" width="264" height="42"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ICB-EP-OKO">
-                                                <rect key="frame" x="140" y="0.0" width="0.0" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="19"/>
-                                                <color key="textColor" red="0.3411764706" green="0.39607843139999999" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-Cq-kUJ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="264" height="42"/>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BFH-7r-49f">
-                                                <rect key="frame" x="0.0" y="0.0" width="280" height="280"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="BFH-7r-49f" secondAttribute="height" multiplier="1:1" id="qfN-ge-bVC"/>
-                                                </constraints>
-                                            </imageView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" red="0.11764705882352941" green="0.15294117647058825" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="LPU-Cq-kUJ" firstAttribute="leading" secondItem="jDo-19-dbI" secondAttribute="leading" id="1iS-oW-v1C"/>
+                                            <constraint firstItem="LPU-Cq-kUJ" firstAttribute="top" secondItem="jDo-19-dbI" secondAttribute="top" id="Bgb-e8-8vi"/>
+                                            <constraint firstAttribute="bottom" secondItem="LPU-Cq-kUJ" secondAttribute="bottom" id="GZh-Nj-nAa"/>
+                                            <constraint firstAttribute="trailing" secondItem="LPU-Cq-kUJ" secondAttribute="trailing" id="RCX-6H-2mC"/>
+                                            <constraint firstAttribute="height" constant="42" id="tZs-Jj-Dpf"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BFH-7r-49f">
+                                        <rect key="frame" x="80" y="256" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="SmP-3G-Rlo"/>
+                                            <constraint firstAttribute="width" secondItem="BFH-7r-49f" secondAttribute="height" multiplier="1:1" id="qfN-ge-bVC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ICB-EP-OKO" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="115" y="392" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="19"/>
+                                        <color key="textColor" red="0.3411764706" green="0.39607843139999999" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jDo-19-dbI" secondAttribute="trailing" constant="8" id="UsK-E8-v7c"/>
+                                    <constraint firstItem="jDo-19-dbI" firstAttribute="leading" secondItem="8xV-0S-xid" secondAttribute="leading" constant="8" id="amU-Q0-FmK"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdD-t2-iQh" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="20" y="498" width="280" height="50"/>
@@ -374,7 +384,7 @@
                                     <constraint firstAttribute="height" constant="50" id="04K-8X-Jxw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -384,14 +394,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0re-jP-a15" firstAttribute="trailing" secondItem="8xV-0S-xid" secondAttribute="trailing" constant="16" id="DbQ-rM-vxS"/>
-                            <constraint firstItem="8xV-0S-xid" firstAttribute="leading" secondItem="0re-jP-a15" secondAttribute="leading" constant="16" id="SSQ-i4-d3L"/>
+                            <constraint firstItem="0re-jP-a15" firstAttribute="trailing" secondItem="8xV-0S-xid" secondAttribute="trailing" constant="20" id="DbQ-rM-vxS"/>
+                            <constraint firstItem="8xV-0S-xid" firstAttribute="leading" secondItem="0re-jP-a15" secondAttribute="leading" constant="20" id="SSQ-i4-d3L"/>
                             <constraint firstItem="NdD-t2-iQh" firstAttribute="centerX" secondItem="0re-jP-a15" secondAttribute="centerX" id="XWa-NS-5hX"/>
                             <constraint firstItem="0re-jP-a15" firstAttribute="bottom" secondItem="NdD-t2-iQh" secondAttribute="bottom" constant="20" id="a6x-5n-8w9"/>
                             <constraint firstItem="NdD-t2-iQh" firstAttribute="leading" secondItem="0re-jP-a15" secondAttribute="leading" constant="20" id="jQB-Jk-a7E"/>
                             <constraint firstItem="8xV-0S-xid" firstAttribute="top" secondItem="0re-jP-a15" secondAttribute="top" constant="16" id="lsq-Pp-08c"/>
                             <constraint firstItem="0re-jP-a15" firstAttribute="trailing" secondItem="NdD-t2-iQh" secondAttribute="trailing" constant="20" id="nKl-KY-Wll"/>
-                            <constraint firstItem="BFH-7r-49f" firstAttribute="width" secondItem="NdD-t2-iQh" secondAttribute="width" id="pib-oF-i9L"/>
                             <constraint firstItem="NdD-t2-iQh" firstAttribute="top" secondItem="8xV-0S-xid" secondAttribute="bottom" constant="20" id="r1n-cD-0N8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0re-jP-a15"/>
@@ -434,7 +443,7 @@
                                     <constraint firstAttribute="height" constant="50" id="N7j-2H-zF4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Got it">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -683,23 +692,15 @@ your email.</string>
                                     <action selector="okButtonAction:" destination="mw0-FA-4TT" eventType="touchUpInside" id="GED-5Y-kFt"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm-email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mzN-51-Yz2">
-                                <rect key="frame" x="128" y="153" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="jDS-9p-pq3"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QvR-VF-Osi" firstAttribute="centerX" secondItem="yka-2F-3uf" secondAttribute="centerX" id="0om-hO-VbK"/>
                             <constraint firstItem="ylW-ha-KfR" firstAttribute="trailing" secondItem="QvR-VF-Osi" secondAttribute="trailing" constant="32" id="6DY-rR-gvc"/>
-                            <constraint firstItem="QvR-VF-Osi" firstAttribute="top" secondItem="mzN-51-Yz2" secondAttribute="bottom" constant="25" id="AFy-N8-rFu"/>
                             <constraint firstItem="rHf-TP-2d2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QvR-VF-Osi" secondAttribute="bottom" constant="20" id="Bmk-YV-VO1"/>
                             <constraint firstItem="QvR-VF-Osi" firstAttribute="centerY" secondItem="yka-2F-3uf" secondAttribute="centerY" id="Eaa-MK-c13"/>
-                            <constraint firstItem="mzN-51-Yz2" firstAttribute="centerX" secondItem="yka-2F-3uf" secondAttribute="centerX" id="Hac-Tn-rIz"/>
                             <constraint firstItem="rHf-TP-2d2" firstAttribute="centerX" secondItem="QvR-VF-Osi" secondAttribute="centerX" id="Sfe-mV-Mdy"/>
-                            <constraint firstItem="mzN-51-Yz2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ylW-ha-KfR" secondAttribute="top" constant="16" id="Szf-Sp-Szo"/>
+                            <constraint firstItem="QvR-VF-Osi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ylW-ha-KfR" secondAttribute="top" constant="25" id="a7e-H3-rHe"/>
                             <constraint firstItem="rHf-TP-2d2" firstAttribute="leading" secondItem="ylW-ha-KfR" secondAttribute="leading" constant="20" id="bfy-bz-jDc"/>
                             <constraint firstItem="ylW-ha-KfR" firstAttribute="trailing" secondItem="rHf-TP-2d2" secondAttribute="trailing" constant="20" id="cEc-pD-U25"/>
                             <constraint firstItem="ylW-ha-KfR" firstAttribute="bottom" secondItem="rHf-TP-2d2" secondAttribute="bottom" constant="20" id="lJ3-Vr-fMw"/>
@@ -708,7 +709,6 @@ your email.</string>
                         <viewLayoutGuide key="safeArea" id="ylW-ha-KfR"/>
                     </view>
                     <connections>
-                        <outlet property="iconImageView" destination="mzN-51-Yz2" id="vky-Lr-rvy"/>
                         <outlet property="okButton" destination="rHf-TP-2d2" id="9p5-ba-3ca"/>
                         <outlet property="textLabel" destination="QvR-VF-Osi" id="MLC-ss-0VP"/>
                     </connections>
@@ -1572,7 +1572,6 @@ your email.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="confirm-email-icon" width="64" height="64"/>
         <image name="img_arrow_right_icon" width="6" height="10"/>
         <image name="img_checkbox_selected_icon" width="24" height="24"/>
         <image name="img_checkbox_unselected_icon" width="24" height="24"/>

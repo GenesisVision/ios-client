@@ -79,7 +79,7 @@ extension UIViewController {
     func showTwoFactorEnableAlert(completion: @escaping (_ enable: Bool) -> Void) {
         let message = String.Alerts.TwoFactorEnable.alertMessage
         let alertController = UIAlertController(title: String.Alerts.TwoFactorEnable.alertTitle, message: message, preferredStyle: .alert)
-//        alertController.view.tintColor = UIColor.primary
+        alertController.view.tintColor = UIColor.Cell.headerBg
         
         alertController.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.enableButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
             NotificationCenter.default.post(name: .twoFactorEnable, object: nil)
@@ -92,7 +92,7 @@ extension UIViewController {
     
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
-//        alertController.view.tintColor = UIColor.primary
+        alertController.view.tintColor = UIColor.Cell.headerBg
         
         present(alertController, animated: true, completion: nil)
         
@@ -250,14 +250,3 @@ extension UIViewController {
         
     }
 }
-
-//extension UIViewControllerWithBottomSheet {
-//    func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
-//        showBottomSheet(type: .success, title: title, subtitle: subtitle)
-//    }
-//
-//    func showErrorHUD(subtitle: String? = nil) {
-//        showBottomSheet(type: .error, subtitle: subtitle)
-//    }
-//
-//}

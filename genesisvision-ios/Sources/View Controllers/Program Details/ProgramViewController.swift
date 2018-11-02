@@ -186,8 +186,8 @@ extension ProgramViewController {
             self.headerViewConstraint.constant += abs(yOffset)
             
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                //                self.scrollView.panGestureRecognizer.isEnabled = false
-                //                self.scrollView.panGestureRecognizer.isEnabled = true
+//                self.scrollView.panGestureRecognizer.isEnabled = false
+//                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }
@@ -213,12 +213,16 @@ extension ProgramViewController {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
         }
+        
+//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
     
     func animateHeader(_ minHeaderHeight: CGFloat) {
@@ -274,3 +278,11 @@ extension ProgramViewController: DetailProtocol {
     }
 }
 
+// MARK: - ReloadDataProtocol
+extension ProgramViewController: ReloadDataProtocol {
+    func didReloadData() {
+        if let programDetailsFull = viewModel.programDetailsFull {
+            headerViewController?.configure(programDetailsFull)
+        }
+    }
+}

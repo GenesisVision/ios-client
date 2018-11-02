@@ -36,13 +36,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    // MARK: - Views
-    @IBOutlet var gradientView: GradientView! {
-        didSet {
-            gradientView.isHidden = true
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +54,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
         
         signInButton.isHidden = !signInButtonEnable
-        gradientView.isHidden = !signInButtonEnable
     }
     
     private func setup() {

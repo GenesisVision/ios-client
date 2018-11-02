@@ -23,30 +23,30 @@ class InRequestsTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var titleLabel: UILabel! {
+    @IBOutlet var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.regular, size: 14.0)
             titleLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var statusLabel: UILabel! {
+    @IBOutlet var statusLabel: SubtitleLabel! {
         didSet {
-            statusLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            statusLabel.font = UIFont.getFont(.regular, size: 12.0)
             statusLabel.textColor = UIColor.Cell.subtitle
         }
     }
     
-    @IBOutlet var amountValueLabel: UILabel! {
+    @IBOutlet var amountValueLabel: TitleLabel! {
         didSet {
             amountValueLabel.font = UIFont.getFont(.semibold, size: 14.0)
             amountValueLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var dateLabel: UILabel! {
+    @IBOutlet var dateLabel: SubtitleLabel! {
         didSet {
-            dateLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            dateLabel.font = UIFont.getFont(.regular, size: 12.0)
             dateLabel.textColor = UIColor.Cell.subtitle
         }
     }

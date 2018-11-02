@@ -50,8 +50,7 @@ class AllEventsViewController: BaseViewControllerWithTableView {
 
         setupNavigationBar()
         
-        showProgressHUD()
-        fetch()
+        bottomViewType = .dateRange
     }
     
     private func reloadData() {
@@ -77,6 +76,14 @@ class AllEventsViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
         
+        fetch()
+    }
+    
+    override func updateData(with dateFrom: Date, dateTo: Date) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
+        showProgressHUD()
         fetch()
     }
 }

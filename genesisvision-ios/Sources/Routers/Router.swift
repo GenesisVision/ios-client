@@ -20,7 +20,7 @@ protocol RouterProtocol {
 }
 
 enum TabsType: Int {
-    case dashboard, programList, wallet, profile
+    case dashboard, assetList, wallet, profile
 }
 
 class Router {

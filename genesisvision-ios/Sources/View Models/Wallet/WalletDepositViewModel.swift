@@ -31,6 +31,7 @@ final class WalletDepositViewModel {
     var walletsInfo: WalletsInfo? {
         didSet {
             self.selectedWallet = walletsInfo?.wallets?.first(where: { $0.currency == .gvt })
+            self.selectedWalletCurrencyIndex = walletsInfo?.wallets?.firstIndex(where: { $0.currency == .gvt }) ?? 0
         }
     }
     var selectedWallet: WalletInfo? {

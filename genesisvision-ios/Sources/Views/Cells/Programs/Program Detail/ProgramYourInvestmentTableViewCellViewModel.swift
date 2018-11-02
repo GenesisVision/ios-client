@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct ProgramYourInvestmentTableViewCellViewModel {
     let programDetailsFull: ProgramDetailsFull?
@@ -35,7 +35,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.statusButton.isHidden = true
         }
         
-        if let isReinvesting = programDetailsFull?.isReinvesting {
+        if let isReinvesting = programDetailsFull?.personalProgramDetails?.isReinvest {
             cell.reinvestSwitch.isOn = isReinvesting
         }
         
@@ -46,7 +46,9 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.investedValueLabel.text = invested.rounded(withType: currency).toString() + " " + currency.rawValue
             
             cell.profitTitleLabel.text = "profit"
-            cell.profitValueLabel.text = (profit / invested * 100).rounded(withType: .undefined).toString() + "%"
+            let profit = invested > 0 ? profit / invested * 100 : 0.0
+            cell.profitValueLabel.text = profit.rounded(withType: .undefined).toString() + "%"
+            cell.profitValueLabel.textColor = profit == 0 ? UIColor.Cell.title : profit > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         if let value = programDetailsFull?.personalProgramDetails?.value {

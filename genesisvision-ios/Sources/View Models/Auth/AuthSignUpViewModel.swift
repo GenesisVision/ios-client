@@ -12,6 +12,7 @@ final class AuthSignUpViewModel {
     var title: String = "Sign up"
     
     private var router: SignUpRouter!
+    let text = "We sent a verification link to the email you specified. \nPlease follow this link to complete the registration."
     
     // MARK: - Init
     init(withRouter router: SignUpRouter) {

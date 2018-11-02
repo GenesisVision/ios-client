@@ -28,17 +28,17 @@ final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
         if let router = router as? AuthTwoFactorTabmanRouter {
             if let vc = router.getTutorialVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title)
+                self.addItem(vc.viewModel.title.uppercased())
             }
             
             if let vc = router.getCreateVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title)
+                self.addItem(vc.viewModel.title.uppercased())
             }
             
             if let vc = router.getConfirmationVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title)
+                self.addItem(vc.viewModel.title.uppercased())
             }
             
             reloadPages()

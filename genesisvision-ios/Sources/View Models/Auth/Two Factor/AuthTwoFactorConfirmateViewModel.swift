@@ -30,7 +30,7 @@ final class AuthTwoFactorEnableConfirmationViewModel: AuthTwoFactorConfirmationV
     
     // MARK: - Variables
     public private(set) var title: String = "Verify"
-    public private(set) var buttonTitleText: String = "Confirm".uppercased()
+    public private(set) var buttonTitleText: String = "Confirm"
     public private(set) var numbersLimit: Int = 6
     
     private var tabmanViewModel: AuthTwoFactorTabmanViewModel!

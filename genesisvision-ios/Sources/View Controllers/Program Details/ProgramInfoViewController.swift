@@ -50,6 +50,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         
         tableView.isScrollEnabled = false
         tableView.delegate = self
+        tableView.bounces = false
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)

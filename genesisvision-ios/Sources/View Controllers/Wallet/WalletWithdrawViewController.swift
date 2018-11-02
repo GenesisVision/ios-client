@@ -46,15 +46,17 @@ class WalletWithdrawViewController: BaseViewController {
     @IBOutlet var numpadBackView: UIView! {
         didSet {
             numpadBackView.isHidden = true
+            numpadBackView.isUserInteractionEnabled = true
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideNumpadView))
             tapGesture.numberOfTapsRequired = 1
-            numpadBackView.isUserInteractionEnabled = true
+            tapGesture.delegate = self
             numpadBackView.addGestureRecognizer(tapGesture)
         }
     }
     
     @IBOutlet var numpadView: NumpadView! {
         didSet {
+            numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
             numpadView.type = .currency
         }
@@ -158,6 +160,7 @@ class WalletWithdrawViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+        bottomViewType = .dateRange
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,7 +211,7 @@ class WalletWithdrawViewController: BaseViewController {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
             }
             
-            availableInWalletValueTitleLabel.text = currency == .gvt ? "You will get" : "Approximate amount"
+            withdrawingTitleLabel.text = currency == .gvt ? "You will get" : "Approximate amount"
         }
         
         if let availableToWithdrawal = viewModel.withdrawalSummary?.availableToWithdrawal {
@@ -321,7 +324,7 @@ class WalletWithdrawViewController: BaseViewController {
             self?.updateUI()
          }
         
-        alert.addAction(title: "Cancel", style: .cancel)
+        alert.addAction(title: "Ok", style: .cancel)
         
         alert.show()
     }
@@ -360,7 +363,11 @@ extension WalletWithdrawViewController: NumpadViewProtocol {
     }
     
     var currency: CurrencyType? {
-        return currency
+        if let currency = viewModel.selectedWallet?.currency {
+            return CurrencyType(rawValue: currency.rawValue)
+        }
+        
+        return nil
     }
     
     func changedActive(value: Bool) {
@@ -391,5 +398,12 @@ extension WalletWithdrawViewController: InvestWithdrawConfirmViewProtocol {
     func confirmButtonDidPress() {
         bottomSheetController.dismiss()
         withdrawMethod()
+    }
+}
+
+extension WalletWithdrawViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
+        
     }
 }

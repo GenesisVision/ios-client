@@ -71,7 +71,11 @@ extension FundAssetsViewModel {
     }
     
     func rowHeight(for row: Int) -> CGFloat {
-        return 60.0
+        return 50.0
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        return 40.0
     }
 }
 
