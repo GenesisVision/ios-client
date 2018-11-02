@@ -39,9 +39,9 @@ class ForgotPasswordViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        #if DEBUG
-        emailTextField.text = "george@genesis.vision"
-        #endif
+//        #if DEBUG
+//        emailTextField.text = "george@genesis.vision"
+//        #endif
         
         setupUI()
     }
@@ -52,8 +52,8 @@ class ForgotPasswordViewController: BaseViewController {
     }
     
     private func showForgotPasswordInfoVC() {
-        showBottomSheet(type: .success, title: viewModel.text) { [weak self] (success) in
-            self?.navigationController?.popViewController(animated: true)
+        showBottomSheet(type: .success, title: viewModel.successText) { [weak self] (success) in
+            self?.viewModel.goToBack()
         }
     }
     

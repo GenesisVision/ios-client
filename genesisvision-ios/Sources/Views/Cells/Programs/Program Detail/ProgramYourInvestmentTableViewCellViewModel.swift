@@ -41,14 +41,15 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         let currency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") ?? .usd
         
-        if let invested = programDetailsFull?.personalProgramDetails?.invested, let profit = programDetailsFull?.personalProgramDetails?.profit {
+        if let invested = programDetailsFull?.personalProgramDetails?.invested {
             cell.investedTitleLabel.text = "invested"
             cell.investedValueLabel.text = invested.rounded(withType: currency).toString() + " " + currency.rawValue
-            
+        }
+        
+        if let profitPercent = programDetailsFull?.personalProgramDetails?.profit {
             cell.profitTitleLabel.text = "profit"
-            let profit = invested > 0 ? profit / invested * 100 : 0.0
-            cell.profitValueLabel.text = profit.rounded(withType: .undefined).toString() + "%"
-            cell.profitValueLabel.textColor = profit == 0 ? UIColor.Cell.title : profit > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+            cell.profitValueLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
+            cell.profitValueLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         if let value = programDetailsFull?.personalProgramDetails?.value {

@@ -55,6 +55,7 @@ extension UIColor {
 
         
         static var yellow: UIColor { return #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1) }                                  //F5A623
+
         static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6431372549, blue: 0.7490196078, alpha: 1) }                                    //66A4BF
         static var purple: UIColor { return #colorLiteral(red: 0.3411764706, green: 0.3450980392, blue: 0.6470588235, alpha: 1) }                                  //5758A5
 

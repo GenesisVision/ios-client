@@ -75,6 +75,7 @@ open class BottomSheet {
         public let overlayView = UIView()
         public let containerView = UIView()
         open var isScrollEnabled: Bool = false
+        open var isDraggable: Bool = true
         open var lineViewIsHidden: Bool = false {
             didSet {
                 lineView.isHidden = lineViewIsHidden

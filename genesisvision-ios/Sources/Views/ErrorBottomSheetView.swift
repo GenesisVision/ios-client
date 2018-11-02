@@ -90,3 +90,11 @@ class ErrorBottomSheetView: UIView {
         }
     }
 }
+
+extension ErrorBottomSheetView: BottomSheetControllerProtocol {
+    func didHide() {
+        if let successCompletionBlock = successCompletionBlock {
+            successCompletionBlock(true)
+        }
+    }
+}

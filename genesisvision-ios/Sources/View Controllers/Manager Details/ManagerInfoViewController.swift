@@ -15,6 +15,13 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     var viewModel: ManagerInfoViewModel!
     
     // MARK: - Views
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+            tableView.isScrollEnabled = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -32,7 +39,6 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setup() {
         setupNavigationBar()
-        setupTableConfiguration()
         setupUI()
     }
     
@@ -41,7 +47,6 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     }
     
     private func setupTableConfiguration() {
-        tableView.isScrollEnabled = false
         tableView.configure(with: .defaultConfiguration)
         tableView.bounces = false
         tableView.delegate = self

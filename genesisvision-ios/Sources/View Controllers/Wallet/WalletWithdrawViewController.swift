@@ -64,7 +64,7 @@ class WalletWithdrawViewController: BaseViewController {
     
     @IBOutlet var availableInWalletValueTitleLabel: TitleLabel! {
         didSet {
-            availableInWalletValueTitleLabel.text = "Availible in wallet"
+            availableInWalletValueTitleLabel.text = "Available in wallet"
             availableInWalletValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -134,6 +134,7 @@ class WalletWithdrawViewController: BaseViewController {
     @IBOutlet weak var addressTextField: DesignableUITextField! {
         didSet {
             addressTextField.keyboardType = .default
+            addressTextField.clearButtonMode = .whileEditing
         }
     }
     
@@ -147,6 +148,7 @@ class WalletWithdrawViewController: BaseViewController {
         didSet {
             twoFactorTextField.placeholder = "Two factor code"
             twoFactorTextField.keyboardType = .numberPad
+            twoFactorTextField.clearButtonMode = .whileEditing
         }
     }
     
@@ -299,6 +301,8 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     @IBAction func showNumPadButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         numpadHeightConstraint.constant = 212.0
         numpadBackView.setNeedsUpdateConstraints()
         numpadBackView.isHidden = false
@@ -309,6 +313,8 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     @IBAction func selectedWalletCurrencyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         
         var selectedIndexRow = viewModel.selectedWalletCurrencyIndex

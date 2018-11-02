@@ -124,19 +124,19 @@ class SignUpViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        #if DEBUG
-            if isInvestorApp {
-                usernameTextField.text = ""
-                emailTextField.text = "george@genesis.vision"
-                passwordTextField.text = "qwerty"
-                confirmPasswordTextField.text = "qwerty"
-            } else {
-                usernameTextField.text = "George"
-                emailTextField.text = "george+1@genesis.vision"
-                passwordTextField.text = "qwerty"
-                confirmPasswordTextField.text = "qwerty"
-            }
-        #endif
+//        #if DEBUG
+//            if isInvestorApp {
+//                usernameTextField.text = ""
+//                emailTextField.text = "george@genesis.vision"
+//                passwordTextField.text = "qwerty"
+//                confirmPasswordTextField.text = "qwerty"
+//            } else {
+//                usernameTextField.text = "George"
+//                emailTextField.text = "george+1@genesis.vision"
+//                passwordTextField.text = "qwerty"
+//                confirmPasswordTextField.text = "qwerty"
+//            }
+//        #endif
         
         setupUI()
     }
@@ -174,8 +174,8 @@ class SignUpViewController: BaseViewController {
     }
     
     private func showSignUpInfoVC() {
-        showBottomSheet(type: .success, title: viewModel.text) { [weak self] (success) in
-            self?.navigationController?.popToRootViewController(animated: true)
+        showBottomSheet(type: .success, title: viewModel.successText) { [weak self] (success) in
+            self?.viewModel.goToBack()
         }
     }
     
@@ -203,6 +203,10 @@ extension SignUpViewController: UITextFieldDelegate {
         switch textField {
         case confirmPasswordTextField:
             sighUpMethod()
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            confirmPasswordTextField.becomeFirstResponder()
         default:
             IQKeyboardManager.sharedManager().goNext()
         }

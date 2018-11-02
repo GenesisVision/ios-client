@@ -62,6 +62,11 @@ enum LineStyle {
     case solid, dashed
 }
 
+func getChangePercent(oldValue: Double, newValue: Double) -> Double {
+    let percent = oldValue > 0.0 ? Double(newValue - oldValue) / oldValue * 100.0 : 0.0
+    return percent
+}
+
 func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
     if let sublayers = view.layer.sublayers {
         for layer in sublayers {

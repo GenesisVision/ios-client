@@ -65,6 +65,11 @@ final class DashboardViewModel {
     
     // MARK: - Public methods
 
+    func deselectChart() {
+        if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
+            pageboyDataSource.deselectChart()
+        }
+    }
     // MARK: - Private methods
     @objc private func enableTwoFactorNotification(notification: Notification) {
         NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)

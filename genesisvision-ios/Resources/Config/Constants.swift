@@ -73,13 +73,13 @@ final class Constants {
         static let equityChartLength: Int = 36
         
         struct Investor {
-            static let debug = "https://black-api.genesis.vision"
-            static let release = "https://alpha.genesis.vision"
+            static let debug = "https://genesis.vision/api/"
+            static let release = "https://genesis.vision/api/"
         }
         
         struct Manager {
             static let debug = "https://black-api.genesis.vision"
-            static let release = "https://alpha.genesis.vision"
+            static let release = "https://genesis.vision/api/"
         }
         
         struct Tournament {

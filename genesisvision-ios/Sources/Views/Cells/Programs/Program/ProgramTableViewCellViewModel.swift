@@ -55,13 +55,9 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.firstTitleLabel.text = "Period"
         if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
-            cell.firstValueLabel.text = periodDuration + periodDuration > 1 ? " days" : " day"
+            cell.firstValueLabel.text = periodDuration.toString() + (periodDuration > 1 ? " days" : " day")
             
             let today = Date()
-            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
-            
-            cell.firstValueLabel.text = periodLeft.isEmpty ? "0" : periodLeft
-
             if let periodDuration = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate:periodStarts).minute, let minutes = periodEnds.getDateComponents(ofComponent: Calendar.Component.minute, fromDate: today).minute {
                 cell.periodLeftProgressView.setProgress(to: Double(periodDuration - minutes) / Double(periodDuration), withAnimation: false)
             }
@@ -79,7 +75,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.thirdTitleLabel.text = "Av. to invest"
         if let availableInvestment = program.availableInvestment {
-            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
         } else {
             cell.thirdValueLabel.text = ""
         }

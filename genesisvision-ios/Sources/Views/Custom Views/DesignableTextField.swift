@@ -110,6 +110,11 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         self.textColor = UIColor.TextField.title
         self.placeholderColor = UIColor.Cell.subtitle
         self.font = UIFont.getFont(.regular, size: 16)
+        
+        keyboardAppearance = .dark
+        
+        placeholder = ""
+        
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

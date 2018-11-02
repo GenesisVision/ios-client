@@ -33,6 +33,10 @@ class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
         portfolioVC?.updateUI()
     }
     
+    func deselectChart() {
+        portfolioVC?.deselectChart()
+    }
+    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return controllers.count
     }

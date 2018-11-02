@@ -156,7 +156,7 @@ protocol UIViewControllerWithBottomView {
     var filterButton: ActionButton { get }
     var signInButton: ActionButton { get }
     var filterStackView: UIStackView { get }
-    var bottomStackView: UIStackView! { get }
+    var bottomStackView: UIStackView { get }
     var bottomViewType: BottomViewType { get }
     
     func sortButtonAction()

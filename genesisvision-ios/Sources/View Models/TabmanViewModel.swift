@@ -63,13 +63,6 @@ class TabmanViewModel: TabmanViewModelProtocol {
     func addController(_ viewController: UIViewController) {
         viewControllers.append(viewController)
         viewControllersCount = viewControllers.count
-        
-        switch style {
-        case .buttonBar:
-            style = viewControllersCount > 4 ? .scrollingButtonBar : .buttonBar
-        default:
-            break
-        }
     }
     
     func removeController(_ index: Int) {

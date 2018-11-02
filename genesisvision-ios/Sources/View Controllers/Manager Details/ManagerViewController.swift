@@ -144,7 +144,7 @@ extension ManagerViewController {
                 self.pullToRefresh()
             }
         } else if yOffset > 0 && self.headerViewConstraint.constant >= minHeaderHeight {
-            self.headerViewConstraint.constant -= yOffset/100
+            self.headerViewConstraint.constant -= abs(yOffset)
             if self.headerViewConstraint.constant < minHeaderHeight {
                 self.headerViewConstraint.constant = minHeaderHeight
             }

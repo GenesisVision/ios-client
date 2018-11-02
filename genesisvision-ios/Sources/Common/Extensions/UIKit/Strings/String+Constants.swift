@@ -8,11 +8,12 @@
 
 extension String {
     struct Info {
-        static var signUpConfirmationSuccess: String = "Please confirm \nyour email.".localized
-        static var forgotPasswordSuccess: String = "We sent a password reset link to the email you specified.\n\nplease follow this link to reset your password.".localized
-        static var changePasswordSuccess: String = "You have been successfully changed your password.".localized
+        static var signUpConfirmationSuccess: String = "We sent a verification link to the email you specified. \nPlease follow this link to complete the registration.".localized
+        static var forgotPasswordSuccess: String = "We sent a password reset link to the email you specified. \nPlease follow this link to reset your password.".localized
+        static var changePasswordSuccess: String = "Password successfully changed".localized
         static var investmentRequestSuccess: String = "You have been successfully invested <N> GVT in the investment program. Your tokens will be working for you only since the next reporting period.\n\nIn case you decide to cancel the investment before the start of the next reporting period, you will have to pay a commission, and you will get your GVT at the actual GVT exchange rate.".localized
         static var withdrawRequestSuccess: String = "At the end of the current trading period the tokens will be returned to the manager and your funds are return to you.".localized
+        static var walletCopyAddress: String = "Your wallet-pane number was copied to the clipboard successfully.".localized
         
         struct TwoFactor {
             static var twoFactorEnableSuccess: String = "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.".localized

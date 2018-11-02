@@ -17,11 +17,7 @@ class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?
     
-    var selectedDateRangeType: DateRangeType = .week {
-        didSet {
-            changeDateRangeType()
-        }
-    }
+    var selectedDateRangeType: DateRangeType = .week
     
     var dateFrom: Date? {
         didSet {
@@ -83,6 +79,7 @@ class DateRangeView: UIView {
         super.awakeFromNib()
         
         selectedDateRangeType = .week
+        changeDateRangeType()
         correctTime()
     }
     
@@ -169,6 +166,8 @@ class DateRangeView: UIView {
     @IBAction func changeDateRangeTypeButtonAction(_ sender: UIButton) {
         sender.isSelected = true
         selectedDateRangeType = DateRangeType(rawValue: sender.tag)!
+        changeDateRangeType()
+        
     }
     
     @IBAction func applyButtonAction(_ sender: UIButton) {
@@ -177,5 +176,20 @@ class DateRangeView: UIView {
         guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return }
         
         delegate?.applyButtonDidPress(with: dateFrom, dateTo: dateTo)
+    }
+}
+
+extension DateRangeView: BottomSheetControllerProtocol {
+    func didHide() {
+        if self.selectedDateRangeType != PlatformManager.shared.dateRangeType {
+            self.selectedDateRangeType = PlatformManager.shared.dateRangeType
+            self.changeDateRangeType()
+        }
+        if self.dateFrom != PlatformManager.shared.dateFrom, PlatformManager.shared.dateFrom != nil {
+            self.dateFrom = PlatformManager.shared.dateFrom
+        }
+        if self.dateTo != PlatformManager.shared.dateTo, PlatformManager.shared.dateTo != nil {
+            self.dateTo = PlatformManager.shared.dateTo
+        }
     }
 }

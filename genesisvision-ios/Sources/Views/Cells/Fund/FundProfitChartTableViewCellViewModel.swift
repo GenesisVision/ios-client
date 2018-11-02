@@ -40,7 +40,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             
             cell.changeTitleLabel.text = "Change"
             if let firstValue = equityChart.first?.value, let lastValue = equityChart.last?.value {
-                let changePercent = firstValue > 0 ? lastValue / firstValue * 100 : 0.0
+                let changePercent = getChangePercent(oldValue: firstValue, newValue: lastValue)
                 cell.changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
             }
             

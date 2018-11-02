@@ -56,7 +56,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             appearance.indicator.bounces = viewModel.bounces
             appearance.indicator.isProgressive = viewModel.isProgressive
             appearance.indicator.compresses = viewModel.compresses
-            
+            bounces = viewModel.bounces
             appearance.text.font = viewModel.font
             
             switch bar.style {

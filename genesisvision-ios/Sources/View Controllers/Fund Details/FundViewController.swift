@@ -142,14 +142,12 @@ class FundViewController: BaseViewController {
         
         
         showProgressHUD()
-        self.viewModel?.changeFavorite() { [weak self] (result) in
+        self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
             case .success:
-                if let fundId = self?.detailsTabmanViewController?.viewModel.fundId {
-                    self?.detailsTabmanViewController?.fundInfoViewControllerProtocol?.didChangeFavoriteState(with: fundId, value: !isFavorite, request: false)
-                }
+                break
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
@@ -167,10 +165,10 @@ extension FundViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
-        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
-            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
-            return
-        }
+//        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
+//            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
+//            return
+//        }
         
         let yOffset = scrollView.contentOffset.y + topConstant
         
@@ -183,13 +181,13 @@ extension FundViewController {
             self.headerViewConstraint.constant += abs(yOffset)
 
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-//                self.scrollView.panGestureRecognizer.isEnabled = false
-//                self.scrollView.panGestureRecognizer.isEnabled = true
+                self.scrollView.panGestureRecognizer.isEnabled = false
+                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }
         } else if yOffset > 0 && self.headerViewConstraint.constant >= minHeaderHeight {
-            self.headerViewConstraint.constant -= yOffset/100
+            self.headerViewConstraint.constant -= abs(yOffset)
             if self.headerViewConstraint.constant < minHeaderHeight {
                 self.headerViewConstraint.constant = minHeaderHeight
             }
@@ -251,7 +249,10 @@ extension FundViewController: FavoriteStateUpdatedProtocol {
 // MARK: - FavoriteStateChangeProtocol
 extension FundViewController: FavoriteStateChangeProtocol {
     func didChangeFavoriteState(with fundID: String, value: Bool, request: Bool) {
-        
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, request: request) { (result) in
+            
+        }
     }
 }
 
@@ -280,6 +281,10 @@ extension FundViewController: ReloadDataProtocol {
     func didReloadData() {
         if let fundDetailsFull = viewModel.fundDetailsFull {
             headerViewController?.configure(fundDetailsFull)
+        }
+        
+        if AuthManager.isLogin(), let isFavorite = self.viewModel?.isFavorite {
+            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         }
     }
 }

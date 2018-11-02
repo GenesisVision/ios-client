@@ -12,7 +12,7 @@ final class AuthSignUpViewModel {
     var title: String = "Sign up"
     
     private var router: SignUpRouter!
-    let text = "We sent a verification link to the email you specified. \nPlease follow this link to complete the registration."
+    let successText = String.Info.signUpConfirmationSuccess
     
     // MARK: - Init
     init(withRouter router: SignUpRouter) {
@@ -31,6 +31,10 @@ final class AuthSignUpViewModel {
     
     func showTerms() {
         router.show(routeType: .terms)
+    }
+    
+    func goToBack() {
+        router.goToBack(animated: true)
     }
     
     // MARK: - API

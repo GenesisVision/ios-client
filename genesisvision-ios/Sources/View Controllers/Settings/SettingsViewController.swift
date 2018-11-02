@@ -27,6 +27,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     @IBOutlet weak var changePhotoButton: UIButton!
     
+    
     @IBOutlet weak var profileNameLabel: TitleLabel! {
         didSet {
             profileNameLabel.font = UIFont.getFont(.semibold, size: 26)
@@ -34,6 +35,19 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     
     @IBOutlet weak var profileEmailLabel: SubtitleLabel!
+    @IBOutlet weak var verifyView: UIView! {
+        didSet {
+            verifyView.isHidden = true
+            verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+        }
+    }
+    @IBOutlet weak var verifyTextLabel: TitleLabel! {
+        didSet {
+            verifyTextLabel.font = UIFont.getFont(.regular, size: 14.0)
+            verifyTextLabel.textColor = UIColor.Cell.redTitle
+        }
+    }
+    
     @IBOutlet weak var changePasswordTitleLabel: TitleLabel! {
         didSet {
             changePasswordTitleLabel.text = SettingsViewModel.SettingsRowType.changePassword.rawValue
@@ -171,6 +185,28 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     private func updateUI() {
         profileImageView.image = UIImage.profilePlaceholder
         
+        if let verificationStatus = viewModel.verificationStatus {
+            verifyView.isHidden = false
+            switch verificationStatus {
+            case .rejected:
+                verifyTextLabel.text = "Rejected"
+                verifyTextLabel.textColor = UIColor.Cell.redTitle
+                verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+            case .verified:
+                verifyTextLabel.text = "Verified"
+                verifyTextLabel.textColor = UIColor.Cell.greenTitle
+                verifyView.backgroundColor = UIColor.Cell.greenTitle.withAlphaComponent(0.1)
+            case .notVerified:
+                verifyTextLabel.text = "Not verified"
+                verifyTextLabel.textColor = UIColor.Cell.redTitle
+                verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+            case .underReview:
+                verifyTextLabel.text = "Under Review"
+                verifyTextLabel.textColor = UIColor.Cell.yellowTitle
+                verifyView.backgroundColor = UIColor.Cell.yellowTitle.withAlphaComponent(0.1)
+            }
+        }
+            
         if let url = viewModel.avatarURL {
             profileImageView.kf.indicatorType = .activity
             profileImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
@@ -199,6 +235,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     
     private func setup() {
+        showProgressHUD()
         fetch()
         setupUI()
         setupPullToRefresh(scrollView: tableView)

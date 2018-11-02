@@ -105,6 +105,7 @@ extension AllEventsViewModel {
             }, completionError: completion)
     }
     
+    /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
         if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
             fetchMore()

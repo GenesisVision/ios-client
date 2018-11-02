@@ -21,6 +21,8 @@ open class PersonalFundDetailsFull: Codable {
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
+    public var canCloseProgram: Bool?
+    public var isFinishing: Bool?
     public var canInvest: Bool?
     public var canWithdraw: Bool?
     public var hasNotifications: Bool?
@@ -33,10 +35,12 @@ open class PersonalFundDetailsFull: Codable {
 
 
     
-    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
+    public init(isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
+        self.canCloseProgram = canCloseProgram
+        self.isFinishing = isFinishing
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
         self.hasNotifications = hasNotifications
@@ -58,6 +62,8 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
+        try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(isFinishing, forKey: "isFinishing")
         try container.encodeIfPresent(canInvest, forKey: "canInvest")
         try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
         try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
@@ -77,6 +83,8 @@ open class PersonalFundDetailsFull: Codable {
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
+        canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        isFinishing = try container.decodeIfPresent(Bool.self, forKey: "isFinishing")
         canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
         canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
         hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")

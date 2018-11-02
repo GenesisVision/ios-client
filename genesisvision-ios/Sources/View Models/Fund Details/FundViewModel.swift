@@ -73,7 +73,7 @@ final class FundViewModel {
     }
     
     @objc private func fundFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["fundId"] as? String, assetId == fundId {
             changeFavorite(value: isFavorite) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }

@@ -15,7 +15,6 @@ class AssetsTabmanViewModel: TabmanViewModel {
     init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
-        style = .scrollingButtonBar
         font = UIFont.getFont(.semibold, size: 16)
     }
 }

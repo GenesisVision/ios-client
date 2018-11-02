@@ -17,6 +17,7 @@ final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
         title = "Enable Two Factor"
         isProgressive = true
         isScrollEnabled = false
+        style = .buttonBar
     }
     
     override func initializeViewControllers() {

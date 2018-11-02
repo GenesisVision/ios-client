@@ -43,7 +43,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         
         if let availableInvestment = programDetailsFull?.availableInvestment {
             cell.investTitleLabel.text = "av. to invest"
-            cell.investValueLabel.text = availableInvestment.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.investValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
         }
     }
 }

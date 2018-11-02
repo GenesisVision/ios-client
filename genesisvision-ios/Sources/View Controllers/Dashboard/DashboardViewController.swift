@@ -200,6 +200,7 @@ extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
+        viewModel.deselectChart()
         navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
@@ -236,8 +237,8 @@ extension DashboardViewController: InRequestsDelegateManagerProtocol {
         case .success:
             self.showProgressHUD()
             self.fetch()
-        default:
-            break
+        case .failure(let errorType):
+            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
         }
     }
 }

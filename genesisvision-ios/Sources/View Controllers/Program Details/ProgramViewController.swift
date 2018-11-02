@@ -84,10 +84,8 @@ class ProgramViewController: BaseViewController {
     
     // MARK: - Public methods
     func hideHeader(_ value: Bool) {
-        let scrollOffset = CGPoint(x: 0.0, y: value ? 94.0 : 0.0)
+        let scrollOffset = CGPoint(x: 0.0, y: value ? minHeaderHeight - topConstant * 2 : -topConstant)
         scrollView.setContentOffset(scrollOffset, animated: true)
-//        scrollView.isScrollEnabled = !value
-        viewModel.setScrollEnable(value)
     }
     
     // MARK: - Private methods
@@ -148,16 +146,13 @@ class ProgramViewController: BaseViewController {
         guard let isFavorite = self.viewModel?.isFavorite else { return }
         self.favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         
-        
         showProgressHUD()
-        self.viewModel?.changeFavorite() { [weak self] (result) in
+        self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
             self?.hideHUD()
             
             switch result {
             case .success:
-                if let programId = self?.detailsTabmanViewController?.viewModel.programId {
-                    self?.detailsTabmanViewController?.programInfoViewControllerProtocol?.didChangeFavoriteState(with: programId, value: !isFavorite, request: false)
-                }
+                break
             case .failure(let errorType):
                 self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
@@ -170,10 +165,10 @@ extension ProgramViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         
-        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
-            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
-            return
-        }
+//        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
+//            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
+//            return
+//        }
         
         let yOffset = scrollView.contentOffset.y + topConstant
         
@@ -186,13 +181,13 @@ extension ProgramViewController {
             self.headerViewConstraint.constant += abs(yOffset)
             
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-//                self.scrollView.panGestureRecognizer.isEnabled = false
-//                self.scrollView.panGestureRecognizer.isEnabled = true
+                self.scrollView.panGestureRecognizer.isEnabled = false
+                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }
         } else if yOffset > 0 && self.headerViewConstraint.constant >= minHeaderHeight {
-            self.headerViewConstraint.constant -= yOffset/100
+            self.headerViewConstraint.constant -= abs(yOffset)
             if self.headerViewConstraint.constant < minHeaderHeight {
                 self.headerViewConstraint.constant = minHeaderHeight
             }
@@ -210,19 +205,29 @@ extension ProgramViewController {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader(minHeaderHeight)
-        }
-        
-//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
+        animateHeaderView(scrollView.contentOffset.y)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        animateHeaderView(scrollView.contentOffset.y)
+    }
+    
+    private func animateHeaderView(_ contentOffsetY: CGFloat) {
+        let yOffset = contentOffsetY + topConstant
+        let headerHeight = headerViewConstraint.constant - topConstant
+        
         if self.headerViewConstraint.constant > minHeaderHeight {
             animateHeader(minHeaderHeight)
+        } else {
+            hideHeader(true)
+//            let yOffset = contentOffsetY + topConstant
+//            let headerHeight = headerViewConstraint.constant - topConstant
+////            hideHeader((headerHeight - yOffset) < headerHeight / 2)
+//
+            if headerHeight - yOffset >= 0 && yOffset >= 0 {
+                headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
+            }
         }
-        
-//        headerViewController?.changeColorAlpha(offset: scrollView.contentOffset.y + topConstant / headerViewConstraint.constant - topConstant)
     }
     
     func animateHeader(_ minHeaderHeight: CGFloat) {
@@ -254,7 +259,10 @@ extension ProgramViewController: FavoriteStateUpdatedProtocol {
 // MARK: - FavoriteStateChangeProtocol
 extension ProgramViewController: FavoriteStateChangeProtocol {
     func didChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
-        
+        showProgressHUD()
+        viewModel.changeFavorite(value: value, request: request) { (result) in
+            
+        }
     }
 }
 
@@ -283,6 +291,10 @@ extension ProgramViewController: ReloadDataProtocol {
     func didReloadData() {
         if let programDetailsFull = viewModel.programDetailsFull {
             headerViewController?.configure(programDetailsFull)
+        }
+        
+        if AuthManager.isLogin(), let isFavorite = self.viewModel?.isFavorite {
+            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         }
     }
 }

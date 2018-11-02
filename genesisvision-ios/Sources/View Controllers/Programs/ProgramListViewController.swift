@@ -92,7 +92,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 16.0 + 16.0 : 0.0
+        tableView.contentInset.bottom = signInButtonEnable ? signInButton.frame.height + 20.0 + 20.0 : 0.0
         
         tableView.delegate = self
         tableView.dataSource = self

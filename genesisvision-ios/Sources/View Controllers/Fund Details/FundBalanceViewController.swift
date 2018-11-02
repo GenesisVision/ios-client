@@ -30,7 +30,6 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)

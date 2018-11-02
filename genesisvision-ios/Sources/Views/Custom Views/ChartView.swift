@@ -31,6 +31,7 @@ class ChartView: CombinedChartView {
     private var programBalanceChartData: [ProgramBalanceChartElement]?
     private var fundBalanceChartData: [BalanceChartElement]?
     
+    var animationEnable: Bool = true
     private var name: String?
     private var currencyValue: String = ""
     
@@ -225,6 +226,9 @@ class ChartView: CombinedChartView {
         rightAxisFormatter.negativeSuffix = " " + currencyValue
         rightAxisFormatter.positiveSuffix = " " + currencyValue
 
+        setViewPortOffsets(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0)
+        
+        
         //leftAxis
         leftAxis.enabled = false
         leftAxis.drawGridLinesEnabled = false
@@ -260,7 +264,7 @@ class ChartView: CombinedChartView {
         rightAxis.centerAxisLabelsEnabled = true
         
         rightAxis.gridLineDashLengths = [3.0, 3.0]
-        rightAxis.drawLimitLinesBehindDataEnabled = true
+        rightAxis.drawLimitLinesBehindDataEnabled = false
 
         //grid
         rightAxis.drawGridLinesEnabled = false
@@ -289,8 +293,8 @@ class ChartView: CombinedChartView {
         xAxis.axisLineWidth = 0.0
         xAxis.axisLineColor = UIColor.Font.dark
         
-        xAxis.avoidFirstLastClippingEnabled = false
-        xAxis.drawLimitLinesBehindDataEnabled = true
+        xAxis.avoidFirstLastClippingEnabled = true
+        xAxis.drawLimitLinesBehindDataEnabled = false
         xAxis.granularityEnabled = true
 //        xAxis.granularity = 10
         
@@ -319,7 +323,7 @@ class ChartView: CombinedChartView {
         drawOrder = [DrawOrder.bar.rawValue,
                      DrawOrder.line.rawValue]
 
-        if chartType != .default {
+        if chartType != .default && animationEnable {
             animate(xAxisDuration: 0.5)
         }
     }

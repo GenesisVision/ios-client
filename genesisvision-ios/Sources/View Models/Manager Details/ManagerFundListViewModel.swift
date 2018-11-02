@@ -153,6 +153,7 @@ extension ManagerFundListViewModel {
             }, completionError: completion)
     }
     
+    /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
         if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
             fetchMore()
@@ -243,7 +244,7 @@ extension ManagerFundListViewModel {
             let totalCount = fundsList.total ?? 0
             
             fundsList.funds?.forEach({ (fund) in
-                let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: nil)
+                let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: self?.router.managerFundsViewController)
                 viewModels.append(fundTableViewCellViewModel)
             })
             
@@ -283,7 +284,7 @@ final class ManagerFundListDelegateManager: NSObject, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        showInfiniteIndicator(value: viewModel?.fetchMore(at: indexPath.row))
+        delegate?.delegateManagerTableView(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     // MARK: - UITableViewDataSource
@@ -297,19 +298,10 @@ final class ManagerFundListDelegateManager: NSObject, UITableViewDelegate, UITab
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.delegateManagerScrollViewDidScroll(scrollView)
-//        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
-//        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-//        if translation.y > 0 {
-//            //            print("down")
-//            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
-//        } else {
-//            //            print("up")
-//            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
-//        }
     }
 }
 

@@ -981,7 +981,7 @@
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJP-G5-69Z">
-                                        <rect key="frame" x="0.0" y="256" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="256" width="414" height="774"/>
                                         <connections>
                                             <segue destination="zVm-9p-YBk" kind="embed" identifier="ProgramTabmanViewControllerSegue" id="zzZ-2A-SvL"/>
                                         </connections>
@@ -1003,7 +1003,7 @@
                             <constraint firstItem="n6f-iF-vqD" firstAttribute="top" secondItem="fZd-ko-14I" secondAttribute="top" id="0cA-z4-E2d"/>
                             <constraint firstItem="ui4-EW-DdJ" firstAttribute="trailing" secondItem="n6f-iF-vqD" secondAttribute="trailing" id="0ku-nw-852"/>
                             <constraint firstItem="n6f-iF-vqD" firstAttribute="leading" secondItem="ui4-EW-DdJ" secondAttribute="leading" id="3pA-Oo-cme"/>
-                            <constraint firstItem="aJP-G5-69Z" firstAttribute="height" secondItem="fZd-ko-14I" secondAttribute="height" id="lIT-4T-fAt"/>
+                            <constraint firstItem="aJP-G5-69Z" firstAttribute="height" secondItem="ui4-EW-DdJ" secondAttribute="height" id="iMA-LQ-BkL"/>
                             <constraint firstItem="EDb-AM-30h" firstAttribute="width" secondItem="fZd-ko-14I" secondAttribute="width" id="mMj-Om-2ge"/>
                             <constraint firstAttribute="bottom" secondItem="n6f-iF-vqD" secondAttribute="bottom" id="wTX-vy-qhp"/>
                         </constraints>
@@ -1025,7 +1025,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProgramTabmanViewController" id="zVm-9p-YBk" customClass="ProgramTabmanViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xsW-TK-J5p">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="PmB-Wx-ptt"/>
                     </view>

@@ -325,6 +325,7 @@ open class ProgramsAPI {
   "isReinvesting" : true,
   "title" : "title",
   "personalProgramDetails" : {
+    "canCloseProgram" : true,
     "canWithdraw" : true,
     "canInvest" : true,
     "pendingOutput" : 1.4894159098541704,
@@ -332,6 +333,7 @@ open class ProgramsAPI {
     "pendingInput" : 1.0246457001441578,
     "isOwnProgram" : true,
     "isReinvest" : true,
+    "isFinishing" : true,
     "value" : 4.145608029883936,
     "profit" : 7.386281948385884,
     "invested" : 1.2315135367772556,
@@ -610,6 +612,7 @@ open class ProgramsAPI {
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -617,6 +620,7 @@ open class ProgramsAPI {
       "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
+      "isFinishing" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,
@@ -676,6 +680,7 @@ open class ProgramsAPI {
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -683,6 +688,7 @@ open class ProgramsAPI {
       "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
+      "isFinishing" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
       "invested" : 1.2315135367772556,

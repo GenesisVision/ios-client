@@ -56,15 +56,15 @@ class SignInViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        #if DEBUG
-        if isInvestorApp {
-            emailTextField.text = "george+1@genesis.vision"
-            passwordTextField.text = "qwerty123"
-        } else {
-            emailTextField.text = "george+1@genesis.vision"
-            passwordTextField.text = "qwerty"
-        }
-        #endif
+//        #if DEBUG
+//        if isInvestorApp {
+//            emailTextField.text = "george+1@genesis.vision"
+//            passwordTextField.text = "qwerty123"
+//        } else {
+//            emailTextField.text = "george+1@genesis.vision"
+//            passwordTextField.text = "qwerty"
+//        }
+//        #endif
         
         setupUI()
     }
@@ -129,6 +129,8 @@ class SignInViewController: BaseViewController {
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
         case passwordTextField:
             signInMethod()
         default:

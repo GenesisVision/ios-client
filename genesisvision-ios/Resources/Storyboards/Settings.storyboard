@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +26,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.066666666669999999" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="1hw-hx-IPR" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="528" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="578" width="375" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="App version 1.0a (1021)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lmg-9i-SOi" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
@@ -49,93 +49,120 @@
                         <sections>
                             <tableViewSection id="Kgj-IH-PKR">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="220" id="KXT-To-6wG" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="270" id="KXT-To-6wG" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KXT-To-6wG" id="88n-E5-wXq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uSQ-fB-Qf8">
-                                                    <rect key="frame" x="20" y="0.0" width="335" height="210"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="p9T-xb-1se">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxO-cu-jhV">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxO-cu-jhV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                                    <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_manager_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="beH-g7-9Tg" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="80" id="JSj-Dq-ELS"/>
-                                                                                <constraint firstAttribute="width" secondItem="beH-g7-9Tg" secondAttribute="height" multiplier="1:1" id="vt6-km-Yup"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_add_photo_icon" translatesAutoresizingMaskIntoConstraints="NO" id="0DU-Nr-8u2" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                            <rect key="frame" x="56" y="56" width="24" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="FwX-WG-ydM"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqD-fg-Khc">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                                            <connections>
-                                                                                <action selector="changePhotoButtonAction:" destination="2Ya-3a-R2M" eventType="touchUpInside" id="lzH-Lv-hU5"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                    </subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_manager_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="beH-g7-9Tg" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <rect key="frame" x="20" y="0.0" width="80" height="80"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="wqD-fg-Khc" secondAttribute="trailing" id="03J-c1-vRa"/>
-                                                                        <constraint firstItem="beH-g7-9Tg" firstAttribute="centerY" secondItem="WxO-cu-jhV" secondAttribute="centerY" id="1X2-bO-ifq"/>
-                                                                        <constraint firstItem="0DU-Nr-8u2" firstAttribute="width" secondItem="0DU-Nr-8u2" secondAttribute="height" multiplier="1:1" id="5ej-p2-8yc"/>
-                                                                        <constraint firstItem="beH-g7-9Tg" firstAttribute="leading" secondItem="WxO-cu-jhV" secondAttribute="leading" id="7PR-cQ-izO"/>
-                                                                        <constraint firstItem="beH-g7-9Tg" firstAttribute="top" secondItem="WxO-cu-jhV" secondAttribute="top" id="AVt-zT-7Da"/>
-                                                                        <constraint firstItem="wqD-fg-Khc" firstAttribute="top" secondItem="WxO-cu-jhV" secondAttribute="top" id="CFD-Zi-Req"/>
-                                                                        <constraint firstItem="wqD-fg-Khc" firstAttribute="leading" secondItem="WxO-cu-jhV" secondAttribute="leading" id="KjV-1R-aCN"/>
-                                                                        <constraint firstItem="0DU-Nr-8u2" firstAttribute="bottom" secondItem="beH-g7-9Tg" secondAttribute="bottom" id="OWH-O5-MmH"/>
-                                                                        <constraint firstItem="0DU-Nr-8u2" firstAttribute="trailing" secondItem="beH-g7-9Tg" secondAttribute="trailing" id="Zxb-D7-lqO"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="wqD-fg-Khc" secondAttribute="bottom" id="aEL-j0-0lL"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="beH-g7-9Tg" secondAttribute="trailing" id="lKd-hr-dT6"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="beH-g7-9Tg" secondAttribute="bottom" id="mSN-bG-xb7"/>
+                                                                        <constraint firstAttribute="height" constant="80" id="3wq-oS-bnT"/>
+                                                                        <constraint firstAttribute="width" secondItem="beH-g7-9Tg" secondAttribute="height" multiplier="1:1" id="vt6-km-Yup"/>
                                                                     </constraints>
-                                                                </view>
+                                                                </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_add_photo_icon" translatesAutoresizingMaskIntoConstraints="NO" id="0DU-Nr-8u2" customClass="RoundedImageView" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <rect key="frame" x="76" y="56" width="24" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="24" id="FwX-WG-ydM"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqD-fg-Khc">
+                                                                    <rect key="frame" x="20" y="0.0" width="80" height="80"/>
+                                                                    <connections>
+                                                                        <action selector="changePhotoButtonAction:" destination="2Ya-3a-R2M" eventType="touchUpInside" id="lzH-Lv-hU5"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
-                                                        </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="100" width="335" height="40"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="ILu-fR-Vnp"/>
+                                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="centerY" secondItem="WxO-cu-jhV" secondAttribute="centerY" id="1X2-bO-ifq"/>
+                                                                <constraint firstItem="0DU-Nr-8u2" firstAttribute="width" secondItem="0DU-Nr-8u2" secondAttribute="height" multiplier="1:1" id="5ej-p2-8yc"/>
+                                                                <constraint firstItem="beH-g7-9Tg" firstAttribute="leading" secondItem="WxO-cu-jhV" secondAttribute="leading" constant="20" id="7PR-cQ-izO"/>
+                                                                <constraint firstItem="wqD-fg-Khc" firstAttribute="trailing" secondItem="beH-g7-9Tg" secondAttribute="trailing" id="DUS-dz-44n"/>
+                                                                <constraint firstItem="wqD-fg-Khc" firstAttribute="bottom" secondItem="beH-g7-9Tg" secondAttribute="bottom" id="FFM-Y9-4Ci"/>
+                                                                <constraint firstItem="wqD-fg-Khc" firstAttribute="leading" secondItem="beH-g7-9Tg" secondAttribute="leading" id="Hqe-9a-Kb9"/>
+                                                                <constraint firstItem="0DU-Nr-8u2" firstAttribute="bottom" secondItem="beH-g7-9Tg" secondAttribute="bottom" id="OWH-O5-MmH"/>
+                                                                <constraint firstItem="wqD-fg-Khc" firstAttribute="top" secondItem="beH-g7-9Tg" secondAttribute="top" id="WGU-a5-qoS"/>
+                                                                <constraint firstItem="0DU-Nr-8u2" firstAttribute="trailing" secondItem="beH-g7-9Tg" secondAttribute="trailing" id="Zxb-D7-lqO"/>
+                                                                <constraint firstAttribute="height" constant="80" id="dGs-nG-vvw"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
-                                                            <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x47-qO-l5P">
-                                                            <rect key="frame" x="0.0" y="160" width="335" height="50"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwP-Ug-0Xa">
+                                                            <rect key="frame" x="0.0" y="100" width="375" height="40"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9d-oA-imM" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <rect key="frame" x="20" y="0.0" width="335" height="40"/>
+                                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="D9d-oA-imM" firstAttribute="top" secondItem="QwP-Ug-0Xa" secondAttribute="top" id="6KM-LW-QZa"/>
+                                                                <constraint firstAttribute="height" constant="40" id="RZL-c2-yCY"/>
+                                                                <constraint firstAttribute="bottom" secondItem="D9d-oA-imM" secondAttribute="bottom" id="ibM-vW-7ox"/>
+                                                                <constraint firstAttribute="trailing" secondItem="D9d-oA-imM" secondAttribute="trailing" constant="20" id="iwe-1M-ntm"/>
+                                                                <constraint firstItem="D9d-oA-imM" firstAttribute="leading" secondItem="QwP-Ug-0Xa" secondAttribute="leading" constant="20" id="kCZ-6v-64I"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKs-EK-Ql6">
+                                                            <rect key="frame" x="0.0" y="160" width="375" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydq-GR-3Fw" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                                    <rect key="frame" x="20" y="0.0" width="335" height="20"/>
                                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
                                                                     <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jef-VJ-Pua">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="0.0"/>
-                                                                    <state key="normal" title="Change"/>
-                                                                </button>
                                                             </subviews>
-                                                        </stackView>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="ydq-GR-3Fw" secondAttribute="trailing" constant="20" id="10n-Cx-yCj"/>
+                                                                <constraint firstAttribute="height" constant="20" id="F4j-rT-vFr"/>
+                                                                <constraint firstItem="ydq-GR-3Fw" firstAttribute="top" secondItem="yKs-EK-Ql6" secondAttribute="top" id="Mop-4t-9B5"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ydq-GR-3Fw" secondAttribute="bottom" id="Q8f-8o-df5"/>
+                                                                <constraint firstItem="ydq-GR-3Fw" firstAttribute="leading" secondItem="yKs-EK-Ql6" secondAttribute="leading" constant="20" id="lVe-W2-a93"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-U0-UIa">
+                                                            <rect key="frame" x="0.0" y="200" width="375" height="70"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not verified" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQE-uX-hO9" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <rect key="frame" x="20" y="0.0" width="335" height="70"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
+                                                                    <color key="textColor" red="0.92156862745098034" green="0.23137254901960785" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="TQE-uX-hO9" firstAttribute="leading" secondItem="bfa-U0-UIa" secondAttribute="leading" constant="20" id="17R-bz-NBG"/>
+                                                                <constraint firstAttribute="height" constant="70" id="2HW-hm-bWJ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="TQE-uX-hO9" secondAttribute="trailing" constant="20" id="2Z7-ef-CYo"/>
+                                                                <constraint firstItem="TQE-uX-hO9" firstAttribute="top" secondItem="bfa-U0-UIa" secondAttribute="top" id="HBE-fD-qTx"/>
+                                                                <constraint firstAttribute="bottom" secondItem="TQE-uX-hO9" secondAttribute="bottom" id="VOM-Lk-WfU"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="uSQ-fB-Qf8" firstAttribute="top" secondItem="88n-E5-wXq" secondAttribute="top" id="4Hc-Te-5zK"/>
-                                                <constraint firstItem="uSQ-fB-Qf8" firstAttribute="leading" secondItem="88n-E5-wXq" secondAttribute="leading" constant="20" id="XeF-97-PoD"/>
-                                                <constraint firstAttribute="bottom" secondItem="uSQ-fB-Qf8" secondAttribute="bottom" constant="10" id="eV7-xA-kb3"/>
-                                                <constraint firstAttribute="trailing" secondItem="uSQ-fB-Qf8" secondAttribute="trailing" constant="20" id="qWX-aN-3RV"/>
+                                                <constraint firstAttribute="bottom" secondItem="uSQ-fB-Qf8" secondAttribute="bottom" id="IlK-w2-Jbh"/>
+                                                <constraint firstItem="uSQ-fB-Qf8" firstAttribute="leading" secondItem="88n-E5-wXq" secondAttribute="leading" id="XeF-97-PoD"/>
+                                                <constraint firstAttribute="trailing" secondItem="uSQ-fB-Qf8" secondAttribute="trailing" id="qWX-aN-3RV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -145,7 +172,7 @@
                             <tableViewSection id="b8S-Iz-jbk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Blk-BK-wBO" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="270" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Blk-BK-wBO" id="eg7-hM-M5p">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -170,7 +197,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pht-tP-VVL" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="314" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pht-tP-VVL" id="obL-gB-rDb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -205,7 +232,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tfs-ZH-Mmd" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="308" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="358" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tfs-ZH-Mmd" id="Txu-Rc-0N0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -240,7 +267,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="5ho-iZ-Ot5" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="352" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="402" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ho-iZ-Ot5" id="PN5-Rj-van">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -279,7 +306,7 @@
                             <tableViewSection id="K4P-NV-KWm">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Q0q-Oi-T8x" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="396" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="446" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q0q-Oi-T8x" id="hyT-Dn-f9a">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -304,7 +331,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9nt-yP-Ec0" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="440" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="490" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9nt-yP-Ec0" id="gpL-V6-X4t">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -329,7 +356,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="abL-4O-wxA" customClass="TableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="484" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="534" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="abL-4O-wxA" id="Dgs-HR-Y9g">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -387,6 +414,8 @@
                         <outlet property="twoFactorCell" destination="5ho-iZ-Ot5" id="hde-7Y-gDS"/>
                         <outlet property="twoFactorSwitch" destination="gwo-Me-1Wz" id="YQh-lK-glh"/>
                         <outlet property="twoFactorTitleLabel" destination="Tcz-6n-stu" id="6QF-e9-te0"/>
+                        <outlet property="verifyTextLabel" destination="TQE-uX-hO9" id="M5V-Jo-u4R"/>
+                        <outlet property="verifyView" destination="bfa-U0-UIa" id="Fnb-g5-BgV"/>
                         <outlet property="versionLabel" destination="Lmg-9i-SOi" id="k5p-pq-ExK"/>
                     </connections>
                 </tableViewController>

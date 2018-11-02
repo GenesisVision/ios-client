@@ -101,7 +101,7 @@ class AuthManager {
     
     static func twoFactorEnabled(completion: @escaping (Bool) -> Void) {
         getTwoFactorStatus(completion: { (model) in
-            completion(true)
+            completion(model.twoFactorEnabled ?? false)
         }) { (result) in
             switch result {
             case .success:

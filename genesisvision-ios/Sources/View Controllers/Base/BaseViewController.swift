@@ -175,6 +175,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 379
         bottomSheetController.addContentsView(dateRangeView)
+        bottomSheetController.bottomSheetControllerProtocol = dateRangeView
         dateRangeView.delegate = self
         bottomSheetController.present()
     }
@@ -241,15 +242,18 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
+        let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
+        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle, completion: completion)
+        
         bottomSheetController = BottomSheetController()
+        bottomSheetController.viewType = .bottomView
+        bottomSheetController.bottomSheetControllerProtocol = errorBottomSheetView
         bottomSheetController.lineViewIsHidden = true
         bottomSheetController.initializeHeight = initializeHeight ?? 300.0
         bottomSheetController.viewActionType = .tappedDismiss
-        
-        let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
-        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle, completion: completion)
-        errorBottomSheetView.bottomSheetController = self.bottomSheetController
         bottomSheetController.addContentsView(errorBottomSheetView)
+        errorBottomSheetView.bottomSheetController = self.bottomSheetController
+        
         bottomSheetController.present()
     }
     

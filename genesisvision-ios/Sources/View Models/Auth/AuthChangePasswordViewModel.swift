@@ -12,7 +12,7 @@ final class AuthChangePasswordViewModel {
     var title: String = "Change password"
     
     private var router: ChangePasswordRouter!
-    let text = "Password successfully changed"
+    let successText = String.Info.changePasswordSuccess
     
     // MARK: - Init
     init(withRouter router: ChangePasswordRouter) {
@@ -23,6 +23,10 @@ final class AuthChangePasswordViewModel {
     // MARK: - Navigation
     func showChangePasswordInfoVC() {
         router.show(routeType: .changePasswordInfo)
+    }
+    
+    func goToBack() {
+        router.goToBack(animated: true)
     }
     
     // MARK: - API

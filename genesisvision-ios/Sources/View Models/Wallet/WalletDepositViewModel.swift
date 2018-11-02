@@ -12,7 +12,7 @@ final class WalletDepositViewModel {
     // MARK: - Variables
     var title: String = "Add funds"
     var labelPlaceholder: String = "0"
-    
+    let successText = String.Info.walletCopyAddress
     private var router: WalletDepositRouter!
     
     private var address: String = "" {

@@ -129,6 +129,12 @@ final class SettingsViewModel {
         return email
     }
     
+    var verificationStatus: ProfileFullViewModel.VerificationStatus? {
+        guard let verificationStatus = profileModel?.verificationStatus else { return nil }
+        
+        return verificationStatus
+    }
+    
     // MARK: - Init
     init(withRouter router: SettingsRouter) {
         self.router = router
@@ -169,7 +175,7 @@ final class SettingsViewModel {
     
     func headerHeight(for section: Int) -> CGFloat {
         switch section {
-        case 0:
+        case 0, 1:
             return 0.0
         default:
             return 20.0

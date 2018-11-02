@@ -178,7 +178,7 @@ class WalletDepositViewController: BaseViewController {
         showProgressHUD()
         viewModel.copy { [weak self] (result) in
             self?.hideAll()
-            self?.showBottomSheet(type: .success, title: "Your wallet-pane number was copied to the clipboard successfully.")
+            self?.showBottomSheet(type: .success, title: self?.viewModel.successText)
         }
     }
     
@@ -248,6 +248,5 @@ extension WalletDepositViewController: NumpadViewProtocol {
 extension WalletDepositViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
-
     }
 }

@@ -16,6 +16,13 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     var viewModel: ProgramInfoViewModel!
     
     // MARK: - Views
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+            tableView.isScrollEnabled = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,7 +45,6 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setup() {
         setupUI()
-        setupTableConfiguration()
     }
     
     private func setupUI() {
@@ -47,11 +53,9 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        
-        tableView.isScrollEnabled = false
         tableView.delegate = self
-        tableView.bounces = false
         tableView.dataSource = self
+        tableView.bounces = false
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         

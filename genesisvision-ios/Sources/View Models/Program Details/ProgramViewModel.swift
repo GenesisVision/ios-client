@@ -86,7 +86,7 @@ final class ProgramViewModel {
     
     // MARK: - Private methods
     @objc private func programFavoriteStateChangeNotification(notification: Notification) {
-        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["programId"] as? String, assetId == programId {
             changeFavorite(value: isFavorite) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }

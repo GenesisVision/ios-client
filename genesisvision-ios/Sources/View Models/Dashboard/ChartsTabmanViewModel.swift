@@ -17,7 +17,6 @@ class ChartsTabmanViewModel: TabmanViewModel {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
         self.dashboardPortfolioChartValue = dashboardPortfolioChartValue
-        style = .scrollingButtonBar
         font = UIFont.getFont(.semibold, size: 16)
     }
 }

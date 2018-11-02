@@ -55,6 +55,12 @@
 		5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F08216528380029BFDE /* Montserrat-Medium.ttf */; };
 		5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */; };
 		5E1CF821218B71D100541C70 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */; };
+		5E1CF838218C02FC00541C70 /* TweeActiveTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF832218C02FA00541C70 /* TweeActiveTextField.swift */; };
+		5E1CF839218C02FC00541C70 /* TweePlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF833218C02FA00541C70 /* TweePlaceholderTextField.swift */; };
+		5E1CF83A218C02FC00541C70 /* WeakTargetProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF834218C02FA00541C70 /* WeakTargetProxy.swift */; };
+		5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF835218C02FA00541C70 /* TweeBorderedTextField.swift */; };
+		5E1CF83C218C02FC00541C70 /* FontAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF836218C02FB00541C70 /* FontAnimation.swift */; };
+		5E1CF83D218C02FC00541C70 /* TweeAttributedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1CF837218C02FC00541C70 /* TweeAttributedTextField.swift */; };
 		5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */; };
 		5E27EC48218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */; };
 		5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */; };
@@ -643,6 +649,12 @@
 		5E18CE0820C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSuccessDisableViewModel.swift; sourceTree = "<group>"; };
 		5E19A1D52063A5DE0010014A /* UITableViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtension.swift; sourceTree = "<group>"; };
 		5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		5E1CF832218C02FA00541C70 /* TweeActiveTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweeActiveTextField.swift; sourceTree = "<group>"; };
+		5E1CF833218C02FA00541C70 /* TweePlaceholderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweePlaceholderTextField.swift; sourceTree = "<group>"; };
+		5E1CF834218C02FA00541C70 /* WeakTargetProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakTargetProxy.swift; sourceTree = "<group>"; };
+		5E1CF835218C02FA00541C70 /* TweeBorderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweeBorderedTextField.swift; sourceTree = "<group>"; };
+		5E1CF836218C02FB00541C70 /* FontAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAnimation.swift; sourceTree = "<group>"; };
+		5E1CF837218C02FC00541C70 /* TweeAttributedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweeAttributedTextField.swift; sourceTree = "<group>"; };
 		5E210D9F2170FE75006BDF16 /* DashboardProgramListDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardProgramListDelegateManager.swift; sourceTree = "<group>"; };
 		5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundAssetTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FundAssetTableViewCell.xib; sourceTree = "<group>"; };
@@ -1432,6 +1444,19 @@
 				5E4BC90D21877880000F2E57 /* WithdrawalSummary.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5E1CF831218C02EF00541C70 /* TweeTextField */ = {
+			isa = PBXGroup;
+			children = (
+				5E1CF836218C02FB00541C70 /* FontAnimation.swift */,
+				5E1CF832218C02FA00541C70 /* TweeActiveTextField.swift */,
+				5E1CF837218C02FC00541C70 /* TweeAttributedTextField.swift */,
+				5E1CF835218C02FA00541C70 /* TweeBorderedTextField.swift */,
+				5E1CF833218C02FA00541C70 /* TweePlaceholderTextField.swift */,
+				5E1CF834218C02FA00541C70 /* WeakTargetProxy.swift */,
+			);
+			path = TweeTextField;
 			sourceTree = "<group>";
 		};
 		5E23926C205F67F000CB5AEC /* Fonts */ = {
@@ -2510,6 +2535,7 @@
 		FCC9DD50200DFA5E008825EC /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5E1CF831218C02EF00541C70 /* TweeTextField */,
 				5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */,
 				5EAD0AB1208F7CA900A92B49 /* EasyTipView */,
 				FC27231C20498958005225F2 /* QRCodeReader */,
@@ -2911,6 +2937,7 @@
 				5E4BC9EF21877893000F2E57 /* WalletPendingTransactionsViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				5EA274B621628207008CAF77 /* ProgramPeriodTableViewCell.swift in Sources */,
+				5E1CF83A218C02FC00541C70 /* WeakTargetProxy.swift in Sources */,
 				5EF14DA3218213B600B3843A /* FundListRouter.swift in Sources */,
 				5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */,
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -2946,6 +2973,7 @@
 				5E4BC9F521877894000F2E57 /* PlatformAssets.swift in Sources */,
 				5E0ACEC3217FA7C600DC76AA /* ErrorBottomSheetView.swift in Sources */,
 				5E4BC9A721877893000F2E57 /* RatesModel.swift in Sources */,
+				5E1CF83C218C02FC00541C70 /* FontAnimation.swift in Sources */,
 				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
@@ -3042,6 +3070,7 @@
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
 				5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */,
 				5E4BC9D421877893000F2E57 /* PlatformStatistic.swift in Sources */,
+				5E1CF83D218C02FC00541C70 /* TweeAttributedTextField.swift in Sources */,
 				5E4BC9B421877893000F2E57 /* BalanceChartElement.swift in Sources */,
 				5EB996A720F36DE600E31D23 /* ListRouterProtocol.swift in Sources */,
 				5EEE455F210B447A009CF791 /* InvestorDashboardViewController.swift in Sources */,
@@ -3094,10 +3123,12 @@
 				5E4BC94B2187788A000F2E57 /* NotificationsAPI.swift in Sources */,
 				5E4BC9AC21877893000F2E57 /* WithdrawalInfo.swift in Sources */,
 				5E5BC18A21854D45009E4BA3 /* ManagerFundListViewController.swift in Sources */,
+				5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */,
 				5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */,
 				5E18CE0520C0561B008FE5B5 /* AuthTwoFactorTabmanRouter.swift in Sources */,
 				5E85834C2060148E0039E13F /* SortHeaderView.swift in Sources */,
 				5E4BC9BF21877893000F2E57 /* ForgotPasswordViewModel.swift in Sources */,
+				5E1CF838218C02FC00541C70 /* TweeActiveTextField.swift in Sources */,
 				5E4BC9AA21877893000F2E57 /* FundDetailsFull.swift in Sources */,
 				5E5BC29221868A44009E4BA3 /* FundAssetsViewModel.swift in Sources */,
 				5E4BC9BD21877893000F2E57 /* RecoveryCodesViewModel.swift in Sources */,
@@ -3107,6 +3138,7 @@
 				5E4BC9AD21877893000F2E57 /* ErrorMessage.swift in Sources */,
 				FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */,
 				5EF14D8B2181F80200B3843A /* FundTabmanViewModel.swift in Sources */,
+				5E1CF839218C02FC00541C70 /* TweePlaceholderTextField.swift in Sources */,
 				5EA274D72162B5C2008CAF77 /* ProgramPeriodTableViewCellViewModel.swift in Sources */,
 				5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */,
 				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,

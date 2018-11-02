@@ -17,7 +17,7 @@ class PortfolioViewController: BaseViewController {
     var vc: UIViewController!
     
     private var bottomAssetsView: UIView?
-    
+    private var tapGesture: UITapGestureRecognizer?
     // MARK: - Outlets
     @IBOutlet weak var amountTitleLabel: SubtitleLabel!
     @IBOutlet weak var amountValueLabel: TitleLabel!
@@ -88,7 +88,7 @@ class PortfolioViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        hideBottomAssetsView()
+        deselectChart()
     }
 
     // MARK: - Public methods
@@ -109,12 +109,10 @@ class PortfolioViewController: BaseViewController {
     private func setup() {
         
         //Selected Chart Assets Bottom Sheet View
-        setupSelectedChartAssetsBottomSheetView()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(deselectChart))
-        tapGesture.numberOfTapsRequired = 1
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(deselectChart))
+        tapGesture?.numberOfTapsRequired = 1
         view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGesture!)
         
         chartView.addSubview(circleView)
     }
@@ -159,6 +157,7 @@ class PortfolioViewController: BaseViewController {
     }
     
     private func setupSelectedChartAssetsBottomSheetView() {
+        bottomSheetController = BottomSheetController()
         bottomSheetController.bottomSheetControllerProtocol = self
         bottomSheetController.addNavigationBar("Assets", subtitle: "")
         bottomSheetController.lineViewIsHidden = true
@@ -190,18 +189,28 @@ class PortfolioViewController: BaseViewController {
     func hideInRequestStackView(_ value: Bool) {
         if let programRequests = viewModel.programRequests, let requests = programRequests.requests, requests.count == 0, inRequestsStackView.isHidden { return }
         
-        UIView.animate(withDuration: 0.3) {
-            self.inRequestsButton.isHidden = value
-            self.inRequestsStackView.isHidden = value
+        self.inRequestsButton.isHidden = value
+        self.inRequestsStackView.isHidden = value
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            
             self.view.layoutIfNeeded()
-        }
+        }, completion: nil)
     }
-    @objc private func deselectChart() {
-        hideBottomAssetsView()
-        circleView.isHidden = true
+    @objc func deselectChart() {
+        if let highlighted = chartView?.highlighted, highlighted.count > 0 {
+            tapGesture?.isEnabled = false
+            hideBottomAssetsView()
+            circleView.isHidden = true
+            hideInRequestStackView(false)
+            chartView.highlightValues([])
+            updateUI()
+        }
     }
     
     private func selectChart(_ entry: ChartDataEntry) {
+        tapGesture?.isEnabled = true
+
         let date = Date(timeIntervalSince1970: entry.x)
         
         let results = viewModel.selectChart(date)
@@ -213,8 +222,27 @@ class PortfolioViewController: BaseViewController {
             hideBottomAssetsView()
         }
         
-        if let chartSimple = results.1, let value = chartSimple.value {
-            print(value)
+        if let chartSimple = results.1, let selectedValue = chartSimple.value {
+            if let firstChartSimple = viewModel.dashboardChartValue?.balanceChart?.first, let firstValue = firstChartSimple.value, let rate = viewModel.dashboardChartValue?.rate {
+                
+                let selectedValueInCurrency = selectedValue * rate
+                let changePercent = getChangePercent(oldValue: firstValue, newValue: selectedValue)
+                let changeValue = selectedValue - firstValue
+                let changeValueCurrency = changeValue * rate
+                
+                amountValueLabel.text = selectedValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                
+                let currency = getSelectedCurrency()
+                if let selectedCurrency = CurrencyType(rawValue: currency) {
+                    amountCurrencyLabel.text = selectedValueInCurrency.rounded(withType: selectedCurrency).toString() + " \(currency)"
+                    
+                    changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(currency)"
+                }
+                
+                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
+
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            }
         } else {
             
         }
@@ -227,8 +255,6 @@ class PortfolioViewController: BaseViewController {
             self.bottomAssetsView?.removeFromSuperview()
             self.bottomAssetsView = nil
         }
-        
-        hideInRequestStackView(false)
     }
     
     private func showBottomAssetsView() {
@@ -236,15 +262,17 @@ class PortfolioViewController: BaseViewController {
             let date = self.viewModel.selectedValueChartBar?.date
             rightBarLabel.text = date?.dateAndTimeFormatString
         }
-        
         if self.bottomAssetsView == nil {
             circleView.isHidden = false
             
             hideInRequestStackView(true)
         }
-
+        
         let window = UIApplication.shared.windows[0] as UIWindow
         if let vc = window.rootViewController, self.bottomAssetsView == nil {
+            setupSelectedChartAssetsBottomSheetView()
+            
+            bottomSheetController.isDraggable = false
             self.bottomAssetsView = bottomSheetController.containerView
             self.bottomAssetsView?.alpha = 0.0
         
@@ -277,19 +305,22 @@ extension PortfolioViewController: ChartViewDelegate {
         circleView.center = CGPoint(x: highlight.xPx, y: highlight.yPx)
         
         selectChart(entry)
+        
+        self.chartView.animationEnable = false
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         hideBottomAssetsView()
         circleView.isHidden = true
-        
+        hideInRequestStackView(false)
+        updateUI()
     }
 }
 
 extension PortfolioViewController: BottomSheetControllerProtocol {
     func didHide() {
-        circleView.isHidden = true
-        hideInRequestStackView(false)
-        chartView.highlightValues([])
+        deselectChart()
+        bottomAssetsView?.removeFromSuperview()
+        bottomAssetsView = nil
     }
 }

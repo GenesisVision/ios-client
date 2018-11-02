@@ -118,6 +118,6 @@ final class NavigationTitleView: UIView {
     
     private func titleVerticalPositionAdjusted(by yOffset: CGFloat) -> CGFloat {
         let midY = bounds.midY - currencyTitleButton.bounds.height * 0.5
-        return max(bounds.maxY - yOffset, midY).rounded()
+        return midY//max(bounds.maxY - yOffset, midY).rounded()
     }
 }

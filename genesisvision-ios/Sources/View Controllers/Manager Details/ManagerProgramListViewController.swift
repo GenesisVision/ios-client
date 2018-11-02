@@ -20,13 +20,13 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         setup()
+        showProgressHUD()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         viewModel.hideHeader()
-        showProgressHUD()
     }
     
     // MARK: - Private methods

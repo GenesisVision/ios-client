@@ -63,9 +63,9 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        #if DEBUG
-        passwordTextField.text = "qwerty123"
-        #endif
+//        #if DEBUG
+//        passwordTextField.text = "qwerty123"
+//        #endif
         
         setupUI()
     }
