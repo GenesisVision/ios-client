@@ -61,11 +61,11 @@ class ChangePasswordViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        #if DEBUG
-//        oldPasswordTextField.text = "qwerty123"
-//        passwordTextField.text = "qwerty123"
-//        confirmPasswordTextField.text = "qwerty123"
-//        #endif
+        #if DEBUG
+        oldPasswordTextField.text = "qwerty123"
+        passwordTextField.text = "qwerty123"
+        confirmPasswordTextField.text = "qwerty123"
+        #endif
         
         setupUI()
     }

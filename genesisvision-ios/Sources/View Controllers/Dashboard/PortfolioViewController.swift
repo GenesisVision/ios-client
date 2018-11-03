@@ -226,7 +226,6 @@ class PortfolioViewController: BaseViewController {
             if let firstChartSimple = viewModel.dashboardChartValue?.balanceChart?.first, let firstValue = firstChartSimple.value, let rate = viewModel.dashboardChartValue?.rate {
                 
                 let selectedValueInCurrency = selectedValue * rate
-                let changePercent = getChangePercent(oldValue: firstValue, newValue: selectedValue)
                 let changeValue = selectedValue - firstValue
                 let changeValueCurrency = changeValue * rate
                 
@@ -239,7 +238,7 @@ class PortfolioViewController: BaseViewController {
                     changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(currency)"
                 }
                 
-                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
+                changePercentLabel.text = getChangePercent(oldValue: firstValue, newValue: selectedValue)
 
                 changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }

@@ -22,6 +22,7 @@ class WalletTransactionTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet var titleLabel: TitleLabel!
+    @IBOutlet var statusLabel: SubtitleLabel!
     @IBOutlet var amountLabel: TitleLabel!
     @IBOutlet var dateLabel: SubtitleLabel!
     

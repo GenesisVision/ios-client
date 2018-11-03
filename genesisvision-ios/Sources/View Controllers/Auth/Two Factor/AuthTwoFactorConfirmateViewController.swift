@@ -21,7 +21,6 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     }
     @IBOutlet var codeTextField: DesignableUITextField! {
         didSet {
-            codeTextField.placeholder = "2FA Code"
             codeTextField.setClearButtonWhileEditing()
             codeTextField.delegate = self
         }
@@ -33,7 +32,6 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.placeholder = "Your Password"
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
@@ -63,9 +61,9 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        #if DEBUG
-//        passwordTextField.text = "qwerty123"
-//        #endif
+        #if DEBUG
+        passwordTextField.text = "qwerty123"
+        #endif
         
         setupUI()
     }

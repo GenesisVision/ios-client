@@ -410,6 +410,5 @@ extension WalletWithdrawViewController: InvestWithdrawConfirmViewProtocol {
 extension WalletWithdrawViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
-        
     }
 }

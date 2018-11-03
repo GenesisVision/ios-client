@@ -62,6 +62,12 @@ enum LineStyle {
     case solid, dashed
 }
 
+func getChangePercent(oldValue: Double, newValue: Double) -> String {
+    let percentText = oldValue > 0.0 ? (Double(newValue - oldValue) / oldValue * 100.0).rounded(withType: .undefined).toString() : "∞"
+    return percentText + "%"
+    
+}
+
 func getChangePercent(oldValue: Double, newValue: Double) -> Double {
     let percent = oldValue > 0.0 ? Double(newValue - oldValue) / oldValue * 100.0 : 0.0
     return percent

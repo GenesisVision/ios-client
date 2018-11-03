@@ -163,7 +163,7 @@ extension WalletControllerViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMoreTransactions(at row: Int) -> Bool {
-        if numberOfRows(in: 1) - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+        if numberOfRows(in: 1) - Constants.Api.fetchThreshold == row && canFetchMoreResults && transactions.count >= take {
             fetchMoreTransactions()
         }
         

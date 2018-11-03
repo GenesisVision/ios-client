@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
-            timestampString = "562832446.14458"
+            timestampString = "562947226.570098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "239"
@@ -106,7 +106,7 @@
                   moduleName = "Genesis Vision"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "562859332.575901"
+                  timestampString = "562947227.203232"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "253"
@@ -121,7 +121,7 @@
                   moduleName = "Genesis Vision"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "562859332.5783449"
+                  timestampString = "562947227.20596"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "255"
@@ -144,6 +144,22 @@
             startingLineNumber = "245"
             endingLineNumber = "245"
             landmarkName = "didFavoriteStateUpdated()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletWithdrawViewController.swift"
+            timestampString = "562947226.570196"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "withdrawMethod()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
