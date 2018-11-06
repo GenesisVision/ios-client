@@ -81,8 +81,9 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.secondTitleLabel.text = "Current value"
-        if let balance = program.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
+        if let value = program.personalDetails?.value {
+            let currency: CurrencyType = .gvt
+            cell.secondValueLabel.text = value.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }

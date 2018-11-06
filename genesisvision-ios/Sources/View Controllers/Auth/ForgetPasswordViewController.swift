@@ -39,9 +39,9 @@ class ForgotPasswordViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        #if DEBUG
-//        emailTextField.text = "george@genesis.vision"
-//        #endif
+        #if DEBUG
+        emailTextField.text = "george+1@genesis.vision"
+        #endif
         
         setupUI()
     }

@@ -136,8 +136,6 @@ class ProfitViewController: BaseViewController {
     private func configureConstraints(containerView: UIView, view: UIView) {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.transform = CGAffineTransform.identity
-        
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 10.0).isActive = true
@@ -145,9 +143,6 @@ class ProfitViewController: BaseViewController {
     }
     
     private func selectBar(_ entry: ChartDataEntry) {
-//        let date = Date(timeIntervalSince1970: entry.x)
-//        let dateString = date.dateAndTimeFormatString
-        
         showBottomAssetsView()
     }
     
@@ -176,7 +171,7 @@ class ProfitViewController: BaseViewController {
             
             self.configureConstraints(containerView: self.bottomAssetsView!, view: vc.view)
             self.bottomAssetsView?.layoutIfNeeded()
-            self.bottomSheetController.initializeHeight = self.bottomAssetsView?.frame.size.height ?? 300.0
+//            self.bottomSheetController.initializeHeight = self.bottomAssetsView?.frame.size.height ?? 300.0
             self.bottomSheetController.viewDidLayoutSubviews()
             
             UIView.animate(withDuration: 0.3) {

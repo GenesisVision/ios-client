@@ -8,7 +8,7 @@
 
 import Charts
 
-class MyFillFormatter: IFillFormatter {
+class InvertGradientFillFormatter: IFillFormatter {
     func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
         return dataProvider.maxHighlightDistance
     }
@@ -53,7 +53,7 @@ class ChartView: CombinedChartView {
             lineChartDataSet.lineWidth = 1.5
 
             lineChartDataSet.drawFilledEnabled = true
-            lineChartDataSet.fillFormatter = MyFillFormatter()
+            lineChartDataSet.fillFormatter = InvertGradientFillFormatter()
 
             let gradientColors = [UIColor.Cell.greenTitle.withAlphaComponent(0.3).cgColor, UIColor.Cell.greenTitle.withAlphaComponent(0.0).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
@@ -161,13 +161,15 @@ class ChartView: CombinedChartView {
             minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
         
-//        if let dateFrom = dateFrom, let dateTo = dateTo {
-//            let width = Date(timeIntervalSince1970: data.xMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: data.xMin)) / 60
-//                
-//            xAxis.axisMaximum = dateTo.timeIntervalSince1970 + Double(width)
-//            xAxis.axisMinimum = dateFrom.timeIntervalSince1970 - Double(width)
-//        }
+
+        let dateMin = data.xMin
+        let dateMax = data.xMax
         
+        let width = Date(timeIntervalSince1970: dateMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: dateMin)) / 60
+
+        xAxis.axisMinimum = dateMin - Double(width * 3)
+        xAxis.axisMaximum = dateMax + Double(width * 7)
+
         self.data = data
     }
     
@@ -226,8 +228,16 @@ class ChartView: CombinedChartView {
         rightAxisFormatter.negativeSuffix = " " + currencyValue
         rightAxisFormatter.positiveSuffix = " " + currencyValue
 
-        setViewPortOffsets(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0)
         
+        
+        if chartType == .default {
+            setViewPortOffsets(left: 0, top: 0, right: 0, bottom: 0)
+        } else {
+            let offsetBottom = self.viewPortHandler.offsetBottom
+            let offsetTop = self.viewPortHandler.offsetTop
+            
+            setViewPortOffsets(left: 0, top: offsetTop, right: 0, bottom: offsetBottom)
+        }
         
         //leftAxis
         leftAxis.enabled = false
@@ -469,6 +479,8 @@ class ChartView: CombinedChartView {
         case .month:
             return 5
         case .year:
+            return 6
+        case .allTime:
             return 6
         case .custom:
             return 6

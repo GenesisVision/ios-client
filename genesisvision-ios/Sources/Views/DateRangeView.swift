@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DateRangeViewProtocol: class {
-    func applyButtonDidPress(with dateFrom: Date, dateTo: Date)
+    func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?)
     func showDatePicker(with dateFrom: Date?, dateTo: Date)
 }
 
@@ -21,39 +21,64 @@ class DateRangeView: UIView {
     
     var dateFrom: Date? {
         didSet {
-            dateFromTextField.text = dateFrom?.onlyDateFormatString
+            guard let dateFrom = dateFrom else {
+                return dateFromTextField.text = "Start date"
+            }
+            
+            dateFromTextField.text = dateFrom.onlyDateFormatString
         }
     }
     var dateTo: Date? {
         didSet {
-            dateToTextField.text = dateTo?.onlyDateFormatString
+            guard let dateTo = dateTo else {
+                return dateToTextField.text = "Today"
+            }
+            
+            dateToTextField.text = dateTo.onlyDateFormatString
         }
     }
     
     // MARK: - IBOutlets
     @IBOutlet var dayButton: DateRangeButton! {
         didSet {
-            dayButton.tag = DateRangeType.day.rawValue
+            let dateRangeType = DateRangeType.day
+            dayButton.setTitle(dateRangeType.getString(), for: .normal)
+            dayButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var weekButton: DateRangeButton! {
         didSet {
-            weekButton.tag = DateRangeType.week.rawValue
+            let dateRangeType = DateRangeType.week
+            weekButton.setTitle(dateRangeType.getString(), for: .normal)
+            weekButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var monthButton: DateRangeButton! {
         didSet {
-            monthButton.tag = DateRangeType.month.rawValue
+            let dateRangeType = DateRangeType.month
+            monthButton.setTitle(dateRangeType.getString(), for: .normal)
+            monthButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var yearButton: DateRangeButton! {
         didSet {
-            yearButton.tag = DateRangeType.year.rawValue
+            let dateRangeType = DateRangeType.year
+            yearButton.setTitle(dateRangeType.getString(), for: .normal)
+            yearButton.tag = dateRangeType.rawValue
+        }
+    }
+    @IBOutlet var allTimeButton: DateRangeButton! {
+        didSet {
+            let dateRangeType = DateRangeType.allTime
+            allTimeButton.setTitle(dateRangeType.getString(), for: .normal)
+            allTimeButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var customButton: DateRangeButton! {
         didSet {
-            customButton.tag = DateRangeType.custom.rawValue
+            let dateRangeType = DateRangeType.custom
+            customButton.setTitle(dateRangeType.getString(), for: .normal)
+            customButton.tag = dateRangeType.rawValue
         }
     }
     
@@ -74,50 +99,81 @@ class DateRangeView: UIView {
     }
     @IBOutlet var applyButton: ActionButton!
     
+    var buttons = [DateRangeButton]()
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectedDateRangeType = .week
-        changeDateRangeType()
-        correctTime()
+        buttons = [dayButton, weekButton, monthButton, yearButton, allTimeButton, customButton]
+        
+        setup()
+    }
+    
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        setup()
     }
     
     // MARK: - Private methods
-    private func changeDateRangeType() {
-        dateTo = Date()
+    private func setup() {
+        selectedDateRangeType = PlatformManager.shared.dateRangeType
         
-        dayButton.isSelected = false
-        weekButton.isSelected = false
-        monthButton.isSelected = false
-        yearButton.isSelected = false
-        customButton.isSelected = false
+        if selectedDateRangeType == .custom {
+            self.dateFrom = PlatformManager.shared.dateFrom
+            self.dateTo = PlatformManager.shared.dateTo
+        }
+        
+        changeDateRangeType()
+        correctTime()
+    }
+    private func changeDateRangeType() {
+        for button in buttons {
+            button.isSelected = false
+        }
         
         switch selectedDateRangeType {
         case .day:
+            dateTo = Date()
             dateFrom = dateTo?.previousDate()
             dayButton.isSelected = true
         case .week:
+            dateTo = Date()
             dateFrom = dateTo?.removeDays(7)
             weekButton.isSelected = true
         case .month:
+            dateTo = Date()
             dateFrom = dateTo?.removeMonths(1)
             monthButton.isSelected = true
         case .year:
+            dateTo = Date()
             dateFrom = dateTo?.removeYears(1)
             yearButton.isSelected = true
+        case .allTime:
+            dateFrom = nil
+            dateTo = nil
+            allTimeButton.isSelected = true
         case .custom:
+            if dateTo == nil {
+                dateTo = Date()
+            }
             if dateFrom == nil {
                 dateFrom = dateTo?.removeDays(7)
             }
-            dateToTextField.isUserInteractionEnabled = true
-            dateFromTextField.isUserInteractionEnabled = true
             customButton.isSelected = true
         }
     }
     
     private func correctTime() {
-        guard var dateFrom = self.dateFrom, var dateTo = self.dateTo else { return }
+        guard var dateFrom = self.dateFrom, var dateTo = self.dateTo else {
+            PlatformManager.shared.dateRangeType = selectedDateRangeType
+            PlatformManager.shared.dateFrom = self.dateFrom
+            PlatformManager.shared.dateTo = self.dateTo
+            
+            return
+        }
         
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
@@ -167,29 +223,17 @@ class DateRangeView: UIView {
         sender.isSelected = true
         selectedDateRangeType = DateRangeType(rawValue: sender.tag)!
         changeDateRangeType()
-        
     }
     
     @IBAction func applyButtonAction(_ sender: UIButton) {
         correctTime()
         
-        guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return }
-        
-        delegate?.applyButtonDidPress(with: dateFrom, dateTo: dateTo)
+        delegate?.applyButtonDidPress(with: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
     }
 }
 
 extension DateRangeView: BottomSheetControllerProtocol {
     func didHide() {
-        if self.selectedDateRangeType != PlatformManager.shared.dateRangeType {
-            self.selectedDateRangeType = PlatformManager.shared.dateRangeType
-            self.changeDateRangeType()
-        }
-        if self.dateFrom != PlatformManager.shared.dateFrom, PlatformManager.shared.dateFrom != nil {
-            self.dateFrom = PlatformManager.shared.dateFrom
-        }
-        if self.dateTo != PlatformManager.shared.dateTo, PlatformManager.shared.dateTo != nil {
-            self.dateTo = PlatformManager.shared.dateTo
-        }
+        
     }
 }

@@ -29,11 +29,14 @@ class CircularProgressView: UIView {
     public var backgroundStrokeColor: UIColor = UIColor.primary.withAlphaComponent(0.2)
 
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
-        progress = Float(progressConstant > 1
+        progress = Double(progressConstant > 1
             ? 1
             : progressConstant < 0
             ? 0
             : progressConstant)
+        let percentText = (progress * 100).rounded(toPlaces: 0).toString() + "%"
+        percentLabel.text = percentText
+        percentLabel.sizeToFit()
         
         foregroundLayer.strokeEnd = CGFloat(progress)
 
@@ -48,9 +51,14 @@ class CircularProgressView: UIView {
 
 
     //MARK: Private
-    private var progress: Float = 0
+    private var progress: Double = 0
     private let foregroundLayer = CAShapeLayer()
     private let backgroundLayer = CAShapeLayer()
+    private let percentLabel: TitleLabel = {
+        let percentLabel = TitleLabel()
+        percentLabel.font = UIFont.getFont(.regular, size: 12.0)
+        return percentLabel
+    }()
 
     private func drawBackgroundLayer() {
         backgroundLayer.lineCap = kCALineCapRound
@@ -66,16 +74,22 @@ class CircularProgressView: UIView {
         foregroundLayer.strokeEnd = 0.0
         self.layer.addSublayer(foregroundLayer)
     }
+    
+    private func addTextLabel() {
+        self.addSubview(percentLabel)
+    }
 
     private func setup() {
         drawBackgroundLayer()
         drawForegroundLayer()
+        addTextLabel()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
         let center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+        percentLabel.center = center
         
         let startAngle = -CGFloat.pi / 2
         let endAngle = 2 * CGFloat.pi + startAngle

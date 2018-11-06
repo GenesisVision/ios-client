@@ -178,7 +178,7 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        guard let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount, amountToInvestValue > minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        guard let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount, amountToInvestValue >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
         viewModel.invest(with: amountToInvestValue) { [weak self] (result) in

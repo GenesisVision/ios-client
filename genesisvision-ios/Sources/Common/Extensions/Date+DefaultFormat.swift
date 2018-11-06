@@ -21,7 +21,7 @@ extension Date {
         switch dateRangeType {
         case .day:
             dateFormatter.dateFormat = "hh:mma"
-        case .year:
+        case .year, .allTime:
             dateFormatter.dateFormat = "dd.MM.yy"
         default:
             dateFormatter.dateFormat = "dd.MM"

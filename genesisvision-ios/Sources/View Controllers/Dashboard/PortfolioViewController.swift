@@ -158,8 +158,10 @@ class PortfolioViewController: BaseViewController {
     
     private func setupSelectedChartAssetsBottomSheetView() {
         bottomSheetController = BottomSheetController()
+        bottomSheetController.isDraggable = false
         bottomSheetController.bottomSheetControllerProtocol = self
-        bottomSheetController.addNavigationBar("Assets", subtitle: "")
+        let closeImage = #imageLiteral(resourceName: "img_event_program_closed")
+        bottomSheetController.addNavigationBar("Assets", centerSubtitle: "", normalImage: closeImage, buttonAction: #selector(deselectChart), buttonTarget: self)
         bottomSheetController.lineViewIsHidden = true
         
         bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
@@ -183,6 +185,9 @@ class PortfolioViewController: BaseViewController {
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 10.0).isActive = true
+//        containerView.topAnchor.constraint(greaterThanOrEqualTo: chartView.bottomAnchor, constant: 10.0).isActive = true
+//        containerView.heightAnchor.constraint(lessThanOrEqualToConstant: 300.0).isActive = true
+//        containerView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
@@ -215,8 +220,7 @@ class PortfolioViewController: BaseViewController {
         
         let results = viewModel.selectChart(date)
         
-        if let valueChartBar = results.0, let topAssets = valueChartBar.topAssets {
-            print(topAssets)
+        if let valueChartBar = results.0, valueChartBar.topAssets != nil {
             showBottomAssetsView()
         } else {
             hideBottomAssetsView()
@@ -247,7 +251,7 @@ class PortfolioViewController: BaseViewController {
         }
     }
     
-    private func hideBottomAssetsView() {
+    @objc private func hideBottomAssetsView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomAssetsView?.alpha = 0.0
         }) { (result) in
@@ -257,10 +261,6 @@ class PortfolioViewController: BaseViewController {
     }
     
     private func showBottomAssetsView() {
-        if let rightBarLabel = bottomSheetController.rightBarLabel {
-            let date = self.viewModel.selectedValueChartBar?.date
-            rightBarLabel.text = date?.dateAndTimeFormatString
-        }
         if self.bottomAssetsView == nil {
             circleView.isHidden = false
             
@@ -271,24 +271,23 @@ class PortfolioViewController: BaseViewController {
         if let vc = window.rootViewController, self.bottomAssetsView == nil {
             setupSelectedChartAssetsBottomSheetView()
             
-            bottomSheetController.isDraggable = false
             self.bottomAssetsView = bottomSheetController.containerView
             self.bottomAssetsView?.alpha = 0.0
         
             guard self.bottomAssetsView != nil else { return }
             vc.view.addSubview(self.bottomAssetsView!)
-        
-            self.bottomAssetsView?.transform = CGAffineTransform.identity
-            self.bottomAssetsView?.clipsToBounds = true
-        
+
             self.configureConstraints(containerView: self.bottomAssetsView!, view: vc.view)
             self.bottomAssetsView?.layoutIfNeeded()
-            self.bottomSheetController.initializeHeight = self.bottomAssetsView?.frame.size.height ?? 300.0
             self.bottomSheetController.viewDidLayoutSubviews()
         
             UIView.animate(withDuration: 0.3) {
                 self.bottomAssetsView?.alpha = 1.0
             }
+        }
+        
+        if let centerBarLabel = bottomSheetController.centerBarLabel, let date = self.viewModel.selectedValueChartBar?.date {
+            centerBarLabel.text = date.dateAndTimeFormatString
         }
     }
     

@@ -69,8 +69,10 @@ open class BottomSheet {
         open var titleTextColor: UIColor? = UIColor.Cell.title
         open var subtitleTextColor: UIColor? = UIColor.Cell.subtitle
         
-        open var rightBarLabel: UILabel?
         open var leftBarLabel: UILabel?
+        open var centerBarLabel: UILabel?
+        open var rightBarLabel: UILabel?
+        
         
         public let overlayView = UIView()
         public let containerView = UIView()
@@ -204,6 +206,7 @@ open class BottomSheet {
         // Adds UINavigationbar
         open func addNavigationBar(_ title: String? = nil,
                                    subtitle: String? = nil,
+                                   centerSubtitle: String? = nil,
                                    buttonTitle: String? = nil,
                                    buttonSelectedTitle: String? = nil,
                                    normalImage: UIImage? = nil,
@@ -228,6 +231,16 @@ open class BottomSheet {
                 leftBarLabel?.text = title
                 leftBarLabel?.font = UIFont.getFont(.semibold, size: 18)
                 item.leftBarButtonItem = UIBarButtonItem(customView: leftBarLabel!)
+            }
+            
+            if let centerSubtitle = centerSubtitle {
+                centerBarLabel = UILabel()
+                centerBarLabel?.frame = CGRect(x: 0, y: 0, width: 120, height: 21.0)
+                centerBarLabel?.textColor = subtitleTextColor
+                centerBarLabel?.textAlignment = .center
+                centerBarLabel?.text = centerSubtitle
+                centerBarLabel?.font = UIFont.getFont(.regular, size: 14)
+                item.titleView = centerBarLabel
             }
             
             if let subtitle = subtitle {
@@ -259,6 +272,24 @@ open class BottomSheet {
                 
                 btn.setTitle(buttonSelected ? buttonSelectedTitle : buttonTitle, for: .normal)
                 btn.tintColor = tintColor
+                btn.sizeToFit()
+                
+                if let buttonAction = buttonAction {
+                    btn.addTarget(buttonTarget, action: buttonAction, for: .touchUpInside)
+                }
+                
+                let rightButton = UIBarButtonItem(customView: btn)
+                item.rightBarButtonItem = rightButton
+            } else if let normalImage = normalImage {
+                let btn = UIButton(type: .custom)
+                if buttonSelected, let selectedImage = selectedImage {
+                    btn.setImage(selectedImage, for: .normal)
+                } else {
+                    btn.setImage(normalImage, for: .normal)
+                }
+                
+                btn.isSelected = buttonSelected
+                btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 0)
                 btn.sizeToFit()
                 
                 if let buttonAction = buttonAction {
@@ -725,9 +756,11 @@ private extension BottomSheetController {
         panGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         panGestureRecognizer.delegate = self
         //
-        barGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
-        barGestureRecognizer.delegate = self
-        barGestureRecognizer.require(toFail: panGestureRecognizer)
+        if isDraggable {
+            barGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
+            barGestureRecognizer.delegate = self
+            barGestureRecognizer.require(toFail: panGestureRecognizer)
+        }
     }
     func addGesture(_ state: State) {
         switch viewActionType {

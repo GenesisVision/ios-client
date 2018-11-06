@@ -27,6 +27,7 @@ enum DateRangeType: Int {
     case week
     case month
     case year
+    case allTime
     case custom
     
     func getString() -> String {
@@ -39,6 +40,8 @@ enum DateRangeType: Int {
             return "Month"
         case .year:
             return "Year"
+        case .allTime:
+            return "All time"
         case .custom:
             return "Custom"
         }

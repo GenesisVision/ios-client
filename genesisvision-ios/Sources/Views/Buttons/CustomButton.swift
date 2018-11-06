@@ -73,7 +73,16 @@ class DateRangeButton: UIButton {
     
     override open var isSelected: Bool {
         didSet {
+            isUserInteractionEnabled = !isSelected
             setBackgroundImage(UIImage.imageWithColor(color: isSelected ? UIColor.DateRangeView.selectedBg : UIColor.DateRangeView.unselectedBg), for: .selected)
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        get {
+            let baseSize = super.intrinsicContentSize
+            return CGSize(width: baseSize.width + 32,
+                height: baseSize.height)
         }
     }
     
@@ -91,6 +100,7 @@ class DateRangeButton: UIButton {
         
         roundCorners(with: 16)
     }
+    
 }
 
 struct ActionButtonOptions {

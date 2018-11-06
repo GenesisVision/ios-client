@@ -130,10 +130,11 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         super.viewDidLoad()
 
         dateRangeView = DateRangeView.viewFromNib()
-        if let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo {
-            updateDateRangeButton()
-            updateData(with: dateFrom, dateTo: dateTo)
-        }
+        
+        let dateFrom = PlatformManager.shared.dateFrom
+        let dateTo = PlatformManager.shared.dateTo
+        updateDateRangeButton()
+        updateData(with: dateFrom, dateTo: dateTo)
         
         commonSetup()
         refreshControl?.endRefreshing()
@@ -152,7 +153,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     // MARK: - Public Methods
-    func updateData(with dateFrom: Date, dateTo: Date) {
+    func updateData(with dateFrom: Date?, dateTo: Date?) {
         //fetch()
     }
     
@@ -186,7 +187,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        dateRangeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        dateRangeButton.widthAnchor.constraint(equalToConstant: 130).isActive = true
         
         filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
@@ -311,7 +312,7 @@ extension BaseViewController: UIScrollViewDelegate {
 }
 
 extension BaseViewController: DateRangeViewProtocol {
-    func applyButtonDidPress(with dateFrom: Date, dateTo: Date) {
+    func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?) {
         bottomSheetController.dismiss()
 
         updateDateRangeButton()
