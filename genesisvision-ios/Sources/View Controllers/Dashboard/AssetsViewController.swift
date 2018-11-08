@@ -22,8 +22,9 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         pageboyDataSource = AssetsPageboyViewControllerDataSource(router: viewModel.router)
         
         self.dataSource = pageboyDataSource
-
-        self.bar.items = [Item(title: "Funds"), Item(title: "Programs")]
+        
+        self.bar.items = [Item(title: "Programs"), Item(title: "Funds")]
+//        viewModel.setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {

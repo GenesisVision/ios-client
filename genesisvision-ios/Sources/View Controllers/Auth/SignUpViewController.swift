@@ -124,20 +124,6 @@ class SignUpViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        #if DEBUG
-            if isInvestorApp {
-                usernameTextField.text = ""
-                emailTextField.text = "george+1@genesis.vision"
-                passwordTextField.text = "qwerty123"
-                confirmPasswordTextField.text = "qwerty123"
-            } else {
-                usernameTextField.text = "George"
-                emailTextField.text = "george+1@genesis.vision"
-                passwordTextField.text = "qwerty123"
-                confirmPasswordTextField.text = "qwerty123"
-            }
-        #endif
-        
         setupUI()
     }
 

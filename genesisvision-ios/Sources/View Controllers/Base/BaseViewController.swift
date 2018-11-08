@@ -426,7 +426,7 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setToRecipients([Constants.Urls.feedbackEmailAddress])
+        mailComposerVC.setToRecipients([Urls.feedbackEmailAddress])
         mailComposerVC.setSubject(getFeedbackSubject())
         mailComposerVC.setMessageBody(getDeviceInfo(), isHTML: false)
         mailComposerVC.navigationBar.isTranslucent = false

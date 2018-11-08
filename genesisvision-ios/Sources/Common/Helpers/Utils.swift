@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
-    return URL(string: Constants.Api.filePath + fileName)
+    return URL(string: Api.filePath + fileName)
 }
 
 func impactFeedback(style: UIImpactFeedbackStyle = .light) {
@@ -76,7 +76,7 @@ func getChangePercent(oldValue: Double, newValue: Double) -> Double {
 func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
     if let sublayers = view.layer.sublayers {
         for layer in sublayers {
-            if layer.name == Constants.Keys.addedLineLayer {
+            if layer.name == Keys.addedLineLayer {
                 layer.removeFromSuperlayer()
             }
         }
@@ -86,7 +86,7 @@ func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineSty
     shapeLayer.fillColor = UIColor.clear.cgColor
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.lineWidth = 1.0
-    shapeLayer.name = Constants.Keys.addedLineLayer
+    shapeLayer.name = Keys.addedLineLayer
     shapeLayer.lineJoin = kCALineJoinRound
     
     if style == .dashed {
@@ -153,7 +153,7 @@ func getFeedbackSubject() -> String {
 }
 
 func newVersionIsAvailable(_ lastVersion: String) -> Bool {
-    if let skipThisVersion = UserDefaults.standard.object(forKey: Constants.UserDefaults.skipThisVersion) as? String, skipThisVersion == lastVersion {
+    if let skipThisVersion = UserDefaults.standard.object(forKey: UserDefaults.skipThisVersion) as? String, skipThisVersion == lastVersion {
         print("SkipThisVersion: \(skipThisVersion)")
         return false
     }
@@ -187,12 +187,12 @@ func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
 
 func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
     AuthManager.getTwoFactorStatus(completion: { (model) in
-        let launchedBefore = UserDefaults.standard.bool(forKey: Constants.UserDefaults.launchedBefore)
+        let launchedBefore = UserDefaults.standard.bool(forKey: UserDefaults.launchedBefore)
         
         guard let twoFactorEnabled = model.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
         
         print("First launch")
-        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.launchedBefore)
+        UserDefaults.standard.set(true, forKey: UserDefaults.launchedBefore)
         
         viewController.showTwoFactorEnableAlert(completion: completion)
     }) { (result) in
@@ -206,7 +206,7 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
 }
 
 func getSelectedCurrency() -> String {
-    if let selectedCurrency = UserDefaults.standard.string(forKey: Constants.UserDefaults.selectedCurrency) {
+    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaults.selectedCurrency) {
         return selectedCurrency
     }
     
@@ -214,5 +214,5 @@ func getSelectedCurrency() -> String {
 }
 
 func updateSelectedCurrency(_ selectedCurrency: String) {
-    UserDefaults.standard.set(selectedCurrency, forKey: Constants.UserDefaults.selectedCurrency)
+    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaults.selectedCurrency)
 }

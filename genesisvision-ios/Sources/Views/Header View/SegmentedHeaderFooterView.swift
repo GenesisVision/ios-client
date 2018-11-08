@@ -26,9 +26,9 @@ class SegmentedHeaderFooterView: UITableViewHeaderFooterView {
         segmentedControl.backgroundColor = .clear
         segmentedControl.tintColor = .clear
         
-        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: Constants.SystemSizes.unselectedSegmentedTitle),
+        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: SystemSizes.unselectedSegmentedTitle),
                               NSAttributedStringKey.foregroundColor: UIColor.Cell.subtitle]
-        let textSelectAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: Constants.SystemSizes.selectedSegmentedTitle),
+        let textSelectAttributes = [NSAttributedStringKey.font: UIFont.getFont(.bold, size: SystemSizes.selectedSegmentedTitle),
                                     NSAttributedStringKey.foregroundColor: UIColor.Cell.title]
         
         segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)

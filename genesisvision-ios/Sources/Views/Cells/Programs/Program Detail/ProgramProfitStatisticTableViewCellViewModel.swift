@@ -17,8 +17,8 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Statistics"
         
         cell.balanceTitleLabel.text = "Balance"
-        if let value = programProfitChart.balance {
-            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+        if let value = programProfitChart.balance, let programCurrency = programProfitChart.programCurrency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
+            cell.balanceValueLabel.text = value.rounded(withType: currency).toString() + " \(currency.rawValue)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"

@@ -138,11 +138,45 @@ extension Date {
     }
     
     
+    func daysSinceDate(fromDate: Date) -> String {
+        let earliest = fromDate
+        let latest = self
+        
+        let components: DateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day], from: earliest, to: latest)
+        
+        let day = components.day ?? 0
+        let hours = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        let seconds = components.second ?? 0
+        
+        
+        if (day >= 2) {
+            return "\(day) days"
+        } else if (day == 1) {
+            return "1 day"
+        } else if (hours >= 2) {
+            return "\(hours) hours"
+        } else if (hours == 1){
+            return "1 hour"
+        } else if (minutes >= 2) {
+            return "\(minutes) minutes"
+        } else if (minutes == 1) {
+            return "1 min"
+        } else if (seconds >= 2) {
+            return "\(seconds) sec"
+        } else if (seconds == 1) {
+            return "\(seconds) sec"
+        } else {
+            return ""
+        }
+        
+    }
+    
     func timeSinceDate(fromDate: Date) -> String {
         let earliest = fromDate
         let latest = self
         
-        let components:DateComponents = Calendar.current.dateComponents([.minute,.hour,.day,.weekOfYear,.month,.year,.second], from: earliest, to: latest)
+        let components: DateComponents = Calendar.current.dateComponents([.minute, .hour, .day, .weekOfYear, .month, .year, .second], from: earliest, to: latest)
         let year = components.year  ?? 0
         let month = components.month  ?? 0
         let week = components.weekOfYear  ?? 0
@@ -152,9 +186,9 @@ extension Date {
         let seconds = components.second ?? 0
         
         
-        if year >= 2{
+        if year >= 2 {
             return "\(year) y"
-        } else if (year >= 1){
+        } else if (year >= 1) {
             return "1 year"
         } else if (month >= 2) {
             return "\(month) m"
@@ -166,7 +200,7 @@ extension Date {
             return "1 week"
         } else if (day >= 2) {
             return "\(day) d"
-        } else if (day >= 1){
+        } else if (day >= 1) {
             return "1 day"
         } else if (hours >= 2) {
             return "\(hours) h"
@@ -174,7 +208,7 @@ extension Date {
             return "1 hour"
         } else if (minutes >= 2) {
             return "\(minutes) min"
-        } else if (minutes >= 1){
+        } else if (minutes >= 1) {
             return "1 min"
         } else if (seconds >= 3) {
             return "\(seconds) sec"

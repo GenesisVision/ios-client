@@ -47,7 +47,7 @@ final class WelcomeViewModel {
     private func requestReview() {
         guard !isDebug else { return }
         
-        let key = Constants.UserDefaults.timesOpened
+        let key = UserDefaults.timesOpened
         var timesOpened = UserDefaults.standard.integer(forKey: key)
         
         timesOpened += 1

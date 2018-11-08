@@ -90,7 +90,7 @@ struct AppearanceController {
     
     static var theme: Theme {
         get {
-            let colorTheme = UserDefaults.standard.integer(forKey: Constants.UserDefaults.colorTheme)
+            let colorTheme = UserDefaults.standard.integer(forKey: UserDefaults.colorTheme)
             guard let themeType = Theme(rawValue: colorTheme) else {
                 return .darkTheme
             }
@@ -98,7 +98,7 @@ struct AppearanceController {
             return themeType
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: Constants.UserDefaults.colorTheme)
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaults.colorTheme)
         }
     }
     
@@ -121,7 +121,7 @@ struct AppearanceController {
         
         let theme = AppearanceController.theme
         
-        UserDefaults.standard.set(theme.rawValue, forKey: Constants.UserDefaults.colorTheme)
+        UserDefaults.standard.set(theme.rawValue, forKey: UserDefaults.colorTheme)
         UserDefaults.standard.synchronize()
         
         // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
@@ -131,11 +131,7 @@ struct AppearanceController {
         UINavigationBar.appearance().barStyle = theme.barStyle
         
         UITabBar.appearance().barStyle = theme.barStyle
-        
-        UISwitch.appearance().onTintColor = UIColor.primary
-        UISwitch.appearance().thumbTintColor = UIColor.Cell.switchThumbTint
-        UISwitch.appearance().tintColor = UIColor.Cell.switchTint
-        
+
         setupTabBar()
         setupSegmentedControl()
         setupPlateCell()
@@ -223,9 +219,9 @@ struct AppearanceController {
     // MARK: - PlateCell
     private static func setupPlateCell() {
         PlateTableViewCell.appearance().plateAppearance =
-            PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
-                                         horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
-                                         verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+            PlateTableViewCellAppearance(cornerRadius: SystemSizes.cornerSize,
+                                         horizontalMarginValue: SystemSizes.Cell.horizontalMarginValue,
+                                         verticalMarginValues: SystemSizes.Cell.verticalMarginValues,
                                          backgroundColor: UIColor.Cell.bg,
                                          selectedBackgroundColor: UIColor.Background.gray)
     }

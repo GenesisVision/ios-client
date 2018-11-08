@@ -19,11 +19,13 @@ extension ProgramPeriodTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Period"
         
         if let periodEnds = periodEnds, let periodStarts = periodStarts {
-            let duration = periodEnds.timeSinceDate(fromDate: periodStarts)
+            let periodEndDate = periodStarts.addDays(periodDuration ?? 0)
+            let duration = periodEndDate.daysSinceDate(fromDate: periodStarts)
             cell.durationLabel.text = duration
             
+            
             let today = Date()
-            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
+            let periodLeft = periodEnds.daysSinceDate(fromDate: today)
             
             cell.periodLeftLabel.text = periodLeft.isEmpty ? "The period is over" : periodLeft + " left"
             

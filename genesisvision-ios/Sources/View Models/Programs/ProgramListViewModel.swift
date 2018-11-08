@@ -29,7 +29,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var chartPointsCount = Constants.Api.equityChartLength
+    var chartPointsCount = Api.equityChartLength
     
     var levelMin = 1
     var levelMax = 7
@@ -38,7 +38,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var isFavorite: Bool = false
     
     var skip = 0
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0 {
         didSet {
             count = "\(totalCount) programs"
@@ -131,7 +131,7 @@ extension ProgramListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

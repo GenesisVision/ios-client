@@ -54,7 +54,13 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
             changePasswordTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var passcodeSwitch: UISwitch!
+    @IBOutlet weak var passcodeSwitch: UISwitch! {
+        didSet {
+            passcodeSwitch.onTintColor = UIColor.primary
+            passcodeSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            passcodeSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     @IBOutlet weak var passcodeTitleLabel: TitleLabel! {
         didSet {
             passcodeTitleLabel.text = SettingsViewModel.SettingsRowType.passcode.rawValue
@@ -70,9 +76,18 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     @IBOutlet weak var biometricIDSwitch: UISwitch! {
         didSet {
             biometricIDSwitch.isEnabled = false
+            biometricIDSwitch.onTintColor = UIColor.primary
+            biometricIDSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            biometricIDSwitch.tintColor = UIColor.Cell.switchTint
         }
     }
-    @IBOutlet weak var twoFactorSwitch: UISwitch!
+    @IBOutlet weak var twoFactorSwitch: UISwitch! {
+        didSet {
+            twoFactorSwitch.onTintColor = UIColor.primary
+            twoFactorSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            twoFactorSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     @IBOutlet weak var twoFactorTitleLabel: TitleLabel! {
         didSet {
             twoFactorTitleLabel.text = SettingsViewModel.SettingsRowType.twoFactor.rawValue
@@ -308,7 +323,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
         })
     }
     
-    @IBAction func changePhotoButtonAction(_ sender: UISwitch) {
+    @IBAction func changePhotoButtonAction(_ sender: UIButton) {
         showImagePicker()
     }
 }

@@ -28,7 +28,13 @@ class AuthTwoFactorSignInViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var recoveryCodeSwitch: UISwitch!
+    @IBOutlet weak var recoveryCodeSwitch: UISwitch! {
+        didSet {
+            recoveryCodeSwitch.onTintColor = UIColor.primary
+            recoveryCodeSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            recoveryCodeSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     @IBOutlet weak var recoveryCodeTitleLabel: TitleLabel! {
         didSet {
             recoveryCodeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)

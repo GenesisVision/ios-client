@@ -134,7 +134,7 @@ class WalletDepositViewController: BaseViewController {
             
             amountToDepositCurrencyLabel.text = currency.rawValue
             
-            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(withType: .gvt).toString() + " " + gvtString
             
             if let description = selectedWallet.description {
                 selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue

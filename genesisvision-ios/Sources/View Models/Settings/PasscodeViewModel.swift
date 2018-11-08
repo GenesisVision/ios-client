@@ -27,7 +27,7 @@ final class PasscodeViewModel {
     var disableText = "Enter passcode to disable it"
     
     var changedMessageEnable: Bool {
-        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
+        return UserDefaults.standard.bool(forKey: UserDefaults.biometricEnable)
         && domainStateChanged
     }
     
@@ -44,15 +44,15 @@ final class PasscodeViewModel {
             return false
         }
         
-        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable) && BiometricIDAuthManager.shared.isTouchAuthenticationAvailable
+        return UserDefaults.standard.bool(forKey: UserDefaults.biometricEnable) && BiometricIDAuthManager.shared.isTouchAuthenticationAvailable
     }
     
     public private(set) var passcode: String? {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaults.passcode)
+            return UserDefaults.standard.string(forKey: UserDefaults.passcode)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.passcode)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.passcode)
         }
     }
     

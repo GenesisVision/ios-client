@@ -268,11 +268,11 @@ extension Router {
     }
     
     func showPrivacy() {
-        navigationController?.openSafariVC(with: Constants.Urls.privacyWebAddress)
+        navigationController?.openSafariVC(with: Urls.privacyWebAddress)
     }
     
     func showTerms() {
-        navigationController?.openSafariVC(with: Constants.Urls.termsWebAddress)
+        navigationController?.openSafariVC(with: Urls.termsWebAddress)
     }
     
     func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true) -> AllEventsViewController? {

@@ -121,7 +121,13 @@ class ProgramTableViewCell: PlateTableViewCell {
     }
     
     @IBOutlet weak var statusButton: StatusButton! 
-    @IBOutlet weak var reinvestSwitch: UISwitch!
+    @IBOutlet weak var reinvestSwitch: UISwitch! {
+        didSet {
+            reinvestSwitch.onTintColor = UIColor.primary
+            reinvestSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            reinvestSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     @IBOutlet weak var reinvestLabel: TitleLabel! {
         didSet {
             reinvestLabel.font = UIFont.getFont(.semibold, size: 12.0)

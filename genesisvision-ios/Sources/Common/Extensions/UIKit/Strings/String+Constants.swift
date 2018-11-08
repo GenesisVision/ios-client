@@ -1,5 +1,5 @@
 //
-//  String+Constants.swift
+//  String+swift
 //  genesisvision-ios
 //
 //  Created by George on 05/04/2018.

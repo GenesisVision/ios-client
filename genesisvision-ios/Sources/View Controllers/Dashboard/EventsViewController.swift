@@ -56,7 +56,7 @@ class EventsViewController: BaseViewController {
     // MARK: - Public methods
     // MARK: - Private methods
     // MARK: - Actions
-    @IBAction func showAllButtonAction(_ sender: UISwitch) {
+    @IBAction func showAllButtonAction(_ sender: UIButton) {
         viewModel.showAllPortfolioEvents()
     }
 }

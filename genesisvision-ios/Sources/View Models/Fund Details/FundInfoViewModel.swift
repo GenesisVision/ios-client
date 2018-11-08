@@ -30,7 +30,7 @@ final class FundInfoViewModel {
     var chartDurationType: ChartDurationType = .all
     var fundId: String!
     var requestSkip = 0
-    var requestTake = Constants.Api.take
+    var requestTake = Api.take
     
     private var equityChart: [ChartSimple]?
     public private(set) var fundDetailsFull: FundDetailsFull? {

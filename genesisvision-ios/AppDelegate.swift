@@ -25,13 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.restrictRotation) ? .landscape : .portrait
+        return UserDefaults.standard.bool(forKey: UserDefaults.restrictRotation) ? .landscape : .portrait
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         guard let passcodeViewController = passcodeViewController, topViewController() == passcodeViewController else { return }
         
-        if let resignActiveTime = resignActiveTime, Date().timeIntervalSince(resignActiveTime) < Constants.Security.timeInterval {
+        if let resignActiveTime = resignActiveTime, Date().timeIntervalSince(resignActiveTime) < Security.timeInterval {
             passcodeViewController.dismiss(animated: true, completion: nil)
             self.resignActiveTime = nil
         } else {
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        if UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable) {
+        if UserDefaults.standard.bool(forKey: UserDefaults.passcodeEnable) {
             resignActiveTime = Date()
             showPasscodeVC()
         }
@@ -59,7 +59,7 @@ extension AppDelegate {
             return
         }
         
-        if UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable) {
+        if UserDefaults.standard.bool(forKey: UserDefaults.passcodeEnable) {
             let window = UIApplication.shared.windows[0] as UIWindow
             if let viewController = PasscodeViewController.storyboardInstance(name: .settings), let vc = window.rootViewController {
                 let router = Router(parentRouter: nil)
@@ -75,8 +75,8 @@ extension AppDelegate {
     }
     
     private func setup() {
-        SwaggerClientAPI.basePath = Constants.Api.basePath
-        UserDefaults.standard.set(false, forKey: Constants.UserDefaults.restrictRotation)
+        SwaggerClientAPI.basePath = Api.basePath
+        UserDefaults.standard.set(false, forKey: UserDefaults.restrictRotation)
         
         setupFirstScreen()
 

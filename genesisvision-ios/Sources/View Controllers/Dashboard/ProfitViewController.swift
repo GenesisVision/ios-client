@@ -45,7 +45,7 @@ class ProfitViewController: BaseViewController {
     }
     
     let circleView: UIView = {
-        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.SystemSizes.chartCircleHeight, height: Constants.SystemSizes.chartCircleHeight))
+        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: SystemSizes.chartCircleHeight, height: SystemSizes.chartCircleHeight))
         circleView.backgroundColor = UIColor.BaseView.bg
         circleView.layer.cornerRadius = circleView.bounds.height / 2
         circleView.layer.borderColor = UIColor.Common.white.cgColor
@@ -103,7 +103,7 @@ class ProfitViewController: BaseViewController {
             
             amountTitleLabel.text = "Amount"
             if let value = dashboardChartValue.value {
-                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + gvtString
             }
             if let valueCurrency = dashboardChartValue.valueCurrency {
                 amountCurrencyLabel.text = valueCurrency.toString() + " \(getSelectedCurrency())"
@@ -114,7 +114,7 @@ class ProfitViewController: BaseViewController {
                 changePercentLabel.text = changePercent.toString() + "%"
             }
             if let changeValue = dashboardChartValue.changeValue {
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + gvtString
             }
             if let changeValueCurrency = dashboardChartValue.changeValueCurrency {
                 changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"
@@ -181,11 +181,11 @@ class ProfitViewController: BaseViewController {
     }
     
     // MARK: - Actions
-    @IBAction func tradersFilterButtonAction(_ sender: UISwitch) {
+    @IBAction func tradersFilterButtonAction(_ sender: UIButton) {
         
     }
     
-    @IBAction func assetsFilterButtonAction(_ sender: UISwitch) {
+    @IBAction func assetsFilterButtonAction(_ sender: UIButton) {
         
     }
 }

@@ -78,7 +78,7 @@ class SettingsRouter: Router {
     }
     
     private func showFeedback() {
-        navigationController?.openSafariVC(with: Constants.Urls.feedbackWebAddress)
+        navigationController?.openSafariVC(with: Urls.feedbackWebAddress)
     }
     
     private func showProfile(_ profileModel: ProfileFullViewModel) {

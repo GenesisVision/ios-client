@@ -18,7 +18,7 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         
         cell.balanceTitleLabel.text = "Balance"
         if let value = fundProfitChart.balance {
-            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"

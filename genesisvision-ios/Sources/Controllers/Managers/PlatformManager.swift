@@ -59,16 +59,16 @@ class PlatformManager {
     }
     
     private func getFilterConstants(_ platformInfo: PlatformInfo?) -> FilterConstants {
-        return FilterConstants(minLevel: Constants.Filters.minLevel,
-                               maxLevel: Constants.Filters.maxLevel,
-                               minAvgProfit: Constants.Filters.minAvgProfit,
-                               maxAvgProfit: Constants.Filters.maxAvgProfit,
-                               minTotalProfit: Constants.Filters.minTotalProfit,
-                               maxTotalProfit: Constants.Filters.maxTotalProfit,
-                               minUsdBalance: Constants.Filters.minUsdBalance,
-                               maxUsdBalance: Constants.Filters.maxUsdBalance,
-                               showActivePrograms: Constants.Filters.showActivePrograms,
-                               showMyFavorites: Constants.Filters.showMyFavorites,
-                               showAvailableToInvest: Constants.Filters.showAvailableToInvest)
+        return FilterConstants(minLevel: Filters.minLevel,
+                               maxLevel: Filters.maxLevel,
+                               minAvgProfit: Filters.minAvgProfit,
+                               maxAvgProfit: Filters.maxAvgProfit,
+                               minTotalProfit: Filters.minTotalProfit,
+                               maxTotalProfit: Filters.maxTotalProfit,
+                               minUsdBalance: Filters.minUsdBalance,
+                               maxUsdBalance: Filters.maxUsdBalance,
+                               showActivePrograms: Filters.showActivePrograms,
+                               showMyFavorites: Filters.showMyFavorites,
+                               showAvailableToInvest: Filters.showAvailableToInvest)
     }
 }

@@ -9,11 +9,11 @@
 import Foundation
 
 extension Notification.Name {
-    static let signOut = Notification.Name(Constants.Keys.signOutKey)
-    static let twoFactorEnable = Notification.Name(Constants.Keys.twoFactorEnableKey)
-    static let twoFactorChange = Notification.Name(Constants.Keys.twoFactorChangeKey)
-    static let programFavoriteStateChange = Notification.Name(Constants.Keys.programFavoriteStateChangeKey)
-    static let fundFavoriteStateChange = Notification.Name(Constants.Keys.fundFavoriteStateChangeKey)
+    static let signOut = Notification.Name(Keys.signOutKey)
+    static let twoFactorEnable = Notification.Name(Keys.twoFactorEnableKey)
+    static let twoFactorChange = Notification.Name(Keys.twoFactorChangeKey)
+    static let programFavoriteStateChange = Notification.Name(Keys.programFavoriteStateChangeKey)
+    static let fundFavoriteStateChange = Notification.Name(Keys.fundFavoriteStateChangeKey)
     
-    static let themeChanged = Notification.Name(Constants.Keys.themeChangedKey)
+    static let themeChanged = Notification.Name(Keys.themeChangedKey)
 }

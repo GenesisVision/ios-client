@@ -54,7 +54,7 @@ class ManagerDashboardViewController: DashboardViewController {
 //        bottomViewType = viewModel.bottomViewType
 //        sortButton.setTitle(self.viewModel.sortingDelegateManager.sortTitle(), for: .normal)
 //        
-//        segmentedControl.cornerRadius = Constants.SystemSizes.cornerSize
+//        segmentedControl.cornerRadius = SystemSizes.cornerSize
 //        segmentedControl.tintColor = UIColor.primary
 //        segmentedControl.selectedSegmentIndex = 0
 //        let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16)]

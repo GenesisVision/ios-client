@@ -43,7 +43,13 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var recoveryCodeSwitch: UISwitch!
+    @IBOutlet weak var recoveryCodeSwitch: UISwitch! {
+        didSet {
+            recoveryCodeSwitch.onTintColor = UIColor.primary
+            recoveryCodeSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            recoveryCodeSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     
     // MARK: - Buttons
     @IBOutlet var confirmButton: ActionButton!
@@ -60,10 +66,6 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if DEBUG
-        passwordTextField.text = "qwerty123"
-        #endif
         
         setupUI()
     }

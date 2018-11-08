@@ -33,7 +33,7 @@ class WalletWithdrawViewController: BaseViewController {
     
     var availableInWalletValue: Double = 0.0 {
         didSet {
-            self.availableInWalletValueLabel.text = availableInWalletValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            self.availableInWalletValueLabel.text = availableInWalletValue.rounded(withType: .gvt).toString() + " " + gvtString
         }
     }
     

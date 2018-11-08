@@ -39,7 +39,7 @@ final class ManagerFundListViewModel {
     
     var canFetchMoreResults = true
     var skip = 0
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0 {
         didSet {
             title = totalCount > 0 ? "Funds \(totalCount)" : "Funds"
@@ -155,7 +155,7 @@ extension ManagerFundListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

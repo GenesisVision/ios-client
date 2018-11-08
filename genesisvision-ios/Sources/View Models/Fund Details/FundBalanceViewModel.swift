@@ -25,7 +25,7 @@ final class FundBalanceViewModel {
 
     var dateFrom: Date?
     var dateTo: Date?
-    var maxPointCount: Int = Constants.Api.maxPoint
+    var maxPointCount: Int = Api.maxPoint
     
     private var fundBalanceChart: FundBalanceChart?
     

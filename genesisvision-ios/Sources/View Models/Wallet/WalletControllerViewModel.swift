@@ -42,7 +42,7 @@ final class WalletControllerViewModel {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var skip = 0            //offset
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0      //total count of programs
     
     var filter: TransactionsFilter?
@@ -163,7 +163,7 @@ extension WalletControllerViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMoreTransactions(at row: Int) -> Bool {
-        if numberOfRows(in: 1) - Constants.Api.fetchThreshold == row && canFetchMoreResults && transactions.count >= take {
+        if numberOfRows(in: 1) - Api.fetchThreshold == row && canFetchMoreResults && transactions.count >= take {
             fetchMoreTransactions()
         }
         

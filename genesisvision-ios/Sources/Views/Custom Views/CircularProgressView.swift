@@ -23,6 +23,7 @@ class CircularProgressView: UIView {
 
 
     //MARK: Public
+    public var percentTextEnable: Bool = false
     public var clockwise: Bool = true
     public var lineWidth: CGFloat = 2
     public var foregroundStrokeColor: UIColor = UIColor.primary
@@ -90,6 +91,7 @@ class CircularProgressView: UIView {
 
         let center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         percentLabel.center = center
+        percentLabel.isHidden = !percentTextEnable
         
         let startAngle = -CGFloat.pi / 2
         let endAngle = 2 * CGFloat.pi + startAngle

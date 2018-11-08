@@ -9,7 +9,7 @@
 import Foundation
 import Tabman
 
-class AssetsTabmanViewModel: TabmanViewModel {
+final class AssetsTabmanViewModel: TabmanViewModel {
 
     // MARK: - Init
     init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {

@@ -80,7 +80,13 @@ class YourInvestmentTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var reinvestSwitch: UISwitch!
+    @IBOutlet var reinvestSwitch: UISwitch! {
+        didSet {
+            reinvestSwitch.onTintColor = UIColor.primary
+            reinvestSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            reinvestSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     
     @IBOutlet var disclaimerLabel: SubtitleLabel!
     
@@ -102,7 +108,7 @@ class YourInvestmentTableViewCell: UITableViewCell {
         yourInvestmentProtocol?.didChangeReinvestSwitch(value: sender.isOn)
     }
     
-    @IBAction func statusButtonAction(_ sender: UISwitch) {
+    @IBAction func statusButtonAction(_ sender: UIButton) {
         yourInvestmentProtocol?.didTapStatusButton()
     }
 }

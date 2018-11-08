@@ -140,7 +140,7 @@ class WalletTransactionView: UIView {
                 }
             }
             
-            subtitleLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            subtitleLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         
         firstTitleLabel.text = "Withdraw currency"

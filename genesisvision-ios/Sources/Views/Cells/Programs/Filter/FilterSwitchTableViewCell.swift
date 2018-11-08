@@ -30,7 +30,13 @@ class FilterSwitchTableViewCell: PlateTableViewCell {
     }
     
     // MARK: - Views
-    @IBOutlet var switchControl: UISwitch!
+    @IBOutlet var switchControl: UISwitch! {
+        didSet {
+            switchControl.onTintColor = UIColor.primary
+            switchControl.thumbTintColor = UIColor.Cell.switchThumbTint
+            switchControl.tintColor = UIColor.Cell.switchTint
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

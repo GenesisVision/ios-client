@@ -69,7 +69,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         if let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
             
             let today = Date()
-            let periodLeft = periodEnds.timeSinceDate(fromDate: today)
+            let periodLeft = periodEnds.daysSinceDate(fromDate: today)
             
             cell.firstValueLabel.text = periodLeft.isEmpty ? "0" : periodLeft
             
@@ -118,7 +118,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         
         if let isInvested = program.personalDetails?.isInvested {

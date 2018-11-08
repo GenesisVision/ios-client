@@ -32,9 +32,9 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var chartPointsCount = Constants.Api.equityChartLength
+    var chartPointsCount = Api.equityChartLength
     var skip = 0
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0 {
         didSet {
             count = "\(totalCount) programs"
@@ -49,7 +49,7 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     
     public private(set) var needToRefresh = false
     
-    internal var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Constants.Sorting.programListDefault
+    internal var sorting: ProgramsAPI.Sorting_v10ProgramsGet = Sorting.programListDefault
     
     var searchText = "" {
         didSet {
@@ -155,7 +155,7 @@ extension FavoriteProgramListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

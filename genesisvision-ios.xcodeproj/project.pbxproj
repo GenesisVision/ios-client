@@ -394,6 +394,7 @@
 		5ED11422215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */; };
 		5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B478210898810026C123 /* ProfileImageView.swift */; };
 		5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B479210898810026C123 /* СhoosePhotoView.swift */; };
+		5ED7385D21942EEC001DA633 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7385C21942EEB001DA633 /* AppConstants.swift */; };
 		5EE0075B217871AC0045B890 /* ManagerProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */; };
 		5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */; };
 		5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */; };
@@ -991,6 +992,7 @@
 		5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCurrencyTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED3B478210898810026C123 /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		5ED3B479210898810026C123 /* СhoosePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "СhoosePhotoView.swift"; sourceTree = "<group>"; };
+		5ED7385C21942EEB001DA633 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewModel.swift; sourceTree = "<group>"; };
 		5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewController.swift; sourceTree = "<group>"; };
@@ -2342,9 +2344,10 @@
 		FCC9DD3C200DFA5E008825EC /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				5ED7385C21942EEB001DA633 /* AppConstants.swift */,
+				FCE8236220161339000061E8 /* Constants.swift */,
 				5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */,
 				FC7CAE14201C310E00163A53 /* Info.plist */,
-				FCE8236220161339000061E8 /* Constants.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -3295,6 +3298,7 @@
 				5EAD3506214FD2170057450C /* ChartsViewController.swift in Sources */,
 				5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */,
 				5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */,
+				5ED7385D21942EEC001DA633 /* AppConstants.swift in Sources */,
 				5E4BC9E821877893000F2E57 /* TwoFactorAuthenticatorConfirm.swift in Sources */,
 				5ED03F3820FF784A00AF5E07 /* FieldWithTextFieldTableViewCellViewModel.swift in Sources */,
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,

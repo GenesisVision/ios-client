@@ -31,7 +31,7 @@ final class ProgramInfoViewModel {
     var chartDurationType: ChartDurationType = .all
     var programId: String!
     var requestSkip = 0
-    var requestTake = Constants.Api.take
+    var requestTake = Api.take
     
     private var equityChart: [ChartSimple]?
     public private(set) var programDetailsFull: ProgramDetailsFull? {

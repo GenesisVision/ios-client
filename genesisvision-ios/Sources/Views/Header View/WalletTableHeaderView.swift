@@ -26,6 +26,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var availableProgressView: CircularProgressView! {
         didSet {
+            availableProgressView.percentTextEnable = true
             availableProgressView.foregroundStrokeColor = UIColor.Common.purple
             availableProgressView.backgroundStrokeColor = UIColor.Common.purple.withAlphaComponent(0.2)
         }
@@ -36,6 +37,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var investedProgressView: CircularProgressView! {
         didSet {
+            investedProgressView.percentTextEnable = true
             investedProgressView.foregroundStrokeColor = UIColor.primary
             investedProgressView.backgroundStrokeColor = UIColor.primary.withAlphaComponent(0.2)
             investedProgressView.clockwise = false
@@ -55,7 +57,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
     func configure(_ wallet: WalletSummary) {
         totalBalanceTitleLabel.text = "Total balance"
         if let totalBalanceGVT = wallet.totalBalanceGVT {
-            totalBalanceValueLabel.text = totalBalanceGVT.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            totalBalanceValueLabel.text = totalBalanceGVT.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         if let totalBalanceCurrency = wallet.totalBalanceCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
             totalBalanceCurrencyLabel.text = totalBalanceCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
@@ -68,7 +70,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         
         availableTitleLabel.text = "Available"
         if let availableGVT = wallet.availableGVT {
-            availableValueLabel.text = availableGVT.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            availableValueLabel.text = availableGVT.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         if let availableCurrency = wallet.availableCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
             availableCurrencyLabel.text = availableCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
@@ -80,7 +82,7 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
         }
         investedTitleLabel.text = "Invested value"
         if let investedGVT = wallet.investedGVT {
-            investedValueLabel.text = investedGVT.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            investedValueLabel.text = investedGVT.rounded(withType: .gvt).toString() + " \(gvtString)"
         }
         if let investedCurrency = wallet.investedCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
             investedCurrencyLabel.text = investedCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"

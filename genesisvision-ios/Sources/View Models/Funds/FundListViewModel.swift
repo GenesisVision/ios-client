@@ -29,9 +29,9 @@ final class FundListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var count: String = ""
-    var chartPointsCount = Constants.Api.equityChartLength
+    var chartPointsCount = Api.equityChartLength
     var skip = 0
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0 {
         didSet {
             count = "\(totalCount) funds"
@@ -128,7 +128,7 @@ extension FundListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

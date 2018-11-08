@@ -61,13 +61,13 @@ extension UIViewController {
         let message = String.Alerts.NewVersionUpdate.alertMessage + "\(newVersion)"
         let alert = UIAlertController(title: String.Alerts.NewVersionUpdate.alertTitle, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.updateButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
-            self?.openUrl(with: Constants.Urls.appStoreAddress)
+            self?.openUrl(with: Urls.appStoreAddress)
         }))
         
         alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.skipThisVersionButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
             DispatchQueue.main.async {
                 print("Skip this version: " + newVersion)
-                UserDefaults.standard.set(newVersion, forKey: Constants.UserDefaults.skipThisVersion)
+                UserDefaults.standard.set(newVersion, forKey: UserDefaults.skipThisVersion)
                 UserDefaults.standard.synchronize()
             }
         }))

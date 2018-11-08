@@ -73,22 +73,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
-            timestampString = "562948337.115029"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "fetchMore(at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Fund Details/FundViewController.swift"
             timestampString = "562859331.997108"
             startingColumnNumber = "9223372036854775807"
@@ -106,7 +90,7 @@
                   moduleName = "Genesis Vision"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "563217736.852463"
+                  timestampString = "563359338.487563"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "253"
@@ -121,7 +105,7 @@
                   moduleName = "Genesis Vision"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "563217736.855109"
+                  timestampString = "563359338.489622"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "255"

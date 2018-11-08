@@ -171,7 +171,7 @@ class ProfileViewController: BaseViewControllerWithTableView, UINavigationContro
         alert.view.tintColor = UIColor.Cell.headerBg
         
         var components = DateComponents()
-        components.year = -Constants.Profile.minYear
+        components.year = -Profile.minYear
         let maxDate = Calendar.current.date(byAdding: components, to: Date())
 
         alert.addDatePicker(mode: .date, date: self.viewModel.getBirthdate(), minimumDate: nil, maximumDate: maxDate) { [weak self] date in
