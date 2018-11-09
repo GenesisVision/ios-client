@@ -86,7 +86,7 @@ class FundWithdrawViewController: BaseViewController {
     
     var availableToWithdrawValue: Double = 0.0 {
         didSet {
-            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + gvtString
+            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + Constants.gvtString
         }
     }
     
@@ -129,7 +129,7 @@ class FundWithdrawViewController: BaseViewController {
 
         
         let amountToWithdrawValueCurrencyString = (availableToWithdrawValue / 100 * amountToWithdrawValue).rounded(withType: .gvt).toString()
-        self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + gvtString
+        self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue * 100 <= availableToWithdrawValue
         

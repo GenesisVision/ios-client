@@ -20,7 +20,7 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.chartViewProtocol = chartViewProtocol
         
         if let amountValue = programBalanceChart.gvtBalance {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(gvtString)"
+            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }

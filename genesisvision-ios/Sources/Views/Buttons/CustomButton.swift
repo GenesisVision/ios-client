@@ -89,6 +89,7 @@ class DateRangeButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        titleLabel?.font = UIFont.getFont(.regular, size: 14)
         setTitleColor(UIColor.DateRangeView.unselectedTitle, for: .normal)
         setTitleColor(UIColor.DateRangeView.selectedTitle, for: .selected)
         backgroundColor = UIColor.DateRangeView.unselectedBg
@@ -99,6 +100,50 @@ class DateRangeButton: UIButton {
         super.layoutSubviews()
         
         roundCorners(with: 16)
+    }
+    
+}
+
+class LevelFilterButton: UIButton {
+    
+    override var buttonType: UIButtonType {
+        return .system
+    }
+    
+    override open var isHighlighted: Bool {
+        didSet {
+            setBackgroundImage(UIImage.imageWithColor(color: isHighlighted ? UIColor.DateRangeView.selectedBg : UIColor.DateRangeView.unselectedBg), for: .highlighted)
+        }
+    }
+    
+    override open var isSelected: Bool {
+        didSet {
+            setBackgroundImage(UIImage.imageWithColor(color: isSelected ? UIColor.DateRangeView.selectedBg : UIColor.DateRangeView.unselectedBg), for: .selected)
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        get {
+            let baseSize = super.intrinsicContentSize
+            return CGSize(width: baseSize.width + 32,
+                          height: baseSize.height)
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        titleLabel?.font = UIFont.getFont(.regular, size: 14)
+        setTitleColor(UIColor.DateRangeView.unselectedTitle, for: .normal)
+        setTitleColor(UIColor.DateRangeView.selectedTitle, for: .selected)
+        backgroundColor = UIColor.DateRangeView.unselectedBg
+        setBackgroundImage(nil, for: .normal)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        roundCorners()
     }
     
 }
@@ -178,7 +223,6 @@ class ActionButton: UIButton {
             titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, -spacing)
             contentEdgeInsets = UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20)
         }
-        
         
         
         titleLabel?.font = UIFont.getFont(.semibold, size: options.fontSize ?? 14.0)

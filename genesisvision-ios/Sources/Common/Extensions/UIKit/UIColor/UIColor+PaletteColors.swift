@@ -34,7 +34,6 @@ extension UIColor {
         static var darkDelimiter: UIColor { return #colorLiteral(red: 0.137254902, green: 0.168627451, blue: 0.1921568627, alpha: 1) }                           //232b31
 
         static var darkButtonBackground: UIColor { return #colorLiteral(red: 0.1058823529, green: 0.1450980392, blue: 0.1725490196, alpha: 1) }                    //1B252C
-        static var darkTextfieldBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                 //131E26
         
         static var blackSeparator: UIColor { return #colorLiteral(red: 0.05490196078, green: 0.08235294118, blue: 0.09803921569, alpha: 1) }                          //0E1519
         
@@ -119,8 +118,8 @@ extension UIColor {
     struct BottomView {
         struct Filter {
             static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
-            static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextfieldBackground : Common.white }
-            static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextfieldBackground : Common.white }
+            static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.white }
+            static var tint: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkBackground : Common.white }
         }
     }
     
@@ -199,7 +198,7 @@ extension UIColor {
         static var selectedTitle: UIColor { return Common.white }
         static var unselectedBg: UIColor { return Common.darkButtonBackground }
         static var selectedBg: UIColor { return Common.primary }
-        static var textfieldBg: UIColor { return Common.darkTextfieldBackground }
+        static var textfieldBg: UIColor { return Common.darkBackground }
     }
     
     struct TextField {

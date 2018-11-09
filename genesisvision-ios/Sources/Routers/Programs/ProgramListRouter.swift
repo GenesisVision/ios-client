@@ -26,9 +26,9 @@ class ProgramListRouter: Router, ListRouterProtocol {
     
     // MARK: - Private methods
     private func showFilterVC(with programListViewModel: ProgramListViewModel) {
-        guard let viewController = ProgramFilterViewController.storyboardInstance(name: .programs) else { return }
-        _ = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = ProgramFilterViewModel()
+        guard let viewController = FilterViewController.storyboardInstance(name: .programs) else { return }
+        let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
+        let viewModel = FilterViewModel(withRouter: router, sortingType: .programs)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

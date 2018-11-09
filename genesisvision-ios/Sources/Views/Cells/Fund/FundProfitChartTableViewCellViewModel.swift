@@ -21,7 +21,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
         cell.amountTitleLabel.text = "Amount"
         
         if let amountValue = fundProfitChart.totalGvtProfit {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(gvtString)"
+            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
@@ -44,7 +44,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             }
             
             if let changeValue = fundProfitChart.timeframeGvtProfit {
-                cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(gvtString)"
+                cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
             } else {
                 cell.changeValueLabel.isHidden = true
             }

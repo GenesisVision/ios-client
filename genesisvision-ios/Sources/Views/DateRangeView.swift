@@ -124,10 +124,12 @@ class DateRangeView: UIView {
         if selectedDateRangeType == .custom {
             self.dateFrom = PlatformManager.shared.dateFrom
             self.dateTo = PlatformManager.shared.dateTo
+            changeDateRangeType()
+            return
         }
         
         changeDateRangeType()
-        correctTime()
+        updateTime()
     }
     private func changeDateRangeType() {
         for button in buttons {
@@ -166,40 +168,10 @@ class DateRangeView: UIView {
         }
     }
     
-    private func correctTime() {
-        guard var dateFrom = self.dateFrom, var dateTo = self.dateTo else {
-            PlatformManager.shared.dateRangeType = selectedDateRangeType
-            PlatformManager.shared.dateFrom = self.dateFrom
-            PlatformManager.shared.dateTo = self.dateTo
-            
-            return
-        }
-        
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
-        
-        switch selectedDateRangeType {
-        case .custom:
-            dateFrom.setTime(hour: 0, min: 0, sec: 0)
-            dateTo.setTime(hour: 0, min: 0, sec: 0)
-            
-            let hour = calendar.component(.hour, from: dateTo)
-            let min = calendar.component(.minute, from: dateTo)
-            let sec = calendar.component(.second, from: dateTo)
-            dateFrom.setTime(hour: hour, min: min, sec: sec)
-            dateTo.setTime(hour: hour, min: min, sec: sec)
-            dateFrom = dateFrom.removeDays(1)
-        default:
-            let hour = calendar.component(.hour, from: dateTo)
-            let min = calendar.component(.minute, from: dateTo)
-            let sec = calendar.component(.second, from: dateTo)
-            dateFrom.setTime(hour: hour, min: min, sec: sec)
-            dateTo.setTime(hour: hour, min: min, sec: sec)
-        }
-        
+    private func updateTime() {
         PlatformManager.shared.dateRangeType = selectedDateRangeType
-        PlatformManager.shared.dateFrom = dateFrom
-        PlatformManager.shared.dateTo = dateTo
+        PlatformManager.shared.dateFrom = self.dateFrom
+        PlatformManager.shared.dateTo = self.dateTo
     }
     
     // MARK: - Actions
@@ -226,7 +198,7 @@ class DateRangeView: UIView {
     }
     
     @IBAction func applyButtonAction(_ sender: UIButton) {
-        correctTime()
+        updateTime()
         
         delegate?.applyButtonDidPress(with: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
     }

@@ -17,12 +17,12 @@ class AuthManager {
     
     static var authorizedToken: String? {
         get {
-            guard let token = UserDefaults.standard.string(forKey: UserDefaults.authorizedToken) else { return nil }
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultKeys.authorizedToken) else { return nil }
             
             return "Bearer " + token
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.authorizedToken)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.authorizedToken)
         }
     }
     
@@ -50,12 +50,12 @@ class AuthManager {
     }
     
     static func resetUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: UserDefaults.authorizedToken)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.authorizedToken)
         
-        UserDefaults.standard.removeObject(forKey: UserDefaults.biometricEnable)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.biometricLastDomainState)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.passcode)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.passcodeEnable)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.biometricEnable)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.biometricLastDomainState)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcode)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcodeEnable)
         
         UserDefaults.standard.synchronize()
     }

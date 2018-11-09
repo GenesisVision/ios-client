@@ -119,7 +119,7 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(with dateFrom: Date?, dateTo: Date?) {
+    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         

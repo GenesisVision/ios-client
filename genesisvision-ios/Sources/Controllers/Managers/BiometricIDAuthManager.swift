@@ -22,10 +22,10 @@ class BiometricIDAuthManager {
     
     private var biometricLastDomainState: Data? {
         get {
-            return UserDefaults.standard.data(forKey: UserDefaults.biometricLastDomainState)
+            return UserDefaults.standard.data(forKey: UserDefaultKeys.biometricLastDomainState)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.biometricLastDomainState)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.biometricLastDomainState)
         }
     }
     

@@ -67,7 +67,7 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.skipThisVersionButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
             DispatchQueue.main.async {
                 print("Skip this version: " + newVersion)
-                UserDefaults.standard.set(newVersion, forKey: UserDefaults.skipThisVersion)
+                UserDefaults.standard.set(newVersion, forKey: UserDefaultKeys.skipThisVersion)
                 UserDefaults.standard.synchronize()
             }
         }))

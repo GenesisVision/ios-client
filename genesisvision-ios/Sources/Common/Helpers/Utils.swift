@@ -153,7 +153,7 @@ func getFeedbackSubject() -> String {
 }
 
 func newVersionIsAvailable(_ lastVersion: String) -> Bool {
-    if let skipThisVersion = UserDefaults.standard.object(forKey: UserDefaults.skipThisVersion) as? String, skipThisVersion == lastVersion {
+    if let skipThisVersion = UserDefaults.standard.object(forKey: UserDefaultKeys.skipThisVersion) as? String, skipThisVersion == lastVersion {
         print("SkipThisVersion: \(skipThisVersion)")
         return false
     }
@@ -187,12 +187,12 @@ func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
 
 func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
     AuthManager.getTwoFactorStatus(completion: { (model) in
-        let launchedBefore = UserDefaults.standard.bool(forKey: UserDefaults.launchedBefore)
+        let launchedBefore = UserDefaults.standard.bool(forKey: UserDefaultKeys.launchedBefore)
         
         guard let twoFactorEnabled = model.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
         
         print("First launch")
-        UserDefaults.standard.set(true, forKey: UserDefaults.launchedBefore)
+        UserDefaults.standard.set(true, forKey: UserDefaultKeys.launchedBefore)
         
         viewController.showTwoFactorEnableAlert(completion: completion)
     }) { (result) in
@@ -206,7 +206,7 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
 }
 
 func getSelectedCurrency() -> String {
-    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaults.selectedCurrency) {
+    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaultKeys.selectedCurrency) {
         return selectedCurrency
     }
     
@@ -214,5 +214,5 @@ func getSelectedCurrency() -> String {
 }
 
 func updateSelectedCurrency(_ selectedCurrency: String) {
-    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaults.selectedCurrency)
+    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaultKeys.selectedCurrency)
 }

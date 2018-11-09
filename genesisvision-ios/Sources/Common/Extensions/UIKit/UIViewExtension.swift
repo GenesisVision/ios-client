@@ -59,14 +59,14 @@ extension UIView {
     func showErrorHUD(subtitle: String? = nil) {
         notificationFeedback(style: .warning)
         subtitle != nil
-            ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self, delay: HudDelay.error)
-            : HUD.flash(.error, onView: self, delay: HudDelay.error)
+            ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self, delay: Constants.HudDelay.error)
+            : HUD.flash(.error, onView: self, delay: Constants.HudDelay.error)
     }
     
     func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
         title != nil || subtitle != nil
-            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self, delay: HudDelay.success, completion: completion)
-            : HUD.flash(.success, onView: self, delay: HudDelay.success, completion: completion)
+            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self, delay: Constants.HudDelay.success, completion: completion)
+            : HUD.flash(.success, onView: self, delay: Constants.HudDelay.success, completion: completion)
     }
     
     func showHUD(type: HUDContentType) {
@@ -74,7 +74,7 @@ extension UIView {
     }
     
     func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
-        HUD.flash(type, onView: self, delay: delay ?? HudDelay.default)
+        HUD.flash(type, onView: self, delay: delay ?? Constants.HudDelay.default)
     }
     
     func typedSuperview<T: UIView>() -> T? {

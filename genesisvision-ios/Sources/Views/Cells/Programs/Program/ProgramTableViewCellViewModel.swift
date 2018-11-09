@@ -75,7 +75,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.thirdTitleLabel.text = "Av. to invest"
         if let availableInvestment = program.availableInvestment {
-            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(gvtString)"
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
         } else {
             cell.thirdValueLabel.text = ""
         }
@@ -106,7 +106,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(gvtString)"
+            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let isInvested = program.personalDetails?.isInvested {

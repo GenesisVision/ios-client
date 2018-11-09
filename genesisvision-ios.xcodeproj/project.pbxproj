@@ -383,9 +383,6 @@
 		5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */; };
 		5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91A2091157500C83F23 /* ShadowView.swift */; };
 		5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */; };
-		5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */; };
-		5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */; };
-		5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */; };
 		5ED1141821594ED900EC5385 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED1141721594ED900EC5385 /* EventListViewModel.swift */; };
 		5ED1141A2159545900EC5385 /* ChartsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED114192159545900EC5385 /* ChartsTabmanViewModel.swift */; };
 		5ED1141C2159549500EC5385 /* AssetsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED1141B2159549500EC5385 /* AssetsTabmanViewModel.swift */; };
@@ -395,6 +392,11 @@
 		5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B478210898810026C123 /* ProfileImageView.swift */; };
 		5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B479210898810026C123 /* СhoosePhotoView.swift */; };
 		5ED7385D21942EEC001DA633 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7385C21942EEB001DA633 /* AppConstants.swift */; };
+		5ED738762194FA15001DA633 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738742194FA15001DA633 /* FilterTableViewCell.swift */; };
+		5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED738752194FA15001DA633 /* FilterTableViewCell.xib */; };
+		5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */; };
+		5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED7387D21951017001DA633 /* LevelsFilterView.xib */; };
+		5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7387E21951017001DA633 /* LevelsFilterView.swift */; };
 		5EE0075B217871AC0045B890 /* ManagerProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */; };
 		5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */; };
 		5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */; };
@@ -483,19 +485,13 @@
 		FC496422201558AD00104CEB /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC496421201558AD00104CEB /* AppearanceController.swift */; };
 		FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */; };
 		FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4964252015598300104CEB /* UIColor+Hex.swift */; };
-		FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */; };
-		FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */; };
 		FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BFD67202267910044C3EC /* EnumExtension.swift */; };
 		FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */; };
 		FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */; };
 		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
 		FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */; };
-		FC5E9048202167CF000E4A90 /* ProgramFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* ProgramFilterViewModel.swift */; };
-		FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9049202169DC000E4A90 /* ProgramFilterViewController.swift */; };
-		FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */; };
-		FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */; };
-		FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */; };
-		FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */; };
+		FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* FilterViewModel.swift */; };
+		FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9049202169DC000E4A90 /* FilterViewController.swift */; };
 		FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */; };
 		FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D87B320446F17002FC943 /* String+Сonversion.swift */; };
 		FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */; };
@@ -981,9 +977,6 @@
 		5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCellAppearance.swift; sourceTree = "<group>"; };
 		5ED0C91A2091157500C83F23 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewAppearance.swift; sourceTree = "<group>"; };
-		5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSwitchTableViewCell.xib; sourceTree = "<group>"; };
-		5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED1141721594ED900EC5385 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
 		5ED114192159545900EC5385 /* ChartsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsTabmanViewModel.swift; sourceTree = "<group>"; };
 		5ED1141B2159549500EC5385 /* AssetsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTabmanViewModel.swift; sourceTree = "<group>"; };
@@ -993,6 +986,11 @@
 		5ED3B478210898810026C123 /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		5ED3B479210898810026C123 /* СhoosePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "СhoosePhotoView.swift"; sourceTree = "<group>"; };
 		5ED7385C21942EEB001DA633 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		5ED738742194FA15001DA633 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		5ED738752194FA15001DA633 /* FilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterTableViewCell.xib; sourceTree = "<group>"; };
+		5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5ED7387D21951017001DA633 /* LevelsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelsFilterView.xib; sourceTree = "<group>"; };
+		5ED7387E21951017001DA633 /* LevelsFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsFilterView.swift; sourceTree = "<group>"; };
 		5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewModel.swift; sourceTree = "<group>"; };
 		5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewController.swift; sourceTree = "<group>"; };
@@ -1089,19 +1087,13 @@
 		FC496421201558AD00104CEB /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		FC4964232015590D00104CEB /* UIColor+PaletteColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PaletteColors.swift"; sourceTree = "<group>"; };
 		FC4964252015598300104CEB /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSliderTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC4BFD67202267910044C3EC /* EnumExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtension.swift; sourceTree = "<group>"; };
 		FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestsRouter.swift; sourceTree = "<group>"; };
 		FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestDataProvider.swift; sourceTree = "<group>"; };
 		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
 		FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramFilterRouter.swift; sourceTree = "<group>"; };
-		FC5E9047202167CF000E4A90 /* ProgramFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramFilterViewModel.swift; sourceTree = "<group>"; };
-		FC5E9049202169DC000E4A90 /* ProgramFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramFilterViewController.swift; sourceTree = "<group>"; };
-		FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAmountTableViewCell.swift; sourceTree = "<group>"; };
-		FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterAmountTableViewCell.xib; sourceTree = "<group>"; };
-		FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortTableViewCell.swift; sourceTree = "<group>"; };
-		FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterSortTableViewCell.xib; sourceTree = "<group>"; };
+		FC5E9047202167CF000E4A90 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		FC5E9049202169DC000E4A90 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDataProvider.swift; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7D87B320446F17002FC943 /* String+Сonversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Сonversion.swift"; sourceTree = "<group>"; };
@@ -1638,7 +1630,6 @@
 				FCC9DD87200E61C0008825EC /* ProgramInfoViewController.swift */,
 				5EA274DA2162DF19008CAF77 /* ProgramBalanceViewController.swift */,
 				5EA274DC2162DF33008CAF77 /* ProgramProfitViewController.swift */,
-				FC5E9049202169DC000E4A90 /* ProgramFilterViewController.swift */,
 				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
 				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
 				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
@@ -2068,7 +2059,6 @@
 			isa = PBXGroup;
 			children = (
 				FCBD22BF2019E960000B8E38 /* ProgramListViewModel.swift */,
-				FC5E9047202167CF000E4A90 /* ProgramFilterViewModel.swift */,
 				5E616B5220F7B73700B3459D /* Create Program */,
 			);
 			path = Programs;
@@ -2200,7 +2190,6 @@
 		FCA57067202735BA001942F3 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				FCA57068202735C4001942F3 /* Filter */,
 				FC4C51AA204806950042CEE1 /* Program */,
 				FC4C51A9204806610042CEE1 /* Program Detail */,
 				FC4C51A82048064F0042CEE1 /* Program Request */,
@@ -2212,15 +2201,9 @@
 		FCA57068202735C4001942F3 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				FC4BFD632022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift */,
-				FC5E90BC20224A59000E4A90 /* FilterAmountTableViewCell.swift */,
-				FC5E90BD20224A59000E4A90 /* FilterAmountTableViewCell.xib */,
-				FC4BFD652022587E0044C3EC /* FilterSortTableViewCellViewModel.swift */,
-				FC5E90C020224A7B000E4A90 /* FilterSortTableViewCell.swift */,
-				FC5E90C120224A7B000E4A90 /* FilterSortTableViewCell.xib */,
-				5ED0C9222091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift */,
-				5ED0C91E2091D54900C83F23 /* FilterSwitchTableViewCell.swift */,
-				5ED0C91F2091D54900C83F23 /* FilterSwitchTableViewCell.xib */,
+				5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */,
+				5ED738742194FA15001DA633 /* FilterTableViewCell.swift */,
+				5ED738752194FA15001DA633 /* FilterTableViewCell.xib */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -2275,6 +2258,7 @@
 				5EA173D020A082AE00905253 /* TabmanViewModel.swift */,
 				FCA19A3C201AE35800157AD6 /* WelcomeViewModel.swift */,
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
+				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
 				5E33E3B520AB216F00A0B9DE /* Program Details */,
 				5EF14D7F2181F19700B3843A /* Fund Details */,
 				5EF14D942181FA2400B3843A /* Funds */,
@@ -2451,6 +2435,7 @@
 		FCC9DD49200DFA5E008825EC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC5E9049202169DC000E4A90 /* FilterViewController.swift */,
 				5EC7B87D20D147D5007720D1 /* Settings */,
 				FCC9DD76200E4CCF008825EC /* Base */,
 				5EA7A0F820A0B08B00D895FC /* Program Details */,
@@ -2561,6 +2546,8 @@
 				5E7FC747207B6342001617FD /* Labels */,
 				5EB996AB20F392DA00E31D23 /* Custom Views */,
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
+				5ED7387E21951017001DA633 /* LevelsFilterView.swift */,
+				5ED7387D21951017001DA633 /* LevelsFilterView.xib */,
 				5E5488352141577700B2D9FE /* DateRangeView.swift */,
 				5E54883321414FD100B2D9FE /* DateRangeView.xib */,
 				5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */,
@@ -2589,6 +2576,7 @@
 				5EA274C521628286008CAF77 /* DetailProfitStatisticTableViewCell.xib */,
 				5EA274C821628297008CAF77 /* DetailBalanceChartTableViewCell.swift */,
 				5EA274C921628297008CAF77 /* DetailBalanceChartTableViewCell.xib */,
+				FCA57068202735C4001942F3 /* Filter */,
 				5E616B4420F7B10F00B3459D /* Fields */,
 				FCB17763204568DA00A482B7 /* Dashboard */,
 				FCA57067202735BA001942F3 /* Programs */,
@@ -2736,7 +2724,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EA274CB21628297008CAF77 /* DetailBalanceChartTableViewCell.xib in Resources */,
-				FC5E90C320224A7C000E4A90 /* FilterSortTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
 				5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */,
 				5EA274B721628207008CAF77 /* ProgramPeriodTableViewCell.xib in Resources */,
@@ -2765,9 +2752,9 @@
 				5E85834A206014820039E13F /* SortHeaderView.xib in Resources */,
 				5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramTradesTableViewCell.xib in Resources */,
+				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
-				5ED0C9212091D54900C83F23 /* FilterSwitchTableViewCell.xib in Resources */,
 				5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
@@ -2784,11 +2771,11 @@
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
+				5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */,
 				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
-				FC5E90BF20224A59000E4A90 /* FilterAmountTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2902,6 +2889,7 @@
 				5ED1141C2159549500EC5385 /* AssetsTabmanViewModel.swift in Sources */,
 				5E4BC99621877893000F2E57 /* ProgramDetailsFull.swift in Sources */,
 				5E6308F9212C079900D15C71 /* PortfolioEventCollectionViewCell.swift in Sources */,
+				5ED738762194FA15001DA633 /* FilterTableViewCell.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
@@ -2929,7 +2917,6 @@
 				5EA274CF2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				5E4BC9E221877893000F2E57 /* TradesViewModel.swift in Sources */,
-				FC5E90C220224A7C000E4A90 /* FilterSortTableViewCell.swift in Sources */,
 				5E12B38520BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift in Sources */,
 				5E4BC9D521877893000F2E57 /* PlatformCurrency.swift in Sources */,
 				5E4BC9DC21877893000F2E57 /* NotificationSettingViewModel.swift in Sources */,
@@ -2966,10 +2953,8 @@
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */,
 				5E4BC9CA21877893000F2E57 /* UpdatePersonalDetailViewModel.swift in Sources */,
-				5ED0C9232091D55A00C83F23 /* FilterSwitchTableViewCellViewModel.swift in Sources */,
 				5E4BC9F021877893000F2E57 /* ProfilePublic.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
-				5ED0C9202091D54900C83F23 /* FilterSwitchTableViewCell.swift in Sources */,
 				5EB996A920F3738600E31D23 /* ListViewModelProtocol.swift in Sources */,
 				5EAC11B220B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift in Sources */,
 				5EF14D8E2181F80200B3843A /* FundViewModel.swift in Sources */,
@@ -3040,7 +3025,6 @@
 				5EA274C221628274008CAF77 /* DetailProfitChartTableViewCell.swift in Sources */,
 				FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */,
 				5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */,
-				FC4BFD662022587E0044C3EC /* FilterSortTableViewCellViewModel.swift in Sources */,
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
 				5E4BC9442187788A000F2E57 /* SearchAPI.swift in Sources */,
 				5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */,
@@ -3223,6 +3207,7 @@
 				5E18CE0120C03DED008FE5B5 /* AuthTwoFactorTabmanViewController.swift in Sources */,
 				5ED03F3520FF784A00AF5E07 /* FieldWithTextViewTableViewCell.swift in Sources */,
 				FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */,
+				5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */,
 				5EC78816216CDEE2000C91E4 /* UICollectionView+Registration.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* AuthSignUpViewModel.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramInfoViewModel.swift in Sources */,
@@ -3232,7 +3217,7 @@
 				5E4BC98A21877893000F2E57 /* FundDetails.swift in Sources */,
 				5EB9320E214697FF00EE01A2 /* DetailManagerTableViewCell.swift in Sources */,
 				5E5BC190218667E3009E4BA3 /* FundAssetsViewController.swift in Sources */,
-				FC5E904A202169DC000E4A90 /* ProgramFilterViewController.swift in Sources */,
+				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				5EA274BA2162823F008CAF77 /* InvestNowTableViewCell.swift in Sources */,
 				5E4BC99521877893000F2E57 /* NewProgramRequest.swift in Sources */,
@@ -3256,12 +3241,11 @@
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProgramProfitViewController.swift in Sources */,
 				5E4BC94A2187788A000F2E57 /* InvestorAPI.swift in Sources */,
-				FC5E9048202167CF000E4A90 /* ProgramFilterViewModel.swift in Sources */,
+				FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				5E4BC9A621877893000F2E57 /* OtherAssetsValue.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramInfoRouter.swift in Sources */,
-				FC5E90BE20224A59000E4A90 /* FilterAmountTableViewCell.swift in Sources */,
 				5EC78811216CDE34000C91E4 /* UICollectionView+ReusableCell.swift in Sources */,
 				5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */,
 				5E4BC99B21877893000F2E57 /* ChartSimple.swift in Sources */,
@@ -3283,6 +3267,7 @@
 				5E4BC9CF21877893000F2E57 /* BlockchainInfo.swift in Sources */,
 				5EF14DA6218214EF00B3843A /* DashboardFundTableViewCellViewModel.swift in Sources */,
 				FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */,
+				5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */,
 				5EEE455B210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift in Sources */,
 				5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */,
 				5E4BC9C921877893000F2E57 /* AndroidAppVersion.swift in Sources */,
@@ -3341,7 +3326,6 @@
 				5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */,
 				5E4BC9452187788A000F2E57 /* BrokersAPI.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
-				FC4BFD642022586F0044C3EC /* FilterSliderTableViewCellViewModel.swift in Sources */,
 				5EF14D8C2181F80200B3843A /* FundBalanceViewModel.swift in Sources */,
 				5E734255214AC7E200C4483E /* InRequestsTableViewCell.swift in Sources */,
 				5E616B4820F7B25F00B3459D /* CreateProgramRouter.swift in Sources */,

@@ -84,8 +84,6 @@ final class ManagerInfoViewModel {
         switch sectionType {
         case .details:
             return rows.count
-        default:
-            return 1
         }
     }
 }

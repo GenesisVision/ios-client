@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return UserDefaults.standard.bool(forKey: UserDefaults.restrictRotation) ? .landscape : .portrait
+        return UserDefaults.standard.bool(forKey: UserDefaultKeys.restrictRotation) ? .landscape : .portrait
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        if UserDefaults.standard.bool(forKey: UserDefaults.passcodeEnable) {
+        if UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable) {
             resignActiveTime = Date()
             showPasscodeVC()
         }
@@ -59,7 +59,7 @@ extension AppDelegate {
             return
         }
         
-        if UserDefaults.standard.bool(forKey: UserDefaults.passcodeEnable) {
+        if UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable) {
             let window = UIApplication.shared.windows[0] as UIWindow
             if let viewController = PasscodeViewController.storyboardInstance(name: .settings), let vc = window.rootViewController {
                 let router = Router(parentRouter: nil)
@@ -76,7 +76,7 @@ extension AppDelegate {
     
     private func setup() {
         SwaggerClientAPI.basePath = Api.basePath
-        UserDefaults.standard.set(false, forKey: UserDefaults.restrictRotation)
+        UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
         
         setupFirstScreen()
 

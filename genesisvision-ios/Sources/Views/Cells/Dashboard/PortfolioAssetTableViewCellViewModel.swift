@@ -32,10 +32,10 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
                 cell.titleLabel.text = value
             }
             if let value = assetsValue.value {
-                cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(gvtString)"
+                cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
             }
             if let value = assetsValue.changeValue {
-                cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(gvtString)"
+                cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
                 cell.changeValueLabel.textColor = value == 0 ? UIColor.Cell.title : value > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
             }
             if let value = assetsValue.changePercent {
@@ -51,10 +51,10 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
             cell.coloredView.backgroundColor = UIColor.Cell.title
             
             if let value = otherAssetsValue.value {
-                cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(gvtString)"
+                cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
             }
             if let value = otherAssetsValue.changeValue {
-                cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(gvtString)"
+                cell.changeValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
                 cell.changeValueLabel.textColor = value == 0 ? UIColor.Cell.title : value > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
             }
             if let value = otherAssetsValue.changePercent {

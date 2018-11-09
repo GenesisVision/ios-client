@@ -330,62 +330,44 @@
             </objects>
             <point key="canvasLocation" x="2975" y="1639"/>
         </scene>
-        <!--Program Filter View Controller-->
+        <!--Filter View Controller-->
         <scene sceneID="1ZW-ud-iiu">
             <objects>
-                <viewController storyboardIdentifier="ProgramFilterViewController" id="Jkr-qa-duU" customClass="ProgramFilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterViewController" id="Jkr-qa-duU" customClass="FilterViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3sG-FT-NvN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-Ka-Ja5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPS-Tf-3yD" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-S8-rLI" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="20" y="597" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="FE5-Oa-MIe"/>
+                                    <constraint firstAttribute="height" constant="50" id="pey-Fb-Efi"/>
                                 </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-hx-mtC">
-                                <rect key="frame" x="88.5" y="606" width="198" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-S8-rLI" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="45"/>
-                                        <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="198" id="Ncm-Tk-kNw"/>
-                                            <constraint firstAttribute="height" constant="45" id="pey-Fb-Efi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="APPLY">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="applyButtonAction:" destination="Jkr-qa-duU" eventType="touchUpInside" id="bjM-rj-gum"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="dH6-yZ-Twk"/>
-                                    <constraint firstAttribute="width" constant="198" id="iVu-4r-Ei2"/>
-                                </constraints>
-                            </stackView>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="APPLY">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="applyButtonAction:" destination="Jkr-qa-duU" eventType="touchUpInside" id="bjM-rj-gum"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="3sG-FT-NvN" secondAttribute="top" id="0fk-7x-n71"/>
                             <constraint firstItem="oh9-Ka-Ja5" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="L1t-gR-1bv"/>
+                            <constraint firstItem="tpj-S8-rLI" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" constant="20" id="Ndh-e8-fk2"/>
                             <constraint firstAttribute="bottom" secondItem="oh9-Ka-Ja5" secondAttribute="bottom" id="RCq-bx-usd"/>
-                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="oVJ-hx-mtC" secondAttribute="bottom" constant="16" id="Xsv-0r-bx0"/>
-                            <constraint firstAttribute="bottom" secondItem="ZPS-Tf-3yD" secondAttribute="bottom" id="YMC-0L-wEK"/>
-                            <constraint firstItem="oVJ-hx-mtC" firstAttribute="centerX" secondItem="3sG-FT-NvN" secondAttribute="centerX" id="YdI-Jb-amv"/>
+                            <constraint firstItem="oh9-Ka-Ja5" firstAttribute="top" secondItem="Oxo-lc-AeP" secondAttribute="top" id="VI0-se-xDj"/>
                             <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="oh9-Ka-Ja5" secondAttribute="trailing" id="bDK-JX-Uci"/>
-                            <constraint firstItem="ZPS-Tf-3yD" firstAttribute="trailing" secondItem="Oxo-lc-AeP" secondAttribute="trailing" id="bXY-TB-i04"/>
-                            <constraint firstItem="ZPS-Tf-3yD" firstAttribute="leading" secondItem="Oxo-lc-AeP" secondAttribute="leading" id="xiR-Q1-7bT"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="trailing" secondItem="tpj-S8-rLI" secondAttribute="trailing" constant="20" id="iKz-Eq-AId"/>
+                            <constraint firstItem="Oxo-lc-AeP" firstAttribute="bottom" secondItem="tpj-S8-rLI" secondAttribute="bottom" constant="20" id="jtq-VF-zya"/>
+                            <constraint firstAttribute="bottom" secondItem="tpj-S8-rLI" secondAttribute="bottom" constant="20" id="ude-2N-AUT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oxo-lc-AeP"/>
                     </view>
@@ -396,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFZ-YF-8K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2434" y="914"/>
+            <point key="canvasLocation" x="2432.8000000000002" y="913.49325337331345"/>
         </scene>
     </scenes>
     <resources>

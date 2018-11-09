@@ -10,5 +10,4 @@ import UIKit.UINavigationController
 
 class FundListRouter: Router, ListRouterProtocol {
     
-
 }

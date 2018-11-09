@@ -21,7 +21,7 @@ final class ProgramDetailFullChartViewModel {
     }
     
     func dismissVC() {
-        UserDefaults.standard.set(false, forKey: UserDefaults.restrictRotation)
+        UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
         router.closeVC()
     }
     

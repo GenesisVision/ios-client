@@ -102,7 +102,7 @@ class DetailBalanceChartTableViewCell: UITableViewCell {
     }
     
     let circleView: UIView = {
-        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: SystemSizes.chartCircleHeight, height: SystemSizes.chartCircleHeight))
+        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.SystemSizes.chartCircleHeight, height: Constants.SystemSizes.chartCircleHeight))
         circleView.backgroundColor = UIColor.BaseView.bg
         circleView.layer.cornerRadius = circleView.bounds.height / 2
         circleView.layer.borderColor = UIColor.Common.white.cgColor

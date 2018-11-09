@@ -130,11 +130,9 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         super.viewDidLoad()
 
         dateRangeView = DateRangeView.viewFromNib()
-        
-        let dateFrom = PlatformManager.shared.dateFrom
-        let dateTo = PlatformManager.shared.dateTo
+
         updateDateRangeButton()
-        updateData(with: dateFrom, dateTo: dateTo)
+        correctTime()
         
         commonSetup()
         refreshControl?.endRefreshing()
@@ -153,7 +151,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     // MARK: - Public Methods
-    func updateData(with dateFrom: Date?, dateTo: Date?) {
+    func updateData(from dateFrom: Date?, to dateTo: Date?) {
         //fetch()
     }
     
@@ -174,7 +172,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     @objc func dateRangeButtonAction() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
-        bottomSheetController.initializeHeight = 379
+        bottomSheetController.initializeHeight = 380
         bottomSheetController.addContentsView(dateRangeView)
         bottomSheetController.bottomSheetControllerProtocol = dateRangeView
         dateRangeView.delegate = self
@@ -262,6 +260,39 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         hideHUD()
         refreshControl?.endRefreshing()
     }
+    
+    private func correctTime() {
+        let selectedDateRangeType = PlatformManager.shared.dateRangeType
+        
+        guard var dateFrom = PlatformManager.shared.dateFrom, var dateTo = PlatformManager.shared.dateTo else {
+            updateData(from: nil, to: nil)
+            return
+        }
+        
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        
+        switch selectedDateRangeType {
+        case .custom:
+            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+            dateTo.setTime(hour: 0, min: 0, sec: 0)
+            
+            let hour = calendar.component(.hour, from: dateTo)
+            let min = calendar.component(.minute, from: dateTo)
+            let sec = calendar.component(.second, from: dateTo)
+            dateFrom.setTime(hour: hour, min: min, sec: sec)
+            dateTo.setTime(hour: hour, min: min, sec: sec)
+            dateFrom = dateFrom.removeDays(1)
+        default:
+            let hour = calendar.component(.hour, from: dateTo)
+            let min = calendar.component(.minute, from: dateTo)
+            let sec = calendar.component(.second, from: dateTo)
+            dateFrom.setTime(hour: hour, min: min, sec: sec)
+            dateTo.setTime(hour: hour, min: min, sec: sec)
+        }
+        
+        updateData(from: dateFrom, to: dateTo)
+    }
 }
 
 extension BaseViewController: UIViewControllerWithPullToRefresh {
@@ -316,7 +347,7 @@ extension BaseViewController: DateRangeViewProtocol {
         bottomSheetController.dismiss()
 
         updateDateRangeButton()
-        updateData(with: dateFrom, dateTo: dateTo)
+        correctTime()
     }
     
     private func updateDateRangeButton() {

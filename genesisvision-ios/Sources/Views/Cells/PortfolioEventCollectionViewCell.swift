@@ -33,7 +33,7 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         backgroundColor = UIColor.Cell.bg
-        roundCorners(with: SystemSizes.cornerSize)
+        roundCorners(with: Constants.SystemSizes.cornerSize)
     }
     
     
@@ -41,6 +41,6 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
         super.layoutIfNeeded()
         
         layer.masksToBounds = true
-        layer.cornerRadius = SystemSizes.cornerSize
+        layer.cornerRadius = Constants.SystemSizes.cornerSize
     }
 }

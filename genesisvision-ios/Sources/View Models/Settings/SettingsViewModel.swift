@@ -44,10 +44,10 @@ final class SettingsViewModel {
     
     var enablePasscode: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: UserDefaults.passcodeEnable)
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.passcodeEnable)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.passcodeEnable)
             
             if !newValue {
                 enableBiometricID = newValue
@@ -58,18 +58,18 @@ final class SettingsViewModel {
     var enableBiometricID: Bool {
         get {
             guard !biometricIDAuthManager.domainStateChanged() else {
-                UserDefaults.standard.set(false, forKey: UserDefaults.biometricEnable)
+                UserDefaults.standard.set(false, forKey: UserDefaultKeys.biometricEnable)
                 return false
             }
             
-            return UserDefaults.standard.bool(forKey: UserDefaults.biometricEnable)
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.biometricEnable)
         }
         set {
             if newValue {
                 biometricIDAuthManager.updateLastDomainState()
             }
             
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.biometricEnable)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.biometricEnable)
         }
     }
     

@@ -93,7 +93,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Variables
     var availableToInvestValue: Double = 0.0 {
         didSet {
-            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " " + gvtString
+            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " " + Constants.gvtString
         }
     }
     
@@ -144,7 +144,7 @@ class ProgramInvestViewController: BaseViewController {
     
     private func updateUI() {
         if let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount {
-            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(gvtString))"
+            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
         }
         
         if let entryFee = viewModel.programInvestInfo?.entryFee, let gvCommission = viewModel.programInvestInfo?.gvCommission {
@@ -152,17 +152,17 @@ class ProgramInvestViewController: BaseViewController {
             let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
             let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
             
-            let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(gvtString))"
+            let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(Constants.gvtString))"
             self.entryFeeValueLabel.text = entryFeeValueLabelString
 
             let gvCommissionGVT = gvCommission * amountToInvestValue / 100
             let gvCommissionGVTString = gvCommissionGVT.rounded(withType: .gvt).toString()
             let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
             
-            let gvCommissionValueLabelString = gvCommissionString + "% (\(gvCommissionGVTString) \(gvtString))"
+            let gvCommissionValueLabelString = gvCommissionString + "% (\(gvCommissionGVTString) \(Constants.gvtString))"
             self.gvCommissionValueLabel.text = gvCommissionValueLabelString
             let investmentAmountValue = (amountToInvestValue - entryFeeGVT - gvCommissionGVT).rounded(withType: .gvt).toString()
-            self.investmentAmountValueLabel.text = investmentAmountValue + " " + gvtString
+            self.investmentAmountValueLabel.text = investmentAmountValue + " " + Constants.gvtString
         }
         
         if let availableToInvest = viewModel.programInvestInfo?.availableToInvest, let availableInWallet = viewModel.programInvestInfo?.availableInWallet {

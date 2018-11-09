@@ -57,7 +57,7 @@ class PortfolioViewController: BaseViewController {
     }
     
     let circleView: UIView = {
-        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: SystemSizes.chartCircleHeight, height: SystemSizes.chartCircleHeight))
+        let circleView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.SystemSizes.chartCircleHeight, height: Constants.SystemSizes.chartCircleHeight))
         circleView.backgroundColor = UIColor.BaseView.bg
         circleView.layer.cornerRadius = circleView.bounds.height / 2
         circleView.layer.borderColor = UIColor.Common.white.cgColor
@@ -125,7 +125,7 @@ class PortfolioViewController: BaseViewController {
             
             amountTitleLabel.text = "Value"
             if let value = dashboardChartValue.value {
-                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + gvtString
+                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }
             if let valueCurrency = dashboardChartValue.valueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                 amountCurrencyLabel.text = valueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
@@ -136,7 +136,7 @@ class PortfolioViewController: BaseViewController {
                 changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
             }
             if let changeValue = dashboardChartValue.changeValue {
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + gvtString
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }
             if let changeValueCurrency = dashboardChartValue.changeValueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                 changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
@@ -145,7 +145,7 @@ class PortfolioViewController: BaseViewController {
             if let programRequests = viewModel.programRequests {
                 inRequestsTitleLabel.text = "In Requests"
                 if let totalValue = programRequests.totalValue {
-                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " " + gvtString
+                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
                 }
                 
                 if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
@@ -233,7 +233,7 @@ class PortfolioViewController: BaseViewController {
                 let changeValue = selectedValue - firstValue
                 let changeValueCurrency = changeValue * rate
                 
-                amountValueLabel.text = selectedValue.rounded(withType: .gvt).toString() + " " + gvtString
+                amountValueLabel.text = selectedValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
                 
                 let currency = getSelectedCurrency()
                 if let selectedCurrency = CurrencyType(rawValue: currency) {
@@ -244,7 +244,7 @@ class PortfolioViewController: BaseViewController {
                 
                 changePercentLabel.text = getChangePercent(oldValue: firstValue, newValue: selectedValue)
 
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + gvtString
+                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
             }
         } else {
             

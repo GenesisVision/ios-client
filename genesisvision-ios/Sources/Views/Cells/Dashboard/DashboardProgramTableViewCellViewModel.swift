@@ -118,7 +118,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(gvtString)"
+            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         if let isInvested = program.personalDetails?.isInvested {
