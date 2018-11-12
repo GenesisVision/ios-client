@@ -246,6 +246,9 @@
 		5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */; };
 		5E6308FC212C0D5500D15C71 /* SegmentedHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */; };
 		5E6308FE212C0D6400D15C71 /* SegmentedHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */; };
+		5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */; };
+		5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */; };
+		5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */; };
 		5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E696019209362EE00505726 /* FavoriteButton.swift */; };
 		5E6A6BC0216D5EEE0082C343 /* PortfolioEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */; };
 		5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */; };
@@ -838,6 +841,9 @@
 		5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioEventCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedHeaderFooterView.swift; sourceTree = "<group>"; };
 		5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentedHeaderFooterView.xib; sourceTree = "<group>"; };
+		5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerWithTableView.swift; sourceTree = "<group>"; };
+		5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCurrencyDelegateManager.swift; sourceTree = "<group>"; };
 		5E696019209362EE00505726 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventTableViewCell.swift; sourceTree = "<group>"; };
 		5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioEventTableViewCell.xib; sourceTree = "<group>"; };
@@ -1832,6 +1838,7 @@
 				5EC7872A216BE8E6000C91E4 /* CurrencyDelegateManager.swift */,
 				5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */,
 				5EC78817216CE74D000C91E4 /* EventsDelegateManager.swift */,
+				5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */,
 			);
 			path = "Delegate Managers";
 			sourceTree = "<group>";
@@ -2627,6 +2634,8 @@
 				FCC9DD79200E4CCF008825EC /* BaseViewController.swift */,
 				5EB8E9DB207263B100F46A8A /* InfoViewController.swift */,
 				5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */,
+				5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */,
+				5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3110,6 +3119,7 @@
 				5E4BC94B2187788A000F2E57 /* NotificationsAPI.swift in Sources */,
 				5E4BC9AC21877893000F2E57 /* WithdrawalInfo.swift in Sources */,
 				5E5BC18A21854D45009E4BA3 /* ManagerFundListViewController.swift in Sources */,
+				5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */,
 				5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */,
 				5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */,
 				5E18CE0520C0561B008FE5B5 /* AuthTwoFactorTabmanRouter.swift in Sources */,
@@ -3120,12 +3130,14 @@
 				5E5BC29221868A44009E4BA3 /* FundAssetsViewModel.swift in Sources */,
 				5E4BC9BD21877893000F2E57 /* RecoveryCodesViewModel.swift in Sources */,
 				5EF14D972181FAD500B3843A /* FundListViewModel.swift in Sources */,
+				5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */,
 				5ED1141E21595E3300EC5385 /* PortfolioViewModel.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
 				5E4BC9AD21877893000F2E57 /* ErrorMessage.swift in Sources */,
 				FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */,
 				5EF14D8B2181F80200B3843A /* FundTabmanViewModel.swift in Sources */,
 				5E1CF839218C02FC00541C70 /* TweePlaceholderTextField.swift in Sources */,
+				5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */,
 				5EA274D72162B5C2008CAF77 /* ProgramPeriodTableViewCellViewModel.swift in Sources */,
 				5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */,
 				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,

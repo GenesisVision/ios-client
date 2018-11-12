@@ -138,8 +138,8 @@ extension ManagerViewController {
             self.headerViewConstraint.constant += abs(yOffset)
             
             if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                //                self.scrollView.panGestureRecognizer.isEnabled = false
-                //                self.scrollView.panGestureRecognizer.isEnabled = true
+                self.scrollView.panGestureRecognizer.isEnabled = false
+                self.scrollView.panGestureRecognizer.isEnabled = true
                 self.isLoading = true
                 self.pullToRefresh()
             }

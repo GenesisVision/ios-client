@@ -127,7 +127,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
             tableView.separatorStyle = .none
         }
         
-        viewModel.sortingDelegateManager.tableViewProtocol = self
+        viewModel.sortingDelegateManager.delegate = self
         bottomSheetController.present()
     }
     

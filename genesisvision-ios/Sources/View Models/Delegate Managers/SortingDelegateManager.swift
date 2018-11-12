@@ -34,10 +34,6 @@ class SortingManager: NSObject {
     }
     
     // MARK: - Private methods
-    private func getSelectedSortingValue() -> String {
-        return sortingValues[selectedIndex]
-    }
-    
     private func getProgramsSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsGet {
         let selectedValue = getSelectedSortingValue()
         
@@ -156,6 +152,14 @@ class SortingManager: NSObject {
     }
     
     // MARK: - Public methods
+    func getSelectedSortingValue() -> String {
+        return sortingValues[selectedIndex]
+    }
+    
+    func reset() {
+        selectedIndex = 0
+    }
+    
     func changeSorting(at index: Int) {
         selectedIndex = index
     }
@@ -182,7 +186,7 @@ class SortingManager: NSObject {
 
 final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    weak var tableViewProtocol: SortingDelegate?
+    weak var delegate: SortingDelegate?
     
     var sortingManager: SortingManager?
     
@@ -197,13 +201,17 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
         sortingManager = SortingManager(sortingType)
     }
     
+    func reset() {
+        sortingManager?.reset()
+    }
+    
     // MARK: - UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         sortingManager?.changeSorting(at: indexPath.row)
         
-        tableViewProtocol?.didSelectSorting()
+        delegate?.didSelectSorting()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

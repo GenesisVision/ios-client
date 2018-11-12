@@ -80,7 +80,7 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
             }
         }
         
-        viewModel.sortingDelegateManager.tableViewProtocol = self
+        viewModel.sortingDelegateManager.delegate = self
         bottomSheetController.present()
     }
     

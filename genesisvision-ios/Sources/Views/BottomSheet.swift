@@ -752,15 +752,16 @@ private extension BottomSheetController {
         overlayViewPanGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         overlayViewPanGestureRecognizer.delegate = self
         overlayViewTapGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleTap(_:)))
+        
+        guard isDraggable else { return }
         //
         panGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         panGestureRecognizer.delegate = self
         //
-        if isDraggable {
-            barGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
-            barGestureRecognizer.delegate = self
-            barGestureRecognizer.require(toFail: panGestureRecognizer)
-        }
+        
+        barGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
+        barGestureRecognizer.delegate = self
+        barGestureRecognizer.require(toFail: panGestureRecognizer)
     }
     func addGesture(_ state: State) {
         switch viewActionType {

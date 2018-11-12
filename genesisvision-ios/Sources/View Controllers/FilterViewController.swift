@@ -15,7 +15,6 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var resetBarButtonItem: UIBarButtonItem?
-    private var levelsFilterView: LevelsFilterView!
     
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -24,7 +23,11 @@ class FilterViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Buttons
-    @IBOutlet weak var applyButton: ActionButton!
+    @IBOutlet weak var applyButton: ActionButton! {
+        didSet {
+            applyButton.setTitle("Apply", for: .normal)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -41,8 +44,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         navigationItem.title = viewModel.title
         
-        levelsFilterView = LevelsFilterView.viewFromNib()
-        
+        viewModel.dateRangeView = dateRangeView
         showInfiniteIndicator(value: false)
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
@@ -69,7 +71,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     }
     
     @objc func highToLowButtonAction() {
-        if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
+        if let sortingManager = viewModel.sortingDelegateManager?.sortingManager {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
@@ -78,24 +80,39 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func showCurrency() {
         bottomSheetController = BottomSheetController()
-        bottomSheetController.addNavigationBar("Currency")
-        bottomSheetController.initializeHeight = 380
+        bottomSheetController.initializeHeight = 250
+        
+        bottomSheetController.addNavigationBar("Preferred currency")
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            viewModel.currencyDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let currencyDelegateManager = self?.viewModel.currencyDelegateManager else { return }
+            tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
+            tableView.delegate = currencyDelegateManager
+            tableView.dataSource = currencyDelegateManager
+        }
         
         bottomSheetController.present()
     }
     
     private func showLevels() {
+        
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Levels")
-        bottomSheetController.initializeHeight = 270
-        bottomSheetController.addContentsView(levelsFilterView)
-        bottomSheetController.bottomSheetControllerProtocol = levelsFilterView
-        levelsFilterView.delegate = self
+        bottomSheetController.initializeHeight = 200
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.isDraggable = false
+        if let levelsFilterView = viewModel.levelsFilterView {
+            bottomSheetController.addContentsView(levelsFilterView)
+            bottomSheetController.bottomSheetControllerProtocol = levelsFilterView
+        }
         bottomSheetController.present()
     }
     
     private func showSort() {
-        guard let sortingManager = viewModel.sortingDelegateManager.sortingManager else { return }
+        guard let sortingManager = viewModel.sortingDelegateManager?.sortingManager else { return }
         
         bottomSheetController = BottomSheetController()
         let normalImage = #imageLiteral(resourceName: "img_profit_filter_icon")
@@ -114,12 +131,11 @@ class FilterViewController: BaseViewControllerWithTableView {
             tableView.separatorStyle = .none
         }
         
-        viewModel.sortingDelegateManager.tableViewProtocol = self
         bottomSheetController.present()
     }
     
     private func showDateRange() {
-        dateRangeButtonAction()
+        dateRangeButtonAction(with: viewModel)
     }
     
     // MARK: - IBAction
@@ -186,22 +202,16 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
-    
+
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.BaseView.bg
         }
     }
 }
-
-extension FilterViewController: SortingDelegate {
-    func didSelectSorting() {
+extension FilterViewController: FilterViewModelProtocol {
+    func didFilterReloadCell(_ row: Int) {
         bottomSheetController.dismiss()
-    }
-}
-
-extension FilterViewController: LevelsFilterViewProtocol {
-    func applyButtonDidPress(with levels: [Int]) {
-        bottomSheetController.dismiss()
+        tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
     }
 }

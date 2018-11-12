@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DateRangeViewProtocol: class {
+@objc protocol DateRangeViewProtocol: class {
     func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?)
     func showDatePicker(with dateFrom: Date?, dateTo: Date)
 }
@@ -117,6 +117,19 @@ class DateRangeView: UIView {
         setup()
     }
     
+    // MARK: - Public methods
+    func reset() {
+        selectedDateRangeType = PlatformManager.shared.dateRangeType
+        
+        if selectedDateRangeType == .custom {
+            self.dateFrom = PlatformManager.shared.dateFrom
+            self.dateTo = PlatformManager.shared.dateTo
+            changeDateRangeType()
+            return
+        }
+        
+        changeDateRangeType()
+    }
     // MARK: - Private methods
     private func setup() {
         selectedDateRangeType = PlatformManager.shared.dateRangeType

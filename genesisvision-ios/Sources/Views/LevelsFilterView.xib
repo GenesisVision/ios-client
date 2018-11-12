@@ -16,14 +16,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iGM-pq-6jc">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iGM-pq-6jc">
                     <rect key="frame" x="20" y="20" width="335" height="100"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1xY-y3-oSh">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kWO-hY-oCI">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bA1-Du-u9s" customClass="TTRangeSlider">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1xY-y3-oSh">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="0.0"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKf-zT-Gm6" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="fl4-wn-Ksu"/>
@@ -38,7 +47,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWf-eb-uE6" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="98.5" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="98.5" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="2">
@@ -50,7 +59,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTk-lK-mAv" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="196.5" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="196.5" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="3">
@@ -62,7 +71,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U93-SD-fDe" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="295" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="4">
@@ -78,14 +87,13 @@
                                 <constraint firstItem="HTk-lK-mAv" firstAttribute="width" secondItem="qWf-eb-uE6" secondAttribute="width" id="7sS-Gj-hOF"/>
                                 <constraint firstItem="U93-SD-fDe" firstAttribute="width" secondItem="HTk-lK-mAv" secondAttribute="width" id="Nul-iA-nlt"/>
                                 <constraint firstItem="qWf-eb-uE6" firstAttribute="width" secondItem="kKf-zT-Gm6" secondAttribute="width" id="OtR-a4-mXY"/>
-                                <constraint firstAttribute="height" constant="40" id="fdU-v7-p2q"/>
                             </constraints>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="l39-0A-Q5p">
-                            <rect key="frame" x="0.0" y="60" width="335" height="40"/>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="l39-0A-Q5p">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="0.0"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWS-VO-o0h" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="dEc-kv-HEw"/>
@@ -100,7 +108,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jK-i8-kCz" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="98.5" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="98.5" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="6">
@@ -112,7 +120,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQ7-Fn-85T" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="196.5" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="196.5" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="7">
@@ -124,7 +132,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OiX-oJ-Lft" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                    <rect key="frame" x="295" y="0.0" width="40" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="All">
@@ -138,7 +146,6 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="NQ7-Fn-85T" firstAttribute="width" secondItem="5jK-i8-kCz" secondAttribute="width" id="5Ze-bO-DnI"/>
-                                <constraint firstAttribute="height" constant="40" id="FRP-Ly-EjJ"/>
                                 <constraint firstItem="5jK-i8-kCz" firstAttribute="width" secondItem="JWS-VO-o0h" secondAttribute="width" id="gKr-so-Zvx"/>
                                 <constraint firstItem="OiX-oJ-Lft" firstAttribute="width" secondItem="NQ7-Fn-85T" secondAttribute="width" id="mXv-QH-kcj"/>
                             </constraints>
@@ -164,7 +171,7 @@
             <constraints>
                 <constraint firstItem="AOa-RE-Tty" firstAttribute="top" secondItem="iGM-pq-6jc" secondAttribute="bottom" constant="20" id="BGi-dX-7gt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iGM-pq-6jc" secondAttribute="trailing" constant="20" id="Let-sE-PTR"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AOa-RE-Tty" secondAttribute="bottom" constant="20" id="Lw8-K7-OOm"/>
+                <constraint firstAttribute="bottom" secondItem="AOa-RE-Tty" secondAttribute="bottom" constant="20" id="Lw8-K7-OOm"/>
                 <constraint firstItem="iGM-pq-6jc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="i9Y-53-EZy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AOa-RE-Tty" secondAttribute="trailing" constant="20" id="m8E-nb-uaw"/>
                 <constraint firstItem="AOa-RE-Tty" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="wNh-44-uiv"/>
@@ -174,6 +181,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="applyButton" destination="AOa-RE-Tty" id="Frc-K2-bgz"/>
+                <outlet property="rangeSlider" destination="bA1-Du-u9s" id="nwy-cQ-bo7"/>
                 <outletCollection property="levelButtons" destination="kKf-zT-Gm6" collectionClass="NSMutableArray" id="gCT-Pe-aCW"/>
                 <outletCollection property="levelButtons" destination="qWf-eb-uE6" collectionClass="NSMutableArray" id="Cet-P9-yzB"/>
                 <outletCollection property="levelButtons" destination="HTk-lK-mAv" collectionClass="NSMutableArray" id="CkS-hQ-Fqd"/>
@@ -183,7 +191,7 @@
                 <outletCollection property="levelButtons" destination="NQ7-Fn-85T" collectionClass="NSMutableArray" id="8le-Og-4vR"/>
                 <outletCollection property="levelButtons" destination="OiX-oJ-Lft" collectionClass="NSMutableArray" id="hTf-8a-MKX"/>
             </connections>
-            <point key="canvasLocation" x="26.399999999999999" y="-60.26986506746627"/>
+            <point key="canvasLocation" x="36" y="-33"/>
         </view>
     </objects>
 </document>

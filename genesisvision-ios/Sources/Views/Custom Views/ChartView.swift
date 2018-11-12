@@ -160,15 +160,16 @@ class ChartView: CombinedChartView {
             maxLimitValue = data.lineData.getYMax().rounded(toPlaces: 2)
             minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
-        
 
-        let dateMin = data.xMin
-        let dateMax = data.xMax
-        
-        let width = Date(timeIntervalSince1970: dateMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: dateMin)) / 60
+        if chartType != .default {
+            let dateMin = data.xMin
+            let dateMax = data.xMax
+            
+            let width = Date(timeIntervalSince1970: dateMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: dateMin)) / 60
 
-        xAxis.axisMinimum = dateMin - Double(width * 3)
-        xAxis.axisMaximum = dateMax + Double(width * 7)
+            xAxis.axisMinimum = dateMin - Double(width * 3)
+            xAxis.axisMaximum = dateMax + Double(width * 7)
+        }
 
         self.data = data
     }

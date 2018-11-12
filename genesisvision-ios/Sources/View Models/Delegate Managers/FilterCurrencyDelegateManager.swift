@@ -1,27 +1,24 @@
 //
-//  CurrencyDelegateManager.swift
+//  FilterCurrencyDelegateManager.swift
 //  genesisvision-ios
 //
-//  Created by George on 08/10/2018.
+//  Created by George on 09/11/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit.UITableView
 
-protocol CurrencyDelegateManagerProtocol: class {
-    func didSelectCurrency(at indexPath: IndexPath)
+protocol FilterCurrencyDelegateManagerProtocol: class {
+    func didSelectFilterCurrency(at indexPath: IndexPath)
 }
 
-final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
-    
-    weak var currencyDelegate: CurrencyDelegateManagerProtocol?
+    weak var delegate: FilterCurrencyDelegateManagerProtocol?
     
     var tableView: UITableView?
     var currencies: [PlatformCurrency] = []
-    
-    var selectedRate: RateItem?
-    var selectedIndex: Int = 0
+    private var selectedIndex: Int = 0
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
@@ -30,6 +27,19 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     // MARK: - Lifecycle
     override init() {
         super.init()
+    }
+    
+    // MARK: - Public methods
+    func reset() {
+        selectedIndex = 0
+    }
+    
+    func getSelectedCurrencyValue() -> String? {
+        guard currencies.count > 0 else {
+            return nil
+        }
+        
+        return currencies[selectedIndex].name
     }
     
     func loadCurrencies() {
@@ -55,9 +65,10 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         
         if let selectedCurrency = currencies[indexPath.row].name {
             updateSelectedCurrency(selectedCurrency)
+            self.selectedIndex = indexPath.row
         }
         
-        currencyDelegate?.didSelectCurrency(at: indexPath)
+        delegate?.didSelectFilterCurrency(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,10 +84,8 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         let isSelected = indexPath.row == selectedIndex
         let currency = currencies[indexPath.row]
         let currencyValue = currency.name ?? ""
-        let currencyRate = currency.rateToGvt ?? 0.0
-        let subtitle = "1 GVT = \(currencyRate) " + currencyValue
         
-        cell.configure(title: currencyValue, subtitle: subtitle, selected: isSelected)
+        cell.configure(title: currencyValue, subtitle: nil, selected: isSelected)
         
         return cell
     }
@@ -93,4 +102,5 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         }
     }
 }
+
 
