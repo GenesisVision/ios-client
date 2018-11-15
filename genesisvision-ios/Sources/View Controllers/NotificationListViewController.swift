@@ -94,6 +94,12 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        viewModel.didSelectPortfolioEvents(at: indexPath)
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)

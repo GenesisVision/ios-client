@@ -567,7 +567,6 @@ open class BottomSheet {
                 case .began:
                     scrollView?.isScrollEnabled = false
                 case .changed:
-                    
 //                    if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && !isScrollEnabled {
 //                        return
 //                    }
@@ -605,6 +604,7 @@ open class BottomSheet {
                     let currentTransformY = containerView.transform.ty
                     containerView.transform = CGAffineTransform(translationX: 0, y: currentTransformY + point.y)
                     gestureRecognizer.setTranslation(.zero, in: gestureView)
+                    break
                 case .ended, .cancelled:
                     scrollView?.isScrollEnabled = true
                     if containerView.transform.ty > moveRange.down {
@@ -656,6 +656,7 @@ private extension BottomSheetController {
         containerView.transform = CGAffineTransform(translationX: 0, y: initializeHeight)
         view.addSubview(containerView)
     }
+    
     func configureConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         let heightConstraint = NSLayoutConstraint(item: containerView,
@@ -689,6 +690,7 @@ private extension BottomSheetController {
         view.addConstraints([heightConstraint, rightConstraint, leftConstraint, bottomLayoutConstraint])
         self.containerViewHeightConstraint = heightConstraint
     }
+    
     func newState(_ state: State) {
         switch state {
         case .hide:
@@ -703,6 +705,7 @@ private extension BottomSheetController {
         }
         transform(state)
     }
+    
     func transform(_ state: State) {
         guard !isNeedLayout else { return }
         switch state {
@@ -729,17 +732,23 @@ private extension BottomSheetController {
             UIView.animate(withDuration: duration.showAll, delay: 0, options: .curveEaseInOut, animations: animations, completion: nil)
         }
     }
+    
     func adjustLayout() {
         containerView.layoutIfNeeded()
+        containerView.layoutSubviews()
+        view.layoutIfNeeded()
+        view.layoutSubviews()
+        contentView?.layoutIfNeeded()
+        contentView?.layoutSubviews()
         containerView.clipsToBounds = true
         containerView.roundCorners([.topLeft, .topRight], radius: cornerRadius)
-        
+
         guard isNeedLayout else { return }
         isNeedLayout = false
         if let bar = bar {
             containerView.bringSubview(toFront: bar)
         }
-        
+
         containerView.bringSubview(toFront: lineView)
         
         configureGesture()
@@ -748,21 +757,20 @@ private extension BottomSheetController {
     }
     
     func configureGesture() {
-        //
         overlayViewPanGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         overlayViewPanGestureRecognizer.delegate = self
         overlayViewTapGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleTap(_:)))
         
         guard isDraggable else { return }
-        //
+        
         panGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         panGestureRecognizer.delegate = self
-        //
         
         barGestureRecognizer.addTarget(self, action: #selector(BottomSheetController.handleGestureDragging(_:)))
         barGestureRecognizer.delegate = self
         barGestureRecognizer.require(toFail: panGestureRecognizer)
     }
+    
     func addGesture(_ state: State) {
         switch viewActionType {
         case .swipe:
@@ -775,13 +783,14 @@ private extension BottomSheetController {
             break
         case .show:
             bar?.addGestureRecognizer(barGestureRecognizer)
-            guard scrollView == nil || !isScrollEnabledInSheet else { return }
+            guard (scrollView == nil || !isScrollEnabledInSheet) && !isDraggable else { return }
             containerView.addGestureRecognizer(panGestureRecognizer)
         case .showAll:
             bar?.addGestureRecognizer(barGestureRecognizer)
             containerView.addGestureRecognizer(panGestureRecognizer)
         }
     }
+    
     func removeGesture(_ state: State) {
         switch state {
         case .hide:
@@ -810,6 +819,7 @@ extension BottomSheetController: UIGestureRecognizerDelegate {
         let contentOffset = scrollView.contentOffset.y + scrollView.contentInset.top
         return contentOffset == 0 && point.y > 0
     }
+    
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -820,6 +830,7 @@ extension BottomSheetController: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return BottomSheetTransitionAnimator(present: true)
     }
+    
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return BottomSheetTransitionAnimator(present: false)
     }
@@ -837,6 +848,7 @@ extension BottomSheet {
             self.presentDuration = presentDuration
             self.dismissDuration = dismissDuration
         }
+        
         open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
             if present == true {
                 return presentDuration
@@ -844,6 +856,7 @@ extension BottomSheet {
                 return dismissDuration
             }
         }
+        
         open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
             if present == true {
                 presentAnimation(transitionContext)
@@ -851,6 +864,7 @@ extension BottomSheet {
                 dismissAnimation(transitionContext)
             }
         }
+        
         // private
         fileprivate func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
             guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? BottomSheetController else {
@@ -858,7 +872,7 @@ extension BottomSheet {
                 return
             }
             let containerView = transitionContext.containerView
-            containerView.backgroundColor = .clear
+
             containerView.addSubview(toVC.view)
             toVC.overlayView.alpha = 0
             let animations = {
@@ -874,6 +888,7 @@ extension BottomSheet {
             }
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .curveEaseInOut, animations: animations, completion: completion)
         }
+        
         fileprivate func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
             guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? BottomSheetController else {
                 transitionContext.completeTransition(false)

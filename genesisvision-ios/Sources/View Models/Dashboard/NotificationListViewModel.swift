@@ -67,6 +67,23 @@ extension NotificationListViewModel {
 // MARK: - Fetch
 extension NotificationListViewModel {
     // MARK: - Public methods
+    func didSelectPortfolioEvents(at indexPath: IndexPath) {
+        guard !viewModels.isEmpty else {
+            return
+        }
+        
+        let selectedModel = viewModels[indexPath.row]
+        let notification = selectedModel.notification
+//        if let assetId = notification.assetId?.uuidString, let assetType = notification.assetType {
+//            switch assetType {
+//            case .program:
+//                router.showProgramDetails(with: assetId)
+//            case .fund:
+//                router.showFundDetails(with: assetId)
+//            }
+//        }
+    }
+    
     func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels)

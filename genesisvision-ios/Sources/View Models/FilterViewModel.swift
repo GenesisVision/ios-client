@@ -119,7 +119,17 @@ final class FilterViewModel {
     }
     
     func apply(completion: @escaping CompletionBlock) {
-//        listViewModel
+        if let minLevel = levelsFilterView?.minLevel, let maxLevel = levelsFilterView?.maxLevel {
+            listViewModel?.minLevel = minLevel
+            listViewModel?.maxLevel = maxLevel
+        }
+        
+        if let dateRangeView = dateRangeView {
+            PlatformManager.shared.dateFrom = dateRangeView.dateFrom
+            PlatformManager.shared.dateTo = dateRangeView.dateTo
+            PlatformManager.shared.dateRangeType = dateRangeView.selectedDateRangeType
+        }
+        
         completion(.success)
     }
     
@@ -180,6 +190,73 @@ extension FilterViewModel: LevelsFilterViewProtocol {
         
         filterViewModelProtocol?.didFilterReloadCell(0)
     }
+    
+    func showPickerMinPicker(min minLevel: Int, max maxLevel: Int) {
+        guard let vc = router.currentController as? BaseViewController else { return }
+        
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        
+        var values: [String] = []
+        for idx in Filters.minLevel...Filters.maxLevel - 1 {
+            values.append("\(idx)")
+        }
+        
+        var minValue = 1
+        if let text = self.levelsFilterView?.minTextField.text, let min = Int(text) {
+            minValue = min
+        }
+        let selectedIndex = values.index{ $0 == "\(minValue)" } ?? 0
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndex)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            if let minSelectedValue = Int(values[index.column][index.row]) {
+                if let text = self?.levelsFilterView?.maxTextField.text, let maxValue = Int(text), minSelectedValue > maxValue {
+                    self?.levelsFilterView?.maxTextField.text = "\(minSelectedValue + 1)"
+                }
+                self?.levelsFilterView?.minTextField.text = "\(minSelectedValue)"
+            }
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        vc.bottomSheetController.present(viewController: alert)
+    }
+    
+    func showPickerMaxPicker(min minLevel: Int, max maxLevel: Int) {
+        guard let vc = router.currentController as? BaseViewController else { return }
+        
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        
+        var values: [String] = []
+        var minValue = 1
+        if let text = self.levelsFilterView?.minTextField.text, let min = Int(text) {
+            minValue = min
+        }
+            
+        for idx in (minValue + 1)...Filters.maxLevel {
+            values.append("\(idx)")
+        }
+        
+        var maxValue = 7
+        if let text = self.levelsFilterView?.maxTextField.text, let max = Int(text) {
+            maxValue = max
+        }
+        let selectedIndex = values.index{ $0 == "\(maxValue)" } ?? 0
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndex)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            self?.levelsFilterView?.maxTextField.text = values[index.column][index.row]
+        }
+        
+        alert.addAction(title: "Done", style: .cancel)
+        vc.bottomSheetController.present(viewController: alert)
+    }
 }
 
 extension FilterViewModel: FilterCurrencyDelegateManagerProtocol {
@@ -204,11 +281,11 @@ extension FilterViewModel: SortingDelegate {
 }
 
 extension FilterViewModel: DateRangeViewProtocol {
-    func showDatePicker(with dateFrom: Date?, dateTo: Date) {
+    func showDatePicker(from dateFrom: Date?, to dateTo: Date) {
         
     }
     
-    func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?) {
+    func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?) {
         if let selectedDate = getSelectedDate() {
             viewModels[3].detail = selectedDate
         }

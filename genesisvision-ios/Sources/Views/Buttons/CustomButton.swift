@@ -227,6 +227,7 @@ class ActionButton: UIButton {
         
         titleLabel?.font = UIFont.getFont(.semibold, size: options.fontSize ?? 14.0)
         backgroundColor = isUserInteractionEnabled ? options.bgColor ?? UIColor.primary : options.bgColor?.withAlphaComponent(0.3) ?? UIColor.primary.withAlphaComponent(0.3)
+        titleLabel?.textColor = isUserInteractionEnabled ? options.textColor ?? UIColor.Common.white : options.textColor?.withAlphaComponent(0.3) ?? UIColor.Common.white.withAlphaComponent(0.3)
     }
     
     override func layoutSubviews() {

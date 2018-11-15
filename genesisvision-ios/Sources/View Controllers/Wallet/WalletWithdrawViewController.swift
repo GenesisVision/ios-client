@@ -356,7 +356,7 @@ extension WalletWithdrawViewController: QRCodeReaderViewControllerDelegate {
 }
 
 extension WalletWithdrawViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return availableInWalletValue
     }
     

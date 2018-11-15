@@ -14,13 +14,11 @@ target 'genesisvision-ios' do
     pod 'DZNEmptyDataSet'
 
     pod 'Kingfisher', '~> 4.0'
-    pod 'TTRangeSlider'
     
     pod 'Firebase/Core'
     pod 'Firebase/Crash'
     
     pod 'ReachabilitySwift'
-    pod 'NotificationBannerSwift'
-    pod 'SimulatorStatusMagic', :configurations => ['debug investor', 'debug manager', 'debug tournament']
     pod 'Tabman', '~> 1.0'
+    pod 'NotificationBannerSwift', '1.6.3'
 end

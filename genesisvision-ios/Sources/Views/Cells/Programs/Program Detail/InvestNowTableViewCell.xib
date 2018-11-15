@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXX-oU-LEc">
-                        <rect key="frame" x="20" y="24" width="280" height="21"/>
+                        <rect key="frame" x="20" y="20" width="280" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="7yK-DH-zee"/>
                         </constraints>
@@ -29,10 +29,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PEE-od-7LG">
-                        <rect key="frame" x="20" y="66" width="280" height="176.5"/>
+                        <rect key="frame" x="20" y="62" width="280" height="190.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="7hJ-jm-49X">
-                                <rect key="frame" x="0.0" y="68" width="93.5" height="41"/>
+                                <rect key="frame" x="0.0" y="75" width="93.5" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ce-8c-cVW">
                                         <rect key="frame" x="0.0" y="0.0" width="93.5" height="20.5"/>
@@ -49,7 +49,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="OGk-xX-6eX">
-                                <rect key="frame" x="93.5" y="68" width="93" height="41"/>
+                                <rect key="frame" x="93.5" y="75" width="93" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-Ch-qJE">
                                         <rect key="frame" x="0.0" y="0.0" width="93" height="20.5"/>
@@ -66,7 +66,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-jf-OzW">
-                                <rect key="frame" x="186.5" y="68" width="93.5" height="41"/>
+                                <rect key="frame" x="186.5" y="75" width="93.5" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-PX-TV1">
                                         <rect key="frame" x="0.0" y="0.0" width="93.5" height="20.5"/>
@@ -84,36 +84,38 @@
                             </stackView>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-YF-Trs" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="274.5" width="280" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="Xuq-MR-LdL"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
-                        <connections>
-                            <action selector="investButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cee-Ai-nZ2"/>
-                        </connections>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="344.5" width="280" height="29"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0zE-uW-kbp">
+                        <rect key="frame" x="20" y="272.5" width="280" height="99"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-YF-Trs" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Xuq-MR-LdL"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="investButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cee-Ai-nZ2"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="280" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="A0B-Yt-WF2" firstAttribute="trailing" secondItem="GrT-YF-Trs" secondAttribute="trailing" id="0DZ-yh-dps"/>
-                    <constraint firstItem="pXX-oU-LEc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="2nY-bp-Tmp"/>
+                    <constraint firstItem="pXX-oU-LEc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="2nY-bp-Tmp"/>
                     <constraint firstItem="PEE-od-7LG" firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" id="42t-QF-jfc"/>
+                    <constraint firstAttribute="bottom" secondItem="0zE-uW-kbp" secondAttribute="bottom" constant="20" id="43u-Tc-xgX"/>
                     <constraint firstItem="PEE-od-7LG" firstAttribute="top" secondItem="pXX-oU-LEc" secondAttribute="bottom" constant="21" id="7Ne-a3-GoJ"/>
                     <constraint firstItem="PEE-od-7LG" firstAttribute="leading" secondItem="pXX-oU-LEc" secondAttribute="leading" id="7Tg-Yt-e4m"/>
-                    <constraint firstItem="A0B-Yt-WF2" firstAttribute="top" secondItem="GrT-YF-Trs" secondAttribute="bottom" constant="20" id="J05-cI-4ld"/>
-                    <constraint firstItem="GrT-YF-Trs" firstAttribute="leading" secondItem="pXX-oU-LEc" secondAttribute="leading" id="QWi-l7-Ab9"/>
-                    <constraint firstItem="GrT-YF-Trs" firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" id="Ts8-7B-XNO"/>
-                    <constraint firstAttribute="bottom" secondItem="A0B-Yt-WF2" secondAttribute="bottom" constant="18" id="Ucw-xX-HXA"/>
-                    <constraint firstItem="GrT-YF-Trs" firstAttribute="top" secondItem="PEE-od-7LG" secondAttribute="bottom" constant="32" id="Xs6-WO-wnW"/>
+                    <constraint firstItem="0zE-uW-kbp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="AJc-CH-cih"/>
+                    <constraint firstAttribute="trailing" secondItem="0zE-uW-kbp" secondAttribute="trailing" constant="20" id="WYc-Cv-NyB"/>
                     <constraint firstItem="pXX-oU-LEc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ads-3g-7yN"/>
-                    <constraint firstItem="A0B-Yt-WF2" firstAttribute="leading" secondItem="GrT-YF-Trs" secondAttribute="leading" id="gLa-6d-Hks"/>
+                    <constraint firstItem="0zE-uW-kbp" firstAttribute="top" secondItem="PEE-od-7LG" secondAttribute="bottom" constant="20" id="nEL-dc-z9D"/>
                     <constraint firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" constant="20" id="otH-3Q-4vE"/>
                 </constraints>
             </tableViewCellContentView>

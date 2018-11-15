@@ -65,7 +65,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.currencyLabel.text = currency.rawValue
         }
         
-        cell.firstTitleLabel.text = "Time left"
+        cell.firstTitleLabel.text = "time left"
         if let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
             
             let today = Date()
@@ -80,7 +80,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.firstValueLabel.text = ""
         }
         
-        cell.secondTitleLabel.text = "Current value"
+        cell.secondTitleLabel.text = "current value"
         if let value = program.personalDetails?.value {
             let currency: CurrencyType = .gvt
             cell.secondValueLabel.text = value.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
@@ -88,7 +88,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.secondValueLabel.text = ""
         }
         
-        cell.thirdTitleLabel.text = "Share"
+        cell.thirdTitleLabel.text = "share"
         if let share = program.dashboardAssetsDetails?.share {
             cell.thirdValueLabel.text = share.rounded(withType: .undefined).toString() + "%"
         } else {

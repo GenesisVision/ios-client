@@ -34,7 +34,10 @@ protocol ListViewModelProtocol {
     
     var dateFrom: Date? { get set }
     var dateTo: Date? { get set }
-
+    
+    var minLevel: Int { get set }
+    var maxLevel: Int { get set }
+    
     var mask: String? { get set }
     var isFavorite: Bool { get set }
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,14 +20,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hf4-Vo-Opg">
-                        <rect key="frame" x="16" y="25" width="60" height="60"/>
+                        <rect key="frame" x="20" y="35" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="OVw-pq-p2Z"/>
-                            <constraint firstAttribute="height" constant="60" id="wSP-ez-zYn"/>
+                            <constraint firstAttribute="width" constant="40" id="OVw-pq-p2Z"/>
+                            <constraint firstAttribute="width" secondItem="hf4-Vo-Opg" secondAttribute="height" multiplier="1:1" id="gkB-jg-RMY"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="aKl-Q9-kUZ">
-                        <rect key="frame" x="84" y="34.5" width="212" height="41"/>
+                        <rect key="frame" x="76" y="34.5" width="220" height="41"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcI-pT-ZZb">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
@@ -52,15 +52,15 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hf4-Vo-Opg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5R2-v3-1sT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aKl-Q9-kUZ" secondAttribute="trailing" constant="8" id="BEW-Gi-f4F"/>
                     <constraint firstAttribute="trailing" secondItem="fDH-sN-ucB" secondAttribute="trailing" constant="20" id="CJy-1u-ivs"/>
                     <constraint firstItem="hf4-Vo-Opg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ErA-CY-DaX"/>
                     <constraint firstItem="fDH-sN-ucB" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KoW-Ea-4m3"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="hf4-Vo-Opg" secondAttribute="bottom" constant="8" id="chQ-qW-aTs"/>
+                    <constraint firstItem="hf4-Vo-Opg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="YCb-Bb-9zc"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="hf4-Vo-Opg" secondAttribute="bottom" constant="12" id="chQ-qW-aTs"/>
                     <constraint firstItem="aKl-Q9-kUZ" firstAttribute="centerY" secondItem="hf4-Vo-Opg" secondAttribute="centerY" id="ff2-ni-TtN"/>
-                    <constraint firstItem="hf4-Vo-Opg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="qEX-34-MMQ"/>
-                    <constraint firstItem="aKl-Q9-kUZ" firstAttribute="leading" secondItem="hf4-Vo-Opg" secondAttribute="trailing" constant="8" id="wMY-Lw-lTb"/>
+                    <constraint firstItem="hf4-Vo-Opg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="qEX-34-MMQ"/>
+                    <constraint firstItem="aKl-Q9-kUZ" firstAttribute="leading" secondItem="hf4-Vo-Opg" secondAttribute="trailing" constant="16" id="wMY-Lw-lTb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

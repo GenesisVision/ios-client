@@ -13,6 +13,9 @@ enum ProgramListViewState {
 }
 
 final class ProgramListViewModel: ListViewModelProtocol {
+    var minLevel: Int = 1
+    var maxLevel: Int = 7
+    
     var type: ListType = .programList
     
     // MARK: - Variables
@@ -50,7 +53,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var dateFrom: Date?
     var dateTo: Date?
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signIn : .filter
+        return signInButtonEnable ? .signInWithFilter : .filter
     }
     
     var searchText = "" {

@@ -172,7 +172,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     @objc func dateRangeButtonAction(with delegate: DateRangeViewProtocol? = nil) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
-        bottomSheetController.initializeHeight = 380
+        bottomSheetController.initializeHeight = 370
         bottomSheetController.addContentsView(dateRangeView)
         bottomSheetController.bottomSheetControllerProtocol = dateRangeView
         dateRangeView.delegate = delegate ?? self
@@ -343,7 +343,7 @@ extension BaseViewController: UIScrollViewDelegate {
 }
 
 extension BaseViewController: DateRangeViewProtocol {
-    func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?) {
+    func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?) {
         bottomSheetController.dismiss()
 
         updateDateRangeButton()
@@ -364,7 +364,7 @@ extension BaseViewController: DateRangeViewProtocol {
         }
     }
     
-    func showDatePicker(with dateFrom: Date?, dateTo: Date) {
+    func showDatePicker(from dateFrom: Date?, to dateTo: Date) {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         alert.view.tintColor = UIColor.Cell.headerBg
         

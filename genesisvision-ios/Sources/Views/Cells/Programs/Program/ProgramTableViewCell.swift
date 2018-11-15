@@ -79,6 +79,11 @@ class ProgramTableViewCell: PlateTableViewCell {
             periodLeftProgressView.backgroundStrokeColor = UIColor.primary.withAlphaComponent(0.2)
         }
     }
+    
+    @IBOutlet weak var firstStackView: UIStackView!
+    @IBOutlet weak var secondStackView: UIStackView!
+    @IBOutlet weak var thirdStackView: UIStackView!
+    
     @IBOutlet weak var firstValueLabel: TitleLabel!
     @IBOutlet weak var secondValueLabel: TitleLabel!
     @IBOutlet weak var thirdValueLabel: TitleLabel!
@@ -99,24 +104,24 @@ class ProgramTableViewCell: PlateTableViewCell {
             fundBottomStackView.isHidden = true
         }
     }
-    @IBOutlet weak var firstFunAssetView: FundAssetView! {
+    @IBOutlet weak var firstFundAssetView: FundAssetView! {
         didSet {
-            firstFunAssetView.isHidden = true
+            firstFundAssetView.isHidden = true
         }
     }
-    @IBOutlet weak var secondFunAssetView: FundAssetView! {
+    @IBOutlet weak var secondFundAssetView: FundAssetView! {
         didSet {
-            secondFunAssetView.isHidden = true
+            secondFundAssetView.isHidden = true
         }
     }
-    @IBOutlet weak var thirdFunAssetView: FundAssetView! {
+    @IBOutlet weak var thirdFundAssetView: FundAssetView! {
         didSet {
-            thirdFunAssetView.isHidden = true
+            thirdFundAssetView.isHidden = true
         }
     }
-    @IBOutlet weak var otherFunAssetView: FundAssetView! {
+    @IBOutlet weak var otherFundAssetView: FundAssetView! {
         didSet {
-            otherFunAssetView.isHidden = true
+            otherFundAssetView.isHidden = true
         }
     }
     

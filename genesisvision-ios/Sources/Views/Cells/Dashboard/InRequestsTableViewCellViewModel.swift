@@ -29,22 +29,36 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
-        if let type = programRequest.type {
+        if let type = programRequest.type, let programType = programRequest.programType {
             switch type {
             case .invest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
                 cell.statusLabel.text = "Invest"
-                cell.amountValueLabel.text = "-"
             case .withdrawal:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
                 cell.statusLabel.text = "Withdraw"
-                cell.amountValueLabel.text = "+"
             }
             
-            if let value = programRequest.value, let programCurrency = programRequest.currency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
-                let text = cell.amountValueLabel.text ?? ""
-                cell.amountValueLabel.text = text + value.rounded(withType: currency).toString() + " \(currency.rawValue)"
+            if type == .withdrawal, programType == .fund {
+                if let fundWithdrawPercent = programRequest.fundWithdrawPercent, let valueGvt = programRequest.valueGvt {
+                    let currency: CurrencyType = .gvt
+                    let text = "\(fundWithdrawPercent)% (≈ " + valueGvt.rounded(withType: currency).toString() + " " + Constants.gvtString + ")"
+                    cell.amountValueLabel.text = text
+                }
+            } else {
+                switch type {
+                case .invest:
+                    cell.amountValueLabel.text = "-"
+                case .withdrawal:
+                    cell.amountValueLabel.text = "+"
+                }
+                
+                if let value = programRequest.value, let programCurrency = programRequest.currency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
+                    let text = cell.amountValueLabel.text ?? ""
+                    cell.amountValueLabel.text = text + value.rounded(withType: currency).toString() + " \(currency.rawValue)"
+                }
             }
+            
         }
         
         if let date = programRequest.date {

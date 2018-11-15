@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TTRangeSlider
 
 class WalletFilterViewController: BaseViewControllerWithTableView {
     

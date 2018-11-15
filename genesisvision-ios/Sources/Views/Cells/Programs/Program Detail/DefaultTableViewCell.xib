@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vt-vU-8tK" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="24" width="280" height="21"/>
+                        <rect key="frame" x="20" y="12" width="280" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="v0T-H6-3WB"/>
                         </constraints>
@@ -29,20 +29,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIo-Ln-NMX" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="20" y="65" width="280" height="148.5"/>
+                        <rect key="frame" x="20" y="53" width="280" height="148.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="2Vt-vU-8tK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="3Gh-hd-DSb"/>
+                    <constraint firstItem="2Vt-vU-8tK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="3Gh-hd-DSb"/>
                     <constraint firstItem="jIo-Ln-NMX" firstAttribute="top" secondItem="2Vt-vU-8tK" secondAttribute="bottom" constant="20" id="Bd7-BG-yYK"/>
                     <constraint firstItem="jIo-Ln-NMX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="QYP-Jd-Cqy"/>
                     <constraint firstAttribute="trailing" secondItem="jIo-Ln-NMX" secondAttribute="trailing" constant="20" id="Riw-FE-lW3"/>
                     <constraint firstItem="2Vt-vU-8tK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="S3N-5a-Psv"/>
                     <constraint firstAttribute="trailing" secondItem="2Vt-vU-8tK" secondAttribute="trailing" constant="20" id="d0d-4A-13e"/>
-                    <constraint firstAttribute="bottom" secondItem="jIo-Ln-NMX" secondAttribute="bottom" constant="8" id="ov8-6i-iBc"/>
+                    <constraint firstAttribute="bottom" secondItem="jIo-Ln-NMX" secondAttribute="bottom" constant="20" id="ov8-6i-iBc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

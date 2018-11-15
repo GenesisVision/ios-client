@@ -55,13 +55,31 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var payoutDayTitleLabel: SubtitleLabel! {
+    @IBOutlet var exitFeeTitleLabel: SubtitleLabel! {
         didSet {
-            payoutDayTitleLabel.text = "Payout day"
-            payoutDayTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            exitFeeTitleLabel.text = "Exit fee"
+            exitFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var payoutDayValueLabel: TitleLabel!
+    @IBOutlet var exitFeeValueLabel: TitleLabel!
+    
+    @IBOutlet var withdrawingAmountTitleLabel: SubtitleLabel! {
+        didSet {
+            withdrawingAmountTitleLabel.text = "You will get approx."
+            withdrawingAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet var withdrawingAmountValueLabel: TitleLabel! {
+        didSet {
+            withdrawingAmountValueLabel.text = "0 GVT"
+        }
+    }
+    
+    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+        didSet {
+            disclaimerLabel.text = "The withdrawal amount can be changed depending on the exchange rate or the success of the Manager."
+        }
+    }
     
     // MARK: - Buttons
     @IBOutlet var withdrawButton: ActionButton!
@@ -73,7 +91,7 @@ class FundWithdrawViewController: BaseViewController {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
-            numpadView.type = .number
+            numpadView.type = .currency
         }
     }
     
@@ -95,12 +113,12 @@ class FundWithdrawViewController: BaseViewController {
         super.viewDidLoad()
         
         navigationItem.title = viewModel.title
+        
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setup()
     }
     
     // MARK: - Private methods
@@ -127,14 +145,27 @@ class FundWithdrawViewController: BaseViewController {
             self.availableToWithdrawValue = availableToWithdraw
         }
 
+        let withdrawingValue = availableToWithdrawValue / 100 * amountToWithdrawValue
         
-        let amountToWithdrawValueCurrencyString = (availableToWithdrawValue / 100 * amountToWithdrawValue).rounded(withType: .gvt).toString()
+        if let exitFee = viewModel.fundWithdrawInfo?.exitFee {
+            let exitFeeString = exitFee.rounded(withType: .undefined).toString()
+            
+            let exitFeeGVT = exitFee * withdrawingValue / 100
+            let exitFeeGVTString = exitFeeGVT.rounded(withType: .gvt).toString()
+            
+            let exitFeeValueLabelString = exitFeeString + "% (≈ \(exitFeeGVTString) " + Constants.gvtString + ")"
+            self.exitFeeValueLabel.text = exitFeeValueLabelString
+            
+            let withdrawingAmountValue = (withdrawingValue - exitFeeGVT).rounded(withType: .gvt).toString()
+            self.withdrawingAmountValueLabel.text = "≈ " + withdrawingAmountValue + " " + Constants.gvtString
+        }
+        
+        let amountToWithdrawValueCurrencyString = (withdrawingValue).rounded(withType: .gvt).toString()
         self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
         
-        let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue * 100 <= availableToWithdrawValue
+        let withdrawButtonEnabled = amountToWithdrawValue > 0 && amountToWithdrawValue <= 100
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
-//        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
     private func withdrawMethod() {
@@ -157,16 +188,6 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     
-//    private func updateNumPadState(value: String?) {
-//        if let text = value, text.range(of: ".") != nil,
-//            let lastComponents = text.components(separatedBy: ".").last,
-//            lastComponents.count >= getDecimalCount(for: currency) {
-//            changedActive(value: false)
-//        } else {
-//            changedActive(value: true)
-//        }
-//    }
-    
     @objc private func closeButtonAction() {
         viewModel.close()
     }
@@ -174,21 +195,27 @@ class FundWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 226.0
+        bottomSheetController.initializeHeight = 430.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-    
+        var amountText = ""
+        if let amountToWithdrawValue = amountToWithdrawValueLabel.text, let amountToWithdrawCurrency = amountToWithdrawCurrencyLabel.text {
+            amountText = amountToWithdrawValue + "% (" + amountToWithdrawCurrency + ")"
+        }
+        
+        let subtitle = "Your request will be processed within a few minutes."
+        
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
-                                                          subtitle: nil,
+                                                          subtitle: subtitle,
                                                           programLogo: nil,
                                                           programTitle: nil,
                                                           managerName: nil,
                                                           firstTitle: "Amount to withdraw",
-                                                          firstValue: amountToWithdrawValueLabel.text,
-                                                          secondTitle: nil,
-                                                          secondValue: nil,
-                                                          thirdTitle: nil,
-                                                          thirdValue: nil,
+                                                          firstValue: amountText,
+                                                          secondTitle: exitFeeTitleLabel.text,
+                                                          secondValue: exitFeeValueLabel.text,
+                                                          thirdTitle: "You will get approximately",
+                                                          thirdValue: withdrawingAmountValueLabel.text,
                                                           fourthTitle: nil,
                                                           fourthValue: nil)
         confirmView.configure(model: confirmViewModel)
@@ -209,8 +236,12 @@ class FundWithdrawViewController: BaseViewController {
 }
 
 extension FundWithdrawViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
-        return availableToWithdrawValue / 100
+    var maxAmount: Double? {
+        return 100
+    }
+    
+    var minAmount: Double? {
+        return 0
     }
     
     var textPlaceholder: String? {
@@ -234,7 +265,7 @@ extension FundWithdrawViewController: NumpadViewProtocol {
     }
     
     func textLabelDidChange(value: Double?) {
-        guard let value = value, value <= availableToWithdrawValue else { return }
+        guard let value = value else { return }
         
         numpadView.isEnable = true
         amountToWithdrawValue = value

@@ -25,7 +25,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         cell.yourInvestmentProtocol = yourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
-        cell.titleLabel.text = "Current period invt."
+        cell.titleLabel.text = "Current period investment"
         cell.reinvestTitleLabel.text = "Auto reinvest"
         
         if let status = programDetailsFull?.personalProgramDetails?.status?.rawValue {

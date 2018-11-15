@@ -142,7 +142,6 @@ class ProgramWithdrawViewController: BaseViewController {
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
-//        updateNumPadState(value: amountToWithdrawValueLabel.text)
     }
     
     private func withdrawMethod() {
@@ -164,16 +163,6 @@ class ProgramWithdrawViewController: BaseViewController {
             }
         }
     }
-    
-//    private func updateNumPadState(value: String?) {
-//        if let text = value, text.range(of: ".") != nil,
-//            let lastComponents = text.components(separatedBy: ".").last,
-//            lastComponents.count >= getDecimalCount(for: currency) {
-//            changedActive(value: false)
-//        } else {
-//            changedActive(value: true)
-//        }
-//    }
     
     @objc private func closeButtonAction() {
         viewModel.close()
@@ -219,7 +208,7 @@ class ProgramWithdrawViewController: BaseViewController {
 }
 
 extension ProgramWithdrawViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return availableToWithdrawValue
     }
     

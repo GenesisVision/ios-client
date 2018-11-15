@@ -9,8 +9,8 @@
 import UIKit
 
 @objc protocol DateRangeViewProtocol: class {
-    func applyButtonDidPress(with dateFrom: Date?, dateTo: Date?)
-    func showDatePicker(with dateFrom: Date?, dateTo: Date)
+    func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?)
+    func showDatePicker(from dateFrom: Date?, to dateTo: Date)
 }
 
 class DateRangeView: UIView {
@@ -198,9 +198,9 @@ class DateRangeView: UIView {
         }
         
         if sender == dateFromTextField {
-            delegate?.showDatePicker(with: dateFrom, dateTo: dateTo)
+            delegate?.showDatePicker(from: dateFrom, to: dateTo)
         } else {
-            delegate?.showDatePicker(with: nil, dateTo: dateTo)
+            delegate?.showDatePicker(from: nil, to: dateTo)
         }
     }
     
@@ -213,7 +213,7 @@ class DateRangeView: UIView {
     @IBAction func applyButtonAction(_ sender: UIButton) {
         updateTime()
         
-        delegate?.applyButtonDidPress(with: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
+        delegate?.applyButtonDidPress(from: PlatformManager.shared.dateFrom, to: PlatformManager.shared.dateTo)
     }
 }
 

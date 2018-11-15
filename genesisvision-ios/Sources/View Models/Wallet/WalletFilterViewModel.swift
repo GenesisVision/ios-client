@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TTRangeSlider
 
 final class WalletFilterViewModel {
     

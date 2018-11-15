@@ -205,7 +205,7 @@ class WalletDepositViewController: BaseViewController {
 }
 
 extension WalletDepositViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return nil
     }
     

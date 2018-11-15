@@ -40,7 +40,7 @@ final class ProgramInfoViewModel {
                 self.availableInvestment = availableInvestment
             }
             
-            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested, let status = programDetailsFull?.personalProgramDetails?.status, status != .ended {
+            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
                 }
@@ -224,7 +224,7 @@ extension ProgramInfoViewModel {
     
     func updateDetails(with programDetailsFull: ProgramDetailsFull) {
         self.programDetailsFull = programDetailsFull
-        self.didReloadData()
+        self.reloadDataProtocol?.didReloadData()
     }
 }
 

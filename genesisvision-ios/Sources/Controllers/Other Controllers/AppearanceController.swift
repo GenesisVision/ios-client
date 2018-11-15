@@ -10,10 +10,6 @@ import UIKit
 import IQKeyboardManagerSwift
 import PKHUD
 
-#if DEBUG
-import SimulatorStatusMagic
-#endif
-
 enum ThemeType: String {
     case `default`, dark
 }
@@ -103,10 +99,6 @@ struct AppearanceController {
     }
     
     static func setupAppearance() {
-        #if DEBUG
-        SDStatusBarManager.sharedInstance().enableOverrides()
-        #endif
-        
         setupNavigationBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
         

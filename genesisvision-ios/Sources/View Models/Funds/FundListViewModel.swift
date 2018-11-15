@@ -13,6 +13,9 @@ enum FundListViewState {
 }
 
 final class FundListViewModel: ListViewModelProtocol {
+    var minLevel: Int = 1
+    var maxLevel: Int = 7
+    
     
     // MARK: - Variables
     var type: ListType = .fundList
@@ -47,7 +50,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var dateTo: Date?
     
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signIn : .filter
+        return signInButtonEnable ? .signInWithFilter : .filter
     }
     
     var searchText = "" {

@@ -189,7 +189,7 @@ extension FundInfoViewModel {
     
     func updateDetails(with fundDetailsFull: FundDetailsFull) {
         self.fundDetailsFull = fundDetailsFull
-        self.didReloadData()
+        self.reloadDataProtocol?.didReloadData()
     }
 }
 

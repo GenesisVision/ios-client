@@ -516,26 +516,29 @@
                 <outlet property="currencyLabel" destination="bsn-Ot-TFc" id="p0x-0e-obu"/>
                 <outlet property="dashboardBottomStackView" destination="vYo-Sa-d7W" id="sRQ-JJ-Ccy"/>
                 <outlet property="favoriteButton" destination="Dy2-tB-PY6" id="lrb-dX-f3f"/>
-                <outlet property="firstFunAssetView" destination="qaX-aC-Bcd" id="0iI-Ab-I0R"/>
+                <outlet property="firstFundAssetView" destination="qaX-aC-Bcd" id="0iI-Ab-I0R"/>
+                <outlet property="firstStackView" destination="3dc-il-rIy" id="yy4-c1-rZu"/>
                 <outlet property="firstTitleLabel" destination="9vD-q0-1m7" id="Wqb-6T-JWS"/>
                 <outlet property="firstValueLabel" destination="YYm-1Z-EZR" id="S91-cZ-37X"/>
                 <outlet property="fundBottomStackView" destination="ZFN-SI-Ohn" id="suv-xg-LEp"/>
                 <outlet property="investedImageView" destination="Gr9-WU-rEO" id="22e-VW-dlS"/>
                 <outlet property="managerNameLabel" destination="AcF-qQ-Zug" id="29G-ZE-9Ju"/>
                 <outlet property="noDataLabel" destination="mzn-bM-hio" id="wv0-a9-B3X"/>
-                <outlet property="otherFunAssetView" destination="1t0-Lc-2TW" id="9Ay-z9-LcZ"/>
+                <outlet property="otherFundAssetView" destination="1t0-Lc-2TW" id="9Ay-z9-LcZ"/>
                 <outlet property="periodLeftProgressView" destination="OOb-Mc-BeD" id="0Ee-we-vnc"/>
                 <outlet property="profitPercentLabel" destination="waZ-UU-3eb" id="rYP-Js-Pp2"/>
                 <outlet property="profitValueLabel" destination="HIW-Ax-xUy" id="kMN-Qf-dp5"/>
                 <outlet property="reinvestLabel" destination="Sih-FJ-okz" id="FRr-A8-qIX"/>
                 <outlet property="reinvestSwitch" destination="dNv-XR-PkX" id="gD1-TX-8F3"/>
                 <outlet property="reinvestTooltip" destination="yF4-cZ-yto" id="Zmm-XV-4Su"/>
-                <outlet property="secondFunAssetView" destination="Pk0-kP-iwZ" id="Cwt-vz-8cc"/>
+                <outlet property="secondFundAssetView" destination="Pk0-kP-iwZ" id="Cwt-vz-8cc"/>
+                <outlet property="secondStackView" destination="sf1-Bb-YUA" id="o96-Vm-ABp"/>
                 <outlet property="secondTitleLabel" destination="3fz-cm-Wwa" id="0Yp-xi-oQ2"/>
                 <outlet property="secondValueLabel" destination="e4V-HV-QRw" id="UOP-LQ-inF"/>
                 <outlet property="stackView" destination="zN4-IX-FiD" id="x50-gj-JWb"/>
                 <outlet property="statusButton" destination="7Ev-NB-uN5" id="ovE-fN-v88"/>
-                <outlet property="thirdFunAssetView" destination="i5T-fK-D9X" id="bIq-Y8-Y6g"/>
+                <outlet property="thirdFundAssetView" destination="i5T-fK-D9X" id="bIq-Y8-Y6g"/>
+                <outlet property="thirdStackView" destination="dGH-PM-kWn" id="aMZ-Rq-Sqa"/>
                 <outlet property="thirdTitleLabel" destination="Zkc-dD-YUT" id="dvk-4C-SGN"/>
                 <outlet property="thirdValueLabel" destination="uZy-5J-VEO" id="3VP-Qm-zct"/>
                 <outlet property="titleLabel" destination="uuZ-15-n94" id="oar-dk-DrK"/>

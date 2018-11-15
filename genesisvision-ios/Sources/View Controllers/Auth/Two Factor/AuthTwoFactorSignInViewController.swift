@@ -117,7 +117,7 @@ class AuthTwoFactorSignInViewController: BaseViewController {
 }
 
 extension AuthTwoFactorSignInViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return nil
     }
     

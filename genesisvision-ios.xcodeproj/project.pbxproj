@@ -288,6 +288,8 @@
 		5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */; };
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
 		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
+		5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */; };
+		5E9FCF9E2199E3BC001FB114 /* NHRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
 		5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */; };
 		5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D020A082AE00905253 /* TabmanViewModel.swift */; };
@@ -885,6 +887,8 @@
 		5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRequestsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSlider.swift; sourceTree = "<group>"; };
+		5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSliderView.swift; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EA173D020A082AE00905253 /* TabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanViewModel.swift; sourceTree = "<group>"; };
@@ -1625,6 +1629,15 @@
 				5E6D681C207655A100299408 /* String+Constants.swift */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		5E9FCF982199E3BC001FB114 /* NHRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */,
+				5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */,
+			);
+			path = NHRangeSlider;
 			sourceTree = "<group>";
 		};
 		5EA7A0F820A0B08B00D895FC /* Program Details */ = {
@@ -2530,6 +2543,7 @@
 		FCC9DD50200DFA5E008825EC /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5E9FCF982199E3BC001FB114 /* NHRangeSlider */,
 				5E1CF831218C02EF00541C70 /* TweeTextField */,
 				5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */,
 				5EAD0AB1208F7CA900A92B49 /* EasyTipView */,
@@ -2697,6 +2711,7 @@
 					};
 					FCC9DD23200DF2C3008825EC = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -2829,10 +2844,8 @@
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/SmileLock/SmileLock.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -2851,10 +2864,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmileLock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -2923,6 +2934,7 @@
 				5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */,
 				5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */,
 				5E4BC98621877893000F2E57 /* Facet.swift in Sources */,
+				5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */,
 				5EA274CF2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				5E4BC9E221877893000F2E57 /* TradesViewModel.swift in Sources */,
@@ -3273,6 +3285,7 @@
 				5EA173D320A0883000905253 /* TabmanRouter.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
 				FCA5706A2027395E001942F3 /* UIImage+Placeholder.swift in Sources */,
+				5E9FCF9E2199E3BC001FB114 /* NHRangeSliderView.swift in Sources */,
 				5E4BC98C21877893000F2E57 /* NotificationList.swift in Sources */,
 				5ED1141821594ED900EC5385 /* EventListViewModel.swift in Sources */,
 				5ED03F3720FF784A00AF5E07 /* FieldWithTextViewTableViewCellViewModel.swift in Sources */,
@@ -3871,6 +3884,7 @@
 			baseConfigurationReference = 96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -3882,6 +3896,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3950,6 +3965,7 @@
 			baseConfigurationReference = 1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -3962,6 +3978,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4023,6 +4040,7 @@
 			baseConfigurationReference = 8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4034,6 +4052,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4095,6 +4114,7 @@
 			baseConfigurationReference = A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4106,6 +4126,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4174,6 +4195,7 @@
 			baseConfigurationReference = 9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4186,6 +4208,7 @@
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4247,6 +4270,7 @@
 			baseConfigurationReference = 48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4258,6 +4282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

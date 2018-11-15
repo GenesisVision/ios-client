@@ -159,7 +159,7 @@ extension Date {
         } else if (hours == 1){
             return "1 hour"
         } else if (minutes >= 2) {
-            return "\(minutes) minutes"
+            return "\(minutes) min"
         } else if (minutes == 1) {
             return "1 min"
         } else if (seconds >= 2) {

@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 final class FavoriteProgramListViewModel: ListViewModelProtocol {
+    var minLevel: Int = 1
+    var maxLevel: Int = 7
+    
     var type: ListType = .programList
     
    // MARK: - Variables

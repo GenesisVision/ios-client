@@ -132,7 +132,7 @@ extension ManagerInfoViewModel {
     
     func updateDetails(with managerProfileDetails: ManagerProfileDetails) {
         self.managerProfileDetails = managerProfileDetails
-        self.didReloadData()
+        self.reloadDataProtocol?.didReloadData()
     }
 }
 

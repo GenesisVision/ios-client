@@ -98,12 +98,9 @@ class FilterViewController: BaseViewControllerWithTableView {
     }
     
     private func showLevels() {
-        
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Levels")
-        bottomSheetController.initializeHeight = 200
-        bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.isDraggable = false
+        bottomSheetController.initializeHeight = 256
         if let levelsFilterView = viewModel.levelsFilterView {
             bottomSheetController.addContentsView(levelsFilterView)
             bottomSheetController.bottomSheetControllerProtocol = levelsFilterView

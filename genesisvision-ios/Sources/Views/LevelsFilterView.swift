@@ -7,32 +7,48 @@
 //
 
 import UIKit
-import TTRangeSlider
 
 enum LevelFilterType {
-    case slider, buttons
+    case fields, buttons
 }
 
 protocol LevelsFilterViewProtocol: class {
     func applyButtonDidPress()
+    func showPickerMinPicker(min minLevel: Int, max maxLevel: Int)
+    func showPickerMaxPicker(min minLevel: Int, max maxLevel: Int)
 }
 
 class LevelsFilterView: UIView {
     // MARK: - Variables
     
-    let levelFilterType: LevelFilterType = .slider
+    let levelFilterType: LevelFilterType = .fields
     
     weak var delegate: LevelsFilterViewProtocol?
     
-    private var minLevel: Int = 1
-    private var maxLevel: Int = 7
+    var minLevel: Int = 1
+    var maxLevel: Int = 7
     
     private var selectedLevels: [Int] = [0]
     
     var bottomSheetController: BottomSheetController?
     
     // MARK: - IBOutlets
-    @IBOutlet var rangeSlider: TTRangeSlider!
+    @IBOutlet var minTitleLabel: UILabel!
+    @IBOutlet var maxTitleLabel: UILabel!
+    
+    @IBOutlet var minTextField: DesignableUITextField! {
+        didSet {
+            minTextField.addPadding()
+            minTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+        }
+    }
+    @IBOutlet var maxTextField: DesignableUITextField! {
+        didSet {
+            maxTextField.addPadding()
+            maxTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+        }
+    }
+    
     @IBOutlet var levelButtons: [LevelFilterButton]!
     
     @IBOutlet var applyButton: ActionButton!
@@ -50,8 +66,8 @@ class LevelsFilterView: UIView {
         switch levelFilterType {
         case .buttons:
             updateLevelButtons()
-        case .slider:
-            break
+        case .fields:
+            updateFileds()
         }
     }
     
@@ -60,34 +76,13 @@ class LevelsFilterView: UIView {
         switch levelFilterType {
         case .buttons:
             setupButtons()
-        case .slider:
-            setupSlider()
+        case .fields:
+            setupFields()
         }
     }
     
-    private func setupSlider() {
-        rangeSlider.delegate = self
-        rangeSlider.enableStep = true
-        rangeSlider.step = 1
-        rangeSlider.minDistance = 1
-
-        rangeSlider.minValue = 1
-        rangeSlider.maxValue = 7
-
-        rangeSlider.selectedMinimum = Float(minLevel)
-        rangeSlider.selectedMaximum = Float(maxLevel)
-
-        rangeSlider.lineHeight = 2.0
-        
-        rangeSlider.tintColor = UIColor.Cell.subtitle
-        
-        rangeSlider.tintColorBetweenHandles = UIColor.Cell.title
-        rangeSlider.handleColor = UIColor.Cell.title
-        rangeSlider.minLabelColour = UIColor.Cell.title
-        rangeSlider.maxLabelColour = UIColor.Cell.title
-
-        rangeSlider.minLabelFont = UIFont.getFont(.regular, size: 14.0)
-        rangeSlider.maxLabelFont = UIFont.getFont(.regular, size: 14.0)
+    private func setupFields() {
+        updateFileds()
         
     }
     private func setupButtons() {
@@ -112,6 +107,11 @@ class LevelsFilterView: UIView {
         }
     }
     
+    private func updateFileds() {
+        minTextField.text = "\(minLevel)"
+        maxTextField.text = "\(maxLevel)"
+    }
+    
     // MARK: - Public methods
     func getSelectedLevels() -> String {
         switch levelFilterType {
@@ -122,7 +122,7 @@ class LevelsFilterView: UIView {
                 let levels = selectedLevels.sorted()
                 return levels.map { String($0) }.joined(separator: ", ")
             }
-        case .slider:
+        case .fields:
             return "\(minLevel)-\(maxLevel)"
         }
     }
@@ -200,8 +200,27 @@ class LevelsFilterView: UIView {
         }
     }
     
+    @IBAction func textFieldEditing(sender: UITextField) {
+        sender.resignFirstResponder()
+        
+        if sender == minTextField {
+            delegate?.showPickerMinPicker(min: minLevel, max: maxLevel)
+        } else {
+            delegate?.showPickerMaxPicker(min: minLevel, max: maxLevel)
+        }
+    }
+    
     @IBAction func applyButtonAction(_ sender: UIButton) {
         bottomSheetController?.dismiss()
+        
+        if let text = minTextField.text, let value = Int(text) {
+            minLevel = value
+        }
+        
+        if let text = maxTextField.text, let value = Int(text) {
+            maxLevel = value
+        }
+        
         delegate?.applyButtonDidPress()
     }
 }
@@ -209,12 +228,5 @@ class LevelsFilterView: UIView {
 extension LevelsFilterView: BottomSheetControllerProtocol {
     func didHide() {
         
-    }
-}
-
-extension LevelsFilterView: TTRangeSliderDelegate {
-    func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
-        minLevel = Int(selectedMinimum)
-        maxLevel = Int(selectedMaximum)
     }
 }

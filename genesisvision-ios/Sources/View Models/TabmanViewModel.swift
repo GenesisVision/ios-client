@@ -85,6 +85,8 @@ class TabmanViewModel: TabmanViewModelProtocol {
         
         if let vc = self.router.currentController as? ProgramTabmanViewController {
             vc.didReloadData()
+        } else if let vc = self.router.currentController as? FundTabmanViewController {
+            vc.didReloadData()
         }
     }
     

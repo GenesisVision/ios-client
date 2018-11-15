@@ -26,7 +26,7 @@ class FundInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Avalible in wallet"
+            availableToInvestTitleLabel.text = "Available to invest"
             availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -113,12 +113,12 @@ class FundInvestViewController: BaseViewController {
         super.viewDidLoad()
         
         navigationItem.title = viewModel.title
+        
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setup()
     }
     
     // MARK: - Private methods
@@ -149,7 +149,7 @@ class FundInvestViewController: BaseViewController {
     
     private func updateUI() {
         if let minInvestmentAmount = viewModel.fundInvestInfo?.minInvestmentAmount {
-            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
+            amountToInvestTitleLabel.text = "Amount to invest (min " + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
         }
         
         if let entryFee = viewModel.fundInvestInfo?.entryFee, let gvCommission = viewModel.fundInvestInfo?.gvCommission {
@@ -219,9 +219,11 @@ class FundInvestViewController: BaseViewController {
         if let amount = amountToInvestValueLabel.text {
              firstValue = amount + " GVT"
         }
+
+        let subtitle = "Your request will be processed within a few minutes."
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
-                                                          subtitle: nil,
+                                                          subtitle: subtitle,
                                                           programLogo: nil,
                                                           programTitle: viewModel.fundInvestInfo?.title,
                                                           managerName: nil,
@@ -252,8 +254,12 @@ class FundInvestViewController: BaseViewController {
 }
 
 extension FundInvestViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return availableToInvestValue
+    }
+
+    var minAmount: Double? {
+        return viewModel.fundInvestInfo?.minInvestmentAmount
     }
     
     var textPlaceholder: String? {

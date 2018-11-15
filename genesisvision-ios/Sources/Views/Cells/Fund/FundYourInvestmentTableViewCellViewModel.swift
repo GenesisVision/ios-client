@@ -21,7 +21,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.withdrawButton.setEnabled(canWithdraw)
         }
         
-        cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
+        cell.disclaimerLabel.text = ""
         
         cell.yourInvestmentProtocol = yourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
@@ -36,25 +36,21 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         cell.disclaimerLabel.isHidden = true
         
+        cell.reinvestView.isHidden = true
         cell.reinvestSwitch.isHidden = true
         cell.reinvestTitleLabel.isHidden = true
         
-        let currency: CurrencyType = .usd
+        let currency: CurrencyType = .gvt
         
-        
-        if let value = fundDetailsFull?.personalFundDetails?.invested {
-            cell.investedTitleLabel.text = "invested"
-            cell.investedValueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
-        }
+        cell.investedTitleLabel.isHidden = true
+        cell.investedValueLabel.isHidden = true
         
         if let value = fundDetailsFull?.personalFundDetails?.value {
             cell.valueTitleLabel.text = "value"
             cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
         }
         
-        if let profit = fundDetailsFull?.personalFundDetails?.profit {
-            cell.profitTitleLabel.text = "profit"
-            cell.profitValueLabel.text = profit.rounded(withType: currency).toString() + " " + currency.rawValue
-        }
+        cell.profitTitleLabel.isHidden = true
+        cell.profitValueLabel.isHidden = true
     }
 }

@@ -26,7 +26,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Avalible to invest"
+            availableToInvestTitleLabel.text = "Available to invest"
             availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -144,7 +144,7 @@ class ProgramInvestViewController: BaseViewController {
     
     private func updateUI() {
         if let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount {
-            amountToInvestTitleLabel.text = "Amount to invest min(" + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
+            amountToInvestTitleLabel.text = "Amount to invest (min " + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
         }
         
         if let entryFee = viewModel.programInvestInfo?.entryFee, let gvCommission = viewModel.programInvestInfo?.gvCommission {
@@ -245,8 +245,12 @@ class ProgramInvestViewController: BaseViewController {
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {
-    var amountLimit: Double? {
+    var maxAmount: Double? {
         return availableToInvestValue
+    }
+
+    var minAmount: Double? {
+        return viewModel.programInvestInfo?.minInvestmentAmount
     }
     
     var textPlaceholder: String? {
