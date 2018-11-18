@@ -13,6 +13,10 @@ protocol FilterViewModelProtocol: class {
     func didFilterReloadCell(_ row: Int)
 }
 
+enum FilterType {
+    case programs, funds, dashboardPrograms, dashboardFunds
+}
+
 final class FilterViewModel {
     
     // MARK: - View Model
@@ -32,9 +36,11 @@ final class FilterViewModel {
     // MARK: - Variables
     var title: String = "Filters"
     
+    var filterType: FilterType = .programs
+    
     private var sections: [SectionType] = [.common]
     
-    private var rows: [RowType] = [.levels, .currency, .sort, .dateRange]
+    private var rows: [RowType] = []
     
     private var router: ProgramFilterRouter!
     
@@ -53,18 +59,21 @@ final class FilterViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ProgramFilterRouter, sortingType: SortingType, filterViewModelProtocol: FilterViewModelProtocol?) {
+    init(withRouter router: ProgramFilterRouter, sortingType: SortingType, filterViewModelProtocol: FilterViewModelProtocol?, filterModel: FilterModel, listViewModel: ListViewModelProtocol?, filterType: FilterType) {
+        
+        self.filterType = filterType
+        switch filterType {
+        case .programs, .dashboardPrograms:
+            rows = [.levels, .currency, .sort, .dateRange]
+        case .funds, .dashboardFunds:
+            rows = [.sort, .dateRange]
+        }
         
         self.router = router
         self.filterViewModelProtocol = filterViewModelProtocol
-
-        sortingDelegateManager = SortingDelegateManager(sortingType)
-        sortingDelegateManager?.delegate = self
-        currencyDelegateManager = FilterCurrencyDelegateManager()
-        currencyDelegateManager?.loadCurrencies()
-        currencyDelegateManager?.delegate = self
-        levelsFilterView = LevelsFilterView.viewFromNib()
-        levelsFilterView?.delegate = self
+        self.listViewModel = listViewModel
+        
+        setupManagers(filterModel, sortingType: sortingType)
         
         setup()
     }
@@ -95,42 +104,67 @@ final class FilterViewModel {
         }
     }
     
+    func changeHighToLowValue() {
+        if let sortingManager = sortingDelegateManager?.sortingManager {
+            sortingManager.highToLowValue = !sortingManager.highToLowValue
+        }
+        
+        didSelectSorting()
+    }
+    
     func reset() {
         currencyDelegateManager?.reset()
         sortingDelegateManager?.reset()
         levelsFilterView?.reset()
         dateRangeView?.reset()
         
-        viewModels[0].detail = levelsFilterView?.getSelectedLevels()
-        
-        if let detail =
-            currencyDelegateManager?.getSelectedCurrencyValue() {
-            viewModels[1].detail = detail
-        }
-    
-        if let detail = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
-            viewModels[2].detail = "by " + detail
-        }
-        
-        
-        if let selectedDate = getSelectedDate() {
-            viewModels[3].detail = selectedDate
+        for (idx, row) in rows.enumerated() {
+            switch row {
+            case .levels:
+                viewModels[idx].detail = levelsFilterView?.getSelectedLevels()
+            case .currency:
+                if let detail =
+                    currencyDelegateManager?.getSelectedCurrencyValue() {
+                    viewModels[idx].detail = detail
+                }
+            case .dateRange:
+                if let selectedDate = getSelectedDate() {
+                    viewModels[idx].detail = selectedDate
+                }
+            case .sort:
+                if let detail = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
+                    viewModels[idx].detail = detail
+                }
+            }
         }
     }
     
     func apply(completion: @escaping CompletionBlock) {
+        guard let filterModel = listViewModel?.filterModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
         if let minLevel = levelsFilterView?.minLevel, let maxLevel = levelsFilterView?.maxLevel {
-            listViewModel?.minLevel = minLevel
-            listViewModel?.maxLevel = maxLevel
+            filterModel.levelModel.minLevel = minLevel
+            filterModel.levelModel.maxLevel = maxLevel
+        }
+        
+        if let sortingManager = sortingDelegateManager?.sortingManager {
+            filterModel.sortingModel.selectedIndex = sortingManager.selectedIndex
+            filterModel.sortingModel.highToLowValue = sortingManager.highToLowValue
+            filterModel.sortingModel.selectedSorting = sortingManager.getSelectedSorting()
+        }
+        
+        if let currencyDelegateManager = currencyDelegateManager {
+            filterModel.currencyModel.selectedIndex = currencyDelegateManager.selectedIndex
+            filterModel.currencyModel.selectedCurrency = currencyDelegateManager.getSelectedCurrencyValue()
         }
         
         if let dateRangeView = dateRangeView {
-            PlatformManager.shared.dateFrom = dateRangeView.dateFrom
-            PlatformManager.shared.dateTo = dateRangeView.dateTo
-            PlatformManager.shared.dateRangeType = dateRangeView.selectedDateRangeType
+            filterModel.dateRangeModel.dateFrom = dateRangeView.dateFrom
+            filterModel.dateRangeModel.dateTo = dateRangeView.dateTo
+            filterModel.dateRangeModel.dateRangeType = dateRangeView.dateRangeType
         }
         
-        completion(.success)
+        listViewModel?.refresh(completion: completion)
     }
     
     func goToBack() {
@@ -138,32 +172,87 @@ final class FilterViewModel {
     }
     
     // MARK: - Private methods
+    private func setupManagers(_ filterModel: FilterModel, sortingType: SortingType) {
+        for row in rows {
+            switch row {
+            case .levels:
+                setupLevelsManager(filterModel)
+            case .currency:
+                setupCurrencyManager(filterModel)
+            case .dateRange:
+                setupDateRangeManager(filterModel)
+            case .sort:
+                setupSortingManager(filterModel, sortingType: sortingType)
+            }
+        }
+    }
+    
+    private func setupLevelsManager(_ filterModel: FilterModel) {
+        levelsFilterView = LevelsFilterView.viewFromNib()
+        levelsFilterView?.minLevel = filterModel.levelModel.minLevel
+        levelsFilterView?.maxLevel = filterModel.levelModel.maxLevel
+        levelsFilterView?.delegate = self
+    }
+    
+    private func setupCurrencyManager(_ filterModel: FilterModel) {
+        currencyDelegateManager = FilterCurrencyDelegateManager()
+        currencyDelegateManager?.selectedIndex = filterModel.currencyModel.selectedIndex
+        currencyDelegateManager?.loadCurrencies()
+        currencyDelegateManager?.delegate = self
+    }
+    
+    private func setupDateRangeManager(_ filterModel: FilterModel) {
+        dateRangeView = DateRangeView.viewFromNib()
+        dateRangeView?.delegate = self
+        dateRangeView?.dateFrom = filterModel.dateRangeModel.dateFrom
+        dateRangeView?.dateTo = filterModel.dateRangeModel.dateTo
+        dateRangeView?.dateRangeType = filterModel.dateRangeModel.dateRangeType
+    }
+    
+    private func setupSortingManager(_ filterModel: FilterModel, sortingType: SortingType) {
+        let sortingManager = SortingManager(sortingType)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
+        sortingDelegateManager?.delegate = self
+        sortingDelegateManager?.sortingManager?.selectedIndex = filterModel.sortingModel.selectedIndex
+        sortingDelegateManager?.sortingManager?.highToLowValue = filterModel.sortingModel.highToLowValue
+    }
+    
     private func setup() {
-        var tableViewCellViewModel = FilterTableViewCellViewModel(title: "Levels", detail: nil)
-        tableViewCellViewModel.detail = levelsFilterView?.getSelectedLevels()
+        var tableViewCellViewModel: FilterTableViewCellViewModel?
         
-        viewModels.append(tableViewCellViewModel)
-        
-        tableViewCellViewModel = FilterTableViewCellViewModel(title: "Currency", detail: nil)
-        if let selectedValue = currencyDelegateManager?.getSelectedCurrencyValue() {
-            tableViewCellViewModel.detail = selectedValue
+        for row in rows {
+            switch row {
+            case .levels:
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Levels", detail: nil, detailImage: nil)
+                tableViewCellViewModel?.detail = levelsFilterView?.getSelectedLevels()
+                
+                viewModels.append(tableViewCellViewModel!)
+            case .currency:
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Currency", detail: nil, detailImage: nil)
+                
+                if let selectedValue = currencyDelegateManager?.getSelectedCurrencyValue() {
+                    tableViewCellViewModel?.detail = selectedValue
+                }
+                
+                viewModels.append(tableViewCellViewModel!)
+            case .dateRange:
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Date Range", detail: nil, detailImage: nil)
+                
+                if let selectedValue = getSelectedDate() {
+                    tableViewCellViewModel?.detail = selectedValue
+                }
+                
+                viewModels.append(tableViewCellViewModel!)
+            case .sort:
+                guard let highToLowValue = sortingDelegateManager?.sortingManager?.highToLowValue else { return }
+                
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil, detailImage: highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon"))
+                if let selectedValue = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
+                    tableViewCellViewModel?.detail = selectedValue
+                }
+                viewModels.append(tableViewCellViewModel!)
+            }
         }
-        viewModels.append(tableViewCellViewModel)
-        
-        tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil)
-        if let selectedValue = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
-            tableViewCellViewModel.detail = "by " + selectedValue.capitalized
-        }
-        viewModels.append(tableViewCellViewModel)
-        
-        
-        tableViewCellViewModel = FilterTableViewCellViewModel(title: "Date Range", detail: nil)
-        
-        if let selectedValue = getSelectedDate() {
-            tableViewCellViewModel.detail = selectedValue
-        }
-            
-        viewModels.append(tableViewCellViewModel)
     }
     
     private func getSelectedDate() -> String? {
@@ -186,9 +275,12 @@ final class FilterViewModel {
 
 extension FilterViewModel: LevelsFilterViewProtocol {
     func applyButtonDidPress() {
-        viewModels[0].detail = levelsFilterView?.getSelectedLevels()
+        let index = rows.index { $0 == .levels }
+        guard let idx = index else { return }
         
-        filterViewModelProtocol?.didFilterReloadCell(0)
+        viewModels[idx].detail = levelsFilterView?.getSelectedLevels()
+        
+        filterViewModelProtocol?.didFilterReloadCell(idx)
     }
     
     func showPickerMinPicker(min minLevel: Int, max maxLevel: Int) {
@@ -261,22 +353,32 @@ extension FilterViewModel: LevelsFilterViewProtocol {
 
 extension FilterViewModel: FilterCurrencyDelegateManagerProtocol {
     func didSelectFilterCurrency(at indexPath: IndexPath) {
+        let index = rows.index { $0 == .currency }
+        guard let idx = index else { return }
+        
         if let detail =
             currencyDelegateManager?.getSelectedCurrencyValue() {
-            viewModels[1].detail = detail
+            viewModels[idx].detail = detail
         }
         
-        filterViewModelProtocol?.didFilterReloadCell(1)
+        filterViewModelProtocol?.didFilterReloadCell(idx)
     }
 }
 
 extension FilterViewModel: SortingDelegate {
     func didSelectSorting() {
-        if let detail = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
-            viewModels[2].detail = "by " + detail
+        let index = rows.index { $0 == .sort }
+        guard let idx = index else { return }
+        
+        if let sortingManager = sortingDelegateManager?.sortingManager {
+            let detail = sortingManager.getSelectedSortingValue()
+            let highToLowValue = sortingManager.highToLowValue
+            
+            viewModels[idx].detail = detail
+            viewModels[idx].detailImage = highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         }
         
-        filterViewModelProtocol?.didFilterReloadCell(2)
+        filterViewModelProtocol?.didFilterReloadCell(idx)
     }
 }
 
@@ -286,10 +388,13 @@ extension FilterViewModel: DateRangeViewProtocol {
     }
     
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?) {
+        let index = rows.index { $0 == .dateRange }
+        guard let idx = index else { return }
+        
         if let selectedDate = getSelectedDate() {
-            viewModels[3].detail = selectedDate
+            viewModels[idx].detail = selectedDate
         }
         
-        filterViewModelProtocol?.didFilterReloadCell(3)
+        filterViewModelProtocol?.didFilterReloadCell(idx)
     }
 }

@@ -8,26 +8,23 @@
 
 import UIKit.UITableView
 
-final class DashboardProgramListViewModel {
-    
-    enum SectionType {
-        case programList
-    }
-    
+final class DashboardProgramListViewModel: ListViewModelProtocol {
     // MARK: - Variables
-    var activePrograms = true
-    
     var title = "Programs"
+    
+    var type: ListType = .programList
     
     var sortingDelegateManager: SortingDelegateManager!
     var programListDelegateManager: DashboardProgramListDelegateManager!
     
-    var highToLowValue: Bool = false
+    var activePrograms = true
     
-    private var sections: [SectionType] = [.programList]
+    var sections: [SectionType] = [.assetList]
     
-    private var router: DashboardRouter!
+    var router: ListRouterProtocol!
     private var programsList: ProgramsList?
+    
+    var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -44,9 +41,7 @@ final class DashboardProgramListViewModel {
         }
     }
     
-    var bottomViewType: BottomViewType {
-        return .dateRange
-    }
+    var bottomViewType: BottomViewType = .filter
     
     var viewModels = [CellViewAnyModel]() {
         didSet {
@@ -65,7 +60,8 @@ final class DashboardProgramListViewModel {
         self.reloadDataProtocol = router.programListViewController
         
         programListDelegateManager = DashboardProgramListDelegateManager(with: self)
-        sortingDelegateManager = SortingDelegateManager(.dashboardPrograms)
+        let sortingManager = SortingManager(.dashboardPrograms)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -161,7 +157,7 @@ extension DashboardProgramListViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs yet.."
+        return "You don't have any programs yet"
     }
     
     func noDataImageName() -> String? {
@@ -183,7 +179,13 @@ extension DashboardProgramListViewModel {
     }
     
     func showProgramList() {
-        router.show(routeType: .assetList)
+        if let router = router as? DashboardRouter {
+            router.show(routeType: .assetList)
+        }
+    }
+    
+    func showFilterVC() {
+        router.show(routeType: .showFilterVC(listViewModel: self, filterModel: self.filterModel, filterType: .dashboardPrograms, sortingType: .dashboardPrograms))
     }
 }
 
@@ -264,7 +266,7 @@ extension DashboardProgramListViewModel {
         }
         
         let program = model.program
-        guard let programId = program.id else { return nil}
+        guard let programId = program.id, let router = router as? DashboardRouter else { return nil}
         
         return router.getDetailsViewController(with: programId.uuidString)
     }
@@ -291,9 +293,11 @@ extension DashboardProgramListViewModel {
             let totalCount = programsList.programs?.count ?? 0
             
             programsList.programs?.forEach({ (program) in
-                let dashboardTableViewCellModel = DashboardProgramTableViewCellViewModel(program: program, reloadDataProtocol: self?.router.programListViewController, delegate:
-                    self?.router.programListViewController, reinvestProtocol: self)
-                viewModels.append(dashboardTableViewCellModel)
+                if let router = self?.router as? DashboardRouter {
+                    let dashboardTableViewCellModel = DashboardProgramTableViewCellViewModel(program: program, reloadDataProtocol: router.programListViewController, delegate:
+                        router.programListViewController, reinvestProtocol: self)
+                    viewModels.append(dashboardTableViewCellModel)
+                }
             })
             
             completionSuccess(totalCount, viewModels)

@@ -255,8 +255,8 @@ open class NHRangeSliderView: UIView {
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        if let titleLabel = self.titleLabel , let lowerLabel = self.lowerLabel ,
-            let upperLabel = self.upperLabel , let rangeSlider = self.rangeSlider {
+        if let titleLabel = self.titleLabel, let lowerLabel = self.lowerLabel,
+            let upperLabel = self.upperLabel, let rangeSlider = self.rangeSlider {
             
             let commonWidth = self.bounds.width
             var titleLabelMaxY : CGFloat = 0
@@ -264,7 +264,7 @@ open class NHRangeSliderView: UIView {
             if !titleLabel.isHidden && titleLabel.text != nil && titleLabel.text!.characters.count > 0 {
                 titleLabel.frame = CGRect(x: 0,
                                           y: 0,
-                                          width: commonWidth  ,
+                                          width: commonWidth ,
                                           height: (titleLabel.font.lineHeight + self.spacing ) )
                 
                 titleLabelMaxY = titleLabel.frame.origin.y + titleLabel.frame.size.height
@@ -272,7 +272,7 @@ open class NHRangeSliderView: UIView {
             
             rangeSlider.frame = CGRect(x: 0,
                                        y: titleLabelMaxY + lowerLabel.font.lineHeight + self.spacing,
-                                       width: commonWidth ,
+                                       width: commonWidth,
                                        height: thumbSize )
 
             let lowerWidth = self.estimatelabelSize(font: lowerLabel.font, string: lowerLabel.text!, constrainedToWidth: Double(commonWidth)).width
@@ -294,12 +294,12 @@ open class NHRangeSliderView: UIView {
             
             lowerLabel.frame = CGRect(      x: lowerLabelX,
                                             y: titleLabelMaxY,
-                                            width: lowerWidth ,
+                                            width: lowerWidth,
                                             height: lowerLabel.font.lineHeight + self.spacing )
             
             upperLabel.frame = CGRect(      x: upperLabelX,
                                             y: titleLabelMaxY,
-                                            width: upperWidth ,
+                                            width: upperWidth,
                                             height: upperLabel.font.lineHeight + self.spacing )
             
         }
@@ -309,7 +309,7 @@ open class NHRangeSliderView: UIView {
     // return the best size that fit within the box
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         
-        if let titleLabel = self.titleLabel , let lowerLabel = self.lowerLabel {
+        if let titleLabel = self.titleLabel, let lowerLabel = self.lowerLabel {
             
             var height : CGFloat = 0
             

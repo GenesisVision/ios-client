@@ -198,14 +198,28 @@ class DashboardViewController: BaseViewController {
 
 extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
-        
         viewModel.deselectChart()
         navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
-//        animateViews(yOffset)
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let viewHeight = UIScreen.main.bounds.height - (statusBarHeight + 44.0 + 50.0 + 44.0 + 16)
+        
+        if yOffset >= viewHeight && self.filterStackView.alpha == 1.0 {
 
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterStackView.alpha = 0.0
+            }) { (success) in
+                self.filterStackView.isHidden = true
+            }
+        } else if yOffset < viewHeight && self.filterStackView.alpha == 0.0 {
+            self.filterStackView.isHidden = false
+
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterStackView.alpha = 1.0
+            })
+        }
+        
         if scrollView == self.scrollView {
             if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.pageboyDataSource {
                 for controller in pageboyDataSource.controllers {

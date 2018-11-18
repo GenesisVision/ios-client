@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 final class FavoriteProgramListViewModel: ListViewModelProtocol {
-    var minLevel: Int = 1
-    var maxLevel: Int = 7
-    
+    var filterModel: FilterModel = FilterModel()
+
     var type: ListType = .programList
     
    // MARK: - Variables
@@ -46,9 +45,7 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
     
     var headerTitle = "PROGRAMS"
     
-    var bottomViewType: BottomViewType {
-        return .sort
-    }
+    var bottomViewType: BottomViewType = .sort
     
     public private(set) var needToRefresh = false
     
@@ -92,7 +89,8 @@ final class FavoriteProgramListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         
-        sortingDelegateManager = SortingDelegateManager(.programs)
+        let sortingManager = SortingManager(.programs)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
     

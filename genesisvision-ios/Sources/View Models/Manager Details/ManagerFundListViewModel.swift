@@ -46,9 +46,7 @@ final class ManagerFundListViewModel {
         }
     }
     
-    var bottomViewType: BottomViewType {
-        return .dateRange
-    }
+    var bottomViewType: BottomViewType = .dateRange
     
     var viewModels = [FundTableViewCellViewModel]()
     
@@ -58,7 +56,8 @@ final class ManagerFundListViewModel {
         self.managerId = managerId
         self.reloadDataProtocol = router.managerFundsViewController
         
-        sortingDelegateManager = SortingDelegateManager(.funds)
+        let sortingManager = SortingManager(.funds)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         fundListDelegateManager = ManagerFundListDelegateManager(with: self)
     }
     // MARK: - Public methods
@@ -123,7 +122,7 @@ extension ManagerFundListViewModel {
     }
     
     func noDataText() -> String {
-        return "manager don’t have \nany funds yet.."
+        return "The manager has no funds yet"
     }
     
     func noDataImageName() -> String? {

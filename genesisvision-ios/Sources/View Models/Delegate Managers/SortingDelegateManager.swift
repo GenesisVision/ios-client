@@ -195,10 +195,10 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     }
     
     // MARK: - Init
-    init(_ sortingType: SortingType) {
+    init(_ sortingManager: SortingManager) {
         super.init()
         
-        sortingManager = SortingManager(sortingType)
+        self.sortingManager = sortingManager
     }
     
     func reset() {

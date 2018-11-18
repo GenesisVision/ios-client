@@ -46,9 +46,7 @@ final class ManagerProgramListViewModel {
         }
     }
     
-    var bottomViewType: BottomViewType {
-        return .dateRange
-    }
+    var bottomViewType: BottomViewType = .dateRange
     
     var viewModels = [ProgramTableViewCellViewModel]()
     
@@ -58,7 +56,8 @@ final class ManagerProgramListViewModel {
         self.managerId = managerId
         self.reloadDataProtocol = router.managerProgramsViewController
         
-        sortingDelegateManager = SortingDelegateManager(.programs)
+        let sortingManager = SortingManager(.programs)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         programListDelegateManager = ManagerProgramListDelegateManager(with: self)
     }
     // MARK: - Public methods
@@ -123,7 +122,7 @@ extension ManagerProgramListViewModel {
     }
     
     func noDataText() -> String {
-        return "manager don’t have \nany programs yet.."
+        return "The manager has no programs yet"
     }
     
     func noDataImageName() -> String? {

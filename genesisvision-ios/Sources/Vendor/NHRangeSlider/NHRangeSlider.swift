@@ -42,7 +42,7 @@ public class RangeSliderTrackLayer: CALayer {
     }
 }
 
-/// the thumb for upper , lower bounds
+/// the thumb for upper, lower bounds
 public class RangeSliderThumbLayer: CALayer {
     
     /// owner slider

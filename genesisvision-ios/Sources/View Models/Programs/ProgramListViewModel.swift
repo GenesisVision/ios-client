@@ -13,8 +13,7 @@ enum ProgramListViewState {
 }
 
 final class ProgramListViewModel: ListViewModelProtocol {
-    var minLevel: Int = 1
-    var maxLevel: Int = 7
+    var filterModel: FilterModel = FilterModel()
     
     var type: ListType = .programList
     
@@ -31,27 +30,17 @@ final class ProgramListViewModel: ListViewModelProtocol {
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var canFetchMoreResults = true
     var dataType: DataType = .api
-    var count: String = ""
     var chartPointsCount = Api.equityChartLength
-    
-    var levelMin = 1
-    var levelMax = 7
     
     var mask: String?
     var isFavorite: Bool = false
     
     var skip = 0
     var take = Api.take
-    var totalCount = 0 {
-        didSet {
-            count = "\(totalCount) programs"
-        }
-    }
+    var totalCount = 0
 
     private var programsList: ProgramsList?
     
-    var dateFrom: Date?
-    var dateTo: Date?
     var bottomViewType: BottomViewType {
         return signInButtonEnable ? .signInWithFilter : .filter
     }
@@ -69,7 +58,8 @@ final class ProgramListViewModel: ListViewModelProtocol {
         self.reloadDataProtocol = reloadDataProtocol
         
         state = isLogin() ? .programList : .programListWithSignIn
-        sortingDelegateManager = SortingDelegateManager(.programs)
+        let sortingManager = SortingManager(.programs)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -80,7 +70,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     
     // MARK: - Public methods
     func noDataText() -> String {
-        return "You do not have any programs yet"
+        return "There are no programs"
     }
     
     func isLogin() -> Bool {
@@ -183,8 +173,20 @@ extension ProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
-            let currencySecondary = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) ?? .btc
+            let levelMin = filterModel.levelModel.minLevel
+            let levelMax = filterModel.levelModel.maxLevel
+            
+            let dateFrom = filterModel.dateRangeModel.dateFrom
+            let dateTo = filterModel.dateRangeModel.dateTo
+            
+            let sorting = filterModel.sortingModel.selectedSorting
+            
+            var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
+            if let selectedCurrency = filterModel.currencyModel.selectedCurrency {
+                currencySecondary = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: selectedCurrency) ?? .btc
+            } else {
+                currencySecondary = .btc
+            }
             
             ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: nil, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: mask, facetId: nil, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }

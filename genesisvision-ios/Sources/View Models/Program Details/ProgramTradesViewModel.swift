@@ -39,7 +39,8 @@ final class ProgramTradesViewModel {
         self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
         
-        sortingDelegateManager = SortingDelegateManager(.trades)
+        let sortingManager = SortingManager(.trades)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
     }
 
     func hideHeader(value: Bool = true) {

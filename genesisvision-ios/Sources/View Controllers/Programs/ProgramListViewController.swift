@@ -151,8 +151,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.dateFrom = dateFrom
-        viewModel.dateTo = dateTo
+        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+        viewModel.filterModel.dateRangeModel.dateTo = dateTo
         
         showProgressHUD()
         fetch()
@@ -178,7 +178,7 @@ extension ProgramListViewController {
     
     override func filterButtonAction() {
         if let viewModel = viewModel as? ProgramListViewModel {
-            viewModel.showFilterVC()
+            viewModel.showFilterVC(filterType: .programs, sortingType: .programs)
         }
     }
     
@@ -277,11 +277,22 @@ extension ProgramListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
-        guard let searchText = searchBar.text, !searchText.isEmpty && searchText != viewModel.searchText || searchText.isEmpty && !viewModel.searchText.isEmpty else {
+        var value = false
+        guard let searchText = searchBar.text else { return }
+        
+        if !searchText.isEmpty, searchText != viewModel.filterModel.mask {
+            value = true
+        }
+        
+        if searchText.isEmpty, let mask = viewModel.filterModel.mask, !mask.isEmpty {
+            value = true
+        }
+        
+        if value {
             return
         }
         
-        viewModel.searchText = searchText
+        viewModel.filterModel.mask = searchText
         
         updateData()
     }
@@ -291,11 +302,11 @@ extension ProgramListViewController: UISearchBarDelegate {
         
         searchBar.text = ""
         
-        guard let searchText = searchBar.text, !viewModel.searchText.isEmpty else {
+        guard let searchText = searchBar.text, let mask = viewModel.filterModel.mask, !mask.isEmpty else {
             return
         }
         
-        viewModel.searchText = searchText
+        viewModel.filterModel.mask = searchText
         
         updateData()
     }

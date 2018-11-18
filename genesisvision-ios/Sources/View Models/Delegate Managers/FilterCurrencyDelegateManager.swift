@@ -18,7 +18,8 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     
     var tableView: UITableView?
     var currencies: [PlatformCurrency] = []
-    private var selectedIndex: Int = 0
+    
+    var selectedIndex: Int = 0
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]

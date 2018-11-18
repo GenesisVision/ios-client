@@ -25,8 +25,8 @@ class LevelsFilterView: UIView {
     
     weak var delegate: LevelsFilterViewProtocol?
     
-    var minLevel: Int = 1
-    var maxLevel: Int = 7
+    var minLevel: Int = Filters.minLevel
+    var maxLevel: Int = Filters.maxLevel
     
     private var selectedLevels: [Int] = [0]
     
@@ -89,7 +89,7 @@ class LevelsFilterView: UIView {
         levelButtons[0].setTitle("All", for: .normal)
         levelButtons[0].tag = 0
         
-        for idx in 1...7 {
+        for idx in Filters.minLevel...Filters.maxLevel {
             levelButtons[idx].setTitle("\(idx)", for: .normal)
             levelButtons[idx].tag = idx
         }
@@ -128,8 +128,15 @@ class LevelsFilterView: UIView {
     }
     
     func reset() {
-        selectedLevels = [0]
+        switch levelFilterType {
+        case .buttons:
+            selectedLevels = [0]
+        case .fields:
+            minLevel = Filters.minLevel
+            maxLevel = Filters.maxLevel
+        }
     }
+    
     // MARK: - Actions
     @IBAction func changeSelectedLevelButtonAction(_ sender: UIButton) {
         if sender.tag == 0, !sender.isSelected {
@@ -179,7 +186,7 @@ class LevelsFilterView: UIView {
                               completion: nil)
             
             levelButtons[0].isUserInteractionEnabled = false
-        } else if selectedLevels.count == 7 && !selectedLevels.contains(0) {
+        } else if selectedLevels.count == Filters.maxLevel && !selectedLevels.contains(0) {
             selectedLevels.removeAll()
             for button in levelButtons {
                 UIView.transition(with: button,

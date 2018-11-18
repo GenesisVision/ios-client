@@ -811,7 +811,7 @@ private extension BottomSheetController {
 // MARK: - UIGestureRecognizerDelegate
 extension BottomSheetController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer , state == .showAll else {
+        guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer, state == .showAll else {
             return true
         }
         let gestureView = gestureRecognizer.view

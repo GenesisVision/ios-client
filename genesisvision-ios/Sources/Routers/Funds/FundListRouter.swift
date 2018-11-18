@@ -9,5 +9,5 @@
 import UIKit.UINavigationController
 
 class FundListRouter: Router, ListRouterProtocol {
-    
+    // MARK: - Public methods
 }

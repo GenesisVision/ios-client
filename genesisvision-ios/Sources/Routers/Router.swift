@@ -237,6 +237,16 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
+        guard let viewController = FilterViewController.storyboardInstance(name: .programs) else { return }
+        let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        let viewModel = FilterViewModel(withRouter: router, sortingType: sortingType, filterViewModelProtocol: viewController, filterModel: filterModel, listViewModel: listViewModel, filterType: filterType)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showFundDetails(with fundId: String) {
         guard let viewController = getFundDetailsViewController(with: fundId) else { return }
         navigationController?.pushViewController(viewController, animated: true)

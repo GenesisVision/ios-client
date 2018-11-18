@@ -40,7 +40,7 @@ final class ProgramInfoViewModel {
                 self.availableInvestment = availableInvestment
             }
             
-            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested {
+            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested, let status = programDetailsFull?.personalProgramDetails?.status, status != .ended {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
                 }

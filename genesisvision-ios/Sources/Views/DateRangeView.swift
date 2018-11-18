@@ -17,7 +17,7 @@ class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?
     
-    var selectedDateRangeType: DateRangeType = .week
+    var dateRangeType: DateRangeType = .week
     
     var dateFrom: Date? {
         didSet {
@@ -119,22 +119,14 @@ class DateRangeView: UIView {
     
     // MARK: - Public methods
     func reset() {
-        selectedDateRangeType = PlatformManager.shared.dateRangeType
-        
-        if selectedDateRangeType == .custom {
-            self.dateFrom = PlatformManager.shared.dateFrom
-            self.dateTo = PlatformManager.shared.dateTo
-            changeDateRangeType()
-            return
-        }
-        
+        dateRangeType = .week
         changeDateRangeType()
     }
     // MARK: - Private methods
     private func setup() {
-        selectedDateRangeType = PlatformManager.shared.dateRangeType
+        dateRangeType = PlatformManager.shared.dateRangeType
         
-        if selectedDateRangeType == .custom {
+        if dateRangeType == .custom {
             self.dateFrom = PlatformManager.shared.dateFrom
             self.dateTo = PlatformManager.shared.dateTo
             changeDateRangeType()
@@ -149,7 +141,7 @@ class DateRangeView: UIView {
             button.isSelected = false
         }
         
-        switch selectedDateRangeType {
+        switch dateRangeType {
         case .day:
             dateTo = Date()
             dateFrom = dateTo?.previousDate()
@@ -182,7 +174,7 @@ class DateRangeView: UIView {
     }
     
     private func updateTime() {
-        PlatformManager.shared.dateRangeType = selectedDateRangeType
+        PlatformManager.shared.dateRangeType = dateRangeType
         PlatformManager.shared.dateFrom = self.dateFrom
         PlatformManager.shared.dateTo = self.dateTo
     }
@@ -193,7 +185,7 @@ class DateRangeView: UIView {
         
         changeDateRangeTypeButtonAction(customButton)
         
-        guard selectedDateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
+        guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
             return
         }
         
@@ -206,7 +198,7 @@ class DateRangeView: UIView {
     
     @IBAction func changeDateRangeTypeButtonAction(_ sender: UIButton) {
         sender.isSelected = true
-        selectedDateRangeType = DateRangeType(rawValue: sender.tag)!
+        dateRangeType = DateRangeType(rawValue: sender.tag)!
         changeDateRangeType()
     }
     

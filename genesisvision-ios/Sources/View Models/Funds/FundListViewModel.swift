@@ -13,9 +13,7 @@ enum FundListViewState {
 }
 
 final class FundListViewModel: ListViewModelProtocol {
-    var minLevel: Int = 1
-    var maxLevel: Int = 7
-    
+    var filterModel: FilterModel = FilterModel()
     
     // MARK: - Variables
     var type: ListType = .fundList
@@ -31,15 +29,11 @@ final class FundListViewModel: ListViewModelProtocol {
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var canFetchMoreResults = true
     var dataType: DataType = .api
-    var count: String = ""
+
     var chartPointsCount = Api.equityChartLength
     var skip = 0
     var take = Api.take
-    var totalCount = 0 {
-        didSet {
-            count = "\(totalCount) funds"
-        }
-    }
+    var totalCount = 0
 
     var mask: String?
     var isFavorite: Bool = false
@@ -66,7 +60,8 @@ final class FundListViewModel: ListViewModelProtocol {
         self.reloadDataProtocol = reloadDataProtocol
         
         state = isLogin() ? .fundList : .fundListWithSignIn
-        sortingDelegateManager = SortingDelegateManager(.funds)
+        let sortingManager = SortingManager(.funds)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
@@ -77,7 +72,7 @@ final class FundListViewModel: ListViewModelProtocol {
     
     // MARK: - Public methods
     func noDataText() -> String {
-        return "You do not have any funds yet"
+        return "There are no funds"
     }
     
     func isLogin() -> Bool {
@@ -180,9 +175,17 @@ extension FundListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
+            let dateFrom = filterModel.dateRangeModel.dateFrom
+            let dateTo = filterModel.dateRangeModel.dateTo
             
-            let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
-            let currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) ?? .btc
+            let sorting = filterModel.sortingModel.selectedSorting
+            
+            var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
+            if let selectedCurrency = filterModel.currencyModel.selectedCurrency {
+                currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: selectedCurrency) ?? .btc
+            } else {
+                currencySecondary = .btc
+            }
             
             FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
                 guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }

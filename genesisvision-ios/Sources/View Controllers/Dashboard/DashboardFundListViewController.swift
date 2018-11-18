@@ -35,6 +35,8 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
+        bottomViewType = viewModel.bottomViewType
+        
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()
         if let imageName = viewModel.noDataImageName() {
@@ -113,7 +115,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     }
     
     func showFilterVC() {
-        //        router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
+        viewModel.showFilterVC()
     }
     
     // MARK: - Actions

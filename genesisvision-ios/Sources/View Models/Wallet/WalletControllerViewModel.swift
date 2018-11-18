@@ -268,7 +268,7 @@ extension WalletControllerViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany transactions"
+        return "You don’t have any transactions yet"
     }
     
     func noDataImageName() -> String? {

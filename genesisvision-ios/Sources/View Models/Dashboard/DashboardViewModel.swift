@@ -44,9 +44,7 @@ final class DashboardViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     
-    var bottomViewType: BottomViewType {
-        return .sort
-    }
+    var bottomViewType: BottomViewType = .sort
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -86,7 +84,7 @@ extension DashboardViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs yet.."
+        return "You don’t have any assets yet"
     }
     
     func noDataImageName() -> String? {

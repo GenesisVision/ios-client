@@ -44,7 +44,6 @@ class FilterViewController: BaseViewControllerWithTableView {
     private func setupUI() {
         navigationItem.title = viewModel.title
         
-        viewModel.dateRangeView = dateRangeView
         showInfiniteIndicator(value: false)
         
         resetBarButtonItem = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetButtonAction(_:)))
@@ -71,16 +70,14 @@ class FilterViewController: BaseViewControllerWithTableView {
     }
     
     @objc func highToLowButtonAction() {
-        if let sortingManager = viewModel.sortingDelegateManager?.sortingManager {
-            sortingManager.highToLowValue = !sortingManager.highToLowValue
-        }
+        viewModel.changeHighToLowValue()
         
         bottomSheetController.dismiss()
     }
     
     private func showCurrency() {
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 250
+        bottomSheetController.initializeHeight = 256
         
         bottomSheetController.addNavigationBar("Preferred currency")
         
@@ -115,7 +112,7 @@ class FilterViewController: BaseViewControllerWithTableView {
         let normalImage = #imageLiteral(resourceName: "img_profit_filter_icon")
         let selectedImage = #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         
-        bottomSheetController.initializeHeight = 380
+        bottomSheetController.initializeHeight = 256
         bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: normalImage, selectedImage: selectedImage, buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
@@ -132,7 +129,14 @@ class FilterViewController: BaseViewControllerWithTableView {
     }
     
     private func showDateRange() {
-        dateRangeButtonAction(with: viewModel)
+        guard let dateRangeView = viewModel.dateRangeView else { return }
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.addNavigationBar("Date range")
+        bottomSheetController.initializeHeight = 370
+        bottomSheetController.addContentsView(dateRangeView)
+        bottomSheetController.bottomSheetControllerProtocol = dateRangeView
+        bottomSheetController.present()
     }
     
     // MARK: - IBAction

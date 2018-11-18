@@ -123,7 +123,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         }
     }
     
-    private var lastContentOffset: CGPoint = .zero
+    public private(set) var lastContentOffset: CGPoint = .zero
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -169,13 +169,13 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         navigationTitleView?.currencyTitleButton.sizeToFit()
     }
     
-    @objc func dateRangeButtonAction(with delegate: DateRangeViewProtocol? = nil) {
+    @objc func dateRangeButtonAction() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 370
         bottomSheetController.addContentsView(dateRangeView)
         bottomSheetController.bottomSheetControllerProtocol = dateRangeView
-        dateRangeView.delegate = delegate ?? self
+        dateRangeView.delegate = self
         bottomSheetController.present()
     }
     
@@ -262,7 +262,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     private func correctTime() {
-        let selectedDateRangeType = PlatformManager.shared.dateRangeType
+        let dateRangeType = PlatformManager.shared.dateRangeType
         
         guard var dateFrom = PlatformManager.shared.dateFrom, var dateTo = PlatformManager.shared.dateTo else {
             updateData(from: nil, to: nil)
@@ -272,7 +272,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         
-        switch selectedDateRangeType {
+        switch dateRangeType {
         case .custom:
             dateFrom.setTime(hour: 0, min: 0, sec: 0)
             dateTo.setTime(hour: 0, min: 0, sec: 0)
@@ -324,20 +324,19 @@ extension BaseViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard bottomStackViewHiddable else { return }
         
-        if (self.lastContentOffset.y < scrollView.contentOffset.y) {
+        if self.lastContentOffset.y < scrollView.contentOffset.y && self.filterStackView.alpha == 1.0 {
+            
             UIView.animate(withDuration: 0.3, animations: {
                 self.filterStackView.alpha = 0.0
             }) { (success) in
-                self.filterStackView.isUserInteractionEnabled = false
-                self.bottomStackView.isUserInteractionEnabled = false
+                self.filterStackView.isHidden = true
             }
-        } else if (self.lastContentOffset.y > scrollView.contentOffset.y) {
+        } else if self.lastContentOffset.y > scrollView.contentOffset.y && self.filterStackView.alpha == 0.0 {
+            self.filterStackView.isHidden = false
+            
             UIView.animate(withDuration: 0.3, animations: {
                 self.filterStackView.alpha = 1.0
-            }) { (success) in
-                self.filterStackView.isUserInteractionEnabled = true
-                self.bottomStackView.isUserInteractionEnabled = true
-            }
+            })
         }
     }
 }

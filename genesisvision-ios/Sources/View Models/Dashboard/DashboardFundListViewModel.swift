@@ -8,14 +8,11 @@
 
 import UIKit.UITableView
 
-final class DashboardFundListViewModel {
-    
-    enum SectionType {
-        case fundList
-    }
-    
+final class DashboardFundListViewModel: ListViewModelProtocol {
     // MARK: - Variables
     var title = "Funds"
+    
+    var type: ListType = .fundList
     
     var sortingDelegateManager: SortingDelegateManager!
     var fundListDelegateManager: DashboardFundListDelegateManager!
@@ -23,10 +20,12 @@ final class DashboardFundListViewModel {
     var activeFunds: Bool = true
     var highToLowValue: Bool = false
     
-    private var sections: [SectionType] = [.fundList]
+    var sections: [SectionType] = [.assetList]
     
-    private var router: DashboardRouter!
+    var router: ListRouterProtocol!
     private var fundList: FundsList?
+    
+    var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -42,9 +41,7 @@ final class DashboardFundListViewModel {
         }
     }
     
-    var bottomViewType: BottomViewType {
-        return .dateRange
-    }
+    var bottomViewType: BottomViewType = .filter
     
     var viewModels = [CellViewAnyModel]() {
         didSet {
@@ -63,7 +60,8 @@ final class DashboardFundListViewModel {
         self.reloadDataProtocol = router.fundListViewController
         
         fundListDelegateManager = DashboardFundListDelegateManager(with: self)
-        sortingDelegateManager = SortingDelegateManager(.funds)
+        let sortingManager = SortingManager(.funds)
+        sortingDelegateManager = SortingDelegateManager(sortingManager)
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
     
@@ -136,7 +134,7 @@ extension DashboardFundListViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany funds yet.."
+        return "You don’t have any funds yet"
     }
     
     func noDataImageName() -> String? {
@@ -158,7 +156,12 @@ extension DashboardFundListViewModel {
     }
     
     func showFundList() {
+        guard let router = router as? DashboardRouter else { return }
         router.show(routeType: .assetList)
+    }
+    
+    func showFilterVC() {
+        router.show(routeType: .showFilterVC(listViewModel: self, filterModel: self.filterModel, filterType: .dashboardFunds, sortingType: .dashboardFunds))
     }
 }
 
@@ -239,7 +242,7 @@ extension DashboardFundListViewModel {
         }
 
         let fund = model.fund
-        guard let fundId = fund.id else { return nil}
+        guard let fundId = fund.id, let router = router as? DashboardRouter else { return nil}
 
         return router.getFundDetailsViewController(with: fundId.uuidString)
     }
@@ -266,9 +269,11 @@ extension DashboardFundListViewModel {
             let totalCount = fundsList.funds?.count ?? 0
             
             fundsList.funds?.forEach({ (fund) in
-                let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: self?.router.fundListViewController, delegate:
-                    self?.router.fundListViewController)
-                dashboardFundViewModels.append(dashboardTableViewCellModel)
+                if let router = self?.router as? DashboardRouter {
+                    let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: router.fundListViewController, delegate:
+                        router.fundListViewController)
+                    dashboardFundViewModels.append(dashboardTableViewCellModel)
+                }
             })
             
             completionSuccess(totalCount, dashboardFundViewModels)

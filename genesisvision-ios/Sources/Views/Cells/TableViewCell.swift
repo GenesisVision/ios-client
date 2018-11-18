@@ -16,9 +16,11 @@ class TableViewCell: UITableViewCell {
         
         textLabel?.font = UIFont.getFont(.regular, size: 14.0)
         textLabel?.textColor = UIColor.Cell.title
+        textLabel?.backgroundColor = .clear
         
         detailTextLabel?.font = UIFont.getFont(.regular, size: 12.0)
         detailTextLabel?.textColor = UIColor.Cell.subtitle
+        detailTextLabel?.backgroundColor = .clear
         
         contentView.backgroundColor = UIColor.BaseView.bg
         backgroundColor = UIColor.BaseView.bg

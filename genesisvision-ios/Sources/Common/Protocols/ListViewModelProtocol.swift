@@ -17,7 +17,6 @@ protocol ListViewModelProtocol {
     
     var type: ListType { get }
     
-    var searchText: String { get set }
     var title: String { get }
 
     var sortingDelegateManager: SortingDelegateManager! { get }
@@ -28,18 +27,8 @@ protocol ListViewModelProtocol {
     var viewModels: [CellViewAnyModel] { get set }
     
     var canFetchMoreResults: Bool { get set }
-    var dataType: DataType { get }
-    var count: String { get }
-    var chartPointsCount: Int { get }
     
-    var dateFrom: Date? { get set }
-    var dateTo: Date? { get set }
-    
-    var minLevel: Int { get set }
-    var maxLevel: Int { get set }
-    
-    var mask: String? { get set }
-    var isFavorite: Bool { get set }
+    var filterModel: FilterModel { get set }
     
     var skip: Int { get set }
     var take: Int { get set }
@@ -75,6 +64,10 @@ protocol ListViewModelProtocol {
 }
 
 extension ListViewModelProtocol {
+    var filterModel: FilterModel {
+        return FilterModel()
+    }
+    
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
@@ -212,10 +205,8 @@ extension ListViewModelProtocol {
         router.show(routeType: .signIn)
     }
     
-    func showFilterVC() {
-        if let router = router as? ProgramListRouter, (self as? ProgramListViewModel) != nil {
-            router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
-        }
+    func showFilterVC(filterType: FilterType, sortingType: SortingType) {
+        router.show(routeType: .showFilterVC(listViewModel: self, filterModel: self.filterModel, filterType: filterType, sortingType: sortingType))
     }
     
     // MARK: - Nodata
@@ -225,7 +216,7 @@ extension ListViewModelProtocol {
     }
     
     func noDataText() -> String {
-        return "no programs yet"
+        return "There are no programs"
     }
     
     func noDataImageName() -> String? {
