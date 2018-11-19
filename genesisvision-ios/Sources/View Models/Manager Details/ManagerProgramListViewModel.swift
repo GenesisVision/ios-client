@@ -230,7 +230,14 @@ extension ManagerProgramListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
-        ProgramsDataProvider.get(statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, managerId: managerId,  skip: skip, take: take, completion: { [weak self] (programsList) in
+        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        
+        var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
+        if let newCurrency = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) {
+            currencySecondary = newCurrency
+        }
+        
+        ProgramsDataProvider.get(sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, managerId: managerId,  skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.programsList = programsList

@@ -36,6 +36,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         bottomViewType = viewModel.bottomViewType
+        bottomStackViewHiddable = false
         
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()
@@ -169,6 +170,10 @@ extension DashboardFundListViewController: ReloadDataProtocol {
 
 // MARK: - FavoriteStateChangeProtocol
 extension DashboardFundListViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with assetId: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: assetId, request: request) { [weak self] (result) in

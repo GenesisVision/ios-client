@@ -257,6 +257,10 @@ extension ProgramListViewController: ReloadDataProtocol {
 
 // MARK: - FavoriteStateChangeProtocol
 extension ProgramListViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: programID, request: request) { [weak self] (result) in

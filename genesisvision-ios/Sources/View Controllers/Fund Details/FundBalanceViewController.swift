@@ -100,6 +100,10 @@ extension FundBalanceViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension FundBalanceViewController: ChartViewProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
         tableView.panGestureRecognizer.isEnabled = true

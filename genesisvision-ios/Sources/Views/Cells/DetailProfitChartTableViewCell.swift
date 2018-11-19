@@ -10,6 +10,8 @@ import UIKit
 import Charts
 
 protocol ChartViewProtocol: class {
+    var filterDateRangeModel: FilterDateRangeModel? { get }
+    
     func chartValueSelected(date: Date)
     func chartValueNothingSelected()
 }

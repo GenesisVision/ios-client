@@ -98,6 +98,10 @@ extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension ProgramBalanceViewController: ChartViewProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
         tableView.panGestureRecognizer.isEnabled = true

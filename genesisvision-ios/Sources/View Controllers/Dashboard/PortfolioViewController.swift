@@ -120,7 +120,7 @@ class PortfolioViewController: BaseViewController {
     private func setupUI() {
         if let dashboardChartValue = viewModel.dashboardChartValue {
             if let lineChartData = dashboardChartValue.balanceChart, let barChartData = dashboardChartValue.investedProgramsInfo {
-                chartView.setup(chartType: .dashboard, lineChartData: lineChartData, barChartData: barChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
+                chartView.setup(chartType: .dashboard, lineChartData: lineChartData, barChartData: barChartData, dateRangeModel: dateRangeModel)
             }
             
             amountTitleLabel.text = "Value"

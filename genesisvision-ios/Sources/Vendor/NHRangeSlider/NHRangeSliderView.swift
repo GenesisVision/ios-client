@@ -264,7 +264,7 @@ open class NHRangeSliderView: UIView {
             if !titleLabel.isHidden && titleLabel.text != nil && titleLabel.text!.characters.count > 0 {
                 titleLabel.frame = CGRect(x: 0,
                                           y: 0,
-                                          width: commonWidth ,
+                                          width: commonWidth,
                                           height: (titleLabel.font.lineHeight + self.spacing ) )
                 
                 titleLabelMaxY = titleLabel.frame.origin.y + titleLabel.frame.size.height

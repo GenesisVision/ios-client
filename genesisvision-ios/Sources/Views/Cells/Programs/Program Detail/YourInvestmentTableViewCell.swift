@@ -13,53 +13,22 @@ class YourInvestmentTableViewCell: UITableViewCell {
     weak var yourInvestmentProtocol: YourInvestmentProtocol?
 
     // MARK: - Outlets
-    @IBOutlet var titleLabel: UILabel! {
+    @IBOutlet var titleLabel: TitleLabel! {
         didSet {
-            titleLabel.textColor = UIColor.Cell.title
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
     
     @IBOutlet var statusButton: StatusButton!
     
-    @IBOutlet var investedTitleLabel: UILabel! {
-        didSet {
-            investedTitleLabel.textColor = UIColor.Cell.subtitle
-            investedTitleLabel.font = UIFont.getFont(.semibold, size: 12.0)
-        }
-    }
-    @IBOutlet var investedValueLabel: UILabel! {
-        didSet {
-            investedValueLabel.textColor = UIColor.Cell.title
-            investedValueLabel.font = UIFont.getFont(.semibold, size: 14.0)
-        }
-    }
+    @IBOutlet var investedTitleLabel: SubtitleLabel!
+    @IBOutlet var investedValueLabel: TitleLabel!
     
-    @IBOutlet var valueTitleLabel: UILabel! {
-        didSet {
-            valueTitleLabel.textColor = UIColor.Cell.subtitle
-            valueTitleLabel.font = UIFont.getFont(.semibold, size: 12.0)
-        }
-    }
-    @IBOutlet var valueLabel: UILabel! {
-        didSet {
-            valueLabel.textColor = UIColor.Cell.title
-            valueLabel.font = UIFont.getFont(.semibold, size: 14.0)
-        }
-    }
+    @IBOutlet var valueTitleLabel: SubtitleLabel!
+    @IBOutlet var valueLabel: TitleLabel!
     
-    @IBOutlet var profitTitleLabel: UILabel! {
-        didSet {
-            profitTitleLabel.textColor = UIColor.Cell.subtitle
-            profitTitleLabel.font = UIFont.getFont(.semibold, size: 12.0)
-        }
-    }
-    @IBOutlet var profitValueLabel: UILabel! {
-        didSet {
-            profitValueLabel.textColor = UIColor.Cell.greenTitle
-            profitValueLabel.font = UIFont.getFont(.semibold, size: 14.0)
-        }
-    }
+    @IBOutlet var profitTitleLabel: SubtitleLabel!
+    @IBOutlet var profitValueLabel: TitleLabel!
     
     @IBOutlet var withdrawButton: ActionButton! {
         didSet {
@@ -69,12 +38,7 @@ class YourInvestmentTableViewCell: UITableViewCell {
     }
     
     @IBOutlet var reinvestView: UIView! 
-    @IBOutlet var reinvestTitleLabel: UILabel! {
-        didSet {
-            reinvestTitleLabel.textColor = UIColor.Cell.title
-            reinvestTitleLabel.font = UIFont.getFont(.semibold, size: 14.0)
-        }
-    }
+    @IBOutlet var reinvestTitleLabel: TitleLabel!
     
     @IBOutlet var reinvestTooltip: TooltipButton! {
         didSet {

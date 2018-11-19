@@ -39,7 +39,7 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         bottomViewType = .dateRange
-        
+        noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         
         setupNavigationBar()

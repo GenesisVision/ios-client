@@ -54,6 +54,12 @@ class SortingManager: NSObject {
             return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
         case "title":
             return highToLowValue ? .byTitleDesc : .byTitleAsc
+        case "new":
+            return highToLowValue ? .byNewDesc : .byNewAsc
+        case "investor":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "currency":
+            return highToLowValue ? .byCurrDesc : .byCurrAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -73,6 +79,8 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
         case "title":
             return highToLowValue ? .byTitleDesc : .byTitleAsc
+        case "new":
+            return highToLowValue ? .byNewDesc : .byNewAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -98,6 +106,12 @@ class SortingManager: NSObject {
             return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
         case "title":
             return highToLowValue ? .byTitleDesc : .byTitleAsc
+        case "new":
+            return highToLowValue ? .byNewDesc : .byNewAsc
+        case "investor":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "currency":
+            return highToLowValue ? .byCurrDesc : .byCurrAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -117,6 +131,8 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
         case "title":
             return highToLowValue ? .byTitleDesc : .byTitleAsc
+        case "new":
+            return highToLowValue ? .byNewDesc : .byNewAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -143,9 +159,9 @@ class SortingManager: NSObject {
     private func setup() {
         switch sortingType {
         case .programs, .dashboardPrograms:
-            sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title"]
+            sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title", "investors", "currency", "new"]
         case .funds, .dashboardFunds:
-            sortingValues = ["profit", "balance", "investors", "drawdown", "title"]
+            sortingValues = ["profit", "balance", "investors", "drawdown", "title", "new"]
         case .trades:
             sortingValues = ["date", "ticket", "symbol", "direction"]
         }

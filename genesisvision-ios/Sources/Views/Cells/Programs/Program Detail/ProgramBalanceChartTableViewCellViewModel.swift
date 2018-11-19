@@ -33,7 +33,7 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         
         if let balanceChartData = programBalanceChart.balanceChart, balanceChartData.count > 0 {
             cell.chartViewHeightConstraint.constant = 200.0
-            cell.chartView.setup(programBalanceChartData: balanceChartData, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
+            cell.chartView.setup(programBalanceChartData: balanceChartData, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false
         } else {
             cell.chartViewHeightConstraint.constant = 0.0

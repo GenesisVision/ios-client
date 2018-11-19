@@ -179,16 +179,23 @@ extension ProgramListViewModel {
             let dateFrom = filterModel.dateRangeModel.dateFrom
             let dateTo = filterModel.dateRangeModel.dateTo
             
-            let sorting = filterModel.sortingModel.selectedSorting
+            let sorting = filterModel.sortingModel.selectedSorting ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
             
-            var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
-            if let selectedCurrency = filterModel.currencyModel.selectedCurrency {
-                currencySecondary = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: selectedCurrency) ?? .btc
-            } else {
-                currencySecondary = .btc
+            let mask = filterModel.mask
+            let isFavorite = filterModel.isFavorite
+            let facetId = filterModel.facetId
+            
+            var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
+            if let selectedCurrency = filterModel.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {
+                programCurrency = newCurrency
             }
             
-            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: nil, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: mask, facetId: nil, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
+            var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
+            if let newCurrency = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) {
+                currencySecondary = newCurrency
+            }
+            
+            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programsList = programsList

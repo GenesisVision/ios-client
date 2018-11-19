@@ -28,6 +28,10 @@ final class AllEventsViewModel {
         }
     }
     
+    func noDataText() -> String {
+        return "There are no events"
+    }
+    
     var dateFrom: Date?
     var dateTo: Date?
     

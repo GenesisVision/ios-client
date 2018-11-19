@@ -44,21 +44,18 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     }
     
     func loadCurrencies() {
-        PlatformManager.shared.getPlatformInfo { (platformInfo) in
+        PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
             guard let platformInfo = platformInfo else { return }
             
             if let platformCurrencies = platformInfo.platformCurrencies {
-                self.currencies = platformCurrencies
-                self.updateSelectedIndex()
-                self.tableView?.reloadData()
+                self?.currencies.removeAll()
+                self?.currencies.append(PlatformCurrency(name: "All", rateToGvt: nil))
+                self?.currencies.append(contentsOf: platformCurrencies)
+                self?.tableView?.reloadData()
             }
         }
     }
     
-    func updateSelectedIndex() {
-        let selectedCurrency = getSelectedCurrency()
-        self.selectedIndex = currencies.firstIndex(where: { return $0.name == selectedCurrency } ) ?? 0
-    }
     
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

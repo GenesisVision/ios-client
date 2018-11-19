@@ -108,9 +108,7 @@ class ChartView: CombinedChartView {
                fundBalanceChartData: [BalanceChartElement]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
-               dateRangeType: DateRangeType? = .week,
-               dateFrom: Date? = nil,
-               dateTo: Date? = nil ) {
+               dateRangeModel: FilterDateRangeModel? = nil) {
         
         self.chartType = chartType
         self.name = name
@@ -119,9 +117,10 @@ class ChartView: CombinedChartView {
         self.programBalanceChartData = programBalanceChartData
         self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
-        self.dateRangeType = dateRangeType
-        self.dateFrom = dateFrom
-        self.dateTo = dateTo
+        
+        self.dateRangeType = dateRangeModel?.dateRangeType
+        self.dateFrom = dateRangeModel?.dateFrom
+        self.dateTo = dateRangeModel?.dateTo
 
         updateData()
         

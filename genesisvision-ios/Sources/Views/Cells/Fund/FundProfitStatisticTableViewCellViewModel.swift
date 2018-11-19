@@ -34,7 +34,11 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.endDateStackView.isHidden = true
         cell.tradesCountStackView.isHidden = true
         cell.tradesSuccessCountStackView.isHidden = true
-        cell.profitFactorPercentStackView.isHidden = true
+        
+        cell.profitFactorPercentTitleLabel.text = "Profit change"
+        if let value = fundProfitChart.profitChangePercent {
+            cell.profitFactorPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+        }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
         if let value = fundProfitChart.sharpeRatio {

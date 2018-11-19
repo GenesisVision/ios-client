@@ -30,7 +30,7 @@ extension DashboardFundTableViewCellViewModel: CellViewModel {
             cell.chartView.isHidden = false
             cell.noDataLabel.isHidden = true
             cell.viewForChartView.isHidden = cell.chartView.isHidden
-            cell.chartView.setup(chartType: .default, lineChartData: chart, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
+            cell.chartView.setup(chartType: .default, lineChartData: chart, dateRangeModel: delegate?.filterDateRangeModel)
         }
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8

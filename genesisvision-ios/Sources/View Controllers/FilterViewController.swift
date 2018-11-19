@@ -54,8 +54,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-//        tableView.contentInset.bottom = applyButton.frame.height + 20.0 + 20.0
-        
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -77,9 +76,9 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func showCurrency() {
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 256
+        bottomSheetController.initializeHeight = 300
         
-        bottomSheetController.addNavigationBar("Preferred currency")
+        bottomSheetController.addNavigationBar("Currency")
         
         bottomSheetController.addTableView { [weak self] tableView in
             viewModel.currencyDelegateManager?.tableView = tableView
@@ -112,7 +111,7 @@ class FilterViewController: BaseViewControllerWithTableView {
         let normalImage = #imageLiteral(resourceName: "img_profit_filter_icon")
         let selectedImage = #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         
-        bottomSheetController.initializeHeight = 256
+        bottomSheetController.initializeHeight = 350
         bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: normalImage, selectedImage: selectedImage, buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in

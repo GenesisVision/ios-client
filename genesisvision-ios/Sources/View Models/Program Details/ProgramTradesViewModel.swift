@@ -31,6 +31,10 @@ final class ProgramTradesViewModel {
         }
     }
     
+    func noDataText() -> String {
+        return "There are no trades"
+    }
+    
     var viewModels = [ProgramTradesTableViewCellViewModel]()
     
     // MARK: - Init

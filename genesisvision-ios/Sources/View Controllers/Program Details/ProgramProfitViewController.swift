@@ -115,6 +115,10 @@ extension ProgramProfitViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension ProgramProfitViewController: ChartViewProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
         tableView.panGestureRecognizer.isEnabled = true

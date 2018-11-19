@@ -35,7 +35,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
         
         if let equityChart = fundProfitChart.equityChart, equityChart.count > 0 {
             cell.chartViewHeightConstraint.constant = 150.0
-            cell.chartView.setup(lineChartData: equityChart, dateRangeType: PlatformManager.shared.dateRangeType, dateFrom: PlatformManager.shared.dateFrom, dateTo: PlatformManager.shared.dateTo)
+            cell.chartView.setup(lineChartData: equityChart, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false
             
             cell.changeTitleLabel.text = "Change"

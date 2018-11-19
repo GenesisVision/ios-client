@@ -48,6 +48,7 @@ class AllEventsViewController: BaseViewControllerWithTableView {
     private func setup() {
         navigationItem.title = viewModel.title
 
+        noDataTitle = viewModel.noDataText()
         setupNavigationBar()
         
         bottomViewType = .dateRange

@@ -180,6 +180,10 @@ extension ManagerFundListViewController: SortingDelegate {
 
 // MARK: - FavoriteStateChangeProtocol
 extension ManagerFundListViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with assetId: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: assetId, request: request) { [weak self] (result) in

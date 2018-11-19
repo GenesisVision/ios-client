@@ -249,6 +249,8 @@ class StatusButton: UIButton {
     var textColor: UIColor = UIColor.Cell.title
     var contentEdge = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
     
+    var handleUserInteractionEnabled: Bool = true
+    
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -263,7 +265,11 @@ class StatusButton: UIButton {
     
     func commonInit() {
         if let status = titleLabel?.text {
-            isUserInteractionEnabled = !(status == "Active" || status == "Ended")
+            if !handleUserInteractionEnabled {
+                isUserInteractionEnabled = handleUserInteractionEnabled
+            } else {
+                isUserInteractionEnabled = !(status == "Active" || status == "Ended")
+            }
             
             setImage(isUserInteractionEnabled ? #imageLiteral(resourceName: "img_arrow_down_icon") : nil, for: .normal)
             semanticContentAttribute = .forceRightToLeft

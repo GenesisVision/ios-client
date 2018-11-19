@@ -15,6 +15,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     var noDataImage: UIImage? = nil
     var noDataButtonTitle: String? = nil
     var dateRangeView: DateRangeView!
+    var dateRangeModel: FilterDateRangeModel = FilterDateRangeModel()
     
     // MARK: - Veriables
     var bottomSheetController: BottomSheetController! = {
@@ -130,7 +131,6 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         super.viewDidLoad()
 
         dateRangeView = DateRangeView.viewFromNib()
-
         updateDateRangeButton()
         correctTime()
         
@@ -170,12 +170,12 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     @objc func dateRangeButtonAction() {
+        dateRangeView.delegate = self
         bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 370
         bottomSheetController.addContentsView(dateRangeView)
         bottomSheetController.bottomSheetControllerProtocol = dateRangeView
-        dateRangeView.delegate = self
         bottomSheetController.present()
     }
     
@@ -185,7 +185,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         sortButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         dateRangeButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        dateRangeButton.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        dateRangeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
         filterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
@@ -262,9 +262,9 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     private func correctTime() {
-        let dateRangeType = PlatformManager.shared.dateRangeType
+        let dateRangeType = dateRangeModel.dateRangeType
         
-        guard var dateFrom = PlatformManager.shared.dateFrom, var dateTo = PlatformManager.shared.dateTo else {
+        guard var dateFrom = dateRangeModel.dateFrom, var dateTo = dateRangeModel.dateTo else {
             updateData(from: nil, to: nil)
             return
         }
@@ -342,6 +342,17 @@ extension BaseViewController: UIScrollViewDelegate {
 }
 
 extension BaseViewController: DateRangeViewProtocol {
+    var dateRange: FilterDateRangeModel? {
+        get {
+            return dateRangeModel
+        }
+        set {
+            if let newValue = newValue {
+                dateRangeModel = newValue
+            }
+        }
+    }
+    
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?) {
         bottomSheetController.dismiss()
 
@@ -350,11 +361,11 @@ extension BaseViewController: DateRangeViewProtocol {
     }
     
     private func updateDateRangeButton() {
-        let dateRangeType = PlatformManager.shared.dateRangeType
+        let dateRangeType = dateRangeModel.dateRangeType
         
         switch dateRangeType {
         case .custom:
-            guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return }
+            guard let dateFrom = dateRangeModel.dateFrom, let dateTo = dateRangeModel.dateTo else { return }
             
             let title = Date.getFormatStringForChart(for: dateFrom, dateRangeType: dateRangeType) + "-" + Date.getFormatStringForChart(for: dateTo, dateRangeType: dateRangeType)
             dateRangeButton.setTitle(title, for: .normal)

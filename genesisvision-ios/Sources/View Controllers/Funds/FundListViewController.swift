@@ -45,10 +45,6 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        if let viewModel = viewModel as? FavoriteFundListViewModel, viewModel.needToRefresh {
-//            fetch()
-//        }
     }
     
     // MARK: - Private methods
@@ -261,6 +257,10 @@ extension FundListViewController: ReloadDataProtocol {
 
 // MARK: - FavoriteStateChangeProtocol
 extension FundListViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with fundID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: fundID, request: request) { [weak self] (result) in

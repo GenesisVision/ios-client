@@ -29,9 +29,6 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateFrom: Date?
-    var dateTo: Date?
-    
     var canFetchMoreResults = true
     var skip = 0
     var take = Api.take
@@ -257,8 +254,11 @@ extension DashboardFundListViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-
-        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        let dateFrom = filterModel.dateRangeModel.dateFrom
+        let dateTo = filterModel.dateRangeModel.dateTo
+        
+        let sorting = filterModel.sortingModel.selectedSorting
+        
         DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundsList) in
             guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             

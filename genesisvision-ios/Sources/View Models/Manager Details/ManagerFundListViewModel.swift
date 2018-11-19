@@ -231,7 +231,11 @@ extension ManagerFundListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
         let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
-        let currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) ?? .btc
+        
+        var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
+        if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
+            currencySecondary = newCurrency
+        }
         
         FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
             guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }

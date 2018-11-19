@@ -115,6 +115,10 @@ extension FundProfitViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FundProfitViewController: ChartViewProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func chartValueNothingSelected() {
         tableView.isScrollEnabled = true
         tableView.panGestureRecognizer.isEnabled = true

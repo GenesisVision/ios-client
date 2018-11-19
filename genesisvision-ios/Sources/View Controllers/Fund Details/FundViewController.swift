@@ -250,6 +250,10 @@ extension FundViewController: FavoriteStateUpdatedProtocol {
 
 // MARK: - FavoriteStateChangeProtocol
 extension FundViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with fundID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, request: request) { (result) in

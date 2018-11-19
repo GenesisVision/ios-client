@@ -8,7 +8,9 @@
 
 import UIKit
 
-@objc protocol DateRangeViewProtocol: class {
+protocol DateRangeViewProtocol: class {
+    var dateRange: FilterDateRangeModel? { get set }
+
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?)
     func showDatePicker(from dateFrom: Date?, to dateTo: Date)
 }
@@ -42,42 +44,42 @@ class DateRangeView: UIView {
     @IBOutlet var dayButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.day
-            dayButton.setTitle(dateRangeType.getString(), for: .normal)
+            dayButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             dayButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var weekButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.week
-            weekButton.setTitle(dateRangeType.getString(), for: .normal)
+            weekButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             weekButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var monthButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.month
-            monthButton.setTitle(dateRangeType.getString(), for: .normal)
+            monthButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             monthButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var yearButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.year
-            yearButton.setTitle(dateRangeType.getString(), for: .normal)
+            yearButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             yearButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var allTimeButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.allTime
-            allTimeButton.setTitle(dateRangeType.getString(), for: .normal)
+            allTimeButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             allTimeButton.tag = dateRangeType.rawValue
         }
     }
     @IBOutlet var customButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.custom
-            customButton.setTitle(dateRangeType.getString(), for: .normal)
+            customButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             customButton.tag = dateRangeType.rawValue
         }
     }
@@ -106,8 +108,6 @@ class DateRangeView: UIView {
         super.awakeFromNib()
         
         buttons = [dayButton, weekButton, monthButton, yearButton, allTimeButton, customButton]
-        
-        setup()
     }
     
     
@@ -124,11 +124,13 @@ class DateRangeView: UIView {
     }
     // MARK: - Private methods
     private func setup() {
-        dateRangeType = PlatformManager.shared.dateRangeType
+        guard let dateRange = delegate?.dateRange else { return }
+        
+        dateRangeType = dateRange.dateRangeType
         
         if dateRangeType == .custom {
-            self.dateFrom = PlatformManager.shared.dateFrom
-            self.dateTo = PlatformManager.shared.dateTo
+            self.dateFrom = dateRange.dateFrom
+            self.dateTo = dateRange.dateTo
             changeDateRangeType()
             return
         }
@@ -174,9 +176,9 @@ class DateRangeView: UIView {
     }
     
     private func updateTime() {
-        PlatformManager.shared.dateRangeType = dateRangeType
-        PlatformManager.shared.dateFrom = self.dateFrom
-        PlatformManager.shared.dateTo = self.dateTo
+        delegate?.dateRange?.dateRangeType = dateRangeType
+        delegate?.dateRange?.dateFrom = dateFrom
+        delegate?.dateRange?.dateTo = dateTo
     }
     
     // MARK: - Actions
@@ -205,7 +207,7 @@ class DateRangeView: UIView {
     @IBAction func applyButtonAction(_ sender: UIButton) {
         updateTime()
         
-        delegate?.applyButtonDidPress(from: PlatformManager.shared.dateFrom, to: PlatformManager.shared.dateTo)
+        delegate?.applyButtonDidPress(from: delegate?.dateRange?.dateFrom, to: delegate?.dateRange?.dateTo)
     }
 }
 

@@ -53,9 +53,17 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
         }
         
         if let amount = walletTransaction.amount,
-            let sourceCurrency = walletTransaction.sourceCurrency {
-            if let currency = CurrencyType(rawValue: sourceCurrency.rawValue) {
-                cell.amountLabel.text = sign + amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            let amountConverted = walletTransaction.amountConverted,
+            let sourceCurrency = walletTransaction.sourceCurrency,
+            let destinationCurrency = walletTransaction.destinationCurrency {
+            if sourceCurrency == .gvt {
+                if let currency = CurrencyType(rawValue: sourceCurrency.rawValue) {
+                    cell.amountLabel.text = sign + amount.rounded(withType: currency).toString() + " " + currency.rawValue
+                }
+            } else {
+                if let currency = CurrencyType(rawValue: destinationCurrency.rawValue) {
+                    cell.amountLabel.text = sign + amountConverted.rounded(withType: currency).toString() + " " + currency.rawValue
+                }
             }
             
             cell.amountLabel.textColor = sign == "+" ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle

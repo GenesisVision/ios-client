@@ -250,6 +250,10 @@ extension ProgramViewController: FavoriteStateUpdatedProtocol {
 
 // MARK: - FavoriteStateChangeProtocol
 extension ProgramViewController: FavoriteStateChangeProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return dateRangeModel
+    }
+    
     func didChangeFavoriteState(with programID: String, value: Bool, request: Bool) {
         showProgressHUD()
         viewModel.changeFavorite(value: value, request: request) { (result) in

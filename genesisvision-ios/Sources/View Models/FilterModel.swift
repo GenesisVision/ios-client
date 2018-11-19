@@ -26,8 +26,8 @@ struct FilterLevelModel {
 
 struct FilterDateRangeModel {
     var dateRangeType: DateRangeType = .week
-    var dateFrom: Date?
-    var dateTo: Date?
+    var dateFrom: Date? = Date().removeDays(7)
+    var dateTo: Date? = Date()
 }
 
 struct FilterCurrencyModel {
@@ -44,6 +44,7 @@ class FilterModel {
     var chartPointsCount: Int = Api.equityChartLength
     var mask: String?
     var isFavorite: Bool = false
+    var facetId: String?
     
     init() {
         sortingModel = FilterSortingModel()

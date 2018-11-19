@@ -120,12 +120,7 @@ extension DashboardViewModel {
     }
     
     private func updateList() {
-        router.programListViewController?.viewModel?.dateFrom = dateFrom
-        router.programListViewController?.viewModel?.dateTo = dateTo
         router.programListViewController?.fetch()
-        
-        router.fundListViewController?.viewModel?.dateFrom = dateFrom
-        router.fundListViewController?.viewModel?.dateTo = dateTo
         router.fundListViewController?.fetch()
     }
     

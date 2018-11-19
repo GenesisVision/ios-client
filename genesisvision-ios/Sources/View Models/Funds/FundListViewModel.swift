@@ -178,13 +178,11 @@ extension FundListViewModel {
             let dateFrom = filterModel.dateRangeModel.dateFrom
             let dateTo = filterModel.dateRangeModel.dateTo
             
-            let sorting = filterModel.sortingModel.selectedSorting
+            let sorting = filterModel.sortingModel.selectedSorting ?? FundsAPI.Sorting_v10FundsGet.byProfitDesc
             
             var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
-            if let selectedCurrency = filterModel.currencyModel.selectedCurrency {
-                currencySecondary = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: selectedCurrency) ?? .btc
-            } else {
-                currencySecondary = .btc
+            if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
+                currencySecondary = newCurrency
             }
             
             FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in

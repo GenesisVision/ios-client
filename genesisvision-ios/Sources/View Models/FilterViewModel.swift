@@ -63,9 +63,9 @@ final class FilterViewModel {
         
         self.filterType = filterType
         switch filterType {
-        case .programs, .dashboardPrograms:
+        case .programs:
             rows = [.levels, .currency, .sort, .dateRange]
-        case .funds, .dashboardFunds:
+        default:
             rows = [.sort, .dateRange]
         }
         
@@ -257,11 +257,12 @@ final class FilterViewModel {
     
     private func getSelectedDate() -> String? {
         var selectedDate = ""
-        let dateRangeType = PlatformManager.shared.dateRangeType
+        guard let dateRangeModel = listViewModel?.filterModel.dateRangeModel else { return nil }
+        let dateRangeType = dateRangeModel.dateRangeType
         
         switch dateRangeType {
         case .custom:
-            guard let dateFrom = PlatformManager.shared.dateFrom, let dateTo = PlatformManager.shared.dateTo else { return nil }
+            guard let dateFrom = dateRangeModel.dateFrom, let dateTo = dateRangeModel.dateTo else { return nil }
             
             let title = Date.getFormatStringForChart(for: dateFrom, dateRangeType: dateRangeType) + "-" + Date.getFormatStringForChart(for: dateTo, dateRangeType: dateRangeType)
             selectedDate = title
@@ -383,6 +384,17 @@ extension FilterViewModel: SortingDelegate {
 }
 
 extension FilterViewModel: DateRangeViewProtocol {
+    var dateRange: FilterDateRangeModel? {
+        get {
+            return listViewModel?.filterModel.dateRangeModel
+        }
+        set {
+            if let newValue = newValue {
+                listViewModel?.filterModel.dateRangeModel = newValue
+            }
+        }
+    }
+    
     func showDatePicker(from dateFrom: Date?, to dateTo: Date) {
         
     }

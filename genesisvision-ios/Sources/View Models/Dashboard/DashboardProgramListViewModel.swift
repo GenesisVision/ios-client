@@ -28,10 +28,6 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var dateFrom: Date?
-    var dateTo: Date?
-    var chartPointsCount = 50
-    
     var canFetchMoreResults = true
     var skip = 0
     var take = Api.take
@@ -282,8 +278,19 @@ extension DashboardProgramListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
-        DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, skip: skip, take: take, completion: { [weak self] (programsList) in
+        let dateFrom = filterModel.dateRangeModel.dateFrom
+        let dateTo = filterModel.dateRangeModel.dateTo
+        
+        let sorting = filterModel.sortingModel.selectedSorting
+        
+        let chartPointsCount = filterModel.chartPointsCount
+        
+        var currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorProgramsGet?
+        if let newCurrency = InvestorAPI.CurrencySecondary_v10InvestorProgramsGet(rawValue: getSelectedCurrency()) {
+            currencySecondary = newCurrency
+        }
+
+        DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             self?.programsList = programsList

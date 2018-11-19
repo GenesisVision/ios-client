@@ -202,8 +202,7 @@ extension DashboardViewController {
         navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let viewHeight = UIScreen.main.bounds.height - (statusBarHeight + 44.0 + 50.0 + 44.0 + 16)
+        let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0
         
         if yOffset >= viewHeight && self.filterStackView.alpha == 1.0 {
 

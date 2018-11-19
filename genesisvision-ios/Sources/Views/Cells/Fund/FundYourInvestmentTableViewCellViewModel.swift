@@ -27,7 +27,9 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Your investment"
         
-        if let status = fundDetailsFull?.personalFundDetails?.status, status != .investing, status != .withdrawing {
+        cell.statusButton.handleUserInteractionEnabled = false
+        
+        if let status = fundDetailsFull?.personalFundDetails?.status {
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         } else {
@@ -42,15 +44,28 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         let currency: CurrencyType = .gvt
         
-        cell.investedTitleLabel.isHidden = true
-        cell.investedValueLabel.isHidden = true
-        
         if let value = fundDetailsFull?.personalFundDetails?.value {
-            cell.valueTitleLabel.text = "value"
-            cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.investedTitleLabel.text = "value"
+            cell.investedValueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+        } else {
+            cell.investedTitleLabel.isHidden = true
+            cell.investedValueLabel.isHidden = true
         }
         
-        cell.profitTitleLabel.isHidden = true
-        cell.profitValueLabel.isHidden = true
+        if let value = fundDetailsFull?.personalFundDetails?.pendingInput, value > 0 {
+            cell.valueTitleLabel.text = "pending input"
+            cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+        } else {
+            cell.valueTitleLabel.isHidden = true
+            cell.valueLabel.isHidden = true
+        }
+        
+        if let value = fundDetailsFull?.personalFundDetails?.pendingOutput, value > 0 {
+            cell.profitTitleLabel.text = "pending output"
+            cell.profitValueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+        } else {
+            cell.profitTitleLabel.isHidden = true
+            cell.profitValueLabel.isHidden = true
+        }
     }
 }
