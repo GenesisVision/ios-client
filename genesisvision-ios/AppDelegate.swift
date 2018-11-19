@@ -75,10 +75,6 @@ extension AppDelegate {
     }
     
     private func setup() {
-        print(isTournamentApp)
-        print(isDebug)
-        print(isInvestorApp)
-        
         SwaggerClientAPI.basePath = Api.basePath
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
         

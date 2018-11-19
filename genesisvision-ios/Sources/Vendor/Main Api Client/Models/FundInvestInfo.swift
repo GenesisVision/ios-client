@@ -17,16 +17,18 @@ open class FundInvestInfo: Codable {
     public var entryFee: Double?
     public var gvCommission: Double?
     public var rate: Double?
+    public var isOwnProgram: Bool?
 
 
     
-    public init(title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?) {
+    public init(title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?, isOwnProgram: Bool?) {
         self.title = title
         self.availableInWallet = availableInWallet
         self.minInvestmentAmount = minInvestmentAmount
         self.entryFee = entryFee
         self.gvCommission = gvCommission
         self.rate = rate
+        self.isOwnProgram = isOwnProgram
     }
     
 
@@ -42,6 +44,7 @@ open class FundInvestInfo: Codable {
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(gvCommission, forKey: "gvCommission")
         try container.encodeIfPresent(rate, forKey: "rate")
+        try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
     }
 
     // Decodable protocol methods
@@ -55,6 +58,7 @@ open class FundInvestInfo: Codable {
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         gvCommission = try container.decodeIfPresent(Double.self, forKey: "gvCommission")
         rate = try container.decodeIfPresent(Double.self, forKey: "rate")
+        isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
     }
 }
 

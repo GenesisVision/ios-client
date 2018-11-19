@@ -51,7 +51,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = 60
+        
         tableView.isScrollEnabled = false
         tableView.bounces = false
         tableView.delegate = self.viewModel?.programListDelegateManager
@@ -114,10 +114,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    func showFilterVC() {
-        viewModel.showFilterVC()
-    }
-    
     // MARK: - Actions
     @objc func highToLowButtonAction() {
         if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
@@ -137,9 +133,7 @@ extension DashboardProgramListViewController {
     }
     
     override func filterButtonAction() {
-//        if let viewModel = viewModel {
-//            viewModel.showFilterVC()
-//        }
+        viewModel?.showFilterVC()
     }
 }
 

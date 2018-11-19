@@ -15,6 +15,8 @@ final class NotificationListViewModel {
     var router: NotificationListRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var allowsSelection: Bool = true
+    
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var notifiactionsCount: String = ""
@@ -67,21 +69,35 @@ extension NotificationListViewModel {
 // MARK: - Fetch
 extension NotificationListViewModel {
     // MARK: - Public methods
-    func didSelectPortfolioEvents(at indexPath: IndexPath) {
+    func didHighlightRowAt(at indexPath: IndexPath) -> Bool {
+        guard !viewModels.isEmpty else {
+            return false
+        }
+        
+        let selectedModel = viewModels[indexPath.row]
+        let notification = selectedModel.notification
+        if (notification.assetId?.uuidString) != nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    func didSelectNotitifaction(at indexPath: IndexPath) {
         guard !viewModels.isEmpty else {
             return
         }
         
         let selectedModel = viewModels[indexPath.row]
         let notification = selectedModel.notification
-//        if let assetId = notification.assetId?.uuidString, let assetType = notification.assetType {
-//            switch assetType {
-//            case .program:
-//                router.showProgramDetails(with: assetId)
-//            case .fund:
-//                router.showFundDetails(with: assetId)
-//            }
-//        }
+        if let assetId = notification.assetId?.uuidString, let assetType = notification.assetType {
+            switch assetType {
+            case .program:
+                router.showProgramDetails(with: assetId)
+            case .fund:
+                router.showFundDetails(with: assetId)
+            }
+        }
     }
     
     func fetch(completion: @escaping CompletionBlock) {

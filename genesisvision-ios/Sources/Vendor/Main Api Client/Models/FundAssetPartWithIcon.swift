@@ -12,14 +12,16 @@ import Foundation
 open class FundAssetPartWithIcon: Codable {
 
     public var icon: String?
+    public var color: String?
     public var name: String?
     public var asset: String?
     public var percent: Double?
 
 
     
-    public init(icon: String?, name: String?, asset: String?, percent: Double?) {
+    public init(icon: String?, color: String?, name: String?, asset: String?, percent: Double?) {
         self.icon = icon
+        self.color = color
         self.name = name
         self.asset = asset
         self.percent = percent
@@ -33,6 +35,7 @@ open class FundAssetPartWithIcon: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(icon, forKey: "icon")
+        try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(name, forKey: "name")
         try container.encodeIfPresent(asset, forKey: "asset")
         try container.encodeIfPresent(percent, forKey: "percent")
@@ -44,6 +47,7 @@ open class FundAssetPartWithIcon: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
         name = try container.decodeIfPresent(String.self, forKey: "name")
         asset = try container.decodeIfPresent(String.self, forKey: "asset")
         percent = try container.decodeIfPresent(Double.self, forKey: "percent")

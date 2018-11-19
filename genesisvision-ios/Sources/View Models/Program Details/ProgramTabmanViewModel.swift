@@ -33,18 +33,6 @@ final class ProgramTabmanViewModel: TabmanViewModel {
     }
     
     // MARK: - Public methods
-    func didRequestCanceled(_ last: Bool) {
-        setup()
-    }
-    
-    func didInvested() {
-        setup()
-    }
-    
-    func didWithdrawn() {
-        setup()
-    }
-    
     func reloadDetails() {
         if let vc = viewControllers.first as? ProgramInfoViewController, let programDetailsFull = programDetailsFull {
             vc.viewModel.updateDetails(with: programDetailsFull)

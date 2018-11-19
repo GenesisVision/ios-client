@@ -28,6 +28,10 @@ open class NotificationViewModel: Codable {
         case fundRebalancing = "FundRebalancing"
         case managerNewProgram = "ManagerNewProgram"
     }
+    public enum AssetType: String, Codable { 
+        case program = "Program"
+        case fund = "Fund"
+    }
     public var id: UUID?
     public var text: String?
     public var date: Date?
@@ -37,10 +41,11 @@ open class NotificationViewModel: Codable {
     public var logo: String?
     public var url: String?
     public var isUnread: Bool?
+    public var assetType: AssetType?
 
 
     
-    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, isUnread: Bool?) {
+    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, isUnread: Bool?, assetType: AssetType?) {
         self.id = id
         self.text = text
         self.date = date
@@ -50,6 +55,7 @@ open class NotificationViewModel: Codable {
         self.logo = logo
         self.url = url
         self.isUnread = isUnread
+        self.assetType = assetType
     }
     
 
@@ -68,6 +74,7 @@ open class NotificationViewModel: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(isUnread, forKey: "isUnread")
+        try container.encodeIfPresent(assetType, forKey: "assetType")
     }
 
     // Decodable protocol methods
@@ -84,6 +91,7 @@ open class NotificationViewModel: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         isUnread = try container.decodeIfPresent(Bool.self, forKey: "isUnread")
+        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
     }
 }
 

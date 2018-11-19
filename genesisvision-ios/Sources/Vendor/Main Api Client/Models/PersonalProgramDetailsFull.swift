@@ -19,6 +19,7 @@ open class PersonalProgramDetailsFull: Codable {
         case ended = "Ended"
     }
     public var isReinvest: Bool?
+    public var gvtValue: Double?
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
@@ -26,6 +27,7 @@ open class PersonalProgramDetailsFull: Codable {
     public var isFinishing: Bool?
     public var canInvest: Bool?
     public var canWithdraw: Bool?
+    public var canClosePeriod: Bool?
     public var hasNotifications: Bool?
     public var value: Double?
     public var profit: Double?
@@ -36,8 +38,9 @@ open class PersonalProgramDetailsFull: Codable {
 
 
     
-    public init(isReinvest: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
+    public init(isReinvest: Bool?, gvtValue: Double?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
         self.isReinvest = isReinvest
+        self.gvtValue = gvtValue
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -45,6 +48,7 @@ open class PersonalProgramDetailsFull: Codable {
         self.isFinishing = isFinishing
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
+        self.canClosePeriod = canClosePeriod
         self.hasNotifications = hasNotifications
         self.value = value
         self.profit = profit
@@ -62,6 +66,7 @@ open class PersonalProgramDetailsFull: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
+        try container.encodeIfPresent(gvtValue, forKey: "gvtValue")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
@@ -69,6 +74,7 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(isFinishing, forKey: "isFinishing")
         try container.encodeIfPresent(canInvest, forKey: "canInvest")
         try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
+        try container.encodeIfPresent(canClosePeriod, forKey: "canClosePeriod")
         try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(profit, forKey: "profit")
@@ -84,6 +90,7 @@ open class PersonalProgramDetailsFull: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
+        gvtValue = try container.decodeIfPresent(Double.self, forKey: "gvtValue")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
@@ -91,6 +98,7 @@ open class PersonalProgramDetailsFull: Codable {
         isFinishing = try container.decodeIfPresent(Bool.self, forKey: "isFinishing")
         canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
         canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
+        canClosePeriod = try container.decodeIfPresent(Bool.self, forKey: "canClosePeriod")
         hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")

@@ -27,10 +27,6 @@ extension PortfolioAssetTableViewCellViewModel: CellViewModel {
             if let value = assetsValue.title {
                 cell.titleLabel.text = value
             }
-            
-            if let value = assetsValue.title {
-                cell.titleLabel.text = value
-            }
             if let value = assetsValue.value {
                 cell.balanceLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
             }

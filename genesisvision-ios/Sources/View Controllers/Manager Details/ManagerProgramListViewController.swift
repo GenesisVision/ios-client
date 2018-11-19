@@ -47,7 +47,6 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = -44.0
         
         tableView.bounces = true
         tableView.delegate = self.viewModel?.programListDelegateManager
@@ -104,7 +103,7 @@ class ManagerProgramListViewController: BaseViewControllerWithTableView {
     }
     
     func showFilterVC() {
-//        router.show(routeType: .showFilterVC(programListViewModel: self as! ProgramListViewModel))
+//        viewModel.showFilterVC()
     }
     
     // MARK: - Actions

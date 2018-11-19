@@ -118,6 +118,7 @@ open class ManagerAPI {
         case managerWithdraw = "ManagerWithdraw"
         case assetFinished = "AssetFinished"
         case entranceFee = "EntranceFee"
+        case exitFee = "ExitFee"
     }
 
     /**
@@ -220,6 +221,49 @@ open class ManagerAPI {
         let requestBuilder: RequestBuilder<ManagerPortfolioEvents>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Update fund assets parts
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter assets: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerFundsByIdAssetsUpdatePost(id: UUID, authorization: String, assets: [FundAssetPart]? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerFundsByIdAssetsUpdatePostWithRequestBuilder(id: id, authorization: authorization, assets: assets).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update fund assets parts
+     - POST /v1.0/manager/funds/{id}/assets/update
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter assets: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ManagerFundsByIdAssetsUpdatePostWithRequestBuilder(id: UUID, authorization: String, assets: [FundAssetPart]? = nil) -> RequestBuilder<Void> {
+        var path = "/v1.0/manager/funds/{id}/assets/update"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: assets)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
@@ -351,6 +395,7 @@ open class ManagerAPI {
      - examples: [{contentType=application/json, example={
   "entryFee" : 1.4658129805029452,
   "availableInWallet" : 0.8008281904610115,
+  "isOwnProgram" : true,
   "rate" : 5.637376656633329,
   "title" : "title",
   "minInvestmentAmount" : 6.027456183070403,
@@ -402,15 +447,17 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 1.284659006116532,
-  "total" : 6,
+  "totalValue" : 6.778324963048013,
+  "total" : 2,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -421,11 +468,13 @@ open class ManagerAPI {
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -720,21 +769,21 @@ open class ManagerAPI {
      Manager funds
      - GET /v1.0/manager/funds
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 2,
   "funds" : [ {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 4,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 5.025004791520295,
-      "drawdownPercent" : 9.965781217890562,
+      "profitPercent" : 9.965781217890562,
+      "drawdownPercent" : 9.369310271410669,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -748,31 +797,35 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 4.965218492984954
+      "percent" : 5.025004791520295
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 4.965218492984954
+      "percent" : 5.025004791520295
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 6.84685269835264
+      "share" : 7.457744773683766
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "pendingOutput" : 3.5571952270680973,
+      "canClosePeriod" : true,
+      "canReallocate" : true,
+      "pendingOutput" : 1.284659006116532,
       "hasNotifications" : true,
-      "pendingInput" : 6.438423552598547,
+      "pendingInput" : 6.965117697638846,
       "isOwnProgram" : true,
+      "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.683562403749608,
-      "profit" : 8.762042012749001,
-      "invested" : 9.018348186070783,
+      "value" : 9.018348186070783,
+      "profit" : 6.438423552598547,
+      "withdrawPercent" : 8.762042012749001,
+      "invested" : 3.5571952270680973,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -788,19 +841,19 @@ open class ManagerAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 1,
+    "totalAssetsCount" : 4,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 5.025004791520295,
-      "drawdownPercent" : 9.965781217890562,
+      "profitPercent" : 9.965781217890562,
+      "drawdownPercent" : 9.369310271410669,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -814,31 +867,35 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 4.965218492984954
+      "percent" : 5.025004791520295
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 4.965218492984954
+      "percent" : 5.025004791520295
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 6.84685269835264
+      "share" : 7.457744773683766
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "pendingOutput" : 3.5571952270680973,
+      "canClosePeriod" : true,
+      "canReallocate" : true,
+      "pendingOutput" : 1.284659006116532,
       "hasNotifications" : true,
-      "pendingInput" : 6.438423552598547,
+      "pendingInput" : 6.965117697638846,
       "isOwnProgram" : true,
+      "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.683562403749608,
-      "profit" : 8.762042012749001,
-      "invested" : 9.018348186070783,
+      "value" : 9.018348186070783,
+      "profit" : 6.438423552598547,
+      "withdrawPercent" : 8.762042012749001,
+      "invested" : 3.5571952270680973,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -987,6 +1044,7 @@ open class ManagerAPI {
         case managerWithdraw = "ManagerWithdraw"
         case assetFinished = "AssetFinished"
         case entranceFee = "EntranceFee"
+        case exitFee = "ExitFee"
     }
 
     /**
@@ -1072,11 +1130,13 @@ open class ManagerAPI {
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -1327,6 +1387,7 @@ open class ManagerAPI {
      - examples: [{contentType=application/json, example={
   "entryFee" : 5.962133916683182,
   "availableInWallet" : 6.027456183070403,
+  "isOwnProgram" : true,
   "rate" : 2.3021358869347655,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "availableToInvest" : 0.8008281904610115,
@@ -1421,15 +1482,17 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 1.284659006116532,
-  "total" : 6,
+  "totalValue" : 6.778324963048013,
+  "total" : 2,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -1440,11 +1503,13 @@ open class ManagerAPI {
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -1747,7 +1812,7 @@ open class ManagerAPI {
      Manager programs
      - GET /v1.0/manager/programs
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1785,22 +1850,24 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 6.84685269835264
+      "share" : 7.457744773683766
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "pendingOutput" : 1.4894159098541704,
+      "canClosePeriod" : true,
+      "pendingOutput" : 6.84685269835264,
       "hasNotifications" : true,
-      "pendingInput" : 1.0246457001441578,
+      "pendingInput" : 1.4894159098541704,
       "isOwnProgram" : true,
       "isReinvest" : true,
+      "gvtValue" : 4.145608029883936,
       "isFinishing" : true,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "invested" : 1.2315135367772556,
+      "value" : 7.386281948385884,
+      "profit" : 1.2315135367772556,
+      "invested" : 1.0246457001441578,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1853,22 +1920,24 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 6.84685269835264
+      "share" : 7.457744773683766
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "pendingOutput" : 1.4894159098541704,
+      "canClosePeriod" : true,
+      "pendingOutput" : 6.84685269835264,
       "hasNotifications" : true,
-      "pendingInput" : 1.0246457001441578,
+      "pendingInput" : 1.4894159098541704,
       "isOwnProgram" : true,
       "isReinvest" : true,
+      "gvtValue" : 4.145608029883936,
       "isFinishing" : true,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "invested" : 1.2315135367772556,
+      "value" : 7.386281948385884,
+      "profit" : 1.2315135367772556,
+      "invested" : 1.0246457001441578,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -2023,15 +2092,17 @@ open class ManagerAPI {
      Get all requests
      - GET /v1.0/manager/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 1.284659006116532,
-  "total" : 6,
+  "totalValue" : 6.778324963048013,
+  "total" : 2,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
@@ -2042,11 +2113,13 @@ open class ManagerAPI {
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeExit" : 6.965117697638846,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
     "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 3.5571952270680973,
+    "fundWithdrawPercent" : 1.284659006116532,
+    "feeEntry" : 3.5571952270680973,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",

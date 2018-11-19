@@ -164,12 +164,7 @@ class ProgramViewController: BaseViewController {
 extension ProgramViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
-        
-//        if scrollView.contentOffset.y >= minHeaderHeight - topConstant * 2 {
-//            scrollView.setContentOffset(CGPoint(x: 0.0, y: minHeaderHeight - topConstant * 2), animated: false)
-//            return
-//        }
-        
+
         let yOffset = scrollView.contentOffset.y + topConstant
         
         let headerHeight = headerViewConstraint.constant - topConstant
@@ -220,10 +215,7 @@ extension ProgramViewController {
             animateHeader(minHeaderHeight)
         } else {
             hideHeader(true)
-//            let yOffset = contentOffsetY + topConstant
-//            let headerHeight = headerViewConstraint.constant - topConstant
-////            hideHeader((headerHeight - yOffset) < headerHeight / 2)
-//
+
             if headerHeight - yOffset >= 0 && yOffset >= 0 {
                 headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
             }
@@ -268,21 +260,15 @@ extension ProgramViewController: FavoriteStateChangeProtocol {
 
 extension ProgramViewController: DetailProtocol {
     func didRequestCanceled(_ last: Bool) {
-        if let viewModel = detailsTabmanViewController?.viewModel {
-            viewModel.didRequestCanceled(last)
-        }
+        fetch()
     }
     
     func didWithdrawn() {
-        if let viewModel = detailsTabmanViewController?.viewModel {
-            viewModel.didWithdrawn()
-        }
+        fetch()
     }
     
     func didInvested() {
-        if let viewModel = detailsTabmanViewController?.viewModel {
-            viewModel.didInvested()
-        }
+        fetch()
     }
 }
 

@@ -54,7 +54,7 @@ class FilterViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = applyButton.frame.height + 20.0 + 20.0
+//        tableView.contentInset.bottom = applyButton.frame.height + 20.0 + 20.0
         
         tableView.delegate = self
         tableView.dataSource = self

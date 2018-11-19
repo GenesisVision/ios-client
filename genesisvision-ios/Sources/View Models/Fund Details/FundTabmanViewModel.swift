@@ -33,18 +33,6 @@ final class FundTabmanViewModel: TabmanViewModel {
     }
     
     // MARK: - Public methods
-    func didRequestCanceled(_ last: Bool) {
-        setup()
-    }
-    
-    func didInvested() {
-        setup()
-    }
-    
-    func didWithdrawn() {
-        setup()
-    }
-    
     func reloadDetails() {
         if let vc = viewControllers.first as? FundInfoViewController, let fundDetailsFull = fundDetailsFull {
             vc.viewModel.updateDetails(with: fundDetailsFull)

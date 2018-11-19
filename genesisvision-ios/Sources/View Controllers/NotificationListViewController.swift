@@ -36,10 +36,12 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.allowsSelection = false
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        
+        tableView.allowsSelection = viewModel.allowsSelection
         
         setupPullToRefresh(scrollView: tableView)
     }
@@ -97,7 +99,7 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        viewModel.didSelectPortfolioEvents(at: indexPath)
+        viewModel.didSelectNotitifaction(at: indexPath)
     }
     
     // MARK: - UITableViewDataSource
@@ -111,6 +113,18 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath), viewModel.didHighlightRowAt(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
     }
 }
 

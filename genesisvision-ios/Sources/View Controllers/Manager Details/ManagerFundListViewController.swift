@@ -47,7 +47,6 @@ class ManagerFundListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = -44.0
         
         tableView.bounces = true
         tableView.delegate = self.viewModel?.fundListDelegateManager
@@ -104,7 +103,7 @@ class ManagerFundListViewController: BaseViewControllerWithTableView {
     }
     
     func showFilterVC() {
-//        router.show(routeType: .showFilterVC(fundListViewModel: self as! FundListViewModel))
+//        viewModel.showFilterVC()
     }
     
     // MARK: - Actions

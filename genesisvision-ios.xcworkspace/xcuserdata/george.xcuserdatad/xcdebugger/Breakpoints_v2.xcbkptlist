@@ -73,70 +73,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Fund Details/FundViewController.swift"
-            timestampString = "562859331.997108"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "didChangeFavoriteState(with:value:request:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Genesis_Vision.FundViewController.didChangeFavoriteState(with: Swift.String, value: Swift.Bool, request: Swift.Bool) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "564277096.978065"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "253"
-                  endingLineNumber = "253"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.FundViewController.didChangeFavoriteState(with: Swift.String, value: Swift.Bool, request: Swift.Bool) -&gt; ()"
-                  moduleName = "Genesis Vision"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Fund%20Details/FundViewController.swift"
-                  timestampString = "564277096.97987"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "255"
-                  endingLineNumber = "255"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Program Details/ProgramViewController.swift"
-            timestampString = "564270254.623474"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "didFavoriteStateUpdated()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletWithdrawViewController.swift"
             timestampString = "563978803.509982"
             startingColumnNumber = "9223372036854775807"
@@ -169,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInfoViewModel.swift"
-            timestampString = "564277096.502046"
+            filePath = "genesisvision-ios/Sources/View Models/FilterViewModel.swift"
+            timestampString = "564282119.517871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "fetch(completion:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "reset()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/FilterViewModel.swift"
-            timestampString = "564277096.502104"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletFilterViewController.swift"
+            timestampString = "564279882.430909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "reset()"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setupTableConfiguration()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

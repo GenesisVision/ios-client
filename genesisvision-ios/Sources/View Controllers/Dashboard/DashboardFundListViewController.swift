@@ -51,7 +51,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = 60
+
         tableView.isScrollEnabled = false
         tableView.bounces = true
         tableView.delegate = self.viewModel?.fundListDelegateManager
@@ -114,10 +114,6 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    func showFilterVC() {
-        viewModel.showFilterVC()
-    }
-    
     // MARK: - Actions
     @objc func highToLowButtonAction() {
         if let sortingManager = viewModel.sortingDelegateManager.sortingManager {
@@ -137,9 +133,7 @@ extension DashboardFundListViewController {
     }
     
     override func filterButtonAction() {
-        //        if let viewModel = viewModel {
-        //            viewModel.showFilterVC()
-        //        }
+        viewModel?.showFilterVC()
     }
 }
 

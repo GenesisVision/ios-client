@@ -43,6 +43,8 @@ open class ProgramRequest: Codable {
     public var date: Date?
     public var value: Double?
     public var valueGvt: Double?
+    public var feeEntry: Double?
+    public var feeExit: Double?
     public var currency: Currency?
     /** Used only in fund withdraw request */
     public var fundWithdrawPercent: Double?
@@ -56,12 +58,14 @@ open class ProgramRequest: Codable {
 
 
     
-    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, valueGvt: Double?, currency: Currency?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
+    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, valueGvt: Double?, feeEntry: Double?, feeExit: Double?, currency: Currency?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
         self.id = id
         self.programId = programId
         self.date = date
         self.value = value
         self.valueGvt = valueGvt
+        self.feeEntry = feeEntry
+        self.feeExit = feeExit
         self.currency = currency
         self.fundWithdrawPercent = fundWithdrawPercent
         self.type = type
@@ -85,6 +89,8 @@ open class ProgramRequest: Codable {
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(valueGvt, forKey: "valueGvt")
+        try container.encodeIfPresent(feeEntry, forKey: "feeEntry")
+        try container.encodeIfPresent(feeExit, forKey: "feeExit")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(fundWithdrawPercent, forKey: "fundWithdrawPercent")
         try container.encodeIfPresent(type, forKey: "type")
@@ -106,6 +112,8 @@ open class ProgramRequest: Codable {
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         valueGvt = try container.decodeIfPresent(Double.self, forKey: "valueGvt")
+        feeEntry = try container.decodeIfPresent(Double.self, forKey: "feeEntry")
+        feeExit = try container.decodeIfPresent(Double.self, forKey: "feeExit")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         fundWithdrawPercent = try container.decodeIfPresent(Double.self, forKey: "fundWithdrawPercent")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")

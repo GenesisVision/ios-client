@@ -40,7 +40,8 @@ open class NotificationsAPI {
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
     "url" : "url",
-    "isUnread" : true
+    "isUnread" : true,
+    "assetType" : "Program"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -50,7 +51,8 @@ open class NotificationsAPI {
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
     "url" : "url",
-    "isUnread" : true
+    "isUnread" : true,
+    "assetType" : "Program"
   } ]
 }}]
      

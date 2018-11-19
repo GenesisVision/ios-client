@@ -36,6 +36,7 @@ open class ManagerPortfolioEvent: Codable {
         case managerWithdraw = "ManagerWithdraw"
         case assetFinished = "AssetFinished"
         case entranceFee = "EntranceFee"
+        case exitFee = "ExitFee"
     }
     public enum ProgramType: String, Codable { 
         case program = "Program"
