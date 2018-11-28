@@ -69,6 +69,15 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             }
         })
     }
+    
+    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: Int, direction: PageboyViewController.NavigationDirection, animated: Bool) {
+        super.pageboyViewController(pageboyViewController, didScrollToPageAt: index, direction: direction, animated: animated)
+        
+        //Only for managerVC
+        if let router = viewModel.router, let managerRouter = router.parentRouter as? ManagerRouter, index > 0 {
+            managerRouter.managerViewController.hideHeader(true)
+        }
+    }
 }
 
 extension BaseTabmanViewController: TabmanViewModelDelegate {

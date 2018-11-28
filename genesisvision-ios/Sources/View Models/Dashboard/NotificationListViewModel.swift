@@ -90,13 +90,8 @@ extension NotificationListViewModel {
         
         let selectedModel = viewModels[indexPath.row]
         let notification = selectedModel.notification
-        if let assetId = notification.assetId?.uuidString, let assetType = notification.assetType {
-            switch assetType {
-            case .program:
-                router.showProgramDetails(with: assetId)
-            case .fund:
-                router.showFundDetails(with: assetId)
-            }
+        if let assetId = notification.assetId?.uuidString, let type = notification.assetType, let assetType = AssetType(rawValue: type.rawValue) {
+            router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
     

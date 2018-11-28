@@ -15,7 +15,7 @@ enum ProgramListViewState {
 final class ProgramListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
-    var type: ListType = .programList
+    var assetType: AssetType = .program
     
     // MARK: - Variables
     var title: String = "Programs"
@@ -29,15 +29,14 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var state: ProgramListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var canFetchMoreResults = true
+    
     var dataType: DataType = .api
-    var chartPointsCount = Api.equityChartLength
-    
-    var mask: String?
-    var isFavorite: Bool = false
-    
+
     var skip = 0
     var take = Api.take
     var totalCount = 0
+
+    var showFacets = false
 
     private var programsList: ProgramsList?
     
@@ -45,28 +44,67 @@ final class ProgramListViewModel: ListViewModelProtocol {
         return signInButtonEnable ? .signInWithFilter : .filter
     }
     
-    var searchText = "" {
-        didSet {
-            mask = searchText
-        }
-    }
     var viewModels = [CellViewAnyModel]()
+    var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
-    init(withRouter router: ProgramListRouter, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramListRouter, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
+        self.showFacets = showFacets
+        
+        if let filterModel = filterModel {
+            self.filterModel = filterModel
+            if let facetTitle = filterModel.facetTitle {
+                self.title = facetTitle + " " + title.lowercased()
+            }
+        }
         
         state = isLogin() ? .programList : .programListWithSignIn
         let sortingManager = SortingManager(.programs)
         sortingDelegateManager = SortingDelegateManager(sortingManager)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
     }
+    
+    // MARK: - Private methods
+    private func setupFacets() {
+        guard showFacets else { return }
+        
+        if !sections.contains(.facetList) {
+            sections.insert(.facetList, at: 0)
+        }
+        
+        var facets: [Facet] = []
+        
+        if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
+            facets.append(contentsOf: programsFacets)
+        } else {
+            PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
+                if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
+                    facets.append(contentsOf: programsFacets)
+                    self?.updateFacets(facets)
+                    self?.reloadDataProtocol?.didReloadData()
+                }
+            }
+        }
+        
+        if isLogin() {
+            facets.insert(Facet(id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil), at: 0)
+        }
+
+        self.updateFacets(facets)
+    }
+    
+    private func updateFacets(_ facets: [Facet]) {
+        let facetsViewModel = FacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
+        facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
+    }
+    
     
     // MARK: - Public methods
     func noDataText() -> String {
@@ -116,13 +154,6 @@ final class ProgramListViewModel: ListViewModelProtocol {
 // MARK: - Fetch
 extension ProgramListViewModel {
     // MARK: - Public methods
-    func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalProgramCount: totalCount, viewModels)
-            }, completionError: completion)
-    }
-    
-    /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
         if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
@@ -142,7 +173,7 @@ extension ProgramListViewModel {
                 allViewModels.append(viewModel)
             })
 
-            self?.updateFetchedData(totalProgramCount: totalCount, allViewModels as! [ProgramTableViewCellViewModel])
+            self?.updateFetchedData(totalCount: totalCount, allViewModels as! [ProgramTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -154,16 +185,22 @@ extension ProgramListViewModel {
     }
 
     func refresh(completion: @escaping CompletionBlock) {
+        if let mask = filterModel.mask, mask.isEmpty {
+            updateFetchedData(totalCount: 0, [])
+            return
+        }
+        
         skip = 0
-
+        setupFacets()
+        
         fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalProgramCount: totalCount, viewModels)
+            self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
     }
     
-    private func updateFetchedData(totalProgramCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
+    private func updateFetchedData(totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) {
         self.viewModels = viewModels
-        self.totalCount = totalProgramCount
+        self.totalCount = totalCount
         self.skip += self.take
         self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
@@ -173,29 +210,8 @@ extension ProgramListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let levelMin = filterModel.levelModel.minLevel
-            let levelMax = filterModel.levelModel.maxLevel
             
-            let dateFrom = filterModel.dateRangeModel.dateFrom
-            let dateTo = filterModel.dateRangeModel.dateTo
-            
-            let sorting = filterModel.sortingModel.selectedSorting ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
-            
-            let mask = filterModel.mask
-            let isFavorite = filterModel.isFavorite
-            let facetId = filterModel.facetId
-            
-            var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
-            if let selectedCurrency = filterModel.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {
-                programCurrency = newCurrency
-            }
-            
-            var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
-            if let newCurrency = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) {
-                currencySecondary = newCurrency
-            }
-            
-            ProgramsDataProvider.get(levelMin: levelMin, levelMax: levelMax, profitAvgMin: nil, profitAvgMax: nil, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsGet , programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, skip: skip, take: take, completion: { [weak self] (programsList) in
+            ProgramsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (programsList) in
                 guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programsList = programsList
@@ -207,7 +223,7 @@ extension ProgramListViewModel {
                 programsList.programs?.forEach({ (program) in
                     guard let programListRouter: ProgramListRouter = self?.router as? ProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.programsViewController)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.currentController as? ProgramListViewController)
                     viewModels.append(programTableViewCellViewModel)
                 })
                 

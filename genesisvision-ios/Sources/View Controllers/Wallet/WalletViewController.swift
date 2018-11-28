@@ -61,7 +61,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         addCurrencyTitleButton(CurrencyDelegateManager())
         
         bottomViewType = .none
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
         
         updateTitle()
     
@@ -108,14 +107,7 @@ class WalletViewController: BaseViewControllerWithTableView {
             self.tableView?.reloadData()
         }
     }
-    
-    private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
-        
-        showProgressHUD()
-        fetchTransactions()
-    }
-    
+
     override func fetch() {
         showProgressHUD()
         fetchBalance()
@@ -141,53 +133,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func update(sorting type: TransactionsFilter.ModelType) {
-        viewModel.filter?.type = type
-        updateSortView()
-    }
-    
-    private func sortMethod() {
-        guard let type: TransactionsFilter.ModelType = viewModel.filter?.type else {
-            return
-        }
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .all)
-        }
-        let internalAction = UIAlertAction(title: "Internal", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: ._internal)
-        }
-        let externalAction = UIAlertAction(title: "External", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .external)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        switch type {
-        case .all:
-            allAction.isEnabled = false
-        case ._internal:
-            internalAction.isEnabled = false
-        case .external:
-            externalAction.isEnabled = false
-        }
-        
-        alert.addAction(allAction)
-        alert.addAction(internalAction)
-        alert.addAction(externalAction)
-        alert.addAction(cancelAction)
-        
-        alert.popoverPresentationController?.sourceView = sortButton
-        alert.popoverPresentationController?.sourceRect = sortButton.bounds
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    override func sortButtonAction() {
-        sortMethod()
-    }
-    
     private func showWalletTransaction(model: WalletTransaction) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300
@@ -196,11 +141,6 @@ class WalletViewController: BaseViewControllerWithTableView {
         view.configure(model)
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
-    }
-    
-    // MARK: - Actions
-    @IBAction func filtersButtonAction(_ sender: UIButton) {
-        viewModel.filters()
     }
 }
 

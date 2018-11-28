@@ -8,14 +8,75 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-enum ListType {
-    case programList
-    case fundList
+protocol ListViewModelProtocolWithFacets {
+    var facets: [Facet]? { get }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    
+    func didSelectFacet(at: IndexPath)
+    func numberOfItems(in section: Int) -> Int
+    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel?
 }
+
+final class FacetsViewModel: ListViewModelProtocolWithFacets {
+    var facets: [Facet]?
+    var router: ListRouterProtocol!
+    var facetsDelegateManager: FacetsDelegateManager!
+    
+    var assetType: AssetType = .program
+    
+    init(withRouter router: ListRouterProtocol, facets: [Facet]?, assetType: AssetType) {
+        self.router = router
+        self.facets = facets
+        self.assetType = assetType
+        
+        facetsDelegateManager = FacetsDelegateManager(with: self)
+    }
+    
+    /// Return view models for registration cell Nib files
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FacetCollectionViewCellViewModel.self]
+    }
+    
+    func didSelectFacet(at indexPath: IndexPath) {
+        guard let facets = facets, !facets.isEmpty else {
+            return
+        }
+        
+        let facet = facets[indexPath.row]
+        
+        let filterModel = FilterModel()
+        
+        if let facetTitle = facet.title {
+            filterModel.facetTitle = facetTitle
+        }
+        
+        if let uuid = facet.id?.uuidString {
+            filterModel.facetId = uuid
+        }
+        
+        filterModel.isFavorite = filterModel.facetTitle == "Favorites"
+        
+        router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+    }
+    
+    func numberOfItems(in section: Int) -> Int {
+        return facets?.count ?? 0
+    }
+    
+    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
+        let facet = facets?[indexPath.row]
+
+        let isFavoriteFacet = facet?.id == nil
+        let model = FacetCollectionViewCellViewModel(facet: facet, isFavoriteFacet: isFavoriteFacet)
+        return model
+    }
+}
+
 protocol ListViewModelProtocol {
     var router: ListRouterProtocol! { get }
     
-    var type: ListType { get }
+    var assetType: AssetType { get }
     
     var title: String { get }
 
@@ -25,9 +86,9 @@ protocol ListViewModelProtocol {
     var bottomViewType: BottomViewType { get } 
     
     var viewModels: [CellViewAnyModel] { get set }
+    var facetsViewModels: [CellViewAnyModel]? { get set }
     
     var canFetchMoreResults: Bool { get set }
-    
     var filterModel: FilterModel { get set }
     
     var skip: Int { get set }
@@ -50,7 +111,6 @@ protocol ListViewModelProtocol {
     func showDetail(with assetId: String)
     func showDetail(at indexPath: IndexPath)
     
-    func fetch(completion: @escaping CompletionBlock)
     func fetchMore(at row: Int) -> Bool
     func fetchMore()
     
@@ -74,16 +134,20 @@ extension ListViewModelProtocol {
         switch type {
         case .assetList:
             return viewModels[indexPath.row]
+        case .facetList:
+            guard let facetsViewModels = facetsViewModels, !facetsViewModels.isEmpty else { return nil }
+            
+            return facetsViewModels[indexPath.row]
         }
     }
     
     func model(at assetId: String) -> CellViewAnyModel? {
-        switch type {
-        case .programList:
+        switch assetType {
+        case .program:
             if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.index(where: { $0.program.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
-        case .fundList:
+        case .fund:
             if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.fund.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
@@ -93,8 +157,8 @@ extension ListViewModelProtocol {
     }
     
     func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController? {
-        switch type {
-        case .programList:
+        switch assetType {
+        case .program:
             guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
                 return nil
             }
@@ -105,7 +169,7 @@ extension ListViewModelProtocol {
             
             return router.getDetailsViewController(with: programId.uuidString)
         
-        case .fundList:
+        case .fund:
                 guard let model = model(at: indexPath) as? FundTableViewCellViewModel else {
                     return nil
                 }
@@ -122,17 +186,17 @@ extension ListViewModelProtocol {
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        switch type {
-        case .programList:
-            return [ProgramTableViewCellViewModel.self]
-        case .fundList:
-            return [FundTableViewCellViewModel.self]
+        switch assetType {
+        case .program:
+            return [FacetsTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
+        case .fund:
+            return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
         }
     }
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SortHeaderView.self]
+        return []
     }
     
     func modelsCount() -> Int {
@@ -147,12 +211,17 @@ extension ListViewModelProtocol {
         switch sections[section] {
         case .assetList:
             return modelsCount()
+        case .facetList:
+            guard let facetsCount = facetsViewModels?.count, facetsCount > 0, modelsCount() > 0 else { return 0 }
+            return 1
         }
     }
     
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .assetList:
+            return nil
+        case .facetList:
             return nil
         }
     }
@@ -161,24 +230,21 @@ extension ListViewModelProtocol {
         switch sections[section] {
         case .assetList:
             return 50.0
+        case .facetList:
+            return 50.0
         }
     }
     
     // MARK: - Navigation
     func showDetail(with assetId: String) {
-        switch type {
-        case .programList:
-            router.show(routeType: .showProgramDetails(programId: assetId))
-        case .fundList:
-            router.show(routeType: .showFundDetails(fundId: assetId))
-        }
+        router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showDetail(at indexPath: IndexPath) {
-        switch type {
-        case .programList:
+        switch assetType {
+        case .program:
             showProgramDetail(at: indexPath)
-        case .fundList:
+        case .fund:
             showFundDetail(at: indexPath)
         }
     }
@@ -187,18 +253,18 @@ extension ListViewModelProtocol {
         guard let model: ProgramTableViewCellViewModel = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
         
         let program = model.program
-        guard let programId = program.id else { return }
+        guard let assetId = program.id else { return }
         
-        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
+        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }
     
     func showFundDetail(at indexPath: IndexPath) {
         guard let model: FundTableViewCellViewModel = model(at: indexPath) as? FundTableViewCellViewModel else { return }
         
         let fund = model.fund
-        guard let fundId = fund.id else { return }
+        guard let assetId = fund.id else { return }
         
-        router.show(routeType: .showFundDetails(fundId: fundId.uuidString))
+        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }
     
     func showSignInVC() {

@@ -8,19 +8,6 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-struct TransactionsFilter {
-    public enum ModelType: String, Codable {
-        case all = "All"
-        case _internal = "Internal"
-        case external = "External"
-    }
-
-    public var programId: UUID?
-    public var type: ModelType?
-    public var skip: Int?
-    public var take: Int?
-}
-
 final class WalletControllerViewModel {
     
     enum SectionType {
@@ -44,8 +31,6 @@ final class WalletControllerViewModel {
     var skip = 0            //offset
     var take = Api.take
     var totalCount = 0      //total count of programs
-    
-    var filter: TransactionsFilter?
     
     // MARK: - Init
     init(withRouter router: WalletRouter) {
@@ -79,10 +64,6 @@ extension WalletControllerViewModel {
         case .transactions:
             return transactions.count
         }
-    }
-    func sortTitle() -> String? {
-        guard let sort = filter?.type?.rawValue else { return ""}
-        return sort + " Transactions"
     }
     
     func headerTitle(for section: Int) -> String? {
@@ -125,8 +106,6 @@ extension WalletControllerViewModel {
 
     // MARK: - Private methods
     private func setup() {
-        //TODO: type: nil
-        filter = TransactionsFilter(programId: nil, type: nil, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }
@@ -241,10 +220,6 @@ extension WalletControllerViewModel {
     
     func deposit() {
         router.show(routeType: .deposit)
-    }
-    
-    func filters() {
-        router.show(routeType: .showFilterVC(walletControllerViewModel: self))
     }
     
     func showDetail(at indexPath: IndexPath) {

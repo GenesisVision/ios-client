@@ -9,7 +9,9 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(programId: String), showFundDetails(fundId: String), assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?), showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
+    case showAssetDetails(assetId: String, assetType: AssetType)
+    case assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?)
+    case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
 class DashboardRouter: Router, ListRouterProtocol {
@@ -33,10 +35,8 @@ class DashboardRouter: Router, ListRouterProtocol {
     // MARK: - Public methods
     func show(routeType: DashboardRouteType) {
         switch routeType {
-        case .showProgramDetails(let programId):
-            showProgramDetails(with: programId)
-        case .showFundDetails(let fundId):
-            showFundDetails(with: fundId)
+        case .showAssetDetails(let assetId, let assetType):
+            showAssetDetails(with: assetId, assetType: assetType)
         case .assetList:
             showAssetList()
         case .notificationList:

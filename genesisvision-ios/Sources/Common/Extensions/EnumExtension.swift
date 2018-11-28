@@ -32,4 +32,3 @@ public extension EnumCollection {
 }
 
 extension ProgramsAPI.Sorting_v10ProgramsGet: EnumCollection {}
-extension TransactionsFilter.ModelType: EnumCollection {}

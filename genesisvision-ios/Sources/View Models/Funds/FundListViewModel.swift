@@ -16,7 +16,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     // MARK: - Variables
-    var type: ListType = .fundList
+    var assetType: AssetType = .fund
     var title: String = "Funds"
     var roundNumber: Int = 1
     
@@ -35,8 +35,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var take = Api.take
     var totalCount = 0
 
-    var mask: String?
-    var isFavorite: Bool = false
+    var showFacets = false
     
     private var fundsList: FundsList?
 
@@ -47,17 +46,21 @@ final class FundListViewModel: ListViewModelProtocol {
         return signInButtonEnable ? .signInWithFilter : .filter
     }
     
-    var searchText = "" {
-        didSet {
-            mask = searchText
-        }
-    }
     var viewModels = [CellViewAnyModel]()
+    var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
-    init(withRouter router: FundListRouter, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundListRouter, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
+        self.showFacets = showFacets
+        
+        if let filterModel = filterModel {
+            self.filterModel = filterModel
+            if let facetTitle = filterModel.facetTitle {
+                self.title = facetTitle + " " + title.lowercased()
+            }
+        }
         
         state = isLogin() ? .fundList : .fundListWithSignIn
         let sortingManager = SortingManager(.funds)
@@ -68,6 +71,40 @@ final class FundListViewModel: ListViewModelProtocol {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
+    }
+    
+    // MARK: - Private methods
+    private func setupFacets() {
+        guard showFacets else { return }
+        
+        if !sections.contains(.facetList) {
+            sections.insert(.facetList, at: 0)
+        }
+        
+        var facets: [Facet] = []
+        
+        if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
+            facets.append(contentsOf: fundsFacets)
+        } else {
+            PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
+                if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
+                    facets.append(contentsOf: fundsFacets)
+                    self?.updateFacets(facets)
+                    self?.reloadDataProtocol?.didReloadData()
+                }
+            }
+        }
+        
+        if isLogin() {
+            facets.insert(Facet(id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil), at: 0)
+        }
+        
+        updateFacets(facets)
+    }
+    
+    private func updateFacets(_ facets: [Facet]) {
+        let facetsViewModel = FacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
+        facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
     }
     
     // MARK: - Public methods
@@ -118,13 +155,6 @@ final class FundListViewModel: ListViewModelProtocol {
 // MARK: - Fetch
 extension FundListViewModel {
     // MARK: - Public methods
-    func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalFundCount: totalCount, viewModels)
-            }, completionError: completion)
-    }
-    
-    /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
         if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
@@ -144,7 +174,7 @@ extension FundListViewModel {
                 allViewModels.append(viewModel)
             })
 
-            self?.updateFetchedData(totalFundCount: totalCount, allViewModels as! [FundTableViewCellViewModel])
+            self?.updateFetchedData(totalCount: totalCount, allViewModels as! [FundTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -156,16 +186,22 @@ extension FundListViewModel {
     }
 
     func refresh(completion: @escaping CompletionBlock) {
+        if let mask = filterModel.mask, mask.isEmpty {
+            updateFetchedData(totalCount: 0, [])
+            return
+        }
+        
         skip = 0
-
+        setupFacets()
+        
         fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalFundCount: totalCount, viewModels)
+            self?.updateFetchedData(totalCount: totalCount, viewModels)
             }, completionError: completion)
     }
     
-    private func updateFetchedData(totalFundCount: Int, _ viewModels: [FundTableViewCellViewModel]) {
+    private func updateFetchedData(totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) {
         self.viewModels = viewModels
-        self.totalCount = totalFundCount
+        self.totalCount = totalCount
         self.skip += self.take
         self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
@@ -175,17 +211,7 @@ extension FundListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            let dateFrom = filterModel.dateRangeModel.dateFrom
-            let dateTo = filterModel.dateRangeModel.dateTo
-            
-            let sorting = filterModel.sortingModel.selectedSorting ?? FundsAPI.Sorting_v10FundsGet.byProfitDesc
-            
-            var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
-            if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
-                currencySecondary = newCurrency
-            }
-            
-            FundsDataProvider.get(sorting: sorting as? FundsAPI.Sorting_v10FundsGet, currencySecondary: currencySecondary, statisticDateFrom: dateFrom, statisticDateTo: dateTo, chartPointsCount: nil, mask: nil, facetId: nil, isFavorite: nil, ids: nil, managerId: nil, programManagerId: nil, skip: skip, take: take, completion: { [weak self] (fundsList) in
+            FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (fundsList) in
                 guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 print(fundsList)
                 self?.fundsList = fundsList
@@ -197,7 +223,7 @@ extension FundListViewModel {
                 fundsList.funds?.forEach({ (fund) in
                     guard let fundListRouter: FundListRouter = self?.router as? FundListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.fundsViewController)
+                    let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.currentController as? FundListViewController)
                     viewModels.append(fundTableViewCellViewModel)
                 })
                 

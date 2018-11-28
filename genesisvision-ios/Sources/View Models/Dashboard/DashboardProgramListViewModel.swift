@@ -12,7 +12,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     // MARK: - Variables
     var title = "Programs"
     
-    var type: ListType = .programList
+    var assetType: AssetType = .program
     
     var sortingDelegateManager: SortingDelegateManager!
     var programListDelegateManager: DashboardProgramListDelegateManager!
@@ -49,6 +49,8 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     }
     var activeViewModels = [DashboardProgramTableViewCellViewModel]()
     var archiveViewModels = [DashboardProgramTableViewCellViewModel]()
+    
+    var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -171,7 +173,7 @@ extension DashboardProgramListViewModel {
         let program = model.program
         guard let programId = program.id else { return }
         
-        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
+        router.show(routeType: .showAssetDetails(assetId: programId.uuidString, assetType: .program))
     }
     
     func showProgramList() {

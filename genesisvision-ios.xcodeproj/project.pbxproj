@@ -74,7 +74,6 @@
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
 		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
-		5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */; };
 		5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */; };
 		5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */; };
 		5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */; };
@@ -90,9 +89,6 @@
 		5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BBE6F21824125009E4BA3 /* Funds.storyboard */; };
 		5E5BC08821836C00009E4BA3 /* WalletTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */; };
 		5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */; };
-		5E5BC18A21854D45009E4BA3 /* ManagerFundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC18921854D45009E4BA3 /* ManagerFundListViewController.swift */; };
-		5E5BC18C21854D90009E4BA3 /* ManagerFundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC18B21854D90009E4BA3 /* ManagerFundListViewModel.swift */; };
-		5E5BC18E21854EBE009E4BA3 /* ManagerFundListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC18D21854EBE009E4BA3 /* ManagerFundListRouter.swift */; };
 		5E5BC190218667E3009E4BA3 /* FundAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC18F218667E3009E4BA3 /* FundAssetsViewController.swift */; };
 		5E5BC29221868A44009E4BA3 /* FundAssetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC29121868A44009E4BA3 /* FundAssetsViewModel.swift */; };
 		5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC29921868FD6009E4BA3 /* FundAssetsHeaderView.xib */; };
@@ -116,8 +112,6 @@
 		5E616B5E20F7CED000B3459D /* EditableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E616B5D20F7CED000B3459D /* EditableField.swift */; };
 		5E6308F9212C079900D15C71 /* PortfolioEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */; };
 		5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */; };
-		5E6308FC212C0D5500D15C71 /* SegmentedHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */; };
-		5E6308FE212C0D6400D15C71 /* SegmentedHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */; };
 		5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */; };
 		5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */; };
 		5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */; };
@@ -150,8 +144,6 @@
 		5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */; };
 		5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858343205FFA010039E13F /* UILabelExtension.swift */; };
 		5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E858345205FFCF70039E13F /* UIFontExtension.swift */; };
-		5E85834A206014820039E13F /* SortHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E858349206014820039E13F /* SortHeaderView.xib */; };
-		5E85834C2060148E0039E13F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E85834B2060148E0039E13F /* SortHeaderView.swift */; };
 		5E8724CC20E0B7E3007A1E16 /* Genesis_VisionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8724CB20E0B7E3007A1E16 /* Genesis_VisionUITests.swift */; };
 		5E8724D820E0BD10007A1E16 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8724D720E0BD10007A1E16 /* SnapshotHelper.swift */; };
 		5E87E75F208F423300141269 /* ScrollableSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */; };
@@ -163,9 +155,15 @@
 		5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */; };
 		5E9FCF9E2199E3BC001FB114 /* NHRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
-		5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */; };
 		5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D020A082AE00905253 /* TabmanViewModel.swift */; };
 		5EA173D320A0883000905253 /* TabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173D220A0883000905253 /* TabmanRouter.swift */; };
+		5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2121A2F16600308D81 /* FacetsTableViewCell.swift */; };
+		5EA1FE2421A2F16600308D81 /* FacetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2221A2F16600308D81 /* FacetsTableViewCell.xib */; };
+		5EA1FE2721A2F24A00308D81 /* FacetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2521A2F24A00308D81 /* FacetCollectionViewCell.swift */; };
+		5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2621A2F24A00308D81 /* FacetCollectionViewCell.xib */; };
+		5EA1FE2A21A3004C00308D81 /* FacetCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2921A3004C00308D81 /* FacetCollectionViewCellViewModel.swift */; };
+		5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2B21A30EC200308D81 /* FacetsDelegateManager.swift */; };
+		5EA1FE2E21A3105000308D81 /* FacetsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1FE2D21A3105000308D81 /* FacetsTableViewCellViewModel.swift */; };
 		5EA274AB216268C7008CAF77 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274AA216268C7008CAF77 /* ProgramViewModel.swift */; };
 		5EA274B2216281DD008CAF77 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274B0216281DD008CAF77 /* DefaultTableViewCell.swift */; };
 		5EA274B3216281DD008CAF77 /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA274B1216281DD008CAF77 /* DefaultTableViewCell.xib */; };
@@ -193,7 +191,6 @@
 		5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274DE2162F0D6008CAF77 /* ProgramBalanceViewModel.swift */; };
 		5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274E02162F113008CAF77 /* ProgramProfitViewModel.swift */; };
 		5EA7A0FA20A0B0AD00D895FC /* ProgramTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0F920A0B0AD00D895FC /* ProgramTabmanViewController.swift */; };
-		5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */; };
 		5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */; };
 		5EAC11AE20B81A850057A2D2 /* ChangePasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11AD20B81A850057A2D2 /* ChangePasswordRouter.swift */; };
 		5EAC11B020B81AD40057A2D2 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */; };
@@ -223,7 +220,6 @@
 		5EB9320E214697FF00EE01A2 /* DetailManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9320C214697FF00EE01A2 /* DetailManagerTableViewCell.swift */; };
 		5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9320D214697FF00EE01A2 /* DetailManagerTableViewCell.xib */; };
 		5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB932102146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift */; };
-		5EB996A420F36D9F00E31D23 /* FavoriteProgramListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */; };
 		5EB996A720F36DE600E31D23 /* ListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A620F36DE600E31D23 /* ListRouterProtocol.swift */; };
 		5EB996A920F3738600E31D23 /* ListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB996A820F3738600E31D23 /* ListViewModelProtocol.swift */; };
 		5EBBEAEC2100CE2D0034E4CB /* BrokersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBBEAEB2100CE2D0034E4CB /* BrokersDataProvider.swift */; };
@@ -274,17 +270,13 @@
 		5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */; };
 		5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED7387D21951017001DA633 /* LevelsFilterView.xib */; };
 		5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7387E21951017001DA633 /* LevelsFilterView.swift */; };
-		5EE0075B217871AC0045B890 /* ManagerProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */; };
 		5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */; };
 		5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */; };
-		5EE007612178720D0045B890 /* ManagerProgramListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE007602178720D0045B890 /* ManagerProgramListViewController.swift */; };
 		5EE007632178737F0045B890 /* ManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE007622178737F0045B890 /* ManagerViewModel.swift */; };
 		5EE00766217873E90045B890 /* ManagerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE00765217873E90045B890 /* ManagerRouter.swift */; };
-		5EE007682178749E0045B890 /* ManagerInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE007672178749E0045B890 /* ManagerInfoRouter.swift */; };
 		5EE0076A217875120045B890 /* ManagersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE00769217875120045B890 /* ManagersDataProvider.swift */; };
 		5EE0076C21787A360045B890 /* ManagerTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */; };
 		5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE0076D217881AA0045B890 /* Manager.storyboard */; };
-		5EE007702178849E0045B890 /* ManagerProgramListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0076F2178849E0045B890 /* ManagerProgramListRouter.swift */; };
 		5EEA3E572177755300449E86 /* ManagerHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */; };
 		5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */; };
 		5EEAC56521A21640004F2121 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEAC56421A21640004F2121 /* FilterModel.swift */; };
@@ -424,7 +416,6 @@
 		5EEC1ACB2175FD08007D77ED /* NotificationsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1ACA2175FD08007D77ED /* NotificationsDataProvider.swift */; };
 		5EEC1ACD217628A4007D77ED /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */; };
 		5EEE4557210B2377009CF791 /* ManagerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */; };
-		5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE4558210B2386009CF791 /* ManagerDashboardTabmanViewController.swift */; };
 		5EEE455B210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */; };
 		5EEE455D210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455C210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift */; };
 		5EEE455F210B447A009CF791 /* InvestorDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */; };
@@ -507,17 +498,10 @@
 		FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */; };
 		FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */; };
 		FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */; };
-		FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */; };
 		FC83DF6B203DAB2500A8F8CE /* ProgramHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */; };
 		FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83DF6C203DCBE400A8F8CE /* ProfileDataProvider.swift */; };
 		FC900E5C204EA852007E9142 /* RoundingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E5B204EA852007E9142 /* RoundingExtensions.swift */; };
 		FC900E5E204EC403007E9142 /* AuthDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E5D204EC403007E9142 /* AuthDataProvider.swift */; };
-		FC900E60204EDF21007E9142 /* WalletFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E5F204EDF21007E9142 /* WalletFilterRouter.swift */; };
-		FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E61204EE02F007E9142 /* WalletFilterViewController.swift */; };
-		FC900E64204EE0EF007E9142 /* WalletFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E63204EE0EF007E9142 /* WalletFilterViewModel.swift */; };
-		FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E65204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift */; };
-		FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC900E66204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib */; };
-		FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC900E69204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift */; };
 		FC91379220311CA6002321C7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC91379120311CA6002321C7 /* Utils.swift */; };
 		FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */; };
 		FCA19A25201AA8C000157AD6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA19A24201AA8C000157AD6 /* Router.swift */; };
@@ -551,7 +535,6 @@
 		FCB1786E2045C46E00A482B7 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1786D2045C46E00A482B7 /* DataProvider.swift */; };
 		FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1786F2045C47A00A482B7 /* WalletDataProvider.swift */; };
 		FCB178722046CA0D00A482B7 /* ProgramsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB178712046CA0D00A482B7 /* ProgramsDataProvider.swift */; };
-		FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */; };
 		FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */; };
 		FCB2C4EC2010BB5F0012AA58 /* RandomAccessCollection+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */; };
 		FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */; };
@@ -590,7 +573,6 @@
 		FCE82365201622BD000061E8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE82364201622BD000061E8 /* CustomButton.swift */; };
 		FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE823662016239C000061E8 /* RoundedImageView.swift */; };
 		FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8236C201631B3000061E8 /* UIViewExtension.swift */; };
-		FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -672,7 +654,6 @@
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestWithdrawConfirmView.xib; sourceTree = "<group>"; };
 		5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestWithdrawConfirmView.swift; sourceTree = "<group>"; };
-		5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProgressBar.swift; sourceTree = "<group>"; };
 		5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetTableViewCell.swift; sourceTree = "<group>"; };
 		5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioAssetTableViewCell.xib; sourceTree = "<group>"; };
@@ -689,9 +670,6 @@
 		5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionView.swift; sourceTree = "<group>"; };
 		5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletTransactionView.xib; sourceTree = "<group>"; };
 		5E5BC08A21849290009E4BA3 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
-		5E5BC18921854D45009E4BA3 /* ManagerFundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFundListViewController.swift; sourceTree = "<group>"; };
-		5E5BC18B21854D90009E4BA3 /* ManagerFundListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFundListViewModel.swift; sourceTree = "<group>"; };
-		5E5BC18D21854EBE009E4BA3 /* ManagerFundListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFundListRouter.swift; sourceTree = "<group>"; };
 		5E5BC18F218667E3009E4BA3 /* FundAssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundAssetsViewController.swift; sourceTree = "<group>"; };
 		5E5BC29121868A44009E4BA3 /* FundAssetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundAssetsViewModel.swift; sourceTree = "<group>"; };
 		5E5BC29921868FD6009E4BA3 /* FundAssetsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FundAssetsHeaderView.xib; sourceTree = "<group>"; };
@@ -715,8 +693,6 @@
 		5E616B5D20F7CED000B3459D /* EditableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableField.swift; sourceTree = "<group>"; };
 		5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioEventCollectionViewCell.xib; sourceTree = "<group>"; };
-		5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedHeaderFooterView.swift; sourceTree = "<group>"; };
-		5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentedHeaderFooterView.xib; sourceTree = "<group>"; };
 		5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerWithTableView.swift; sourceTree = "<group>"; };
 		5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCurrencyDelegateManager.swift; sourceTree = "<group>"; };
@@ -749,8 +725,6 @@
 		5E858341205FF2380039E13F /* ProgramDetailProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailProtocol.swift; sourceTree = "<group>"; };
 		5E858343205FFA010039E13F /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		5E858345205FFCF70039E13F /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
-		5E858349206014820039E13F /* SortHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortHeaderView.xib; sourceTree = "<group>"; };
-		5E85834B2060148E0039E13F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Genesis VisionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8724CB20E0B7E3007A1E16 /* Genesis_VisionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genesis_VisionUITests.swift; sourceTree = "<group>"; };
 		5E8724CD20E0B7E3007A1E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -764,9 +738,15 @@
 		5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSlider.swift; sourceTree = "<group>"; };
 		5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSliderView.swift; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
-		5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EA173D020A082AE00905253 /* TabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanViewModel.swift; sourceTree = "<group>"; };
 		5EA173D220A0883000905253 /* TabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanRouter.swift; sourceTree = "<group>"; };
+		5EA1FE2121A2F16600308D81 /* FacetsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetsTableViewCell.swift; sourceTree = "<group>"; };
+		5EA1FE2221A2F16600308D81 /* FacetsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacetsTableViewCell.xib; sourceTree = "<group>"; };
+		5EA1FE2521A2F24A00308D81 /* FacetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetCollectionViewCell.swift; sourceTree = "<group>"; };
+		5EA1FE2621A2F24A00308D81 /* FacetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacetCollectionViewCell.xib; sourceTree = "<group>"; };
+		5EA1FE2921A3004C00308D81 /* FacetCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		5EA1FE2B21A30EC200308D81 /* FacetsDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetsDelegateManager.swift; sourceTree = "<group>"; };
+		5EA1FE2D21A3105000308D81 /* FacetsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EA274AA216268C7008CAF77 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
 		5EA274B0216281DD008CAF77 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		5EA274B1216281DD008CAF77 /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
@@ -794,7 +774,6 @@
 		5EA274DE2162F0D6008CAF77 /* ProgramBalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramBalanceViewModel.swift; sourceTree = "<group>"; };
 		5EA274E02162F113008CAF77 /* ProgramProfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramProfitViewModel.swift; sourceTree = "<group>"; };
 		5EA7A0F920A0B0AD00D895FC /* ProgramTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTabmanViewController.swift; sourceTree = "<group>"; };
-		5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewController.swift; sourceTree = "<group>"; };
 		5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		5EAC11AD20B81A850057A2D2 /* ChangePasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRouter.swift; sourceTree = "<group>"; };
 		5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -824,7 +803,6 @@
 		5EB9320C214697FF00EE01A2 /* DetailManagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailManagerTableViewCell.swift; sourceTree = "<group>"; };
 		5EB9320D214697FF00EE01A2 /* DetailManagerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailManagerTableViewCell.xib; sourceTree = "<group>"; };
 		5EB932102146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailManagerTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProgramListRouter.swift; sourceTree = "<group>"; };
 		5EB996A620F36DE600E31D23 /* ListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouterProtocol.swift; sourceTree = "<group>"; };
 		5EB996A820F3738600E31D23 /* ListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EBBEAEB2100CE2D0034E4CB /* BrokersDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersDataProvider.swift; sourceTree = "<group>"; };
@@ -875,17 +853,13 @@
 		5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED7387D21951017001DA633 /* LevelsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelsFilterView.xib; sourceTree = "<group>"; };
 		5ED7387E21951017001DA633 /* LevelsFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsFilterView.swift; sourceTree = "<group>"; };
-		5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewModel.swift; sourceTree = "<group>"; };
 		5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewController.swift; sourceTree = "<group>"; };
-		5EE007602178720D0045B890 /* ManagerProgramListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProgramListViewController.swift; sourceTree = "<group>"; };
 		5EE007622178737F0045B890 /* ManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewModel.swift; sourceTree = "<group>"; };
 		5EE00765217873E90045B890 /* ManagerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerRouter.swift; sourceTree = "<group>"; };
-		5EE007672178749E0045B890 /* ManagerInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoRouter.swift; sourceTree = "<group>"; };
 		5EE00769217875120045B890 /* ManagersDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersDataProvider.swift; sourceTree = "<group>"; };
 		5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanRouter.swift; sourceTree = "<group>"; };
 		5EE0076D217881AA0045B890 /* Manager.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Manager.storyboard; sourceTree = "<group>"; };
-		5EE0076F2178849E0045B890 /* ManagerProgramListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProgramListRouter.swift; sourceTree = "<group>"; };
 		5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerHeaderViewController.swift; sourceTree = "<group>"; };
 		5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanViewController.swift; sourceTree = "<group>"; };
 		5EEAC56421A21640004F2121 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -1025,7 +999,6 @@
 		5EEC1ACA2175FD08007D77ED /* NotificationsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsDataProvider.swift; sourceTree = "<group>"; };
 		5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardViewController.swift; sourceTree = "<group>"; };
-		5EEE4558210B2386009CF791 /* ManagerDashboardTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanViewController.swift; sourceTree = "<group>"; };
 		5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanViewModel.swift; sourceTree = "<group>"; };
 		5EEE455C210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanRouter.swift; sourceTree = "<group>"; };
 		5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardViewController.swift; sourceTree = "<group>"; };
@@ -1117,17 +1090,10 @@
 		FC83DF60203D896C00A8F8CE /* ProgramWithdrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawViewModel.swift; sourceTree = "<group>"; };
 		FC83DF62203D89BE00A8F8CE /* ProgramWithdrawRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawRouter.swift; sourceTree = "<group>"; };
 		FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestRouter.swift; sourceTree = "<group>"; };
-		FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHistoryViewController.swift; sourceTree = "<group>"; };
 		FC83DF6A203DAB2500A8F8CE /* ProgramHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHistoryViewModel.swift; sourceTree = "<group>"; };
 		FC83DF6C203DCBE400A8F8CE /* ProfileDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataProvider.swift; sourceTree = "<group>"; };
 		FC900E5B204EA852007E9142 /* RoundingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingExtensions.swift; sourceTree = "<group>"; };
 		FC900E5D204EC403007E9142 /* AuthDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataProvider.swift; sourceTree = "<group>"; };
-		FC900E5F204EDF21007E9142 /* WalletFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterRouter.swift; sourceTree = "<group>"; };
-		FC900E61204EE02F007E9142 /* WalletFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterViewController.swift; sourceTree = "<group>"; };
-		FC900E63204EE0EF007E9142 /* WalletFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterViewModel.swift; sourceTree = "<group>"; };
-		FC900E65204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterTypeTableViewCell.swift; sourceTree = "<group>"; };
-		FC900E66204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletFilterTypeTableViewCell.xib; sourceTree = "<group>"; };
-		FC900E69204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFilterTypeTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC91379120311CA6002321C7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		FCA19A24201AA8C000157AD6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -1161,7 +1127,6 @@
 		FCB1786D2045C46E00A482B7 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		FCB1786F2045C47A00A482B7 /* WalletDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDataProvider.swift; sourceTree = "<group>"; };
 		FCB178712046CA0D00A482B7 /* ProgramsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsDataProvider.swift; sourceTree = "<group>"; };
-		FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateEntityProtocol.swift; sourceTree = "<group>"; };
 		FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		FCB2C4EB2010BB5F0012AA58 /* RandomAccessCollection+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomAccessCollection+Random.swift"; sourceTree = "<group>"; };
 		FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -1169,7 +1134,6 @@
 		FCB8DFC52010F64200698D18 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FCB8DFCA2010F6B100698D18 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FCB8DFCE2010F99200698D18 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		FCBD22BF2019E960000B8E38 /* ProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModel.swift; sourceTree = "<group>"; };
 		FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1242,25 +1206,20 @@
 		5E0AD0E821813E8700DC76AA /* Funds */ = {
 			isa = PBXGroup;
 			children = (
-				5E0AD0EB21813EE300DC76AA /* FundListViewController.swift */,
+				5EC6709C21AEAC28009BF4C0 /* List */,
+				5E0AD0ED21813F1C00DC76AA /* Details */,
 			);
 			path = Funds;
 			sourceTree = "<group>";
 		};
-		5E0AD0ED21813F1C00DC76AA /* Fund Details */ = {
+		5E0AD0ED21813F1C00DC76AA /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				5E0AD0EE21813F3800DC76AA /* FundTabmanViewController.swift */,
 				5EFE7C3D2181E78500D385C8 /* FundViewController.swift */,
-				5EF14D7A2181EB5A00B3843A /* FundInfoViewController.swift */,
-				5EFE7C3F2181E78600D385C8 /* FundHeaderViewController.swift */,
-				5EFE7C3E2181E78500D385C8 /* FundBalanceViewController.swift */,
-				5EFE7C402181E78600D385C8 /* FundProfitViewController.swift */,
-				5EF14D762181EB0E00B3843A /* FundInvestViewController.swift */,
-				5EF14D772181EB0E00B3843A /* FundWithdrawViewController.swift */,
-				5E5BC18F218667E3009E4BA3 /* FundAssetsViewController.swift */,
+				5EC670A221AEAE11009BF4C0 /* Header */,
+				5EC670A321AEAE1C009BF4C0 /* Tabs */,
 			);
-			path = "Fund Details";
+			path = Details;
 			sourceTree = "<group>";
 		};
 		5E12B38120BEEAF300302730 /* Two Factor */ = {
@@ -1481,7 +1440,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		5E33E3B220AB209700A0B9DE /* Program Details */ = {
+		5E33E3B220AB209700A0B9DE /* Details */ = {
 			isa = PBXGroup;
 			children = (
 				5E085F4A215E867600950042 /* ProgramRouter.swift */,
@@ -1492,7 +1451,7 @@
 				FC83DF64203D89CE00A8F8CE /* ProgramInvestRouter.swift */,
 				FC4C519A2048055A0042CEE1 /* ProgramRequestsRouter.swift */,
 			);
-			path = "Program Details";
+			path = Details;
 			sourceTree = "<group>";
 		};
 		5E33E3B520AB216F00A0B9DE /* Program Details */ = {
@@ -1538,13 +1497,13 @@
 			path = Fields;
 			sourceTree = "<group>";
 		};
-		5E616B4920F7B27300B3459D /* Create Program */ = {
+		5E616B4920F7B27300B3459D /* Create */ = {
 			isa = PBXGroup;
 			children = (
 				5E616B4520F7B22600B3459D /* CreateProgramTabmanRouter.swift */,
 				5E616B4720F7B25F00B3459D /* CreateProgramRouter.swift */,
 			);
-			path = "Create Program";
+			path = Create;
 			sourceTree = "<group>";
 		};
 		5E616B5220F7B73700B3459D /* Create Program */ = {
@@ -1559,17 +1518,14 @@
 			path = "Create Program";
 			sourceTree = "<group>";
 		};
-		5E6C0CF12109A8E000B7F844 /* Manager Details */ = {
+		5E6C0CF12109A8E000B7F844 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				5E6C0CEF2109A8D900B7F844 /* ManagerViewController.swift */,
-				5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */,
-				5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */,
-				5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */,
-				5EE007602178720D0045B890 /* ManagerProgramListViewController.swift */,
-				5E5BC18921854D45009E4BA3 /* ManagerFundListViewController.swift */,
+				5EC670A621AEAE38009BF4C0 /* Header */,
+				5EC670A721AEAE3F009BF4C0 /* Tabs */,
 			);
-			path = "Manager Details";
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		5E6C0CF42109AA5A00B7F844 /* Manager Details */ = {
@@ -1577,8 +1533,6 @@
 			children = (
 				5EE007622178737F0045B890 /* ManagerViewModel.swift */,
 				5E6C0CF22109AA5500B7F844 /* ManagerTabmanViewModel.swift */,
-				5EE0075A217871AC0045B890 /* ManagerProgramListViewModel.swift */,
-				5E5BC18B21854D90009E4BA3 /* ManagerFundListViewModel.swift */,
 				5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */,
 			);
 			path = "Manager Details";
@@ -1605,14 +1559,14 @@
 			path = Labels;
 			sourceTree = "<group>";
 		};
-		5E8340E7207E39BD004A29F1 /* ProgramDetailTrades */ = {
+		5E8340E7207E39BD004A29F1 /* Trades tab */ = {
 			isa = PBXGroup;
 			children = (
 				5E8340E8207E39C5004A29F1 /* ProgramTradesTableViewCellViewModel.swift */,
 				5E8340E3207E39B5004A29F1 /* ProgramTradesTableViewCell.swift */,
 				5E8340E4207E39B6004A29F1 /* ProgramTradesTableViewCell.xib */,
 			);
-			path = ProgramDetailTrades;
+			path = "Trades tab";
 			sourceTree = "<group>";
 		};
 		5E8724CA20E0B7E3007A1E16 /* Genesis VisionUITests */ = {
@@ -1645,22 +1599,14 @@
 			path = NHRangeSlider;
 			sourceTree = "<group>";
 		};
-		5EA7A0F820A0B08B00D895FC /* Program Details */ = {
+		5EA7A0F820A0B08B00D895FC /* Details */ = {
 			isa = PBXGroup;
 			children = (
 				5E085F46215E7D9B00950042 /* ProgramViewController.swift */,
-				5E085F48215E802100950042 /* ProgramHeaderViewController.swift */,
-				5EA7A0F920A0B0AD00D895FC /* ProgramTabmanViewController.swift */,
-				FCC9DD87200E61C0008825EC /* ProgramInfoViewController.swift */,
-				5EA274DA2162DF19008CAF77 /* ProgramBalanceViewController.swift */,
-				5EA274DC2162DF33008CAF77 /* ProgramProfitViewController.swift */,
-				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
-				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
-				FC83DF68203DAB0400A8F8CE /* ProgramHistoryViewController.swift */,
-				5E8340DD207E38A4004A29F1 /* ProgramTradesViewController.swift */,
-				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
+				5EC670A521AEAE2F009BF4C0 /* Header */,
+				5EC670A421AEAE26009BF4C0 /* Tabs */,
 			);
-			path = "Program Details";
+			path = Details;
 			sourceTree = "<group>";
 		};
 		5EAD0AB1208F7CA900A92B49 /* EasyTipView */ = {
@@ -1672,18 +1618,9 @@
 			path = EasyTipView;
 			sourceTree = "<group>";
 		};
-		5EB996A520F36DAD00E31D23 /* Favorite Programs */ = {
-			isa = PBXGroup;
-			children = (
-				5EB996A320F36D9F00E31D23 /* FavoriteProgramListRouter.swift */,
-			);
-			path = "Favorite Programs";
-			sourceTree = "<group>";
-		};
 		5EB996AA20F373E100E31D23 /* Favorite Programs */ = {
 			isa = PBXGroup;
 			children = (
-				5EA173CE20A081B800905253 /* FavoriteProgramListViewModel.swift */,
 			);
 			path = "Favorite Programs";
 			sourceTree = "<group>";
@@ -1693,7 +1630,6 @@
 			children = (
 				FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */,
 				5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */,
-				5E478B9B2077B53900E697C1 /* StackedProgressBar.swift */,
 				5ED0C91A2091157500C83F23 /* ShadowView.swift */,
 				FCE823662016239C000061E8 /* RoundedImageView.swift */,
 				FCA19A4B201B83E900157AD6 /* ChartView.swift */,
@@ -1717,6 +1653,419 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		5EC6707E21AEA718009BF4C0 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				5ED1141F2159666A00EC5385 /* PortfolioAssetTableViewCellViewModel.swift */,
+				5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */,
+				5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */,
+				5E7717692154200D002624FC /* PortfolioEventCollectionViewCellViewModel.swift */,
+				5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */,
+				5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */,
+				5E6A6BC2216D5EF80082C343 /* PortfolioEventTableViewCellViewModel.swift */,
+				5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */,
+				5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		5EC6707F21AEA72A009BF4C0 /* Profit */ = {
+			isa = PBXGroup;
+			children = (
+				5EA274C021628274008CAF77 /* DetailProfitChartTableViewCell.swift */,
+				5EA274C121628274008CAF77 /* DetailProfitChartTableViewCell.xib */,
+				5EA274C421628286008CAF77 /* DetailProfitStatisticTableViewCell.swift */,
+				5EA274C521628286008CAF77 /* DetailProfitStatisticTableViewCell.xib */,
+			);
+			path = Profit;
+			sourceTree = "<group>";
+		};
+		5EC6708021AEA742009BF4C0 /* Balance */ = {
+			isa = PBXGroup;
+			children = (
+				5EA274C821628297008CAF77 /* DetailBalanceChartTableViewCell.swift */,
+				5EA274C921628297008CAF77 /* DetailBalanceChartTableViewCell.xib */,
+			);
+			path = Balance;
+			sourceTree = "<group>";
+		};
+		5EC6708221AEA79B009BF4C0 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */,
+				5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */,
+				5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		5EC6708321AEA7BB009BF4C0 /* Second Currency */ = {
+			isa = PBXGroup;
+			children = (
+				5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */,
+				5E82C75121429785007A21C3 /* DashboardCurrencyTableViewCell.swift */,
+				5E82C75221429785007A21C3 /* DashboardCurrencyTableViewCell.xib */,
+			);
+			path = "Second Currency";
+			sourceTree = "<group>";
+		};
+		5EC6708421AEA7D4009BF4C0 /* In Request */ = {
+			isa = PBXGroup;
+			children = (
+				5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */,
+				5E734253214AC7E200C4483E /* InRequestsTableViewCell.swift */,
+				5E734254214AC7E200C4483E /* InRequestsTableViewCell.xib */,
+			);
+			path = "In Request";
+			sourceTree = "<group>";
+		};
+		5EC6708521AEA7F3009BF4C0 /* Info tab */ = {
+			isa = PBXGroup;
+			children = (
+				5EA274D22162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift */,
+				5EA274BC21628253008CAF77 /* YourInvestmentTableViewCell.swift */,
+				5EA274BD21628253008CAF77 /* YourInvestmentTableViewCell.xib */,
+				5EB932102146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift */,
+				5EB9320C214697FF00EE01A2 /* DetailManagerTableViewCell.swift */,
+				5EB9320D214697FF00EE01A2 /* DetailManagerTableViewCell.xib */,
+				5EA274D62162B5C2008CAF77 /* ProgramPeriodTableViewCellViewModel.swift */,
+				5EA274B421628207008CAF77 /* ProgramPeriodTableViewCell.swift */,
+				5EA274B521628207008CAF77 /* ProgramPeriodTableViewCell.xib */,
+				5EA274D42162B5AB008CAF77 /* ProgramInvestNowTableViewCellViewModel.swift */,
+				5EA274B82162823F008CAF77 /* InvestNowTableViewCell.swift */,
+				5EA274B92162823F008CAF77 /* InvestNowTableViewCell.xib */,
+				5EA274D82162B5D8008CAF77 /* DefaultTableViewCellViewModel.swift */,
+				5EA274B0216281DD008CAF77 /* DefaultTableViewCell.swift */,
+				5EA274B1216281DD008CAF77 /* DefaultTableViewCell.xib */,
+			);
+			path = "Info tab";
+			sourceTree = "<group>";
+		};
+		5EC6708621AEA814009BF4C0 /* Profit tab */ = {
+			isa = PBXGroup;
+			children = (
+				5EA274D02162B567008CAF77 /* ProgramProfitChartTableViewCellViewModel.swift */,
+				5EA274CE2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift */,
+			);
+			path = "Profit tab";
+			sourceTree = "<group>";
+		};
+		5EC6708721AEA823009BF4C0 /* Balance tab */ = {
+			isa = PBXGroup;
+			children = (
+				5EA274CC2162B53B008CAF77 /* ProgramBalanceChartTableViewCellViewModel.swift */,
+			);
+			path = "Balance tab";
+			sourceTree = "<group>";
+		};
+		5EC6708821AEA84E009BF4C0 /* Facets */ = {
+			isa = PBXGroup;
+			children = (
+				5EA1FE2921A3004C00308D81 /* FacetCollectionViewCellViewModel.swift */,
+				5EA1FE2521A2F24A00308D81 /* FacetCollectionViewCell.swift */,
+				5EA1FE2621A2F24A00308D81 /* FacetCollectionViewCell.xib */,
+				5EA1FE2D21A3105000308D81 /* FacetsTableViewCellViewModel.swift */,
+				5EA1FE2121A2F16600308D81 /* FacetsTableViewCell.swift */,
+				5EA1FE2221A2F16600308D81 /* FacetsTableViewCell.xib */,
+			);
+			path = Facets;
+			sourceTree = "<group>";
+		};
+		5EC6708921AEA877009BF4C0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */,
+				5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */,
+				5EC6708821AEA84E009BF4C0 /* Facets */,
+				5EC6708C21AEA913009BF4C0 /* Program */,
+				FCA57068202735C4001942F3 /* Filter */,
+				5E616B4420F7B10F00B3459D /* Fields */,
+				5EC6708221AEA79B009BF4C0 /* Notification */,
+				5EC6708321AEA7BB009BF4C0 /* Second Currency */,
+				5EC6708421AEA7D4009BF4C0 /* In Request */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5EC6708A21AEA896009BF4C0 /* Structure tab */ = {
+			isa = PBXGroup;
+			children = (
+				5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */,
+				5E27EC47218758AC00C6CF5C /* FundAssetTableViewCell.swift */,
+				5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */,
+			);
+			path = "Structure tab";
+			sourceTree = "<group>";
+		};
+		5EC6708B21AEA8D8009BF4C0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				5EF14DA8218215AF00B3843A /* FundTableViewCellViewModel.swift */,
+				5EF14DA5218214EE00B3843A /* DashboardFundTableViewCellViewModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		5EC6708C21AEA913009BF4C0 /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */,
+				FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */,
+			);
+			path = Program;
+			sourceTree = "<group>";
+		};
+		5EC6708D21AEA92A009BF4C0 /* Info tab */ = {
+			isa = PBXGroup;
+			children = (
+				5E5BBE6321822708009E4BA3 /* FundInvestNowTableViewCellViewModel.swift */,
+				5E5BBE6421822708009E4BA3 /* FundYourInvestmentTableViewCellViewModel.swift */,
+			);
+			path = "Info tab";
+			sourceTree = "<group>";
+		};
+		5EC6708E21AEA933009BF4C0 /* Profit tab */ = {
+			isa = PBXGroup;
+			children = (
+				5E5BBE67218228E5009E4BA3 /* FundProfitChartTableViewCellViewModel.swift */,
+				5E5BBE6D21822AA6009E4BA3 /* FundProfitStatisticTableViewCellViewModel.swift */,
+			);
+			path = "Profit tab";
+			sourceTree = "<group>";
+		};
+		5EC6708F21AEA93A009BF4C0 /* Balance tab */ = {
+			isa = PBXGroup;
+			children = (
+				5E5BBE69218228E6009E4BA3 /* FundBalanceChartTableViewCellViewModel.swift */,
+			);
+			path = "Balance tab";
+			sourceTree = "<group>";
+		};
+		5EC6709021AEA943009BF4C0 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				5EC6708A21AEA896009BF4C0 /* Structure tab */,
+				5EC6708D21AEA92A009BF4C0 /* Info tab */,
+				5EC6708E21AEA933009BF4C0 /* Profit tab */,
+				5EC6708F21AEA93A009BF4C0 /* Balance tab */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		5EC6709121AEA976009BF4C0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5EC6709321AEA9B8009BF4C0 /* Bottom sheets */ = {
+			isa = PBXGroup;
+			children = (
+				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
+				5EC6709721AEAA13009BF4C0 /* Invest and Withdraw */,
+				5EC6709421AEA9EE009BF4C0 /* Wallet */,
+				5EC6709521AEA9FB009BF4C0 /* Filters */,
+				5EC6709621AEAA07009BF4C0 /* Error */,
+			);
+			path = "Bottom sheets";
+			sourceTree = "<group>";
+		};
+		5EC6709421AEA9EE009BF4C0 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */,
+				5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		5EC6709521AEA9FB009BF4C0 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				5ED7387E21951017001DA633 /* LevelsFilterView.swift */,
+				5ED7387D21951017001DA633 /* LevelsFilterView.xib */,
+				5E5488352141577700B2D9FE /* DateRangeView.swift */,
+				5E54883321414FD100B2D9FE /* DateRangeView.xib */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		5EC6709621AEAA07009BF4C0 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				5E0ACEC1217FA7C500DC76AA /* ErrorBottomSheetView.swift */,
+				5E0ACEC0217FA7C400DC76AA /* ErrorBottomSheetView.xib */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		5EC6709721AEAA13009BF4C0 /* Invest and Withdraw */ = {
+			isa = PBXGroup;
+			children = (
+				5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */,
+				5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */,
+			);
+			path = "Invest and Withdraw";
+			sourceTree = "<group>";
+		};
+		5EC6709821AEAB1C009BF4C0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				5EF14DA2218213B500B3843A /* FundListRouter.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		5EC6709921AEAB32009BF4C0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				FCA19A2C201ADAB100157AD6 /* ProgramListRouter.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		5EC6709A21AEABF8009BF4C0 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		5EC6709B21AEAC16009BF4C0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
+				5E7717672153F5A1002624FC /* DashboardProgramListViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		5EC6709C21AEAC28009BF4C0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				5E0AD0EB21813EE300DC76AA /* FundListViewController.swift */,
+				5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		5EC6709D21AEACB3009BF4C0 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				5EAD3505214FD2170057450C /* ChartsViewController.swift */,
+				5EAD350B214FD57F0057450C /* PortfolioViewController.swift */,
+				5EAD350D214FD58D0057450C /* ProfitViewController.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		5EC6709E21AEACCA009BF4C0 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				5EAD3507214FD2200057450C /* EventsViewController.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		5EC6709F21AEACD6009BF4C0 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		5EC670A021AEACE1009BF4C0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5EAD3509214FD2270057450C /* AssetsViewController.swift */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		5EC670A121AEAD8A009BF4C0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5EC670A021AEACE1009BF4C0 /* Assets */,
+				5EC6709F21AEACD6009BF4C0 /* Events */,
+				5EC6709A21AEABF8009BF4C0 /* Notifications */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5EC670A221AEAE11009BF4C0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				5EFE7C3F2181E78600D385C8 /* FundHeaderViewController.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		5EC670A321AEAE1C009BF4C0 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				5E0AD0EE21813F3800DC76AA /* FundTabmanViewController.swift */,
+				5EF14D7A2181EB5A00B3843A /* FundInfoViewController.swift */,
+				5EFE7C3E2181E78500D385C8 /* FundBalanceViewController.swift */,
+				5EFE7C402181E78600D385C8 /* FundProfitViewController.swift */,
+				5E5BC18F218667E3009E4BA3 /* FundAssetsViewController.swift */,
+				5EF14D762181EB0E00B3843A /* FundInvestViewController.swift */,
+				5EF14D772181EB0E00B3843A /* FundWithdrawViewController.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		5EC670A421AEAE26009BF4C0 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				5EA7A0F920A0B0AD00D895FC /* ProgramTabmanViewController.swift */,
+				FCC9DD87200E61C0008825EC /* ProgramInfoViewController.swift */,
+				5EA274DC2162DF33008CAF77 /* ProgramProfitViewController.swift */,
+				5EA274DA2162DF19008CAF77 /* ProgramBalanceViewController.swift */,
+				5E8340DD207E38A4004A29F1 /* ProgramTradesViewController.swift */,
+				5E5C66ED207FAF700076F630 /* ProgramDetailFullChartViewController.swift */,
+				FC83DF5A203D886F00A8F8CE /* ProgramInvestViewController.swift */,
+				FC83DF5C203D887E00A8F8CE /* ProgramWithdrawViewController.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		5EC670A521AEAE2F009BF4C0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				5E085F48215E802100950042 /* ProgramHeaderViewController.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		5EC670A621AEAE38009BF4C0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		5EC670A721AEAE3F009BF4C0 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */,
+				5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		5EC670A821AEAE71009BF4C0 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				FC5E9049202169DC000E4A90 /* FilterViewController.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		5EC78812216CDE55000C91E4 /* UICollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1732,6 +2081,7 @@
 			children = (
 				5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */,
 				5E36652120D948B700195CBE /* PasscodeViewController.swift */,
+				FCC9DD72200E4C7E008825EC /* Profile */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1749,6 +2099,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */,
+				FC4C194020304EDF00625795 /* Profile */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1767,34 +2118,6 @@
 			children = (
 				5EE00765217873E90045B890 /* ManagerRouter.swift */,
 				5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */,
-				5EE007672178749E0045B890 /* ManagerInfoRouter.swift */,
-				5EE0076F2178849E0045B890 /* ManagerProgramListRouter.swift */,
-				5E5BC18D21854EBE009E4BA3 /* ManagerFundListRouter.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		5EE0077121789A7B0045B890 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		5EEE4554210B22B0009CF791 /* Investor */ = {
-			isa = PBXGroup;
-			children = (
-				5EA7A0FB20A0B0D400D895FC /* DashboardTabmanViewController.swift */,
-				5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */,
-			);
-			path = Investor;
-			sourceTree = "<group>";
-		};
-		5EEE4555210B2366009CF791 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				5EEE4558210B2386009CF791 /* ManagerDashboardTabmanViewController.swift */,
-				5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1819,7 +2142,7 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		5EF14D7C2181F0DD00B3843A /* Fund Details */ = {
+		5EF14D7C2181F0DD00B3843A /* Details */ = {
 			isa = PBXGroup;
 			children = (
 				5EF14D912181F85C00B3843A /* FundRouter.swift */,
@@ -1828,7 +2151,7 @@
 				5EF14D9D2181FC5500B3843A /* FundWithdrawRouter.swift */,
 				5EF14D9C2181FC5500B3843A /* FundInvestRouter.swift */,
 			);
-			path = "Fund Details";
+			path = Details;
 			sourceTree = "<group>";
 		};
 		5EF14D7F2181F19700B3843A /* Fund Details */ = {
@@ -1857,6 +2180,7 @@
 				5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */,
 				5EC78817216CE74D000C91E4 /* EventsDelegateManager.swift */,
 				5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */,
+				5EA1FE2B21A30EC200308D81 /* FacetsDelegateManager.swift */,
 			);
 			path = "Delegate Managers";
 			sourceTree = "<group>";
@@ -1869,27 +2193,20 @@
 			path = Funds;
 			sourceTree = "<group>";
 		};
-		5EF14DA4218213BC00B3843A /* Funds */ = {
+		5EF14DA4218213BC00B3843A /* Fund */ = {
 			isa = PBXGroup;
 			children = (
-				5EF14DA2218213B500B3843A /* FundListRouter.swift */,
+				5EC6709821AEAB1C009BF4C0 /* List */,
+				5EF14D7C2181F0DD00B3843A /* Details */,
 			);
-			path = Funds;
+			path = Fund;
 			sourceTree = "<group>";
 		};
 		5EF14DA7218215A200B3843A /* Fund */ = {
 			isa = PBXGroup;
 			children = (
-				5E27EC47218758AC00C6CF5C /* FundAssetTableViewCell.swift */,
-				5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */,
-				5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */,
-				5EF14DA8218215AF00B3843A /* FundTableViewCellViewModel.swift */,
-				5EF14DA5218214EE00B3843A /* DashboardFundTableViewCellViewModel.swift */,
-				5E5BBE6321822708009E4BA3 /* FundInvestNowTableViewCellViewModel.swift */,
-				5E5BBE6421822708009E4BA3 /* FundYourInvestmentTableViewCellViewModel.swift */,
-				5E5BBE67218228E5009E4BA3 /* FundProfitChartTableViewCellViewModel.swift */,
-				5E5BBE6D21822AA6009E4BA3 /* FundProfitStatisticTableViewCellViewModel.swift */,
-				5E5BBE69218228E6009E4BA3 /* FundBalanceChartTableViewCellViewModel.swift */,
+				5EC6708B21AEA8D8009BF4C0 /* List */,
+				5EC6709021AEA943009BF4C0 /* Detail */,
 			);
 			path = Fund;
 			sourceTree = "<group>";
@@ -1903,21 +2220,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FC0E20082044352000872BE5 /* Header View */ = {
+		FC0E20082044352000872BE5 /* Header Footer View */ = {
 			isa = PBXGroup;
 			children = (
 				5E5BC29A21868FD6009E4BA3 /* FundAssetsHeaderView.swift */,
 				5E5BC29921868FD6009E4BA3 /* FundAssetsHeaderView.xib */,
 				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
 				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
-				5E85834B2060148E0039E13F /* SortHeaderView.swift */,
-				5E858349206014820039E13F /* SortHeaderView.xib */,
-				5E6308FB212C0D5500D15C71 /* SegmentedHeaderFooterView.swift */,
-				5E6308FD212C0D6400D15C71 /* SegmentedHeaderFooterView.xib */,
 				5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */,
 				5E152F12216638400029BFDE /* WalletTableHeaderView.xib */,
 			);
-			path = "Header View";
+			path = "Header Footer View";
 			sourceTree = "<group>";
 		};
 		FC0E20152044459500872BE5 /* QRCode */ = {
@@ -1972,7 +2285,6 @@
 				FC4964142015445E00104CEB /* WalletViewController.swift */,
 				FC0E20092044357800872BE5 /* WalletDepositViewController.swift */,
 				FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */,
-				FC900E61204EE02F007E9142 /* WalletFilterViewController.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1980,17 +2292,11 @@
 		FC4964192015474B00104CEB /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				5E7717672153F5A1002624FC /* DashboardProgramListViewController.swift */,
-				5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */,
 				FC4964172015474700104CEB /* DashboardViewController.swift */,
-				5EAD3505214FD2170057450C /* ChartsViewController.swift */,
-				5EAD3507214FD2200057450C /* EventsViewController.swift */,
-				5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */,
-				5EAD3509214FD2270057450C /* AssetsViewController.swift */,
-				5EAD350B214FD57F0057450C /* PortfolioViewController.swift */,
-				5EAD350D214FD58D0057450C /* ProfitViewController.swift */,
-				5EEE4555210B2366009CF791 /* Manager */,
-				5EEE4554210B22B0009CF791 /* Investor */,
+				5EEE4556210B2377009CF791 /* ManagerDashboardViewController.swift */,
+				5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */,
+				5EC6709D21AEACB3009BF4C0 /* Charts */,
+				5EC6709E21AEACCA009BF4C0 /* Events */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -2066,18 +2372,18 @@
 				FCA19A44201AE86900157AD6 /* WalletRouter.swift */,
 				FC0E2013204435DE00872BE5 /* WalletDepositRouter.swift */,
 				FC0E2011204435D300872BE5 /* WalletWithdrawRouter.swift */,
-				FC900E5F204EDF21007E9142 /* WalletFilterRouter.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
 		};
-		FC4C194320304F0400625795 /* Programs */ = {
+		FC4C194320304F0400625795 /* Program */ = {
 			isa = PBXGroup;
 			children = (
-				FCA19A2C201ADAB100157AD6 /* ProgramListRouter.swift */,
-				5E616B4920F7B27300B3459D /* Create Program */,
+				5E616B4920F7B27300B3459D /* Create */,
+				5EC6709921AEAB32009BF4C0 /* List */,
+				5E33E3B220AB209700A0B9DE /* Details */,
 			);
-			path = Programs;
+			path = Program;
 			sourceTree = "<group>";
 		};
 		FC4C194A203050F200625795 /* Programs */ = {
@@ -2110,7 +2416,6 @@
 				FCA19A3E201AE83100157AD6 /* WalletControllerViewModel.swift */,
 				FC0E200D2044359800872BE5 /* WalletDepositViewModel.swift */,
 				FC0E200F2044359D00872BE5 /* WalletWithdrawViewModel.swift */,
-				FC900E63204EE0EF007E9142 /* WalletFilterViewModel.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2141,59 +2446,29 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		FC4C51A82048064F0042CEE1 /* Program Request */ = {
+		FC4C51A9204806610042CEE1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				5EC6707F21AEA72A009BF4C0 /* Profit */,
+				5EC6708021AEA742009BF4C0 /* Balance */,
+				5EC6708521AEA7F3009BF4C0 /* Info tab */,
+				5EC6708621AEA814009BF4C0 /* Profit tab */,
+				5EC6708721AEA823009BF4C0 /* Balance tab */,
+				5E8340E7207E39BD004A29F1 /* Trades tab */,
 			);
-			path = "Program Request";
+			path = Detail;
 			sourceTree = "<group>";
 		};
-		FC4C51A9204806610042CEE1 /* Program Detail */ = {
+		FC4C51AA204806950042CEE1 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				5EB932102146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift */,
-				5EB9320C214697FF00EE01A2 /* DetailManagerTableViewCell.swift */,
-				5EB9320D214697FF00EE01A2 /* DetailManagerTableViewCell.xib */,
-				5EA274D62162B5C2008CAF77 /* ProgramPeriodTableViewCellViewModel.swift */,
-				5EA274B421628207008CAF77 /* ProgramPeriodTableViewCell.swift */,
-				5EA274B521628207008CAF77 /* ProgramPeriodTableViewCell.xib */,
-				5EA274D42162B5AB008CAF77 /* ProgramInvestNowTableViewCellViewModel.swift */,
-				5EA274B82162823F008CAF77 /* InvestNowTableViewCell.swift */,
-				5EA274B92162823F008CAF77 /* InvestNowTableViewCell.xib */,
-				5EA274D82162B5D8008CAF77 /* DefaultTableViewCellViewModel.swift */,
-				5EA274B0216281DD008CAF77 /* DefaultTableViewCell.swift */,
-				5EA274B1216281DD008CAF77 /* DefaultTableViewCell.xib */,
-				5EA274D22162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift */,
-				5EA274BC21628253008CAF77 /* YourInvestmentTableViewCell.swift */,
-				5EA274BD21628253008CAF77 /* YourInvestmentTableViewCell.xib */,
-				5EA274D02162B567008CAF77 /* ProgramProfitChartTableViewCellViewModel.swift */,
-				5EA274CE2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift */,
-				5EA274CC2162B53B008CAF77 /* ProgramBalanceChartTableViewCellViewModel.swift */,
-			);
-			path = "Program Detail";
-			sourceTree = "<group>";
-		};
-		FC4C51AA204806950042CEE1 /* Program */ = {
-			isa = PBXGroup;
-			children = (
+				5E5EB53421679D4A00CDA376 /* DashboardProgramTableViewCellViewModel.swift */,
 				FC92CB212030192200CDBF19 /* ProgramTableViewCellViewModel.swift */,
-				FCC9DD5E200E20DB008825EC /* ProgramTableViewCell.swift */,
-				FCC9DD5F200E20DB008825EC /* ProgramTableViewCell.xib */,
 			);
-			path = Program;
+			path = List;
 			sourceTree = "<group>";
 		};
-		FC900E6B204EE5C7007E9142 /* Filters */ = {
-			isa = PBXGroup;
-			children = (
-				FC900E69204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift */,
-				FC900E65204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift */,
-				FC900E66204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib */,
-			);
-			path = Filters;
-			sourceTree = "<group>";
-		};
-		FC900E6C204EE5D6007E9142 /* Wallet */ = {
+		FCA57066202735A8001942F3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
 				FCA5705D2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift */,
@@ -2203,24 +2478,13 @@
 			path = Wallet;
 			sourceTree = "<group>";
 		};
-		FCA57066202735A8001942F3 /* Wallet */ = {
+		FCA57067202735BA001942F3 /* Program */ = {
 			isa = PBXGroup;
 			children = (
-				FC900E6C204EE5D6007E9142 /* Wallet */,
-				FC900E6B204EE5C7007E9142 /* Filters */,
+				FC4C51AA204806950042CEE1 /* List */,
+				FC4C51A9204806610042CEE1 /* Detail */,
 			);
-			path = Wallet;
-			sourceTree = "<group>";
-		};
-		FCA57067202735BA001942F3 /* Programs */ = {
-			isa = PBXGroup;
-			children = (
-				FC4C51AA204806950042CEE1 /* Program */,
-				FC4C51A9204806610042CEE1 /* Program Detail */,
-				FC4C51A82048064F0042CEE1 /* Program Request */,
-				5E8340E7207E39BD004A29F1 /* ProgramDetailTrades */,
-			);
-			path = Programs;
+			path = Program;
 			sourceTree = "<group>";
 		};
 		FCA57068202735C4001942F3 /* Filter */ = {
@@ -2236,19 +2500,7 @@
 		FCB17763204568DA00A482B7 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				5E5EB53421679D4A00CDA376 /* DashboardProgramTableViewCellViewModel.swift */,
-				5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */,
-				5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */,
-				5E82C75121429785007A21C3 /* DashboardCurrencyTableViewCell.swift */,
-				5E82C75221429785007A21C3 /* DashboardCurrencyTableViewCell.xib */,
-				5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */,
-				5E734253214AC7E200C4483E /* InRequestsTableViewCell.swift */,
-				5E734254214AC7E200C4483E /* InRequestsTableViewCell.xib */,
-				5ED1141F2159666A00EC5385 /* PortfolioAssetTableViewCellViewModel.swift */,
-				5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */,
-				5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */,
-				5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */,
-				5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */,
+				5EC6707E21AEA718009BF4C0 /* Portfolio */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -2388,7 +2640,6 @@
 				FCBD22BE2019E925000B8E38 /* View Models */,
 				FCC9DD49200DFA5E008825EC /* View Controllers */,
 				FCC9DD47200DFA5E008825EC /* Controllers */,
-				FCC9DD4A200DFA5E008825EC /* Models */,
 				FCC9DD4E200DFA5E008825EC /* Routers */,
 				FCC9DD4F200DFA5E008825EC /* Data Providers */,
 				FCC9DD50200DFA5E008825EC /* Vendor */,
@@ -2461,66 +2712,34 @@
 		FCC9DD49200DFA5E008825EC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC5E9049202169DC000E4A90 /* FilterViewController.swift */,
-				5EC7B87D20D147D5007720D1 /* Settings */,
+				5EC670A821AEAE71009BF4C0 /* Filters */,
 				FCC9DD76200E4CCF008825EC /* Base */,
-				5EA7A0F820A0B08B00D895FC /* Program Details */,
-				5E0AD0ED21813F1C00DC76AA /* Fund Details */,
+				FCB8DFC72010F64D00698D18 /* Auth */,
+				FC49641C2015489B00104CEB /* Welcome */,
+				5EC670A121AEAD8A009BF4C0 /* Common */,
+				FC4964192015474B00104CEB /* Dashboard */,
 				FCC9DD6F200E4C7E008825EC /* Programs */,
 				5E0AD0E821813E8700DC76AA /* Funds */,
-				FCB8DFC72010F64D00698D18 /* Auth */,
-				FCC9DD72200E4C7E008825EC /* Profile */,
+				5E6C0CF12109A8E000B7F844 /* Manager */,
 				FC4964162015446700104CEB /* Wallet */,
-				FC4964192015474B00104CEB /* Dashboard */,
-				FC49641C2015489B00104CEB /* Welcome */,
-				5E6C0CF12109A8E000B7F844 /* Manager Details */,
-				5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */,
+				5EC7B87D20D147D5007720D1 /* Settings */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		FCC9DD4A200DFA5E008825EC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FCC9DD4B200DFA5E008825EC /* Entities */,
-				FCC9DD4C200DFA5E008825EC /* Helpers */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FCC9DD4B200DFA5E008825EC /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				FCB8DFD02010F9E000698D18 /* ProfileEntity.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		FCC9DD4C200DFA5E008825EC /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				FCB2C4E320109CAC0012AA58 /* TemplateEntityProtocol.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		FCC9DD4E200DFA5E008825EC /* Routers */ = {
 			isa = PBXGroup;
 			children = (
-				5EE00764217873CB0045B890 /* Manager */,
-				5EC7B88320D15E89007720D1 /* Settings */,
-				5EF14D7C2181F0DD00B3843A /* Fund Details */,
-				5E33E3B220AB209700A0B9DE /* Program Details */,
-				FCA19A3A201AE34900157AD6 /* WelcomeRouter.swift */,
 				FCA19A24201AA8C000157AD6 /* Router.swift */,
-				5EF14DA4218213BC00B3843A /* Funds */,
+				FCA19A3A201AE34900157AD6 /* WelcomeRouter.swift */,
 				5EA173D220A0883000905253 /* TabmanRouter.swift */,
-				FC4C194320304F0400625795 /* Programs */,
 				FC4C193F20304ED300625795 /* Auth */,
-				FC4C194020304EDF00625795 /* Profile */,
 				FC4C194120304EEF00625795 /* Dashboard */,
+				5EF14DA4218213BC00B3843A /* Fund */,
+				FC4C194320304F0400625795 /* Program */,
+				5EE00764217873CB0045B890 /* Manager */,
 				FC4C194220304EF800625795 /* Wallet */,
-				5EB996A520F36DAD00E31D23 /* Favorite Programs */,
+				5EC7B88320D15E89007720D1 /* Settings */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -2564,24 +2783,14 @@
 		FCC9DD51200DFA5E008825EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5E5BC08621836BFF009E4BA3 /* WalletTransactionView.swift */,
-				5E5BC08721836C00009E4BA3 /* WalletTransactionView.xib */,
-				5ED3B477210898810026C123 /* Profile */,
-				FC0E20082044352000872BE5 /* Header View */,
-				5E7B03532067BA3000D8F3BA /* Buttons */,
 				FCC9DD52200DFA5E008825EC /* Cells */,
+				5ED3B477210898810026C123 /* Profile */,
+				FC0E20082044352000872BE5 /* Header Footer View */,
+				5E7B03532067BA3000D8F3BA /* Buttons */,
 				5E7FC747207B6342001617FD /* Labels */,
 				5EB996AB20F392DA00E31D23 /* Custom Views */,
-				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
-				5ED7387E21951017001DA633 /* LevelsFilterView.swift */,
-				5ED7387D21951017001DA633 /* LevelsFilterView.xib */,
-				5E5488352141577700B2D9FE /* DateRangeView.swift */,
-				5E54883321414FD100B2D9FE /* DateRangeView.xib */,
-				5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */,
-				5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */,
+				5EC6709321AEA9B8009BF4C0 /* Bottom sheets */,
 				5EEC1ACC217628A4007D77ED /* NavigationTitleView.swift */,
-				5E0ACEC1217FA7C500DC76AA /* ErrorBottomSheetView.swift */,
-				5E0ACEC0217FA7C400DC76AA /* ErrorBottomSheetView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2589,28 +2798,12 @@
 		FCC9DD52200DFA5E008825EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5EF14DA7218215A200B3843A /* Fund */,
-				5ED0C9162091144100C83F23 /* PlateTableViewCell.swift */,
-				5E7717692154200D002624FC /* PortfolioEventCollectionViewCellViewModel.swift */,
-				5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */,
-				5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */,
-				5E6A6BC2216D5EF80082C343 /* PortfolioEventTableViewCellViewModel.swift */,
-				5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */,
-				5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */,
-				5EA274C021628274008CAF77 /* DetailProfitChartTableViewCell.swift */,
-				5EA274C121628274008CAF77 /* DetailProfitChartTableViewCell.xib */,
-				5EA274C421628286008CAF77 /* DetailProfitStatisticTableViewCell.swift */,
-				5EA274C521628286008CAF77 /* DetailProfitStatisticTableViewCell.xib */,
-				5EA274C821628297008CAF77 /* DetailBalanceChartTableViewCell.swift */,
-				5EA274C921628297008CAF77 /* DetailBalanceChartTableViewCell.xib */,
-				FCA57068202735C4001942F3 /* Filter */,
-				5E616B4420F7B10F00B3459D /* Fields */,
+				5EC6708921AEA877009BF4C0 /* Common */,
 				FCB17763204568DA00A482B7 /* Dashboard */,
-				FCA57067202735BA001942F3 /* Programs */,
+				FCA57067202735BA001942F3 /* Program */,
+				5EF14DA7218215A200B3843A /* Fund */,
 				FCA57066202735A8001942F3 /* Wallet */,
-				5E1C0869216F8CE7007C45B2 /* TableViewCell.swift */,
-				5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */,
-				5EE0077121789A7B0045B890 /* Manager */,
+				5EC6709121AEA976009BF4C0 /* Settings */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2632,8 +2825,9 @@
 		FCC9DD6F200E4C7E008825EC /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				FCC9DD70200E4C7E008825EC /* ProgramListViewController.swift */,
 				5E616B3920F7672200B3459D /* Create Program */,
+				5EC6709B21AEAC16009BF4C0 /* List */,
+				5EA7A0F820A0B08B00D895FC /* Details */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -2770,6 +2964,7 @@
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
 				5E82C75421429785007A21C3 /* DashboardCurrencyTableViewCell.xib in Resources */,
 				5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */,
+				5EA1FE2421A2F16600308D81 /* FacetsTableViewCell.xib in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				5EA274B3216281DD008CAF77 /* DefaultTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
@@ -2778,10 +2973,9 @@
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
 				5EA274BF21628253008CAF77 /* YourInvestmentTableViewCell.xib in Resources */,
 				5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */,
-				5E6308FE212C0D6400D15C71 /* SegmentedHeaderFooterView.xib in Resources */,
-				5E85834A206014820039E13F /* SortHeaderView.xib in Resources */,
 				5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramTradesTableViewCell.xib in Resources */,
+				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
@@ -2804,7 +2998,6 @@
 				5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */,
-				FC900E68204EE58A007E9142 /* WalletFilterTypeTableViewCell.xib in Resources */,
 				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2899,7 +3092,6 @@
 				5EEAC60521A23144004F2121 /* ProgramStatistic.swift in Sources */,
 				FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
-				FCF1060520179F0200E3F481 /* ProfileEntity.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				5EE007632178737F0045B890 /* ManagerViewModel.swift in Sources */,
 				5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */,
@@ -2990,6 +3182,7 @@
 				5E0ACEC3217FA7C600DC76AA /* ErrorBottomSheetView.swift in Sources */,
 				5EEAC62A21A23144004F2121 /* FundProfitChart.swift in Sources */,
 				5E1CF83C218C02FC00541C70 /* FontAnimation.swift in Sources */,
+				5EA1FE2721A2F24A00308D81 /* FacetCollectionViewCell.swift in Sources */,
 				5EEAC65321A23144004F2121 /* FundNotificationSettingList.swift in Sources */,
 				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5EEAC60B21A23144004F2121 /* ManagerProfile.swift in Sources */,
@@ -3012,7 +3205,6 @@
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				5EEAC64921A23144004F2121 /* DashboardPortfolioEvents.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* AuthSignUpConfirmationViewModel.swift in Sources */,
-				5EE007612178720D0045B890 /* ManagerProgramListViewController.swift in Sources */,
 				5E1813872061D40600481646 /* RoundedLabel.swift in Sources */,
 				5EEAC62C21A23144004F2121 /* ManagerFundWithdrawInfo.swift in Sources */,
 				5EF14DA9218215B000B3843A /* FundTableViewCellViewModel.swift in Sources */,
@@ -3031,7 +3223,6 @@
 				5EA274D32162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift in Sources */,
 				5EEAC64721A23144004F2121 /* PlatformInfo.swift in Sources */,
 				5E87E765208F638E00141269 /* Tooltips.swift in Sources */,
-				FCB2C4E420109CAC0012AA58 /* TemplateEntityProtocol.swift in Sources */,
 				5EEAC66321A23144004F2121 /* ManagerOverview.swift in Sources */,
 				5E8340E0207E3907004A29F1 /* ProgramTradesViewModel.swift in Sources */,
 				5EEAC65521A23144004F2121 /* AndroidVersion.swift in Sources */,
@@ -3040,13 +3231,11 @@
 				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,
 				5EA274B2216281DD008CAF77 /* DefaultTableViewCell.swift in Sources */,
 				5EEAC57721A2311F004F2121 /* FileAPI.swift in Sources */,
-				5EE007682178749E0045B890 /* ManagerInfoRouter.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				5EA274CA21628297008CAF77 /* DetailBalanceChartTableViewCell.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				5E5488362141577700B2D9FE /* DateRangeView.swift in Sources */,
 				5EEAC61621A23144004F2121 /* PeriodDate.swift in Sources */,
-				5E5BC18E21854EBE009E4BA3 /* ManagerFundListRouter.swift in Sources */,
 				5EE0076A217875120045B890 /* ManagersDataProvider.swift in Sources */,
 				5EEAC62F21A23144004F2121 /* WalletTransactionsViewModel.swift in Sources */,
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
@@ -3054,7 +3243,6 @@
 				FC91379220311CA6002321C7 /* Utils.swift in Sources */,
 				5EA274C221628274008CAF77 /* DetailProfitChartTableViewCell.swift in Sources */,
 				FC27232820498959005225F2 /* QRCodeReaderResult.swift in Sources */,
-				5EA7A0FC20A0B0D400D895FC /* DashboardTabmanViewController.swift in Sources */,
 				5EEAC63521A23144004F2121 /* FundAssetPartWithIcon.swift in Sources */,
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
 				5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */,
@@ -3070,7 +3258,6 @@
 				5EAD350A214FD2270057450C /* AssetsViewController.swift in Sources */,
 				5EA274AB216268C7008CAF77 /* ProgramViewModel.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
-				5EA173CF20A081B800905253 /* FavoriteProgramListViewModel.swift in Sources */,
 				5EEAC57421A2311F004F2121 /* FundsAPI.swift in Sources */,
 				5EEAC60E21A23144004F2121 /* PersonalFundDetailsFull.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
@@ -3101,12 +3288,12 @@
 				5EEAC60F21A23144004F2121 /* FundAssetsListInfo.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
-				FC900E60204EDF21007E9142 /* WalletFilterRouter.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramInfoViewController.swift in Sources */,
 				5E77176A2154200D002624FC /* PortfolioEventCollectionViewCellViewModel.swift in Sources */,
 				5E616B4020F7880800B3459D /* ImagePickerPresentable.swift in Sources */,
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
 				FCA19A2D201ADAB100157AD6 /* ProgramListRouter.swift in Sources */,
+				5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */,
 				5E616B5B20F7C37900B3459D /* CreateProgramFirstViewController.swift in Sources */,
 				FCBD22C02019E960000B8E38 /* ProgramListViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
@@ -3125,7 +3312,6 @@
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,
 				FC140FE62030168100B71E7F /* Configuration.swift in Sources */,
 				5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */,
-				5E5BC18C21854D90009E4BA3 /* ManagerFundListViewModel.swift in Sources */,
 				5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
@@ -3134,12 +3320,10 @@
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
 				5EEAC66B21A23144004F2121 /* FundAssetInfo.swift in Sources */,
 				5EEAC61921A23144004F2121 /* ResetPasswordViewModel.swift in Sources */,
-				5E5BC18A21854D45009E4BA3 /* ManagerFundListViewController.swift in Sources */,
 				5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */,
 				5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */,
 				5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */,
 				5E18CE0520C0561B008FE5B5 /* AuthTwoFactorTabmanRouter.swift in Sources */,
-				5E85834C2060148E0039E13F /* SortHeaderView.swift in Sources */,
 				5E1CF838218C02FC00541C70 /* TweeActiveTextField.swift in Sources */,
 				5EEAC65F21A23144004F2121 /* DashboardPortfolioEvent.swift in Sources */,
 				5EEAC65A21A23144004F2121 /* ManagerPortfolioEvent.swift in Sources */,
@@ -3152,7 +3336,6 @@
 				5ED1141E21595E3300EC5385 /* PortfolioViewModel.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
 				5EEAC63B21A23144004F2121 /* WithdrawalInfo.swift in Sources */,
-				FC900E62204EE02F007E9142 /* WalletFilterViewController.swift in Sources */,
 				5EF14D8B2181F80200B3843A /* FundTabmanViewModel.swift in Sources */,
 				5E1CF839218C02FC00541C70 /* TweePlaceholderTextField.swift in Sources */,
 				5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */,
@@ -3164,9 +3347,7 @@
 				5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */,
 				5E0AD0EF21813F3800DC76AA /* FundTabmanViewController.swift in Sources */,
 				5EEAC60621A23144004F2121 /* RatesModel.swift in Sources */,
-				5EE007702178849E0045B890 /* ManagerProgramListRouter.swift in Sources */,
 				5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */,
-				5EEE4559210B2386009CF791 /* ManagerDashboardTabmanViewController.swift in Sources */,
 				5EEAC65B21A23144004F2121 /* ResendConfirmationViewModel.swift in Sources */,
 				5EAD3504214FCA1C0057450C /* Enums.swift in Sources */,
 				5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */,
@@ -3181,6 +3362,7 @@
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
 				5E5EB53521679D4A00CDA376 /* DashboardProgramTableViewCellViewModel.swift in Sources */,
 				5EEAC64321A23144004F2121 /* WalletTransaction.swift in Sources */,
+				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
 				5EEAC66221A23144004F2121 /* WalletWithdrawalInfo.swift in Sources */,
 				5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */,
 				FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */,
@@ -3188,7 +3370,6 @@
 				5E181E6A2067AD1900BF3240 /* NumpadView.swift in Sources */,
 				5EEAC60A21A23144004F2121 /* CreateWithdrawalRequestModel.swift in Sources */,
 				FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */,
-				FC83DF69203DAB0400A8F8CE /* ProgramHistoryViewController.swift in Sources */,
 				5E5BC08821836C00009E4BA3 /* WalletTransactionView.swift in Sources */,
 				5E085F49215E802100950042 /* ProgramHeaderViewController.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
@@ -3205,14 +3386,12 @@
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */,
 				5EAD350E214FD58D0057450C /* ProfitViewController.swift in Sources */,
-				FC900E6A204EE5AD007E9142 /* WalletFilterTypeTableViewCellViewModel.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */,
 				5EEAC63E21A23144004F2121 /* ProgramDetailsFull.swift in Sources */,
 				5EC78729216BE8B2000C91E4 /* InRequestsDelegateManager.swift in Sources */,
 				5EEAC5F921A23144004F2121 /* FundsList.swift in Sources */,
 				5E5C66F0207FAF7A0076F630 /* ProgramDetailFullChartViewModel.swift in Sources */,
-				FC900E64204EE0EF007E9142 /* WalletFilterViewModel.swift in Sources */,
 				5E6D681D207655A100299408 /* String+Constants.swift in Sources */,
 				5EEAC65E21A23144004F2121 /* FundDetailsListStatistic.swift in Sources */,
 				5EEAC62B21A23144004F2121 /* TwoFactorStatus.swift in Sources */,
@@ -3233,10 +3412,7 @@
 				5EEAC57E21A2311F004F2121 /* BrokersAPI.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
-				5E478B9C2077B53900E697C1 /* StackedProgressBar.swift in Sources */,
 				5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */,
-				5EB996A420F36D9F00E31D23 /* FavoriteProgramListRouter.swift in Sources */,
-				5E6308FC212C0D5500D15C71 /* SegmentedHeaderFooterView.swift in Sources */,
 				FCE8236320161339000061E8 /* Constants.swift in Sources */,
 				5EEAC65621A23144004F2121 /* AssetSelection.swift in Sources */,
 				5E18CE0120C03DED008FE5B5 /* AuthTwoFactorTabmanViewController.swift in Sources */,
@@ -3259,7 +3435,6 @@
 				5EA274BA2162823F008CAF77 /* InvestNowTableViewCell.swift in Sources */,
 				5EEAC57A21A2311F004F2121 /* ProgramsAPI.swift in Sources */,
 				5E5BBE6A218228E6009E4BA3 /* FundProfitChartTableViewCellViewModel.swift in Sources */,
-				FC900E67204EE58A007E9142 /* WalletFilterTypeTableViewCell.swift in Sources */,
 				FC900E5E204EC403007E9142 /* AuthDataProvider.swift in Sources */,
 				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
 				5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */,
@@ -3319,12 +3494,14 @@
 				5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */,
 				5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */,
 				5ED7385D21942EEC001DA633 /* AppConstants.swift in Sources */,
+				5EA1FE2E21A3105000308D81 /* FacetsTableViewCellViewModel.swift in Sources */,
 				5ED03F3820FF784A00AF5E07 /* FieldWithTextFieldTableViewCellViewModel.swift in Sources */,
 				FC2722EA20496FB5005225F2 /* WalletProtocol.swift in Sources */,
 				5E7717682153F5A1002624FC /* DashboardProgramListViewController.swift in Sources */,
 				5E27EC4A218758AC00C6CF5C /* FundAssetTableViewCell.swift in Sources */,
 				5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */,
 				5EEAC60221A23144004F2121 /* BrokerAccountType.swift in Sources */,
+				5EA1FE2A21A3004C00308D81 /* FacetCollectionViewCellViewModel.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				5EEAC56521A21640004F2121 /* FilterModel.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* AuthSignInViewModel.swift in Sources */,
@@ -3376,7 +3553,6 @@
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
 				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
 				5E067A5420EE3AD5002CA1D1 /* DashboardTabmanRouter.swift in Sources */,
-				5EE0075B217871AC0045B890 /* ManagerProgramListViewModel.swift in Sources */,
 				5EA274C621628286008CAF77 /* DetailProfitStatisticTableViewCell.swift in Sources */,
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,
 				5EEAC64A21A23144004F2121 /* WalletSummary.swift in Sources */,
@@ -3907,7 +4083,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Manager";
 		};
@@ -3989,7 +4165,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Investor";
 		};
@@ -4063,7 +4239,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Investor";
 		};
@@ -4137,7 +4313,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Tournament";
 		};
@@ -4219,7 +4395,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Tournament";
 		};
@@ -4293,7 +4469,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release Manager";
 		};

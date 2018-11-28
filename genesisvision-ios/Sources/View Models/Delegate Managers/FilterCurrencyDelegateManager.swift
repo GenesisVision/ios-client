@@ -56,15 +56,11 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
         }
     }
     
-    
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let selectedCurrency = currencies[indexPath.row].name {
-            updateSelectedCurrency(selectedCurrency)
-            self.selectedIndex = indexPath.row
-        }
+        self.selectedIndex = indexPath.row
         
         delegate?.didSelectFilterCurrency(at: indexPath)
     }

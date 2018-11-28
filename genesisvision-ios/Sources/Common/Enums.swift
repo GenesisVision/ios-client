@@ -100,6 +100,11 @@ enum DataType {
     case fake
 }
 
+enum AssetType: String {
+    case fund = "Fund"
+    case program = "Program"
+}
+
 // MARK: - CompletionsResult
 enum CompletionResult {
     case success
@@ -113,7 +118,7 @@ enum BottomViewType {
 
 // MARK: - TableViewCell
 enum SectionType {
-    case assetList
+    case facetList, assetList
 }
 
 // MARK: - Stroryboard Instances

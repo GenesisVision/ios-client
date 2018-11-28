@@ -20,16 +20,5 @@ class ManagerDashboardTabmanRouter: TabmanRouter {
         
         return viewController
     }
-    
-    func getFavorites() -> ProgramListViewController? {
-        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
-        
-        let navigationController = BaseNavigationController(rootViewController: viewController)
-        let router = FavoriteProgramListRouter(parentRouter: self, navigationController: navigationController, favoriteProgramListViewController: viewController)
-        let model = FavoriteProgramListViewModel(withRouter: router, reloadDataProtocol: viewController)
-        viewController.viewModel = model
-        
-        return viewController
-    }
 }
 

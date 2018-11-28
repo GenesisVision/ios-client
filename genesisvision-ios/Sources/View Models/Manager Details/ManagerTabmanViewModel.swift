@@ -43,19 +43,24 @@ final class ManagerTabmanViewModel: TabmanViewModel {
             self.managerProfileDetails = viewModel
         }
         
-        if let router = router as? ManagerTabmanRouter, let managerProfileDetails = managerProfileDetails {
+        if let router = router as? ManagerTabmanRouter, let managerProfileDetails = managerProfileDetails, let uuid = managerProfileDetails.managerProfile?.id?.uuidString {
+            
             if let vc = router.getInfo(with: managerProfileDetails) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
-            if let managerId = managerProfileDetails.managerProfile?.id?.uuidString, let programs = router.getPrograms(with: managerId), let funds = router.getFunds(with: managerId) {
-                
-                self.addController(funds)
-                self.addItem(funds.viewModel.title.uppercased())
-                
+            let filterModel = FilterModel()
+            filterModel.managerId = uuid
+    
+            if let programs = router.getPrograms(with: filterModel) {
                 self.addController(programs)
                 self.addItem(programs.viewModel.title.uppercased())
+            }
+            
+            if let funds = router.getFunds(with: filterModel) {
+                self.addController(funds)
+                self.addItem(funds.viewModel.title.uppercased())
             }
             
             reloadPages()

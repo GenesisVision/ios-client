@@ -7,7 +7,10 @@
 //
 
 enum ListRouteType {
-    case signIn, showProgramDetails(programId: String), showFundDetails(fundId: String), showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
+    case signIn
+    case showAssetDetails(assetId: String, assetType: AssetType)
+    case showAssetList(filterModel: FilterModel, assetType: AssetType)
+    case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
 protocol ListRouterProtocol {
@@ -19,10 +22,10 @@ extension ListRouterProtocol where Self: Router {
         switch routeType {
         case .signIn:
             signInAction()
-        case .showProgramDetails(let programId):
-            showProgramDetails(with: programId)
-        case .showFundDetails(let fundId):
-            showFundDetails(with: fundId)
+        case .showAssetDetails(let assetId, let assetType):
+            showAssetDetails(with: assetId, assetType: assetType)
+        case .showAssetList(let filterModel, let assetType):
+            showAssetList(with: filterModel, assetType: assetType)
         case .showFilterVC(let listViewModel, let filterModel, let filterType, let sortingType):
             showFilterVC(with: listViewModel, filterModel: filterModel, filterType: filterType, sortingType: sortingType)
         }

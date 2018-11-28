@@ -233,15 +233,6 @@ extension DashboardViewController {
     }
 }
 
-extension DashboardViewController: SortingDelegate {
-    func didSelectSorting() {
-        bottomSheetController.dismiss()
-        
-        showProgressHUD()
-        fetch()
-    }
-}
-
 extension DashboardViewController: InRequestsDelegateManagerProtocol {
     func didCanceledRequest(completionResult: CompletionResult) {
         bottomSheetController.dismiss()

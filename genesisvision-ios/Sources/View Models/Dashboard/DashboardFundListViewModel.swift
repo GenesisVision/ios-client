@@ -12,7 +12,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     // MARK: - Variables
     var title = "Funds"
     
-    var type: ListType = .fundList
+    var assetType: AssetType = .fund
     
     var sortingDelegateManager: SortingDelegateManager!
     var fundListDelegateManager: DashboardFundListDelegateManager!
@@ -50,6 +50,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     }
     var activeViewModels = [DashboardFundTableViewCellViewModel]()
     var archiveViewModels = [DashboardFundTableViewCellViewModel]()
+    var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
@@ -149,7 +150,7 @@ extension DashboardFundListViewModel {
         let fund = model.fund
         guard let fundId = fund.id else { return }
 
-        router.show(routeType: .showFundDetails(fundId: fundId.uuidString))
+        router.show(routeType: .showAssetDetails(assetId: fundId.uuidString, assetType: .fund))
     }
     
     func showFundList() {

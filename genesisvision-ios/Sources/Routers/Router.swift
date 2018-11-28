@@ -78,6 +78,8 @@ class Router {
         let navigationController = BaseNavigationController(rootViewController: assetsViewController)
         let router = Router(parentRouter: self, navigationController: navigationController)
         let viewModel = AssetsTabmanViewModel(withRouter: router)
+        viewModel.showFacets = true
+        viewModel.searchBarEnable = true
         assetsViewController.viewModel = viewModel
         
         return navigationController
@@ -129,6 +131,18 @@ class Router {
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysOriginal)
             viewControllers.append(navigationController)
         }
+    }
+    
+    private func showProgramList(with filterModel: FilterModel) {
+        guard let viewController = getPrograms(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showFundList(with filterModel: FilterModel) {
+        guard let viewController = getFunds(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -232,13 +246,22 @@ extension Router {
         
     }
     
-    func showProgramDetails(with programId: String) {
+    func showAssetDetails(with assetId: String, assetType: AssetType) {
+        switch assetType {
+        case .program:
+            showProgramDetails(with: assetId)
+        case .fund:
+            showFundDetails(with: assetId)
+        }
+    }
+        
+    private func showProgramDetails(with programId: String) {
         guard let viewController = getDetailsViewController(with: programId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
-        guard let viewController = FilterViewController.storyboardInstance(name: .programs) else { return }
+        guard let viewController = FiltersViewController.storyboardInstance(name: .programs) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
         router.currentController = viewController
         let viewModel = FilterViewModel(withRouter: router, sortingType: sortingType, filterViewModelProtocol: viewController, filterModel: filterModel, listViewModel: listViewModel, filterType: filterType)
@@ -247,9 +270,18 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showFundDetails(with fundId: String) {
+    private func showFundDetails(with fundId: String) {
         guard let viewController = getFundDetailsViewController(with: fundId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showAssetList(with filterModel: FilterModel, assetType: AssetType) {
+        switch assetType {
+        case .program:
+            showProgramList(with: filterModel)
+        case .fund:
+            showFundList(with: filterModel)
+        }
     }
     
     func showNotificationList() {
@@ -328,6 +360,30 @@ extension Router {
         viewController.viewModel = AuthTwoFactorDisableConfirmationViewModel(withRouter: router)
         viewController.hidesBottomBarWhenPushed = true
         
+        return viewController
+    }
+    
+    func getPrograms(with filterModel: FilterModel) -> ProgramListViewController? {
+        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
+        
+        let router = ProgramListRouter(parentRouter: self)
+        router.currentController = viewController
+        let viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getFunds(with filterModel: FilterModel) -> FundListViewController? {
+        guard let viewController = FundListViewController.storyboardInstance(name: .funds) else { return nil }
+        
+        let router = FundListRouter(parentRouter: self)
+        router.currentController = viewController
+        let viewModel = FundListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
     

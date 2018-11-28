@@ -9,11 +9,47 @@
 import UIKit
 
 class ProgramsDataProvider: DataProvider {
-    static func get(levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsGet? = nil, programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    
+        let levelMin = filterModel?.levelModel.minLevel
+        let levelMax = filterModel?.levelModel.maxLevel
+        
+        let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
+        let statisticDateTo = filterModel?.dateRangeModel.dateTo
+        
+        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
+        
+        let profitAvgMin = filterModel?.profitAvgMin
+        let profitAvgMax = filterModel?.profitAvgMax
+        
+        let mask = filterModel?.mask
+        let isFavorite = filterModel?.isFavorite
+        let facetId = filterModel?.facetId
+        let managerId = filterModel?.managerId
+        let chartPointsCount = filterModel?.chartPointsCount
+        
+        var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
+        if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {
+            programCurrency = newCurrency
+        }
+        
+        var currencySecondary: ProgramsAPI.CurrencySecondary_v10ProgramsGet?
+        if let newCurrency = ProgramsAPI.CurrencySecondary_v10ProgramsGet(rawValue: getSelectedCurrency()) {
+            currencySecondary = newCurrency
+        }
         
         let authorization = AuthManager.authorizedToken
         
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getSets(completion: @escaping (_ programSets: ProgramSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsSetsGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

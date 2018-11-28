@@ -26,8 +26,8 @@ final class Constants {
     
     struct SystemSizes {
         struct Cell {
-            static let horizontalMarginValue: CGFloat = 8.0
-            static let verticalMarginValues: CGFloat = 8.0
+            static let horizontalMarginValue: CGFloat = 10.0
+            static let verticalMarginValues: CGFloat = 10.0
         }
         
         static let cornerSize: CGFloat = 16.0

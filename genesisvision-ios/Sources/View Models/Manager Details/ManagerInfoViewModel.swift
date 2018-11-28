@@ -20,7 +20,7 @@ final class ManagerInfoViewModel {
     // MARK: - Variables
     var title: String = "Info"
     
-    private var router: ManagerInfoRouter
+    private var router: Router
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var managerId: String!
@@ -38,7 +38,7 @@ final class ManagerInfoViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: ManagerInfoRouter,
+    init(withRouter router: Router,
          managerId: String? = nil,
          managerProfileDetails: ManagerProfileDetails? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {

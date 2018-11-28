@@ -9,11 +9,36 @@
 import UIKit
 
 class FundsDataProvider: DataProvider {
-    static func get(sorting: FundsAPI.Sorting_v10FundsGet? = nil, currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ fundsList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ fundsList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
+        let statisticDateTo = filterModel?.dateRangeModel.dateTo
+        
+        let sorting = filterModel?.sortingModel.selectedSorting as? FundsAPI.Sorting_v10FundsGet ?? FundsAPI.Sorting_v10FundsGet.byProfitDesc
+        
+        let mask = filterModel?.mask
+        let isFavorite = filterModel?.isFavorite
+        let facetId = filterModel?.facetId
+        let managerId = filterModel?.managerId
+        let chartPointsCount = filterModel?.chartPointsCount
+        
+        var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
+        if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
+            currencySecondary = newCurrency
+        }
         
         let authorization = AuthManager.authorizedToken
 
-        FundsAPI.v10FundsGet(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take) { (viewModel, error) in
+        FundsAPI.v10FundsGet(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getSets(completion: @escaping (_ programSets: ProgramSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsSetsGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

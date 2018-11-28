@@ -54,13 +54,8 @@ class EventListViewModel {
         
         let selectedModel = viewModels[indexPath.row]
         let event = selectedModel.dashboardPortfolioEvent
-        if let assetId = event.assetId?.uuidString, let assetType = event.assetType {
-            switch assetType {
-            case .program:
-                router.showProgramDetails(with: assetId)
-            case .fund:
-                router.showFundDetails(with: assetId)
-            }
+        if let assetId = event.assetId?.uuidString, let type = event.assetType, let assetType = AssetType(rawValue: type.rawValue) {
+            router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
     

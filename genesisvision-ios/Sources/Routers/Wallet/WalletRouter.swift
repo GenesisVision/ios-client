@@ -7,7 +7,8 @@
 //
 
 enum WalletRouteType {
-    case withdraw, deposit, showProgramDetails(programId: String), showFilterVC(walletControllerViewModel: WalletControllerViewModel), programList
+    case withdraw, deposit, programList
+    case showAssetDetails(assetId: String, assetType: AssetType)
 }
 
 class WalletRouter: Router {
@@ -19,10 +20,8 @@ class WalletRouter: Router {
             withdraw()
         case .deposit:
             deposit()
-        case .showProgramDetails(let programId):
-            showProgramDetails(with: programId)
-        case .showFilterVC(let walletControllerViewModel):
-            showFilterVC(with: walletControllerViewModel)
+        case .showAssetDetails(let assetId, let assetType):
+            showAssetDetails(with: assetId, assetType: assetType)
         case .programList:
             showProgramList()
         }
@@ -48,15 +47,6 @@ class WalletRouter: Router {
         guard let viewController = WalletDepositViewController.storyboardInstance(name: .wallet) else { return }
         let router = WalletDepositRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = WalletDepositViewModel(withRouter: router)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func showFilterVC(with walletControllerViewModel: WalletControllerViewModel) {
-        guard let viewController = WalletFilterViewController.storyboardInstance(name: .wallet) else { return }
-        let router = WalletFilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = WalletFilterViewModel(withRouter: router, walletControllerViewModel: walletControllerViewModel)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

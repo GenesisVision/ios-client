@@ -12,7 +12,7 @@ import Pageboy
 class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
     var controllers = [BaseViewController]()
     
-    init(router: Router) {
+    init(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         super.init()
         
         if let router = router as? DashboardRouter {
@@ -36,14 +36,17 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             router.programsViewController = programListViewController
             
             let programListRouter = ProgramListRouter(parentRouter: router)
-            let programsViewModel = ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController)
+            programListRouter.currentController = programListViewController
+            let programsViewModel =
+                ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController, filterModel: filterModel, showFacets: showFacets)
             programListViewController.viewModel = programsViewModel
             
             guard let fundListViewController = FundListViewController.storyboardInstance(name: .funds) else { return }
             router.fundsViewController = fundListViewController
             
             let fundListRouter = FundListRouter(parentRouter: router)
-            let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController)
+            fundListRouter.currentController = fundListViewController
+            let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController, filterModel: filterModel, showFacets: showFacets)
             fundListViewController.viewModel = fundsViewModel
             
             controllers = [programListViewController, fundListViewController]

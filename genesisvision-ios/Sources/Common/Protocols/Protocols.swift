@@ -50,11 +50,10 @@ protocol DelegateManagerProtocol: class {
     
 }
 
-//old ProgramProtocol
 protocol FavoriteStateChangeProtocol: class {
     var filterDateRangeModel: FilterDateRangeModel? { get }
     
-    func didChangeFavoriteState(with programID: String, value: Bool, request: Bool)
+    func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool)
 }
 
 protocol FavoriteStateUpdatedProtocol: class {

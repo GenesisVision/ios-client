@@ -45,6 +45,12 @@ class FilterModel {
     var mask: String?
     var isFavorite: Bool = false
     var facetId: String?
+    var facetTitle: String?
+    
+    var managerId: String?
+    
+    var profitAvgMin: Double?
+    var profitAvgMax: Double?
     
     init() {
         sortingModel = FilterSortingModel()

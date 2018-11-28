@@ -50,6 +50,7 @@ extension UIViewController {
     
     func showSettingsAlert(_ message: String) {
         let alert = UIAlertController(title: String.Alerts.PrivacySettings.alertTitle, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.Cell.headerBg
         alert.addAction(UIAlertAction(title: String.Alerts.PrivacySettings.settingsButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: UIApplicationOpenSettingsURLString)
         }))
@@ -60,6 +61,7 @@ extension UIViewController {
     func showNewVersionAlert(_ newVersion: String) {
         let message = String.Alerts.NewVersionUpdate.alertMessage + "\(newVersion)"
         let alert = UIAlertController(title: String.Alerts.NewVersionUpdate.alertTitle, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.Cell.headerBg
         alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.updateButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: Urls.appStoreAddress)
         }))

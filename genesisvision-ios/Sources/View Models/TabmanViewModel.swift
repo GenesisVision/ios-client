@@ -21,6 +21,7 @@ protocol TabmanViewModelDelegate: class {
 class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
     var title: String = ""
+    var items: [TabmanBar.Item]?
     
     var pageboyDataSource: PageboyDataSource!
     
@@ -36,7 +37,7 @@ class TabmanViewModel: TabmanViewModelProtocol {
     internal var isProgressive = false
     internal var itemDistribution: TabmanBar.Appearance.Layout.ItemDistribution = .leftAligned
     internal var shouldHideWhenSingleItem = false
-    internal var router: Router!
+    var router: Router!
     
     var viewControllersCount: Int = 1
     public private(set) var viewControllers = [UIViewController]()
