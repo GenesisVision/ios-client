@@ -41,7 +41,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     private var programsList: ProgramsList?
     
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithFilter : .filter
+        return signInButtonEnable ? .signInWithFilter : filterModel.mask == nil ? .filter : .none
     }
     
     var viewModels = [CellViewAnyModel]()

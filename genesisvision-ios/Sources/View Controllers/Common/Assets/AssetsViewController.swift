@@ -14,6 +14,9 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     var pageboyDataSource: AssetsPageboyViewControllerDataSource!
 
     var resultsViewController: AssetsViewController?
+    
+    var timer: Timer?
+    
     // MARK: - Outlets
     var searchController = UISearchController()
     // MARK: - Lifecycle
@@ -41,8 +44,8 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         resultsViewController = AssetsViewController()
         let router = Router(parentRouter: viewModel.router, navigationController: navigationController)
         let searchViewModel = AssetsTabmanViewModel(withRouter: router)
+        searchViewModel.filterModel.mask = ""
         resultsViewController?.viewModel = searchViewModel
-        
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
@@ -66,11 +69,15 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        print(text)
-        
-        guard let controllers = resultsViewController?.pageboyDataSource.controllers else { return }
-        
         resultsViewController?.viewModel.filterModel.mask = text
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
+    }
+    
+    @objc func performSearch() {
+        guard let controllers = resultsViewController?.pageboyDataSource.controllers else { return }
         
         for vc in controllers {
             if let vc = vc as? ProgramListViewController {

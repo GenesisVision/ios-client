@@ -43,7 +43,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var dateTo: Date?
     
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithFilter : .filter
+        return signInButtonEnable ? .signInWithFilter : filterModel.mask == nil ? .filter : .none
     }
     
     var viewModels = [CellViewAnyModel]()
