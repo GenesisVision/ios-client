@@ -27,6 +27,7 @@ class ProgramsDataProvider: DataProvider {
         let facetId = filterModel?.facetId
         let managerId = filterModel?.managerId
         let chartPointsCount = filterModel?.chartPointsCount
+        let levelUpFrom = filterModel?.levelUpFrom
         
         var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
         if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {
@@ -40,7 +41,16 @@ class ProgramsDataProvider: DataProvider {
         
         let authorization = AuthManager.authorizedToken
         
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getLevelUpSummary(completion: @escaping (_ levelUpSummary: LevelUpSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsLevelupSummaryGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

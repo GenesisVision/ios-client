@@ -24,8 +24,8 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
 
         navigationItem.title = viewModel.title
         
-        self.dataSource = viewModel.dataSource
-        self.bar.items = viewModel.items
+        dataSource = viewModel.dataSource
+        bar.items = viewModel.items
         
         if viewModel.searchBarEnable {
             setupSearchBar()

@@ -11,7 +11,7 @@ import Tabman
 import Pageboy
 import UIKit.UINavigationController
 
-class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
+class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController, TabmanViewModelDelegate {
     
     // MARK: - View Model
     var viewModel: T!
@@ -78,9 +78,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             managerRouter.managerViewController.hideHeader(true)
         }
     }
-}
-
-extension BaseTabmanViewController: TabmanViewModelDelegate {
+    
     func updatedItems() {
         var barItems = [Item]()
         

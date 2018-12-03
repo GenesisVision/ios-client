@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import Pageboy
 
-class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
-    var controllers = [BaseViewController]()
-    
-    init(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
-        super.init()
-        
+class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
+    // MARK: - Private methods
+    internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         if let router = router as? DashboardRouter {
             let programListViewController = DashboardProgramListViewController()
             let fundListViewController = DashboardFundListViewController()
@@ -51,29 +47,5 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             
             controllers = [programListViewController, fundListViewController]
         }
-    }
-    
-    func update(dashboardSummary: DashboardSummary?) {
-        for controller in controllers {
-            switch controller {
-            case is DashboardProgramListViewController:
-                //TODO:
-                break
-            default:
-                break
-            }
-        }
-    }
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return controllers.count
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return controllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return PageboyViewController.Page.first
     }
 }

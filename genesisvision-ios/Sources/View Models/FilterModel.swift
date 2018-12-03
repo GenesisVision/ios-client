@@ -36,11 +36,13 @@ struct FilterCurrencyModel {
 }
 
 class FilterModel {
+    var levelUpSummary: LevelUpSummary?
+    
     var sortingModel: FilterSortingModel
     var levelModel: FilterLevelModel
     var dateRangeModel: FilterDateRangeModel
     var currencyModel: FilterCurrencyModel
-    
+    var levelUpFrom: Int?
     var chartPointsCount: Int = Api.equityChartLength
     var mask: String?
     var isFavorite: Bool = false

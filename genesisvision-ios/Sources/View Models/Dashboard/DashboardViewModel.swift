@@ -27,9 +27,7 @@ final class DashboardViewModel {
             if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
                 pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, programRequests: dashboard.requests)
             }
-            if let vc = router.dashboardAssetsViewController, let pageboyDataSource = vc.viewModel.dataSource {
-                pageboyDataSource.update(dashboardSummary: dashboard)
-            }
+            
             if let vc = router.eventsViewController, let viewModel = vc.viewModel {
                 viewModel.dashboardPortfolioEvents = dashboard.events
             }

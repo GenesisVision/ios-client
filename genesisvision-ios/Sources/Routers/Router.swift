@@ -443,13 +443,13 @@ extension Router {
         return viewController
     }
     
-    func getRatings(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> AssetsViewController? {
-        let viewController = AssetsViewController()
+    func getRatings(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> RatingsViewController? {
+        let viewController = RatingsViewController()
         
         let router = Router(parentRouter: parentRouter ?? self, navigationController: navigationController)
         router.currentController = viewController
-//        let viewModel = FundListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
-        let viewModel = RatingsTabmanViewModel(withRouter: router)
+        
+        let viewModel = RatingsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: viewController)
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true

@@ -813,14 +813,19 @@ open class ProgramsAPI {
      Level up summary
      - GET /v1.0/programs/levelup/summary
      - examples: [{contentType=application/json, example={
-  "levelData" : {
-    "key" : {
-      "total" : 0,
-      "totalOwn" : 6,
-      "quota" : 1,
-      "targetProfit" : 5.962133916683182
-    }
-  }
+  "levelData" : [ {
+    "total" : 6,
+    "level" : 0,
+    "totalOwn" : 1,
+    "quota" : 5,
+    "targetProfit" : 5.637376656633329
+  }, {
+    "total" : 6,
+    "level" : 0,
+    "totalOwn" : 1,
+    "quota" : 5,
+    "targetProfit" : 5.637376656633329
+  } ]
 }}]
      
      - parameter authorization: (header)  (optional)

@@ -11,11 +11,11 @@ import Foundation
 
 open class LevelUpSummary: Codable {
 
-    public var levelData: [String:LevelUpData]?
+    public var levelData: [LevelUpData]?
 
 
     
-    public init(levelData: [String:LevelUpData]?) {
+    public init(levelData: [LevelUpData]?) {
         self.levelData = levelData
     }
     
@@ -34,7 +34,7 @@ open class LevelUpSummary: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        levelData = try container.decodeIfPresent([String:LevelUpData].self, forKey: "levelData")
+        levelData = try container.decodeIfPresent([LevelUpData].self, forKey: "levelData")
     }
 }
 

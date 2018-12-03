@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import Pageboy
 
-class SearchPageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource {
-    var controllers = [BaseViewController]()
-    
-    init(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
-        super.init()
-
+class SearchPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
+    // MARK: - Private methods
+    internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         guard let programListViewController = router.getPrograms(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
         router.programsViewController = programListViewController
         controllers.append(programListViewController)
@@ -26,17 +22,5 @@ class SearchPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
         guard let managerListViewController = router.getManagers(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
         router.managersViewController = managerListViewController
         controllers.append(managerListViewController)
-    }
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return controllers.count
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return controllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return PageboyViewController.Page.first
     }
 }
