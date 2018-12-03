@@ -14,7 +14,6 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType = .program
     
-    var sortingDelegateManager: SortingDelegateManager!
     var programListDelegateManager: DashboardProgramListDelegateManager!
     
     var activePrograms = true
@@ -27,7 +26,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
-    
+    var canPullToRefresh = true
     var canFetchMoreResults = true
     var skip = 0
     var take = Api.take
@@ -58,8 +57,6 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
         self.reloadDataProtocol = router.programListViewController
         
         programListDelegateManager = DashboardProgramListDelegateManager(with: self)
-        let sortingManager = SortingManager(.dashboardPrograms)
-        sortingDelegateManager = SortingDelegateManager(sortingManager)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -258,7 +255,7 @@ extension DashboardProgramListViewModel {
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
+    func getProgramViewController(with indexPath: IndexPath) -> ProgramViewController? {
         guard let model = model(at: indexPath) as? DashboardProgramTableViewCellViewModel else {
             return nil
         }
@@ -266,7 +263,7 @@ extension DashboardProgramListViewModel {
         let program = model.program
         guard let programId = program.id, let router = router as? DashboardRouter else { return nil}
         
-        return router.getDetailsViewController(with: programId.uuidString)
+        return router.getProgramViewController(with: programId.uuidString)
     }
     
     // MARK: - Private methods

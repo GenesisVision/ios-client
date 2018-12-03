@@ -27,8 +27,10 @@ class Router {
     // MARK: - Variables
     var investorDashboardViewController: InvestorDashboardViewController!
     var managerDashboardViewController: ManagerDashboardViewController!
+    
     var programsViewController: ProgramListViewController!
     var fundsViewController: FundListViewController!
+    var managersViewController: ManagerListViewController!
 
     var assetsViewController: AssetsViewController!
     
@@ -60,6 +62,8 @@ class Router {
 
         self.programsViewController = parentRouter?.programsViewController
         self.fundsViewController = parentRouter?.fundsViewController
+        self.managersViewController = parentRouter?.managersViewController
+        
         self.assetsViewController = parentRouter?.assetsViewController
         self.investorDashboardViewController = parentRouter?.investorDashboardViewController
         self.managerDashboardViewController = parentRouter?.managerDashboardViewController
@@ -77,9 +81,7 @@ class Router {
         
         let navigationController = BaseNavigationController(rootViewController: assetsViewController)
         let router = Router(parentRouter: self, navigationController: navigationController)
-        let viewModel = AssetsTabmanViewModel(withRouter: router)
-        viewModel.showFacets = true
-        viewModel.searchBarEnable = true
+        let viewModel = AssetsTabmanViewModel(withRouter: router, searchBarEnable: true, showFacets: true)
         assetsViewController.viewModel = viewModel
         
         return navigationController
@@ -141,6 +143,18 @@ class Router {
     
     private func showFundList(with filterModel: FilterModel) {
         guard let viewController = getFunds(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showManagerList(with filterModel: FilterModel) {
+        guard let viewController = getManagers(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showRatingList(with filterModel: FilterModel) {
+        guard let viewController = getRatings(with: filterModel) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -252,12 +266,11 @@ extension Router {
             showProgramDetails(with: assetId)
         case .fund:
             showFundDetails(with: assetId)
+        case .manager:
+            showManagerDetails(with: assetId)
+        case .ratings:
+            break
         }
-    }
-        
-    private func showProgramDetails(with programId: String) {
-        guard let viewController = getDetailsViewController(with: programId) else { return }
-        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
@@ -270,8 +283,18 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func showProgramDetails(with programId: String) {
+        guard let viewController = getProgramViewController(with: programId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     private func showFundDetails(with fundId: String) {
-        guard let viewController = getFundDetailsViewController(with: fundId) else { return }
+        guard let viewController = getFundViewController(with: fundId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showManagerDetails(with managerId: String) {
+        guard let viewController = getManagerViewController(with: managerId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -281,6 +304,10 @@ extension Router {
             showProgramList(with: filterModel)
         case .fund:
             showFundList(with: filterModel)
+        case .manager:
+            showManagerList(with: filterModel)
+        case .ratings:
+            showRatingList(with: filterModel)
         }
     }
     
@@ -325,24 +352,40 @@ extension Router {
         return viewController
     }
     
-    func getDetailsViewController(with programId: String) -> ProgramViewController? {
-        guard let programViewController = ProgramViewController.storyboardInstance(name: .program) else {
+    func getProgramViewController(with programId: String) -> ProgramViewController? {
+        guard let viewController = ProgramViewController.storyboardInstance(name: .program) else {
             return nil
         }
-        programViewController.viewModel = ProgramViewModel(withRouter: self, programId: programId, programViewController: programViewController)
+        let router = ProgramRouter(parentRouter: self, navigationController: navigationController, programViewController: viewController)
+        let viewModel = ProgramViewModel(withRouter: router, programId: programId, programViewController: viewController)
+        viewController.viewModel = viewModel
 
-        programViewController.hidesBottomBarWhenPushed = true
-        return programViewController
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
     
-    func getFundDetailsViewController(with fundId: String) -> FundViewController? {
-        guard let fundViewController = FundViewController.storyboardInstance(name: .fund) else {
+    func getFundViewController(with fundId: String) -> FundViewController? {
+        guard let viewController = FundViewController.storyboardInstance(name: .fund) else {
             return nil
         }
-        fundViewController.viewModel = FundViewModel(withRouter: self, fundId: fundId, fundViewController: fundViewController)
+        let router = FundRouter(parentRouter: self, navigationController: navigationController, fundViewController: viewController)
+        let viewModel = FundViewModel(withRouter: router, fundId: fundId, fundViewController: viewController)
+        viewController.viewModel = viewModel
         
-        fundViewController.hidesBottomBarWhenPushed = true
-        return fundViewController
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getManagerViewController(with managerId: String) -> ManagerViewController? {
+        guard let viewController = ManagerViewController.storyboardInstance(name: .manager) else {
+            return nil
+        }
+        let router = ManagerRouter(parentRouter: self, navigationController: navigationController, managerViewController: viewController)
+        let viewModel = ManagerViewModel(withRouter: router, managerId: managerId, managerViewController: viewController)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
     
     func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {
@@ -363,24 +406,50 @@ extension Router {
         return viewController
     }
     
-    func getPrograms(with filterModel: FilterModel) -> ProgramListViewController? {
+    func getPrograms(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ProgramListViewController? {
         guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
         
-        let router = ProgramListRouter(parentRouter: self)
+        let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
-        let viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel)
+        let viewModel = ProgramListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
+
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
     
-    func getFunds(with filterModel: FilterModel) -> FundListViewController? {
+    func getFunds(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> FundListViewController? {
         guard let viewController = FundListViewController.storyboardInstance(name: .funds) else { return nil }
         
-        let router = FundListRouter(parentRouter: self)
+        let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
-        let viewModel = FundListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel)
+        let viewModel = FundListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getManagers(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ManagerListViewController? {
+        guard let viewController = ManagerListViewController.storyboardInstance(name: .manager) else { return nil }
+        
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ManagerListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getRatings(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> AssetsViewController? {
+        let viewController = AssetsViewController()
+        
+        let router = Router(parentRouter: parentRouter ?? self, navigationController: navigationController)
+        router.currentController = viewController
+//        let viewModel = FundListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
+        let viewModel = RatingsTabmanViewModel(withRouter: router)
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true

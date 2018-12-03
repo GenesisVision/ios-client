@@ -34,11 +34,12 @@ open class ProfileFullViewModel: Codable {
     public var userName: String?
     public var index: String?
     public var citizenship: String?
+    public var refUrl: String?
     public var verificationStatus: VerificationStatus?
 
 
     
-    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, verificationStatus: VerificationStatus?) {
+    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, refUrl: String?, verificationStatus: VerificationStatus?) {
         self.id = id
         self.email = email
         self.firstName = firstName
@@ -56,6 +57,7 @@ open class ProfileFullViewModel: Codable {
         self.userName = userName
         self.index = index
         self.citizenship = citizenship
+        self.refUrl = refUrl
         self.verificationStatus = verificationStatus
     }
     
@@ -83,6 +85,7 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(userName, forKey: "userName")
         try container.encodeIfPresent(index, forKey: "index")
         try container.encodeIfPresent(citizenship, forKey: "citizenship")
+        try container.encodeIfPresent(refUrl, forKey: "refUrl")
         try container.encodeIfPresent(verificationStatus, forKey: "verificationStatus")
     }
 
@@ -108,6 +111,7 @@ open class ProfileFullViewModel: Codable {
         userName = try container.decodeIfPresent(String.self, forKey: "userName")
         index = try container.decodeIfPresent(String.self, forKey: "index")
         citizenship = try container.decodeIfPresent(String.self, forKey: "citizenship")
+        refUrl = try container.decodeIfPresent(String.self, forKey: "refUrl")
         verificationStatus = try container.decodeIfPresent(VerificationStatus.self, forKey: "verificationStatus")
     }
 }

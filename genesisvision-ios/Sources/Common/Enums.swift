@@ -103,6 +103,8 @@ enum DataType {
 enum AssetType: String {
     case fund = "Fund"
     case program = "Program"
+    case manager = "Manager"
+    case ratings = "Ratings"
 }
 
 // MARK: - CompletionsResult

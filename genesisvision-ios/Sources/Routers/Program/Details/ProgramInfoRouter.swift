@@ -23,7 +23,7 @@ class ProgramInfoRouter: Router {
         case .fullChart(let programDetailsFull):
             fullChart(with: programDetailsFull)
         case .manager(let managerId):
-            manager(with: managerId)
+            showAssetDetails(with: managerId, assetType: .manager)
         }
     }
     
@@ -34,15 +34,6 @@ class ProgramInfoRouter: Router {
         
         let router = ProgramInvestRouter(parentRouter: self)
         let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
-        viewController.viewModel = viewModel
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func manager(with managerId: String) {
-        guard let viewController = ManagerViewController.storyboardInstance(name: .manager) else { return }
-        
-        let router = ManagerRouter(parentRouter: self, navigationController: navigationController, managerViewController: viewController)
-        let viewModel = ManagerViewModel(withRouter: router, managerId: managerId, managerViewController: viewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

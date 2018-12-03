@@ -384,21 +384,21 @@ open class InvestorAPI {
      Funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 2,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 4,
+    "totalAssetsCount" : 9,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.965781217890562,
-      "drawdownPercent" : 9.369310271410669,
+      "profitPercent" : 6.683562403749608,
+      "drawdownPercent" : 8.762042012749001,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -412,18 +412,18 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -431,16 +431,16 @@ open class InvestorAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 1.284659006116532,
+      "pendingOutput" : 6.778324963048013,
       "hasNotifications" : true,
-      "pendingInput" : 6.965117697638846,
+      "pendingInput" : 2.8841621266687802,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 9.018348186070783,
-      "profit" : 6.438423552598547,
-      "withdrawPercent" : 8.762042012749001,
-      "invested" : 3.5571952270680973,
+      "value" : 3.5571952270680973,
+      "profit" : 6.965117697638846,
+      "withdrawPercent" : 6.438423552598547,
+      "invested" : 1.284659006116532,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -456,19 +456,19 @@ open class InvestorAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 4,
+    "totalAssetsCount" : 9,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.965781217890562,
-      "drawdownPercent" : 9.369310271410669,
+      "profitPercent" : 6.683562403749608,
+      "drawdownPercent" : 8.762042012749001,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -482,18 +482,18 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -501,16 +501,16 @@ open class InvestorAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 1.284659006116532,
+      "pendingOutput" : 6.778324963048013,
       "hasNotifications" : true,
-      "pendingInput" : 6.965117697638846,
+      "pendingInput" : 2.8841621266687802,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 9.018348186070783,
-      "profit" : 6.438423552598547,
-      "withdrawPercent" : 8.762042012749001,
-      "invested" : 3.5571952270680973,
+      "value" : 3.5571952270680973,
+      "profit" : 6.965117697638846,
+      "withdrawPercent" : 6.438423552598547,
+      "invested" : 1.284659006116532,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1522,7 +1522,7 @@ open class InvestorAPI {
      Dashboard program list
      - GET /v1.0/investor/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 5,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1555,12 +1555,17 @@ open class InvestorAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1568,16 +1573,16 @@ open class InvestorAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1625,12 +1630,17 @@ open class InvestorAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1638,16 +1648,16 @@ open class InvestorAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

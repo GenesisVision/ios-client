@@ -11,23 +11,20 @@ import Tabman
 
 class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UISearchResultsUpdating, UISearchBarDelegate {
     // MARK: - Variables
-    var pageboyDataSource: AssetsPageboyViewControllerDataSource!
-
-    var resultsViewController: AssetsViewController?
+    var resultsViewController: SearchViewController?
     
     var timer: Timer?
     
     // MARK: - Outlets
     var searchController = UISearchController()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = viewModel.title
         
-        pageboyDataSource = AssetsPageboyViewControllerDataSource(router: viewModel.router, filterModel: viewModel.filterModel, showFacets: viewModel.showFacets)
-        self.dataSource = pageboyDataSource
-        
+        self.dataSource = viewModel.dataSource
         self.bar.items = viewModel.items
         
         if viewModel.searchBarEnable {
@@ -41,50 +38,55 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     
     // MARK: - Private methods
     private func setupSearchBar() {
-        resultsViewController = AssetsViewController()
+        resultsViewController = SearchViewController()
         let router = Router(parentRouter: viewModel.router, navigationController: navigationController)
-        let searchViewModel = AssetsTabmanViewModel(withRouter: router)
+        let searchViewModel = SearchTabmanViewModel(withRouter: router)
         searchViewModel.filterModel.mask = ""
         resultsViewController?.viewModel = searchViewModel
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
+        
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
 
         //UI
+        searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.setImage(#imageLiteral(resourceName: "img_search_icon"), for: UISearchBarIcon.search, state: .normal)
         searchController.searchBar.isTranslucent = true
-        searchController.searchBar.backgroundColor = UIColor.BaseView.bg
-        searchController.searchBar.barTintColor = UIColor.primary
+        searchController.searchBar.searchBarStyle = .minimal
+        
         searchController.searchBar.tintColor = UIColor.primary
+        searchController.searchBar.barTintColor = UIColor.primary
+        
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.inputView?.tintColor = UIColor.primary
         
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.titleView = searchController.searchBar
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
 
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.textColor = UIColor.primary
+        }
+        
         definesPresentationContext = true
     }
     
+    @objc private func performSearch() {
+        resultsViewController?.performSearch()
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
+        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
         resultsViewController?.viewModel.filterModel.mask = text
         
         timer?.invalidate()
         
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
-    }
-    
-    @objc func performSearch() {
-        guard let controllers = resultsViewController?.pageboyDataSource.controllers else { return }
-        
-        for vc in controllers {
-            if let vc = vc as? ProgramListViewController {
-                vc.fetch()
-            } else if let vc = vc as? FundListViewController {
-                vc.fetch()
-            }
-        }
     }
 }

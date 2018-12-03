@@ -124,6 +124,7 @@ open class ProfileAPI {
   "phone" : "phone",
   "middleName" : "middleName",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "refUrl" : "refUrl",
   "email" : "email"
 }}]
      

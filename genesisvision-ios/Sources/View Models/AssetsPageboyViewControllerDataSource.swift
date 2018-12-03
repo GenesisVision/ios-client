@@ -35,7 +35,7 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             guard let programListViewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
             router.programsViewController = programListViewController
             
-            let programListRouter = ProgramListRouter(parentRouter: router)
+            let programListRouter = ListRouter(parentRouter: router)
             programListRouter.currentController = programListViewController
             let programsViewModel =
                 ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController, filterModel: filterModel, showFacets: showFacets)
@@ -44,7 +44,7 @@ class AssetsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
             guard let fundListViewController = FundListViewController.storyboardInstance(name: .funds) else { return }
             router.fundsViewController = fundListViewController
             
-            let fundListRouter = FundListRouter(parentRouter: router)
+            let fundListRouter = ListRouter(parentRouter: router)
             fundListRouter.currentController = fundListViewController
             let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController, filterModel: filterModel, showFacets: showFacets)
             fundListViewController.viewModel = fundsViewModel

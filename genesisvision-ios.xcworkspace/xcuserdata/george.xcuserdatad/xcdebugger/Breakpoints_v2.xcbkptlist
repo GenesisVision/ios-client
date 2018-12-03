@@ -19,46 +19,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Dashboard/AssetsTabmanViewModel.swift"
-            timestampString = "565110240.831228"
+            filePath = "genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
+            timestampString = "565528861.260741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "refresh()"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "model(at:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Programs/ProgramListViewModel.swift"
-            timestampString = "565110240.831876"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "bottomViewType"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Common/Assets/AssetsViewController.swift"
-            timestampString = "565110240.832673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "setupSearchBar()"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in Genesis_Vision):Genesis_Vision.ListViewModelProtocol.model(at: Swift.String) -&gt; Swift.Optional&lt;Genesis_Vision.CellViewAnyModel&gt;"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
+                  timestampString = "565528861.785128"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "1940">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Genesis_Vision.ManagerTableViewCellViewModel) -&gt; Swift.Bool in (extension in Genesis_Vision):Genesis_Vision.ListViewModelProtocol.model(at: Swift.String) -&gt; Swift.Optional&lt;Genesis_Vision.CellViewAnyModel&gt;"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
+                  timestampString = "565528861.789117"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

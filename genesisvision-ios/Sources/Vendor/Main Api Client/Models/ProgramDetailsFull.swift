@@ -44,6 +44,7 @@ open class ProgramDetailsFull: Codable {
     public var isReinvesting: Bool?
     public var availableInvestment: Double?
     public var statistic: ProgramStatistic?
+    public var rating: ProgramDetailsRating?
     /** Fields for authorized user */
     public var personalProgramDetails: PersonalProgramDetailsFull?
     public var id: UUID?
@@ -58,7 +59,7 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -69,6 +70,7 @@ open class ProgramDetailsFull: Codable {
         self.isReinvesting = isReinvesting
         self.availableInvestment = availableInvestment
         self.statistic = statistic
+        self.rating = rating
         self.personalProgramDetails = personalProgramDetails
         self.id = id
         self.logo = logo
@@ -98,6 +100,7 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(isReinvesting, forKey: "isReinvesting")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(statistic, forKey: "statistic")
+        try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(personalProgramDetails, forKey: "personalProgramDetails")
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -125,6 +128,7 @@ open class ProgramDetailsFull: Codable {
         isReinvesting = try container.decodeIfPresent(Bool.self, forKey: "isReinvesting")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         statistic = try container.decodeIfPresent(ProgramStatistic.self, forKey: "statistic")
+        rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")
         personalProgramDetails = try container.decodeIfPresent(PersonalProgramDetailsFull.self, forKey: "personalProgramDetails")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

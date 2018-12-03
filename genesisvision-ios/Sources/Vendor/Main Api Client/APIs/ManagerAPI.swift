@@ -12,6 +12,74 @@ import Alamofire
 
 open class ManagerAPI {
     /**
+     Manager assets list
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerAssetsGet(authorization: String, completion: @escaping ((_ data: ManagerAssets?,_ error: Error?) -> Void)) {
+        v10ManagerAssetsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Manager assets list
+     - GET /v1.0/manager/assets
+     - examples: [{contentType=application/json, example={
+  "funds" : [ {
+    "color" : "color",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "url" : "url"
+  }, {
+    "color" : "color",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "url" : "url"
+  } ],
+  "programs" : [ {
+    "color" : "color",
+    "level" : 0,
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "url" : "url"
+  }, {
+    "color" : "color",
+    "level" : 0,
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "url" : "url"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ManagerAssets> 
+     */
+    open class func v10ManagerAssetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<ManagerAssets> {
+        let path = "/v1.0/manager/assets"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ManagerAssets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Manager details
      
      - parameter id: (path)  
@@ -267,7 +335,7 @@ open class ManagerAPI {
     }
 
     /**
-     Close existing investment program/fund
+     Close existing fund
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
@@ -282,7 +350,7 @@ open class ManagerAPI {
 
 
     /**
-     Close existing investment program/fund
+     Close existing fund
      - POST /v1.0/manager/funds/{id}/close
      
      - parameter id: (path)  
@@ -769,21 +837,21 @@ open class ManagerAPI {
      Manager funds
      - GET /v1.0/manager/funds
      - examples: [{contentType=application/json, example={
-  "total" : 2,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 4,
+    "totalAssetsCount" : 9,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.965781217890562,
-      "drawdownPercent" : 9.369310271410669,
+      "profitPercent" : 6.683562403749608,
+      "drawdownPercent" : 8.762042012749001,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -797,18 +865,18 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -816,16 +884,16 @@ open class ManagerAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 1.284659006116532,
+      "pendingOutput" : 6.778324963048013,
       "hasNotifications" : true,
-      "pendingInput" : 6.965117697638846,
+      "pendingInput" : 2.8841621266687802,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 9.018348186070783,
-      "profit" : 6.438423552598547,
-      "withdrawPercent" : 8.762042012749001,
-      "invested" : 3.5571952270680973,
+      "value" : 3.5571952270680973,
+      "profit" : 6.965117697638846,
+      "withdrawPercent" : 6.438423552598547,
+      "invested" : 1.284659006116532,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -841,19 +909,19 @@ open class ManagerAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 4,
+    "totalAssetsCount" : 9,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.965781217890562,
-      "drawdownPercent" : 9.369310271410669,
+      "profitPercent" : 6.683562403749608,
+      "drawdownPercent" : 8.762042012749001,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -867,18 +935,18 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 5.025004791520295
+      "percent" : 9.369310271410669
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -886,16 +954,16 @@ open class ManagerAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 1.284659006116532,
+      "pendingOutput" : 6.778324963048013,
       "hasNotifications" : true,
-      "pendingInput" : 6.965117697638846,
+      "pendingInput" : 2.8841621266687802,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 9.018348186070783,
-      "profit" : 6.438423552598547,
-      "withdrawPercent" : 8.762042012749001,
-      "invested" : 3.5571952270680973,
+      "value" : 3.5571952270680973,
+      "profit" : 6.965117697638846,
+      "withdrawPercent" : 6.438423552598547,
+      "invested" : 1.284659006116532,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1106,11 +1174,11 @@ open class ManagerAPI {
     "type" : "Program"
   } ],
   "fundChart" : {
-    "profitChangePercent" : 6.965117697638846,
-    "calmarRatio" : 6.778324963048013,
-    "timeframeGvtProfit" : 6.704019297950036,
+    "profitChangePercent" : 1.284659006116532,
+    "calmarRatio" : 6.878052220127876,
+    "timeframeGvtProfit" : 3.353193347011243,
     "timeframeUsdProfit" : 8.762042012749001,
-    "maxDrawdown" : 6.878052220127876,
+    "maxDrawdown" : 5.944895607614016,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1119,14 +1187,15 @@ open class ManagerAPI {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
     } ],
-    "investors" : 3,
-    "totalGvtProfit" : 5.944895607614016,
-    "sortinoRatio" : 2.8841621266687802,
+    "investors" : 6,
+    "totalGvtProfit" : 6.704019297950036,
+    "sortinoRatio" : 6.778324963048013,
     "rebalances" : 9,
-    "balance" : 6.438423552598547,
-    "rate" : 3.353193347011243,
+    "profitPercent" : 6.438423552598547,
+    "balance" : 3.5571952270680973,
+    "rate" : 3.0937452626664474,
     "totalUsdProfit" : 6.683562403749608,
-    "sharpeRatio" : 1.284659006116532
+    "sharpeRatio" : 2.8841621266687802
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1259,7 +1328,7 @@ open class ManagerAPI {
     }
 
     /**
-     Close existing investment program/fund
+     Close existing investment program
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
@@ -1274,7 +1343,7 @@ open class ManagerAPI {
 
 
     /**
-     Close existing investment program/fund
+     Close existing investment program
      - POST /v1.0/manager/programs/{id}/close
      
      - parameter id: (path)  
@@ -1812,7 +1881,7 @@ open class ManagerAPI {
      Manager programs
      - GET /v1.0/manager/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 5,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1845,12 +1914,17 @@ open class ManagerAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1858,16 +1932,16 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1915,12 +1989,17 @@ open class ManagerAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1928,16 +2007,16 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

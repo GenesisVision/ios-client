@@ -95,13 +95,13 @@ extension WalletControllerViewModel {
         }
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> ProgramViewController? {
+    func getProgramViewController(with indexPath: IndexPath) -> ProgramViewController? {
 //        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
 //            let program = model.walletTransaction.program,
 //            let programId = program.id
 //            else { return nil }
         let uuidString = "" //programId.uuidString
-        return router.getDetailsViewController(with: uuidString)
+        return router.getProgramViewController(with: uuidString)
     }
 
     // MARK: - Private methods

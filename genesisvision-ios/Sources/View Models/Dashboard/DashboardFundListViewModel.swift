@@ -14,7 +14,6 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType = .fund
     
-    var sortingDelegateManager: SortingDelegateManager!
     var fundListDelegateManager: DashboardFundListDelegateManager!
     
     var activeFunds: Bool = true
@@ -28,7 +27,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
-    
+    var canPullToRefresh = true
     var canFetchMoreResults = true
     var skip = 0
     var take = Api.take
@@ -58,8 +57,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
         self.reloadDataProtocol = router.fundListViewController
         
         fundListDelegateManager = DashboardFundListDelegateManager(with: self)
-        let sortingManager = SortingManager(.funds)
-        sortingDelegateManager = SortingDelegateManager(sortingManager)
+
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
     
@@ -234,7 +232,7 @@ extension DashboardFundListViewModel {
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> FundViewController? {
+    func getFundViewController(with indexPath: IndexPath) -> FundViewController? {
         guard let model = model(at: indexPath) as? DashboardFundTableViewCellViewModel else {
             return nil
         }
@@ -242,7 +240,7 @@ extension DashboardFundListViewModel {
         let fund = model.fund
         guard let fundId = fund.id, let router = router as? DashboardRouter else { return nil}
 
-        return router.getFundDetailsViewController(with: fundId.uuidString)
+        return router.getFundViewController(with: fundId.uuidString)
     }
     
     // MARK: - Private methods
@@ -260,24 +258,24 @@ extension DashboardFundListViewModel {
         
         let sorting = filterModel.sortingModel.selectedSorting
         
-        DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundsList) in
-            guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+        DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundList) in
+            guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            self?.fundList = fundsList
+            self?.fundList = fundList
             
-            var dashboardFundViewModels = [DashboardFundTableViewCellViewModel]()
+            var viewModels = [DashboardFundTableViewCellViewModel]()
             
-            let totalCount = fundsList.funds?.count ?? 0
+            let totalCount = fundList.funds?.count ?? 0
             
-            fundsList.funds?.forEach({ (fund) in
+            fundList.funds?.forEach({ (fund) in
                 if let router = self?.router as? DashboardRouter {
                     let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: router.fundListViewController, delegate:
                         router.fundListViewController)
-                    dashboardFundViewModels.append(dashboardTableViewCellModel)
+                    viewModels.append(dashboardTableViewCellModel)
                 }
             })
             
-            completionSuccess(totalCount, dashboardFundViewModels)
+            completionSuccess(totalCount, viewModels)
             completionError(.success)
             }, errorCompletion: completionError)
     }

@@ -56,8 +56,13 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
         }
         
         filterModel.isFavorite = filterModel.facetTitle == "Favorites"
+        let sortType = facet.sortType
         
-        router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+        if sortType != nil, sortType == .toLevelUp {
+            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: .ratings))
+        } else {
+            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+        }
     }
     
     func numberOfItems(in section: Int) -> Int {
@@ -80,14 +85,13 @@ protocol ListViewModelProtocol {
     
     var title: String { get }
 
-    var sortingDelegateManager: SortingDelegateManager! { get }
-    
     var sections: [SectionType] { get }
     var bottomViewType: BottomViewType { get } 
     
     var viewModels: [CellViewAnyModel] { get set }
     var facetsViewModels: [CellViewAnyModel]? { get set }
     
+    var canPullToRefresh: Bool { get set }
     var canFetchMoreResults: Bool { get set }
     var filterModel: FilterModel { get set }
     
@@ -151,6 +155,12 @@ extension ListViewModelProtocol {
             if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.fund.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
+        case .manager:
+            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.index(where: { $0.manager.id?.uuidString == assetId }) {
+                return viewModels[i]
+            }
+        case .ratings:
+            break
         }
         
         return nil
@@ -167,7 +177,7 @@ extension ListViewModelProtocol {
             guard let programId = program.id else { return nil}
             guard let router = router as? Router else { return nil }
             
-            return router.getDetailsViewController(with: programId.uuidString)
+            return router.getProgramViewController(with: programId.uuidString)
         
         case .fund:
                 guard let model = model(at: indexPath) as? FundTableViewCellViewModel else {
@@ -178,7 +188,19 @@ extension ListViewModelProtocol {
                 guard let fundId = fund.id else { return nil}
                 guard let router = router as? Router else { return nil }
                 
-                return router.getFundDetailsViewController(with: fundId.uuidString)
+                return router.getFundViewController(with: fundId.uuidString)
+        case .manager:
+            guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel else {
+                return nil
+            }
+            
+            let manager = model.manager
+            guard let managerId = manager.id else { return nil}
+            guard let router = router as? Router else { return nil }
+            
+            return router.getManagerViewController(with: managerId.uuidString)
+        case .ratings:
+            return nil
         }
     }
     
@@ -191,6 +213,10 @@ extension ListViewModelProtocol {
             return [FacetsTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
         case .fund:
             return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
+        case .manager:
+            return [FacetsTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
+        case .ratings:
+            return []
         }
     }
     
@@ -246,11 +272,15 @@ extension ListViewModelProtocol {
             showProgramDetail(at: indexPath)
         case .fund:
             showFundDetail(at: indexPath)
+        case .manager:
+            showManagerDetail(at: indexPath)
+        case .ratings:
+            break
         }
     }
     
     func showProgramDetail(at indexPath: IndexPath) {
-        guard let model: ProgramTableViewCellViewModel = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
+        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
         
         let program = model.program
         guard let assetId = program.id else { return }
@@ -259,10 +289,19 @@ extension ListViewModelProtocol {
     }
     
     func showFundDetail(at indexPath: IndexPath) {
-        guard let model: FundTableViewCellViewModel = model(at: indexPath) as? FundTableViewCellViewModel else { return }
+        guard let model = model(at: indexPath) as? FundTableViewCellViewModel else { return }
         
         let fund = model.fund
         guard let assetId = fund.id else { return }
+        
+        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
+    }
+    
+    func showManagerDetail(at indexPath: IndexPath) {
+        guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel else { return }
+        
+        let manager = model.manager
+        guard let assetId = manager.id else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }

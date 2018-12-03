@@ -19,15 +19,13 @@ final class ProgramListViewModel: ListViewModelProtocol {
     
     // MARK: - Variables
     var title: String = "Programs"
-    var roundNumber: Int = 1
-    
-    var sortingDelegateManager: SortingDelegateManager!
-    
+
     internal var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
     var state: ProgramListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    var canPullToRefresh = true
     var canFetchMoreResults = true
     
     var dataType: DataType = .api
@@ -48,7 +46,7 @@ final class ProgramListViewModel: ListViewModelProtocol {
     var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
-    init(withRouter router: ProgramListRouter, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
+    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets
@@ -61,8 +59,6 @@ final class ProgramListViewModel: ListViewModelProtocol {
         }
         
         state = isLogin() ? .programList : .programListWithSignIn
-        let sortingManager = SortingManager(.programs)
-        sortingDelegateManager = SortingDelegateManager(sortingManager)
 
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -105,7 +101,6 @@ final class ProgramListViewModel: ListViewModelProtocol {
         facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
     }
     
-    
     // MARK: - Public methods
     func noDataText() -> String {
         return "There are no programs"
@@ -139,6 +134,25 @@ final class ProgramListViewModel: ListViewModelProtocol {
                 completion(result)
             }
         }
+    }
+    
+    func updateViewModels(_ programsList: ProgramsList?) {
+        guard let programsList = programsList else { return }
+        
+        self.programsList = programsList
+        
+        var viewModels = [ProgramTableViewCellViewModel]()
+        
+        let totalCount = programsList.total ?? 0
+        
+        programsList.programs?.forEach({ (program) in
+            guard let programListRouter = self.router as? ListRouter else { return }
+            
+            let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.currentController as? ProgramListViewController)
+            viewModels.append(programTableViewCellViewModel)
+        })
+
+        self.updateFetchedData(totalCount: totalCount, viewModels)
     }
     
     // MARK: - Private methods
@@ -221,7 +235,7 @@ extension ProgramListViewModel {
                 let totalCount = programsList.total ?? 0
                 
                 programsList.programs?.forEach({ (program) in
-                    guard let programListRouter: ProgramListRouter = self?.router as? ProgramListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                    guard let programListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.currentController as? ProgramListViewController)
                     viewModels.append(programTableViewCellViewModel)

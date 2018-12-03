@@ -77,16 +77,17 @@ class AuthDataProvider: DataProvider {
     }
     
     // MARK: - Sign Up
-    private static func investorSignUp(with email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword)
+    private static func investorSignUp(with email: String, password: String, confirmPassword: String, refCode: String? = nil, completion: @escaping CompletionBlock) {
+        
+        let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword, refCode: refCode)
     
         AuthAPI.v10AuthSignupInvestorPost(model: registerInvestorViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        let registerManagerViewModel = RegisterManagerViewModel(userName: username, email: email, password: password, confirmPassword: confirmPassword)
+    private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, refCode: String? = nil, completion: @escaping CompletionBlock) {
+        let registerManagerViewModel = RegisterManagerViewModel(userName: username, email: email, password: password, confirmPassword: confirmPassword, refCode: refCode)
         
         AuthAPI.v10AuthSignupManagerPost(model: registerManagerViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)

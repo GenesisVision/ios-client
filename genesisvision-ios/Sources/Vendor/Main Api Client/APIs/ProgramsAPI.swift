@@ -321,6 +321,11 @@ open class ProgramsAPI {
   "level" : 0,
   "availableInvestment" : 5.637376656633329,
   "successFee" : 5.962133916683182,
+  "rating" : {
+    "rating" : 4,
+    "canLevelUp" : true,
+    "profit" : 7.386281948385884
+  },
   "description" : "description",
   "isReinvesting" : true,
   "title" : "title",
@@ -329,16 +334,16 @@ open class ProgramsAPI {
     "canWithdraw" : true,
     "canInvest" : true,
     "canClosePeriod" : true,
-    "pendingOutput" : 6.84685269835264,
+    "pendingOutput" : 1.1730742509559433,
     "hasNotifications" : true,
-    "pendingInput" : 1.4894159098541704,
+    "pendingInput" : 7.457744773683766,
     "isOwnProgram" : true,
     "isReinvest" : true,
-    "gvtValue" : 4.145608029883936,
+    "gvtValue" : 1.2315135367772556,
     "isFinishing" : true,
-    "value" : 7.386281948385884,
-    "profit" : 1.2315135367772556,
-    "invested" : 1.0246457001441578,
+    "value" : 1.0246457001441578,
+    "profit" : 1.4894159098541704,
+    "invested" : 6.84685269835264,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -548,6 +553,7 @@ open class ProgramsAPI {
      - parameter sorting: (query)  (optional)
      - parameter programCurrency: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter levelUpFrom: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -562,8 +568,8 @@ open class ProgramsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -573,7 +579,7 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 5,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -606,12 +612,17 @@ open class ProgramsAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -619,16 +630,16 @@ open class ProgramsAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -676,12 +687,17 @@ open class ProgramsAPI {
     },
     "level" : 0,
     "availableInvestment" : 1.4658129805029452,
+    "rating" : {
+      "rating" : 4,
+      "canLevelUp" : true,
+      "profit" : 7.386281948385884
+    },
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 7.457744773683766
+      "share" : 4.965218492984954
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -689,16 +705,16 @@ open class ProgramsAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 6.84685269835264,
+      "pendingOutput" : 1.1730742509559433,
       "hasNotifications" : true,
-      "pendingInput" : 1.4894159098541704,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 4.145608029883936,
+      "gvtValue" : 1.2315135367772556,
       "isFinishing" : true,
-      "value" : 7.386281948385884,
-      "profit" : 1.2315135367772556,
-      "invested" : 1.0246457001441578,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -725,6 +741,7 @@ open class ProgramsAPI {
      - parameter sorting: (query)  (optional)
      - parameter programCurrency: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter levelUpFrom: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -740,7 +757,7 @@ open class ProgramsAPI {
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -754,6 +771,7 @@ open class ProgramsAPI {
             "Sorting": sorting?.rawValue, 
             "ProgramCurrency": programCurrency?.rawValue, 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "LevelUpFrom": levelUpFrom?.encodeToJSON(), 
             "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
             "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
@@ -774,6 +792,54 @@ open class ProgramsAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ProgramsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Level up summary
+     
+     - parameter authorization: (header)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProgramsLevelupSummaryGet(authorization: String? = nil, completion: @escaping ((_ data: LevelUpSummary?,_ error: Error?) -> Void)) {
+        v10ProgramsLevelupSummaryGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Level up summary
+     - GET /v1.0/programs/levelup/summary
+     - examples: [{contentType=application/json, example={
+  "levelData" : {
+    "key" : {
+      "total" : 0,
+      "totalOwn" : 6,
+      "quota" : 1,
+      "targetProfit" : 5.962133916683182
+    }
+  }
+}}]
+     
+     - parameter authorization: (header)  (optional)
+
+     - returns: RequestBuilder<LevelUpSummary> 
+     */
+    open class func v10ProgramsLevelupSummaryGetWithRequestBuilder(authorization: String? = nil) -> RequestBuilder<LevelUpSummary> {
+        let path = "/v1.0/programs/levelup/summary"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<LevelUpSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

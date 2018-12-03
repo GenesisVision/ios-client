@@ -18,15 +18,13 @@ final class FundListViewModel: ListViewModelProtocol {
     // MARK: - Variables
     var assetType: AssetType = .fund
     var title: String = "Funds"
-    var roundNumber: Int = 1
-    
-    var sortingDelegateManager: SortingDelegateManager!
-    
+
     internal var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
     var state: FundListViewState?
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    var canPullToRefresh = true
     var canFetchMoreResults = true
     var dataType: DataType = .api
 
@@ -37,11 +35,8 @@ final class FundListViewModel: ListViewModelProtocol {
 
     var showFacets = false
     
-    private var fundsList: FundsList?
+    private var fundList: FundsList?
 
-    var dateFrom: Date?
-    var dateTo: Date?
-    
     var bottomViewType: BottomViewType {
         return signInButtonEnable ? .signInWithFilter : filterModel.mask == nil ? .filter : .none
     }
@@ -50,7 +45,7 @@ final class FundListViewModel: ListViewModelProtocol {
     var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
-    init(withRouter router: FundListRouter, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
+    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets
@@ -63,9 +58,7 @@ final class FundListViewModel: ListViewModelProtocol {
         }
         
         state = isLogin() ? .fundList : .fundListWithSignIn
-        let sortingManager = SortingManager(.funds)
-        sortingDelegateManager = SortingDelegateManager(sortingManager)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
     
@@ -142,6 +135,24 @@ final class FundListViewModel: ListViewModelProtocol {
         }
     }
     
+    func updateViewModels(_ fundList: FundsList?) {
+        guard let fundList = fundList else { return }
+        self.fundList = fundList
+        
+        var viewModels = [FundTableViewCellViewModel]()
+        
+        let totalCount = fundList.total ?? 0
+        
+        fundList.funds?.forEach({ (fund) in
+            guard let fundListRouter = self.router as? ListRouter else { return }
+            
+            let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.currentController as? FundListViewController)
+            viewModels.append(fundTableViewCellViewModel)
+        })
+        
+        self.updateFetchedData(totalCount: totalCount, viewModels)
+    }
+
     // MARK: - Private methods
     @objc private func fundFavoriteStateChangeNotification(notification: Notification) {
         if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["fundId"] as? String {
@@ -211,17 +222,16 @@ extension FundListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (fundsList) in
-                guard let fundsList = fundsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-                print(fundsList)
-                self?.fundsList = fundsList
+            FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
+                guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                self?.fundList = fundList
                 
                 var viewModels = [FundTableViewCellViewModel]()
                 
-                let totalCount = fundsList.total ?? 0
+                let totalCount = fundList.total ?? 0
                 
-                fundsList.funds?.forEach({ (fund) in
-                    guard let fundListRouter: FundListRouter = self?.router as? FundListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                fundList.funds?.forEach({ (fund) in
+                    guard let fundListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.currentController as? FundListViewController)
                     viewModels.append(fundTableViewCellViewModel)

@@ -14,13 +14,15 @@ open class RegisterInvestorViewModel: Codable {
     public var email: String
     public var password: String
     public var confirmPassword: String?
+    public var refCode: String?
 
 
     
-    public init(email: String, password: String, confirmPassword: String?) {
+    public init(email: String, password: String, confirmPassword: String?, refCode: String?) {
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
+        self.refCode = refCode
     }
     
 
@@ -33,6 +35,7 @@ open class RegisterInvestorViewModel: Codable {
         try container.encode(email, forKey: "email")
         try container.encode(password, forKey: "password")
         try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
+        try container.encodeIfPresent(refCode, forKey: "refCode")
     }
 
     // Decodable protocol methods
@@ -43,6 +46,7 @@ open class RegisterInvestorViewModel: Codable {
         email = try container.decode(String.self, forKey: "email")
         password = try container.decode(String.self, forKey: "password")
         confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
+        refCode = try container.decodeIfPresent(String.self, forKey: "refCode")
     }
 }
 

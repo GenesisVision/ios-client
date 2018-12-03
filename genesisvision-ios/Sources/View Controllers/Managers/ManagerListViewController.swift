@@ -1,17 +1,14 @@
 //
-//  FundListViewController.swift
+//  ManagerListViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 25/10/2018.
+//  Created by George on 02/12/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class FundListViewController: BaseViewControllerWithTableView {
-    
-    // MARK: - Variables
-    private var signInButtonEnable: Bool = false
+class ManagerListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: ListViewModelProtocol!
@@ -19,11 +16,10 @@ class FundListViewController: BaseViewControllerWithTableView {
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
         didSet {
-            setupSignInButton()
             setupTableConfiguration()
         }
     }
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +32,9 @@ class FundListViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Private methods
-    private func setupSignInButton() {
-        if let viewModel = viewModel as? FundListViewModel {
-            signInButtonEnable = viewModel.signInButtonEnable
-        }
-        
-        signInButton.isHidden = !signInButtonEnable
-    }
-    
     private func setup() {
         registerForPreviewing()
-
+        
         setupUI()
     }
     
@@ -60,23 +48,17 @@ class FundListViewController: BaseViewControllerWithTableView {
         navigationItem.title = viewModel.title
         
         bottomViewType = viewModel.bottomViewType
-        
-        if signInButtonEnable {
-            showNewVersionAlertIfNeeded(self)
-        }
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.contentInset.bottom = signInButtonEnable ? 82.0 : 0.0
+        tableView.contentInset.bottom = 0.0
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        if viewModel.canPullToRefresh {
-            setupPullToRefresh(scrollView: tableView)
-        }
+        setupPullToRefresh(scrollView: tableView)
     }
     
     private func reloadData() {
@@ -108,29 +90,19 @@ class FundListViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
-        viewModel.filterModel.dateRangeModel.dateTo = dateTo
-        
-        showProgressHUD()
-        fetch()
+        //TODL: in future
     }
 }
 
-extension FundListViewController {
+extension ManagerListViewController {
     override func filterButtonAction() {
         if let viewModel = viewModel as? FundListViewModel {
             viewModel.showFilterVC(filterType: .funds, sortingType: .funds)
         }
     }
-    
-    override func signInButtonAction() {
-        if let viewModel = viewModel as? FundListViewModel {
-            viewModel.showSignInVC()
-        }
-    }
 }
 
-extension FundListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ManagerListViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -147,7 +119,7 @@ extension FundListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let model = viewModel.model(at: indexPath) else {
             return TableViewCell()
         }
-
+        
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
@@ -167,7 +139,7 @@ extension FundListViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 // MARK: - UIViewControllerPreviewingDelegate
-extension FundListViewController: UIViewControllerPreviewingDelegate {
+extension ManagerListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            viewControllerForLocation location: CGPoint) -> UIViewController? {
         
@@ -190,14 +162,14 @@ extension FundListViewController: UIViewControllerPreviewingDelegate {
 }
 
 // MARK: - ReloadDataProtocol
-extension FundListViewController: ReloadDataProtocol {
+extension ManagerListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
     }
 }
 
 // MARK: - FavoriteStateChangeProtocol
-extension FundListViewController: FavoriteStateChangeProtocol {
+extension ManagerListViewController: FavoriteStateChangeProtocol {
     var filterDateRangeModel: FilterDateRangeModel? {
         return dateRangeModel
     }
@@ -213,3 +185,4 @@ extension FundListViewController: FavoriteStateChangeProtocol {
         }
     }
 }
+

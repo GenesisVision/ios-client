@@ -220,7 +220,7 @@ extension DashboardViewController {
         }
         
         if scrollView == self.scrollView {
-            if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.pageboyDataSource {
+            if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.viewModel.dataSource {
                 for controller in pageboyDataSource.controllers {
                     if let vc = controller as? BaseViewControllerWithTableView {
                         vc.register3dTouch()
