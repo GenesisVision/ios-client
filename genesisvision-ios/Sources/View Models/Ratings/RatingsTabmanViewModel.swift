@@ -1,5 +1,5 @@
 //
-//  RatingsTabmanViewModel.swift
+//  RatingTabmanViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George on 03/12/2018.
@@ -9,8 +9,8 @@
 import Foundation
 import Tabman
 
-final class RatingsTabmanViewModel: TabmanViewModel {
-    var dataSource: RatingsPageboyViewControllerDataSource!
+final class RatingTabmanViewModel: TabmanViewModel {
+    var dataSource: RatingPageboyViewControllerDataSource!
     
     var filterModel: FilterModel = FilterModel()
     var searchBarEnable = false
@@ -20,13 +20,13 @@ final class RatingsTabmanViewModel: TabmanViewModel {
     init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil, searchBarEnable: Bool = false, showFacets: Bool = false) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
-        title = "Ratings"
+        title = "Rating"
         font = UIFont.getFont(.semibold, size: 16)
         
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
         self.tabmanViewModelDelegate = tabmanViewModelDelegate
-        self.dataSource = RatingsPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
+        self.dataSource = RatingPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
         
         ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
             self?.updateItems(levelUpSummary)
@@ -45,12 +45,12 @@ final class RatingsTabmanViewModel: TabmanViewModel {
         guard let levelUpSummary = levelUpSummary, let levelData = levelUpSummary.levelData else { return }
         
         self.filterModel.levelUpSummary = levelUpSummary
-        self.dataSource = RatingsPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
+        self.dataSource = RatingPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
         
         var items: [TabmanBar.Item] = []
         for data in levelData {
             if let level = data.level {
-                items.append(TabmanBar.Item(title: "\(level) -> \(level + 1)"))
+                items.append(TabmanBar.Item(title: "\(level) ⤍ \(level + 1)"))
             }
         }
         

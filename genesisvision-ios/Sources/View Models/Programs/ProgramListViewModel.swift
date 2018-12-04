@@ -39,7 +39,15 @@ final class ProgramListViewModel: ListViewModelProtocol {
     private var programsList: ProgramsList?
     
     var bottomViewType: BottomViewType {
-        return signInButtonEnable ? .signInWithFilter : filterModel.mask == nil ? .filter : .none
+        if signInButtonEnable {
+            return .signInWithFilter
+        }
+        
+        if filterModel.mask == nil, filterModel.levelUpData == nil, filterModel.facetId == nil {
+            return .filter
+        }
+        
+        return .none
     }
     
     var viewModels = [CellViewAnyModel]()
@@ -222,30 +230,24 @@ extension ProgramListViewModel {
 
     // MARK: - Private methods
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
+        ProgramsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (programsList) in
+            guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            ProgramsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (programsList) in
-                guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            self?.programsList = programsList
+            
+            var viewModels = [ProgramTableViewCellViewModel]()
+            
+            let totalCount = programsList.total ?? 0
+            
+            programsList.programs?.forEach({ (program) in
+                guard let programListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                self?.programsList = programsList
-                
-                var viewModels = [ProgramTableViewCellViewModel]()
-                
-                let totalCount = programsList.total ?? 0
-                
-                programsList.programs?.forEach({ (program) in
-                    guard let programListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-                    
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.currentController as? ProgramListViewController)
-                    viewModels.append(programTableViewCellViewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
-            }, errorCompletion: completionError)
-        case .fake:
-            break
-        }
+                let programTableViewCellViewModel = ProgramTableViewCellViewModel(program: program, delegate: programListRouter.currentController as? ProgramListViewController)
+                viewModels.append(programTableViewCellViewModel)
+            })
+            
+            completionSuccess(totalCount, viewModels)
+            completionError(.success)
+        }, errorCompletion: completionError)
     }
 }

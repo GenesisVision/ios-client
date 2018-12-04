@@ -220,28 +220,23 @@ extension FundListViewModel {
 
     // MARK: - Private methods
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [FundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
-            FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
-                guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-                self?.fundList = fundList
+        FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
+            guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            self?.fundList = fundList
+            
+            var viewModels = [FundTableViewCellViewModel]()
+            
+            let totalCount = fundList.total ?? 0
+            
+            fundList.funds?.forEach({ (fund) in
+                guard let fundListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
-                var viewModels = [FundTableViewCellViewModel]()
-                
-                let totalCount = fundList.total ?? 0
-                
-                fundList.funds?.forEach({ (fund) in
-                    guard let fundListRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
-                    
-                    let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.currentController as? FundListViewController)
-                    viewModels.append(fundTableViewCellViewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
-            }, errorCompletion: completionError)
-        case .fake:
-            break
-        }
+                let fundTableViewCellViewModel = FundTableViewCellViewModel(fund: fund, delegate: fundListRouter.currentController as? FundListViewController)
+                viewModels.append(fundTableViewCellViewModel)
+            })
+            
+            completionSuccess(totalCount, viewModels)
+            completionError(.success)
+        }, errorCompletion: completionError)
     }
 }

@@ -43,6 +43,7 @@ class EventsViewController: BaseViewController {
         collectionView.registerNibs(for: viewModel.cellModelsForRegistration)
         collectionView.isScrollEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.indicatorStyle = .black
         
         collectionView.delegate = viewModel.eventsDelegateManager
         collectionView.dataSource = viewModel.eventsDelegateManager

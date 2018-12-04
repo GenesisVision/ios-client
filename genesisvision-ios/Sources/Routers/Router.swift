@@ -154,7 +154,7 @@ class Router {
     }
     
     private func showRatingList(with filterModel: FilterModel) {
-        guard let viewController = getRatings(with: filterModel) else { return }
+        guard let viewController = getRating(with: filterModel) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -268,7 +268,7 @@ extension Router {
             showFundDetails(with: assetId)
         case .manager:
             showManagerDetails(with: assetId)
-        case .ratings:
+        case .rating:
             break
         }
     }
@@ -306,7 +306,7 @@ extension Router {
             showFundList(with: filterModel)
         case .manager:
             showManagerList(with: filterModel)
-        case .ratings:
+        case .rating:
             showRatingList(with: filterModel)
         }
     }
@@ -443,13 +443,13 @@ extension Router {
         return viewController
     }
     
-    func getRatings(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> RatingsViewController? {
-        let viewController = RatingsViewController()
+    func getRating(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> RatingViewController? {
+        let viewController = RatingViewController()
         
         let router = Router(parentRouter: parentRouter ?? self, navigationController: navigationController)
         router.currentController = viewController
         
-        let viewModel = RatingsTabmanViewModel(withRouter: router, tabmanViewModelDelegate: viewController)
+        let viewModel = RatingTabmanViewModel(withRouter: router, tabmanViewModelDelegate: viewController)
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true

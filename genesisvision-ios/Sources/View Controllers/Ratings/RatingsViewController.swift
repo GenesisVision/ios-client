@@ -1,5 +1,5 @@
 //
-//  RatingsViewController.swift
+//  RatingViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 03/12/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingsViewController: BaseTabmanViewController<RatingsTabmanViewModel> {
+class RatingViewController: BaseTabmanViewController<RatingTabmanViewModel> {
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

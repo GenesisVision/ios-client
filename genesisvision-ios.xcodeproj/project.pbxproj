@@ -37,7 +37,9 @@
 		5E14CDA521B5829400388616 /* RatingsPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA421B5829300388616 /* RatingsPageboyViewControllerDataSource.swift */; };
 		5E14CDA821B5972100388616 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA721B5972100388616 /* RatingsViewController.swift */; };
 		5E14CDAB21B597DB00388616 /* RatingsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDAA21B597DB00388616 /* RatingsTabmanViewModel.swift */; };
-		5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F12216638400029BFDE /* WalletTableHeaderView.xib */; };
+		5E14CDAE21B6A2F200388616 /* RatingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */; };
+		5E14CDAF21B6B1FC00388616 /* WalletTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */; };
+		5E152F13216638400029BFDE /* RatingsTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */; };
 		5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */; };
 		5E1813802061D36700481646 /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137B2061D36500481646 /* Common+Extensions.swift */; };
 		5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137C2061D36600481646 /* PickerViewViewController.swift */; };
@@ -634,12 +636,14 @@
 		5E14CDA421B5829300388616 /* RatingsPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5E14CDA721B5972100388616 /* RatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
 		5E14CDAA21B597DB00388616 /* RatingsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTabmanViewModel.swift; sourceTree = "<group>"; };
+		5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableHeaderView.swift; sourceTree = "<group>"; };
+		5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableHeaderView.xib; sourceTree = "<group>"; };
 		5E152F08216528380029BFDE /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		5E152F09216528380029BFDE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
-		5E152F12216638400029BFDE /* WalletTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableHeaderView.xib; sourceTree = "<group>"; };
+		5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingsTableHeaderView.xib; sourceTree = "<group>"; };
 		5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableHeaderView.swift; sourceTree = "<group>"; };
 		5E18137B2061D36500481646 /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5E18137C2061D36600481646 /* PickerViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
@@ -2316,7 +2320,9 @@
 				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
 				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
 				5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */,
-				5E152F12216638400029BFDE /* WalletTableHeaderView.xib */,
+				5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */,
+				5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */,
+				5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */,
 			);
 			path = "Header Footer View";
 			sourceTree = "<group>";
@@ -3075,7 +3081,7 @@
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
-				5E152F13216638400029BFDE /* WalletTableHeaderView.xib in Resources */,
+				5E152F13216638400029BFDE /* RatingsTableHeaderView.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
@@ -3093,6 +3099,7 @@
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
 				5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
+				5E14CDAF21B6B1FC00388616 /* WalletTableHeaderView.xib in Resources */,
 				5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */,
 				FCC9DD61200E20DB008825EC /* ProgramTableViewCell.xib in Resources */,
 			);
@@ -3272,6 +3279,7 @@
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				5ED520C321B465B600A8DF60 /* ProgramWithdrawInfo.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
+				5E14CDAE21B6A2F200388616 /* RatingsTableHeaderView.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,

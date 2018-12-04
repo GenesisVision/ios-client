@@ -27,7 +27,7 @@ class ProgramsDataProvider: DataProvider {
         let facetId = filterModel?.facetId
         let managerId = filterModel?.managerId
         let chartPointsCount = filterModel?.chartPointsCount
-        let levelUpFrom = filterModel?.levelUpFrom
+        let levelUpFrom = filterModel?.levelUpData?.level
         
         var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
         if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {

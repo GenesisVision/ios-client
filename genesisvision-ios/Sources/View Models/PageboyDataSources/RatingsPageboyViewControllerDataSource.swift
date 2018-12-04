@@ -1,5 +1,5 @@
 //
-//  RatingsPageboyViewControllerDataSource.swift
+//  RatingPageboyViewControllerDataSource.swift
 //  genesisvision-ios
 //
 //  Created by George on 03/12/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
+class RatingPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
     // MARK: - Private methods
     internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         
@@ -16,7 +16,7 @@ class RatingsPageboyViewControllerDataSource: BasePageboyViewControllerDataSourc
         
         for data in levelData {
             let filterModel = FilterModel()
-            filterModel.levelUpFrom = data.level
+            filterModel.levelUpData = data
             filterModel.dateRangeModel.dateFrom = nil
             filterModel.dateRangeModel.dateTo = nil
             

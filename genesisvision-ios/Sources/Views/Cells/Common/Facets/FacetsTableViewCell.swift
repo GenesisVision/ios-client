@@ -35,6 +35,7 @@ class FacetsTableViewCell: UITableViewCell {
         
         collectionView.isScrollEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.indicatorStyle = .black
 
         contentView.backgroundColor = UIColor.BaseView.bg
         backgroundColor = UIColor.BaseView.bg

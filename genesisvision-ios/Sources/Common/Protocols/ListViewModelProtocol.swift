@@ -59,7 +59,7 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
         let sortType = facet.sortType
         
         if sortType != nil, sortType == .toLevelUp {
-            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: .ratings))
+            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: .rating))
         } else {
             router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
         }
@@ -159,7 +159,7 @@ extension ListViewModelProtocol {
             if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.index(where: { $0.manager.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
-        case .ratings:
+        case .rating:
             break
         }
         
@@ -199,7 +199,7 @@ extension ListViewModelProtocol {
             guard let router = router as? Router else { return nil }
             
             return router.getManagerViewController(with: managerId.uuidString)
-        case .ratings:
+        case .rating:
             return nil
         }
     }
@@ -215,14 +215,19 @@ extension ListViewModelProtocol {
             return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
         case .manager:
             return [FacetsTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
-        case .ratings:
-            return []
+        case .rating:
+            return [ProgramTableViewCellViewModel.self]
         }
     }
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return []
+        switch assetType {
+        case .rating:
+            return [RatingTableHeaderView.self]
+        default:
+            return []
+        }
     }
     
     func modelsCount() -> Int {
@@ -274,7 +279,7 @@ extension ListViewModelProtocol {
             showFundDetail(at: indexPath)
         case .manager:
             showManagerDetail(at: indexPath)
-        case .ratings:
+        case .rating:
             break
         }
     }

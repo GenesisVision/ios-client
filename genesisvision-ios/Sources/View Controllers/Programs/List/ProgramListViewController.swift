@@ -24,6 +24,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
+    var ratingTableHeaderView: RatingTableHeaderView?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         if viewModel.canPullToRefresh {
             setupPullToRefresh(scrollView: tableView)
@@ -154,6 +157,31 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch viewModel.assetType {
+        case .rating:
+            return 60.0
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch viewModel.assetType {
+        case .rating:
+            let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
+            if let levelUpData = viewModel.filterModel.levelUpData {
+                header.configure(levelUpData)
+            }
+            
+            ratingTableHeaderView = header
+            
+            return ratingTableHeaderView
+        default:
+            return nil
+        }
     }
     
     // MARK: - UITableViewDataSource

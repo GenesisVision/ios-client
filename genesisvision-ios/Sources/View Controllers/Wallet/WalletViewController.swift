@@ -185,7 +185,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return viewModel.headerHeight(for: section)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
