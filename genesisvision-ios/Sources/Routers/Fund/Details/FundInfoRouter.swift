@@ -28,7 +28,7 @@ class FundInfoRouter: Router {
     // MARK: - Private methods
     func invest(with fundId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
-            let viewController = FundInvestViewController.storyboardInstance(name: .fund) else { return }
+            let viewController = FundInvestViewController.storyboardInstance(.fund) else { return }
         
         let router = FundInvestRouter(parentRouter: self)
         let viewModel = FundInvestViewModel(withRouter: router, fundId: fundId, detailProtocol: fundViewController)
@@ -38,7 +38,7 @@ class FundInfoRouter: Router {
     
     func withdraw(with fundId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
-            let viewController = FundWithdrawViewController.storyboardInstance(name: .fund) else { return }
+            let viewController = FundWithdrawViewController.storyboardInstance(.fund) else { return }
         
         let router = FundWithdrawRouter(parentRouter: self)
         let viewModel = FundWithdrawViewModel(withRouter: router, fundId: fundId, detailProtocol: fundViewController)

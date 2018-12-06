@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct ProgramTableViewCellViewModel {
-    let program: ProgramDetails
+    let asset: ProgramDetails
     weak var delegate: FavoriteStateChangeProtocol?
 }
 
@@ -24,7 +24,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = program.chart {
+        if let chart = asset.chart {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
@@ -33,28 +33,28 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
-        if let title = program.title {
+        if let title = asset.title {
             cell.titleLabel.text = title
         }
         
-        if let managerName = program.manager?.username {
+        if let managerName = asset.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
         
-        if let programId = program.id?.uuidString {
-            cell.assetId = programId
+        if let assetId = asset.id?.uuidString {
+            cell.assetId = assetId
         }
         
-        if let level = program.level {
+        if let level = asset.level {
             cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
-        if let currency = program.currency {
+        if let currency = asset.currency {
             cell.currencyLabel.text = currency.rawValue
         }
         
         cell.firstTitleLabel.text = "Period"
-        if let periodStarts = program.periodStarts, let periodEnds = program.periodEnds, let periodDuration = program.periodDuration {
+        if let periodStarts = asset.periodStarts, let periodEnds = asset.periodEnds, let periodDuration = asset.periodDuration {
             cell.firstValueLabel.text = periodDuration.toString() + (periodDuration > 1 ? " days" : " day")
             
             let today = Date()
@@ -67,14 +67,14 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         
         cell.secondTitleLabel.text = "Balance"
-        if let balance = program.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+        if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
             cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }
         
         cell.thirdTitleLabel.text = "Av. to invest"
-        if let availableInvestment = program.availableInvestment {
+        if let availableInvestment = asset.availableInvestment {
             cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
         } else {
             cell.thirdValueLabel.text = ""
@@ -83,33 +83,33 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         cell.favoriteButton.isHidden = !AuthManager.isLogin()
         
-        if let isFavorite = program.personalDetails?.isFavorite {
+        if let isFavorite = asset.personalDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        if let color = program.color {
+        if let color = asset.color {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
         
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
-        if let logo = program.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
-        if let profitPercent = program.statistic?.profitPercent {
+        if let profitPercent = asset.statistic?.profitPercent {
             let sign = profitPercent > 0 ? "+" : ""
             cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
-        if let profitValue = program.statistic?.profitValue {
+        if let profitValue = asset.statistic?.profitValue {
             cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
         }
         
-        if let isInvested = program.personalDetails?.isInvested {
+        if let isInvested = asset.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested
         }
     }

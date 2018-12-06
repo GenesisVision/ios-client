@@ -35,7 +35,7 @@ class ProgramTabmanRouter: TabmanRouter {
     }
     
     func getFullChart(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailFullChartViewController? {
-        guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program), let router = self.parentRouter as? ProgramRouter else { return nil }
+        guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(.program), let router = self.parentRouter as? ProgramRouter else { return nil }
         
         let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
         viewController.viewModel = viewModel

@@ -17,7 +17,7 @@ class ChartsPageboyViewControllerDataSource: NSObject, PageboyViewControllerData
     init(router: DashboardRouter, dashboardPortfolioChartValue: DashboardChartValue?) {
         super.init()
 
-        if let portfolioVC = PortfolioViewController.storyboardInstance(name: .dashboard) {
+        if let portfolioVC = PortfolioViewController.storyboardInstance(.dashboard) {
             portfolioVC.viewModel = PortfolioViewModel(withRouter: router, dashboardChartValue: dashboardPortfolioChartValue)
             portfolioVC.vc = router.chartsViewController
             

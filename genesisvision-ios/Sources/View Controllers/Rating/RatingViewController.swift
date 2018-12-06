@@ -10,11 +10,16 @@ import UIKit
 
 class RatingViewController: BaseTabmanViewController<RatingTabmanViewModel> {
     
+    private var infoBarButtonItem: UIBarButtonItem!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = viewModel.title
+        
+        infoBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_info"), style: .done, target: self, action: #selector(aboutLevelsButtonAction(_:)))
+        navigationItem.rightBarButtonItem = infoBarButtonItem
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -25,5 +30,10 @@ class RatingViewController: BaseTabmanViewController<RatingTabmanViewModel> {
         dataSource = viewModel.dataSource
         bar.items = viewModel.items
         reloadPages()
+    }
+    
+    // MARK: - IBAction
+    @objc @IBAction func aboutLevelsButtonAction(_ sender: UIButton) {
+        viewModel.showAboutLevels()
     }
 }

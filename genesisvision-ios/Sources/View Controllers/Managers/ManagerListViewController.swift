@@ -94,14 +94,6 @@ class ManagerListViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension ManagerListViewController {
-    override func filterButtonAction() {
-        if let viewModel = viewModel as? FundListViewModel {
-            viewModel.showFilterVC(filterType: .funds, sortingType: .funds)
-        }
-    }
-}
-
 extension ManagerListViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate

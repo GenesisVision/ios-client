@@ -12,7 +12,7 @@ class ManagerTabmanRouter: TabmanRouter {
     
     // MARK: - Public methods
     func getInfo(with managerProfileDetails: ManagerProfileDetails) -> ManagerInfoViewController? {
-        guard let viewController = ManagerInfoViewController.storyboardInstance(name: .manager) else { return nil }
+        guard let viewController = ManagerInfoViewController.storyboardInstance(.manager) else { return nil }
         
         let router = Router(parentRouter: self)
         router.currentController = viewController

@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct FundTableViewCellViewModel {
-    let fund: FundDetails
+    let asset: FundDetails
     weak var delegate: FavoriteStateChangeProtocol?
 }
 
@@ -26,7 +26,7 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
-        if let chart = fund.chart {
+        if let chart = asset.chart {
             cell.chartView.isHidden = false
             cell.viewForChartView.isHidden = cell.chartView.isHidden
             cell.noDataLabel.isHidden = true
@@ -35,16 +35,16 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
         
-        if let title = fund.title {
+        if let title = asset.title {
             cell.titleLabel.text = title
         }
         
-        if let managerName = fund.manager?.username {
+        if let managerName = asset.manager?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
         
-        if let fundId = fund.id?.uuidString {
-            cell.assetId = fundId
+        if let assetId = asset.id?.uuidString {
+            cell.assetId = assetId
         }
         
         cell.assetLogoImageView.levelButton.isHidden = true
@@ -53,7 +53,7 @@ extension FundTableViewCellViewModel: CellViewModel {
         cell.periodLeftProgressView.isHidden = true
         
         cell.firstTitleLabel.text = "Balance"
-        if let balance = fund.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+        if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
             cell.firstValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {
             cell.firstValueLabel.text = ""
@@ -61,14 +61,14 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         
         cell.secondTitleLabel.text = "Investors"
-        if let investorsCount = fund.statistic?.investorsCount {
+        if let investorsCount = asset.statistic?.investorsCount {
             cell.secondValueLabel.text = investorsCount.toString()
         } else {
             cell.secondValueLabel.text = ""
         }
         
         cell.thirdTitleLabel.text = "D.down"
-        if let drawdownPercent = fund.statistic?.drawdownPercent {
+        if let drawdownPercent = asset.statistic?.drawdownPercent {
             cell.thirdValueLabel.text = drawdownPercent.rounded(withType: .undefined).toString() + "%"
         } else {
             cell.thirdValueLabel.text = ""
@@ -77,23 +77,23 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.favoriteButton.isHidden = !AuthManager.isLogin()
         
-        if let isFavorite = fund.personalDetails?.isFavorite {
+        if let isFavorite = asset.personalDetails?.isFavorite {
             cell.favoriteButton.isSelected = isFavorite
         }
         
-        if let color = fund.color {
+        if let color = asset.color {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
         
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.fundPlaceholder
         
-        if let logo = fund.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
-        if let profitPercent = fund.statistic?.profitPercent {
+        if let profitPercent = asset.statistic?.profitPercent {
             let sign = profitPercent > 0 ? "+" : ""
             cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
@@ -101,13 +101,13 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.profitValueLabel.isHidden = true
         
-        if let isInvested = fund.personalDetails?.isInvested {
+        if let isInvested = asset.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested
         }
     }
     
     func setupFundBottomView(on cell: ProgramTableViewCell) {
-        guard let totalAssetsCount = fund.totalAssetsCount, totalAssetsCount > 0, let topFundAssets = fund.topFundAssets else { return }
+        guard let totalAssetsCount = asset.totalAssetsCount, totalAssetsCount > 0, let topFundAssets = asset.topFundAssets else { return }
         
         cell.fundBottomStackView.isHidden = false
         

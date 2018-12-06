@@ -61,7 +61,7 @@ extension AppDelegate {
         
         if UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable) {
             let window = UIApplication.shared.windows[0] as UIWindow
-            if let viewController = PasscodeViewController.storyboardInstance(name: .settings), let vc = window.rootViewController {
+            if let viewController = PasscodeViewController.storyboardInstance(.settings), let vc = window.rootViewController {
                 let router = Router(parentRouter: nil)
                 viewController.viewModel = PasscodeViewModel(withRouter: router)
                 viewController.delegate = self

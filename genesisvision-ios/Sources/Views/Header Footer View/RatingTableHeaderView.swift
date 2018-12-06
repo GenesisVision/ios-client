@@ -37,9 +37,11 @@ class RatingTableHeaderView: UITableViewHeaderFooterView {
             quotaValueLabel.text = quota.toString()
         }
         
-        targetProfitTitleLabel.text = "Current target profit"
+        targetProfitTitleLabel.text = "Target profit"
         if let targetProfit = levelUpData.targetProfit {
             targetProfitValueLabel.text = targetProfit.rounded(withType: .undefined).toString() + "%"
+            
+            targetProfitValueLabel.textColor = targetProfit == 0 ? UIColor.Cell.title : targetProfit > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
     }
 }

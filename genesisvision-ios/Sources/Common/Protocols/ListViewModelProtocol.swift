@@ -59,7 +59,7 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
         let sortType = facet.sortType
         
         if sortType != nil, sortType == .toLevelUp {
-            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: .rating))
+            router.show(routeType: .showRatingList(filterModel: filterModel))
         } else {
             router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
         }
@@ -148,19 +148,17 @@ extension ListViewModelProtocol {
     func model(at assetId: String) -> CellViewAnyModel? {
         switch assetType {
         case .program:
-            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.index(where: { $0.program.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .fund:
-            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.fund.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .manager:
             if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.index(where: { $0.manager.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
-        case .rating:
-            break
         }
         
         return nil
@@ -173,8 +171,8 @@ extension ListViewModelProtocol {
                 return nil
             }
             
-            let program = model.program
-            guard let programId = program.id else { return nil}
+            let asset = model.asset
+            guard let programId = asset.id else { return nil}
             guard let router = router as? Router else { return nil }
             
             return router.getProgramViewController(with: programId.uuidString)
@@ -184,8 +182,8 @@ extension ListViewModelProtocol {
                     return nil
                 }
                 
-                let fund = model.fund
-                guard let fundId = fund.id else { return nil}
+                let asset = model.asset
+                guard let fundId = asset.id else { return nil}
                 guard let router = router as? Router else { return nil }
                 
                 return router.getFundViewController(with: fundId.uuidString)
@@ -199,8 +197,6 @@ extension ListViewModelProtocol {
             guard let router = router as? Router else { return nil }
             
             return router.getManagerViewController(with: managerId.uuidString)
-        case .rating:
-            return nil
         }
     }
     
@@ -215,19 +211,22 @@ extension ListViewModelProtocol {
             return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
         case .manager:
             return [FacetsTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
-        case .rating:
-            return [ProgramTableViewCellViewModel.self]
         }
     }
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        switch assetType {
-        case .rating:
+        if filterModel.levelUpData != nil {
             return [RatingTableHeaderView.self]
-        default:
-            return []
         }
+        
+        return []
+//        switch assetType {
+//        case .rating:
+//            return [RatingTableHeaderView.self]
+//        default:
+//            return []
+//        }
     }
     
     func modelsCount() -> Int {
@@ -279,16 +278,14 @@ extension ListViewModelProtocol {
             showFundDetail(at: indexPath)
         case .manager:
             showManagerDetail(at: indexPath)
-        case .rating:
-            break
         }
     }
     
     func showProgramDetail(at indexPath: IndexPath) {
         guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
         
-        let program = model.program
-        guard let assetId = program.id else { return }
+        let asset = model.asset
+        guard let assetId = asset.id else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }
@@ -296,8 +293,8 @@ extension ListViewModelProtocol {
     func showFundDetail(at indexPath: IndexPath) {
         guard let model = model(at: indexPath) as? FundTableViewCellViewModel else { return }
         
-        let fund = model.fund
-        guard let assetId = fund.id else { return }
+        let asset = model.asset
+        guard let assetId = asset.id else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }

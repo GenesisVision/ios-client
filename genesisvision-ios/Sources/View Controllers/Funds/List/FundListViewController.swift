@@ -14,7 +14,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     private var signInButtonEnable: Bool = false
     
     // MARK: - View Model
-    var viewModel: ListViewModelProtocol!
+    var viewModel: ListViewModel!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -37,10 +37,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setupSignInButton() {
-        if let viewModel = viewModel as? FundListViewModel {
-            signInButtonEnable = viewModel.signInButtonEnable
-        }
-        
+        signInButtonEnable = viewModel.signInButtonEnable
         signInButton.isHidden = !signInButtonEnable
     }
     
@@ -118,15 +115,11 @@ class FundListViewController: BaseViewControllerWithTableView {
 
 extension FundListViewController {
     override func filterButtonAction() {
-        if let viewModel = viewModel as? FundListViewModel {
-            viewModel.showFilterVC(filterType: .funds, sortingType: .funds)
-        }
+        viewModel.showFilterVC(filterType: .funds, sortingType: .funds)
     }
     
     override func signInButtonAction() {
-        if let viewModel = viewModel as? FundListViewModel {
-            viewModel.showSignInVC()
-        }
+        viewModel.showSignInVC()
     }
 }
 

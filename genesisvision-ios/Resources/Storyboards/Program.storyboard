@@ -1192,6 +1192,327 @@
             </objects>
             <point key="canvasLocation" x="755.07246376811599" y="1862.9464285714284"/>
         </scene>
+        <!--About Levels View Controller-->
+        <scene sceneID="eB4-GL-F1B">
+            <objects>
+                <viewController storyboardIdentifier="AboutLevelsViewController" id="GvS-24-uQ6" customClass="AboutLevelsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N6x-Tw-hIn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVy-p9-mOx">
+                                <rect key="frame" x="0.0" y="44" width="375" height="1356"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic rules of levelling up" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaH-P0-Bju" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="20" width="295" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVf-qy-1Bh" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="60.333333333333314" width="295" height="872.66666666666674"/>
+                                        <mutableString key="text">1. All of the managers are levelled up only on the first day of each month.
+ 2. A manager can go up only one level at a time.
+ 3. In order to level-up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.
+ 4. Profit is calculated as a percentage and is calculated over a certain period. The general rule of thumb is that the period of time is calculated as “managers’ level — 1 month”.  For example: if your current level is 4, then the last three months of your trading will be counted.
+ 5. All programs that have completed at least one trade participate in the rating.
+ 6. Each level needs to have a minimum of ten participators.   7. You can’t level up if fewer than ten people are competing against you.
+  The higher a manager’s level is — the more funds he can attract.
+That’s it, those are all the rules! Here is a simplified recap: you need to end up in the top 10% of the most profitable managers that have the same level as you. Oh, and we almost forgot! We bet that you wish to know the amounts of GVT that can be attracted on each level.  Worry not, there they are:</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Fb-t3-EeH">
+                                        <rect key="frame" x="20" y="953" width="335" height="497"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levels limits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPi-SF-QNn" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="40" width="295" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="DEa-bE-8ms"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZoF-1E-Npl">
+                                                <rect key="frame" x="20" y="101" width="295" height="376"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-JE-aMY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="121" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zI-nC-27F" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="pSc-Se-8xT"/>
+                                                                </constraints>
+                                                                <state key="normal" title="1"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SsB-dD-u8b">
+                                                                <rect key="frame" x="60" y="2.3333333333332575" width="61" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-HU-QMK" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="61" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCv-Nw-gBy" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="61" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="2zI-nC-27F" firstAttribute="width" secondItem="2zI-nC-27F" secondAttribute="height" multiplier="1:1" id="9xg-Yn-7EV"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="m1X-Ex-iSV">
+                                                        <rect key="frame" x="0.0" y="56" width="121" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGm-Ju-KdK" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="Cco-J0-2S1"/>
+                                                                </constraints>
+                                                                <state key="normal" title="2"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-kn-ror">
+                                                                <rect key="frame" x="60" y="2.3333333333332575" width="61" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjR-Zo-z3W" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="61" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="700 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHz-jl-rYn" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="61" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="PGm-Ju-KdK" firstAttribute="width" secondItem="PGm-Ju-KdK" secondAttribute="height" multiplier="1:1" id="KAO-RK-0ln"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="y89-G4-KOz">
+                                                        <rect key="frame" x="0.0" y="112" width="130.66666666666666" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7N-Ij-6qh" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="fcz-wa-XU7"/>
+                                                                </constraints>
+                                                                <state key="normal" title="3"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vxw-hE-NLE">
+                                                                <rect key="frame" x="60.000000000000007" y="2.3333333333332575" width="70.666666666666686" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsN-PI-HuB" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="70.666666666666671" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 500 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNC-vH-VNA" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="70.666666666666671" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="u7N-Ij-6qh" firstAttribute="width" secondItem="u7N-Ij-6qh" secondAttribute="height" multiplier="1:1" id="8jB-GS-k4F"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SkY-uC-IFw">
+                                                        <rect key="frame" x="0.0" y="168" width="130" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qv2-qp-EME" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="Peb-jw-bqa"/>
+                                                                </constraints>
+                                                                <state key="normal" title="4"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KJZ-78-dkK">
+                                                                <rect key="frame" x="60" y="2.3333333333332575" width="70" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPl-1f-IUw" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 000 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-Zq-kez" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="70" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="Qv2-qp-EME" firstAttribute="width" secondItem="Qv2-qp-EME" secondAttribute="height" multiplier="1:1" id="g70-MJ-qab"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vJ6-lT-3xU">
+                                                        <rect key="frame" x="0.0" y="224" width="137.33333333333334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3h-PP-SBL" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="WNk-AC-OgU"/>
+                                                                </constraints>
+                                                                <state key="normal" title="5"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="f7X-Wh-Vag">
+                                                                <rect key="frame" x="59.999999999999993" y="2.3333333333332575" width="77.333333333333314" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAw-aD-9cC" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="77.333333333333329" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 000 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZJ-sk-PfX" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="77.333333333333329" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="F3h-PP-SBL" firstAttribute="width" secondItem="F3h-PP-SBL" secondAttribute="height" multiplier="1:1" id="LNf-RE-mXe"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="61B-DE-q7I">
+                                                        <rect key="frame" x="0.0" y="280" width="139.33333333333334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FC-YN-vcV" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="5z6-lO-SkI"/>
+                                                                </constraints>
+                                                                <state key="normal" title="6"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yVH-H1-Zgo">
+                                                                <rect key="frame" x="59.999999999999993" y="2.3333333333332575" width="79.333333333333314" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a77-wr-2Fb" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="79.333333333333329" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35 000 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDL-AP-Vsr" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="79.333333333333329" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="4FC-YN-vcV" firstAttribute="width" secondItem="4FC-YN-vcV" secondAttribute="height" multiplier="1:1" id="IyI-QK-BTs"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WQG-8D-aWt">
+                                                        <rect key="frame" x="0.0" y="336" width="138.33333333333334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AE-hD-Fsf" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="lPn-ed-5uT"/>
+                                                                </constraints>
+                                                                <state key="normal" title="7"/>
+                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BJF-rW-jVb">
+                                                                <rect key="frame" x="59.999999999999993" y="2.3333333333332575" width="78.333333333333314" height="35.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invest limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVN-CG-E3K" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="78.333333333333329" height="14.333333333333334"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70 000 GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TH-De-b58" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333485" width="78.333333333333329" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="6AE-hD-Fsf" firstAttribute="width" secondItem="6AE-hD-Fsf" secondAttribute="height" multiplier="1:1" id="spg-KY-8Cy"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ZoF-1E-Npl" firstAttribute="top" secondItem="CPi-SF-QNn" secondAttribute="bottom" constant="40" id="Afk-Fv-mOc"/>
+                                            <constraint firstItem="ZoF-1E-Npl" firstAttribute="leading" secondItem="CPi-SF-QNn" secondAttribute="leading" id="DzQ-NF-0gO"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZoF-1E-Npl" secondAttribute="bottom" constant="20" id="FWg-dh-2H1"/>
+                                            <constraint firstAttribute="trailing" secondItem="CPi-SF-QNn" secondAttribute="trailing" constant="20" id="P9X-eP-BCF"/>
+                                            <constraint firstItem="ZoF-1E-Npl" firstAttribute="trailing" secondItem="CPi-SF-QNn" secondAttribute="trailing" id="T1L-BW-k5H"/>
+                                            <constraint firstItem="CPi-SF-QNn" firstAttribute="leading" secondItem="9Fb-t3-EeH" secondAttribute="leading" constant="20" id="mNC-YJ-52o"/>
+                                            <constraint firstItem="CPi-SF-QNn" firstAttribute="top" secondItem="9Fb-t3-EeH" secondAttribute="top" constant="40" id="tHJ-XH-rla"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="9Fb-t3-EeH" secondAttribute="bottom" constant="20" id="MNx-Eg-zij"/>
+                                    <constraint firstItem="QaH-P0-Bju" firstAttribute="leading" secondItem="UVy-p9-mOx" secondAttribute="leading" constant="40" id="Quw-1J-ekb"/>
+                                    <constraint firstItem="9Fb-t3-EeH" firstAttribute="leading" secondItem="UVy-p9-mOx" secondAttribute="leading" constant="20" id="TAs-Ea-Ek0"/>
+                                    <constraint firstItem="wVf-qy-1Bh" firstAttribute="top" secondItem="QaH-P0-Bju" secondAttribute="bottom" constant="20" id="Y10-bg-u7U"/>
+                                    <constraint firstAttribute="trailing" secondItem="wVf-qy-1Bh" secondAttribute="trailing" constant="40" id="Zio-XC-fKJ"/>
+                                    <constraint firstItem="9Fb-t3-EeH" firstAttribute="top" secondItem="wVf-qy-1Bh" secondAttribute="bottom" constant="20" id="ft5-bg-GF6"/>
+                                    <constraint firstAttribute="trailing" secondItem="QaH-P0-Bju" secondAttribute="trailing" constant="40" id="naD-CY-Lh9"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Fb-t3-EeH" secondAttribute="trailing" constant="20" id="pWL-vj-gHQ"/>
+                                    <constraint firstItem="QaH-P0-Bju" firstAttribute="top" secondItem="UVy-p9-mOx" secondAttribute="top" constant="20" id="sx0-qi-fQs"/>
+                                    <constraint firstItem="wVf-qy-1Bh" firstAttribute="leading" secondItem="UVy-p9-mOx" secondAttribute="leading" constant="40" id="xGh-RO-8zc"/>
+                                    <constraint firstItem="wVf-qy-1Bh" firstAttribute="centerX" secondItem="UVy-p9-mOx" secondAttribute="centerX" id="xt2-TM-hJl"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UVy-p9-mOx" firstAttribute="top" secondItem="HCo-EL-ZbE" secondAttribute="top" id="05Z-7b-JXD"/>
+                            <constraint firstAttribute="bottom" secondItem="UVy-p9-mOx" secondAttribute="bottom" id="EeE-7U-Yp5"/>
+                            <constraint firstItem="HCo-EL-ZbE" firstAttribute="trailing" secondItem="UVy-p9-mOx" secondAttribute="trailing" id="Oum-75-QI9"/>
+                            <constraint firstItem="UVy-p9-mOx" firstAttribute="leading" secondItem="HCo-EL-ZbE" secondAttribute="leading" id="SCJ-Rq-M0y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HCo-EL-ZbE"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="1400"/>
+                    <connections>
+                        <outlet property="levelsTitleLabel" destination="CPi-SF-QNn" id="sVM-hn-VGf"/>
+                        <outlet property="levelsView" destination="9Fb-t3-EeH" id="94E-Oc-8qd"/>
+                        <outlet property="textLabel" destination="wVf-qy-1Bh" id="IXf-OH-Zzw"/>
+                        <outlet property="titleLabel" destination="QaH-P0-Bju" id="GZe-uV-JHd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Idt-3u-cYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5973" y="1985"/>
+        </scene>
     </scenes>
     <resources>
         <image name="img_exit_full_screen" width="44" height="44"/>

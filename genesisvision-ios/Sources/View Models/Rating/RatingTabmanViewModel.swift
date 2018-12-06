@@ -57,4 +57,8 @@ final class RatingTabmanViewModel: TabmanViewModel {
         self.items = items
         tabmanViewModelDelegate?.updatedItems()
     }
+    
+    func showAboutLevels() {
+        router.showAboutLevels()
+    }
 }

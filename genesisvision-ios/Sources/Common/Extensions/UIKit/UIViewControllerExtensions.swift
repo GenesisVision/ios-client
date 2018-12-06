@@ -11,14 +11,14 @@ import UIKit.UIViewController
 import PKHUD
 
 extension UIViewController {
-    private class func mainStoryboardInstancePrivate<T: UIViewController>(name: String) -> T? {
+    private class func mainStoryboardInstancePrivate<T: UIViewController>(_ name: String) -> T? {
         let storyboard = UIStoryboard(name: name, bundle: nil)
 
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? T
     }
     
-    class func storyboardInstance(name: StoryboardNames) -> Self? {
-        return mainStoryboardInstancePrivate(name: name.rawValue.capitalized)
+    class func storyboardInstance(_ name: StoryboardNames) -> Self? {
+        return mainStoryboardInstancePrivate(name.rawValue.capitalized)
     }
     
     

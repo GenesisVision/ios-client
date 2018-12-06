@@ -261,8 +261,6 @@ extension DashboardFundListViewModel {
         DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundList) in
             guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            self?.fundList = fundList
-            
             var viewModels = [DashboardFundTableViewCellViewModel]()
             
             let totalCount = fundList.funds?.count ?? 0

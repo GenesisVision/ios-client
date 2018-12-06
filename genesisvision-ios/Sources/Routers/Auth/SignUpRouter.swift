@@ -26,7 +26,7 @@ class SignUpRouter: Router {
     
     // MARK: - Private methods
     private func confirmationAction() {
-        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = InfoViewController.storyboardInstance(.auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthSignUpConfirmationViewModel(withRouter: router)
         present(viewController: viewController)

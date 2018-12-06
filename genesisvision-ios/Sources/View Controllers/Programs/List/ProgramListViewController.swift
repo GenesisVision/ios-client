@@ -14,7 +14,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private var signInButtonEnable: Bool = false
     
     // MARK: - View Model
-    var viewModel: ListViewModelProtocol!
+    var viewModel: ListViewModel!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -39,10 +39,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setupSignInButton() {
-        if let viewModel = viewModel as? ProgramListViewModel {
-            signInButtonEnable = viewModel.signInButtonEnable
-        }
-        
+        signInButtonEnable = viewModel.signInButtonEnable
         signInButton.isHidden = !signInButtonEnable
     }
     
@@ -122,15 +119,11 @@ class ProgramListViewController: BaseViewControllerWithTableView {
 
 extension ProgramListViewController {
     override func filterButtonAction() {
-        if let viewModel = viewModel as? ProgramListViewModel {
-            viewModel.showFilterVC(filterType: .programs, sortingType: .programs)
-        }
+        viewModel.showFilterVC(filterType: .programs, sortingType: .programs)
     }
     
     override func signInButtonAction() {
-        if let viewModel = viewModel as? ProgramListViewModel {
-            viewModel.showSignInVC()
-        }
+        viewModel.showSignInVC()
     }
 }
 
@@ -160,28 +153,44 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch viewModel.assetType {
-        case .rating:
+        if viewModel.filterModel.levelUpData != nil {
             return 60.0
-        default:
-            return 0
         }
+        
+        return 0
+        
+//        switch viewModel.assetType {
+//        case .rating:
+//            return 60.0
+//        default:
+//            return 0
+//        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch viewModel.assetType {
-        case .rating:
+        if let levelUpData = viewModel.filterModel.levelUpData {
             let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
-            if let levelUpData = viewModel.filterModel.levelUpData {
-                header.configure(levelUpData)
-            }
+            header.configure(levelUpData)
             
             ratingTableHeaderView = header
             
             return ratingTableHeaderView
-        default:
-            return nil
         }
+        
+        return nil
+//        switch viewModel.assetType {
+//        case .rating:
+//            let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
+//            if let levelUpData = viewModel.filterModel.levelUpData {
+//                header.configure(levelUpData)
+//            }
+//
+//            ratingTableHeaderView = header
+//
+//            return ratingTableHeaderView
+//        default:
+//            return nil
+//        }
     }
     
     // MARK: - UITableViewDataSource

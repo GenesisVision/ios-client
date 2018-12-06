@@ -28,21 +28,21 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
             
             controllers = [programListViewController, fundListViewController]
         } else {
-            guard let programListViewController = ProgramListViewController.storyboardInstance(name: .programs) else { return }
+            guard let programListViewController = ProgramListViewController.storyboardInstance(.programs) else { return }
             router.programsViewController = programListViewController
             
             let programListRouter = ListRouter(parentRouter: router)
             programListRouter.currentController = programListViewController
             let programsViewModel =
-                ProgramListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController, filterModel: filterModel, showFacets: showFacets)
+                ListViewModel(withRouter: programListRouter, reloadDataProtocol: programListViewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
             programListViewController.viewModel = programsViewModel
             
-            guard let fundListViewController = FundListViewController.storyboardInstance(name: .funds) else { return }
+            guard let fundListViewController = FundListViewController.storyboardInstance(.funds) else { return }
             router.fundsViewController = fundListViewController
             
             let fundListRouter = ListRouter(parentRouter: router)
             fundListRouter.currentController = fundListViewController
-            let fundsViewModel = FundListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController, filterModel: filterModel, showFacets: showFacets)
+            let fundsViewModel = ListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController, filterModel: filterModel, showFacets: showFacets, assetType: .fund)
             fundListViewController.viewModel = fundsViewModel
             
             controllers = [programListViewController, fundListViewController]

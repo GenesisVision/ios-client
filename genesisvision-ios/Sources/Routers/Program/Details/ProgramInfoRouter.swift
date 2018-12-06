@@ -30,7 +30,7 @@ class ProgramInfoRouter: Router {
     // MARK: - Private methods
     func invest(with programId: String, programCurrency: CurrencyType) {
         guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
-            let viewController = ProgramInvestViewController.storyboardInstance(name: .program) else { return }
+            let viewController = ProgramInvestViewController.storyboardInstance(.program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
         let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
@@ -40,7 +40,7 @@ class ProgramInfoRouter: Router {
     
     func withdraw(with programId: String, programCurrency: CurrencyType) {
         guard let programViewController = parentRouter?.topViewController() as? ProgramViewController,
-            let viewController = ProgramWithdrawViewController.storyboardInstance(name: .program) else { return }
+            let viewController = ProgramWithdrawViewController.storyboardInstance(.program) else { return }
         
         let router = ProgramWithdrawRouter(parentRouter: self)
         let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
@@ -49,7 +49,7 @@ class ProgramInfoRouter: Router {
     }
     
     private func fullChart(with programDetailsFull: ProgramDetailsFull) {
-        guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(name: .program) else { return }
+        guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(.program) else { return }
         let router = self.parentRouter?.parentRouter as! ProgramRouter
         let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
         viewController.viewModel = viewModel

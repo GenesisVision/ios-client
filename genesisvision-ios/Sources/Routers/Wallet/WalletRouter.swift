@@ -35,7 +35,7 @@ class WalletRouter: Router {
     private func withdraw() {
         guard let vc = topViewController() else { return }
         
-        guard let viewController = WalletWithdrawViewController.storyboardInstance(name: .wallet) else { return }
+        guard let viewController = WalletWithdrawViewController.storyboardInstance(.wallet) else { return }
         let router = WalletWithdrawRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = WalletWithdrawViewModel(withRouter: router, walletProtocol: vc as! WalletProtocol)
         viewController.viewModel = viewModel
@@ -44,7 +44,7 @@ class WalletRouter: Router {
     }
     
     private func deposit() {
-        guard let viewController = WalletDepositViewController.storyboardInstance(name: .wallet) else { return }
+        guard let viewController = WalletDepositViewController.storyboardInstance(.wallet) else { return }
         let router = WalletDepositRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = WalletDepositViewModel(withRouter: router)
         viewController.viewModel = viewModel

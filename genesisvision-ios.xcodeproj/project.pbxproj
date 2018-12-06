@@ -25,6 +25,10 @@
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
 		5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E106386213D69AF008A0E8B /* BaseExtensions.swift */; };
+		5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */; };
+		5E11DFD221B9286400B2B6EE /* RatingTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */; };
+		5E11DFD321B9286400B2B6EE /* RatingTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E11DFD121B9286400B2B6EE /* RatingTableHeaderView.xib */; };
+		5E11DFD521B93CDF00B2B6EE /* AboutLevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFD421B93CDF00B2B6EE /* AboutLevelsViewController.swift */; };
 		5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */; };
 		5E12B38520BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38420BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift */; };
 		5E12B38720BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38620BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift */; };
@@ -34,12 +38,10 @@
 		5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */; };
 		5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */; };
 		5E14CDA221B57F5600388616 /* BasePageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */; };
-		5E14CDA521B5829400388616 /* RatingsPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA421B5829300388616 /* RatingsPageboyViewControllerDataSource.swift */; };
-		5E14CDA821B5972100388616 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA721B5972100388616 /* RatingsViewController.swift */; };
-		5E14CDAB21B597DB00388616 /* RatingsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDAA21B597DB00388616 /* RatingsTabmanViewModel.swift */; };
-		5E14CDAE21B6A2F200388616 /* RatingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */; };
+		5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */; };
+		5E14CDA821B5972100388616 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA721B5972100388616 /* RatingViewController.swift */; };
+		5E14CDAB21B597DB00388616 /* RatingTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDAA21B597DB00388616 /* RatingTabmanViewModel.swift */; };
 		5E14CDAF21B6B1FC00388616 /* WalletTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */; };
-		5E152F13216638400029BFDE /* RatingsTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */; };
 		5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */; };
 		5E1813802061D36700481646 /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137B2061D36500481646 /* Common+Extensions.swift */; };
 		5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18137C2061D36600481646 /* PickerViewViewController.swift */; };
@@ -449,7 +451,6 @@
 		5EF14D8F2181F80200B3843A /* FundInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D8A2181F80200B3843A /* FundInfoViewModel.swift */; };
 		5EF14D922181F85C00B3843A /* FundTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D902181F85C00B3843A /* FundTabmanRouter.swift */; };
 		5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D912181F85C00B3843A /* FundRouter.swift */; };
-		5EF14D972181FAD500B3843A /* FundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D962181FAD500B3843A /* FundListViewModel.swift */; };
 		5EF14D9A2181FBCD00B3843A /* FundWithdrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D982181FBCC00B3843A /* FundWithdrawViewModel.swift */; };
 		5EF14D9B2181FBCD00B3843A /* FundInvestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D992181FBCD00B3843A /* FundInvestViewModel.swift */; };
 		5EF14D9E2181FC5500B3843A /* FundInvestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D9C2181FC5500B3843A /* FundInvestRouter.swift */; };
@@ -560,7 +561,6 @@
 		FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFC52010F64200698D18 /* SignInViewController.swift */; };
 		FCB8DFCB2010F6B100698D18 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCA2010F6B100698D18 /* Protocols.swift */; };
 		FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8DFCE2010F99200698D18 /* AuthManager.swift */; };
-		FCBD22C02019E960000B8E38 /* ProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD22BF2019E960000B8E38 /* ProgramListViewModel.swift */; };
 		FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */; };
 		FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */; };
 		FCC9DD28200DF2C3008825EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9DD27200DF2C3008825EC /* AppDelegate.swift */; };
@@ -624,6 +624,10 @@
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		5E106386213D69AF008A0E8B /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
+		5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableHeaderView.swift; sourceTree = "<group>"; };
+		5E11DFD121B9286400B2B6EE /* RatingTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingTableHeaderView.xib; sourceTree = "<group>"; };
+		5E11DFD421B93CDF00B2B6EE /* AboutLevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLevelsViewController.swift; sourceTree = "<group>"; };
 		5E12B38220BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorCreateViewModel.swift; sourceTree = "<group>"; };
 		5E12B38420BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorTutorialViewModel.swift; sourceTree = "<group>"; };
 		5E12B38620BEEB4D00302730 /* AuthTwoFactorConfirmateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorConfirmateViewModel.swift; sourceTree = "<group>"; };
@@ -633,17 +637,15 @@
 		5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorConfirmateViewController.swift; sourceTree = "<group>"; };
 		5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorDataProvider.swift; sourceTree = "<group>"; };
 		5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
-		5E14CDA421B5829300388616 /* RatingsPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
-		5E14CDA721B5972100388616 /* RatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
-		5E14CDAA21B597DB00388616 /* RatingsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTabmanViewModel.swift; sourceTree = "<group>"; };
-		5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableHeaderView.swift; sourceTree = "<group>"; };
+		5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
+		5E14CDA721B5972100388616 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		5E14CDAA21B597DB00388616 /* RatingTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableHeaderView.xib; sourceTree = "<group>"; };
 		5E152F08216528380029BFDE /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		5E152F09216528380029BFDE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		5E152F0A216528380029BFDE /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		5E152F0B216528390029BFDE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		5E152F0C2165283A0029BFDE /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
-		5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingsTableHeaderView.xib; sourceTree = "<group>"; };
 		5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableHeaderView.swift; sourceTree = "<group>"; };
 		5E18137B2061D36500481646 /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5E18137C2061D36600481646 /* PickerViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
@@ -1050,7 +1052,6 @@
 		5EF14D8A2181F80200B3843A /* FundInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundInfoViewModel.swift; sourceTree = "<group>"; };
 		5EF14D902181F85C00B3843A /* FundTabmanRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundTabmanRouter.swift; sourceTree = "<group>"; };
 		5EF14D912181F85C00B3843A /* FundRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundRouter.swift; sourceTree = "<group>"; };
-		5EF14D962181FAD500B3843A /* FundListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundListViewModel.swift; sourceTree = "<group>"; };
 		5EF14D982181FBCC00B3843A /* FundWithdrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundWithdrawViewModel.swift; sourceTree = "<group>"; };
 		5EF14D992181FBCD00B3843A /* FundInvestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundInvestViewModel.swift; sourceTree = "<group>"; };
 		5EF14D9C2181FC5500B3843A /* FundInvestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundInvestRouter.swift; sourceTree = "<group>"; };
@@ -1170,7 +1171,6 @@
 		FCB8DFC52010F64200698D18 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FCB8DFCA2010F6B100698D18 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FCB8DFCE2010F99200698D18 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		FCBD22BF2019E960000B8E38 /* ProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModel.swift; sourceTree = "<group>"; };
 		FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		FCC9DD24200DF2C3008825EC /* Genesis Vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Genesis Vision.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1290,26 +1290,26 @@
 			children = (
 				5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */,
 				5EAD3511214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift */,
-				5E14CDA421B5829300388616 /* RatingsPageboyViewControllerDataSource.swift */,
+				5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */,
 				5EA8B9C521B45DD40074EA2C /* SearchPageboyViewControllerDataSource.swift */,
 			);
 			path = PageboyDataSources;
 			sourceTree = "<group>";
 		};
-		5E14CDA621B5971700388616 /* Ratings */ = {
+		5E14CDA621B5971700388616 /* Rating */ = {
 			isa = PBXGroup;
 			children = (
-				5E14CDA721B5972100388616 /* RatingsViewController.swift */,
+				5E14CDA721B5972100388616 /* RatingViewController.swift */,
 			);
-			path = Ratings;
+			path = Rating;
 			sourceTree = "<group>";
 		};
-		5E14CDA921B597D300388616 /* Ratings */ = {
+		5E14CDA921B597D300388616 /* Rating */ = {
 			isa = PBXGroup;
 			children = (
-				5E14CDAA21B597DB00388616 /* RatingsTabmanViewModel.swift */,
+				5E14CDAA21B597DB00388616 /* RatingTabmanViewModel.swift */,
 			);
-			path = Ratings;
+			path = Rating;
 			sourceTree = "<group>";
 		};
 		5E1813852061D37000481646 /* Custom Alert */ = {
@@ -2082,6 +2082,7 @@
 		5EC670A121AEAD8A009BF4C0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */,
 				5EC670A021AEACE1009BF4C0 /* Assets */,
 				5EC6709F21AEACD6009BF4C0 /* Events */,
 				5EC6709A21AEABF8009BF4C0 /* Notifications */,
@@ -2278,14 +2279,6 @@
 			path = "Delegate Managers";
 			sourceTree = "<group>";
 		};
-		5EF14D942181FA2400B3843A /* Funds */ = {
-			isa = PBXGroup;
-			children = (
-				5EF14D962181FAD500B3843A /* FundListViewModel.swift */,
-			);
-			path = Funds;
-			sourceTree = "<group>";
-		};
 		5EF14DA4218213BC00B3843A /* Fund */ = {
 			isa = PBXGroup;
 			children = (
@@ -2315,14 +2308,14 @@
 		FC0E20082044352000872BE5 /* Header Footer View */ = {
 			isa = PBXGroup;
 			children = (
+				5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */,
+				5E11DFD121B9286400B2B6EE /* RatingTableHeaderView.xib */,
 				5E5BC29A21868FD6009E4BA3 /* FundAssetsHeaderView.swift */,
 				5E5BC29921868FD6009E4BA3 /* FundAssetsHeaderView.xib */,
 				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
 				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
 				5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */,
 				5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */,
-				5E14CDAC21B6A2F100388616 /* RatingsTableHeaderView.swift */,
-				5E152F12216638400029BFDE /* RatingsTableHeaderView.xib */,
 			);
 			path = "Header Footer View";
 			sourceTree = "<group>";
@@ -2482,7 +2475,6 @@
 		FC4C194A203050F200625795 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
-				FCBD22BF2019E960000B8E38 /* ProgramListViewModel.swift */,
 				5E616B5220F7B73700B3459D /* Create Program */,
 			);
 			path = Programs;
@@ -2622,7 +2614,6 @@
 		FCBD22BE2019E925000B8E38 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				5E14CDA921B597D300388616 /* Ratings */,
 				5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */,
 				5E14CDA321B57F7300388616 /* PageboyDataSources */,
 				5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */,
@@ -2631,9 +2622,10 @@
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
 				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
 				5EA8B9B421B434480074EA2C /* SearchTabmanViewModel.swift */,
+				5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */,
+				5E14CDA921B597D300388616 /* Rating */,
 				5E33E3B520AB216F00A0B9DE /* Program Details */,
 				5EF14D7F2181F19700B3843A /* Fund Details */,
-				5EF14D942181FA2400B3843A /* Funds */,
 				FC4C194A203050F200625795 /* Programs */,
 				5EA8B9BB21B44F7C0074EA2C /* Managers */,
 				5EB996AA20F373E100E31D23 /* Favorite Programs */,
@@ -2808,7 +2800,7 @@
 		FCC9DD49200DFA5E008825EC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5E14CDA621B5971700388616 /* Ratings */,
+				5E14CDA621B5971700388616 /* Rating */,
 				5EA8B9B821B439050074EA2C /* Managers */,
 				5EC670A821AEAE71009BF4C0 /* Filters */,
 				FCC9DD76200E4CCF008825EC /* Base */,
@@ -2945,13 +2937,13 @@
 		FCC9DD76200E4CCF008825EC /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				5E11DFD421B93CDF00B2B6EE /* AboutLevelsViewController.swift */,
 				FCC9DD77200E4CCF008825EC /* BaseNavigationController.swift */,
 				FCC9DD78200E4CCF008825EC /* BaseTabBarController.swift */,
 				FCC9DD79200E4CCF008825EC /* BaseViewController.swift */,
 				5EB8E9DB207263B100F46A8A /* InfoViewController.swift */,
 				5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */,
 				5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */,
-				5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3081,7 +3073,6 @@
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
-				5E152F13216638400029BFDE /* RatingsTableHeaderView.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
@@ -3098,6 +3089,7 @@
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
 				5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */,
+				5E11DFD321B9286400B2B6EE /* RatingTableHeaderView.xib in Resources */,
 				5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */,
 				5E14CDAF21B6B1FC00388616 /* WalletTableHeaderView.xib in Resources */,
 				5E5BBE7021824125009E4BA3 /* Funds.storyboard in Resources */,
@@ -3198,7 +3190,7 @@
 				5ED520B021B465B600A8DF60 /* ManagerProfileDetails.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				5EE007632178737F0045B890 /* ManagerViewModel.swift in Sources */,
-				5E14CDAB21B597DB00388616 /* RatingsTabmanViewModel.swift in Sources */,
+				5E14CDAB21B597DB00388616 /* RatingTabmanViewModel.swift in Sources */,
 				5ED5206E21B465B600A8DF60 /* ProgramStatistic.swift in Sources */,
 				5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */,
 				5EA274D92162B5D8008CAF77 /* DefaultTableViewCellViewModel.swift in Sources */,
@@ -3255,6 +3247,7 @@
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				5ED5208721B465B600A8DF60 /* ProgramDetailsListStatistic.swift in Sources */,
 				5ED5209E21B465B600A8DF60 /* BalanceChartElement.swift in Sources */,
+				5E11DFD521B93CDF00B2B6EE /* AboutLevelsViewController.swift in Sources */,
 				5EA274B621628207008CAF77 /* ProgramPeriodTableViewCell.swift in Sources */,
 				5E1CF83A218C02FC00541C70 /* WeakTargetProxy.swift in Sources */,
 				5E152F1521663AF90029BFDE /* WalletTableHeaderView.swift in Sources */,
@@ -3279,7 +3272,6 @@
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
 				5ED520C321B465B600A8DF60 /* ProgramWithdrawInfo.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
-				5E14CDAE21B6A2F200388616 /* RatingsTableHeaderView.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
@@ -3364,7 +3356,7 @@
 				5EBBEAEC2100CE2D0034E4CB /* BrokersDataProvider.swift in Sources */,
 				5EB8E9D820723D7E00F46A8A /* ForgetPasswordRouter.swift in Sources */,
 				FC900E5C204EA852007E9142 /* RoundingExtensions.swift in Sources */,
-				5E14CDA821B5972100388616 /* RatingsViewController.swift in Sources */,
+				5E14CDA821B5972100388616 /* RatingViewController.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
@@ -3392,7 +3384,6 @@
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
 				5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */,
 				5E616B5B20F7C37900B3459D /* CreateProgramFirstViewController.swift in Sources */,
-				FCBD22C02019E960000B8E38 /* ProgramListViewModel.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				5ED520B521B465B600A8DF60 /* FundWithdrawInfo.swift in Sources */,
 				5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */,
@@ -3419,12 +3410,13 @@
 				5EB8E9D620723D6500F46A8A /* ForgetPasswordViewController.swift in Sources */,
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
 				5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */,
+				5E11DFD221B9286400B2B6EE /* RatingTableHeaderView.swift in Sources */,
 				5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */,
 				5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */,
 				5E18CE0520C0561B008FE5B5 /* AuthTwoFactorTabmanRouter.swift in Sources */,
 				5E1CF838218C02FC00541C70 /* TweeActiveTextField.swift in Sources */,
 				5E5BC29221868A44009E4BA3 /* FundAssetsViewModel.swift in Sources */,
-				5EF14D972181FAD500B3843A /* FundListViewModel.swift in Sources */,
+				5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */,
 				5ED520A121B465B600A8DF60 /* ChartSimple.swift in Sources */,
 				5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */,
 				5ED1141E21595E3300EC5385 /* PortfolioViewModel.swift in Sources */,
@@ -3552,7 +3544,7 @@
 				5E18CE0320C03E3A008FE5B5 /* AuthTwoFactorTabmanViewModel.swift in Sources */,
 				5ED5200421B465B000A8DF60 /* NotificationsAPI.swift in Sources */,
 				5ED5206A21B465B600A8DF60 /* LoginViewModel.swift in Sources */,
-				5E14CDA521B5829400388616 /* RatingsPageboyViewControllerDataSource.swift in Sources */,
+				5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */,
 				FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */,
 				5E12B38F20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift in Sources */,
 				FCB178722046CA0D00A482B7 /* ProgramsDataProvider.swift in Sources */,

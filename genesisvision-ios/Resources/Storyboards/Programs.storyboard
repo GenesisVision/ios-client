@@ -62,10 +62,10 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5DT-ji-mDf">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2s6-z7-eT3" customClass="СhoosePhotoView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="216" y="16" width="168" height="168"/>
+                                            <rect key="frame" x="103.5" y="16" width="168" height="168"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="5yO-0D-jMt">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>

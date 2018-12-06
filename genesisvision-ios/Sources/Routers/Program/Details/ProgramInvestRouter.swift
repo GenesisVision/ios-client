@@ -21,7 +21,7 @@ class ProgramInvestRouter: Router {
     
     // MARK: - Private methods
     private func investmentRequested(investedAmount: Double) {
-        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = InfoViewController.storyboardInstance(.auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = ProgramInvestSuccessViewModel(withRouter: router, investedAmount: investedAmount)
         present(viewController: viewController)
