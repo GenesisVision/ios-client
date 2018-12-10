@@ -58,7 +58,6 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
                     cell.amountValueLabel.text = text + value.rounded(withType: currency).toString() + " \(currency.rawValue)"
                 }
             }
-            
         }
         
         if let date = programRequest.date {

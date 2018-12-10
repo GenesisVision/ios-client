@@ -10,11 +10,13 @@ import UIKit
 
 protocol InRequestsDelegateManagerProtocol: class {
     func didCanceledRequest(completionResult: CompletionResult)
+    func didSelectRequest(at indexPath: IndexPath)
 }
 
 final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
     weak var inRequestsDelegate: InRequestsDelegateManagerProtocol?
+    var requestSelectable: Bool = true
     
     var inRequestsCellModelsForRegistration: [CellViewAnyModel.Type] {
         return [InRequestsTableViewCellViewModel.self]
@@ -38,6 +40,10 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if requestSelectable {
+            inRequestsDelegate?.didSelectRequest(at: indexPath)
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return programRequests?.requests?.count ?? 0
@@ -69,5 +75,17 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
         cancelRowAction.backgroundColor = UIColor.Cell.redTitle
         
         return [cancelRowAction]
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
     }
 }

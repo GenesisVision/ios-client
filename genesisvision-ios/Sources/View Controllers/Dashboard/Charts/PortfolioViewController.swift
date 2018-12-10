@@ -167,7 +167,6 @@ class PortfolioViewController: BaseViewController {
         bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
             tableView.separatorStyle = .none
             tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-            tableView.allowsSelection = false
             
             if let selectedChartAssetsDelegateManager = self?.viewModel.selectedChartAssetsDelegateManager {
                 selectedChartAssetsDelegateManager.tableView = tableView

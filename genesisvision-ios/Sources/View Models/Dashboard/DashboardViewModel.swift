@@ -60,10 +60,20 @@ final class DashboardViewModel {
     }
     
     // MARK: - Public methods
-
     func deselectChart() {
         if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
             pageboyDataSource.deselectChart()
+        }
+    }
+    
+    func didSelectRequest(at indexPath: IndexPath) {
+        guard let requests = inRequestsDelegateManager.programRequests?.requests, !requests.isEmpty else {
+            return
+        }
+        
+        let request = requests[indexPath.row]
+        if let assetId = request.programId?.uuidString, let type = request.programType, let assetType = AssetType(rawValue: type.rawValue) {
+            router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
     // MARK: - Private methods

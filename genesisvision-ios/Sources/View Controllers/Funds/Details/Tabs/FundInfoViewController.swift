@@ -77,6 +77,7 @@ class FundInfoViewController: BaseViewControllerWithTableView {
         
         bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
+        viewModel.inRequestsDelegateManager.requestSelectable = false
         viewModel.inRequestsDelegateManager.programRequests = programRequests
         
         bottomSheetController.addTableView { [weak self] tableView in
@@ -181,6 +182,9 @@ extension FundInfoViewController: ReloadDataProtocol {
 }
 
 extension FundInfoViewController: InRequestsDelegateManagerProtocol {
+    func didSelectRequest(at indexPath: IndexPath) {
+    }
+    
     func didCanceledRequest(completionResult: CompletionResult) {
         bottomSheetController.dismiss()
         

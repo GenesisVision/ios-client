@@ -234,6 +234,12 @@ extension DashboardViewController {
 }
 
 extension DashboardViewController: InRequestsDelegateManagerProtocol {
+    func didSelectRequest(at indexPath: IndexPath) {
+        bottomSheetController.dismiss()
+        
+        viewModel.didSelectRequest(at: indexPath)
+    }
+    
     func didCanceledRequest(completionResult: CompletionResult) {
         bottomSheetController.dismiss()
         

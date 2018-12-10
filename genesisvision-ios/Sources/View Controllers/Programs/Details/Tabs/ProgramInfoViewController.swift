@@ -80,6 +80,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         
         bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
+        viewModel.inRequestsDelegateManager.requestSelectable = false
         viewModel.inRequestsDelegateManager.programRequests = programRequests
         
         bottomSheetController.addTableView { [weak self] tableView in
@@ -186,6 +187,10 @@ extension ProgramInfoViewController: ReloadDataProtocol {
 }
 
 extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
+    func didSelectRequest(at indexPath: IndexPath) {
+        
+    }
+    
     func didCanceledRequest(completionResult: CompletionResult) {
         bottomSheetController.dismiss()
         

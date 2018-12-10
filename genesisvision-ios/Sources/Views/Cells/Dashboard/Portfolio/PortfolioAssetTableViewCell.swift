@@ -54,15 +54,15 @@ class PortfolioAssetTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        backgroundColor = UIColor.Cell.bg
+        contentView.backgroundColor = UIColor.Cell.bg
+        tintColor = UIColor.Cell.title
+        accessoryView?.backgroundColor = UIColor.Cell.bg
+        
+        selectionStyle = .none
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     // MARK: - Public methods
     func configure() {
         

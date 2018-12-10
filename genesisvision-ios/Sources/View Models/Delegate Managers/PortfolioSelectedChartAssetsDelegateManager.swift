@@ -27,6 +27,8 @@ final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDe
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        viewModel?.didSelectAsset(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,6 +42,20 @@ final class PortfolioSelectedChartAssetsDelegateManager: NSObject, UITableViewDe
         
         
         return TableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard viewModel?.didHighlightRow(at: indexPath) ?? false else { return }
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
     }
 }
 

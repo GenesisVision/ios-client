@@ -49,7 +49,7 @@ final class PortfolioViewModel {
         self.selectedChartAssetsDelegateManager = PortfolioSelectedChartAssetsDelegateManager(with: self)
     }
     
-    // MARK: - Methods
+    // MARK: - Public methods
     func selectChart(_ date: Date) -> (ValueChartBar?, ChartSimple?) {
         var balanceChart: ChartSimple? = nil
         
@@ -69,6 +69,22 @@ final class PortfolioViewModel {
         guard let requests = programRequests?.requests, requests.count > 0 else { return }
         
         router.show(routeType: .requests(programRequests: programRequests))
+    }
+    
+    func didSelectAsset(at indexPath: IndexPath) {
+        guard !viewModels.isEmpty else {
+            return
+        }
+        
+        let selectedModel = viewModels[indexPath.row]
+        if let assetId = selectedModel.assetsValue?.id?.uuidString, let type = selectedModel.assetsValue?.type, let assetType = AssetType(rawValue: type.rawValue) {
+            router.showAssetDetails(with: assetId, assetType: assetType)
+        }
+    }
+    
+    func didHighlightRow(at indexPath: IndexPath) -> Bool {
+        let selectedModel = viewModels[indexPath.row]
+        return selectedModel.otherAssetsValue == nil
     }
 }
 
