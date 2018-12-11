@@ -21,12 +21,13 @@ open class RatesModelRates: Codable {
     public var BCH: [RateItem]?
     public var LTC: [RateItem]?
     public var DOGE: [RateItem]?
+    public var BNB: [RateItem]?
     public var USD: [RateItem]?
     public var EUR: [RateItem]?
 
 
     
-    public init(undefined: [RateItem]?, GVT: [RateItem]?, ETH: [RateItem]?, BTC: [RateItem]?, ADA: [RateItem]?, USDT: [RateItem]?, XRP: [RateItem]?, BCH: [RateItem]?, LTC: [RateItem]?, DOGE: [RateItem]?, USD: [RateItem]?, EUR: [RateItem]?) {
+    public init(undefined: [RateItem]?, GVT: [RateItem]?, ETH: [RateItem]?, BTC: [RateItem]?, ADA: [RateItem]?, USDT: [RateItem]?, XRP: [RateItem]?, BCH: [RateItem]?, LTC: [RateItem]?, DOGE: [RateItem]?, BNB: [RateItem]?, USD: [RateItem]?, EUR: [RateItem]?) {
         self.undefined = undefined
         self.GVT = GVT
         self.ETH = ETH
@@ -37,6 +38,7 @@ open class RatesModelRates: Codable {
         self.BCH = BCH
         self.LTC = LTC
         self.DOGE = DOGE
+        self.BNB = BNB
         self.USD = USD
         self.EUR = EUR
     }
@@ -58,6 +60,7 @@ open class RatesModelRates: Codable {
         try container.encodeIfPresent(BCH, forKey: "BCH")
         try container.encodeIfPresent(LTC, forKey: "LTC")
         try container.encodeIfPresent(DOGE, forKey: "DOGE")
+        try container.encodeIfPresent(BNB, forKey: "BNB")
         try container.encodeIfPresent(USD, forKey: "USD")
         try container.encodeIfPresent(EUR, forKey: "EUR")
     }
@@ -77,6 +80,7 @@ open class RatesModelRates: Codable {
         BCH = try container.decodeIfPresent([RateItem].self, forKey: "BCH")
         LTC = try container.decodeIfPresent([RateItem].self, forKey: "LTC")
         DOGE = try container.decodeIfPresent([RateItem].self, forKey: "DOGE")
+        BNB = try container.decodeIfPresent([RateItem].self, forKey: "BNB")
         USD = try container.decodeIfPresent([RateItem].self, forKey: "USD")
         EUR = try container.decodeIfPresent([RateItem].self, forKey: "EUR")
     }

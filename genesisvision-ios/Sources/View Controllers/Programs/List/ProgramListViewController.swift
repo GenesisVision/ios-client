@@ -158,13 +158,6 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         return 0
-        
-//        switch viewModel.assetType {
-//        case .rating:
-//            return 60.0
-//        default:
-//            return 0
-//        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -178,19 +171,6 @@ extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         return nil
-//        switch viewModel.assetType {
-//        case .rating:
-//            let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
-//            if let levelUpData = viewModel.filterModel.levelUpData {
-//                header.configure(levelUpData)
-//            }
-//
-//            ratingTableHeaderView = header
-//
-//            return ratingTableHeaderView
-//        default:
-//            return nil
-//        }
     }
     
     // MARK: - UITableViewDataSource

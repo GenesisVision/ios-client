@@ -35,6 +35,7 @@ class PlatformManager {
     
     public private(set) var platformInfo: PlatformInfo?
     public private(set) var filterConstants: FilterConstants?
+    public private(set) var programsLevelsInfo: ProgramsLevelsInfo?
     
     init() {
         filterConstants = getFilterConstants(nil)
@@ -47,6 +48,24 @@ class PlatformManager {
         
         BaseDataProvider.getPlatformInfo(completion: { [weak self] (viewModel) in
             self?.platformInfo = viewModel
+            completion(viewModel)
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
+    
+    func getProgramsLevelsInfo(completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
+        if let programsLevelsInfo = programsLevelsInfo {
+            completion(programsLevelsInfo)
+        }
+        
+        BaseDataProvider.getProgramsLevelsInfo(completion: { [weak self] (viewModel) in
+            self?.programsLevelsInfo = viewModel
             completion(viewModel)
         }) { (result) in
             switch result {

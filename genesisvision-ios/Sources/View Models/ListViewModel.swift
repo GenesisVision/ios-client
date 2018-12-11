@@ -225,7 +225,7 @@ final class ListViewModel: ListViewModelProtocol {
         assetList.programs?.forEach({ (asset) in
             guard let programListRouter = self.router as? ListRouter else { return }
             
-            let viewModel = ProgramTableViewCellViewModel(asset: asset, delegate: programListRouter.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = ProgramTableViewCellViewModel(asset: asset, isRating: filterModel.levelUpData != nil, delegate: programListRouter.currentController as? FavoriteStateChangeProtocol)
             viewModels.append(viewModel)
         })
 
@@ -338,7 +338,7 @@ extension ListViewModel {
                 assetList.programs?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, isRating: self?.filterModel.levelUpData != nil, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
                     viewModels.append(programTableViewCellViewModel)
                 })
                 

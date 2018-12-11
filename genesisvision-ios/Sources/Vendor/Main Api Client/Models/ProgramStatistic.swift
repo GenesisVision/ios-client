@@ -22,6 +22,7 @@ open class ProgramStatistic: Codable {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -36,6 +37,7 @@ open class ProgramStatistic: Codable {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }

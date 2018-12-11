@@ -221,12 +221,6 @@ extension ListViewModelProtocol {
         }
         
         return []
-//        switch assetType {
-//        case .rating:
-//            return [RatingTableHeaderView.self]
-//        default:
-//            return []
-//        }
     }
     
     func modelsCount() -> Int {

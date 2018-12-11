@@ -105,6 +105,71 @@ open class PlatformAPI {
     }
 
     /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10PlatformLevelsGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Investment programs levels
+     
+     - parameter currency: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10PlatformLevelsGet(currency: Currency_v10PlatformLevelsGet? = nil, completion: @escaping ((_ data: ProgramsLevelsInfo?,_ error: Error?) -> Void)) {
+        v10PlatformLevelsGetWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Investment programs levels
+     - GET /v1.0/platform/levels
+     - examples: [{contentType=application/json, example={
+  "levels" : [ {
+    "level" : 0,
+    "investmentLimit" : 6.027456183070403
+  }, {
+    "level" : 0,
+    "investmentLimit" : 6.027456183070403
+  } ]
+}}]
+     
+     - parameter currency: (query)  (optional)
+
+     - returns: RequestBuilder<ProgramsLevelsInfo> 
+     */
+    open class func v10PlatformLevelsGetWithRequestBuilder(currency: Currency_v10PlatformLevelsGet? = nil) -> RequestBuilder<ProgramsLevelsInfo> {
+        let path = "/v1.0/platform/levels"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "currency": currency?.rawValue
+        ])
+        
+
+        let requestBuilder: RequestBuilder<ProgramsLevelsInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Platform statistic
      
      - parameter completion: completion handler to receive the data and the error objects

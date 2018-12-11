@@ -438,6 +438,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -682,6 +683,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -809,6 +811,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -837,7 +840,7 @@ open class ManagerAPI {
      Manager funds
      - GET /v1.0/manager/funds
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 5,
   "funds" : [ {
     "totalAssetsCount" : 9,
     "statistic" : {
@@ -845,13 +848,13 @@ open class ManagerAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 6.683562403749608,
-      "drawdownPercent" : 8.762042012749001,
+      "profitPercent" : 8.762042012749001,
+      "drawdownPercent" : 9.018348186070783,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -865,18 +868,18 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -884,16 +887,16 @@ open class ManagerAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.778324963048013,
+      "pendingOutput" : 6.878052220127876,
       "hasNotifications" : true,
-      "pendingInput" : 2.8841621266687802,
+      "pendingInput" : 6.778324963048013,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 3.5571952270680973,
-      "profit" : 6.965117697638846,
-      "withdrawPercent" : 6.438423552598547,
-      "invested" : 1.284659006116532,
+      "value" : 6.965117697638846,
+      "profit" : 1.284659006116532,
+      "withdrawPercent" : 3.5571952270680973,
+      "invested" : 2.8841621266687802,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -915,13 +918,13 @@ open class ManagerAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 6.683562403749608,
-      "drawdownPercent" : 8.762042012749001,
+      "profitPercent" : 8.762042012749001,
+      "drawdownPercent" : 9.018348186070783,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -935,18 +938,18 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -954,16 +957,16 @@ open class ManagerAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.778324963048013,
+      "pendingOutput" : 6.878052220127876,
       "hasNotifications" : true,
-      "pendingInput" : 2.8841621266687802,
+      "pendingInput" : 6.778324963048013,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 3.5571952270680973,
-      "profit" : 6.965117697638846,
-      "withdrawPercent" : 6.438423552598547,
-      "invested" : 1.284659006116532,
+      "value" : 6.965117697638846,
+      "profit" : 1.284659006116532,
+      "withdrawPercent" : 3.5571952270680973,
+      "invested" : 2.8841621266687802,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1431,6 +1434,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1718,6 +1722,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1853,6 +1858,7 @@ open class ManagerAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -1881,7 +1887,7 @@ open class ManagerAPI {
      Manager programs
      - GET /v1.0/manager/programs
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 9,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -1917,6 +1923,7 @@ open class ManagerAPI {
     "rating" : {
       "rating" : 4,
       "canLevelUp" : true,
+      "topPercent" : 1.2315135367772556,
       "profit" : 7.386281948385884
     },
     "description" : "description",
@@ -1924,7 +1931,7 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1932,16 +1939,16 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
+      "pendingOutput" : 4.965218492984954,
       "hasNotifications" : true,
-      "pendingInput" : 7.457744773683766,
+      "pendingInput" : 1.1730742509559433,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.2315135367772556,
+      "gvtValue" : 1.0246457001441578,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
-      "invested" : 6.84685269835264,
+      "value" : 1.4894159098541704,
+      "profit" : 6.84685269835264,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1992,6 +1999,7 @@ open class ManagerAPI {
     "rating" : {
       "rating" : 4,
       "canLevelUp" : true,
+      "topPercent" : 1.2315135367772556,
       "profit" : 7.386281948385884
     },
     "description" : "description",
@@ -1999,7 +2007,7 @@ open class ManagerAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -2007,16 +2015,16 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
+      "pendingOutput" : 4.965218492984954,
       "hasNotifications" : true,
-      "pendingInput" : 7.457744773683766,
+      "pendingInput" : 1.1730742509559433,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.2315135367772556,
+      "gvtValue" : 1.0246457001441578,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
-      "invested" : 6.84685269835264,
+      "value" : 1.4894159098541704,
+      "profit" : 6.84685269835264,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

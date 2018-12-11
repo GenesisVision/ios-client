@@ -10,6 +10,7 @@ import UIKit.UINavigationController
 
 enum ProgramRouteType {
     case notifications
+    case aboutLevels
 }
 
 class ProgramRouter: Router {
@@ -34,6 +35,8 @@ class ProgramRouter: Router {
         case .notifications:
             let vc = BaseViewController()
             navigationController?.pushViewController(vc, animated: true)
+        case .aboutLevels:
+            showAboutLevels()
         }
     }
 }

@@ -38,6 +38,10 @@ final class ProgramViewModel {
         router.show(routeType: .notifications)
     }
     
+    func showAboutLevels() {
+        router.show(routeType: .aboutLevels)
+    }
+    
     func fetch(completion: @escaping CompletionBlock) {
         let сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
         ProgramsDataProvider.get(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in

@@ -111,13 +111,6 @@ open class RateAPI {
      - GET /v1.0/rate
      - examples: [{contentType=application/json, example={
   "rates" : {
-    "BTC" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    } ],
     "Undefined" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
@@ -146,21 +139,7 @@ open class RateAPI {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     } ],
-    "XRP" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    } ],
     "USD" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
-    } ],
-    "ETH" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     }, {
@@ -175,6 +154,34 @@ open class RateAPI {
       "currency" : "Undefined"
     } ],
     "DOGE" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "BTC" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "XRP" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "BNB" : [ {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    }, {
+      "rate" : 0.8008281904610115,
+      "currency" : "Undefined"
+    } ],
+    "ETH" : [ {
       "rate" : 0.8008281904610115,
       "currency" : "Undefined"
     }, {

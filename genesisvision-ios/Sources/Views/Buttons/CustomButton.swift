@@ -323,7 +323,6 @@ class LevelButton: UIButton {
         commonInit()
     }
     
-    
     func commonInit() {
         titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
 

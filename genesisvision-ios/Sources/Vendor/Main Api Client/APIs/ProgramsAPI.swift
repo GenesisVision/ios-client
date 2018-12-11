@@ -256,6 +256,7 @@ open class ProgramsAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -324,6 +325,7 @@ open class ProgramsAPI {
   "rating" : {
     "rating" : 4,
     "canLevelUp" : true,
+    "topPercent" : 1.2315135367772556,
     "profit" : 7.386281948385884
   },
   "description" : "description",
@@ -334,16 +336,16 @@ open class ProgramsAPI {
     "canWithdraw" : true,
     "canInvest" : true,
     "canClosePeriod" : true,
-    "pendingOutput" : 1.1730742509559433,
+    "pendingOutput" : 4.965218492984954,
     "hasNotifications" : true,
-    "pendingInput" : 7.457744773683766,
+    "pendingInput" : 1.1730742509559433,
     "isOwnProgram" : true,
     "isReinvest" : true,
-    "gvtValue" : 1.2315135367772556,
+    "gvtValue" : 1.0246457001441578,
     "isFinishing" : true,
-    "value" : 1.0246457001441578,
-    "profit" : 1.4894159098541704,
-    "invested" : 6.84685269835264,
+    "value" : 1.4894159098541704,
+    "profit" : 6.84685269835264,
+    "invested" : 7.457744773683766,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -520,6 +522,7 @@ open class ProgramsAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -538,6 +541,7 @@ open class ProgramsAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -579,7 +583,7 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 9,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
@@ -615,6 +619,7 @@ open class ProgramsAPI {
     "rating" : {
       "rating" : 4,
       "canLevelUp" : true,
+      "topPercent" : 1.2315135367772556,
       "profit" : 7.386281948385884
     },
     "description" : "description",
@@ -622,7 +627,7 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -630,16 +635,16 @@ open class ProgramsAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
+      "pendingOutput" : 4.965218492984954,
       "hasNotifications" : true,
-      "pendingInput" : 7.457744773683766,
+      "pendingInput" : 1.1730742509559433,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.2315135367772556,
+      "gvtValue" : 1.0246457001441578,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
-      "invested" : 6.84685269835264,
+      "value" : 1.4894159098541704,
+      "profit" : 6.84685269835264,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -690,6 +695,7 @@ open class ProgramsAPI {
     "rating" : {
       "rating" : 4,
       "canLevelUp" : true,
+      "topPercent" : 1.2315135367772556,
       "profit" : 7.386281948385884
     },
     "description" : "description",
@@ -697,7 +703,7 @@ open class ProgramsAPI {
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -705,16 +711,16 @@ open class ProgramsAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
+      "pendingOutput" : 4.965218492984954,
       "hasNotifications" : true,
-      "pendingInput" : 7.457744773683766,
+      "pendingInput" : 1.1730742509559433,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.2315135367772556,
+      "gvtValue" : 1.0246457001441578,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
-      "invested" : 6.84685269835264,
+      "value" : 1.4894159098541704,
+      "profit" : 6.84685269835264,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

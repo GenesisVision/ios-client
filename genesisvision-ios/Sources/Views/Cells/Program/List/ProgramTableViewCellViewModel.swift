@@ -11,6 +11,7 @@ import Kingfisher
 
 struct ProgramTableViewCellViewModel {
     let asset: ProgramDetails
+    let isRating: Bool
     weak var delegate: FavoriteStateChangeProtocol?
 }
 
@@ -45,8 +46,27 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.assetId = assetId
         }
         
+        cell.assetLogoImageView.levelButton.setImage(nil, for: .normal)
+        cell.assetLogoImageView.levelButton.setTitle(nil, for: .normal)
+        
+        cell.bgColor = UIColor.Cell.bg
+        
+        cell.ratingPlaceHeightConstraint.constant = isRating ? 24.0 : 0.0
+        
         if let level = asset.level {
-            cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+            if isRating, let rating = asset.rating, let canLevelUp = rating.canLevelUp, canLevelUp {
+                cell.assetLogoImageView.levelButton.setImage(#imageLiteral(resourceName: "img_arrow_up_rating"), for: .normal)
+                cell.assetLogoImageView.levelButton.backgroundColor = UIColor.Level.color(for: level)
+                cell.bgColor = UIColor.Cell.ratingBg
+            } else {
+                cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+            }
+        }
+        
+        cell.ratingLabel.isHidden = !isRating
+        
+        if isRating, let rating = asset.rating, let ratingPlace = rating.rating {
+            cell.ratingLabel.text = ratingPlace.toString()
         }
         
         if let currency = asset.currency {

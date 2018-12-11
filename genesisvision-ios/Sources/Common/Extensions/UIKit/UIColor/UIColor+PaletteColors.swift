@@ -19,6 +19,7 @@ extension UIColor {
         
         static var darkBackground: UIColor { return #colorLiteral(red: 0.07450980392, green: 0.1176470588, blue: 0.1490196078, alpha: 1) }                          //131E26
         static var darkCell: UIColor { return #colorLiteral(red: 0.1215686275, green: 0.168627451, blue: 0.2078431373, alpha: 1) }                                //1F2B35
+        static var darkRatingCell: UIColor { return #colorLiteral(red: 0.09803921569, green: 0.1803921569, blue: 0.2470588235, alpha: 1) }                          //192E3F
         
         static var darkSectionHeader: UIColor { return #colorLiteral(red: 0.06666666667, green: 0.1019607843, blue: 0.1254901961, alpha: 1) }                       //111A20
         
@@ -55,7 +56,8 @@ extension UIColor {
         
         static var yellow: UIColor { return #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1) }                                  //F5A623
 
-        static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6431372549, blue: 0.7490196078, alpha: 1) }                                    //66A4BF
+        static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6509803922, blue: 0.7568627451, alpha: 1) }                                    //34A6C1
+        
         static var purple: UIColor { return #colorLiteral(red: 0.3411764706, green: 0.3450980392, blue: 0.6470588235, alpha: 1) }                                  //5758A5
 
         static var powderPink: UIColor { return #colorLiteral(red: 1, green: 0.6470588235, blue: 0.8, alpha: 1) }                              //ffa5cc
@@ -269,10 +271,14 @@ extension UIColor {
     struct Cell {
         static var separator: UIColor { return Common.separator }
         static var bg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkCell : Common.white }
+        static var ratingBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkRatingCell : Common.white }
         static var selectedBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.uglyBlue.withAlphaComponent(0.7) : Common.lightGray }
         static var headerBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkSectionHeader : Common.darkSectionHeader }
         
         static var title: UIColor { return AppearanceController.theme == .darkTheme ? Common.darkTextPrimary : Common.darkSlateBlue }
+        
+        static var ratingTagTitle: UIColor { return Common.blue }
+        static var ratingTagBg: UIColor { return Common.blue.withAlphaComponent(0.2) }
         
         static var redTitle: UIColor { return AppearanceController.theme == .darkTheme ? Common.red : Common.red }
         static var redBg: UIColor { return AppearanceController.theme == .darkTheme ? Common.redBg : Common.redBg }
@@ -299,7 +305,7 @@ extension UIColor {
         static var third: UIColor { return #colorLiteral(red: 0.368627451, green: 0.4156862745, blue: 0.7450980392, alpha: 1) }                                    //5E6ABE
         static var fourth: UIColor { return #colorLiteral(red: 0.431372549, green: 0.5058823529, blue: 0.8862745098, alpha: 1) }                                   //6E81E2
         static var fifth: UIColor { return #colorLiteral(red: 0.3137254902, green: 0.5803921569, blue: 0.8196078431, alpha: 1) }                                    //5094D1
-        static var sixth: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6509803922, blue: 0.7568627451, alpha: 1) }                                    //34A6C1
+        static var sixth: UIColor { return Common.blue }
         static var seventh: UIColor { return #colorLiteral(red: 0.08235294118, green: 0.7333333333, blue: 0.6862745098, alpha: 1) }                                  //15BBAF
         
         static func color(for level: Int) -> UIColor {

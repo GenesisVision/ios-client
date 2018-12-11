@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,25 +23,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgramTableViewCell" rowHeight="311" id="KGk-i7-Jjw" customClass="ProgramTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="333" height="311"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgramTableViewCell" rowHeight="422" id="KGk-i7-Jjw" customClass="ProgramTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="361" height="422"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="333" height="310.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="361" height="421.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhC-FL-XlQ">
-                        <rect key="frame" x="0.0" y="0.0" width="333" height="380.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwY-0w-2ue" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="156.5" y="19" width="48" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="HgC-vQ-VnK"/>
+                            <constraint firstAttribute="height" constant="24" id="mcg-gJ-9qc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zN4-IX-FiD">
-                        <rect key="frame" x="30" y="30" width="273" height="320.5"/>
+                        <rect key="frame" x="30" y="59" width="301" height="330.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xv1-6M-0z1">
-                                <rect key="frame" x="0.0" y="0.0" width="273" height="60.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="301" height="60.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="SU9-lQ-fNy">
-                                        <rect key="frame" x="0.0" y="0.0" width="228.5" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="249" height="60.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iG3-wO-Vm5" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="60.5"/>
@@ -53,13 +59,12 @@
                                                             <constraint firstAttribute="width" constant="40" id="wtH-Dr-Qnx"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXT-Uf-pZd" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXT-Uf-pZd" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="28" y="17.5" width="26" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="CXT-Uf-pZd" secondAttribute="height" multiplier="1:1" id="6ld-6B-wlC"/>
                                                             <constraint firstAttribute="width" constant="26" id="cT0-4k-yUf"/>
                                                         </constraints>
-                                                        <state key="normal" title="1"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -76,7 +81,7 @@
                                                 </connections>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Z26-TH-PXe">
-                                                <rect key="frame" x="66" y="13.5" width="162.5" height="33.5"/>
+                                                <rect key="frame" x="66" y="13.5" width="183" height="33.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gqT-Bt-UAZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="92.5" height="16.5"/>
@@ -109,7 +114,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy2-tB-PY6" customClass="FavoriteButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="236.5" y="0.0" width="36.5" height="37"/>
+                                        <rect key="frame" x="257" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="kae-AX-arX"/>
                                             <constraint firstAttribute="width" secondItem="Dy2-tB-PY6" secondAttribute="height" multiplier="1:1" id="x34-20-Hvx"/>
@@ -123,19 +128,19 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yhp-9J-c7R">
-                                <rect key="frame" x="0.0" y="106.5" width="273" height="70"/>
+                                <rect key="frame" x="0.0" y="111.5" width="301" height="70"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf8-Ie-DjM">
-                                        <rect key="frame" x="0.0" y="0.0" width="177" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="205" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzn-bM-hio">
-                                                <rect key="frame" x="0.0" y="0.0" width="177" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="205" height="70"/>
                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="13"/>
                                                 <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JvI-96-Xpf" customClass="ChartView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="177" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="205" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
@@ -153,7 +158,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-ZQ-sb7">
-                                        <rect key="frame" x="185" y="1" width="88" height="68"/>
+                                        <rect key="frame" x="213" y="1" width="88" height="68"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsn-Ot-TFc" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="20"/>
@@ -195,13 +200,13 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c3b-lK-ryn">
-                                <rect key="frame" x="0.0" y="184.5" width="273" height="136"/>
+                                <rect key="frame" x="0.0" y="194.5" width="301" height="136"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-L2-2Gg">
-                                        <rect key="frame" x="0.0" y="0.0" width="273" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="301" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-il-rIy">
-                                                <rect key="frame" x="0.0" y="2.5" width="85.5" height="34.5"/>
+                                                <rect key="frame" x="0.0" y="3" width="95" height="34.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zeR-YU-5IA">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="16.5"/>
@@ -231,7 +236,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sf1-Bb-YUA">
-                                                <rect key="frame" x="93.5" y="2.5" width="86" height="34.5"/>
+                                                <rect key="frame" x="103" y="3" width="95" height="34.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e4V-HV-QRw" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="8" height="16.5"/>
@@ -248,7 +253,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="dGH-PM-kWn">
-                                                <rect key="frame" x="187.5" y="1" width="85.5" height="38"/>
+                                                <rect key="frame" x="206" y="1" width="95" height="38"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Cvi-1f-PSa">
                                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20"/>
@@ -283,16 +288,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vYo-Sa-d7W">
-                                        <rect key="frame" x="0.0" y="48" width="273" height="40"/>
+                                        <rect key="frame" x="0.0" y="48" width="301" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ev-NB-uN5" customClass="StatusButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="5" width="30" height="30"/>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="1vo-pk-Ly9">
-                                                <rect key="frame" x="38" y="4.5" width="235" height="31"/>
+                                                <rect key="frame" x="38" y="4.5" width="263" height="31"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qp0-Xe-N3V">
-                                                        <rect key="frame" x="76.5" y="0.0" width="158.5" height="31"/>
+                                                        <rect key="frame" x="104.5" y="0.0" width="158.5" height="31"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SKp-Wm-pbR">
                                                                 <rect key="frame" x="0.0" y="5.5" width="93.5" height="20"/>
@@ -339,16 +344,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZFN-SI-Ohn">
-                                        <rect key="frame" x="0.0" y="96" width="273" height="40"/>
+                                        <rect key="frame" x="0.0" y="96" width="301" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fL4-Hr-KuU">
-                                                <rect key="frame" x="0.0" y="0.0" width="273" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="301" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaX-aC-Bcd" customClass="FundAssetView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dww-VE-U0S">
-                                                                <rect key="frame" x="6" y="10" width="57.5" height="20"/>
+                                                                <rect key="frame" x="11" y="10" width="57.5" height="20"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pKa-pV-OSF">
                                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -381,10 +386,10 @@
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-kP-iwZ" customClass="FundAssetView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="77.5" y="0.0" width="70" height="40"/>
+                                                        <rect key="frame" x="87" y="0.0" width="79" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dfO-5v-DbV">
-                                                                <rect key="frame" x="6.5" y="10" width="57.5" height="20"/>
+                                                                <rect key="frame" x="11" y="10" width="57.5" height="20"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9nR-oh-jdh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -416,10 +421,10 @@
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5T-fK-D9X" customClass="FundAssetView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="155.5" y="0.0" width="69.5" height="40"/>
+                                                        <rect key="frame" x="174" y="0.0" width="79" height="40"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bjF-hS-Hcp">
-                                                                <rect key="frame" x="6" y="10" width="57.5" height="20"/>
+                                                                <rect key="frame" x="11" y="10" width="57.5" height="20"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-an-3WC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -451,7 +456,7 @@
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1t0-Lc-2TW" customClass="FundAssetView" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="233" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="261" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vw-DO-1s0" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -494,21 +499,18 @@
                 </subviews>
                 <color key="backgroundColor" red="0.12156862745098039" green="0.16862745098039217" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="nhC-FL-XlQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0s2-7f-Ldi"/>
                     <constraint firstItem="zN4-IX-FiD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="1bZ-sI-Jkk"/>
                     <constraint firstAttribute="trailing" secondItem="zN4-IX-FiD" secondAttribute="trailing" constant="30" id="6pb-va-cJM"/>
-                    <constraint firstAttribute="bottom" secondItem="nhC-FL-XlQ" secondAttribute="bottom" id="FmV-DE-016"/>
-                    <constraint firstItem="zN4-IX-FiD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="Qf8-7b-nY6"/>
-                    <constraint firstItem="nhC-FL-XlQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="diW-oY-dzf"/>
-                    <constraint firstAttribute="trailing" secondItem="nhC-FL-XlQ" secondAttribute="trailing" id="eZi-Gk-hPz"/>
-                    <constraint firstAttribute="bottom" secondItem="zN4-IX-FiD" secondAttribute="bottom" constant="30" id="qVh-No-WWJ"/>
+                    <constraint firstItem="SwY-0w-2ue" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="9ym-6y-BZE"/>
+                    <constraint firstItem="SwY-0w-2ue" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Mbp-eP-n0S"/>
+                    <constraint firstAttribute="bottom" secondItem="zN4-IX-FiD" secondAttribute="bottom" constant="32" id="qVh-No-WWJ"/>
+                    <constraint firstItem="zN4-IX-FiD" firstAttribute="top" secondItem="SwY-0w-2ue" secondAttribute="bottom" constant="16" id="sov-YR-7le"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="assetLogoImageView" destination="iG3-wO-Vm5" id="VVY-Lb-kcJ"/>
-                <outlet property="backgroundView" destination="nhC-FL-XlQ" id="bB4-eN-6pX"/>
                 <outlet property="chartView" destination="JvI-96-Xpf" id="ZE9-TV-gL2"/>
                 <outlet property="currencyLabel" destination="bsn-Ot-TFc" id="p0x-0e-obu"/>
                 <outlet property="dashboardBottomStackView" destination="vYo-Sa-d7W" id="sRQ-JJ-Ccy"/>
@@ -525,6 +527,8 @@
                 <outlet property="periodLeftProgressView" destination="OOb-Mc-BeD" id="0Ee-we-vnc"/>
                 <outlet property="profitPercentLabel" destination="waZ-UU-3eb" id="rYP-Js-Pp2"/>
                 <outlet property="profitValueLabel" destination="HIW-Ax-xUy" id="kMN-Qf-dp5"/>
+                <outlet property="ratingLabel" destination="SwY-0w-2ue" id="8QH-7j-ptm"/>
+                <outlet property="ratingPlaceHeightConstraint" destination="mcg-gJ-9qc" id="wTc-hL-zWR"/>
                 <outlet property="reinvestLabel" destination="Sih-FJ-okz" id="FRr-A8-qIX"/>
                 <outlet property="reinvestSwitch" destination="dNv-XR-PkX" id="gD1-TX-8F3"/>
                 <outlet property="reinvestTooltip" destination="yF4-cZ-yto" id="Zmm-XV-4Su"/>
@@ -541,7 +545,7 @@
                 <outlet property="titleLabel" destination="uuZ-15-n94" id="oar-dk-DrK"/>
                 <outlet property="viewForChartView" destination="yf8-Ie-DjM" id="J8R-l4-uTQ"/>
             </connections>
-            <point key="canvasLocation" x="90.9375" y="169.54225352112675"/>
+            <point key="canvasLocation" x="110.86956521739131" y="206.25"/>
         </tableViewCell>
     </objects>
     <resources>

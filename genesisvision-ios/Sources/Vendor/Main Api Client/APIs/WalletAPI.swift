@@ -76,6 +76,7 @@ open class WalletAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }

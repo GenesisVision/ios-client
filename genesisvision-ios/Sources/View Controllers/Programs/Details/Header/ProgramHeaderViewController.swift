@@ -9,7 +9,13 @@
 import UIKit
 import Kingfisher
 
+protocol ProgramHeaderViewControllerProtocol: class {
+    func aboutLevelButtonDidPress()
+}
+
 class ProgramHeaderViewController: BaseViewController {
+    // MARK: - Variables
+    weak var delegate: ProgramHeaderViewControllerProtocol?
     
     @IBOutlet weak var activityIndicatorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -60,6 +66,14 @@ class ProgramHeaderViewController: BaseViewController {
         }
     }
     @IBOutlet weak var currencyLabel: CurrencyLabel!
+    @IBOutlet weak var ratingTagLabel: RoundedLabel! {
+        didSet {
+            ratingTagLabel.isHidden = true
+            ratingTagLabel.text = "TOP 10%"
+            ratingTagLabel.textColor = UIColor.Cell.ratingTagTitle
+            ratingTagLabel.backgroundColor = UIColor.Cell.ratingTagBg
+        }
+    }
     
     @IBOutlet weak var labelsLeadingConstraint: NSLayoutConstraint!
     
@@ -69,6 +83,18 @@ class ProgramHeaderViewController: BaseViewController {
         
         view.backgroundColor = UIColor.Cell.bg
         activityIndicator.startAnimating()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.levelButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.levelButton.transform = CGAffineTransform.identity
+            }
+        })
     }
     
     // MARK: - Public methods
@@ -85,6 +111,7 @@ class ProgramHeaderViewController: BaseViewController {
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
         self.currencyLabel.alpha = 1.0 - offset * 2
+        self.ratingTagLabel.alpha = 1.0 - offset * 2
         self.investedImageView.alpha = 1.0 - offset * 2
         
         self.headerTitleImageView.alpha = offset
@@ -130,5 +157,14 @@ class ProgramHeaderViewController: BaseViewController {
         if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {
             self.investedImageView.isHidden = !isInvested
         }
+        
+        if let rating = programDetailsFull?.rating, let canLevelUp = rating.canLevelUp {
+            ratingTagLabel.isHidden = !canLevelUp
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func aboutLevelButtonAction(_ sender: UIButton) {
+        delegate?.aboutLevelButtonDidPress()
     }
 }

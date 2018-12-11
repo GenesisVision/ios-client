@@ -334,6 +334,7 @@ open class FundsAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -404,16 +405,16 @@ open class FundsAPI {
     "canInvest" : true,
     "canClosePeriod" : true,
     "canReallocate" : true,
-    "pendingOutput" : 6.778324963048013,
+    "pendingOutput" : 6.878052220127876,
     "hasNotifications" : true,
-    "pendingInput" : 2.8841621266687802,
+    "pendingInput" : 6.778324963048013,
     "isOwnProgram" : true,
     "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
     "isFinishing" : true,
-    "value" : 3.5571952270680973,
-    "profit" : 6.965117697638846,
-    "withdrawPercent" : 6.438423552598547,
-    "invested" : 1.284659006116532,
+    "value" : 6.965117697638846,
+    "profit" : 1.284659006116532,
+    "withdrawPercent" : 3.5571952270680973,
+    "invested" : 2.8841621266687802,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -486,6 +487,7 @@ open class FundsAPI {
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
+        case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
     }
@@ -521,7 +523,7 @@ open class FundsAPI {
      Funds list
      - GET /v1.0/funds
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 5,
   "funds" : [ {
     "totalAssetsCount" : 9,
     "statistic" : {
@@ -529,13 +531,13 @@ open class FundsAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 6.683562403749608,
-      "drawdownPercent" : 8.762042012749001,
+      "profitPercent" : 8.762042012749001,
+      "drawdownPercent" : 9.018348186070783,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -549,18 +551,18 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -568,16 +570,16 @@ open class FundsAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.778324963048013,
+      "pendingOutput" : 6.878052220127876,
       "hasNotifications" : true,
-      "pendingInput" : 2.8841621266687802,
+      "pendingInput" : 6.778324963048013,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 3.5571952270680973,
-      "profit" : 6.965117697638846,
-      "withdrawPercent" : 6.438423552598547,
-      "invested" : 1.284659006116532,
+      "value" : 6.965117697638846,
+      "profit" : 1.284659006116532,
+      "withdrawPercent" : 3.5571952270680973,
+      "invested" : 2.8841621266687802,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -599,13 +601,13 @@ open class FundsAPI {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "profitPercent" : 6.683562403749608,
-      "drawdownPercent" : 8.762042012749001,
+      "profitPercent" : 8.762042012749001,
+      "drawdownPercent" : 9.018348186070783,
       "balanceSecondary" : {
         "amount" : 5.962133916683182,
         "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
@@ -619,18 +621,18 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.369310271410669
+      "percent" : 6.683562403749608
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 4.965218492984954
+      "share" : 5.025004791520295
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -638,16 +640,16 @@ open class FundsAPI {
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.778324963048013,
+      "pendingOutput" : 6.878052220127876,
       "hasNotifications" : true,
-      "pendingInput" : 2.8841621266687802,
+      "pendingInput" : 6.778324963048013,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 3.5571952270680973,
-      "profit" : 6.965117697638846,
-      "withdrawPercent" : 6.438423552598547,
-      "invested" : 1.284659006116532,
+      "value" : 6.965117697638846,
+      "profit" : 1.284659006116532,
+      "withdrawPercent" : 3.5571952270680973,
+      "invested" : 2.8841621266687802,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

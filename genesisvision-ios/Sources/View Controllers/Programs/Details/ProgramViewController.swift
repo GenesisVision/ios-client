@@ -60,6 +60,7 @@ class ProgramViewController: BaseViewController {
         if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
             segue.identifier == "ProgramHeaderViewControllerSegue" {
             self.viewModel?.router?.programHeaderViewController = programHeaderViewController
+            programHeaderViewController.delegate = self
             self.headerViewController = programHeaderViewController
         } else if let tabmanViewController = segue.destination as? ProgramTabmanViewController,
             segue.identifier == "ProgramTabmanViewControllerSegue" {
@@ -148,7 +149,7 @@ class ProgramViewController: BaseViewController {
         
         showProgressHUD()
         self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:
@@ -288,3 +289,29 @@ extension ProgramViewController: ReloadDataProtocol {
         }
     }
 }
+
+// MARK: - ProgramHeaderViewControllerProtocol
+extension ProgramViewController: ProgramHeaderViewControllerProtocol {
+    func aboutLevelButtonDidPress() {
+        let aboutLevelView = AboutLevelView.viewFromNib()
+        aboutLevelView.delegate = self
+        
+        aboutLevelView.configure(viewModel.programDetailsFull?.rating, level: viewModel.programDetailsFull?.level)
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.initializeHeight = 270
+        bottomSheetController.addContentsView(aboutLevelView)
+        bottomSheetController.present()
+    }
+}
+
+// MARK: - AboutLevelViewProtocol
+extension ProgramViewController: AboutLevelViewProtocol {
+    func aboutLevelsButtonDidPress() {
+        bottomSheetController.dismiss()
+        
+        viewModel.showAboutLevels()
+    }
+}
+

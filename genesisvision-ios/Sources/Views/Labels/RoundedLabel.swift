@@ -75,9 +75,6 @@ class CurrencyLabel: RoundedLabel {
     override func commonInit() {
         super.commonInit()
 
-//        backgroundColor = UIColor.Cell.greenTitle.withAlphaComponent(0.1)
-//        textColor = UIColor.Cell.greenTitle
-        
         if let text = text {
             let currencyType = CurrencyType(rawValue: text)
             let currencyColor = currencyType?.currencyColor

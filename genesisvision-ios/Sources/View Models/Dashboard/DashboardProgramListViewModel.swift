@@ -21,7 +21,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
-    private var programsList: ProgramsList?
+    
     
     var filterModel: FilterModel = FilterModel()
     
@@ -234,10 +234,6 @@ extension DashboardProgramListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard programsList != nil else {
-            return nil
-        }
-        
         return activePrograms ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
     }
     
@@ -291,8 +287,6 @@ extension DashboardProgramListViewModel {
 
         DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            self?.programsList = programsList
             
             var viewModels = [DashboardProgramTableViewCellViewModel]()
             

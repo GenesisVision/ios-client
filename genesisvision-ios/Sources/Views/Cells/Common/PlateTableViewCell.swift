@@ -28,6 +28,12 @@ class PlateTableViewCell: UITableViewCell {
         }
     }
 
+    var bgColor: UIColor = .white {
+        didSet {
+            shape.fillColor = bgColor.cgColor
+        }
+    }
+        
     private var plateAppearanceValue: PlateTableViewCellAppearance? {
         didSet {
             updateAppearance()
@@ -100,8 +106,8 @@ class PlateTableViewCell: UITableViewCell {
         guard let plateAppearance = plateAppearanceValue else {
             return
         }
-
-        shape.fillColor = plateAppearance.backgroundColor.cgColor
+        
+        shape.fillColor = bgColor.cgColor
 
         var newMargins = UIEdgeInsets.zero
         newMargins.left += plateAppearance.horizontalMarginValue

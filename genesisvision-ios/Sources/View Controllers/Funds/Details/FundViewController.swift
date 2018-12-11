@@ -143,7 +143,7 @@ class FundViewController: BaseViewController {
         
         showProgressHUD()
         self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
-            self?.hideHUD()
+            self?.hideAll()
             
             switch result {
             case .success:

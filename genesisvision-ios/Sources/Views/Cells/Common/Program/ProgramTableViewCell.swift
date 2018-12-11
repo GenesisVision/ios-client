@@ -39,6 +39,16 @@ class ProgramTableViewCell: PlateTableViewCell {
     @IBOutlet weak var assetLogoImageView: ProfileImageView!
     @IBOutlet weak var stackView: UIStackView!
 
+    @IBOutlet weak var ratingPlaceHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var ratingLabel: RoundedLabel! {
+        didSet {
+            ratingLabel.isHidden = true
+            ratingLabel.textColor = UIColor.Cell.subtitle
+            ratingLabel.backgroundColor = UIColor.black.withAlphaComponent(0.14)
+        }
+    }
+    
     @IBOutlet weak var favoriteButton: FavoriteButton!
     
     @IBOutlet weak var viewForChartView: UIView!
@@ -148,6 +158,9 @@ class ProgramTableViewCell: PlateTableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.ratingPlaceHeightConstraint.constant = 0.0
+        bgColor = UIColor.Cell.bg
     }
     
     // MARK: - Public methods

@@ -22,7 +22,6 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
-    private var fundList: FundsList?
     
     var filterModel: FilterModel = FilterModel()
     
@@ -211,10 +210,6 @@ extension DashboardFundListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard fundList != nil else {
-            return nil
-        }
-        
         return activeFunds ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
     }
     

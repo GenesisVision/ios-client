@@ -14,13 +14,15 @@ open class ProgramDetailsRating: Codable {
     public var rating: Int?
     public var profit: Double?
     public var canLevelUp: Bool?
+    public var topPercent: Double?
 
 
     
-    public init(rating: Int?, profit: Double?, canLevelUp: Bool?) {
+    public init(rating: Int?, profit: Double?, canLevelUp: Bool?, topPercent: Double?) {
         self.rating = rating
         self.profit = profit
         self.canLevelUp = canLevelUp
+        self.topPercent = topPercent
     }
     
 
@@ -33,6 +35,7 @@ open class ProgramDetailsRating: Codable {
         try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(profit, forKey: "profit")
         try container.encodeIfPresent(canLevelUp, forKey: "canLevelUp")
+        try container.encodeIfPresent(topPercent, forKey: "topPercent")
     }
 
     // Decodable protocol methods
@@ -43,6 +46,7 @@ open class ProgramDetailsRating: Codable {
         rating = try container.decodeIfPresent(Int.self, forKey: "rating")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         canLevelUp = try container.decodeIfPresent(Bool.self, forKey: "canLevelUp")
+        topPercent = try container.decodeIfPresent(Double.self, forKey: "topPercent")
     }
 }
 
