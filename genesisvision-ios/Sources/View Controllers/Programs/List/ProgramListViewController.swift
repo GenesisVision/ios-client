@@ -21,6 +21,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         didSet {
             setupSignInButton()
             setupTableConfiguration()
+            tableView.keyboardDismissMode = .onDrag
         }
     }
     
@@ -210,6 +211,7 @@ extension ProgramListViewController: UIViewControllerPreviewingDelegate {
 // MARK: - ReloadDataProtocol
 extension ProgramListViewController: ReloadDataProtocol {
     func didReloadData() {
+        hideAll()
         reloadData()
     }
 }

@@ -91,9 +91,11 @@ class ProgramHeaderViewController: BaseViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.levelButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         }, completion: { _ in
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.levelButton.transform = CGAffineTransform.identity
-            }
+            }, completion: { _ in
+                self.levelButton.layoutSubviews()
+            })
         })
     }
     

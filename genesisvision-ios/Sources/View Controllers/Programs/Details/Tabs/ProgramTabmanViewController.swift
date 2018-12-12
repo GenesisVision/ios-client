@@ -12,17 +12,10 @@ class ProgramTabmanViewController: BaseTabmanViewController<ProgramTabmanViewMod
     
     // MARK: - Variables
     weak var programInfoViewControllerProtocol: FavoriteStateChangeProtocol?
-    var scrollEnabled: Bool = true {
-        didSet {
-            //TODO:
-        }
-    }
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.bounces = false
     }
     
     // MARK: - Public Methods

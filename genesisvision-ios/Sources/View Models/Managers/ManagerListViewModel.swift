@@ -31,8 +31,6 @@ final class ManagerListViewModel: ListViewModelProtocol {
     
     var showFacets = false
     
-    private var managerList: ManagersList?
-    
     var bottomViewType: BottomViewType {
         return filterModel.mask == nil ? .filter : .none
     }
@@ -73,8 +71,7 @@ final class ManagerListViewModel: ListViewModelProtocol {
     
     func updateViewModels(_ managerList: ManagersList?) {
         guard let managerList = managerList else { return }
-        self.managerList = managerList  
-        
+
         var viewModels = [ManagerTableViewCellViewModel]()
         
         let totalCount = managerList.total ?? 0

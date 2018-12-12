@@ -52,6 +52,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
 
         //UI
         searchController.searchBar.keyboardAppearance = .dark
+        searchController.searchBar.returnKeyType = .done
         searchController.searchBar.showsCancelButton = false
         searchController.searchBar.setImage(#imageLiteral(resourceName: "img_search_icon"), for: UISearchBarIcon.search, state: .normal)
         searchController.searchBar.isTranslucent = true
@@ -82,7 +83,12 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
+        guard let text = searchController.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {
+            resultsViewController?.viewModel.filterModel.mask = ""
+            resultsViewController?.clearResults()
+            timer?.invalidate()
+            return
+        }
         resultsViewController?.viewModel.filterModel.mask = text
         
         timer?.invalidate()

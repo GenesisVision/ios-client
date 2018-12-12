@@ -39,7 +39,8 @@ class RatingTableHeaderView: UITableViewHeaderFooterView {
         
         targetProfitTitleLabel.text = "Target profit"
         if let targetProfit = levelUpData.targetProfit {
-            targetProfitValueLabel.text = targetProfit.rounded(withType: .undefined).toString() + "%"
+            let sign = targetProfit == 0 ? "" : targetProfit > 0 ? "+" : "-"
+            targetProfitValueLabel.text = sign + targetProfit.rounded(withType: .undefined).toString() + "%"
             
             targetProfitValueLabel.textColor = targetProfit == 0 ? UIColor.Cell.title : targetProfit > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }

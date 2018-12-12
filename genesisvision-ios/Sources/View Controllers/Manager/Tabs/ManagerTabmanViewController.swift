@@ -11,13 +11,6 @@ import Pageboy
 
 class ManagerTabmanViewController: BaseTabmanViewController<ManagerTabmanViewModel> {
     
-    // MARK: - Variables
-    var scrollEnabled: Bool = true {
-        didSet {
-            //TODO:
-        }
-    }
-    
     // MARK: - Public Methods
     func setup(_ managerProfileDetails: ManagerProfileDetails?) {
         viewModel.setup(managerProfileDetails)

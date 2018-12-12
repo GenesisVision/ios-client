@@ -79,8 +79,6 @@
 		5E36652220D948B700195CBE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652120D948B700195CBE /* PasscodeViewController.swift */; };
 		5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */; };
 		5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E367906206BC6DA006E226A /* AmountLabel.swift */; };
-		5E37BA1F21BEBF9900FF6AA1 /* AboutLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37BA1D21BEBF9700FF6AA1 /* AboutLevelView.swift */; };
-		5E37BA2021BFBDF800FF6AA1 /* AboutLevelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E37BA1E21BEBF9800FF6AA1 /* AboutLevelView.xib */; };
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
 		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
@@ -419,6 +417,8 @@
 		5ED11422215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */; };
 		5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B478210898810026C123 /* ProfileImageView.swift */; };
 		5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3B479210898810026C123 /* СhoosePhotoView.swift */; };
+		5ED645F521C06A0F0044AC1D /* AboutLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED645F321C06A0E0044AC1D /* AboutLevelView.swift */; };
+		5ED645F621C06A0F0044AC1D /* AboutLevelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED645F421C06A0E0044AC1D /* AboutLevelView.xib */; };
 		5ED7385D21942EEC001DA633 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7385C21942EEB001DA633 /* AppConstants.swift */; };
 		5ED738762194FA15001DA633 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738742194FA15001DA633 /* FilterTableViewCell.swift */; };
 		5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED738752194FA15001DA633 /* FilterTableViewCell.xib */; };
@@ -681,8 +681,6 @@
 		5E36652120D948B700195CBE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewModel.swift; sourceTree = "<group>"; };
 		5E367906206BC6DA006E226A /* AmountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountLabel.swift; sourceTree = "<group>"; };
-		5E37BA1D21BEBF9700FF6AA1 /* AboutLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLevelView.swift; sourceTree = "<group>"; };
-		5E37BA1E21BEBF9800FF6AA1 /* AboutLevelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutLevelView.xib; sourceTree = "<group>"; };
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestWithdrawConfirmView.xib; sourceTree = "<group>"; };
 		5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestWithdrawConfirmView.swift; sourceTree = "<group>"; };
@@ -1024,6 +1022,8 @@
 		5ED11421215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCurrencyTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED3B478210898810026C123 /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		5ED3B479210898810026C123 /* СhoosePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "СhoosePhotoView.swift"; sourceTree = "<group>"; };
+		5ED645F321C06A0E0044AC1D /* AboutLevelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutLevelView.swift; sourceTree = "<group>"; };
+		5ED645F421C06A0E0044AC1D /* AboutLevelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutLevelView.xib; sourceTree = "<group>"; };
 		5ED7385C21942EEB001DA633 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		5ED738742194FA15001DA633 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		5ED738752194FA15001DA633 /* FilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterTableViewCell.xib; sourceTree = "<group>"; };
@@ -1982,8 +1982,7 @@
 			isa = PBXGroup;
 			children = (
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
-				5E37BA1D21BEBF9700FF6AA1 /* AboutLevelView.swift */,
-				5E37BA1E21BEBF9800FF6AA1 /* AboutLevelView.xib */,
+				5ED645F221C06A0E0044AC1D /* About Level */,
 				5EC6709721AEAA13009BF4C0 /* Invest and Withdraw */,
 				5EC6709421AEA9EE009BF4C0 /* Wallet */,
 				5EC6709521AEA9FB009BF4C0 /* Filters */,
@@ -2217,6 +2216,15 @@
 				5ED3B479210898810026C123 /* СhoosePhotoView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		5ED645F221C06A0E0044AC1D /* About Level */ = {
+			isa = PBXGroup;
+			children = (
+				5ED645F321C06A0E0044AC1D /* AboutLevelView.swift */,
+				5ED645F421C06A0E0044AC1D /* AboutLevelView.xib */,
+			);
+			path = "About Level";
 			sourceTree = "<group>";
 		};
 		5EE00764217873CB0045B890 /* Manager */ = {
@@ -3084,7 +3092,7 @@
 				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
-				5E37BA2021BFBDF800FF6AA1 /* AboutLevelView.xib in Resources */,
+				5ED645F621C06A0F0044AC1D /* AboutLevelView.xib in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
@@ -3322,6 +3330,7 @@
 				5E4FF15321BE7B4000E29A31 /* BrokersInfo.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* AuthSignUpConfirmationViewModel.swift in Sources */,
+				5ED645F521C06A0F0044AC1D /* AboutLevelView.swift in Sources */,
 				5E4FF11C21BE7B4000E29A31 /* ProgramStatistic.swift in Sources */,
 				5E1813872061D40600481646 /* RoundedLabel.swift in Sources */,
 				5EF14DA9218215B000B3843A /* FundTableViewCellViewModel.swift in Sources */,
@@ -3485,7 +3494,6 @@
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
 				5E5914FE2072D575000F5053 /* StopJumpingTableViewOnInsertRows.swift in Sources */,
 				FC0E201D2044459500872BE5 /* CIImageExtension.swift in Sources */,
-				5E37BA1F21BEBF9900FF6AA1 /* AboutLevelView.swift in Sources */,
 				5E181E6A2067AD1900BF3240 /* NumpadView.swift in Sources */,
 				FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */,
 				5E4FF13521BE7B4000E29A31 /* ProgramNotificationSettingList.swift in Sources */,

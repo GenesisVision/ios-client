@@ -45,16 +45,21 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
         }
     }
     
-    private func updateControllers(_ searchViewModel: SearchViewModel) {
+    func clearResults() {
+        let searchViewModel = SearchViewModel(programs: ProgramsList(programs: [], total: 0),
+                                              funds: FundsList(funds: [], total: 0),
+                                              managers: ManagersList(managers: [], total: 0))
+        self.updateControllers(searchViewModel)
+    }
+    
+    private func updateControllers(_ searchViewModel: SearchViewModel?) {
         for vc in pageboyDataSource.controllers {
             if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel {
-                viewModel.updateViewModels(searchViewModel.programs)
+                viewModel.updateViewModels(searchViewModel?.programs)
             } else if let vc = vc as? FundListViewController, let viewModel = vc.viewModel {
-//                vc.fetch()
-                viewModel.updateViewModels(searchViewModel.funds)
+                viewModel.updateViewModels(searchViewModel?.funds)
             } else if let vc = vc as? ManagerListViewController, let viewModel = vc.viewModel as? ManagerListViewModel {
-//                vc.fetch()
-                viewModel.updateViewModels(searchViewModel.managers)
+                viewModel.updateViewModels(searchViewModel?.managers)
             }
         }
     }

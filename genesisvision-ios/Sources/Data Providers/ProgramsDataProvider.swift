@@ -17,7 +17,7 @@ class ProgramsDataProvider: DataProvider {
         let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
         let statisticDateTo = filterModel?.dateRangeModel.dateTo
         
-        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
+        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet
         
         let profitAvgMin = filterModel?.profitAvgMin
         let profitAvgMax = filterModel?.profitAvgMax

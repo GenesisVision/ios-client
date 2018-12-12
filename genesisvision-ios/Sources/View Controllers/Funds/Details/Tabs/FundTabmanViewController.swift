@@ -12,17 +12,10 @@ class FundTabmanViewController: BaseTabmanViewController<FundTabmanViewModel> {
     
     // MARK: - Variables
     weak var fundInfoViewControllerProtocol: FavoriteStateChangeProtocol?
-    var scrollEnabled: Bool = true {
-        didSet {
-            //TODO:
-        }
-    }
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //        self.bounces = false
     }
     
     // MARK: - Public Methods

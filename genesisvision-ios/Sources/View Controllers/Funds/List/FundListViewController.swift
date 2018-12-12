@@ -185,6 +185,7 @@ extension FundListViewController: UIViewControllerPreviewingDelegate {
 // MARK: - ReloadDataProtocol
 extension FundListViewController: ReloadDataProtocol {
     func didReloadData() {
+        hideAll()
         reloadData()
     }
 }

@@ -156,6 +156,7 @@ extension ManagerListViewController: UIViewControllerPreviewingDelegate {
 // MARK: - ReloadDataProtocol
 extension ManagerListViewController: ReloadDataProtocol {
     func didReloadData() {
+        hideAll()
         reloadData()
     }
 }
