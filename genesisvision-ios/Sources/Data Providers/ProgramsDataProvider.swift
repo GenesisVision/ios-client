@@ -48,7 +48,7 @@ class ProgramsDataProvider: DataProvider {
     
     static func getLevelUpSummary(completion: @escaping (_ levelUpSummary: LevelUpSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        let authorization = AuthManager.authorizedToken
         
         ProgramsAPI.v10ProgramsLevelupSummaryGet(authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)

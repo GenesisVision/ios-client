@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3wT-12-bfT">
-                        <rect key="frame" x="20" y="20" width="280" height="177.5"/>
+                        <rect key="frame" x="20" y="20" width="280" height="220.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c4V-7c-6dh">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="36.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="79.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycv-hE-o7u" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="18.5" width="136" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="40" width="136" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqx-Bi-HNK" customClass="StatusButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="250" y="3.5" width="30" height="30"/>
+                                        <rect key="frame" x="250" y="25" width="30" height="30"/>
                                         <connections>
                                             <action selector="statusButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bYd-Qx-iM4"/>
                                         </connections>
@@ -40,7 +40,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="btz-Pl-S5x">
-                                <rect key="frame" x="0.0" y="56.5" width="280" height="70"/>
+                                <rect key="frame" x="0.0" y="99.5" width="280" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uFT-e1-7eV">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
@@ -103,7 +103,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wr-lp-RKf">
-                                <rect key="frame" x="0.0" y="146.5" width="280" height="31"/>
+                                <rect key="frame" x="0.0" y="189.5" width="280" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto reinvest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-qS-k5J" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5" width="100" height="21"/>
@@ -125,30 +125,32 @@
                                             <action selector="reinvestSwitchAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="FN5-nR-Grw"/>
                                         </connections>
                                     </switch>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqa-Vz-KyD" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="108" y="5.5" width="20" height="20"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c42-ed-ZUQ" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="98" y="-4.5" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="jkF-D7-0f3"/>
-                                            <constraint firstAttribute="height" constant="20" id="nna-Oh-3h5"/>
+                                            <constraint firstAttribute="height" constant="40" id="11m-7i-nZZ"/>
                                         </constraints>
-                                    </view>
+                                        <state key="normal" image="img_tip_icon"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="aiF-Rd-jMn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c42-ed-ZUQ" secondAttribute="trailing" constant="-2" id="3iP-gL-ZC3"/>
                                     <constraint firstItem="jWF-qS-k5J" firstAttribute="leading" secondItem="6wr-lp-RKf" secondAttribute="leading" id="7Cg-le-UCO"/>
-                                    <constraint firstItem="kqa-Vz-KyD" firstAttribute="leading" secondItem="jWF-qS-k5J" secondAttribute="trailing" constant="8" id="ANv-YO-3bN"/>
-                                    <constraint firstItem="kqa-Vz-KyD" firstAttribute="centerY" secondItem="6wr-lp-RKf" secondAttribute="centerY" id="CkP-jY-B8P"/>
+                                    <constraint firstItem="c42-ed-ZUQ" firstAttribute="leading" secondItem="jWF-qS-k5J" secondAttribute="trailing" constant="-2" id="Eeq-RI-ZIf"/>
+                                    <constraint firstItem="c42-ed-ZUQ" firstAttribute="width" secondItem="c42-ed-ZUQ" secondAttribute="height" multiplier="1:1" id="GgP-1V-836"/>
                                     <constraint firstItem="aiF-Rd-jMn" firstAttribute="centerY" secondItem="6wr-lp-RKf" secondAttribute="centerY" id="XUr-B8-Pi6"/>
                                     <constraint firstAttribute="trailing" secondItem="aiF-Rd-jMn" secondAttribute="trailing" id="fR2-Uc-7IF"/>
                                     <constraint firstItem="jWF-qS-k5J" firstAttribute="centerY" secondItem="6wr-lp-RKf" secondAttribute="centerY" id="j8N-jb-jTJ"/>
                                     <constraint firstAttribute="height" constant="31" id="oeY-PY-W70"/>
+                                    <constraint firstItem="c42-ed-ZUQ" firstAttribute="centerY" secondItem="jWF-qS-k5J" secondAttribute="centerY" id="zD2-IV-OBA"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1hu-aO-GKi">
-                        <rect key="frame" x="20" y="217.5" width="280" height="113"/>
+                        <rect key="frame" x="20" y="260.5" width="280" height="70"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDt-ef-ZJN" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
@@ -160,8 +162,8 @@
                                     <action selector="withdrawButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rXz-CR-o0d"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ba7-jf-RWo" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="280" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ba7-jf-RWo" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="280" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -169,6 +171,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="1hu-aO-GKi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="108-Vm-BFN"/>
                     <constraint firstAttribute="trailing" secondItem="3wT-12-bfT" secondAttribute="trailing" constant="20" id="7Jc-gB-Ein"/>
@@ -179,6 +182,7 @@
                     <constraint firstItem="1hu-aO-GKi" firstAttribute="top" secondItem="3wT-12-bfT" secondAttribute="bottom" constant="20" id="xgZ-cE-9sR"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="disclaimerLabel" destination="ba7-jf-RWo" id="I0O-Sr-u0q"/>
@@ -188,7 +192,7 @@
                 <outlet property="profitValueLabel" destination="Ymm-UW-Cta" id="Eo7-8j-m2d"/>
                 <outlet property="reinvestSwitch" destination="aiF-Rd-jMn" id="3fQ-nA-5ST"/>
                 <outlet property="reinvestTitleLabel" destination="jWF-qS-k5J" id="jqd-WV-Wq3"/>
-                <outlet property="reinvestTooltip" destination="kqa-Vz-KyD" id="w63-iE-CcD"/>
+                <outlet property="reinvestTooltip" destination="c42-ed-ZUQ" id="MFT-Q1-eVv"/>
                 <outlet property="reinvestView" destination="6wr-lp-RKf" id="In9-Rz-Lan"/>
                 <outlet property="statusButton" destination="Dqx-Bi-HNK" id="Dqj-21-KAt"/>
                 <outlet property="titleLabel" destination="ycv-hE-o7u" id="dkz-3O-eqf"/>
@@ -199,4 +203,7 @@
             <point key="canvasLocation" x="148.80000000000001" y="65.217391304347828"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="img_tip_icon" width="24" height="24"/>
+    </resources>
 </document>

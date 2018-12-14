@@ -29,6 +29,11 @@ class ErrorBottomSheetView: UIView {
     
     // MARK: - IBOutlets
     @IBOutlet var topBackgroundImageView: UIImageView!
+    @IBOutlet var iconStackView: UIStackView! {
+        didSet {
+            iconStackView.isHidden = true
+        }
+    }
     @IBOutlet var iconImageView: UIImageView! {
         didSet {
             iconImageView.isHidden = true
@@ -36,12 +41,17 @@ class ErrorBottomSheetView: UIView {
     }
     @IBOutlet var titleLabel: TitleLabel! {
         didSet {
+            titleLabel.setLineSpacing(lineSpacing: 3.0)
+            titleLabel.textAlignment = .center
+            titleLabel.font = UIFont.getFont(.regular, size: 14.0)
             titleLabel.isHidden = true
         }
     }
     @IBOutlet var subtitleLabel: SubtitleLabel! {
         didSet {
             subtitleLabel.isHidden = true
+            subtitleLabel.setLineSpacing(lineSpacing: 3.0)
+            subtitleLabel.textAlignment = .center
         }
     }
     
@@ -53,21 +63,25 @@ class ErrorBottomSheetView: UIView {
     }
     
     // MARK: - Private methods
-    func configure(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: SuccessCompletionBlock? = nil) {
+    func configure(_ type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, completion: SuccessCompletionBlock? = nil) {
         self.successCompletionBlock = completion
         
         switch type {
         case .error:
             iconImageView.image = #imageLiteral(resourceName: "img_error_icon")
             iconImageView.isHidden = false
+            iconStackView.isHidden = false
         case .success:
             iconImageView.image = #imageLiteral(resourceName: "img_success_icon")
             iconImageView.isHidden = false
+            iconStackView.isHidden = false
         case .warning:
             iconImageView.image = #imageLiteral(resourceName: "img_error_icon")
             iconImageView.isHidden = false
+            iconStackView.isHidden = false
         case .text:
-            break
+            okButton.isHidden = true
+            topBackgroundImageView.isHidden = true
         }
         
         if let title = title {
@@ -78,6 +92,10 @@ class ErrorBottomSheetView: UIView {
         if let subtitle = subtitle {
             subtitleLabel.text = subtitle
             subtitleLabel.isHidden = false
+            
+            if title != nil {
+                titleLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            }
         }
     }
     

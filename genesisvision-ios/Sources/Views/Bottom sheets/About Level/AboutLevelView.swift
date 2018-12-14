@@ -62,6 +62,8 @@ class AboutLevelView: UIView {
     @IBOutlet var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.text = "Genesis level shows the experience and reliability of the Manager"
+            
+            disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
         }
     }
     

@@ -85,6 +85,9 @@ class WalletDepositViewController: BaseViewController {
     @IBOutlet var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.font = UIFont.getFont(.regular, size: 10.0)
+            
+            disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
+            disclaimerLabel.textAlignment = .center
         }
     }
     
@@ -178,7 +181,7 @@ class WalletDepositViewController: BaseViewController {
         showProgressHUD()
         viewModel.copy { [weak self] (result) in
             self?.hideAll()
-            self?.showBottomSheet(type: .success, title: self?.viewModel.successText)
+            self?.showBottomSheet(.success, title: self?.viewModel.successText)
         }
     }
     

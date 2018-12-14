@@ -55,7 +55,12 @@ class YourInvestmentTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel!
+    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+        didSet {
+            disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
+            disclaimerLabel.textAlignment = .center
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

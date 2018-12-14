@@ -113,7 +113,7 @@
                             <color key="textColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKy-Nn-mkf" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKy-Nn-mkf" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="35" width="156.5" height="50"/>
                             <color key="backgroundColor" red="0.14117647058823529" green="0.16470588235294117" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -122,9 +122,6 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <action selector="textFieldEditingWithSender:" destination="iN0-l3-epB" eventType="touchDown" id="jb1-A9-NMU"/>
-                            </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEy-0c-8z8">
                             <rect key="frame" x="162.5" y="59.5" width="10" height="1"/>
@@ -134,15 +131,12 @@
                                 <constraint firstAttribute="height" constant="1" id="GG1-jm-xb0"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfK-zO-ULL" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfK-zO-ULL" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
                             <rect key="frame" x="178.5" y="35" width="156.5" height="50"/>
                             <color key="backgroundColor" red="0.14117647059999999" green="0.1647058824" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <action selector="textFieldEditingWithSender:" destination="iN0-l3-epB" eventType="touchDown" id="MRO-hf-C4w"/>
-                            </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72r-dl-Y5Z">
                             <rect key="frame" x="178.5" y="0.0" width="156.5" height="27"/>

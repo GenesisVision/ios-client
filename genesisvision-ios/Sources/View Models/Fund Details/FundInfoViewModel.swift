@@ -208,6 +208,10 @@ extension FundInfoViewModel: YourInvestmentProtocol {
 }
 
 extension FundInfoViewModel: InvestNowProtocol {
+    func didTapEntryFeeTooltipButton(_ tooltipText: String) {
+        
+    }
+    
     func didTapInvestButton() {
         invest()
     }

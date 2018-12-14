@@ -10,6 +10,7 @@ import UIKit
 
 protocol InvestNowProtocol: class {
     func didTapInvestButton()
+    func didTapEntryFeeTooltipButton(_ tooltipText: String)
 }
 
 class InvestNowTableViewCell: UITableViewCell {
@@ -38,7 +39,20 @@ class InvestNowTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel!
+    @IBOutlet var entryFeeTooltip: TooltipButton! {
+        didSet {
+            entryFeeTooltip.tooltipText = String.Tooltitps.entryFee
+            entryFeeTooltip.delegate = self
+            entryFeeTooltip.isHidden = true
+        }
+    }
+    
+    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+        didSet {
+            disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
+            disclaimerLabel.textAlignment = .center
+        }
+    }
     
     weak var investNowProtocol: InvestNowProtocol?
     
@@ -54,5 +68,11 @@ class InvestNowTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
         investNowProtocol?.didTapInvestButton()
+    }
+}
+
+extension InvestNowTableViewCell: TooltipButtonProtocol {
+    func showDidPress(_ tooltipText: String) {
+        investNowProtocol?.didTapEntryFeeTooltipButton(tooltipText)
     }
 }

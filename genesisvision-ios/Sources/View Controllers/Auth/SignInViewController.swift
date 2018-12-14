@@ -56,6 +56,11 @@ class SignInViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        #if DEBUG
+        emailTextField.text = email
+        passwordTextField.text = pass
+        #endif
+        
         setupUI()
     }
     

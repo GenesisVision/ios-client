@@ -29,53 +29,53 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PEE-od-7LG">
-                        <rect key="frame" x="20" y="62" width="280" height="190.5"/>
+                        <rect key="frame" x="20" y="62" width="280" height="219.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="7hJ-jm-49X">
-                                <rect key="frame" x="0.0" y="75" width="93.5" height="41"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7hJ-jm-49X">
+                                <rect key="frame" x="0.0" y="89.5" width="93.5" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ce-8c-cVW" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="93.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDX-1s-uOu" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.5" width="93.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="OGk-xX-6eX">
-                                <rect key="frame" x="93.5" y="75" width="93" height="41"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="OGk-xX-6eX">
+                                <rect key="frame" x="93.5" y="89.5" width="93" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-Ch-qJE" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="93" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ves-4M-lWr" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.5" width="93" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-jf-OzW">
-                                <rect key="frame" x="186.5" y="75" width="93.5" height="41"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-jf-OzW">
+                                <rect key="frame" x="186.5" y="89.5" width="93.5" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-PX-TV1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="93.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aka-N3-lBO" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.5" width="93.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0zE-uW-kbp">
-                        <rect key="frame" x="20" y="272.5" width="280" height="99"/>
+                        <rect key="frame" x="20" y="301.5" width="280" height="70"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-YF-Trs" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
@@ -97,14 +97,23 @@
                                     <action selector="investButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cee-Ai-nZ2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your request will be processed at the end of the reporting period 12.07.2019, 16:20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="280" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="280" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCJ-kf-EU1" customClass="TooltipButton" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="153.5" y="162" width="40" height="40"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="3Ba-3e-ok3"/>
+                            <constraint firstAttribute="width" secondItem="YCJ-kf-EU1" secondAttribute="height" multiplier="1:1" id="4YC-Kb-IGX"/>
+                        </constraints>
+                        <state key="normal" image="img_tip_icon"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="pXX-oU-LEc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="2nY-bp-Tmp"/>
@@ -113,10 +122,13 @@
                     <constraint firstItem="PEE-od-7LG" firstAttribute="top" secondItem="pXX-oU-LEc" secondAttribute="bottom" constant="21" id="7Ne-a3-GoJ"/>
                     <constraint firstItem="PEE-od-7LG" firstAttribute="leading" secondItem="pXX-oU-LEc" secondAttribute="leading" id="7Tg-Yt-e4m"/>
                     <constraint firstItem="0zE-uW-kbp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="AJc-CH-cih"/>
+                    <constraint firstItem="aka-N3-lBO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YCJ-kf-EU1" secondAttribute="trailing" constant="-2" id="DuD-nf-ZpE"/>
                     <constraint firstAttribute="trailing" secondItem="0zE-uW-kbp" secondAttribute="trailing" constant="20" id="WYc-Cv-NyB"/>
                     <constraint firstItem="pXX-oU-LEc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ads-3g-7yN"/>
                     <constraint firstItem="0zE-uW-kbp" firstAttribute="top" secondItem="PEE-od-7LG" secondAttribute="bottom" constant="20" id="nEL-dc-z9D"/>
                     <constraint firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" constant="20" id="otH-3Q-4vE"/>
+                    <constraint firstItem="YCJ-kf-EU1" firstAttribute="centerY" secondItem="ves-4M-lWr" secondAttribute="centerY" id="p4O-Ov-YzO"/>
+                    <constraint firstItem="YCJ-kf-EU1" firstAttribute="leading" secondItem="ves-4M-lWr" secondAttribute="trailing" constant="-2" id="qGY-uv-FX8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -124,6 +136,7 @@
                 <outlet property="disclaimerLabel" destination="A0B-Yt-WF2" id="7We-7O-uMi"/>
                 <outlet property="entryFeeStackView" destination="OGk-xX-6eX" id="MJ2-f0-QZD"/>
                 <outlet property="entryFeeTitleLabel" destination="ves-4M-lWr" id="Nbm-dy-Xo4"/>
+                <outlet property="entryFeeTooltip" destination="YCJ-kf-EU1" id="hBB-wn-WNZ"/>
                 <outlet property="entryFeeValueLabel" destination="dYQ-Ch-qJE" id="6CM-R2-4UJ"/>
                 <outlet property="investButton" destination="GrT-YF-Trs" id="4bl-pn-fBD"/>
                 <outlet property="investStackView" destination="7hJ-jm-49X" id="Mqb-Ki-6oM"/>
@@ -137,4 +150,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="-121.4392803598201"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="img_tip_icon" width="24" height="24"/>
+    </resources>
 </document>

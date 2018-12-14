@@ -42,11 +42,10 @@ final class ListViewModel: ListViewModelProtocol {
     var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
-    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType = .none, assetType: AssetType) {
+    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType? = .none, assetType: AssetType) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets
-        self.bottomViewType = bottomViewType
         self.assetType = assetType
         
         if let filterModel = filterModel {
@@ -58,10 +57,18 @@ final class ListViewModel: ListViewModelProtocol {
         
         state = isLogin() ? .list : .listWithSignIn
 
-        self.bottomViewType = signInButtonEnable ? .signInWithFilter : self.bottomViewType
-        
-        if self.filterModel.mask == nil, self.filterModel.levelUpData == nil, self.filterModel.facetId == nil {
-            self.bottomViewType = .filter
+        if let bottomViewType = bottomViewType {
+            self.bottomViewType = bottomViewType
+        } else {
+            var hasFilter = false
+            
+            if self.filterModel.mask == nil, self.filterModel.levelUpData == nil, self.filterModel.facetId == nil {
+                hasFilter = true
+            }
+            
+            self.bottomViewType = signInButtonEnable
+                ? hasFilter ? .signInWithFilter : .signIn
+                : hasFilter ? .filter : self.bottomViewType
         }
         
         switch assetType {

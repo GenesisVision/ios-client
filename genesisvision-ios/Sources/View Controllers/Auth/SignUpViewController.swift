@@ -160,7 +160,7 @@ class SignUpViewController: BaseViewController {
     }
     
     private func showSignUpInfoVC() {
-        showBottomSheet(type: .success, title: viewModel.successText) { [weak self] (success) in
+        showBottomSheet(.success, title: viewModel.successText) { [weak self] (success) in
             self?.viewModel.goToBack()
         }
     }

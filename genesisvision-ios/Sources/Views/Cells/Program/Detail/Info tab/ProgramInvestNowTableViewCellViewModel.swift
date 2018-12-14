@@ -23,17 +23,22 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         
         if let periodEnds = programDetailsFull?.periodEnds {
             let periodEndsString = periodEnds.defaultFormatString
-             cell.disclaimerLabel.text = "Your request will be processed at the end of the reporting period " + periodEndsString
+            cell.disclaimerLabel.text = "Your request will be processed at the end of the reporting period " + periodEndsString
         }
+        
+        cell.entryFeeTooltip.isHidden = false
         
         cell.investNowProtocol = investNowProtocol
         
         cell.titleLabel.text = "Invest Now"
         cell.investButton.setTitle("Invest", for: .normal)
         
-         if let entryFee = programDetailsFull?.entryFee {
+        if let entryFeeCurrent = programDetailsFull?.entryFeeCurrent, let entryFeeSelected = programDetailsFull?.entryFeeSelected {
+            let entryFeeCurrentString = entryFeeCurrent.rounded(withType: .undefined).toString() + "%"
+            let entryFeeSelectedString = " (" + entryFeeSelected.rounded(withType: .undefined).toString() + "%)"
+            
             cell.entryFeeTitleLabel.text = "entry fee"
-            cell.entryFeeValueLabel.text = entryFee.rounded(withType: .undefined).toString() + "%"
+            cell.entryFeeValueLabel.text = entryFeeCurrent == entryFeeSelected ? entryFeeCurrentString : entryFeeCurrentString + entryFeeSelectedString
         }
         
         if let successFee = programDetailsFull?.successFee {

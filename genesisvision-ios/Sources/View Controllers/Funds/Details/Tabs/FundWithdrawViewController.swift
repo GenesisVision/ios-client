@@ -78,6 +78,9 @@ class FundWithdrawViewController: BaseViewController {
     @IBOutlet var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.text = "The withdrawal amount can be changed depending on the exchange rate or the success of the Manager."
+            
+            disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
+            disclaimerLabel.textAlignment = .center
         }
     }
     

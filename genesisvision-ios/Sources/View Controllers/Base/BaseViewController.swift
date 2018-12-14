@@ -240,9 +240,9 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.present()
     }
     
-    func showBottomSheet(type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
+    func showBottomSheet(_ type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
         let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
-        errorBottomSheetView.configure(type: type, title: title, subtitle: subtitle, completion: completion)
+        errorBottomSheetView.configure(type, title: title, subtitle: subtitle, completion: completion)
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.viewType = .bottomView
@@ -379,7 +379,7 @@ extension BaseViewController: DateRangeViewProtocol {
         alert.view.tintColor = UIColor.Cell.headerBg
         
         if let dateFrom = dateFrom {
-            alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: dateTo.previousDate()) { [weak self] date in
+            alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: dateTo) { [weak self] date in
                 DispatchQueue.main.async {
                     self?.dateRangeView.dateFrom = date
                 }

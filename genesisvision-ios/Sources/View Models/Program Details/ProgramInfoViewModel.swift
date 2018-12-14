@@ -264,6 +264,12 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
 }
 
 extension ProgramInfoViewModel: InvestNowProtocol {
+    func didTapEntryFeeTooltipButton(_ tooltipText: String) {
+        if let viewController = router.topViewController() as? BaseViewController {
+            viewController.showBottomSheet(.text, title: tooltipText, initializeHeight: 130, completion: nil)
+        }
+    }
+    
     func didTapInvestButton() {
         if availableInvestment > 0 {
             invest()

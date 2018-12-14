@@ -91,12 +91,26 @@ class DateRangeView: UIView {
         didSet {
             dateFromTextField.addPadding()
             dateFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+            dateFromTextField.isUserInteractionEnabled = true
+            dateFromTextField.isEnabled = true
+            dateFromTextField.delegate = self
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateFromTextFieldEditing))
+            tapGesture.numberOfTapsRequired = 1
+            dateFromTextField.addGestureRecognizer(tapGesture)
         }
     }
     @IBOutlet var dateToTextField: DesignableUITextField! {
         didSet {
             dateToTextField.addPadding()
             dateToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
+            dateToTextField.isUserInteractionEnabled = true
+            dateToTextField.isEnabled = true
+            dateToTextField.delegate = self
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateToTextFieldEditing))
+            tapGesture.numberOfTapsRequired = 1
+            dateToTextField.addGestureRecognizer(tapGesture)
         }
     }
     @IBOutlet var applyButton: ActionButton!
@@ -181,23 +195,23 @@ class DateRangeView: UIView {
         delegate?.dateRange?.dateTo = dateTo
     }
     
-    // MARK: - Actions
-    @IBAction func textFieldEditing(sender: UITextField) {
-        sender.resignFirstResponder()
-        
+    @objc private func dateFromTextFieldEditing() {
         changeDateRangeTypeButtonAction(customButton)
         
-        guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
-            return
-        }
+        guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else { return }
         
-        if sender == dateFromTextField {
-            delegate?.showDatePicker(from: dateFrom, to: dateTo)
-        } else {
-            delegate?.showDatePicker(from: nil, to: dateTo)
-        }
+        delegate?.showDatePicker(from: dateFrom, to: dateTo)
     }
     
+    @objc private func dateToTextFieldEditing() {
+        changeDateRangeTypeButtonAction(customButton)
+        
+        guard dateRangeType == .custom, let dateTo = dateTo else { return }
+        
+        delegate?.showDatePicker(from: nil, to: dateTo)
+    }
+    
+    // MARK: - Actions
     @IBAction func changeDateRangeTypeButtonAction(_ sender: UIButton) {
         sender.isSelected = true
         dateRangeType = DateRangeType(rawValue: sender.tag)!
@@ -214,5 +228,11 @@ class DateRangeView: UIView {
 extension DateRangeView: BottomSheetControllerProtocol {
     func didHide() {
         
+    }
+}
+
+extension DateRangeView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
 }
