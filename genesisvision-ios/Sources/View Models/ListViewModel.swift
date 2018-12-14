@@ -48,13 +48,6 @@ final class ListViewModel: ListViewModelProtocol {
         self.showFacets = showFacets
         self.assetType = assetType
         
-        if let filterModel = filterModel {
-            self.filterModel = filterModel
-            if let facetTitle = filterModel.facetTitle {
-                self.title = facetTitle + " " + title.lowercased()
-            }
-        }
-        
         state = isLogin() ? .list : .listWithSignIn
 
         if let bottomViewType = bottomViewType {
@@ -82,6 +75,13 @@ final class ListViewModel: ListViewModelProtocol {
             NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
         default:
             break
+        }
+        
+        if let filterModel = filterModel {
+            self.filterModel = filterModel
+            if let facetTitle = filterModel.facetTitle {
+                self.title = (facetTitle == "Favorites" ? "Favorite" : facetTitle) + " " + title.lowercased()
+            }
         }
     }
     
