@@ -41,6 +41,8 @@ open class ProgramDetailsFull: Codable {
     public var periodStarts: Date?
     public var periodEnds: Date?
     public var entryFee: Double?
+    public var entryFeeSelected: Double?
+    public var entryFeeCurrent: Double?
     public var successFee: Double?
     public var isReinvesting: Bool?
     public var availableInvestment: Double?
@@ -60,13 +62,15 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
         self.entryFee = entryFee
+        self.entryFeeSelected = entryFeeSelected
+        self.entryFeeCurrent = entryFeeCurrent
         self.successFee = successFee
         self.isReinvesting = isReinvesting
         self.availableInvestment = availableInvestment
@@ -97,6 +101,8 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
+        try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
         try container.encodeIfPresent(successFee, forKey: "successFee")
         try container.encodeIfPresent(isReinvesting, forKey: "isReinvesting")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
@@ -125,6 +131,8 @@ open class ProgramDetailsFull: Codable {
         periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
+        entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
         isReinvesting = try container.decodeIfPresent(Bool.self, forKey: "isReinvesting")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")

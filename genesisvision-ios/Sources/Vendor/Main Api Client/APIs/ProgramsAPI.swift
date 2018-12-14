@@ -283,11 +283,11 @@ open class ProgramsAPI {
   "entryFee" : 1.4658129805029452,
   "periodDuration" : 6,
   "statistic" : {
-    "profitFactorPercent" : 1.4894159098541704,
-    "investedAmount" : 7.386281948385884,
+    "profitFactorPercent" : 7.457744773683766,
+    "investedAmount" : 1.0246457001441578,
     "startCurrency" : "Undefined",
-    "tradesSuccessCount" : 1,
-    "drawdownPercent" : 3.616076749251911,
+    "tradesSuccessCount" : 6,
+    "drawdownPercent" : 4.145608029883936,
     "balanceBase" : {
       "amount" : 5.962133916683182,
       "currency" : "Undefined"
@@ -298,18 +298,18 @@ open class ProgramsAPI {
       "amount" : 5.962133916683182,
       "currency" : "Undefined"
     },
-    "profitPercent" : 7.061401241503109,
+    "profitPercent" : 3.616076749251911,
     "investedCurrency" : "Undefined",
-    "sharpeRatioPercent" : 6.84685269835264,
-    "profitValue" : 9.301444243932576,
-    "currentValue" : 2.3021358869347655,
+    "sharpeRatioPercent" : 1.1730742509559433,
+    "profitValue" : 2.027123023002322,
+    "currentValue" : 9.301444243932576,
     "startDate" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 4.145608029883936,
+    "startBalance" : 1.2315135367772556,
     "balanceSecondary" : {
       "amount" : 5.962133916683182,
       "currency" : "Undefined"
     },
-    "investorsCount" : 2
+    "investorsCount" : 7
   },
   "color" : "color",
   "manager" : {
@@ -320,14 +320,16 @@ open class ProgramsAPI {
     "username" : "username"
   },
   "level" : 0,
-  "availableInvestment" : 5.637376656633329,
-  "successFee" : 5.962133916683182,
+  "entryFeeCurrent" : 5.637376656633329,
+  "availableInvestment" : 7.061401241503109,
+  "successFee" : 2.3021358869347655,
   "rating" : {
     "rating" : 4,
     "canLevelUp" : true,
     "topPercent" : 1.2315135367772556,
     "profit" : 7.386281948385884
   },
+  "entryFeeSelected" : 5.962133916683182,
   "description" : "description",
   "isReinvesting" : true,
   "title" : "title",
