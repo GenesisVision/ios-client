@@ -10,12 +10,17 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
-    return URL(string: Constants.Api.filePath + fileName)
+    return URL(string: Api.filePath + fileName)
 }
 
-func feedback(style: UIImpactFeedbackStyle = .light) {
+func impactFeedback(style: UIImpactFeedbackStyle = .light) {
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.impactOccurred()
+}
+
+func notificationFeedback(style: UINotificationFeedbackType = .success) {
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(style)
 }
 
 func networkActivity(show: Bool = true) {
@@ -29,40 +34,49 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
     let hours = minutes / 60
     let days = hours / 24
     
-    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : seconds >= 0 ? "seconds" : nil
+    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "min" : seconds >= 0 ? "sec" : nil
     let periodLeftValue: Int = days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : seconds >= 0 ? seconds : -1
     
     return (periodLeftValue, periodLeftTimeString)
 }
 
-func getDecimalCount(for currencyValue: String?) -> Int {
-    guard let currencyValue = currencyValue,
-        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue) else { return 2 }
+func getPeriodDuration(from minutes: Int) -> String? {
+    let hours = minutes / 60
+    let days = hours / 24
+    let weeks = days / 7
+    let months = days / 31
     
-    var currencyType: CurrencyType = .gvt
+    let periodLeftTimeString: String = months > 0 ? "m" : weeks > 0 ? "w" : days > 0 ? "d" : hours > 0 ? "h" : minutes > 0 ? "min" : ""
+    let periodLeftValue: Int = months > 0 ? months : weeks > 0 ? weeks : days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : -1
     
-    switch currency {
-    case .usd, .eur:
-        currencyType = .other
-    case .eth, .btc:
-        currencyType = .crypto
-    case .gvt:
-        currencyType = .gvt
-    default:
-        currencyType = .other
-    }
-    
-    return currencyType.rawValue
+    return periodLeftValue > 0 ? "\(periodLeftValue) " + periodLeftTimeString : nil
+}
+
+func getDecimalCount(for currencyType: CurrencyType?) -> Int {
+    guard let currencyType = currencyType else { return 2 }
+
+    return currencyType.currencyLenght
 }
 
 enum LineStyle {
     case solid, dashed
 }
 
+func getChangePercent(oldValue: Double, newValue: Double) -> String {
+    let percentText = oldValue > 0.0 ? (Double(newValue - oldValue) / oldValue * 100.0).rounded(withType: .undefined).toString() : "∞"
+    return percentText + "%"
+    
+}
+
+func getChangePercent(oldValue: Double, newValue: Double) -> Double {
+    let percent = oldValue > 0.0 ? Double(newValue - oldValue) / oldValue * 100.0 : 0.0
+    return percent
+}
+
 func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
     if let sublayers = view.layer.sublayers {
         for layer in sublayers {
-            if layer.name == Constants.Keys.addedLineLayer {
+            if layer.name == Keys.addedLineLayer {
                 layer.removeFromSuperlayer()
             }
         }
@@ -72,7 +86,7 @@ func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineSty
     shapeLayer.fillColor = UIColor.clear.cgColor
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.lineWidth = 1.0
-    shapeLayer.name = Constants.Keys.addedLineLayer
+    shapeLayer.name = Keys.addedLineLayer
     shapeLayer.lineJoin = kCALineJoinRound
     
     if style == .dashed {
@@ -109,8 +123,17 @@ func startTimer() -> Bool {
 func getVersion() -> String {
     let dictionary = Bundle.main.infoDictionary!
     let version = dictionary["CFBundleShortVersionString"] as! String
+    return "\(version)"
+}
+
+func getBuild() -> String {
+    let dictionary = Bundle.main.infoDictionary!
     let build = dictionary["CFBundleVersion"] as! String
-    return "\(version)(\(build))"
+    return "\(build)"
+}
+
+func getFullVersion() -> String {
+    return "\(getVersion())(\(getBuild()))"
 }
 
 func getDeviceInfo() -> String {
@@ -126,5 +149,70 @@ func getDeviceInfo() -> String {
 }
 
 func getFeedbackSubject() -> String {
-    return "iOS Feedback " + getVersion()
+    return "iOS Feedback " + getFullVersion()
+}
+
+func newVersionIsAvailable(_ lastVersion: String) -> Bool {
+    if let skipThisVersion = UserDefaults.standard.object(forKey: UserDefaultKeys.skipThisVersion) as? String, skipThisVersion == lastVersion {
+        print("SkipThisVersion: \(skipThisVersion)")
+        return false
+    }
+    
+    let currentVersionArray = getVersion().components(separatedBy: ".")
+    let lastVersionArray = lastVersion.components(separatedBy: ".")
+    
+    return versionIsOld(currentVersionArray: currentVersionArray, lastVersionArray: lastVersionArray, idx: 0)
+}
+
+func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx: Int) -> Bool {
+    guard idx < 3, let currentIntVal = Int(currentVersionArray[idx]), let lastIntVal = Int(lastVersionArray[idx]) else { return false }
+    
+    if currentIntVal == lastIntVal {
+        return versionIsOld(currentVersionArray: currentVersionArray, lastVersionArray: lastVersionArray, idx: idx + 1)
+    } else {
+        return currentIntVal < lastIntVal
+    }
+}
+
+func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
+    PlatformManager.shared.getPlatformInfo(completion: { (model) in
+        guard let platformInfo = model,
+            let iOSVersion = platformInfo.iOSVersion,
+            let lastVersion = iOSVersion.lastVersion,
+            newVersionIsAvailable(lastVersion) else { return }
+        
+        viewController.showNewVersionAlert(lastVersion)
+    })
+}
+
+func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
+    AuthManager.getTwoFactorStatus(completion: { (model) in
+        let launchedBefore = UserDefaults.standard.bool(forKey: UserDefaultKeys.launchedBefore)
+        
+        guard let twoFactorEnabled = model.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
+        
+        print("First launch")
+        UserDefaults.standard.set(true, forKey: UserDefaultKeys.launchedBefore)
+        
+        viewController.showTwoFactorEnableAlert(completion: completion)
+    }) { (result) in
+        switch result {
+        case .success:
+            break
+        case .failure(let errorType):
+            ErrorHandler.handleError(with: errorType)
+        }
+    }
+}
+
+func getSelectedCurrency() -> String {
+    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaultKeys.selectedCurrency) {
+        return selectedCurrency
+    }
+    
+    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.usd.rawValue
+}
+
+func updateSelectedCurrency(_ selectedCurrency: String) {
+    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaultKeys.selectedCurrency)
 }

@@ -11,25 +11,14 @@ import Foundation
 
 open class TradesViewModel: Codable {
 
-    public enum TradeServerType: String, Codable { 
-        case undefined = "Undefined"
-        case metaTrader4 = "MetaTrader4"
-        case metaTrader5 = "MetaTrader5"
-        case ninjaTrader = "NinjaTrader"
-        case ctrader = "cTrader"
-        case rumus = "Rumus"
-        case metastock = "Metastock"
-    }
     public var trades: [OrderModel]?
     public var total: Int?
-    public var tradeServerType: TradeServerType?
 
 
     
-    public init(trades: [OrderModel]?, total: Int?, tradeServerType: TradeServerType?) {
+    public init(trades: [OrderModel]?, total: Int?) {
         self.trades = trades
         self.total = total
-        self.tradeServerType = tradeServerType
     }
     
 
@@ -41,7 +30,6 @@ open class TradesViewModel: Codable {
 
         try container.encodeIfPresent(trades, forKey: "trades")
         try container.encodeIfPresent(total, forKey: "total")
-        try container.encodeIfPresent(tradeServerType, forKey: "tradeServerType")
     }
 
     // Decodable protocol methods
@@ -51,7 +39,6 @@ open class TradesViewModel: Codable {
 
         trades = try container.decodeIfPresent([OrderModel].self, forKey: "trades")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
-        tradeServerType = try container.decodeIfPresent(TradeServerType.self, forKey: "tradeServerType")
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ProgramDetailProtocol.swift
+//  DetailProtocol.swift
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 02.03.18.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol ProgramDetailProtocol: class {
+protocol DetailProtocol: class {
     func didInvested()
     func didWithdrawn()
-    func didRequestCanceled()
+    func didRequestCanceled(_ last: Bool)
 }

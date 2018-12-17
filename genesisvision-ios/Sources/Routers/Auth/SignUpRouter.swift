@@ -7,7 +7,7 @@
 //
 
 enum SignUpRouteType {
-    case confirmation
+    case confirmation, privacy, terms
 }
 
 class SignUpRouter: Router {
@@ -17,15 +17,18 @@ class SignUpRouter: Router {
         switch routeType {
         case .confirmation:
             confirmationAction()
+        case .privacy:
+            showPrivacy()
+        case .terms:
+            showTerms()
         }
     }
     
     // MARK: - Private methods
     private func confirmationAction() {
-        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = InfoViewController.storyboardInstance(.auth) else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
-        childRouters.append(router)
-        viewController.viewModel = SignUpConfirmationViewModel(withRouter: router)
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.viewModel = AuthSignUpConfirmationViewModel(withRouter: router)
+        present(viewController: viewController)
     }
 }

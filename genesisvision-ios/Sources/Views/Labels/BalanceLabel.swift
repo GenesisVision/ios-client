@@ -29,10 +29,6 @@ class BalanceLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        font = UIFont.getFont(.light, size: 25)
-        
-        textColor = UIColor.Font.dark
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(updateLayout))
         tapGesture.numberOfTapsRequired = 1
         isUserInteractionEnabled = true

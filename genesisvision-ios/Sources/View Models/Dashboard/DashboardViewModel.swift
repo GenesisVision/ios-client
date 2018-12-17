@@ -9,130 +9,90 @@
 import UIKit.UITableViewHeaderFooterView
 
 final class DashboardViewModel {
-    
-    enum SectionType {
-        case header
-        case programList
-    }
-    
     // MARK: - Variables
-    var title: String = "Dashboard"
+    var title = "Dashboard"
     
-    private var sections: [SectionType] = [.header, .programList]
+    var inRequestsDelegateManager = InRequestsDelegateManager()
+    var isLoading: Bool = false
     
-    private var router: DashboardRouter!
-    private var dashboard: InvestorDashboard?
+    var skip = 0
+    var eventsTake = 10
+    var requestsTake = 50
+    
+    var router: DashboardRouter!
+    var dashboard: DashboardSummary? {
+        didSet {
+            guard let dashboard = dashboard else { return }
+            
+            if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
+                pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, programRequests: dashboard.requests)
+            }
+            
+            if let vc = router.eventsViewController, let viewModel = vc.viewModel {
+                viewModel.dashboardPortfolioEvents = dashboard.events
+            }
+        }
+    }
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var canFetchMoreResults = true
-    var programsCount: String = ""
-    var skip = 0
-    var take = Constants.Api.take
-    var totalCount = 0 {
-        didSet {
-            programsCount = "\(totalCount) programs"
-        }
-    }
-    var sorting: InvestorAPI.Sorting_apiInvestorDashboardGet = Constants.Sorting.dashboardDefault
-    var investMaxAmountFrom: Double?
-    var investMaxAmountTo: Double?
-    var searchText = ""
-    var viewModels = [DashboardTableViewCellViewModel]()
+    var assetsTabmanViewModel: AssetsTabmanViewModel?
+    var chartsTabmanViewModel: ChartsTabmanViewModel?
+    var eventListViewModel: EventListViewModel?
     
-    var sortingKeys: [InvestorAPI.Sorting_apiInvestorDashboardGet] = [.byProfitDesc, .byProfitAsc, .byLevelDesc, .byLevelAsc, .byOrdersDesc, .byOrdersAsc, .byEndOfPeriodDesc, .byEndOfPeriodAsc, .byTitleDesc, .byTitleAsc]
+    var dateFrom: Date?
+    var dateTo: Date?
     
-    var sortingValues: [String] = ["profit ⇣", "profit ⇡", "level ⇣", "level ⇡", "orders ⇣", "orders ⇡", "end of period ⇣", "end of period ⇡", "title ⇣", "title ⇡"]
-    
-    struct SortingList {
-        var sortingValue: String
-        var sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet
-    }
-    
-    var sortingList: [SortingList] {
-        return sortingValues.enumerated().map { (index, element) in
-            return SortingList(sortingValue: element, sortingKey: sortingKeys[index])
-        }
-    }
+    var bottomViewType: BottomViewType = .sort
     
     // MARK: - Init
     init(withRouter router: DashboardRouter) {
         self.router = router
-        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
+        self.reloadDataProtocol = router.programListViewController
+        assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router)
+        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, dashboardPortfolioChartValue: dashboard?.chart)
+        eventListViewModel = EventListViewModel(withRouter: router, dashboardPortfolioEvents: dashboard?.events)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
     }
     
     // MARK: - Public methods
-    func getSortingValue(sortingKey: InvestorAPI.Sorting_apiInvestorDashboardGet) -> String {
-        guard let index = sortingKeys.index(of: sortingKey) else { return "" }
-        return sortingValues[index]
-    }
-    
-    func changeSorting(at index: Int) {
-        sorting = sortingKeys[index]
-    }
-    
-    func getSelectedSortingIndex() -> Int {
-        return sortingKeys.index(of: sorting) ?? 0
-    }
-}
-
-// MARK: - TableView
-extension DashboardViewModel {
-    // MARK: - Public methods
-    /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DashboardHeaderTableViewCellViewModel.self, DashboardTableViewCellViewModel.self]
-    }
-    
-    /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SortHeaderView.self]
-    }
-    
-    func modelsCount() -> Int {
-        return viewModels.count
-    }
-    
-    func numberOfSections() -> Int {
-        return modelsCount() > 0 ? sections.count : 0
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        switch sections[section] {
-        case .programList:
-            return modelsCount()
-        case .header:
-            return 1
+    func deselectChart() {
+        if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
+            pageboyDataSource.deselectChart()
         }
     }
     
-    func headerTitle(for section: Int) -> String? {
-        switch sections[section] {
-        case .programList:
-            return "Sort by " + getSortingValue(sortingKey: sorting)
-        case .header:
-            return nil
+    func didSelectRequest(at indexPath: IndexPath) {
+        guard let requests = inRequestsDelegateManager.programRequests?.requests, !requests.isEmpty else {
+            return
+        }
+        
+        let request = requests[indexPath.row]
+        if let assetId = request.programId?.uuidString, let type = request.programType, let assetType = AssetType(rawValue: type.rawValue) {
+            router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
-    
-    func headerHeight(for section: Int) -> CGFloat {
-        switch sections[section] {
-        case .programList:
-            return 50.0
-        case .header:
-            return 0.0
-        }
+    // MARK: - Private methods
+    @objc private func enableTwoFactorNotification(notification: Notification) {
+        NotificationCenter.default.removeObserver(self, name: .twoFactorEnable, object: nil)
+        
+        router.showTwoFactorEnable()
     }
 }
 
 // MARK: - Navigation
 extension DashboardViewModel {
     func logoImageName() -> String? {
-        let imageName = "img_dashboard_logo"
+        let imageName = "img_nodata_list"
         return imageName
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany programs yet.."
+        return "You don’t have any assets yet"
     }
     
     func noDataImageName() -> String? {
@@ -140,124 +100,51 @@ extension DashboardViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
-        return text.uppercased()
-    }
-    
-    func showDetail(at indexPath: IndexPath) {
-        guard let model: DashboardTableViewCellViewModel = model(at: indexPath) as? DashboardTableViewCellViewModel else { return }
-        
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return }
-        
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+        let text = "Browse assets"
+        return text
     }
     
     func showProgramList() {
-        router.show(routeType: .programList)
+        router.show(routeType: .assetList)
+    }
+    
+    func showNotificationList() {
+        router.show(routeType: .notificationList)
     }
 }
 
 // MARK: - Fetch
 extension DashboardViewModel {
     // MARK: - Public methods
-    func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
-    }
-    
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
-            fetchMore()
-        }
-        
-        return skip < totalCount
-    }
-    
-    func fetchMore() {
-        guard skip < totalCount else { return }
-        
-        canFetchMoreResults = false
-        fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [DashboardTableViewCellViewModel]()
-            
-            viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
-            })
-            
-            self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: { (result) in
-                switch result {
-                case .success:
-                    break
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType)
-                }
-        })
-    }
-    
     func refresh(completion: @escaping CompletionBlock) {
-        skip = 0
-        
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
-    }
-    
-    /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard let dashboard = dashboard else {
-            return nil
-        }
-        
-        let type = sections[indexPath.section]
-        switch type {
-        case .header:
-            return modelsCount() > 0 ? DashboardHeaderTableViewCellViewModel(investorDashboard: dashboard) : nil
-        case .programList:
-            return viewModels[indexPath.row]
-        }
-    }
-    
-    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
-        guard let model = model(at: indexPath) as? DashboardTableViewCellViewModel else {
-            return nil
-        }
-        
-        let investmentProgram = model.investmentProgram
-        guard let investmentProgramId = investmentProgram.id else { return nil}
-        
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+        updatePlatformInfo()
+        updateList()
+        fetch(completion)
     }
     
     // MARK: - Private methods
-    private func updateFetchedData(totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) {
-        self.viewModels = viewModels
-        self.totalCount = totalCount
-        self.skip += self.take
-        self.reloadDataProtocol?.didReloadData()
+    private func updatePlatformInfo() {
+        PlatformManager.shared.getPlatformInfo(completion: { (model) in })
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func updateList() {
+        router.programListViewController?.fetch()
+        router.fundListViewController?.fetch()
+    }
+    
+    private func fetch(_ completion: @escaping CompletionBlock) {
+        isLoading = true
         
-        DashboardDataProvider.getProgram(with: sorting, completion: { [weak self] (dashboard) in
-            guard let dashboard = dashboard else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
+        let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
+        let balancePoints = 30
+        let programsPoints = 7
+        
+        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateFrom, to: dateTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: skip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
+            guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
             self?.dashboard = dashboard
             
-            var dashboardProgramViewModels = [DashboardTableViewCellViewModel]()
-            
-            let totalCount = dashboard.investmentPrograms?.count ?? 0
-            
-            dashboard.investmentPrograms?.forEach({ (dashboardProgram) in
-                let dashboardTableViewCellModel = DashboardTableViewCellViewModel(investmentProgram: dashboardProgram, reloadDataProtocol: self)
-                dashboardProgramViewModels.append(dashboardTableViewCellModel)
-            })
-            
-            completionSuccess(totalCount, dashboardProgramViewModels)
-            completionError(.success)
-        }, errorCompletion: completionError)
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }
 
@@ -266,3 +153,4 @@ extension DashboardViewModel: ReloadDataProtocol {
         refresh { (result) in }
     }
 }
+

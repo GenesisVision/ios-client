@@ -10,24 +10,51 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
-    var shadowView: ShadowView!
+    // MARK: - Variables
+//    var shadowView: ShadowView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
+        navigationBar.barTintColor = UIColor.BaseView.bg
+        view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(0.0)
         
-        navigationBar.barTintColor = UIColor.NavBar.grayBackground
-        navigationBar.isTranslucent = false
-        navigationBar.tintColor = UIColor.primary
-        
-        shadowView = ShadowView()
-//        view.insertSubview(shadowView, belowSubview: navigationBar)
+        applyTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        shadowView.frame = navigationBar.frame
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .themeChanged, object: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        guard let topViewController = self.topViewController else {
+            return AppearanceController.theme == .darkTheme ? .lightContent : .default
+        }
+      
+        switch topViewController {
+        case is InfoViewController:
+            return .lightContent
+        default:
+            return AppearanceController.theme == .darkTheme ? .lightContent : .default
+        }
+    }
+    
+    // MARK: - Private methods
+    @objc private func themeChangedNotification(notification: Notification) {
+        applyTheme()
+    }
+    
+    private func applyTheme() {
+//        navigationBar.barTintColor = UIColor.NavBar.colorScheme().backgroundColor
+//        navigationBar.tintColor = UIColor.NavBar.colorScheme().textColor
     }
 }

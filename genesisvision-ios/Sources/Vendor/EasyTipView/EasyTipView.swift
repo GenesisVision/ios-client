@@ -322,8 +322,7 @@ open class EasyTipView: UIView {
     // MARK: - Rotation support -
     
     @objc func handleRotation() {
-        guard let sview = superview
-            , presentingView != nil else { return }
+        guard let sview = superview, presentingView != nil else { return }
         
         UIView.animate(withDuration: 0.3) {
             self.arrange(withinSuperview: sview)

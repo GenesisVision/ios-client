@@ -293,7 +293,7 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
     if supportedOrientations.contains(orientationMask(videoOrientation: result)) {
       return result
     }
-    else if let orientation = fallbackOrientation , supportedOrientations.contains(orientationMask(videoOrientation: orientation)) {
+    else if let orientation = fallbackOrientation, supportedOrientations.contains(orientationMask(videoOrientation: orientation)) {
       return orientation
     }
     else if supportedOrientations.contains(.portrait) {

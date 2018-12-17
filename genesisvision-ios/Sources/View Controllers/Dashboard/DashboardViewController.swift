@@ -8,100 +8,63 @@
 
 import UIKit
 
-class DashboardViewController: BaseViewControllerWithTableView {
-
+class DashboardViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: DashboardViewModel!
 
     // MARK: - Variables
-    private var feedbackBarButtonItem: UIBarButtonItem?
-    
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
+    @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-            setupTableConfiguration()
+            scrollView.delegate = self
         }
     }
     
+    @IBOutlet weak var chartsView: UIView!
+    @IBOutlet weak var eventsView: UIView!
+    @IBOutlet weak var assetsView: UIView!
+    
+    var eventsViewHeightStart: CGFloat = 150.0
+    var eventsViewHeightEnd: CGFloat = 220.0
+    
+    var chartsViewHeightStart: CGFloat = 400.0
+    var chartsViewHeightEnd: CGFloat = 100.0
+    
+    private var notificationsBarButtonItem: UIBarButtonItem!
+    
+    @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            chartsViewHeightConstraint.constant = chartsViewHeightStart
+        }
+    }
+    @IBOutlet weak var eventsViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            eventsViewHeightConstraint.constant = eventsViewHeightEnd
+        }
+    }
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        showProgressHUD()
+        
         setup()
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        for visibleCell in tableView.visibleCells {
-            if let cell = visibleCell as? DashboardTableViewCell {
-                cell.stopTimer()
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if viewModel.modelsCount() == 0 {
-            fetch()
-        }
-    }
-    // MARK: - Private methods
-    private func setup() {
-        registerForPreviewing()
-
-        setupUI()
-    }
-    
-    private func setupUI() {
-        title = viewModel.title.uppercased()
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
-        
-        feedbackBarButtonItem = UIBarButtonItem(title: "Feedback", style: .done, target: self, action: #selector(feedbackButtonAction(_:)))
-        navigationItem.rightBarButtonItem = feedbackBarButtonItem
-    }
-    
-    private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerNibs(for: DashboardViewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: InvestmentProgramListViewModel.viewModelsForRegistration)
-        
-        setupPullToRefresh()
-    }
-    
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    private func updateSortHeaderView() {
-        guard let title = self.viewModel.headerTitle(for: 1) else {
-            return
-        }
-        
-        let header = self.tableView.headerView(forSection: 1) as! SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
-        
-        showProgressHUD()
-        fetch()
-    }
-    
-    override func fetch() {
-        viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AssetsViewController,
+            segue.identifier == "AssetsViewControllerSegue" {
+            vc.viewModel = viewModel.assetsTabmanViewModel
             
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
+            viewModel.router.dashboardAssetsViewController = vc
+        } else if let vc = segue.destination as? EventsViewController,
+            segue.identifier == "EventsViewControllerSegue" {
+            vc.viewModel = viewModel.eventListViewModel
+            
+            viewModel.router.eventsViewController = vc
+        } else if let vc = segue.destination as? ChartsViewController,
+            segue.identifier == "ChartsViewControllerSegue" {
+            vc.viewModel = viewModel.chartsTabmanViewModel
+            
+            viewModel.router.chartsViewController = vc
         }
     }
     
@@ -111,178 +74,181 @@ class DashboardViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    // MARK: - Actions
-    @IBAction func feedbackButtonAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.primary
+    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
         
-        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
-            self?.openSafariVC(with: Constants.Urls.feedbackWebAddress)
-        }))
-        
-        alert.addAction(UIAlertAction(title: String.Alerts.Feedback.emailButtonText, style: .default, handler: { [weak self] (action) in
-            self?.sendEmailFeedback()
-        }))
-        
-        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler:nil))
-        
-        present(alert, animated: true, completion: nil)
-    }
-}
-
-extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard viewModel.modelsCount() >= indexPath.row else {
-            return
-        }
-        
-        viewModel.showDetail(at: indexPath)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
-            return UITableViewCell()
-        }
-        
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+        showProgressHUD()
+        fetch()
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+    // MARK: - Private methods
+    private func setup() {
+        setupPullToRefresh(scrollView: scrollView)
+        bottomViewType = .dateRange
+        bottomStackViewHiddable = false
+        addBottomView()
         
-        if let cell = cell as? DashboardTableViewCell {
-            cell.startTimer()
-        }
+        setupUI()
+        
+        showProgressHUD()
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cell = cell as? DashboardTableViewCell {
-            cell.stopTimer()
+    private func reloadData() {
+        if let events = viewModel.dashboard?.events?.events, events.count > 0 {
+            eventsView.isHidden = false
+            eventsViewHeightConstraint.constant = eventsViewHeightEnd
+        } else {
+            eventsView.isHidden = true
+            eventsViewHeightConstraint.constant = 0.0
+        }
+        
+        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
+            viewModel.router.chartsViewController?.hideChart(false)
+            chartsViewHeightConstraint.constant = chartsViewHeightStart
+        } else {
+            viewModel.router.chartsViewController?.hideChart(true)
+            chartsViewHeightConstraint.constant = 250.0
+        }
+        
+        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
+            viewModel.router.chartsViewController?.hideInRequests(false)
+        } else {
+            viewModel.router.chartsViewController?.hideInRequests(true)
+            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
+        }
+        
+        if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
+            notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+            navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
+    private func fetch() {
+        viewModel.refresh { [weak self] (result) in
+            DispatchQueue.main.async {
+                self?.hideAll()
+                self?.viewModel.isLoading = false
+                
+                switch result {
+                case .success:
+                    self?.reloadData()
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self)
+                }
+            }
+        }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let title = viewModel.headerTitle(for: section) else {
-            return nil
+    private func setupUI() {
+        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
+        addCurrencyTitleButton(CurrencyDelegateManager())
+    }
+    
+    // MARK: - Public methods
+    func showRequests(_ programRequests: ProgramRequests?) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("In Requests")
+        viewModel.inRequestsDelegateManager.programRequests = programRequests
+        viewModel.inRequestsDelegateManager.inRequestsDelegate = self
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
+            tableView.delegate = self?.viewModel.inRequestsDelegateManager
+            tableView.dataSource = self?.viewModel.inRequestsDelegateManager
+            tableView.separatorStyle = .none
         }
         
-        let header = tableView.dequeueReusableHeaderFooterView() as SortHeaderView
-        header.sortButton.setTitle(title, for: .normal)
-        header.delegate = self
-        
-        return header
+        bottomSheetController.present()
     }
     
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
+    @objc func notificationsButtonAction() {
+        viewModel.showNotificationList()
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
+    // MARK: - Private methods
+    private func animateChartsView(_ yOffset: CGFloat) {
+        let chartsH = chartsViewHeightStart - yOffset * 2
+        if chartsH >= chartsViewHeightEnd && chartsH <= chartsViewHeightStart {
+            chartsViewHeightConstraint.constant = chartsH
+            viewModel.router.chartsViewController?.viewDidLayoutSubviews()
+        }
+    }
+    
+    private func animateEventsView(_ yOffset: CGFloat) {
+        let newHeight = eventsViewHeightStart + yOffset * 2
+        if newHeight >= eventsViewHeightStart && newHeight <= eventsViewHeightEnd {
+            eventsViewHeightConstraint.constant = newHeight
+            viewModel.router.eventsViewController?.viewDidLayoutSubviews()
+        }
+    }
+    
+    private func animateViews(_ yOffset: CGFloat) {
+        animateChartsView(yOffset)
+        animateEventsView(yOffset)
     }
 }
 
 extension DashboardViewController {
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewModel.deselectChart()
+        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        if let imageName = viewModel.noDataImageName() {
-            return UIImage(named: imageName)
-        }
+        let yOffset = scrollView.contentOffset.y
+        let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0
         
-        return UIImage.noDataPlaceholder
-    }
-    
-    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        viewModel.showProgramList()
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = viewModel.noDataButtonTitle()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
+        if yOffset >= viewHeight && self.filterStackView.alpha == 1.0 {
 
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-
-extension DashboardViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        let cellPosition = tableView.convert(location, from: view)
-        
-        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailViewController(with: indexPath),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return nil }
-        
-        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
-        
-        return vc
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        push(viewController: viewControllerToCommit)
-    }
-}
-
-extension DashboardViewController: SortHeaderViewProtocol {
-    func sortButtonDidPress() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
-        
-        var selectedIndexRow = viewModel.getSelectedSortingIndex()
-        let values = viewModel.sortingValues
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] (action) in
-            guard selectedIndexRow != self?.viewModel.getSelectedSortingIndex() else { return }
-            
-            self?.viewModel.changeSorting(at: selectedIndexRow)
-            self?.updateSortHeaderView()
-        }
-        
-        applyAction.isEnabled = false
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            
-            guard index.row != self?.viewModel.getSelectedSortingIndex() else {
-                return applyAction.isEnabled = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterStackView.alpha = 0.0
+            }) { (success) in
+                self.filterStackView.isHidden = true
             }
-            
-            applyAction.isEnabled = true
-            selectedIndexRow = index.row
+        } else if yOffset < viewHeight && self.filterStackView.alpha == 0.0 {
+            self.filterStackView.isHidden = false
+
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterStackView.alpha = 1.0
+            })
         }
         
-        alert.addAction(applyAction)
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+        if scrollView == self.scrollView {
+            if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.viewModel.dataSource {
+                for controller in pageboyDataSource.controllers {
+                    if let vc = controller as? BaseViewControllerWithTableView {
+                        vc.register3dTouch()
+
+                        vc.tableView?.isScrollEnabled = yOffset >= assetsView.frame.origin.y
+                    }
+                }
+            }
+        }
     }
 }
 
-extension DashboardViewController: ReloadDataProtocol {
-    func didReloadData() {
-        reloadData()
+extension DashboardViewController: InRequestsDelegateManagerProtocol {
+    func didSelectRequest(at indexPath: IndexPath) {
+        bottomSheetController.dismiss()
+        
+        viewModel.didSelectRequest(at: indexPath)
+    }
+    
+    func didCanceledRequest(completionResult: CompletionResult) {
+        bottomSheetController.dismiss()
+        
+        switch completionResult {
+        case .success:
+            self.showProgressHUD()
+            self.fetch()
+        case .failure(let errorType):
+            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+        }
     }
 }

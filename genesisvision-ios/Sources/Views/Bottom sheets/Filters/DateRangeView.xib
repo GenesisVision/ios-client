@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DateRangeView" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="321"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1xY-y3-oSh">
+                    <rect key="frame" x="20" y="20" width="335" height="32"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHu-Qx-60P" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="5qK-67-AK8"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Day">
+                                <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Kp-tO-rZH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9D-Su-Fcp" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="134.5" y="0.0" width="46" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Week">
+                                <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="z0f-4A-rDE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdc-Xd-pbs" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="283" y="0.0" width="52" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Month">
+                                <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="KH8-av-tQu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="C9D-Su-Fcp" firstAttribute="height" secondItem="DHu-Qx-60P" secondAttribute="height" id="70o-pO-ZBU"/>
+                        <constraint firstAttribute="height" constant="32" id="Wl9-3C-Q8y"/>
+                        <constraint firstItem="cdc-Xd-pbs" firstAttribute="height" secondItem="DHu-Qx-60P" secondAttribute="height" id="j3m-TO-soR"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Xpq-Xe-3ZQ">
+                    <rect key="frame" x="20" y="72" width="335" height="32"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEm-X3-EaX" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="36" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="tDA-Hx-hcU"/>
+                            </constraints>
+                            <state key="normal" title="Year">
+                                <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="62l-iS-N7l"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ng1-bj-hFb" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="124" y="0.0" width="60" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="All time">
+                                <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="xtk-O7-pgv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIA-sH-9SR" customClass="DateRangeButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="272" y="0.0" width="63" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Custom">
+                                <color key="titleColor" red="0.47058823529411764" green="0.49019607843137253" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeDateRangeTypeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sgm-SP-rTK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="zIA-sH-9SR" firstAttribute="height" secondItem="hEm-X3-EaX" secondAttribute="height" id="3vH-1D-rQh"/>
+                        <constraint firstItem="Ng1-bj-hFb" firstAttribute="height" secondItem="hEm-X3-EaX" secondAttribute="height" id="Z1P-w1-kYL"/>
+                    </constraints>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxp-mI-JYU">
+                    <rect key="frame" x="20" y="136" width="335" height="85"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrx-PS-E2r">
+                            <rect key="frame" x="0.0" y="0.0" width="156.5" height="27"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKy-Nn-mkf" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="35" width="156.5" height="50"/>
+                            <color key="backgroundColor" red="0.14117647058823529" green="0.16470588235294117" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="RTA-ZX-JJe"/>
+                            </constraints>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEy-0c-8z8">
+                            <rect key="frame" x="162.5" y="59.5" width="10" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="10" id="4c4-cH-UnZ"/>
+                                <constraint firstAttribute="height" constant="1" id="GG1-jm-xb0"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfK-zO-ULL" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="178.5" y="35" width="156.5" height="50"/>
+                            <color key="backgroundColor" red="0.14117647059999999" green="0.1647058824" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72r-dl-Y5Z">
+                            <rect key="frame" x="178.5" y="0.0" width="156.5" height="27"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="GfK-zO-ULL" firstAttribute="leading" secondItem="hEy-0c-8z8" secondAttribute="trailing" constant="6" id="1tk-UO-w2z"/>
+                        <constraint firstItem="72r-dl-Y5Z" firstAttribute="top" secondItem="Xrx-PS-E2r" secondAttribute="top" id="59q-Ct-lOh"/>
+                        <constraint firstAttribute="trailing" secondItem="GfK-zO-ULL" secondAttribute="trailing" id="6or-SI-NEn"/>
+                        <constraint firstItem="GfK-zO-ULL" firstAttribute="top" secondItem="72r-dl-Y5Z" secondAttribute="bottom" constant="8" id="Dk7-Ns-ipE"/>
+                        <constraint firstItem="GfK-zO-ULL" firstAttribute="height" secondItem="lKy-Nn-mkf" secondAttribute="height" id="FtF-Uv-CCS"/>
+                        <constraint firstItem="hEy-0c-8z8" firstAttribute="leading" secondItem="lKy-Nn-mkf" secondAttribute="trailing" constant="6" id="IPo-z3-hzx"/>
+                        <constraint firstAttribute="height" constant="85" id="IlD-l8-g2Z"/>
+                        <constraint firstItem="lKy-Nn-mkf" firstAttribute="leading" secondItem="Fxp-mI-JYU" secondAttribute="leading" id="Nu0-IQ-2dJ"/>
+                        <constraint firstItem="lKy-Nn-mkf" firstAttribute="top" secondItem="Xrx-PS-E2r" secondAttribute="bottom" constant="8" id="R8W-Pp-vrL"/>
+                        <constraint firstItem="Xrx-PS-E2r" firstAttribute="trailing" secondItem="lKy-Nn-mkf" secondAttribute="trailing" id="Tqb-xs-1fB"/>
+                        <constraint firstAttribute="bottom" secondItem="GfK-zO-ULL" secondAttribute="bottom" id="XUI-N9-Gpc"/>
+                        <constraint firstItem="Xrx-PS-E2r" firstAttribute="leading" secondItem="lKy-Nn-mkf" secondAttribute="leading" id="e8A-LD-doo"/>
+                        <constraint firstItem="Xrx-PS-E2r" firstAttribute="top" secondItem="Fxp-mI-JYU" secondAttribute="top" id="e9K-tA-WyM"/>
+                        <constraint firstItem="72r-dl-Y5Z" firstAttribute="trailing" secondItem="GfK-zO-ULL" secondAttribute="trailing" id="hXq-7g-VE1"/>
+                        <constraint firstItem="72r-dl-Y5Z" firstAttribute="height" secondItem="Xrx-PS-E2r" secondAttribute="height" id="ilF-jy-rbc"/>
+                        <constraint firstItem="hEy-0c-8z8" firstAttribute="centerY" secondItem="lKy-Nn-mkf" secondAttribute="centerY" id="oIV-Xb-W9R"/>
+                        <constraint firstItem="72r-dl-Y5Z" firstAttribute="leading" secondItem="GfK-zO-ULL" secondAttribute="leading" id="qsE-Ri-b7H"/>
+                        <constraint firstAttribute="bottom" secondItem="lKy-Nn-mkf" secondAttribute="bottom" id="zGp-2p-T7M"/>
+                        <constraint firstItem="GfK-zO-ULL" firstAttribute="width" secondItem="lKy-Nn-mkf" secondAttribute="width" id="zfy-W5-yZR"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-RE-Tty" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                    <rect key="frame" x="20" y="243" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="55d-EH-4WO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Apply">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="applyButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="8zV-tS-psg"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Xpq-Xe-3ZQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="885-DV-Okm"/>
+                <constraint firstItem="1xY-y3-oSh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="Bdn-I1-QpI"/>
+                <constraint firstItem="1xY-y3-oSh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Era-uL-NTB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1xY-y3-oSh" secondAttribute="trailing" constant="20" id="KBM-XA-2N1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Fxp-mI-JYU" secondAttribute="trailing" constant="20" id="KqX-2i-aty"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AOa-RE-Tty" secondAttribute="bottom" constant="20" id="Lw8-K7-OOm"/>
+                <constraint firstItem="Fxp-mI-JYU" firstAttribute="top" secondItem="Xpq-Xe-3ZQ" secondAttribute="bottom" constant="32" id="RG6-5r-f9Q"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xpq-Xe-3ZQ" secondAttribute="trailing" constant="20" id="TA4-j3-ySw"/>
+                <constraint firstItem="Fxp-mI-JYU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="TfL-sB-rDJ"/>
+                <constraint firstItem="Xpq-Xe-3ZQ" firstAttribute="top" secondItem="1xY-y3-oSh" secondAttribute="bottom" constant="20" id="Wbf-Hh-FbY"/>
+                <constraint firstItem="Xpq-Xe-3ZQ" firstAttribute="height" secondItem="1xY-y3-oSh" secondAttribute="height" id="XcN-eH-xXb"/>
+                <constraint firstItem="AOa-RE-Tty" firstAttribute="top" secondItem="Fxp-mI-JYU" secondAttribute="bottom" constant="22" id="gHw-aK-fuQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AOa-RE-Tty" secondAttribute="trailing" constant="20" id="m8E-nb-uaw"/>
+                <constraint firstItem="AOa-RE-Tty" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="wNh-44-uiv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="allTimeButton" destination="Ng1-bj-hFb" id="H03-4p-wGf"/>
+                <outlet property="applyButton" destination="AOa-RE-Tty" id="Frc-K2-bgz"/>
+                <outlet property="customButton" destination="zIA-sH-9SR" id="qsC-wY-CoB"/>
+                <outlet property="dateFromTextField" destination="lKy-Nn-mkf" id="2s1-8f-oZL"/>
+                <outlet property="dateFromTitleLabel" destination="Xrx-PS-E2r" id="vUm-gV-PNT"/>
+                <outlet property="dateToTextField" destination="GfK-zO-ULL" id="qVl-N3-qGQ"/>
+                <outlet property="dateToTitleLabel" destination="72r-dl-Y5Z" id="RUD-8x-Soc"/>
+                <outlet property="dayButton" destination="DHu-Qx-60P" id="IEp-aZ-bzc"/>
+                <outlet property="monthButton" destination="cdc-Xd-pbs" id="b2e-uF-gvH"/>
+                <outlet property="weekButton" destination="C9D-Su-Fcp" id="a2G-FG-h5y"/>
+                <outlet property="yearButton" destination="hEm-X3-EaX" id="hfm-c2-WWo"/>
+            </connections>
+            <point key="canvasLocation" x="26.399999999999999" y="-110.19490254872565"/>
+        </view>
+    </objects>
+</document>

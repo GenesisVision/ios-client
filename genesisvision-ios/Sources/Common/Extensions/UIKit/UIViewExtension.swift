@@ -7,6 +7,7 @@
 //
 
 import UIKit.UIView
+import PKHUD
 
 extension UIView {
     func roundCorners() {
@@ -19,11 +20,14 @@ extension UIView {
         layer.cornerRadius = radius
     }
     
-    func roundWithBorder(_ approximateBorderWidth: CGFloat, color: UIColor = .white) {
-        roundCorners()
-        let border = makeRoundBorder(approximateBorderWidth, color: color)
-        //TODO: Remove old border
-        layer.addSublayer(border)
+    func roundCorners(with radius: CGFloat? = nil, borderWidth: CGFloat, borderColor: UIColor) {
+        contentMode = .scaleAspectFill
+        clipsToBounds = true
+        
+        layer.cornerRadius = radius ?? frame.height / 2
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
+        layer.masksToBounds = true
     }
     
     func addBorder(withBorderWidth borderWidth: CGFloat, color: UIColor = .white) {
@@ -40,5 +44,50 @@ extension UIView {
         border.path = UIBezierPath(ovalIn: border.bounds).cgPath
         
         return border
+    }
+    
+    // MARK: - PKHUD
+    func showProgressHUD(onView: UIView? = nil, withBgView: Bool = false) {
+        PKHUD.sharedHUD.dimsBackground = withBgView
+        HUD.show(.progress, onView: onView ?? self)
+    }
+    
+    func hideHUD() {
+        HUD.hide()
+    }
+    
+    func showErrorHUD(subtitle: String? = nil) {
+        notificationFeedback(style: .warning)
+        subtitle != nil
+            ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self, delay: Constants.HudDelay.error)
+            : HUD.flash(.error, onView: self, delay: Constants.HudDelay.error)
+    }
+    
+    func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+        title != nil || subtitle != nil
+            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self, delay: Constants.HudDelay.success, completion: completion)
+            : HUD.flash(.success, onView: self, delay: Constants.HudDelay.success, completion: completion)
+    }
+    
+    func showHUD(type: HUDContentType) {
+        HUD.show(.success, onView: self)
+    }
+    
+    func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
+        HUD.flash(type, onView: self, delay: delay ?? Constants.HudDelay.default)
+    }
+    
+    func typedSuperview<T: UIView>() -> T? {
+        var parent = superview
+        
+        while parent != nil {
+            if let view = parent as? T {
+                return view
+            } else {
+                parent = parent?.superview
+            }
+        }
+        
+        return nil
     }
 }

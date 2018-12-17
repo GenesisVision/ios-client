@@ -8,9 +8,14 @@
 
 import UIKit.UIButton
 
+protocol TooltipButtonProtocol: class {
+    func showDidPress(_ tooltipText: String)
+}
+
 class TooltipButton: UIButton {
     
-    var customBorderColor: UIColor = UIColor.Font.light
+    weak var delegate: TooltipButtonProtocol?
+    
     var tooltipText: String = ""
     
     // MARK: - Lifecycle
@@ -19,13 +24,7 @@ class TooltipButton: UIButton {
         
         backgroundColor = .clear
         
-        layer.backgroundColor = UIColor.clear.cgColor
-        layer.borderWidth = 1.0
-        layer.borderColor = customBorderColor.cgColor
-        
-        titleLabel?.font = UIFont.getFont(.bold, size: 13)
-        setTitleColor(customBorderColor, for: .normal)
-        setTitle("?", for: .normal)
+        setImage(#imageLiteral(resourceName: "img_tip_icon"), for: .normal)
         
         layer.cornerRadius = bounds.size.height / 2
         layer.masksToBounds = true
@@ -34,9 +33,13 @@ class TooltipButton: UIButton {
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
-        let window = UIApplication.shared.windows[0] as UIWindow
-        if let viewController = window.rootViewController {
-            viewController.showTooltip(with: tooltipText, for: self)
+        if let delegate = delegate {
+            delegate.showDidPress(tooltipText)
+        } else {
+            let window = UIApplication.shared.windows[0] as UIWindow
+            if let viewController = window.rootViewController as? BaseViewController {
+                viewController.showBottomSheet(.text, title: tooltipText, initializeHeight: 130, completion: nil)
+            }
         }
     }
 }

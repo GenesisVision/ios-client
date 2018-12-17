@@ -12,7 +12,8 @@ class NumpadButton: UIButton {
     
     var cornerSize: CGFloat = 5.0
     var fontSize: CGFloat = 25.0
-    
+    var bgColor: UIColor = UIColor.Button.numpadBackground
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -22,7 +23,7 @@ class NumpadButton: UIButton {
         titleLabel?.font = UIFont.getFont(.regular, size: fontSize)
         setTitleColor(UIColor.Font.numPadText, for: .normal)
         
-        backgroundColor = UIColor.Button.numpadBackground
+        backgroundColor = bgColor
     }
     
     // MARK: - Public methods

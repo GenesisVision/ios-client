@@ -10,11 +10,18 @@ import UIKit
 
 class BaseTabBarController: UITabBarController {
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBar.isTranslucent = false
-        tabBar.barTintColor = UIColor.TabBar.background
+
+        showNewVersionAlertIfNeeded(self)
+        showTwoFactorEnableAlertIfNeeded(self) { (enable) in
+        }
+        
+        applyTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -23,9 +30,22 @@ class BaseTabBarController: UITabBarController {
         if let items = tabBar.items {
             for item in items {
                 if UIDevice.current.userInterfaceIdiom != .pad {
-                    item.titlePositionAdjustment = UIOffsetMake(0, -4)
+                    item.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
                 }
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .themeChanged, object: nil)
+    }
+    
+    // MARK: - Private methods
+    @objc private func themeChangedNotification(notification: Notification) {
+        applyTheme()
+    }
+    
+    private func applyTheme() {
+        tabBar.barTintColor = UIColor.TabBar.bg
     }
 }

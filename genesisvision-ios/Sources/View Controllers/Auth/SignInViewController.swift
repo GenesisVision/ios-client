@@ -11,45 +11,54 @@ import IQKeyboardManagerSwift
 
 class SignInViewController: BaseViewController {
 
-    var viewModel: SignInViewModel!
+    var viewModel: AuthSignInViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
     }
-    
+    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+        didSet {
+            passwordTitleLabel.text = "Password"
+        }
+    }
     @IBOutlet var passwordTextField: DesignableUITextField! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
     }
     
-    // MARK: - Buttons
-    @IBOutlet var signInButton: UIButton!
-    @IBOutlet var forgotPasswordButton: UIButton!
-    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var forgotButton: UIButton! {
+        didSet {
+            forgotButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            forgotButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
+    
+    private var signUpBarButtonItem: UIBarButtonItem!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         #if DEBUG
-            emailTextField.text = "george@genesis.vision"
-            passwordTextField.text = "qwerty"
+        emailTextField.text = email
+        passwordTextField.text = pass
         #endif
         
         setupUI()
@@ -57,15 +66,23 @@ class SignInViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        emailTextField.setBottomLine()
-        passwordTextField.setBottomLine()
+        navigationItem.title = viewModel.title
+        
+        signUpBarButtonItem = UIBarButtonItem(title: "Sign up", style: .done, target: self, action: #selector(showSignUpVC))
+        navigationItem.rightBarButtonItem = signUpBarButtonItem
     }
     
-    private func sighInMethod() {
+    private func signInMethod() {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] (result) in
+        var email = emailTextField.text ?? ""
+        var password = passwordTextField.text ?? ""
+        
+        email = email.trimmingCharacters(in: .whitespaces)
+        password = password.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.signIn(email: email, password: password) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -74,12 +91,17 @@ class SignInViewController: BaseViewController {
                     self?.viewModel.startAsAuthorized()
                 })
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                switch errorType {
+                case .requiresTwoFactor:
+                    self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
+                default:
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
             }
         }
     }
     
-    private func showSignUpVC() {
+    @objc private func showSignUpVC() {
         hideKeyboard()
         viewModel.showSignUpVC()
     }
@@ -91,23 +113,21 @@ class SignInViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction func signInButtonAction(_ sender: UIButton) {
-        sighInMethod()
+        signInMethod()
     }
     
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         showForgotPasswordVC()
-    }
-    
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
-        showSignUpVC()
     }
 }
 
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
         case passwordTextField:
-            sighInMethod()
+            signInMethod()
         default:
             IQKeyboardManager.sharedManager().goNext()
         }

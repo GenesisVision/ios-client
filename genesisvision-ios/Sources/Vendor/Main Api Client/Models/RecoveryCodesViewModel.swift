@@ -12,11 +12,13 @@ import Foundation
 open class RecoveryCodesViewModel: Codable {
 
     public var codes: [RecoveryCode]?
+    public var authToken: String?
 
 
     
-    public init(codes: [RecoveryCode]?) {
+    public init(codes: [RecoveryCode]?, authToken: String?) {
         self.codes = codes
+        self.authToken = authToken
     }
     
 
@@ -27,6 +29,7 @@ open class RecoveryCodesViewModel: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(codes, forKey: "codes")
+        try container.encodeIfPresent(authToken, forKey: "authToken")
     }
 
     // Decodable protocol methods
@@ -35,6 +38,7 @@ open class RecoveryCodesViewModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         codes = try container.decodeIfPresent([RecoveryCode].self, forKey: "codes")
+        authToken = try container.decodeIfPresent(String.self, forKey: "authToken")
     }
 }
 

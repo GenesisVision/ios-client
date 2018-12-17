@@ -11,53 +11,62 @@ import IQKeyboardManagerSwift
 
 class ForgotPasswordViewController: BaseViewController {
     
-    var viewModel: ForgetPasswordViewModel!
+    var viewModel: AuthForgetPasswordViewModel!
     
     // MARK: - TextFields
+    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
     @IBOutlet var emailTextField: DesignableUITextField! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
     }
     
     // MARK: - Buttons
-    @IBOutlet var resetButtonButton: UIButton!
+    @IBOutlet var resetButtonButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if DEBUG
-        emailTextField.text = "george@genesis.vision"
-        #endif
         
         setupUI()
     }
     
     // MARK: - Private methods
     private func setupUI() {
-        emailTextField.setBottomLine()
+        
+    }
+    
+    private func showForgotPasswordInfoVC() {
+        showBottomSheet(.success, title: viewModel.successText) { [weak self] (success) in
+            self?.viewModel.goToBack()
+        }
     }
     
     private func resetButtonMethod() {
         hideKeyboard()
         showProgressHUD()
         
-        viewModel.forgotPassword(email: emailTextField.text ?? "") { [weak self] (result) in
+        var email = emailTextField.text ?? ""
+        
+        email = email.trimmingCharacters(in: .whitespaces)
+        
+        viewModel.forgotPassword(email: email) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
             case .success:
-                self?.viewModel.showForgotPasswordInfoVC()
+                self?.showForgotPasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }

@@ -7,7 +7,7 @@
 //
 
 enum WelcomeRouteType {
-    case startAsAuthorized, startAsUnauthorized, startTournament
+    case startAsAuthorized, startAsUnauthorized
 }
 
 class WelcomeRouter: Router {
@@ -19,8 +19,6 @@ class WelcomeRouter: Router {
             startAsAuthorized()
         case .startAsUnauthorized:
             startAsUnauthorized()
-        case .startTournament:
-            startTournament()
         }
     }
 }

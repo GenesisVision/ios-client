@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '755A3E6417601F39E5BA6E000EC69E43'
-               BlueprintName = 'TTRangeSlider'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'TTRangeSlider.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8075E5CA2F7227D4893313337B836F1C"
+               BlueprintName = "TTRangeSlider"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "TTRangeSlider.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

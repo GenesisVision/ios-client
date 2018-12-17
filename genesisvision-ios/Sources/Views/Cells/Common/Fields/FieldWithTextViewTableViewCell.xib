@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Bol.ttf">
+            <string>NeuzeitGro-Bol</string>
+        </array>
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="252" id="Ppw-gj-CzO" customClass="FieldWithTextViewTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ppw-gj-CzO" id="Eg2-dv-9W7">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="251.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gqL-iF-Tbj">
+                        <rect key="frame" x="16" y="16" width="343" height="227.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QnD-Y6-mr9">
+                                <rect key="frame" x="0.0" y="55" width="321" height="118"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gQ-dr-43f">
+                                        <rect key="frame" x="0.0" y="0.0" width="321" height="10"/>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="10"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.83529411760000005" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tk1-Tn-g5I">
+                                        <rect key="frame" x="0.0" y="18" width="321" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="puZ-U7-NUC"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" red="0.1058823529" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9gQ-dr-43f" secondAttribute="trailing" id="0hI-xi-8ZP"/>
+                                    <constraint firstAttribute="trailing" secondItem="tk1-Tn-g5I" secondAttribute="trailing" id="0xa-Wd-jPa"/>
+                                    <constraint firstItem="tk1-Tn-g5I" firstAttribute="leading" secondItem="QnD-Y6-mr9" secondAttribute="leading" id="bYE-yf-kc9"/>
+                                    <constraint firstItem="9gQ-dr-43f" firstAttribute="leading" secondItem="QnD-Y6-mr9" secondAttribute="leading" id="ntk-UO-eZB"/>
+                                </constraints>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_dropdown_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vBv-9J-s8B">
+                                <rect key="frame" x="329" y="107" width="14" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="O23-Bp-aex"/>
+                                    <constraint firstAttribute="width" constant="14" id="xQk-RG-GjU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gqL-iF-Tbj" firstAttribute="leading" secondItem="Eg2-dv-9W7" secondAttribute="leading" constant="16" id="418-2u-SAw"/>
+                    <constraint firstAttribute="bottom" secondItem="gqL-iF-Tbj" secondAttribute="bottom" constant="8" id="Msa-q1-ZMs"/>
+                    <constraint firstAttribute="trailing" secondItem="gqL-iF-Tbj" secondAttribute="trailing" constant="16" id="RZI-7f-1Ne"/>
+                    <constraint firstItem="gqL-iF-Tbj" firstAttribute="top" secondItem="Eg2-dv-9W7" secondAttribute="top" constant="16" id="XHR-nm-OML"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="E23-KK-Bgh"/>
+            <connections>
+                <outlet property="accessoryImageView" destination="vBv-9J-s8B" id="A0y-Sc-tQp"/>
+                <outlet property="textView" destination="tk1-Tn-g5I" id="YHj-qv-Y37"/>
+                <outlet property="titleLabel" destination="9gQ-dr-43f" id="nNW-Vp-d5I"/>
+            </connections>
+            <point key="canvasLocation" x="-62.5" y="-82"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="img_dropdown_icon" width="13" height="7"/>
+    </resources>
+</document>

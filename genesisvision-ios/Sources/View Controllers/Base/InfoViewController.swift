@@ -13,9 +13,12 @@ class InfoViewController: BaseViewController {
     var viewModel: InfoViewModel?
     
     // MARK: - Buttons
-    @IBOutlet var okButton: UIButton!
-    @IBOutlet var iconImageView: UIImageView!
-    @IBOutlet var textLabel: UILabel!
+    @IBOutlet var okButton: ActionButton!
+    @IBOutlet var textLabel: SubtitleLabel! {
+        didSet {
+            textLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -31,12 +34,12 @@ class InfoViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - Private methods
     private func setupUI() {
-        if let iconImage = viewModel?.iconImage {
-            iconImageView.image = iconImage
-        }
-        
         if let text = viewModel?.text {
             textLabel.text = text
         }
@@ -47,12 +50,6 @@ class InfoViewController: BaseViewController {
         
         if let backgroundColor = viewModel?.backgroundColor {
             view.backgroundColor = backgroundColor
-            okButton.setTitleColor(backgroundColor, for: .normal)
-        }
-        
-        if let tintColor = viewModel?.tintColor {
-            okButton.backgroundColor = tintColor
-            iconImageView.tintColor = tintColor
         }
         
         if let textColor = viewModel?.textColor {

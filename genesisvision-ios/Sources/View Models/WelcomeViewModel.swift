@@ -24,12 +24,15 @@ final class WelcomeViewModel {
     // MARK: - Public methods
     // MARK: - Navigation
     func start() {
+        
+        if isUITest {
+            AuthManager.signOut()
+        }
+        
         requestReview()
-        isTournamentApp
-            ? startTournament()
-            : AuthManager.isLogin()
-                ? startAsAuthorized()
-                : startAsUnauthorized()
+        AuthManager.isLogin()
+            ? startAsAuthorized()
+            : startAsUnauthorized()
     }
     
     // MARK: - Private methods
@@ -41,12 +44,10 @@ final class WelcomeViewModel {
         router.show(routeType: .startAsUnauthorized)
     }
     
-    private func startTournament() {
-        router.show(routeType: .startTournament)
-    }
-    
     private func requestReview() {
-        let key = Constants.UserDefaults.timesOpened
+        guard !isDebug else { return }
+        
+        let key = UserDefaultKeys.timesOpened
         var timesOpened = UserDefaults.standard.integer(forKey: key)
         
         timesOpened += 1
@@ -57,6 +58,7 @@ final class WelcomeViewModel {
                 SKStoreReviewController.requestReview()
             }
             UserDefaults.standard.removeObject(forKey: key)
+            UserDefaults.standard.synchronize()
         }
         
     }

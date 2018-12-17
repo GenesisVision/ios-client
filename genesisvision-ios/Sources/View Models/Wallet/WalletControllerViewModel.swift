@@ -18,56 +18,39 @@ final class WalletControllerViewModel {
     // MARK: - Variables
     var title: String = "Wallet"
     
+    var wallet: WalletSummary?
+    
     private var sections: [SectionType] = [.header, .transactions]
 
     private var router: WalletRouter!
     private var transactions = [WalletTransactionTableViewCellViewModel]()
-    private weak var delegate: WalletHeaderTableViewCellProtocol?
     private weak var reloadDataProtocol: ReloadDataProtocol?
-    
-    private var balance: Double = 0.0 {
-        didSet {
-            self.usdBalance = balance * self.rate
-        }
-    }
-    private var currency: String = Constants.currency
-    private var rate: Double = 0.0
-    private var usdBalance: Double = 0.0
-    
+
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var skip = 0            //offset
-    var take = Constants.Api.take
+    var take = Api.take
     var totalCount = 0      //total count of programs
-    
-    var filter: TransactionsFilter?
     
     // MARK: - Init
     init(withRouter router: WalletRouter) {
         self.router = router
-        self.delegate = router.currentController() as? WalletHeaderTableViewCellProtocol
-        self.reloadDataProtocol = router.currentController() as? ReloadDataProtocol
+        self.reloadDataProtocol = router.topViewController() as? ReloadDataProtocol
         
         setup()
-    }
-    
-    // MARK: - Data methods
-    func getBalance() -> Double {
-        return balance
     }
 }
 
 // MARK: - TableView
 extension WalletControllerViewModel {
     /// Return view models for registration cell Nib files
-    static var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletHeaderTableViewCellViewModel.self,
-                WalletTransactionTableViewCellViewModel.self]
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [WalletTransactionTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
-    static var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return [SortHeaderView.self]
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [WalletTableHeaderView.self, DefaultTableHeaderView.self]
     }
     
     func numberOfSections() -> Int {
@@ -77,7 +60,7 @@ extension WalletControllerViewModel {
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
         case .header:
-            return 1
+            return 0
         case .transactions:
             return transactions.count
         }
@@ -86,8 +69,7 @@ extension WalletControllerViewModel {
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
         case .transactions:
-            guard let sort = filter?.type?.rawValue else { return ""}
-            return sort + " Transactions"
+            return "Transaction history"
         case .header:
             return nil
         }
@@ -95,10 +77,10 @@ extension WalletControllerViewModel {
     
     func headerHeight(for section: Int) -> CGFloat {
         switch sections[section] {
-        case .transactions:
-            return 50.0
         case .header:
-            return 0.0
+            return 250.0
+        case .transactions:
+            return 86.0
         }
     }
     
@@ -107,24 +89,23 @@ extension WalletControllerViewModel {
         let type = sections[indexPath.section]
         switch type {
         case .header:
-            return WalletHeaderTableViewCellViewModel(balance: balance, usdBalance: usdBalance, imageName: logoImageName(), delegate: delegate)
+            return nil
         case .transactions:
             return transactions[indexPath.row]
         }
     }
     
-    func getDetailViewController(with indexPath: IndexPath) -> ProgramDetailViewController? {
-        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
-            let investmentProgram = model.walletTransaction.investmentProgram,
-            let investmentProgramId = investmentProgram.id
-            else { return nil }
-        
-        return router.getDetailViewController(with: investmentProgramId.uuidString)
+    func getProgramViewController(with indexPath: IndexPath) -> ProgramViewController? {
+//        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+//            let program = model.walletTransaction.program,
+//            let programId = program.id
+//            else { return nil }
+        let uuidString = "" //programId.uuidString
+        return router.getProgramViewController(with: uuidString)
     }
 
     // MARK: - Private methods
     private func setup() {
-        filter = TransactionsFilter(investmentProgramId: nil, type: Constants.Filters.walletModelTypeDefault, skip: skip, take: take)
         fetchBalance { (result) in }
     }
 }
@@ -132,14 +113,17 @@ extension WalletControllerViewModel {
 // MARK: - Fetch
 extension WalletControllerViewModel {
     func fetchBalance(completion: @escaping CompletionBlock) {
-        AuthManager.getSavedRate { [weak self] (value) in
-            self?.rate = value
+        guard let currency = WalletAPI.Currency_v10WalletByCurrencyGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        WalletDataProvider.getWallet(with: currency, completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
             
-            AuthManager.getBalance(completion: { [weak self] (value) in
-                self?.balance = value
-                completion(.success)
-            }, completionError: completion)
-        }
+            self?.wallet = viewModel
+            
+            completion(.success)
+        }, errorCompletion: completion)
     }
     
     /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
@@ -158,7 +142,7 @@ extension WalletControllerViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMoreTransactions(at row: Int) -> Bool {
-        if numberOfRows(in: 1) - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+        if numberOfRows(in: 1) - Api.fetchThreshold == row && canFetchMoreResults && transactions.count >= take {
             fetchMoreTransactions()
         }
         
@@ -207,9 +191,8 @@ extension WalletControllerViewModel {
     
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        guard let filter = filter else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
+        WalletDataProvider.getWalletTransactions(with: nil, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
@@ -239,17 +222,13 @@ extension WalletControllerViewModel {
         router.show(routeType: .deposit)
     }
     
-    func filters() {
-        router.show(routeType: .showFilterVC(walletControllerViewModel: self))
-    }
-    
     func showDetail(at indexPath: IndexPath) {
-        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
-            let investmentProgram = model.walletTransaction.investmentProgram,
-            let investmentProgramId = investmentProgram.id
-            else { return }
-        
-        router.show(routeType: .showProgramDetail(investmentProgramId: investmentProgramId.uuidString))
+//        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+//            let program = model.walletTransaction.program,
+//            let programId = program.id
+//            else { return }
+//        
+//        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
     }
     
     func showProgramList() {
@@ -264,7 +243,7 @@ extension WalletControllerViewModel {
     }
     
     func noDataText() -> String {
-        return "you don’t have \nany transactions"
+        return "You don’t have any transactions yet"
     }
     
     func noDataImageName() -> String? {
@@ -272,7 +251,7 @@ extension WalletControllerViewModel {
     }
     
     func noDataButtonTitle() -> String {
-        let text = "Browse programs"
-        return text.uppercased()
+        let text = ""
+        return text
     }
 }

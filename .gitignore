@@ -8,9 +8,12 @@ DerivedData/
 
 ## Constants 
 Constants.swift
+AppConstants.swift
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+Pods

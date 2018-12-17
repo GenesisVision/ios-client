@@ -11,35 +11,21 @@ import UIKit.UIViewController
 import PKHUD
 
 extension UIViewController {
-    
-    // MARK: - Stroryboard Instances
-    enum StoryboardNames: String {
-        case main
-        case program
-        case launch
-        case profile
-        case programs
-        case auth
-        case wallet
-        case dashboard
-        case tournament
-    }
-    
-    private class func mainStoryboardInstancePrivate<T: UIViewController>(name: String) -> T? {
+    private class func mainStoryboardInstancePrivate<T: UIViewController>(_ name: String) -> T? {
         let storyboard = UIStoryboard(name: name, bundle: nil)
 
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? T
     }
     
-    class func storyboardInstance(name: StoryboardNames) -> Self? {
-        return mainStoryboardInstancePrivate(name: name.rawValue.capitalized)
+    class func storyboardInstance(_ name: StoryboardNames) -> Self? {
+        return mainStoryboardInstancePrivate(name.rawValue.capitalized)
     }
     
     
     // MARK: - Alerts
     func showAlertWithTitle(title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
         
         if actionTitle != nil {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
@@ -63,17 +49,52 @@ extension UIViewController {
     }
     
     func showSettingsAlert(_ message: String) {
-        let alert = UIAlertController(title: "Privacy settings", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
+        let alert = UIAlertController(title: String.Alerts.PrivacySettings.alertTitle, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        alert.addAction(UIAlertAction(title: String.Alerts.PrivacySettings.settingsButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: UIApplicationOpenSettingsURLString)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func showNewVersionAlert(_ newVersion: String) {
+        let message = String.Alerts.NewVersionUpdate.alertMessage + "\(newVersion)"
+        let alert = UIAlertController(title: String.Alerts.NewVersionUpdate.alertTitle, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.updateButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
+            self?.openUrl(with: Urls.appStoreAddress)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.skipThisVersionButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
+            DispatchQueue.main.async {
+                print("Skip this version: " + newVersion)
+                UserDefaults.standard.set(newVersion, forKey: UserDefaultKeys.skipThisVersion)
+                UserDefaults.standard.synchronize()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showTwoFactorEnableAlert(completion: @escaping (_ enable: Bool) -> Void) {
+        let message = String.Alerts.TwoFactorEnable.alertMessage
+        let alertController = UIAlertController(title: String.Alerts.TwoFactorEnable.alertTitle, message: message, preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.Cell.headerBg
+        
+        alertController.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.enableButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
+            NotificationCenter.default.post(name: .twoFactorEnable, object: nil)
+            completion(true)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.cancelButtonText, style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
-        alertController.view.tintColor = UIColor.primary
+        alertController.view.tintColor = UIColor.Cell.headerBg
         
         present(alertController, animated: true, completion: nil)
         
@@ -87,11 +108,11 @@ extension UIViewController {
     }
     
     func openUrl(with urlAddress: String) {
-        if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+        if let url = URL(string: urlAddress), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(url as URL)
+                UIApplication.shared.openURL(url)
             }
         }
     }
@@ -109,42 +130,28 @@ extension UIViewController {
         showAlertWithTitle(title: "", message: text, actionTitle: String.Alerts.okButtonText, cancelTitle: nil, handler: nil, cancelHandler: nil)
     }
     
-    func showProgressHUD(withNetworkActivity networkActivity: Bool = true) {
-        HUD.show(.progress, onView: self.view)
+    func showProgressHUD(onView: UIView? = nil) {
+        self.view.showProgressHUD(onView: onView)
     }
 
     func hideHUD() {
-        HUD.hide()
-    }
-
-    func showErrorHUD(title: String?, subtitle: String?) {
-        title != nil || subtitle != nil
-            ? HUD.flash(.labeledError(title: title, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.error)
-            : HUD.flash(.error, onView: self.view, delay: Constants.HudDelay.error)
+        self.view.hideHUD()
     }
     
     func showErrorHUD(subtitle: String? = nil) {
-        subtitle != nil
-            ? HUD.flash(.labeledError(title: nil, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.error)
-            : HUD.flash(.error, onView: self.view, delay: Constants.HudDelay.error)
-    }
-
-    func showSuccessHUD(title: String?, subtitle: String?) {
-        title != nil || subtitle != nil
-            ? HUD.flash(.labeledSuccess(title: title, subtitle: subtitle), onView: self.view, delay: Constants.HudDelay.success)
-            : HUD.flash(.success, onView: self.view, delay: Constants.HudDelay.success)
+        self.view.showErrorHUD(subtitle: subtitle)
     }
     
-    func showSuccessHUD(completion: ((Bool) -> Void)? = nil) {
-        HUD.flash(.success, onView: self.view, delay: Constants.HudDelay.success, completion: completion)
+    func showSuccessHUD(title: String? = nil, subtitle: String? = nil, completion: ((Bool) -> Void)? = nil) {
+        self.view.showSuccessHUD(title: title, subtitle: subtitle, completion: completion)
     }
 
     func showHUD(type: HUDContentType) {
-        HUD.show(.success, onView: self.view)
+        self.view.showHUD(type: type)
     }
 
     func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
-        HUD.flash(type, onView: self.view, delay: delay ?? Constants.HudDelay.default)
+        self.view.showFlashHUD(type: type, delay: delay)
     }
     
     // MARK: - Keyboard
@@ -163,8 +170,8 @@ extension UIViewController {
     
     func openSafariVC(with url: URL) {
         let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
-        safariViewController.preferredBarTintColor = UIColor.Background.main
-        safariViewController.preferredControlTintColor = UIColor.primary
+        safariViewController.preferredBarTintColor = UIColor.BaseView.bg
+//        safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }
@@ -191,7 +198,7 @@ extension UIViewController {
                          cancelTitle: String?,
                          cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.primary
+        alert.view.tintColor = UIColor.Cell.headerBg
         
         if let actionTitle = firstActionTitle {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in

@@ -7,10 +7,10 @@
 import Foundation
 
 open class SwaggerClientAPI {
-    open static var basePath = "https://localhost"
-    open static var credential: URLCredential?
-    open static var customHeaders: [String:String] = [:]
-    open static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
+    public static var basePath = "https://localhost"
+    public static var credential: URLCredential?
+    public static var customHeaders: [String:String] = [:]
+    public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
 }
 
 open class RequestBuilder<T> {
@@ -31,6 +31,10 @@ open class RequestBuilder<T> {
         self.isBody = isBody
         self.headers = headers
 
+        if isDebug {
+            print(URLString)
+        }
+       
         addHeaders(SwaggerClientAPI.customHeaders)
     }
 

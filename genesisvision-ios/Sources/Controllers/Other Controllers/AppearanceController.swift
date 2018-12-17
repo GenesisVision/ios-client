@@ -8,41 +8,123 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import PKHUD
 
-enum ColorStyle {
+enum ThemeType: String {
+    case `default`, dark
+}
+
+enum NavBarType {
     case white, primary, gray
 }
 
-struct StyleColors {
-    var tintColor = UIColor.NavBar.tint
-    var backgroundColor = UIColor.NavBar.background
-    var textColor = UIColor.Font.dark
-    var subtitleColor = UIColor.Font.medium
-    
-    init(with style: ColorStyle = .white) {
-        switch style {
-        case .primary:
-            self.tintColor = UIColor.Font.white
-            self.backgroundColor = UIColor.primary
-            self.textColor = UIColor.Font.white
-            self.subtitleColor = UIColor.Font.white.withAlphaComponent(0.5)
-        case .gray:
-            self.backgroundColor = UIColor.NavBar.grayBackground
-            self.subtitleColor = UIColor.Font.dark.withAlphaComponent(0.7)
-        default:
-            self.tintColor = UIColor.NavBar.tint
-            self.backgroundColor = UIColor.NavBar.background
-            self.textColor = UIColor.Font.dark
-        }
-    }
+struct NavBarColors {
+    var tintColor: UIColor
+    var backgroundColor: UIColor
+    var textColor: UIColor
+    var subtitleColor: UIColor
 }
 
 struct AppearanceController {
+    enum Theme: Int {
+        case darkTheme, lightTheme
+         
+        var mainColor: UIColor {
+            switch self {
+            case .darkTheme:
+                return UIColor.primary
+            case .lightTheme:
+                return UIColor.primary
+            }
+        }
+        
+        //Customizing the Navigation Bar
+        var barStyle: UIBarStyle {
+            switch self {
+            case .lightTheme:
+                return .black
+            case .darkTheme:
+                return .default
+            }
+        }
+
+        var backgroundColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightBackground
+            case .darkTheme:
+                return UIColor.Common.darkCell
+            }
+        }
+        
+        var secondaryColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+        
+        var titleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightTextPrimary
+            case .darkTheme:
+                return UIColor.Common.darkTextPrimary
+            }
+        }
+        var subtitleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+    }
+    
+    static var theme: Theme {
+        get {
+            let colorTheme = UserDefaults.standard.integer(forKey: UserDefaultKeys.colorTheme)
+            guard let themeType = Theme(rawValue: colorTheme) else {
+                return .darkTheme
+            }
+            
+            return themeType
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultKeys.colorTheme)
+        }
+    }
+    
     static func setupAppearance() {
         setupNavigationBar()
-        setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
         
+        applyTheme()
+        
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
+    }
+    
+    static func applyTheme() {
+        NotificationCenter.default.post(name: .themeChanged, object: nil)
+        
+        let theme = AppearanceController.theme
+        
+        UserDefaults.standard.set(theme.rawValue, forKey: UserDefaultKeys.colorTheme)
+        UserDefaults.standard.synchronize()
+        
+        // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
+        let sharedApplication = UIApplication.shared
+        sharedApplication.delegate?.window??.tintColor = UIColor.primary
+        
+        UINavigationBar.appearance().barStyle = theme.barStyle
+        
+        UITabBar.appearance().barStyle = theme.barStyle
+
+        setupTabBar()
         setupSegmentedControl()
         setupPlateCell()
         setupShadowView()
@@ -50,23 +132,25 @@ struct AppearanceController {
     }
     
     // NavigationBar
-    static func setupNavigationBar(with style: ColorStyle = .gray) {
-        let colors = StyleColors(with: style)
+    static func setupNavigationBar(with type: NavBarType = .gray) {
+        let colors = UIColor.NavBar.colorScheme(with: type)
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+                                                            NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18)]
         
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
         }
         
-        UINavigationBar.appearance().tintColor = colors.tintColor
-        UINavigationBar.appearance().backgroundColor = colors.backgroundColor
+        UINavigationBar.appearance().tintColor = colors.textColor
         
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .focused)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .highlighted)
     }
-    
     
     // TabBar
     private static func setupTabBar() {
@@ -76,7 +160,7 @@ struct AppearanceController {
                                                           NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .selected)
 
         UITabBar.appearance().tintColor = UIColor.TabBar.tint
-        UITabBar.appearance().backgroundColor = UIColor.TabBar.background
+        UITabBar.appearance().backgroundColor = UIColor.TabBar.bg
     }
     
     // MARK: - IQKeyboardManager
@@ -127,11 +211,11 @@ struct AppearanceController {
     // MARK: - PlateCell
     private static func setupPlateCell() {
         PlateTableViewCell.appearance().plateAppearance =
-            PlateTableViewCellAppearance(cornerRadius: 6,
-                                         horizontalMarginValue: 8,
-                                         verticalMarginValues: 4,
-                                         backgroundColor: UIColor.Font.white,
-                                         selectedBackgroundColor: UIColor.Font.light)
+            PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
+                                         horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
+                                         verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                         backgroundColor: UIColor.Cell.bg,
+                                         selectedBackgroundColor: UIColor.Background.gray)
     }
     
     // MARK: - ShadowView
