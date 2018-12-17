@@ -135,7 +135,7 @@ class ProgramViewController: BaseViewController {
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
-        navigationItem.rightBarButtonItems = [favoriteBarButtonItem]
+        navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
     }
     
     @objc func notificationsButtonAction() {

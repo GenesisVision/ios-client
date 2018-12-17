@@ -226,6 +226,12 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showNotificationsSettings() {
+        guard let viewController = getNotificationsSettingsViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showRatingList(with filterModel: FilterModel) {
         guard let viewController = getRating(with: filterModel) else { return }
         
@@ -396,6 +402,15 @@ extension Router {
         tabmanViewController.hidesBottomBarWhenPushed = true
         
         return tabmanViewController
+    }
+    
+    func getNotificationsSettingsViewController() -> BaseViewController? {
+        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(.auth) else { return nil }
+        let router = AuthTwoFactorDisableRouter(parentRouter: self)
+        viewController.viewModel = AuthTwoFactorDisableConfirmationViewModel(withRouter: router)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
     }
     
     func getTwoFactorDisableViewController() -> AuthTwoFactorConfirmationViewController? {

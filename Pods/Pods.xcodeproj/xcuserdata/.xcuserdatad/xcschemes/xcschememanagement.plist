@@ -74,22 +74,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SimulatorStatusMagic.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SmileLock.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SnapKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TTRangeSlider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

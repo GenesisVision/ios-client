@@ -397,6 +397,9 @@
 		5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */; };
 		5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */; };
 		5EC7B88720D16093007720D1 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC7B88620D16093007720D1 /* LocalAuthentication.framework */; };
+		5ECA620721C8216200CA9C8C /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA620621C8216100CA9C8C /* FilterViewModel.swift */; };
+		5ECA620921C8216C00CA9C8C /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA620821C8216C00CA9C8C /* FilterModel.swift */; };
+		5ECA620B21C8217500CA9C8C /* NotificationsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECA620A21C8217400CA9C8C /* NotificationsSettingsViewModel.swift */; };
 		5ECDB71821645C4E00483D90 /* ProfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDB71721645C4E00483D90 /* ProfitViewModel.swift */; };
 		5ED03F2920F900EE00AF5E07 /* DataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED03F2820F900EE00AF5E07 /* DataSourceAndDelegate.swift */; };
 		5ED03F3520FF784A00AF5E07 /* FieldWithTextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED03F2F20FF784900AF5E07 /* FieldWithTextViewTableViewCell.swift */; };
@@ -432,9 +435,10 @@
 		5EE0076A217875120045B890 /* ManagersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE00769217875120045B890 /* ManagersDataProvider.swift */; };
 		5EE0076C21787A360045B890 /* ManagerTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */; };
 		5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE0076D217881AA0045B890 /* Manager.storyboard */; };
+		5EE9490C21C7F92300D0950B /* NotificationsSettingsAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */; };
+		5EE9490E21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */; };
 		5EEA3E572177755300449E86 /* ManagerHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */; };
 		5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */; };
-		5EEAC56521A21640004F2121 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEAC56421A21640004F2121 /* FilterModel.swift */; };
 		5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */; };
 		5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */; };
 		5EEC1AC72175F871007D77ED /* AllEventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */; };
@@ -512,7 +516,6 @@
 		FC4C51AC204812B00042CEE1 /* ProgramRequestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */; };
 		FC5E90442020C169000E4A90 /* DispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */; };
 		FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */; };
-		FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9047202167CF000E4A90 /* FilterViewModel.swift */; };
 		FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E9049202169DC000E4A90 /* FilterViewController.swift */; };
 		FC5EEC34204D86E300F3D491 /* RateDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */; };
 		FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D87B320446F17002FC943 /* String+Сonversion.swift */; };
@@ -1002,6 +1005,9 @@
 		5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		5EC7B88420D15E9D007720D1 /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		5EC7B88620D16093007720D1 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		5ECA620621C8216100CA9C8C /* FilterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		5ECA620821C8216C00CA9C8C /* FilterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
+		5ECA620A21C8217400CA9C8C /* NotificationsSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewModel.swift; sourceTree = "<group>"; };
 		5ECDB71721645C4E00483D90 /* ProfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitViewModel.swift; sourceTree = "<group>"; };
 		5ED03F2820F900EE00AF5E07 /* DataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		5ED03F2F20FF784900AF5E07 /* FieldWithTextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldWithTextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -1037,9 +1043,11 @@
 		5EE00769217875120045B890 /* ManagersDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersDataProvider.swift; sourceTree = "<group>"; };
 		5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanRouter.swift; sourceTree = "<group>"; };
 		5EE0076D217881AA0045B890 /* Manager.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Manager.storyboard; sourceTree = "<group>"; };
+		5EE9490A21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSettingsAssetTableViewCell.xib; sourceTree = "<group>"; };
+		5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsAssetTableViewCell.swift; sourceTree = "<group>"; };
+		5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerHeaderViewController.swift; sourceTree = "<group>"; };
 		5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanViewController.swift; sourceTree = "<group>"; };
-		5EEAC56421A21640004F2121 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewController.swift; sourceTree = "<group>"; };
 		5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewModel.swift; sourceTree = "<group>"; };
 		5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsRouter.swift; sourceTree = "<group>"; };
@@ -1125,7 +1133,6 @@
 		FC4C51AB204812B00042CEE1 /* ProgramRequestDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRequestDataProvider.swift; sourceTree = "<group>"; };
 		FC5E90432020C169000E4A90 /* DispatchQueueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtension.swift; sourceTree = "<group>"; };
 		FC5E904520216769000E4A90 /* ProgramFilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramFilterRouter.swift; sourceTree = "<group>"; };
-		FC5E9047202167CF000E4A90 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		FC5E9049202169DC000E4A90 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC5EEC33204D86E300F3D491 /* RateDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDataProvider.swift; sourceTree = "<group>"; };
 		FC7CAE14201C310E00163A53 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1803,6 +1810,9 @@
 		5EC6708221AEA79B009BF4C0 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */,
+				5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */,
+				5EE9490A21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.xib */,
 				5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */,
 				5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */,
 				5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */,
@@ -2627,15 +2637,18 @@
 		FCBD22BE2019E925000B8E38 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				5ECA620A21C8217400CA9C8C /* NotificationsSettingsViewModel.swift */,
+				5ECA620821C8216C00CA9C8C /* FilterModel.swift */,
 				5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */,
 				5E14CDA321B57F7300388616 /* PageboyDataSources */,
 				5EA7A0FF20A0B3B100D895FC /* BaseViewModel.swift */,
 				5EA173D020A082AE00905253 /* TabmanViewModel.swift */,
 				FCA19A3C201AE35800157AD6 /* WelcomeViewModel.swift */,
 				5EB8E9D92072590200F46A8A /* InfoViewModel.swift */,
-				FC5E9047202167CF000E4A90 /* FilterViewModel.swift */,
 				5EA8B9B421B434480074EA2C /* SearchTabmanViewModel.swift */,
+				5ECA620621C8216100CA9C8C /* FilterViewModel.swift */,
 				5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */,
+				5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */,
 				5E14CDA921B597D300388616 /* Rating */,
 				5E33E3B520AB216F00A0B9DE /* Program Details */,
 				5EF14D7F2181F19700B3843A /* Fund Details */,
@@ -2649,8 +2662,6 @@
 				5EC7B88020D14C7E007720D1 /* Settings */,
 				5E6C0CF42109AA5A00B7F844 /* Manager Details */,
 				5EF14D802181F1AA00B3843A /* Delegate Managers */,
-				5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */,
-				5EEAC56421A21640004F2121 /* FilterModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -3226,6 +3237,7 @@
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
+				5ECA620B21C8217500CA9C8C /* NotificationsSettingsViewModel.swift in Sources */,
 				5E0546C821C3BF3F000DA7E8 /* NotificationSettingList.swift in Sources */,
 				5EC78724216BD458000C91E4 /* NotificationListTableViewCell.swift in Sources */,
 				5EFE7C432181E78700D385C8 /* FundHeaderViewController.swift in Sources */,
@@ -3397,6 +3409,7 @@
 				5E0546FF21C3BF3F000DA7E8 /* AndroidAppVersion.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
+				5EE9490C21C7F92300D0950B /* NotificationsSettingsAssetTableViewCell.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
 				5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */,
 				5E0546E621C3BF3F000DA7E8 /* RateItem.swift in Sources */,
@@ -3475,6 +3488,7 @@
 				5E0546A721C3BF3F000DA7E8 /* NotificationList.swift in Sources */,
 				5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
+				5ECA620921C8216C00CA9C8C /* FilterModel.swift in Sources */,
 				5E05470521C3BF3F000DA7E8 /* PeriodDate.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
@@ -3503,6 +3517,7 @@
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */,
 				5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */,
+				5ECA620721C8216200CA9C8C /* FilterViewModel.swift in Sources */,
 				5E05462021C3BF29000DA7E8 /* InvestorAPI.swift in Sources */,
 				5E0AD0E3218138A800DC76AA /* DashboardFundListDelegateManager.swift in Sources */,
 				5EC0309420A5A4B9005CBA32 /* BaseDataProvider.swift in Sources */,
@@ -3545,6 +3560,7 @@
 				5E0546BF21C3BF3F000DA7E8 /* ManagerDashboard.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramInfoViewModel.swift in Sources */,
 				FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */,
+				5EE9490E21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
 				5E05461A21C3BF29000DA7E8 /* WalletAPI.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
@@ -3567,7 +3583,6 @@
 				5EF14D792181EB0E00B3843A /* FundWithdrawViewController.swift in Sources */,
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProgramProfitViewController.swift in Sources */,
-				FC5E9048202167CF000E4A90 /* FilterViewModel.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				5E0546EF21C3BF3F000DA7E8 /* RecoveryCodesViewModel.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
@@ -3625,7 +3640,6 @@
 				5EA1FE2A21A3004C00308D81 /* FacetCollectionViewCellViewModel.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				5E0546D721C3BF3F000DA7E8 /* ResendConfirmationViewModel.swift in Sources */,
-				5EEAC56521A21640004F2121 /* FilterModel.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* AuthSignInViewModel.swift in Sources */,
 				5E395A2D2065613800A6B779 /* GradientView.swift in Sources */,
 				5EA274DB2162DF19008CAF77 /* ProgramBalanceViewController.swift in Sources */,

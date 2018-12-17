@@ -35,6 +35,10 @@ final class NotificationListViewModel {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
     }
+    
+    func showNotificationsSettings() {
+        router.showNotificationsSettings()
+    }
 }
 
 // MARK: - TableView

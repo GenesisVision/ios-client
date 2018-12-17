@@ -16,6 +16,8 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     var viewModel: NotificationListViewModel!
     
     // MARK: - Outlets
+    private var notificationsBarButtonItem: UIBarButtonItem!
+
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -49,10 +51,16 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     private func setup() {
         navigationItem.title = viewModel.title
         
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_settings"), style: .done, target: self, action: #selector(notificationsButtonAction))
+
         setupNavigationBar()
         
         showProgressHUD()
         fetch()
+    }
+    
+    @objc func notificationsButtonAction() {
+//        viewModel.showNotificationsSettings()
     }
     
     private func reloadData() {
