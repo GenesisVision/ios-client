@@ -143,31 +143,27 @@ extension ProgramTradesViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
-            guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
+        
+        guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
 
-            let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        
+        ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
+            guard tradesViewModel != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completionError)
+            }
+            var viewModels = [ProgramTradesTableViewCellViewModel]()
             
-            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
-                guard tradesViewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
-                }
-                var viewModels = [ProgramTradesTableViewCellViewModel]()
-                
-                let totalCount = tradesViewModel?.total ?? 0
-                
-                tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
-                    viewModels.append(viewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
-            }, errorCompletion: completionError)
-        case .fake:
-            break
-        }
+            let totalCount = tradesViewModel?.total ?? 0
+            
+            tradesViewModel?.trades?.forEach({ (orderModel) in
+                let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
+                viewModels.append(viewModel)
+            })
+            
+            completionSuccess(totalCount, viewModels)
+            completionError(.success)
+        }, errorCompletion: completionError)
     }
 }
 

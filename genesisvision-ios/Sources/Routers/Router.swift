@@ -404,10 +404,10 @@ extension Router {
         return tabmanViewController
     }
     
-    func getNotificationsSettingsViewController() -> BaseViewController? {
-        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(.auth) else { return nil }
-        let router = AuthTwoFactorDisableRouter(parentRouter: self)
-        viewController.viewModel = AuthTwoFactorDisableConfirmationViewModel(withRouter: router)
+    func getNotificationsSettingsViewController() -> NotificationsSettingsViewController? {
+        guard let viewController = NotificationsSettingsViewController.storyboardInstance(.dashboard) else { return nil }
+        
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController

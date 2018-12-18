@@ -13,41 +13,41 @@ class YourInvestmentTableViewCell: UITableViewCell {
     weak var yourInvestmentProtocol: YourInvestmentProtocol?
 
     // MARK: - Outlets
-    @IBOutlet var titleLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
     
-    @IBOutlet var statusButton: StatusButton!
+    @IBOutlet weak var statusButton: StatusButton!
     
-    @IBOutlet var investedTitleLabel: SubtitleLabel!
-    @IBOutlet var investedValueLabel: TitleLabel!
+    @IBOutlet weak var investedTitleLabel: SubtitleLabel!
+    @IBOutlet weak var investedValueLabel: TitleLabel!
     
-    @IBOutlet var valueTitleLabel: SubtitleLabel!
-    @IBOutlet var valueLabel: TitleLabel!
+    @IBOutlet weak var valueTitleLabel: SubtitleLabel!
+    @IBOutlet weak var valueLabel: TitleLabel!
     
-    @IBOutlet var profitTitleLabel: SubtitleLabel!
-    @IBOutlet var profitValueLabel: TitleLabel!
+    @IBOutlet weak var profitTitleLabel: SubtitleLabel!
+    @IBOutlet weak var profitValueLabel: TitleLabel!
     
-    @IBOutlet var withdrawButton: ActionButton! {
+    @IBOutlet weak var withdrawButton: ActionButton! {
         didSet {
             withdrawButton.configure(with: .darkClear)
             withdrawButton.setEnabled(AuthManager.isLogin())
         }
     }
     
-    @IBOutlet var reinvestView: UIView! 
-    @IBOutlet var reinvestTitleLabel: TitleLabel!
+    @IBOutlet weak var reinvestView: UIView! 
+    @IBOutlet weak var reinvestTitleLabel: TitleLabel!
     
-    @IBOutlet var reinvestTooltip: TooltipButton! {
+    @IBOutlet weak var reinvestTooltip: TooltipButton! {
         didSet {
             reinvestTooltip.tooltipText = String.Tooltitps.reinvest
             reinvestTooltip.isHidden = true
         }
     }
     
-    @IBOutlet var reinvestSwitch: UISwitch! {
+    @IBOutlet weak var reinvestSwitch: UISwitch! {
         didSet {
             reinvestSwitch.onTintColor = UIColor.primary
             reinvestSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
@@ -55,7 +55,7 @@ class YourInvestmentTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
             disclaimerLabel.textAlignment = .center

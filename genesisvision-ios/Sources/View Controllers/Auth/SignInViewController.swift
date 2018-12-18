@@ -14,30 +14,30 @@ class SignInViewController: BaseViewController {
     var viewModel: AuthSignInViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var emailTitleLabel: SubtitleLabel! {
         didSet {
             emailTitleLabel.text = "Email"
         }
     }
-    @IBOutlet var emailTextField: DesignableUITextField! {
+    @IBOutlet weak var emailTextField: DesignableUITextField! {
         didSet {
             emailTextField.setClearButtonWhileEditing()
             emailTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
             passwordTitleLabel.text = "Password"
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
     }
     
-    @IBOutlet var forgotButton: UIButton! {
+    @IBOutlet weak var forgotButton: UIButton! {
         didSet {
             forgotButton.setTitleColor(UIColor.Cell.title, for: .normal)
             forgotButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
@@ -129,7 +129,7 @@ extension SignInViewController: UITextFieldDelegate {
         case passwordTextField:
             signInMethod()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

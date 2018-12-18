@@ -33,16 +33,16 @@ class LevelsFilterView: UIView {
     var bottomSheetController: BottomSheetController?
     
     // MARK: - IBOutlets
-    @IBOutlet var minTitleLabel: UILabel!
-    @IBOutlet var maxTitleLabel: UILabel!
+    @IBOutlet weak var minTitleLabel: UILabel!
+    @IBOutlet weak var maxTitleLabel: UILabel!
     
-    @IBOutlet var minTextField: DesignableUITextField! {
+    @IBOutlet weak var minTextField: DesignableUITextField! {
         didSet {
             minTextField.addPadding()
             minTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
         }
     }
-    @IBOutlet var maxTextField: DesignableUITextField! {
+    @IBOutlet weak var maxTextField: DesignableUITextField! {
         didSet {
             maxTextField.addPadding()
             maxTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
@@ -51,7 +51,7 @@ class LevelsFilterView: UIView {
     
     @IBOutlet var levelButtons: [LevelFilterButton]!
     
-    @IBOutlet var applyButton: ActionButton!
+    @IBOutlet weak var applyButton: ActionButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

@@ -26,7 +26,7 @@ class WalletDepositViewController: BaseViewController {
             numpadHeightConstraint.constant = 0.0
         }
     }
-    @IBOutlet var numpadBackView: UIView! {
+    @IBOutlet weak var numpadBackView: UIView! {
         didSet {
             numpadBackView.isHidden = true
             numpadBackView.isUserInteractionEnabled = true
@@ -37,7 +37,7 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var numpadView: NumpadView! {
+    @IBOutlet weak var numpadView: NumpadView! {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
@@ -45,44 +45,44 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var amountToDepositTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToDepositTitleLabel: SubtitleLabel! {
         didSet {
             amountToDepositTitleLabel.text = "You will send"
         }
     }
-    @IBOutlet var amountToDepositValueLabel: TitleLabel! {
+    @IBOutlet weak var amountToDepositValueLabel: TitleLabel! {
         didSet {
             amountToDepositValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
-    @IBOutlet var amountToDepositCurrencyLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToDepositCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToDepositCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
-    @IBOutlet var amountToDepositGVTTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToDepositGVTTitleLabel: SubtitleLabel! {
         didSet {
             amountToDepositGVTTitleLabel.text = "Approximate amount"
             amountToDepositGVTTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountToDepositGVTValueLabel: TitleLabel!
+    @IBOutlet weak var amountToDepositGVTValueLabel: TitleLabel!
     
-    @IBOutlet var selectedWalletCurrencyButton: UIButton!
-    @IBOutlet var selectedWalletCurrencyTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var selectedWalletCurrencyButton: UIButton!
+    @IBOutlet weak var selectedWalletCurrencyTitleLabel: SubtitleLabel! {
         didSet {
             selectedWalletCurrencyTitleLabel.text = "Select a wallet currency"
         }
     }
-    @IBOutlet var selectedWalletCurrencyValueLabel: TitleLabel! {
+    @IBOutlet weak var selectedWalletCurrencyValueLabel: TitleLabel! {
         didSet {
             selectedWalletCurrencyValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.font = UIFont.getFont(.regular, size: 10.0)
             
@@ -91,8 +91,8 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var qrImageView: UIImageView!
-    @IBOutlet var addressLabel: TitleLabel!
+    @IBOutlet weak var qrImageView: UIImageView!
+    @IBOutlet weak var addressLabel: TitleLabel!
     
     @IBOutlet weak var copyButton: UIButton! {
         didSet {

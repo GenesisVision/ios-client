@@ -28,18 +28,18 @@ class ErrorBottomSheetView: UIView {
     var successCompletionBlock: SuccessCompletionBlock?
     
     // MARK: - IBOutlets
-    @IBOutlet var topBackgroundImageView: UIImageView!
-    @IBOutlet var iconStackView: UIStackView! {
+    @IBOutlet weak var topBackgroundImageView: UIImageView!
+    @IBOutlet weak var iconStackView: UIStackView! {
         didSet {
             iconStackView.isHidden = true
         }
     }
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.isHidden = true
         }
     }
-    @IBOutlet var titleLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.setLineSpacing(lineSpacing: 3.0)
             titleLabel.textAlignment = .center
@@ -47,7 +47,7 @@ class ErrorBottomSheetView: UIView {
             titleLabel.isHidden = true
         }
     }
-    @IBOutlet var subtitleLabel: SubtitleLabel! {
+    @IBOutlet weak var subtitleLabel: SubtitleLabel! {
         didSet {
             subtitleLabel.isHidden = true
             subtitleLabel.setLineSpacing(lineSpacing: 3.0)
@@ -55,7 +55,7 @@ class ErrorBottomSheetView: UIView {
         }
     }
     
-    @IBOutlet var okButton: ActionButton!
+    @IBOutlet weak var okButton: ActionButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

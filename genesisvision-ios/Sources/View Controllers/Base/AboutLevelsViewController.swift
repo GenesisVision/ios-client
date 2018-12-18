@@ -9,32 +9,32 @@
 import UIKit
 
 class LevelStackView: UIStackView {
-    @IBOutlet var levelButton: LevelButton!
-    @IBOutlet var valueLabel: TitleLabel!
+    @IBOutlet weak var levelButton: LevelButton!
+    @IBOutlet weak var valueLabel: TitleLabel!
 }
 
 class AboutLevelsViewController: BaseViewController {
     
     // MARK: - Buttons
-    @IBOutlet var titleLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
     
-    @IBOutlet var textLabel: SubtitleLabel! {
+    @IBOutlet weak var textLabel: SubtitleLabel! {
         didSet {
             textLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     
-    @IBOutlet var levelsTitleLabel: TitleLabel! {
+    @IBOutlet weak var levelsTitleLabel: TitleLabel! {
         didSet {
             levelsTitleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
     
-    @IBOutlet var levelsView: UIView! {
+    @IBOutlet weak var levelsView: UIView! {
         didSet {
             levelsView.roundCorners(with: Constants.SystemSizes.cornerSize)
             levelsView.backgroundColor = UIColor.Cell.bg

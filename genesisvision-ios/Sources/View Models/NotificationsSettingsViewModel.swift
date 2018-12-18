@@ -19,37 +19,31 @@ final class NotificationsSettingsViewModel {
         case managers
     }
     
-    enum RowType {
-        case news
-        case emergency
-    }
-    
     // MARK: - Variables
     var title: String = "Notifications settings"
     
     private var sections: [SectionType] = []
     
-    private var generalRows: [RowType] = []
-    
     private var router: Router!
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var settingsGeneralViewModels = [CellViewAnyModel]()
+    var settingsGeneralViewModels = [NotificationsSettingsGeneralTableViewCellViewModel]()
     var settingsProgramsViewModels = [NotificationsSettingsProgramTableViewCellViewModel]()
     var settingsFundsViewModels = [NotificationsSettingsFundTableViewCellViewModel]()
     var settingsManagersViewModels = [NotificationsSettingsManagerTableViewCellViewModel]()
     
-    var assetType: AssetType = .program
-    
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [NotificationsSettingsProgramTableViewCellViewModel.self,
+        return [NotificationsSettingsGeneralTableViewCellViewModel.self,
+                NotificationsSettingsProgramTableViewCellViewModel.self,
                 NotificationsSettingsFundTableViewCellViewModel.self,
                 NotificationsSettingsManagerTableViewCellViewModel.self]
     }
     
     // MARK: - Init
-    init(withRouter router: Router, notificationSettingList: NotificationSettingList?) {
+    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
+        self.reloadDataProtocol = reloadDataProtocol
         
         guard let notificationSettingList = notificationSettingList else { return }
         
@@ -59,7 +53,7 @@ final class NotificationsSettingsViewModel {
     
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> CellViewAnyModel {
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
         case .general:
@@ -73,24 +67,23 @@ final class NotificationsSettingsViewModel {
         }
     }
     
-    func getRowType(for indexPath: IndexPath) -> RowType {
-        let type = sections[indexPath.section]
-        switch type {
-        case .general:
-            return generalRows[indexPath.row]
-        default:
-            return .news
-        }
-    }
-    
     func numberOfSections() -> Int {
         return sections.count
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return 20.0
+        }
     }
     
     func numberOfRows(in section: Int) -> Int {
         switch sections[section] {
         case .general:
-            return generalRows.count
+            return settingsGeneralViewModels.count
         case .programs:
             return settingsProgramsViewModels.count
         case .funds:
@@ -100,44 +93,73 @@ final class NotificationsSettingsViewModel {
         }
     }
     
+    func didSelectRow(at indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+        case .programs:
+        //TODO: show program settings
+            break
+        case .funds:
+            //TODO: show fund settings
+            break
+        case .managers:
+            //TODO: show manager settings
+            break
+        default:
+            break
+        }
+    }
+    
     func goToBack() {
         router.goToBack()
     }
     
+    func fetch(completion: @escaping CompletionBlock) {
+        NotificationsDataProvider.getSettings(completion: { [weak self] (notificationSettingList) in
+            guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+            
+            self?.setup(notificationSettingList)
+            completion(.success)
+        }, errorCompletion: completion)
+    }
+    
     // MARK: - Private methods
     private func setup(_ notificationSettingList: NotificationSettingList) {
-        var tableViewCellViewModel: CellViewAnyModel?
-        
-        if notificationSettingList.settingsGeneral != nil {
+        if let settings = notificationSettingList.settingsGeneral, settings.count > 0 {
             sections.append(.general)
-            generalRows = [.news, .emergency]
+            
+            settings.forEach({ (setting) in
+                let settingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: setting)
+                settingsGeneralViewModels.append(settingsViewModel)
+            })
         }
         
-        if let settings = notificationSettingList.settingsProgram {
+        if let settings = notificationSettingList.settingsProgram, settings.count > 0 {
             sections.append(.programs)
             
-            for setting in settings {
+            settings.forEach({ (setting) in
                 let settingsViewModel = NotificationsSettingsProgramTableViewCellViewModel(setting: setting)
                 settingsProgramsViewModels.append(settingsViewModel)
-            }
+            })
         }
         
-        if let settings = notificationSettingList.settingsFund {
+        if let settings = notificationSettingList.settingsFund, settings.count > 0 {
             sections.append(.funds)
             
-            for setting in settings {
+            settings.forEach({ (setting) in
                 let settingsViewModel = NotificationsSettingsFundTableViewCellViewModel(setting: setting)
                 settingsFundsViewModels.append(settingsViewModel)
-            }
+            })
         }
         
-        if let settings = notificationSettingList.settingsManager {
+        if let settings = notificationSettingList.settingsManager, settings.count > 0 {
             sections.append(.managers)
             
-            for setting in settings {
+            settings.forEach({ (setting) in
                 let settingsViewModel = NotificationsSettingsManagerTableViewCellViewModel(setting: setting)
                 settingsManagersViewModels.append(settingsViewModel)
-            }
+            })
         }
+        
+        reloadDataProtocol?.didReloadData()
     }
 }

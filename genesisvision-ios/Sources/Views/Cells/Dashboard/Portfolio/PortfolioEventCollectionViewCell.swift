@@ -11,22 +11,22 @@ import UIKit
 class PortfolioEventCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
         }
     }
     
-    @IBOutlet var typeImageView: UIImageView! {
+    @IBOutlet weak var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }
     }
     
-    @IBOutlet var stackView: UIStackView!
-    @IBOutlet var balanceValueLabel: TitleLabel!
-    @IBOutlet var titleLabel: TitleLabel!
-    @IBOutlet var dateLabel: SubtitleLabel!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var balanceValueLabel: TitleLabel!
+    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var dateLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

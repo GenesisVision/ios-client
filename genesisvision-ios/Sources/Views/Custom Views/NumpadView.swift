@@ -121,8 +121,8 @@ class NumpadView: UIView {
     var type: NumpadViewType = .number
     
     @IBOutlet var numberButtons: [NumpadButton]!
-    @IBOutlet var separatorButton: UIButton!
-    @IBOutlet var clearButton: UIButton!
+    @IBOutlet weak var separatorButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

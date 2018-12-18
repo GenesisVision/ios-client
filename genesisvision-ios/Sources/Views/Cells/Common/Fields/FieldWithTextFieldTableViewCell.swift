@@ -13,11 +13,11 @@ class FieldWithTextFieldTableViewCell: PlateTableViewCell {
     var valueChanged: ((String) -> Void)?
     
     // MARK: - Views
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet var accessoryImageView: UIImageView!
+    @IBOutlet weak var accessoryImageView: UIImageView!
     
-    @IBOutlet var textField: DesignableUITextField! {
+    @IBOutlet weak var textField: DesignableUITextField! {
         didSet {
             textField.setClearButtonWhileEditing()
             textField.designableTextFieldDelegate = self

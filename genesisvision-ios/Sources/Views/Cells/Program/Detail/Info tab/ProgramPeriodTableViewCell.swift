@@ -10,27 +10,27 @@ import UIKit
 
 class ProgramPeriodTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet var progressView: UIProgressView! {
+    @IBOutlet weak var progressView: UIProgressView! {
         didSet {
             progressView.progressTintColor = UIColor.ProgressView.progressTint
             progressView.trackTintColor = UIColor.ProgressView.trackTint
         }
     }
-    @IBOutlet var titleLabel: UILabel! {
+    @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = UIColor.Cell.subtitle
             titleLabel.font = UIFont.getFont(.semibold, size: 14.0)
             titleLabel.text = ""
         }
     }
-    @IBOutlet var durationLabel: UILabel! {
+    @IBOutlet weak var durationLabel: UILabel! {
         didSet {
             durationLabel.textColor = UIColor.Cell.title
             durationLabel.font = UIFont.getFont(.semibold, size: 14.0)
             durationLabel.text = ""
         }
     }
-    @IBOutlet var periodLeftLabel: UILabel! {
+    @IBOutlet weak var periodLeftLabel: UILabel! {
         didSet {
             periodLeftLabel.textColor = UIColor.Cell.title
             periodLeftLabel.font = UIFont.getFont(.semibold, size: 14.0)

@@ -24,7 +24,7 @@ class FacetsTableViewCell: UITableViewCell {
     }
     
     // MARK: - Outlets
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -14,23 +14,23 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     var viewModel: AuthTwoFactorConfirmationViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var codeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var codeTitleLabel: SubtitleLabel! {
         didSet {
             codeTitleLabel.text = "2FA Code"
         }
     }
-    @IBOutlet var codeTextField: DesignableUITextField! {
+    @IBOutlet weak var codeTextField: DesignableUITextField! {
         didSet {
             codeTextField.setClearButtonWhileEditing()
             codeTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
             passwordTitleLabel.text = "Your Password"
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
@@ -52,7 +52,7 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var confirmButton: ActionButton!
+    @IBOutlet weak var confirmButton: ActionButton!
 
     // MARK: - Variables
     private var isRecoveryCode: Bool = false
@@ -122,7 +122,7 @@ extension AuthTwoFactorConfirmationViewController: UITextFieldDelegate {
         case codeTextField:
             confirmMethod()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

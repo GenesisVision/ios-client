@@ -11,14 +11,14 @@ import UIKit
 class NotificationListTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
             iconImageView.image = #imageLiteral(resourceName: "icon_notification_star")
         }
     }
     
-    @IBOutlet var unreadView: UIView! {
+    @IBOutlet weak var unreadView: UIView! {
         didSet {
             unreadView.roundCorners()
             unreadView.backgroundColor = UIColor.Cell.redTitle
@@ -26,21 +26,21 @@ class NotificationListTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var titleLabel: UILabel! {
+    @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.regular, size: 14.0)
             titleLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var dateLabel: UILabel! {
+    @IBOutlet weak var dateLabel: UILabel! {
         didSet {
             dateLabel.font = UIFont.getFont(.semibold, size: 12.0)
             dateLabel.textColor = UIColor.Cell.subtitle
         }
     }
     
-    @IBOutlet var detailButton: UIButton! {
+    @IBOutlet weak var detailButton: UIButton! {
         didSet {
             detailButton.isHidden = true
         }

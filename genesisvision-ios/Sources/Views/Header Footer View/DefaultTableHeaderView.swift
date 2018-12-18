@@ -17,9 +17,9 @@ class DefaultTableHeaderView: UITableViewHeaderFooterView {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 
-    @IBOutlet var headerBackgroundView: UIView!
+    @IBOutlet weak var headerBackgroundView: UIView!
         
-    @IBOutlet var headerLabel: UILabel! {
+    @IBOutlet weak var headerLabel: UILabel! {
         didSet {
             headerLabel.font = DefaultTableHeaderView.font
             headerLabel.textColor = UIColor.Cell.title

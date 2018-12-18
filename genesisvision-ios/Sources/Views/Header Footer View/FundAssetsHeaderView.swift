@@ -11,22 +11,22 @@ import UIKit
 class FundAssetsHeaderView: UITableViewHeaderFooterView {
 
     // MARK: - Labels
-    @IBOutlet var firstTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var firstTitleLabel: SubtitleLabel! {
         didSet {
             firstTitleLabel.isHidden = true
         }
     }
-    @IBOutlet var secondTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var secondTitleLabel: SubtitleLabel! {
         didSet {
             secondTitleLabel.isHidden = true
         }
     }
-    @IBOutlet var thirdTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var thirdTitleLabel: SubtitleLabel! {
         didSet {
             thirdTitleLabel.isHidden = true
         }
     }
-    @IBOutlet var fourthTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var fourthTitleLabel: SubtitleLabel! {
         didSet {
             fourthTitleLabel.isHidden = true
         }

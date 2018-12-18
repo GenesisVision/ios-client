@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationsSettingsGeneralTableViewCell" rowHeight="60" id="Z8z-zm-2ge" customClass="NotificationsSettingsGeneralTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z8z-zm-2ge" id="uaA-0u-Iyl">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rx-Sk-2Hy">
+                        <rect key="frame" x="306" y="15" width="51" height="31"/>
+                        <color key="tintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="onTintColor" red="0.08235294118" green="0.73333333329999995" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News and updates" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuH-x1-2As" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                        <rect key="frame" x="20" y="0.0" width="278" height="60.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="OET-UI-VtO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                        <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0Rx-Sk-2Hy" firstAttribute="centerY" secondItem="uaA-0u-Iyl" secondAttribute="centerY" id="Jp8-vV-b3G"/>
+                    <constraint firstItem="0Rx-Sk-2Hy" firstAttribute="leading" secondItem="TuH-x1-2As" secondAttribute="trailing" constant="8" id="NtF-sz-gMZ"/>
+                    <constraint firstItem="TuH-x1-2As" firstAttribute="top" secondItem="uaA-0u-Iyl" secondAttribute="top" id="Q9P-V6-T6F"/>
+                    <constraint firstItem="TuH-x1-2As" firstAttribute="leading" secondItem="uaA-0u-Iyl" secondAttribute="leadingMargin" constant="4" id="UIz-cn-mSM"/>
+                    <constraint firstItem="TuH-x1-2As" firstAttribute="centerY" secondItem="uaA-0u-Iyl" secondAttribute="centerY" id="fhm-4v-Mxg"/>
+                    <constraint firstAttribute="bottom" secondItem="TuH-x1-2As" secondAttribute="bottom" id="gG4-oD-sil"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="0Rx-Sk-2Hy" secondAttribute="trailing" constant="4" id="rXU-9T-aTS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="enableSwitch" destination="0Rx-Sk-2Hy" id="j7y-fR-DZE"/>
+                <outlet property="titleLabel" destination="TuH-x1-2As" id="sNc-pg-PYx"/>
+            </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="122.33883058470765"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -15,18 +15,18 @@ class ProgramDetailFullChartViewController: BaseViewController {
     var viewModel: ProgramDetailFullChartViewModel!
     
     // MARK: - Labels
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     
-    @IBOutlet var xTitleLabel: UILabel!
-    @IBOutlet var yTitleLabel: UILabel!
+    @IBOutlet weak var xTitleLabel: UILabel!
+    @IBOutlet weak var yTitleLabel: UILabel!
     
-    @IBOutlet var xValueLabel: UILabel!
-    @IBOutlet var yValueLabel: UILabel!
-    @IBOutlet var currencyValueLabel: CurrencyLabel!
+    @IBOutlet weak var xValueLabel: UILabel!
+    @IBOutlet weak var yValueLabel: UILabel!
+    @IBOutlet weak var currencyValueLabel: CurrencyLabel!
     
     // MARK: - Views
-    @IBOutlet var segmentedControl: ScrollableSegmentedControl! {
+    @IBOutlet weak var segmentedControl: ScrollableSegmentedControl! {
         didSet {
             segmentedControl.segmentStyle = .textOnly
             segmentedControl.insertSegment(withTitle: "1D", at: 0)
@@ -51,7 +51,7 @@ class ProgramDetailFullChartViewController: BaseViewController {
             segmentedControl.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
         }
     }
-    @IBOutlet var chartView: ChartView! {
+    @IBOutlet weak var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = true
             chartView.delegate = self

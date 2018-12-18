@@ -13,8 +13,8 @@ class InfoViewController: BaseViewController {
     var viewModel: InfoViewModel?
     
     // MARK: - Buttons
-    @IBOutlet var okButton: ActionButton!
-    @IBOutlet var textLabel: SubtitleLabel! {
+    @IBOutlet weak var okButton: ActionButton!
+    @IBOutlet weak var textLabel: SubtitleLabel! {
         didSet {
             textLabel.font = UIFont.getFont(.regular, size: 14.0)
         }

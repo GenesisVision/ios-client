@@ -307,10 +307,10 @@ extension ProfileViewController: ImagePickerPresentable {
 
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if IQKeyboardManager.sharedManager().canGoNext {
-            IQKeyboardManager.sharedManager().goNext()
+        if IQKeyboardManager.shared.canGoNext {
+            IQKeyboardManager.shared.goNext()
         } else {
-            IQKeyboardManager.sharedManager().resignFirstResponder()
+            IQKeyboardManager.shared.resignFirstResponder()
         }
         
         return false

@@ -15,31 +15,31 @@ protocol InvestNowProtocol: class {
 
 class InvestNowTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet var titleLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
     
-    @IBOutlet var investStackView: UIStackView!
-    @IBOutlet var investValueLabel: TitleLabel!
-    @IBOutlet var investTitleLabel: SubtitleLabel!
+    @IBOutlet weak var investStackView: UIStackView!
+    @IBOutlet weak var investValueLabel: TitleLabel!
+    @IBOutlet weak var investTitleLabel: SubtitleLabel!
     
-    @IBOutlet var entryFeeStackView: UIStackView!
-    @IBOutlet var entryFeeValueLabel: TitleLabel!
-    @IBOutlet var entryFeeTitleLabel: SubtitleLabel!
+    @IBOutlet weak var entryFeeStackView: UIStackView!
+    @IBOutlet weak var entryFeeValueLabel: TitleLabel!
+    @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel!
     
-    @IBOutlet var successFeeStackView: UIStackView!
-    @IBOutlet var successFeeValueLabel: TitleLabel!
-    @IBOutlet var successFeeTitleLabel: SubtitleLabel!
+    @IBOutlet weak var successFeeStackView: UIStackView!
+    @IBOutlet weak var successFeeValueLabel: TitleLabel!
+    @IBOutlet weak var successFeeTitleLabel: SubtitleLabel!
     
-    @IBOutlet var investButton: ActionButton! {
+    @IBOutlet weak var investButton: ActionButton! {
         didSet {
             investButton.setEnabled(AuthManager.isLogin())
         }
     }
     
-    @IBOutlet var entryFeeTooltip: TooltipButton! {
+    @IBOutlet weak var entryFeeTooltip: TooltipButton! {
         didSet {
             entryFeeTooltip.tooltipText = String.Tooltitps.entryFee
             entryFeeTooltip.delegate = self
@@ -47,7 +47,7 @@ class InvestNowTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
             disclaimerLabel.textAlignment = .center

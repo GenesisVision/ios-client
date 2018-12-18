@@ -15,7 +15,7 @@ class FundInvestViewController: BaseViewController {
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
     
-    @IBOutlet var numpadView: NumpadView! {
+    @IBOutlet weak var numpadView: NumpadView! {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
@@ -24,76 +24,76 @@ class FundInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableToInvestTitleLabel: TitleLabel! {
         didSet {
             availableToInvestTitleLabel.text = "Available to invest"
             availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var availableToInvestValueLabel: TitleLabel! {
+    @IBOutlet weak var availableToInvestValueLabel: TitleLabel! {
         didSet {
             availableToInvestValueLabel.textColor = UIColor.primary
             availableToInvestValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountToInvestTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel! {
         didSet {
             amountToInvestTitleLabel.text = "Amount to invest"
         }
     }
-    @IBOutlet var amountToInvestValueLabel: TitleLabel! {
+    @IBOutlet weak var amountToInvestValueLabel: TitleLabel! {
         didSet {
             amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToInvestGVTLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToInvestGVTLabel: SubtitleLabel! {
         didSet {
             amountToInvestGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton! {
+    @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
         }
     }
     
-    @IBOutlet var entryFeeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel! {
         didSet {
             entryFeeTitleLabel.text = "Entry fee"
             entryFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var entryFeeValueLabel: TitleLabel!
+    @IBOutlet weak var entryFeeValueLabel: TitleLabel!
     
-    @IBOutlet var gvCommissionTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var gvCommissionTitleLabel: SubtitleLabel! {
         didSet {
             gvCommissionTitleLabel.text = "GV commission"
             gvCommissionTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var gvCommissionValueLabel: TitleLabel!
+    @IBOutlet weak var gvCommissionValueLabel: TitleLabel!
     
-    @IBOutlet var investmentAmountTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var investmentAmountTitleLabel: SubtitleLabel! {
         didSet {
             investmentAmountTitleLabel.text = "Investment amount"
             investmentAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var investmentAmountValueLabel: TitleLabel! {
+    @IBOutlet weak var investmentAmountValueLabel: TitleLabel! {
         didSet {
             investmentAmountValueLabel.text = "0 GVT"
         }
     }
 
     // MARK: - Buttons
-    @IBOutlet var investButton: ActionButton!
+    @IBOutlet weak var investButton: ActionButton!
     
     // MARK: - Variables
     var availableToInvestValue: Double = 0.0 {

@@ -81,7 +81,7 @@ final class FilterViewModel {
     
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> CellViewAnyModel {
+    func model(at indexPath: IndexPath) -> CellViewAnyModel {
         let type = sections[indexPath.section]
         switch type {
         case .common:

@@ -19,7 +19,7 @@ class WalletTransactionView: UIView {
     
     
     // MARK: - Outlets
-    @IBOutlet var typeImageView: UIImageView! {
+    @IBOutlet weak var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }

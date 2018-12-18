@@ -52,6 +52,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         navigationItem.title = viewModel.title
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_settings"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        navigationItem.rightBarButtonItem = notificationsBarButtonItem
 
         setupNavigationBar()
         
@@ -60,7 +61,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     }
     
     @objc func notificationsButtonAction() {
-//        viewModel.showNotificationsSettings()
+        viewModel.showNotificationsSettings()
     }
     
     private func reloadData() {

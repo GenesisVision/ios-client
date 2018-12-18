@@ -16,7 +16,10 @@ target 'genesisvision-ios' do
     pod 'Kingfisher', '~> 4.0'
     
     pod 'Firebase/Core'
-    pod 'Firebase/Crash'
+    pod 'Firebase/Messaging'
+    
+    pod 'Fabric'
+    pod 'Crashlytics'
     
     pod 'ReachabilitySwift'
     pod 'Tabman', '~> 1.0'

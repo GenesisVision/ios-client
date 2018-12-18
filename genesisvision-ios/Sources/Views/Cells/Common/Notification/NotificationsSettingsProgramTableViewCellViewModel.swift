@@ -23,6 +23,10 @@ extension NotificationsSettingsProgramTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
+//        if let color = setting.color {
+//            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+//        }
+        
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let logo = setting.logo, let fileUrl = getFileURL(fileName: logo) {

@@ -161,7 +161,7 @@ extension NotificationListViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [NotificationListTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            NotificationsDataProvider.getNotifications(skip: skip, take: take, completion: { (notificationList) in
+            NotificationsDataProvider.get(skip: skip, take: take, completion: { (notificationList) in
                 guard notificationList != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

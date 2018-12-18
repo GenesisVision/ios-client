@@ -14,51 +14,51 @@ class SignUpViewController: BaseViewController {
     var viewModel: AuthSignUpViewModel!
     
     // MARK: - Outlets
-    @IBOutlet var usernameStackView: UIStackView! {
+    @IBOutlet weak var usernameStackView: UIStackView! {
         didSet {
             usernameStackView.isHidden = isInvestorApp
         }
     }
     
-    @IBOutlet var usernameTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var usernameTitleLabel: SubtitleLabel! {
         didSet {
             usernameTitleLabel.text = "Username"
         }
     }
-    @IBOutlet var usernameTextField: DesignableUITextField! {
+    @IBOutlet weak var usernameTextField: DesignableUITextField! {
         didSet {
             usernameTextField.setClearButtonWhileEditing()
             usernameTextField.delegate = self
         }
     }
-    @IBOutlet var emailTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var emailTitleLabel: SubtitleLabel! {
         didSet {
             emailTitleLabel.text = "Email"
         }
     }
-    @IBOutlet var emailTextField: DesignableUITextField! {
+    @IBOutlet weak var emailTextField: DesignableUITextField! {
         didSet {
             emailTextField.setClearButtonWhileEditing()
             emailTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
             passwordTitleLabel.text = "Password"
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
     }
-    @IBOutlet var confirmTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var confirmTitleLabel: SubtitleLabel! {
         didSet {
             confirmTitleLabel.text = "Confirm password"
         }
     }
-    @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var confirmPasswordTextField: DesignableUITextField! {
         didSet {
             confirmPasswordTextField.setClearButtonWhileEditing()
             confirmPasswordTextField.delegate = self
@@ -66,7 +66,7 @@ class SignUpViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var privacyPolicyButton: UIButton! {
+    @IBOutlet weak var privacyPolicyButton: UIButton! {
         didSet {
             privacyPolicyButton.tintColor = UIColor.Cell.title
             privacyPolicyButton.setTitleColor(UIColor.Cell.title, for: .normal)
@@ -74,7 +74,7 @@ class SignUpViewController: BaseViewController {
             privacyPolicyButton.setTitle("I accept the Privacy Policy", for: .normal)
         }
     }
-    @IBOutlet var termsButton: UIButton! {
+    @IBOutlet weak var termsButton: UIButton! {
         didSet {
             termsButton.tintColor = UIColor.Cell.title
             termsButton.setTitleColor(UIColor.Cell.title, for: .normal)
@@ -82,33 +82,33 @@ class SignUpViewController: BaseViewController {
             termsButton.setTitle("I accept the Terms of Service", for: .normal)
         }
     }
-    @IBOutlet var notAmericanLabel: SubtitleLabel! {
+    @IBOutlet weak var notAmericanLabel: SubtitleLabel! {
         didSet {
             notAmericanLabel.textColor = UIColor.Cell.title
             notAmericanLabel.text = "I certify that I am not a resident or citizen of the USA"
         }
     }
     
-    @IBOutlet var privacyPolicySwitchButton: UIButton! {
+    @IBOutlet weak var privacyPolicySwitchButton: UIButton! {
         didSet {
             privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
             privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
         }
     }
-    @IBOutlet var termsSwitchButton: UIButton! {
+    @IBOutlet weak var termsSwitchButton: UIButton! {
         didSet {
             termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
             termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
         }
     }
-    @IBOutlet var notAmericanSwitchButton: UIButton! {
+    @IBOutlet weak var notAmericanSwitchButton: UIButton! {
         didSet {
             notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
             notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
         }
     }
     
-    @IBOutlet var signUpButton: ActionButton! {
+    @IBOutlet weak var signUpButton: ActionButton! {
         didSet {
             signUpButton.setEnabled(false)
         }
@@ -194,7 +194,7 @@ extension SignUpViewController: UITextFieldDelegate {
         case passwordTextField:
             confirmPasswordTextField.becomeFirstResponder()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

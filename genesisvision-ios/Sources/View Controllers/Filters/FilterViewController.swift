@@ -164,7 +164,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = viewModel.model(for: indexPath)
+        let model = viewModel.model(at: indexPath)
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     

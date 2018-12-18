@@ -11,20 +11,20 @@ import UIKit
 class WalletTransactionTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
         }
     }
-    @IBOutlet var typeImageView: UIImageView! {
+    @IBOutlet weak var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }
     }
-    @IBOutlet var titleLabel: TitleLabel!
-    @IBOutlet var statusLabel: SubtitleLabel!
-    @IBOutlet var amountLabel: TitleLabel!
-    @IBOutlet var dateLabel: SubtitleLabel!
+    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var statusLabel: SubtitleLabel!
+    @IBOutlet weak var amountLabel: TitleLabel!
+    @IBOutlet weak var dateLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Navigation direction detection
 internal extension PageboyViewController.NavigationDirection {
     
-    var pageViewControllerNavDirection: UIPageViewControllerNavigationDirection {
+    var pageViewControllerNavDirection: UIPageViewController.NavigationDirection {
         switch self {
             
         case .reverse:
@@ -33,6 +33,16 @@ internal extension PageboyViewController.NavigationDirection {
             return .neutral
         }
         return  position > previousPosition ? .forward : .reverse
+    }
+}
+
+internal extension PageboyViewController.NavigationDirection {
+    
+    func layoutNormalized(isRtL: Bool) -> PageboyViewController.NavigationDirection {
+        guard isRtL else {
+            return self
+        }
+        return self == .forward ? .reverse : .forward
     }
 }
 

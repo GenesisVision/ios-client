@@ -165,13 +165,13 @@ struct AppearanceController {
     
     // MARK: - IQKeyboardManager
     private static func turnIQKeyboardManager(enable: Bool, enableAutoToolbar: Bool, shouldResignOnTouchOutside: Bool) {
-        IQKeyboardManager.sharedManager().enable = enable
-        IQKeyboardManager.sharedManager().enableAutoToolbar = enableAutoToolbar
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = shouldResignOnTouchOutside
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 32.0
-        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.primary
-        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Dismiss"
-        IQKeyboardManager.sharedManager().placeholderFont = UIFont.getFont(.regular, size: 14.0)
+        IQKeyboardManager.shared.enable = enable
+        IQKeyboardManager.shared.enableAutoToolbar = enableAutoToolbar
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = shouldResignOnTouchOutside
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 32.0
+        IQKeyboardManager.shared.toolbarTintColor = UIColor.primary
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Dismiss"
+        IQKeyboardManager.shared.placeholderFont = UIFont.getFont(.regular, size: 14.0)
     }
     
     // MARK: - SegmentedControl

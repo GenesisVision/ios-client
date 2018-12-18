@@ -59,7 +59,7 @@ class AboutLevelView: UIView {
         }
     }
 
-    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.text = "Genesis level shows the experience and reliability of the Manager"
             

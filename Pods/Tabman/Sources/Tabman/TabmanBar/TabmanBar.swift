@@ -291,9 +291,10 @@ open class TabmanBar: UIView, TabmanBarLifecycle {
         }
         self.height = height
         
-        let bottomSeparatorColor = appearance.style.bottomSeparatorColor ?? defaultAppearance.style.bottomSeparatorColor!
+        let bottomSeparatorColor = appearance.bottomSeparator.color ?? defaultAppearance.bottomSeparator.color!
         self.bottomSeparator.color = bottomSeparatorColor
-        let bottomSeparatorEdgeInsets = appearance.layout.bottomSeparatorEdgeInsets ?? defaultAppearance.layout.bottomSeparatorEdgeInsets!
+        self.bottomSeparator.height = (appearance.bottomSeparator.height ?? defaultAppearance.bottomSeparator.height!).rawValue
+        let bottomSeparatorEdgeInsets = appearance.bottomSeparator.edgeInsets ?? defaultAppearance.bottomSeparator.edgeInsets!
         self.bottomSeparator.edgeInsets = bottomSeparatorEdgeInsets
         
         self.update(forAppearance: appearance,
@@ -331,7 +332,7 @@ open class TabmanBar: UIView, TabmanBarLifecycle {
     ///
     /// - Parameter index: The index of the selected item.
     open func itemSelected(at index: Int) {
-        responder?.bar(self, didSelectItemAt: index)
+        responder?.bar(self, didSelectItemAt: index, completion: nil)
     }
 }
 
