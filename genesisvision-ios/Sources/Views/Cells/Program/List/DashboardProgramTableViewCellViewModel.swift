@@ -13,7 +13,7 @@ struct DashboardProgramTableViewCellViewModel {
     let program: ProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
-    weak var reinvestProtocol: ReinvestProtocol?
+    weak var reinvestProtocol: SwitchProtocol?
 }
 
 extension DashboardProgramTableViewCellViewModel: CellViewModel {

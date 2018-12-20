@@ -42,6 +42,7 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh(scrollView: tableView)
     }
@@ -95,9 +96,15 @@ extension NotificationsSettingsViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor.Cell.headerBg
-        return view
+        guard section > 0 else { return nil }
+
+        guard let title = viewModel.headerTitle(for: section) else {
+            return nil
+        }
+        
+        let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+        header.headerLabel.text = title
+        return header
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {

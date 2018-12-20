@@ -25,20 +25,26 @@ class NotificationsDataProvider: DataProvider {
         }
     }
     
-    static func addSetting(assetId: String?, managerId: String?, type: NotificationsAPI.ModelType_v10NotificationsSettingsAddPost?, conditionType: NotificationsAPI.ConditionType_v10NotificationsSettingsAddPost?, conditionAmount: Double?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func addSetting(assetId: String? = nil, managerId: String? = nil, type: NotificationsAPI.ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: NotificationsAPI.ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId,
-            let assetUUID = UUID(uuidString: assetId),
-            let managerId = managerId,
-            let managerUUID = UUID(uuidString: managerId)
-        else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        var assetUUID: UUID? = nil
+        if let assetId = assetId {
+            assetUUID = UUID(uuidString: assetId)
+        }
+        
+        var managerUUID: UUID? = nil
+        if let managerId = managerId {
+            managerUUID = UUID(uuidString: managerId)
+        }
         
         NotificationsAPI.v10NotificationsSettingsAddPost(authorization: authorization, assetId: assetUUID, managerId: managerUUID, type: type, conditionType: conditionType, conditionAmount: conditionAmount) { (uuid, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    completion(uuid?.uuidString)
+                    let uuid = uuid?.removeCharacters(from: "\\").removeCharacters(from: "\"")
+                    completion(uuid)
                 case .failure:
                     errorCompletion(result)
                 }

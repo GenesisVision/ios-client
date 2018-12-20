@@ -80,7 +80,7 @@ extension WalletControllerViewModel {
         case .header:
             return 250.0
         case .transactions:
-            return 86.0
+            return 78.0
         }
     }
     

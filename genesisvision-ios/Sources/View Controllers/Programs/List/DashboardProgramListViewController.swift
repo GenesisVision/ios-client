@@ -157,9 +157,9 @@ extension DashboardProgramListViewController: DelegateManagerProtocol {
     }
 }
 
-extension DashboardProgramListViewController: ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, assetId: String) {
-        viewModel.didChangeReinvestSwitch(value: value, assetId: assetId)
+extension DashboardProgramListViewController: SwitchProtocol {
+    func didChangeSwitch(value: Bool, assetId: String) {
+        viewModel.didChangeSwitch(value: value, assetId: assetId)
     }
 }
 

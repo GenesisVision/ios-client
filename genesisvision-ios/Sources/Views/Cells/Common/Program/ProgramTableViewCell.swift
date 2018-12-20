@@ -31,7 +31,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
     weak var delegate: FavoriteStateChangeProtocol?
-    weak var reinvestProtocol: ReinvestProtocol?
+    weak var reinvestProtocol: SwitchProtocol?
     
     var assetId: String?
     
@@ -174,7 +174,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     @IBAction func reinvestSwitchAction(_ sender: UISwitch) {
         if let assetId = assetId {
-            reinvestProtocol?.didChangeReinvestSwitch(value: sender.isOn, assetId: assetId)
+            reinvestProtocol?.didChangeSwitch(value: sender.isOn, assetId: assetId)
         }
     }
 }

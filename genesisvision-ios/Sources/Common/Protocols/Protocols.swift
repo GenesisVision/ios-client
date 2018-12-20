@@ -17,7 +17,7 @@ protocol NodataProtocol {
 protocol YourInvestmentProtocol: class {
     func didTapWithdrawButton()
     func didTapStatusButton()
-    func didChangeReinvestSwitch(value: Bool)
+    func didChangeSwitch(value: Bool)
 }
 
 extension YourInvestmentProtocol {
@@ -28,19 +28,20 @@ extension YourInvestmentProtocol {
         
     }
     
-    func didChangeReinvestSwitch(value: Bool) {
+    func didChangeSwitch(value: Bool) {
         
     }
 }
 
-protocol ReinvestProtocol: class {
-    func didChangeReinvestSwitch(value: Bool, assetId: String)
+protocol NotificationsSettingsProtocol: class {
+    func didChange(enable: Bool, settingId: String?)
+    func didRemove(settingId: String?)
+    func didAdd(type: NotificationSettingViewModel.ModelType?)
+    func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?)
 }
 
-extension ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, indexPath: IndexPath) {
-        
-    }
+protocol SwitchProtocol: class {
+    func didChangeSwitch(value: Bool, assetId: String)
 }
 
 protocol DelegateManagerProtocol: class {

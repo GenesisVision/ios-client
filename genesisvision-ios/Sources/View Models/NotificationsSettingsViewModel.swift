@@ -40,6 +40,11 @@ final class NotificationsSettingsViewModel {
                 NotificationsSettingsManagerTableViewCellViewModel.self]
     }
     
+    /// Return view models for registration header/footer Nib files
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [DefaultTableHeaderView.self]
+    }
+    
     // MARK: - Init
     init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
@@ -71,12 +76,27 @@ final class NotificationsSettingsViewModel {
         return sections.count
     }
     
+    func headerTitle(for section: Int) -> String? {
+        let type = sections[section]
+        switch type {
+        case .general:
+            return nil
+        case .programs:
+            return "Programs"
+        case .funds:
+            return "Funds"
+        case .managers:
+            return "Managers"
+        }
+    }
+    
     func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        case 0:
+        let type = sections[section]
+        switch type {
+        case .general:
             return 0.0
         default:
-            return 20.0
+            return 78.0
         }
     }
     
@@ -96,7 +116,8 @@ final class NotificationsSettingsViewModel {
     func didSelectRow(at indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .programs:
-        //TODO: show program settings
+            router.showNotificationList()
+            //TODO: show program settings
             break
         case .funds:
             //TODO: show fund settings
@@ -124,14 +145,39 @@ final class NotificationsSettingsViewModel {
     
     // MARK: - Private methods
     private func setup(_ notificationSettingList: NotificationSettingList) {
+        sections = [.general]
+        
+        settingsGeneralViewModels.removeAll()
+        settingsProgramsViewModels.removeAll()
+        settingsFundsViewModels.removeAll()
+        settingsManagersViewModels.removeAll()
+        
+        let newsAndUpdatesSetting = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: NotificationSettingViewModel.ModelType.platformNewsAndUpdates, conditionType: NotificationSettingViewModel.ConditionType.empty, conditionAmount: 0)
+        
+        let emergencySettings = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: NotificationSettingViewModel.ModelType.platformEmergency, conditionType: NotificationSettingViewModel.ConditionType.empty, conditionAmount: 0)
+        
         if let settings = notificationSettingList.settingsGeneral, settings.count > 0 {
-            sections.append(.general)
-            
             settings.forEach({ (setting) in
-                let settingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: setting)
-                settingsGeneralViewModels.append(settingsViewModel)
+                if let type = setting.type {
+                    switch type {
+                    case .platformNewsAndUpdates:
+                        newsAndUpdatesSetting.id = setting.id
+                        newsAndUpdatesSetting.isEnabled = setting.isEnabled
+                    case .platformEmergency:
+                        emergencySettings.id = setting.id
+                        emergencySettings.isEnabled = setting.isEnabled
+                    default:
+                        break
+                    }
+                }
             })
         }
+        
+        let newsAndUpdatesSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: newsAndUpdatesSetting, settingsProtocol: self)
+        settingsGeneralViewModels.append(newsAndUpdatesSettingViewModel)
+        
+        let emergencySettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: emergencySettings, settingsProtocol: self)
+        settingsGeneralViewModels.append(emergencySettingsViewModel)
         
         if let settings = notificationSettingList.settingsProgram, settings.count > 0 {
             sections.append(.programs)
@@ -161,5 +207,77 @@ final class NotificationsSettingsViewModel {
         }
         
         reloadDataProtocol?.didReloadData()
+    }
+}
+
+extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
+    func didAdd(type: NotificationSettingViewModel.ModelType?) {
+
+        let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
+        
+        NotificationsDataProvider.addSetting(type: type, completion: { [weak self] (uuidString) in
+            if let uuidString = uuidString, let type = type {
+                switch type {
+                case .platformNewsAndUpdates:
+                    self?.settingsGeneralViewModels.first?.setting.id = UUID(uuidString: uuidString)
+                case .platformEmergency:
+                    self?.settingsGeneralViewModels.last?.setting.id = UUID(uuidString: uuidString)
+                default:
+                    break
+                }
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
+    }
+    
+    func didChange(enable: Bool, settingId: String?) {
+        NotificationsDataProvider.enableSetting(settingId: settingId, enable: enable, completion: { (result) in
+            if let result = result {
+                print(result)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
+    }
+    
+    func didRemove(settingId: String?) {
+        NotificationsDataProvider.removeSetting(settingId: settingId) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
+    }
+    
+    func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?) {
+        
+        let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
+        let conditionType = NotificationsAPI.ConditionType_v10NotificationsSettingsAddPost(rawValue: conditionType?.rawValue ?? "")
+        
+        NotificationsDataProvider.addSetting(assetId: assetId, type: type, conditionType: conditionType, conditionAmount: conditionAmount, completion: { (result) in
+            if let result = result {
+                print(result)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
     }
 }

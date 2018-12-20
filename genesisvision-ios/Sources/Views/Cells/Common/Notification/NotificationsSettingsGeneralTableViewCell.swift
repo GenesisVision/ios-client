@@ -10,6 +10,11 @@ import UIKit
 
 class NotificationsSettingsGeneralTableViewCell: UITableViewCell {
 
+    // MARK: - Variables
+    weak var settingsProtocol: NotificationsSettingsProtocol?
+    
+    var setting: NotificationSettingViewModel?
+    
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
@@ -34,5 +39,10 @@ class NotificationsSettingsGeneralTableViewCell: UITableViewCell {
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         
         selectionStyle = .none
+    }
+    
+    // MARK: - Actions
+    @IBAction func changeSwitchAction(_ sender: UISwitch) {
+        sender.isOn ? settingsProtocol?.didAdd(type: setting?.type) : settingsProtocol?.didRemove(settingId: setting?.id?.uuidString)
     }
 }

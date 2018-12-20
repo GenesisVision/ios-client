@@ -77,7 +77,7 @@ class YourInvestmentTableViewCell: UITableViewCell {
     }
     
     @IBAction func reinvestSwitchAction(_ sender: UISwitch) {
-        yourInvestmentProtocol?.didChangeReinvestSwitch(value: sender.isOn)
+        yourInvestmentProtocol?.didChangeSwitch(value: sender.isOn)
     }
     
     @IBAction func statusButtonAction(_ sender: UIButton) {

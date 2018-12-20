@@ -21,12 +21,13 @@ open class ProfileHeaderViewModel: Codable {
     public var investedGvt: Double?
     public var availableGvt: Double?
     public var kycConfirmed: Bool?
+    public var allowForex: Bool?
     public var isTwoFactorEnabled: Bool?
     public var isNewUser: Bool?
 
 
     
-    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
+    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?, allowForex: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
         self.id = id
         self.name = name
         self.email = email
@@ -37,6 +38,7 @@ open class ProfileHeaderViewModel: Codable {
         self.investedGvt = investedGvt
         self.availableGvt = availableGvt
         self.kycConfirmed = kycConfirmed
+        self.allowForex = allowForex
         self.isTwoFactorEnabled = isTwoFactorEnabled
         self.isNewUser = isNewUser
     }
@@ -58,6 +60,7 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(investedGvt, forKey: "investedGvt")
         try container.encodeIfPresent(availableGvt, forKey: "availableGvt")
         try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
+        try container.encodeIfPresent(allowForex, forKey: "allowForex")
         try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
         try container.encodeIfPresent(isNewUser, forKey: "isNewUser")
     }
@@ -77,6 +80,7 @@ open class ProfileHeaderViewModel: Codable {
         investedGvt = try container.decodeIfPresent(Double.self, forKey: "investedGvt")
         availableGvt = try container.decodeIfPresent(Double.self, forKey: "availableGvt")
         kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
+        allowForex = try container.decodeIfPresent(Bool.self, forKey: "allowForex")
         isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")
         isNewUser = try container.decodeIfPresent(Bool.self, forKey: "isNewUser")
     }

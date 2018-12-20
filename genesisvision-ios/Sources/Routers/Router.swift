@@ -327,6 +327,15 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showNotification() {
+        guard let viewController = NotificationListViewController.storyboardInstance(.dashboard) else { return }
+        
+        let router = NotificationListRouter(parentRouter: self)
+        viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showEvents(with assetId: String? = nil) {
         guard let viewController = getEventsViewController(with: assetId) else { return }
         

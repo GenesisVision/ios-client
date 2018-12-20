@@ -306,8 +306,8 @@ extension DashboardProgramListViewModel {
     }
 }
 
-extension DashboardProgramListViewModel: ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, assetId: String) {
+extension DashboardProgramListViewModel: SwitchProtocol {
+    func didChangeSwitch(value: Bool, assetId: String) {
         reinvest(value, programId: assetId)
     }
 }

@@ -23,9 +23,9 @@ extension NotificationsSettingsProgramTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
-//        if let color = setting.color {
-//            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
-//        }
+        if let color = setting.color {
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+        }
         
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
@@ -60,6 +60,10 @@ extension NotificationsSettingsFundTableViewCellViewModel: CellViewModel {
         }
         
         cell.assetLogoImageView.levelButton.isHidden = true
+        
+        if let color = setting.color {
+            cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
+        }
         
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         

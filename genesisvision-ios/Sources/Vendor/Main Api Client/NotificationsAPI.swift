@@ -163,7 +163,7 @@ open class NotificationsAPI {
      - parameter conditionAmount: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10NotificationsSettingsAddPost(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+    open class func v10NotificationsSettingsAddPost(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
         v10NotificationsSettingsAddPostWithRequestBuilder(authorization: authorization, assetId: assetId, managerId: managerId, type: type, conditionType: conditionType, conditionAmount: conditionAmount).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -184,7 +184,7 @@ open class NotificationsAPI {
 
      - returns: RequestBuilder<UUID> 
      */
-    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<UUID> {
+    open class func v10NotificationsSettingsAddPostWithRequestBuilder(authorization: String, assetId: UUID? = nil, managerId: UUID? = nil, type: ModelType_v10NotificationsSettingsAddPost? = nil, conditionType: ConditionType_v10NotificationsSettingsAddPost? = nil, conditionAmount: Double? = nil) -> RequestBuilder<String> {
         let path = "/v1.0/notifications/settings/add"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -203,7 +203,7 @@ open class NotificationsAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
@@ -271,6 +271,7 @@ open class NotificationsAPI {
      User settings for fund
      - GET /v1.0/notifications/settings/funds/{id}
      - examples: [{contentType=application/json, example={
+  "color" : "color",
   "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",
   "settingsGeneral" : [ {
@@ -335,6 +336,7 @@ open class NotificationsAPI {
      - GET /v1.0/notifications/settings
      - examples: [{contentType=application/json, example={
   "settingsProgram" : [ {
+    "color" : "color",
     "level" : 6,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -375,6 +377,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates"
     } ]
   }, {
+    "color" : "color",
     "level" : 6,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -480,6 +483,7 @@ open class NotificationsAPI {
     "type" : "PlatformNewsAndUpdates"
   } ],
   "settingsFund" : [ {
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
@@ -502,6 +506,7 @@ open class NotificationsAPI {
     "title" : "title",
     "url" : "url"
   }, {
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
@@ -630,6 +635,7 @@ open class NotificationsAPI {
      User settings for program
      - GET /v1.0/notifications/settings/programs/{id}
      - examples: [{contentType=application/json, example={
+  "color" : "color",
   "level" : 6,
   "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",

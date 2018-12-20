@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="DefaultTableHeaderView" id="iN0-l3-epB" customClass="DefaultTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ksr-AV-5gZ">
-                    <rect key="frame" x="0.0" y="20" width="375" height="78"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="63"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Portfolio events" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtU-OR-Odo">
-                            <rect key="frame" x="20" y="27.5" width="140" height="23"/>
+                            <rect key="frame" x="20" y="0.0" width="140" height="63"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show all" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXl-fe-7st">
-                            <rect key="frame" x="263" y="30" width="56" height="18"/>
+                            <rect key="frame" x="263" y="22.5" width="56" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <color key="textColor" white="1" alpha="0.50287576687116564" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FNC-tQ-buq">
-                            <rect key="frame" x="335" y="29" width="20" height="20"/>
+                            <rect key="frame" x="335" y="21.5" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="MUf-Nl-X0r"/>
                                 <constraint firstAttribute="width" constant="20" id="ljO-WG-bow"/>
@@ -45,6 +45,8 @@
                         <constraint firstItem="FNC-tQ-buq" firstAttribute="leading" secondItem="eXl-fe-7st" secondAttribute="trailing" constant="16" id="5Df-uo-fGG"/>
                         <constraint firstItem="eXl-fe-7st" firstAttribute="centerY" secondItem="FNC-tQ-buq" secondAttribute="centerY" id="LYY-Lg-Gae"/>
                         <constraint firstItem="GtU-OR-Odo" firstAttribute="centerY" secondItem="eXl-fe-7st" secondAttribute="centerY" id="eX3-3M-goj"/>
+                        <constraint firstItem="GtU-OR-Odo" firstAttribute="top" secondItem="ksr-AV-5gZ" secondAttribute="top" id="gfS-ex-WgE"/>
+                        <constraint firstAttribute="bottom" secondItem="GtU-OR-Odo" secondAttribute="bottom" id="j9b-AN-I1f"/>
                         <constraint firstAttribute="trailing" secondItem="FNC-tQ-buq" secondAttribute="trailing" constant="20" id="msJ-FZ-ufm"/>
                         <constraint firstItem="eXl-fe-7st" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GtU-OR-Odo" secondAttribute="trailing" constant="8" id="okP-yg-YZD"/>
                     </constraints>
@@ -62,7 +64,7 @@
                 <outlet property="headerBackgroundView" destination="ksr-AV-5gZ" id="TSW-83-rXv"/>
                 <outlet property="headerLabel" destination="GtU-OR-Odo" id="kMz-aC-aoy"/>
             </connections>
-            <point key="canvasLocation" x="34.399999999999999" y="71.064467766116948"/>
+            <point key="canvasLocation" x="34.399999999999999" y="64.31784107946028"/>
         </view>
     </objects>
 </document>

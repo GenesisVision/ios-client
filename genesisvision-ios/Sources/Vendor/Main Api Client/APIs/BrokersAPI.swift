@@ -34,6 +34,7 @@ open class BrokersAPI {
     "terms" : "terms",
     "fee" : 0.8008281904610115,
     "name" : "name",
+    "isForex" : true,
     "description" : "description",
     "logo" : "logo",
     "accountTypes" : [ {
@@ -58,6 +59,7 @@ open class BrokersAPI {
     "terms" : "terms",
     "fee" : 0.8008281904610115,
     "name" : "name",
+    "isForex" : true,
     "description" : "description",
     "logo" : "logo",
     "accountTypes" : [ {

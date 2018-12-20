@@ -654,16 +654,17 @@ open class InvestorAPI {
     } ]
   },
   "profileHeader" : {
-    "isTwoFactorEnabled" : true,
-    "name" : "name",
     "notificationsCount" : 1,
     "kycConfirmed" : true,
     "availableGvt" : 9.369310271410669,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
     "investedGvt" : 9.965781217890562,
     "favoritesCount" : 4,
     "isNewUser" : true,
+    "isTwoFactorEnabled" : true,
+    "allowForex" : true,
+    "name" : "name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "totalBalanceGvt" : 5.025004791520295,
     "email" : "email"
   },

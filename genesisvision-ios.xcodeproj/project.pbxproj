@@ -1367,7 +1367,6 @@
 				5E05461021C3BF26000DA7E8 /* FundsAPI.swift */,
 				5E05461321C3BF26000DA7E8 /* InvestorAPI.swift */,
 				5E05461821C3BF28000DA7E8 /* ManagerAPI.swift */,
-				5E05461621C3BF28000DA7E8 /* NotificationsAPI.swift */,
 				5E05461721C3BF28000DA7E8 /* PlatformAPI.swift */,
 				5E05461221C3BF26000DA7E8 /* ProfileAPI.swift */,
 				5E05461421C3BF27000DA7E8 /* ProgramsAPI.swift */,
@@ -2628,6 +2627,7 @@
 		FCB177F22045B40E00A482B7 /* Main Api Client */ = {
 			isa = PBXGroup;
 			children = (
+				5E05461621C3BF28000DA7E8 /* NotificationsAPI.swift */,
 				5E18CE0C20C566F0008FE5B5 /* APIs */,
 				5E18CE1320C566F0008FE5B5 /* Models */,
 			);

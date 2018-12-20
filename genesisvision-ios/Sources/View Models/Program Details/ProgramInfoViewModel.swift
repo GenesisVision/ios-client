@@ -241,7 +241,7 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
         withdraw()
     }
     
-    func didChangeReinvestSwitch(value: Bool) {
+    func didChangeSwitch(value: Bool) {
         reinvest(value)
     }
     
