@@ -454,6 +454,7 @@
 		5EEE455B210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */; };
 		5EEE455D210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455C210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift */; };
 		5EEE455F210B447A009CF791 /* InvestorDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */; };
+		5EEEA89C21CCE4060062C4B1 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEEA89B21CCE4060062C4B1 /* Notifications.storyboard */; };
 		5EF14D782181EB0E00B3843A /* FundInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D762181EB0E00B3843A /* FundInvestViewController.swift */; };
 		5EF14D792181EB0E00B3843A /* FundWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D772181EB0E00B3843A /* FundWithdrawViewController.swift */; };
 		5EF14D7B2181EB5A00B3843A /* FundInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14D7A2181EB5A00B3843A /* FundInfoViewController.swift */; };
@@ -1067,6 +1068,7 @@
 		5EEE455A210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanViewModel.swift; sourceTree = "<group>"; };
 		5EEE455C210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDashboardTabmanRouter.swift; sourceTree = "<group>"; };
 		5EEE455E210B447A009CF791 /* InvestorDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorDashboardViewController.swift; sourceTree = "<group>"; };
+		5EEEA89B21CCE4060062C4B1 /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		5EF14D762181EB0E00B3843A /* FundInvestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundInvestViewController.swift; sourceTree = "<group>"; };
 		5EF14D772181EB0E00B3843A /* FundWithdrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundWithdrawViewController.swift; sourceTree = "<group>"; };
 		5EF14D7A2181EB5A00B3843A /* FundInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundInfoViewController.swift; sourceTree = "<group>"; };
@@ -2745,6 +2747,7 @@
 				FCC9DD42200DFA5E008825EC /* Main.storyboard */,
 				FC49641F2015502A00104CEB /* Wallet.storyboard */,
 				FC49641D2015500700104CEB /* Dashboard.storyboard */,
+				5EEEA89B21CCE4060062C4B1 /* Notifications.storyboard */,
 				FCB2C4ED2010D51D0012AA58 /* Auth.storyboard */,
 				FCC9DD5C200DFFDC008825EC /* Programs.storyboard */,
 				5E8340DB207E3279004A29F1 /* Program.storyboard */,
@@ -3123,6 +3126,7 @@
 				5ED03F3A20FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.xib in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
+				5EEEA89C21CCE4060062C4B1 /* Notifications.storyboard in Resources */,
 				5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,

@@ -83,24 +83,24 @@ class NotificationsDataProvider: DataProvider {
         }
     }
 
-    static func getSettings(settingId: String?, assetType: AssetType, programCompletion: @escaping (_ programNotificationSettingList: ProgramNotificationSettingList?) -> Void, fundCompletion: @escaping (_ fundNotificationSettingList: FundNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getSettings(programId assetId: String?, completion: @escaping (_ programNotificationSettingList: ProgramNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken,
-            let settingId = settingId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+            let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        switch assetType {
-        case .program:
-            NotificationsAPI.v10NotificationsSettingsProgramsByIdGet(id: settingId, authorization: authorization) { (model, error) in
-                DataProvider().responseHandler(model, error: error, successCompletion: programCompletion, errorCompletion: errorCompletion)
-            }
-        case .fund:
-            NotificationsAPI.v10NotificationsSettingsFundsByIdGet(id: settingId, authorization: authorization) { (model, error) in
-                DataProvider().responseHandler(model, error: error, successCompletion: fundCompletion, errorCompletion: errorCompletion)
-            }
-        default:
-            break
+        NotificationsAPI.v10NotificationsSettingsProgramsByIdGet(id: assetId, authorization: authorization) { (model, error) in
+            DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
+    }
+    
+    static func getSettings(fundId assetId: String?, completion: @escaping (_ fundNotificationSettingList: FundNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
+        guard let authorization = AuthManager.authorizedToken,
+            let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        NotificationsAPI.v10NotificationsSettingsFundsByIdGet(id: assetId, authorization: authorization) { (model, error) in
+            DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
     }
 }
 

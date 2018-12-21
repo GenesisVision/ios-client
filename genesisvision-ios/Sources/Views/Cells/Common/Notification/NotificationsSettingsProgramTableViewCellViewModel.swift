@@ -113,5 +113,3 @@ extension NotificationsSettingsManagerTableViewCellViewModel: CellViewModel {
         cell.notificationsCountLabel.text = "\(count)"
     }
 }
-
-

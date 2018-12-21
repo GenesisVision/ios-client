@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+enum NotificationSettingsType {
+    case all
+    case program
+    case fund
+    case manager
+}
+
 final class NotificationsSettingsViewModel {
     
     // MARK: - View Model
@@ -17,12 +24,16 @@ final class NotificationsSettingsViewModel {
         case programs
         case funds
         case managers
+        case custom
     }
     
     // MARK: - Variables
     var title: String = "Notifications settings"
     
     private var sections: [SectionType] = []
+    
+    var type: NotificationSettingsType = .all
+    var assetId: String?
     
     private var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -31,6 +42,7 @@ final class NotificationsSettingsViewModel {
     var settingsProgramsViewModels = [NotificationsSettingsProgramTableViewCellViewModel]()
     var settingsFundsViewModels = [NotificationsSettingsFundTableViewCellViewModel]()
     var settingsManagersViewModels = [NotificationsSettingsManagerTableViewCellViewModel]()
+    var settingsCustomViewModels = [NotificationsSettingsGeneralTableViewCellViewModel]()
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -46,9 +58,11 @@ final class NotificationsSettingsViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?, type: NotificationSettingsType, assetId: String? = nil) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
+        self.type = type
+        self.assetId = assetId
         
         guard let notificationSettingList = notificationSettingList else { return }
         
@@ -69,6 +83,8 @@ final class NotificationsSettingsViewModel {
             return settingsFundsViewModels[indexPath.row]
         case .managers:
             return settingsManagersViewModels[indexPath.row]
+        case .custom:
+            return settingsCustomViewModels[indexPath.row]
         }
     }
     
@@ -87,6 +103,8 @@ final class NotificationsSettingsViewModel {
             return "Funds"
         case .managers:
             return "Managers"
+        case .custom:
+            return "Custom"
         }
     }
     
@@ -110,20 +128,22 @@ final class NotificationsSettingsViewModel {
             return settingsFundsViewModels.count
         case .managers:
             return settingsManagersViewModels.count
+        case .custom:
+            return settingsCustomViewModels.count
         }
     }
     
     func didSelectRow(at indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .programs:
-            router.showNotificationList()
-            //TODO: show program settings
-            break
+            guard let viewModel = model(at: indexPath) as? NotificationsSettingsProgramTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
+            router.showAssetNotificationsSettings(assetId, title: title, type: .program)
         case .funds:
-            //TODO: show fund settings
-            break
+            guard let viewModel = model(at: indexPath) as? NotificationsSettingsFundTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
+            router.showAssetNotificationsSettings(assetId, title: title, type: .fund)
         case .managers:
-            //TODO: show manager settings
+            break
+        case .custom:
             break
         default:
             break
@@ -135,28 +155,120 @@ final class NotificationsSettingsViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        NotificationsDataProvider.getSettings(completion: { [weak self] (notificationSettingList) in
-            guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
-            
-            self?.setup(notificationSettingList)
-            completion(.success)
-        }, errorCompletion: completion)
+        sections = []
+        
+        switch type {
+        case .all:
+            NotificationsDataProvider.getSettings(completion: { [weak self] (notificationSettingList) in
+                guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+                
+                self?.setup(notificationSettingList)
+                self?.reloadDataProtocol?.didReloadData()
+                
+                completion(.success)
+                }, errorCompletion: completion)
+        case .program:
+            NotificationsDataProvider.getSettings(programId: assetId, completion: { [weak self] (notificationSettingList) in
+                guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+                
+                self?.setup(program: notificationSettingList)
+                self?.reloadDataProtocol?.didReloadData()
+                
+                completion(.success)
+            }, errorCompletion: completion)
+        case .fund:
+            NotificationsDataProvider.getSettings(fundId: assetId, completion: { [weak self] (notificationSettingList) in
+                guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+                
+                self?.setup(fund: notificationSettingList)
+                self?.reloadDataProtocol?.didReloadData()
+                
+                completion(.success)
+            }, errorCompletion: completion)
+        case .manager:
+            break
+        }
     }
     
     // MARK: - Private methods
     private func setup(_ notificationSettingList: NotificationSettingList) {
-        sections = [.general]
+        setup(generals: notificationSettingList.settingsGeneral)
+        setup(programs: notificationSettingList.settingsProgram)
+        setup(funds: notificationSettingList.settingsFund)
+        setup(managers: notificationSettingList.settingsManager)
+    }
+    
+    private func setup(program notificationSettingList: ProgramNotificationSettingList) {
+        setup(generalsProgram: notificationSettingList.settingsGeneral)
+        setup(customs: notificationSettingList.settingsCustom)
+    }
+    
+    private func setup(fund notificationSettingList: FundNotificationSettingList) {
+        setup(generalsFund: notificationSettingList.settingsGeneral)
+    }
+    
+    private func setup(customs settings: [NotificationSettingViewModel]?) {
+        settingsCustomViewModels.removeAll()
         
-        settingsGeneralViewModels.removeAll()
+        if let settings = settings, settings.count > 0 {
+            sections.append(.custom)
+            
+            settings.forEach({ (setting) in
+                let settingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: setting, settingsProtocol: self)
+                settingsCustomViewModels.append(settingsViewModel)
+            })
+        }
+    }
+    
+    private func setup(programs settings: [ProgramNotificationSettingList]?) {
         settingsProgramsViewModels.removeAll()
+        
+        if let settings = settings, settings.count > 0 {
+            sections.append(.programs)
+            
+            settings.forEach({ (setting) in
+                let settingsViewModel = NotificationsSettingsProgramTableViewCellViewModel(setting: setting)
+                settingsProgramsViewModels.append(settingsViewModel)
+            })
+        }
+    }
+    
+    private func setup(funds settings: [FundNotificationSettingList]?) {
         settingsFundsViewModels.removeAll()
+        
+        if let settings = settings, settings.count > 0 {
+            sections.append(.funds)
+            
+            settings.forEach({ (setting) in
+                let settingsViewModel = NotificationsSettingsFundTableViewCellViewModel(setting: setting)
+                settingsFundsViewModels.append(settingsViewModel)
+            })
+        }
+    }
+    
+    private func setup(managers settings: [ManagerNotificationSettingList]?) {
         settingsManagersViewModels.removeAll()
         
-        let newsAndUpdatesSetting = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: NotificationSettingViewModel.ModelType.platformNewsAndUpdates, conditionType: NotificationSettingViewModel.ConditionType.empty, conditionAmount: 0)
+        if let settings = settings, settings.count > 0 {
+            sections.append(.managers)
+            
+            settings.forEach({ (setting) in
+                let settingsViewModel = NotificationsSettingsManagerTableViewCellViewModel(setting: setting)
+                settingsManagersViewModels.append(settingsViewModel)
+            })
+        }
+    }
+    
+    private func setup(generals settingsGeneral: [NotificationSettingViewModel]?) {
+        sections.append(.general)
         
-        let emergencySettings = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: NotificationSettingViewModel.ModelType.platformEmergency, conditionType: NotificationSettingViewModel.ConditionType.empty, conditionAmount: 0)
+        settingsGeneralViewModels.removeAll()
         
-        if let settings = notificationSettingList.settingsGeneral, settings.count > 0 {
+        let newsAndUpdatesSetting = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        
+        let emergencySettings = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0)
+        
+        if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
                 if let type = setting.type {
                     switch type {
@@ -173,40 +285,85 @@ final class NotificationsSettingsViewModel {
             })
         }
         
-        let newsAndUpdatesSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: newsAndUpdatesSetting, settingsProtocol: self)
-        settingsGeneralViewModels.append(newsAndUpdatesSettingViewModel)
+        let firstSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: newsAndUpdatesSetting, settingsProtocol: self)
+        settingsGeneralViewModels.append(firstSettingViewModel)
         
-        let emergencySettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: emergencySettings, settingsProtocol: self)
-        settingsGeneralViewModels.append(emergencySettingsViewModel)
+        let secondSettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: emergencySettings, settingsProtocol: self)
+        settingsGeneralViewModels.append(secondSettingsViewModel)
+    }
+    
+    private func setup(generalsProgram settingsGeneral: [NotificationSettingViewModel]?) {
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return }
         
-        if let settings = notificationSettingList.settingsProgram, settings.count > 0 {
-            sections.append(.programs)
-            
+        sections.append(.general)
+        
+        settingsGeneralViewModels.removeAll()
+        
+        let programNewsAndUpdates = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        
+        let programEndOfPeriod = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programEndOfPeriod, conditionType: .empty, conditionAmount: 0)
+        
+        if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
-                let settingsViewModel = NotificationsSettingsProgramTableViewCellViewModel(setting: setting)
-                settingsProgramsViewModels.append(settingsViewModel)
+                if let type = setting.type {
+                    switch type {
+                    case .programNewsAndUpdates:
+                        programNewsAndUpdates.id = setting.id
+                        programNewsAndUpdates.assetId = setting.assetId
+                        programNewsAndUpdates.isEnabled = setting.isEnabled
+                    case .programEndOfPeriod:
+                        programEndOfPeriod.id = setting.id
+                        programEndOfPeriod.assetId = setting.assetId
+                        programEndOfPeriod.isEnabled = setting.isEnabled
+                    default:
+                        break
+                    }
+                }
             })
         }
         
-        if let settings = notificationSettingList.settingsFund, settings.count > 0 {
-            sections.append(.funds)
-            
+        let firstSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: programNewsAndUpdates, settingsProtocol: self)
+        settingsGeneralViewModels.append(firstSettingViewModel)
+        
+        let secondSettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: programEndOfPeriod, settingsProtocol: self)
+        settingsGeneralViewModels.append(secondSettingsViewModel)
+    }
+    
+    private func setup(generalsFund settingsGeneral: [NotificationSettingViewModel]?) {
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return }
+        
+        sections.append(.general)
+        
+        settingsGeneralViewModels.removeAll()
+        
+        let fundNewsAndUpdates = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        
+        let fundRebalancing = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundRebalancing, conditionType: .empty, conditionAmount: 0)
+        
+        if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
-                let settingsViewModel = NotificationsSettingsFundTableViewCellViewModel(setting: setting)
-                settingsFundsViewModels.append(settingsViewModel)
+                if let type = setting.type {
+                    switch type {
+                    case .fundNewsAndUpdates:
+                        fundNewsAndUpdates.id = setting.id
+                        fundNewsAndUpdates.assetId = setting.assetId
+                        fundNewsAndUpdates.isEnabled = setting.isEnabled
+                    case .fundRebalancing:
+                        fundRebalancing.id = setting.id
+                        fundRebalancing.assetId = setting.assetId
+                        fundRebalancing.isEnabled = setting.isEnabled
+                    default:
+                        break
+                    }
+                }
             })
         }
         
-        if let settings = notificationSettingList.settingsManager, settings.count > 0 {
-            sections.append(.managers)
-            
-            settings.forEach({ (setting) in
-                let settingsViewModel = NotificationsSettingsManagerTableViewCellViewModel(setting: setting)
-                settingsManagersViewModels.append(settingsViewModel)
-            })
-        }
+        let firstSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: fundNewsAndUpdates, settingsProtocol: self)
+        settingsGeneralViewModels.append(firstSettingViewModel)
         
-        reloadDataProtocol?.didReloadData()
+        let secondSettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: fundRebalancing, settingsProtocol: self)
+        settingsGeneralViewModels.append(secondSettingsViewModel)
     }
 }
 
@@ -215,7 +372,7 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
 
         let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
         
-        NotificationsDataProvider.addSetting(type: type, completion: { [weak self] (uuidString) in
+        NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
             if let uuidString = uuidString, let type = type {
                 switch type {
                 case .platformNewsAndUpdates:

@@ -566,6 +566,78 @@
             </objects>
             <point key="canvasLocation" x="1414" y="898"/>
         </scene>
+        <!--Notifications Settings View Controller-->
+        <scene sceneID="pBR-y8-ZEC">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsSettingsViewController" id="0OP-Yu-R5z" customClass="NotificationsSettingsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fbv-WV-hPn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7e3-Qb-z2Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0OP-Yu-R5z" id="1fM-iW-VKA"/>
+                                    <outlet property="delegate" destination="0OP-Yu-R5z" id="drT-Rg-UKq"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oD3-Zb-Hgd" firstAttribute="trailing" secondItem="7e3-Qb-z2Z" secondAttribute="trailing" id="HeX-1e-Chk"/>
+                            <constraint firstAttribute="bottom" secondItem="7e3-Qb-z2Z" secondAttribute="bottom" id="jmc-12-aIU"/>
+                            <constraint firstItem="7e3-Qb-z2Z" firstAttribute="leading" secondItem="oD3-Zb-Hgd" secondAttribute="leading" id="mih-Oi-AvU"/>
+                            <constraint firstItem="7e3-Qb-z2Z" firstAttribute="top" secondItem="oD3-Zb-Hgd" secondAttribute="top" id="yUH-bW-R5l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oD3-Zb-Hgd"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nnD-q6-tnf"/>
+                    <connections>
+                        <outlet property="tableView" destination="7e3-Qb-z2Z" id="3Gi-bw-Gvw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zbH-oE-aMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2865" y="1334"/>
+        </scene>
+        <!--Notification List View Controller-->
+        <scene sceneID="gY9-dC-B8x">
+            <objects>
+                <viewController storyboardIdentifier="NotificationListViewController" id="5l9-tM-PE1" customClass="NotificationListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1U0-kE-AzS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C5B-wt-JCk">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="5l9-tM-PE1" id="sWS-fb-hbR"/>
+                                    <outlet property="delegate" destination="5l9-tM-PE1" id="cqZ-eN-lDX"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7GW-Wt-RtC" firstAttribute="trailing" secondItem="C5B-wt-JCk" secondAttribute="trailing" id="G7L-R8-bEX"/>
+                            <constraint firstItem="C5B-wt-JCk" firstAttribute="top" secondItem="7GW-Wt-RtC" secondAttribute="top" id="Gee-RY-WuS"/>
+                            <constraint firstAttribute="bottom" secondItem="C5B-wt-JCk" secondAttribute="bottom" id="NWv-oq-udu"/>
+                            <constraint firstItem="C5B-wt-JCk" firstAttribute="leading" secondItem="7GW-Wt-RtC" secondAttribute="leading" id="aHQ-dq-XMn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7GW-Wt-RtC"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Tbu-2c-UDZ"/>
+                    <connections>
+                        <outlet property="tableView" destination="C5B-wt-JCk" id="swa-iS-L63"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGO-gV-9Av" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3576.8000000000002" y="1333.5832083958021"/>
+        </scene>
         <!--All Events View Controller-->
         <scene sceneID="P9m-UJ-tOn">
             <objects>
