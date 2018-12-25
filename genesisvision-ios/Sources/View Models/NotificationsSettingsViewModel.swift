@@ -42,11 +42,12 @@ final class NotificationsSettingsViewModel {
     var settingsProgramsViewModels = [NotificationsSettingsProgramTableViewCellViewModel]()
     var settingsFundsViewModels = [NotificationsSettingsFundTableViewCellViewModel]()
     var settingsManagersViewModels = [NotificationsSettingsManagerTableViewCellViewModel]()
-    var settingsCustomViewModels = [NotificationsSettingsGeneralTableViewCellViewModel]()
+    var settingsCustomViewModels = [NotificationsSettingsCustomTableViewCellViewModel]()
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [NotificationsSettingsGeneralTableViewCellViewModel.self,
+        return [NotificationsSettingsCustomTableViewCellViewModel.self,
+                NotificationsSettingsGeneralTableViewCellViewModel.self,
                 NotificationsSettingsProgramTableViewCellViewModel.self,
                 NotificationsSettingsFundTableViewCellViewModel.self,
                 NotificationsSettingsManagerTableViewCellViewModel.self]
@@ -58,11 +59,12 @@ final class NotificationsSettingsViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?, type: NotificationSettingsType, assetId: String? = nil) {
+    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?, type: NotificationSettingsType, assetId: String? = nil, title: String = "Notifications settings") {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.type = type
         self.assetId = assetId
+        self.title = title
         
         guard let notificationSettingList = notificationSettingList else { return }
         
@@ -92,6 +94,13 @@ final class NotificationsSettingsViewModel {
         return sections.count
     }
     
+    func didHighlightRow(at indexPath: IndexPath) -> Bool {
+        guard indexPath.section > 0 else { return false }
+        guard (model(at: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel) != nil else { return true }
+        
+        return false
+    }
+    
     func headerTitle(for section: Int) -> String? {
         let type = sections[section]
         switch type {
@@ -105,6 +114,12 @@ final class NotificationsSettingsViewModel {
             return "Managers"
         case .custom:
             return "Custom"
+        }
+    }
+    
+    func removeCustomSetting(at indexPath: IndexPath) {
+        if let settingsCustomViewModel = model(at: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting.id?.uuidString {
+            didRemove(settingId: settingId)
         }
     }
     
@@ -214,7 +229,7 @@ final class NotificationsSettingsViewModel {
             sections.append(.custom)
             
             settings.forEach({ (setting) in
-                let settingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: setting, settingsProtocol: self)
+                let settingsViewModel = NotificationsSettingsCustomTableViewCellViewModel(setting: setting, settingsProtocol: self)
                 settingsCustomViewModels.append(settingsViewModel)
             })
         }

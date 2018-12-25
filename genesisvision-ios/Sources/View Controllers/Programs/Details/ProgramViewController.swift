@@ -139,7 +139,7 @@ class ProgramViewController: BaseViewController {
     }
     
     @objc func notificationsButtonAction() {
-        viewModel.showNotifications()
+        viewModel.showNotificationSettings()
     }
     
     // MARK: - IBActions

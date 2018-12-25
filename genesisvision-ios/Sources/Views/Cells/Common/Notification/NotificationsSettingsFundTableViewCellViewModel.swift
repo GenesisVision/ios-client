@@ -1,27 +1,25 @@
 //
-//  NotificationsSettingsProgramTableViewCellViewModel.swift
+//  NotificationsSettingsFundTableViewCellViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 17/12/2018.
+//  Created by George on 25/12/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import Foundation
 import UIKit.UIImage
 
-struct NotificationsSettingsProgramTableViewCellViewModel {
-    let setting: ProgramNotificationSettingList
+struct NotificationsSettingsFundTableViewCellViewModel {
+    let setting: FundNotificationSettingList
 }
 
-extension NotificationsSettingsProgramTableViewCellViewModel: CellViewModel {
+extension NotificationsSettingsFundTableViewCellViewModel: CellViewModel {
     func setup(on cell: NotificationsSettingsAssetTableViewCell) {
         if let title = setting.title {
             cell.titleLabel.text = title
         }
-
-        if let level = setting.level {
-            cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
-        }
+        
+        cell.assetLogoImageView.levelButton.isHidden = true
         
         if let color = setting.color {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
@@ -37,9 +35,6 @@ extension NotificationsSettingsProgramTableViewCellViewModel: CellViewModel {
         
         var count = 0
         
-        if let settingsCustom = setting.settingsCustom {
-            count += settingsCustom.count
-        }
         if let settingsGeneral = setting.settingsGeneral {
             count += settingsGeneral.count
         }

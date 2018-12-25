@@ -20,6 +20,14 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
         }
     }
     
+    // MARK: - Buttons
+    @IBOutlet weak var createButton: ActionButton! {
+        didSet {
+            createButton.configure(with: .darkClear)
+            createButton.setTitle("Create notification", for: .normal)
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +43,7 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         navigationItem.title = viewModel.title
+        createButton.isHidden = viewModel.type == .all
     }
     
     private func setupTableConfiguration() {
@@ -63,6 +72,11 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     override func fetch() {
         showProgressHUD()
         viewModel.fetch { (result) in }
+    }
+    
+    // MARK: - IBAction
+    @IBAction func createButtonAction(_ sender: UIButton) {
+        //TODO: create
     }
 }
 
@@ -107,8 +121,25 @@ extension NotificationsSettingsViewController: UITableViewDelegate, UITableViewD
         return header
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard indexPath.section > 0 else {
+            return false
+        }
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let removeRowAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] (action, indexPath) in
+            self?.viewModel.removeCustomSetting(at: indexPath)
+        }
+        removeRowAction.backgroundColor = UIColor.Cell.redTitle
+        
+        return [removeRowAction]
+    }
+    
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard indexPath.section > 0 else { return }
+        guard viewModel?.didHighlightRow(at: indexPath) ?? false else { return }
         
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +15,7 @@
             <objects>
                 <viewController storyboardIdentifier="NotificationsSettingsViewController" id="0OP-Yu-R5z" customClass="NotificationsSettingsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fbv-WV-hPn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7e3-Qb-z2Z">
@@ -23,18 +27,36 @@
                                     <outlet property="delegate" destination="0OP-Yu-R5z" id="drT-Rg-UKq"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0y-qE-JQ5" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="20" y="597" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aRS-Y6-tik"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createButtonAction:" destination="0OP-Yu-R5z" eventType="touchUpInside" id="uHe-yi-H5a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="V0y-qE-JQ5" firstAttribute="leading" secondItem="oD3-Zb-Hgd" secondAttribute="leading" constant="20" id="6uY-Zf-dTD"/>
                             <constraint firstItem="oD3-Zb-Hgd" firstAttribute="trailing" secondItem="7e3-Qb-z2Z" secondAttribute="trailing" id="HeX-1e-Chk"/>
                             <constraint firstAttribute="bottom" secondItem="7e3-Qb-z2Z" secondAttribute="bottom" id="jmc-12-aIU"/>
+                            <constraint firstItem="oD3-Zb-Hgd" firstAttribute="trailing" secondItem="V0y-qE-JQ5" secondAttribute="trailing" constant="20" id="kcO-So-ORR"/>
                             <constraint firstItem="7e3-Qb-z2Z" firstAttribute="leading" secondItem="oD3-Zb-Hgd" secondAttribute="leading" id="mih-Oi-AvU"/>
+                            <constraint firstItem="oD3-Zb-Hgd" firstAttribute="bottom" secondItem="V0y-qE-JQ5" secondAttribute="bottom" constant="20" id="qhh-yB-ACY"/>
                             <constraint firstItem="7e3-Qb-z2Z" firstAttribute="top" secondItem="oD3-Zb-Hgd" secondAttribute="top" id="yUH-bW-R5l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oD3-Zb-Hgd"/>
                     </view>
                     <navigationItem key="navigationItem" id="nnD-q6-tnf"/>
                     <connections>
+                        <outlet property="createButton" destination="V0y-qE-JQ5" id="Ias-cT-TjJ"/>
                         <outlet property="tableView" destination="7e3-Qb-z2Z" id="3Gi-bw-Gvw"/>
                     </connections>
                 </viewController>
@@ -47,7 +69,7 @@
             <objects>
                 <viewController storyboardIdentifier="NotificationListViewController" id="5l9-tM-PE1" customClass="NotificationListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1U0-kE-AzS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C5B-wt-JCk">

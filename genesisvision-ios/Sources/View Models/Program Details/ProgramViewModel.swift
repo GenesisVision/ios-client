@@ -34,8 +34,8 @@ final class ProgramViewModel {
         NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
     }
     
-    func showNotifications() {
-        router.show(routeType: .notifications)
+    func showNotificationSettings() {
+        router.show(routeType: .notificationSettings(assetId: programId, title: programDetailsFull?.title ?? "Program Settings"))
     }
     
     func showAboutLevels() {

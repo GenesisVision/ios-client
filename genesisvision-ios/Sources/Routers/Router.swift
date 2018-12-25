@@ -233,8 +233,7 @@ extension Router {
     }
     
     func showAssetNotificationsSettings(_ assetId: String?, title: String, type: NotificationSettingsType) {
-        guard let viewController = getAssetNotificationsSettingsViewController(assetId, type: type) else { return }
-        viewController.title = title
+        guard let viewController = getAssetNotificationsSettingsViewController(assetId, title: title, type: type) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -420,10 +419,10 @@ extension Router {
         return viewController
     }
     
-    func getAssetNotificationsSettingsViewController(_ assetId: String?, type: NotificationSettingsType) -> NotificationsSettingsViewController? {
+    func getAssetNotificationsSettingsViewController(_ assetId: String?, title: String, type: NotificationSettingsType) -> NotificationsSettingsViewController? {
         guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
         
-        viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController, type: type, assetId: assetId)
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController, type: type, assetId: assetId, title: title)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController

@@ -162,9 +162,6 @@
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
 		5E0DB5E321C8EB2C0027A778 /* NotificationsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */; };
-		5E0DB5E621C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0DB5E421C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.swift */; };
-		5E0DB5E721C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0DB5E521C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.xib */; };
-		5E0DB5E921C903D70027A778 /* NotificationsSettingsGlobalTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0DB5E821C903D70027A778 /* NotificationsSettingsGlobalTableViewCellViewModel.swift */; };
 		5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E106386213D69AF008A0E8B /* BaseExtensions.swift */; };
 		5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */; };
 		5E11DFD221B9286400B2B6EE /* RatingTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */; };
@@ -221,7 +218,6 @@
 		5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */; };
 		5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E367906206BC6DA006E226A /* AmountLabel.swift */; };
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
-		5E3A987D21C936EB00279DDE /* NotificationsSettingsAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE9490A21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.xib */; };
 		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
 		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
 		5E4F9ED520876FAD00D4EAB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4F9ED420876FAC00D4EAB0 /* GoogleService-Info.plist */; };
@@ -301,6 +297,20 @@
 		5E87E767208F64C200141269 /* TooltipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87E766208F64C200141269 /* TooltipButton.swift */; };
 		5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */; };
 		5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E89772F206E987B0015FD26 /* ReachabilityManager.swift */; };
+		5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E93E6EF21D1A5330020DE55 /* NotificationsSettingsAssetTableViewCell.xib */; };
+		5E93E6FC21D1A5370020DE55 /* NotificationListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E93E6F021D1A5330020DE55 /* NotificationListTableViewCell.xib */; };
+		5E93E6FD21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E93E6F121D1A5330020DE55 /* NotificationsSettingsGeneralTableViewCell.xib */; };
+		5E93E6FE21D1A5370020DE55 /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6F221D1A5330020DE55 /* NotificationListTableViewCell.swift */; };
+		5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6F421D1A5350020DE55 /* NotificationsSettingsGeneralTableViewCell.swift */; };
+		5E93E70121D1A5370020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6F521D1A5350020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift */; };
+		5E93E70221D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6F621D1A5350020DE55 /* NotificationsSettingsAssetTableViewCell.swift */; };
+		5E93E70421D1A5370020DE55 /* NotificationListTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6F821D1A5360020DE55 /* NotificationListTableViewCellViewModel.swift */; };
+		5E93E70621D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E6FA21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift */; };
+		5E93E70821D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E70721D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift */; };
+		5E93E70A21D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E70921D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift */; };
+		5E93E70D21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E70B21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift */; };
+		5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E93E70C21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib */; };
+		5E93E71021D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E70F21D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift */; };
 		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
 		5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */; };
 		5E9FCF9E2199E3BC001FB114 /* NHRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */; };
@@ -387,9 +397,6 @@
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		5EC7871D216BD243000C91E4 /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */; };
 		5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7871E216BD3E1000C91E4 /* NotificationListViewModel.swift */; };
-		5EC78724216BD458000C91E4 /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */; };
-		5EC78725216BD458000C91E4 /* NotificationListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */; };
-		5EC78727216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */; };
 		5EC78729216BE8B2000C91E4 /* InRequestsDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC78728216BE8B2000C91E4 /* InRequestsDelegateManager.swift */; };
 		5EC7872B216BE8E6000C91E4 /* CurrencyDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7872A216BE8E6000C91E4 /* CurrencyDelegateManager.swift */; };
 		5EC7872D216BE905000C91E4 /* SortingDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */; };
@@ -440,8 +447,6 @@
 		5EE0076A217875120045B890 /* ManagersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE00769217875120045B890 /* ManagersDataProvider.swift */; };
 		5EE0076C21787A360045B890 /* ManagerTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */; };
 		5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE0076D217881AA0045B890 /* Manager.storyboard */; };
-		5EE9490C21C7F92300D0950B /* NotificationsSettingsAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */; };
-		5EE9490E21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */; };
 		5EEA3E572177755300449E86 /* ManagerHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */; };
 		5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */; };
 		5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */; };
@@ -774,9 +779,6 @@
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewController.swift; sourceTree = "<group>"; };
-		5E0DB5E421C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsGeneralTableViewCell.swift; sourceTree = "<group>"; };
-		5E0DB5E521C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSettingsGeneralTableViewCell.xib; sourceTree = "<group>"; };
-		5E0DB5E821C903D70027A778 /* NotificationsSettingsGlobalTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsGlobalTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E106386213D69AF008A0E8B /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
 		5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableHeaderView.swift; sourceTree = "<group>"; };
@@ -914,6 +916,20 @@
 		5E87E766208F64C200141269 /* TooltipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipButton.swift; sourceTree = "<group>"; };
 		5E887F0F215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRequestsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E89772F206E987B0015FD26 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		5E93E6EF21D1A5330020DE55 /* NotificationsSettingsAssetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsSettingsAssetTableViewCell.xib; sourceTree = "<group>"; };
+		5E93E6F021D1A5330020DE55 /* NotificationListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationListTableViewCell.xib; sourceTree = "<group>"; };
+		5E93E6F121D1A5330020DE55 /* NotificationsSettingsGeneralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsSettingsGeneralTableViewCell.xib; sourceTree = "<group>"; };
+		5E93E6F221D1A5330020DE55 /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
+		5E93E6F421D1A5350020DE55 /* NotificationsSettingsGeneralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsGeneralTableViewCell.swift; sourceTree = "<group>"; };
+		5E93E6F521D1A5350020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E93E6F621D1A5350020DE55 /* NotificationsSettingsAssetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsAssetTableViewCell.swift; sourceTree = "<group>"; };
+		5E93E6F821D1A5360020DE55 /* NotificationListTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E93E6FA21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsGeneralTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E93E70721D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsFundTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E93E70921D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsManagerTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E93E70B21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsCustomTableViewCell.swift; sourceTree = "<group>"; };
+		5E93E70C21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSettingsCustomTableViewCell.xib; sourceTree = "<group>"; };
+		5E93E70F21D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsCustomTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSlider.swift; sourceTree = "<group>"; };
 		5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSliderView.swift; sourceTree = "<group>"; };
@@ -1000,9 +1016,6 @@
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
 		5EC7871E216BD3E1000C91E4 /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
-		5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
-		5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationListTableViewCell.xib; sourceTree = "<group>"; };
-		5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EC78728216BE8B2000C91E4 /* InRequestsDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InRequestsDelegateManager.swift; sourceTree = "<group>"; };
 		5EC7872A216BE8E6000C91E4 /* CurrencyDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDelegateManager.swift; sourceTree = "<group>"; };
 		5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingDelegateManager.swift; sourceTree = "<group>"; };
@@ -1053,9 +1066,6 @@
 		5EE00769217875120045B890 /* ManagersDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersDataProvider.swift; sourceTree = "<group>"; };
 		5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanRouter.swift; sourceTree = "<group>"; };
 		5EE0076D217881AA0045B890 /* Manager.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Manager.storyboard; sourceTree = "<group>"; };
-		5EE9490A21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSettingsAssetTableViewCell.xib; sourceTree = "<group>"; };
-		5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsAssetTableViewCell.swift; sourceTree = "<group>"; };
-		5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsProgramTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerHeaderViewController.swift; sourceTree = "<group>"; };
 		5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanViewController.swift; sourceTree = "<group>"; };
 		5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewController.swift; sourceTree = "<group>"; };
@@ -1820,15 +1830,20 @@
 		5EC6708221AEA79B009BF4C0 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				5E0DB5E821C903D70027A778 /* NotificationsSettingsGlobalTableViewCellViewModel.swift */,
-				5E0DB5E421C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.swift */,
-				5E0DB5E521C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.xib */,
-				5EE9490D21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift */,
-				5EE9490B21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.swift */,
-				5EE9490A21C7F92200D0950B /* NotificationsSettingsAssetTableViewCell.xib */,
-				5EC78726216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift */,
-				5EC78722216BD458000C91E4 /* NotificationListTableViewCell.swift */,
-				5EC78723216BD458000C91E4 /* NotificationListTableViewCell.xib */,
+				5E93E6F821D1A5360020DE55 /* NotificationListTableViewCellViewModel.swift */,
+				5E93E6F221D1A5330020DE55 /* NotificationListTableViewCell.swift */,
+				5E93E6F021D1A5330020DE55 /* NotificationListTableViewCell.xib */,
+				5E93E6F521D1A5350020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift */,
+				5E93E70721D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift */,
+				5E93E70921D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift */,
+				5E93E6F621D1A5350020DE55 /* NotificationsSettingsAssetTableViewCell.swift */,
+				5E93E6EF21D1A5330020DE55 /* NotificationsSettingsAssetTableViewCell.xib */,
+				5E93E70F21D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift */,
+				5E93E70B21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift */,
+				5E93E70C21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib */,
+				5E93E6FA21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift */,
+				5E93E6F421D1A5350020DE55 /* NotificationsSettingsGeneralTableViewCell.swift */,
+				5E93E6F121D1A5330020DE55 /* NotificationsSettingsGeneralTableViewCell.xib */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -3091,18 +3106,19 @@
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
 				5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
-				5E3A987D21C936EB00279DDE /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
 				5ED03F3620FF784A00AF5E07 /* FieldWithTextViewTableViewCell.xib in Resources */,
 				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
+				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
+				5E93E6FC21D1A5370020DE55 /* NotificationListTableViewCell.xib in Resources */,
 				5E82C75421429785007A21C3 /* DashboardCurrencyTableViewCell.xib in Resources */,
 				5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */,
-				5E0DB5E721C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */,
 				5EA1FE2421A2F16600308D81 /* FacetsTableViewCell.xib in Resources */,
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				5EA274B3216281DD008CAF77 /* DefaultTableViewCell.xib in Resources */,
+				5E93E6FD21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
 				5EA274C321628274008CAF77 /* DetailProfitChartTableViewCell.xib in Resources */,
@@ -3120,7 +3136,6 @@
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
 				5EA274BB2162823F008CAF77 /* InvestNowTableViewCell.xib in Resources */,
-				5EC78725216BD458000C91E4 /* NotificationListTableViewCell.xib in Resources */,
 				5E1CF81E218B71D100541C70 /* Montserrat-Light.ttf in Resources */,
 				FCA5707F2027B520001942F3 /* DefaultTableHeaderView.xib in Resources */,
 				5ED03F3A20FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.xib in Resources */,
@@ -3128,6 +3143,7 @@
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
 				5EEEA89C21CCE4060062C4B1 /* Notifications.storyboard in Resources */,
 				5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */,
+				5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
@@ -3277,7 +3293,6 @@
 				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
 				5ECA620B21C8217500CA9C8C /* NotificationsSettingsViewModel.swift in Sources */,
 				5E0546C821C3BF3F000DA7E8 /* NotificationSettingList.swift in Sources */,
-				5EC78724216BD458000C91E4 /* NotificationListTableViewCell.swift in Sources */,
 				5EFE7C432181E78700D385C8 /* FundHeaderViewController.swift in Sources */,
 				5E0546F921C3BF3F000DA7E8 /* FundInvestInfo.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
@@ -3329,6 +3344,7 @@
 				5EE0076C21787A360045B890 /* ManagerTabmanRouter.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
+				5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
 				5E616B4F20F7B73400B3459D /* CreateProgramThirdViewModel.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
 				5E0546AF21C3BF3F000DA7E8 /* FundAssetPartWithIcon.swift in Sources */,
@@ -3406,6 +3422,7 @@
 				FC92CB222030192300CDBF19 /* ProgramTableViewCellViewModel.swift in Sources */,
 				5E05470621C3BF3F000DA7E8 /* ProfileFullViewModel.swift in Sources */,
 				5E0546D021C3BF3F000DA7E8 /* AmountWithCurrency.swift in Sources */,
+				5E93E70D21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift in Sources */,
 				FCC9DD60200E20DB008825EC /* ProgramTableViewCell.swift in Sources */,
 				FC91379220311CA6002321C7 /* Utils.swift in Sources */,
 				5EA274C221628274008CAF77 /* DetailProfitChartTableViewCell.swift in Sources */,
@@ -3448,10 +3465,8 @@
 				5E0546FF21C3BF3F000DA7E8 /* AndroidAppVersion.swift in Sources */,
 				FCA5705B20273561001942F3 /* WalletTransactionTableViewCell.swift in Sources */,
 				5E78F8A7206426B5000C13D7 /* UIBarButtonItem+Badge.swift in Sources */,
-				5EE9490C21C7F92300D0950B /* NotificationsSettingsAssetTableViewCell.swift in Sources */,
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
 				5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */,
-				5E0DB5E621C901A20027A778 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
 				5E0546E621C3BF3F000DA7E8 /* RateItem.swift in Sources */,
 				5E1CF83D218C02FC00541C70 /* TweeAttributedTextField.swift in Sources */,
 				5EB996A720F36DE600E31D23 /* ListRouterProtocol.swift in Sources */,
@@ -3480,6 +3495,7 @@
 				5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */,
 				5EFE7C442181E78700D385C8 /* FundProfitViewController.swift in Sources */,
 				FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */,
+				5E93E70621D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift in Sources */,
 				5EC7881A216D4787000C91E4 /* PortfolioSelectedChartAssetsDelegateManager.swift in Sources */,
 				5E6C0CF32109AA5500B7F844 /* ManagerTabmanViewModel.swift in Sources */,
 				5EF14D9E2181FC5500B3843A /* FundInvestRouter.swift in Sources */,
@@ -3492,6 +3508,7 @@
 				5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
+				5E93E71021D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift in Sources */,
 				5E616B5A20F7C37900B3459D /* CreateProgramThirdViewController.swift in Sources */,
 				5EB8E9D620723D6500F46A8A /* ForgetPasswordViewController.swift in Sources */,
 				5E0546C921C3BF3F000DA7E8 /* WithdrawalInfo.swift in Sources */,
@@ -3508,6 +3525,7 @@
 				5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */,
 				5ED1141E21595E3300EC5385 /* PortfolioViewModel.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
+				5E93E70221D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.swift in Sources */,
 				5EF14D8B2181F80200B3843A /* FundTabmanViewModel.swift in Sources */,
 				5E1CF839218C02FC00541C70 /* TweePlaceholderTextField.swift in Sources */,
 				5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */,
@@ -3553,7 +3571,6 @@
 				5E0546B121C3BF3F000DA7E8 /* ManagerPortfolioEvent.swift in Sources */,
 				5E0546DD21C3BF3F000DA7E8 /* FundAssetInfo.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* ProgramTradesTableViewCellViewModel.swift in Sources */,
-				5EC78727216BD464000C91E4 /* NotificationListTableViewCellViewModel.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */,
 				5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */,
@@ -3584,6 +3601,7 @@
 				5EA274D12162B567008CAF77 /* ProgramProfitChartTableViewCellViewModel.swift in Sources */,
 				5E616B4E20F7B73400B3459D /* CreateProgramSecondViewModel.swift in Sources */,
 				5E0546CF21C3BF3F000DA7E8 /* Broker.swift in Sources */,
+				5E93E70421D1A5370020DE55 /* NotificationListTableViewCellViewModel.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
 				5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */,
@@ -3600,7 +3618,6 @@
 				5E0546BF21C3BF3F000DA7E8 /* ManagerDashboard.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramInfoViewModel.swift in Sources */,
 				FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */,
-				5EE9490E21C7FE7F00D0950B /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */,
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
 				5E05461A21C3BF29000DA7E8 /* WalletAPI.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
@@ -3617,6 +3634,7 @@
 				5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
+				5E93E6FE21D1A5370020DE55 /* NotificationListTableViewCell.swift in Sources */,
 				5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */,
 				5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */,
 				5EF14D9B2181FBCD00B3843A /* FundInvestViewModel.swift in Sources */,
@@ -3661,6 +3679,7 @@
 				5EAC11B020B81AD40057A2D2 /* ChangePasswordViewController.swift in Sources */,
 				FCA19A43201AE85C00157AD6 /* DashboardRouter.swift in Sources */,
 				5E5EB5372167B1FA00CDA376 /* CircularProgressView.swift in Sources */,
+				5E93E70A21D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift in Sources */,
 				5E5BBE6E21822AA6009E4BA3 /* FundProfitStatisticTableViewCellViewModel.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
 				5EF14D922181F85C00B3843A /* FundTabmanRouter.swift in Sources */,
@@ -3689,6 +3708,7 @@
 				5E0546D121C3BF3F000DA7E8 /* NotificationViewModel.swift in Sources */,
 				5E0546FC21C3BF3F000DA7E8 /* ProgramUpdate.swift in Sources */,
 				FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */,
+				5E93E70821D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift in Sources */,
 				5E05471121C3BF3F000DA7E8 /* FundAssetsListInfo.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
 				5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */,
@@ -3699,7 +3719,6 @@
 				5EC78814216CDE65000C91E4 /* UICollectionView+CellViewModel.swift in Sources */,
 				5E33E3B420AB20B900A0B9DE /* ProgramTabmanRouter.swift in Sources */,
 				5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */,
-				5E0DB5E921C903D70027A778 /* NotificationsSettingsGlobalTableViewCellViewModel.swift in Sources */,
 				5E8340DE207E38A4004A29F1 /* ProgramTradesViewController.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
 				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
@@ -3719,6 +3738,7 @@
 				5E0546B321C3BF3F000DA7E8 /* ManagerProgramWithdrawInfo.swift in Sources */,
 				5E05470F21C3BF3F000DA7E8 /* NewFundRequest.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
+				5E93E70121D1A5370020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */,
 				5EF14D8C2181F80200B3843A /* FundBalanceViewModel.swift in Sources */,
 				5E05471021C3BF3F000DA7E8 /* ManagersList.swift in Sources */,
 				5E734255214AC7E200C4483E /* InRequestsTableViewCell.swift in Sources */,

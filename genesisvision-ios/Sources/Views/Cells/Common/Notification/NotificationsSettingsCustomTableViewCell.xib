@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Reg.ttf">
+            <string>NeuzeitGro-Reg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationsSettingsCustomTableViewCell" rowHeight="60" id="Xlp-A0-6lK" customClass="NotificationsSettingsCustomTableViewCell" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xlp-A0-6lK" id="0rD-LM-pUf">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ReL-ik-qpr">
+                        <rect key="frame" x="20" y="0.0" width="170" height="60.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News and updates" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-vm-9fA" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20.5" width="143" height="20"/>
+                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBT-H6-7xU" customClass="SubtitleLabel" customModule="Genesis_Vision">
+                                <rect key="frame" x="151" y="20.5" width="19" height="20"/>
+                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="jTn-Oa-Odo"/>
+                        </constraints>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3s-6E-Ahq">
+                        <rect key="frame" x="315" y="10.5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="te3-nu-zEY"/>
+                        </constraints>
+                        <color key="tintColor" red="0.074509803920000006" green="0.1176470588" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                        <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" image="img_checkbox_unselected_icon"/>
+                        <state key="selected" image="img_checkbox_selected_icon"/>
+                        <connections>
+                            <action selector="switchButtonAction:" destination="Xlp-A0-6lK" eventType="touchUpInside" id="Gr0-di-9uf"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ReL-ik-qpr" firstAttribute="top" secondItem="0rD-LM-pUf" secondAttribute="top" id="08Q-u3-tn5"/>
+                    <constraint firstItem="ReL-ik-qpr" firstAttribute="centerY" secondItem="0rD-LM-pUf" secondAttribute="centerY" id="KVj-5u-qSn"/>
+                    <constraint firstItem="e3s-6E-Ahq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ReL-ik-qpr" secondAttribute="trailing" constant="20" id="MYW-Ub-90v"/>
+                    <constraint firstItem="e3s-6E-Ahq" firstAttribute="width" secondItem="e3s-6E-Ahq" secondAttribute="height" multiplier="1:1" id="RVC-dd-Z5R"/>
+                    <constraint firstAttribute="trailing" secondItem="e3s-6E-Ahq" secondAttribute="trailing" constant="20" id="gVm-L0-bei"/>
+                    <constraint firstItem="e3s-6E-Ahq" firstAttribute="centerY" secondItem="0rD-LM-pUf" secondAttribute="centerY" id="iJE-Cd-iTb"/>
+                    <constraint firstAttribute="bottom" secondItem="ReL-ik-qpr" secondAttribute="bottom" id="p1H-MS-F2J"/>
+                    <constraint firstItem="ReL-ik-qpr" firstAttribute="leading" secondItem="0rD-LM-pUf" secondAttribute="leading" constant="20" id="rHb-Ng-lT4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="enableSettingSwitchButton" destination="e3s-6E-Ahq" id="es0-uZ-8rb"/>
+                <outlet property="subtitleLabel" destination="ZBT-H6-7xU" id="hcS-Hj-8tA"/>
+                <outlet property="titleLabel" destination="GA2-vm-9fA" id="0de-sr-22U"/>
+            </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="122.33883058470765"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="img_checkbox_selected_icon" width="24" height="24"/>
+        <image name="img_checkbox_unselected_icon" width="24" height="24"/>
+    </resources>
+</document>
