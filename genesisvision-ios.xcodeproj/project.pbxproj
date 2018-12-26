@@ -312,6 +312,8 @@
 		5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E93E70C21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib */; };
 		5E93E71021D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93E70F21D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift */; };
 		5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E942E8820D7BA5A0069343C /* Settings.storyboard */; };
+		5E96D77821D30B1500BFB842 /* CreateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E96D77721D30B1500BFB842 /* CreateNotificationViewController.swift */; };
+		5E96D77A21D30DE300BFB842 /* CreateNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E96D77921D30DE300BFB842 /* CreateNotificationViewModel.swift */; };
 		5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */; };
 		5E9FCF9E2199E3BC001FB114 /* NHRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */; };
 		5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */; };
@@ -931,6 +933,8 @@
 		5E93E70C21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSettingsCustomTableViewCell.xib; sourceTree = "<group>"; };
 		5E93E70F21D1AC210020DE55 /* NotificationsSettingsCustomTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsCustomTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E942E8820D7BA5A0069343C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		5E96D77721D30B1500BFB842 /* CreateNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewController.swift; sourceTree = "<group>"; };
+		5E96D77921D30DE300BFB842 /* CreateNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewModel.swift; sourceTree = "<group>"; };
 		5E9FCF992199E3BC001FB114 /* NHRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSlider.swift; sourceTree = "<group>"; };
 		5E9FCF9A2199E3BC001FB114 /* NHRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSliderView.swift; sourceTree = "<group>"; };
 		5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
@@ -2064,6 +2068,8 @@
 			isa = PBXGroup;
 			children = (
 				5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */,
+				5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */,
+				5E96D77721D30B1500BFB842 /* CreateNotificationViewController.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -2667,6 +2673,7 @@
 			isa = PBXGroup;
 			children = (
 				5ECA620A21C8217400CA9C8C /* NotificationsSettingsViewModel.swift */,
+				5E96D77921D30DE300BFB842 /* CreateNotificationViewModel.swift */,
 				5ECA620821C8216C00CA9C8C /* FilterModel.swift */,
 				5EAD350F214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift */,
 				5E14CDA321B57F7300388616 /* PageboyDataSources */,
@@ -2867,7 +2874,6 @@
 				5E6C0CF12109A8E000B7F844 /* Manager */,
 				FC4964162015446700104CEB /* Wallet */,
 				5EC7B87D20D147D5007720D1 /* Settings */,
-				5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -3613,6 +3619,7 @@
 				FC5E904620216769000E4A90 /* ProgramFilterRouter.swift in Sources */,
 				5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */,
 				5E0546AA21C3BF3F000DA7E8 /* FundNotificationSettingList.swift in Sources */,
+				5E96D77A21D30DE300BFB842 /* CreateNotificationViewModel.swift in Sources */,
 				5EC78816216CDEE2000C91E4 /* UICollectionView+Registration.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* AuthSignUpViewModel.swift in Sources */,
 				5E0546BF21C3BF3F000DA7E8 /* ManagerDashboard.swift in Sources */,
@@ -3634,6 +3641,7 @@
 				5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
+				5E96D77821D30B1500BFB842 /* CreateNotificationViewController.swift in Sources */,
 				5E93E6FE21D1A5370020DE55 /* NotificationListTableViewCell.swift in Sources */,
 				5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */,
 				5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */,

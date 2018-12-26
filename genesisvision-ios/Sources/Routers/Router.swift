@@ -232,6 +232,12 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showCreateNotification() {
+        guard let viewController = getCreateNotificationViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showAssetNotificationsSettings(_ assetId: String?, title: String, type: NotificationSettingsType) {
         guard let viewController = getAssetNotificationsSettingsViewController(assetId, title: title, type: type) else { return }
         
@@ -414,6 +420,15 @@ extension Router {
         guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
         
         viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController, type: .all)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
+    func getCreateNotificationViewController() -> CreateNotificationViewController? {
+        guard let viewController = CreateNotificationViewController.storyboardInstance(.notifications) else { return nil }
+        
+        viewController.viewModel = CreateNotificationViewModel(withRouter: self)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController

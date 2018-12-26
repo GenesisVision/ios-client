@@ -76,7 +76,7 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     
     // MARK: - IBAction
     @IBAction func createButtonAction(_ sender: UIButton) {
-        //TODO: create
+        viewModel.createNotification()
     }
 }
 

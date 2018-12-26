@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/NotificationsSettingsViewModel.swift"
+            timestampString = "567487226.491563"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
+            landmarkName = "didRemove(settingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Genesis_Vision.NotificationsSettingsViewModel.didRemove(settingId: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/NotificationsSettingsViewModel.swift"
+                  timestampString = "567487226.850713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.NotificationsSettingsViewModel.didRemove(settingId: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/NotificationsSettingsViewModel.swift"
+                  timestampString = "567487226.8529119"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "459"
+                  endingLineNumber = "459"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

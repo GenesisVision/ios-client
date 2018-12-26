@@ -90,6 +90,19 @@ final class NotificationsSettingsViewModel {
         }
     }
     
+    func removeModel(at indexPath: IndexPath) {
+        let type = sections[indexPath.section]
+        switch type {
+        case .custom:
+            settingsCustomViewModels.remove(at: indexPath.row)
+            if settingsCustomViewModels.count == 0 {
+                sections.remove(at: indexPath.section)
+            }
+        default:
+            break
+        }
+    }
+    
     func numberOfSections() -> Int {
         return sections.count
     }
@@ -119,7 +132,16 @@ final class NotificationsSettingsViewModel {
     
     func removeCustomSetting(at indexPath: IndexPath) {
         if let settingsCustomViewModel = model(at: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting.id?.uuidString {
-            didRemove(settingId: settingId)
+
+            removeNotification(settingId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.removeModel(at: indexPath)
+                    self?.reloadDataProtocol?.didReloadData()
+                case .failure(let errorType):
+                    print(errorType)
+                }
+            }
         }
     }
     
@@ -167,6 +189,10 @@ final class NotificationsSettingsViewModel {
     
     func goToBack() {
         router.goToBack()
+    }
+    
+    func createNotification() {
+        router.showCreateNotification()
     }
     
     func fetch(completion: @escaping CompletionBlock) {
@@ -344,6 +370,10 @@ final class NotificationsSettingsViewModel {
         settingsGeneralViewModels.append(secondSettingsViewModel)
     }
     
+    private func removeNotification(_ settingId: String?, completion: @escaping CompletionBlock) {
+        NotificationsDataProvider.removeSetting(settingId: settingId, completion: completion)
+    }
+    
     private func setup(generalsFund settingsGeneral: [NotificationSettingViewModel]?) {
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return }
         
@@ -424,13 +454,8 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
     }
     
     func didRemove(settingId: String?) {
-        NotificationsDataProvider.removeSetting(settingId: settingId) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-            }
+        removeNotification(settingId) { (result) in
+            
         }
     }
     
