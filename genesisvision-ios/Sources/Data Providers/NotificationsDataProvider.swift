@@ -75,7 +75,8 @@ class NotificationsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    completion(uuid?.uuidString)
+                    let uuid = uuid?.removeCharacters(from: "\\").removeCharacters(from: "\"")
+                    completion(uuid)
                 case .failure:
                     errorCompletion(result)
                 }

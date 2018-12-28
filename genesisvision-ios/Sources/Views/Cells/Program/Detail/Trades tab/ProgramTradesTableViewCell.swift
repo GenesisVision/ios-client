@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramTradesTableViewCell: PlateTableViewCell {
+class ProgramTradesTableViewCell: UITableViewCell {
 
     // MARK: - Labels
     @IBOutlet weak var entryImageView: UIImageView! {

@@ -95,6 +95,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="IKM-Vs-SFA"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,6 +117,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="FMr-MT-uFD"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,6 +139,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="OTG-ee-Ue4"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -152,6 +161,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="aZy-c7-uBT"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -206,6 +218,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="aiP-EW-Snv"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -225,6 +240,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="aLd-6I-bSE"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -244,6 +262,9 @@
                                                                             <color key="titleColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeSelectedLevelButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="DW3-ji-yFr"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -354,10 +375,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JP-kX-PeZ" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzW-xy-m1I" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="684" width="414" height="212"/>
+                                        <rect key="frame" x="0.0" y="650" width="414" height="212"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4dw-PV-NOK">
                                                 <rect key="frame" x="6" y="0.0" width="402" height="206"/>
@@ -554,7 +575,7 @@
                             <constraint firstItem="9zE-nr-Tef" firstAttribute="trailing" secondItem="3JP-kX-PeZ" secondAttribute="trailing" id="8nx-fU-T1J"/>
                             <constraint firstItem="oMi-GJ-rpL" firstAttribute="leading" secondItem="9zE-nr-Tef" secondAttribute="leading" constant="20" id="ECv-x1-wG0"/>
                             <constraint firstItem="9zE-nr-Tef" firstAttribute="trailing" secondItem="oMi-GJ-rpL" secondAttribute="trailing" constant="20" id="Eal-2a-fu6"/>
-                            <constraint firstAttribute="bottom" secondItem="3JP-kX-PeZ" secondAttribute="bottom" id="Kxg-0Q-F37"/>
+                            <constraint firstItem="9zE-nr-Tef" firstAttribute="bottom" secondItem="3JP-kX-PeZ" secondAttribute="bottom" id="Kxg-0Q-F37"/>
                             <constraint firstItem="oMi-GJ-rpL" firstAttribute="top" secondItem="9zE-nr-Tef" secondAttribute="top" constant="20" id="MpT-Rx-aiR"/>
                             <constraint firstItem="2Vu-r9-hwm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oMi-GJ-rpL" secondAttribute="bottom" constant="20" id="Yvr-VS-M2O"/>
                             <constraint firstItem="3JP-kX-PeZ" firstAttribute="leading" secondItem="rhw-jS-c9C" secondAttribute="leading" id="pkg-6L-fxL"/>
@@ -575,6 +596,13 @@
                         <outlet property="typeStackView" destination="VYy-CQ-B5y" id="lwE-oY-5zF"/>
                         <outlet property="typeTextField" destination="L6d-wS-SOu" id="fel-Fp-9I4"/>
                         <outlet property="typeTitleLabel" destination="iS4-rb-Xms" id="mxT-nx-9yB"/>
+                        <outletCollection property="levelButtons" destination="Hx4-4S-MK7" collectionClass="NSMutableArray" id="oTc-ok-eLp"/>
+                        <outletCollection property="levelButtons" destination="eH4-fQ-hok" collectionClass="NSMutableArray" id="gqv-BQ-k6D"/>
+                        <outletCollection property="levelButtons" destination="q7M-0j-0en" collectionClass="NSMutableArray" id="fKk-1h-8DM"/>
+                        <outletCollection property="levelButtons" destination="Jjw-8u-yGd" collectionClass="NSMutableArray" id="vHM-os-FCB"/>
+                        <outletCollection property="levelButtons" destination="j0u-jM-vb9" collectionClass="NSMutableArray" id="BVu-QS-K74"/>
+                        <outletCollection property="levelButtons" destination="ySg-2Z-ad0" collectionClass="NSMutableArray" id="f6Y-bT-nth"/>
+                        <outletCollection property="levelButtons" destination="VMy-BB-mrD" collectionClass="NSMutableArray" id="dmg-LK-TZ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JAi-GH-lAs" userLabel="First Responder" sceneMemberID="firstResponder"/>

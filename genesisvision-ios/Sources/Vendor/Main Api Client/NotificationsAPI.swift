@@ -216,7 +216,7 @@ open class NotificationsAPI {
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10NotificationsSettingsByIdByEnablePost(id: UUID, enable: Bool, authorization: String, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
+    open class func v10NotificationsSettingsByIdByEnablePost(id: UUID, enable: Bool, authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
         v10NotificationsSettingsByIdByEnablePostWithRequestBuilder(id: id, enable: enable, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -234,7 +234,7 @@ open class NotificationsAPI {
 
      - returns: RequestBuilder<UUID> 
      */
-    open class func v10NotificationsSettingsByIdByEnablePostWithRequestBuilder(id: UUID, enable: Bool, authorization: String) -> RequestBuilder<UUID> {
+    open class func v10NotificationsSettingsByIdByEnablePostWithRequestBuilder(id: UUID, enable: Bool, authorization: String) -> RequestBuilder<String> {
         var path = "/v1.0/notifications/settings/{id}/{enable}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{enable}", with: "\(enable)", options: .literal, range: nil)
@@ -248,7 +248,7 @@ open class NotificationsAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<UUID>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

@@ -12,14 +12,6 @@ class CreateNotificationViewController: BaseViewController {
     
     var viewModel: CreateNotificationViewModel!
     
-    // MARK: - Variables
-    
-    var profitAmountValue: Double = 0.0 {
-        didSet {
-            updateUI()
-        }
-    }
-    
     // MARK: - Labels
     @IBOutlet weak var typeTitleLabel: SubtitleLabel! {
         didSet {
@@ -47,6 +39,8 @@ class CreateNotificationViewController: BaseViewController {
     
     
     // MARK: - Views
+    @IBOutlet var levelButtons: [LevelFilterButton]!
+    
     @IBOutlet weak var numpadHeightConstraint: NSLayoutConstraint! {
         didSet {
             numpadHeightConstraint.constant = 0.0
@@ -74,7 +68,7 @@ class CreateNotificationViewController: BaseViewController {
     
     @IBOutlet weak var typeStackView: UIStackView! {
         didSet {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTypeButtonAction(_:)))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTypeButtonAction))
             tapGesture.numberOfTapsRequired = 1
             typeStackView.isUserInteractionEnabled = true
             typeStackView.addGestureRecognizer(tapGesture)
@@ -83,9 +77,9 @@ class CreateNotificationViewController: BaseViewController {
     
     @IBOutlet weak var profitStackView: UIStackView! {
         didSet {
-            profitStackView.isHidden = false
+            profitStackView.isHidden = true
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNumPadButtonAction(_:)))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNumPadButtonAction))
             tapGesture.numberOfTapsRequired = 1
             profitStackView.isUserInteractionEnabled = true
             profitStackView.addGestureRecognizer(tapGesture)
@@ -94,10 +88,9 @@ class CreateNotificationViewController: BaseViewController {
     
     @IBOutlet weak var levelStackView: UIStackView! {
         didSet {
-            levelStackView.isHidden = false
+            levelStackView.isHidden = true
         }
     }
-    
     
     // MARK: - TextFields
     @IBOutlet weak var typeTextField: DesignableUITextField! {
@@ -109,8 +102,6 @@ class CreateNotificationViewController: BaseViewController {
     
     // MARK: - Buttons
     @IBOutlet weak var createButton: ActionButton!
-    
-    // MARK: - Variables
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -127,18 +118,35 @@ class CreateNotificationViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        createButton.setEnabled(false)
+        setupButtons()
+        updateUI()
+    }
+    
+    private func setupButtons() {
+        var idx = 1
+        levelButtons.forEach { (btn) in
+            btn.setTitle("\(idx)", for: .normal)
+            btn.tag = idx
+            idx += 1
+        }
         
+        updateLevelButtons()
+    }
+    
+    private func updateLevelButtons() {
+        levelButtons.forEach { (btn) in
+            btn.isSelected = btn.tag == viewModel.selectedLevel ? true : false
+        }
     }
     
     private func updateUI() {
+        typeTextField.text = viewModel.selectedType.rawValue
         
-//        let createButtonEnabled = amountToInvestValue >= minInvestmentAmount ?? 0 && amountToInvestValue <= availableToInvestValue
-//        
-//        createButton.setEnabled(createButtonEnabled)
+        levelStackView.isHidden = viewModel.selectedType == .profit
+        profitStackView.isHidden = viewModel.selectedType == .level
     }
     
-    @IBAction func showNumPadButtonAction(_ sender: UIButton) {
+    @objc private func showNumPadButtonAction() {
         self.view.endEditing(true)
         
         numpadHeightConstraint.constant = 212.0
@@ -161,23 +169,62 @@ class CreateNotificationViewController: BaseViewController {
     }
     
     private func createMethod() {
-        //TODO: Create
+        showProgressHUD()
+        
+        viewModel.createNotification { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+    
+    private func showTypes() {
+        self.view.endEditing(true)
+        
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        
+        var selectedIndexRow = viewModel.selectedTypeIndex
+        let values = viewModel.typeValues
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            selectedIndexRow = index.row
+            self?.viewModel.updateSelectedTypeIndex(selectedIndexRow)
+            
+            self?.updateUI()
+        }
+        
+        alert.addAction(title: "Ok", style: .cancel)
+        
+        alert.show()
+    }
+    
+    @objc private func showTypeButtonAction() {
+        showTypes()
     }
     
     // MARK: - Actions
-    @IBAction func showTypeButtonAction(_ sender: UIButton) {
-        
-    }
-    
     @IBAction func createButtonAction(_ sender: UIButton) {
         createMethod()
     }
     
+    @IBAction func changeSelectedLevelButtonAction(_ sender: UIButton) {
+        viewModel.selectedLevel = sender.tag
+        updateLevelButtons()
+    }
 }
 
 extension CreateNotificationViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return 100
+        return 1000
     }
     
     var textPlaceholder: String? {
@@ -201,14 +248,14 @@ extension CreateNotificationViewController: NumpadViewProtocol {
     }
     
     var enteredAmountValue: Double {
-        return profitAmountValue
+        return viewModel.enteredProfitValue
     }
     
     func textLabelDidChange(value: Double?) {
         guard let value = value else { return }
         
         numpadView.isEnable = true
-        profitAmountValue = value
+        viewModel.enteredProfitValue = value
     }
 }
 

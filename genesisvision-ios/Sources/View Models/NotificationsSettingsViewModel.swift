@@ -192,7 +192,9 @@ final class NotificationsSettingsViewModel {
     }
     
     func createNotification() {
-        router.showCreateNotification()
+        if let assetId = assetId {
+            router.showCreateNotification(assetId, reloadDataProtocol: self)
+        }
     }
     
     func fetch(completion: @escaping CompletionBlock) {
@@ -414,10 +416,13 @@ final class NotificationsSettingsViewModel {
 
 extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
     func didAdd(type: NotificationSettingViewModel.ModelType?) {
-
+        router.currentController?.showProgressHUD()
+        
         let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
         
         NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
+            self?.router.currentController?.hideHUD()
+            
             if let uuidString = uuidString, let type = type {
                 switch type {
                 case .platformNewsAndUpdates:
@@ -428,53 +433,86 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
                     break
                 }
             }
-        }) { (result) in
+        }) { [weak self] (result) in
+            self?.router.currentController?.hideHUD()
+            
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }
     
     func didChange(enable: Bool, settingId: String?) {
-        NotificationsDataProvider.enableSetting(settingId: settingId, enable: enable, completion: { (result) in
+        router.currentController?.showProgressHUD()
+        
+        NotificationsDataProvider.enableSetting(settingId: settingId, enable: enable, completion: { [weak self] (result) in
+            self?.router.currentController?.hideHUD()
+            
             if let result = result {
                 print(result)
             }
-        }) { (result) in
+        }) { [weak self] (result) in
+            self?.router.currentController?.hideHUD()
+            
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }
     
     func didRemove(settingId: String?) {
-        removeNotification(settingId) { (result) in
-            
+        router.currentController?.showProgressHUD()
+        
+        removeNotification(settingId) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.router.currentController?.hideHUD()
+            case .failure(let errorType):
+                print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
+            }
         }
     }
     
     func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?) {
+    
+        router.currentController?.showProgressHUD()
         
         let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
         let conditionType = NotificationsAPI.ConditionType_v10NotificationsSettingsAddPost(rawValue: conditionType?.rawValue ?? "")
         
-        NotificationsDataProvider.addSetting(assetId: assetId, type: type, conditionType: conditionType, conditionAmount: conditionAmount, completion: { (result) in
+        NotificationsDataProvider.addSetting(assetId: assetId, type: type, conditionType: conditionType, conditionAmount: conditionAmount, completion: { [weak self] (result) in
+            self?.router.currentController?.hideHUD()
+            
             if let result = result {
                 print(result)
             }
-        }) { (result) in
+        }) { [weak self] (result) in
+            self?.router.currentController?.hideHUD()
+            
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
+        }
+    }
+}
+
+extension NotificationsSettingsViewModel: ReloadDataProtocol {
+    func didReloadData() {
+        fetch { (result) in
+            print(result)
         }
     }
 }

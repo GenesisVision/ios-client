@@ -232,8 +232,8 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showCreateNotification() {
-        guard let viewController = getCreateNotificationViewController() else { return }
+    func showCreateNotification(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) {
+        guard let viewController = getCreateNotificationViewController(assetId, reloadDataProtocol: reloadDataProtocol) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -419,16 +419,20 @@ extension Router {
     func getNotificationsSettingsViewController() -> NotificationsSettingsViewController? {
         guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
         
-        viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController, type: .all)
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: .all)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController
     }
     
-    func getCreateNotificationViewController() -> CreateNotificationViewController? {
+    func getCreateNotificationViewController(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) -> CreateNotificationViewController? {
         guard let viewController = CreateNotificationViewController.storyboardInstance(.notifications) else { return nil }
         
-        viewController.viewModel = CreateNotificationViewModel(withRouter: self)
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = CreateNotificationViewModel(withRouter: router, reloadDataProtocol: reloadDataProtocol, assetId: assetId)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController
@@ -437,7 +441,9 @@ extension Router {
     func getAssetNotificationsSettingsViewController(_ assetId: String?, title: String, type: NotificationSettingsType) -> NotificationsSettingsViewController? {
         guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
         
-        viewController.viewModel = NotificationsSettingsViewModel(withRouter: self, reloadDataProtocol: viewController, type: type, assetId: assetId, title: title)
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: type, assetId: assetId, title: title)
         viewController.hidesBottomBarWhenPushed = true
         
         return viewController
