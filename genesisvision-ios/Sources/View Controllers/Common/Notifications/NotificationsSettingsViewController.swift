@@ -43,7 +43,7 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     
     private func setupUI() {
         navigationItem.title = viewModel.title
-        createButton.isHidden = viewModel.type == .all
+        createButton.isHidden = viewModel.type != .program
     }
     
     private func setupTableConfiguration() {

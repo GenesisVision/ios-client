@@ -33,8 +33,8 @@ final class FundViewModel {
         NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
     }
     
-    func showNotifications() {
-        router.show(routeType: .notifications)
+    func showNotificationSettings() {
+        router.show(routeType: .notificationSettings(assetId: fundId, title: fundDetailsFull?.title ?? "Fund Settings"))
     }
     
     func fetch(completion: @escaping CompletionBlock) {

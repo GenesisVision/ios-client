@@ -20,7 +20,24 @@ extension NotificationsSettingsGeneralTableViewCellViewModel: CellViewModel {
         cell.setting = setting
         
         if let type = setting.type {
-            cell.titleLabel.text = type.rawValue
+            switch type {
+            case .fundNewsAndUpdates:
+                cell.titleLabel.text = "Fund news and updates"
+            case .fundRebalancing:
+                cell.titleLabel.text = "Fund rebalancing"
+                
+            case .programEndOfPeriod:
+                cell.titleLabel.text = "End of the period"
+            case .programNewsAndUpdates:
+                cell.titleLabel.text = "Program news and updates"
+                
+            case .platformNewsAndUpdates:
+                cell.titleLabel.text = "News and updates"
+            case .platformEmergency:
+                cell.titleLabel.text = "Emergency notifications"
+            default:
+                break
+            }
         }
         
         if let isEnabled = setting.isEnabled {
