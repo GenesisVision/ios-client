@@ -12,6 +12,17 @@ class FundWithdrawViewController: BaseViewController {
 
     var viewModel: FundWithdrawViewModel!
     
+    @IBOutlet weak var mainStackView: UIStackView! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_4_4S, .iPhones_5_5s_5c_SE:
+                mainStackView.spacing = 8.0
+            default:
+                mainStackView.spacing = 32.0
+            }
+        }
+    }
+    
     // MARK: - Labels
     @IBOutlet weak var availableToWithdrawValueTitleLabel: TitleLabel! {
         didSet {
@@ -80,7 +91,7 @@ class FundWithdrawViewController: BaseViewController {
             disclaimerLabel.text = "The withdrawal amount can be changed depending on the exchange rate or the success of the Manager."
             
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
-            disclaimerLabel.textAlignment = .center
+            disclaimerLabel.textAlignment = .justified
         }
     }
     

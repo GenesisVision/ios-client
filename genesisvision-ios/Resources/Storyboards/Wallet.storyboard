@@ -558,6 +558,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="clearButton" destination="foL-gR-ewb" id="VbU-4Y-0I6"/>
+                                            <outlet property="numpadButtonHeightConstraint" destination="7Vo-as-mlq" id="c2p-yf-fd9"/>
                                             <outlet property="separatorButton" destination="Gk2-i4-FcP" id="fv9-Mm-oZq"/>
                                             <outletCollection property="numberButtons" destination="rJ8-r3-Q3F" collectionClass="NSMutableArray" id="VJ3-6G-zTM"/>
                                             <outletCollection property="numberButtons" destination="SkY-4V-yMo" collectionClass="NSMutableArray" id="2iL-1C-YZA"/>
@@ -1012,6 +1013,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="clearButton" destination="G43-PF-yZj" id="Zi2-Tg-m1b"/>
+                                            <outlet property="numpadButtonHeightConstraint" destination="FgH-AH-HXT" id="GK7-u1-0hx"/>
                                             <outlet property="separatorButton" destination="Rar-JP-xyk" id="3lK-EA-3wc"/>
                                             <outletCollection property="numberButtons" destination="5rk-V3-bgn" collectionClass="NSMutableArray" id="bLS-a3-H89"/>
                                             <outletCollection property="numberButtons" destination="9e3-JT-k41" collectionClass="NSMutableArray" id="zBu-Sb-sIQ"/>

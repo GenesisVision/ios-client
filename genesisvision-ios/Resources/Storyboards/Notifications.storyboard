@@ -545,6 +545,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="clearButton" destination="haF-5W-MZO" id="ZHB-2M-dUP"/>
+                                            <outlet property="numpadButtonHeightConstraint" destination="AV1-5l-w66" id="5h8-uz-U20"/>
                                             <outlet property="separatorButton" destination="ohd-KU-bZY" id="MrB-3u-xzy"/>
                                             <outletCollection property="numberButtons" destination="EIR-A2-DbR" collectionClass="NSMutableArray" id="Wdb-8i-ly0"/>
                                             <outletCollection property="numberButtons" destination="M6R-Hm-UZi" collectionClass="NSMutableArray" id="vaK-Mq-wxo"/>

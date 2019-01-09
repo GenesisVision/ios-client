@@ -120,6 +120,17 @@ class NumpadView: UIView {
     
     var type: NumpadViewType = .number
     
+    @IBOutlet weak var numpadButtonHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_4_4S, .iPhones_5_5s_5c_SE:
+                numpadButtonHeightConstraint.constant = 40.0
+            default:
+                numpadButtonHeightConstraint.constant = 47.0
+            }
+        }
+    }
+    
     @IBOutlet var numberButtons: [NumpadButton]!
     @IBOutlet weak var separatorButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!

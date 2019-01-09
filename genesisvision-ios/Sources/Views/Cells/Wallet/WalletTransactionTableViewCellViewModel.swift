@@ -71,6 +71,12 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.amountLabel.isHidden = true
         }
         
+        if let information = walletTransaction.information {
+            cell.titleLabel.text = information
+        } else {
+            cell.titleLabel.isHidden = true
+        }
+        
         if let status = walletTransaction.destinationWithdrawalInfo?.status {
             var statusText = ""
             switch status {
@@ -85,12 +91,6 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.statusLabel.isHidden = true
         }
         
-        if let information = walletTransaction.information {
-            cell.titleLabel.text = information
-        } else {
-            cell.titleLabel.isHidden = true
-        }
-    
         if let date = walletTransaction.date {
             cell.dateLabel.text = date.defaultFormatString
         } else {

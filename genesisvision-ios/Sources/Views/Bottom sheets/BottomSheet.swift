@@ -49,7 +49,14 @@ open class BottomSheet {
         open var cornerRadius: CGFloat = 15.0
         open var initializeHeight: CGFloat = 300 {
             didSet {
-                containerViewHeightConstraint?.constant = initializeHeight
+                switch UIDevice.current.screenType {
+                case .iPhones_4_4S:
+                    containerViewHeightConstraint?.constant = initializeHeight + initializeHeight * 0.2
+                case .iPhones_5_5s_5c_SE:
+                    containerViewHeightConstraint?.constant = initializeHeight + initializeHeight * 0.05
+                default:
+                    containerViewHeightConstraint?.constant = initializeHeight
+                }
             }
         }
         open var viewActionType: OverlayViewActionType = .tappedDismiss

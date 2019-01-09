@@ -30,6 +30,11 @@ class ProgramHeaderViewController: BaseViewController {
             titleLeadingConstraint.constant = 16.0
         }
     }
+    @IBOutlet weak var titleTrailingConstraint: NSLayoutConstraint! {
+        didSet {
+            titleTrailingConstraint.constant = 16.0
+        }
+    }
     
     @IBOutlet weak var headerTitleImageView: UIImageView! {
         didSet {
@@ -120,6 +125,7 @@ class ProgramHeaderViewController: BaseViewController {
         
         self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
         self.titleBottomConstraint.constant = 20.0 - offset * 46.0
+        self.titleTrailingConstraint.constant = 16.0 + offset * 76.0
         
         self.titleLabel.font = UIFont.getFont(.semibold, size: 26.0 - 10.0 * offset)
         

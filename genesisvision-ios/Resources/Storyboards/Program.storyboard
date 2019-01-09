@@ -130,7 +130,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="61j-9s-2lI">
-                                <rect key="frame" x="0.0" y="503" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="511" width="414" height="65"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EXQ-zl-HAW">
                                         <rect key="frame" x="30" y="0.0" width="354" height="65"/>
@@ -378,6 +378,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="clearButton" destination="PG8-5y-cUt" id="wPH-8v-7mQ"/>
+                                    <outlet property="numpadButtonHeightConstraint" destination="9pV-e3-oLc" id="UUH-6d-Izo"/>
                                     <outlet property="separatorButton" destination="RtD-LP-snB" id="Ltg-xS-uQq"/>
                                     <outletCollection property="numberButtons" destination="H1a-eZ-Z1v" collectionClass="NSMutableArray" id="KZa-Uu-vVX"/>
                                     <outletCollection property="numberButtons" destination="grX-L7-q9B" collectionClass="NSMutableArray" id="i2C-CJ-TTy"/>
@@ -406,7 +407,7 @@
                             <constraint firstItem="Idd-ap-JQ5" firstAttribute="trailing" secondItem="F8v-KL-HF4" secondAttribute="trailing" id="tTP-6V-yP1"/>
                             <constraint firstItem="k4A-Kz-3qk" firstAttribute="trailing" secondItem="F8v-KL-HF4" secondAttribute="trailing" id="ueI-8U-qHp"/>
                             <constraint firstItem="Uun-QE-fnC" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" constant="20" id="utZ-ZH-5a7"/>
-                            <constraint firstItem="Uun-QE-fnC" firstAttribute="top" secondItem="61j-9s-2lI" secondAttribute="bottom" constant="24" id="vMU-Pp-DPy"/>
+                            <constraint firstItem="Uun-QE-fnC" firstAttribute="top" secondItem="61j-9s-2lI" secondAttribute="bottom" constant="16" id="vMU-Pp-DPy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F8v-KL-HF4"/>
                     </view>
@@ -547,7 +548,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="yuR-VB-V9S">
-                                <rect key="frame" x="0.0" y="551.66666666666663" width="414" height="16.333333333333371"/>
+                                <rect key="frame" x="0.0" y="559.66666666666663" width="414" height="16.333333333333371"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AvR-Ah-34w">
                                         <rect key="frame" x="30" y="0.0" width="354" height="16.333333333333332"/>
@@ -761,6 +762,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="clearButton" destination="2g1-c3-Gw6" id="fTJ-qu-7Ar"/>
+                                    <outlet property="numpadButtonHeightConstraint" destination="o6W-Ov-hz6" id="dno-gC-czK"/>
                                     <outlet property="separatorButton" destination="fuq-4S-aSw" id="gzn-Hn-bid"/>
                                     <outletCollection property="numberButtons" destination="qCl-EV-zaL" collectionClass="NSMutableArray" id="dgE-Uh-5q2"/>
                                     <outletCollection property="numberButtons" destination="jUw-6v-FN3" collectionClass="NSMutableArray" id="l8P-KJ-bUE"/>
@@ -779,7 +781,7 @@
                         <constraints>
                             <constraint firstItem="QT4-go-RKP" firstAttribute="trailing" secondItem="rno-bv-Y9B" secondAttribute="trailing" constant="20" id="1TC-MX-OAX"/>
                             <constraint firstItem="rno-bv-Y9B" firstAttribute="leading" secondItem="QT4-go-RKP" secondAttribute="leading" constant="20" id="3RP-gF-kN0"/>
-                            <constraint firstItem="rno-bv-Y9B" firstAttribute="top" secondItem="yuR-VB-V9S" secondAttribute="bottom" constant="24" id="7Zo-K6-jm3"/>
+                            <constraint firstItem="rno-bv-Y9B" firstAttribute="top" secondItem="yuR-VB-V9S" secondAttribute="bottom" constant="16" id="7Zo-K6-jm3"/>
                             <constraint firstItem="LMV-QU-2FE" firstAttribute="leading" secondItem="QT4-go-RKP" secondAttribute="leading" id="GUQ-WZ-MfH"/>
                             <constraint firstItem="5Wt-f7-ZId" firstAttribute="trailing" secondItem="QT4-go-RKP" secondAttribute="trailing" id="Kyu-a7-lcQ"/>
                             <constraint firstItem="QT4-go-RKP" firstAttribute="bottom" secondItem="LMV-QU-2FE" secondAttribute="bottom" id="P1f-ws-yWr"/>
@@ -1078,7 +1080,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-8x-Znh">
-                                        <rect key="frame" x="16" y="150" width="353" height="86"/>
+                                        <rect key="frame" x="16" y="150" width="382" height="86"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-Bs-zl1">
                                                 <rect key="frame" x="0.0" y="0.0" width="78" height="50"/>
@@ -1133,8 +1135,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Eaw-8x-Znh" secondAttribute="trailing" constant="16" id="C5R-FP-WoT"/>
                                     <constraint firstItem="Ve2-gG-cNO" firstAttribute="leading" secondItem="42F-Jq-OHD" secondAttribute="leading" id="Jal-E0-hFJ"/>
-                                    <constraint firstItem="VBQ-Hy-1RL" firstAttribute="leading" secondItem="Eaw-8x-Znh" secondAttribute="trailing" id="JpN-Dl-lDL"/>
                                     <constraint firstItem="42F-Jq-OHD" firstAttribute="leading" secondItem="RGX-oA-Pvb" secondAttribute="leading" id="NSQ-xx-jQ4"/>
                                     <constraint firstItem="fvX-Ah-bEA" firstAttribute="centerX" secondItem="RGX-oA-Pvb" secondAttribute="centerX" id="O8d-Uu-fdE"/>
                                     <constraint firstAttribute="bottom" secondItem="Eaw-8x-Znh" secondAttribute="bottom" constant="20" id="OUS-VT-bgg"/>
@@ -1180,6 +1182,7 @@
                         <outlet property="titleBottomConstraint" destination="OUS-VT-bgg" id="iwW-5n-A4A"/>
                         <outlet property="titleLabel" destination="3VW-0g-mFo" id="Fuj-me-4lD"/>
                         <outlet property="titleLeadingConstraint" destination="lRI-5L-ddA" id="tGO-Ij-zQM"/>
+                        <outlet property="titleTrailingConstraint" destination="C5R-FP-WoT" id="O2u-bE-xs6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsR-fC-rTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
