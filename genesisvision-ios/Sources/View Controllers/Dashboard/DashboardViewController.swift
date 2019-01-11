@@ -23,6 +23,18 @@ class DashboardViewController: BaseViewController {
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var assetsView: UIView!
     
+    @IBOutlet weak var selectedChartAssetsView: SelectedChartAssetsView!
+    @IBOutlet weak var selectedChartAssetsViewBottomConstraint: NSLayoutConstraint! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
+                selectedChartAssetsViewBottomConstraint.constant = -(49 + 34)
+            default:
+                selectedChartAssetsViewBottomConstraint.constant = -49
+            }
+        }
+    }
+    
     var eventsViewHeightStart: CGFloat = 150.0
     var eventsViewHeightEnd: CGFloat = 220.0
     
@@ -47,6 +59,13 @@ class DashboardViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.bringSubview(toFront: selectedChartAssetsView)
+//        selectedChartAssetsView.bringSubview(toFront: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,7 +102,21 @@ class DashboardViewController: BaseViewController {
     }
     
     // MARK: - Private methods
+    @objc private func displayFCMToken(notification: NSNotification){
+        guard let userInfo = notification.userInfo else {return}
+        if let fcmToken = userInfo["token"] as? String {
+            let fcmTokenMessage = "Received FCM token: \(fcmToken)"
+            showAlertWithTitle(title: nil, message: fcmTokenMessage, actionTitle: "Ok", cancelTitle: "Cancel", handler: {
+                
+            }) {
+                
+            }
+        }
+    }
+    
     private func setup() {
+        selectedChartAssetsView?.alpha = 0.0
+        
         setupPullToRefresh(scrollView: scrollView)
         bottomViewType = .dateRange
         bottomStackViewHiddable = false

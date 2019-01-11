@@ -16,7 +16,8 @@ class PortfolioViewController: BaseViewController {
     
     var vc: UIViewController!
     
-    private var bottomAssetsView: UIView?
+    private var selectedChartAssetsView: SelectedChartAssetsView?
+
     private var tapGesture: UITapGestureRecognizer?
     // MARK: - Outlets
     @IBOutlet weak var amountTitleLabel: SubtitleLabel!
@@ -157,14 +158,11 @@ class PortfolioViewController: BaseViewController {
     }
     
     private func setupSelectedChartAssetsBottomSheetView() {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.isDraggable = false
-        bottomSheetController.bottomSheetControllerProtocol = self
-        let closeImage = #imageLiteral(resourceName: "img_event_program_closed")
-        bottomSheetController.addNavigationBar("Assets", centerSubtitle: "", normalImage: closeImage, buttonAction: #selector(deselectChart), buttonTarget: self)
-        bottomSheetController.lineViewIsHidden = true
+        let vc = viewModel.getDashboardVC()
+        selectedChartAssetsView = vc.selectedChartAssetsView
+        selectedChartAssetsView?.delegate = self
         
-        bottomSheetController.addTableView(isScrollEnabledInSheet: true) { [weak self] tableView in
+        selectedChartAssetsView?.configure(configurationHandler: { [weak self] tableView in
             tableView.separatorStyle = .none
             tableView.registerNibs(for: viewModel.cellModelsForRegistration)
             
@@ -172,24 +170,11 @@ class PortfolioViewController: BaseViewController {
                 selectedChartAssetsDelegateManager.tableView = tableView
                 tableView.delegate = selectedChartAssetsDelegateManager
                 tableView.dataSource = selectedChartAssetsDelegateManager
+                tableView.reloadData()
             }
-        }
+        })
     }
-    
-    private func configureConstraints(containerView: UIView, view: UIView) {
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.transform = CGAffineTransform.identity
-        
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 10.0).isActive = true
-//        containerView.topAnchor.constraint(greaterThanOrEqualTo: chartView.bottomAnchor, constant: 10.0).isActive = true
-//        containerView.heightAnchor.constraint(lessThanOrEqualToConstant: 300.0).isActive = true
-//        containerView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
+
     func hideInRequestStackView(_ value: Bool) {
         if let programRequests = viewModel.programRequests, let requests = programRequests.requests, requests.count == 0, inRequestsStackView.isHidden { return }
         
@@ -201,10 +186,11 @@ class PortfolioViewController: BaseViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+    
     @objc func deselectChart() {
         if let highlighted = chartView?.highlighted, highlighted.count > 0 {
             tapGesture?.isEnabled = false
-            hideBottomAssetsView()
+            hideSelectedChartAssetsView()
             circleView.isHidden = true
             hideInRequestStackView(false)
             chartView.highlightValues([])
@@ -220,9 +206,9 @@ class PortfolioViewController: BaseViewController {
         let results = viewModel.selectChart(date)
         
         if let valueChartBar = results.0, valueChartBar.topAssets != nil {
-            showBottomAssetsView()
+            showSelectedChartAssetsView()
         } else {
-            hideBottomAssetsView()
+            hideSelectedChartAssetsView()
         }
         
         if let chartSimple = results.1, let selectedValue = chartSimple.value {
@@ -250,43 +236,36 @@ class PortfolioViewController: BaseViewController {
         }
     }
     
-    @objc private func hideBottomAssetsView() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.bottomAssetsView?.alpha = 0.0
-        }) { (result) in
-            self.bottomAssetsView?.removeFromSuperview()
-            self.bottomAssetsView = nil
+    @objc private func hideSelectedChartAssetsView() {
+        guard let window = UIApplication.shared.windows[0] as UIWindow?, let tabBarController = window.rootViewController as? BaseTabBarController else { return }
+        
+        tabBarController.tabBar.isHidden = false
+        
+        UIView.animate(withDuration: 0.3) {
+            self.selectedChartAssetsView?.alpha = 0.0
+            tabBarController.tabBar.alpha = 1.0
         }
     }
     
-    private func showBottomAssetsView() {
-        if self.bottomAssetsView == nil {
+    private func showSelectedChartAssetsView() {
+        if self.selectedChartAssetsView == nil {
             circleView.isHidden = false
-            
             hideInRequestStackView(true)
-        }
-        
-        let window = UIApplication.shared.windows[0] as UIWindow
-        if let vc = window.rootViewController, self.bottomAssetsView == nil {
             setupSelectedChartAssetsBottomSheetView()
-            
-            self.bottomAssetsView = bottomSheetController.containerView
-            self.bottomAssetsView?.alpha = 0.0
-        
-            guard self.bottomAssetsView != nil else { return }
-            vc.view.addSubview(self.bottomAssetsView!)
-
-            self.configureConstraints(containerView: self.bottomAssetsView!, view: vc.view)
-            self.bottomAssetsView?.layoutIfNeeded()
-            self.bottomSheetController.viewDidLayoutSubviews()
-        
-            UIView.animate(withDuration: 0.3) {
-                self.bottomAssetsView?.alpha = 1.0
-            }
+            selectedChartAssetsView?.alpha = 0.0
         }
         
-        if let centerBarLabel = bottomSheetController.centerBarLabel, let date = self.viewModel.selectedValueChartBar?.date {
-            centerBarLabel.text = date.dateAndTimeFormatString
+        guard let window = UIApplication.shared.windows[0] as UIWindow?, let tabBarController = window.rootViewController as? BaseTabBarController else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.selectedChartAssetsView?.alpha = 1.0
+            tabBarController.tabBar.alpha = 0.0
+        })  { (result) in
+            tabBarController.tabBar.isHidden = true
+        }
+        
+        if let date = self.viewModel.selectedValueChartBar?.date {
+            selectedChartAssetsView?.dateLabel.text = date.dateAndTimeFormatString
         }
     }
     
@@ -307,7 +286,7 @@ extension PortfolioViewController: ChartViewDelegate {
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        hideBottomAssetsView()
+        hideSelectedChartAssetsView()
         circleView.isHidden = true
         hideInRequestStackView(false)
         updateUI()
@@ -317,7 +296,11 @@ extension PortfolioViewController: ChartViewDelegate {
 extension PortfolioViewController: BottomSheetControllerProtocol {
     func didHide() {
         deselectChart()
-        bottomAssetsView?.removeFromSuperview()
-        bottomAssetsView = nil
+    }
+}
+
+extension PortfolioViewController: SelectedChartAssetsViewProtocol {
+    func assetViewDidClose() {
+        deselectChart()
     }
 }

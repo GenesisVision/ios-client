@@ -479,6 +479,8 @@
 		5EF14DA12182135E00B3843A /* FundInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14DA02182135E00B3843A /* FundInfoRouter.swift */; };
 		5EF14DA6218214EF00B3843A /* DashboardFundTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14DA5218214EE00B3843A /* DashboardFundTableViewCellViewModel.swift */; };
 		5EF14DA9218215B000B3843A /* FundTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF14DA8218215AF00B3843A /* FundTableViewCellViewModel.swift */; };
+		5EF16D6721E8C4B100FF55B8 /* SelectedChartAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF16D6621E8C4B100FF55B8 /* SelectedChartAssetsView.swift */; };
+		5EF16D6921E8C4B700FF55B8 /* SelectedChartAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF16D6821E8C4B700FF55B8 /* SelectedChartAssetsView.xib */; };
 		5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2256F206E486B00D2CB12 /* UIDevice.swift */; };
 		5EFCC77021553D58001E1A56 /* DashboardProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFCC76F21553D58001E1A56 /* DashboardProgramListViewModel.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
@@ -886,6 +888,7 @@
 		5E6A6BC2216D5EF80082C343 /* PortfolioEventTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E6C0CEF2109A8D900B7F844 /* ManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
 		5E6C0CF22109AA5500B7F844 /* ManagerTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanViewModel.swift; sourceTree = "<group>"; };
+		5E6D18F321E8F0F10094D885 /* Genesis Vision.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Genesis Vision.entitlements"; sourceTree = "<group>"; };
 		5E6D681C207655A100299408 /* String+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Constants.swift"; sourceTree = "<group>"; };
 		5E6D681E2076587E00299408 /* ProgramInvestSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramInvestSuccessViewModel.swift; sourceTree = "<group>"; };
 		5E6D68202076588E00299408 /* ProgramWithdrawSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramWithdrawSuccessViewModel.swift; sourceTree = "<group>"; };
@@ -1100,6 +1103,8 @@
 		5EF14DA02182135E00B3843A /* FundInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundInfoRouter.swift; sourceTree = "<group>"; };
 		5EF14DA5218214EE00B3843A /* DashboardFundTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5EF14DA8218215AF00B3843A /* FundTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5EF16D6621E8C4B100FF55B8 /* SelectedChartAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChartAssetsView.swift; sourceTree = "<group>"; };
+		5EF16D6821E8C4B700FF55B8 /* SelectedChartAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedChartAssetsView.xib; sourceTree = "<group>"; };
 		5EF2256F206E486B00D2CB12 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		5EFCC76F21553D58001E1A56 /* DashboardProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EFE7C3D2181E78500D385C8 /* FundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundViewController.swift; sourceTree = "<group>"; };
@@ -2017,6 +2022,7 @@
 			isa = PBXGroup;
 			children = (
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
+				5EF16D6A21E8C4BF00FF55B8 /* Selected Chart Assets */,
 				5ED645F221C06A0E0044AC1D /* About Level */,
 				5EC6709721AEAA13009BF4C0 /* Invest and Withdraw */,
 				5EC6709421AEA9EE009BF4C0 /* Wallet */,
@@ -2351,6 +2357,15 @@
 				5EC6709021AEA943009BF4C0 /* Detail */,
 			);
 			path = Fund;
+			sourceTree = "<group>";
+		};
+		5EF16D6A21E8C4BF00FF55B8 /* Selected Chart Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5EF16D6621E8C4B100FF55B8 /* SelectedChartAssetsView.swift */,
+				5EF16D6821E8C4B700FF55B8 /* SelectedChartAssetsView.xib */,
+			);
+			path = "Selected Chart Assets";
 			sourceTree = "<group>";
 		};
 		B8DB3D95241F1BF35C1AA19C /* Frameworks */ = {
@@ -2725,6 +2740,7 @@
 		FCC9DD26200DF2C3008825EC /* genesisvision-ios */ = {
 			isa = PBXGroup;
 			children = (
+				5E6D18F321E8F0F10094D885 /* Genesis Vision.entitlements */,
 				FCC9DD27200DF2C3008825EC /* AppDelegate.swift */,
 				FCC9DD43200DFA5E008825EC /* Sources */,
 				FCC9DD39200DFA5E008825EC /* Resources */,
@@ -3068,6 +3084,11 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -3139,6 +3160,7 @@
 				5ED645F621C06A0F0044AC1D /* AboutLevelView.xib in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
+				5EF16D6921E8C4B700FF55B8 /* SelectedChartAssetsView.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
 				5EA274BB2162823F008CAF77 /* InvestNowTableViewCell.xib in Resources */,
@@ -3376,6 +3398,7 @@
 				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5E858342205FF2390039E13F /* ProgramDetailProtocol.swift in Sources */,
 				5E0546C621C3BF3F000DA7E8 /* ManagerSimpleFund.swift in Sources */,
+				5EF16D6721E8C4B100FF55B8 /* SelectedChartAssetsView.swift in Sources */,
 				FCC9DD7E200E57ED008825EC /* Previewing.swift in Sources */,
 				5EEE455D210B41CB009CF791 /* ManagerDashboardTabmanRouter.swift in Sources */,
 				5E0546CC21C3BF3F000DA7E8 /* AssetsValue.swift in Sources */,
@@ -4149,6 +4172,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4230,6 +4254,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4305,6 +4330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
@@ -4379,6 +4405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
