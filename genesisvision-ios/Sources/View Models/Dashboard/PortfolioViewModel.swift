@@ -86,6 +86,10 @@ final class PortfolioViewModel {
         return router.dashboardViewController
     }
     
+    func getTabBar() -> BaseTabBarController? {
+        return router.rootTabBarController
+    }
+    
     func didHighlightRow(at indexPath: IndexPath) -> Bool {
         let selectedModel = viewModels[indexPath.row]
         return selectedModel.otherAssetsValue == nil

@@ -15,5 +15,7 @@ extension Notification.Name {
     static let programFavoriteStateChange = Notification.Name(Keys.programFavoriteStateChangeKey)
     static let fundFavoriteStateChange = Notification.Name(Keys.fundFavoriteStateChangeKey)
     
+    static let notificationDidReceive = Notification.Name(Keys.notificationDidReceiveKey)
+    
     static let themeChanged = Notification.Name(Keys.themeChangedKey)
 }

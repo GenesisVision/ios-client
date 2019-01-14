@@ -213,9 +213,10 @@ extension Router {
     
     func startAsAuthorized() {
         let tabBarController = BaseTabBarController()
-        tabBarController.viewControllers = tabBarControllers
-    
         rootTabBarController = tabBarController
+        
+        tabBarController.viewControllers = tabBarControllers
+        tabBarController.router = self
         
         setWindowRoot(viewController: rootTabBarController)
     }
@@ -301,16 +302,19 @@ extension Router {
     
     private func showProgramDetails(with programId: String) {
         guard let viewController = getProgramViewController(with: programId) else { return }
+        navigationController = rootTabBarController?.selectedViewController as? UINavigationController 
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showFundDetails(with fundId: String) {
         guard let viewController = getFundViewController(with: fundId) else { return }
+        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showManagerDetails(with managerId: String) {
         guard let viewController = getManagerViewController(with: managerId) else { return }
+        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -336,6 +340,7 @@ extension Router {
         let router = NotificationListRouter(parentRouter: self)
         viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
         viewController.hidesBottomBarWhenPushed = true
+        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     

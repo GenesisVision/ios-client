@@ -12,12 +12,12 @@ import UserNotifications
 import Firebase
 
 let gcmMessageIDKey = "gcm.message_id"
+let gcmModelKey = "model"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     var reachabilityManager: ReachabilityManager?
     
     var resignActiveTime: Date?
@@ -63,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - Setup
 extension AppDelegate {
     private func showPasscodeVC() {
-        
         if (topViewController() as? PasscodeViewController) != nil {
             return
         }
@@ -85,7 +84,6 @@ extension AppDelegate {
     
     private func setup(_ application: UIApplication) {
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self
         
         SwaggerClientAPI.basePath = Api.basePath
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
@@ -96,8 +94,12 @@ extension AppDelegate {
         AppearanceController.setupAppearance()
         
         showPasscodeVC()
-        
-        //Push Notifications
+        setupNotifications(application)
+    }
+    
+    //Push Notifications
+    private func setupNotifications(_ application: UIApplication) {
+        Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -182,9 +184,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print(userInfo)
         
-        completionHandler([])
+        completionHandler([.alert, .badge, .sound])
     }
-    
+    //action
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -196,6 +198,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print(userInfo)
         
+        if let modelData = userInfo[gcmModelKey] as? String {
+            let dataDict: [String: String] = [gcmModelKey: modelData]
+            NotificationCenter.default.post(name: .notificationDidReceive, object: nil, userInfo: dataDict)
+        }
+        
         completionHandler()
     }
 }
@@ -204,9 +211,9 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
         
-        let dataDict:[String: String] = ["token": fcmToken]
-        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        
+//        let dataDict:[String: String] = ["token": fcmToken]
+//        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+//
         // TODO: If necessary send token to application server.
     }
     

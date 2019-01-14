@@ -237,7 +237,7 @@ class PortfolioViewController: BaseViewController {
     }
     
     @objc private func hideSelectedChartAssetsView() {
-        guard let window = UIApplication.shared.windows[0] as UIWindow?, let tabBarController = window.rootViewController as? BaseTabBarController else { return }
+        guard let tabBarController = viewModel.getTabBar() else { return }
         
         tabBarController.tabBar.isHidden = false
         
@@ -255,7 +255,7 @@ class PortfolioViewController: BaseViewController {
             selectedChartAssetsView?.alpha = 0.0
         }
         
-        guard let window = UIApplication.shared.windows[0] as UIWindow?, let tabBarController = window.rootViewController as? BaseTabBarController else { return }
+        guard let tabBarController = viewModel.getTabBar() else { return }
         
         UIView.animate(withDuration: 0.3, animations: {
             self.selectedChartAssetsView?.alpha = 1.0

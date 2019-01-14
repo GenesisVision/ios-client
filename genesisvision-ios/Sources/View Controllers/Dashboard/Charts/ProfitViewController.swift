@@ -158,26 +158,7 @@ class ProfitViewController: BaseViewController {
     }
     
     private func showBottomAssetsView() {
-        let window = UIApplication.shared.windows[0] as UIWindow
-        if let vc = window.rootViewController, self.bottomAssetsView == nil {
-            self.bottomAssetsView = bottomSheetController.containerView
-            self.bottomAssetsView?.alpha = 0.0
-            
-            guard self.bottomAssetsView != nil else { return }
-            vc.view.addSubview(self.bottomAssetsView!)
-            
-            self.bottomAssetsView?.transform = CGAffineTransform.identity
-            self.bottomAssetsView?.clipsToBounds = true
-            
-            self.configureConstraints(containerView: self.bottomAssetsView!, view: vc.view)
-            self.bottomAssetsView?.layoutIfNeeded()
-//            self.bottomSheetController.initializeHeight = self.bottomAssetsView?.frame.size.height ?? 300.0
-            self.bottomSheetController.viewDidLayoutSubviews()
-            
-            UIView.animate(withDuration: 0.3) {
-                self.bottomAssetsView?.alpha = 1.0
-            }
-        }
+        
     }
     
     // MARK: - Actions
