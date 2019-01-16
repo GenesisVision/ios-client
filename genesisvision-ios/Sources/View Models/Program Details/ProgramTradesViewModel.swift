@@ -35,7 +35,14 @@ final class ProgramTradesViewModel {
         return "There are no trades"
     }
     
-    var viewModels = [ProgramTradesTableViewCellViewModel]()
+    var viewModels = [ProgramTradesTableViewCellViewModel]() {
+        didSet {
+            self.sortModels(viewModels)
+        }
+    }
+    
+    var sections = [Date : [ProgramTradesTableViewCellViewModel]]()
+    var sortedSections = [Date]()
     
     // MARK: - Init
     init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
@@ -59,9 +66,13 @@ extension ProgramTradesViewModel {
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramTradesTableViewCellViewModel.self]
     }
+    /// Return view models for registration header/footer Nib files
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return [DateSectionTableHeaderView.self]
+    }
     
     func numberOfSections() -> Int {
-        return 1
+        return sortedSections.count
     }
     
     func modelsCount() -> Int {
@@ -69,7 +80,8 @@ extension ProgramTradesViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        guard let section = sections[sortedSections[section]] else { return 0 }
+        return section.count
     }
     
     func isMetaTrader5() -> Bool {
@@ -77,7 +89,11 @@ extension ProgramTradesViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 0.0
+        return sortedSections.count > 0 ? 20.0 : 0.0
+    }
+    
+    func titleForHeader(in section: Int) -> String {
+        return sortedSections[section].onlyDateFormatString
     }
 }
 
@@ -129,11 +145,36 @@ extension ProgramTradesViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramTradesTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> ProgramTradesTableViewCellViewModel? {
+        guard let section = sections[sortedSections[indexPath.section]] else { return nil }
+        return section[indexPath.row]
     }
     
     // MARK: - Private methods
+    private func sortModels(_ viewModels: [ProgramTradesTableViewCellViewModel]) {
+        var sections = [Date : [ProgramTradesTableViewCellViewModel]]()
+        
+        for model in viewModels {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Bundle.main.locale
+            
+            guard let dateStr = model.orderModel.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
+            
+            if sections.index(forKey: date) == nil {
+                sections[date] = [model]
+            } else {
+                sections[date]!.append(model)
+                sections[date] = sections[date]!.sorted(by: { $0.orderModel.date!.compare($1.orderModel.date!) == .orderedDescending })
+            }
+        }
+        
+        sortedSections = sections.keys.sorted(by: { $0.compare($1) == .orderedDescending })
+        
+        self.sections = sections
+    }
+    
     private func updateFetchedData(totalCount: Int, viewModels: [ProgramTradesTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount

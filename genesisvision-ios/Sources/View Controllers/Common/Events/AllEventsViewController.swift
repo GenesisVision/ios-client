@@ -39,6 +39,7 @@ class AllEventsViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         tableView.allowsSelection = viewModel.allowsSelection
         
@@ -92,7 +93,7 @@ class AllEventsViewController: BaseViewControllerWithTableView {
 extension AllEventsViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         
@@ -120,6 +121,12 @@ extension AllEventsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
+        header.headerLabel.text = viewModel.titleForHeader(in: section)
+        return header
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {

@@ -79,7 +79,7 @@ extension ProgramBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> ProgramBalanceChartTableViewCellViewModel? {
         guard let programBalanceChart = programBalanceChart else { return nil }
         
         let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)

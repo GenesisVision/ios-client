@@ -28,7 +28,14 @@ final class NotificationListViewModel {
         }
     }
     
-    var viewModels = [NotificationListTableViewCellViewModel]()
+    var viewModels = [NotificationListTableViewCellViewModel]() {
+        didSet {
+            self.sortModels(viewModels)
+        }
+    }
+    
+    var sections = [Date : [NotificationListTableViewCellViewModel]]()
+    var sortedSections = [Date]()
     
     // MARK: - Init
     init(withRouter router: NotificationListRouter, reloadDataProtocol: ReloadDataProtocol?) {
@@ -50,11 +57,11 @@ extension NotificationListViewModel {
     }
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return []
+        return [DateSectionTableHeaderView.self]
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return sortedSections.count
     }
     
     func modelsCount() -> Int {
@@ -62,11 +69,16 @@ extension NotificationListViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        guard let section = sections[sortedSections[section]] else { return 0 }
+        return section.count
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 0.0
+        return sortedSections.count > 0 ? 20.0 : 0.0
+    }
+    
+    func titleForHeader(in section: Int) -> String {
+        return sortedSections[section].onlyDateFormatString
     }
 }
 
@@ -145,11 +157,36 @@ extension NotificationListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> NotificationListTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> NotificationListTableViewCellViewModel? {
+        guard let section = sections[sortedSections[indexPath.section]] else { return nil }
+        return section[indexPath.row]
     }
     
     // MARK: - Private methods
+    private func sortModels(_ viewModels: [NotificationListTableViewCellViewModel]) {
+        var sections = [Date : [NotificationListTableViewCellViewModel]]()
+        
+        for model in viewModels {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Bundle.main.locale
+            
+            guard let dateStr = model.notification.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
+            
+            if sections.index(forKey: date) == nil {
+                sections[date] = [model]
+            } else {
+                sections[date]!.append(model)
+                sections[date] = sections[date]!.sorted(by: { $0.notification.date!.compare($1.notification.date!) == .orderedDescending })
+            }
+        }
+        
+        sortedSections = sections.keys.sorted(by: { $0.compare($1) == .orderedDescending })
+        
+        self.sections = sections
+    }
+    
     private func updateFetchedData(totalCount: Int, viewModels: [NotificationListTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount

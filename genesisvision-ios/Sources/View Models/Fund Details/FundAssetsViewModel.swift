@@ -127,8 +127,8 @@ extension FundAssetsViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> FundAssetTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> FundAssetTableViewCellViewModel? {
+        return viewModels[indexPath.row]
     }
     
     // MARK: - Private methods

@@ -106,8 +106,8 @@ extension ProgramHistoryViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> WalletTransactionTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> WalletTransactionTableViewCellViewModel? {
+        return viewModels[indexPath.row]
     }
 
     // MARK: - Private methods

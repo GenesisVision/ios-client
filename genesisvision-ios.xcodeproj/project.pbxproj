@@ -261,6 +261,8 @@
 		5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */; };
 		5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */; };
 		5E6732B02195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */; };
+		5E6845E221EF7D9900DA8607 /* DateSectionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6845E121EF7D9900DA8607 /* DateSectionTableHeaderView.swift */; };
+		5E6845E321EF8B4400DA8607 /* DateSectionTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6845E021EF7D9900DA8607 /* DateSectionTableHeaderView.xib */; };
 		5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E696019209362EE00505726 /* FavoriteButton.swift */; };
 		5E6A6BC0216D5EEE0082C343 /* PortfolioEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */; };
 		5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */; };
@@ -882,6 +884,8 @@
 		5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5E6732AD2195C56A000A5C7C /* BaseViewControllerWithTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerWithTableView.swift; sourceTree = "<group>"; };
 		5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCurrencyDelegateManager.swift; sourceTree = "<group>"; };
+		5E6845E021EF7D9900DA8607 /* DateSectionTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSectionTableHeaderView.xib; sourceTree = "<group>"; };
+		5E6845E121EF7D9900DA8607 /* DateSectionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSectionTableHeaderView.swift; sourceTree = "<group>"; };
 		5E696019209362EE00505726 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		5E6A6BBE216D5EEE0082C343 /* PortfolioEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventTableViewCell.swift; sourceTree = "<group>"; };
 		5E6A6BBF216D5EEE0082C343 /* PortfolioEventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioEventTableViewCell.xib; sourceTree = "<group>"; };
@@ -2386,6 +2390,8 @@
 				5E5BC29921868FD6009E4BA3 /* FundAssetsHeaderView.xib */,
 				FCA5707E2027B51F001942F3 /* DefaultTableHeaderView.swift */,
 				FCA5707D2027B51E001942F3 /* DefaultTableHeaderView.xib */,
+				5E6845E121EF7D9900DA8607 /* DateSectionTableHeaderView.swift */,
+				5E6845E021EF7D9900DA8607 /* DateSectionTableHeaderView.xib */,
 				5E152F1421663AF90029BFDE /* WalletTableHeaderView.swift */,
 				5E14CDAD21B6A2F200388616 /* WalletTableHeaderView.xib */,
 			);
@@ -3129,6 +3135,7 @@
 				5EA274B721628207008CAF77 /* ProgramPeriodTableViewCell.xib in Resources */,
 				5E0AD0E721813E1700DC76AA /* Fund.storyboard in Resources */,
 				5E1CF821218B71D100541C70 /* Montserrat-SemiBold.ttf in Resources */,
+				5E6845E321EF8B4400DA8607 /* DateSectionTableHeaderView.xib in Resources */,
 				5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */,
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
 				5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */,
@@ -3442,6 +3449,7 @@
 				5E05471621C3BF3F000DA7E8 /* BlockchainInfo.swift in Sources */,
 				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,
 				5EA274B2216281DD008CAF77 /* DefaultTableViewCell.swift in Sources */,
+				5E6845E221EF7D9900DA8607 /* DateSectionTableHeaderView.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				5EA274CA21628297008CAF77 /* DetailBalanceChartTableViewCell.swift in Sources */,
 				5E05470121C3BF3F000DA7E8 /* BrokerAccountType.swift in Sources */,
