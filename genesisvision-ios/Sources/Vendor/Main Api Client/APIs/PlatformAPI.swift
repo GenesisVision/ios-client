@@ -37,6 +37,13 @@ open class PlatformAPI {
       "versionCode" : "versionCode"
     }
   },
+  "programTags" : [ {
+    "color" : "color",
+    "name" : "Crypto"
+  }, {
+    "color" : "color",
+    "name" : "Crypto"
+  } ],
   "iOSVersion" : {
     "lastVersion" : "lastVersion",
     "minVersion" : "minVersion"

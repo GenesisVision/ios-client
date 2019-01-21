@@ -166,18 +166,18 @@ open class ProfileAPI {
      Get header profile
      - GET /v1.0/profile/header
      - examples: [{contentType=application/json, example={
-  "notificationsCount" : 1,
+  "notificationsCount" : 9,
   "kycConfirmed" : true,
-  "availableGvt" : 9.369310271410669,
+  "availableGvt" : 9.018348186070783,
   "avatar" : "avatar",
-  "investedGvt" : 9.965781217890562,
-  "favoritesCount" : 4,
+  "investedGvt" : 8.762042012749001,
+  "favoritesCount" : 9,
   "isNewUser" : true,
   "isTwoFactorEnabled" : true,
   "allowForex" : true,
   "name" : "name",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "totalBalanceGvt" : 5.025004791520295,
+  "totalBalanceGvt" : 6.683562403749608,
   "email" : "email"
 }}]
      
@@ -229,6 +229,44 @@ open class ProfileAPI {
         let path = "/v1.0/profile/personal/update"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfilePushTokenPost(authorization: String, token: FcmTokenViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfilePushTokenPostWithRequestBuilder(authorization: authorization, token: token).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /v1.0/profile/push/token
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfilePushTokenPostWithRequestBuilder(authorization: String, token: FcmTokenViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/profile/push/token"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: token)
 
         let url = NSURLComponents(string: URLString)
 

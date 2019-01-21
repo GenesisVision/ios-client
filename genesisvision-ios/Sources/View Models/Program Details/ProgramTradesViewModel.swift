@@ -23,7 +23,7 @@ final class ProgramTradesViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
 
     var totalCount = 0 {
         didSet {
@@ -107,7 +107,7 @@ extension ProgramTradesViewModel {
     }
     
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

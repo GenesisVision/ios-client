@@ -31,7 +31,7 @@ final class ListViewModel: ListViewModelProtocol {
     var dataType: DataType = .api
 
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     var totalCount = 0
 
     var showFacets = false
@@ -278,7 +278,7 @@ final class ListViewModel: ListViewModelProtocol {
 extension ListViewModel {
     // MARK: - Public methods
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

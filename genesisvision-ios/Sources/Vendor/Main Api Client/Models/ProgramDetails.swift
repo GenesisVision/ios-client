@@ -45,6 +45,7 @@ open class ProgramDetails: Codable {
     public var rating: ProgramDetailsRating?
     /** Fields for authorized user */
     public var personalDetails: PersonalProgramDetailsFull?
+    public var tags: [ProgramTag]?
     public var id: UUID?
     public var logo: String?
     public var url: String?
@@ -59,7 +60,7 @@ open class ProgramDetails: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -69,6 +70,7 @@ open class ProgramDetails: Codable {
         self.statistic = statistic
         self.rating = rating
         self.personalDetails = personalDetails
+        self.tags = tags
         self.id = id
         self.logo = logo
         self.url = url
@@ -97,6 +99,7 @@ open class ProgramDetails: Codable {
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
+        try container.encodeIfPresent(tags, forKey: "tags")
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(url, forKey: "url")
@@ -123,6 +126,7 @@ open class ProgramDetails: Codable {
         statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")
         personalDetails = try container.decodeIfPresent(PersonalProgramDetailsFull.self, forKey: "personalDetails")
+        tags = try container.decodeIfPresent([ProgramTag].self, forKey: "tags")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")

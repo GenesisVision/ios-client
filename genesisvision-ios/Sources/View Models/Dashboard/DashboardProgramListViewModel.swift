@@ -29,7 +29,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     var canPullToRefresh = true
     var canFetchMoreResults = true
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
             title = totalCount > 0 ? "Programs \(totalCount)" : "Programs"
@@ -195,7 +195,7 @@ extension DashboardProgramListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

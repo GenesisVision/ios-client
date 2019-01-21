@@ -44,7 +44,7 @@ class FilterModel {
     var levelModel: FilterLevelModel
     var dateRangeModel: FilterDateRangeModel
     var currencyModel: FilterCurrencyModel
-    var chartPointsCount: Int = Api.equityChartLength
+    var chartPointsCount: Int = ApiKeys.equityChartLength
     var mask: String?
     var isFavorite: Bool = false
     var facetId: String?

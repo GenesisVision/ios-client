@@ -516,40 +516,40 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.778324963048013,
-  "total" : 2,
+  "totalValue" : 6.704019297950036,
+  "total" : 5,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -1202,19 +1202,19 @@ open class ManagerAPI {
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   },
@@ -1555,40 +1555,40 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.778324963048013,
-  "total" : 2,
+  "totalValue" : 6.704019297950036,
+  "total" : 5,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -1930,6 +1930,13 @@ open class ManagerAPI {
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
     "dashboardAssetsDetails" : {
       "share" : 5.025004791520295
     },
@@ -2006,6 +2013,13 @@ open class ManagerAPI {
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
     "dashboardAssetsDetails" : {
       "share" : 5.025004791520295
     },
@@ -2179,40 +2193,40 @@ open class ManagerAPI {
      Get all requests
      - GET /v1.0/manager/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.778324963048013,
-  "total" : 2,
+  "totalValue" : 6.704019297950036,
+  "total" : 5,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.965117697638846,
+    "feeExit" : 6.778324963048013,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.438423552598547,
-    "fundWithdrawPercent" : 1.284659006116532,
-    "feeEntry" : 3.5571952270680973,
+    "valueGvt" : 1.284659006116532,
+    "fundWithdrawPercent" : 6.878052220127876,
+    "feeEntry" : 2.8841621266687802,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 9.018348186070783,
+    "value" : 6.965117697638846,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]

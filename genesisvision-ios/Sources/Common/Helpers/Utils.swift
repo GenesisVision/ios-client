@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
-    return URL(string: Api.filePath + fileName)
+    return URL(string: ApiKeys.filePath + fileName)
 }
 
 func impactFeedback(style: UIImpactFeedbackStyle = .light) {

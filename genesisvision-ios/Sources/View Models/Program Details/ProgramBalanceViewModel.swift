@@ -25,7 +25,7 @@ final class ProgramBalanceViewModel {
 
     var dateFrom: Date?
     var dateTo: Date?
-    var maxPointCount: Int = Api.maxPoint
+    var maxPointCount: Int = ApiKeys.maxPoint
     
     private var programBalanceChart: ProgramBalanceChart?
     

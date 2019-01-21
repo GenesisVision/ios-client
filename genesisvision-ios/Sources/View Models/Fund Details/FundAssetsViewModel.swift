@@ -20,7 +20,7 @@ final class FundAssetsViewModel {
     var dataType: DataType = .api
     var assetsCount: String = ""
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     
     var totalCount = 0 {
         didSet {
@@ -89,7 +89,7 @@ extension FundAssetsViewModel {
     }
     
     func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

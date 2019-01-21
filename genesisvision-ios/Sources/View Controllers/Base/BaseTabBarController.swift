@@ -46,16 +46,16 @@ class BaseTabBarController: UITabBarController {
     
     // MARK: - Private methods
     @objc private func notificationDidReceive(_ notification: Notification) {
-        if let jsonText = notification.userInfo?["model"] as? String {
+        if let jsonText = notification.userInfo?["result"] as? String {
             var dictonary: Dictionary<String, Any>?
-            
-            if let data = jsonText.data(using: String.Encoding.utf8) {
+
+            if let data = jsonText.data(using: .utf8) {
                 do {
                     dictonary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
                     
                     if let myDictionary = dictonary,
-                        let assetId = myDictionary["assetId"] as? String,
-                        let type = myDictionary["assetType"] as? String,
+                        let assetId = myDictionary["AssetId"] as? String,
+                        let type = myDictionary["AssetType"] as? String,
                         let assetType = AssetType(rawValue: type.capitalized) {
                         
                         router?.showAssetDetails(with: assetId, assetType: assetType)

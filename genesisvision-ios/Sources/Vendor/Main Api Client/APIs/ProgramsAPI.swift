@@ -354,6 +354,13 @@ open class ProgramsAPI {
   },
   "url" : "url",
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+  "tags" : [ {
+    "color" : "color",
+    "name" : "Crypto"
+  }, {
+    "color" : "color",
+    "name" : "Crypto"
+  } ],
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "ipfsHash" : "ipfsHash",
   "logo" : "logo",
@@ -549,6 +556,14 @@ open class ProgramsAPI {
     }
 
     /**
+     * enum for parameter tags
+     */
+    public enum Tags_v10ProgramsGet: String { 
+        case crypto = "Crypto"
+        case forex = "Forex"
+    }
+
+    /**
      Programs list
      
      - parameter authorization: (header)  (optional)
@@ -560,6 +575,7 @@ open class ProgramsAPI {
      - parameter programCurrency: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter levelUpFrom: (query)  (optional)
+     - parameter tags: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -574,8 +590,8 @@ open class ProgramsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -628,6 +644,13 @@ open class ProgramsAPI {
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
     "dashboardAssetsDetails" : {
       "share" : 5.025004791520295
     },
@@ -704,6 +727,13 @@ open class ProgramsAPI {
     "title" : "title",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
     "dashboardAssetsDetails" : {
       "share" : 5.025004791520295
     },
@@ -750,6 +780,7 @@ open class ProgramsAPI {
      - parameter programCurrency: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter levelUpFrom: (query)  (optional)
+     - parameter tags: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -765,7 +796,7 @@ open class ProgramsAPI {
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -780,6 +811,7 @@ open class ProgramsAPI {
             "ProgramCurrency": programCurrency?.rawValue, 
             "CurrencySecondary": currencySecondary?.rawValue, 
             "LevelUpFrom": levelUpFrom?.encodeToJSON(), 
+            "Tags": tags, 
             "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
             "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 

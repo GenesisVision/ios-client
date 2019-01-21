@@ -217,6 +217,13 @@ open class SearchAPI {
       "title" : "title",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "Crypto"
+      }, {
+        "color" : "color",
+        "name" : "Crypto"
+      } ],
       "dashboardAssetsDetails" : {
         "share" : 5.025004791520295
       },
@@ -293,6 +300,13 @@ open class SearchAPI {
       "title" : "title",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "Crypto"
+      }, {
+        "color" : "color",
+        "name" : "Crypto"
+      } ],
       "dashboardAssetsDetails" : {
         "share" : 5.025004791520295
       },

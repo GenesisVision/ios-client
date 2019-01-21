@@ -12,7 +12,7 @@ import UserNotifications
 import Firebase
 
 let gcmMessageIDKey = "gcm.message_id"
-let gcmModelKey = "model"
+let gcmModelKey = "result"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -83,9 +83,9 @@ extension AppDelegate {
     }
     
     private func setup(_ application: UIApplication) {
-        FirebaseApp.configure()
+        FirebaseApp.configure(options: .init(googleAppID: ApiKeys.googleAppID, gcmSenderID: ApiKeys.gcmSenderID))
+        SwaggerClientAPI.basePath = ApiKeys.basePath
         
-        SwaggerClientAPI.basePath = Api.basePath
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
         
         setupFirstScreen()
@@ -211,10 +211,14 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
         
-//        let dataDict:[String: String] = ["token": fcmToken]
-//        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-//
-        // TODO: If necessary send token to application server.
+        ProfileDataProvider.addFCMToken(token: fcmToken) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
