@@ -103,7 +103,7 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

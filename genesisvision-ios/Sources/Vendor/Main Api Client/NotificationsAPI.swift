@@ -12,6 +12,47 @@ import Alamofire
 
 open class NotificationsAPI {
     /**
+     Read notification
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsByIdReadPost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10NotificationsByIdReadPostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Read notification
+     - POST /v1.0/notifications/{id}/read
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10NotificationsByIdReadPostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v1.0/notifications/{id}/read"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      User notifications
      
      - parameter authorization: (header) JWT access token 

@@ -17,7 +17,6 @@
 		5E05462021C3BF29000DA7E8 /* InvestorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461321C3BF26000DA7E8 /* InvestorAPI.swift */; };
 		5E05462121C3BF29000DA7E8 /* ProgramsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461421C3BF27000DA7E8 /* ProgramsAPI.swift */; };
 		5E05462221C3BF29000DA7E8 /* FileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461521C3BF27000DA7E8 /* FileAPI.swift */; };
-		5E05462321C3BF29000DA7E8 /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461621C3BF28000DA7E8 /* NotificationsAPI.swift */; };
 		5E05462421C3BF29000DA7E8 /* PlatformAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461721C3BF28000DA7E8 /* PlatformAPI.swift */; };
 		5E05462521C3BF29000DA7E8 /* ManagerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461821C3BF28000DA7E8 /* ManagerAPI.swift */; };
 		5E05462621C3BF29000DA7E8 /* BrokersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05461921C3BF28000DA7E8 /* BrokersAPI.swift */; };
@@ -455,6 +454,7 @@
 		5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */; };
 		5EEA460321EF9AC500D6730D /* ProgramTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA460221EF9AC400D6730D /* ProgramTag.swift */; };
 		5EEA460721F2282A00D6730D /* FcmTokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA460621F2282900D6730D /* FcmTokenViewModel.swift */; };
+		5EEA460D21F61B4500D6730D /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA460C21F61B4500D6730D /* NotificationsAPI.swift */; };
 		5EEC1AC32175F7F6007D77ED /* AllEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */; };
 		5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */; };
 		5EEC1AC72175F871007D77ED /* AllEventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */; };
@@ -641,7 +641,6 @@
 		5E05461321C3BF26000DA7E8 /* InvestorAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorAPI.swift; sourceTree = "<group>"; };
 		5E05461421C3BF27000DA7E8 /* ProgramsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramsAPI.swift; sourceTree = "<group>"; };
 		5E05461521C3BF27000DA7E8 /* FileAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAPI.swift; sourceTree = "<group>"; };
-		5E05461621C3BF28000DA7E8 /* NotificationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
 		5E05461721C3BF28000DA7E8 /* PlatformAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformAPI.swift; sourceTree = "<group>"; };
 		5E05461821C3BF28000DA7E8 /* ManagerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAPI.swift; sourceTree = "<group>"; };
 		5E05461921C3BF28000DA7E8 /* BrokersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokersAPI.swift; sourceTree = "<group>"; };
@@ -1083,6 +1082,7 @@
 		5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabmanViewController.swift; sourceTree = "<group>"; };
 		5EEA460221EF9AC400D6730D /* ProgramTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTag.swift; sourceTree = "<group>"; };
 		5EEA460621F2282900D6730D /* FcmTokenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FcmTokenViewModel.swift; sourceTree = "<group>"; };
+		5EEA460C21F61B4500D6730D /* NotificationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
 		5EEC1AC22175F7F6007D77ED /* AllEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewController.swift; sourceTree = "<group>"; };
 		5EEC1AC42175F82D007D77ED /* AllEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsViewModel.swift; sourceTree = "<group>"; };
 		5EEC1AC62175F871007D77ED /* AllEventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsRouter.swift; sourceTree = "<group>"; };
@@ -2685,7 +2685,7 @@
 		FCB177F22045B40E00A482B7 /* Main Api Client */ = {
 			isa = PBXGroup;
 			children = (
-				5E05461621C3BF28000DA7E8 /* NotificationsAPI.swift */,
+				5EEA460C21F61B4500D6730D /* NotificationsAPI.swift */,
 				5E18CE0C20C566F0008FE5B5 /* APIs */,
 				5E18CE1320C566F0008FE5B5 /* Models */,
 			);
@@ -3486,7 +3486,6 @@
 				5EAD350A214FD2270057450C /* AssetsViewController.swift in Sources */,
 				5EA274AB216268C7008CAF77 /* ProgramViewModel.swift in Sources */,
 				FCC9DD84200E5CEC008825EC /* UITableView+ReusableCell.swift in Sources */,
-				5E05462321C3BF29000DA7E8 /* NotificationsAPI.swift in Sources */,
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				5E0546E121C3BF3F000DA7E8 /* ProgramDetailsRating.swift in Sources */,
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
@@ -3667,6 +3666,7 @@
 				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				5EA274BA2162823F008CAF77 /* InvestNowTableViewCell.swift in Sources */,
+				5EEA460D21F61B4500D6730D /* NotificationsAPI.swift in Sources */,
 				5EA8B9C021B4528C0074EA2C /* ListRouter.swift in Sources */,
 				5E0546B421C3BF3F000DA7E8 /* FundAssetPart.swift in Sources */,
 				5E5BBE6A218228E6009E4BA3 /* FundProfitChartTableViewCellViewModel.swift in Sources */,

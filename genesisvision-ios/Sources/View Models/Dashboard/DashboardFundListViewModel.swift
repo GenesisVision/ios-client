@@ -170,8 +170,8 @@ extension DashboardFundListViewModel {
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

@@ -64,6 +64,18 @@ class NotificationsDataProvider: DataProvider {
         }
     }
     
+    static func readSetting(settingId: String?, completion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken,
+            let settingId = settingId,
+            let uuid = UUID(uuidString: settingId)
+            else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        NotificationsAPI.v10NotificationsByIdReadPost(id: uuid, authorization: authorization) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
     static func enableSetting(settingId: String?, enable: Bool, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken,

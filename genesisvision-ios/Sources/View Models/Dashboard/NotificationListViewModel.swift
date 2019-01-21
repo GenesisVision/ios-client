@@ -21,7 +21,7 @@ final class NotificationListViewModel {
     var dataType: DataType = .api
     var notifiactionsCount: String = ""
     var skip = 0
-    var take = ApiKeys.take
+    var take = ApiKeys.take + 38
     var totalCount = 0 {
         didSet {
             notifiactionsCount = "\(totalCount) notifiactions"
@@ -118,8 +118,9 @@ extension NotificationListViewModel {
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        let rowCount = numberOfRows(in: indexPath.section)
+        if rowCount - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

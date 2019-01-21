@@ -106,8 +106,9 @@ extension ProgramTradesViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        let rowCount = numberOfRows(in: indexPath.section)
+        if rowCount - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

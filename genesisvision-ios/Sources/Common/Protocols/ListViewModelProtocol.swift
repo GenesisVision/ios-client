@@ -115,7 +115,7 @@ protocol ListViewModelProtocol {
     func showDetail(with assetId: String)
     func showDetail(at indexPath: IndexPath)
     
-    func fetchMore(at row: Int) -> Bool
+    func fetchMore(at indexPath: IndexPath) -> Bool
     func fetchMore()
     
     func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController?
@@ -330,8 +330,8 @@ extension ListViewModelProtocol {
     }
     
     // MARK: - Fetch
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - ApiKeys.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
