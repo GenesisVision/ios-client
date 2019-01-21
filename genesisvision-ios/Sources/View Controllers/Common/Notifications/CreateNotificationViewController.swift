@@ -62,7 +62,7 @@ class CreateNotificationViewController: BaseViewController {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
-            numpadView.type = .currency
+            numpadView.type = .number
         }
     }
     
