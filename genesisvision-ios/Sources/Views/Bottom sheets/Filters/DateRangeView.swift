@@ -12,7 +12,7 @@ protocol DateRangeViewProtocol: class {
     var dateRange: FilterDateRangeModel? { get set }
 
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?)
-    func showDatePicker(from dateFrom: Date?, to dateTo: Date)
+    func showDatePicker(from dateFrom: Date, to dateTo: Date, isFrom: Bool)
 }
 
 class DateRangeView: UIView {
@@ -200,15 +200,17 @@ class DateRangeView: UIView {
         
         guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else { return }
         
-        delegate?.showDatePicker(from: dateFrom, to: dateTo)
+        delegate?.showDatePicker(from: dateFrom, to: dateTo, isFrom: true)
     }
     
     @objc private func dateToTextFieldEditing() {
         changeDateRangeTypeButtonAction(customButton)
         
-        guard dateRangeType == .custom, let dateTo = dateTo else { return }
+        guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
+            return
+        }
         
-        delegate?.showDatePicker(from: nil, to: dateTo)
+        delegate?.showDatePicker(from: dateFrom, to: dateTo, isFrom: false)
     }
     
     // MARK: - Actions

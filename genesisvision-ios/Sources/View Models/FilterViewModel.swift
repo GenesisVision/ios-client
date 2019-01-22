@@ -395,27 +395,31 @@ extension FilterViewModel: DateRangeViewProtocol {
         }
     }
     
-    func showDatePicker(from dateFrom: Date?, to dateTo: Date) {
+    func showDatePicker(from dateFrom: Date, to dateTo: Date, isFrom: Bool = true) {
         guard let vc = router.currentController as? BaseViewController else { return }
         
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
         alert.view.tintColor = UIColor.Cell.headerBg
 
-        if let dateFrom = dateFrom {
-            alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: dateTo) { [weak self] date in
+        if isFrom {
+            alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: Date()) { [weak self] date in
                 DispatchQueue.main.async {
                     self?.dateRangeView?.dateFrom = date
+                    self?.dateRangeView?.dateTo = dateTo.compare(date) == .orderedAscending ? date : dateTo
                 }
             }
         } else {
             alert.addDatePicker(mode: .date, date: dateTo, minimumDate: nil, maximumDate: Date()) { [weak self] date in
                 DispatchQueue.main.async {
+                    self?.dateRangeView?.dateFrom = dateFrom.compare(date) == .orderedDescending ? date : dateFrom
                     self?.dateRangeView?.dateTo = date
                 }
             }
         }
 
-        alert.addAction(title: "Done", style: .cancel)
+        alert.addAction(title: "Done", style: .cancel) { (action) in
+            print(action)
+        }
         vc.bottomSheetController.present(viewController: alert)
     }
     

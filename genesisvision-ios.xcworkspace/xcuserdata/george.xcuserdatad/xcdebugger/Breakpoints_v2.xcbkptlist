@@ -57,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/FilterViewModel.swift"
-            timestampString = "569775410.8562109"
+            filePath = "genesisvision-ios/Sources/Views/Bottom sheets/Filters/DateRangeView.swift"
+            timestampString = "569860807.999189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
-            landmarkName = "showDatePicker(from:to:)"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Views/Bottom sheets/Filters/DateRangeView.swift"
+            timestampString = "569860807.999262"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "dateToTextFieldEditing()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
