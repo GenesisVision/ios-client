@@ -152,6 +152,7 @@ class DashboardViewController: BaseViewController {
         }
         
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
+            UIApplication.shared.applicationIconBadgeNumber = notificationsCount
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
             navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         }
@@ -202,6 +203,7 @@ class DashboardViewController: BaseViewController {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationList()
+        UIApplication.shared.applicationIconBadgeNumber = 0
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
     }

@@ -46,9 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
-
-        
         if (topViewController() as? PasscodeViewController) != nil {
             return
         }

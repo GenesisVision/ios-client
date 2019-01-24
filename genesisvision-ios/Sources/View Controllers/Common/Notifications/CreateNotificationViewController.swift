@@ -12,6 +12,13 @@ class CreateNotificationViewController: BaseViewController {
     
     var viewModel: CreateNotificationViewModel!
     
+    var enteredProfitValue: Double = 0.0 {
+        didSet {
+            viewModel.enteredProfitValue = enteredProfitValue
+            updateUI()
+        }
+    }
+    
     // MARK: - Labels
     @IBOutlet weak var typeTitleLabel: SubtitleLabel! {
         didSet {
@@ -118,6 +125,7 @@ class CreateNotificationViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
+        createButton.setEnabled(false)
         setupButtons()
         updateUI()
     }
@@ -144,6 +152,8 @@ class CreateNotificationViewController: BaseViewController {
         
         levelStackView.isHidden = viewModel.selectedType == .profit
         profitStackView.isHidden = viewModel.selectedType == .level
+        
+        createButton.setEnabled(viewModel.createButtonEnabled())
     }
     
     @objc private func showNumPadButtonAction() {
@@ -224,7 +234,11 @@ class CreateNotificationViewController: BaseViewController {
 
 extension CreateNotificationViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return 1000
+        return viewModel.maxProfitAmount
+    }
+    
+    var minAmount: Double? {
+        return viewModel.minProfitAmount
     }
     
     var textPlaceholder: String? {
@@ -248,14 +262,14 @@ extension CreateNotificationViewController: NumpadViewProtocol {
     }
     
     var enteredAmountValue: Double {
-        return viewModel.enteredProfitValue
+        return enteredProfitValue
     }
     
     func textLabelDidChange(value: Double?) {
         guard let value = value else { return }
         
         numpadView.isEnable = true
-        viewModel.enteredProfitValue = value
+        enteredProfitValue = value
     }
 }
 

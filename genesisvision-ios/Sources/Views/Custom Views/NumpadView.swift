@@ -14,6 +14,7 @@ protocol NumpadViewProtocol: class {
     var currency: CurrencyType? { get }
     var numbersLimit: Int? { get }
     var maxAmount: Double? { get }
+    var minAmount: Double? { get }
     
     func textLabelDidChange(value: Double?)
     func onClearClicked(view: NumpadView)
@@ -36,6 +37,10 @@ extension NumpadViewProtocol {
     }
     
     var maxAmount: Double? {
+        return nil
+    }
+    
+    var minAmount: Double? {
         return nil
     }
     
@@ -82,9 +87,10 @@ extension NumpadViewProtocol {
         
         let amountString = text + valueString
         
-        if let maxAmount = maxAmount, let amount = Double(amountString), amount > maxAmount {
-            return
-        }
+        guard let amount = Double(amountString) else { return }
+        
+        if let maxAmount = maxAmount, amount > maxAmount { return }
+        if let minAmount = minAmount, amount < minAmount { return }
         
         if text == "0" {
             textLabel.text = value == 0 ? "0." : value.toString()

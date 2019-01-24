@@ -34,6 +34,9 @@ final class CreateNotificationViewModel {
     private var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
+    var maxProfitAmount: Double = 1000.0
+    var minProfitAmount: Double = 1.0
+    
     // MARK: - Init
     init(withRouter router: Router, reloadDataProtocol: ReloadDataProtocol?, assetId: String?, managerId: String? = nil) {
         self.router = router
@@ -51,6 +54,15 @@ final class CreateNotificationViewModel {
             self?.reloadDataProtocol?.didReloadData()
             completion(.success)
         }, errorCompletion: completion)
+    }
+    
+    func createButtonEnabled() -> Bool {
+        switch selectedType {
+        case .profit:
+            return enteredProfitValue >= minProfitAmount && enteredProfitValue <= maxProfitAmount
+        default:
+            return true
+        }
     }
     
     func updateSelectedTypeIndex(_ selectedTypeIndex: Int) {
