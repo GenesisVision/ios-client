@@ -86,7 +86,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         
-        cell.secondTitleLabel.text = "Balance"
+        cell.secondTitleLabel.text = "Equity"
         if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
             cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
         } else {

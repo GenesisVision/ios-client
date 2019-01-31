@@ -14,7 +14,7 @@ final class ProgramBalanceViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Balance"
+    var title: String = "Equity"
     var programId: String?
     
     var router: ProgramRouter!

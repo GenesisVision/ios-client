@@ -41,7 +41,22 @@ class Router {
     //for authorized user
     weak var rootTabBarController: BaseTabBarController?
     
-    weak var navigationController: UINavigationController?
+    weak var navController: UINavigationController?
+        
+    weak var navigationController: UINavigationController? {
+        guard let rootTabBarController = rootTabBarController else {
+            guard let navController = navController else {
+                return BaseNavigationController()
+            }
+            
+            return navController
+        }
+        guard let navigationController =  rootTabBarController.selectedViewController as? UINavigationController else {
+            return BaseNavigationController()
+        }
+        
+        return navigationController
+    }
     
     var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
@@ -68,8 +83,11 @@ class Router {
         self.investorDashboardViewController = parentRouter?.investorDashboardViewController
         self.managerDashboardViewController = parentRouter?.managerDashboardViewController
         
-        self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
+        
+        if rootTabBarController == nil {
+            self.navController = navigationController != nil ? navigationController : parentRouter?.navigationController
+        }
         
         self.currentController = topViewController()
     }
@@ -302,19 +320,16 @@ extension Router {
     
     private func showProgramDetails(with programId: String) {
         guard let viewController = getProgramViewController(with: programId) else { return }
-        navigationController = rootTabBarController?.selectedViewController as? UINavigationController 
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showFundDetails(with fundId: String) {
         guard let viewController = getFundViewController(with: fundId) else { return }
-        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showManagerDetails(with managerId: String) {
         guard let viewController = getManagerViewController(with: managerId) else { return }
-        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -340,7 +355,6 @@ extension Router {
         let router = NotificationListRouter(parentRouter: self)
         viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
         viewController.hidesBottomBarWhenPushed = true
-        navigationController = rootTabBarController?.selectedViewController as? UINavigationController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
