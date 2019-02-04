@@ -122,11 +122,7 @@ extension NotificationsSettingsViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard indexPath.section > 0 else {
-            return false
-        }
-        
-        return true
+        return viewModel.canEditRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

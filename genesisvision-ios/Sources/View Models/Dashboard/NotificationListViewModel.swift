@@ -24,7 +24,7 @@ final class NotificationListViewModel {
     var take = ApiKeys.take + 38
     var totalCount = 0 {
         didSet {
-            notifiactionsCount = "\(totalCount) notifiactions"
+            notifiactionsCount = "\(totalCount) notifications"
         }
     }
     
@@ -86,11 +86,10 @@ extension NotificationListViewModel {
 extension NotificationListViewModel {
     // MARK: - Public methods
     func didHighlightRowAt(at indexPath: IndexPath) -> Bool {
-        guard !viewModels.isEmpty else {
+        guard !viewModels.isEmpty, let selectedModel = model(for: indexPath) else {
             return false
         }
         
-        let selectedModel = viewModels[indexPath.row]
         let notification = selectedModel.notification
         if (notification.assetId?.uuidString) != nil {
             return true
@@ -100,11 +99,10 @@ extension NotificationListViewModel {
     }
     
     func didSelectNotitifaction(at indexPath: IndexPath) {
-        guard !viewModels.isEmpty else {
+        guard !viewModels.isEmpty, let selectedModel = model(for: indexPath) else {
             return
         }
         
-        let selectedModel = viewModels[indexPath.row]
         let notification = selectedModel.notification
         if let assetId = notification.assetId?.uuidString, let type = notification.assetType, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
@@ -119,8 +117,9 @@ extension NotificationListViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at indexPath: IndexPath) -> Bool {
-        let rowCount = numberOfRows(in: indexPath.section)
-        if rowCount - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
+        if numberOfSections() == indexPath.section + 1
+            && numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row
+            && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

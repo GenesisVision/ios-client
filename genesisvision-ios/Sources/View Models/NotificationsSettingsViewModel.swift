@@ -170,6 +170,14 @@ final class NotificationsSettingsViewModel {
         }
     }
     
+    func canEditRow(at indexPath: IndexPath) -> Bool {
+        guard indexPath.section > 0, type != .all else {
+            return false
+        }
+        
+        return true
+    }
+    
     func didSelectRow(at indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .programs:

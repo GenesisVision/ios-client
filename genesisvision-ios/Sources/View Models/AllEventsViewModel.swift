@@ -95,11 +95,10 @@ extension AllEventsViewModel {
     }
     
     func didSelectPortfolioEvents(at indexPath: IndexPath) {
-        guard !viewModels.isEmpty else {
+        guard !viewModels.isEmpty, let selectedModel = model(for: indexPath) else {
             return
         }
         
-        let selectedModel = viewModels[indexPath.row]
         let event = selectedModel.dashboardPortfolioEvent
         if let assetId = event.assetId?.uuidString, let type = event.assetType, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
@@ -118,8 +117,9 @@ extension AllEventsViewModel {
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at indexPath: IndexPath) -> Bool {
-        let rowCount = numberOfRows(in: indexPath.section)
-        if rowCount - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
+        if numberOfSections() == indexPath.section + 1
+            && numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row
+            && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

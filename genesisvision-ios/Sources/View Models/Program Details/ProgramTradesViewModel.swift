@@ -107,8 +107,9 @@ extension ProgramTradesViewModel {
     }
     
     func fetchMore(at indexPath: IndexPath) -> Bool {
-        let rowCount = numberOfRows(in: indexPath.section)
-        if rowCount - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
+        if numberOfSections() == indexPath.section + 1
+            && numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row
+            && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
