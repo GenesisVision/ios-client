@@ -24,6 +24,7 @@ class DashboardViewController: BaseViewController {
     @IBOutlet weak var assetsView: UIView!
     
     @IBOutlet weak var selectedChartAssetsView: SelectedChartAssetsView!
+    @IBOutlet weak var selectedChartAssetsViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var selectedChartAssetsViewBottomConstraint: NSLayoutConstraint! {
         didSet {
             switch UIDevice.current.screenType {
@@ -65,7 +66,6 @@ class DashboardViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         view.bringSubview(toFront: selectedChartAssetsView)
-//        selectedChartAssetsView.bringSubview(toFront: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,7 +115,7 @@ class DashboardViewController: BaseViewController {
     }
     
     private func setup() {
-        selectedChartAssetsView?.alpha = 0.0
+//        selectedChartAssetsView?.alpha = 0.0
         
         setupPullToRefresh(scrollView: scrollView)
         bottomViewType = .dateRange
