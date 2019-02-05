@@ -280,10 +280,6 @@ extension FundInvestViewController: NumpadViewProtocol {
         return self.amountToInvestValueLabel
     }
     
-    var enteredAmountValue: Double {
-        return amountToInvestValue
-    }
-    
     func textLabelDidChange(value: Double?) {
         guard let value = value, value <= availableToInvestValue else { return }
         

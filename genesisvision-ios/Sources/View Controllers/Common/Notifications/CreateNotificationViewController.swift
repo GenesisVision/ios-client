@@ -260,11 +260,7 @@ extension CreateNotificationViewController: NumpadViewProtocol {
     var textLabel: UILabel {
         return self.profitAmountValueLabel
     }
-    
-    var enteredAmountValue: Double {
-        return enteredProfitValue
-    }
-    
+   
     func textLabelDidChange(value: Double?) {
         guard let value = value else { return }
         

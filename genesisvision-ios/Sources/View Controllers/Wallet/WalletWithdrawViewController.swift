@@ -384,10 +384,6 @@ extension WalletWithdrawViewController: NumpadViewProtocol {
         return self.amountToWithdrawValueLabel
     }
     
-    var enteredAmountValue: Double {
-        return amountToWithdrawValue
-    }
-    
     func textLabelDidChange(value: Double?) {
         guard let value = value, value <= availableInWalletValue else { return }
         

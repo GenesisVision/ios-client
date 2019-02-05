@@ -574,10 +574,6 @@ open class BottomSheet {
                 case .began:
                     scrollView?.isScrollEnabled = false
                 case .changed:
-//                    if ((containerViewHeightConstraint?.constant ?? 0) - initializeHeight > moveRange.up) && !isScrollEnabled {
-//                        return
-//                    }
-                    
                     containerView.frame.origin.y = max(0, containerView.frame.origin.y + point.y)
                     containerViewHeightConstraint?.constant = max(initializeHeight, maxHeight - containerView.frame.origin.y)
                     gestureRecognizer.setTranslation(.zero, in: gestureView)

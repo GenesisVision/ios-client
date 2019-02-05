@@ -197,7 +197,7 @@ class WalletDepositViewController: BaseViewController {
         alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
             selectedIndexRow = index.row
             self?.viewModel.updateWalletCurrencyIndex(selectedIndexRow)
-            
+            self?.numpadView.clearAction()
             self?.updateUI()
         }
         
@@ -235,11 +235,7 @@ extension WalletDepositViewController: NumpadViewProtocol {
     var textLabel: UILabel {
         return self.amountToDepositValueLabel
     }
-    
-    var enteredAmountValue: Double {
-        return amountToDepositValue
-    }
-    
+     
     func textLabelDidChange(value: Double?) {
         guard let value = value else { return }
         

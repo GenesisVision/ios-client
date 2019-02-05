@@ -16,6 +16,7 @@ protocol NumpadViewProtocol: class {
     var maxAmount: Double? { get }
     var minAmount: Double? { get }
     
+    func clearAction()
     func textLabelDidChange(value: Double?)
     func onClearClicked(view: NumpadView)
     func onSeparatorClicked(view: NumpadView)
@@ -115,6 +116,15 @@ extension NumpadViewProtocol {
             changedActive(value: true)
         }
     }
+    
+    func clearAction() {
+        textLabel.text = textPlaceholder
+        
+        if let text = textLabel.text {
+            textLabelDidChange(value: text.doubleValue)
+            updateNumPadState(text)
+        }
+    }
 }
 
 enum NumpadViewType {
@@ -181,6 +191,10 @@ class NumpadView: UIView {
                 button.bgColor = buttonBackgroundColor
             }
         }
+    }
+    
+    func clearAction() {
+        delegate?.clearAction()
     }
     
     @IBAction func clearButtonAction(_ sender: UIButton) {

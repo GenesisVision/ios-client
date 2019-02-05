@@ -21,7 +21,6 @@ class BalanceLabel: UILabel {
     
     override var text: String? {
         didSet {
-//            print(text ?? "")
         }
     }
     

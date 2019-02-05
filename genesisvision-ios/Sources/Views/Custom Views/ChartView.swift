@@ -290,7 +290,7 @@ class ChartView: CombinedChartView {
         rightAxis.labelFont = UIFont.getFont(.light, size: 13)
 
         //yZeroLine
-        rightAxis.drawZeroLineEnabled = false//chartType == .default
+        rightAxis.drawZeroLineEnabled = false
         rightAxis.zeroLineColor = UIColor.Cell.separator
         rightAxis.zeroLineWidth = 1.0
         rightAxis.zeroLineDashLengths = chartType == .default ? [2.0, 2.0] : [2.0, 6.0]
@@ -306,7 +306,6 @@ class ChartView: CombinedChartView {
         xAxis.avoidFirstLastClippingEnabled = true
         xAxis.drawLimitLinesBehindDataEnabled = false
         xAxis.granularityEnabled = true
-//        xAxis.granularity = 10
         
         xAxis.valueFormatter = DefaultAxisValueFormatter(block: {(index, _) in
             let date = Date(timeIntervalSince1970: index)
