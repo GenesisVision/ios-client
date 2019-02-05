@@ -75,6 +75,8 @@ final class NotificationsSettingsViewModel {
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        guard sections.count > 0 else { return nil }
+        
         let type = sections[indexPath.section]
         switch type {
         case .general:
@@ -91,6 +93,8 @@ final class NotificationsSettingsViewModel {
     }
     
     func removeModel(at indexPath: IndexPath) {
+        guard sections.count > 0 else { return }
+        
         let type = sections[indexPath.section]
         switch type {
         case .custom:
@@ -115,6 +119,8 @@ final class NotificationsSettingsViewModel {
     }
     
     func headerTitle(for section: Int) -> String? {
+        guard sections.count > 0 else { return nil }
+        
         let type = sections[section]
         switch type {
         case .general:
@@ -146,6 +152,8 @@ final class NotificationsSettingsViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
+        guard sections.count > 0 else { return 0.0 }
+        
         let type = sections[section]
         switch type {
         case .general:
@@ -156,6 +164,8 @@ final class NotificationsSettingsViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
+        guard sections.count > 0 else { return 0 }
+        
         switch sections[section] {
         case .general:
             return settingsGeneralViewModels.count
@@ -179,6 +189,8 @@ final class NotificationsSettingsViewModel {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
+        guard sections.count > 0 else { return }
+        
         switch sections[indexPath.section] {
         case .programs:
             guard let viewModel = model(at: indexPath) as? NotificationsSettingsProgramTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
