@@ -13,14 +13,16 @@ final class SettingsViewModel {
     enum SettingsRowType: String, EnumCollection {
         case profile = "Profile"
         
-        case changePassword = "Change Password"
+        case changePassword = "Change password"
         case passcode = "Passcode"
         case biometricID = "Touch ID"
-        case twoFactor = "Two Factor"
+        case twoFactor = "Two-factor authentication"
         
-        case sendFeedback = "Send Feedback"
+        case darkTheme = "Dark theme"
         
-        case signOut = "Log Out"
+        case termsAndConditions = "Terms and conditions"
+        case privacyPolicy = "Privacy policy"
+        case contactUs = "Contact us"
         
         case none
     }
@@ -28,21 +30,24 @@ final class SettingsViewModel {
     enum SettingsSectionType: String {
         case profile
         case security
+        case darkTheme
         case feedback
-        case signOut
     }
     
     // MARK: - Variables
     var title: String = "Settings"
     
+    var pickedImage: UIImage?
+    var pickedImageURL: URL?
+    
     let biometricIDAuthManager = BiometricIDAuthManager.shared
     
     var enablePasscode: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: Constants.UserDefaults.passcodeEnable)
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.passcodeEnable)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.passcodeEnable)
             
             if !newValue {
                 enableBiometricID = newValue
@@ -53,24 +58,33 @@ final class SettingsViewModel {
     var enableBiometricID: Bool {
         get {
             guard !biometricIDAuthManager.domainStateChanged() else {
-                UserDefaults.standard.set(false, forKey: Constants.UserDefaults.biometricEnable)
+                UserDefaults.standard.set(false, forKey: UserDefaultKeys.biometricEnable)
                 return false
             }
             
-            return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.biometricEnable)
         }
         set {
             if newValue {
                 biometricIDAuthManager.updateLastDomainState()
             }
             
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.biometricEnable)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.biometricEnable)
         }
     }
     
     var enableTwoFactor: Bool = false
     var enableBiometricCell: Bool {
         return biometricIDAuthManager.isTouchAuthenticationAvailable && enablePasscode
+    }
+    
+    var enableDarkTheme: Bool {
+        get {
+            return AppearanceController.theme == .darkTheme
+        }
+        set {
+            AppearanceController.theme = newValue ? .darkTheme : .lightTheme
+        }
     }
     
     var biometricTitleText: String {
@@ -88,11 +102,10 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
-    var sections: [SettingsSectionType] = [.profile, .security, .feedback, .signOut]
+    var sections: [SettingsSectionType] = [.profile, .security, .feedback]
     var rows: [SettingsSectionType : [SettingsRowType]] = [.profile : [.profile],
                                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
-                                                           .feedback : [.sendFeedback],
-                                                           .signOut : [.signOut]]
+                                                           .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
     
     var fullName: String? {
         let firstName = self.profileModel?.firstName ?? ""
@@ -114,6 +127,12 @@ final class SettingsViewModel {
         guard let email = profileModel?.email else { return "" }
         
         return email
+    }
+    
+    var verificationStatus: ProfileFullViewModel.VerificationStatus? {
+        guard let verificationStatus = profileModel?.verificationStatus else { return nil }
+        
+        return verificationStatus
     }
     
     // MARK: - Init
@@ -141,12 +160,8 @@ final class SettingsViewModel {
     
     func fetchTwoFactorStatus(completion: @escaping CompletionBlock) {
         AuthManager.getTwoFactorStatus(completion: { [weak self] (viewModel) in
-            if let twoFactorModel = viewModel {
-                self?.twoFactorModel = twoFactorModel
-                completion(.success)
-            }
-            
-            completion(.failure(errorType: .apiError(message: nil)))
+            self?.twoFactorModel = viewModel
+            completion(.success)
             }, completionError: completion)
     }
     
@@ -156,6 +171,15 @@ final class SettingsViewModel {
         guard let rows = rows[sectionType] else { return nil }
         
         return rows[indexPath.row]
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0, 1:
+            return 0.0
+        default:
+            return 20.0
+        }
     }
     
     // MARK: - Navigation
@@ -178,6 +202,10 @@ final class SettingsViewModel {
     
     func enableTwoFactor(_ value: Bool) {
         router.show(routeType: .enableTwoFactor(value))
+    }
+    
+    func enableDarkTheme(_ value: Bool) {
+        AppearanceController.theme = value ? .darkTheme : .lightTheme
     }
     
     func sendFeedback() {
@@ -212,6 +240,26 @@ final class SettingsViewModel {
     private func forceSignOut() {
         clearData()
         router.show(routeType: .forceSignOut)
+    }
+    
+    func saveProfilePhoto(completion: @escaping CompletionBlock) {
+        guard let pickedImageURL = pickedImageURL else {
+            return completion(.failure(errorType: .apiError(message: nil)))
+        }
+        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.profileModel?.avatar = uuidString
+                    completion(.success)
+                case .failure(let errorType):
+                    print(errorType)
+                    break
+                }
+            })
+        }, errorCompletion: completion)
     }
     
     @objc private func signOutNotification(notification: Notification) {

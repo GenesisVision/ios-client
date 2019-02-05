@@ -17,25 +17,41 @@ class AuthTwoFactorSignInViewController: BaseViewController {
         didSet {
             numpadView.delegate = self
             numpadView.type = .number
-            numpadView.backgroundColor = UIColor.BaseView.bg
-            numpadView.buttonBackgroundColor = UIColor.Background.main            
         }
     }
     
     // MARK: - Labels
-    @IBOutlet weak var authenticatorCodeLabel: UILabel! {
+    @IBOutlet weak var authenticatorCodeLabel: TitleLabel! {
         didSet {
-            authenticatorCodeLabel.font = UIFont.getFont(.light, size: 72)
+            authenticatorCodeLabel.font = UIFont.getFont(.medium, size: 32)
             authenticatorCodeLabel.text = viewModel.labelPlaceholder
         }
     }
     
-    @IBOutlet weak var recoveryCodeSwitch: UISwitch!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var recoveryCodeSwitch: UISwitch! {
+        didSet {
+            recoveryCodeSwitch.onTintColor = UIColor.primary
+            recoveryCodeSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            recoveryCodeSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
+    @IBOutlet weak var recoveryCodeTitleLabel: TitleLabel! {
+        didSet {
+            recoveryCodeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.text = "Enter the 2F authentication code "
+            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
+    @IBOutlet weak var underLineView: UIView! {
+        didSet {
+            underLineView.backgroundColor = UIColor.Border.forButton
+        }
+    }
     @IBOutlet weak var logoImageView: UIImageView!
-    
-    // MARK: - Buttons
-    @IBOutlet weak var signInButton: ActionButton!
     
     // MARK: - Variables
     var enteredValue: String = ""
@@ -45,7 +61,7 @@ class AuthTwoFactorSignInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,15 +117,19 @@ class AuthTwoFactorSignInViewController: BaseViewController {
 }
 
 extension AuthTwoFactorSignInViewController: NumpadViewProtocol {
+    var maxAmount: Double? {
+        return nil
+    }
+    
     var textPlaceholder: String? {
         return viewModel.labelPlaceholder
     }
     
-    var numbersLimit: Int {
+    var numbersLimit: Int? {
         return viewModel.numbersLimit
     }
     
-    var currency: String? {
+    var currency: CurrencyType? {
         return nil
     }
     

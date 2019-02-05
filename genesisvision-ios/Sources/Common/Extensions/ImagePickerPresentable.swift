@@ -28,9 +28,10 @@ extension ImagePickerPresentable where Self: UIViewController {
             pickerController.sourceType    = type
             pickerController.allowsEditing = true
             
-            pickerController.navigationBar.barTintColor = UIColor.Background.main
-            pickerController.navigationBar.tintColor = UIColor.primary
-            pickerController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.primary]
+            pickerController.navigationBar.barStyle = .black
+            pickerController.navigationBar.barTintColor = UIColor.BaseView.bg
+            pickerController.navigationBar.tintColor = UIColor.Cell.title
+            pickerController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Cell.title, NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18.0)]
             
             self.present(pickerController, animated: true)
         }
@@ -40,7 +41,7 @@ extension ImagePickerPresentable where Self: UIViewController {
         ImagePickerHelper.shared.delegate = self
         
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        optionMenu.view.tintColor = UIColor.primary
+        optionMenu.view.tintColor = UIColor.Cell.headerBg
         
         if let action = self.pickerControllerActionFor(for: .camera, title: "Take Photo") {
             optionMenu.addAction(action)
@@ -95,27 +96,49 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var data: Data?
-        let fileName = "test.jpg"
+        let fileName = "avatar.jpg"
         var selectedImage: UIImage?
         
-        if let refURL = info[UIImagePickerControllerReferenceURL] as! URL? {
-            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if #available(iOS 11.0, *) {
+            if let refURL = info[UIImagePickerControllerImageURL] as! URL? {
+                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                    data = UIImageJPEGRepresentation(image, 0.5)
+                    selectedImage = image
+                } else {
+                    do {
+                        data = try Data(contentsOf: refURL)
+                    } catch {
+                        print("Unable to load data: \(error)")
+                    }
+                    
+                    if let data = data {
+                        selectedImage = UIImage(data: data)
+                    }
+                }
+            } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
                 data = UIImageJPEGRepresentation(image, 0.5)
                 selectedImage = image
-            } else {
-                do {
-                    data = try Data(contentsOf: refURL)
-                } catch {
-                    print("Unable to load data: \(error)")
-                }
-                
-                if let data = data {
-                    selectedImage = UIImage(data: data)
-                }
             }
-        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            data = UIImageJPEGRepresentation(image, 0.5)
-            selectedImage = image
+        } else {
+            if let refURL = info[UIImagePickerControllerReferenceURL] as! URL? {
+                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                    data = UIImageJPEGRepresentation(image, 0.5)
+                    selectedImage = image
+                } else {
+                    do {
+                        data = try Data(contentsOf: refURL)
+                    } catch {
+                        print("Unable to load data: \(error)")
+                    }
+                    
+                    if let data = data {
+                        selectedImage = UIImage(data: data)
+                    }
+                }
+            } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                data = UIImageJPEGRepresentation(image, 0.5)
+                selectedImage = image
+            }
         }
         
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)

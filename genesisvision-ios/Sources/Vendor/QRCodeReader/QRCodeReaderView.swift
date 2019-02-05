@@ -91,7 +91,7 @@ final public class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[cv]|", options: [], metrics: nil, views: views))
 
     if showCancelButton {
-      addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[cv][cb(40)]|", options: [], metrics: nil, views: views))
+      addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[cv][cb(60)]|", options: [], metrics: nil, views: views))
       addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[cb]-|", options: [], metrics: nil, views: views))
     }
     else {

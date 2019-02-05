@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
-    return URL(string: Constants.Api.filePath + fileName)
+    return URL(string: ApiKeys.filePath + fileName)
 }
 
 func impactFeedback(style: UIImpactFeedbackStyle = .light) {
@@ -34,15 +34,26 @@ func getPeriodLeft(endOfPeriod: Date) -> (Int, String?) {
     let hours = minutes / 60
     let days = hours / 24
     
-    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "minutes" : seconds >= 0 ? "seconds" : nil
+    let periodLeftTimeString: String? = days > 0 ? "days" : hours > 0 ? "hours" : minutes > 0 ? "min" : seconds >= 0 ? "sec" : nil
     let periodLeftValue: Int = days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : seconds >= 0 ? seconds : -1
     
     return (periodLeftValue, periodLeftTimeString)
 }
 
-func getDecimalCount(for currencyValue: String?) -> Int {
-    guard let currencyValue = currencyValue,
-        let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else { return 2 }
+func getPeriodDuration(from minutes: Int) -> String? {
+    let hours = minutes / 60
+    let days = hours / 24
+    let weeks = days / 7
+    let months = days / 31
+    
+    let periodLeftTimeString: String = months > 0 ? "m" : weeks > 0 ? "w" : days > 0 ? "d" : hours > 0 ? "h" : minutes > 0 ? "min" : ""
+    let periodLeftValue: Int = months > 0 ? months : weeks > 0 ? weeks : days > 0 ? days : hours > 0 ? hours : minutes > 0 ? minutes : -1
+    
+    return periodLeftValue > 0 ? "\(periodLeftValue) " + periodLeftTimeString : nil
+}
+
+func getDecimalCount(for currencyType: CurrencyType?) -> Int {
+    guard let currencyType = currencyType else { return 2 }
 
     return currencyType.currencyLenght
 }
@@ -51,10 +62,21 @@ enum LineStyle {
     case solid, dashed
 }
 
+func getChangePercent(oldValue: Double, newValue: Double) -> String {
+    let percentText = oldValue > 0.0 ? (Double(newValue - oldValue) / oldValue * 100.0).rounded(withType: .undefined).toString() : "∞"
+    return percentText + "%"
+    
+}
+
+func getChangePercent(oldValue: Double, newValue: Double) -> Double {
+    let percent = oldValue > 0.0 ? Double(newValue - oldValue) / oldValue * 100.0 : 0.0
+    return percent
+}
+
 func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineStyle, color: UIColor) {
     if let sublayers = view.layer.sublayers {
         for layer in sublayers {
-            if layer.name == Constants.Keys.addedLineLayer {
+            if layer.name == Keys.addedLineLayer {
                 layer.removeFromSuperlayer()
             }
         }
@@ -64,7 +86,7 @@ func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineSty
     shapeLayer.fillColor = UIColor.clear.cgColor
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.lineWidth = 1.0
-    shapeLayer.name = Constants.Keys.addedLineLayer
+    shapeLayer.name = Keys.addedLineLayer
     shapeLayer.lineJoin = kCALineJoinRound
     
     if style == .dashed {
@@ -131,7 +153,7 @@ func getFeedbackSubject() -> String {
 }
 
 func newVersionIsAvailable(_ lastVersion: String) -> Bool {
-    if let skipThisVersion = UserDefaults.standard.object(forKey: Constants.UserDefaults.skipThisVersion) as? String, skipThisVersion == lastVersion {
+    if let skipThisVersion = UserDefaults.standard.object(forKey: UserDefaultKeys.skipThisVersion) as? String, skipThisVersion == lastVersion {
         print("SkipThisVersion: \(skipThisVersion)")
         return false
     }
@@ -153,9 +175,9 @@ func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx
 }
 
 func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
-    PlatformManager.getPlatformStatus(completion: { (model) in
-        guard let platformStatus = model,
-            let iOSVersion = platformStatus.iOSVersion,
+    PlatformManager.shared.getPlatformInfo(completion: { (model) in
+        guard let platformInfo = model,
+            let iOSVersion = platformInfo.iOSVersion,
             let lastVersion = iOSVersion.lastVersion,
             newVersionIsAvailable(lastVersion) else { return }
         
@@ -165,12 +187,12 @@ func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
 
 func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, completion: @escaping (_ enable: Bool) -> Void) {
     AuthManager.getTwoFactorStatus(completion: { (model) in
-        let launchedBefore = UserDefaults.standard.bool(forKey: Constants.UserDefaults.launchedBefore)
+        let launchedBefore = UserDefaults.standard.bool(forKey: UserDefaultKeys.launchedBefore)
         
-        guard let twoFactorEnabled = model?.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
+        guard let twoFactorEnabled = model.twoFactorEnabled, !twoFactorEnabled, !launchedBefore else { return completion(false) }
         
         print("First launch")
-        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.launchedBefore)
+        UserDefaults.standard.set(true, forKey: UserDefaultKeys.launchedBefore)
         
         viewController.showTwoFactorEnableAlert(completion: completion)
     }) { (result) in
@@ -181,4 +203,16 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
             ErrorHandler.handleError(with: errorType)
         }
     }
+}
+
+func getSelectedCurrency() -> String {
+    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaultKeys.selectedCurrency) {
+        return selectedCurrency
+    }
+    
+    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.usd.rawValue
+}
+
+func updateSelectedCurrency(_ selectedCurrency: String) {
+    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaultKeys.selectedCurrency)
 }

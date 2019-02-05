@@ -9,9 +9,10 @@
 final class AuthChangePasswordViewModel {
     
     // MARK: - Variables
-    var title: String = "Change Password"
+    var title: String = "Change password"
     
     private var router: ChangePasswordRouter!
+    let successText = String.Info.changePasswordSuccess
     
     // MARK: - Init
     init(withRouter router: ChangePasswordRouter) {
@@ -24,9 +25,16 @@ final class AuthChangePasswordViewModel {
         router.show(routeType: .changePasswordInfo)
     }
     
+    func goToBack() {
+        router.goToBack(animated: true)
+    }
+    
     // MARK: - API
     func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
-        AuthDataProvider.changePassword(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword, completion: completion)
+        AuthDataProvider.changePassword(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword, completion: { (token) in
+            AuthManager.authorizedToken = token
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }
 

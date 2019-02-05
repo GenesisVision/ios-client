@@ -11,20 +11,30 @@ import Foundation
 
 open class Broker: Codable {
 
-    public var id: UUID?
     public var name: String?
     public var description: String?
     public var logo: String?
-    public var registrationDate: Date?
+    public var terms: String?
+    public var assets: String?
+    public var fee: Double?
+    public var leverageMin: Int?
+    public var leverageMax: Int?
+    public var accountTypes: [BrokerAccountType]?
+    public var isForex: Bool?
 
 
     
-    public init(id: UUID?, name: String?, description: String?, logo: String?, registrationDate: Date?) {
-        self.id = id
+    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?, isForex: Bool?) {
         self.name = name
         self.description = description
         self.logo = logo
-        self.registrationDate = registrationDate
+        self.terms = terms
+        self.assets = assets
+        self.fee = fee
+        self.leverageMin = leverageMin
+        self.leverageMax = leverageMax
+        self.accountTypes = accountTypes
+        self.isForex = isForex
     }
     
 
@@ -34,11 +44,16 @@ open class Broker: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(name, forKey: "name")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
+        try container.encodeIfPresent(terms, forKey: "terms")
+        try container.encodeIfPresent(assets, forKey: "assets")
+        try container.encodeIfPresent(fee, forKey: "fee")
+        try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
+        try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
+        try container.encodeIfPresent(accountTypes, forKey: "accountTypes")
+        try container.encodeIfPresent(isForex, forKey: "isForex")
     }
 
     // Decodable protocol methods
@@ -46,11 +61,16 @@ open class Broker: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         name = try container.decodeIfPresent(String.self, forKey: "name")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
+        terms = try container.decodeIfPresent(String.self, forKey: "terms")
+        assets = try container.decodeIfPresent(String.self, forKey: "assets")
+        fee = try container.decodeIfPresent(Double.self, forKey: "fee")
+        leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
+        leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
+        accountTypes = try container.decodeIfPresent([BrokerAccountType].self, forKey: "accountTypes")
+        isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
     }
 }
 

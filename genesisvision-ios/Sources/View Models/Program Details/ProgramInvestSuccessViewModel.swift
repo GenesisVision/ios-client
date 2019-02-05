@@ -13,7 +13,7 @@ final class ProgramInvestSuccessViewModel: InfoViewModel {
     var text: String = String.Info.investmentRequestSuccess
     var investedAmount: Double = 0.0
     
-    var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
+    var iconImage: UIImage? = #imageLiteral(resourceName: "email-confirmed-icon")
     var backgroundColor: UIColor = UIColor.InfoView.bg
     var textColor: UIColor = UIColor.InfoView.text
     var tintColor: UIColor = UIColor.InfoView.tint

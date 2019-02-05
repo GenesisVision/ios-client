@@ -13,80 +13,123 @@ class SignUpViewController: BaseViewController {
 
     var viewModel: AuthSignUpViewModel!
     
-    // MARK: - TextFields
-    @IBOutlet var usernameTextField: DesignableUITextField! {
+    // MARK: - Outlets
+    @IBOutlet weak var usernameStackView: UIStackView! {
         didSet {
-            usernameTextField.font = UIFont.getFont(.regular, size: 18)
-            usernameTextField.setClearButtonWhileEditing()
-            usernameTextField.setLeftImageView()
-            usernameTextField.delegate = self
-            usernameTextField.isHidden = isInvestorApp
+            usernameStackView.isHidden = isInvestorApp
         }
     }
     
-    @IBOutlet var emailTextField: DesignableUITextField! {
+    @IBOutlet weak var usernameTitleLabel: SubtitleLabel! {
         didSet {
-            emailTextField.font = UIFont.getFont(.regular, size: 18)
+            usernameTitleLabel.text = "Username"
+        }
+    }
+    @IBOutlet weak var usernameTextField: DesignableUITextField! {
+        didSet {
+            usernameTextField.setClearButtonWhileEditing()
+            usernameTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var emailTitleLabel: SubtitleLabel! {
+        didSet {
+            emailTitleLabel.text = "Email"
+        }
+    }
+    @IBOutlet weak var emailTextField: DesignableUITextField! {
+        didSet {
             emailTextField.setClearButtonWhileEditing()
-            emailTextField.setLeftImageView()
             emailTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
+            passwordTitleLabel.text = "Password"
+        }
+    }
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
+        didSet {
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
     }
-    @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var confirmTitleLabel: SubtitleLabel! {
         didSet {
-            confirmPasswordTextField.font = UIFont.getFont(.regular, size: 18)
+            confirmTitleLabel.text = "Confirm password"
+        }
+    }
+    @IBOutlet weak var confirmPasswordTextField: DesignableUITextField! {
+        didSet {
             confirmPasswordTextField.setClearButtonWhileEditing()
-            confirmPasswordTextField.setLeftImageView()
             confirmPasswordTextField.delegate = self
         }
     }
     
     // MARK: - Buttons
-    @IBOutlet var signUpButton: ActionButton!
+    @IBOutlet weak var privacyPolicyButton: UIButton! {
+        didSet {
+            privacyPolicyButton.tintColor = UIColor.Cell.title
+            privacyPolicyButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            privacyPolicyButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
+            privacyPolicyButton.setTitle("I accept the Privacy Policy", for: .normal)
+        }
+    }
+    @IBOutlet weak var termsButton: UIButton! {
+        didSet {
+            termsButton.tintColor = UIColor.Cell.title
+            termsButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            termsButton.titleLabel?.font = UIFont.getFont(.regular, size: 12.0)
+            termsButton.setTitle("I accept the Terms of Service", for: .normal)
+        }
+    }
+    @IBOutlet weak var notAmericanLabel: SubtitleLabel! {
+        didSet {
+            notAmericanLabel.textColor = UIColor.Cell.title
+            notAmericanLabel.text = "I certify that I am not a resident or citizen of the USA"
+        }
+    }
+    
+    @IBOutlet weak var privacyPolicySwitchButton: UIButton! {
+        didSet {
+            privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            privacyPolicySwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
+    @IBOutlet weak var termsSwitchButton: UIButton! {
+        didSet {
+            termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
+    @IBOutlet weak var notAmericanSwitchButton: UIButton! {
+        didSet {
+            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
+    
+    @IBOutlet weak var signUpButton: ActionButton! {
+        didSet {
+            signUpButton.setEnabled(false)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if DEBUG
-        
-        
-            if isInvestorApp {
-                usernameTextField.text = ""
-                emailTextField.text = "george@genesis.vision"
-                passwordTextField.text = "qwerty"
-                confirmPasswordTextField.text = "qwerty"
-            } else {
-                usernameTextField.text = "George"
-                emailTextField.text = "george+1@genesis.vision"
-                passwordTextField.text = "qwerty"
-                confirmPasswordTextField.text = "qwerty"
-            }
-        #endif
         
         setupUI()
     }
 
     // MARK: - Private methods
     private func setupUI() {
-        usernameTextField.setBottomLine()
-        emailTextField.setBottomLine()
-        passwordTextField.setBottomLine()
-        confirmPasswordTextField.setBottomLine()
+        
     }
     
     
@@ -109,16 +152,35 @@ class SignUpViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showConfirmationVC()
+                self?.showSignUpInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }
     
+    private func showSignUpInfoVC() {
+        showBottomSheet(.success, title: viewModel.successText) { [weak self] (success) in
+            self?.viewModel.goToBack()
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         sighUpMethod()
+    }
+    
+    @IBAction func showPrivacyButtonAction(_ sender: UIButton) {
+        viewModel.showPrivacy()
+    }
+    
+    @IBAction func showTermsButtonAction(_ sender: UIButton) {
+        viewModel.showTerms()
+    }
+    
+    @IBAction func switchButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && termsSwitchButton.isSelected && notAmericanSwitchButton.isSelected)
     }
 }
 
@@ -127,8 +189,12 @@ extension SignUpViewController: UITextFieldDelegate {
         switch textField {
         case confirmPasswordTextField:
             sighUpMethod()
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            confirmPasswordTextField.becomeFirstResponder()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

@@ -8,7 +8,7 @@
 
 final class CreateProgramTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
-    var brokersViewModel: BrokersViewModel?
+    var brokersViewModel: BrokersInfo?
     
     // MARK: - Init
     init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate) {
@@ -29,17 +29,17 @@ final class CreateProgramTabmanViewModel: TabmanViewModel {
         if let router = router as? CreateProgramTabmanRouter {
             if let vc = router.getCreateProgramFirstVC(with: self) {
                 addController(vc)
-                addItem(vc.viewModel.title)
+//                addItem(vc.viewModel.title)
             }
             
             if let vc = router.getCreateProgramSecondVC(with: self, brokersViewModel: brokersViewModel) {
                 addController(vc)
-                addItem(vc.viewModel.title)
+//                addItem(vc.viewModel.title)
             }
             
             if let vc = router.getCreateProgramThirdVC(with: self) {
                 addController(vc)
-                addItem(vc.viewModel.title)
+//                addItem(vc.viewModel.title)
             }
             
             reloadPages()
@@ -47,9 +47,9 @@ final class CreateProgramTabmanViewModel: TabmanViewModel {
     }
     
     private func reloadDetails() {
-        if let vc = viewControllers[1] as? CreateProgramSecondViewController, let brokersViewModel = brokersViewModel {
-            vc.viewModel.brokersViewModel = brokersViewModel
-        }
+//        if let vc = viewControllers[1] as? CreateProgramSecondViewController, let brokersViewModel = brokersViewModel {
+//            vc.viewModel.brokersViewModel = brokersViewModel
+//        }
     }
     
     private func getBrokers() {

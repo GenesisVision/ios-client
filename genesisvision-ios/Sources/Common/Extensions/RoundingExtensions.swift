@@ -20,12 +20,21 @@ extension Double {
         return (self * decimalValue).rounded() / decimalValue
     }
     
-    func rounded(withType type: CurrencyType) -> Double {
-        return rounded(toPlaces: type.currencyLenght)
+    func rounded(withType type: CurrencyType, specialForGVT: Bool? = false) -> Double {
+        switch type {
+        case .gvt:
+            guard let specialForGVT = specialForGVT, specialForGVT else {
+                return rounded(toPlaces: type.currencyLenght)
+            }
+            
+            return rounded(toPlaces: self > 1.0 ? 0 : 1)
+        default:
+            return rounded(toPlaces: type.currencyLenght)
+        }
     }
     
     func rounded(withCurrency currencyValue: String?) -> Double {
-        guard let currencyValue = currencyValue, let currency = InvestmentProgramDetails.Currency(rawValue: currencyValue), let currencyType = CurrencyType(currency: currency) else {
+        guard let currencyValue = currencyValue, let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(rawValue: currency.rawValue) else {
             return rounded(withType: .usd)
         }
         

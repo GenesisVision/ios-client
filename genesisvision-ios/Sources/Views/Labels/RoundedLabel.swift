@@ -10,90 +10,83 @@ import UIKit.UILabel
 
 class RoundedLabel: UILabel {
     
-    var topInset: CGFloat = 4.0
-    var bottomInset: CGFloat = 4.0
-    var leftInset: CGFloat = 8
-    var rightInset: CGFloat = 8
-    
+    var edgeInsets: UIEdgeInsets!
+
     // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        backgroundColor = .clear
-        font = UIFont.getFont(.bold, size: 10)
-
-        layer.backgroundColor = UIColor.Font.primary.cgColor
-        textColor = UIColor.Font.white
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        self.commonInit()
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    func commonInit() {
+        self.backgroundColor = .clear
+        self.setProperties()
+    }
+    
+    func setProperties(font: UIFont? = UIFont.getFont(.semibold, size: 12),
+                       textColor: UIColor? = UIColor.Cell.title,
+                       backgroundColor: UIColor? = UIColor.Cell.title.withAlphaComponent(0.3),
+                       edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)) {
+        self.font = font
+        self.textColor = textColor
+        self.backgroundColor = backgroundColor
+        self.edgeInsets = edgeInsets
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         layer.cornerRadius = bounds.size.height / 2
         layer.masksToBounds = true
     }
     
     override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets.init(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))
     }
     
     override var intrinsicContentSize: CGSize {
         var intrinsicSuperViewContentSize = super.intrinsicContentSize
-        intrinsicSuperViewContentSize.height += topInset + bottomInset
-        intrinsicSuperViewContentSize.width += leftInset + rightInset
+        intrinsicSuperViewContentSize.height += edgeInsets.top + edgeInsets.bottom
+        intrinsicSuperViewContentSize.width += edgeInsets.left + edgeInsets.right
         return intrinsicSuperViewContentSize
     }
 }
 
 class CurrencyLabel: RoundedLabel {
+    
+    // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    override func commonInit() {
+        super.commonInit()
 
-    var currencyType: CurrencyType = .gvt {
-        didSet {
-            var currencyColor = UIColor.Currency.gvt.cgColor
-            
-            switch currencyType {
-            case .gvt:
-                currencyColor = UIColor.Currency.gvt.cgColor
-            case .btc:
-                currencyColor = UIColor.Currency.btc.cgColor
-            case .eth:
-                currencyColor = UIColor.Currency.eth.cgColor
-            case .eur:
-                currencyColor = UIColor.Currency.eur.cgColor
-            case .usd:
-                currencyColor = UIColor.Currency.usd.cgColor
-            default:
-                break
-            }
-            
-            layer.backgroundColor = currencyColor
+        if let text = text {
+            let currencyType = CurrencyType(rawValue: text)
+            let currencyColor = currencyType?.currencyColor
+            backgroundColor = currencyColor?.withAlphaComponent(0.1)
+            textColor = currencyColor
         }
     }
     
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        var currencyColor = UIColor.Currency.gvt.cgColor
-        
-        switch currencyType {
-        case .gvt:
-            currencyColor = UIColor.Currency.gvt.cgColor
-        case .btc:
-            currencyColor = UIColor.Currency.btc.cgColor
-        case .eth:
-            currencyColor = UIColor.Currency.eth.cgColor
-        case .eur:
-            currencyColor = UIColor.Currency.eur.cgColor
-        case .usd:
-            currencyColor = UIColor.Currency.usd.cgColor
-        default:
-            break
-        }
-        
-        layer.backgroundColor = currencyColor
-        textColor = UIColor.Font.white
+        self.commonInit()
     }
 }
 
@@ -103,35 +96,6 @@ class WhiteCurrencyLabel: RoundedLabel {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        layer.backgroundColor = UIColor.Font.white.cgColor
-        textColor = UIColor.Font.primary
-    }
-}
-
-class TournamentPlaceLabel: RoundedLabel {
-    override var text: String? {
-        didSet {
-            let attachment = NSTextAttachment()
-            attachment.image = #imageLiteral(resourceName: "img_trophy_small_icon")
-            attachment.bounds = CGRect(x: 0.0, y: -4.0, width: 15.0, height: 15.0)
-            let attachmentStr = NSAttributedString(attachment: attachment)
-
-            let mutableAttributedString = NSMutableAttributedString()
-            mutableAttributedString.append(attachmentStr)
-            
-            let textString = NSAttributedString(string: text ?? "", attributes: [.font: UIFont.getFont(.bold, size: 11)])
-            mutableAttributedString.append(textString)
-            
-            self.textAlignment = .center
-            self.attributedText = mutableAttributedString
-        }
-    }
-    
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        layer.backgroundColor = UIColor.Tournament.bg.cgColor
-        textColor = UIColor.Font.white
+        setProperties(textColor: UIColor.Font.primary, backgroundColor: UIColor.Font.white)
     }
 }

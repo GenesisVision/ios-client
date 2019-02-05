@@ -10,11 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import PKHUD
 
-#if DEBUG
-import SimulatorStatusMagic
-#endif
-
-enum ThemeType {
+enum ThemeType: String {
     case `default`, dark
 }
 
@@ -30,24 +26,109 @@ struct NavBarColors {
 }
 
 struct AppearanceController {
-    static var theme: ThemeType = .default
+    enum Theme: Int {
+        case darkTheme, lightTheme
+         
+        var mainColor: UIColor {
+            switch self {
+            case .darkTheme:
+                return UIColor.primary
+            case .lightTheme:
+                return UIColor.primary
+            }
+        }
+        
+        //Customizing the Navigation Bar
+        var barStyle: UIBarStyle {
+            switch self {
+            case .lightTheme:
+                return .black
+            case .darkTheme:
+                return .default
+            }
+        }
+
+        var backgroundColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightBackground
+            case .darkTheme:
+                return UIColor.Common.darkCell
+            }
+        }
+        
+        var secondaryColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+        
+        var titleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.lightTextPrimary
+            case .darkTheme:
+                return UIColor.Common.darkTextPrimary
+            }
+        }
+        var subtitleTextColor: UIColor {
+            switch self {
+            case .lightTheme:
+                return UIColor.Common.darkTextSecondary
+            case .darkTheme:
+                return UIColor.Common.dark
+            }
+        }
+    }
+    
+    static var theme: Theme {
+        get {
+            let colorTheme = UserDefaults.standard.integer(forKey: UserDefaultKeys.colorTheme)
+            guard let themeType = Theme(rawValue: colorTheme) else {
+                return .darkTheme
+            }
+            
+            return themeType
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultKeys.colorTheme)
+        }
+    }
     
     static func setupAppearance() {
-        #if DEBUG
-        SDStatusBarManager.sharedInstance().enableOverrides()
-        #endif
-        
         setupNavigationBar()
-        setupTabBar()
         turnIQKeyboardManager(enable: true, enableAutoToolbar: true, shouldResignOnTouchOutside: true)
         
+        applyTheme()
+        
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
+    }
+    
+    static func applyTheme() {
+        NotificationCenter.default.post(name: .themeChanged, object: nil)
+        
+        let theme = AppearanceController.theme
+        
+        UserDefaults.standard.set(theme.rawValue, forKey: UserDefaultKeys.colorTheme)
+        UserDefaults.standard.synchronize()
+        
+        // You get your current (selected) theme and apply the main color to the tintColor property of your application’s window.
+        let sharedApplication = UIApplication.shared
+        sharedApplication.delegate?.window??.tintColor = UIColor.primary
+        
+        UINavigationBar.appearance().barStyle = theme.barStyle
+        
+        UITabBar.appearance().barStyle = theme.barStyle
+
+        setupTabBar()
         setupSegmentedControl()
         setupPlateCell()
         setupShadowView()
         setupEasyTipView()
-        
-        PKHUD.sharedHUD.dimsBackground = false
-        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
     }
     
     // NavigationBar
@@ -55,19 +136,21 @@ struct AppearanceController {
         let colors = UIColor.NavBar.colorScheme(with: type)
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+                                                            NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18)]
         
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
         }
         
-        UINavigationBar.appearance().tintColor = colors.tintColor
-        UINavigationBar.appearance().backgroundColor = colors.backgroundColor
+        UINavigationBar.appearance().tintColor = colors.textColor
         
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .focused)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .highlighted)
     }
-    
     
     // TabBar
     private static func setupTabBar() {
@@ -82,13 +165,13 @@ struct AppearanceController {
     
     // MARK: - IQKeyboardManager
     private static func turnIQKeyboardManager(enable: Bool, enableAutoToolbar: Bool, shouldResignOnTouchOutside: Bool) {
-        IQKeyboardManager.sharedManager().enable = enable
-        IQKeyboardManager.sharedManager().enableAutoToolbar = enableAutoToolbar
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = shouldResignOnTouchOutside
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 32.0
-        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.primary
-        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "Dismiss"
-        IQKeyboardManager.sharedManager().placeholderFont = UIFont.getFont(.regular, size: 14.0)
+        IQKeyboardManager.shared.enable = enable
+        IQKeyboardManager.shared.enableAutoToolbar = enableAutoToolbar
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = shouldResignOnTouchOutside
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 32.0
+        IQKeyboardManager.shared.toolbarTintColor = UIColor.primary
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Dismiss"
+        IQKeyboardManager.shared.placeholderFont = UIFont.getFont(.regular, size: 14.0)
     }
     
     // MARK: - SegmentedControl

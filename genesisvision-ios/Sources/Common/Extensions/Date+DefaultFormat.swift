@@ -16,16 +16,17 @@ extension Date {
         return dateFormatter.string(from: self)
     }
    
-    static func getFormatStringForChart(for date: Date, chartDurationType: ChartDurationType) -> String {
+    static func getFormatStringForChart(for date: Date, dateRangeType: DateRangeType) -> String {
         let dateFormatter = DateFormatter()
-        switch chartDurationType {
+        switch dateRangeType {
         case .day:
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .short
+            dateFormatter.dateFormat = "hh:mma"
+        case .year, .allTime:
+            dateFormatter.dateFormat = "dd.MM.yy"
         default:
-            dateFormatter.timeStyle = .none
-            dateFormatter.dateStyle = .short
+            dateFormatter.dateFormat = "dd.MM"
         }
+        
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: date)
     }
@@ -48,23 +49,9 @@ extension Date {
     
     var dateAndTimeFormatString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "dd.MM hh:mm a"
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
-    }
-    
-    func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
-        
-        let currentCalendar = Calendar.current
-
-        let unitFlags = Set<Calendar.Component>([comp])
-        
-        let dateComponents = currentCalendar.dateComponents(unitFlags, from: date, to: self)
-
-        guard let seconds = dateComponents.second else { return 0 }
-
-        return seconds
     }
 }
 

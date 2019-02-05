@@ -21,21 +21,21 @@ class AuthTwoFactorTabmanRouter: TabmanRouter {
     }
     
     func getCreateVC(with tabmanViewModel: AuthTwoFactorTabmanViewModel) -> AuthTwoFactorCreateViewController? {
-        guard let viewController = AuthTwoFactorCreateViewController.storyboardInstance(name: .auth) else { return  nil }
+        guard let viewController = AuthTwoFactorCreateViewController.storyboardInstance(.auth) else { return  nil }
         viewController.viewModel = AuthTwoFactorCreateViewModel(withRouter: self, tabmanViewModel: tabmanViewModel)
         
         return viewController
     }
     
     func getTutorialVC(with tabmanViewModel: AuthTwoFactorTabmanViewModel) -> AuthTwoFactorTutorialViewController? {
-        guard let viewController = AuthTwoFactorTutorialViewController.storyboardInstance(name: .auth) else { return  nil }
+        guard let viewController = AuthTwoFactorTutorialViewController.storyboardInstance(.auth) else { return  nil }
         viewController.viewModel = AuthTwoFactorTutorialViewModel(withRouter: self, tabmanViewModel: tabmanViewModel)
         
         return viewController
     }
     
     func getConfirmationVC(with tabmanViewModel: AuthTwoFactorTabmanViewModel) -> AuthTwoFactorConfirmationViewController? {
-        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(name: .auth) else { return  nil }
+        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(.auth) else { return  nil }
         viewController.viewModel = AuthTwoFactorEnableConfirmationViewModel(withRouter: self, tabmanViewModel: tabmanViewModel)
         
         return viewController
@@ -43,7 +43,7 @@ class AuthTwoFactorTabmanRouter: TabmanRouter {
     
     // MARK: - Private methods
     private func getSuccessEnableVC(with recoveryCodes: [String]) -> InfoViewController? {
-        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return nil }
+        guard let viewController = InfoViewController.storyboardInstance(.auth) else { return nil }
         viewController.viewModel = AuthTwoFactorSuccessEnableViewModel(withRouter: self, recoveryCodes: recoveryCodes)
         
         return viewController

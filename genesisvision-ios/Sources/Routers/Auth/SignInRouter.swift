@@ -29,21 +29,21 @@ class SignInRouter: Router {
     // MARK: - Private methods
     // MARK: - Navigation
     private func signUpAction() {
-        guard let viewController = SignUpViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = SignUpViewController.storyboardInstance(.auth) else { return }
         let router = SignUpRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthSignUpViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func forgotPasswordAction() {
-        guard let viewController = ForgotPasswordViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = ForgotPasswordViewController.storyboardInstance(.auth) else { return }
         let router = ForgotPasswordRouter(parentRouter: self, navigationController: navigationController) 
         viewController.viewModel = AuthForgetPasswordViewModel(withRouter: router)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func twoFactorSignInAction(email: String, password: String) {
-        guard let viewController = AuthTwoFactorSignInViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = AuthTwoFactorSignInViewController.storyboardInstance(.auth) else { return }
         let router = AuthTwoFactorSignInRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthTwoFactorSignInViewModel(withRouter: router, email: email, password: password)
         navigationController?.pushViewController(viewController, animated: true)

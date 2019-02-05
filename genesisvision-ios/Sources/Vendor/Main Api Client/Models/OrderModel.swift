@@ -25,23 +25,19 @@ open class OrderModel: Codable {
         case outBy = "OutBy"
     }
     public var id: UUID?
-    public var login: Int64?
-    public var ticket: Int64?
+    public var login: String?
+    public var ticket: String?
     public var symbol: String?
     public var volume: Double?
     public var profit: Double?
     public var direction: Direction?
-    public var dateOpen: Date?
-    public var dateClose: Date?
-    public var priceOpen: Double?
-    public var priceClose: Double?
     public var date: Date?
     public var price: Double?
     public var entry: Entry?
 
 
     
-    public init(id: UUID?, login: Int64?, ticket: Int64?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, dateOpen: Date?, dateClose: Date?, priceOpen: Double?, priceClose: Double?, date: Date?, price: Double?, entry: Entry?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, entry: Entry?) {
         self.id = id
         self.login = login
         self.ticket = ticket
@@ -49,10 +45,6 @@ open class OrderModel: Codable {
         self.volume = volume
         self.profit = profit
         self.direction = direction
-        self.dateOpen = dateOpen
-        self.dateClose = dateClose
-        self.priceOpen = priceOpen
-        self.priceClose = priceClose
         self.date = date
         self.price = price
         self.entry = entry
@@ -72,10 +64,6 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(volume, forKey: "volume")
         try container.encodeIfPresent(profit, forKey: "profit")
         try container.encodeIfPresent(direction, forKey: "direction")
-        try container.encodeIfPresent(dateOpen, forKey: "dateOpen")
-        try container.encodeIfPresent(dateClose, forKey: "dateClose")
-        try container.encodeIfPresent(priceOpen, forKey: "priceOpen")
-        try container.encodeIfPresent(priceClose, forKey: "priceClose")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(price, forKey: "price")
         try container.encodeIfPresent(entry, forKey: "entry")
@@ -87,16 +75,12 @@ open class OrderModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        login = try container.decodeIfPresent(Int64.self, forKey: "login")
-        ticket = try container.decodeIfPresent(Int64.self, forKey: "ticket")
+        login = try container.decodeIfPresent(String.self, forKey: "login")
+        ticket = try container.decodeIfPresent(String.self, forKey: "ticket")
         symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
         volume = try container.decodeIfPresent(Double.self, forKey: "volume")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         direction = try container.decodeIfPresent(Direction.self, forKey: "direction")
-        dateOpen = try container.decodeIfPresent(Date.self, forKey: "dateOpen")
-        dateClose = try container.decodeIfPresent(Date.self, forKey: "dateClose")
-        priceOpen = try container.decodeIfPresent(Double.self, forKey: "priceOpen")
-        priceClose = try container.decodeIfPresent(Double.self, forKey: "priceClose")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         price = try container.decodeIfPresent(Double.self, forKey: "price")
         entry = try container.decodeIfPresent(Entry.self, forKey: "entry")

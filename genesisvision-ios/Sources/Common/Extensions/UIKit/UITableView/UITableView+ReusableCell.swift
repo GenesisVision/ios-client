@@ -17,4 +17,3 @@ extension UITableViewCell: ReusableCell {
         return UINib(nibName: identifier, bundle: nil)
     }
 }
-

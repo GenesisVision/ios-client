@@ -30,6 +30,7 @@ public extension PageboyViewController {
         updateViewControllers(to: [currentViewController],
                               animated: false,
                               async: false,
+                              force: false,
                               completion: nil)
     }
 }
@@ -43,10 +44,15 @@ internal extension PageboyViewController {
                                direction: NavigationDirection = .forward,
                                animated: Bool,
                                async: Bool,
+                               force: Bool,
                                completion: TransitionOperation.Completion?) {
-        guard let pageViewController = self.pageViewController, !isUpdatingViewControllers else {
+        guard let pageViewController = self.pageViewController else {
             return
         }
+        if isUpdatingViewControllers && !force {
+            return
+        }
+        
         
         targetIndex = toIndex
         isUpdatingViewControllers = true
@@ -64,7 +70,7 @@ internal extension PageboyViewController {
         let animateUpdate = animated ? !isUsingCustomTransition : false
         let updateBlock = {
             pageViewController.setViewControllers(viewControllers,
-                                                  direction: direction.pageViewControllerNavDirection,
+                                                  direction: direction.layoutNormalized(isRtL: self.view.layoutIsRightToLeft).pageViewControllerNavDirection,
                                                   animated: animateUpdate,
                                                   completion:
                 { (finished) in
@@ -101,7 +107,7 @@ internal extension PageboyViewController {
         if let pageViewController = self.pageViewController { // destroy existing page VC
             existingZIndex = self.view.subviews.index(of: pageViewController.view)
             self.pageViewController?.view.removeFromSuperview()
-            self.pageViewController?.removeFromParentViewController()
+            self.pageViewController?.removeFromParent()
             self.pageViewController = nil
         }
         
@@ -112,15 +118,15 @@ internal extension PageboyViewController {
         pageViewController.dataSource = self
         self.pageViewController = pageViewController
         
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         if let existingZIndex = existingZIndex {
             view.insertSubview(pageViewController.view, at: existingZIndex)
         } else {
             view.addSubview(pageViewController.view)
-            view.sendSubview(toBack: pageViewController.view)
+            view.sendSubviewToBack(pageViewController.view)
         }
         pageViewController.view.pinToSuperviewEdges()
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
       
         pageViewController.scrollView?.delegate = self
         pageViewController.view.backgroundColor = .clear
@@ -151,7 +157,7 @@ internal extension PageboyViewController {
                 return
         }
         
-        updateViewControllers(to: [viewController], animated: false, async: false) { _ in
+        updateViewControllers(to: [viewController], animated: false, async: false, force: false) { _ in
             self.currentIndex = defaultIndex
             self.delegate?.pageboyViewController(self,
                                                  didReloadWith: viewController,
@@ -177,11 +183,11 @@ internal extension PageboyViewController {
     }
     
     /// The options to be passed to a UIPageViewController instance.
-    internal var pageViewControllerOptions: [String: Any]? {
-        var options = [String: Any]()
+    internal var pageViewControllerOptions: [UIPageViewController.OptionsKey: Any]? {
+        var options = [UIPageViewController.OptionsKey: Any]()
         
         if self.interPageSpacing > 0.0 {
-            options[UIPageViewControllerOptionInterPageSpacingKey] = self.interPageSpacing
+            options[.interPageSpacing] = self.interPageSpacing
         }
         
         guard options.count > 0 else {

@@ -20,14 +20,19 @@ protocol RouterProtocol {
 }
 
 enum TabsType: Int {
-    case dashboard, programList, wallet, profile
+    case dashboard, assetList, wallet, profile
 }
 
 class Router {
     // MARK: - Variables
-    var tournamentViewController: TournamentListViewController!
-    var dashboardTabmanViewController: DashboardTabmanViewController!
+    var investorDashboardViewController: InvestorDashboardViewController!
+    var managerDashboardViewController: ManagerDashboardViewController!
+    
     var programsViewController: ProgramListViewController!
+    var fundsViewController: FundListViewController!
+    var managersViewController: ManagerListViewController!
+
+    var assetsViewController: AssetsViewController!
     
     var currentController: UIViewController?
     
@@ -36,52 +41,21 @@ class Router {
     //for authorized user
     weak var rootTabBarController: BaseTabBarController?
     
-    weak var navigationController: UINavigationController?
-    
-    fileprivate func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let dashboardTabmanViewController = DashboardTabmanViewController()
-        self.dashboardTabmanViewController = dashboardTabmanViewController
+    weak var navController: UINavigationController?
         
-        navigationController = BaseNavigationController(rootViewController: dashboardTabmanViewController)
-        let router =  DashboardTabmanRouter(parentRouter: self, tabmanViewController: dashboardTabmanViewController, navigationController: navigationController)
-        let viewModel = DashboardTabmanViewModel(withRouter: router, tabmanViewModelDelegate: dashboardTabmanViewController)
-        dashboardTabmanViewController.viewModel = viewModel
-        navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard_selected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.title = "DASHBOARD"
-        viewControllers.append(navigationController)
-    }
-    
-    fileprivate func addPrograms(_ viewControllers: inout [UIViewController]) {
-        if let navigationController = getProgramsNavigationController() {
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "PROGRAMS"
-            viewControllers.append(navigationController)
+    weak var navigationController: UINavigationController? {
+        guard let rootTabBarController = rootTabBarController else {
+            guard let navController = navController else {
+                return BaseNavigationController()
+            }
+            
+            return navController
         }
-    }
-    
-    fileprivate func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let walletViewController = WalletViewController()
-        navigationController = BaseNavigationController(rootViewController: walletViewController)
-        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
-        navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_unselected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet_selected").withRenderingMode(.alwaysOriginal)
-        navigationController.tabBarItem.title = "WALLET"
-        viewControllers.append(navigationController)
-    }
-    
-    fileprivate func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        if let settingsViewController = SettingsViewController.storyboardInstance(name: .settings) {
-            navigationController = BaseNavigationController(rootViewController: settingsViewController)
-            let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
-            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
-            navigationController.tabBarItem.image = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_unselected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.selectedImage = AppearanceController.theme == .dark ? #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_settings_selected").withRenderingMode(.alwaysOriginal)
-            navigationController.tabBarItem.title = "SETTINGS"
-            viewControllers.append(navigationController)
+        guard let navigationController =  rootTabBarController.selectedViewController as? UINavigationController else {
+            return BaseNavigationController()
         }
+        
+        return navigationController
     }
     
     var tabBarControllers: [UIViewController] {
@@ -101,40 +75,100 @@ class Router {
     init(parentRouter: Router?, navigationController: UINavigationController? = nil) {
         self.parentRouter = parentRouter
 
-        if isTournamentApp {
-            self.tournamentViewController = parentRouter?.tournamentViewController
-        } else {
-            self.programsViewController = parentRouter?.programsViewController
-            self.dashboardTabmanViewController = parentRouter?.dashboardTabmanViewController
-        }
+        self.programsViewController = parentRouter?.programsViewController
+        self.fundsViewController = parentRouter?.fundsViewController
+        self.managersViewController = parentRouter?.managersViewController
         
-        self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
+        self.assetsViewController = parentRouter?.assetsViewController
+        self.investorDashboardViewController = parentRouter?.investorDashboardViewController
+        self.managerDashboardViewController = parentRouter?.managerDashboardViewController
+        
         self.rootTabBarController = parentRouter?.rootTabBarController
+        
+        if rootTabBarController == nil {
+            self.navController = navigationController != nil ? navigationController : parentRouter?.navigationController
+        }
         
         self.currentController = topViewController()
     }
     
     // MARK: - Private methods
-    private func getProgramsNavigationController() -> UINavigationController? {
-        guard let viewController = ProgramListViewController.storyboardInstance(name: .programs) else { return nil }
-        self.programsViewController = viewController
+    private func getAssetsNavigationController() -> BaseNavigationController? {
+        let assetsVC = AssetsViewController()
+        self.assetsViewController = assetsVC
         
-        let navigationController = BaseNavigationController(rootViewController: programsViewController)
-        let router = InvestmentProgramListRouter(parentRouter: self, navigationController: navigationController)
-        programsViewController.viewModel = InvestmentProgramListViewModel(withRouter: router, reloadDataProtocol: programsViewController)
+        let navigationController = BaseNavigationController(rootViewController: assetsViewController)
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        let viewModel = AssetsTabmanViewModel(withRouter: router, searchBarEnable: true, showFacets: true)
+        assetsViewController.viewModel = viewModel
         
         return navigationController
     }
     
-    private func getTournamentNavigationController() -> UINavigationController? {
-        guard let viewController = TournamentListViewController.storyboardInstance(name: .tournament) else { return nil }
-        tournamentViewController = viewController
+    private func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         
-        let navigationController = BaseNavigationController(rootViewController: tournamentViewController)
-        let router = TournamentListRouter(parentRouter: self, navigationController: navigationController)
-        tournamentViewController.viewModel = TournamentListViewModel(withRouter: router, reloadDataProtocol: viewController, roundNumber: nil)
+        if isInvestorApp, let viewController = InvestorDashboardViewController.storyboardInstance(.dashboard) {
+            self.investorDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        } else {
+            let viewController = ManagerDashboardViewController()
+            self.managerDashboardViewController = viewController
+            
+            navigationController = BaseNavigationController(rootViewController: viewController)
+            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+            viewController.viewModel = DashboardViewModel(withRouter: router)
+        }
         
-        return navigationController
+        
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysOriginal)
+        viewControllers.append(navigationController)
+    }
+    
+    private func addPrograms(_ viewControllers: inout [UIViewController]) {
+        if let navigationController = getAssetsNavigationController() {
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_program_list").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_program_list").withRenderingMode(.alwaysOriginal)
+            viewControllers.append(navigationController)
+        }
+    }
+    
+    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        guard let walletViewController = WalletViewController.storyboardInstance(.wallet) else { return }
+        navigationController = BaseNavigationController(rootViewController: walletViewController)
+        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
+        viewControllers.append(navigationController)
+    }
+    
+    private func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        if let settingsViewController = SettingsViewController.storyboardInstance(.settings) {
+            navigationController = BaseNavigationController(rootViewController: settingsViewController)
+            let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
+            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
+            navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysOriginal)
+            viewControllers.append(navigationController)
+        }
+    }
+    
+    private func showProgramList(with filterModel: FilterModel) {
+        guard let viewController = getPrograms(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showFundList(with filterModel: FilterModel) {
+        guard let viewController = getFunds(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showManagerList(with filterModel: FilterModel) {
+        guard let viewController = getManagers(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -185,37 +219,52 @@ extension Router {
     }
    
     func startAsForceSignOut() {
-        guard let navigationController = getProgramsNavigationController(),
-            let programsVC = navigationController.topViewController as? ProgramListViewController,
-            let viewModel = programsVC.viewModel,
-            let router = viewModel.router as? InvestmentProgramListRouter else { return }
-        
-        router.show(routeType: .signIn)
-        
+        guard let navigationController = getAssetsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
-    }
-    
-    func startTournament() {
-        guard let navigationController = getTournamentNavigationController() else { return }
-        setWindowRoot(viewController: navigationController)
+        signInAction(navigationController)
     }
     
     func startAsUnauthorized() {
-        guard let navigationController = getProgramsNavigationController() else { return }
+        guard let navigationController = getAssetsNavigationController() else { return }
         setWindowRoot(viewController: navigationController)
     }
     
     func startAsAuthorized() {
         let tabBarController = BaseTabBarController()
-        tabBarController.viewControllers = tabBarControllers
-    
         rootTabBarController = tabBarController
+        
+        tabBarController.viewControllers = tabBarControllers
+        tabBarController.router = self
         
         setWindowRoot(viewController: rootTabBarController)
     }
     
     func showTwoFactorEnable() {
         guard let viewController = getTwoFactorEnableViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showNotificationsSettings() {
+        guard let viewController = getNotificationsSettingsViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showCreateNotification(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) {
+        guard let viewController = getCreateNotificationViewController(assetId, reloadDataProtocol: reloadDataProtocol) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showAssetNotificationsSettings(_ assetId: String?, title: String, type: NotificationSettingsType) {
+        guard let viewController = getAssetNotificationsSettingsViewController(assetId, title: title, type: type) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showRatingList(with filterModel: FilterModel) {
+        guard let viewController = getRating(with: filterModel) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -236,8 +285,82 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
-    func showProgramDetails(with investmentProgramId: String) {
-        guard let viewController = getDetailsViewController(with: investmentProgramId) else { return }
+    func signInAction(_ navigationController: BaseNavigationController? = nil) {
+        guard let viewController = SignInViewController.storyboardInstance(.auth) else { return }
+        let router = SignInRouter(parentRouter: self, navigationController: navigationController)
+        viewController.viewModel = AuthSignInViewModel(withRouter: router)
+        if let navigationController = navigationController {
+            navigationController.pushViewController(viewController, animated: true)
+        } else {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        
+    }
+    
+    func showAssetDetails(with assetId: String, assetType: AssetType) {
+        switch assetType {
+        case .program:
+            showProgramDetails(with: assetId)
+        case .fund:
+            showFundDetails(with: assetId)
+        case .manager:
+            showManagerDetails(with: assetId)
+        }
+    }
+    
+    func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
+        guard let viewController = FiltersViewController.storyboardInstance(.programs) else { return }
+        let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        let viewModel = FilterViewModel(withRouter: router, sortingType: sortingType, filterViewModelProtocol: viewController, filterModel: filterModel, listViewModel: listViewModel, filterType: filterType)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showProgramDetails(with programId: String) {
+        guard let viewController = getProgramViewController(with: programId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showFundDetails(with fundId: String) {
+        guard let viewController = getFundViewController(with: fundId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showManagerDetails(with managerId: String) {
+        guard let viewController = getManagerViewController(with: managerId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showAssetList(with filterModel: FilterModel, assetType: AssetType) {
+        switch assetType {
+        case .program:
+            showProgramList(with: filterModel)
+        case .fund:
+            showFundList(with: filterModel)
+        case .manager:
+            showManagerList(with: filterModel)
+        }
+    }
+    
+    func showAboutLevels() {
+        guard let viewController = AboutLevelsViewController.storyboardInstance(.program) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showNotificationList() {
+        guard let viewController = NotificationListViewController.storyboardInstance(.notifications) else { return }
+        
+        let router = NotificationListRouter(parentRouter: self)
+        viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showEvents(with assetId: String? = nil) {
+        guard let viewController = getEventsViewController(with: assetId) else { return }
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -251,19 +374,56 @@ extension Router {
         navigationController?.pushViewController(tabmanViewController, animated: true)
     }
     
-    func getDetailsViewController(with investmentProgramId: String) -> ProgramDetailsTabmanViewController? {
-        guard let vc = currentController else { return nil }
+    func showPrivacy() {
+        navigationController?.openSafariVC(with: Urls.privacyWebAddress)
+    }
+    
+    func showTerms() {
+        navigationController?.openSafariVC(with: Urls.termsWebAddress)
+    }
+    
+    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true) -> AllEventsViewController? {
+        guard let viewController = AllEventsViewController.storyboardInstance(.dashboard) else { return nil }
         
-        let tabmanViewController = ProgramDetailsTabmanViewController()
-        tabmanViewController.programDetailViewControllerProtocol = vc as? ProgramDetailViewControllerProtocol
+        viewController.viewModel = AllEventsViewModel(withRouter: router ?? AllEventsRouter(parentRouter: self), assetId: assetId, reloadDataProtocol: viewController, allowsSelection: allowsSelection)
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getProgramViewController(with programId: String) -> ProgramViewController? {
+        guard let viewController = ProgramViewController.storyboardInstance(.program) else {
+            return nil
+        }
+        let router = ProgramRouter(parentRouter: self, navigationController: navigationController, programViewController: viewController)
+        let viewModel = ProgramViewModel(withRouter: router, programId: programId, programViewController: viewController)
+        viewController.viewModel = viewModel
+
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getFundViewController(with fundId: String) -> FundViewController? {
+        guard let viewController = FundViewController.storyboardInstance(.fund) else {
+            return nil
+        }
+        let router = FundRouter(parentRouter: self, navigationController: navigationController, fundViewController: viewController)
+        let viewModel = FundViewModel(withRouter: router, fundId: fundId, fundViewController: viewController)
+        viewController.viewModel = viewModel
         
-        let router = ProgramDetailsRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        let viewModel = ProgramDetailsViewModel(withRouter: router, investmentProgramId: investmentProgramId, tabmanViewModelDelegate: tabmanViewController)
-        viewModel.programDetailsProtocol = tabmanViewController
-        tabmanViewController.viewModel = viewModel
-        tabmanViewController.hidesBottomBarWhenPushed = true
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getManagerViewController(with managerId: String) -> ManagerViewController? {
+        guard let viewController = ManagerViewController.storyboardInstance(.manager) else {
+            return nil
+        }
+        let router = ManagerRouter(parentRouter: self, navigationController: navigationController, managerViewController: viewController)
+        let viewModel = ManagerViewModel(withRouter: router, managerId: managerId, managerViewController: viewController)
+        viewController.viewModel = viewModel
         
-        return tabmanViewController
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
     
     func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {
@@ -275,12 +435,95 @@ extension Router {
         return tabmanViewController
     }
     
+    func getNotificationsSettingsViewController() -> NotificationsSettingsViewController? {
+        guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: .all)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
+    func getCreateNotificationViewController(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) -> CreateNotificationViewController? {
+        guard let viewController = CreateNotificationViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = CreateNotificationViewModel(withRouter: router, reloadDataProtocol: reloadDataProtocol, assetId: assetId)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
+    func getAssetNotificationsSettingsViewController(_ assetId: String?, title: String, type: NotificationSettingsType) -> NotificationsSettingsViewController? {
+        guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: type, assetId: assetId, title: title)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
     func getTwoFactorDisableViewController() -> AuthTwoFactorConfirmationViewController? {
-        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(name: .auth) else { return nil }
+        guard let viewController = AuthTwoFactorConfirmationViewController.storyboardInstance(.auth) else { return nil }
         let router = AuthTwoFactorDisableRouter(parentRouter: self)
         viewController.viewModel = AuthTwoFactorDisableConfirmationViewModel(withRouter: router)
         viewController.hidesBottomBarWhenPushed = true
         
+        return viewController
+    }
+    
+    func getPrograms(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ProgramListViewController? {
+        guard let viewController = ProgramListViewController.storyboardInstance(.programs) else { return nil }
+        
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
+
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getFunds(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> FundListViewController? {
+        guard let viewController = FundListViewController.storyboardInstance(.funds) else { return nil }
+        
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .fund)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getManagers(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ManagerListViewController? {
+        guard let viewController = ManagerListViewController.storyboardInstance(.manager) else { return nil }
+        
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ManagerListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getRating(with filterModel: FilterModel?) -> RatingViewController? {
+        let viewController = RatingViewController()
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        
+        let viewModel = RatingTabmanViewModel(withRouter: router, tabmanViewModelDelegate: viewController)
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
     

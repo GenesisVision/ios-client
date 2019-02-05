@@ -11,81 +11,37 @@ import Foundation
 final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
-    var investmentProgramId: String?
+    var programId: String?
+    var programCurrency: CurrencyType?
+    
     var labelPlaceholder: String = "0"
     
-    private var rate: Double = 0.0
-    private var availableToInvest: Double = 0.0
-    
-    private var minAvailableToInvest: Double = 0.0 {
-        didSet {
-            self.exchangedMinAvailableToInvest = minAvailableToInvest * self.rate
-        }
-    }
-    private var exchangedMinAvailableToInvest: Double = 0.0
-    
-    var currency: String = "GVT"
-    
-    private weak var programDetailProtocol: ProgramDetailProtocol?
+    var programInvestInfo: ProgramInvestInfo?
+
+    private weak var detailProtocol: DetailProtocol?
     
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, investmentProgramId: String, currency: String, availableToInvest: Double, programDetailProtocol: ProgramDetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
-        self.currency = currency
-        self.programDetailProtocol = programDetailProtocol
-        self.availableToInvest = availableToInvest
+        self.programId = programId
+        self.programCurrency = programCurrency
+        self.detailProtocol = detailProtocol
     }
     
     // MARK: - Public methods
-    func getAvailableToInvest(completion: @escaping (_ availableToInvest: Double, _ exchangedAvailableToInvest: Double) -> Void, completionError: @escaping CompletionBlock) {
-        let toCurrency = RequestRate.To(rawValue: self.currency)
+    func getInfo(completion: @escaping CompletionBlock, completionError: @escaping CompletionBlock) {
+        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet(rawValue: getSelectedCurrency()), let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
-            guard viewModel != nil, let rate = viewModel?.rate else {
+        ProgramsDataProvider.getInvestInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programInvestInfo) in
+            guard let programInvestInfo = programInvestInfo else {
                 return completionError(.failure(errorType: .apiError(message: nil)))
             }
             
-            self.rate = rate
-            
-            AuthManager.getBalance(completion: { [weak self] (balance) in
-                guard let availableToInvest = self?.availableToInvest  else {
-                    let exchangedMinAvailableToInvest = balance * rate
-                    return completion(balance, exchangedMinAvailableToInvest)
-                }
-                
-                let minAvailableToInvest = min(balance, availableToInvest)
-                let exchangedMinAvailableToInvest = minAvailableToInvest * rate
-                
-                completion(minAvailableToInvest, exchangedMinAvailableToInvest)
-                }, completionError: completionError)
+            self?.programInvestInfo = programInvestInfo
+            completion(.success)
         }, errorCompletion: completionError)
-    }
-    
-    func getExchangedAmount(amount: Double, completion: @escaping (_ exchangedAmount: Double) -> Void, completionError: @escaping CompletionBlock) {
-        guard amount > 0 else {
-            return completion(0.0)
-        }
-        guard self.rate > 0 else {
-            let toCurrency = RequestRate.To(rawValue: self.currency)
-            
-            RateDataProvider.getTake(from: .gvt, to: toCurrency ?? RequestRate.To.gvt, completion: { (viewModel) in
-                if viewModel != nil, let rate = viewModel?.rate {
-                    self.rate = rate
-                }
-                
-                let exchangedBalance = amount * self.rate
-                
-                completion(exchangedBalance)
-            }, errorCompletion: completionError)
-            
-            return
-        }
-        
-        let exchangedBalance = amount * self.rate
-        completion(exchangedBalance)
     }
     
     // MARK: - Navigation
@@ -94,27 +50,24 @@ final class ProgramInvestViewModel {
     }
     
     func showInvestmentRequestedVC(investedAmount: Double) {
-        programDetailProtocol?.didInvested()
+        detailProtocol?.didInvested()
         router.show(routeType: .investmentRequested(investedAmount: investedAmount))
     }
     
     func goToBack() {
-        programDetailProtocol?.didInvested()
+        detailProtocol?.didInvested()
         router.goToBack()
+    }
+    
+    func close() {
+        router.closeVC()
     }
     
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        ProgramDataProvider.investProgram(withAmount: value, investmentProgramId: investmentProgramId, completion: { (viewModel) in
-            guard let walletsViewModel = viewModel, let wallets = walletsViewModel.wallets, let wallet = wallets.first else {
-                return completion(.failure(errorType: .apiError(message: nil)))
-            }
-            
-            AuthManager.saveWalletViewModel(viewModel: wallet)
-            completion(.success)
-        }) { (result) in
+        ProgramsDataProvider.invest(withAmount: value, programId: programId, errorCompletion: { (result) in
             completion(result)
-        }
+        })
     }
 }

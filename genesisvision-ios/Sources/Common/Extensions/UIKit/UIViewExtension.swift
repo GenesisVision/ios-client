@@ -20,11 +20,14 @@ extension UIView {
         layer.cornerRadius = radius
     }
     
-    func roundWithBorder(_ approximateBorderWidth: CGFloat, color: UIColor = .white) {
-        roundCorners()
-        let border = makeRoundBorder(approximateBorderWidth, color: color)
-        //TODO: Remove old border
-        layer.addSublayer(border)
+    func roundCorners(with radius: CGFloat? = nil, borderWidth: CGFloat, borderColor: UIColor) {
+        contentMode = .scaleAspectFill
+        clipsToBounds = true
+        
+        layer.cornerRadius = radius ?? frame.height / 2
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
+        layer.masksToBounds = true
     }
     
     func addBorder(withBorderWidth borderWidth: CGFloat, color: UIColor = .white) {
@@ -72,5 +75,19 @@ extension UIView {
     
     func showFlashHUD(type: HUDContentType, delay: TimeInterval? = nil) {
         HUD.flash(type, onView: self, delay: delay ?? Constants.HudDelay.default)
+    }
+    
+    func typedSuperview<T: UIView>() -> T? {
+        var parent = superview
+        
+        while parent != nil {
+            if let view = parent as? T {
+                return view
+            } else {
+                parent = parent?.superview
+            }
+        }
+        
+        return nil
     }
 }

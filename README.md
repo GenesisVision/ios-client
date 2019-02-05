@@ -1,8 +1,6 @@
 # Genesis Vision Investor App for iOS.
 
-
-iOS Testers are still welcome! Fill in the form and get personal Email invitation to test 
-[Genesis Vision Platform on iOS](https://goo.gl/ifDmcP)
+Install on the App Store: https://itunes.apple.com/us/app/genesis-vision-investor/id1369865290?mt=8
 
 ## Feedback/bug reports
 We're collecting your feedback and will start adding most requested features soon. 

@@ -37,35 +37,54 @@ internal class TabmanButtonBar: TabmanBar {
     internal var horizontalMarginConstraints = [NSLayoutConstraint]()
     internal var edgeMarginConstraints = [NSLayoutConstraint]()
     
+    private var isAnimatingFocussedButton: Bool = false
     internal var focussedButton: UIButton? {
         didSet {
             guard focussedButton !== oldValue else {
                 return
             }
             
-            focussedButton?.setTitleColor(self.selectedColor, for: .normal)
-            focussedButton?.tintColor = self.selectedColor
-            oldValue?.setTitleColor(self.color, for: .normal)
-            oldValue?.tintColor = self.color
+            let update = {
+                self.focussedButton?.setTitleColor(self.selectedColor, for: .normal)
+                self.focussedButton?.tintColor = self.selectedColor
+                self.focussedButton?.titleLabel?.font = self.selectedTextFont
+                oldValue?.setTitleColor(self.color, for: .normal)
+                oldValue?.tintColor = self.color
+                oldValue?.titleLabel?.font = self.textFont
+            }
+            
+            // If animating between buttons then dont use a transition - only for scroll events
+            if isAnimatingFocussedButton {
+                update()
+            } else {
+                guard let transitionView = focussedButton ?? oldValue else {
+                    update()
+                    return
+                }
+                UIView.transition(with: transitionView, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                    update()
+                }, completion: nil)
+            }
         }
     }
     
     public var textFont: UIFont = Appearance.defaultAppearance.text.font! {
         didSet {
-            guard textFont != oldValue else {
-                return
-            }
-            
-            self.updateButtons(update: { (button) in
+            updateButtons { (button) in
                 button.titleLabel?.font = textFont
-            })
+            }
         }
     }
-    
+    public var selectedTextFont: UIFont = Appearance.defaultAppearance.text.font! {
+        didSet {
+            focussedButton?.titleLabel?.font = selectedTextFont
+        }
+    }
+
     public var color: UIColor = Appearance.defaultAppearance.state.color!
     public var selectedColor: UIColor = Appearance.defaultAppearance.state.selectedColor!
   
-    public var imageRenderingMode: UIImageRenderingMode = Appearance.defaultAppearance.style.imageRenderingMode! {
+    public var imageRenderingMode: UIImage.RenderingMode = Appearance.defaultAppearance.style.imageRenderingMode! {
         didSet {
             guard oldValue != imageRenderingMode else {
                 return
@@ -156,6 +175,9 @@ internal class TabmanButtonBar: TabmanBar {
         let textFont = appearance.text.font
         self.textFont = textFont ?? defaultAppearance.text.font!
         
+        let selectedTextFont = appearance.text.selectedFont
+        self.selectedTextFont = selectedTextFont ?? self.textFont
+
         let itemVerticalPadding = appearance.layout.itemVerticalPadding
         self.itemVerticalPadding = itemVerticalPadding ?? defaultAppearance.layout.itemVerticalPadding!
         
@@ -188,35 +210,11 @@ internal class TabmanButtonBar: TabmanBar {
                                 customize: TabmanButtonBarItemCustomize) {
         
         var previousButton: UIButton?
-        for (index, item) in items.enumerated() {
+        
+        for item in items {
             
-            let button = UIButton()
+            let button = makeAndConfigureButton(for: item)
             view.addSubview(button)
-            
-            if let image = item.image, let title = item.title {
-                // resize images to fit
-                let resizedImage = image.resize(toSize: Defaults.titleWithImageSize)
-                if resizedImage.size != .zero {
-                    button.setImage(resizedImage.withRenderingMode(imageRenderingMode), for: .normal)
-                }
-                button.setTitle(title, for: .normal)
-                // Nudge it over a little bit
-                button.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 0.0)
-            } else if let title = item.title {
-                button.setTitle(title, for: .normal)
-            } else if let image = item.image {
-                // resize images to fit
-                let resizedImage = image.resize(toSize: Defaults.itemImageSize)
-                if resizedImage.size != .zero {
-                    button.setImage(resizedImage.withRenderingMode(imageRenderingMode), for: .normal)
-                }
-            }
-            
-            // appearance
-            button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.titleLabel?.font = self.textFont
-            
-            // layout
             button.set(.height, to: Defaults.minimumItemHeight, priority: UILayoutPriority(500))
             button.pinToSuperviewEdge(.top)
             button.pinToSuperviewEdge(.bottom)
@@ -232,23 +230,52 @@ internal class TabmanButtonBar: TabmanBar {
             } else { // pin to leading
                 self.edgeMarginConstraints.append(button.pinToSuperviewEdge(.leading, priority: UILayoutPriority(500)))
             }
-            if index == items.count - 1 {
+            if item === items.last {
                 self.edgeMarginConstraints.append(button.pinToSuperviewEdge(.trailing, priority: UILayoutPriority(500)))
             }
             
             // allow button to be compressed
             button.setContentCompressionResistance(for: .horizontal, to: UILayoutPriority(400))
             
-            // Accessibility
-            button.accessibilityLabel = item.accessibilityLabel
-            button.accessibilityHint = item.accessibilityHint
-            if let accessibilityTraits = item.accessibilityTraits {
-                button.accessibilityTraits = accessibilityTraits
-            }
-            
             customize(button, previousButton)
             previousButton = button
         }
+    }
+    
+    private func makeAndConfigureButton(for item: TabmanBar.Item) -> UIButton {
+        let button = UIButton()
+        
+        if let image = item.image, let title = item.title {
+            // resize images to fit
+            let resizedImage = image.resize(toSize: Defaults.titleWithImageSize)
+            if resizedImage.size != .zero {
+                button.setImage(resizedImage.withRenderingMode(imageRenderingMode), for: .normal)
+            }
+            button.setTitle(title, for: .normal)
+            // Nudge it over a little bit
+            button.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 0.0)
+        } else if let title = item.title {
+            button.setTitle(title, for: .normal)
+        } else if let image = item.image {
+            // resize images to fit
+            let resizedImage = image.resize(toSize: Defaults.itemImageSize)
+            if resizedImage.size != .zero {
+                button.setImage(resizedImage.withRenderingMode(imageRenderingMode), for: .normal)
+            }
+        }
+        
+        // appearance
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = self.textFont
+        
+        // Accessibility
+        button.accessibilityLabel = item.accessibilityLabel
+        button.accessibilityHint = item.accessibilityHint
+        if let accessibilityTraits = item.accessibilityTraits {
+            button.accessibilityTraits = accessibilityTraits
+        }
+        
+        return button
     }
     
     internal enum ButtonContext {
@@ -273,7 +300,10 @@ internal class TabmanButtonBar: TabmanBar {
     
     @objc internal func tabButtonPressed(_ sender: UIButton) {
         if let index = self.buttons.index(of: sender), (self.responder?.bar(self, shouldSelectItemAt: index) ?? true) {
-            self.responder?.bar(self, didSelectItemAt: index)
+            isAnimatingFocussedButton = true
+            responder?.bar(self, didSelectItemAt: index, completion: {
+                self.isAnimatingFocussedButton = false
+            })
         }
     }
     

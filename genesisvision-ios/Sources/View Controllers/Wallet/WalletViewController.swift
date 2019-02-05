@@ -13,6 +13,22 @@ class WalletViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: WalletControllerViewModel!
     
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
+    
+    var walletTableHeaderViewHeightStart: CGFloat = 300.0
+    var walletTableHeaderViewHeight: CGFloat = 300.0
+    var walletTableHeaderViewHeightEnd: CGFloat = 100.0
+    
+    var walletTableHeaderView: WalletTableHeaderView?
+    
+    private var withdrawBarButtonItem: UIBarButtonItem!
+    private var addFundsBarButtonItem: UIBarButtonItem!
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +44,44 @@ class WalletViewController: BaseViewControllerWithTableView {
     
     // MARK: - Private methods
     private func setup() {
-        setupTableConfiguration()
-        
-        registerForPreviewing()
-        
+//        registerForPreviewing()
+
         setupUI()
         fetch()
     }
     
     private func setupUI() {
-        bottomViewType = .sort
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
+        noDataTitle = viewModel.noDataText()
+        noDataButtonTitle = viewModel.noDataButtonTitle()
+        if let imageName = viewModel.noDataImageName() {
+            noDataImage = UIImage(named: imageName)
+        }
+        
+        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        addCurrencyTitleButton(CurrencyDelegateManager())
+        
+        bottomViewType = .none
         
         updateTitle()
+    
+        withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction))
+        addFundsBarButtonItem = UIBarButtonItem(title: "Add funds", style: .done, target: self, action: #selector(addFundsButtonAction))
+        addFundsBarButtonItem.tintColor = UIColor.primary
+    
+        navigationItem.leftBarButtonItem = withdrawBarButtonItem
+        navigationItem.rightBarButtonItem = addFundsBarButtonItem
+    }
+    
+    @objc private func withdrawButtonAction() {
+        viewModel.withdraw()
+    }
+    
+    @objc private func addFundsButtonAction() {
+        viewModel.deposit()
     }
     
     private func updateTitle() {
-        title = viewModel.title
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     private func setupTableConfiguration() {
@@ -53,8 +89,9 @@ class WalletViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
-        setupPullToRefresh()
+        setupPullToRefresh(scrollView: tableView)
     }
     
     override func pullToRefresh() {
@@ -70,14 +107,7 @@ class WalletViewController: BaseViewControllerWithTableView {
             self.tableView?.reloadData()
         }
     }
-    
-    private func updateSortView() {
-        sortButton.setTitle(self.viewModel.sortTitle(), for: .normal)
-        
-        showProgressHUD()
-        fetchTransactions()
-    }
-    
+
     override func fetch() {
         showProgressHUD()
         fetchBalance()
@@ -103,57 +133,14 @@ class WalletViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func update(sorting type: TransactionsFilter.ModelType) {
-        viewModel.filter?.type = type
-        updateSortView()
-    }
-    
-    private func sortMethod() {
-        guard let type: TransactionsFilter.ModelType = viewModel.filter?.type else {
-            return
-        }
+    private func showWalletTransaction(model: WalletTransaction) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300
         
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.primary
-        
-        let allAction = UIAlertAction(title: "All", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .all)
-        }
-        let internalAction = UIAlertAction(title: "Internal", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: ._internal)
-        }
-        let externalAction = UIAlertAction(title: "External", style: .default) { [weak self] (UIAlertAction) in
-            self?.update(sorting: .external)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        switch type {
-        case .all:
-            allAction.isEnabled = false
-        case ._internal:
-            internalAction.isEnabled = false
-        case .external:
-            externalAction.isEnabled = false
-        }
-        
-        alert.addAction(allAction)
-        alert.addAction(internalAction)
-        alert.addAction(externalAction)
-        alert.addAction(cancelAction)
-        
-        alert.popoverPresentationController?.sourceView = sortButton
-        alert.popoverPresentationController?.sourceRect = sortButton.bounds
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    override func sortButtonAction() {
-        sortMethod()
-    }
-    
-    // MARK: - Actions
-    @IBAction func filtersButtonAction(_ sender: UIButton) {
-        viewModel.filters()
+        let view = WalletTransactionView.viewFromNib()
+        view.configure(model)
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
     }
 }
 
@@ -163,16 +150,16 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else {
-            return
-        }
+        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
         
-        viewModel.showDetail(at: indexPath)
+        guard let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel else { return }
+        
+        showWalletTransaction(model: model.walletTransaction)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(at: indexPath) else {
-            return UITableViewCell()
+            return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
@@ -190,6 +177,55 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections()
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return walletTableHeaderViewHeight
+        default:
+            return viewModel.headerHeight(for: section)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let header = tableView.dequeueReusableHeaderFooterView() as WalletTableHeaderView
+            if let wallet = viewModel.wallet {
+                header.configure(wallet)
+            }
+            
+            walletTableHeaderView = header
+            
+            return walletTableHeaderView
+        case 1:
+            guard let title = viewModel.headerTitle(for: section) else {
+                return nil
+            }
+            
+            let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
+            header.headerLabel.text = title
+            return header
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
+    }
 }
 
 extension WalletViewController: WalletProtocol {
@@ -201,82 +237,5 @@ extension WalletViewController: WalletProtocol {
 extension WalletViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
-    }
-}
-
-extension WalletViewController: WalletHeaderTableViewCellProtocol {
-    func depositProgramDidPress() {
-        guard isDebug else {
-            showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
-            return
-        }
-        
-        viewModel.deposit()
-    }
-    
-    func withdrawProgramDidPress() {
-        guard isDebug else {
-            showAlertWithTitle(title: "", message: String.Alerts.comingSoon, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
-            return
-        }
-        
-        viewModel.withdraw()
-    }
-    
-    func updateBalanceDidPress() {
-        fetchBalance()
-    }
-}
-
-extension WalletViewController {
-    override func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = viewModel.noDataText()
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.dark,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 25)]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    override func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        if let imageName = viewModel.noDataImageName() {
-            return UIImage(named: imageName)
-        }
-        
-        return UIImage.noDataPlaceholder
-    }
-    
-    override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        viewModel.showProgramList()
-    }
-    
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = viewModel.noDataButtonTitle()
-        
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.white,
-                          NSAttributedStringKey.font : UIFont.getFont(.bold, size: 14)]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-
-extension WalletViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        let cellPosition = tableView.convert(location, from: view)
-        
-        guard let indexPath = tableView.indexPathForRow(at: cellPosition),
-            let vc = viewModel.getDetailsViewController(with: indexPath),
-            let cell = tableView.cellForRow(at: indexPath)
-            else { return nil }
-        
-        vc.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = view.convert(cell.frame, from: tableView)
-        
-        return vc
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        push(viewController: viewControllerToCommit)
     }
 }

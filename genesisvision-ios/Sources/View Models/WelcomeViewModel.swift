@@ -30,11 +30,9 @@ final class WelcomeViewModel {
         }
         
         requestReview()
-        isTournamentApp
-            ? startTournament()
-            : AuthManager.isLogin()
-                ? startAsAuthorized()
-                : startAsUnauthorized()
+        AuthManager.isLogin()
+            ? startAsAuthorized()
+            : startAsUnauthorized()
     }
     
     // MARK: - Private methods
@@ -46,14 +44,10 @@ final class WelcomeViewModel {
         router.show(routeType: .startAsUnauthorized)
     }
     
-    private func startTournament() {
-        router.show(routeType: .startTournament)
-    }
-    
     private func requestReview() {
         guard !isDebug else { return }
         
-        let key = Constants.UserDefaults.timesOpened
+        let key = UserDefaultKeys.timesOpened
         var timesOpened = UserDefaults.standard.integer(forKey: key)
         
         timesOpened += 1

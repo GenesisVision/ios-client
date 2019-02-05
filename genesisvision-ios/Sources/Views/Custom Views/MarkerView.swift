@@ -11,7 +11,7 @@ import UIKit.UIView
 class MarkerView: UIView {
     var cornerSize: CGFloat = 6.0
     
-    @IBOutlet var contentView: UIView! {
+    @IBOutlet weak var contentView: UIView! {
         didSet {
             contentView.backgroundColor = UIColor.ChartMarker.bg
         }

@@ -9,10 +9,10 @@
 import UIKit
 
 class ProgramRequestDataProvider: DataProvider {
-    static func getRequests(filter: InvestmentProgramRequestsFilter, completion: @escaping (_ programRequests: InvestmentProgramRequests?) -> Void) {
+    static func getRequests(skip: Int, take: Int, completion: @escaping (_ programRequests: ProgramRequests?) -> Void) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
-        getProgramRequests(with: authorization, filter: filter, completion: completion)
+        getProgramRequests(with: authorization, skip: skip, take: take, completion: completion)
     }
     
     static func cancelRequest(requestId: String, completion: @escaping CompletionBlock) {
@@ -24,8 +24,8 @@ class ProgramRequestDataProvider: DataProvider {
     }
     
     // MARK: - Private methods
-    private static func getProgramRequests(with authorization: String, filter: InvestmentProgramRequestsFilter, completion: @escaping (_ programRequests: InvestmentProgramRequests?) -> Void) {
-        InvestorAPI.apiInvestorInvestmentProgramRequestsPost(authorization: authorization, filter: filter) { (programRquests, error) in
+    private static func getProgramRequests(with authorization: String, skip: Int, take: Int, completion: @escaping (_ programRequests: ProgramRequests?) -> Void) {
+        InvestorAPI.v10InvestorRequestsBySkipByTakeGet(skip: skip, take: take, authorization: authorization) { (programRquests, error) in
             DataProvider().responseHandler(programRquests, error: error, successCompletion: { (viewModel) in
                 completion(viewModel)
             }, errorCompletion: { (error) in
@@ -35,7 +35,7 @@ class ProgramRequestDataProvider: DataProvider {
     }
     
     private static func cancelRequest(with authorization: String, requestId: UUID, completion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorInvestmentProgramsCancelInvestmentRequestPost(requestId: requestId, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorProgramsRequestsByIdCancelPost(id: requestId, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

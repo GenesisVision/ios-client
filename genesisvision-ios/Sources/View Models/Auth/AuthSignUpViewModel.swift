@@ -9,9 +9,10 @@
 final class AuthSignUpViewModel {
     
     // MARK: - Variables
-    var title: String = "Sign Up"
+    var title: String = "Sign up"
     
     private var router: SignUpRouter!
+    let successText = String.Info.signUpConfirmationSuccess
     
     // MARK: - Init
     init(withRouter router: SignUpRouter) {
@@ -22,6 +23,18 @@ final class AuthSignUpViewModel {
     // MARK: - Navigation
     func showConfirmationVC() {
         router.show(routeType: .confirmation)
+    }
+    
+    func showPrivacy() {
+        router.show(routeType: .privacy)
+    }
+    
+    func showTerms() {
+        router.show(routeType: .terms)
+    }
+    
+    func goToBack() {
+        router.goToBack(animated: true)
     }
     
     // MARK: - API

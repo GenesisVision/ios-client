@@ -23,7 +23,7 @@ class AuthTwoFactorDisableRouter: TabmanRouter {
     // MARK: - Private methods
     // MARK: - Private methods
     private func getSuccessDisableVC() -> InfoViewController? {
-        guard let viewController = InfoViewController.storyboardInstance(name: .auth) else { return nil }
+        guard let viewController = InfoViewController.storyboardInstance(.auth) else { return nil }
         viewController.viewModel = AuthTwoFactorSuccessDisableViewModel(withRouter: self)
         
         return viewController

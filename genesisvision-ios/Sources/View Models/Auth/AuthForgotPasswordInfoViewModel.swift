@@ -11,7 +11,7 @@ import UIKit.UIImage
 final class AuthForgotPasswordInfoViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.forgotPasswordSuccess
-    var iconImage: UIImage = #imageLiteral(resourceName: "confirm-email-icon")
+    var iconImage: UIImage? = #imageLiteral(resourceName: "confirm-email-icon")
     var backgroundColor: UIColor = UIColor.InfoView.bg
     var textColor: UIColor = UIColor.InfoView.text
     var tintColor: UIColor = UIColor.InfoView.tint

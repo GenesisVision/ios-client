@@ -9,8 +9,8 @@
 final class AuthForgetPasswordViewModel {
     
     // MARK: - Variables
-    var title: String = "Forgot Password?"
-    
+    var title: String = "Forgot password"
+    let successText = String.Info.forgotPasswordSuccess
     private var router: ForgotPasswordRouter!
     
     // MARK: - Init
@@ -22,6 +22,10 @@ final class AuthForgetPasswordViewModel {
     // MARK: - Navigation
     func showForgotPasswordInfoVC() {
         router.show(routeType: .forgotPasswordInfo)
+    }
+    
+    func goToBack() {
+        router.goToBack(animated: true)
     }
     
     // MARK: - API

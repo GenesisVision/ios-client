@@ -14,60 +14,61 @@ class ChangePasswordViewController: BaseViewController {
     var viewModel: AuthChangePasswordViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var oldPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var oldPasswordTitleLabel: SubtitleLabel! {
         didSet {
-            oldPasswordTextField.font = UIFont.getFont(.regular, size: 18)
+            oldPasswordTitleLabel.text = "Old password"
+        }
+    }
+    @IBOutlet weak var oldPasswordTextField: DesignableUITextField! {
+        didSet {
             oldPasswordTextField.setClearButtonWhileEditing()
-            oldPasswordTextField.setLeftImageView()
             oldPasswordTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
+            passwordTitleLabel.text = "New password"
+        }
+    }
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
+        didSet {
             passwordTextField.setClearButtonWhileEditing()
-            passwordTextField.setLeftImageView()
             passwordTextField.delegate = self
         }
     }
-    @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var confirmPasswordTitleLabel: SubtitleLabel! {
         didSet {
-            confirmPasswordTextField.font = UIFont.getFont(.regular, size: 18)
+            confirmPasswordTitleLabel.text = "Repeat password"
+        }
+    }
+    @IBOutlet weak var confirmPasswordTextField: DesignableUITextField! {
+        didSet {
             confirmPasswordTextField.setClearButtonWhileEditing()
-            confirmPasswordTextField.setLeftImageView()
             confirmPasswordTextField.delegate = self
         }
     }
     
     // MARK: - Buttons
-    @IBOutlet var changePasswordButton: ActionButton!
+    @IBOutlet weak var changePasswordButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if DEBUG
-        oldPasswordTextField.text = "qwerty"
-        passwordTextField.text = "qwerty"
-        confirmPasswordTextField.text = "qwerty"
-        #endif
         
         setupUI()
     }
     
     // MARK: - Private methods
     private func setupUI() {
-        oldPasswordTextField.setBottomLine()
-        passwordTextField.setBottomLine()
-        confirmPasswordTextField.setBottomLine()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
     }
-    
     
     private func changePasswordMethod() {
         hideKeyboard()
@@ -86,10 +87,16 @@ class ChangePasswordViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showChangePasswordInfoVC()
+                self?.showChangePasswordInfoVC()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
+        }
+    }
+    
+    private func showChangePasswordInfoVC() {
+        showBottomSheet(.success, title: viewModel.successText) { [weak self] (success) in
+            self?.viewModel.goToBack()
         }
     }
     
@@ -105,10 +112,9 @@ extension ChangePasswordViewController: UITextFieldDelegate {
         case confirmPasswordTextField:
             changePasswordMethod()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false
     }
 }
-

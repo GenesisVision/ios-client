@@ -14,19 +14,24 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     var viewModel: AuthTwoFactorConfirmationViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var codeTextField: DesignableUITextField! {
+    @IBOutlet weak var codeTitleLabel: SubtitleLabel! {
         didSet {
-            codeTextField.placeholder = "Two Factor Code"
-            codeTextField.font = UIFont.getFont(.regular, size: 18)
+            codeTitleLabel.text = "2FA Code"
+        }
+    }
+    @IBOutlet weak var codeTextField: DesignableUITextField! {
+        didSet {
             codeTextField.setClearButtonWhileEditing()
             codeTextField.delegate = self
         }
     }
-    
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
-            passwordTextField.placeholder = "Your Password"
-            passwordTextField.font = UIFont.getFont(.regular, size: 18)
+            passwordTitleLabel.text = "Your Password"
+        }
+    }
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
+        didSet {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
@@ -38,10 +43,16 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var recoveryCodeSwitch: UISwitch!
+    @IBOutlet weak var recoveryCodeSwitch: UISwitch! {
+        didSet {
+            recoveryCodeSwitch.onTintColor = UIColor.primary
+            recoveryCodeSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            recoveryCodeSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
     
     // MARK: - Buttons
-    @IBOutlet var confirmButton: ActionButton!
+    @IBOutlet weak var confirmButton: ActionButton!
 
     // MARK: - Variables
     private var isRecoveryCode: Bool = false
@@ -50,24 +61,17 @@ class AuthTwoFactorConfirmationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if DEBUG
-        passwordTextField.text = "qwerty"
-        #endif
         
         setupUI()
     }
     
     // MARK: - Private methods
     private func setupUI() {
-        codeTextField.setBottomLine()
-        passwordTextField.setBottomLine()
-        
         confirmButton.setTitle(viewModel.buttonTitleText, for: .normal)
     }
     
@@ -118,7 +122,7 @@ extension AuthTwoFactorConfirmationViewController: UITextFieldDelegate {
         case codeTextField:
             confirmMethod()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

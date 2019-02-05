@@ -10,30 +10,22 @@ import UIKit
 
 class BaseDataProvider: DataProvider {
     // MARK: - Public methods
-    static func getPlatformStatus(completion: @escaping (_ platformStatus: PlatformStatus?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        isInvestorApp
-            ? getInvestorPlatformStatus(completion: completion, errorCompletion: errorCompletion)
-            : getManagerPlatformStatus(completion: completion, errorCompletion: errorCompletion)
-    }
-    
-    static func uploadImage(imageURL: URL, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        FilesAPI.apiFilesUploadPost(uploadedFile: imageURL) { (uploadResultModel, error) in
-            DataProvider().responseHandler(uploadResultModel, error: error, successCompletion: { (viewModel) in
-                let uuid = uploadResultModel?.id?.uuidString
-                completion(uuid)
-            }, errorCompletion: errorCompletion)
-        }
-    }
-    
-    // MARK: - Private methods
-    private static func getInvestorPlatformStatus(completion: @escaping (_ platformStatus: PlatformStatus?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        InvestorAPI.apiInvestorPlatformStatusGet { (model, error) in
+    static func getPlatformInfo(completion: @escaping (_ platformStatus: PlatformInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        PlatformAPI.v10PlatformInfoGet { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    private static func getManagerPlatformStatus(completion: @escaping (_ platformStatus: PlatformStatus?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        ManagerAPI.apiManagerPlatformStatusGet { (model, error) in
+    static func getProgramsLevelsInfo(completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        PlatformAPI.v10PlatformLevelsGet { (model, error) in
+            DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func uploadImage(imageURL: URL, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FileAPI.v10FileUploadPost(uploadedFile: imageURL, authorization: authorization) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

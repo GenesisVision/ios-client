@@ -16,8 +16,7 @@ class WelcomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let navigationController = BaseNavigationController()
-        let router = WelcomeRouter(parentRouter: nil, navigationController: navigationController)
+        let router = WelcomeRouter(parentRouter: nil)
         viewModel = WelcomeViewModel(withRouter: router)
         viewModel.start()
     }

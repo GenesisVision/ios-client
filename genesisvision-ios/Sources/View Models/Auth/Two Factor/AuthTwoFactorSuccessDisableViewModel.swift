@@ -12,11 +12,11 @@ final class AuthTwoFactorSuccessDisableViewModel: InfoViewModel {
     // MARK: - Variables
     var text: String = String.Info.TwoFactor.twoFactorDisableSuccess
     
-    var iconImage: UIImage = #imageLiteral(resourceName: "email-confirmed-icon")
-    var backgroundColor: UIColor = UIColor.InfoView.bg
-    var textColor: UIColor = UIColor.InfoView.text
+    var iconImage: UIImage? = nil
+    var backgroundColor: UIColor = UIColor.BaseView.bg
+    var textColor: UIColor = UIColor.Cell.subtitle
     var tintColor: UIColor = UIColor.InfoView.tint
-    var textFont: UIFont = UIFont.getFont(.regular, size: 24)
+    var textFont: UIFont = UIFont.getFont(.regular, size: 14)
     
     var router: Router!
     

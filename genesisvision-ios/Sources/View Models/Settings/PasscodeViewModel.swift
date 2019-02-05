@@ -16,15 +16,18 @@ final class PasscodeViewModel {
     // MARK: - Variables
     var title: String = "Passcode"
     var passwordDigit: Int = 4
-    var deleteButtonTitle: String = "Delete"
-    var isVibrancyEffect: Bool = true
-    var labelFont: UIFont = UIFont.getFont(.regular, size: 29)
+    var isVibrancyEffect: Bool = false
+    var numButtonFont: UIFont = UIFont.getFont(.ultraLight, size: 32)
     
-    var titleLabelText = "Enter Passcode"
-    var againTitleLabelText = "Enter Passcode Again"
+    var createText = "Think of a passcode to enter the application"
+    
+    var enterText = "Enter passcode"
+    var enterAgainText = "Enter passcode again"
+    var enableText = "Enter Passcode to enable it"
+    var disableText = "Enter passcode to disable it"
     
     var changedMessageEnable: Bool {
-        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable)
+        return UserDefaults.standard.bool(forKey: UserDefaultKeys.biometricEnable)
         && domainStateChanged
     }
     
@@ -41,15 +44,15 @@ final class PasscodeViewModel {
             return false
         }
         
-        return UserDefaults.standard.bool(forKey: Constants.UserDefaults.biometricEnable) && BiometricIDAuthManager.shared.isTouchAuthenticationAvailable
+        return UserDefaults.standard.bool(forKey: UserDefaultKeys.biometricEnable) && BiometricIDAuthManager.shared.isTouchAuthenticationAvailable
     }
     
     public private(set) var passcode: String? {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaults.passcode)
+            return UserDefaults.standard.string(forKey: UserDefaultKeys.passcode)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.passcode)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.passcode)
         }
     }
     

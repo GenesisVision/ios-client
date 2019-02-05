@@ -13,11 +13,31 @@ class AuthTwoFactorCreateViewController: BaseViewController {
     var viewModel: AuthTwoFactorCreateViewModel!
     
     // MARK: - Outlets
-    @IBOutlet weak var bottomTitleLabel: UILabel!
-    @IBOutlet weak var topTitleLabel: UILabel!
+    @IBOutlet weak var topTitleLabel: SubtitleLabel! {
+        didSet {
+            topTitleLabel.textColor = UIColor.Cell.subtitle
+            topTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     
-    @IBOutlet weak var qrImageView: UIImageView!
-    @IBOutlet weak var sharedKeyLabel: UILabel!
+    @IBOutlet weak var bottomTitleLabel: SubtitleLabel! {
+        didSet {
+            bottomTitleLabel.textColor = UIColor.Cell.subtitle
+            bottomTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+   
+    @IBOutlet weak var qrImageView: UIImageView! {
+        didSet {
+            qrImageView.backgroundColor = UIColor.BaseView.bg
+        }
+    }
+    @IBOutlet weak var sharedKeyLabel: TitleLabel! {
+        didSet {
+            sharedKeyLabel.textColor = UIColor.Cell.title
+            sharedKeyLabel.font = UIFont.getFont(.medium, size: 16.0)
+        }
+    }
     @IBOutlet weak var nextButton: UIButton!
     
     // MARK: - Lifecycle
@@ -53,15 +73,9 @@ class AuthTwoFactorCreateViewController: BaseViewController {
     
     private func setupUI() {
         sharedKeyLabel.text = viewModel.sharedKey
-        sharedKeyLabel.textColor = UIColor.TwoFactor.codeTitle
-        
         qrImageView.image = viewModel.getQRImage()
-        
         topTitleLabel.text = viewModel.topTitleText
-        topTitleLabel.textColor = UIColor.TwoFactor.title
-        
         bottomTitleLabel.text = viewModel.bottomTitleText
-        bottomTitleLabel.textColor = UIColor.TwoFactor.title
     }
     
     // MARK: - Actions

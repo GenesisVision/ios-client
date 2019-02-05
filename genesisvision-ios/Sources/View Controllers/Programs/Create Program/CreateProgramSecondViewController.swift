@@ -34,17 +34,16 @@ class CreateProgramSecondViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+//        navigationItem.title = viewModel.title
         
         showInfiniteIndicator(value: false)
     }
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = self
-        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+//        tableView.delegate = self
+//        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
+//        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
     }
     
     private func reloadData() {
@@ -54,89 +53,89 @@ class CreateProgramSecondViewController: BaseViewControllerWithTableView {
     }
     
     private func selectBrokerServer() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+//        alert.view.tintColor = UIColor.primary
+//
+//        var selectedIndexRow = viewModel.selectedBrokerServerIndex
+//        let values = viewModel.brokerServerValues()
         
-        var selectedIndexRow = viewModel.selectedBrokerServerIndex
-        let values = viewModel.brokerServerValues()
-        
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.updateTradeServerIndex(selectedIndexRow)
-            UIView.setAnimationsEnabled(false)
-            let indexPath = IndexPath(row: 2, section: 0)
-            self?.tableView.reloadRows(at: [indexPath], with: .none)
-            UIView.setAnimationsEnabled(true)
-        }
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+//        let pickerViewValues: [[String]] = [values.map { $0 }]
+//        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+//
+//        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+//            selectedIndexRow = index.row
+//            self?.viewModel.updateTradeServerIndex(selectedIndexRow)
+//            UIView.setAnimationsEnabled(false)
+//            let indexPath = IndexPath(row: 2, section: 0)
+//            self?.tableView.reloadRows(at: [indexPath], with: .none)
+//            UIView.setAnimationsEnabled(true)
+//        }
+//
+//        alert.addAction(title: "Cancel", style: .cancel)
+//
+//        alert.show()
     }
     
     private func selectLeverage() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+//        alert.view.tintColor = UIColor.primary
         
-        var selectedIndexRow = viewModel.selectedBrokerTradeServerLeverageIndex
-        let values = viewModel.brokerServerLeverageValues()
+//        var selectedIndexRow = viewModel.selectedBrokerTradeServerLeverageIndex
+//        let values = viewModel.brokerServerLeverageValues()
         
-        let pickerViewValues: [[String]] = [values.map { "\($0)" }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.selectedBrokerTradeServerLeverageIndex = selectedIndexRow
-            UIView.setAnimationsEnabled(false)
-            let indexPath = IndexPath(row: 3, section: 0)
-            self?.tableView.reloadRows(at: [indexPath], with: .none)
-            UIView.setAnimationsEnabled(true)
-        }
-        
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+//        let pickerViewValues: [[String]] = [values.map { "\($0)" }]
+//        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+//
+//        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+//            selectedIndexRow = index.row
+//            self?.viewModel.selectedBrokerTradeServerLeverageIndex = selectedIndexRow
+//            UIView.setAnimationsEnabled(false)
+//            let indexPath = IndexPath(row: 3, section: 0)
+//            self?.tableView.reloadRows(at: [indexPath], with: .none)
+//            UIView.setAnimationsEnabled(true)
+//        }
+//
+//        alert.addAction(title: "Cancel", style: .cancel)
+//
+//        alert.show()
     }
     
     private func selectPeriodLength() {
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.primary
+//        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+//        alert.view.tintColor = UIColor.primary
         
-        var selectedIndexRow = viewModel.selectedPeriodLenghtIndex
-        let values = viewModel.periodLenthValues
+//        var selectedIndexRow = viewModel.selectedPeriodLenghtIndex
+//        let values = viewModel.periodLenthValues
         
-        let pickerViewValues: [[String]] = [values.map { "\($0)" }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.selectedPeriodLenghtIndex = selectedIndexRow
-            UIView.setAnimationsEnabled(false)
-            let indexPath = IndexPath(row: 4, section: 0)
-            self?.tableView.reloadRows(at: [indexPath], with: .none)
-            UIView.setAnimationsEnabled(true)
-        }
-
-        alert.addAction(title: "Cancel", style: .cancel)
-        
-        alert.show()
+//        let pickerViewValues: [[String]] = [values.map { "\($0)" }]
+//        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+//
+//        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+//            selectedIndexRow = index.row
+//            self?.viewModel.selectedPeriodLenghtIndex = selectedIndexRow
+//            UIView.setAnimationsEnabled(false)
+//            let indexPath = IndexPath(row: 4, section: 0)
+//            self?.tableView.reloadRows(at: [indexPath], with: .none)
+//            UIView.setAnimationsEnabled(true)
+//        }
+//
+//        alert.addAction(title: "Cancel", style: .cancel)
+//
+//        alert.show()
     }
     
     // MARK: - Actions
     @IBAction func nextButtonAction(_ sender: UIButton) {
-        viewModel.nextStep()
+//        viewModel.nextStep()
     }
 }
 
 extension CreateProgramSecondViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if IQKeyboardManager.sharedManager().canGoNext {
-            IQKeyboardManager.sharedManager().goNext()
+        if IQKeyboardManager.shared.canGoNext {
+            IQKeyboardManager.shared.goNext()
         } else {
-            IQKeyboardManager.sharedManager().resignFirstResponder()
+            IQKeyboardManager.shared.resignFirstResponder()
         }
         
         return false
@@ -147,24 +146,24 @@ extension CreateProgramSecondViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let fieldType = viewModel.didSelect(indexPath) else {
-            return
-        }
-        
-        switch fieldType {
-        case .brokerServer:
-            selectBrokerServer()
-        case .leverage:
-            guard viewModel.selectedBrokerTradeServer != nil else {
-                showAlertWithTitle(title: "", message: "Please first select the Broker Server", actionTitle: String.Alerts.okButtonText, cancelTitle: nil, handler: nil, cancelHandler: nil)
-                return
-            }
-            
-            selectLeverage()
-        case .periodLength:
-            selectPeriodLength()
-        default:
-            break
-        }
+//        guard let fieldType = viewModel.didSelect(indexPath) else {
+//            return
+//        }
+//
+//        switch fieldType {
+//        case .brokerServer:
+//            selectBrokerServer()
+//        case .leverage:
+//            guard viewModel.selectedBrokerTradeServer != nil else {
+//                showAlertWithTitle(title: "", message: "Please first select the Broker Server", actionTitle: String.Alerts.okButtonText, cancelTitle: nil, handler: nil, cancelHandler: nil)
+//                return
+//            }
+//
+//            selectLeverage()
+//        case .periodLength:
+//            selectPeriodLength()
+//        default:
+//            break
+//        }
     }
 }

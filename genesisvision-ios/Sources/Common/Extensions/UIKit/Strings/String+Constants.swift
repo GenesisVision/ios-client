@@ -1,5 +1,5 @@
 //
-//  String+Constants.swift
+//  String+swift
 //  genesisvision-ios
 //
 //  Created by George on 05/04/2018.
@@ -8,15 +8,16 @@
 
 extension String {
     struct Info {
-        static var signUpConfirmationSuccess: String = "Please confirm \nyour email.".localized
-        static var forgotPasswordSuccess: String = "We sent a password reset link to the email you specified.\n\nplease follow this link to reset your password.".localized
-        static var changePasswordSuccess: String = "You have been successfully changed your password.".localized
+        static var signUpConfirmationSuccess: String = "We sent a verification link to the email you specified. \nPlease follow this link to complete the registration.".localized
+        static var forgotPasswordSuccess: String = "We sent a password reset link to the email you specified. \nPlease follow this link to reset your password.".localized
+        static var changePasswordSuccess: String = "Password successfully changed".localized
         static var investmentRequestSuccess: String = "You have been successfully invested <N> GVT in the investment program. Your tokens will be working for you only since the next reporting period.\n\nIn case you decide to cancel the investment before the start of the next reporting period, you will have to pay a commission, and you will get your GVT at the actual GVT exchange rate.".localized
         static var withdrawRequestSuccess: String = "At the end of the current trading period the tokens will be returned to the manager and your funds are return to you.".localized
+        static var walletCopyAddress: String = "Your wallet-pane number was copied to the clipboard successfully.".localized
         
         struct TwoFactor {
-            static var twoFactorEnableSuccess: String = "You have just successfully configured two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.".localized
-            static var twoFactorEnableRecoveryCodes: String = "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place.".localized
+            static var twoFactorEnableSuccess: String = "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.".localized
+            static var twoFactorEnableRecoveryCodes: String = "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.\n\n\nWARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account.".localized
             static var twoFactorDisableSuccess: String = "You have successfully disabled the two factor authentication. \nHowever, we strongly recommend you keep it enabled. This can protect your funds from being stolen.".localized
         }
     }
@@ -30,20 +31,22 @@ extension String {
         struct TwoFactor {
             static var signInTitle: String = "Enter code from \nGoogle Authenticator".localized
             
-            static var createTopTitle: String = "Save this Key on paper. This key will allow you to receive your Google Authentication in case of phone loss.".localized
+            static var createTopTitle: String = "This is your Google 2FA Key. Please save it in a safe place. This key allows you to recover your two factor authentication in case of phone loss".localized
             static var createBottomTitle: String = "You can also add the key using a QR code".localized
             
             static var tutorialTopTitles: [String] = ["Install the Google Authenticator app".localized,
                                                "Open the Google Authenticator app".localized,
-                                               "Select the Manual entry option".localized,
-                                               "Enter any name for the Key.\nFor example, \"Genesis Vision\"".localized,
-                                               "Google Authenticator will start generating a 6 digit code".localized]
+                                               "Select Manual entry option".localized,
+                                               "Enter any name for the Key. \nFor example, «Genesis Vision»".localized,
+                                               "Google Autenticator will start generating a 6 digit code".localized]
             
             static var tutorialBottomTitles: [String] = ["You can use any third party implementation of Google Authenticator instead".localized,
                                                          "Press + in the top right".localized,
                                                          createBottomTitle,
-                                                         "Enter a 2FA Key.\nYou can find it on next step".localized,
+                                                         "Enter a 2FA Key. You can find it on next step «Get key»".localized,
                                                          "Use it when the Genesis Vision app requires a 2FA confirmation".localized]
+            
+            static var tutorialLastStep = "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.\n\n\nYou can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.\n\n\nWARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
         }
         
         static let refreshControlTitle = "Loading...".localized
@@ -51,7 +54,7 @@ extension String {
     
     struct Alerts {
         static var cancelButtonText: String = "Cancel".localized
-        static var okButtonText: String = "OK".localized
+        static var okButtonText: String = "Ok".localized
         
         struct NewVersionUpdate {
             static var alertTitle: String = "New version is available".localized

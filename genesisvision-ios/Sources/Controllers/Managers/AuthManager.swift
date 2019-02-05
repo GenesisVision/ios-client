@@ -11,18 +11,18 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
-    private static var walletViewModel: WalletViewModel?
-    private static var rateViewModel: RateViewModel?
+    private static var walletViewModel: WalletSummary?
+    private static var ratesModel: RatesModel?
     private static var twoFactorStatus: TwoFactorStatus?
     
     static var authorizedToken: String? {
         get {
-            guard let token = UserDefaults.standard.string(forKey: Constants.UserDefaults.authorizedToken) else { return nil }
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultKeys.authorizedToken) else { return nil }
             
             return "Bearer " + token
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.authorizedToken)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.authorizedToken)
         }
     }
     
@@ -42,7 +42,7 @@ class AuthManager {
         AuthManager.authorizedToken = nil
         AuthManager.profileViewModel = nil
         AuthManager.walletViewModel = nil
-        AuthManager.rateViewModel = nil
+        AuthManager.ratesModel = nil
     }
     
     static func isLogin() -> Bool {
@@ -50,29 +50,30 @@ class AuthManager {
     }
     
     static func resetUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.authorizedToken)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.authorizedToken)
         
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.biometricEnable)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.biometricLastDomainState)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.passcode)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.passcodeEnable)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.biometricEnable)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.biometricLastDomainState)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcode)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcodeEnable)
         
         UserDefaults.standard.synchronize()
     }
     
-    static func getSavedRate(completion: @escaping (_ rate: Double) -> Void) {
-        getRate { (viewModel) in
-            completion(rateViewModel?.rate ?? 0.0)
+    static func getSavedRates(completion: @escaping (_ rates: [RateItem]?) -> Void) {
+        getRates { (viewModel) in
+            guard let viewModel = viewModel else { return completion(nil) }
+            completion(viewModel.rates?.GVT)
         }
     }
     
     static func getBalance(completion: @escaping (_ balance: Double) -> Void, completionError: @escaping CompletionBlock) {
         getWallet(completion: { (viewModel) in
-            completion(walletViewModel?.amount?.rounded(withType: .gvt) ?? 0.0)
+            completion(walletViewModel?.availableGVT?.rounded(withType: .gvt) ?? 0.0)
         }, completionError: completionError)
     }
     
-    static func saveWalletViewModel(viewModel: WalletViewModel) {
+    static func saveWalletViewModel(viewModel: WalletSummary) {
         self.walletViewModel = viewModel
     }
     
@@ -98,52 +99,68 @@ class AuthManager {
         }, errorCompletion: completionError)
     }
     
-    static func getRate(completion: @escaping (_ rate: RateViewModel?) -> Void) {
-        guard rateViewModel == nil else {
-            completion(rateViewModel)
+    static func twoFactorEnabled(completion: @escaping (Bool) -> Void) {
+        getTwoFactorStatus(completion: { (model) in
+            completion(model.twoFactorEnabled ?? false)
+        }) { (result) in
+            switch result {
+            case .success:
+                completion(false)
+                break
+            case .failure(let errorType):
+                completion(false)
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
+    
+    static func getRates(completion: @escaping (_ rate: RatesModel?) -> Void) {
+        guard ratesModel == nil else {
+            completion(ratesModel)
             return
         }
         
-        RateDataProvider.getTake(completion: { (viewModel) in
+        RateDataProvider.getRates(completion: { (viewModel) in
             if viewModel != nil  {
-                rateViewModel = viewModel
+                ratesModel = viewModel
             }
             
-            completion(rateViewModel)
-        }, errorCompletion: { (result) in
+            completion(ratesModel)
+        }) { (result) in
             switch result {
             case .success:
                 break
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType)
             }
-        })
+        }
     }
     
-    static func getWallet(completion: @escaping (_ wallet: WalletViewModel?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getWallet(completion: @escaping (_ wallet: WalletSummary?) -> Void, completionError: @escaping CompletionBlock) {
         if let walletViewModel = walletViewModel {
             completion(walletViewModel)
         }
         
-        WalletDataProvider.getWallet(completion: { (viewModel) in
+        let currency: WalletAPI.Currency_v10WalletByCurrencyGet = .gvt
+        
+        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
             if viewModel != nil  {
-                walletViewModel = viewModel?.wallets?.first
+                walletViewModel = viewModel
             }
             
             completion(walletViewModel)
         }, errorCompletion: completionError)
     }
     
-    static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getTwoFactorStatus(completion: @escaping (_ twoFactorStatus: TwoFactorStatus) -> Void, completionError: @escaping CompletionBlock) {
         if let twoFactorStatus = twoFactorStatus {
             completion(twoFactorStatus)
         }
         
         TwoFactorDataProvider.auth2faGetStatus(completion: { (viewModel) in
-            if viewModel != nil  {
-                twoFactorStatus = viewModel
-            }
+            guard let viewModel = viewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
+            twoFactorStatus = viewModel
             completion(viewModel)
         }, errorCompletion: completionError)
     }
@@ -151,8 +168,7 @@ class AuthManager {
     // MARK: - Private methods
     private func updateApiToken(completion: @escaping CompletionBlock)  {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.apiInvestorAuthUpdateTokenGet(authorization: token) { (token, error) in
+        AuthAPI.v10AuthTokenUpdatePost(authorization: token) { (token, error) in
             guard token != nil else {
                 return ErrorHandler.handleApiError(error: error, completion: completion)
             }

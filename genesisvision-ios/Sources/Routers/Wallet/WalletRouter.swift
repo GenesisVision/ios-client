@@ -7,7 +7,8 @@
 //
 
 enum WalletRouteType {
-    case withdraw, deposit, showProgramDetails(investmentProgramId: String), showFilterVC(walletControllerViewModel: WalletControllerViewModel), programList
+    case withdraw, deposit, programList
+    case showAssetDetails(assetId: String, assetType: AssetType)
 }
 
 class WalletRouter: Router {
@@ -19,10 +20,8 @@ class WalletRouter: Router {
             withdraw()
         case .deposit:
             deposit()
-        case .showProgramDetails(let investmentProgramId):
-            showProgramDetails(with: investmentProgramId)
-        case .showFilterVC(let walletControllerViewModel):
-            showFilterVC(with: walletControllerViewModel)
+        case .showAssetDetails(let assetId, let assetType):
+            showAssetDetails(with: assetId, assetType: assetType)
         case .programList:
             showProgramList()
         }
@@ -30,13 +29,13 @@ class WalletRouter: Router {
     
     // MARK: - Private methods
     private func showProgramList() {
-        changeTab(withParentRouter: self, to: .programList)
+        changeTab(withParentRouter: self, to: .assetList)
     }
     
     private func withdraw() {
         guard let vc = topViewController() else { return }
         
-        guard let viewController = WalletWithdrawViewController.storyboardInstance(name: .wallet) else { return }
+        guard let viewController = WalletWithdrawViewController.storyboardInstance(.wallet) else { return }
         let router = WalletWithdrawRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = WalletWithdrawViewModel(withRouter: router, walletProtocol: vc as! WalletProtocol)
         viewController.viewModel = viewModel
@@ -45,18 +44,9 @@ class WalletRouter: Router {
     }
     
     private func deposit() {
-        guard let viewController = WalletDepositViewController.storyboardInstance(name: .wallet) else { return }
+        guard let viewController = WalletDepositViewController.storyboardInstance(.wallet) else { return }
         let router = WalletDepositRouter(parentRouter: self, navigationController: navigationController)
         let viewModel = WalletDepositViewModel(withRouter: router)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func showFilterVC(with walletControllerViewModel: WalletControllerViewModel) {
-        guard let viewController = WalletFilterViewController.storyboardInstance(name: .wallet) else { return }
-        let router = WalletFilterRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = WalletFilterViewModel(withRouter: router, walletControllerViewModel: walletControllerViewModel)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

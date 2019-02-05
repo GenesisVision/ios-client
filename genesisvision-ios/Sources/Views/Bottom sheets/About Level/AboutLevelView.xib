@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AboutLevelView" customModule="Genesis_Vision">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rq6-wx-hWK">
+                    <rect key="frame" x="30" y="12" width="315" height="144"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-fH-zC9" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="315" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QOh-o9-cGm">
+                            <rect key="frame" x="0.0" y="37.5" width="315" height="42"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nSa-wX-fgY">
+                                    <rect key="frame" x="0.0" y="0.0" width="79" height="17"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-bX-1B8" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="35.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUS-9G-ALT" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="43.5" y="0.0" width="35.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RJs-O3-qh6">
+                                    <rect key="frame" x="0.0" y="25" width="79" height="17"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92U-PD-bwh" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="35.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xf-kP-YEj" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="43.5" y="0.0" width="35.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4d-vy-my5">
+                            <rect key="frame" x="0.0" y="95.5" width="315" height="1"/>
+                            <color key="backgroundColor" red="0.14509803921568626" green="0.19607843137254902" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="2zJ-k7-qvM"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genesis level shows the experience and reliability of the Manager" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwJ-cM-vmn" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="112.5" width="315" height="31.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2j-6V-fEt" customClass="ActionButton" customModule="Genesis_Vision">
+                    <rect key="frame" x="20" y="197" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="s06-pN-zDg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="About Levels">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="aboutLevelsButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Sjf-hN-nV0"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="V2j-6V-fEt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="BGE-4b-tb3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="V2j-6V-fEt" secondAttribute="trailing" constant="20" id="GXW-uq-ajR"/>
+                <constraint firstAttribute="bottom" secondItem="V2j-6V-fEt" secondAttribute="bottom" constant="20" id="QG7-WN-5dC"/>
+                <constraint firstItem="Rq6-wx-hWK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="bpW-SV-buc"/>
+                <constraint firstItem="Rq6-wx-hWK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="igc-rb-TS2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rq6-wx-hWK" secondAttribute="trailing" constant="30" id="tVv-MW-uBH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="aboutLevelsButton" destination="V2j-6V-fEt" id="cUW-qa-DKy"/>
+                <outlet property="disclaimerLabel" destination="iwJ-cM-vmn" id="uBO-xF-kh4"/>
+                <outlet property="firstStackView" destination="nSa-wX-fgY" id="r6L-Pi-w0G"/>
+                <outlet property="firstTitleLabel" destination="DgK-bX-1B8" id="Xls-gi-2X9"/>
+                <outlet property="firstValueLabel" destination="EUS-9G-ALT" id="dfb-w1-tGj"/>
+                <outlet property="secondStackView" destination="RJs-O3-qh6" id="umQ-uF-OP8"/>
+                <outlet property="secondTitleLabel" destination="92U-PD-bwh" id="D1O-tB-k0G"/>
+                <outlet property="secondValueLabel" destination="1Xf-kP-YEj" id="Xxk-64-CaW"/>
+                <outlet property="titleLabel" destination="wPp-fH-zC9" id="gaE-AO-zPy"/>
+            </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="332.38380809595208"/>
+        </view>
+    </objects>
+</document>

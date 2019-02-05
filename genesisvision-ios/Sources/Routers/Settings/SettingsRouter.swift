@@ -48,7 +48,7 @@ class SettingsRouter: Router {
     }
     
     private func changePassword() {
-        guard let viewController = ChangePasswordViewController.storyboardInstance(name: .auth) else { return }
+        guard let viewController = ChangePasswordViewController.storyboardInstance(.auth) else { return }
         let router = ChangePasswordRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthChangePasswordViewModel(withRouter: router)
         viewController.hidesBottomBarWhenPushed = true
@@ -62,7 +62,7 @@ class SettingsRouter: Router {
     
     private func enablePasscode(_ value: Bool) {
         let window = UIApplication.shared.windows[0] as UIWindow
-        guard let viewController = PasscodeViewController.storyboardInstance(name: .settings), let rootViewController = window.rootViewController else { return }
+        guard let viewController = PasscodeViewController.storyboardInstance(.settings), let rootViewController = window.rootViewController else { return }
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = PasscodeViewModel(withRouter: router)
         
@@ -78,19 +78,11 @@ class SettingsRouter: Router {
     }
     
     private func showFeedback() {
-        navigationController?.openSafariVC(with: Constants.Urls.feedbackWebAddress)
-    }
-    
-    private func showTerms() {
-        navigationController?.openSafariVC(with: Constants.Urls.termsWebAddress)
-    }
-    
-    private func showPrivacy() {
-        navigationController?.openSafariVC(with: Constants.Urls.privacyWebAddress)
+        navigationController?.openSafariVC(with: Urls.feedbackWebAddress)
     }
     
     private func showProfile(_ profileModel: ProfileFullViewModel) {
-        guard let viewController = ProfileViewController.storyboardInstance(name: .profile) else { return }
+        guard let viewController = ProfileViewController.storyboardInstance(.profile) else { return }
         let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = ProfileViewModel(withRouter: router, profileModel: profileModel, textFieldDelegate: viewController)
         viewController.hidesBottomBarWhenPushed = true

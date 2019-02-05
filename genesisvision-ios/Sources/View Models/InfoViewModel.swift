@@ -10,7 +10,7 @@ import UIKit.UIImage
 
 protocol InfoViewModel {
 
-    var iconImage: UIImage { get }
+    var iconImage: UIImage? { get }
     var text: String { get }
     
     var backgroundColor: UIColor { get }

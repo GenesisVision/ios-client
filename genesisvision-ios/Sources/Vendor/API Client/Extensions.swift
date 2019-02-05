@@ -170,46 +170,13 @@ extension KeyedDecodingContainerProtocol {
 
 }
 
-extension UINavigationItem {
-    func setTitle(title: String, subtitle: String, type: NavBarType = .gray) {
-        let colors = UIColor.NavBar.colorScheme(with: type)
-        
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = UIFont.getFont(.bold, size: 18)
-        titleLabel.textColor = colors.textColor
-        titleLabel.textAlignment = .center
-        titleLabel.sizeToFit()
-        
-        let subtitleLabel = UILabel()
-        subtitleLabel.text = subtitle
-        subtitleLabel.font = UIFont.getFont(.bold, size: 10)
-        subtitleLabel.textColor = colors.subtitleColor
-        subtitleLabel.textAlignment = .center
-        subtitleLabel.sizeToFit()
-        
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
-        stackView.distribution = .equalCentering
-        stackView.axis = .vertical
-        
-        let width = max(titleLabel.frame.size.width, subtitleLabel.frame.size.width)
-        stackView.frame = CGRect(x: 0, y: 0, width: width, height: 35)
-        
-        titleLabel.sizeToFit()
-        subtitleLabel.sizeToFit()
-        
-        self.titleView = stackView
+extension String {
+    func removeCharacters(from forbiddenChars: CharacterSet) -> String {
+        let passed = self.unicodeScalars.filter { !forbiddenChars.contains($0) }
+        return String(String.UnicodeScalarView(passed))
+    }
+    
+    func removeCharacters(from: String) -> String {
+        return removeCharacters(from: CharacterSet(charactersIn: from))
     }
 }
-
-extension UIImage {
-    func alpha(_ value: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: .zero, blendMode: .normal, alpha: value)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-}
-
-

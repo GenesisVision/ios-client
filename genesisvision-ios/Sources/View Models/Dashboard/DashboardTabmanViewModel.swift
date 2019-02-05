@@ -22,17 +22,12 @@ final class DashboardTabmanViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title)
             }
             
-            if let vc = router.getFavorites() {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title)
-            }
+//            if let vc = router.getFavorites() {
+//                self.addController(vc)
+//                self.addItem(vc.viewModel.title)
+//            }
             
             reloadPages()
         }
-    }
-    
-    // MARK: - Public methods
-    func showCreateProgramVC() {
-        router.showCreateProgramVC()
     }
 }

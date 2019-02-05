@@ -9,12 +9,21 @@
 import UIKit.UINavigationController
 
 enum DashboardRouteType {
-    case showProgramDetails(investmentProgramId: String), programList
+    case showAssetDetails(assetId: String, assetType: AssetType)
+    case assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?)
+    case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
-class DashboardRouter: Router {
+class DashboardRouter: Router, ListRouterProtocol {
     
     var dashboardViewController: DashboardViewController!
+    
+    var chartsViewController: ChartsViewController?
+    var eventsViewController: EventsViewController?
+    var dashboardAssetsViewController: AssetsViewController?
+    
+    var programListViewController: DashboardProgramListViewController?
+    var fundListViewController: DashboardFundListViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {
@@ -26,15 +35,27 @@ class DashboardRouter: Router {
     // MARK: - Public methods
     func show(routeType: DashboardRouteType) {
         switch routeType {
-        case .showProgramDetails(let investmentProgramId):
-            parentRouter?.showProgramDetails(with: investmentProgramId)
-        case .programList:
-            showProgramList()
+        case .showAssetDetails(let assetId, let assetType):
+            showAssetDetails(with: assetId, assetType: assetType)
+        case .assetList:
+            showAssetList()
+        case .notificationList:
+            showNotificationList()
+        case .allEvents:
+            showEvents()
+        case .requests(let programRequests):
+            showRequests(programRequests)
+        case .showFilterVC(let listViewModel, let filterModel, let filterType, let sortingType):
+            showFilterVC(with: listViewModel, filterModel: filterModel, filterType: filterType, sortingType: sortingType)
         }
     }
     
     // MARK: - Private methods
-    private func showProgramList() {
-        changeTab(withParentRouter: self, to: .programList)
+    private func showAssetList() {
+        changeTab(withParentRouter: self, to: .assetList)
+    }
+    
+    private func showRequests(_ programRequests: ProgramRequests?) {
+        dashboardViewController.showRequests(programRequests)
     }
 }

@@ -43,17 +43,16 @@ class CreateProgramFirstViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        title = viewModel.title
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+//        navigationItem.title = viewModel.title  
         
         showInfiniteIndicator(value: false)
     }
     
     private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = viewModel.tableViewDataSourceAndDelegate
-        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+//        tableView.configure(with: .defaultConfiguration)
+//        tableView.delegate = viewModel.tableViewDataSourceAndDelegate
+//        tableView.dataSource = viewModel.tableViewDataSourceAndDelegate
+//        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
     }
     
     private func reloadData() {
@@ -64,7 +63,7 @@ class CreateProgramFirstViewController: BaseViewControllerWithTableView {
     
     // MARK: - Actions
     @IBAction func nextButtonAction(_ sender: UIButton) {
-        viewModel.nextStep()
+//        viewModel.nextStep()
     }
 }
 
@@ -93,10 +92,10 @@ extension CreateProgramFirstViewController: ImagePickerPresentable {
 
 extension CreateProgramFirstViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if IQKeyboardManager.sharedManager().canGoNext {
-            IQKeyboardManager.sharedManager().goNext()
+        if IQKeyboardManager.shared.canGoNext {
+            IQKeyboardManager.shared.goNext()
         } else {
-            IQKeyboardManager.sharedManager().resignFirstResponder()
+            IQKeyboardManager.shared.resignFirstResponder()
         }
         
         return false

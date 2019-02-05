@@ -29,10 +29,10 @@ class PhotoHeaderView: UIView {
     }
         
     // MARK: - Views
-    @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // MARK: - Buttons
-    @IBOutlet var choosePhotoView: СhoosePhotoView!
+    @IBOutlet weak var choosePhotoView: СhoosePhotoView!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -49,13 +49,13 @@ class PhotoHeaderView: UIView {
     }
     
     func updateAvatar(url: URL? = nil, image: UIImage? = nil) {
-        choosePhotoView.photoImageView.image = UIImage.placeholder
+        choosePhotoView.photoImageView.image = UIImage.profilePlaceholder
         
         if let image = image {
             choosePhotoView.photoImageView.image = image
         } else if let url = url {
             choosePhotoView.photoImageView.kf.indicatorType = .activity
-            choosePhotoView.photoImageView.kf.setImage(with: url, placeholder: UIImage.placeholder)
+            choosePhotoView.photoImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
         }
     }
     

@@ -11,58 +11,59 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Variables
     var title: String = "Withdraw"
-    var investmentProgramId: String?
-    var investedTokens: Double?
+    var programId: String
+    var programCurrency: CurrencyType
     var labelPlaceholder: String = "0"
     
-    private var rate: Double = 0.0
-    private var balance: Double = 0.0 {
-        didSet {
-            self.exchangedBalance = balance * self.rate
-        }
-    }
+    var programWithdrawInfo: ProgramWithdrawInfo?
     
-    private var exchangedBalance: Double = 0.0
-    var currency: String = "GVT"
-    
-    private weak var programDetailProtocol: ProgramDetailProtocol?
+    private weak var detailProtocol: DetailProtocol?
     
     private var router: ProgramWithdrawRouter!
     
     // MARK: - Init
     init(withRouter router: ProgramWithdrawRouter,
-         investmentProgramId: String,
-         investedTokens: Double,
-         currency: String,
-         programDetailProtocol: ProgramDetailProtocol?) {
+         programId: String,
+         programCurrency: CurrencyType,
+         detailProtocol: DetailProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
-        self.investedTokens = investedTokens
-        self.currency = currency
-        self.programDetailProtocol = programDetailProtocol
+        self.programId = programId
+        self.programCurrency = programCurrency
+        self.detailProtocol = detailProtocol
     }
     
     // MARK: - Public methods
+    func getInfo(completion: @escaping CompletionBlock) {
+        guard let currency = InvestorAPI.Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsDataProvider.getWithdrawInfo(programId: programId, currencySecondary: currency, completion: { [weak self] (programWithdrawInfo) in
+            guard let programWithdrawInfo = programWithdrawInfo else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            
+            self?.programWithdrawInfo = programWithdrawInfo
+            completion(.success)
+            }, errorCompletion: completion)
+    }
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
         apiWithdraw(with: amount, completion: completion)
     }
     
-    func showWithdrawRequestedVC() {
-        programDetailProtocol?.didWithdrawn()
-        router.show(routeType: .withdrawRequested)
+    func goToBack() {
+        detailProtocol?.didWithdrawn()
+        router.goToBack()
     }
     
-    func goToBack() {
-        programDetailProtocol?.didWithdrawn()
-        router.goToBack()
+    func close() {
+        router.closeVC()
     }
     
     // MARK: - Private methods
     // MARK: - API
     private func apiWithdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        ProgramDataProvider.withdrawProgram(withAmount: amount, investmentProgramId: investmentProgramId) { (result) in
+        ProgramsDataProvider.withdraw(withAmount: amount, programId: programId) { (result) in
             completion(result)
         }
     }

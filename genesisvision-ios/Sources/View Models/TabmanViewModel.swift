@@ -21,20 +21,23 @@ protocol TabmanViewModelDelegate: class {
 class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
     var title: String = ""
+    var items: [TabmanBar.Item]?
     
     var pageboyDataSource: PageboyDataSource!
     
     weak var tabmanViewModelDelegate: TabmanViewModelDelegate?
     
-    internal var style: TabmanBar.Style = .buttonBar
+    internal var style: TabmanBar.Style = .scrollingButtonBar
     internal var location: TabmanBar.Location = .top
     internal var bounces = true
     internal var compresses = false
+    internal var backgroundColor: UIColor = UIColor.BaseView.bg
+    internal var font = UIFont.getFont(.semibold, size: 12)
     internal var isScrollEnabled = true
     internal var isProgressive = false
     internal var itemDistribution: TabmanBar.Appearance.Layout.ItemDistribution = .leftAligned
     internal var shouldHideWhenSingleItem = false
-    internal var router: Router!
+    var router: Router!
     
     var viewControllersCount: Int = 1
     public private(set) var viewControllers = [UIViewController]()
@@ -61,13 +64,6 @@ class TabmanViewModel: TabmanViewModelProtocol {
     func addController(_ viewController: UIViewController) {
         viewControllers.append(viewController)
         viewControllersCount = viewControllers.count
-        
-        switch style {
-        case .buttonBar:
-            style = viewControllersCount > 4 ? .scrollingButtonBar : .buttonBar
-        default:
-            break
-        }
     }
     
     func removeController(_ index: Int) {
@@ -88,7 +84,9 @@ class TabmanViewModel: TabmanViewModelProtocol {
             vc.reloadPages()
         }
         
-        if let vc = self.router.currentController as? ProgramDetailsTabmanViewController {
+        if let vc = self.router.currentController as? ProgramTabmanViewController {
+            vc.didReloadData()
+        } else if let vc = self.router.currentController as? FundTabmanViewController {
             vc.didReloadData()
         }
     }

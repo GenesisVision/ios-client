@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="RatingTableHeaderView" id="HcM-09-upK" customClass="RatingTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="563" height="312"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xcz-AC-Erz">
+                    <rect key="frame" x="20" y="0.0" width="523" height="312"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hFH-XO-WZh">
+                            <rect key="frame" x="0.0" y="135" width="163.5" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geP-2G-6mx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="48.5" y="0.0" width="66.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UiW-pA-hgu" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="77" y="24" width="9.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ntC-rV-ctS">
+                            <rect key="frame" x="179.5" y="135" width="164" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQg-2s-8w8" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="61" y="0.0" width="42" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3i-I9-BH1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="77.5" y="24" width="9.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="NPZ-BK-iIB">
+                            <rect key="frame" x="359.5" y="135" width="163.5" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target profit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N71-O1-pc3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="39.5" y="0.0" width="84.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meD-ga-EP8" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="77" y="24" width="9.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xcz-AC-Erz" firstAttribute="leading" secondItem="Eq4-UW-zDG" secondAttribute="leading" constant="20" id="4wu-GL-OtW"/>
+                <constraint firstItem="xcz-AC-Erz" firstAttribute="top" secondItem="HcM-09-upK" secondAttribute="top" id="B2o-J5-792"/>
+                <constraint firstAttribute="bottom" secondItem="xcz-AC-Erz" secondAttribute="bottom" id="FgR-Vc-Zrg"/>
+                <constraint firstItem="Eq4-UW-zDG" firstAttribute="trailing" secondItem="xcz-AC-Erz" secondAttribute="trailing" constant="20" id="Rlt-8T-3Si"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Eq4-UW-zDG"/>
+            <connections>
+                <outlet property="programsTotalCountTitleLabel" destination="geP-2G-6mx" id="9ey-FB-FAp"/>
+                <outlet property="programsTotalCountValueLabel" destination="UiW-pA-hgu" id="Exu-uf-IFz"/>
+                <outlet property="quotaTitleLabel" destination="AQg-2s-8w8" id="osg-jC-6E2"/>
+                <outlet property="quotaValueLabel" destination="N3i-I9-BH1" id="EsV-f9-sX0"/>
+                <outlet property="targetProfitTitleLabel" destination="N71-O1-pc3" id="LZo-bc-fyH"/>
+                <outlet property="targetProfitValueLabel" destination="meD-ga-EP8" id="PEe-4c-w5u"/>
+            </connections>
+            <point key="canvasLocation" x="797.60000000000002" y="-44.07796101949026"/>
+        </view>
+    </objects>
+</document>

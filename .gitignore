@@ -8,9 +8,14 @@ DerivedData/
 
 ## Constants 
 Constants.swift
+AppConstants.swift
+GoogleService-Info.plist
+Info.plist
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+Pods

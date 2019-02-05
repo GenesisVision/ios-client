@@ -9,8 +9,9 @@
 import UIKit
 import Tabman
 import Pageboy
+import UIKit.UINavigationController
 
-class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
+class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController, TabmanViewModelDelegate {
     
     // MARK: - View Model
     var viewModel: T!
@@ -26,13 +27,13 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         viewModel.initializeViewControllers()
         
         dataSource = viewModel.pageboyDataSource
-        navigationItem.setTitle(title: viewModel.title, subtitle: getFullVersion())
+        navigationItem.title = viewModel.title
         
         setupUI()
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor.BaseView.bg
+        view.backgroundColor = viewModel.backgroundColor
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
         
         bar.style = viewModel.style
@@ -43,19 +44,20 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.interaction.isScrollEnabled = viewModel.isScrollEnabled
             
-            appearance.state.selectedColor = UIColor.primary
+            appearance.state.selectedColor = UIColor.Cell.title
+            appearance.state.color = UIColor.Cell.subtitle
             appearance.state.shouldHideWhenSingleItem = viewModel.shouldHideWhenSingleItem
             
             appearance.style.imageRenderingMode = .alwaysTemplate
             appearance.style.showEdgeFade = false
-            appearance.style.background = .solid(color: UIColor.BaseView.bg)
+            appearance.style.background = .solid(color: viewModel.backgroundColor)
             
             appearance.indicator.color = UIColor.primary
             appearance.indicator.bounces = viewModel.bounces
             appearance.indicator.isProgressive = viewModel.isProgressive
             appearance.indicator.compresses = viewModel.compresses
-            
-            appearance.text.font = UIFont.getFont(.regular, size: 15)
+            bounces = viewModel.bounces
+            appearance.text.font = viewModel.font
             
             switch bar.style {
             case .buttonBar:
@@ -67,9 +69,16 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             }
         })
     }
-}
-
-extension BaseTabmanViewController: TabmanViewModelDelegate {
+    
+    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: Int, direction: PageboyViewController.NavigationDirection, animated: Bool) {
+        super.pageboyViewController(pageboyViewController, didScrollToPageAt: index, direction: direction, animated: animated)
+        
+        //Only for managerVC
+        if let router = viewModel.router, let managerRouter = router.parentRouter as? ManagerRouter, index > 0 {
+            managerRouter.managerViewController.hideHeader(true)
+        }
+    }
+    
     func updatedItems() {
         var barItems = [Item]()
         

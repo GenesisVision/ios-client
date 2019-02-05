@@ -10,17 +10,17 @@ import UIKit
 
 final class ProgramHistoryViewModel {
     // MARK: - Variables
-    var title: String = "History".uppercased()
-    var investmentProgramId: String?
+    var title: String = "History"
+    var programId: String?
     
-    var router: ProgramHistoryRouter!
+    var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
     var transactionsCount: String = ""
     var skip = 0
-    var take = Constants.Api.take
+    var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
             transactionsCount = "\(totalCount) transactions"
@@ -30,10 +30,14 @@ final class ProgramHistoryViewModel {
     var viewModels = [WalletTransactionTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: ProgramHistoryRouter, investmentProgramId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.investmentProgramId = investmentProgramId
+        self.programId = programId
         self.reloadDataProtocol = reloadDataProtocol
+    }
+
+    func hideHeader(value: Bool = true) {
+        router.programViewController.hideHeader(value)
     }
 }
 
@@ -63,8 +67,8 @@ extension ProgramHistoryViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Constants.Api.fetchThreshold == row && canFetchMoreResults {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
@@ -102,8 +106,8 @@ extension ProgramHistoryViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> WalletTransactionTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> WalletTransactionTableViewCellViewModel? {
+        return viewModels[indexPath.row]
     }
 
     // MARK: - Private methods
@@ -118,11 +122,10 @@ extension ProgramHistoryViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let investmentProgramId = investmentProgramId,
-                let uuid = UUID(uuidString: investmentProgramId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
+            guard let programId = programId,
+                let uuid = UUID(uuidString: programId) else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
-            let filter = TransactionsFilter(investmentProgramId: uuid, type: nil, skip: skip, take: take)
-            WalletDataProvider.getWalletTransactions(with: filter, completion: { (transactionsViewModel) in
+            WalletDataProvider.getWalletTransactions(with: uuid, from: nil, to: nil, assetType: nil, txAction: nil, skip: skip, take: take, completion: { (transactionsViewModel) in
                 guard transactionsViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

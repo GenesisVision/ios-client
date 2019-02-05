@@ -9,7 +9,7 @@
 final class AuthSignInViewModel {
     
     // MARK: - Variables
-    var title: String = "Sign In"
+    var title: String = "Sign in"
     
     private var router: SignInRouter!
     
@@ -41,8 +41,6 @@ final class AuthSignInViewModel {
         AuthDataProvider.signIn(email: email, password: password, completion: { (token) in
             AuthManager.authorizedToken = token
             completion(.success)
-        }) { (result) in
-            completion(result)
-        }
+        }, errorCompletion: completion)
     }
 }

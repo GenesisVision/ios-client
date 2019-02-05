@@ -66,6 +66,10 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         rightViewMode = .whileEditing
     }
     
+    func addPadding() {
+        padding = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
+    }
+    
     func setLeftImageView() {
         if let text = text {
             leftImage = !text.isEmpty
@@ -100,6 +104,19 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     }
     
     // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        self.textColor = UIColor.TextField.title
+        self.placeholderColor = UIColor.Cell.subtitle
+        self.font = UIFont.getFont(.regular, size: 16)
+        
+        keyboardAppearance = .dark
+        
+        placeholder = ""
+        
+    }
+    
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }
@@ -114,6 +131,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.placeholderColor = UIColor.Cell.subtitle
         
         borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - bottomlineHeight, width: Double(self.frame.width), height: bottomlineHeight)
     }
