@@ -112,9 +112,7 @@ extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
                 scrollTop(tableView)
             }
         case .wallet:
-            if let vc = navController.viewControllers.first as? WalletViewController, let tableView = vc.tableView {
-                scrollTop(tableView)
-            }
+            break
         case .profile:
             if let vc = navController.viewControllers.first as? ProfileViewController, let tableView = vc.tableView {
                 scrollTop(tableView)

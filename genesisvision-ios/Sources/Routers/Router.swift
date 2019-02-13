@@ -135,10 +135,11 @@ class Router {
     }
     
     private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        guard let walletViewController = WalletViewController.storyboardInstance(.wallet) else { return }
+        let walletViewController = WalletViewController()
         navigationController = BaseNavigationController(rootViewController: walletViewController)
         let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
+        router.walletTabmanViewController = walletViewController
+        walletViewController.viewModel = WalletTabmanViewModel(withRouter: router)
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }

@@ -11,15 +11,24 @@ import Foundation
 
 open class ProfileHeaderViewModel: Codable {
 
+    public enum UserType: String, Codable { 
+        case investor = "Investor"
+        case manager = "Manager"
+    }
     public var id: UUID?
     public var name: String?
     public var email: String?
     public var avatar: String?
+    public var userType: UserType?
     public var notificationsCount: Int?
     public var favoritesCount: Int?
     public var totalBalanceGvt: Double?
     public var investedGvt: Double?
     public var availableGvt: Double?
+    public var totalBalance: Double?
+    public var invested: Double?
+    public var available: Double?
+    public var pending: Double?
     public var kycConfirmed: Bool?
     public var allowForex: Bool?
     public var isTwoFactorEnabled: Bool?
@@ -27,16 +36,21 @@ open class ProfileHeaderViewModel: Codable {
 
 
     
-    public init(id: UUID?, name: String?, email: String?, avatar: String?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, kycConfirmed: Bool?, allowForex: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
+    public init(id: UUID?, name: String?, email: String?, avatar: String?, userType: UserType?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, totalBalance: Double?, invested: Double?, available: Double?, pending: Double?, kycConfirmed: Bool?, allowForex: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
         self.id = id
         self.name = name
         self.email = email
         self.avatar = avatar
+        self.userType = userType
         self.notificationsCount = notificationsCount
         self.favoritesCount = favoritesCount
         self.totalBalanceGvt = totalBalanceGvt
         self.investedGvt = investedGvt
         self.availableGvt = availableGvt
+        self.totalBalance = totalBalance
+        self.invested = invested
+        self.available = available
+        self.pending = pending
         self.kycConfirmed = kycConfirmed
         self.allowForex = allowForex
         self.isTwoFactorEnabled = isTwoFactorEnabled
@@ -54,11 +68,16 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(name, forKey: "name")
         try container.encodeIfPresent(email, forKey: "email")
         try container.encodeIfPresent(avatar, forKey: "avatar")
+        try container.encodeIfPresent(userType, forKey: "userType")
         try container.encodeIfPresent(notificationsCount, forKey: "notificationsCount")
         try container.encodeIfPresent(favoritesCount, forKey: "favoritesCount")
         try container.encodeIfPresent(totalBalanceGvt, forKey: "totalBalanceGvt")
         try container.encodeIfPresent(investedGvt, forKey: "investedGvt")
         try container.encodeIfPresent(availableGvt, forKey: "availableGvt")
+        try container.encodeIfPresent(totalBalance, forKey: "totalBalance")
+        try container.encodeIfPresent(invested, forKey: "invested")
+        try container.encodeIfPresent(available, forKey: "available")
+        try container.encodeIfPresent(pending, forKey: "pending")
         try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
         try container.encodeIfPresent(allowForex, forKey: "allowForex")
         try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
@@ -74,11 +93,16 @@ open class ProfileHeaderViewModel: Codable {
         name = try container.decodeIfPresent(String.self, forKey: "name")
         email = try container.decodeIfPresent(String.self, forKey: "email")
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
+        userType = try container.decodeIfPresent(UserType.self, forKey: "userType")
         notificationsCount = try container.decodeIfPresent(Int.self, forKey: "notificationsCount")
         favoritesCount = try container.decodeIfPresent(Int.self, forKey: "favoritesCount")
         totalBalanceGvt = try container.decodeIfPresent(Double.self, forKey: "totalBalanceGvt")
         investedGvt = try container.decodeIfPresent(Double.self, forKey: "investedGvt")
         availableGvt = try container.decodeIfPresent(Double.self, forKey: "availableGvt")
+        totalBalance = try container.decodeIfPresent(Double.self, forKey: "totalBalance")
+        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
+        available = try container.decodeIfPresent(Double.self, forKey: "available")
+        pending = try container.decodeIfPresent(Double.self, forKey: "pending")
         kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
         allowForex = try container.decodeIfPresent(Bool.self, forKey: "allowForex")
         isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")

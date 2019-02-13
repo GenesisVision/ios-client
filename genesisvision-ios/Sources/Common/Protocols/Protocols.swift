@@ -185,3 +185,24 @@ extension UIViewControllerWithBottomView where Self: BaseViewController {
     }
 }
 
+protocol WalletTransactionListViewModel {
+    var title: String { get }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
+    
+    func fetch(completion: @escaping CompletionBlock)
+    func refresh(completion: @escaping CompletionBlock)
+    
+    func fetchMore(at indexPath: IndexPath) -> Bool
+    func numberOfSections() -> Int
+    func numberOfRows(in section: Int) -> Int
+    func headerTitle(for section: Int) -> String?
+    func headerHeight(for section: Int) -> CGFloat
+    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    
+    func logoImageName() -> String
+    func noDataText() -> String
+    func noDataImageName() -> String?
+    func noDataButtonTitle() -> String
+}

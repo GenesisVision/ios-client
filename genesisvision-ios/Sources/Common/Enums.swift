@@ -107,6 +107,13 @@ enum AssetType: String {
     case manager = "Manager"
 }
 
+enum WalletBalanceType: String {
+    case total = "Total balance"
+    case available = "Available"
+    case invested = "Invested"
+    case pending = "Pending"
+}
+
 // MARK: - CompletionsResult
 enum CompletionResult {
     case success

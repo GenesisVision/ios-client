@@ -33,11 +33,12 @@ open class OrderModel: Codable {
     public var direction: Direction?
     public var date: Date?
     public var price: Double?
+    public var priceCurrent: Double?
     public var entry: Entry?
 
 
     
-    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, entry: Entry?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?) {
         self.id = id
         self.login = login
         self.ticket = ticket
@@ -47,6 +48,7 @@ open class OrderModel: Codable {
         self.direction = direction
         self.date = date
         self.price = price
+        self.priceCurrent = priceCurrent
         self.entry = entry
     }
     
@@ -66,6 +68,7 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(direction, forKey: "direction")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(price, forKey: "price")
+        try container.encodeIfPresent(priceCurrent, forKey: "priceCurrent")
         try container.encodeIfPresent(entry, forKey: "entry")
     }
 
@@ -83,6 +86,7 @@ open class OrderModel: Codable {
         direction = try container.decodeIfPresent(Direction.self, forKey: "direction")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         price = try container.decodeIfPresent(Double.self, forKey: "price")
+        priceCurrent = try container.decodeIfPresent(Double.self, forKey: "priceCurrent")
         entry = try container.decodeIfPresent(Entry.self, forKey: "entry")
     }
 }

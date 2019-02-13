@@ -59,7 +59,7 @@ final class WalletWithdrawViewModel {
     
     // MARK: - Public methods
     func getInfo(completion: @escaping CompletionBlock) {
-        WalletDataProvider.getWalletWithdrawInfo(completion: { [weak self] (withdrawalSummary) in
+        WalletDataProvider.getWithdrawInfo(completion: { [weak self] (withdrawalSummary) in
             guard let withdrawalSummary = withdrawalSummary else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

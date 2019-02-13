@@ -19,6 +19,7 @@ open class WalletTransaction: Codable {
         case fundRequest = "FundRequest"
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
+        case blockchain = "Blockchain"
     }
     public enum SourceCurrency: String, Codable { 
         case undefined = "Undefined"
@@ -55,6 +56,7 @@ open class WalletTransaction: Codable {
         case fundRequest = "FundRequest"
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
+        case blockchain = "Blockchain"
     }
     public enum DestinationCurrency: String, Codable { 
         case undefined = "Undefined"

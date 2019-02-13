@@ -78,7 +78,7 @@ final class WalletDepositViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-        WalletDataProvider.getWalletAddresses(completion: { [weak self] (walletsInfo) in
+        WalletDataProvider.getAddresses(completion: { [weak self] (walletsInfo) in
             guard let walletsInfo = walletsInfo else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

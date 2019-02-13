@@ -12,31 +12,52 @@ import Alamofire
 
 open class InvestorAPI {
     /**
-     Investing into the fund
+     * enum for parameter currency
+     */
+    public enum Currency_v10InvestorFundsByIdInvestByAmountPost: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Investing into the fund  Invest in GVT if currency is empty
      
      - parameter id: (path)  
      - parameter amount: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorFundsByIdInvestByAmountPost(id: UUID, amount: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10InvestorFundsByIdInvestByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10InvestorFundsByIdInvestByAmountPost(id: UUID, amount: Double, authorization: String, currency: Currency_v10InvestorFundsByIdInvestByAmountPost? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10InvestorFundsByIdInvestByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization, currency: currency).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Investing into the fund
+     Investing into the fund  Invest in GVT if currency is empty
      - POST /v1.0/investor/funds/{id}/invest/{amount}
      
      - parameter id: (path)  
      - parameter amount: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10InvestorFundsByIdInvestByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String) -> RequestBuilder<Void> {
+    open class func v10InvestorFundsByIdInvestByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String, currency: Currency_v10InvestorFundsByIdInvestByAmountPost? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/investor/funds/{id}/invest/{amount}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{amount}", with: "\(amount)", options: .literal, range: nil)
@@ -44,7 +65,10 @@ open class InvestorAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "currency": currency?.rawValue
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -147,40 +171,40 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.704019297950036,
-  "total" : 5,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -214,31 +238,52 @@ open class InvestorAPI {
     }
 
     /**
-     Withdraw from fund. Percent is % of investor total money.
+     * enum for parameter currency
+     */
+    public enum Currency_v10InvestorFundsByIdWithdrawByPercentPost: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Withdraw from fund. Percent is % of investor total money.  Withdraw in GVT if currency is empty
      
      - parameter id: (path)  
      - parameter percent: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorFundsByIdWithdrawByPercentPost(id: UUID, percent: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: id, percent: percent, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10InvestorFundsByIdWithdrawByPercentPost(id: UUID, percent: Double, authorization: String, currency: Currency_v10InvestorFundsByIdWithdrawByPercentPost? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: id, percent: percent, authorization: authorization, currency: currency).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Withdraw from fund. Percent is % of investor total money.
+     Withdraw from fund. Percent is % of investor total money.  Withdraw in GVT if currency is empty
      - POST /v1.0/investor/funds/{id}/withdraw/{percent}
      
      - parameter id: (path)  
      - parameter percent: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: UUID, percent: Double, authorization: String) -> RequestBuilder<Void> {
+    open class func v10InvestorFundsByIdWithdrawByPercentPostWithRequestBuilder(id: UUID, percent: Double, authorization: String, currency: Currency_v10InvestorFundsByIdWithdrawByPercentPost? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/investor/funds/{id}/withdraw/{percent}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{percent}", with: "\(percent)", options: .literal, range: nil)
@@ -246,7 +291,10 @@ open class InvestorAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "currency": currency?.rawValue
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -613,60 +661,65 @@ open class InvestorAPI {
      - GET /v1.0/investor
      - examples: [{contentType=application/json, example={
   "programsCount" : 6,
-  "fundsCount" : 3,
+  "fundsCount" : 6,
   "requests" : {
-    "totalValue" : 6.704019297950036,
-    "total" : 5,
+    "totalValue" : 7.058770351582356,
+    "total" : 0,
     "requests" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeExit" : 6.778324963048013,
+      "feeExit" : 3.0937452626664474,
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
-      "valueGvt" : 1.284659006116532,
-      "fundWithdrawPercent" : 6.878052220127876,
-      "feeEntry" : 2.8841621266687802,
+      "valueGvt" : 6.704019297950036,
+      "fundWithdrawPercent" : 7.143538047012306,
+      "feeEntry" : 3.353193347011243,
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "value" : 6.965117697638846,
+      "value" : 5.944895607614016,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeExit" : 6.778324963048013,
+      "feeExit" : 3.0937452626664474,
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
-      "valueGvt" : 1.284659006116532,
-      "fundWithdrawPercent" : 6.878052220127876,
-      "feeEntry" : 2.8841621266687802,
+      "valueGvt" : 6.704019297950036,
+      "fundWithdrawPercent" : 7.143538047012306,
+      "feeEntry" : 3.353193347011243,
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "value" : 6.965117697638846,
+      "value" : 5.944895607614016,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "New"
     } ]
   },
   "profileHeader" : {
+    "totalBalance" : 3.5571952270680973,
+    "pending" : 2.8841621266687802,
+    "available" : 1.284659006116532,
     "notificationsCount" : 9,
     "kycConfirmed" : true,
-    "availableGvt" : 9.018348186070783,
+    "availableGvt" : 6.438423552598547,
     "avatar" : "avatar",
-    "investedGvt" : 8.762042012749001,
-    "favoritesCount" : 9,
+    "investedGvt" : 9.018348186070783,
+    "favoritesCount" : 6,
     "isNewUser" : true,
     "isTwoFactorEnabled" : true,
     "allowForex" : true,
     "name" : "name",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "totalBalanceGvt" : 6.683562403749608,
-    "email" : "email"
+    "userType" : "Investor",
+    "totalBalanceGvt" : 8.762042012749001,
+    "email" : "email",
+    "invested" : 6.965117697638846
   },
   "chart" : {
     "investedProgramsInfo" : [ {
@@ -741,9 +794,10 @@ open class InvestorAPI {
     "value" : 2.027123023002322
   },
   "events" : {
-    "total" : 5,
+    "total" : 9,
     "events" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
+      "feeSuccessPlatformCurrency" : "Undefined",
       "color" : "color",
       "description" : "description",
       "feeSuccessManager" : 1.1730742509559433,
@@ -751,6 +805,8 @@ open class InvestorAPI {
       "type" : "All",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
+      "feeSuccessManagerCurrency" : "Undefined",
+      "profitPercent" : 5.025004791520295,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
       "currency" : "Undefined",
@@ -758,6 +814,7 @@ open class InvestorAPI {
       "valueTotal" : 7.457744773683766
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
+      "feeSuccessPlatformCurrency" : "Undefined",
       "color" : "color",
       "description" : "description",
       "feeSuccessManager" : 1.1730742509559433,
@@ -765,6 +822,8 @@ open class InvestorAPI {
       "type" : "All",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
+      "feeSuccessManagerCurrency" : "Undefined",
+      "profitPercent" : 5.025004791520295,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
       "currency" : "Undefined",
@@ -1006,9 +1065,10 @@ open class InvestorAPI {
      Portfolio events
      - GET /v1.0/investor/portfolio/events
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 9,
   "events" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeSuccessPlatformCurrency" : "Undefined",
     "color" : "color",
     "description" : "description",
     "feeSuccessManager" : 1.1730742509559433,
@@ -1016,6 +1076,8 @@ open class InvestorAPI {
     "type" : "All",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
+    "feeSuccessManagerCurrency" : "Undefined",
+    "profitPercent" : 5.025004791520295,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "currency" : "Undefined",
@@ -1023,6 +1085,7 @@ open class InvestorAPI {
     "valueTotal" : 7.457744773683766
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "feeSuccessPlatformCurrency" : "Undefined",
     "color" : "color",
     "description" : "description",
     "feeSuccessManager" : 1.1730742509559433,
@@ -1030,6 +1093,8 @@ open class InvestorAPI {
     "type" : "All",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
+    "feeSuccessManagerCurrency" : "Undefined",
+    "profitPercent" : 5.025004791520295,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "currency" : "Undefined",
@@ -1076,31 +1141,52 @@ open class InvestorAPI {
     }
 
     /**
-     Investing into the program
+     * enum for parameter currency
+     */
+    public enum Currency_v10InvestorProgramsByIdInvestByAmountPost: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Investing into the program  Invest in GVT if currency is empty
      
      - parameter id: (path)  
      - parameter amount: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorProgramsByIdInvestByAmountPost(id: UUID, amount: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10InvestorProgramsByIdInvestByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10InvestorProgramsByIdInvestByAmountPost(id: UUID, amount: Double, authorization: String, currency: Currency_v10InvestorProgramsByIdInvestByAmountPost? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10InvestorProgramsByIdInvestByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization, currency: currency).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Investing into the program
+     Investing into the program  Invest in GVT if currency is empty
      - POST /v1.0/investor/programs/{id}/invest/{amount}
      
      - parameter id: (path)  
      - parameter amount: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter currency: (query)  (optional, default to 100)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10InvestorProgramsByIdInvestByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String) -> RequestBuilder<Void> {
+    open class func v10InvestorProgramsByIdInvestByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String, currency: Currency_v10InvestorProgramsByIdInvestByAmountPost? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/investor/programs/{id}/invest/{amount}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{amount}", with: "\(amount)", options: .literal, range: nil)
@@ -1108,7 +1194,10 @@ open class InvestorAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "currency": currency?.rawValue
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -1295,40 +1384,40 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.704019297950036,
-  "total" : 5,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -1362,7 +1451,7 @@ open class InvestorAPI {
     }
 
     /**
-     Withdraw from investment program
+     [Obsolete] Withdraw from investment program in GVT
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -1377,7 +1466,7 @@ open class InvestorAPI {
 
 
     /**
-     Withdraw from investment program
+     [Obsolete] Withdraw from investment program in GVT
      - POST /v1.0/investor/programs/{id}/withdraw/{amount}
      
      - parameter id: (path)  
@@ -1472,6 +1561,50 @@ open class InvestorAPI {
         let requestBuilder: RequestBuilder<ProgramWithdrawInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Withdraw from investment program in program currency
+     
+     - parameter id: (path)  
+     - parameter amount: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10InvestorProgramsByIdWithdrawMultiByAmountPost(id: UUID, amount: Double, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10InvestorProgramsByIdWithdrawMultiByAmountPostWithRequestBuilder(id: id, amount: amount, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Withdraw from investment program in program currency
+     - POST /v1.0/investor/programs/{id}/withdraw/multi/{amount}
+     
+     - parameter id: (path)  
+     - parameter amount: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10InvestorProgramsByIdWithdrawMultiByAmountPostWithRequestBuilder(id: UUID, amount: Double, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v1.0/investor/programs/{id}/withdraw/multi/{amount}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{amount}", with: "\(amount)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -1810,40 +1943,40 @@ open class InvestorAPI {
      Get all requests
      - GET /v1.0/investor/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.704019297950036,
-  "total" : 5,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 6.778324963048013,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 1.284659006116532,
-    "fundWithdrawPercent" : 6.878052220127876,
-    "feeEntry" : 2.8841621266687802,
+    "valueGvt" : 6.704019297950036,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.965117697638846,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]

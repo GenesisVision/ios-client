@@ -9,84 +9,49 @@
 import UIKit.UIColor
 
 struct WalletTransactionTableViewCellViewModel {
-    let walletTransaction: WalletTransaction
+    let walletTransaction: MultiWalletTransaction
 }
 
 extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
-        cell.iconImageView.image = #imageLiteral(resourceName: "img_wallet_transaction_icon")
-        cell.typeImageView.image = nil
+        cell.iconImageView.image = UIImage.eventPlaceholder
+        
+        if let logo = walletTransaction.logoFrom, let fileUrl = getFileURL(fileName: logo) {
+            cell.iconImageView.kf.indicatorType = .activity
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+            cell.iconImageView.backgroundColor = .clear
+        } else {
+            cell.iconImageView.isHidden = true
+        }
 
         cell.amountLabel.text = ""
         
-        var sign = ""
-        
-        if let action = walletTransaction.action,
-            let sourceType = walletTransaction.sourceType,
-            let destinationType = walletTransaction.destinationType {
-            
-            switch action {
-            case .transfer:
-                if sourceType == .paymentTransaction, action == .transfer, destinationType == .wallet {
-                    cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-                    sign = "+"
-                }
-                
-                if sourceType == .wallet, action == .transfer, destinationType == .withdrawalRequest {
-                    cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-                    sign = "-"
-                }
-                
-                if sourceType == .withdrawalRequest, action == .transfer, destinationType == .paymentTransaction {
-                    cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-                    sign = "-"
-                }
-            default:
-                if sourceType == .wallet {
-                    cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-                    sign = "-"
-                } else if destinationType == .wallet {
-                    cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-                    sign = "+"
-                }
+        if let amount = walletTransaction.amount, let currencyFrom = walletTransaction.currencyFrom {
+            if let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
+                cell.amountLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+                cell.amountLabel.textColor = amount == 0 ? UIColor.Cell.title : amount > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
             }
-        }
-        
-        if let amount = walletTransaction.amount,
-            let amountConverted = walletTransaction.amountConverted,
-            let sourceCurrency = walletTransaction.sourceCurrency,
-            let destinationCurrency = walletTransaction.destinationCurrency {
-            if sourceCurrency == .gvt {
-                if let currency = CurrencyType(rawValue: sourceCurrency.rawValue) {
-                    cell.amountLabel.text = sign + amount.rounded(withType: currency).toString() + " " + currency.rawValue
-                }
-            } else {
-                if let currency = CurrencyType(rawValue: destinationCurrency.rawValue) {
-                    cell.amountLabel.text = sign + amountConverted.rounded(withType: currency).toString() + " " + currency.rawValue
-                }
-            }
-            
-            cell.amountLabel.textColor = sign == "+" ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         } else {
             cell.amountLabel.isHidden = true
         }
         
-        if let information = walletTransaction.information {
+        if let information = walletTransaction.description {
             cell.titleLabel.text = information
         } else {
             cell.titleLabel.isHidden = true
         }
         
-        if let status = walletTransaction.destinationWithdrawalInfo?.status {
-            var statusText = ""
-            switch status {
-            case .inProcess:
-                statusText = "In process"
-            default:
-                statusText = status.rawValue
-            }
+        if let status = walletTransaction.status {
+            cell.statusLabel.text = status.rawValue
             
-            cell.statusLabel.text = statusText
+            switch status {
+                case .canceled, .error:
+                    cell.statusLabel.textColor = UIColor.Cell.redTitle
+                case .done:
+                    cell.statusLabel.textColor = UIColor.Cell.greenTitle
+                case .pending:
+                    cell.statusLabel.textColor = UIColor.Cell.yellowTitle
+            }
         } else {
             cell.statusLabel.isHidden = true
         }

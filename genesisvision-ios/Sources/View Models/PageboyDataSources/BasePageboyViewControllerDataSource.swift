@@ -11,6 +11,7 @@ import Pageboy
 
 protocol BasePageboyProtocol {
     func setup(router: Router, filterModel: FilterModel?, showFacets: Bool)
+    func setup(router: Router, wallet: WalletData?)
 }
 
 class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource, BasePageboyProtocol {
@@ -21,6 +22,12 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
         super.init()
         
         setup(router: router, filterModel: filterModel, showFacets: showFacets)
+    }
+    
+    init(router: Router, wallet: WalletData? = nil) {
+        super.init()
+        
+        setup(router: router, wallet: wallet)
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -37,5 +44,8 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     
     // MARK: - Private methods
     internal func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+    }
+    
+    internal func setup(router: Router, wallet: WalletData? = nil) {
     }
 }

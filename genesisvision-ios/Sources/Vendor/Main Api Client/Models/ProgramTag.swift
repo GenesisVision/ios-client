@@ -14,6 +14,8 @@ open class ProgramTag: Codable {
     public enum Name: String, Codable { 
         case crypto = "Crypto"
         case forex = "Forex"
+        case highRisk = "HighRisk"
+        case signal = "Signal"
     }
     public var name: Name?
     public var color: String?

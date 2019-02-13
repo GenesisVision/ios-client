@@ -16,11 +16,7 @@ class WalletTransactionTableViewCell: UITableViewCell {
             iconImageView.roundCorners()
         }
     }
-    @IBOutlet weak var typeImageView: UIImageView! {
-        didSet {
-            typeImageView.roundCorners()
-        }
-    }
+    
     @IBOutlet weak var titleLabel: TitleLabel!
     @IBOutlet weak var statusLabel: SubtitleLabel!
     @IBOutlet weak var amountLabel: TitleLabel!

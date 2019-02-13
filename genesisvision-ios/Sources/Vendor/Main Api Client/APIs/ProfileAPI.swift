@@ -166,19 +166,24 @@ open class ProfileAPI {
      Get header profile
      - GET /v1.0/profile/header
      - examples: [{contentType=application/json, example={
+  "totalBalance" : 3.5571952270680973,
+  "pending" : 2.8841621266687802,
+  "available" : 1.284659006116532,
   "notificationsCount" : 9,
   "kycConfirmed" : true,
-  "availableGvt" : 9.018348186070783,
+  "availableGvt" : 6.438423552598547,
   "avatar" : "avatar",
-  "investedGvt" : 8.762042012749001,
-  "favoritesCount" : 9,
+  "investedGvt" : 9.018348186070783,
+  "favoritesCount" : 6,
   "isNewUser" : true,
   "isTwoFactorEnabled" : true,
   "allowForex" : true,
   "name" : "name",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "totalBalanceGvt" : 6.683562403749608,
-  "email" : "email"
+  "userType" : "Investor",
+  "totalBalanceGvt" : 8.762042012749001,
+  "email" : "email",
+  "invested" : 6.965117697638846
 }}]
      
      - parameter authorization: (header) JWT access token 

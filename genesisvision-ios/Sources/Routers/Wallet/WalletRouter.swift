@@ -13,6 +13,9 @@ enum WalletRouteType {
 
 class WalletRouter: Router {
     
+    var walletBalanceViewController: WalletBalanceViewController?
+    var walletTabmanViewController: WalletViewController?
+    
     // MARK: - Public methods
     func show(routeType: WalletRouteType) {
         switch routeType {
@@ -25,6 +28,40 @@ class WalletRouter: Router {
         case .programList:
             showProgramList()
         }
+    }
+    
+    func getBalance(_ wallet: WalletData? = nil) -> WalletBalanceViewController? {
+        let viewController = WalletBalanceViewController()
+        let viewModel = WalletBalanceViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getWallets(_ wallet: WalletData? = nil) -> WalletListViewController? {
+        guard wallet == nil else { return nil }
+        
+        let viewController = WalletListViewController()
+        let viewModel = WalletListViewModel(withRouter: self, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getInternalTransactions(_ wallet: WalletData? = nil) -> WalletTransactionListViewController? {
+        let viewController = WalletTransactionListViewController()
+        let viewModel = WalletInternalTransactionListViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getExternalTransactions(_ wallet: WalletData? = nil) -> WalletTransactionListViewController? {
+        let viewController = WalletTransactionListViewController()
+        let viewModel = WalletExternalTransactionListViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
     
     // MARK: - Private methods

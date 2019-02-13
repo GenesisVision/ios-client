@@ -102,21 +102,7 @@ class DashboardViewController: BaseViewController {
     }
     
     // MARK: - Private methods
-    @objc private func displayFCMToken(notification: NSNotification){
-        guard let userInfo = notification.userInfo else {return}
-        if let fcmToken = userInfo["token"] as? String {
-            let fcmTokenMessage = "Received FCM token: \(fcmToken)"
-            showAlertWithTitle(title: nil, message: fcmTokenMessage, actionTitle: "Ok", cancelTitle: "Cancel", handler: {
-                
-            }) {
-                
-            }
-        }
-    }
-    
     private func setup() {
-//        selectedChartAssetsView?.alpha = 0.0
-        
         setupPullToRefresh(scrollView: scrollView)
         bottomViewType = .dateRange
         bottomStackViewHiddable = false

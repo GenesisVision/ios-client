@@ -143,7 +143,7 @@ class AuthManager {
         
         let currency: WalletAPI.Currency_v10WalletByCurrencyGet = .gvt
         
-        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
+        WalletDataProvider.get(with: currency, completion: { (viewModel) in
             if viewModel != nil  {
                 walletViewModel = viewModel
             }

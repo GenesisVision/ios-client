@@ -144,15 +144,15 @@ class SortingManager: NSObject {
         
         switch selectedValue {
         case "date":
-            return highToLowValue ? .byDateDesc : .byDateAsk
+            return highToLowValue ? .byDateDesc : .byDateAsc
         case "ticket":
-            return highToLowValue ? .byTicketDesc : .byTicketAsk
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
         case "symbol":
-            return highToLowValue ? .bySymbolDesc : .bySymbolAsk
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
         case "direction":
-            return highToLowValue ? .byDirectionDesc : .byDirectionAsk
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
         default:
-            return highToLowValue ? .byDateDesc : .byDateAsk
+            return highToLowValue ? .byDateDesc : .byDateAsc
         }
     }
     

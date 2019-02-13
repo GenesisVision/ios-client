@@ -400,14 +400,22 @@ open class ProgramsAPI {
      * enum for parameter sorting
      */
     public enum Sorting_v10ProgramsByIdTradesGet: String { 
-        case byDateAsk = "ByDateAsk"
+        case byDateAsc = "ByDateAsc"
         case byDateDesc = "ByDateDesc"
-        case byTicketAsk = "ByTicketAsk"
+        case byTicketAsc = "ByTicketAsc"
         case byTicketDesc = "ByTicketDesc"
-        case bySymbolAsk = "BySymbolAsk"
+        case bySymbolAsc = "BySymbolAsc"
         case bySymbolDesc = "BySymbolDesc"
-        case byDirectionAsk = "ByDirectionAsk"
+        case byDirectionAsc = "ByDirectionAsc"
         case byDirectionDesc = "ByDirectionDesc"
+        case byVolumeAsc = "ByVolumeAsc"
+        case byVolumeDesc = "ByVolumeDesc"
+        case byPriceAsc = "ByPriceAsc"
+        case byPriceDesc = "ByPriceDesc"
+        case byPriceCurrentAsc = "ByPriceCurrentAsc"
+        case byPriceCurrentDesc = "ByPriceCurrentDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
     }
 
     /**
@@ -438,6 +446,7 @@ open class ProgramsAPI {
     "volume" : 0.8008281904610115,
     "date" : "2000-01-23T04:56:07.000+00:00",
     "symbol" : "symbol",
+    "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "ticket" : "ticket",
     "price" : 1.4658129805029452,
@@ -449,6 +458,7 @@ open class ProgramsAPI {
     "volume" : 0.8008281904610115,
     "date" : "2000-01-23T04:56:07.000+00:00",
     "symbol" : "symbol",
+    "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "ticket" : "ticket",
     "price" : 1.4658129805029452,
@@ -480,6 +490,102 @@ open class ProgramsAPI {
             "DateFrom": dateFrom?.encodeToJSON(), 
             "DateTo": dateTo?.encodeToJSON(), 
             "Symbol": symbol, 
+            "Sorting": sorting?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<TradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     * enum for parameter sorting
+     */
+    public enum Sorting_v10ProgramsByIdTradesOpenGet: String { 
+        case byDateAsc = "ByDateAsc"
+        case byDateDesc = "ByDateDesc"
+        case byTicketAsc = "ByTicketAsc"
+        case byTicketDesc = "ByTicketDesc"
+        case bySymbolAsc = "BySymbolAsc"
+        case bySymbolDesc = "BySymbolDesc"
+        case byDirectionAsc = "ByDirectionAsc"
+        case byDirectionDesc = "ByDirectionDesc"
+        case byVolumeAsc = "ByVolumeAsc"
+        case byVolumeDesc = "ByVolumeDesc"
+        case byPriceAsc = "ByPriceAsc"
+        case byPriceDesc = "ByPriceDesc"
+        case byPriceCurrentAsc = "ByPriceCurrentAsc"
+        case byPriceCurrentDesc = "ByPriceCurrentDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+    }
+
+    /**
+     Open positions
+     
+     - parameter id: (path)  
+     - parameter sorting: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProgramsByIdTradesOpenGet(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: id, sorting: sorting, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Open positions
+     - GET /v1.0/programs/{id}/trades/open
+     - examples: [{contentType=application/json, example={
+  "total" : 5,
+  "trades" : [ {
+    "volume" : 0.8008281904610115,
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "symbol" : "symbol",
+    "priceCurrent" : 5.962133916683182,
+    "entry" : "In",
+    "ticket" : "ticket",
+    "price" : 1.4658129805029452,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "login" : "login",
+    "profit" : 6.027456183070403,
+    "direction" : "Buy"
+  }, {
+    "volume" : 0.8008281904610115,
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "symbol" : "symbol",
+    "priceCurrent" : 5.962133916683182,
+    "entry" : "In",
+    "ticket" : "ticket",
+    "price" : 1.4658129805029452,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "login" : "login",
+    "profit" : 6.027456183070403,
+    "direction" : "Buy"
+  } ]
+}}]
+     
+     - parameter id: (path)  
+     - parameter sorting: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<TradesViewModel> 
+     */
+    open class func v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+        var path = "/v1.0/programs/{id}/trades/open"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "Sorting": sorting?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
@@ -561,6 +667,8 @@ open class ProgramsAPI {
     public enum Tags_v10ProgramsGet: String { 
         case crypto = "Crypto"
         case forex = "Forex"
+        case highRisk = "HighRisk"
+        case signal = "Signal"
     }
 
     /**
