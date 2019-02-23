@@ -32,7 +32,7 @@ class ProgramHeaderViewController: BaseViewController {
     }
     @IBOutlet weak var titleTrailingConstraint: NSLayoutConstraint! {
         didSet {
-            titleTrailingConstraint.constant = 16.0
+            titleTrailingConstraint.constant = 0.0
         }
     }
     
@@ -70,6 +70,8 @@ class ProgramHeaderViewController: BaseViewController {
             titleLabel.font = UIFont.getFont(.semibold, size: 26.0)
         }
     }
+    
+    @IBOutlet weak var tagsView: UIScrollView!
     @IBOutlet weak var currencyLabel: CurrencyLabel!
     @IBOutlet weak var ratingTagLabel: RoundedLabel! {
         didSet {
@@ -77,6 +79,27 @@ class ProgramHeaderViewController: BaseViewController {
             ratingTagLabel.text = "TOP 10%"
             ratingTagLabel.textColor = UIColor.Cell.ratingTagTitle
             ratingTagLabel.backgroundColor = UIColor.Cell.ratingTagBg
+        }
+    }
+    
+    @IBOutlet weak var firstTagLabel: RoundedLabel! {
+        didSet {
+            firstTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var secondTagLabel: RoundedLabel! {
+        didSet {
+            secondTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var thirdTagLabel: RoundedLabel! {
+        didSet {
+            thirdTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var fourthTagLabel: RoundedLabel! {
+        didSet {
+            fourthTagLabel.isHidden = true
         }
     }
     
@@ -117,15 +140,15 @@ class ProgramHeaderViewController: BaseViewController {
         self.levelBgImageView.alpha = 1.0 - offset
         self.levelButton.alpha = 1.0 - offset
         self.bgImageView.alpha = 1.0 - offset
-        self.currencyLabel.alpha = 1.0 - offset * 2
-        self.ratingTagLabel.alpha = 1.0 - offset * 2
+        self.tagsView.alpha = 1.0 - offset * 2
+        
         self.investedImageView.alpha = 1.0 - offset * 2
         
         self.headerTitleImageView.alpha = offset
         
         self.titleLeadingConstraint.constant = 16.0 + offset * 50.0
         self.titleBottomConstraint.constant = 20.0 - offset * 46.0
-        self.titleTrailingConstraint.constant = 16.0 + offset * 76.0
+        self.titleTrailingConstraint.constant = offset * 76.0
         
         self.titleLabel.font = UIFont.getFont(.semibold, size: 26.0 - 10.0 * offset)
         
@@ -133,6 +156,8 @@ class ProgramHeaderViewController: BaseViewController {
     }
     
     func configure(_ programDetailsFull: ProgramDetailsFull?) {
+        setupTags(programDetailsFull)
+        
         if let title = programDetailsFull?.title {
             titleLabel.text = title
         }
@@ -168,6 +193,46 @@ class ProgramHeaderViewController: BaseViewController {
         
         if let rating = programDetailsFull?.rating, let canLevelUp = rating.canLevelUp {
             ratingTagLabel.isHidden = !canLevelUp
+        }
+    }
+    
+    func setupTags(_ programDetailsFull: ProgramDetailsFull?) {
+        guard let programDetailsFull = programDetailsFull, let tags = programDetailsFull.tags, !tags.isEmpty else { return }
+        
+//        let tags = [ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: "")]
+        
+        let tagsCount = tags.count
+        
+        firstTagLabel.isHidden = true
+        if let name = tags[0].name?.rawValue, let color = tags[0].color {
+            firstTagLabel.isHidden = false
+            firstTagLabel.text = name
+            firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            firstTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        secondTagLabel.isHidden = true
+        if tagsCount > 1, let name = tags[1].name?.rawValue, let color = tags[1].color {
+            secondTagLabel.isHidden = false
+            secondTagLabel.text = name
+            secondTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            secondTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        thirdTagLabel.isHidden = true
+        if tagsCount > 2, let name = tags[2].name?.rawValue, let color = tags[2].color {
+            thirdTagLabel.isHidden = false
+            thirdTagLabel.text = name
+            thirdTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            thirdTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        fourthTagLabel.isHidden = true
+        if tagsCount > 3, let name = tags[3].name?.rawValue, let color = tags[3].color {
+            fourthTagLabel.isHidden = false
+            fourthTagLabel.text = name
+            fourthTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            fourthTagLabel.textColor = UIColor.hexColor(color)
         }
     }
     

@@ -1079,50 +1079,103 @@
                                             <constraint firstAttribute="width" constant="24" id="gJm-6X-Izr"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-8x-Znh">
-                                        <rect key="frame" x="16" y="150" width="382" height="86"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-8x-Znh">
+                                        <rect key="frame" x="16" y="150" width="398" height="86"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-Bs-zl1">
-                                                <rect key="frame" x="0.0" y="0.0" width="78" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="LVT-fL-6W4">
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VW-0g-mFo" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_invested_icon" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-X1-Qxk">
-                                                        <rect key="frame" x="58" y="19.666666666666657" width="20" height="11"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="dNF-7J-5hx"/>
-                                                            <constraint firstAttribute="height" constant="11" id="qEd-2m-zsN"/>
-                                                        </constraints>
-                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-Bs-zl1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VW-0g-mFo" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_invested_icon" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-X1-Qxk">
+                                                                <rect key="frame" x="362" y="19.666666666666657" width="20" height="11"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="dNF-7J-5hx"/>
+                                                                    <constraint firstAttribute="height" constant="11" id="qEd-2m-zsN"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-gS-IuW">
-                                                <rect key="frame" x="0.0" y="58" width="108" height="28"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-rc-GOi">
+                                                <rect key="frame" x="0.0" y="58" width="398" height="28"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jct-Mg-OxJ" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="28"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="28" id="t06-dg-2mh"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DQ-tL-qzk" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                        <rect key="frame" x="58" y="0.0" width="50" height="28"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="28" id="Mil-fN-Gs6"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-gS-IuW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="380" height="28"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jct-Mg-OxJ" customClass="CurrencyLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="t06-dg-2mh"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DQ-tL-qzk" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="98" y="0.0" width="50" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="Mil-fN-Gs6"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ng-Zc-58x" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="156" y="0.0" width="50" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="L2j-jJ-Lkg"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VH-y1-HuC" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="214" y="0.0" width="50" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="NTb-FV-1Pk"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvv-v8-rky" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="272" y="0.0" width="50" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="mJE-Uo-4jv"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Ge-oC6" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="330" y="0.0" width="50" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="8PL-2k-vYe"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
-                                            </stackView>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="0RK-V8-Zio"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Vua-gS-IuW" secondAttribute="trailing" id="3ZI-MA-jf4"/>
+                                                    <constraint firstItem="Vua-gS-IuW" firstAttribute="leading" secondItem="ezZ-rc-GOi" secondAttribute="leading" id="CDq-PX-ybK"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Vua-gS-IuW" secondAttribute="bottom" id="ecc-ub-m7E"/>
+                                                    <constraint firstItem="Vua-gS-IuW" firstAttribute="top" secondItem="ezZ-rc-GOi" secondAttribute="top" id="sZ2-n9-YrE"/>
+                                                </constraints>
+                                            </scrollView>
                                         </subviews>
                                     </stackView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fvX-Ah-bEA">
@@ -1135,15 +1188,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Eaw-8x-Znh" secondAttribute="trailing" constant="16" id="C5R-FP-WoT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eaw-8x-Znh" secondAttribute="trailing" id="C5R-FP-WoT"/>
                                     <constraint firstItem="Ve2-gG-cNO" firstAttribute="leading" secondItem="42F-Jq-OHD" secondAttribute="leading" id="Jal-E0-hFJ"/>
                                     <constraint firstItem="42F-Jq-OHD" firstAttribute="leading" secondItem="RGX-oA-Pvb" secondAttribute="leading" id="NSQ-xx-jQ4"/>
                                     <constraint firstItem="fvX-Ah-bEA" firstAttribute="centerX" secondItem="RGX-oA-Pvb" secondAttribute="centerX" id="O8d-Uu-fdE"/>
                                     <constraint firstAttribute="bottom" secondItem="Eaw-8x-Znh" secondAttribute="bottom" constant="20" id="OUS-VT-bgg"/>
                                     <constraint firstItem="42F-Jq-OHD" firstAttribute="top" secondItem="RGX-oA-Pvb" secondAttribute="top" id="Pwa-6J-jxv"/>
                                     <constraint firstItem="hhe-DH-fmz" firstAttribute="centerY" secondItem="RGX-oA-Pvb" secondAttribute="centerY" id="Qvu-Ey-5Ql"/>
+                                    <constraint firstItem="3VW-0g-mFo" firstAttribute="leading" secondItem="uQf-L6-UGG" secondAttribute="trailing" constant="8" id="V8c-dA-bVQ"/>
                                     <constraint firstItem="Ve2-gG-cNO" firstAttribute="top" secondItem="RGX-oA-Pvb" secondAttribute="top" id="WM7-1r-kPH"/>
-                                    <constraint firstItem="uQf-L6-UGG" firstAttribute="centerY" secondItem="3VW-0g-mFo" secondAttribute="centerY" id="bWC-ZJ-IDR"/>
+                                    <constraint firstItem="uQf-L6-UGG" firstAttribute="centerY" secondItem="3VW-0g-mFo" secondAttribute="centerY" id="Xef-fW-PyN"/>
                                     <constraint firstAttribute="bottom" secondItem="42F-Jq-OHD" secondAttribute="bottom" id="esx-Uo-oAq"/>
                                     <constraint firstAttribute="trailing" secondItem="42F-Jq-OHD" secondAttribute="trailing" id="gV6-Ta-eiO"/>
                                     <constraint firstAttribute="bottom" secondItem="Ve2-gG-cNO" secondAttribute="bottom" id="hBo-f2-Uns"/>
@@ -1151,7 +1205,6 @@
                                     <constraint firstItem="Ve2-gG-cNO" firstAttribute="trailing" secondItem="42F-Jq-OHD" secondAttribute="trailing" id="jmY-2D-ekA"/>
                                     <constraint firstItem="Eaw-8x-Znh" firstAttribute="leading" secondItem="RGX-oA-Pvb" secondAttribute="leading" constant="16" id="lRI-5L-ddA"/>
                                     <constraint firstItem="VBQ-Hy-1RL" firstAttribute="leading" secondItem="hhe-DH-fmz" secondAttribute="leading" constant="10" id="mvN-Be-veT"/>
-                                    <constraint firstItem="3VW-0g-mFo" firstAttribute="leading" secondItem="uQf-L6-UGG" secondAttribute="trailing" constant="8" id="vsU-wQ-7Z1"/>
                                     <constraint firstAttribute="trailing" secondItem="hhe-DH-fmz" secondAttribute="trailing" id="xnA-OP-TIg"/>
                                     <constraint firstItem="VBQ-Hy-1RL" firstAttribute="centerY" secondItem="hhe-DH-fmz" secondAttribute="centerY" constant="-1" id="ybv-In-0cC"/>
                                 </constraints>
@@ -1171,6 +1224,8 @@
                         <outlet property="activityIndicatorTopConstraint" destination="iLv-xP-zTI" id="h3h-jk-JbK"/>
                         <outlet property="bgImageView" destination="42F-Jq-OHD" id="VaN-r1-gBn"/>
                         <outlet property="currencyLabel" destination="Jct-Mg-OxJ" id="Fuc-bV-Ote"/>
+                        <outlet property="firstTagLabel" destination="7Ng-Zc-58x" id="17f-2x-Wcv"/>
+                        <outlet property="fourthTagLabel" destination="SQT-Ge-oC6" id="4dj-k7-n6e"/>
                         <outlet property="gradientView" destination="Ve2-gG-cNO" id="5Kk-fq-jqR"/>
                         <outlet property="headerTitleImageView" destination="uQf-L6-UGG" id="g1Q-pI-vv3"/>
                         <outlet property="investedImageView" destination="SeJ-X1-Qxk" id="t0R-Pg-P90"/>
@@ -1179,6 +1234,9 @@
                         <outlet property="levelBgImageView" destination="hhe-DH-fmz" id="06a-xu-38R"/>
                         <outlet property="levelButton" destination="VBQ-Hy-1RL" id="O78-tG-VcR"/>
                         <outlet property="ratingTagLabel" destination="7DQ-tL-qzk" id="CII-ac-8zU"/>
+                        <outlet property="secondTagLabel" destination="2VH-y1-HuC" id="n64-Ho-JWi"/>
+                        <outlet property="tagsView" destination="ezZ-rc-GOi" id="bAP-lT-oWc"/>
+                        <outlet property="thirdTagLabel" destination="qvv-v8-rky" id="wk8-F8-swC"/>
                         <outlet property="titleBottomConstraint" destination="OUS-VT-bgg" id="iwW-5n-A4A"/>
                         <outlet property="titleLabel" destination="3VW-0g-mFo" id="Fuj-me-4lD"/>
                         <outlet property="titleLeadingConstraint" destination="lRI-5L-ddA" id="tGO-Ij-zQM"/>
