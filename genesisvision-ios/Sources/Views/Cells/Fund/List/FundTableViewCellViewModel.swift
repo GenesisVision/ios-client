@@ -16,7 +16,6 @@ struct FundTableViewCellViewModel {
 
 extension FundTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
-        cell.fundBottomStackView.isHidden = false
         setupFundBottomView(on: cell)
         
         cell.chartView.isHidden = true

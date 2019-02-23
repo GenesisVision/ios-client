@@ -109,6 +109,32 @@ class ProgramTableViewCell: PlateTableViewCell {
         }
     }
     
+    @IBOutlet weak var tagsBottomStackView: UIStackView! {
+        didSet {
+            tagsBottomStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var firstTagLabel: RoundedLabel! {
+        didSet {
+            firstTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var secondTagLabel: RoundedLabel! {
+        didSet {
+            secondTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var thirdTagLabel: RoundedLabel! {
+        didSet {
+            thirdTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var otherTagLabel: RoundedLabel! {
+        didSet {
+            otherTagLabel.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var fundBottomStackView: UIStackView! {
         didSet {
             fundBottomStackView.isHidden = true
