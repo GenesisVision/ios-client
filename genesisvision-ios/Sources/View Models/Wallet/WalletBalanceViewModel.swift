@@ -37,6 +37,10 @@ class WalletBalanceViewModel {
         
         guard let wallet = wallet else {
             WalletDataProvider.getMulti(with: currency, completion: { [weak self] (wallet) in
+                if let walletTabmanViewModel = self?.router.walletTabmanViewController?.viewModel {
+                    walletTabmanViewModel.multiWallet = wallet
+                }
+                
                 guard let grandTotal = wallet?.grandTotal else { return }
                 self?.viewModels = [WalletBalanceTableViewCellViewModel.init(type: .total, grandTotal: grandTotal, selectedWallet: nil),
                                                WalletBalanceTableViewCellViewModel.init(type: .available, grandTotal: grandTotal, selectedWallet: nil),

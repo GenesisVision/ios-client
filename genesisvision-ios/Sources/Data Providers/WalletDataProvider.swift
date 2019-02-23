@@ -97,10 +97,12 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func transfer(from: WalletAPI.From_v10WalletTransferPost?, to: WalletAPI.To_v10WalletTransferPost?, amount: Double?, completion: @escaping CompletionBlock) {
+    static func transfer(sourceId: UUID?, destinationId: UUID?, amount: Double?, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        WalletAPI.v10WalletTransferPost(authorization: authorization, from: from, to: to, amount: amount) { (error) in
+        let request = InternalTransferRequest(sourceId: sourceId, sourceType: InternalTransferRequest.SourceType.wallet, destinationId: destinationId, destinationType: InternalTransferRequest.DestinationType.wallet, amount: amount)
+        
+        WalletAPI.v10WalletTransferPost(authorization: authorization, request: request) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

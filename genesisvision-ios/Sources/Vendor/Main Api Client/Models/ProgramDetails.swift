@@ -38,9 +38,12 @@ open class ProgramDetails: Codable {
     public var currency: Currency?
     public var level: Int?
     public var periodDuration: Int?
+    public var stopOutLevel: Double?
     public var periodStarts: Date?
     public var periodEnds: Date?
     public var availableInvestment: Double?
+    /** Fields for dashboard */
+    public var dashboardAssetsDetails: DashboardProgramDetails?
     public var statistic: ProgramDetailsListStatistic?
     public var rating: ProgramDetailsRating?
     /** Fields for authorized user */
@@ -55,18 +58,18 @@ open class ProgramDetails: Codable {
     public var status: Status?
     public var manager: ProfilePublic?
     public var chart: [ChartSimple]?
-    /** Fields for dashboard */
-    public var dashboardAssetsDetails: DashboardProgramDetails?
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?, dashboardAssetsDetails: DashboardProgramDetails?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
+        self.stopOutLevel = stopOutLevel
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
         self.availableInvestment = availableInvestment
+        self.dashboardAssetsDetails = dashboardAssetsDetails
         self.statistic = statistic
         self.rating = rating
         self.personalDetails = personalDetails
@@ -80,7 +83,6 @@ open class ProgramDetails: Codable {
         self.status = status
         self.manager = manager
         self.chart = chart
-        self.dashboardAssetsDetails = dashboardAssetsDetails
     }
     
 
@@ -93,9 +95,11 @@ open class ProgramDetails: Codable {
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(level, forKey: "level")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
+        try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
+        try container.encodeIfPresent(dashboardAssetsDetails, forKey: "dashboardAssetsDetails")
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
@@ -109,7 +113,6 @@ open class ProgramDetails: Codable {
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(chart, forKey: "chart")
-        try container.encodeIfPresent(dashboardAssetsDetails, forKey: "dashboardAssetsDetails")
     }
 
     // Decodable protocol methods
@@ -120,9 +123,11 @@ open class ProgramDetails: Codable {
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
+        stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
+        dashboardAssetsDetails = try container.decodeIfPresent(DashboardProgramDetails.self, forKey: "dashboardAssetsDetails")
         statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")
         personalDetails = try container.decodeIfPresent(PersonalProgramDetailsFull.self, forKey: "personalDetails")
@@ -136,7 +141,6 @@ open class ProgramDetails: Codable {
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
         chart = try container.decodeIfPresent([ChartSimple].self, forKey: "chart")
-        dashboardAssetsDetails = try container.decodeIfPresent(DashboardProgramDetails.self, forKey: "dashboardAssetsDetails")
     }
 }
 

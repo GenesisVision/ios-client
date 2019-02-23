@@ -11,12 +11,12 @@ import Foundation
 
 open class ProgramSets: Codable {
 
-    public var sets: [Facet]?
+    public var sets: [ProgramFacet]?
     public var favoritesCount: Int?
 
 
     
-    public init(sets: [Facet]?, favoritesCount: Int?) {
+    public init(sets: [ProgramFacet]?, favoritesCount: Int?) {
         self.sets = sets
         self.favoritesCount = favoritesCount
     }
@@ -37,7 +37,7 @@ open class ProgramSets: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        sets = try container.decodeIfPresent([Facet].self, forKey: "sets")
+        sets = try container.decodeIfPresent([ProgramFacet].self, forKey: "sets")
         favoritesCount = try container.decodeIfPresent(Int.self, forKey: "favoritesCount")
     }
 }

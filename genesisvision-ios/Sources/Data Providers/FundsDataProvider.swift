@@ -34,7 +34,7 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func getSets(completion: @escaping (_ programSets: ProgramSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getSets(completion: @escaping (_ programSets: FundSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

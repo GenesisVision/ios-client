@@ -246,33 +246,37 @@ open class WalletAPI {
   },
   "payFeesWithGvt" : true,
   "wallets" : [ {
-    "totalCcy" : 6.84685269835264,
-    "availableCcy" : 1.2315135367772556,
-    "pending" : 4.145608029883936,
-    "available" : 3.616076749251911,
+    "rateToGVT" : 3.616076749251911,
+    "totalCcy" : 7.457744773683766,
+    "address" : "address",
+    "availableCcy" : 1.0246457001441578,
+    "pending" : 7.386281948385884,
+    "available" : 2.027123023002322,
     "title" : "title",
-    "total" : 7.386281948385884,
+    "total" : 1.2315135367772556,
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "invested" : 2.027123023002322,
+    "invested" : 4.145608029883936,
     "currencyCcy" : "Undefined",
-    "pendingCcy" : 1.4894159098541704,
-    "investedCcy" : 1.0246457001441578
+    "pendingCcy" : 6.84685269835264,
+    "investedCcy" : 1.4894159098541704
   }, {
-    "totalCcy" : 6.84685269835264,
-    "availableCcy" : 1.2315135367772556,
-    "pending" : 4.145608029883936,
-    "available" : 3.616076749251911,
+    "rateToGVT" : 3.616076749251911,
+    "totalCcy" : 7.457744773683766,
+    "address" : "address",
+    "availableCcy" : 1.0246457001441578,
+    "pending" : 7.386281948385884,
+    "available" : 2.027123023002322,
     "title" : "title",
-    "total" : 7.386281948385884,
+    "total" : 1.2315135367772556,
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "invested" : 2.027123023002322,
+    "invested" : 4.145608029883936,
     "currencyCcy" : "Undefined",
-    "pendingCcy" : 1.4894159098541704,
-    "investedCcy" : 1.0246457001441578
+    "pendingCcy" : 6.84685269835264,
+    "investedCcy" : 1.4894159098541704
   } ]
 }}]
      
@@ -507,10 +511,11 @@ open class WalletAPI {
      Multi wallet transactions
      - GET /v1.0/wallet/multi/transactions
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 1,
   "transactions" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : 0.8008281904610115,
+    "amountTo" : 6.027456183070403,
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -522,6 +527,7 @@ open class WalletAPI {
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : 0.8008281904610115,
+    "amountTo" : 6.027456183070403,
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -915,54 +921,14 @@ open class WalletAPI {
     }
 
     /**
-     * enum for parameter from
-     */
-    public enum From_v10WalletTransferPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter to
-     */
-    public enum To_v10WalletTransferPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
      Transfer money
      
      - parameter authorization: (header) JWT access token 
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter amount: (query)  (optional)
+     - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10WalletTransferPost(authorization: String, from: From_v10WalletTransferPost? = nil, to: To_v10WalletTransferPost? = nil, amount: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10WalletTransferPostWithRequestBuilder(authorization: authorization, from: from, to: to, amount: amount).execute { (response, error) -> Void in
+    open class func v10WalletTransferPost(authorization: String, request: InternalTransferRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10WalletTransferPostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -973,24 +939,17 @@ open class WalletAPI {
      - POST /v1.0/wallet/transfer
      
      - parameter authorization: (header) JWT access token 
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter amount: (query)  (optional)
+     - parameter request: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10WalletTransferPostWithRequestBuilder(authorization: String, from: From_v10WalletTransferPost? = nil, to: To_v10WalletTransferPost? = nil, amount: Double? = nil) -> RequestBuilder<Void> {
+    open class func v10WalletTransferPostWithRequestBuilder(authorization: String, request: InternalTransferRequest? = nil) -> RequestBuilder<Void> {
         let path = "/v1.0/wallet/transfer"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "From": from?.rawValue, 
-            "To": to?.rawValue, 
-            "Amount": amount
-        ])
-        
+
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -998,7 +957,7 @@ open class WalletAPI {
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**

@@ -171,40 +171,40 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 7.058770351582356,
-  "total" : 0,
+  "totalValue" : 6.519180951018382,
+  "total" : 7,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -412,7 +412,7 @@ open class InvestorAPI {
     }
 
     /**
-     Funds list
+     Dashboard funds list
      
      - parameter authorization: (header) JWT access token 
      - parameter sorting: (query)  (optional)
@@ -432,24 +432,24 @@ open class InvestorAPI {
 
 
     /**
-     Funds list
+     Dashboard funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 3,
   "funds" : [ {
-    "totalAssetsCount" : 9,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 8.762042012749001,
-      "drawdownPercent" : 9.018348186070783,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -463,35 +463,37 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 7.457744773683766
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 5.637376656633329
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.878052220127876,
+      "pendingOutput" : 6.438423552598547,
       "hasNotifications" : true,
-      "pendingInput" : 6.778324963048013,
+      "pendingInput" : 9.018348186070783,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.965117697638846,
-      "profit" : 1.284659006116532,
-      "withdrawPercent" : 3.5571952270680973,
-      "invested" : 2.8841621266687802,
+      "canMakeSignalProvider" : true,
+      "value" : 9.369310271410669,
+      "profit" : 6.683562403749608,
+      "withdrawPercent" : 9.965781217890562,
+      "invested" : 8.762042012749001,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -507,19 +509,19 @@ open class InvestorAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 9,
+    "totalAssetsCount" : 6,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 8.762042012749001,
-      "drawdownPercent" : 9.018348186070783,
+      "profitPercent" : 1.1730742509559433,
+      "drawdownPercent" : 4.965218492984954,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 5
     },
     "color" : "color",
     "manager" : {
@@ -533,35 +535,37 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 7.457744773683766
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 7.457744773683766
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 5.637376656633329
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.878052220127876,
+      "pendingOutput" : 6.438423552598547,
       "hasNotifications" : true,
-      "pendingInput" : 6.778324963048013,
+      "pendingInput" : 9.018348186070783,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.965117697638846,
-      "profit" : 1.284659006116532,
-      "withdrawPercent" : 3.5571952270680973,
-      "invested" : 2.8841621266687802,
+      "canMakeSignalProvider" : true,
+      "value" : 9.369310271410669,
+      "profit" : 6.683562403749608,
+      "withdrawPercent" : 9.965781217890562,
+      "invested" : 8.762042012749001,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -660,43 +664,44 @@ open class InvestorAPI {
      Summary dashboard info
      - GET /v1.0/investor
      - examples: [{contentType=application/json, example={
+  "signalsCount" : 5,
   "programsCount" : 6,
   "fundsCount" : 6,
   "requests" : {
-    "totalValue" : 7.058770351582356,
-    "total" : 0,
+    "totalValue" : 6.519180951018382,
+    "total" : 7,
     "requests" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeExit" : 3.0937452626664474,
+      "feeExit" : 7.143538047012306,
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
-      "valueGvt" : 6.704019297950036,
-      "fundWithdrawPercent" : 7.143538047012306,
-      "feeEntry" : 3.353193347011243,
+      "valueGvt" : 3.353193347011243,
+      "fundWithdrawPercent" : 0.8851374739011653,
+      "feeEntry" : 3.0937452626664474,
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "value" : 5.944895607614016,
+      "value" : 6.704019297950036,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "New"
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeExit" : 3.0937452626664474,
+      "feeExit" : 7.143538047012306,
       "canCancelRequest" : true,
       "programType" : "Program",
       "color" : "color",
-      "valueGvt" : 6.704019297950036,
-      "fundWithdrawPercent" : 7.143538047012306,
-      "feeEntry" : 3.353193347011243,
+      "valueGvt" : 3.353193347011243,
+      "fundWithdrawPercent" : 0.8851374739011653,
+      "feeEntry" : 3.0937452626664474,
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "value" : 5.944895607614016,
+      "value" : 6.704019297950036,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "New"
     } ]
@@ -1384,40 +1389,40 @@ open class InvestorAPI {
      Get program/fund requests
      - GET /v1.0/investor/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 7.058770351582356,
-  "total" : 0,
+  "totalValue" : 6.519180951018382,
+  "total" : 7,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -1676,28 +1681,28 @@ open class InvestorAPI {
      Dashboard program list
      - GET /v1.0/investor/programs
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 1,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "tradesCount" : 2,
+      "tradesCount" : 7,
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 2.3021358869347655,
-      "profitValue" : 7.061401241503109,
-      "drawdownPercent" : 9.301444243932576,
-      "currentValue" : 5.637376656633329,
+      "profitPercent" : 1.4658129805029452,
+      "profitValue" : 5.962133916683182,
+      "drawdownPercent" : 5.637376656633329,
+      "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 3
+      "investorsCount" : 2
     },
     "color" : "color",
     "manager" : {
@@ -1708,12 +1713,13 @@ open class InvestorAPI {
       "username" : "username"
     },
     "level" : 0,
-    "availableInvestment" : 1.4658129805029452,
+    "stopOutLevel" : 1.4658129805029452,
+    "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 4,
+      "rating" : 2,
       "canLevelUp" : true,
-      "topPercent" : 1.2315135367772556,
-      "profit" : 7.386281948385884
+      "topPercent" : 9.301444243932576,
+      "profit" : 7.061401241503109
     },
     "description" : "description",
     "title" : "title",
@@ -1727,24 +1733,26 @@ open class InvestorAPI {
       "name" : "Crypto"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 5.637376656633329
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 4.965218492984954,
+      "pendingOutput" : 1.0246457001441578,
       "hasNotifications" : true,
-      "pendingInput" : 1.1730742509559433,
+      "pendingInput" : 1.2315135367772556,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.0246457001441578,
+      "gvtValue" : 3.616076749251911,
       "isFinishing" : true,
-      "value" : 1.4894159098541704,
-      "profit" : 6.84685269835264,
-      "invested" : 7.457744773683766,
+      "canMakeSignalProvider" : true,
+      "value" : 2.027123023002322,
+      "profit" : 4.145608029883936,
+      "invested" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1764,23 +1772,23 @@ open class InvestorAPI {
     "periodDuration" : 6,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "tradesCount" : 2,
+      "tradesCount" : 7,
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 2.3021358869347655,
-      "profitValue" : 7.061401241503109,
-      "drawdownPercent" : 9.301444243932576,
-      "currentValue" : 5.637376656633329,
+      "profitPercent" : 1.4658129805029452,
+      "profitValue" : 5.962133916683182,
+      "drawdownPercent" : 5.637376656633329,
+      "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 3
+      "investorsCount" : 2
     },
     "color" : "color",
     "manager" : {
@@ -1791,12 +1799,13 @@ open class InvestorAPI {
       "username" : "username"
     },
     "level" : 0,
-    "availableInvestment" : 1.4658129805029452,
+    "stopOutLevel" : 1.4658129805029452,
+    "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 4,
+      "rating" : 2,
       "canLevelUp" : true,
-      "topPercent" : 1.2315135367772556,
-      "profit" : 7.386281948385884
+      "topPercent" : 9.301444243932576,
+      "profit" : 7.061401241503109
     },
     "description" : "description",
     "title" : "title",
@@ -1810,24 +1819,26 @@ open class InvestorAPI {
       "name" : "Crypto"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 5.637376656633329
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 4.965218492984954,
+      "pendingOutput" : 1.0246457001441578,
       "hasNotifications" : true,
-      "pendingInput" : 1.1730742509559433,
+      "pendingInput" : 1.2315135367772556,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 1.0246457001441578,
+      "gvtValue" : 3.616076749251911,
       "isFinishing" : true,
-      "value" : 1.4894159098541704,
-      "profit" : 6.84685269835264,
-      "invested" : 7.457744773683766,
+      "canMakeSignalProvider" : true,
+      "value" : 2.027123023002322,
+      "profit" : 4.145608029883936,
+      "invested" : 7.386281948385884,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1943,40 +1954,40 @@ open class InvestorAPI {
      Get all requests
      - GET /v1.0/investor/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 7.058770351582356,
-  "total" : 0,
+  "totalValue" : 6.519180951018382,
+  "total" : 7,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 3.0937452626664474,
+    "feeExit" : 7.143538047012306,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 6.704019297950036,
-    "fundWithdrawPercent" : 7.143538047012306,
-    "feeEntry" : 3.353193347011243,
+    "valueGvt" : 3.353193347011243,
+    "fundWithdrawPercent" : 0.8851374739011653,
+    "feeEntry" : 3.0937452626664474,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 5.944895607614016,
+    "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -2003,6 +2014,230 @@ open class InvestorAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ProgramRequests>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter sorting
+     */
+    public enum Sorting_v10InvestorSignalsGet: String { 
+        case byLevelAsc = "ByLevelAsc"
+        case byLevelDesc = "ByLevelDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+        case byDrawdownAsc = "ByDrawdownAsc"
+        case byDrawdownDesc = "ByDrawdownDesc"
+        case byTradesAsc = "ByTradesAsc"
+        case byTradesDesc = "ByTradesDesc"
+        case byInvestorsAsc = "ByInvestorsAsc"
+        case byInvestorsDesc = "ByInvestorsDesc"
+        case byNewDesc = "ByNewDesc"
+        case byNewAsc = "ByNewAsc"
+        case byEndOfPeriodAsc = "ByEndOfPeriodAsc"
+        case byEndOfPeriodDesc = "ByEndOfPeriodDesc"
+        case byTitleAsc = "ByTitleAsc"
+        case byTitleDesc = "ByTitleDesc"
+        case byBalanceAsc = "ByBalanceAsc"
+        case byBalanceDesc = "ByBalanceDesc"
+        case byCurrDesc = "ByCurrDesc"
+        case byCurrAsc = "ByCurrAsc"
+    }
+
+    /**
+     * enum for parameter currencySecondary
+     */
+    public enum CurrencySecondary_v10InvestorSignalsGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Dashboard signal providers list
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter sorting: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter currencySecondary: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10InvestorSignalsGet(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalsList?,_ error: Error?) -> Void)) {
+        v10InvestorSignalsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Dashboard signal providers list
+     - GET /v1.0/investor/signals
+     - examples: [{contentType=application/json, example={
+  "total" : 7,
+  "programs" : [ {
+    "statistic" : {
+      "balanceBase" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "tradesCount" : 7,
+      "balanceGVT" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "profitPercent" : 1.4658129805029452,
+      "profitValue" : 5.962133916683182,
+      "drawdownPercent" : 5.637376656633329,
+      "currentValue" : 6.027456183070403,
+      "balanceSecondary" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "investorsCount" : 2
+    },
+    "color" : "color",
+    "manager" : {
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "url" : "url",
+      "username" : "username"
+    },
+    "level" : 2,
+    "subscribers" : 4,
+    "description" : "description",
+    "title" : "title",
+    "url" : "url",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
+    "personalDetails" : {
+      "investorTrades" : 3,
+      "subscribeDate" : "2000-01-23T04:56:07.000+00:00",
+      "investorProfit" : 9.301444243932576
+    },
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 3.616076749251911
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 3.616076749251911
+    } ],
+    "status" : "None"
+  }, {
+    "statistic" : {
+      "balanceBase" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "tradesCount" : 7,
+      "balanceGVT" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "profitPercent" : 1.4658129805029452,
+      "profitValue" : 5.962133916683182,
+      "drawdownPercent" : 5.637376656633329,
+      "currentValue" : 6.027456183070403,
+      "balanceSecondary" : {
+        "amount" : 0.8008281904610115,
+        "currency" : "Undefined"
+      },
+      "investorsCount" : 2
+    },
+    "color" : "color",
+    "manager" : {
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "url" : "url",
+      "username" : "username"
+    },
+    "level" : 2,
+    "subscribers" : 4,
+    "description" : "description",
+    "title" : "title",
+    "url" : "url",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "Crypto"
+    }, {
+      "color" : "color",
+      "name" : "Crypto"
+    } ],
+    "personalDetails" : {
+      "investorTrades" : 3,
+      "subscribeDate" : "2000-01-23T04:56:07.000+00:00",
+      "investorProfit" : 9.301444243932576
+    },
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 3.616076749251911
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 3.616076749251911
+    } ],
+    "status" : "None"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter sorting: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter currencySecondary: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<SignalsList> 
+     */
+    open class func v10InvestorSignalsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalsList> {
+        let path = "/v1.0/investor/signals"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Sorting": sorting?.rawValue, 
+            "From": from?.encodeToJSON(), 
+            "To": to?.encodeToJSON(), 
+            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+            "CurrencySecondary": currencySecondary?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<SignalsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

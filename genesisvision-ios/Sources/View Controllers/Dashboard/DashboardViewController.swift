@@ -220,7 +220,6 @@ class DashboardViewController: BaseViewController {
 extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         viewModel.deselectChart()
-        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
         let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0

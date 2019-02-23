@@ -13,6 +13,7 @@ final class WalletTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
     var dataSource: WalletPageboyViewControllerDataSource!
     var wallet: WalletData?
+    var multiWallet: WalletMultiSummary?
     
     // MARK: - Init
     init(withRouter router: Router, wallet: WalletData? = nil, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {
@@ -48,6 +49,11 @@ final class WalletTabmanViewModel: TabmanViewModel {
     
     // MARK: - Public methods
     func reloadDetails() {
+        let controllers = dataSource.controllers
+        if let walletBalanceViewController = controllers[0] as? WalletBalanceViewController, let walletListViewController = controllers[1] as? WalletListViewController {
+            walletBalanceViewController.viewModel.fetch()
+            walletListViewController.viewModel.fetch()
+        }
     }
 }
 

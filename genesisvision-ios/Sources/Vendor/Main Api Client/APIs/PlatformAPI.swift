@@ -50,21 +50,29 @@ open class PlatformAPI {
   },
   "programsInfo" : {
     "managerProgramInvestment" : 0.8008281904610115,
-    "managerFundInvestment" : 5.962133916683182,
-    "managerMaxExitFee" : 5.637376656633329,
-    "managerMaxSuccessFee" : 1.4658129805029452,
+    "managerProgramInvestmentUSD" : 6.027456183070403,
+    "managerProgramInvestmentUSDT" : 1.4658129805029452,
+    "managerFundInvestment" : 9.301444243932576,
+    "managerProgramInvestmentETH" : 5.637376656633329,
+    "managerMaxExitFee" : 3.616076749251911,
+    "managerMaxSuccessFee" : 7.061401241503109,
     "periods" : [ 2, 2 ],
-    "managerMaxEntryFee" : 6.027456183070403
+    "managerProgramInvestmentBTC" : 5.962133916683182,
+    "managerMaxEntryFee" : 2.3021358869347655
   },
   "programsFacets" : [ {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByLevelAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByLevelAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -72,14 +80,18 @@ open class PlatformAPI {
     "url" : "url"
   } ],
   "fundsFacets" : [ {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByProfitAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByProfitAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -87,10 +99,10 @@ open class PlatformAPI {
     "url" : "url"
   } ],
   "platformCurrencies" : [ {
-    "rateToGvt" : 7.061401241503109,
+    "rateToGvt" : 4.145608029883936,
     "name" : "name"
   }, {
-    "rateToGvt" : 7.061401241503109,
+    "rateToGvt" : 4.145608029883936,
     "name" : "name"
   } ],
   "currencies" : [ "currencies", "currencies" ]

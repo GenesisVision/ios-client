@@ -44,7 +44,11 @@ open class ProgramDetailsFull: Codable {
     public var entryFeeSelected: Double?
     public var entryFeeCurrent: Double?
     public var successFee: Double?
+    public var stopOutLevel: Double?
     public var isReinvesting: Bool?
+    public var isSignalProgram: Bool?
+    public var signalSuccessFee: Double?
+    public var signalSubscriptionFee: Double?
     public var availableInvestment: Double?
     public var statistic: ProgramStatistic?
     public var rating: ProgramDetailsRating?
@@ -63,7 +67,7 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, isReinvesting: Bool?, availableInvestment: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, stopOutLevel: Double?, isReinvesting: Bool?, isSignalProgram: Bool?, signalSuccessFee: Double?, signalSubscriptionFee: Double?, availableInvestment: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -73,7 +77,11 @@ open class ProgramDetailsFull: Codable {
         self.entryFeeSelected = entryFeeSelected
         self.entryFeeCurrent = entryFeeCurrent
         self.successFee = successFee
+        self.stopOutLevel = stopOutLevel
         self.isReinvesting = isReinvesting
+        self.isSignalProgram = isSignalProgram
+        self.signalSuccessFee = signalSuccessFee
+        self.signalSubscriptionFee = signalSubscriptionFee
         self.availableInvestment = availableInvestment
         self.statistic = statistic
         self.rating = rating
@@ -106,7 +114,11 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
         try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
         try container.encodeIfPresent(successFee, forKey: "successFee")
+        try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(isReinvesting, forKey: "isReinvesting")
+        try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
+        try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
+        try container.encodeIfPresent(signalSubscriptionFee, forKey: "signalSubscriptionFee")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
@@ -137,7 +149,11 @@ open class ProgramDetailsFull: Codable {
         entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
         entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
+        stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         isReinvesting = try container.decodeIfPresent(Bool.self, forKey: "isReinvesting")
+        isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
+        signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
+        signalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "signalSubscriptionFee")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         statistic = try container.decodeIfPresent(ProgramStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")

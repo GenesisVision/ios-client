@@ -39,19 +39,24 @@ open class BrokersAPI {
     "logo" : "logo",
     "accountTypes" : [ {
       "name" : "name",
+      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
+      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
-    } ]
+    } ],
+    "isSignalsAvailable" : true
   }, {
     "leverageMin" : 6,
     "leverageMax" : 1,
@@ -64,19 +69,24 @@ open class BrokersAPI {
     "logo" : "logo",
     "accountTypes" : [ {
       "name" : "name",
+      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
+      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
-    } ]
+    } ],
+    "isSignalsAvailable" : true
   } ]
 }}]
 

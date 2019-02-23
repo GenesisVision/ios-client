@@ -104,29 +104,37 @@ final class ListViewModel: ListViewModelProtocol {
             sections.insert(.facetList, at: 0)
         }
         
-        var facets: [Facet] = []
+        var programFacets: [ProgramFacet] = []
+        var fundFacets: [FundFacet] = []
+        
+        if isLogin() {
+            programFacets.insert(ProgramFacet(sorting: nil, id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil), at: 0)
+            fundFacets.insert(FundFacet(sorting: nil, id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil), at: 0)
+        }
         
         switch assetType {
         case .program:
             if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
-                facets.append(contentsOf: programsFacets)
+                programFacets.append(contentsOf: programsFacets)
+                updateProgramFacets(programFacets)
             } else {
                 PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
                     if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
-                        facets.append(contentsOf: programsFacets)
-                        self?.updateFacets(facets)
+                        programFacets.append(contentsOf: programsFacets)
+                        self?.updateProgramFacets(programFacets)
                         self?.reloadDataProtocol?.didReloadData()
                     }
                 }
             }
         case .fund:
             if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
-                facets.append(contentsOf: fundsFacets)
+                fundFacets.append(contentsOf: fundsFacets)
+                updateFundFacets(fundFacets)
             } else {
                 PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
                     if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
-                        facets.append(contentsOf: fundsFacets)
-                        self?.updateFacets(facets)
+                        fundFacets.append(contentsOf: fundsFacets)
+                        self?.updateFundFacets(fundFacets)
                         self?.reloadDataProtocol?.didReloadData()
                     }
                 }
@@ -134,16 +142,15 @@ final class ListViewModel: ListViewModelProtocol {
         default:
             break
         }
-        
-        if isLogin() {
-            facets.insert(Facet(id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil), at: 0)
-        }
-
-        self.updateFacets(facets)
     }
     
-    private func updateFacets(_ facets: [Facet]) {
-        let facetsViewModel = FacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
+    private func updateProgramFacets(_ facets: [ProgramFacet]) {
+        let facetsViewModel = ProgramFacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
+        facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
+    }
+    
+    private func updateFundFacets(_ facets: [FundFacet]) {
+        let facetsViewModel = FundFacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
         facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
     }
     

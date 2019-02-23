@@ -15,7 +15,7 @@ class ProgramTabmanViewController: BaseTabmanViewController<ProgramTabmanViewMod
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
     }
     
     // MARK: - Public Methods

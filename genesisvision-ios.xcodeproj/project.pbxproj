@@ -84,7 +84,6 @@
 		5E0546E021C3BF3F000DA7E8 /* BalanceChartElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466421C3BF3B000DA7E8 /* BalanceChartElement.swift */; };
 		5E0546E121C3BF3F000DA7E8 /* ProgramDetailsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466521C3BF3B000DA7E8 /* ProgramDetailsRating.swift */; };
 		5E0546E221C3BF3F000DA7E8 /* AssetSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466621C3BF3B000DA7E8 /* AssetSelection.swift */; };
-		5E0546E321C3BF3F000DA7E8 /* Facet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466721C3BF3B000DA7E8 /* Facet.swift */; };
 		5E0546E421C3BF3F000DA7E8 /* ProgramsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466821C3BF3B000DA7E8 /* ProgramsList.swift */; };
 		5E0546E521C3BF3F000DA7E8 /* FundAssetPercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466921C3BF3B000DA7E8 /* FundAssetPercent.swift */; };
 		5E0546E621C3BF3F000DA7E8 /* RateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05466A21C3BF3B000DA7E8 /* RateItem.swift */; };
@@ -161,6 +160,22 @@
 		5E0B1B1420594D6500557707 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */; };
 		5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */; };
 		5E0DB5E321C8EB2C0027A778 /* NotificationsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */; };
+		5E0E1B73222146F6001F3C4E /* SignalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B72222146F6001F3C4E /* SignalAPI.swift */; };
+		5E0E1B8322214711001F3C4E /* OrderOpenSignalSlaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B742221470E001F3C4E /* OrderOpenSignalSlaveModel.swift */; };
+		5E0E1B8422214711001F3C4E /* OrderProgramData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B752221470E001F3C4E /* OrderProgramData.swift */; };
+		5E0E1B8522214712001F3C4E /* SignalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B762221470E001F3C4E /* SignalDetails.swift */; };
+		5E0E1B8622214712001F3C4E /* SignalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B772221470E001F3C4E /* SignalsList.swift */; };
+		5E0E1B8722214712001F3C4E /* FundSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B782221470F001F3C4E /* FundSets.swift */; };
+		5E0E1B8822214712001F3C4E /* CopyTradingAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B792221470F001F3C4E /* CopyTradingAccountInfo.swift */; };
+		5E0E1B8922214712001F3C4E /* CopyTradingAccountsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7A22214710001F3C4E /* CopyTradingAccountsList.swift */; };
+		5E0E1B8A22214712001F3C4E /* PersonalSignalDetailsFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7B22214710001F3C4E /* PersonalSignalDetailsFull.swift */; };
+		5E0E1B8B22214712001F3C4E /* ProgramMinimumDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7C22214710001F3C4E /* ProgramMinimumDeposit.swift */; };
+		5E0E1B8C22214712001F3C4E /* TradesHistorySignalSlaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7D22214710001F3C4E /* TradesHistorySignalSlaveViewModel.swift */; };
+		5E0E1B8D22214712001F3C4E /* ProgramFacet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7E22214711001F3C4E /* ProgramFacet.swift */; };
+		5E0E1B8E22214712001F3C4E /* OrderClosedSignalSlaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B7F22214711001F3C4E /* OrderClosedSignalSlaveModel.swift */; };
+		5E0E1B8F22214712001F3C4E /* TradesOpenSignalSlaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B8022214711001F3C4E /* TradesOpenSignalSlaveViewModel.swift */; };
+		5E0E1B9022214712001F3C4E /* InternalTransferRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B8122214711001F3C4E /* InternalTransferRequest.swift */; };
+		5E0E1B9122214712001F3C4E /* FundFacet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E1B8222214711001F3C4E /* FundFacet.swift */; };
 		5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E106386213D69AF008A0E8B /* BaseExtensions.swift */; };
 		5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */; };
 		5E11DFD221B9286400B2B6EE /* RatingTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */; };
@@ -466,6 +481,7 @@
 		5EE0076A217875120045B890 /* ManagersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE00769217875120045B890 /* ManagersDataProvider.swift */; };
 		5EE0076C21787A360045B890 /* ManagerTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0076B21787A360045B890 /* ManagerTabmanRouter.swift */; };
 		5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE0076D217881AA0045B890 /* Manager.storyboard */; };
+		5EE13217221F037C00231F6C /* WalletMoreButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEFD84E221468FE005E7E9F /* WalletMoreButtonView.xib */; };
 		5EEA3E572177755300449E86 /* ManagerHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E562177755300449E86 /* ManagerHeaderViewController.swift */; };
 		5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA3E582177756800449E86 /* ManagerTabmanViewController.swift */; };
 		5EEA460321EF9AC500D6730D /* ProgramTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEA460221EF9AC400D6730D /* ProgramTag.swift */; };
@@ -737,7 +753,6 @@
 		5E05466421C3BF3B000DA7E8 /* BalanceChartElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceChartElement.swift; sourceTree = "<group>"; };
 		5E05466521C3BF3B000DA7E8 /* ProgramDetailsRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailsRating.swift; sourceTree = "<group>"; };
 		5E05466621C3BF3B000DA7E8 /* AssetSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetSelection.swift; sourceTree = "<group>"; };
-		5E05466721C3BF3B000DA7E8 /* Facet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Facet.swift; sourceTree = "<group>"; };
 		5E05466821C3BF3B000DA7E8 /* ProgramsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramsList.swift; sourceTree = "<group>"; };
 		5E05466921C3BF3B000DA7E8 /* FundAssetPercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundAssetPercent.swift; sourceTree = "<group>"; };
 		5E05466A21C3BF3B000DA7E8 /* RateItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateItem.swift; sourceTree = "<group>"; };
@@ -814,6 +829,22 @@
 		5E0B1B1320594D6500557707 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		5E0B1BA3205BAAFB00557707 /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		5E0DB5E221C8EB2C0027A778 /* NotificationsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewController.swift; sourceTree = "<group>"; };
+		5E0E1B72222146F6001F3C4E /* SignalAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalAPI.swift; sourceTree = "<group>"; };
+		5E0E1B742221470E001F3C4E /* OrderOpenSignalSlaveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOpenSignalSlaveModel.swift; sourceTree = "<group>"; };
+		5E0E1B752221470E001F3C4E /* OrderProgramData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderProgramData.swift; sourceTree = "<group>"; };
+		5E0E1B762221470E001F3C4E /* SignalDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalDetails.swift; sourceTree = "<group>"; };
+		5E0E1B772221470E001F3C4E /* SignalsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalsList.swift; sourceTree = "<group>"; };
+		5E0E1B782221470F001F3C4E /* FundSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundSets.swift; sourceTree = "<group>"; };
+		5E0E1B792221470F001F3C4E /* CopyTradingAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyTradingAccountInfo.swift; sourceTree = "<group>"; };
+		5E0E1B7A22214710001F3C4E /* CopyTradingAccountsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyTradingAccountsList.swift; sourceTree = "<group>"; };
+		5E0E1B7B22214710001F3C4E /* PersonalSignalDetailsFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSignalDetailsFull.swift; sourceTree = "<group>"; };
+		5E0E1B7C22214710001F3C4E /* ProgramMinimumDeposit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramMinimumDeposit.swift; sourceTree = "<group>"; };
+		5E0E1B7D22214710001F3C4E /* TradesHistorySignalSlaveViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesHistorySignalSlaveViewModel.swift; sourceTree = "<group>"; };
+		5E0E1B7E22214711001F3C4E /* ProgramFacet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramFacet.swift; sourceTree = "<group>"; };
+		5E0E1B7F22214711001F3C4E /* OrderClosedSignalSlaveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderClosedSignalSlaveModel.swift; sourceTree = "<group>"; };
+		5E0E1B8022214711001F3C4E /* TradesOpenSignalSlaveViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesOpenSignalSlaveViewModel.swift; sourceTree = "<group>"; };
+		5E0E1B8122214711001F3C4E /* InternalTransferRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalTransferRequest.swift; sourceTree = "<group>"; };
+		5E0E1B8222214711001F3C4E /* FundFacet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundFacet.swift; sourceTree = "<group>"; };
 		5E106386213D69AF008A0E8B /* BaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtensions.swift; sourceTree = "<group>"; };
 		5E11DFCB21B91F2100B2B6EE /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		5E11DFD021B9286400B2B6EE /* RatingTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableHeaderView.swift; sourceTree = "<group>"; };
@@ -1447,6 +1478,7 @@
 		5E18CE0C20C566F0008FE5B5 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				5E0E1B72222146F6001F3C4E /* SignalAPI.swift */,
 				5E05461121C3BF26000DA7E8 /* AuthAPI.swift */,
 				5E05461921C3BF28000DA7E8 /* BrokersAPI.swift */,
 				5E05461521C3BF27000DA7E8 /* FileAPI.swift */,
@@ -1466,6 +1498,21 @@
 		5E18CE1320C566F0008FE5B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5E0E1B792221470F001F3C4E /* CopyTradingAccountInfo.swift */,
+				5E0E1B7A22214710001F3C4E /* CopyTradingAccountsList.swift */,
+				5E0E1B8222214711001F3C4E /* FundFacet.swift */,
+				5E0E1B782221470F001F3C4E /* FundSets.swift */,
+				5E0E1B8122214711001F3C4E /* InternalTransferRequest.swift */,
+				5E0E1B7F22214711001F3C4E /* OrderClosedSignalSlaveModel.swift */,
+				5E0E1B742221470E001F3C4E /* OrderOpenSignalSlaveModel.swift */,
+				5E0E1B752221470E001F3C4E /* OrderProgramData.swift */,
+				5E0E1B7B22214710001F3C4E /* PersonalSignalDetailsFull.swift */,
+				5E0E1B7E22214711001F3C4E /* ProgramFacet.swift */,
+				5E0E1B7C22214710001F3C4E /* ProgramMinimumDeposit.swift */,
+				5E0E1B762221470E001F3C4E /* SignalDetails.swift */,
+				5E0E1B772221470E001F3C4E /* SignalsList.swift */,
+				5E0E1B7D22214710001F3C4E /* TradesHistorySignalSlaveViewModel.swift */,
+				5E0E1B8022214711001F3C4E /* TradesOpenSignalSlaveViewModel.swift */,
 				5EEFD8382213A814005E7E9F /* ConvertingDetails.swift */,
 				5EEFD83B2213A815005E7E9F /* ExternalTransactionDetails.swift */,
 				5EEFD83C2213A815005E7E9F /* MultiWalletExternalTransaction.swift */,
@@ -1500,7 +1547,6 @@
 				5E05467B21C3BF3C000DA7E8 /* DashboardSummary.swift */,
 				5E05465E21C3BF3A000DA7E8 /* ErrorMessage.swift */,
 				5E05465C21C3BF3A000DA7E8 /* ErrorViewModel.swift */,
-				5E05466721C3BF3B000DA7E8 /* Facet.swift */,
 				5E05463221C3BF37000DA7E8 /* ForgotPasswordViewModel.swift */,
 				5E05466121C3BF3A000DA7E8 /* FundAssetInfo.swift */,
 				5E05463821C3BF37000DA7E8 /* FundAssetPart.swift */,
@@ -3247,6 +3293,7 @@
 				5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */,
 				5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramTradesTableViewCell.xib in Resources */,
+				5EE13217221F037C00231F6C /* WalletMoreButtonView.xib in Resources */,
 				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
@@ -3422,6 +3469,7 @@
 				5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */,
 				5E0546DB21C3BF3F000DA7E8 /* PlatformCurrency.swift in Sources */,
 				5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */,
+				5E0E1B8822214712001F3C4E /* CopyTradingAccountInfo.swift in Sources */,
 				5EC78818216CE74D000C91E4 /* EventsDelegateManager.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */,
@@ -3440,10 +3488,12 @@
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
 				5E12B38520BEEB4300302730 /* AuthTwoFactorTutorialViewModel.swift in Sources */,
 				5E33E3B720AB218A00A0B9DE /* ProgramTabmanViewModel.swift in Sources */,
+				5E0E1B73222146F6001F3C4E /* SignalAPI.swift in Sources */,
 				5E0546FE21C3BF3F000DA7E8 /* ManagerAssets.swift in Sources */,
 				5E0546BC21C3BF3F000DA7E8 /* LevelInfo.swift in Sources */,
 				5E0546CE21C3BF3F000DA7E8 /* ManagerProfileDetails.swift in Sources */,
 				5E27EC48218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift in Sources */,
+				5E0E1B8422214711001F3C4E /* OrderProgramData.swift in Sources */,
 				5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */,
 				5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */,
 				5E0546C021C3BF3F000DA7E8 /* ProgramDetailsListStatistic.swift in Sources */,
@@ -3469,10 +3519,12 @@
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
 				5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
+				5E0E1B8322214711001F3C4E /* OrderOpenSignalSlaveModel.swift in Sources */,
 				5E616B4F20F7B73400B3459D /* CreateProgramThirdViewModel.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
 				5E0546AF21C3BF3F000DA7E8 /* FundAssetPartWithIcon.swift in Sources */,
 				5EEE4557210B2377009CF791 /* ManagerDashboardViewController.swift in Sources */,
+				5E0E1B8722214712001F3C4E /* FundSets.swift in Sources */,
 				5E5488382141600100B2D9FE /* DateHelper.swift in Sources */,
 				5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */,
 				5EEFD850221468FF005E7E9F /* WalletMoreButtonView.swift in Sources */,
@@ -3502,6 +3554,7 @@
 				5EAC11AE20B81A850057A2D2 /* ChangePasswordRouter.swift in Sources */,
 				5E82C75321429785007A21C3 /* DashboardCurrencyTableViewCell.swift in Sources */,
 				5E05470221C3BF3F000DA7E8 /* ProgramBalanceChart.swift in Sources */,
+				5E0E1B8622214712001F3C4E /* SignalsList.swift in Sources */,
 				5ED03F2920F900EE00AF5E07 /* DataSourceAndDelegate.swift in Sources */,
 				5E05471521C3BF3F000DA7E8 /* RecoveryCode.swift in Sources */,
 				5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */,
@@ -3611,7 +3664,9 @@
 				5EAD350C214FD57F0057450C /* PortfolioViewController.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
+				5E0E1B8F22214712001F3C4E /* TradesOpenSignalSlaveViewModel.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramInfoViewController.swift in Sources */,
+				5E0E1B8C22214712001F3C4E /* TradesHistorySignalSlaveViewModel.swift in Sources */,
 				5E77176A2154200D002624FC /* PortfolioEventCollectionViewCellViewModel.swift in Sources */,
 				5E616B4020F7880800B3459D /* ImagePickerPresentable.swift in Sources */,
 				5E0546F021C3BF3F000DA7E8 /* TwoFactorAuthenticatorConfirm.swift in Sources */,
@@ -3636,6 +3691,7 @@
 				FCC9DD7B200E4CCF008825EC /* BaseTabBarController.swift in Sources */,
 				FC140FE62030168100B71E7F /* Configuration.swift in Sources */,
 				5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */,
+				5E0E1B9122214712001F3C4E /* FundFacet.swift in Sources */,
 				5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
@@ -3687,6 +3743,7 @@
 				5EEFD8482213A815005E7E9F /* MultiWalletExternalTransaction.swift in Sources */,
 				5EFE7C422181E78700D385C8 /* FundBalanceViewController.swift in Sources */,
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
+				5E0E1B8522214712001F3C4E /* SignalDetails.swift in Sources */,
 				5E5EB53521679D4A00CDA376 /* DashboardProgramTableViewCellViewModel.swift in Sources */,
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
 				5E0546AC21C3BF3F000DA7E8 /* DashboardProgramDetails.swift in Sources */,
@@ -3704,6 +3761,7 @@
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E0546B121C3BF3F000DA7E8 /* ManagerPortfolioEvent.swift in Sources */,
 				5E0546DD21C3BF3F000DA7E8 /* FundAssetInfo.swift in Sources */,
+				5E0E1B8A22214712001F3C4E /* PersonalSignalDetailsFull.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* ProgramTradesTableViewCellViewModel.swift in Sources */,
 				FC140FE32030168100B71E7F /* APIHelper.swift in Sources */,
 				5E887F10215A912A00E4EFA5 /* InRequestsTableViewCellViewModel.swift in Sources */,
@@ -3715,7 +3773,6 @@
 				FC27232F20498959005225F2 /* SwitchCameraButton.swift in Sources */,
 				FC49641B2015489700104CEB /* WelcomeViewController.swift in Sources */,
 				5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */,
-				5E0546E321C3BF3F000DA7E8 /* Facet.swift in Sources */,
 				5EAD350E214FD58D0057450C /* ProfitViewController.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */,
@@ -3751,6 +3808,7 @@
 				5E96D77A21D30DE300BFB842 /* CreateNotificationViewModel.swift in Sources */,
 				5EC78816216CDEE2000C91E4 /* UICollectionView+Registration.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* AuthSignUpViewModel.swift in Sources */,
+				5E0E1B8E22214712001F3C4E /* OrderClosedSignalSlaveModel.swift in Sources */,
 				5E0546BF21C3BF3F000DA7E8 /* ManagerDashboard.swift in Sources */,
 				FCA19A47201AF8D600157AD6 /* ProgramInfoViewModel.swift in Sources */,
 				FCA60B9C204721600081DC14 /* DashboardDataProvider.swift in Sources */,
@@ -3771,6 +3829,7 @@
 				FC900E5E204EC403007E9142 /* AuthDataProvider.swift in Sources */,
 				FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */,
 				5EA7A10020A0B3B100D895FC /* BaseViewModel.swift in Sources */,
+				5E0E1B8D22214712001F3C4E /* ProgramFacet.swift in Sources */,
 				FC0E2012204435D300872BE5 /* WalletWithdrawRouter.swift in Sources */,
 				FC27232D20498959005225F2 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
 				5E96D77821D30B1500BFB842 /* CreateNotificationViewController.swift in Sources */,
@@ -3824,6 +3883,7 @@
 				5E5EB5372167B1FA00CDA376 /* CircularProgressView.swift in Sources */,
 				5E93E70A21D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift in Sources */,
 				5E5BBE6E21822AA6009E4BA3 /* FundProfitStatisticTableViewCellViewModel.swift in Sources */,
+				5E0E1B8922214712001F3C4E /* CopyTradingAccountsList.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
 				5EF14D922181F85C00B3843A /* FundTabmanRouter.swift in Sources */,
 				FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */,
@@ -3900,6 +3960,7 @@
 				FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */,
 				5E05471E21C3BF3F000DA7E8 /* DashboardChartValue.swift in Sources */,
 				5E0546AB21C3BF3F000DA7E8 /* ProfilePublic.swift in Sources */,
+				5E0E1B9022214712001F3C4E /* InternalTransferRequest.swift in Sources */,
 				5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */,
 				FCA570802027B520001942F3 /* DefaultTableHeaderView.swift in Sources */,
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
@@ -3934,6 +3995,7 @@
 				5E0546DA21C3BF3F000DA7E8 /* ErrorMessage.swift in Sources */,
 				5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */,
 				5EC7871D216BD243000C91E4 /* NotificationListViewController.swift in Sources */,
+				5E0E1B8B22214712001F3C4E /* ProgramMinimumDeposit.swift in Sources */,
 				5EC7872B216BE8E6000C91E4 /* CurrencyDelegateManager.swift in Sources */,
 				FCA19A3F201AE83100157AD6 /* WalletControllerViewModel.swift in Sources */,
 				5E616B5120F7B73400B3459D /* CreateProgramTabmanViewModel.swift in Sources */,

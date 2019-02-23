@@ -69,7 +69,7 @@ final class NavigationTitleView: UIView {
         let y: CGFloat
         
         if contentOffset == 0 {
-            y = bounds.maxY
+            y = 8.0//bounds.maxY
         } else {
             y = titleVerticalPositionAdjusted(by: contentOffset)
         }
@@ -85,7 +85,7 @@ final class NavigationTitleView: UIView {
         x = bounds.midX - size.width * 0.5
         
         if contentOffset == 0 {
-            y = bounds.maxY
+            y = 8.0//bounds.maxY
         } else {
             y = titleVerticalPositionAdjusted(by: contentOffset)
         }
@@ -118,6 +118,6 @@ final class NavigationTitleView: UIView {
     
     private func titleVerticalPositionAdjusted(by yOffset: CGFloat) -> CGFloat {
         let midY = bounds.midY - currencyTitleButton.bounds.height * 0.5
-        return midY//max(bounds.maxY - yOffset, midY).rounded()
+        return midY
     }
 }
