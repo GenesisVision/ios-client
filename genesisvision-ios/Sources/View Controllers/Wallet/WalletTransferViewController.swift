@@ -180,15 +180,6 @@ class WalletTransferViewController: BaseViewController {
             amountToTransferToValueLabel.text = "= " + value + " " + currencyType.rawValue
         }
         
-        if let selectedWallet = viewModel.selectedWalletFrom, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-
-            if amountToTransferValue > 0.0 {
-                self.amountToTransferFromValueLabel.text = amountToTransferValue.rounded(withType: currencyType).toString()
-            } else {
-                self.amountToTransferFromValueLabel.text = "0"
-            }
-        }
-        
         if let available = viewModel.selectedWalletFrom?.available {
             self.availableInWalletFromValue = available
         }
