@@ -11,7 +11,7 @@ import UIKit
 class WalletTransactionListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: WalletTransactionListViewModel!
+    var viewModel: WalletListViewModelProtocol!
     
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -71,7 +71,7 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
     }
     
     override func fetch() {
-        showProgressHUD()
+//        showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideAll()
         }
@@ -153,4 +153,3 @@ extension WalletTransactionListViewController: ReloadDataProtocol {
         reloadData()
     }
 }
-

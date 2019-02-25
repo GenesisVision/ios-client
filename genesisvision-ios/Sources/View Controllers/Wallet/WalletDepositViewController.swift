@@ -112,19 +112,7 @@ class WalletDepositViewController: BaseViewController {
     private func setup() {
         navigationItem.title = viewModel.title
         
-        showProgressHUD()
-        viewModel.getInfo(completion: { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.updateUI()
-                }
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        })
+        self.updateUI()
     }
     
     private func updateUI() {
@@ -139,8 +127,8 @@ class WalletDepositViewController: BaseViewController {
             
             amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(withType: .gvt).toString() + " " + Constants.gvtString
             
-            if let description = selectedWallet.description {
-                selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue
+            if let title = selectedWallet.title {
+                selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
             }
             
             if currency != .gvt {

@@ -32,7 +32,7 @@ final class ProgramTradesViewModel {
     }
     
     func noDataText() -> String {
-        return "There are no trades"
+        return self.isOpenTrades ? "There are no open positions" : "There are no trades"
     }
     
     var viewModels = [ProgramTradesTableViewCellViewModel]() {
@@ -44,13 +44,18 @@ final class ProgramTradesViewModel {
     var sections = [Date : [ProgramTradesTableViewCellViewModel]]()
     var sortedSections = [Date]()
     
+    var isOpenTrades: Bool = false
+    
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false) {
         self.router = router
         self.programId = programId
+        self.isOpenTrades = isOpenTrades ?? false
         self.reloadDataProtocol = reloadDataProtocol
         
-        let sortingManager = SortingManager(.trades)
+        title = self.isOpenTrades ? "Open positions" : "Trades"
+        
+        let sortingManager = SortingManager(self.isOpenTrades ? .tradesOpen : .trades)
         sortingDelegateManager = SortingDelegateManager(sortingManager)
     }
 
@@ -188,26 +193,43 @@ extension ProgramTradesViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
         guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
-
+        
         let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
         
-        ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
-            guard tradesViewModel != nil else {
-                return ErrorHandler.handleApiError(error: nil, completion: completionError)
-            }
-            var viewModels = [ProgramTradesTableViewCellViewModel]()
-            
-            let totalCount = tradesViewModel?.total ?? 0
-            
-            tradesViewModel?.trades?.forEach({ (orderModel) in
-                let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
-                viewModels.append(viewModel)
-            })
-            
-            completionSuccess(totalCount, viewModels)
-            completionError(.success)
-        }, errorCompletion: completionError)
+        if isOpenTrades {
+            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet, skip: skip, take: take, completion: { (tradesViewModel) in
+                guard tradesViewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
+                }
+                var viewModels = [ProgramTradesTableViewCellViewModel]()
+                
+                let totalCount = tradesViewModel?.total ?? 0
+                
+                tradesViewModel?.trades?.forEach({ (orderModel) in
+                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
+                    viewModels.append(viewModel)
+                })
+                
+                completionSuccess(totalCount, viewModels)
+                completionError(.success)
+            }, errorCompletion: completionError)
+        } else {
+            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
+                guard tradesViewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
+                }
+                var viewModels = [ProgramTradesTableViewCellViewModel]()
+                
+                let totalCount = tradesViewModel?.total ?? 0
+                
+                tradesViewModel?.trades?.forEach({ (orderModel) in
+                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
+                    viewModels.append(viewModel)
+                })
+                
+                completionSuccess(totalCount, viewModels)
+                completionError(.success)
+            }, errorCompletion: completionError)
+        }
     }
 }
-
-

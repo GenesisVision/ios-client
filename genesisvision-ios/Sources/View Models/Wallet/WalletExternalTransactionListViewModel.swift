@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class WalletExternalTransactionListViewModel: WalletTransactionListViewModel {
+final class WalletExternalTransactionListViewModel: WalletListViewModelProtocol {
     enum SectionType {
         case header
         case transactions

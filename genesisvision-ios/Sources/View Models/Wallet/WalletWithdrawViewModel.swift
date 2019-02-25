@@ -12,12 +12,12 @@ final class WalletWithdrawViewModel {
     
     private weak var walletProtocol: WalletProtocol?
     
-    var currency = CreateWithdrawalRequestModel.Currency.gvt
     var labelPlaceholder: String = "0"
     
     var withdrawalSummary: WithdrawalSummary? {
         didSet {
-            self.selectedWallet = withdrawalSummary?.wallets?.first
+            self.selectedWallet = withdrawalSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
+            self.selectedWalletCurrencyIndex = withdrawalSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrency }) ?? 0
         }
     }
     var selectedWallet: WalletWithdrawalInfo?
@@ -26,10 +26,22 @@ final class WalletWithdrawViewModel {
     
     var selectedWalletCurrencyIndex: Int = 0
     
+    var selectedCurrency: WalletWithdrawalInfo.Currency = .gvt
+    
     // MARK: - Init
-    init(withRouter router: WalletWithdrawRouter, walletProtocol: WalletProtocol) {
+    init(withRouter router: WalletWithdrawRouter, walletProtocol: WalletProtocol, currency: CurrencyType) {
         self.router = router
         self.walletProtocol = walletProtocol
+        
+        setup(currency)
+    }
+    
+    private func setup(_ currency: CurrencyType) {
+        if let selectedCurrency = WalletWithdrawalInfo.Currency(rawValue: currency.rawValue) {
+            self.selectedCurrency = selectedCurrency
+            self.selectedWallet = withdrawalSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
+            self.selectedWalletCurrencyIndex = withdrawalSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrency }) ?? 0
+        }
     }
     
     // MARK: - Public methods
@@ -83,10 +95,7 @@ final class WalletWithdrawViewModel {
     }
     
     func goToBack() {
-        walletProtocol?.didWithdrawn()
+        walletProtocol?.didUpdateData()
         router.goToBack()
     }
 }
-
-
-

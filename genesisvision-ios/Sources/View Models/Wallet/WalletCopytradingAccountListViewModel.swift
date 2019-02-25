@@ -1,28 +1,28 @@
 //
-//  WalletInternalTransactionListViewModel.swift
+//  WalletCopytradingAccountListViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 08/02/2019.
+//  Created by George on 25/02/2019.
 //  Copyright © 2019 Genesis Vision. All rights reserved.
 //
 
 import UIKit.UITableViewHeaderFooterView
 
-final class WalletInternalTransactionListViewModel: WalletListViewModelProtocol {
+final class WalletCopytradingAccountListViewModel: WalletListViewModelProtocol {
     enum SectionType {
         case header
-        case transactions
+        case accounts
     }
     
     // MARK: - Variables
-    var title: String = "Transactions"
+    var title: String = "Copytrading accounts"
     
     var wallet: WalletData?
     
-    private var sections: [SectionType] = [.transactions]
+    private var sections: [SectionType] = [.accounts]
     
     private var router: WalletRouter!
-    private var transactions = [WalletTransactionTableViewCellViewModel]()
+    private var accounts = [WalletCopytradingAccountTableViewCellViewModel]()
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
@@ -40,10 +40,10 @@ final class WalletInternalTransactionListViewModel: WalletListViewModelProtocol 
 }
 
 // MARK: - TableView
-extension WalletInternalTransactionListViewModel {
+extension WalletCopytradingAccountListViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletTransactionTableViewCellViewModel.self]
+        return [WalletCopytradingAccountTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -59,15 +59,15 @@ extension WalletInternalTransactionListViewModel {
         switch sections[section] {
         case .header:
             return 0
-        case .transactions:
-            return transactions.count
+        case .accounts:
+            return accounts.count
         }
     }
     
     func headerTitle(for section: Int) -> String? {
         switch sections[section] {
-        case .transactions:
-            return "Transaction history"
+        case .accounts:
+            return "Copytrading accounts"
         case .header:
             return nil
         }
@@ -77,7 +77,7 @@ extension WalletInternalTransactionListViewModel {
         switch sections[section] {
         case .header:
             return 0.0
-        case .transactions:
+        case .accounts:
             return 78.0
         }
     }
@@ -88,15 +88,14 @@ extension WalletInternalTransactionListViewModel {
         switch type {
         case .header:
             return nil
-        case .transactions:
-            return transactions[indexPath.row]
+        case .accounts:
+            return accounts[indexPath.row]
         }
     }
 }
 
 // MARK: - Fetch
-extension WalletInternalTransactionListViewModel {
-    /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
+extension WalletCopytradingAccountListViewModel {
     func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
@@ -105,9 +104,8 @@ extension WalletInternalTransactionListViewModel {
         
     }
     
-    /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
     func fetchMore(at indexPath: IndexPath) -> Bool {
-        if numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && transactions.count >= take {
+        if numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && accounts.count >= take {
             fetchMore()
         }
         
@@ -119,7 +117,7 @@ extension WalletInternalTransactionListViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.transactions ?? [WalletTransactionTableViewCellViewModel]()
+            var allViewModels = self?.accounts ?? [WalletCopytradingAccountTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -136,7 +134,6 @@ extension WalletInternalTransactionListViewModel {
         })
     }
     
-    /// Fetch transactions from API -> Save fetched data -> Return CompletionBlock
     func refresh(completion: @escaping CompletionBlock) {
         skip = 0
         
@@ -145,30 +142,26 @@ extension WalletInternalTransactionListViewModel {
             }, completionError: completion)
     }
     
-    /// Update saved transactions (WalletTransactionTableViewCellViewModel)
-    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
-        self.transactions = viewModels
+    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletCopytradingAccountTableViewCellViewModel]) {
+        self.accounts = viewModels
         self.totalCount = totalCount
         self.skip += self.take
         self.canFetchMoreResults = true
         self.reloadDataProtocol?.didReloadData()
     }
     
-    /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletCopytradingAccountTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        let currency = WalletAPI.Currency_v10WalletMultiTransactionsGet(rawValue: wallet?.currency?.rawValue ?? "")
-        
-        WalletDataProvider.getMultiTransactions(currency: currency, skip: skip, take: take, completion: { (transactionsViewModel) in
-            guard transactionsViewModel != nil else {
+        SignalDataProvider.getAccounts(completion: { (copyTradingAccountsViewModel) in
+            guard copyTradingAccountsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
-            var viewModels = [WalletTransactionTableViewCellViewModel]()
+            var viewModels = [WalletCopytradingAccountTableViewCellViewModel]()
             
-            let totalCount = transactionsViewModel?.total ?? 0
+            let totalCount = copyTradingAccountsViewModel?.accounts?.count ?? 0
             
-            transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
-                let viewModel = WalletTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
+            copyTradingAccountsViewModel?.accounts?.forEach({ (copyTradingAccountInfo) in
+                let viewModel = WalletCopytradingAccountTableViewCellViewModel(copyTradingAccountInfo: copyTradingAccountInfo)
                 viewModels.append(viewModel)
             })
             
@@ -180,25 +173,19 @@ extension WalletInternalTransactionListViewModel {
 
 
 // MARK: - Navigation
-extension WalletInternalTransactionListViewModel {
+extension WalletCopytradingAccountListViewModel {
     func showDetail(at indexPath: IndexPath) {
-        //        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
-        //            let program = model.walletTransaction.program,
-        //            let programId = program.id
-        //            else { return }
-        //
-        //        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
     }
 }
 
-extension WalletInternalTransactionListViewModel {
+extension WalletCopytradingAccountListViewModel {
     func logoImageName() -> String {
         let imageName = "img_wallet_logo"
         return imageName
     }
     
     func noDataText() -> String {
-        return "You don’t have any transactions yet"
+        return "You don’t have any copytrading accounts yet"
     }
     
     func noDataImageName() -> String? {
@@ -210,3 +197,5 @@ extension WalletInternalTransactionListViewModel {
         return text
     }
 }
+
+

@@ -12,25 +12,25 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
     // MARK: - Private methods
     internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         if let router = router as? DashboardRouter {
+            
             let programListViewController = DashboardProgramListViewController()
-            let fundListViewController = DashboardFundListViewController()
             programListViewController.tableViewStyle = .plain
-            fundListViewController.tableViewStyle = .plain
-            
             router.programListViewController = programListViewController
-            router.fundListViewController = fundListViewController
-            
             let programsViewModel = DashboardProgramListViewModel(withRouter: router)
             programListViewController.viewModel = programsViewModel
             
+            let fundListViewController = DashboardFundListViewController()
+            fundListViewController.tableViewStyle = .plain
+            router.fundListViewController = fundListViewController
             let fundsViewModel = DashboardFundListViewModel(withRouter: router)
             fundListViewController.viewModel = fundsViewModel
             
+            
             controllers = [programListViewController, fundListViewController]
         } else {
+            
             guard let programListViewController = ProgramListViewController.storyboardInstance(.programs) else { return }
             router.programsViewController = programListViewController
-            
             let programListRouter = ListRouter(parentRouter: router)
             programListRouter.currentController = programListViewController
             let programsViewModel =
@@ -39,7 +39,6 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
             
             guard let fundListViewController = FundListViewController.storyboardInstance(.funds) else { return }
             router.fundsViewController = fundListViewController
-            
             let fundListRouter = ListRouter(parentRouter: router)
             fundListRouter.currentController = fundListViewController
             let fundsViewModel = ListViewModel(withRouter: fundListRouter, reloadDataProtocol: fundListViewController, filterModel: filterModel, showFacets: showFacets, assetType: .fund)

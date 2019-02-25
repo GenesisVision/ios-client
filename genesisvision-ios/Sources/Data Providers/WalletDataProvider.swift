@@ -10,14 +10,6 @@ import UIKit
 
 class WalletDataProvider: DataProvider {
     // MARK: - Get methods
-    static func get(with currency: WalletAPI.Currency_v10WalletByCurrencyGet, completion: @escaping (_ wallet: WalletSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
-        
-        WalletAPI.v10WalletByCurrencyGet(currency: currency, authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
     static func getMulti(with currency: WalletAPI.Currency_v10WalletMultiByCurrencyGet, completion: @escaping (_ wallet: WalletMultiSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
@@ -73,15 +65,6 @@ class WalletDataProvider: DataProvider {
             DataProvider().responseHandler(walletsInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    
-    static func getAddress(completion: @escaping (_ walletAddressViewModel: WalletsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
-        
-        WalletAPI.v10WalletAddressesGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
     
     // MARK: - Post methods
     static func feeChange(_ value: Bool, completion: @escaping CompletionBlock) {

@@ -112,6 +112,10 @@ extension WalletListViewModel {
             router.walletTabmanViewController?.push(viewController: walletViewController)
         }
     }
+    
+    func transfer() {
+        router.show(routeType: .transfer(currencyTypeFrom: .gvt, currencyTypeTo: .btc, walletMultiSummary: wallet))
+    }
 }
 
 extension WalletListViewModel {

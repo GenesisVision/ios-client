@@ -48,21 +48,21 @@ extension WalletBalanceTableViewCellViewModel: CellViewModel {
         if let grandTotal = grandTotal, let walletCurrency = grandTotal.currencyCcy, let currencyType = CurrencyType(rawValue: walletCurrency.rawValue) {
             switch type {
             case .total:
-                if let balanceValue = grandTotal.total {
+                if let balanceValue = grandTotal.totalCcy {
                     balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
                 }
             case .available:
-                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.available {
+                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.availableCcy {
                     balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
             case .invested:
-                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.invested {
+                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.investedCcy {
                     balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
             case .pending:
-                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.pending {
+                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.pendingCcy {
                     balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }

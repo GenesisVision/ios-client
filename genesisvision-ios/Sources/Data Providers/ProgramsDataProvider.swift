@@ -114,6 +114,15 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
+    static func getTradesOpen(with programId: String?, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let programId = programId, let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsByIdTradesOpenGet(id: uuid, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getTrades(with programId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let programId = programId, let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -173,24 +182,6 @@ class ProgramsDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    
-    //    static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-    //        guard let authorization = AuthManager.authorizedToken,
-    //            let newInvestmentRequest = newInvestmentRequest
-    //            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-    //
-    //        ManagerAPI.apiManagerAccountNewInvestmentRequestPost(authorization: authorization, request: newInvestmentRequest) { (uuid, error) in
-    //            DataProvider().responseHandler(error, completion: { (result) in
-    //                switch result {
-    //                case .success:
-    //                    completion(uuid?.uuidString)
-    //                case .failure:
-    //                    errorCompletion(result)
-    //                }
-    //            })
-    //        }
-    //    }
-    
     
     // MARK: - Private methods
     private static func programFavoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {

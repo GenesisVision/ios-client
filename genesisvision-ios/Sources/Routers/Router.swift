@@ -221,12 +221,14 @@ extension Router {
    
     func startAsForceSignOut() {
         guard let navigationController = getAssetsNavigationController() else { return }
+        navController = navigationController
         setWindowRoot(viewController: navigationController)
         signInAction(navigationController)
     }
     
     func startAsUnauthorized() {
         guard let navigationController = getAssetsNavigationController() else { return }
+        navController = navigationController
         setWindowRoot(viewController: navigationController)
     }
     

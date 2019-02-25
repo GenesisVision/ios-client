@@ -8,6 +8,16 @@
 
 import UIKit.UITableViewHeaderFooterView
 
+class Person {
+    var name: String = ""
+    var child: Person?
+    
+    func a() {
+        let a = Person()
+        
+    }
+    
+}
 final class WalletControllerViewModel {
     
     enum SectionType {
@@ -18,12 +28,10 @@ final class WalletControllerViewModel {
     // MARK: - Variables
     var title: String = "Wallet"
     
-    var wallet: WalletSummary?
-    
     private var sections: [SectionType] = [.header, .transactions]
 
     var router: WalletRouter!
-    private var transactions = [WalletTransactionTableViewCellViewModel]()
+//    private var transactions = [WalletTransactionTableViewCellViewModel]()
     private weak var reloadDataProtocol: ReloadDataProtocol?
 
     var walletTabmanViewModel: WalletTabmanViewModel?
@@ -53,14 +61,6 @@ final class WalletControllerViewModel {
 
 // MARK: - Navigation
 extension WalletControllerViewModel {
-    func withdraw() {
-        router.show(routeType: .withdraw)
-    }
-    
-    func deposit() {
-        router.show(routeType: .deposit)
-    }
-    
     func showDetail(at indexPath: IndexPath) {
 //        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
 //            let program = model.walletTransaction.program,

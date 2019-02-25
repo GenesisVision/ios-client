@@ -199,8 +199,6 @@ class ProgramHeaderViewController: BaseViewController {
     func setupTags(_ programDetailsFull: ProgramDetailsFull?) {
         guard let programDetailsFull = programDetailsFull, let tags = programDetailsFull.tags, !tags.isEmpty else { return }
         
-//        let tags = [ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: ""), ProgramTag(name: ProgramTag.Name.crypto, color: "")]
-        
         let tagsCount = tags.count
         
         firstTagLabel.isHidden = true

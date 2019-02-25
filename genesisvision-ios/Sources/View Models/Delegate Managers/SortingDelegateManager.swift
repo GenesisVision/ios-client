@@ -13,7 +13,7 @@ protocol SortingDelegate: class {
 }
 
 enum SortingType {
-    case programs, funds, dashboardPrograms, dashboardFunds, trades
+    case programs, funds, dashboardPrograms, dashboardFunds, tradesOpen, trades
 }
 
 class SortingManager: NSObject {
@@ -138,6 +138,28 @@ class SortingManager: NSObject {
         }
     }
     
+    private func getTradesOpenSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "date":
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        case "ticket":
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
+        case "symbol":
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+        case "direction":
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case "volume":
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case "price":
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        default:
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        }
+    }
     
     private func getTradesSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsByIdTradesGet {
         let selectedValue = getSelectedSortingValue()
@@ -151,6 +173,13 @@ class SortingManager: NSObject {
             return highToLowValue ? .bySymbolDesc : .bySymbolAsc
         case "direction":
             return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case "volume":
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case "price":
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+
         default:
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
@@ -162,8 +191,8 @@ class SortingManager: NSObject {
             sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title", "investors", "currency", "new"]
         case .funds, .dashboardFunds:
             sortingValues = ["profit", "balance", "investors", "drawdown", "title", "new"]
-        case .trades:
-            sortingValues = ["date", "ticket", "symbol", "direction"]
+        case .tradesOpen, .trades:
+            sortingValues = ["date", "ticket", "symbol", "direction", "volume", "price", "profit"]
         }
     }
     
@@ -194,6 +223,8 @@ class SortingManager: NSObject {
             return getDashboardProgramsSelectedSorting()
         case .dashboardFunds:
             return getDashboardFundsSelectedSorting()
+        case .tradesOpen:
+            return getTradesOpenSelectedSorting()
         case .trades:
             return getTradesSelectedSorting()
         }

@@ -27,7 +27,8 @@ final class WalletTabmanViewModel: TabmanViewModel {
             title = "Wallets"
             
             items = [TabmanBar.Item(title: "Balance"),
-                     TabmanBar.Item(title: "My Funds"),
+                     TabmanBar.Item(title: "My Wallets"),
+                     TabmanBar.Item(title: "Copytrading accounts"),
                      TabmanBar.Item(title: "Transactions"),
                      TabmanBar.Item(title: "Deposits/Withdrawals")]
             
@@ -67,7 +68,11 @@ class WalletPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
                 controllers.append(vc)
             }
             
-            if let vc = router.getWallets(wallet) {
+            if wallet == nil, let vc = router.getWallets(wallet) {
+                controllers.append(vc)
+            }
+            
+            if wallet == nil, let vc = router.getCopytradingAccounts(wallet) {
                 controllers.append(vc)
             }
             

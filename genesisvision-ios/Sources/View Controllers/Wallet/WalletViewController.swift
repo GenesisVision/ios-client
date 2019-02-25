@@ -65,7 +65,7 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = 200
+        bottomSheetController.initializeHeight = 80
         bottomSheetController.addContentsView(walletMoreButtonView)
         bottomSheetController.present()
     }
@@ -133,5 +133,11 @@ extension WalletViewController: WalletMoreButtonViewProtocol {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+}
+
+extension WalletViewController: WalletProtocol {
+    func didUpdateData() {
+        viewModel.reloadDetails()
     }
 }

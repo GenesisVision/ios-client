@@ -104,64 +104,58 @@ class WalletTransactionView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(_ model: WalletTransaction) {
-        if let information = model.information {
-            titleLabel.text = information
-        }
-        
-        typeImageView.image = nil
-        
-        if let action = model.action, let sourceType = model.sourceType, let destinationType = model.destinationType, let value = model.amount {
-            var sign = ""
-            
-            switch action {
-            case .transfer:
-                if sourceType == .paymentTransaction, action == .transfer, destinationType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
-                    sign = "+"
-                }
-                
-                if sourceType == .wallet, action == .transfer, destinationType == .withdrawalRequest {
-                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
-                    sign = "-"
-                }
-                
-                if sourceType == .withdrawalRequest, action == .transfer, destinationType == .paymentTransaction {
-                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
-                    sign = "-"
-                }
-            default:
-                if sourceType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
-                    sign = "-"
-                } else if destinationType == .wallet {
-                    typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
-                    sign = "+"
-                }
+    func configure(_ model: TransactionDetails) {
+        if let details = model.programDetails, let managerName = model.programDetails?.managerName {
+            if let title = details.title {
+                titleLabel.text = title
+                subtitleLabel.text = managerName
             }
             
-            subtitleLabel.text = sign + value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            if let color = details.color {
+                typeImageView.backgroundColor = UIColor.hexColor(color)
+            }
+            
+            typeImageView.image = UIImage.programPlaceholder
+            
+            if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
+                typeImageView.kf.indicatorType = .activity
+                typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                typeImageView.backgroundColor = .clear
+            }
         }
         
-        firstTitleLabel.text = "Withdraw currency"
-        if let sourceCurrency = model.sourceCurrency {
-            firstValueLabel.text = sourceCurrency.rawValue
+        if let details = model.convertingDetails {
+            typeImageView.image = UIImage.programPlaceholder
+            
+            if let logo = details.currencyToLogo, let fileUrl = getFileURL(fileName: logo) {
+                typeImageView.kf.indicatorType = .activity
+                typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                typeImageView.backgroundColor = .clear
+            }
         }
         
-        secondTitleLabel.text = "To address"
-        if let wallet = model.destinationWithdrawalInfo?.wallet {
-            secondValueLabel.text = wallet
+        if let details = model.externalTransactionDetails {
+            if let fromAddress = details.fromAddress {
+                titleLabel.text = fromAddress
+                subtitleLabel.text = "From external address"
+            }
+            
+            typeImageView.image = UIImage.programPlaceholder
+            if let logo = details.fromAddress, let fileUrl = getFileURL(fileName: logo) {
+                typeImageView.kf.indicatorType = .activity
+                typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                typeImageView.backgroundColor = .clear
+            }
         }
         
-        
-        thirdTitleLabel.text = "To address"
-        if let hash = model.destinationBlockchainInfo?.hash {
-            thirdValueLabel.text = hash
+        firstTitleLabel.text = "Amount"
+        if let amount = model.amount, let currency = model.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            firstValueLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         }
         
-        fourthTitleLabel.text = "Date"
-        if let date = model.date {
-            fourthValueLabel.text = date.dateAndTimeFormatString
+        secondTitleLabel.text = "Status"
+        if let status = model.status {
+            secondValueLabel.text = status.rawValue
         }
     }
     

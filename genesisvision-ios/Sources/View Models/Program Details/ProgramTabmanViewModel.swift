@@ -54,23 +54,26 @@ final class ProgramTabmanViewModel: TabmanViewModel {
         
         if let router = router as? ProgramTabmanRouter, let programDetailsFull = programDetailsFull {
             if let vc = router.getInfo(with: programDetailsFull) {
-                self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
+                self.addController(vc)
             }
             
             if let vc = router.getProfit(with: programId) {
-                self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
+                self.addController(vc)
             }
             
             if let vc = router.getBalance(with: programId) {
-                self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
+                self.addController(vc)
             }
             
-            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let vc = router.getTrades(with: programId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let tradesVC = router.getTrades(with: programId), let openTradesVC = router.getTradesOpen(with: programId) {
+                self.addItem(openTradesVC.viewModel.title.uppercased())
+                self.addController(openTradesVC)
+                
+                self.addItem(tradesVC.viewModel.title.uppercased())
+                self.addController(tradesVC)
             }
             
             if let personalProgramDetails = programDetailsFull.personalProgramDetails, let isInvested = personalProgramDetails.isInvested, isInvested, let vc = router.getEvents(with: programId) {

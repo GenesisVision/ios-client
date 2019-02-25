@@ -20,6 +20,12 @@ protocol YourInvestmentProtocol: class {
     func didChangeSwitch(value: Bool)
 }
 
+protocol WalletActionsProtocol: class {
+    func didTapWithdrawButton()
+    func didTapAddFundsButton()
+    func didTapTransferButton()
+}
+
 extension YourInvestmentProtocol {
     func didTapWithdrawButton() {
         
@@ -49,6 +55,14 @@ protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     
+}
+
+protocol WalletProtocol: class {
+    func didUpdateData()
+}
+
+protocol ReloadDataProtocol: class {
+    func didReloadData()
 }
 
 protocol FavoriteStateChangeProtocol: class {
@@ -185,7 +199,7 @@ extension UIViewControllerWithBottomView where Self: BaseViewController {
     }
 }
 
-protocol WalletTransactionListViewModel {
+protocol WalletListViewModelProtocol {
     var title: String { get }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }

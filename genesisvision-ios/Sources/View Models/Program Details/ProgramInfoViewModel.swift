@@ -11,6 +11,7 @@ import UIKit.UITableViewHeaderFooterView
 final class ProgramInfoViewModel {
     enum SectionType {
         case details
+        case signals
         case yourInvestment
         case investNow
     }
@@ -45,6 +46,12 @@ final class ProgramInfoViewModel {
                     sections.insert(.yourInvestment, at: 1)
                 }
             }
+            
+            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
+                if !sections.contains(.signals) {
+                    sections.insert(.signals, at: 1)
+                }
+            }
         }
     }
     
@@ -57,7 +64,8 @@ final class ProgramInfoViewModel {
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailManagerTableViewCellViewModel.self, DefaultTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self]
+        return [DetailManagerTableViewCellViewModel.self, DefaultTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self,
+            InfoSignalsTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -204,6 +212,8 @@ extension ProgramInfoViewModel {
             return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, yourInvestmentProtocol: self)
         case .investNow:
             return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
+        case .signals:
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, infoSignalsProtocol: self)
         }
     }
     
@@ -276,5 +286,21 @@ extension ProgramInfoViewModel: InvestNowProtocol {
         } else if let topViewController = router.topViewController() {
             topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
         }
+    }
+}
+
+extension ProgramInfoViewModel: InfoSignalsProtocol {
+    
+    func didTapFollowButton() {
+        if let programId = programDetailsFull?.id, let isFollowSignals = programDetailsFull?.personalProgramDetails?.isFollowSignals {
+            //TODO:
+            isFollowSignals
+                ? SignalDataProvider.unsubscribe(with: programId) { (result) in print(result) }
+                : SignalDataProvider.subscribe(with: programId) { (result) in print(result) }
+        }
+    }
+    
+    func didTapEditButton() {
+        //TODO:
     }
 }

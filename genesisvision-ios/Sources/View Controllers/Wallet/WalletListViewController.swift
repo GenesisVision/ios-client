@@ -13,6 +13,20 @@ class WalletListViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
     var viewModel: WalletListViewModel!
     
+    // MARK: - Views
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
+        
+    // MARK: - Buttons
+    @IBOutlet weak var transferButton: ActionButton! {
+        didSet {
+            transferButton.isHidden = true
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +38,10 @@ class WalletListViewController: BaseViewControllerWithTableView {
     private func setup() {
         setupUI()
         fetch()
-        
-        setupTableConfiguration()
     }
     
     private func setupUI() {
-        showInfiniteIndicator(value: false)
+       showInfiniteIndicator(value: false)
         
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()
@@ -38,6 +50,11 @@ class WalletListViewController: BaseViewControllerWithTableView {
         }
         
         bottomViewType = .none
+        
+        if viewModel.wallet != nil {
+            transferButton.isHidden = false
+            tableView.contentInset.bottom = 82.0
+        }
     }
     
     private func setupTableConfiguration() {
@@ -65,6 +82,11 @@ class WalletListViewController: BaseViewControllerWithTableView {
     override func fetch() {
         showProgressHUD()
         viewModel.fetch()
+    }
+    
+    // MARK: - Actions
+    @IBAction func transferButtonAction(_ sender: UIButton) {
+        viewModel.transfer()
     }
 }
 

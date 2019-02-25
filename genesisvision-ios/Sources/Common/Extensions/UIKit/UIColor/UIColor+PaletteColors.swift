@@ -53,7 +53,6 @@ extension UIColor {
         
         static var switchTint: UIColor { return #colorLiteral(red: 0.1843137255, green: 0.2745098039, blue: 0.2901960784, alpha: 1) }                              //2F464A
 
-        
         static var yellow: UIColor { return #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1) }                                  //F5A623
 
         static var blue: UIColor { return #colorLiteral(red: 0.2039215686, green: 0.6509803922, blue: 0.7568627451, alpha: 1) }                                    //34A6C1

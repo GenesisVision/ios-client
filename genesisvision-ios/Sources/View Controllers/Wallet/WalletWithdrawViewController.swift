@@ -33,7 +33,9 @@ class WalletWithdrawViewController: BaseViewController {
     
     var availableInWalletValue: Double = 0.0 {
         didSet {
-            self.availableInWalletValueLabel.text = availableInWalletValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            if let currency = viewModel.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                self.availableInWalletValueLabel.text = availableInWalletValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            }
         }
     }
     
@@ -62,18 +64,17 @@ class WalletWithdrawViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var availableInWalletValueTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableInWalletValueTitleLabel: SubtitleLabel! {
         didSet {
             availableInWalletValueTitleLabel.text = "Available in wallet"
-            availableInWalletValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var availableInWalletValueLabel: TitleLabel! {
         didSet {
-            availableInWalletValueLabel.textColor = UIColor.primary
             availableInWalletValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
+    
     @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Enter correct amount"
@@ -162,7 +163,7 @@ class WalletWithdrawViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
-        bottomViewType = .dateRange
+        bottomViewType = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,20 +195,19 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commission, let currency = selectedWallet.currency {
-            let currency = CurrencyType(rawValue: currency.rawValue) ?? .gvt
+        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commission, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             
             if let description = selectedWallet.description {
                 selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue
             }
             
-            self.feeValueLabel.text = commission.rounded(withType: currency).toString() + " " + currency.rawValue
+            self.feeValueLabel.text = commission.rounded(withType: currencyType).toString() + " " + currency.rawValue
             
             if let rate = selectedWallet.rateToGvt, amountToWithdrawValue > commission {
                 var getValue = amountToWithdrawValue * rate - commission
                 getValue = getValue > 0.0 ? getValue : 0.0
                 
-                let amountToWithdrawValueCurrencyString = getValue.rounded(withType: currency).toString()
+                let amountToWithdrawValueCurrencyString = getValue.rounded(withType: currencyType).toString()
                 self.withdrawingValueLabel.text = amountToWithdrawValueCurrencyString + " " + currency.rawValue
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
@@ -216,7 +216,11 @@ class WalletWithdrawViewController: BaseViewController {
             withdrawingTitleLabel.text = currency == .gvt ? "You will get" : "Approximate amount"
         }
         
-        if let availableToWithdrawal = viewModel.withdrawalSummary?.availableToWithdrawal {
+        if let currency = viewModel.selectedWallet?.currency {
+            self.amountToWithdrawGVTLabel.text = currency.rawValue
+        }
+        
+        if let availableToWithdrawal = viewModel.selectedWallet?.availableToWithdrawal {
             self.availableInWalletValue = availableToWithdrawal
         }
         
@@ -231,7 +235,7 @@ class WalletWithdrawViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
 
-        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
+        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm withdraw",
                                                           subtitle: "Check again because the transaction cannot be reversed",
                                                           programLogo: nil,
                                                           programTitle: nil,

@@ -34,6 +34,16 @@ class ProgramTabmanRouter: TabmanRouter {
         return viewController
     }
     
+    func getTradesOpen(with programId: String) -> ProgramTradesViewController? {
+        guard let router = self.parentRouter as? ProgramRouter else { return nil }
+        
+        let viewController = ProgramTradesViewController()
+        let viewModel = ProgramTradesViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController, isOpenTrades: true)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
     func getFullChart(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailFullChartViewController? {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(.program), let router = self.parentRouter as? ProgramRouter else { return nil }
         

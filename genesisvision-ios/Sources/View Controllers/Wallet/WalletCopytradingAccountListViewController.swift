@@ -1,40 +1,22 @@
 //
-//  WalletBalanceViewController.swift
+//  WalletCopytradingAccountListViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 08/02/2019.
+//  Created by George on 20/02/2019.
 //  Copyright © 2019 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class WalletBalanceViewController: BaseViewControllerWithTableView {
-    // MARK: - Variables
-    var viewModel: WalletBalanceViewModel!
+class WalletCopytradingAccountListViewController: BaseViewControllerWithTableView {
     
-    // MARK: - Views
+    // MARK: - View Model
+    var viewModel: WalletListViewModelProtocol!
+    
+    // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
-        }
-    }
-    
-    // MARK: - Buttons
-    @IBOutlet weak var addFundsButton: ActionButton! {
-        didSet {
-            addFundsButton.isHidden = true
-            addFundsButton.backgroundColor = UIColor.primary.withAlphaComponent(0.1)
-        }
-    }
-    @IBOutlet weak var withdrawButton: ActionButton! {
-        didSet {
-            withdrawButton.isHidden = true
-            withdrawButton.configure(with: .darkClear)
-        }
-    }
-    @IBOutlet weak var transferButton: ActionButton! {
-        didSet {
-            transferButton.isHidden = true
         }
     }
     
@@ -52,29 +34,16 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-        showInfiniteIndicator(value: false)
-        
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()
         if let imageName = viewModel.noDataImageName() {
             noDataImage = UIImage(named: imageName)
         }
-
-        bottomViewType = .none
         
-        if viewModel.wallet != nil {
-            addFundsButton.isHidden = false
-            withdrawButton.isHidden = false
-            tableView.contentInset.bottom = 82.0
-        }
-    }
-    
-    @objc private func withdrawButtonAction() {
-        viewModel.withdraw()
-    }
-    
-    @objc private func addFundsButtonAction() {
-        viewModel.deposit()
+        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        addCurrencyTitleButton(CurrencyDelegateManager())
+        
+        bottomViewType = .none
     }
     
     private func setupTableConfiguration() {
@@ -89,7 +58,9 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
         
-        viewModel.fetch()
+        viewModel.refresh { (result) in
+            
+        }
     }
     
     private func reloadData() {
@@ -100,29 +71,46 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     }
     
     override func fetch() {
-        showProgressHUD()
-        viewModel.fetch()
+        //        showProgressHUD()
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+        }
     }
     
-    // MARK: - Actions
-    @IBAction func withdrawButtonAction(_ sender: UIButton) {
-        viewModel.withdraw()
+    private func showTransaction(model: MultiWalletTransaction) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 500
+        
+//        let view = WalletTransactionView.viewFromNib()
+//        view.configure(model)
+//        bottomSheetController.addContentsView(view)
+//        bottomSheetController.present()
     }
     
-    @IBAction func depositButtonAction(_ sender: UISwitch) {
-        viewModel.deposit()
-    }
-    
-    @IBAction func transferButtonAction(_ sender: UIButton) {
-        viewModel.transfer()
+    private func showExternalTransaction(model: MultiWalletExternalTransaction) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 500
+        
+//        let view = WalletTransactionView.viewFromNib()
+//        view.configure(model)
+//        bottomSheetController.addContentsView(view)
+//        bottomSheetController.present()
     }
 }
 
-extension WalletBalanceViewController: UITableViewDelegate, UITableViewDataSource {
+extension WalletCopytradingAccountListViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,     didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
+        
+        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel {
+            showTransaction(model: model.walletTransaction)
+        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel {
+            showExternalTransaction(model: model.walletTransaction)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,6 +119,10 @@ extension WalletBalanceViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     // MARK: - UITableViewDataSource
@@ -155,9 +147,12 @@ extension WalletBalanceViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension WalletBalanceViewController: ReloadDataProtocol {
+extension WalletCopytradingAccountListViewController: ReloadDataProtocol {
     func didReloadData() {
         hideAll()
         reloadData()
     }
 }
+
+
+
