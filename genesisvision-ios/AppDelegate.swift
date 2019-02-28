@@ -146,8 +146,6 @@ extension AppDelegate {
         }
         
         print(userInfo)
-        
-        //TODO: open program, fund, profile or notification list
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -156,8 +154,6 @@ extension AppDelegate {
         }
         
         print(userInfo)
-        
-        //TODO: open program, fund, profile or notification list
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
