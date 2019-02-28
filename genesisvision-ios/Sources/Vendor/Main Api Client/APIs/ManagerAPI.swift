@@ -235,7 +235,7 @@ open class ManagerAPI {
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "feeValue" : 5.962133916683182,
     "value" : 1.4658129805029452
   }, {
@@ -249,7 +249,7 @@ open class ManagerAPI {
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "feeValue" : 5.962133916683182,
     "value" : 1.4658129805029452
   } ]
@@ -385,12 +385,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdInvestByAmountPost: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -453,12 +453,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdInvestInfoByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -555,7 +555,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -572,7 +572,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -654,12 +654,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdWithdrawByPercentPost: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -722,12 +722,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdWithdrawInfoByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -850,12 +850,12 @@ open class ManagerAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ManagerFundsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -895,13 +895,13 @@ open class ManagerAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 9
     },
@@ -967,13 +967,13 @@ open class ManagerAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 9
     },
@@ -1266,7 +1266,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1285,7 +1285,7 @@ open class ManagerAPI {
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "BTC",
+      "currency" : "Undefined",
       "feeValue" : 5.962133916683182,
       "value" : 1.4658129805029452
     }, {
@@ -1299,7 +1299,7 @@ open class ManagerAPI {
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "BTC",
+      "currency" : "Undefined",
       "feeValue" : 5.962133916683182,
       "value" : 1.4658129805029452
     } ]
@@ -1330,7 +1330,7 @@ open class ManagerAPI {
       "value" : 3.616076749251911
     } ],
     "balance" : 1.2315135367772556,
-    "programCurrency" : "BTC",
+    "programCurrency" : "Undefined",
     "rate" : 9.369310271410669,
     "totalProgramCurrencyProfit" : 9.301444243932576,
     "successTradesPercent" : 4.145608029883936,
@@ -1434,12 +1434,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdInvestByAmountPost: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1502,12 +1502,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdInvestInfoByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1648,7 +1648,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1665,7 +1665,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1791,12 +1791,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdWithdrawInfoByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1971,12 +1971,12 @@ open class ManagerAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ManagerProgramsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -2016,12 +2016,12 @@ open class ManagerAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2029,7 +2029,7 @@ open class ManagerAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
@@ -2088,7 +2088,7 @@ open class ManagerAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2103,12 +2103,12 @@ open class ManagerAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2116,7 +2116,7 @@ open class ManagerAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
@@ -2175,7 +2175,7 @@ open class ManagerAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2342,7 +2342,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -2359,7 +2359,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

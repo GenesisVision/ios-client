@@ -15,12 +15,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletAddressesByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -50,7 +50,7 @@ open class WalletAPI {
   "address" : "address",
   "description" : "description",
   "logo" : "logo",
-  "currency" : "BTC",
+  "currency" : "Undefined",
   "isDepositEnabled" : true
 }}]
      
@@ -97,14 +97,14 @@ open class WalletAPI {
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "isDepositEnabled" : true
   }, {
     "rateToGVT" : 0.8008281904610115,
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "isDepositEnabled" : true
   } ]
 }}]
@@ -134,12 +134,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -247,12 +247,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiByCurrencyGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -286,9 +286,9 @@ open class WalletAPI {
     "availableCcy" : 5.637376656633329,
     "pending" : 1.4658129805029452,
     "available" : 0.8008281904610115,
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "invested" : 6.027456183070403,
-    "currencyCcy" : "BTC",
+    "currencyCcy" : "Undefined",
     "pendingCcy" : 7.061401241503109,
     "investedCcy" : 2.3021358869347655
   },
@@ -306,10 +306,10 @@ open class WalletAPI {
     "isDepositEnabled" : true,
     "total" : 1.0246457001441578,
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "invested" : 7.386281948385884,
-    "currencyCcy" : "BTC",
+    "currencyCcy" : "Undefined",
     "pendingCcy" : 7.457744773683766,
     "investedCcy" : 6.84685269835264
   }, {
@@ -325,10 +325,10 @@ open class WalletAPI {
     "isDepositEnabled" : true,
     "total" : 1.0246457001441578,
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "invested" : 7.386281948385884,
-    "currencyCcy" : "BTC",
+    "currencyCcy" : "Undefined",
     "pendingCcy" : 7.457744773683766,
     "investedCcy" : 6.84685269835264
   } ]
@@ -370,12 +370,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiTransactionsExternalGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -415,7 +415,7 @@ open class WalletAPI {
     "statusUrl" : "statusUrl",
     "logo" : "logo",
     "isEnableActions" : true,
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "All",
     "status" : "status"
@@ -425,7 +425,7 @@ open class WalletAPI {
     "statusUrl" : "statusUrl",
     "logo" : "logo",
     "isEnableActions" : true,
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "All",
     "status" : "status"
@@ -485,12 +485,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiTransactionsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -531,9 +531,9 @@ open class WalletAPI {
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currencyTo" : "BTC",
+    "currencyTo" : "Undefined",
     "type" : "All",
-    "currencyFrom" : "BTC",
+    "currencyFrom" : "Undefined",
     "logoTo" : "logoTo",
     "status" : "Done"
   }, {
@@ -543,9 +543,9 @@ open class WalletAPI {
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currencyTo" : "BTC",
+    "currencyTo" : "Undefined",
     "type" : "All",
-    "currencyFrom" : "BTC",
+    "currencyFrom" : "Undefined",
     "logoTo" : "logoTo",
     "status" : "Done"
   } ]
@@ -698,7 +698,7 @@ open class WalletAPI {
   "convertingDetails" : {
     "rateValue" : 3.616076749251911,
     "amountTo" : 9.301444243932576,
-    "currencyTo" : "BTC",
+    "currencyTo" : "Undefined",
     "currencyToName" : "currencyToName",
     "currencyToLogo" : "currencyToLogo"
   },
@@ -711,9 +711,10 @@ open class WalletAPI {
   },
   "currencyName" : "currencyName",
   "gvCommissionPercent" : 4.145608029883936,
-  "currency" : "BTC",
+  "currency" : "Undefined",
   "currencyLogo" : "currencyLogo",
   "type" : "Investing",
+  "gvCommissionCurrency" : "Undefined",
   "gvCommission" : 2.027123023002322,
   "status" : "Done"
 }}]
@@ -771,12 +772,12 @@ open class WalletAPI {
      * enum for parameter wallet
      */
     public enum Wallet_v10WalletTransactionsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -823,7 +824,7 @@ open class WalletAPI {
     },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceCurrency" : "BTC",
+    "sourceCurrency" : "Undefined",
     "sourceProgramInfo" : {
       "title" : "title"
     },
@@ -842,7 +843,7 @@ open class WalletAPI {
     },
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "BTC",
+    "destinationCurrency" : "Undefined",
     "destinationBlockchainInfo" : {
       "hash" : "hash",
       "status" : "Undefined"
@@ -863,7 +864,7 @@ open class WalletAPI {
     },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceCurrency" : "BTC",
+    "sourceCurrency" : "Undefined",
     "sourceProgramInfo" : {
       "title" : "title"
     },
@@ -882,7 +883,7 @@ open class WalletAPI {
     },
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "BTC",
+    "destinationCurrency" : "Undefined",
     "destinationBlockchainInfo" : {
       "hash" : "hash",
       "status" : "Undefined"
@@ -993,14 +994,14 @@ open class WalletAPI {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "commission" : 6.027456183070403,
     "availableToWithdrawal" : 5.962133916683182
   }, {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "commission" : 6.027456183070403,
     "availableToWithdrawal" : 5.962133916683182
   } ],

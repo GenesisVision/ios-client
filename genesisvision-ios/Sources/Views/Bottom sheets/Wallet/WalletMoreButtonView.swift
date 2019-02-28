@@ -10,6 +10,7 @@ import UIKit
 
 protocol WalletMoreButtonViewProtocol: class {
     func feeSwitchDidChange(value: Bool)
+    func aboutFeesButtonDidTapped()
 }
 
 class WalletMoreButtonView: UIView {
@@ -50,5 +51,9 @@ class WalletMoreButtonView: UIView {
     // MARK: - Actions
     @IBAction func payFeesWithGvtSwitchAction(_ sender: UISwitch) {
         delegate?.feeSwitchDidChange(value: sender.isOn)
+    }
+    
+    @IBAction func aboutFeesButtonAction(_ sender: UISwitch) {
+        delegate?.aboutFeesButtonDidTapped()
     }
 }

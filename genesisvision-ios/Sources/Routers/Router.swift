@@ -362,6 +362,12 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showAboutFees() {
+        guard let viewController = AboutFeesViewController.storyboardInstance(.wallet) else { return }
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showNotificationList() {
         guard let viewController = NotificationListViewController.storyboardInstance(.notifications) else { return }
         

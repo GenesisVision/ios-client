@@ -60,6 +60,10 @@ final class WalletTabmanViewModel: TabmanViewModel {
             walletListViewController.viewModel.fetch()
         }
     }
+    
+    func showAboutFees() {
+        router.showAboutFees()
+    }
 }
 
 class WalletPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {

@@ -13,16 +13,13 @@ final class ProgramInvestViewModel {
     var title: String = "Investment"
     var programId: String?
     var programCurrency: CurrencyType?
-    
     var labelPlaceholder: String = "0"
     
     var programInvestInfo: ProgramInvestInfo?
 
     var walletMultiSummary: WalletMultiSummary?
-    
     var selectedWalletFrom: WalletData?
     var selectedWalletFromCurrencyIndex: Int = 0
-    
     var rate: Double = 0.0
     
     private weak var detailProtocol: DetailProtocol?

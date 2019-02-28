@@ -134,6 +134,11 @@ extension WalletViewController: WalletMoreButtonViewProtocol {
             }
         }
     }
+    func aboutFeesButtonDidTapped() {
+        bottomSheetController.dismiss()
+        
+        viewModel.showAboutFees()
+    }
 }
 
 extension WalletViewController: WalletProtocol {

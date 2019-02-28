@@ -307,6 +307,7 @@
 		5E616B5B20F7C37900B3459D /* CreateProgramFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E616B5720F7C37900B3459D /* CreateProgramFirstViewController.swift */; };
 		5E616B5C20F7C37900B3459D /* CreateProgramTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E616B5820F7C37900B3459D /* CreateProgramTabmanViewController.swift */; };
 		5E616B5E20F7CED000B3459D /* EditableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E616B5D20F7CED000B3459D /* EditableField.swift */; };
+		5E62E0F92227F6970027DA5A /* AboutFeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E62E0F82227F6970027DA5A /* AboutFeesViewController.swift */; };
 		5E6308F9212C079900D15C71 /* PortfolioEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */; };
 		5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */; };
 		5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */; };
@@ -987,6 +988,7 @@
 		5E616B5720F7C37900B3459D /* CreateProgramFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProgramFirstViewController.swift; sourceTree = "<group>"; };
 		5E616B5820F7C37900B3459D /* CreateProgramTabmanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProgramTabmanViewController.swift; sourceTree = "<group>"; };
 		5E616B5D20F7CED000B3459D /* EditableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableField.swift; sourceTree = "<group>"; };
+		5E62E0F82227F6970027DA5A /* AboutFeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFeesViewController.swift; sourceTree = "<group>"; };
 		5E6308F7212C079900D15C71 /* PortfolioEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioEventCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E6308F8212C079900D15C71 /* PortfolioEventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioEventCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
@@ -3189,6 +3191,7 @@
 				5EB8E9DB207263B100F46A8A /* InfoViewController.swift */,
 				5EA173CC20A06DED00905253 /* BaseTabmanViewController.swift */,
 				5E6732AB2195C514000A5C7C /* BaseTableViewController.swift */,
+				5E62E0F82227F6970027DA5A /* AboutFeesViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3741,6 +3744,7 @@
 				FCC9DD82200E5CA0008825EC /* UITableView+Registration.swift in Sources */,
 				5E6732AC2195C514000A5C7C /* BaseTableViewController.swift in Sources */,
 				5E11DFD221B9286400B2B6EE /* RatingTableHeaderView.swift in Sources */,
+				5E62E0F92227F6970027DA5A /* AboutFeesViewController.swift in Sources */,
 				5E1CF83B218C02FC00541C70 /* TweeBorderedTextField.swift in Sources */,
 				5EEFD84D2213BA87005E7E9F /* WalletExternalTransactionTableViewCellViewModel.swift in Sources */,
 				5EB8E9DC207263B100F46A8A /* InfoViewController.swift in Sources */,

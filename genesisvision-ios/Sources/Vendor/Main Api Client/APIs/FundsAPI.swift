@@ -324,12 +324,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsByIdGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -362,7 +362,7 @@ open class FundsAPI {
   "statistic" : {
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "profitPercent" : 5.637376656633329,
     "rebalancingCount" : 2,
@@ -372,7 +372,7 @@ open class FundsAPI {
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "investorsCount" : 7
   },
@@ -479,12 +479,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -531,13 +531,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 9
     },
@@ -603,13 +603,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 9
     },

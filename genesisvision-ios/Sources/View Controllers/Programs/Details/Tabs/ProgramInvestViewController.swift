@@ -26,7 +26,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet weak var availableToInvestTitleLabel: SubtitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Available to invest in program"
+            availableToInvestTitleLabel.text = "Available to invest"
         }
     }
     @IBOutlet weak var availableToInvestValueLabel: TitleLabel!
@@ -161,6 +161,7 @@ class ProgramInvestViewController: BaseViewController {
         }
     }
     
+    
     private func updateUI() {
         guard let programCurrency = viewModel.programCurrency else { return }
         
@@ -213,7 +214,8 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        guard let minInvestmentAmount = viewModel.programInvestInfo?.minInvestmentAmount, amountToInvestValue >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        let minInvestmentAmount = viewModel.getMinInvestmentAmount()
+        guard amountToInvestValue >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
         viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
@@ -316,7 +318,6 @@ class ProgramInvestViewController: BaseViewController {
             amountToInvestValue = minValue
         }
     }
-    
 }
 
 extension ProgramInvestViewController: NumpadViewProtocol {

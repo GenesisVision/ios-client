@@ -113,94 +113,94 @@ open class RateAPI {
   "rates" : {
     "Undefined" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "EUR" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "GVT" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "BCH" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "USD" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "USDT" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "DOGE" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "BTC" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "XRP" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "BNB" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "ETH" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "LTC" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ],
     "ADA" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     } ]
   }
 }}]

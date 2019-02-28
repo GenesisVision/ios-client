@@ -22,7 +22,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         }
         
         cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
-        
+
         cell.yourInvestmentProtocol = yourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Current period investment"

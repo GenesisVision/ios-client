@@ -77,7 +77,7 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
     
     private func openTransictionDetails(_ details: TransactionDetails, uuid: UUID) {
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 500
+        bottomSheetController.initializeHeight = 450
         bottomSheetController.lineViewIsHidden = true
         
         let view = WalletTransactionView.viewFromNib()

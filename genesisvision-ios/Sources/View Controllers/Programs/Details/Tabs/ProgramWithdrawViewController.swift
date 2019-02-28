@@ -171,11 +171,11 @@ class ProgramWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 370.0
+        bottomSheetController.initializeHeight = 350.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
-        let subtitle = "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet"
+        let subtitle = "Your request will be processed at the end of the reporting period."
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
                                                           subtitle: subtitle,

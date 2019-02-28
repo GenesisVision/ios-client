@@ -29,12 +29,27 @@ open class TransactionDetails: Codable {
         case error = "Error"
     }
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+    public enum GvCommissionCurrency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -52,12 +67,13 @@ open class TransactionDetails: Codable {
     public var currencyName: String?
     public var currencyLogo: String?
     public var gvCommission: Double?
+    public var gvCommissionCurrency: GvCommissionCurrency?
     public var gvCommissionPercent: Double?
     public var amount: Double?
 
 
     
-    public init(type: ModelType?, programDetails: ProgramTransactionDetails?, convertingDetails: ConvertingDetails?, externalTransactionDetails: ExternalTransactionDetails?, status: Status?, currency: Currency?, currencyName: String?, currencyLogo: String?, gvCommission: Double?, gvCommissionPercent: Double?, amount: Double?) {
+    public init(type: ModelType?, programDetails: ProgramTransactionDetails?, convertingDetails: ConvertingDetails?, externalTransactionDetails: ExternalTransactionDetails?, status: Status?, currency: Currency?, currencyName: String?, currencyLogo: String?, gvCommission: Double?, gvCommissionCurrency: GvCommissionCurrency?, gvCommissionPercent: Double?, amount: Double?) {
         self.type = type
         self.programDetails = programDetails
         self.convertingDetails = convertingDetails
@@ -67,6 +83,7 @@ open class TransactionDetails: Codable {
         self.currencyName = currencyName
         self.currencyLogo = currencyLogo
         self.gvCommission = gvCommission
+        self.gvCommissionCurrency = gvCommissionCurrency
         self.gvCommissionPercent = gvCommissionPercent
         self.amount = amount
     }
@@ -87,6 +104,7 @@ open class TransactionDetails: Codable {
         try container.encodeIfPresent(currencyName, forKey: "currencyName")
         try container.encodeIfPresent(currencyLogo, forKey: "currencyLogo")
         try container.encodeIfPresent(gvCommission, forKey: "gvCommission")
+        try container.encodeIfPresent(gvCommissionCurrency, forKey: "gvCommissionCurrency")
         try container.encodeIfPresent(gvCommissionPercent, forKey: "gvCommissionPercent")
         try container.encodeIfPresent(amount, forKey: "amount")
     }
@@ -105,6 +123,7 @@ open class TransactionDetails: Codable {
         currencyName = try container.decodeIfPresent(String.self, forKey: "currencyName")
         currencyLogo = try container.decodeIfPresent(String.self, forKey: "currencyLogo")
         gvCommission = try container.decodeIfPresent(Double.self, forKey: "gvCommission")
+        gvCommissionCurrency = try container.decodeIfPresent(GvCommissionCurrency.self, forKey: "gvCommissionCurrency")
         gvCommissionPercent = try container.decodeIfPresent(Double.self, forKey: "gvCommissionPercent")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
     }

@@ -48,6 +48,23 @@ class WalletTransactionView: UIView {
             externalWithdrawalStackView.isHidden = true
         }
     }
+    @IBOutlet weak var externalDepositStackView: ExternalDepositStackView! {
+        didSet {
+            externalDepositStackView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var openProgramStackView: OpenProgramStackView! {
+        didSet {
+            openProgramStackView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var platformFeeStackView: PlatformFeeStackView! {
+        didSet {
+            platformFeeStackView.isHidden = true
+        }
+    }
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -68,7 +85,7 @@ class WalletTransactionView: UIView {
     
         switch type {
         case .externalDeposit:
-            break
+            setupExternalDeposit(model)
         case .externalWithdrawal:
             setupExternalWithdrawal(model)
         case .investing, .profit:
@@ -77,8 +94,10 @@ class WalletTransactionView: UIView {
             setupWithdrawal(model)
         case .converting:
             setupConverting(model)
-        case .open, .close, .platformFee:
-            break
+        case .open, .close:
+            setupOpenCloseProgram(model)
+        case .platformFee:
+            setupPlatformFeeProgram(model)
         }
         
         if let status = model.status {
@@ -91,9 +110,14 @@ class WalletTransactionView: UIView {
             case .pending:
                 image = #imageLiteral(resourceName: "img_wallet_status_pending_icon")
             }
+            
             statusStackView.iconImageView.image = image
-            statusStackView.titleLabel.text = status.rawValue
             statusStackView.subtitleLabel.text = "Status"
+            statusStackView.titleLabel.text = status.rawValue
+            
+            if let externalTransactionDetails = model.externalTransactionDetails, let description = externalTransactionDetails.description, let text = statusStackView.titleLabel.text {
+                statusStackView.titleLabel.text = text + " " + description
+            }
         }
     }
     
@@ -123,6 +147,43 @@ class WalletTransactionView: UIView {
 
 // MARK: - Setups
 extension WalletTransactionView {
+    private func setupPlatformFeeProgram(_ model: TransactionDetails) {
+        platformFeeStackView.isHidden = false
+        topStackView.subtitleLabel.text = "Platform fee"
+        
+        platformFeeStackView.fromWalletStackView.headerLabel.text = "From"
+        platformFeeStackView.fromWalletStackView.iconImageView.image = UIImage.walletPlaceholder
+        if let logo = model.currencyLogo, let fileUrl = getFileURL(fileName: logo) {
+            platformFeeStackView.fromWalletStackView.iconImageView.kf.indicatorType = .activity
+            platformFeeStackView.fromWalletStackView.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+            platformFeeStackView.fromWalletStackView.iconImageView.backgroundColor = .clear
+        }
+        if let currencyName = model.currencyName {
+            platformFeeStackView.fromWalletStackView.titleLabel.text = currencyName
+        }
+        
+        platformFeeStackView.amountStackView.subtitleLabel.text = "Amount"
+        if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            platformFeeStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        }
+    }
+    private func setupExternalDeposit(_ model: TransactionDetails) {
+        externalDepositStackView.isHidden = false
+        topStackView.subtitleLabel.text = "Deposit"
+        
+        externalDepositStackView.fromWalletStackView.headerLabel.text = "From external address"
+        externalDepositStackView.fromWalletStackView.iconImageView.image = #imageLiteral(resourceName: "img_wallet_external_icon")
+        
+        if let fromAddress = model.externalTransactionDetails?.fromAddress {
+            externalDepositStackView.fromWalletStackView.titleLabel.text = fromAddress
+            externalDepositStackView.fromWalletStackView.copyButton.isHidden = false
+        }
+        
+        externalDepositStackView.toAmountStackView.subtitleLabel.text = "Amount"
+        if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            externalDepositStackView.toAmountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        }
+    }
     private func setupExternalWithdrawal(_ model: TransactionDetails) {
         externalWithdrawalStackView.isHidden = false
         topStackView.subtitleLabel.text = "Withdrawal"
@@ -158,6 +219,50 @@ extension WalletTransactionView {
             }
         }
     }
+    private func setupOpenCloseProgram(_ model: TransactionDetails) {
+        openProgramStackView.isHidden = false
+        openProgramStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
+        
+        if let details = model.programDetails, let currency = model.currency, let type = model.type {
+            if let programType = details.programType {
+                openProgramStackView.assetStackView.headerLabel.text = programType == .program ? "Program" : "Fund"
+                if type == .open {
+                    topStackView.subtitleLabel.text = programType == .program ? "Open program" : "Open fund"
+                } else if type == .close {
+                    topStackView.subtitleLabel.text = programType == .program ? "Close program" : "Close fund"
+                }
+                
+                if programType == .program, let level = details.level {
+                    openProgramStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                } else {
+                    openProgramStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
+                }
+            }
+            
+            if let color = details.color {
+                openProgramStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
+            }
+            if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
+                openProgramStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
+                openProgramStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                openProgramStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
+            }
+            
+            if let title = details.title {
+                openProgramStackView.assetStackView.titleLabel.text = title
+            }
+            if let managerName = model.programDetails?.managerName {
+                openProgramStackView.assetStackView.subtitleLabel.text = managerName
+            }
+            
+            openProgramStackView.amountStackView.subtitleLabel.text = "Investment amount"
+            if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                openProgramStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            } else {
+                openProgramStackView.amountStackView.isHidden = true
+            }
+        }
+    }
     private func setupInvestingAndProfit(_ model: TransactionDetails) {
         investmentStackView.isHidden = false
         investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
@@ -166,7 +271,14 @@ extension WalletTransactionView {
             if let programType = details.programType {
                 investmentStackView.assetStackView.headerLabel.text = programType == .program ? "To the program" : "To the fund"
                 topStackView.subtitleLabel.text = programType == .program ? "Program investment" : "Fund investment"
+                
+                if programType == .program, let level = details.level {
+                    investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                } else {
+                    investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
+                }
             }
+            
             if let color = details.color {
             investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
             }
@@ -175,9 +287,7 @@ extension WalletTransactionView {
                 investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
                 investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
             }
-            if let level = details.level {
-                investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
-            }
+            
             if let title = details.title {
                 investmentStackView.assetStackView.titleLabel.text = title
             }
@@ -185,26 +295,27 @@ extension WalletTransactionView {
                 investmentStackView.assetStackView.subtitleLabel.text = managerName
             }
             investmentStackView.successFeeStackView.subtitleLabel.text = "Success fee"
-            if let successFee = model.programDetails?.successFee, let successFeePercent = model.programDetails?.successFeePercent {
-                investmentStackView.successFeeStackView.titleLabel.text = "\(successFeePercent)%  (\(successFee) \(currency.rawValue))"
+            if let successFee = model.programDetails?.successFee, let successFeePercent = model.programDetails?.successFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                investmentStackView.successFeeStackView.titleLabel.text = "\(successFeePercent)% (" + successFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.successFeeStackView.isHidden = true
             }
             investmentStackView.exitFeeStackView.subtitleLabel.text = "Exit fee"
-            if let exitFee = model.programDetails?.exitFee, let exitFeePercent = model.programDetails?.exitFeePercent {
-                investmentStackView.exitFeeStackView.titleLabel.text = "\(exitFeePercent)% (\(exitFee) \(currency.rawValue))"
+            if let exitFee = model.programDetails?.exitFee, let exitFeePercent = model.programDetails?.exitFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                investmentStackView.exitFeeStackView.titleLabel.text = "\(exitFeePercent)% (" + exitFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.exitFeeStackView.isHidden = true
             }
             investmentStackView.entryFeeStackView.subtitleLabel.text = "Entry fee"
-            if let entryFee = model.programDetails?.entryFee, let entryFeePercent = model.programDetails?.entryFeePercent {
-                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (\(entryFee) \(currency.rawValue))"
+            if let entryFee = model.programDetails?.entryFee, let entryFeePercent = model.programDetails?.entryFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+
+                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (" + entryFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.entryFeeStackView.isHidden = true
             }
             investmentStackView.gvCommissionStackView.subtitleLabel.text = "GV Commission"
-            if let gvCommission = model.gvCommission, let gvCommissionPercent = model.gvCommissionPercent {
-                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (\(gvCommission) \(currency.rawValue))"
+            if let gvCommission = model.gvCommission, let gvCommissionCurrency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: gvCommissionCurrency.rawValue) {
+                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.gvCommissionStackView.isHidden = true
             }
@@ -227,6 +338,8 @@ extension WalletTransactionView {
                 
                 if programType == .program, let level = details.level {
                     withdrawalStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                } else {
+                    withdrawalStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
                 }
             }
             if let color = details.color {
@@ -301,8 +414,8 @@ extension WalletTransactionView {
                 convertingStackView.toAmountStackView.isHidden = true
             }
             
-            if let amount = details.amountTo {
-                convertingStackView.rateStackView.titleLabel.text = "1 \(currency.rawValue) = \(amount) \(currencyTo.rawValue)"
+            if let amount = details.amountTo, let currencyType = CurrencyType(rawValue: currencyTo.rawValue) {
+                convertingStackView.rateStackView.titleLabel.text = "1 \(currency.rawValue) = \(amount.rounded(withType: currencyType).toString()) \(currencyType.rawValue)"
             } else {
                 convertingStackView.rateStackView.isHidden = true
             }
@@ -345,8 +458,17 @@ class ExternalWithdrawalStackView: UIStackView {
 
 class ExternalDepositStackView: UIStackView {
     @IBOutlet weak var fromWalletStackView: ExternalStackView!
-    @IBOutlet weak var toWalletStackView: ExternalStackView!
     @IBOutlet weak var toAmountStackView: AmountStackView!
+}
+
+class OpenProgramStackView: UIStackView {
+    @IBOutlet weak var assetStackView: AssetStackView!
+    @IBOutlet weak var amountStackView: AmountStackView!
+}
+
+class PlatformFeeStackView: UIStackView {
+    @IBOutlet weak var fromWalletStackView: ExternalStackView!
+    @IBOutlet weak var amountStackView: AmountStackView!
 }
 
 class TopStackView: DefaultStackView {
@@ -391,9 +513,14 @@ class StatusStackView: DefaultStackView {
 }
 
 class ActionsStackView: UIStackView {
-    @IBOutlet weak var resendButton: ActionButton!
+    @IBOutlet weak var resendButton: ActionButton! {
+        didSet {
+            resendButton.setTitle("Resend email", for: .normal)
+        }
+    }
     @IBOutlet weak var cancelButton: ActionButton! {
         didSet {
+            cancelButton.setTitle("Cancel", for: .normal)
             cancelButton.configure(with: .highClear)
         }
     }
@@ -426,8 +553,9 @@ class ExternalStackView: DefaultStackView {
         }
     }
     
-    @IBOutlet weak var copyButton: StatusButton! {
+    @IBOutlet weak var copyButton: ActionButton! {
         didSet {
+            copyButton.configure(with: .lightBorder)
             copyButton.isHidden = true
         }
     }

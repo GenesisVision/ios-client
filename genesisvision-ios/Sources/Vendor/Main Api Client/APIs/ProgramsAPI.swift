@@ -32,7 +32,7 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/balance
      - examples: [{contentType=application/json, example={
   "programCurrencyBalance" : 0.8008281904610115,
-  "programCurrency" : "BTC",
+  "programCurrency" : "Undefined",
   "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "investorsFunds" : 5.962133916683182,
@@ -118,7 +118,7 @@ open class ProgramsAPI {
     "value" : 3.616076749251911
   } ],
   "balance" : 1.2315135367772556,
-  "programCurrency" : "BTC",
+  "programCurrency" : "Undefined",
   "rate" : 9.369310271410669,
   "totalProgramCurrencyProfit" : 9.301444243932576,
   "successTradesPercent" : 4.145608029883936,
@@ -246,12 +246,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsByIdGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -297,28 +297,28 @@ open class ProgramsAPI {
   "availableInvestmentBase" : 4.145608029883936,
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
   "logo" : "logo",
-  "currency" : "BTC",
+  "currency" : "Undefined",
   "signalSubscriptionFee" : 3.616076749251911,
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "periodDuration" : 6,
   "statistic" : {
     "profitFactorPercent" : 9.965781217890562,
     "investedAmount" : 1.1730742509559433,
-    "startCurrency" : "BTC",
+    "startCurrency" : "Undefined",
     "tradesSuccessCount" : 5,
     "drawdownPercent" : 1.4894159098541704,
     "balanceBase" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "tradesCount" : 4,
     "hasNotifications" : true,
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "profitPercent" : 1.2315135367772556,
-    "investedCurrency" : "BTC",
+    "investedCurrency" : "Undefined",
     "sharpeRatioPercent" : 9.369310271410669,
     "profitValue" : 1.0246457001441578,
     "currentValue" : 7.386281948385884,
@@ -326,7 +326,7 @@ open class ProgramsAPI {
     "startBalance" : 7.457744773683766,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "investorsCount" : 6
   },
@@ -634,12 +634,12 @@ open class ProgramsAPI {
      * enum for parameter programCurrency
      */
     public enum ProgramCurrency_v10ProgramsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -653,12 +653,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -713,12 +713,12 @@ open class ProgramsAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -726,7 +726,7 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
@@ -785,7 +785,7 @@ open class ProgramsAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -800,12 +800,12 @@ open class ProgramsAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -813,7 +813,7 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
@@ -872,7 +872,7 @@ open class ProgramsAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "BTC",
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",

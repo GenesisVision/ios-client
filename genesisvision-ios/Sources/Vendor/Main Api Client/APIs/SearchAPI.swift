@@ -36,13 +36,13 @@ open class SearchAPI {
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 4.965218492984954,
         "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 9
       },
@@ -108,13 +108,13 @@ open class SearchAPI {
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 4.965218492984954,
         "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 9
       },
@@ -184,12 +184,12 @@ open class SearchAPI {
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -197,7 +197,7 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 2
       },
@@ -256,7 +256,7 @@ open class SearchAPI {
         "status" : "Pending"
       },
       "logo" : "logo",
-      "currency" : "BTC",
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
@@ -271,12 +271,12 @@ open class SearchAPI {
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -284,7 +284,7 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 2
       },
@@ -343,7 +343,7 @@ open class SearchAPI {
         "status" : "Pending"
       },
       "logo" : "logo",
-      "currency" : "BTC",
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
