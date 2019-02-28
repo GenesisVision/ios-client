@@ -14,7 +14,7 @@ final class ProgramBalanceViewModel {
     }
     
     // MARK: - Variables
-    var title: String = "Balance"
+    var title: String = "Equity"
     var programId: String?
     
     var router: ProgramRouter!
@@ -25,7 +25,7 @@ final class ProgramBalanceViewModel {
 
     var dateFrom: Date?
     var dateTo: Date?
-    var maxPointCount: Int = Api.maxPoint
+    var maxPointCount: Int = ApiKeys.maxPoint
     
     private var programBalanceChart: ProgramBalanceChart?
     
@@ -79,7 +79,7 @@ extension ProgramBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> ProgramBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> ProgramBalanceChartTableViewCellViewModel? {
         guard let programBalanceChart = programBalanceChart else { return nil }
         
         let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)

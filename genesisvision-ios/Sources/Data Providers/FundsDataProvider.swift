@@ -34,7 +34,7 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func getSets(completion: @escaping (_ programSets: ProgramSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getSets(completion: @escaping (_ programSets: FundSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -81,13 +81,13 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func invest(withAmount amount: Double, fundId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func invest(withAmount amount: Double, fundId: String?, currency: InvestorAPI.Currency_v10InvestorFundsByIdInvestByAmountPost? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let fundId = fundId,
             let uuid = UUID(uuidString: fundId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorFundsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization, currency: currency) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

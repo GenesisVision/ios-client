@@ -16,7 +16,6 @@ struct FundTableViewCellViewModel {
 
 extension FundTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
-        cell.fundBottomStackView.isHidden = false
         setupFundBottomView(on: cell)
         
         cell.chartView.isHidden = true
@@ -54,7 +53,7 @@ extension FundTableViewCellViewModel: CellViewModel {
         
         cell.firstTitleLabel.text = "Balance"
         if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.firstValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
+            cell.firstValueLabel.text = amount.rounded(withType: currency, short: true).toString() + " " + currency.rawValue
         } else {
             cell.firstValueLabel.text = ""
         }

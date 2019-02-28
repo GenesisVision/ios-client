@@ -13,15 +13,16 @@ open class PlatformInfo: Codable {
 
     public var iOSVersion: IOsAppVersion?
     public var androidVersion: AndroidAppVersion?
-    public var programsFacets: [Facet]?
-    public var fundsFacets: [Facet]?
+    public var programsFacets: [ProgramFacet]?
+    public var fundsFacets: [FundFacet]?
     public var programsInfo: ProgramsInfo?
     public var currencies: [String]?
     public var platformCurrencies: [PlatformCurrency]?
+    public var enums: Enums?
 
 
     
-    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [Facet]?, fundsFacets: [Facet]?, programsInfo: ProgramsInfo?, currencies: [String]?, platformCurrencies: [PlatformCurrency]?) {
+    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [ProgramFacet]?, fundsFacets: [FundFacet]?, programsInfo: ProgramsInfo?, currencies: [String]?, platformCurrencies: [PlatformCurrency]?, enums: Enums?) {
         self.iOSVersion = iOSVersion
         self.androidVersion = androidVersion
         self.programsFacets = programsFacets
@@ -29,6 +30,7 @@ open class PlatformInfo: Codable {
         self.programsInfo = programsInfo
         self.currencies = currencies
         self.platformCurrencies = platformCurrencies
+        self.enums = enums
     }
     
 
@@ -45,6 +47,7 @@ open class PlatformInfo: Codable {
         try container.encodeIfPresent(programsInfo, forKey: "programsInfo")
         try container.encodeIfPresent(currencies, forKey: "currencies")
         try container.encodeIfPresent(platformCurrencies, forKey: "platformCurrencies")
+        try container.encodeIfPresent(enums, forKey: "enums")
     }
 
     // Decodable protocol methods
@@ -54,11 +57,12 @@ open class PlatformInfo: Codable {
 
         iOSVersion = try container.decodeIfPresent(IOsAppVersion.self, forKey: "iOSVersion")
         androidVersion = try container.decodeIfPresent(AndroidAppVersion.self, forKey: "androidVersion")
-        programsFacets = try container.decodeIfPresent([Facet].self, forKey: "programsFacets")
-        fundsFacets = try container.decodeIfPresent([Facet].self, forKey: "fundsFacets")
+        programsFacets = try container.decodeIfPresent([ProgramFacet].self, forKey: "programsFacets")
+        fundsFacets = try container.decodeIfPresent([FundFacet].self, forKey: "fundsFacets")
         programsInfo = try container.decodeIfPresent(ProgramsInfo.self, forKey: "programsInfo")
         currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
         platformCurrencies = try container.decodeIfPresent([PlatformCurrency].self, forKey: "platformCurrencies")
+        enums = try container.decodeIfPresent(Enums.self, forKey: "enums")
     }
 }
 

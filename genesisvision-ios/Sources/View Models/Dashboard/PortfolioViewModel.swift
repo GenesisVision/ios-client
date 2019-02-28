@@ -39,7 +39,7 @@ final class PortfolioViewModel {
     weak var reloadDataProtocol: ReloadDataProtocol?
     var dashboardChartValue: DashboardChartValue?
     var programRequests: ProgramRequests?
-    
+
     private var router: DashboardRouter!
     
     // MARK: - Init
@@ -80,6 +80,14 @@ final class PortfolioViewModel {
         if let assetId = selectedModel.assetsValue?.id?.uuidString, let type = selectedModel.assetsValue?.type, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
         }
+    }
+    
+    func getDashboardVC() -> DashboardViewController {
+        return router.dashboardViewController
+    }
+    
+    func getTabBar() -> BaseTabBarController? {
+        return router.rootTabBarController
     }
     
     func didHighlightRow(at indexPath: IndexPath) -> Bool {

@@ -15,7 +15,7 @@ class FundInvestViewController: BaseViewController {
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
     
-    @IBOutlet var numpadView: NumpadView! {
+    @IBOutlet weak var numpadView: NumpadView! {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
@@ -24,87 +24,93 @@ class FundInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet var availableToInvestTitleLabel: TitleLabel! {
+    @IBOutlet weak var selectedWalletFromTitleLabel: SubtitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Available to invest"
-            availableToInvestTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            selectedWalletFromTitleLabel.text = "From"
         }
     }
-    @IBOutlet var availableToInvestValueLabel: TitleLabel! {
+    @IBOutlet weak var selectedWalletFromButton: UIButton!
+    @IBOutlet weak var selectedWalletFromValueLabel: TitleLabel! {
         didSet {
-            availableToInvestValueLabel.textColor = UIColor.primary
-            availableToInvestValueLabel.font = UIFont.getFont(.regular, size: 14.0)
+            selectedWalletFromValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToInvestTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var availableInWalletTitleLabel: SubtitleLabel! {
+        didSet {
+            availableInWalletTitleLabel.text = "Available in wallet"
+        }
+    }
+    @IBOutlet weak var availableInWalletValueLabel: TitleLabel!
+    
+    @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel! {
         didSet {
             amountToInvestTitleLabel.text = "Amount to invest"
         }
     }
-    @IBOutlet var amountToInvestValueLabel: TitleLabel! {
+    @IBOutlet weak var amountToInvestValueLabel: TitleLabel! {
         didSet {
             amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToInvestGVTLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
-            amountToInvestGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
-        }
-    }
-    @IBOutlet var amountToInvestCurrencyLabel: SubtitleLabel! {
-        didSet {
-            amountToInvestCurrencyLabel.textColor = UIColor.Cell.title
+            amountToInvestCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton! {
+    @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
         }
     }
     
-    @IBOutlet var entryFeeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel! {
         didSet {
             entryFeeTitleLabel.text = "Entry fee"
             entryFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var entryFeeValueLabel: TitleLabel!
+    @IBOutlet weak var entryFeeValueLabel: TitleLabel!
     
-    @IBOutlet var gvCommissionTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var gvCommissionTitleLabel: SubtitleLabel! {
         didSet {
             gvCommissionTitleLabel.text = "GV commission"
             gvCommissionTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var gvCommissionValueLabel: TitleLabel!
+    @IBOutlet weak var gvCommissionValueLabel: TitleLabel!
     
-    @IBOutlet var investmentAmountTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var investmentAmountTitleLabel: SubtitleLabel! {
         didSet {
             investmentAmountTitleLabel.text = "Investment amount"
             investmentAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var investmentAmountValueLabel: TitleLabel! {
+    @IBOutlet weak var investmentAmountValueLabel: TitleLabel! {
         didSet {
-            investmentAmountValueLabel.text = "0 GVT"
+            if let currency = viewModel.selectedWalletFrom?.currency {
+                investmentAmountValueLabel.text = "0 " + currency.rawValue
+            }
         }
     }
+    @IBOutlet weak var investmentAmountCurrencyLabel: SubtitleLabel!
 
     // MARK: - Buttons
-    @IBOutlet var investButton: ActionButton!
+    @IBOutlet weak var investButton: ActionButton!
     
     // MARK: - Variables
-    var availableToInvestValue: Double = 0.0 {
-        didSet {
-            self.availableToInvestValueLabel.text = availableToInvestValue.toString() + " " + Constants.gvtString
-        }
-    }
-    
     var amountToInvestValue: Double = 0.0 {
         didSet {
             updateUI()
+        }
+    }
+    
+    var availableInWalletFromValue: Double = 0.0 {
+        didSet {
+            if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+                self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            }
         }
     }
     
@@ -137,53 +143,51 @@ class FundInvestViewController: BaseViewController {
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
-        }) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
+        })
     }
     
     private func updateUI() {
-        let minInvestmentAmount = viewModel.fundInvestInfo?.minInvestmentAmount
+        guard let fundCurrency = viewModel.fundCurrency else { return }
         
-        if let minInvestmentAmount = minInvestmentAmount {
-            amountToInvestTitleLabel.text = "Amount to invest (min " + minInvestmentAmount.rounded(withType: .gvt).toString() + " \(Constants.gvtString))"
+        //wallet
+        self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
+        self.availableInWalletFromValue = viewModel.getAvailableInWallet()
+        
+        //investment
+        if let walletCurrency = viewModel.selectedWalletFrom?.currency?.rawValue {
+            self.amountToInvestCurrencyLabel.text = walletCurrency
         }
         
-        if let entryFee = viewModel.fundInvestInfo?.entryFee, let gvCommission = viewModel.fundInvestInfo?.gvCommission {
-            let entryFeeGVT = entryFee * amountToInvestValue / 100
-            let entryFeeGVTString = entryFeeGVT.rounded(withType: .gvt).toString()
-            let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
-            
-            let entryFeeValueLabelString = entryFeeString + "% (\(entryFeeGVTString) \(Constants.gvtString))"
-            self.entryFeeValueLabel.text = entryFeeValueLabelString
-
-            let gvCommissionGVT = gvCommission * amountToInvestValue / 100
-            let gvCommissionGVTString = gvCommissionGVT.rounded(withType: .gvt).toString()
-            let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
-            
-            let gvCommissionValueLabelString = gvCommissionString + "% (\(gvCommissionGVTString) \(Constants.gvtString))"
-            self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-            let investmentAmountValue = (amountToInvestValue - entryFeeGVT - gvCommissionGVT).rounded(withType: .gvt).toString()
-            self.investmentAmountValueLabel.text = investmentAmountValue + " " + Constants.gvtString
+        if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, fundCurrency.rawValue != currency {
+            self.investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
+        } else {
+            self.investmentAmountCurrencyLabel.text = ""
         }
         
-        if let availableToInvest = viewModel.fundInvestInfo?.availableInWallet {
-            self.availableToInvestValue = availableToInvest
-        }
+        self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
         
-        if let rate = viewModel.fundInvestInfo?.rate {
-            let selectedCurrency = getSelectedCurrency()
-            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToInvestValueCurrencyString = (amountToInvestValue * rate).rounded(withType: currency).toString()
-            self.amountToInvestCurrencyLabel.text = "= " + amountToInvestValueCurrencyString + " " + selectedCurrency
-        }
+        let rate = viewModel.rate
+        let entryFee = viewModel.getEntryFee()
+        let gvCommission = viewModel.getGVCommision()
         
-        let investButtonEnabled = amountToInvestValue >= minInvestmentAmount ?? 0 && amountToInvestValue <= availableToInvestValue
+        let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
+        let entryFeeCurrencyString = entryFeeCurrency.rounded(withType: fundCurrency).toString()
+        let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
+        
+        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(fundCurrency.rawValue))"
+        self.entryFeeValueLabel.text = entryFeeValueLabelString
+        
+        let gvCommissionCurrency = gvCommission * amountToInvestValue * rate / 100
+        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: fundCurrency).toString()
+        let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
+        
+        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(fundCurrency.rawValue))"
+        self.gvCommissionValueLabel.text = gvCommissionValueLabelString
+        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency).rounded(withType: fundCurrency).toString()
+        self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + fundCurrency.rawValue
+        
+        let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+        
         investButton.setEnabled(investButtonEnabled)
     }
     
@@ -192,7 +196,9 @@ class FundInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        guard amountToInvestValue > 0 else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        let rate = viewModel.rate
+        let minInvestmentAmount = viewModel.getMinInvestmentAmount()
+        guard amountToInvestValue * rate >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
         viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
@@ -216,10 +222,12 @@ class FundInvestViewController: BaseViewController {
         bottomSheetController.initializeHeight = 480.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
-
+        
+        guard let currency = viewModel.selectedWalletFrom?.currency else { return }
+        
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {
-             firstValue = amount + " GVT"
+            firstValue = amount + " " + currency.rawValue
         }
 
         let subtitle = "Your request will be processed within a few minutes."
@@ -243,21 +251,55 @@ class FundInvestViewController: BaseViewController {
         bottomSheetController.present()
     }
     
+    @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        
+        var selectedIndexRow = viewModel.selectedWalletFromCurrencyIndex
+        let values = viewModel.walletCurrencyValues()
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            selectedIndexRow = index.row
+            self?.showProgressHUD()
+            self?.viewModel.updateWalletCurrencyFromIndex(selectedIndexRow, completion: { (result) in
+                self?.hideAll()
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.updateUI()
+                    }
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            })
+        }
+        
+        alert.addAction(title: "Ok", style: .cancel)
+        
+        alert.show()
+    }
+    
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
         showConfirmVC()
     }
     
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
-        amountToInvestValueLabel.text = availableToInvestValue.toString(withoutFormatter: true)
-        amountToInvestValue = availableToInvestValue
+        if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            
+            amountToInvestValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString(withoutFormatter: true)
+            amountToInvestValue = availableInWalletFromValue
+        }
     }
-    
 }
 
 extension FundInvestViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return availableToInvestValue
+        return viewModel.getMaxAmount()
     }
 
     var textPlaceholder: String? {
@@ -269,7 +311,7 @@ extension FundInvestViewController: NumpadViewProtocol {
     }
     
     var currency: CurrencyType? {
-        return .gvt
+        return viewModel.fundCurrency
     }
     
     func changedActive(value: Bool) {
@@ -280,12 +322,8 @@ extension FundInvestViewController: NumpadViewProtocol {
         return self.amountToInvestValueLabel
     }
     
-    var enteredAmountValue: Double {
-        return amountToInvestValue
-    }
-    
     func textLabelDidChange(value: Double?) {
-        guard let value = value, value <= availableToInvestValue else { return }
+        guard let value = value else { return }
         
         numpadView.isEnable = true
         amountToInvestValue = value

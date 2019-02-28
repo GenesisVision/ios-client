@@ -12,42 +12,47 @@ class FundWithdrawViewController: BaseViewController {
 
     var viewModel: FundWithdrawViewModel!
     
+    @IBOutlet weak var mainStackView: UIStackView! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_4_4S, .iPhones_5_5s_5c_SE:
+                mainStackView.spacing = 8.0
+            default:
+                mainStackView.spacing = 32.0
+            }
+        }
+    }
+    
     // MARK: - Labels
-    @IBOutlet var availableToWithdrawValueTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueTitleLabel: SubtitleLabel! {
         didSet {
             availableToWithdrawValueTitleLabel.text = "Current invested value"
-            availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var availableToWithdrawValueLabel: TitleLabel! {
-        didSet {
-            availableToWithdrawValueLabel.textColor = UIColor.primary
-            availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
-        }
-    }
-    @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel!
+    @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Amount to withdraw"
         }
     }
-    @IBOutlet var amountToWithdrawValueLabel: TitleLabel! {
+    @IBOutlet weak var amountToWithdrawValueLabel: TitleLabel! {
         didSet {
             amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToWithdrawGVTLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawGVTLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawGVTLabel.text = "%"
             amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToWithdrawCurrencyLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawCurrencyLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton! {
+    @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
             copyMaxValueButton.isHidden = true
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
@@ -55,42 +60,42 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var exitFeeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var exitFeeTitleLabel: SubtitleLabel! {
         didSet {
             exitFeeTitleLabel.text = "Exit fee"
             exitFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var exitFeeValueLabel: TitleLabel!
+    @IBOutlet weak var exitFeeValueLabel: TitleLabel!
     
-    @IBOutlet var withdrawingAmountTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var withdrawingAmountTitleLabel: SubtitleLabel! {
         didSet {
             withdrawingAmountTitleLabel.text = "You will get approx."
             withdrawingAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var withdrawingAmountValueLabel: TitleLabel! {
+    @IBOutlet weak var withdrawingAmountValueLabel: TitleLabel! {
         didSet {
             withdrawingAmountValueLabel.text = "0 GVT"
         }
     }
     
-    @IBOutlet var disclaimerLabel: SubtitleLabel! {
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.text = "The withdrawal amount can be changed depending on the exchange rate or the success of the Manager."
             
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
-            disclaimerLabel.textAlignment = .center
+            disclaimerLabel.textAlignment = .justified
         }
     }
     
     // MARK: - Buttons
-    @IBOutlet var withdrawButton: ActionButton!
+    @IBOutlet weak var withdrawButton: ActionButton!
     
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
     
-    @IBOutlet var numpadView: NumpadView! {
+    @IBOutlet weak var numpadView: NumpadView! {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
@@ -156,15 +161,15 @@ class FundWithdrawViewController: BaseViewController {
             let exitFeeGVT = exitFee * withdrawingValue / 100
             let exitFeeGVTString = exitFeeGVT.rounded(withType: .gvt).toString()
             
-            let exitFeeValueLabelString = exitFeeString + "% (≈ \(exitFeeGVTString) " + Constants.gvtString + ")"
+            let exitFeeValueLabelString = exitFeeString + "% (≈\(exitFeeGVTString) " + Constants.gvtString + ")"
             self.exitFeeValueLabel.text = exitFeeValueLabelString
             
             let withdrawingAmountValue = (withdrawingValue - exitFeeGVT).rounded(withType: .gvt).toString()
-            self.withdrawingAmountValueLabel.text = "≈ " + withdrawingAmountValue + " " + Constants.gvtString
+            self.withdrawingAmountValueLabel.text = "≈" + withdrawingAmountValue + " " + Constants.gvtString
         }
         
         let amountToWithdrawValueCurrencyString = (withdrawingValue).rounded(withType: .gvt).toString()
-        self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
+        self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0 && amountToWithdrawValue <= 100
         

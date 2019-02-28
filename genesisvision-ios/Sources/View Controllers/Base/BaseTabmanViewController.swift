@@ -46,8 +46,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController, Tabman
             
             appearance.state.selectedColor = UIColor.Cell.title
             appearance.state.color = UIColor.Cell.subtitle
-            appearance.state.shouldHideWhenSingleItem = viewModel.shouldHideWhenSingleItem
-            
+
             appearance.style.imageRenderingMode = .alwaysTemplate
             appearance.style.showEdgeFade = false
             appearance.style.background = .solid(color: viewModel.backgroundColor)

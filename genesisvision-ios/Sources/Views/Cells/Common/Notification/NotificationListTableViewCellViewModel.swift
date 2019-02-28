@@ -33,7 +33,7 @@ extension NotificationListTableViewCellViewModel: CellViewModel {
         }
         
         if let date = notification.date {
-            cell.dateLabel.text = date.defaultFormatString
+            cell.dateLabel.text = date.onlyTimeFormatString
         }
     }
 }

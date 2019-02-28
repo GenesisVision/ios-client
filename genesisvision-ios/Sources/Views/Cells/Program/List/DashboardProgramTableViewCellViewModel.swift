@@ -13,7 +13,7 @@ struct DashboardProgramTableViewCellViewModel {
     let program: ProgramDetails
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
-    weak var reinvestProtocol: ReinvestProtocol?
+    weak var reinvestProtocol: SwitchProtocol?
 }
 
 extension DashboardProgramTableViewCellViewModel: CellViewModel {
@@ -83,7 +83,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         cell.secondTitleLabel.text = "current value"
         if let value = program.personalDetails?.value {
             let currency: CurrencyType = .gvt
-            cell.secondValueLabel.text = value.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
+            cell.secondValueLabel.text = value.rounded(withType: currency, short: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }

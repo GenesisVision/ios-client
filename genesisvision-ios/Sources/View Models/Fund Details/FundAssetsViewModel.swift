@@ -20,7 +20,7 @@ final class FundAssetsViewModel {
     var dataType: DataType = .api
     var assetsCount: String = ""
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     
     var totalCount = 0 {
         didSet {
@@ -88,8 +88,8 @@ extension FundAssetsViewModel {
             }, completionError: completion)
     }
     
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
@@ -127,8 +127,8 @@ extension FundAssetsViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> FundAssetTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> FundAssetTableViewCellViewModel? {
+        return viewModels[indexPath.row]
     }
     
     // MARK: - Private methods

@@ -24,11 +24,21 @@ class ProgramTabmanRouter: TabmanRouter {
         return viewController
     }
     
-    func getTrades(with programId: String) -> ProgramTradesViewController? {
+    func getTrades(with programId: String, currencyType: CurrencyType) -> ProgramTradesViewController? {
         guard let router = self.parentRouter as? ProgramRouter else { return nil }
         
         let viewController = ProgramTradesViewController()
-        let viewModel = ProgramTradesViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController)
+        let viewModel = ProgramTradesViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController, currencyType: currencyType)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getTradesOpen(with programId: String, currencyType: CurrencyType) -> ProgramTradesViewController? {
+        guard let router = self.parentRouter as? ProgramRouter else { return nil }
+        
+        let viewController = ProgramTradesViewController()
+        let viewModel = ProgramTradesViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController, isOpenTrades: true, currencyType: currencyType)
         viewController.viewModel = viewModel
         
         return viewController

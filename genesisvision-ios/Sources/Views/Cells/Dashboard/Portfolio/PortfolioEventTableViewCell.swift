@@ -11,21 +11,21 @@ import UIKit
 class PortfolioEventTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
         }
     }
     
-    @IBOutlet var typeImageView: UIImageView! {
+    @IBOutlet weak var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }
     }
     
-    @IBOutlet var titleLabel: TitleLabel!
-    @IBOutlet var dateLabel: SubtitleLabel!
-    @IBOutlet var amountLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var dateLabel: SubtitleLabel!
+    @IBOutlet weak var amountLabel: TitleLabel! {
         didSet {
             amountLabel.font = UIFont.getFont(.semibold, size: 12.0)
         }

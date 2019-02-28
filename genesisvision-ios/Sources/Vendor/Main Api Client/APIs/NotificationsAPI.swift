@@ -12,6 +12,47 @@ import Alamofire
 
 open class NotificationsAPI {
     /**
+     Read notification
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10NotificationsByIdReadPost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10NotificationsByIdReadPostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Read notification
+     - POST /v1.0/notifications/{id}/read
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10NotificationsByIdReadPostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v1.0/notifications/{id}/read"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      User notifications
      
      - parameter authorization: (header) JWT access token 
@@ -271,6 +312,7 @@ open class NotificationsAPI {
      User settings for fund
      - GET /v1.0/notifications/settings/funds/{id}
      - examples: [{contentType=application/json, example={
+  "color" : "color",
   "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",
   "settingsGeneral" : [ {
@@ -335,6 +377,7 @@ open class NotificationsAPI {
      - GET /v1.0/notifications/settings
      - examples: [{contentType=application/json, example={
   "settingsProgram" : [ {
+    "color" : "color",
     "level" : 6,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -375,6 +418,7 @@ open class NotificationsAPI {
       "type" : "PlatformNewsAndUpdates"
     } ]
   }, {
+    "color" : "color",
     "level" : 6,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -480,6 +524,7 @@ open class NotificationsAPI {
     "type" : "PlatformNewsAndUpdates"
   } ],
   "settingsFund" : [ {
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
@@ -502,6 +547,7 @@ open class NotificationsAPI {
     "title" : "title",
     "url" : "url"
   }, {
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "settingsGeneral" : [ {
@@ -630,6 +676,7 @@ open class NotificationsAPI {
      User settings for program
      - GET /v1.0/notifications/settings/programs/{id}
      - examples: [{contentType=application/json, example={
+  "color" : "color",
   "level" : 6,
   "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "logo" : "logo",

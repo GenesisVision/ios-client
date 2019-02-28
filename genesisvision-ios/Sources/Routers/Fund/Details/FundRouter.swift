@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum FundRouteType {
-    case notifications
+    case notificationSettings(assetId: String, title: String)
 }
 
 class FundRouter: Router {
@@ -31,9 +31,8 @@ class FundRouter: Router {
     // MARK: - Public methods
     func show(routeType: FundRouteType) {
         switch routeType {
-        case .notifications:
-            let vc = BaseViewController()
-            navigationController?.pushViewController(vc, animated: true)
+        case .notificationSettings(let assetId, let title):
+            showAssetNotificationsSettings(assetId, title: title, type: .fund)
         }
     }
 }

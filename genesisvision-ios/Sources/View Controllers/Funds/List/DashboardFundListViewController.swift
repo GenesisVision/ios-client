@@ -145,7 +145,7 @@ extension DashboardFundListViewController: FavoriteStateChangeProtocol {
 
 extension DashboardFundListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -41,7 +41,32 @@ class Router {
     //for authorized user
     weak var rootTabBarController: BaseTabBarController?
     
-    weak var navigationController: UINavigationController?
+    weak var navController: UINavigationController?
+        
+    weak var navigationController: UINavigationController? {
+        guard let rootTabBarController = rootTabBarController else {
+            guard let navController = navController else {
+                let window = UIApplication.shared.windows[0] as UIWindow
+                if let vc = window.rootViewController {
+                    if vc is UINavigationController {
+                        return vc as? UINavigationController
+                    }
+                    
+                    return BaseNavigationController(rootViewController: vc)
+                }
+                
+                return BaseNavigationController()
+            }
+
+            return navController
+        }
+        
+        guard let navigationController = rootTabBarController.selectedViewController as? UINavigationController else {
+            return BaseNavigationController()
+        }
+        
+        return navigationController
+    }
     
     var tabBarControllers: [UIViewController] {
         var viewControllers: [UIViewController] = []
@@ -68,8 +93,11 @@ class Router {
         self.investorDashboardViewController = parentRouter?.investorDashboardViewController
         self.managerDashboardViewController = parentRouter?.managerDashboardViewController
         
-        self.navigationController = navigationController != nil ? navigationController : parentRouter?.navigationController
         self.rootTabBarController = parentRouter?.rootTabBarController
+        
+        if rootTabBarController == nil {
+            self.navController = navigationController != nil ? navigationController : parentRouter?.navigationController
+        }
         
         self.currentController = topViewController()
     }
@@ -117,10 +145,11 @@ class Router {
     }
     
     private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        guard let walletViewController = WalletViewController.storyboardInstance(.wallet) else { return }
+        let walletViewController = WalletViewController()
         navigationController = BaseNavigationController(rootViewController: walletViewController)
         let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        walletViewController.viewModel = WalletControllerViewModel(withRouter: router)
+        router.walletTabmanViewController = walletViewController
+        walletViewController.viewModel = WalletTabmanViewModel(withRouter: router)
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }
@@ -202,26 +231,47 @@ extension Router {
    
     func startAsForceSignOut() {
         guard let navigationController = getAssetsNavigationController() else { return }
+        navController = navigationController
         setWindowRoot(viewController: navigationController)
         signInAction(navigationController)
     }
     
     func startAsUnauthorized() {
         guard let navigationController = getAssetsNavigationController() else { return }
+        navController = navigationController
         setWindowRoot(viewController: navigationController)
     }
     
     func startAsAuthorized() {
         let tabBarController = BaseTabBarController()
-        tabBarController.viewControllers = tabBarControllers
-    
         rootTabBarController = tabBarController
+        
+        tabBarController.viewControllers = tabBarControllers
+        tabBarController.router = self
         
         setWindowRoot(viewController: rootTabBarController)
     }
     
     func showTwoFactorEnable() {
         guard let viewController = getTwoFactorEnableViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showNotificationsSettings() {
+        guard let viewController = getNotificationsSettingsViewController() else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showCreateNotification(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) {
+        guard let viewController = getCreateNotificationViewController(assetId, reloadDataProtocol: reloadDataProtocol) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showAssetNotificationsSettings(_ assetId: String?, title: String, type: NotificationSettingsType) {
+        guard let viewController = getAssetNotificationsSettingsViewController(assetId, title: title, type: type) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -312,8 +362,14 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showAboutFees() {
+        guard let viewController = AboutFeesViewController.storyboardInstance(.wallet) else { return }
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showNotificationList() {
-        guard let viewController = NotificationListViewController.storyboardInstance(.dashboard) else { return }
+        guard let viewController = NotificationListViewController.storyboardInstance(.notifications) else { return }
         
         let router = NotificationListRouter(parentRouter: self)
         viewController.viewModel = NotificationListViewModel(withRouter: router, reloadDataProtocol: viewController)
@@ -396,6 +452,39 @@ extension Router {
         tabmanViewController.hidesBottomBarWhenPushed = true
         
         return tabmanViewController
+    }
+    
+    func getNotificationsSettingsViewController() -> NotificationsSettingsViewController? {
+        guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: .all)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
+    func getCreateNotificationViewController(_ assetId: String?, reloadDataProtocol: ReloadDataProtocol?) -> CreateNotificationViewController? {
+        guard let viewController = CreateNotificationViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = CreateNotificationViewModel(withRouter: router, reloadDataProtocol: reloadDataProtocol, assetId: assetId)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
+    }
+    
+    func getAssetNotificationsSettingsViewController(_ assetId: String?, title: String, type: NotificationSettingsType) -> NotificationsSettingsViewController? {
+        guard let viewController = NotificationsSettingsViewController.storyboardInstance(.notifications) else { return nil }
+        
+        let router = Router(parentRouter: self, navigationController: navigationController)
+        router.currentController = viewController
+        viewController.viewModel = NotificationsSettingsViewModel(withRouter: router, reloadDataProtocol: viewController, type: type, assetId: assetId, title: title)
+        viewController.hidesBottomBarWhenPushed = true
+        
+        return viewController
     }
     
     func getTwoFactorDisableViewController() -> AuthTwoFactorConfirmationViewController? {

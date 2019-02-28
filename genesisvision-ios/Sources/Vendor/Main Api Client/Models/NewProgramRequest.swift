@@ -32,24 +32,34 @@ open class NewProgramRequest: Codable {
     public var stopOutLevel: Double?
     public var leverage: Int?
     public var brokerAccountTypeId: UUID?
+    public var signalSuccessFee: Double?
+    public var signalSubscriptionFee: Double?
+    public var isSignalProgram: Bool?
     public var title: String?
     public var description: String?
     public var logo: String?
     public var entryFee: Double?
+    public var depositAmount: Double?
+    public var depositWalletId: UUID?
 
 
     
-    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, title: String?, description: String?, logo: String?, entryFee: Double?) {
+    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, signalSuccessFee: Double?, signalSubscriptionFee: Double?, isSignalProgram: Bool?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
         self.currency = currency
         self.periodLength = periodLength
         self.successFee = successFee
         self.stopOutLevel = stopOutLevel
         self.leverage = leverage
         self.brokerAccountTypeId = brokerAccountTypeId
+        self.signalSuccessFee = signalSuccessFee
+        self.signalSubscriptionFee = signalSubscriptionFee
+        self.isSignalProgram = isSignalProgram
         self.title = title
         self.description = description
         self.logo = logo
         self.entryFee = entryFee
+        self.depositAmount = depositAmount
+        self.depositWalletId = depositWalletId
     }
     
 
@@ -65,10 +75,15 @@ open class NewProgramRequest: Codable {
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(leverage, forKey: "leverage")
         try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
+        try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
+        try container.encodeIfPresent(signalSubscriptionFee, forKey: "signalSubscriptionFee")
+        try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
+        try container.encodeIfPresent(depositWalletId, forKey: "depositWalletId")
     }
 
     // Decodable protocol methods
@@ -82,10 +97,15 @@ open class NewProgramRequest: Codable {
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         leverage = try container.decodeIfPresent(Int.self, forKey: "leverage")
         brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
+        signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
+        signalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "signalSubscriptionFee")
+        isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")
+        depositWalletId = try container.decodeIfPresent(UUID.self, forKey: "depositWalletId")
     }
 }
 

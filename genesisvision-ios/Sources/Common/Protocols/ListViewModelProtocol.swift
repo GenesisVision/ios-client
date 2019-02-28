@@ -9,37 +9,36 @@
 import UIKit.UITableViewHeaderFooterView
 
 protocol ListViewModelProtocolWithFacets {
-    var facets: [Facet]? { get }
-    
+    var assetType: AssetType { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
-    
+
     func didSelectFacet(at: IndexPath)
     func numberOfItems(in section: Int) -> Int
-    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel?
 }
 
-final class FacetsViewModel: ListViewModelProtocolWithFacets {
-    var facets: [Facet]?
+final class ProgramFacetsViewModel: ListViewModelProtocolWithFacets {
+    var programFacets: [ProgramFacet]?
+    
     var router: ListRouterProtocol!
-    var facetsDelegateManager: FacetsDelegateManager!
+    var facetsDelegateManager: ProgramFacetsDelegateManager!
     
     var assetType: AssetType = .program
     
-    init(withRouter router: ListRouterProtocol, facets: [Facet]?, assetType: AssetType) {
+    init(withRouter router: ListRouterProtocol, facets: [ProgramFacet]?, assetType: AssetType) {
         self.router = router
-        self.facets = facets
+        self.programFacets = facets
         self.assetType = assetType
         
-        facetsDelegateManager = FacetsDelegateManager(with: self)
+        facetsDelegateManager = ProgramFacetsDelegateManager(with: self)
     }
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FacetCollectionViewCellViewModel.self]
+        return [ProgramFacetCollectionViewCellViewModel.self]
     }
     
     func didSelectFacet(at indexPath: IndexPath) {
-        guard let facets = facets, !facets.isEmpty else {
+        guard let facets = programFacets, !facets.isEmpty else {
             return
         }
         
@@ -66,14 +65,75 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
     }
     
     func numberOfItems(in section: Int) -> Int {
-        return facets?.count ?? 0
+        return programFacets?.count ?? 0
     }
     
-    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
-        let facet = facets?[indexPath.row]
+    func model(at indexPath: IndexPath) -> ProgramFacetCollectionViewCellViewModel? {
+        let facet = programFacets?[indexPath.row]
 
         let isFavoriteFacet = facet?.id == nil
-        let model = FacetCollectionViewCellViewModel(facet: facet, isFavoriteFacet: isFavoriteFacet)
+        let model = ProgramFacetCollectionViewCellViewModel(facet: facet, isFavoriteFacet: isFavoriteFacet)
+        return model
+    }
+}
+
+final class FundFacetsViewModel: ListViewModelProtocolWithFacets {
+    var fundFacets: [FundFacet]?
+    
+    var router: ListRouterProtocol!
+    var facetsDelegateManager: FundFacetsDelegateManager!
+    
+    var assetType: AssetType = .fund
+    
+    init(withRouter router: ListRouterProtocol, facets: [FundFacet]? = nil, assetType: AssetType) {
+        self.router = router
+        self.fundFacets = facets
+        self.assetType = assetType
+        
+        facetsDelegateManager = FundFacetsDelegateManager(with: self)
+    }
+    
+    /// Return view models for registration cell Nib files
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FundFacetCollectionViewCellViewModel.self]
+    }
+    
+    func didSelectFacet(at indexPath: IndexPath) {
+        guard let facets = fundFacets, !facets.isEmpty else {
+            return
+        }
+        
+        let facet = facets[indexPath.row]
+        
+        let filterModel = FilterModel()
+        
+        if let facetTitle = facet.title {
+            filterModel.facetTitle = facetTitle
+        }
+        
+        if let uuid = facet.id?.uuidString {
+            filterModel.facetId = uuid
+        }
+        
+        filterModel.isFavorite = filterModel.facetTitle == "Favorites"
+        let sortType = facet.sortType
+        
+        if sortType != nil, sortType == .toLevelUp {
+            router.show(routeType: .showRatingList(filterModel: filterModel))
+        } else {
+            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+        }
+    }
+    
+    func numberOfItems(in section: Int) -> Int {
+        return fundFacets?.count ?? 0
+    }
+    
+    func model(at indexPath: IndexPath) -> FundFacetCollectionViewCellViewModel? {
+        let facet = fundFacets?[indexPath.row]
+        
+        let isFavoriteFacet = facet?.id == nil
+        let model = FundFacetCollectionViewCellViewModel(facet: facet, isFavoriteFacet: isFavoriteFacet)
         return model
     }
 }
@@ -115,7 +175,7 @@ protocol ListViewModelProtocol {
     func showDetail(with assetId: String)
     func showDetail(at indexPath: IndexPath)
     
-    func fetchMore(at row: Int) -> Bool
+    func fetchMore(at indexPath: IndexPath) -> Bool
     func fetchMore()
     
     func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController?
@@ -330,8 +390,8 @@ extension ListViewModelProtocol {
     }
     
     // MARK: - Fetch
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

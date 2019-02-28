@@ -12,6 +12,72 @@ import Alamofire
 
 open class WalletAPI {
     /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10WalletAddressesByCurrencyGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletAddressesByCurrencyGet(currency: Currency_v10WalletAddressesByCurrencyGet, authorization: String, completion: @escaping ((_ data: WalletInfo?,_ error: Error?) -> Void)) {
+        v10WalletAddressesByCurrencyGetWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     - GET /v1.0/wallet/addresses/{currency}
+     - examples: [{contentType=application/json, example={
+  "rateToGVT" : 0.8008281904610115,
+  "address" : "address",
+  "description" : "description",
+  "logo" : "logo",
+  "currency" : "Undefined",
+  "isDepositEnabled" : true
+}}]
+     
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<WalletInfo> 
+     */
+    open class func v10WalletAddressesByCurrencyGetWithRequestBuilder(currency: Currency_v10WalletAddressesByCurrencyGet, authorization: String) -> RequestBuilder<WalletInfo> {
+        var path = "/v1.0/wallet/addresses/{currency}"
+        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
 
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -31,13 +97,15 @@ open class WalletAPI {
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined"
+    "currency" : "Undefined",
+    "isDepositEnabled" : true
   }, {
     "rateToGVT" : 0.8008281904610115,
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined"
+    "currency" : "Undefined",
+    "isDepositEnabled" : true
   } ]
 }}]
      
@@ -131,6 +199,550 @@ open class WalletAPI {
     }
 
     /**
+     GenesisMarkets commission data
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletFeeGvtholdingGet(authorization: String, completion: @escaping ((_ data: UserCommissionData?,_ error: Error?) -> Void)) {
+        v10WalletFeeGvtholdingGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     GenesisMarkets commission data
+     - GET /v1.0/wallet/fee/gvtholding
+     - examples: [{contentType=application/json, example={
+  "regularTradingFee" : 1.4658129805029452,
+  "regularDiscount" : 5.962133916683182,
+  "gvtHolderDiscount" : 6.027456183070403,
+  "isPayingCommissionInGvt" : true,
+  "gvtHolderTradingFee" : 0.8008281904610115
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<UserCommissionData> 
+     */
+    open class func v10WalletFeeGvtholdingGetWithRequestBuilder(authorization: String) -> RequestBuilder<UserCommissionData> {
+        let path = "/v1.0/wallet/fee/gvtholding"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<UserCommissionData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10WalletMultiByCurrencyGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Multi wallet summary
+     
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletMultiByCurrencyGet(currency: Currency_v10WalletMultiByCurrencyGet, authorization: String, completion: @escaping ((_ data: WalletMultiSummary?,_ error: Error?) -> Void)) {
+        v10WalletMultiByCurrencyGetWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Multi wallet summary
+     - GET /v1.0/wallet/multi/{currency}
+     - examples: [{contentType=application/json, example={
+  "grandTotal" : {
+    "total" : 5.962133916683182,
+    "totalCcy" : 9.301444243932576,
+    "availableCcy" : 5.637376656633329,
+    "pending" : 1.4658129805029452,
+    "available" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "invested" : 6.027456183070403,
+    "currencyCcy" : "Undefined",
+    "pendingCcy" : 7.061401241503109,
+    "investedCcy" : 2.3021358869347655
+  },
+  "payFeesWithGvt" : true,
+  "wallets" : [ {
+    "rateToGVT" : 3.616076749251911,
+    "totalCcy" : 1.1730742509559433,
+    "availableCcy" : 1.4894159098541704,
+    "pending" : 1.2315135367772556,
+    "depositAddress" : "depositAddress",
+    "available" : 4.145608029883936,
+    "withdrawalCommission" : 2.027123023002322,
+    "isWithdrawalEnabled" : true,
+    "title" : "title",
+    "isDepositEnabled" : true,
+    "total" : 1.0246457001441578,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "invested" : 7.386281948385884,
+    "currencyCcy" : "Undefined",
+    "pendingCcy" : 7.457744773683766,
+    "investedCcy" : 6.84685269835264
+  }, {
+    "rateToGVT" : 3.616076749251911,
+    "totalCcy" : 1.1730742509559433,
+    "availableCcy" : 1.4894159098541704,
+    "pending" : 1.2315135367772556,
+    "depositAddress" : "depositAddress",
+    "available" : 4.145608029883936,
+    "withdrawalCommission" : 2.027123023002322,
+    "isWithdrawalEnabled" : true,
+    "title" : "title",
+    "isDepositEnabled" : true,
+    "total" : 1.0246457001441578,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "invested" : 7.386281948385884,
+    "currencyCcy" : "Undefined",
+    "pendingCcy" : 7.457744773683766,
+    "investedCcy" : 6.84685269835264
+  } ]
+}}]
+     
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<WalletMultiSummary> 
+     */
+    open class func v10WalletMultiByCurrencyGetWithRequestBuilder(currency: Currency_v10WalletMultiByCurrencyGet, authorization: String) -> RequestBuilder<WalletMultiSummary> {
+        var path = "/v1.0/wallet/multi/{currency}"
+        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletMultiSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter type
+     */
+    public enum ModelType_v10WalletMultiTransactionsExternalGet: String { 
+        case all = "All"
+        case deposit = "Deposit"
+        case withdrawal = "Withdrawal"
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10WalletMultiTransactionsExternalGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Wallet pending transactions
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletMultiTransactionsExternalGet(authorization: String, from: Date? = nil, to: Date? = nil, type: ModelType_v10WalletMultiTransactionsExternalGet? = nil, currency: Currency_v10WalletMultiTransactionsExternalGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: MultiWalletExternalTransactionsViewModel?,_ error: Error?) -> Void)) {
+        v10WalletMultiTransactionsExternalGetWithRequestBuilder(authorization: authorization, from: from, to: to, type: type, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Wallet pending transactions
+     - GET /v1.0/wallet/multi/transactions/external
+     - examples: [{contentType=application/json, example={
+  "total" : 6,
+  "transactions" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "statusUrl" : "statusUrl",
+    "logo" : "logo",
+    "isEnableActions" : true,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "All",
+    "status" : "status"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "statusUrl" : "statusUrl",
+    "logo" : "logo",
+    "isEnableActions" : true,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "All",
+    "status" : "status"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<MultiWalletExternalTransactionsViewModel> 
+     */
+    open class func v10WalletMultiTransactionsExternalGetWithRequestBuilder(authorization: String, from: Date? = nil, to: Date? = nil, type: ModelType_v10WalletMultiTransactionsExternalGet? = nil, currency: Currency_v10WalletMultiTransactionsExternalGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<MultiWalletExternalTransactionsViewModel> {
+        let path = "/v1.0/wallet/multi/transactions/external"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "From": from?.encodeToJSON(), 
+            "To": to?.encodeToJSON(), 
+            "Type": type?.rawValue, 
+            "Currency": currency?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<MultiWalletExternalTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter type
+     */
+    public enum ModelType_v10WalletMultiTransactionsGet: String { 
+        case all = "All"
+        case investment = "Investment"
+        case converting = "Converting"
+        case withdrawal = "Withdrawal"
+        case close = "Close"
+        case open = "Open"
+        case fee = "Fee"
+        case profits = "Profits"
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10WalletMultiTransactionsGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Multi wallet transactions
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletMultiTransactionsGet(authorization: String, from: Date? = nil, to: Date? = nil, type: ModelType_v10WalletMultiTransactionsGet? = nil, currency: Currency_v10WalletMultiTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: MultiWalletTransactionsViewModel?,_ error: Error?) -> Void)) {
+        v10WalletMultiTransactionsGetWithRequestBuilder(authorization: authorization, from: from, to: to, type: type, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Multi wallet transactions
+     - GET /v1.0/wallet/multi/transactions
+     - examples: [{contentType=application/json, example={
+  "total" : 1,
+  "transactions" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "amountTo" : 6.027456183070403,
+    "logoFrom" : "logoFrom",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currencyTo" : "Undefined",
+    "type" : "All",
+    "currencyFrom" : "Undefined",
+    "logoTo" : "logoTo",
+    "status" : "Done"
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "amount" : 0.8008281904610115,
+    "amountTo" : 6.027456183070403,
+    "logoFrom" : "logoFrom",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currencyTo" : "Undefined",
+    "type" : "All",
+    "currencyFrom" : "Undefined",
+    "logoTo" : "logoTo",
+    "status" : "Done"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter type: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<MultiWalletTransactionsViewModel> 
+     */
+    open class func v10WalletMultiTransactionsGetWithRequestBuilder(authorization: String, from: Date? = nil, to: Date? = nil, type: ModelType_v10WalletMultiTransactionsGet? = nil, currency: Currency_v10WalletMultiTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<MultiWalletTransactionsViewModel> {
+        let path = "/v1.0/wallet/multi/transactions"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "From": from?.encodeToJSON(), 
+            "To": to?.encodeToJSON(), 
+            "Type": type?.rawValue, 
+            "Currency": currency?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<MultiWalletTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Disable paying platform fees with GVT
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletPaygvtfeeOffPost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10WalletPaygvtfeeOffPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Disable paying platform fees with GVT
+     - POST /v1.0/wallet/paygvtfee/off
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10WalletPaygvtfeeOffPostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v1.0/wallet/paygvtfee/off"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Enable paying platform fees with GVT
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletPaygvtfeeOnPost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10WalletPaygvtfeeOnPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Enable paying platform fees with GVT
+     - POST /v1.0/wallet/paygvtfee/on
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10WalletPaygvtfeeOnPostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v1.0/wallet/paygvtfee/on"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Get transaction details
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletTransactionByIdGet(id: UUID, authorization: String, completion: @escaping ((_ data: TransactionDetails?,_ error: Error?) -> Void)) {
+        v10WalletTransactionByIdGetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get transaction details
+     - GET /v1.0/wallet/transaction/{id}
+     - examples: [{contentType=application/json, example={
+  "programDetails" : {
+    "entryFee" : 0.8008281904610115,
+    "programType" : "Program",
+    "color" : "color",
+    "level" : 5,
+    "successFee" : 1.4658129805029452,
+    "exitFeePercent" : 7.061401241503109,
+    "managerName" : "managerName",
+    "title" : "title",
+    "entryFeePercent" : 6.027456183070403,
+    "exitFee" : 2.3021358869347655,
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "successFeePercent" : 5.962133916683182
+  },
+  "convertingDetails" : {
+    "rateValue" : 3.616076749251911,
+    "amountTo" : 9.301444243932576,
+    "currencyTo" : "Undefined",
+    "currencyToName" : "currencyToName",
+    "currencyToLogo" : "currencyToLogo"
+  },
+  "amount" : 7.386281948385884,
+  "externalTransactionDetails" : {
+    "descriptionUrl" : "descriptionUrl",
+    "description" : "description",
+    "isEnableActions" : true,
+    "fromAddress" : "fromAddress"
+  },
+  "currencyName" : "currencyName",
+  "gvCommissionPercent" : 4.145608029883936,
+  "currency" : "Undefined",
+  "currencyLogo" : "currencyLogo",
+  "type" : "Investing",
+  "gvCommissionCurrency" : "Undefined",
+  "gvCommission" : 2.027123023002322,
+  "status" : "Done"
+}}]
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<TransactionDetails> 
+     */
+    open class func v10WalletTransactionByIdGetWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<TransactionDetails> {
+        var path = "/v1.0/wallet/transaction/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<TransactionDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      * enum for parameter assetType
      */
     public enum AssetType_v10WalletTransactionsGet: String { 
@@ -153,6 +765,26 @@ open class WalletAPI {
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
+        case payingFee = "PayingFee"
+    }
+
+    /**
+     * enum for parameter wallet
+     */
+    public enum Wallet_v10WalletTransactionsGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
     }
 
     /**
@@ -164,12 +796,13 @@ open class WalletAPI {
      - parameter to: (query)  (optional)
      - parameter assetType: (query)  (optional)
      - parameter txAction: (query)  (optional)
+     - parameter wallet: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10WalletTransactionsGet(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: AssetType_v10WalletTransactionsGet? = nil, txAction: TxAction_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {
-        v10WalletTransactionsGetWithRequestBuilder(authorization: authorization, assetId: assetId, from: from, to: to, assetType: assetType, txAction: txAction, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10WalletTransactionsGet(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: AssetType_v10WalletTransactionsGet? = nil, txAction: TxAction_v10WalletTransactionsGet? = nil, wallet: Wallet_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: WalletTransactionsViewModel?,_ error: Error?) -> Void)) {
+        v10WalletTransactionsGetWithRequestBuilder(authorization: authorization, assetId: assetId, from: from, to: to, assetType: assetType, txAction: txAction, wallet: wallet, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -269,12 +902,13 @@ open class WalletAPI {
      - parameter to: (query)  (optional)
      - parameter assetType: (query)  (optional)
      - parameter txAction: (query)  (optional)
+     - parameter wallet: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<WalletTransactionsViewModel> 
      */
-    open class func v10WalletTransactionsGetWithRequestBuilder(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: AssetType_v10WalletTransactionsGet? = nil, txAction: TxAction_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<WalletTransactionsViewModel> {
+    open class func v10WalletTransactionsGetWithRequestBuilder(authorization: String, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: AssetType_v10WalletTransactionsGet? = nil, txAction: TxAction_v10WalletTransactionsGet? = nil, wallet: Wallet_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<WalletTransactionsViewModel> {
         let path = "/v1.0/wallet/transactions"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -286,6 +920,7 @@ open class WalletAPI {
             "To": to?.encodeToJSON(), 
             "AssetType": assetType?.rawValue, 
             "TxAction": txAction?.rawValue, 
+            "Wallet": wallet?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -301,52 +936,32 @@ open class WalletAPI {
     }
 
     /**
-     Wallet pending transactions
+     Transfer money
      
      - parameter authorization: (header) JWT access token 
+     - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10WalletTransactionsPendingGet(authorization: String, completion: @escaping ((_ data: WalletPendingTransactionsViewModel?,_ error: Error?) -> Void)) {
-        v10WalletTransactionsPendingGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func v10WalletTransferPost(authorization: String, request: InternalTransferRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10WalletTransferPostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
+            completion(error);
         }
     }
 
 
     /**
-     Wallet pending transactions
-     - GET /v1.0/wallet/transactions/pending
-     - examples: [{contentType=application/json, example={
-  "total" : 6,
-  "transactions" : [ {
-    "lastUpdated" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 0.8008281904610115,
-    "dateCreated" : "2000-01-23T04:56:07.000+00:00",
-    "address" : "address",
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit",
-    "hash" : "hash"
-  }, {
-    "lastUpdated" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 0.8008281904610115,
-    "dateCreated" : "2000-01-23T04:56:07.000+00:00",
-    "address" : "address",
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Deposit",
-    "hash" : "hash"
-  } ]
-}}]
+     Transfer money
+     - POST /v1.0/wallet/transfer
      
      - parameter authorization: (header) JWT access token 
+     - parameter request: (body)  (optional)
 
-     - returns: RequestBuilder<WalletPendingTransactionsViewModel> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func v10WalletTransactionsPendingGetWithRequestBuilder(authorization: String) -> RequestBuilder<WalletPendingTransactionsViewModel> {
-        let path = "/v1.0/wallet/transactions/pending"
+    open class func v10WalletTransferPostWithRequestBuilder(authorization: String, request: InternalTransferRequest? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/wallet/transfer"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
 
         let url = NSURLComponents(string: URLString)
 
@@ -355,9 +970,9 @@ open class WalletAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<WalletPendingTransactionsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
@@ -380,13 +995,15 @@ open class WalletAPI {
     "description" : "description",
     "logo" : "logo",
     "currency" : "Undefined",
-    "commission" : 6.027456183070403
+    "commission" : 6.027456183070403,
+    "availableToWithdrawal" : 5.962133916683182
   }, {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
     "currency" : "Undefined",
-    "commission" : 6.027456183070403
+    "commission" : 6.027456183070403,
+    "availableToWithdrawal" : 5.962133916683182
   } ],
   "availableToWithdrawal" : 0.8008281904610115
 }}]

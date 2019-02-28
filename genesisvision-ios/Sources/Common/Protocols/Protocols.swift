@@ -17,7 +17,13 @@ protocol NodataProtocol {
 protocol YourInvestmentProtocol: class {
     func didTapWithdrawButton()
     func didTapStatusButton()
-    func didChangeReinvestSwitch(value: Bool)
+    func didChangeSwitch(value: Bool)
+}
+
+protocol WalletActionsProtocol: class {
+    func didTapWithdrawButton()
+    func didTapAddFundsButton()
+    func didTapTransferButton()
 }
 
 extension YourInvestmentProtocol {
@@ -28,19 +34,20 @@ extension YourInvestmentProtocol {
         
     }
     
-    func didChangeReinvestSwitch(value: Bool) {
+    func didChangeSwitch(value: Bool) {
         
     }
 }
 
-protocol ReinvestProtocol: class {
-    func didChangeReinvestSwitch(value: Bool, assetId: String)
+protocol NotificationsSettingsProtocol: class {
+    func didChange(enable: Bool, settingId: String?)
+    func didRemove(settingId: String?)
+    func didAdd(type: NotificationSettingViewModel.ModelType?)
+    func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?)
 }
 
-extension ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, indexPath: IndexPath) {
-        
-    }
+protocol SwitchProtocol: class {
+    func didChangeSwitch(value: Bool, assetId: String)
 }
 
 protocol DelegateManagerProtocol: class {
@@ -48,6 +55,14 @@ protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     
+}
+
+protocol WalletProtocol: class {
+    func didUpdateData()
+}
+
+protocol ReloadDataProtocol: class {
+    func didReloadData()
 }
 
 protocol FavoriteStateChangeProtocol: class {
@@ -184,3 +199,24 @@ extension UIViewControllerWithBottomView where Self: BaseViewController {
     }
 }
 
+protocol WalletListViewModelProtocol {
+    var title: String { get }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
+    
+    func fetch(completion: @escaping CompletionBlock)
+    func refresh(completion: @escaping CompletionBlock)
+    
+    func fetchMore(at indexPath: IndexPath) -> Bool
+    func numberOfSections() -> Int
+    func numberOfRows(in section: Int) -> Int
+    func headerTitle(for section: Int) -> String?
+    func headerHeight(for section: Int) -> CGFloat
+    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    
+    func logoImageName() -> String
+    func noDataText() -> String
+    func noDataImageName() -> String?
+    func noDataButtonTitle() -> String
+}

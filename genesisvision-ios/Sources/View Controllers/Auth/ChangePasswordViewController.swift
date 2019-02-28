@@ -14,34 +14,34 @@ class ChangePasswordViewController: BaseViewController {
     var viewModel: AuthChangePasswordViewModel!
     
     // MARK: - TextFields
-    @IBOutlet var oldPasswordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var oldPasswordTitleLabel: SubtitleLabel! {
         didSet {
             oldPasswordTitleLabel.text = "Old password"
         }
     }
-    @IBOutlet var oldPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var oldPasswordTextField: DesignableUITextField! {
         didSet {
             oldPasswordTextField.setClearButtonWhileEditing()
             oldPasswordTextField.delegate = self
         }
     }
-    @IBOutlet var passwordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var passwordTitleLabel: SubtitleLabel! {
         didSet {
             passwordTitleLabel.text = "New password"
         }
     }
-    @IBOutlet var passwordTextField: DesignableUITextField! {
+    @IBOutlet weak var passwordTextField: DesignableUITextField! {
         didSet {
             passwordTextField.setClearButtonWhileEditing()
             passwordTextField.delegate = self
         }
     }
-    @IBOutlet var confirmPasswordTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var confirmPasswordTitleLabel: SubtitleLabel! {
         didSet {
             confirmPasswordTitleLabel.text = "Repeat password"
         }
     }
-    @IBOutlet var confirmPasswordTextField: DesignableUITextField! {
+    @IBOutlet weak var confirmPasswordTextField: DesignableUITextField! {
         didSet {
             confirmPasswordTextField.setClearButtonWhileEditing()
             confirmPasswordTextField.delegate = self
@@ -49,7 +49,7 @@ class ChangePasswordViewController: BaseViewController {
     }
     
     // MARK: - Buttons
-    @IBOutlet var changePasswordButton: ActionButton!
+    @IBOutlet weak var changePasswordButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -112,7 +112,7 @@ extension ChangePasswordViewController: UITextFieldDelegate {
         case confirmPasswordTextField:
             changePasswordMethod()
         default:
-            IQKeyboardManager.sharedManager().goNext()
+            IQKeyboardManager.shared.goNext()
         }
         
         return false

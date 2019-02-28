@@ -84,7 +84,7 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
 extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         

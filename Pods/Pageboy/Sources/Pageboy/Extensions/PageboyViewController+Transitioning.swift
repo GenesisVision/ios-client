@@ -64,7 +64,7 @@ internal extension PageboyViewController {
         
         let transitionDisplayLink = CADisplayLink(target: self, selector: #selector(displayLinkDidTick))
         transitionDisplayLink.isPaused = true
-        transitionDisplayLink.add(to: RunLoop.main, forMode: .commonModes)
+        transitionDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
         self.transitionDisplayLink = transitionDisplayLink
     }
     
@@ -107,7 +107,7 @@ internal extension PageboyViewController {
         /// Calculate semantic direction for RtL languages
         var semanticDirection = direction
         if view.layoutIsRightToLeft && navigationOrientation == .horizontal {
-            semanticDirection = semanticDirection == .forward ? .reverse : .forward
+            semanticDirection = direction.layoutNormalized(isRtL: view.layoutIsRightToLeft)
         }
         
         // create a transition and unpause display link
@@ -164,6 +164,6 @@ internal extension PageboyViewController.Transition {
     
     func configure(transition: inout CATransition) {
         transition.duration = self.duration
-        transition.type = self.style.rawValue
+        transition.type = CATransitionType(rawValue: self.style.rawValue)
     }
 }

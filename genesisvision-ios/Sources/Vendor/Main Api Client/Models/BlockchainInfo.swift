@@ -17,7 +17,6 @@ open class BlockchainInfo: Codable {
         case pending = "Pending"
         case confirmedByGate = "ConfirmedByGate"
         case confirmedAndValidated = "ConfirmedAndValidated"
-        case pendingAddInWallet = "PendingAddInWallet"
         case error = "Error"
         case cancelled = "Cancelled"
     }

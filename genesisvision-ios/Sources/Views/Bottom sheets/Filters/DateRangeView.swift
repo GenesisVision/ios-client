@@ -12,7 +12,7 @@ protocol DateRangeViewProtocol: class {
     var dateRange: FilterDateRangeModel? { get set }
 
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?)
-    func showDatePicker(from dateFrom: Date?, to dateTo: Date)
+    func showDatePicker(from dateFrom: Date, to dateTo: Date, isFrom: Bool)
 }
 
 class DateRangeView: UIView {
@@ -41,42 +41,42 @@ class DateRangeView: UIView {
     }
     
     // MARK: - IBOutlets
-    @IBOutlet var dayButton: DateRangeButton! {
+    @IBOutlet weak var dayButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.day
             dayButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             dayButton.tag = dateRangeType.rawValue
         }
     }
-    @IBOutlet var weekButton: DateRangeButton! {
+    @IBOutlet weak var weekButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.week
             weekButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             weekButton.tag = dateRangeType.rawValue
         }
     }
-    @IBOutlet var monthButton: DateRangeButton! {
+    @IBOutlet weak var monthButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.month
             monthButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             monthButton.tag = dateRangeType.rawValue
         }
     }
-    @IBOutlet var yearButton: DateRangeButton! {
+    @IBOutlet weak var yearButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.year
             yearButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             yearButton.tag = dateRangeType.rawValue
         }
     }
-    @IBOutlet var allTimeButton: DateRangeButton! {
+    @IBOutlet weak var allTimeButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.allTime
             allTimeButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             allTimeButton.tag = dateRangeType.rawValue
         }
     }
-    @IBOutlet var customButton: DateRangeButton! {
+    @IBOutlet weak var customButton: DateRangeButton! {
         didSet {
             let dateRangeType = DateRangeType.custom
             customButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
@@ -84,10 +84,10 @@ class DateRangeView: UIView {
         }
     }
     
-    @IBOutlet var dateFromTitleLabel: UILabel!
-    @IBOutlet var dateToTitleLabel: UILabel!
+    @IBOutlet weak var dateFromTitleLabel: UILabel!
+    @IBOutlet weak var dateToTitleLabel: UILabel!
     
-    @IBOutlet var dateFromTextField: DesignableUITextField! {
+    @IBOutlet weak var dateFromTextField: DesignableUITextField! {
         didSet {
             dateFromTextField.addPadding()
             dateFromTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
@@ -100,7 +100,7 @@ class DateRangeView: UIView {
             dateFromTextField.addGestureRecognizer(tapGesture)
         }
     }
-    @IBOutlet var dateToTextField: DesignableUITextField! {
+    @IBOutlet weak var dateToTextField: DesignableUITextField! {
         didSet {
             dateToTextField.addPadding()
             dateToTextField.backgroundColor = UIColor.DateRangeView.textfieldBg
@@ -113,7 +113,7 @@ class DateRangeView: UIView {
             dateToTextField.addGestureRecognizer(tapGesture)
         }
     }
-    @IBOutlet var applyButton: ActionButton!
+    @IBOutlet weak var applyButton: ActionButton!
     
     var buttons = [DateRangeButton]()
     
@@ -200,15 +200,17 @@ class DateRangeView: UIView {
         
         guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else { return }
         
-        delegate?.showDatePicker(from: dateFrom, to: dateTo)
+        delegate?.showDatePicker(from: dateFrom, to: dateTo, isFrom: true)
     }
     
     @objc private func dateToTextFieldEditing() {
         changeDateRangeTypeButtonAction(customButton)
         
-        guard dateRangeType == .custom, let dateTo = dateTo else { return }
+        guard dateRangeType == .custom, let dateTo = dateTo, let dateFrom = dateFrom else {
+            return
+        }
         
-        delegate?.showDatePicker(from: nil, to: dateTo)
+        delegate?.showDatePicker(from: dateFrom, to: dateTo, isFrom: false)
     }
     
     // MARK: - Actions

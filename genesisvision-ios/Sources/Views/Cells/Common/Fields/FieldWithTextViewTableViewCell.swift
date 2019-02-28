@@ -13,11 +13,11 @@ class FieldWithTextViewTableViewCell: PlateTableViewCell {
     var valueChanged: ((String) -> Void)?
     
     // MARK: - Views
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet var accessoryImageView: UIImageView!
+    @IBOutlet weak var accessoryImageView: UIImageView!
     
-    @IBOutlet var textView: UITextView! {
+    @IBOutlet weak var textView: UITextView! {
         didSet {
             textView.delegate = self
         }

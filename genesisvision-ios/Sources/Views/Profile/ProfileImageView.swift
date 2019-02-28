@@ -9,7 +9,7 @@
 import UIKit.UIView
 
 class ProfileImageView: UIView {
-    @IBOutlet var profilePhotoImageView: UIImageView! {
+    @IBOutlet weak var profilePhotoImageView: UIImageView! {
         didSet {
             profilePhotoImageView.contentMode = .scaleAspectFill
             profilePhotoImageView.clipsToBounds = true
@@ -18,14 +18,7 @@ class ProfileImageView: UIView {
         }
     }
     
-    @IBOutlet var readMoreImageView: UIImageView! {
-        didSet {
-            readMoreImageView.image = #imageLiteral(resourceName: "img_program_read_more")
-            readMoreImageView.isHidden = true
-        }
-    }
-    
-    @IBOutlet var levelButton: LevelButton!
+    @IBOutlet weak var levelButton: LevelButton!
     
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -22,7 +22,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         }
         
         cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
-        
+
         cell.yourInvestmentProtocol = yourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.titleLabel.text = "Current period investment"
@@ -41,19 +41,21 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         let currency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") ?? .usd
         
-        if let invested = programDetailsFull?.personalProgramDetails?.invested {
-            cell.investedTitleLabel.text = "invested"
-            cell.investedValueLabel.text = invested.rounded(withType: currency).toString() + " " + currency.rawValue
-        }
+        cell.investedTitleLabel.isHidden = true
+        cell.investedValueLabel.isHidden = true
         
-        if let profitPercent = programDetailsFull?.personalProgramDetails?.profit {
-            cell.profitTitleLabel.text = "profit"
-            cell.profitValueLabel.text = profitPercent.rounded(withType: .undefined).toString() + "%"
+        cell.profitTitleLabel.text = "profit"
+        if let profitPercent = programDetailsFull?.personalProgramDetails?.profit,
+            let value = programDetailsFull?.personalProgramDetails?.value,
+            let invested = programDetailsFull?.personalProgramDetails?.invested {
+            let profitValue = value - invested
+            let sign = profitValue > 0 ? "+" : ""
+            cell.profitValueLabel.text = sign + profitValue.rounded(withType: currency).toString() + " " + currency.rawValue + " (\(profitPercent.rounded(withType: .undefined).toString())%)"
             cell.profitValueLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
+        cell.valueTitleLabel.text = "value"
         if let value = programDetailsFull?.personalProgramDetails?.value {
-            cell.valueTitleLabel.text = "value"
             cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
         }
     }

@@ -29,10 +29,10 @@ class PhotoHeaderView: UIView {
     }
         
     // MARK: - Views
-    @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // MARK: - Buttons
-    @IBOutlet var choosePhotoView: СhoosePhotoView!
+    @IBOutlet weak var choosePhotoView: СhoosePhotoView!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

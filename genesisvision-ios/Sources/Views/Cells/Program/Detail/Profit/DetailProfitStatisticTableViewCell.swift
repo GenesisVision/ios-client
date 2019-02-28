@@ -57,7 +57,7 @@ class MediumLabel: CustomLabel {
 class DetailProfitStatisticTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var titleLabel: UILabel! {
+    @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = UIColor.Cell.title
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
@@ -65,49 +65,49 @@ class DetailProfitStatisticTableViewCell: UITableViewCell {
     }
     
     
-    @IBOutlet var startDateStackView: UIStackView!
-    @IBOutlet var startDateValueLabel: TitleLabel!
-    @IBOutlet var startDateTitleLabel: SubtitleLabel!
+    @IBOutlet weak var startDateStackView: UIStackView!
+    @IBOutlet weak var startDateValueLabel: TitleLabel!
+    @IBOutlet weak var startDateTitleLabel: SubtitleLabel!
     
-    @IBOutlet var endDateStackView: UIStackView!
-    @IBOutlet var endDateValueLabel: TitleLabel!
-    @IBOutlet var endDateTitleLabel: SubtitleLabel!
+    @IBOutlet weak var endDateStackView: UIStackView!
+    @IBOutlet weak var endDateValueLabel: TitleLabel!
+    @IBOutlet weak var endDateTitleLabel: SubtitleLabel!
     
-    @IBOutlet var tradesSuccessCountStackView: UIStackView!
-    @IBOutlet var tradesSuccessCountValueLabel: TitleLabel!
-    @IBOutlet var tradesSuccessCountTitleLabel: SubtitleLabel!
+    @IBOutlet weak var tradesSuccessCountStackView: UIStackView!
+    @IBOutlet weak var tradesSuccessCountValueLabel: TitleLabel!
+    @IBOutlet weak var tradesSuccessCountTitleLabel: SubtitleLabel!
     
-    @IBOutlet var tradesCountStackView: UIStackView!
-    @IBOutlet var tradesCountValueLabel: TitleLabel!
-    @IBOutlet var tradesCountTitleLabel: SubtitleLabel!
+    @IBOutlet weak var tradesCountStackView: UIStackView!
+    @IBOutlet weak var tradesCountValueLabel: TitleLabel!
+    @IBOutlet weak var tradesCountTitleLabel: SubtitleLabel!
     
-    @IBOutlet var drawdownPercentStackView: UIStackView!
-    @IBOutlet var drawdownPercentValueLabel: TitleLabel!
-    @IBOutlet var drawdownPercentTitleLabel: SubtitleLabel!
+    @IBOutlet weak var drawdownPercentStackView: UIStackView!
+    @IBOutlet weak var drawdownPercentValueLabel: TitleLabel!
+    @IBOutlet weak var drawdownPercentTitleLabel: SubtitleLabel!
     
-    @IBOutlet var investorsCountStackView: UIStackView!
-    @IBOutlet var investorsCountValueLabel: TitleLabel!
-    @IBOutlet var investorsCountTitleLabel: SubtitleLabel!
+    @IBOutlet weak var investorsCountStackView: UIStackView!
+    @IBOutlet weak var investorsCountValueLabel: TitleLabel!
+    @IBOutlet weak var investorsCountTitleLabel: SubtitleLabel!
     
-    @IBOutlet var balanceStackView: UIStackView!
-    @IBOutlet var balanceValueLabel: TitleLabel!
-    @IBOutlet var balanceTitleLabel: SubtitleLabel!
+    @IBOutlet weak var balanceStackView: UIStackView!
+    @IBOutlet weak var balanceValueLabel: TitleLabel!
+    @IBOutlet weak var balanceTitleLabel: SubtitleLabel!
     
-    @IBOutlet var sharpeRatioPercentStackView: UIStackView!
-    @IBOutlet var sharpeRatioPercentValueLabel: TitleLabel!
-    @IBOutlet var sharpeRatioPercentTitleLabel: SubtitleLabel!
+    @IBOutlet weak var sharpeRatioPercentStackView: UIStackView!
+    @IBOutlet weak var sharpeRatioPercentValueLabel: TitleLabel!
+    @IBOutlet weak var sharpeRatioPercentTitleLabel: SubtitleLabel!
     
-    @IBOutlet var calmarRatioPercentStackView: UIStackView!
-    @IBOutlet var calmarRatioPercentValueLabel: TitleLabel!
-    @IBOutlet var calmarRatioPercentTitleLabel: SubtitleLabel!
+    @IBOutlet weak var calmarRatioPercentStackView: UIStackView!
+    @IBOutlet weak var calmarRatioPercentValueLabel: TitleLabel!
+    @IBOutlet weak var calmarRatioPercentTitleLabel: SubtitleLabel!
     
-    @IBOutlet var sortinoRatioPercentStackView: UIStackView!
-    @IBOutlet var sortinoRatioPercentValueLabel: TitleLabel!
-    @IBOutlet var sortinoRatioPercentTitleLabel: SubtitleLabel!
+    @IBOutlet weak var sortinoRatioPercentStackView: UIStackView!
+    @IBOutlet weak var sortinoRatioPercentValueLabel: TitleLabel!
+    @IBOutlet weak var sortinoRatioPercentTitleLabel: SubtitleLabel!
     
-    @IBOutlet var profitFactorPercentStackView: UIStackView!
-    @IBOutlet var profitFactorPercentValueLabel: TitleLabel!
-    @IBOutlet var profitFactorPercentTitleLabel: SubtitleLabel!
+    @IBOutlet weak var profitFactorPercentStackView: UIStackView!
+    @IBOutlet weak var profitFactorPercentValueLabel: TitleLabel!
+    @IBOutlet weak var profitFactorPercentTitleLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

@@ -10,18 +10,18 @@ import UIKit
 
 class FacetCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
-    @IBOutlet var bgImageView: UIImageView!
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.isHidden = true
             iconImageView.tintColor = UIColor.primary
         }
     }
     
-    @IBOutlet var stackView: UIStackView!
+    @IBOutlet weak var stackView: UIStackView!
 
-    @IBOutlet var titleLabel: TitleLabel!
-    @IBOutlet var detailLabel: SubtitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var detailLabel: SubtitleLabel! {
         didSet {
             detailLabel.isHidden = true
             detailLabel.textColor = UIColor.primary

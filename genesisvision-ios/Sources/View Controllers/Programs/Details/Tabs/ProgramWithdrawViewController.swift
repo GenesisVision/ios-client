@@ -13,61 +13,61 @@ class ProgramWithdrawViewController: BaseViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - Labels
-    @IBOutlet var availableToWithdrawValueTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueTitleLabel: TitleLabel! {
         didSet {
             availableToWithdrawValueTitleLabel.text = "You invested in program"
             availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var availableToWithdrawValueLabel: TitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel! {
         didSet {
             availableToWithdrawValueLabel.textColor = UIColor.primary
             availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var amountToWithdrawTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Amount to withdraw"
         }
     }
-    @IBOutlet var amountToWithdrawValueLabel: TitleLabel! {
+    @IBOutlet weak var amountToWithdrawValueLabel: TitleLabel! {
         didSet {
             amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToWithdrawGVTLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawGVTLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet var amountToWithdrawCurrencyLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawCurrencyLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var copyMaxValueButton: UIButton! {
+    @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
         }
     }
     
-    @IBOutlet var payoutDayTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var payoutDayTitleLabel: SubtitleLabel! {
         didSet {
             payoutDayTitleLabel.text = "Payout day"
             payoutDayTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet var payoutDayValueLabel: TitleLabel!
+    @IBOutlet weak var payoutDayValueLabel: TitleLabel!
     
     // MARK: - Buttons
-    @IBOutlet var withdrawButton: ActionButton!
+    @IBOutlet weak var withdrawButton: ActionButton!
     
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
     
-    @IBOutlet var numpadView: NumpadView! {
+    @IBOutlet weak var numpadView: NumpadView! {
         didSet {
             numpadView.isUserInteractionEnabled = true
             numpadView.delegate = self
@@ -135,8 +135,8 @@ class ProgramWithdrawViewController: BaseViewController {
         if let rate = viewModel.programWithdrawInfo?.rate {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue / rate).rounded(withType: currency).toString()
-            self.amountToWithdrawCurrencyLabel.text = "= " + amountToWithdrawValueCurrencyString + " " + selectedCurrency
+            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(withType: currency).toString()
+            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + selectedCurrency
         }
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
@@ -175,7 +175,7 @@ class ProgramWithdrawViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
-        let subtitle = "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet"
+        let subtitle = "Your request will be processed at the end of the reporting period."
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
                                                           subtitle: subtitle,

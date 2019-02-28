@@ -14,6 +14,8 @@ open class PasswordDotView: UIView {
     @IBInspectable
     open var inputDotCount = 0 {
         didSet {
+            let format = Bundle(for: type(of: self)).localizedString(forKey: "PasswordDotViewAccessibilityValue", value: nil, table: nil)
+            accessibilityValue = String(format: format, totalDotCount, inputDotCount)
             setNeedsDisplay()
         }
     }
@@ -69,6 +71,8 @@ open class PasswordDotView: UIView {
     open override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = UIColor.clear
+        isAccessibilityElement = true
+        accessibilityLabel = Bundle(for: type(of: self)).localizedString(forKey: "PasswordDotViewAccessibilityLabel", value: nil, table: nil)
     }
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -119,7 +123,7 @@ open class PasswordDotView: UIView {
 private extension PasswordDotView {
     //MARK: Animation
     func shakeAnimation(withDuration duration: TimeInterval, animations: @escaping () -> (), completion: @escaping () -> ()) {
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.01, initialSpringVelocity: 0.35, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.01, initialSpringVelocity: 0.35, options: .curveEaseInOut, animations: {
             animations()
         }) { _ in
             completion()

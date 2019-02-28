@@ -35,10 +35,12 @@ open class PersonalProgramDetailsFull: Codable {
     public var pendingInput: Double?
     public var pendingOutput: Double?
     public var status: Status?
+    public var isFollowSignals: Bool?
+    public var canMakeSignalProvider: Bool?
 
 
     
-    public init(isReinvest: Bool?, gvtValue: Double?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
+    public init(isReinvest: Bool?, gvtValue: Double?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
         self.isReinvest = isReinvest
         self.gvtValue = gvtValue
         self.isFavorite = isFavorite
@@ -56,6 +58,8 @@ open class PersonalProgramDetailsFull: Codable {
         self.pendingInput = pendingInput
         self.pendingOutput = pendingOutput
         self.status = status
+        self.isFollowSignals = isFollowSignals
+        self.canMakeSignalProvider = canMakeSignalProvider
     }
     
 
@@ -82,6 +86,8 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
         try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
         try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(isFollowSignals, forKey: "isFollowSignals")
+        try container.encodeIfPresent(canMakeSignalProvider, forKey: "canMakeSignalProvider")
     }
 
     // Decodable protocol methods
@@ -106,6 +112,8 @@ open class PersonalProgramDetailsFull: Codable {
         pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
         pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
+        isFollowSignals = try container.decodeIfPresent(Bool.self, forKey: "isFollowSignals")
+        canMakeSignalProvider = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProvider")
     }
 }
 

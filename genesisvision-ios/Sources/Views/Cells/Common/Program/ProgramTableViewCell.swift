@@ -31,7 +31,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     // MARK: - Variables
     weak var delegate: FavoriteStateChangeProtocol?
-    weak var reinvestProtocol: ReinvestProtocol?
+    weak var reinvestProtocol: SwitchProtocol?
     
     var assetId: String?
     
@@ -109,6 +109,32 @@ class ProgramTableViewCell: PlateTableViewCell {
         }
     }
     
+    @IBOutlet weak var tagsBottomStackView: UIStackView! {
+        didSet {
+            tagsBottomStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var firstTagLabel: RoundedLabel! {
+        didSet {
+            firstTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var secondTagLabel: RoundedLabel! {
+        didSet {
+            secondTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var thirdTagLabel: RoundedLabel! {
+        didSet {
+            thirdTagLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var otherTagLabel: RoundedLabel! {
+        didSet {
+            otherTagLabel.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var fundBottomStackView: UIStackView! {
         didSet {
             fundBottomStackView.isHidden = true
@@ -174,7 +200,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     
     @IBAction func reinvestSwitchAction(_ sender: UISwitch) {
         if let assetId = assetId {
-            reinvestProtocol?.didChangeReinvestSwitch(value: sender.isOn, assetId: assetId)
+            reinvestProtocol?.didChangeSwitch(value: sender.isOn, assetId: assetId)
         }
     }
 }

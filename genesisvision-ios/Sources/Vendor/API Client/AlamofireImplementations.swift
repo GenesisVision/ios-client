@@ -342,6 +342,26 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     nil
                 )
             })
+        case is Double.Type:
+            validatedRequest.responseString(completionHandler: { (stringResponse) in
+                cleanupRequest()
+                
+                if stringResponse.result.isFailure {
+                    completion(
+                        nil,
+                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error as Error!)
+                    )
+                    return
+                }
+                
+                completion(
+                    Response(
+                        response: stringResponse.response!,
+                        body: ((stringResponse.result.value ?? "").doubleValue as! T)
+                    ),
+                    nil
+                )
+            })
         case is Void.Type:
             validatedRequest.responseData(completionHandler: { (voidResponse) in
                 cleanupRequest()

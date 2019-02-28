@@ -25,7 +25,7 @@ final class FundBalanceViewModel {
 
     var dateFrom: Date?
     var dateTo: Date?
-    var maxPointCount: Int = Api.maxPoint
+    var maxPointCount: Int = ApiKeys.maxPoint
     
     private var fundBalanceChart: FundBalanceChart?
     
@@ -80,7 +80,7 @@ extension FundBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> FundBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> FundBalanceChartTableViewCellViewModel? {
         guard let fundBalanceChart = fundBalanceChart else { return nil }
         
         let fundBalanceChartTableViewCellViewModel =  FundBalanceChartTableViewCellViewModel(fundBalanceChart: fundBalanceChart, chartViewProtocol: self.chartViewProtocol)

@@ -11,6 +11,36 @@ import Foundation
 
 open class DashboardPortfolioEvent: Codable {
 
+    public enum FeeSuccessManagerCurrency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+    public enum FeeSuccessPlatformCurrency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public enum Currency: String, Codable { 
         case undefined = "Undefined"
         case gvt = "GVT"
@@ -33,8 +63,9 @@ open class DashboardPortfolioEvent: Codable {
         case profit = "Profit"
         case loss = "Loss"
         case reinvest = "Reinvest"
-        case cancelled = "Cancelled"
+        case canceled = "Canceled"
         case ended = "Ended"
+        case withdrawByStopOut = "WithdrawByStopOut"
     }
     public enum AssetType: String, Codable { 
         case program = "Program"
@@ -44,6 +75,12 @@ open class DashboardPortfolioEvent: Codable {
     public var date: Date?
     public var title: String?
     public var value: Double?
+    public var valueTotal: Double?
+    public var feeSuccessManager: Double?
+    public var feeSuccessManagerCurrency: FeeSuccessManagerCurrency?
+    public var feeSuccessPlatform: Double?
+    public var feeSuccessPlatformCurrency: FeeSuccessPlatformCurrency?
+    public var profitPercent: Double?
     public var currency: Currency?
     public var type: ModelType?
     public var logo: String?
@@ -53,11 +90,17 @@ open class DashboardPortfolioEvent: Codable {
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?, assetType: AssetType?) {
+    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, valueTotal: Double?, feeSuccessManager: Double?, feeSuccessManagerCurrency: FeeSuccessManagerCurrency?, feeSuccessPlatform: Double?, feeSuccessPlatformCurrency: FeeSuccessPlatformCurrency?, profitPercent: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?, assetType: AssetType?) {
         self.assetId = assetId
         self.date = date
         self.title = title
         self.value = value
+        self.valueTotal = valueTotal
+        self.feeSuccessManager = feeSuccessManager
+        self.feeSuccessManagerCurrency = feeSuccessManagerCurrency
+        self.feeSuccessPlatform = feeSuccessPlatform
+        self.feeSuccessPlatformCurrency = feeSuccessPlatformCurrency
+        self.profitPercent = profitPercent
         self.currency = currency
         self.type = type
         self.logo = logo
@@ -77,6 +120,12 @@ open class DashboardPortfolioEvent: Codable {
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(value, forKey: "value")
+        try container.encodeIfPresent(valueTotal, forKey: "valueTotal")
+        try container.encodeIfPresent(feeSuccessManager, forKey: "feeSuccessManager")
+        try container.encodeIfPresent(feeSuccessManagerCurrency, forKey: "feeSuccessManagerCurrency")
+        try container.encodeIfPresent(feeSuccessPlatform, forKey: "feeSuccessPlatform")
+        try container.encodeIfPresent(feeSuccessPlatformCurrency, forKey: "feeSuccessPlatformCurrency")
+        try container.encodeIfPresent(profitPercent, forKey: "profitPercent")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -94,6 +143,12 @@ open class DashboardPortfolioEvent: Codable {
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
+        valueTotal = try container.decodeIfPresent(Double.self, forKey: "valueTotal")
+        feeSuccessManager = try container.decodeIfPresent(Double.self, forKey: "feeSuccessManager")
+        feeSuccessManagerCurrency = try container.decodeIfPresent(FeeSuccessManagerCurrency.self, forKey: "feeSuccessManagerCurrency")
+        feeSuccessPlatform = try container.decodeIfPresent(Double.self, forKey: "feeSuccessPlatform")
+        feeSuccessPlatformCurrency = try container.decodeIfPresent(FeeSuccessPlatformCurrency.self, forKey: "feeSuccessPlatformCurrency")
+        profitPercent = try container.decodeIfPresent(Double.self, forKey: "profitPercent")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

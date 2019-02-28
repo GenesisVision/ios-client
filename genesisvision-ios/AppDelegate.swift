@@ -7,20 +7,26 @@
 //
 
 import UIKit
+import UserNotifications
+
 import Firebase
+
+let gcmMessageIDKey = "gcm.message_id"
+let gcmModelKey = "result"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     var reachabilityManager: ReachabilityManager?
     
     var resignActiveTime: Date?
     var passcodeViewController: PasscodeViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        setup()
+        
+        setup(application)
+        
         return true
     }
     
@@ -54,7 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - Setup
 extension AppDelegate {
     private func showPasscodeVC() {
-        
         if (topViewController() as? PasscodeViewController) != nil {
             return
         }
@@ -74,17 +79,37 @@ extension AppDelegate {
         }
     }
     
-    private func setup() {
-        SwaggerClientAPI.basePath = Api.basePath
+    private func setup(_ application: UIApplication) {
+        FirebaseApp.configure(options: .init(googleAppID: ApiKeys.googleAppID, gcmSenderID: ApiKeys.gcmSenderID))
+        SwaggerClientAPI.basePath = ApiKeys.basePath
+        
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)
         
         setupFirstScreen()
 
         reachabilityManager = ReachabilityManager()
         AppearanceController.setupAppearance()
-        FirebaseApp.configure()
         
         showPasscodeVC()
+        setupNotifications(application)
+    }
+    
+    //Push Notifications
+    private func setupNotifications(_ application: UIApplication) {
+        Messaging.messaging().delegate = self
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
     }
     
     private func setupFirstScreen() {
@@ -113,3 +138,84 @@ extension AppDelegate: PasscodeProtocol {
         }
     }
 }
+
+extension AppDelegate {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        print(userInfo)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 10, *)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        print(userInfo)
+        
+        completionHandler([.alert, .badge, .sound])
+    }
+    //action
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        print(userInfo)
+        
+        if let modelData = userInfo[gcmModelKey] as? String {
+            let dataDict: [String: String] = [gcmModelKey: modelData]
+            NotificationCenter.default.post(name: .notificationDidReceive, object: nil, userInfo: dataDict)
+        }
+        
+        completionHandler()
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        ProfileDataProvider.addFCMToken(token: fcmToken) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
+    }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+}
+

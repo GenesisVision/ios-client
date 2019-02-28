@@ -29,7 +29,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     var canPullToRefresh = true
     var canFetchMoreResults = true
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
             title = totalCount > 0 ? "Programs \(totalCount)" : "Programs"
@@ -194,8 +194,8 @@ extension DashboardProgramListViewModel {
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
@@ -306,8 +306,8 @@ extension DashboardProgramListViewModel {
     }
 }
 
-extension DashboardProgramListViewModel: ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, assetId: String) {
+extension DashboardProgramListViewModel: SwitchProtocol {
+    func didChangeSwitch(value: Bool, assetId: String) {
         reinvest(value, programId: assetId)
     }
 }

@@ -25,7 +25,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         cell.yourInvestmentProtocol = yourInvestmentProtocol
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
-        cell.titleLabel.text = "Your investment"
+        cell.titleLabel.text = "Current investment"
         
         cell.statusButton.handleUserInteractionEnabled = false
         

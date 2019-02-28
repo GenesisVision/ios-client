@@ -14,7 +14,7 @@ final class SearchTabmanViewModel: TabmanViewModel {
     var filterModel: FilterModel = FilterModel()
     var searchBarEnable = false
     var showFacets = false
-    var take = Api.take
+    var take = ApiKeys.take
     
     // MARK: - Init
     init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {

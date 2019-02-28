@@ -30,21 +30,21 @@ open class SearchAPI {
      - GET /v1.0/search
      - examples: [{contentType=application/json, example={
   "funds" : {
-    "total" : 5,
+    "total" : 6,
     "funds" : [ {
-      "totalAssetsCount" : 9,
+      "totalAssetsCount" : 7,
       "statistic" : {
         "balanceGVT" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "profitPercent" : 8.762042012749001,
-        "drawdownPercent" : 9.018348186070783,
+        "profitPercent" : 4.965218492984954,
+        "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "investorsCount" : 6
+        "investorsCount" : 9
       },
       "color" : "color",
       "manager" : {
@@ -58,35 +58,37 @@ open class SearchAPI {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 6.683562403749608
+        "percent" : 1.1730742509559433
       }, {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 6.683562403749608
+        "percent" : 1.1730742509559433
       } ],
       "description" : "description",
       "title" : "title",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 5.025004791520295
+        "share" : 2.3021358869347655
       },
       "personalDetails" : {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "isFollowSignals" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
-        "pendingOutput" : 6.878052220127876,
+        "pendingOutput" : 3.5571952270680973,
         "hasNotifications" : true,
-        "pendingInput" : 6.778324963048013,
+        "pendingInput" : 6.438423552598547,
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "value" : 6.965117697638846,
-        "profit" : 1.284659006116532,
-        "withdrawPercent" : 3.5571952270680973,
-        "invested" : 2.8841621266687802,
+        "canMakeSignalProvider" : true,
+        "value" : 6.683562403749608,
+        "profit" : 8.762042012749001,
+        "withdrawPercent" : 9.369310271410669,
+        "invested" : 9.018348186070783,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -102,19 +104,19 @@ open class SearchAPI {
       } ],
       "status" : "None"
     }, {
-      "totalAssetsCount" : 9,
+      "totalAssetsCount" : 7,
       "statistic" : {
         "balanceGVT" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "profitPercent" : 8.762042012749001,
-        "drawdownPercent" : 9.018348186070783,
+        "profitPercent" : 4.965218492984954,
+        "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "investorsCount" : 6
+        "investorsCount" : 9
       },
       "color" : "color",
       "manager" : {
@@ -128,35 +130,37 @@ open class SearchAPI {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 6.683562403749608
+        "percent" : 1.1730742509559433
       }, {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 6.683562403749608
+        "percent" : 1.1730742509559433
       } ],
       "description" : "description",
       "title" : "title",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 5.025004791520295
+        "share" : 2.3021358869347655
       },
       "personalDetails" : {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "isFollowSignals" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
-        "pendingOutput" : 6.878052220127876,
+        "pendingOutput" : 3.5571952270680973,
         "hasNotifications" : true,
-        "pendingInput" : 6.778324963048013,
+        "pendingInput" : 6.438423552598547,
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "value" : 6.965117697638846,
-        "profit" : 1.284659006116532,
-        "withdrawPercent" : 3.5571952270680973,
-        "invested" : 2.8841621266687802,
+        "canMakeSignalProvider" : true,
+        "value" : 6.683562403749608,
+        "profit" : 8.762042012749001,
+        "withdrawPercent" : 9.369310271410669,
+        "invested" : 9.018348186070783,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -174,28 +178,28 @@ open class SearchAPI {
     } ]
   },
   "programs" : {
-    "total" : 9,
+    "total" : 6,
     "programs" : [ {
       "periodDuration" : 6,
       "statistic" : {
         "balanceBase" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "tradesCount" : 2,
+        "tradesCount" : 7,
         "balanceGVT" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "profitPercent" : 2.3021358869347655,
-        "profitValue" : 7.061401241503109,
-        "drawdownPercent" : 9.301444243932576,
-        "currentValue" : 5.637376656633329,
+        "profitPercent" : 1.4658129805029452,
+        "profitValue" : 5.962133916683182,
+        "drawdownPercent" : 5.637376656633329,
+        "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "investorsCount" : 3
+        "investorsCount" : 2
       },
       "color" : "color",
       "manager" : {
@@ -206,36 +210,47 @@ open class SearchAPI {
         "username" : "username"
       },
       "level" : 0,
-      "availableInvestment" : 1.4658129805029452,
+      "stopOutLevel" : 1.4658129805029452,
+      "availableInvestment" : 5.962133916683182,
       "rating" : {
-        "rating" : 4,
+        "rating" : 7,
         "canLevelUp" : true,
-        "topPercent" : 1.2315135367772556,
-        "profit" : 7.386281948385884
+        "topPercent" : 3.616076749251911,
+        "profit" : 9.301444243932576
       },
       "description" : "description",
       "title" : "title",
+      "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
       "dashboardAssetsDetails" : {
-        "share" : 5.025004791520295
+        "share" : 2.3021358869347655
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "isFollowSignals" : true,
         "canClosePeriod" : true,
-        "pendingOutput" : 4.965218492984954,
+        "pendingOutput" : 1.4894159098541704,
         "hasNotifications" : true,
-        "pendingInput" : 1.1730742509559433,
+        "pendingInput" : 1.0246457001441578,
         "isOwnProgram" : true,
         "isReinvest" : true,
-        "gvtValue" : 1.0246457001441578,
+        "gvtValue" : 2.027123023002322,
         "isFinishing" : true,
-        "value" : 1.4894159098541704,
-        "profit" : 6.84685269835264,
-        "invested" : 7.457744773683766,
+        "canMakeSignalProvider" : true,
+        "value" : 4.145608029883936,
+        "profit" : 7.386281948385884,
+        "invested" : 1.2315135367772556,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -255,23 +270,23 @@ open class SearchAPI {
       "periodDuration" : 6,
       "statistic" : {
         "balanceBase" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "tradesCount" : 2,
+        "tradesCount" : 7,
         "balanceGVT" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "profitPercent" : 2.3021358869347655,
-        "profitValue" : 7.061401241503109,
-        "drawdownPercent" : 9.301444243932576,
-        "currentValue" : 5.637376656633329,
+        "profitPercent" : 1.4658129805029452,
+        "profitValue" : 5.962133916683182,
+        "drawdownPercent" : 5.637376656633329,
+        "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
-          "amount" : 5.962133916683182,
+          "amount" : 0.8008281904610115,
           "currency" : "Undefined"
         },
-        "investorsCount" : 3
+        "investorsCount" : 2
       },
       "color" : "color",
       "manager" : {
@@ -282,36 +297,47 @@ open class SearchAPI {
         "username" : "username"
       },
       "level" : 0,
-      "availableInvestment" : 1.4658129805029452,
+      "stopOutLevel" : 1.4658129805029452,
+      "availableInvestment" : 5.962133916683182,
       "rating" : {
-        "rating" : 4,
+        "rating" : 7,
         "canLevelUp" : true,
-        "topPercent" : 1.2315135367772556,
-        "profit" : 7.386281948385884
+        "topPercent" : 3.616076749251911,
+        "profit" : 9.301444243932576
       },
       "description" : "description",
       "title" : "title",
+      "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
       "dashboardAssetsDetails" : {
-        "share" : 5.025004791520295
+        "share" : 2.3021358869347655
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "isFollowSignals" : true,
         "canClosePeriod" : true,
-        "pendingOutput" : 4.965218492984954,
+        "pendingOutput" : 1.4894159098541704,
         "hasNotifications" : true,
-        "pendingInput" : 1.1730742509559433,
+        "pendingInput" : 1.0246457001441578,
         "isOwnProgram" : true,
         "isReinvest" : true,
-        "gvtValue" : 1.0246457001441578,
+        "gvtValue" : 2.027123023002322,
         "isFinishing" : true,
-        "value" : 1.4894159098541704,
-        "profit" : 6.84685269835264,
-        "invested" : 7.457744773683766,
+        "canMakeSignalProvider" : true,
+        "value" : 4.145608029883936,
+        "profit" : 7.386281948385884,
+        "invested" : 1.2315135367772556,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -330,7 +356,7 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 6,
+    "total" : 1,
     "managers" : [ {
       "assets" : [ "assets", "assets" ],
       "about" : "about",

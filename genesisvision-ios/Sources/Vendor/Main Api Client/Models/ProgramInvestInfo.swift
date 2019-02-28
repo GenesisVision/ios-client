@@ -12,7 +12,10 @@ import Foundation
 open class ProgramInvestInfo: Codable {
 
     public var periodEnds: Date?
+    /** In GVT */
     public var availableToInvest: Double?
+    /** In account currency */
+    public var availableToInvestBase: Double?
     public var title: String?
     public var availableInWallet: Double?
     public var minInvestmentAmount: Double?
@@ -23,9 +26,10 @@ open class ProgramInvestInfo: Codable {
 
 
     
-    public init(periodEnds: Date?, availableToInvest: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?, isOwnProgram: Bool?) {
+    public init(periodEnds: Date?, availableToInvest: Double?, availableToInvestBase: Double?, title: String?, availableInWallet: Double?, minInvestmentAmount: Double?, entryFee: Double?, gvCommission: Double?, rate: Double?, isOwnProgram: Bool?) {
         self.periodEnds = periodEnds
         self.availableToInvest = availableToInvest
+        self.availableToInvestBase = availableToInvestBase
         self.title = title
         self.availableInWallet = availableInWallet
         self.minInvestmentAmount = minInvestmentAmount
@@ -44,6 +48,7 @@ open class ProgramInvestInfo: Codable {
 
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(availableToInvest, forKey: "availableToInvest")
+        try container.encodeIfPresent(availableToInvestBase, forKey: "availableToInvestBase")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableInWallet, forKey: "availableInWallet")
         try container.encodeIfPresent(minInvestmentAmount, forKey: "minInvestmentAmount")
@@ -60,6 +65,7 @@ open class ProgramInvestInfo: Codable {
 
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableToInvest = try container.decodeIfPresent(Double.self, forKey: "availableToInvest")
+        availableToInvestBase = try container.decodeIfPresent(Double.self, forKey: "availableToInvestBase")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableInWallet = try container.decodeIfPresent(Double.self, forKey: "availableInWallet")
         minInvestmentAmount = try container.decodeIfPresent(Double.self, forKey: "minInvestmentAmount")

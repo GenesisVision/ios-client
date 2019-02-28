@@ -145,7 +145,7 @@ extension DashboardProgramListViewController: FavoriteStateChangeProtocol {
 
 extension DashboardProgramListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -157,9 +157,9 @@ extension DashboardProgramListViewController: DelegateManagerProtocol {
     }
 }
 
-extension DashboardProgramListViewController: ReinvestProtocol {
-    func didChangeReinvestSwitch(value: Bool, assetId: String) {
-        viewModel.didChangeReinvestSwitch(value: value, assetId: assetId)
+extension DashboardProgramListViewController: SwitchProtocol {
+    func didChangeSwitch(value: Bool, assetId: String) {
+        viewModel.didChangeSwitch(value: value, assetId: assetId)
     }
 }
 

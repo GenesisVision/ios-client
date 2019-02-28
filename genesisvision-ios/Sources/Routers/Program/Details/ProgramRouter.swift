@@ -9,7 +9,7 @@
 import UIKit.UINavigationController
 
 enum ProgramRouteType {
-    case notifications
+    case notificationSettings(assetId: String, title: String)
     case aboutLevels
 }
 
@@ -32,9 +32,8 @@ class ProgramRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramRouteType) {
         switch routeType {
-        case .notifications:
-            let vc = BaseViewController()
-            navigationController?.pushViewController(vc, animated: true)
+        case .notificationSettings(let assetId, let title):
+            showAssetNotificationsSettings(assetId, title: title, type: .program)
         case .aboutLevels:
             showAboutLevels()
         }

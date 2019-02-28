@@ -14,7 +14,9 @@ protocol NumpadViewProtocol: class {
     var currency: CurrencyType? { get }
     var numbersLimit: Int? { get }
     var maxAmount: Double? { get }
+    var minAmount: Double? { get }
     
+    func clearAction()
     func textLabelDidChange(value: Double?)
     func onClearClicked(view: NumpadView)
     func onSeparatorClicked(view: NumpadView)
@@ -36,6 +38,10 @@ extension NumpadViewProtocol {
     }
     
     var maxAmount: Double? {
+        return nil
+    }
+    
+    var minAmount: Double? {
         return nil
     }
     
@@ -82,9 +88,10 @@ extension NumpadViewProtocol {
         
         let amountString = text + valueString
         
-        if let maxAmount = maxAmount, let amount = Double(amountString), amount > maxAmount {
-            return
-        }
+        guard let amount = Double(amountString) else { return }
+        
+        if let maxAmount = maxAmount, amount > maxAmount { return }
+        if let minAmount = minAmount, amount < minAmount { return }
         
         if text == "0" {
             textLabel.text = value == 0 ? "0." : value.toString()
@@ -109,6 +116,15 @@ extension NumpadViewProtocol {
             changedActive(value: true)
         }
     }
+    
+    func clearAction() {
+        textLabel.text = textPlaceholder
+        
+        if let text = textLabel.text {
+            textLabelDidChange(value: text.doubleValue)
+            updateNumPadState(text)
+        }
+    }
 }
 
 enum NumpadViewType {
@@ -120,9 +136,20 @@ class NumpadView: UIView {
     
     var type: NumpadViewType = .number
     
+    @IBOutlet weak var numpadButtonHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_4_4S, .iPhones_5_5s_5c_SE:
+                numpadButtonHeightConstraint.constant = 40.0
+            default:
+                numpadButtonHeightConstraint.constant = 47.0
+            }
+        }
+    }
+    
     @IBOutlet var numberButtons: [NumpadButton]!
-    @IBOutlet var separatorButton: UIButton!
-    @IBOutlet var clearButton: UIButton!
+    @IBOutlet weak var separatorButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -164,6 +191,10 @@ class NumpadView: UIView {
                 button.bgColor = buttonBackgroundColor
             }
         }
+    }
+    
+    func clearAction() {
+        delegate?.clearAction()
     }
     
     @IBAction func clearButtonAction(_ sender: UIButton) {

@@ -42,7 +42,7 @@ extension Date {
     var onlyTimeFormatString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .medium
+        dateFormatter.timeStyle = .short
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }

@@ -6,6 +6,8 @@
 //  Copyright © 2018 UI At Six. All rights reserved.
 //
 
+// swiftlint:disable nesting
+
 import UIKit
 
 public extension TabmanBar {
@@ -19,7 +21,7 @@ public extension TabmanBar {
         
         public enum Style {
             case clear
-            case blur(style: UIBlurEffectStyle)
+            case blur(style: UIBlurEffect.Style)
             case solid(color: UIColor)
         }
         

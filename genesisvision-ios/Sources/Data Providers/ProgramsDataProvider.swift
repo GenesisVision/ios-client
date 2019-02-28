@@ -17,7 +17,7 @@ class ProgramsDataProvider: DataProvider {
         let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
         let statisticDateTo = filterModel?.dateRangeModel.dateTo
         
-        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet
+        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
         
         let profitAvgMin = filterModel?.profitAvgMin
         let profitAvgMax = filterModel?.profitAvgMax
@@ -92,13 +92,13 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func invest(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func invest(withAmount amount: Double, programId: String?, currency: InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorProgramsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization, currency: currency) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
@@ -111,6 +111,15 @@ class ProgramsDataProvider: DataProvider {
         
         InvestorAPI.v10InvestorProgramsByIdWithdrawByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
+        }
+    }
+    
+    static func getTradesOpen(with programId: String?, sorting: ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let programId = programId, let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsByIdTradesOpenGet(id: uuid, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
@@ -173,24 +182,6 @@ class ProgramsDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    
-    //    static func createProgram(with newInvestmentRequest: NewInvestmentRequest?, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-    //        guard let authorization = AuthManager.authorizedToken,
-    //            let newInvestmentRequest = newInvestmentRequest
-    //            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-    //
-    //        ManagerAPI.apiManagerAccountNewInvestmentRequestPost(authorization: authorization, request: newInvestmentRequest) { (uuid, error) in
-    //            DataProvider().responseHandler(error, completion: { (result) in
-    //                switch result {
-    //                case .success:
-    //                    completion(uuid?.uuidString)
-    //                case .failure:
-    //                    errorCompletion(result)
-    //                }
-    //            })
-    //        }
-    //    }
-    
     
     // MARK: - Private methods
     private static func programFavoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {

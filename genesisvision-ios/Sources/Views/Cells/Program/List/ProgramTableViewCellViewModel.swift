@@ -17,6 +17,7 @@ struct ProgramTableViewCellViewModel {
 
 extension ProgramTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
+        setupTagsBottomView(on: cell)
         
         cell.chartView.isHidden = true
         cell.noDataLabel.isHidden = false
@@ -86,16 +87,16 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         
-        cell.secondTitleLabel.text = "Balance"
-        if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
+        cell.secondTitleLabel.text = "Equity"
+        if let balance = asset.statistic?.balanceBase, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+            cell.secondValueLabel.text = amount.rounded(withType: currency, short: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }
         
         cell.thirdTitleLabel.text = "Av. to invest"
-        if let availableInvestment = asset.availableInvestment {
-            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
+        if let availableInvestment = asset.availableInvestmentBase, let currency = asset.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.thirdValueLabel.text = ""
         }
@@ -125,12 +126,53 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
-        if let profitValue = asset.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        }
+//        if let profitValue = asset.statistic?.profitValue {
+//            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+//        }
+        
+        cell.profitValueLabel.isHidden = true
         
         if let isInvested = asset.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested
+        }
+    }
+    
+    func setupTagsBottomView(on cell: ProgramTableViewCell) {
+        guard let tags = asset.tags, !tags.isEmpty else { return }
+        
+        let tagsCount = tags.count
+        cell.tagsBottomStackView.isHidden = false
+        
+        cell.firstTagLabel.isHidden = true
+        if let name = tags[0].name, let color = tags[0].color {
+            cell.firstTagLabel.isHidden = false
+            cell.firstTagLabel.text = name.uppercased()
+            cell.firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            cell.firstTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        cell.secondTagLabel.isHidden = true
+        if tagsCount > 1, let name = tags[1].name, let color = tags[1].color {
+            cell.secondTagLabel.isHidden = false
+            cell.secondTagLabel.text = name.uppercased()
+            cell.secondTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            cell.secondTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        cell.thirdTagLabel.isHidden = true
+        if tagsCount > 2, let name = tags[2].name, let color = tags[2].color {
+            cell.thirdTagLabel.isHidden = false
+            cell.thirdTagLabel.text = name.uppercased()
+            cell.thirdTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            cell.thirdTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        cell.otherTagLabel.isHidden = true
+        if tagsCount > 3 {
+            cell.otherTagLabel.isHidden = false
+            cell.otherTagLabel.text = "+\(tagsCount - 3)"
+            cell.otherTagLabel.backgroundColor = UIColor.Common.green.withAlphaComponent(0.1)
+            cell.otherTagLabel.textColor = UIColor.Common.green
         }
     }
 }

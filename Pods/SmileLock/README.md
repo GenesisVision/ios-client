@@ -19,14 +19,14 @@ A library for make a beautiful Passcode Lock View, also support Touch ID.
 - iOS 9.0+
 - Swift 4 (pod version 3.x), Swift 3 (pod version 2.x), Swift 2.3 (pod version 1.x)
 
-#What can it do for you?
+# What can it do for you?
 
 
 #### 1. Create a beautiful passcode lock view simply.
 
 ``` swift
 let kPasswordDigit = 6
-passwordContainerView = PasswordContainerView.createWithDigit(kPasswordDigit)
+passwordContainerView = PasswordContainerView.create(withDigit: kPasswordDigit)
 ```
 
 #### 2. Passcode input completed delegate callback.
@@ -44,7 +44,7 @@ extension ViewController: PasswordInputCompleteProtocol {
 
 ```
 
-#### 3. Touch ID.
+#### 3. Touch ID and Face ID
 
 Thanks for the contribution of [Piotr Sochalewski](https://github.com/sochalewski).👍
 
@@ -61,6 +61,10 @@ extension ViewController: PasswordInputCompleteProtocol {
 ```
 <img src="SmileLock-Example/demo_gif/touch_id.png" width="400">
 
+#### Face ID requirements
+
+Using Face ID requires adding `NSFaceIDUsageDescription` to your `Info.plist` otherwise the app would crash trying to use it.
+
 #### 4. Customize UI.
 
 ``` swift
@@ -72,7 +76,7 @@ passwordContainerView.highlightedColor = UIColor.color(.blue)
 If you want to see no visual effect, change the property `isBlurUI` to `false` in `HomeViewController.swift`.
 
 
-#How to use it for your project?
+# How to use it for your project?
 
 SmileLock is available through use [CocoaPods](http://cocoapods.org).
 

@@ -21,7 +21,7 @@ final class AllEventsViewModel {
     var dataType: DataType = .api
     var eventsCount: String = ""
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
             eventsCount = "\(totalCount) events"
@@ -35,7 +35,14 @@ final class AllEventsViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     
-    var viewModels = [PortfolioEventTableViewCellViewModel]()
+    var viewModels = [PortfolioEventTableViewCellViewModel]() {
+        didSet {
+            self.sortModels(viewModels)
+        }
+    }
+    
+    var sections = [Date : [PortfolioEventTableViewCellViewModel]]()
+    var sortedSections = [Date]()
     
     // MARK: - Init
     init(withRouter router: Router, assetId: String? = nil, reloadDataProtocol: ReloadDataProtocol?, allowsSelection: Bool = true) {
@@ -63,11 +70,11 @@ extension AllEventsViewModel {
     }
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return []
+        return [DateSectionTableHeaderView.self]
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return sortedSections.count
     }
     
     func modelsCount() -> Int {
@@ -75,19 +82,23 @@ extension AllEventsViewModel {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return modelsCount()
+        guard let section = sections[sortedSections[section]] else { return 0 }
+        return section.count
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 0.0
+        return sortedSections.count > 0 ? 20.0 : 0.0
+    }
+    
+    func titleForHeader(in section: Int) -> String {
+        return sortedSections[section].onlyDateFormatString
     }
     
     func didSelectPortfolioEvents(at indexPath: IndexPath) {
-        guard !viewModels.isEmpty else {
+        guard !viewModels.isEmpty, let selectedModel = model(for: indexPath) else {
             return
         }
         
-        let selectedModel = viewModels[indexPath.row]
         let event = selectedModel.dashboardPortfolioEvent
         if let assetId = event.assetId?.uuidString, let type = event.assetType, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
@@ -105,8 +116,10 @@ extension AllEventsViewModel {
     }
     
     /// Fetch more transactions from API -> Save fetched data -> Return CompletionBlock
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if numberOfSections() == indexPath.section + 1
+            && numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row
+            && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         
@@ -144,11 +157,36 @@ extension AllEventsViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for index: Int) -> PortfolioEventTableViewCellViewModel? {
-        return viewModels[index]
+    func model(for indexPath: IndexPath) -> PortfolioEventTableViewCellViewModel? {
+        guard let section = sections[sortedSections[indexPath.section]] else { return nil }
+        return section[indexPath.row]
     }
     
     // MARK: - Private methods
+    private func sortModels(_ viewModels: [PortfolioEventTableViewCellViewModel]) {
+        var sections = [Date : [PortfolioEventTableViewCellViewModel]]()
+        
+        for model in viewModels {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Bundle.main.locale
+            
+            guard let dateStr = model.dashboardPortfolioEvent.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
+            
+            if sections.index(forKey: date) == nil {
+                sections[date] = [model]
+            } else {
+                sections[date]!.append(model)
+                sections[date] = sections[date]!.sorted(by: { $0.dashboardPortfolioEvent.date!.compare($1.dashboardPortfolioEvent.date!) == .orderedDescending })
+            }
+        }
+        
+        sortedSections = sections.keys.sorted(by: { $0.compare($1) == .orderedDescending })
+        
+        self.sections = sections
+    }
+    
     private func updateFetchedData(totalCount: Int, viewModels: [PortfolioEventTableViewCellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount

@@ -128,7 +128,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yhp-9J-c7R">
-                                <rect key="frame" x="0.0" y="111.5" width="301" height="70"/>
+                                <rect key="frame" x="0.0" y="80.5" width="301" height="70"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf8-Ie-DjM">
                                         <rect key="frame" x="0.0" y="0.0" width="205" height="70"/>
@@ -200,7 +200,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c3b-lK-ryn">
-                                <rect key="frame" x="0.0" y="194.5" width="301" height="136"/>
+                                <rect key="frame" x="0.0" y="158.5" width="301" height="172"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-L2-2Gg">
                                         <rect key="frame" x="0.0" y="0.0" width="301" height="40"/>
@@ -341,8 +341,61 @@
                                             <constraint firstAttribute="height" constant="40" id="taf-xx-7fh"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jcf-d5-hPJ">
+                                        <rect key="frame" x="0.0" y="96" width="301" height="28"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="EWo-XJ-t4C">
+                                                <rect key="frame" x="0.0" y="0.0" width="240.5" height="28"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Yzg-tf-Wn9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="180.5" height="28"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Aw-Pw-bjB" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="28"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="gvU-WE-Rph"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDdkfhjdskjfhsdkf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-Mu-l2R" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="37" y="0.0" width="106.5" height="28"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORJ-Ss-wee" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="155.5" y="0.0" width="25" height="28"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                                <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="ORJ-Ss-wee" firstAttribute="height" secondItem="dEY-Mu-l2R" secondAttribute="height" id="Idh-cD-7Ke"/>
+                                                            <constraint firstItem="dEY-Mu-l2R" firstAttribute="height" secondItem="7Aw-Pw-bjB" secondAttribute="height" id="bGX-7s-JjO"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctu-R1-FDQ" customClass="RoundedLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                        <rect key="frame" x="192.5" y="0.0" width="48" height="28"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="48" id="Fho-D6-W6F"/>
+                                                            <constraint firstAttribute="height" constant="28" id="M9H-si-NVR"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                        <color key="textColor" red="0.15686274510000001" green="0.46274509800000002" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="06d-32-mTY"/>
+                                        </constraints>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZFN-SI-Ohn">
-                                        <rect key="frame" x="0.0" y="96" width="301" height="40"/>
+                                        <rect key="frame" x="0.0" y="132" width="301" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fL4-Hr-KuU">
                                                 <rect key="frame" x="0.0" y="0.0" width="301" height="40"/>
@@ -486,7 +539,6 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ahM-ew-RLl"/>
                                             <constraint firstAttribute="height" constant="40" id="iqg-mi-yWq"/>
                                         </constraints>
                                     </stackView>
@@ -515,6 +567,7 @@
                 <outlet property="favoriteButton" destination="Dy2-tB-PY6" id="lrb-dX-f3f"/>
                 <outlet property="firstFundAssetView" destination="qaX-aC-Bcd" id="0iI-Ab-I0R"/>
                 <outlet property="firstStackView" destination="3dc-il-rIy" id="yy4-c1-rZu"/>
+                <outlet property="firstTagLabel" destination="7Aw-Pw-bjB" id="kiy-TU-flM"/>
                 <outlet property="firstTitleLabel" destination="9vD-q0-1m7" id="Wqb-6T-JWS"/>
                 <outlet property="firstValueLabel" destination="YYm-1Z-EZR" id="S91-cZ-37X"/>
                 <outlet property="fundBottomStackView" destination="ZFN-SI-Ohn" id="suv-xg-LEp"/>
@@ -522,6 +575,7 @@
                 <outlet property="managerNameLabel" destination="AcF-qQ-Zug" id="29G-ZE-9Ju"/>
                 <outlet property="noDataLabel" destination="mzn-bM-hio" id="wv0-a9-B3X"/>
                 <outlet property="otherFundAssetView" destination="1t0-Lc-2TW" id="9Ay-z9-LcZ"/>
+                <outlet property="otherTagLabel" destination="Ctu-R1-FDQ" id="BQ3-Ja-49C"/>
                 <outlet property="periodLeftProgressView" destination="OOb-Mc-BeD" id="0Ee-we-vnc"/>
                 <outlet property="profitPercentLabel" destination="waZ-UU-3eb" id="rYP-Js-Pp2"/>
                 <outlet property="profitValueLabel" destination="HIW-Ax-xUy" id="kMN-Qf-dp5"/>
@@ -532,12 +586,15 @@
                 <outlet property="reinvestTooltip" destination="2d9-6n-WOL" id="1Ep-3u-bjh"/>
                 <outlet property="secondFundAssetView" destination="Pk0-kP-iwZ" id="Cwt-vz-8cc"/>
                 <outlet property="secondStackView" destination="sf1-Bb-YUA" id="o96-Vm-ABp"/>
+                <outlet property="secondTagLabel" destination="dEY-Mu-l2R" id="3rf-Tz-beP"/>
                 <outlet property="secondTitleLabel" destination="3fz-cm-Wwa" id="0Yp-xi-oQ2"/>
                 <outlet property="secondValueLabel" destination="e4V-HV-QRw" id="UOP-LQ-inF"/>
                 <outlet property="stackView" destination="zN4-IX-FiD" id="x50-gj-JWb"/>
                 <outlet property="statusButton" destination="7Ev-NB-uN5" id="ovE-fN-v88"/>
+                <outlet property="tagsBottomStackView" destination="jcf-d5-hPJ" id="2cE-83-PyP"/>
                 <outlet property="thirdFundAssetView" destination="i5T-fK-D9X" id="bIq-Y8-Y6g"/>
                 <outlet property="thirdStackView" destination="dGH-PM-kWn" id="aMZ-Rq-Sqa"/>
+                <outlet property="thirdTagLabel" destination="ORJ-Ss-wee" id="K7d-OJ-F9M"/>
                 <outlet property="thirdTitleLabel" destination="Zkc-dD-YUT" id="dvk-4C-SGN"/>
                 <outlet property="thirdValueLabel" destination="uZy-5J-VEO" id="3VP-Qm-zct"/>
                 <outlet property="titleLabel" destination="uuZ-15-n94" id="oar-dk-DrK"/>

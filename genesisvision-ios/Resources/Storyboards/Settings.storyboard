@@ -20,17 +20,17 @@
             <objects>
                 <tableViewController storyboardIdentifier="SettingsViewController" id="2Ya-3a-R2M" customClass="SettingsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5SI-7c-rA4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.066666666669999999" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.066666666669999999" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="1hw-hx-IPR" customClass="UITableViewHeaderFooterView">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="1hw-hx-IPR" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="578" width="375" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="App version 1.0a (1021)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lmg-9i-SOi" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                    <rect key="frame" x="0.0" y="116.5" width="375" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="Egw-da-prL"/>
                                     </constraints>
@@ -421,7 +421,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5w-5q-aux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303.2" y="191.6041979010495"/>
+            <point key="canvasLocation" x="1298" y="87"/>
         </scene>
         <!--Passcode View Controller-->
         <scene sceneID="cCf-59-WIr">

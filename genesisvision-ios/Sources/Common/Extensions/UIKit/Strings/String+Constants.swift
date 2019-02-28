@@ -14,6 +14,9 @@ extension String {
         static var investmentRequestSuccess: String = "You have been successfully invested <N> GVT in the investment program. Your tokens will be working for you only since the next reporting period.\n\nIn case you decide to cancel the investment before the start of the next reporting period, you will have to pay a commission, and you will get your GVT at the actual GVT exchange rate.".localized
         static var withdrawRequestSuccess: String = "At the end of the current trading period the tokens will be returned to the manager and your funds are return to you.".localized
         static var walletCopyAddress: String = "Your wallet-pane number was copied to the clipboard successfully.".localized
+        static var walletEmailSent: String = "Please approve the withdrawal request via the link in the confirmation email.".localized
+        static var withdrawalCanceled: String = "Transaction сanceled".localized
+        
         
         struct TwoFactor {
             static var twoFactorEnableSuccess: String = "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.".localized

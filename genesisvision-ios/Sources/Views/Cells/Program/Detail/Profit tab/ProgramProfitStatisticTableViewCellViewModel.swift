@@ -16,7 +16,7 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailProfitStatisticTableViewCell) {
         cell.titleLabel.text = "Statistics"
         
-        cell.balanceTitleLabel.text = "Balance"
+        cell.balanceTitleLabel.text = "Equity"
         if let value = programProfitChart.balance, let programCurrency = programProfitChart.programCurrency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
             cell.balanceValueLabel.text = value.rounded(withType: currency).toString() + " \(currency.rawValue)"
         }

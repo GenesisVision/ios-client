@@ -8,28 +8,28 @@
 
 import UIKit
 
-class ProgramTradesTableViewCell: PlateTableViewCell {
+class ProgramTradesTableViewCell: UITableViewCell {
 
     // MARK: - Labels
-    @IBOutlet var entryImageView: UIImageView! {
+    @IBOutlet weak var entryImageView: UIImageView! {
         didSet {
             entryImageView.roundCorners()
         }
     }
     
-    @IBOutlet var symbolLabel: TitleLabel! {
+    @IBOutlet weak var symbolLabel: TitleLabel! {
         didSet {
             symbolLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
-    @IBOutlet var directionLabel: SubtitleLabel!
+    @IBOutlet weak var directionLabel: SubtitleLabel!
     
-    @IBOutlet var balanceLabel: TitleLabel! {
+    @IBOutlet weak var balanceLabel: TitleLabel! {
         didSet {
             balanceLabel.font = UIFont.getFont(.semibold, size: 14.0)
         }
     }
-    @IBOutlet var profitLabel: SubtitleLabel! {
+    @IBOutlet weak var profitLabel: SubtitleLabel! {
         didSet {
             profitLabel.textColor = UIColor.Cell.greenTitle
         }

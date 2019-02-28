@@ -177,6 +177,7 @@ extension PageboyViewController: UIScrollViewDelegate {
             if self.autoScroller.restartsOnScrollEnd {
                 self.autoScroller.restart()
             }
+            self.expectedTransitionIndex = nil
         })
     }
     
@@ -265,13 +266,11 @@ private extension PageboyViewController {
     ///   - scrollView: The scroll view that is being scrolled.
     /// - Returns: Whether a page transition has been detected.
     private func detectCurrentPageIndexIfNeeded(pagePosition: CGFloat, scrollView: UIScrollView) -> Bool {
-        guard let currentIndex = self.currentIndex else {
-            return false
-        }
-        guard scrollView.isDecelerating == false else {
+        guard var currentIndex = self.currentIndex else {
             return false
         }
         
+        // Handle scenario where user continues to pan past a single page range.
         let isPagingForward = pagePosition > self.previousPagePosition ?? 0.0
         if scrollView.isTracking {
             if isPagingForward && pagePosition >= CGFloat(currentIndex + 1) {
@@ -285,10 +284,14 @@ private extension PageboyViewController {
         
         let isOnPage = pagePosition.truncatingRemainder(dividingBy: 1) == 0
         if isOnPage {
-            guard currentIndex != self.currentIndex else {
-                return false
+            
+            // Special case where scroll view might be decelerating but on a new index,
+            // and UIPageViewController didFinishAnimating is not called
+            if scrollView.isDecelerating {
+                currentIndex = Int(pagePosition)
             }
-            self.currentIndex = currentIndex
+            
+            return updateCurrentPageIndexIfNeeded(currentIndex)
         }
         
         return false
@@ -297,12 +300,15 @@ private extension PageboyViewController {
     /// Safely update the current page index.
     ///
     /// - Parameter index: the proposed index.
-    private func updateCurrentPageIndexIfNeeded(_ index: Int) {
+    /// - Returns: Whether the page index was updated.
+    @discardableResult
+    private func updateCurrentPageIndexIfNeeded(_ index: Int) -> Bool {
         guard self.currentIndex != index, index >= 0 &&
             index < self.viewControllerCount ?? 0 else {
-                return
+                return false
         }
         self.currentIndex = index
+        return true
     }
     
     /// Calculate the expected index diff for a page scroll.

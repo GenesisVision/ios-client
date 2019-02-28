@@ -80,7 +80,7 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
 extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         
@@ -88,7 +88,7 @@ extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     // MARK: - UITableViewDataSource

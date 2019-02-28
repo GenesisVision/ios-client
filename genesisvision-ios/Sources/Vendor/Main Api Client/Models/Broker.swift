@@ -20,10 +20,12 @@ open class Broker: Codable {
     public var leverageMin: Int?
     public var leverageMax: Int?
     public var accountTypes: [BrokerAccountType]?
+    public var isForex: Bool?
+    public var isSignalsAvailable: Bool?
 
 
     
-    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?) {
+    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?, isForex: Bool?, isSignalsAvailable: Bool?) {
         self.name = name
         self.description = description
         self.logo = logo
@@ -33,6 +35,8 @@ open class Broker: Codable {
         self.leverageMin = leverageMin
         self.leverageMax = leverageMax
         self.accountTypes = accountTypes
+        self.isForex = isForex
+        self.isSignalsAvailable = isSignalsAvailable
     }
     
 
@@ -51,6 +55,8 @@ open class Broker: Codable {
         try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
         try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
         try container.encodeIfPresent(accountTypes, forKey: "accountTypes")
+        try container.encodeIfPresent(isForex, forKey: "isForex")
+        try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
     }
 
     // Decodable protocol methods
@@ -67,6 +73,8 @@ open class Broker: Codable {
         leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
         leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
         accountTypes = try container.decodeIfPresent([BrokerAccountType].self, forKey: "accountTypes")
+        isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
+        isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit.UIImage
 extension UIImage {
     static var placeholder: UIImage =  #imageLiteral(resourceName: "img_logo")
     static var programPlaceholder: UIImage =  #imageLiteral(resourceName: "img_program_placeholder")
+    static var walletPlaceholder: UIImage =  #imageLiteral(resourceName: "img_wallet_gvt_icon")
     static var fundPlaceholder: UIImage =  #imageLiteral(resourceName: "img_program_placeholder")
     static var profilePlaceholder: UIImage =  #imageLiteral(resourceName: "img_manager_placeholder")
     static var eventPlaceholder: UIImage =  #imageLiteral(resourceName: "img_wallet_transaction_icon")

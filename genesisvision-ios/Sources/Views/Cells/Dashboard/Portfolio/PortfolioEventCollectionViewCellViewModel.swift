@@ -54,14 +54,14 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
             case .invest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-            case .all:
-                cell.typeImageView.image = nil
             case .reinvest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_reinvest")
-            case .cancelled:
+            case .canceled:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_canceled")
             case .ended:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_program_finished")
+            default:
+                cell.typeImageView.image = nil
             }
         }
     }

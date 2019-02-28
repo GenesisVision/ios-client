@@ -53,14 +53,16 @@ public final class AutoInsetter {
             if scrollView.contentInset != requiredContentInset {
                 
                 let isTopInsetChanged = requiredContentInset.top != scrollView.contentInset.top
-                
+                let topInsetDelta = requiredContentInset.top - scrollView.contentInset.top
+
                 scrollView.contentInset = requiredContentInset
                 scrollView.scrollIndicatorInsets = requiredContentInset
                                 
                 // only update contentOffset if the top contentInset has updated.
                 if isTopInsetChanged {
                     var contentOffset = scrollView.contentOffset
-                    contentOffset.y = -requiredContentInset.top
+                    let candidateYOffset = contentOffset.y - topInsetDelta
+                    contentOffset.y = min(candidateYOffset, 0.0) // Only update content offset if we're pushing content 'down' ( < 0.0)
                     scrollView.contentOffset = contentOffset
                 }
             }
@@ -115,12 +117,13 @@ private extension AutoInsetter {
             let relativeFrame = viewController.view.convert(scrollView.frame, from: relativeSuperview)
             let relativeTopInset = max(requiredContentInset.top - relativeFrame.minY, 0.0)
             let bottomInsetMinY = viewController.view.bounds.height - requiredContentInset.bottom
-            let relativeBottomInset = fabs(min(bottomInsetMinY - relativeFrame.maxY, 0.0))
+            let relativeBottomInset = abs(min(bottomInsetMinY - relativeFrame.maxY, 0.0))
+            let originalContentInset = scrollView.contentInset
             
             proposedContentInset = UIEdgeInsets(top: relativeTopInset,
-                                                left: 0.0,
+                                                left: originalContentInset.left,
                                                 bottom: relativeBottomInset,
-                                                right: 0.0)
+                                                right: originalContentInset.right)
         }
         
         currentScrollViewInsets[scrollView] = proposedContentInset

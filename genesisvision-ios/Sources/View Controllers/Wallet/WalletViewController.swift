@@ -6,236 +6,143 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import UIKit
 
-class WalletViewController: BaseViewControllerWithTableView {
+import UIKit
+import Tabman
+
+class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
+    // MARK: - Variables
+    private var moreBarButtonItem: UIBarButtonItem!
     
-    // MARK: - View Model
-    var viewModel: WalletControllerViewModel!
+    var currencyDelegateManager: CurrencyDelegateManager?
     
-    // MARK: - Outlets
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
-    
-    var walletTableHeaderViewHeightStart: CGFloat = 300.0
-    var walletTableHeaderViewHeight: CGFloat = 300.0
-    var walletTableHeaderViewHeightEnd: CGFloat = 100.0
-    
-    var walletTableHeaderView: WalletTableHeaderView?
-    
-    private var withdrawBarButtonItem: UIBarButtonItem!
-    private var addFundsBarButtonItem: UIBarButtonItem!
+    var navigationTitleView: NavigationTitleView?
+    var bottomSheetController: BottomSheetController!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setup()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        updateTitle()
+        updateCurrencyButtonTitle()
     }
     
     // MARK: - Private methods
     private func setup() {
-//        registerForPreviewing()
-
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        bar.items = viewModel.items
+        
         setupUI()
-        fetch()
     }
     
     private func setupUI() {
-        noDataTitle = viewModel.noDataText()
-        noDataButtonTitle = viewModel.noDataButtonTitle()
-        if let imageName = viewModel.noDataImageName() {
-            noDataImage = UIImage(named: imageName)
-        }
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
         
-        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        addCurrencyTitleButton(CurrencyDelegateManager())
-        
-        bottomViewType = .none
-        
-        updateTitle()
-    
-        withdrawBarButtonItem = UIBarButtonItem(title: "Withdraw", style: .done, target: self, action: #selector(withdrawButtonAction))
-        addFundsBarButtonItem = UIBarButtonItem(title: "Add funds", style: .done, target: self, action: #selector(addFundsButtonAction))
-        addFundsBarButtonItem.tintColor = UIColor.primary
-    
-        navigationItem.leftBarButtonItem = withdrawBarButtonItem
-        navigationItem.rightBarButtonItem = addFundsBarButtonItem
-    }
-    
-    @objc private func withdrawButtonAction() {
-        viewModel.withdraw()
-    }
-    
-    @objc private func addFundsButtonAction() {
-        viewModel.deposit()
-    }
-    
-    private func updateTitle() {
-        navigationItem.title = viewModel.title
-    }
-    
-    private func setupTableConfiguration() {
-        tableView.configure(with: .defaultConfiguration)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
-        
-        setupPullToRefresh(scrollView: tableView)
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-
-        fetchBalance()
-        fetchTransactions()
-    }
-
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
-            self.tableView?.reloadData()
-        }
-    }
-
-    override func fetch() {
-        showProgressHUD()
-        fetchBalance()
-        fetchTransactions()
-    }
-    
-    private func fetchBalance() {
-        viewModel.fetchBalance { [weak self] (result) in
-            self?.reloadData()
-        }
-    }
-    
-    private func fetchTransactions() {
-        viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
+        if viewModel.wallet == nil {
+            moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_more_icon"), style: .done, target: self, action: #selector(moreBarButtonAction))
+            navigationItem.rightBarButtonItem = moreBarButtonItem
             
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
+            navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+            
+            addCurrencyTitleButton(CurrencyDelegateManager())
         }
     }
     
-    private func showWalletTransaction(model: WalletTransaction) {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300
+    @objc func moreBarButtonAction() {
+        guard let wallet = viewModel.multiWallet else { return }
         
-        let view = WalletTransactionView.viewFromNib()
-        view.configure(model)
-        bottomSheetController.addContentsView(view)
+        let walletMoreButtonView = WalletMoreButtonView.viewFromNib()
+        walletMoreButtonView.delegate = self
+        walletMoreButtonView.configure(wallet)
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.initializeHeight = 120
+        bottomSheetController.addContentsView(walletMoreButtonView)
+        bottomSheetController.present()
+    }
+    
+    @objc private func currencyButtonAction() {
+        currencyDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 250.0
+        
+        bottomSheetController.addNavigationBar("Preferred currency")
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            currencyDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
+            currencyDelegateManager.loadCurrencies()
+            tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
+            tableView.delegate = currencyDelegateManager
+            tableView.dataSource = currencyDelegateManager
+        }
+        
         bottomSheetController.present()
     }
 }
 
-extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//Currency button
+extension WalletViewController {
+    private func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
+        navigationTitleView?.currencyTitleButton.addTarget(self, action: #selector(currencyButtonAction), for: .touchUpInside)
+        self.currencyDelegateManager = currencyDelegateManager
+        currencyDelegateManager?.currencyDelegate = self
         
-        guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
+        navigationItem.titleView = navigationTitleView
+    }
+    
+    private func updateCurrencyButtonTitle() {
+        let selectedCurrency = getSelectedCurrency()
+        navigationTitleView?.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
+        navigationTitleView?.currencyTitleButton.sizeToFit()
+    }
+}
+
+extension WalletViewController: CurrencyDelegateManagerProtocol {
+    func didSelectCurrency(at indexPath: IndexPath) {
+        updateCurrencyButtonTitle()
+        viewModel.reloadDetails()
         
-        guard let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel else { return }
-        
-        showWalletTransaction(model: model.walletTransaction)
+        bottomSheetController.dismiss()
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
-            return TableViewCell()
-        }
-        
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMoreTransactions(at: indexPath.row))
-    }
-    
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return walletTableHeaderViewHeight
-        default:
-            return viewModel.headerHeight(for: section)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            let header = tableView.dequeueReusableHeaderFooterView() as WalletTableHeaderView
-            if let wallet = viewModel.wallet {
-                header.configure(wallet)
+}
+
+extension WalletViewController: WalletMoreButtonViewProtocol {
+    func feeSwitchDidChange(value: Bool) {
+        showProgressHUD()
+        WalletDataProvider.feeChange(value) { [weak self] (result) in
+            self?.hideHUD()
+            self?.bottomSheetController.dismiss()
+            
+            switch result {
+            case .success:
+                self?.viewModel.multiWallet?.payFeesWithGvt = value
+            case .failure(let errorType):
+                print(errorType)
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
-            
-            walletTableHeaderView = header
-            
-            return walletTableHeaderView
-        case 1:
-            guard let title = viewModel.headerTitle(for: section) else {
-                return nil
-            }
-            
-            let header = tableView.dequeueReusableHeaderFooterView() as DefaultTableHeaderView
-            header.headerLabel.text = title
-            return header
-        default:
-            return nil
         }
     }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.BaseView.bg
-        }
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
+    func aboutFeesButtonDidTapped() {
+        bottomSheetController.dismiss()
+        
+        viewModel.showAboutFees()
     }
 }
 
 extension WalletViewController: WalletProtocol {
-    func didWithdrawn() {
-        reloadData()
-    }
-}
-
-extension WalletViewController: ReloadDataProtocol {
-    func didReloadData() {
-        reloadData()
+    func didUpdateData() {
+        viewModel.reloadDetails()
     }
 }

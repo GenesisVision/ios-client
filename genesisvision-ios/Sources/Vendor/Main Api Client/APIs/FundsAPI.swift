@@ -361,7 +361,7 @@ open class FundsAPI {
   "entryFee" : 0.8008281904610115,
   "statistic" : {
     "balanceGVT" : {
-      "amount" : 5.962133916683182,
+      "amount" : 0.8008281904610115,
       "currency" : "Undefined"
     },
     "profitPercent" : 5.637376656633329,
@@ -371,7 +371,7 @@ open class FundsAPI {
     "startDate" : "2000-01-23T04:56:07.000+00:00",
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
-      "amount" : 5.962133916683182,
+      "amount" : 0.8008281904610115,
       "currency" : "Undefined"
     },
     "investorsCount" : 7
@@ -403,18 +403,20 @@ open class FundsAPI {
     "canCloseProgram" : true,
     "canWithdraw" : true,
     "canInvest" : true,
+    "isFollowSignals" : true,
     "canClosePeriod" : true,
     "canReallocate" : true,
-    "pendingOutput" : 6.878052220127876,
+    "pendingOutput" : 3.5571952270680973,
     "hasNotifications" : true,
-    "pendingInput" : 6.778324963048013,
+    "pendingInput" : 6.438423552598547,
     "isOwnProgram" : true,
     "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
     "isFinishing" : true,
-    "value" : 6.965117697638846,
-    "profit" : 1.284659006116532,
-    "withdrawPercent" : 3.5571952270680973,
-    "invested" : 2.8841621266687802,
+    "canMakeSignalProvider" : true,
+    "value" : 6.683562403749608,
+    "profit" : 8.762042012749001,
+    "withdrawPercent" : 9.369310271410669,
+    "invested" : 9.018348186070783,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -523,21 +525,21 @@ open class FundsAPI {
      Funds list
      - GET /v1.0/funds
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 9,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 8.762042012749001,
-      "drawdownPercent" : 9.018348186070783,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -551,35 +553,37 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.878052220127876,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 6.778324963048013,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.965117697638846,
-      "profit" : 1.284659006116532,
-      "withdrawPercent" : 3.5571952270680973,
-      "invested" : 2.8841621266687802,
+      "canMakeSignalProvider" : true,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -595,19 +599,19 @@ open class FundsAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 9,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "profitPercent" : 8.762042012749001,
-      "drawdownPercent" : 9.018348186070783,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
-        "amount" : 5.962133916683182,
+        "amount" : 0.8008281904610115,
         "currency" : "Undefined"
       },
-      "investorsCount" : 6
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -621,35 +625,37 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 6.683562403749608
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.025004791520295
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.878052220127876,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 6.778324963048013,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.965117697638846,
-      "profit" : 1.284659006116532,
-      "withdrawPercent" : 3.5571952270680973,
-      "invested" : 2.8841621266687802,
+      "canMakeSignalProvider" : true,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -724,7 +730,7 @@ open class FundsAPI {
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsSetsGet(authorization: String, completion: @escaping ((_ data: ProgramSets?,_ error: Error?) -> Void)) {
+    open class func v10FundsSetsGet(authorization: String, completion: @escaping ((_ data: FundSets?,_ error: Error?) -> Void)) {
         v10FundsSetsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -736,14 +742,18 @@ open class FundsAPI {
      - GET /v1.0/funds/sets
      - examples: [{contentType=application/json, example={
   "sets" : [ {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByProfitAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "url" : "url"
   }, {
+    "timeframe" : "Day",
     "sortType" : "New",
+    "sorting" : "ByProfitAsc",
     "description" : "description",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -755,9 +765,9 @@ open class FundsAPI {
      
      - parameter authorization: (header) JWT access token 
 
-     - returns: RequestBuilder<ProgramSets> 
+     - returns: RequestBuilder<FundSets> 
      */
-    open class func v10FundsSetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProgramSets> {
+    open class func v10FundsSetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<FundSets> {
         let path = "/v1.0/funds/sets"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -769,7 +779,7 @@ open class FundsAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ProgramSets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<FundSets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }

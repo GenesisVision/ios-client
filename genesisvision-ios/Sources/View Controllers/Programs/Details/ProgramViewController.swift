@@ -20,7 +20,15 @@ class ProgramViewController: BaseViewController {
         }
     }
     
-    var minHeaderHeight: CGFloat = 200.0
+    var minHeaderHeight: CGFloat = {
+        switch UIDevice.current.screenType {
+        case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
+            return 244.0
+        default:
+            return 200.0
+        }
+    }()
+    
     var topConstant: CGFloat = 0.0
     
     @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
@@ -135,11 +143,11 @@ class ProgramViewController: BaseViewController {
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
-        navigationItem.rightBarButtonItems = [favoriteBarButtonItem]
+        navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
     }
     
     @objc func notificationsButtonAction() {
-        viewModel.showNotifications()
+        viewModel.showNotificationSettings()
     }
     
     // MARK: - IBActions

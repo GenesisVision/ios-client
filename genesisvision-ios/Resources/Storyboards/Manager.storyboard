@@ -188,6 +188,7 @@
                         <outlet property="titleBottomConstraint" destination="Kf2-My-mMi" id="0FP-RO-VEE"/>
                         <outlet property="titleLabel" destination="Td2-xI-pUl" id="V2u-IB-t3J"/>
                         <outlet property="titleLeadingConstraint" destination="cmG-51-o1S" id="qhe-ko-boy"/>
+                        <outlet property="titleTrailingConstraint" destination="S54-ka-Z9o" id="oL9-S3-eHG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moV-Hw-lGG" userLabel="First Responder" sceneMemberID="firstResponder"/>

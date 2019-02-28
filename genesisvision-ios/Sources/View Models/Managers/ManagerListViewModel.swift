@@ -24,9 +24,9 @@ final class ManagerListViewModel: ListViewModelProtocol {
     var canFetchMoreResults = true
     var dataType: DataType = .api
     
-    var chartPointsCount = Api.equityChartLength
+    var chartPointsCount = ApiKeys.equityChartLength
     var skip = 0
-    var take = Api.take
+    var take = ApiKeys.take
     var totalCount = 0
     
     var showFacets = false
@@ -88,8 +88,8 @@ final class ManagerListViewModel: ListViewModelProtocol {
 // MARK: - Fetch
 extension ManagerListViewModel {
     // MARK: - Public methods
-    func fetchMore(at row: Int) -> Bool {
-        if modelsCount() - Api.fetchThreshold == row && canFetchMoreResults && modelsCount() >= take {
+    func fetchMore(at indexPath: IndexPath) -> Bool {
+        if modelsCount() - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && modelsCount() >= take {
             fetchMore()
         }
         

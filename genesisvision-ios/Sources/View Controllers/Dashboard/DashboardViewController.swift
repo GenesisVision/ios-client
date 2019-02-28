@@ -23,6 +23,19 @@ class DashboardViewController: BaseViewController {
     @IBOutlet weak var eventsView: UIView!
     @IBOutlet weak var assetsView: UIView!
     
+    @IBOutlet weak var selectedChartAssetsView: SelectedChartAssetsView!
+    @IBOutlet weak var selectedChartAssetsViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var selectedChartAssetsViewBottomConstraint: NSLayoutConstraint! {
+        didSet {
+            switch UIDevice.current.screenType {
+            case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
+                selectedChartAssetsViewBottomConstraint.constant = -(49 + 34)
+            default:
+                selectedChartAssetsViewBottomConstraint.constant = -49
+            }
+        }
+    }
+    
     var eventsViewHeightStart: CGFloat = 150.0
     var eventsViewHeightEnd: CGFloat = 220.0
     
@@ -47,6 +60,12 @@ class DashboardViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.bringSubview(toFront: selectedChartAssetsView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,6 +138,7 @@ class DashboardViewController: BaseViewController {
         }
         
         if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
+            UIApplication.shared.applicationIconBadgeNumber = notificationsCount
             notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
             navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
         }
@@ -169,6 +189,7 @@ class DashboardViewController: BaseViewController {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationList()
+        UIApplication.shared.applicationIconBadgeNumber = 0
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
     }
@@ -199,7 +220,6 @@ class DashboardViewController: BaseViewController {
 extension DashboardViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         viewModel.deselectChart()
-        navigationTitleView?.scrollViewDidScroll(scrollView, threshold: -30.0)
         
         let yOffset = scrollView.contentOffset.y
         let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0

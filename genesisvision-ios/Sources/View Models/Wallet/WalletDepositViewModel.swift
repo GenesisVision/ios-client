@@ -28,64 +28,57 @@ final class WalletDepositViewModel {
     
     private var qrImage: UIImage?
     
-    var walletsInfo: WalletsInfo? {
+    var selectedCurrency: WalletData.Currency = .gvt
+    
+    var walletMultiSummary: WalletMultiSummary?
+    var selectedWallet: WalletData? {
         didSet {
-            self.selectedWallet = walletsInfo?.wallets?.first(where: { $0.currency == .gvt })
-            self.selectedWalletCurrencyIndex = walletsInfo?.wallets?.firstIndex(where: { $0.currency == .gvt }) ?? 0
-        }
-    }
-    var selectedWallet: WalletInfo? {
-        didSet {
-            guard let selectedWallet = selectedWallet,
-                let address = selectedWallet.address
-                else { return }
+            guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddress else { return }
             
             self.address = address
         }
     }
-    
     var selectedWalletCurrencyIndex: Int = 0
     
     
     // MARK: - Init
-    init(withRouter router: WalletDepositRouter) {
+    init(withRouter router: WalletDepositRouter, currency: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
         self.router = router
+        self.walletMultiSummary = walletMultiSummary
+        
+        setup(currency: currency)
+    }
+    
+    private func setup(currency: CurrencyType) {
+        if let selectedCurrency = WalletData.Currency(rawValue: currency.rawValue) {
+            self.selectedCurrency = selectedCurrency
+            self.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
+            self.selectedWalletCurrencyIndex = walletMultiSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrency }) ?? 0
+        }
     }
     
     // MARK: - Public methods
     func updateWalletCurrencyIndex(_ selectedIndex: Int) {
-        guard let withdrawalSummary = walletsInfo,
-            let wallets = withdrawalSummary.wallets else { return }
+        guard let walletMultiSummary = walletMultiSummary,
+            let wallets = walletMultiSummary.wallets else { return }
         selectedWallet = wallets[selectedIndex]
         selectedWalletCurrencyIndex = selectedIndex
     }
     
-    
     // MARK: - Picker View Values
     func walletCurrencyValues() -> [String] {
-        guard let withdrawalSummary = walletsInfo,
-            let wallets = withdrawalSummary.wallets else {
+        guard let walletMultiSummary = walletMultiSummary,
+            let wallets = walletMultiSummary.wallets else {
                 return []
         }
         
         return wallets.map {
-            if let description = $0.description, let currency = $0.currency?.rawValue {
+            if let description = $0.title, let currency = $0.currency?.rawValue {
                 return description + " | " + currency
             }
             
             return ""
         }
-    }
-    
-    func getInfo(completion: @escaping CompletionBlock) {
-        WalletDataProvider.getWalletAddresses(completion: { [weak self] (walletsInfo) in
-            guard let walletsInfo = walletsInfo else {
-                return completion(.failure(errorType: .apiError(message: nil)))
-            }
-            
-            self?.walletsInfo = walletsInfo
-            completion(.success)
-            }, errorCompletion: completion)
     }
     
     func getAddress() -> String {

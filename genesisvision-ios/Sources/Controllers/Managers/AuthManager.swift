@@ -11,7 +11,7 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
-    private static var walletViewModel: WalletSummary?
+    private static var walletViewModel: WalletMultiSummary?
     private static var ratesModel: RatesModel?
     private static var twoFactorStatus: TwoFactorStatus?
     
@@ -67,13 +67,7 @@ class AuthManager {
         }
     }
     
-    static func getBalance(completion: @escaping (_ balance: Double) -> Void, completionError: @escaping CompletionBlock) {
-        getWallet(completion: { (viewModel) in
-            completion(walletViewModel?.availableGVT?.rounded(withType: .gvt) ?? 0.0)
-        }, completionError: completionError)
-    }
-    
-    static func saveWalletViewModel(viewModel: WalletSummary) {
+    static func saveWalletViewModel(viewModel: WalletMultiSummary) {
         self.walletViewModel = viewModel
     }
     
@@ -136,14 +130,15 @@ class AuthManager {
         }
     }
     
-    static func getWallet(completion: @escaping (_ wallet: WalletSummary?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getWallet(with currency: WalletAPI.Currency_v10WalletMultiByCurrencyGet? = nil, completion: @escaping (_ wallet: WalletMultiSummary?) -> Void, completionError: @escaping CompletionBlock) {
+        
         if let walletViewModel = walletViewModel {
             completion(walletViewModel)
         }
         
-        let currency: WalletAPI.Currency_v10WalletByCurrencyGet = .gvt
-        
-        WalletDataProvider.getWallet(with: currency, completion: { (viewModel) in
+        let selectedCurrency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) ?? .gvt
+            
+        WalletDataProvider.getMulti(with: currency ?? selectedCurrency, completion: { (viewModel) in
             if viewModel != nil  {
                 walletViewModel = viewModel
             }

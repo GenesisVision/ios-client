@@ -16,19 +16,17 @@ open class KycCallback: Codable {
     public var correlationId: String?
     public var externalUserId: String?
     public var success: Bool?
-    public var details: Any?
     public var type: String?
     public var review: Review?
 
 
     
-    public init(applicantId: String?, inspectionId: String?, correlationId: String?, externalUserId: String?, success: Bool?, details: Any?, type: String?, review: Review?) {
+    public init(applicantId: String?, inspectionId: String?, correlationId: String?, externalUserId: String?, success: Bool?, type: String?, review: Review?) {
         self.applicantId = applicantId
         self.inspectionId = inspectionId
         self.correlationId = correlationId
         self.externalUserId = externalUserId
         self.success = success
-        self.details = details
         self.type = type
         self.review = review
     }
@@ -45,7 +43,6 @@ open class KycCallback: Codable {
         try container.encodeIfPresent(correlationId, forKey: "correlationId")
         try container.encodeIfPresent(externalUserId, forKey: "externalUserId")
         try container.encodeIfPresent(success, forKey: "success")
-        try container.encodeIfPresent(details, forKey: "details")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(review, forKey: "review")
     }
@@ -60,7 +57,6 @@ open class KycCallback: Codable {
         correlationId = try container.decodeIfPresent(String.self, forKey: "correlationId")
         externalUserId = try container.decodeIfPresent(String.self, forKey: "externalUserId")
         success = try container.decodeIfPresent(Bool.self, forKey: "success")
-        details = try container.decodeIfPresent(Any.self, forKey: "details")
         type = try container.decodeIfPresent(String.self, forKey: "type")
         review = try container.decodeIfPresent(Review.self, forKey: "review")
     }

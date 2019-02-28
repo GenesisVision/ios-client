@@ -16,6 +16,8 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     var viewModel: NotificationListViewModel!
     
     // MARK: - Outlets
+    private var notificationsBarButtonItem: UIBarButtonItem!
+
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
@@ -40,6 +42,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         tableView.allowsSelection = viewModel.allowsSelection
         
@@ -49,10 +52,17 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     private func setup() {
         navigationItem.title = viewModel.title
         
+        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_settings"), style: .done, target: self, action: #selector(notificationsButtonAction))
+        navigationItem.rightBarButtonItem = notificationsBarButtonItem
+
         setupNavigationBar()
         
         showProgressHUD()
         fetch()
+    }
+    
+    @objc func notificationsButtonAction() {
+        viewModel.showNotificationsSettings()
     }
     
     private func reloadData() {
@@ -85,7 +95,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
 extension NotificationListViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath.row) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         
@@ -93,7 +103,7 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath.row))
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -115,6 +125,12 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
         return viewModel.headerHeight(for: section)
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
+        header.headerLabel.text = viewModel.titleForHeader(in: section)
+        return header
+    }
+
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath), viewModel.didHighlightRowAt(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)

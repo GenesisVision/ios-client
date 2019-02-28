@@ -12,6 +12,10 @@ import Foundation
 open class ProgramsInfo: Codable {
 
     public var managerProgramInvestment: Double?
+    public var managerProgramInvestmentUSD: Double?
+    public var managerProgramInvestmentUSDT: Double?
+    public var managerProgramInvestmentBTC: Double?
+    public var managerProgramInvestmentETH: Double?
     public var managerMaxEntryFee: Double?
     public var managerMaxSuccessFee: Double?
     public var managerFundInvestment: Double?
@@ -20,8 +24,12 @@ open class ProgramsInfo: Codable {
 
 
     
-    public init(managerProgramInvestment: Double?, managerMaxEntryFee: Double?, managerMaxSuccessFee: Double?, managerFundInvestment: Double?, managerMaxExitFee: Double?, periods: [Int]?) {
+    public init(managerProgramInvestment: Double?, managerProgramInvestmentUSD: Double?, managerProgramInvestmentUSDT: Double?, managerProgramInvestmentBTC: Double?, managerProgramInvestmentETH: Double?, managerMaxEntryFee: Double?, managerMaxSuccessFee: Double?, managerFundInvestment: Double?, managerMaxExitFee: Double?, periods: [Int]?) {
         self.managerProgramInvestment = managerProgramInvestment
+        self.managerProgramInvestmentUSD = managerProgramInvestmentUSD
+        self.managerProgramInvestmentUSDT = managerProgramInvestmentUSDT
+        self.managerProgramInvestmentBTC = managerProgramInvestmentBTC
+        self.managerProgramInvestmentETH = managerProgramInvestmentETH
         self.managerMaxEntryFee = managerMaxEntryFee
         self.managerMaxSuccessFee = managerMaxSuccessFee
         self.managerFundInvestment = managerFundInvestment
@@ -37,6 +45,10 @@ open class ProgramsInfo: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(managerProgramInvestment, forKey: "managerProgramInvestment")
+        try container.encodeIfPresent(managerProgramInvestmentUSD, forKey: "managerProgramInvestmentUSD")
+        try container.encodeIfPresent(managerProgramInvestmentUSDT, forKey: "managerProgramInvestmentUSDT")
+        try container.encodeIfPresent(managerProgramInvestmentBTC, forKey: "managerProgramInvestmentBTC")
+        try container.encodeIfPresent(managerProgramInvestmentETH, forKey: "managerProgramInvestmentETH")
         try container.encodeIfPresent(managerMaxEntryFee, forKey: "managerMaxEntryFee")
         try container.encodeIfPresent(managerMaxSuccessFee, forKey: "managerMaxSuccessFee")
         try container.encodeIfPresent(managerFundInvestment, forKey: "managerFundInvestment")
@@ -50,6 +62,10 @@ open class ProgramsInfo: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         managerProgramInvestment = try container.decodeIfPresent(Double.self, forKey: "managerProgramInvestment")
+        managerProgramInvestmentUSD = try container.decodeIfPresent(Double.self, forKey: "managerProgramInvestmentUSD")
+        managerProgramInvestmentUSDT = try container.decodeIfPresent(Double.self, forKey: "managerProgramInvestmentUSDT")
+        managerProgramInvestmentBTC = try container.decodeIfPresent(Double.self, forKey: "managerProgramInvestmentBTC")
+        managerProgramInvestmentETH = try container.decodeIfPresent(Double.self, forKey: "managerProgramInvestmentETH")
         managerMaxEntryFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxEntryFee")
         managerMaxSuccessFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxSuccessFee")
         managerFundInvestment = try container.decodeIfPresent(Double.self, forKey: "managerFundInvestment")

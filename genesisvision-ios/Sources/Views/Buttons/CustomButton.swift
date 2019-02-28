@@ -163,6 +163,7 @@ struct ActionButtonOptions {
 enum ActionButtonStyle {
     case normal
     case highClear
+    case lightBorder
     case darkClear
     case filter(image: UIImage?)
     case custom(options: ActionButtonOptions)
@@ -196,6 +197,8 @@ class ActionButton: UIButton {
             self.options = ActionButtonOptions(borderWidth: 1.0, borderColor: UIColor.Cell.bg.withAlphaComponent(0.2), fontSize: nil, bgColor: UIColor.Common.white, textColor: UIColor.Cell.bg, image: nil, rightPosition: nil)
         case .filter(let image):
             self.options = ActionButtonOptions(borderWidth: nil, borderColor: nil, fontSize: nil, bgColor: UIColor.BottomView.Filter.bg, textColor: UIColor.BottomView.Filter.title, image: image, rightPosition: nil)
+        case .lightBorder:
+            self.options = ActionButtonOptions(borderWidth: 1.0, borderColor: UIColor.Border.forButton, fontSize: nil, bgColor: UIColor.clear, textColor: UIColor.primary, image: nil, rightPosition: nil)
         case .custom(let options):
             self.options = options
         default:

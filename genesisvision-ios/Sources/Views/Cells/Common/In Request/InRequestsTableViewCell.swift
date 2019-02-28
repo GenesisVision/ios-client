@@ -11,40 +11,40 @@ import UIKit
 class InRequestsTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet var iconImageView: UIImageView! {
+    @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
         }
     }
     
-    @IBOutlet var typeImageView: UIImageView! {
+    @IBOutlet weak var typeImageView: UIImageView! {
         didSet {
             typeImageView.roundCorners()
         }
     }
     
-    @IBOutlet var titleLabel: TitleLabel! {
+    @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.regular, size: 14.0)
             titleLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var statusLabel: SubtitleLabel! {
+    @IBOutlet weak var statusLabel: SubtitleLabel! {
         didSet {
             statusLabel.font = UIFont.getFont(.regular, size: 12.0)
             statusLabel.textColor = UIColor.Cell.subtitle
         }
     }
     
-    @IBOutlet var amountValueLabel: TitleLabel! {
+    @IBOutlet weak var amountValueLabel: TitleLabel! {
         didSet {
             amountValueLabel.font = UIFont.getFont(.semibold, size: 14.0)
             amountValueLabel.textColor = UIColor.Cell.title
         }
     }
     
-    @IBOutlet var dateLabel: SubtitleLabel! {
+    @IBOutlet weak var dateLabel: SubtitleLabel! {
         didSet {
             dateLabel.font = UIFont.getFont(.regular, size: 12.0)
             dateLabel.textColor = UIColor.Cell.subtitle

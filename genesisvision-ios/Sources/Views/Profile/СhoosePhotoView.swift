@@ -10,12 +10,12 @@ import UIKit
 
 class СhoosePhotoView: UIView {
     // MARK: - Outlets
-    @IBOutlet var shadowView: UIView!
+    @IBOutlet weak var shadowView: UIView!
     
-    @IBOutlet var photoImageView: UIImageView!
-    @IBOutlet var editImageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var editImageView: UIImageView!
     
-    @IBOutlet var choosePhotoButton: UIButton! {
+    @IBOutlet weak var choosePhotoButton: UIButton! {
         didSet {
             choosePhotoButton.backgroundColor = .clear
         }

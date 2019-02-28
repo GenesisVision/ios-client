@@ -31,15 +31,17 @@ open class WalletWithdrawalInfo: Codable {
     public var logo: String?
     public var commission: Double?
     public var rateToGvt: Double?
+    public var availableToWithdrawal: Double?
 
 
     
-    public init(currency: Currency?, description: String?, logo: String?, commission: Double?, rateToGvt: Double?) {
+    public init(currency: Currency?, description: String?, logo: String?, commission: Double?, rateToGvt: Double?, availableToWithdrawal: Double?) {
         self.currency = currency
         self.description = description
         self.logo = logo
         self.commission = commission
         self.rateToGvt = rateToGvt
+        self.availableToWithdrawal = availableToWithdrawal
     }
     
 
@@ -54,6 +56,7 @@ open class WalletWithdrawalInfo: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(commission, forKey: "commission")
         try container.encodeIfPresent(rateToGvt, forKey: "rateToGvt")
+        try container.encodeIfPresent(availableToWithdrawal, forKey: "availableToWithdrawal")
     }
 
     // Decodable protocol methods
@@ -66,6 +69,7 @@ open class WalletWithdrawalInfo: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         commission = try container.decodeIfPresent(Double.self, forKey: "commission")
         rateToGvt = try container.decodeIfPresent(Double.self, forKey: "rateToGvt")
+        availableToWithdrawal = try container.decodeIfPresent(Double.self, forKey: "availableToWithdrawal")
     }
 }
 

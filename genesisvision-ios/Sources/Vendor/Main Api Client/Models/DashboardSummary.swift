@@ -16,16 +16,18 @@ open class DashboardSummary: Codable {
     public var profileHeader: ProfileHeaderViewModel?
     public var programsCount: Int?
     public var fundsCount: Int?
+    public var signalsCount: Int?
     public var requests: ProgramRequests?
 
 
     
-    public init(chart: DashboardChartValue?, events: DashboardPortfolioEvents?, profileHeader: ProfileHeaderViewModel?, programsCount: Int?, fundsCount: Int?, requests: ProgramRequests?) {
+    public init(chart: DashboardChartValue?, events: DashboardPortfolioEvents?, profileHeader: ProfileHeaderViewModel?, programsCount: Int?, fundsCount: Int?, signalsCount: Int?, requests: ProgramRequests?) {
         self.chart = chart
         self.events = events
         self.profileHeader = profileHeader
         self.programsCount = programsCount
         self.fundsCount = fundsCount
+        self.signalsCount = signalsCount
         self.requests = requests
     }
     
@@ -41,6 +43,7 @@ open class DashboardSummary: Codable {
         try container.encodeIfPresent(profileHeader, forKey: "profileHeader")
         try container.encodeIfPresent(programsCount, forKey: "programsCount")
         try container.encodeIfPresent(fundsCount, forKey: "fundsCount")
+        try container.encodeIfPresent(signalsCount, forKey: "signalsCount")
         try container.encodeIfPresent(requests, forKey: "requests")
     }
 
@@ -54,6 +57,7 @@ open class DashboardSummary: Codable {
         profileHeader = try container.decodeIfPresent(ProfileHeaderViewModel.self, forKey: "profileHeader")
         programsCount = try container.decodeIfPresent(Int.self, forKey: "programsCount")
         fundsCount = try container.decodeIfPresent(Int.self, forKey: "fundsCount")
+        signalsCount = try container.decodeIfPresent(Int.self, forKey: "signalsCount")
         requests = try container.decodeIfPresent(ProgramRequests.self, forKey: "requests")
     }
 }

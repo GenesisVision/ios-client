@@ -32,4 +32,14 @@ class ProfileDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
+    static func addFCMToken(token: String, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        let token = FcmTokenViewModel(token: token)
+        
+        ProfileAPI.v10ProfilePushTokenPost(authorization: authorization, token: token) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
 }

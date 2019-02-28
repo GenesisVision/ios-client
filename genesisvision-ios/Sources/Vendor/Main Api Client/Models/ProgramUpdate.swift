@@ -14,13 +14,15 @@ open class ProgramUpdate: Codable {
     public var title: String?
     public var description: String?
     public var logo: String?
+    public var stopOutLevel: Double?
 
 
     
-    public init(title: String?, description: String?, logo: String?) {
+    public init(title: String?, description: String?, logo: String?, stopOutLevel: Double?) {
         self.title = title
         self.description = description
         self.logo = logo
+        self.stopOutLevel = stopOutLevel
     }
     
 
@@ -33,6 +35,7 @@ open class ProgramUpdate: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
     }
 
     // Decodable protocol methods
@@ -43,6 +46,7 @@ open class ProgramUpdate: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
     }
 }
 

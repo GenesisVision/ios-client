@@ -52,7 +52,7 @@ open class PasswordContainerView: UIView {
     open override var tintColor: UIColor! {
         didSet {
             guard !isVibrancyEffect else { return }
-            deleteButton.setTitleColor(tintColor, for: UIControlState())
+            deleteButton.setTitleColor(tintColor, for: .normal)
             passwordDotView.strokeColor = tintColor
             touchAuthenticationButton.tintColor = tintColor
             passwordInputViews.forEach {
@@ -151,7 +151,7 @@ open class PasswordContainerView: UIView {
             }
         }
         
-        touchAuthenticationButton.setImage(image, for: UIControlState())
+        touchAuthenticationButton.setImage(image, for: .normal)
         touchAuthenticationButton.tintColor = tintColor
     }
     
@@ -182,6 +182,10 @@ open class PasswordContainerView: UIView {
     }
     
     @IBAction func touchAuthenticationAction(_ sender: UIButton) {
+        touchAuthentication()
+    }
+    
+    open func touchAuthentication() {
         guard isTouchAuthenticationAvailable else { return }
         touchIDContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: touchAuthenticationReason) { (success, error) in
             DispatchQueue.main.async {
@@ -190,7 +194,11 @@ open class PasswordContainerView: UIView {
                     // instantiate LAContext again for avoiding the situation that PasswordContainerView stay in memory when authenticate successfully
                     self.touchIDContext = LAContext()
                 }
-                self.delegate?.touchAuthenticationComplete(self, success: success, error: error)
+                
+                // delay delegate callback for the user can see passwordDotView input dots filled animation
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.delegate?.touchAuthenticationComplete(self, success: success, error: error)
+                }
             }
         }
     }
