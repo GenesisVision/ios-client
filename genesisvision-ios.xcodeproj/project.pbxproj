@@ -48,6 +48,8 @@
 		5E12B38F20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38E20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift */; };
 		5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */; };
 		5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */; };
+		5E148931222870AF003FB659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14892D222870AF003FB659 /* Constants.swift */; };
+		5E148933222870AF003FB659 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14892F222870AF003FB659 /* AppConstants.swift */; };
 		5E14CDA221B57F5600388616 /* BasePageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */; };
 		5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */; };
 		5E14CDA821B5972100388616 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA721B5972100388616 /* RatingViewController.swift */; };
@@ -500,8 +502,6 @@
 		5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */; };
 		5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED7387D21951017001DA633 /* LevelsFilterView.xib */; };
 		5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7387E21951017001DA633 /* LevelsFilterView.swift */; };
-		5EDDDBFC21EF96990084BA17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDDDBF821EF96990084BA17 /* Constants.swift */; };
-		5EDDDBFE21EF96990084BA17 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDDDBFA21EF96990084BA17 /* AppConstants.swift */; };
 		5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */; };
 		5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */; };
 		5EE007632178737F0045B890 /* ManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE007622178737F0045B890 /* ManagerViewModel.swift */; };
@@ -729,6 +729,10 @@
 		5E12B38E20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorTutorialViewController.swift; sourceTree = "<group>"; };
 		5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorConfirmateViewController.swift; sourceTree = "<group>"; };
 		5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorDataProvider.swift; sourceTree = "<group>"; };
+		5E14892D222870AF003FB659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5E14892E222870AF003FB659 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5E14892F222870AF003FB659 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		5E148930222870AF003FB659 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5E14CDA721B5972100388616 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
@@ -1184,9 +1188,6 @@
 		5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED7387D21951017001DA633 /* LevelsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelsFilterView.xib; sourceTree = "<group>"; };
 		5ED7387E21951017001DA633 /* LevelsFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsFilterView.swift; sourceTree = "<group>"; };
-		5EDDDBF821EF96990084BA17 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5EDDDBFA21EF96990084BA17 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
-		5EDDDBFB21EF96990084BA17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EE0075C217871BB0045B890 /* ManagerInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewModel.swift; sourceTree = "<group>"; };
 		5EE0075E217871E40045B890 /* ManagerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerInfoViewController.swift; sourceTree = "<group>"; };
 		5EE007622178737F0045B890 /* ManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewModel.swift; sourceTree = "<group>"; };
@@ -1448,6 +1449,17 @@
 				5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */,
 			);
 			path = "Two Factor";
+			sourceTree = "<group>";
+		};
+		5E14892C222870AF003FB659 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5E14892D222870AF003FB659 /* Constants.swift */,
+				5E14892E222870AF003FB659 /* GoogleService-Info.plist */,
+				5E14892F222870AF003FB659 /* AppConstants.swift */,
+				5E148930222870AF003FB659 /* Info.plist */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		5E14CDA321B57F7300388616 /* PageboyDataSources */ = {
@@ -2419,16 +2431,6 @@
 			path = "About Level";
 			sourceTree = "<group>";
 		};
-		5EDDDBF721EF96990084BA17 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				5EDDDBF821EF96990084BA17 /* Constants.swift */,
-				5EDDDBFA21EF96990084BA17 /* AppConstants.swift */,
-				5EDDDBFB21EF96990084BA17 /* Info.plist */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
 		5EE00764217873CB0045B890 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2934,7 +2936,7 @@
 		FCC9DD39200DFA5E008825EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5EDDDBF721EF96990084BA17 /* Constants */,
+				5E14892C222870AF003FB659 /* Config */,
 				5E23926C205F67F000CB5AEC /* Fonts */,
 				FCC9DD3A200DFA5E008825EC /* Assets */,
 				FCC9DD40200DFA5E008825EC /* Storyboards */,
@@ -3720,11 +3722,11 @@
 				5E24C6E22226B1AE00470154 /* RecoveryCodesViewModel.swift in Sources */,
 				5EFE7C442181E78700D385C8 /* FundProfitViewController.swift in Sources */,
 				FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */,
-				5EDDDBFC21EF96990084BA17 /* Constants.swift in Sources */,
 				5E93E70621D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift in Sources */,
 				5E24C6EF2226B1AE00470154 /* SignalsList.swift in Sources */,
 				5EC7881A216D4787000C91E4 /* PortfolioSelectedChartAssetsDelegateManager.swift in Sources */,
 				5E6C0CF32109AA5500B7F844 /* ManagerTabmanViewModel.swift in Sources */,
+				5E148933222870AF003FB659 /* AppConstants.swift in Sources */,
 				5EF14D9E2181FC5500B3843A /* FundInvestRouter.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				5E24C7342226B1AF00470154 /* OrderOpenSignalSlaveModel.swift in Sources */,
@@ -3770,6 +3772,7 @@
 				5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */,
 				5EAD3504214FCA1C0057450C /* AllEnums.swift in Sources */,
 				5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */,
+				5E148931222870AF003FB659 /* Constants.swift in Sources */,
 				5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
 				5ED1ED442211B22600031AD4 /* WalletBalanceViewModel.swift in Sources */,
@@ -3845,7 +3848,6 @@
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
 				5E24C6362226B19C00470154 /* FileAPI.swift in Sources */,
 				5E24C6BC2226B1AE00470154 /* BrokerAccountType.swift in Sources */,
-				5EDDDBFE21EF96990084BA17 /* AppConstants.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
 				5E24C7302226B1AF00470154 /* LoginViewModel.swift in Sources */,
 				5EB9320E214697FF00EE01A2 /* DetailManagerTableViewCell.swift in Sources */,
@@ -4408,7 +4410,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
-				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Constants/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
@@ -4491,7 +4493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Constants/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
@@ -4566,7 +4568,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
-				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Constants/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
@@ -4641,7 +4643,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
-				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Constants/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
