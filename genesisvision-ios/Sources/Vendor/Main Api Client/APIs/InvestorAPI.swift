@@ -15,12 +15,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorFundsByIdInvestByAmountPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -31,7 +31,7 @@ open class InvestorAPI {
     }
 
     /**
-     Investing into the fund  Invest in GVT if currency is empty
+     Investing into the fund.  Invest in GVT if currency is empty
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -47,7 +47,7 @@ open class InvestorAPI {
 
 
     /**
-     Investing into the fund  Invest in GVT if currency is empty
+     Investing into the fund.  Invest in GVT if currency is empty
      - POST /v1.0/investor/funds/{id}/invest/{amount}
      
      - parameter id: (path)  
@@ -83,12 +83,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -185,7 +185,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -202,7 +202,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -241,12 +241,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorFundsByIdWithdrawByPercentPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -309,12 +309,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -396,12 +396,12 @@ open class InvestorAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10InvestorFundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -435,21 +435,21 @@ open class InvestorAPI {
      Dashboard funds list
      - GET /v1.0/investor/funds
      - examples: [{contentType=application/json, example={
-  "total" : 3,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -463,18 +463,18 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -483,17 +483,17 @@ open class InvestorAPI {
       "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.438423552598547,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 9.018348186070783,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 9.369310271410669,
-      "profit" : 6.683562403749608,
-      "withdrawPercent" : 9.965781217890562,
-      "invested" : 8.762042012749001,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -509,19 +509,19 @@ open class InvestorAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -535,18 +535,18 @@ open class InvestorAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -555,17 +555,17 @@ open class InvestorAPI {
       "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.438423552598547,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 9.018348186070783,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 9.369310271410669,
-      "profit" : 6.683562403749608,
-      "withdrawPercent" : 9.965781217890562,
-      "invested" : 8.762042012749001,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -624,12 +624,12 @@ open class InvestorAPI {
      * enum for parameter chartCurrency
      */
     public enum ChartCurrency_v10InvestorGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -682,7 +682,7 @@ open class InvestorAPI {
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "value" : 6.704019297950036,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -699,7 +699,7 @@ open class InvestorAPI {
       "type" : "Invest",
       "title" : "title",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "value" : 6.704019297950036,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -802,7 +802,7 @@ open class InvestorAPI {
     "total" : 9,
     "events" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeSuccessPlatformCurrency" : "Undefined",
+      "feeSuccessPlatformCurrency" : "BTC",
       "color" : "color",
       "description" : "description",
       "feeSuccessManager" : 1.1730742509559433,
@@ -810,16 +810,16 @@ open class InvestorAPI {
       "type" : "All",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
-      "feeSuccessManagerCurrency" : "Undefined",
+      "feeSuccessManagerCurrency" : "BTC",
       "profitPercent" : 5.025004791520295,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "value" : 6.84685269835264,
       "valueTotal" : 7.457744773683766
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "feeSuccessPlatformCurrency" : "Undefined",
+      "feeSuccessPlatformCurrency" : "BTC",
       "color" : "color",
       "description" : "description",
       "feeSuccessManager" : 1.1730742509559433,
@@ -827,11 +827,11 @@ open class InvestorAPI {
       "type" : "All",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
-      "feeSuccessManagerCurrency" : "Undefined",
+      "feeSuccessManagerCurrency" : "BTC",
       "profitPercent" : 5.025004791520295,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "value" : 6.84685269835264,
       "valueTotal" : 7.457744773683766
     } ]
@@ -881,12 +881,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorPortfolioChartGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1035,6 +1035,7 @@ open class InvestorAPI {
         case reinvest = "Reinvest"
         case canceled = "Canceled"
         case ended = "Ended"
+        case withdrawByStopOut = "WithdrawByStopOut"
     }
 
     /**
@@ -1073,7 +1074,7 @@ open class InvestorAPI {
   "total" : 9,
   "events" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeSuccessPlatformCurrency" : "Undefined",
+    "feeSuccessPlatformCurrency" : "BTC",
     "color" : "color",
     "description" : "description",
     "feeSuccessManager" : 1.1730742509559433,
@@ -1081,16 +1082,16 @@ open class InvestorAPI {
     "type" : "All",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
-    "feeSuccessManagerCurrency" : "Undefined",
+    "feeSuccessManagerCurrency" : "BTC",
     "profitPercent" : 5.025004791520295,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "value" : 6.84685269835264,
     "valueTotal" : 7.457744773683766
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeSuccessPlatformCurrency" : "Undefined",
+    "feeSuccessPlatformCurrency" : "BTC",
     "color" : "color",
     "description" : "description",
     "feeSuccessManager" : 1.1730742509559433,
@@ -1098,11 +1099,11 @@ open class InvestorAPI {
     "type" : "All",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
-    "feeSuccessManagerCurrency" : "Undefined",
+    "feeSuccessManagerCurrency" : "BTC",
     "profitPercent" : 5.025004791520295,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "value" : 6.84685269835264,
     "valueTotal" : 7.457744773683766
   } ]
@@ -1149,12 +1150,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorProgramsByIdInvestByAmountPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1165,7 +1166,7 @@ open class InvestorAPI {
     }
 
     /**
-     Investing into the program  Invest in GVT if currency is empty
+     Investing into the program.  Invest in GVT if currency is empty
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -1181,7 +1182,7 @@ open class InvestorAPI {
 
 
     /**
-     Investing into the program  Invest in GVT if currency is empty
+     Investing into the program.  Invest in GVT if currency is empty
      - POST /v1.0/investor/programs/{id}/invest/{amount}
      
      - parameter id: (path)  
@@ -1217,12 +1218,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1251,15 +1252,16 @@ open class InvestorAPI {
      Data for investing into the program
      - GET /v1.0/investor/programs/{id}/invest/info/{currency}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 5.962133916683182,
-  "availableInWallet" : 6.027456183070403,
+  "entryFee" : 5.637376656633329,
+  "availableInWallet" : 1.4658129805029452,
   "isOwnProgram" : true,
-  "rate" : 2.3021358869347655,
+  "availableToInvestBase" : 6.027456183070403,
+  "rate" : 7.061401241503109,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "availableToInvest" : 0.8008281904610115,
   "title" : "title",
-  "minInvestmentAmount" : 1.4658129805029452,
-  "gvCommission" : 5.637376656633329
+  "minInvestmentAmount" : 5.962133916683182,
+  "gvCommission" : 2.3021358869347655
 }}]
      
      - parameter id: (path)  
@@ -1403,7 +1405,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1420,7 +1422,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1503,12 +1505,12 @@ open class InvestorAPI {
      * enum for parameter currency
      */
     public enum Currency_v10InvestorProgramsByIdWithdrawInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1642,12 +1644,12 @@ open class InvestorAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10InvestorProgramsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1681,18 +1683,18 @@ open class InvestorAPI {
      Dashboard program list
      - GET /v1.0/investor/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -1700,7 +1702,7 @@ open class InvestorAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -1716,24 +1718,25 @@ open class InvestorAPI {
     "stopOutLevel" : 1.4658129805029452,
     "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 2,
+      "rating" : 7,
       "canLevelUp" : true,
-      "topPercent" : 9.301444243932576,
-      "profit" : 7.061401241503109
+      "topPercent" : 3.616076749251911,
+      "profit" : 9.301444243932576
     },
     "description" : "description",
     "title" : "title",
+    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1742,23 +1745,23 @@ open class InvestorAPI {
       "canInvest" : true,
       "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.0246457001441578,
+      "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
-      "pendingInput" : 1.2315135367772556,
+      "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 3.616076749251911,
+      "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 2.027123023002322,
-      "profit" : 4.145608029883936,
-      "invested" : 7.386281948385884,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1773,12 +1776,12 @@ open class InvestorAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -1786,7 +1789,7 @@ open class InvestorAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -1802,24 +1805,25 @@ open class InvestorAPI {
     "stopOutLevel" : 1.4658129805029452,
     "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 2,
+      "rating" : 7,
       "canLevelUp" : true,
-      "topPercent" : 9.301444243932576,
-      "profit" : 7.061401241503109
+      "topPercent" : 3.616076749251911,
+      "profit" : 9.301444243932576
     },
     "description" : "description",
     "title" : "title",
+    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -1828,23 +1832,23 @@ open class InvestorAPI {
       "canInvest" : true,
       "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.0246457001441578,
+      "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
-      "pendingInput" : 1.2315135367772556,
+      "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 3.616076749251911,
+      "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 2.027123023002322,
-      "profit" : 4.145608029883936,
-      "invested" : 7.386281948385884,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -1968,7 +1972,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1985,7 +1989,7 @@ open class InvestorAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -2048,12 +2052,12 @@ open class InvestorAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10InvestorSignalsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -2092,12 +2096,12 @@ open class InvestorAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2105,7 +2109,7 @@ open class InvestorAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -2124,10 +2128,10 @@ open class InvestorAPI {
     "url" : "url",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "personalDetails" : {
       "investorTrades" : 3,
@@ -2135,7 +2139,7 @@ open class InvestorAPI {
       "investorProfit" : 9.301444243932576
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2149,12 +2153,12 @@ open class InvestorAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2162,7 +2166,7 @@ open class InvestorAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -2181,10 +2185,10 @@ open class InvestorAPI {
     "url" : "url",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "personalDetails" : {
       "investorTrades" : 3,
@@ -2192,7 +2196,7 @@ open class InvestorAPI {
       "investorProfit" : 9.301444243932576
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",

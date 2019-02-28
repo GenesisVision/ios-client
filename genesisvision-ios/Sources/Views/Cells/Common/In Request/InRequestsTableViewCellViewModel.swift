@@ -42,7 +42,7 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
             if type == .withdrawal, programType == .fund {
                 if let fundWithdrawPercent = programRequest.fundWithdrawPercent, let valueGvt = programRequest.valueGvt {
                     let currency: CurrencyType = .gvt
-                    let text = "\(fundWithdrawPercent)% (≈ " + valueGvt.rounded(withType: currency).toString() + " " + Constants.gvtString + ")"
+                    let text = "\(fundWithdrawPercent)% (≈" + valueGvt.rounded(withType: currency).toString() + " " + Constants.gvtString + ")"
                     cell.amountValueLabel.text = text
                 }
             } else {

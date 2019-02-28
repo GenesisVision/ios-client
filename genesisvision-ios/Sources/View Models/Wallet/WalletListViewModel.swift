@@ -141,9 +141,7 @@ extension WalletListViewModel {
 // MARK: - Fetch
 extension WalletListViewModel {
     func fetch() {
-        guard let currency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) else { return }
-        
-        WalletDataProvider.getMulti(with: currency, completion: { [weak self] (wallet) in
+        AuthManager.getWallet(completion: { [weak self] (wallet) in
             guard let wallet = wallet else { return }
             self?.wallet = wallet
             self?.reloadDataProtocol?.didReloadData()

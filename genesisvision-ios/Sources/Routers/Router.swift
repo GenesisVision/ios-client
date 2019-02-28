@@ -46,12 +46,22 @@ class Router {
     weak var navigationController: UINavigationController? {
         guard let rootTabBarController = rootTabBarController else {
             guard let navController = navController else {
+                let window = UIApplication.shared.windows[0] as UIWindow
+                if let vc = window.rootViewController {
+                    if vc is UINavigationController {
+                        return vc as? UINavigationController
+                    }
+                    
+                    return BaseNavigationController(rootViewController: vc)
+                }
+                
                 return BaseNavigationController()
             }
-            
+
             return navController
         }
-        guard let navigationController =  rootTabBarController.selectedViewController as? UINavigationController else {
+        
+        guard let navigationController = rootTabBarController.selectedViewController as? UINavigationController else {
             return BaseNavigationController()
         }
         

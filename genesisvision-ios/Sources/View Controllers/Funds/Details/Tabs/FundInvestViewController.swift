@@ -180,7 +180,7 @@ class FundInvestViewController: BaseViewController {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
             let amountToInvestValueCurrencyString = (amountToInvestValue * rate).rounded(withType: currency).toString()
-            self.amountToInvestCurrencyLabel.text = "= " + amountToInvestValueCurrencyString + " " + selectedCurrency
+            self.amountToInvestCurrencyLabel.text = "≈" + amountToInvestValueCurrencyString + " " + selectedCurrency
         }
         
         let investButtonEnabled = amountToInvestValue >= minInvestmentAmount ?? 0 && amountToInvestValue <= availableToInvestValue

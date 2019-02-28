@@ -20,14 +20,15 @@ open class WalletTransaction: Codable {
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
         case blockchain = "Blockchain"
+        case genesisVisionPlatform = "GenesisVisionPlatform"
     }
     public enum SourceCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -47,6 +48,7 @@ open class WalletTransaction: Codable {
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
+        case payingFee = "PayingFee"
     }
     public enum DestinationType: String, Codable { 
         case wallet = "Wallet"
@@ -57,14 +59,15 @@ open class WalletTransaction: Codable {
         case withdrawalRequest = "WithdrawalRequest"
         case paymentTransaction = "PaymentTransaction"
         case blockchain = "Blockchain"
+        case genesisVisionPlatform = "GenesisVisionPlatform"
     }
     public enum DestinationCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"

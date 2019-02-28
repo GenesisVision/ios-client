@@ -18,13 +18,6 @@ class ProfileImageView: UIView {
         }
     }
     
-    @IBOutlet weak var readMoreImageView: UIImageView! {
-        didSet {
-            readMoreImageView.image = #imageLiteral(resourceName: "img_program_read_more")
-            readMoreImageView.isHidden = true
-        }
-    }
-    
     @IBOutlet weak var levelButton: LevelButton!
     
     override func layoutSubviews() {

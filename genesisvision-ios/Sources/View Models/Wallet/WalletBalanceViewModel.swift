@@ -36,7 +36,7 @@ class WalletBalanceViewModel {
         guard let currency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) else { return }
         
         guard let wallet = wallet else {
-            WalletDataProvider.getMulti(with: currency, completion: { [weak self] (wallet) in
+            AuthManager.getWallet(with: currency, completion: { [weak self] (wallet) in
                 if let walletTabmanViewModel = self?.router.walletTabmanViewController?.viewModel {
                     walletTabmanViewModel.multiWallet = wallet
                 }

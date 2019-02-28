@@ -32,7 +32,7 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/balance
      - examples: [{contentType=application/json, example={
   "programCurrencyBalance" : 0.8008281904610115,
-  "programCurrency" : "Undefined",
+  "programCurrency" : "BTC",
   "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "investorsFunds" : 5.962133916683182,
@@ -118,7 +118,7 @@ open class ProgramsAPI {
     "value" : 3.616076749251911
   } ],
   "balance" : 1.2315135367772556,
-  "programCurrency" : "Undefined",
+  "programCurrency" : "BTC",
   "rate" : 9.369310271410669,
   "totalProgramCurrencyProfit" : 9.301444243932576,
   "successTradesPercent" : 4.145608029883936,
@@ -246,12 +246,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsByIdGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -286,48 +286,49 @@ open class ProgramsAPI {
   "availableInvestment" : 2.027123023002322,
   "successFee" : 2.3021358869347655,
   "rating" : {
-    "rating" : 2,
+    "rating" : 7,
     "canLevelUp" : true,
-    "topPercent" : 9.301444243932576,
-    "profit" : 7.061401241503109
+    "topPercent" : 3.616076749251911,
+    "profit" : 9.301444243932576
   },
   "description" : "description",
   "title" : "title",
   "isSignalProgram" : true,
+  "availableInvestmentBase" : 4.145608029883936,
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
   "logo" : "logo",
-  "currency" : "Undefined",
+  "currency" : "BTC",
   "signalSubscriptionFee" : 3.616076749251911,
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "periodDuration" : 6,
   "statistic" : {
-    "profitFactorPercent" : 5.025004791520295,
-    "investedAmount" : 7.457744773683766,
-    "startCurrency" : "Undefined",
-    "tradesSuccessCount" : 4,
-    "drawdownPercent" : 1.0246457001441578,
+    "profitFactorPercent" : 9.965781217890562,
+    "investedAmount" : 1.1730742509559433,
+    "startCurrency" : "BTC",
+    "tradesSuccessCount" : 5,
+    "drawdownPercent" : 1.4894159098541704,
     "balanceBase" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
-    "tradesCount" : 1,
+    "tradesCount" : 4,
     "hasNotifications" : true,
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
-    "profitPercent" : 7.386281948385884,
-    "investedCurrency" : "Undefined",
-    "sharpeRatioPercent" : 9.965781217890562,
-    "profitValue" : 1.2315135367772556,
-    "currentValue" : 4.145608029883936,
+    "profitPercent" : 1.2315135367772556,
+    "investedCurrency" : "BTC",
+    "sharpeRatioPercent" : 9.369310271410669,
+    "profitValue" : 1.0246457001441578,
+    "currentValue" : 7.386281948385884,
     "startDate" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 6.84685269835264,
+    "startBalance" : 7.457744773683766,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
-    "investorsCount" : 1
+    "investorsCount" : 6
   },
   "manager" : {
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -346,17 +347,17 @@ open class ProgramsAPI {
     "canInvest" : true,
     "isFollowSignals" : true,
     "canClosePeriod" : true,
-    "pendingOutput" : 1.0246457001441578,
+    "pendingOutput" : 1.4894159098541704,
     "hasNotifications" : true,
-    "pendingInput" : 1.2315135367772556,
+    "pendingInput" : 1.0246457001441578,
     "isOwnProgram" : true,
     "isReinvest" : true,
-    "gvtValue" : 3.616076749251911,
+    "gvtValue" : 2.027123023002322,
     "isFinishing" : true,
     "canMakeSignalProvider" : true,
-    "value" : 2.027123023002322,
-    "profit" : 4.145608029883936,
-    "invested" : 7.386281948385884,
+    "value" : 4.145608029883936,
+    "profit" : 7.386281948385884,
+    "invested" : 1.2315135367772556,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -364,10 +365,10 @@ open class ProgramsAPI {
   "url" : "url",
   "tags" : [ {
     "color" : "color",
-    "name" : "Crypto"
+    "name" : "name"
   }, {
     "color" : "color",
-    "name" : "Crypto"
+    "name" : "name"
   } ],
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "ipfsHash" : "ipfsHash",
@@ -633,12 +634,12 @@ open class ProgramsAPI {
      * enum for parameter programCurrency
      */
     public enum ProgramCurrency_v10ProgramsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -652,12 +653,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -665,16 +666,6 @@ open class ProgramsAPI {
         case bnb = "BNB"
         case usd = "USD"
         case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter tags
-     */
-    public enum Tags_v10ProgramsGet: String { 
-        case crypto = "Crypto"
-        case forex = "Forex"
-        case highRisk = "HighRisk"
-        case signal = "Signal"
     }
 
     /**
@@ -716,18 +707,18 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "programs" : [ {
     "periodDuration" : 6,
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -735,7 +726,7 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -751,24 +742,25 @@ open class ProgramsAPI {
     "stopOutLevel" : 1.4658129805029452,
     "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 2,
+      "rating" : 7,
       "canLevelUp" : true,
-      "topPercent" : 9.301444243932576,
-      "profit" : 7.061401241503109
+      "topPercent" : 3.616076749251911,
+      "profit" : 9.301444243932576
     },
     "description" : "description",
     "title" : "title",
+    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -777,23 +769,23 @@ open class ProgramsAPI {
       "canInvest" : true,
       "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.0246457001441578,
+      "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
-      "pendingInput" : 1.2315135367772556,
+      "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 3.616076749251911,
+      "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 2.027123023002322,
-      "profit" : 4.145608029883936,
-      "invested" : 7.386281948385884,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -808,12 +800,12 @@ open class ProgramsAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -821,7 +813,7 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -837,24 +829,25 @@ open class ProgramsAPI {
     "stopOutLevel" : 1.4658129805029452,
     "availableInvestment" : 5.962133916683182,
     "rating" : {
-      "rating" : 2,
+      "rating" : 7,
       "canLevelUp" : true,
-      "topPercent" : 9.301444243932576,
-      "profit" : 7.061401241503109
+      "topPercent" : 3.616076749251911,
+      "profit" : 9.301444243932576
     },
     "description" : "description",
     "title" : "title",
+    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     }, {
       "color" : "color",
-      "name" : "Crypto"
+      "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
@@ -863,23 +856,23 @@ open class ProgramsAPI {
       "canInvest" : true,
       "isFollowSignals" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.0246457001441578,
+      "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
-      "pendingInput" : 1.2315135367772556,
+      "pendingInput" : 1.0246457001441578,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 3.616076749251911,
+      "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 2.027123023002322,
-      "profit" : 4.145608029883936,
-      "invested" : 7.386281948385884,
+      "value" : 4.145608029883936,
+      "profit" : 7.386281948385884,
+      "invested" : 1.2315135367772556,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",

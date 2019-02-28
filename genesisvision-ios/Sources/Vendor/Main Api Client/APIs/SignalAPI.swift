@@ -31,12 +31,12 @@ open class SignalAPI {
   "accounts" : [ {
     "freeMargin" : 1.4658129805029452,
     "balance" : 0.8008281904610115,
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "equity" : 6.027456183070403
   }, {
     "freeMargin" : 1.4658129805029452,
     "balance" : 0.8008281904610115,
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "equity" : 6.027456183070403
   } ]
 }}]
@@ -75,12 +75,12 @@ open class SignalAPI {
      * enum for parameter fixedCurrency
      */
     public enum FixedCurrency_v10SignalAttachByIdPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -94,12 +94,12 @@ open class SignalAPI {
      * enum for parameter initialDepositCurrency
      */
     public enum InitialDepositCurrency_v10SignalAttachByIdPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -539,12 +539,12 @@ open class SignalAPI {
      * enum for parameter fixedCurrency
      */
     public enum FixedCurrency_v10SignalUpdatePost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -558,12 +558,12 @@ open class SignalAPI {
      * enum for parameter initialDepositCurrency
      */
     public enum InitialDepositCurrency_v10SignalUpdatePost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"

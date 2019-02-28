@@ -33,7 +33,7 @@ final class WalletDepositViewModel {
     var walletMultiSummary: WalletMultiSummary?
     var selectedWallet: WalletData? {
         didSet {
-            guard let selectedWallet = selectedWallet, let address = selectedWallet.address else { return }
+            guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddress else { return }
             
             self.address = address
         }

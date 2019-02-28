@@ -68,7 +68,7 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.addController(vc)
             }
             
-            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let tradesVC = router.getTrades(with: programId), let openTradesVC = router.getTradesOpen(with: programId) {
+            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let tradesVC = router.getTrades(with: programId, currencyType: currencyType), let openTradesVC = router.getTradesOpen(with: programId, currencyType: currencyType) {
                 self.addItem(openTradesVC.viewModel.title.uppercased())
                 self.addController(openTradesVC)
                 

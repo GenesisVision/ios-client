@@ -167,15 +167,15 @@ class FundWithdrawViewController: BaseViewController {
             let exitFeeGVT = exitFee * withdrawingValue / 100
             let exitFeeGVTString = exitFeeGVT.rounded(withType: .gvt).toString()
             
-            let exitFeeValueLabelString = exitFeeString + "% (≈ \(exitFeeGVTString) " + Constants.gvtString + ")"
+            let exitFeeValueLabelString = exitFeeString + "% (≈\(exitFeeGVTString) " + Constants.gvtString + ")"
             self.exitFeeValueLabel.text = exitFeeValueLabelString
             
             let withdrawingAmountValue = (withdrawingValue - exitFeeGVT).rounded(withType: .gvt).toString()
-            self.withdrawingAmountValueLabel.text = "≈ " + withdrawingAmountValue + " " + Constants.gvtString
+            self.withdrawingAmountValueLabel.text = "≈" + withdrawingAmountValue + " " + Constants.gvtString
         }
         
         let amountToWithdrawValueCurrencyString = (withdrawingValue).rounded(withType: .gvt).toString()
-        self.amountToWithdrawCurrencyLabel.text = "≈ " + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
+        self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0 && amountToWithdrawValue <= 100
         

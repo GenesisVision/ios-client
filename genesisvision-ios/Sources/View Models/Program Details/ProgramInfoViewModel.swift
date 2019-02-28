@@ -37,7 +37,7 @@ final class ProgramInfoViewModel {
     private var equityChart: [ChartSimple]?
     public private(set) var programDetailsFull: ProgramDetailsFull? {
         didSet {
-            if let availableInvestment = programDetailsFull?.availableInvestment {
+            if let availableInvestment = programDetailsFull?.availableInvestmentBase {
                 self.availableInvestment = availableInvestment
             }
             
@@ -47,11 +47,11 @@ final class ProgramInfoViewModel {
                 }
             }
             
-            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
-                if !sections.contains(.signals) {
-                    sections.insert(.signals, at: 1)
-                }
-            }
+//            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
+//                if !sections.contains(.signals) {
+//                    sections.insert(.signals, at: 1)
+//                }
+//            }
         }
     }
     

@@ -14,13 +14,15 @@ open class ExternalTransactionDetails: Codable {
     public var description: String?
     public var descriptionUrl: String?
     public var fromAddress: String?
+    public var isEnableActions: Bool?
 
 
     
-    public init(description: String?, descriptionUrl: String?, fromAddress: String?) {
+    public init(description: String?, descriptionUrl: String?, fromAddress: String?, isEnableActions: Bool?) {
         self.description = description
         self.descriptionUrl = descriptionUrl
         self.fromAddress = fromAddress
+        self.isEnableActions = isEnableActions
     }
     
 
@@ -33,6 +35,7 @@ open class ExternalTransactionDetails: Codable {
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(descriptionUrl, forKey: "descriptionUrl")
         try container.encodeIfPresent(fromAddress, forKey: "fromAddress")
+        try container.encodeIfPresent(isEnableActions, forKey: "isEnableActions")
     }
 
     // Decodable protocol methods
@@ -43,6 +46,7 @@ open class ExternalTransactionDetails: Codable {
         description = try container.decodeIfPresent(String.self, forKey: "description")
         descriptionUrl = try container.decodeIfPresent(String.self, forKey: "descriptionUrl")
         fromAddress = try container.decodeIfPresent(String.self, forKey: "fromAddress")
+        isEnableActions = try container.decodeIfPresent(Bool.self, forKey: "isEnableActions")
     }
 }
 

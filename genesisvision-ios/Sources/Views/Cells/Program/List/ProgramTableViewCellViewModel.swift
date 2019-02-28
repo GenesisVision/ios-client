@@ -95,8 +95,8 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.thirdTitleLabel.text = "Av. to invest"
-        if let availableInvestment = asset.availableInvestment {
-            cell.thirdValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
+        if let availableInvestment = asset.availableInvestmentBase, let currency = asset.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            cell.thirdValueLabel.text = availableInvestment.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.thirdValueLabel.text = ""
         }
@@ -142,25 +142,25 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         cell.tagsBottomStackView.isHidden = false
         
         cell.firstTagLabel.isHidden = true
-        if let name = tags[0].name?.rawValue, let color = tags[0].color {
+        if let name = tags[0].name, let color = tags[0].color {
             cell.firstTagLabel.isHidden = false
-            cell.firstTagLabel.text = name
+            cell.firstTagLabel.text = name.uppercased()
             cell.firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             cell.firstTagLabel.textColor = UIColor.hexColor(color)
         }
         
         cell.secondTagLabel.isHidden = true
-        if tagsCount > 1, let name = tags[1].name?.rawValue, let color = tags[1].color {
+        if tagsCount > 1, let name = tags[1].name, let color = tags[1].color {
             cell.secondTagLabel.isHidden = false
-            cell.secondTagLabel.text = name
+            cell.secondTagLabel.text = name.uppercased()
             cell.secondTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             cell.secondTagLabel.textColor = UIColor.hexColor(color)
         }
         
         cell.thirdTagLabel.isHidden = true
-        if tagsCount > 2, let name = tags[2].name?.rawValue, let color = tags[2].color {
+        if tagsCount > 2, let name = tags[2].name, let color = tags[2].color {
             cell.thirdTagLabel.isHidden = false
-            cell.thirdTagLabel.text = name
+            cell.thirdTagLabel.text = name.uppercased()
             cell.thirdTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             cell.thirdTagLabel.textColor = UIColor.hexColor(color)
         }

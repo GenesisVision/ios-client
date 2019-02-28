@@ -12,12 +12,12 @@ import Foundation
 open class WalletInfo: Codable {
 
     public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -31,15 +31,17 @@ open class WalletInfo: Codable {
     public var rateToGVT: Double?
     public var description: String?
     public var logo: String?
+    public var isDepositEnabled: Bool?
 
 
     
-    public init(currency: Currency?, address: String?, rateToGVT: Double?, description: String?, logo: String?) {
+    public init(currency: Currency?, address: String?, rateToGVT: Double?, description: String?, logo: String?, isDepositEnabled: Bool?) {
         self.currency = currency
         self.address = address
         self.rateToGVT = rateToGVT
         self.description = description
         self.logo = logo
+        self.isDepositEnabled = isDepositEnabled
     }
     
 
@@ -54,6 +56,7 @@ open class WalletInfo: Codable {
         try container.encodeIfPresent(rateToGVT, forKey: "rateToGVT")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(isDepositEnabled, forKey: "isDepositEnabled")
     }
 
     // Decodable protocol methods
@@ -66,6 +69,7 @@ open class WalletInfo: Codable {
         rateToGVT = try container.decodeIfPresent(Double.self, forKey: "rateToGVT")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        isDepositEnabled = try container.decodeIfPresent(Bool.self, forKey: "isDepositEnabled")
     }
 }
 

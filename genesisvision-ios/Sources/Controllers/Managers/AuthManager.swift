@@ -130,14 +130,15 @@ class AuthManager {
         }
     }
     
-    static func getWallet(completion: @escaping (_ wallet: WalletMultiSummary?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getWallet(with currency: WalletAPI.Currency_v10WalletMultiByCurrencyGet? = nil, completion: @escaping (_ wallet: WalletMultiSummary?) -> Void, completionError: @escaping CompletionBlock) {
+        
         if let walletViewModel = walletViewModel {
             completion(walletViewModel)
         }
         
-        let currency: WalletAPI.Currency_v10WalletMultiByCurrencyGet = .gvt
-
-        WalletDataProvider.getMulti(with: currency, completion: { (viewModel) in
+        let selectedCurrency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) ?? .gvt
+            
+        WalletDataProvider.getMulti(with: currency ?? selectedCurrency, completion: { (viewModel) in
             if viewModel != nil  {
                 walletViewModel = viewModel
             }

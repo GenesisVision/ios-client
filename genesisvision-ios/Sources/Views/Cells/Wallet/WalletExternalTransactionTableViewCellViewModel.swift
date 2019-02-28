@@ -53,7 +53,6 @@ extension WalletExternalTransactionTableViewCellViewModel: CellViewModel {
         
         if let status = walletTransaction.status {
             cell.statusLabel.text = status
-
         } else {
             cell.statusLabel.isHidden = true
         }

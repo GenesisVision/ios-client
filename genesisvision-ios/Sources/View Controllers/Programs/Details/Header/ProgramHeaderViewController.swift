@@ -202,33 +202,33 @@ class ProgramHeaderViewController: BaseViewController {
         let tagsCount = tags.count
         
         firstTagLabel.isHidden = true
-        if let name = tags[0].name?.rawValue, let color = tags[0].color {
+        if let name = tags[0].name, let color = tags[0].color {
             firstTagLabel.isHidden = false
-            firstTagLabel.text = name
+            firstTagLabel.text = name.uppercased()
             firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             firstTagLabel.textColor = UIColor.hexColor(color)
         }
         
         secondTagLabel.isHidden = true
-        if tagsCount > 1, let name = tags[1].name?.rawValue, let color = tags[1].color {
+        if tagsCount > 1, let name = tags[1].name, let color = tags[1].color {
             secondTagLabel.isHidden = false
-            secondTagLabel.text = name
+            secondTagLabel.text = name.uppercased()
             secondTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             secondTagLabel.textColor = UIColor.hexColor(color)
         }
         
         thirdTagLabel.isHidden = true
-        if tagsCount > 2, let name = tags[2].name?.rawValue, let color = tags[2].color {
+        if tagsCount > 2, let name = tags[2].name, let color = tags[2].color {
             thirdTagLabel.isHidden = false
-            thirdTagLabel.text = name
+            thirdTagLabel.text = name.uppercased()
             thirdTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             thirdTagLabel.textColor = UIColor.hexColor(color)
         }
         
         fourthTagLabel.isHidden = true
-        if tagsCount > 3, let name = tags[3].name?.rawValue, let color = tags[3].color {
+        if tagsCount > 3, let name = tags[3].name, let color = tags[3].color {
             fourthTagLabel.isHidden = false
-            fourthTagLabel.text = name
+            fourthTagLabel.text = name.uppercased()
             fourthTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
             fourthTagLabel.textColor = UIColor.hexColor(color)
         }

@@ -24,15 +24,17 @@ open class InternalTransferRequest: Codable {
     public var destinationId: UUID?
     public var destinationType: DestinationType?
     public var amount: Double?
+    public var transferAll: Bool?
 
 
     
-    public init(sourceId: UUID?, sourceType: SourceType?, destinationId: UUID?, destinationType: DestinationType?, amount: Double?) {
+    public init(sourceId: UUID?, sourceType: SourceType?, destinationId: UUID?, destinationType: DestinationType?, amount: Double?, transferAll: Bool?) {
         self.sourceId = sourceId
         self.sourceType = sourceType
         self.destinationId = destinationId
         self.destinationType = destinationType
         self.amount = amount
+        self.transferAll = transferAll
     }
     
 
@@ -47,6 +49,7 @@ open class InternalTransferRequest: Codable {
         try container.encodeIfPresent(destinationId, forKey: "destinationId")
         try container.encodeIfPresent(destinationType, forKey: "destinationType")
         try container.encodeIfPresent(amount, forKey: "amount")
+        try container.encodeIfPresent(transferAll, forKey: "transferAll")
     }
 
     // Decodable protocol methods
@@ -59,6 +62,7 @@ open class InternalTransferRequest: Codable {
         destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
         destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
+        transferAll = try container.decodeIfPresent(Bool.self, forKey: "transferAll")
     }
 }
 

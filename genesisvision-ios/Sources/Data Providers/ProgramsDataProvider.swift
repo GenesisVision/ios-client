@@ -92,13 +92,13 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func invest(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func invest(withAmount amount: Double, programId: String?, currency: InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorProgramsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization, currency: currency) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

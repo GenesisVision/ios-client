@@ -27,6 +27,21 @@ open class PlatformAPI {
      Platform info
      - GET /v1.0/platform/info
      - examples: [{contentType=application/json, example={
+  "enums" : {
+    "multiWallet" : {
+      "transactionType" : [ "transactionType", "transactionType" ],
+      "externalTransactionType" : [ "externalTransactionType", "externalTransactionType" ]
+    },
+    "program" : {
+      "programTags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ]
+    }
+  },
   "androidVersion" : {
     "lastVersion" : {
       "versionName" : "versionName",
@@ -37,13 +52,6 @@ open class PlatformAPI {
       "versionCode" : "versionCode"
     }
   },
-  "programTags" : [ {
-    "color" : "color",
-    "name" : "Crypto"
-  }, {
-    "color" : "color",
-    "name" : "Crypto"
-  } ],
   "iOSVersion" : {
     "lastVersion" : "lastVersion",
     "minVersion" : "minVersion"
@@ -127,12 +135,12 @@ open class PlatformAPI {
      * enum for parameter currency
      */
     public enum Currency_v10PlatformLevelsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"

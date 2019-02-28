@@ -44,18 +44,18 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.investedTitleLabel.isHidden = true
         cell.investedValueLabel.isHidden = true
         
+        cell.profitTitleLabel.text = "profit"
         if let profitPercent = programDetailsFull?.personalProgramDetails?.profit,
             let value = programDetailsFull?.personalProgramDetails?.value,
             let invested = programDetailsFull?.personalProgramDetails?.invested {
             let profitValue = value - invested
             let sign = profitValue > 0 ? "+" : ""
-            cell.profitTitleLabel.text = "profit"
             cell.profitValueLabel.text = sign + profitValue.rounded(withType: currency).toString() + " " + currency.rawValue + " (\(profitPercent.rounded(withType: .undefined).toString())%)"
             cell.profitValueLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
+        cell.valueTitleLabel.text = "value"
         if let value = programDetailsFull?.personalProgramDetails?.value {
-            cell.valueTitleLabel.text = "value"
             cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
         }
     }

@@ -11,14 +11,14 @@ import Foundation
 
 open class MultiWalletFilters: Codable {
 
-    public var multiWalletTransactionType: [String]?
-    public var multiWalletExternalTransactionType: [String]?
+    public var transactionType: [String]?
+    public var externalTransactionType: [String]?
 
 
     
-    public init(multiWalletTransactionType: [String]?, multiWalletExternalTransactionType: [String]?) {
-        self.multiWalletTransactionType = multiWalletTransactionType
-        self.multiWalletExternalTransactionType = multiWalletExternalTransactionType
+    public init(transactionType: [String]?, externalTransactionType: [String]?) {
+        self.transactionType = transactionType
+        self.externalTransactionType = externalTransactionType
     }
     
 
@@ -28,8 +28,8 @@ open class MultiWalletFilters: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(multiWalletTransactionType, forKey: "multiWalletTransactionType")
-        try container.encodeIfPresent(multiWalletExternalTransactionType, forKey: "multiWalletExternalTransactionType")
+        try container.encodeIfPresent(transactionType, forKey: "transactionType")
+        try container.encodeIfPresent(externalTransactionType, forKey: "externalTransactionType")
     }
 
     // Decodable protocol methods
@@ -37,8 +37,8 @@ open class MultiWalletFilters: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        multiWalletTransactionType = try container.decodeIfPresent([String].self, forKey: "multiWalletTransactionType")
-        multiWalletExternalTransactionType = try container.decodeIfPresent([String].self, forKey: "multiWalletExternalTransactionType")
+        transactionType = try container.decodeIfPresent([String].self, forKey: "transactionType")
+        externalTransactionType = try container.decodeIfPresent([String].self, forKey: "externalTransactionType")
     }
 }
 

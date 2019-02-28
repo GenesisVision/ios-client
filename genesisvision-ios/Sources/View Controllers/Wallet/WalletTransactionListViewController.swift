@@ -58,9 +58,7 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
     override func pullToRefresh() {
         super.pullToRefresh()
 
-        viewModel.refresh { (result) in
-            
-        }
+        viewModel.refresh { (result) in }
     }
     
     private func reloadData() {
@@ -77,24 +75,34 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func showTransaction(model: MultiWalletTransaction) {
+    private func openTransictionDetails(_ details: TransactionDetails, uuid: UUID) {
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300
+        bottomSheetController.initializeHeight = 500
+        bottomSheetController.lineViewIsHidden = true
         
         let view = WalletTransactionView.viewFromNib()
-//        view.configure(model)
+        view.configure(details, uuid: uuid)
+        view.delegate = self
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
     }
     
-    private func showExternalTransaction(model: MultiWalletExternalTransaction) {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300
-        
-        let view = WalletTransactionView.viewFromNib()
-        //        view.configure(model)
-        bottomSheetController.addContentsView(view)
-        bottomSheetController.present()
+    private func showTransaction(_ uuid: UUID) {
+        showProgressHUD()
+        WalletDataProvider.getTransactionDetails(with: uuid, completion: { [weak self] (details) in
+            self?.hideAll()
+            
+            if let details = details {
+                self?.openTransictionDetails(details, uuid: uuid)
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
     }
 }
 
@@ -106,10 +114,10 @@ extension WalletTransactionListViewController: UITableViewDelegate, UITableViewD
         
         guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
 
-        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel {
-            showTransaction(model: model.walletTransaction)
-        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel {
-            showExternalTransaction(model: model.walletTransaction)
+        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel, let uuid = model.walletTransaction.id {
+            showTransaction(uuid)
+        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel, let uuid = model.walletTransaction.id {
+            showTransaction(uuid)
         }
     }
     
@@ -151,5 +159,45 @@ extension WalletTransactionListViewController: ReloadDataProtocol {
     func didReloadData() {
         hideAll()
         reloadData()
+    }
+}
+
+extension WalletTransactionListViewController: WalletTransactionViewProtocol {
+    func copyAddressButtonDidPress(_ address: String) {
+        bottomSheetController.dismiss()
+
+        UIPasteboard.general.string = address
+        showBottomSheet(.success, title: String.Info.walletCopyAddress)
+    }
+    
+    func closeButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+    func resendButtonDidPress(_ uuid: UUID) {
+        bottomSheetController.dismiss()
+        showProgressHUD()
+        WalletDataProvider.resendWithdrawalRequest(with: uuid) { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
+    }
+    
+    func cancelButtonDidPress(_ uuid: UUID) {
+        bottomSheetController.dismiss()
+        showProgressHUD()
+        WalletDataProvider.cancelWithdrawalRequest(with: uuid) { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                self?.viewModel.refresh { (result) in }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
     }
 }

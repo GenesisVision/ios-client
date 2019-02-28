@@ -177,7 +177,7 @@ class WalletTransferViewController: BaseViewController {
             selectedWalletToValueLabel.text = title + " | " + to
             
             let value = (amountToTransferValue * viewModel.rate).rounded(withType: currencyType).toString()
-            amountToTransferToValueLabel.text = "= " + value + " " + currencyType.rawValue
+            amountToTransferToValueLabel.text = "≈" + value + " " + currencyType.rawValue
         }
         
         if let available = viewModel.selectedWalletFrom?.available {
@@ -244,7 +244,10 @@ class WalletTransferViewController: BaseViewController {
     
     private func showSuccessfulView() {
         showBottomSheet(.success, title: "Conversion successful", subtitle: nil, initializeHeight: nil) { [weak self] (result) in
-            self?.viewModel.goToBack()
+            DispatchQueue.main.async {
+                self?.viewModel.goToBack()
+                self?.bottomSheetController.dismiss()
+            }
         }
     }
     

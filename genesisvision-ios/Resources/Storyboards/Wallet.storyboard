@@ -101,13 +101,13 @@
                                                                 <rect key="frame" x="0.0" y="56" width="354" height="25"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTi-Th-tnK" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="249.33333333333334" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GVT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lb-JE-qMw" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="257.33333333333331" y="0.0" width="96.666666666666686" height="25"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lb-JE-qMw" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="156" y="0.0" width="198" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="40"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-6N-me7">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="40"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sX-3v-YMZ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="8.6666666666666661" height="40"/>
@@ -146,8 +146,8 @@
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLI-Ch-CE4" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                                        <rect key="frame" x="16.666666666666664" y="0.0" width="29.333333333333336" height="40"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLI-Ch-CE4" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                                        <rect key="frame" x="16.666666666666664" y="0.0" width="49.999999999999993" height="40"/>
                                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -564,7 +564,7 @@
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="I4M-WY-5xc" id="V9A-co-IHP"/>
-                        <outlet property="amountToWithdrawGVTLabel" destination="eLI-Ch-CE4" id="AXu-VU-cPI"/>
+                        <outlet property="amountToWithdrawCurrencyLabel" destination="eLI-Ch-CE4" id="AXu-VU-cPI"/>
                         <outlet property="amountToWithdrawTitleLabel" destination="dCA-vi-qAP" id="Ecy-LJ-WEx"/>
                         <outlet property="amountToWithdrawValueLabel" destination="1sX-3v-YMZ" id="smu-3a-jwr"/>
                         <outlet property="availableInWalletValueLabel" destination="5Lb-JE-qMw" id="3Iw-91-aUR"/>
@@ -588,7 +588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZM-vW-9Le" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="1754.5727136431785"/>
+            <point key="canvasLocation" x="1580" y="1754"/>
         </scene>
         <!--Wallet List View Controller-->
         <scene sceneID="QYE-TR-bi1">
@@ -642,7 +642,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eo5-uf-BWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2348" y="1753.4482758620691"/>
+            <point key="canvasLocation" x="2312" y="1754"/>
         </scene>
         <!--Wallet Balance View Controller-->
         <scene sceneID="R3h-6i-8jp">
@@ -722,7 +722,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCf-hJ-vPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3012" y="1755"/>
+            <point key="canvasLocation" x="3057" y="1754"/>
         </scene>
         <!--Wallet Transfer View Controller-->
         <scene sceneID="Irx-hq-Rcw">
@@ -804,13 +804,13 @@
                                                                 <rect key="frame" x="0.0" y="56" width="354" height="25"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD3-2W-epF" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="3.6666666666666714" width="249.33333333333334" height="17.666666666666668"/>
+                                                                        <rect key="frame" x="0.0" y="3.6666666666666714" width="122.66666666666667" height="17.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GVT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7G-W4-CzI" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="257.33333333333331" y="3.6666666666666714" width="96.666666666666686" height="17.666666666666668"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7G-W4-CzI" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="130.66666666666663" y="0.0" width="223.33333333333337" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -885,13 +885,13 @@
                                                                 <rect key="frame" x="0.0" y="56" width="354" height="25"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHn-Xs-CiU" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="3.6666666666666572" width="249.33333333333334" height="17.666666666666668"/>
+                                                                        <rect key="frame" x="0.0" y="3.6666666666666572" width="129.66666666666666" height="17.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GVT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOj-54-gTN" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="257.33333333333331" y="3.6666666666666572" width="96.666666666666686" height="17.666666666666668"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOj-54-gTN" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                        <rect key="frame" x="137.66666666666663" y="0.0" width="216.33333333333337" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -922,7 +922,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="40"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qLt-Ib-6Ii">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="40"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znQ-ab-5WS" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="8.6666666666666661" height="40"/>
@@ -930,8 +930,8 @@
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uA-8p-rHk" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                                        <rect key="frame" x="16.666666666666664" y="0.0" width="29.333333333333336" height="40"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uA-8p-rHk" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                                        <rect key="frame" x="16.666666666666664" y="0.0" width="49.999999999999993" height="40"/>
                                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -963,7 +963,7 @@
                                                                     <constraint firstAttribute="height" constant="1" id="Ohj-Dm-0SA"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GVT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxA-HZ-OxF" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxA-HZ-OxF" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="56" width="354" height="25"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1274,7 +1274,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-Tk-fZX">
-                                <rect key="frame" x="0.0" y="44" width="414" height="72"/>
+                                <rect key="frame" x="0.0" y="74" width="414" height="72"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pyg-kE-pMh">
                                         <rect key="frame" x="30" y="0.0" width="354" height="56"/>
@@ -1433,7 +1433,7 @@
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7u-bu-5aq">
-                                <rect key="frame" x="30" y="115" width="354" height="40"/>
+                                <rect key="frame" x="30" y="145" width="354" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="TDE-xo-cWd"/>
                                 </constraints>
@@ -1441,30 +1441,45 @@
                                     <action selector="showNumPadButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="cfH-A6-QgN"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-U4-1oT">
-                                <rect key="frame" x="30" y="680" width="354" height="96"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-U4-1oT">
+                                <rect key="frame" x="30" y="162" width="354" height="614"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
-                                        <rect key="frame" x="146" y="0.0" width="62" height="62"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="EoU-jq-OAo" secondAttribute="height" multiplier="1:1" id="052-hD-Hpw"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="152" y="70" width="50" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="f1y-MQ-6Th"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs8-8t-Pzx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="177" y="96" width="0.0" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z1Q-Te-Obk">
+                                        <rect key="frame" x="0.0" y="177" width="354" height="260"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-jq-OAo">
+                                                <rect key="frame" x="77" y="0.0" width="200" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EoU-jq-OAo" secondAttribute="height" multiplier="1:1" id="052-hD-Hpw"/>
+                                                    <constraint firstAttribute="width" constant="200" id="6gD-Uj-dl5"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit address" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lm7-Ew-tJr" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="126" y="208" width="102.33333333333331" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="GtA-E7-Khe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-7K-hAh" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="152" y="234" width="50" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="f1y-MQ-6Th"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fs8-8t-Pzx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                <rect key="frame" x="177" y="260" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-J6-Vd4" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
@@ -1481,220 +1496,23 @@
                                     <action selector="copyButtonAction:" destination="hib-N9-WaH" eventType="touchUpInside" id="YpO-M7-yyr"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btr-BA-QEG" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfl-dh-t7x" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="650" width="414" height="212"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="uJE-oa-J0p">
-                                                <rect key="frame" x="6" y="0.0" width="402" height="206"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-nu-YhL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="47"/>
-                                                        <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rk-V3-bgn" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="1">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="BmL-Zg-bup"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e3-JT-k41" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="136" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="2">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="Aoq-RB-RAa"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uq5-vF-w00" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="272" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="3">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="A6J-C6-O61"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="47" id="FgH-AH-HXT"/>
-                                                        </constraints>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Srb-Ju-oHa">
-                                                        <rect key="frame" x="0.0" y="53" width="402" height="47"/>
-                                                        <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdU-BB-rFO" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="4">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="f2B-wg-dwf"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xux-AM-Apf" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="136" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="5">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="Z3y-VJ-WLC"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfY-ef-163" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="272" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="6">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="0LJ-bM-qXD"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="uVO-av-oC9">
-                                                        <rect key="frame" x="0.0" y="106" width="402" height="47"/>
-                                                        <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMp-8i-PnS" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="7">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="OdC-sK-vDO"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WP-xu-gBT" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="136" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="8">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="w1K-Cw-1BU"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkN-jK-DfV" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="272" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="9">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="Xxc-Pi-sG0"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="3xx-0u-pqd">
-                                                        <rect key="frame" x="0.0" y="159" width="402" height="47"/>
-                                                        <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rar-JP-xyk" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title=".">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="separatorButtonAction:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="nql-vo-Qsf"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atd-tY-Kao" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="136" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <state key="normal" title="0">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buttons:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="J4W-yB-83j"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G43-PF-yZj">
-                                                                <rect key="frame" x="272" y="0.0" width="130" height="47"/>
-                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
-                                                                <color key="tintColor" red="0.0" green="0.73725490199999999" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <state key="normal" image="img_numpad_delete">
-                                                                    <color key="titleColor" red="0.1450980392" green="0.46666666670000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="clearButtonAction:" destination="Rfl-dh-t7x" eventType="touchUpInside" id="gVF-Uz-MoE"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="Srb-Ju-oHa" firstAttribute="height" secondItem="LbI-nu-YhL" secondAttribute="height" id="nMc-VC-Z5q"/>
-                                                    <constraint firstItem="3xx-0u-pqd" firstAttribute="height" secondItem="uVO-av-oC9" secondAttribute="height" id="wC0-qP-I2I"/>
-                                                    <constraint firstItem="uVO-av-oC9" firstAttribute="height" secondItem="Srb-Ju-oHa" secondAttribute="height" id="xmv-Wq-iqY"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="uJE-oa-J0p" secondAttribute="bottom" constant="6" id="2O3-Gn-x8K"/>
-                                            <constraint firstAttribute="height" constant="212" id="Lfk-b7-V5a"/>
-                                            <constraint firstAttribute="trailing" secondItem="uJE-oa-J0p" secondAttribute="trailing" constant="6" id="O86-gJ-b9L"/>
-                                            <constraint firstItem="uJE-oa-J0p" firstAttribute="top" secondItem="Rfl-dh-t7x" secondAttribute="top" id="T61-dN-rI3"/>
-                                            <constraint firstItem="uJE-oa-J0p" firstAttribute="leading" secondItem="Rfl-dh-t7x" secondAttribute="leading" constant="6" id="tSs-A4-Kcu"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="clearButton" destination="G43-PF-yZj" id="Zi2-Tg-m1b"/>
-                                            <outlet property="numpadButtonHeightConstraint" destination="FgH-AH-HXT" id="GK7-u1-0hx"/>
-                                            <outlet property="separatorButton" destination="Rar-JP-xyk" id="3lK-EA-3wc"/>
-                                            <outletCollection property="numberButtons" destination="5rk-V3-bgn" collectionClass="NSMutableArray" id="bLS-a3-H89"/>
-                                            <outletCollection property="numberButtons" destination="9e3-JT-k41" collectionClass="NSMutableArray" id="zBu-Sb-sIQ"/>
-                                            <outletCollection property="numberButtons" destination="Uq5-vF-w00" collectionClass="NSMutableArray" id="fmP-Q3-KTv"/>
-                                            <outletCollection property="numberButtons" destination="zdU-BB-rFO" collectionClass="NSMutableArray" id="fIt-ni-cxl"/>
-                                            <outletCollection property="numberButtons" destination="Xux-AM-Apf" collectionClass="NSMutableArray" id="Onp-Qg-5nm"/>
-                                            <outletCollection property="numberButtons" destination="wfY-ef-163" collectionClass="NSMutableArray" id="1iP-gu-Hid"/>
-                                            <outletCollection property="numberButtons" destination="gkN-jK-DfV" collectionClass="NSMutableArray" id="0Qq-0c-Fc5"/>
-                                            <outletCollection property="numberButtons" destination="3WP-xu-gBT" collectionClass="NSMutableArray" id="ser-yA-2QC"/>
-                                            <outletCollection property="numberButtons" destination="hMp-8i-PnS" collectionClass="NSMutableArray" id="9RL-yd-XG7"/>
-                                            <outletCollection property="numberButtons" destination="atd-tY-Kao" collectionClass="NSMutableArray" id="5nv-st-JiH"/>
-                                        </connections>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Rfl-dh-t7x" secondAttribute="bottom" id="Dsc-eU-jyl"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rfl-dh-t7x" secondAttribute="trailing" id="dY5-s3-6c4"/>
-                                    <constraint firstItem="Rfl-dh-t7x" firstAttribute="leading" secondItem="btr-BA-QEG" secondAttribute="leading" id="nar-S4-gDZ"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.074509803920000006" green="0.1176470588" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="sU7-lt-Ncn" firstAttribute="bottom" secondItem="0fG-J6-Vd4" secondAttribute="bottom" constant="20" id="1A0-YF-oWA"/>
                             <constraint firstItem="0fG-J6-Vd4" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" constant="20" id="8JF-Jv-HLO"/>
-                            <constraint firstItem="btr-BA-QEG" firstAttribute="bottom" secondItem="sU7-lt-Ncn" secondAttribute="bottom" id="DNB-ns-VJR"/>
                             <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="0fG-J6-Vd4" secondAttribute="trailing" constant="20" id="EGT-yv-5Nk"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="trailing" secondItem="ACz-2l-Cfa" secondAttribute="trailing" id="IvH-aK-fsS"/>
-                            <constraint firstItem="btr-BA-QEG" firstAttribute="top" secondItem="h0j-YK-F4n" secondAttribute="top" id="Ohz-FL-KWL"/>
                             <constraint firstItem="sU7-lt-Ncn" firstAttribute="trailing" secondItem="Hbd-U4-1oT" secondAttribute="trailing" constant="30" id="TJL-rC-yca"/>
                             <constraint firstItem="Hbd-U4-1oT" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" constant="30" id="Us4-k5-h7M"/>
-                            <constraint firstItem="btr-BA-QEG" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="cf5-Jq-SHH"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="leading" secondItem="ACz-2l-Cfa" secondAttribute="leading" id="lLM-py-NLu"/>
                             <constraint firstItem="0fG-J6-Vd4" firstAttribute="top" secondItem="Hbd-U4-1oT" secondAttribute="bottom" constant="16" id="nqC-yR-EIT"/>
-                            <constraint firstItem="btr-BA-QEG" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="rg5-fX-HRC"/>
                             <constraint firstItem="GZ4-Tk-fZX" firstAttribute="leading" secondItem="sU7-lt-Ncn" secondAttribute="leading" id="t25-sp-yND"/>
-                            <constraint firstItem="GZ4-Tk-fZX" firstAttribute="top" secondItem="sU7-lt-Ncn" secondAttribute="top" id="uhY-ER-73Q"/>
+                            <constraint firstItem="GZ4-Tk-fZX" firstAttribute="top" secondItem="sU7-lt-Ncn" secondAttribute="top" constant="30" id="uhY-ER-73Q"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="top" secondItem="ACz-2l-Cfa" secondAttribute="top" id="uvq-XN-4aL"/>
                             <constraint firstItem="GZ4-Tk-fZX" firstAttribute="trailing" secondItem="sU7-lt-Ncn" secondAttribute="trailing" id="vct-PB-d0d"/>
                             <constraint firstItem="H7u-bu-5aq" firstAttribute="bottom" secondItem="ACz-2l-Cfa" secondAttribute="bottom" id="xHc-Rt-vyw"/>
-                            <constraint firstItem="Hbd-U4-1oT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GZ4-Tk-fZX" secondAttribute="bottom" constant="16" id="zwy-nz-DU2"/>
+                            <constraint firstItem="Hbd-U4-1oT" firstAttribute="top" secondItem="GZ4-Tk-fZX" secondAttribute="bottom" constant="16" id="zwy-nz-DU2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sU7-lt-Ncn"/>
                     </view>
@@ -1707,9 +1525,6 @@
                         <outlet property="amountToDepositValueLabel" destination="vjk-zq-hjb" id="1tL-vb-WiD"/>
                         <outlet property="copyButton" destination="0fG-J6-Vd4" id="ZdH-r2-I9a"/>
                         <outlet property="disclaimerLabel" destination="Fs8-8t-Pzx" id="hHV-Nz-bWl"/>
-                        <outlet property="numpadBackView" destination="btr-BA-QEG" id="Kq8-CY-7IY"/>
-                        <outlet property="numpadHeightConstraint" destination="Lfk-b7-V5a" id="Opi-QW-ufh"/>
-                        <outlet property="numpadView" destination="Rfl-dh-t7x" id="B2T-hk-avf"/>
                         <outlet property="qrImageView" destination="EoU-jq-OAo" id="zlE-lo-Qdz"/>
                         <outlet property="selectedWalletCurrencyButton" destination="zdh-pH-Ygv" id="ek2-oz-doi"/>
                         <outlet property="selectedWalletCurrencyTitleLabel" destination="LkP-cp-tSS" id="joZ-Lu-doF"/>
@@ -1718,7 +1533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJr-FZ-h6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="1755"/>
+            <point key="canvasLocation" x="859" y="1754"/>
         </scene>
     </scenes>
     <resources>

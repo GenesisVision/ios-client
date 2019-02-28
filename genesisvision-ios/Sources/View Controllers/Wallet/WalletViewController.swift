@@ -65,7 +65,7 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = 80
+        bottomSheetController.initializeHeight = 120
         bottomSheetController.addContentsView(walletMoreButtonView)
         bottomSheetController.present()
     }

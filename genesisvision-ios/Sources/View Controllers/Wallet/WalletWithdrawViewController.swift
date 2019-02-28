@@ -85,9 +85,9 @@ class WalletWithdrawViewController: BaseViewController {
             amountToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet weak var amountToWithdrawGVTLabel: SubtitleLabel! {
+    @IBOutlet weak var amountToWithdrawCurrencyLabel: SubtitleLabel! {
         didSet {
-            amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
+            amountToWithdrawCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
     
@@ -126,7 +126,7 @@ class WalletWithdrawViewController: BaseViewController {
     @IBOutlet weak var feeValueLabel: TitleLabel!
     @IBOutlet weak var withdrawingTitleLabel: SubtitleLabel! {
         didSet {
-            withdrawingTitleLabel.text = "Approximate amount"
+            withdrawingTitleLabel.text = "You will get"
             withdrawingTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -203,21 +203,18 @@ class WalletWithdrawViewController: BaseViewController {
             
             self.feeValueLabel.text = commission.rounded(withType: currencyType).toString() + " " + currency.rawValue
             
-            if let rate = selectedWallet.rateToGvt, amountToWithdrawValue > commission {
-                var getValue = amountToWithdrawValue * rate - commission
-                getValue = getValue > 0.0 ? getValue : 0.0
+            if amountToWithdrawValue > commission {
+                var value = amountToWithdrawValue - commission
+                value = value > 0.0 ? value : 0.0
                 
-                let amountToWithdrawValueCurrencyString = getValue.rounded(withType: currencyType).toString()
-                self.withdrawingValueLabel.text = amountToWithdrawValueCurrencyString + " " + currency.rawValue
+                self.withdrawingValueLabel.text = value.rounded(withType: currencyType).toString() + " " + currency.rawValue
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
             }
-            
-            withdrawingTitleLabel.text = currency == .gvt ? "You will get" : "Approximate amount"
         }
         
         if let currency = viewModel.selectedWallet?.currency {
-            self.amountToWithdrawGVTLabel.text = currency.rawValue
+            self.amountToWithdrawCurrencyLabel.text = currency.rawValue
         }
         
         if let availableToWithdrawal = viewModel.selectedWallet?.availableToWithdrawal {
@@ -235,19 +232,25 @@ class WalletWithdrawViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
 
+        var amountText = ""
+        
+        if let amountToWithdrawValueLabel = amountToWithdrawValueLabel.text, let amountToWithdrawCurrency = amountToWithdrawCurrencyLabel.text {
+            amountText = amountToWithdrawValueLabel + " " + amountToWithdrawCurrency
+        }
+        
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm withdraw",
                                                           subtitle: "Check again because the transaction cannot be reversed",
                                                           programLogo: nil,
                                                           programTitle: nil,
                                                           managerName: nil,
                                                           firstTitle: "Withdraw amount",
-                                                          firstValue: amountToWithdrawValueLabel.text,
+                                                          firstValue: amountText,
                                                           secondTitle: "To address",
                                                           secondValue: addressTextField.text,
-                                                          thirdTitle: withdrawingTitleLabel.text,
-                                                          thirdValue: withdrawingValueLabel.text,
-                                                          fourthTitle: feeTitleLabel.text,
-                                                          fourthValue: feeValueLabel.text)
+                                                          thirdTitle: feeTitleLabel.text,
+                                                          thirdValue: feeValueLabel.text,
+                                                          fourthTitle: withdrawingTitleLabel.text,
+                                                          fourthValue: withdrawingValueLabel.text)
         confirmView.configure(model: confirmViewModel)
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self
@@ -270,9 +273,18 @@ class WalletWithdrawViewController: BaseViewController {
             
             switch result {
             case .success:
-                self?.viewModel.showWalletWithdrawRequested()
+                self?.showSuccessfulView()
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+    
+    private func showSuccessfulView() {
+        showBottomSheet(.success, title: "Please approve the withdrawal request via the link in the confirmation email.", subtitle: nil, initializeHeight: nil) { [weak self] (result) in
+            DispatchQueue.main.async {
+                self?.viewModel.goToBack()
+                self?.bottomSheetController.dismiss()
             }
         }
     }

@@ -21,30 +21,6 @@ class WalletDepositViewController: BaseViewController {
     }
     
     // MARK: - Outlets
-    @IBOutlet weak var numpadHeightConstraint: NSLayoutConstraint! {
-        didSet {
-            numpadHeightConstraint.constant = 0.0
-        }
-    }
-    @IBOutlet weak var numpadBackView: UIView! {
-        didSet {
-            numpadBackView.isHidden = true
-            numpadBackView.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideNumpadView))
-            tapGesture.numberOfTapsRequired = 1
-            tapGesture.delegate = self
-            numpadBackView.addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    @IBOutlet weak var numpadView: NumpadView! {
-        didSet {
-            numpadView.isUserInteractionEnabled = true
-            numpadView.delegate = self
-            numpadView.type = .currency
-        }
-    }
-    
     @IBOutlet weak var amountToDepositTitleLabel: SubtitleLabel! {
         didSet {
             amountToDepositTitleLabel.text = "You will send"
@@ -64,7 +40,7 @@ class WalletDepositViewController: BaseViewController {
     
     @IBOutlet weak var amountToDepositGVTTitleLabel: SubtitleLabel! {
         didSet {
-            amountToDepositGVTTitleLabel.text = "Approximate amount"
+            amountToDepositGVTTitleLabel.text = "You will get"
             amountToDepositGVTTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -84,6 +60,7 @@ class WalletDepositViewController: BaseViewController {
     
     @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
+            disclaimerLabel.isHidden = true
             disclaimerLabel.font = UIFont.getFont(.regular, size: 10.0)
             
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
@@ -130,41 +107,12 @@ class WalletDepositViewController: BaseViewController {
             if let title = selectedWallet.title {
                 selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
             }
-            
-            if currency != .gvt {
-                disclaimerLabel.isHidden = false
-                disclaimerLabel.text = "After processing the \(currency.rawValue) transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
-                amountToDepositGVTTitleLabel.text = "Approximate amount"
-            } else {
-                disclaimerLabel.isHidden = true
-                amountToDepositGVTTitleLabel.text = "You will get"
-            }
         }
         
         self.view.layoutIfNeeded()
     }
     
-    @objc private func hideNumpadView() {
-        numpadHeightConstraint.constant = 0.0
-        numpadBackView.setNeedsUpdateConstraints()
-        numpadBackView.isHidden = true
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.numpadBackView.layoutIfNeeded()
-        })
-    }
-    
     // MARK: - Actions
-    @IBAction func showNumPadButtonAction(_ sender: UIButton) {
-        numpadHeightConstraint.constant = 212.0
-        numpadBackView.setNeedsUpdateConstraints()
-        numpadBackView.isHidden = false
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.numpadBackView.layoutIfNeeded()
-        })
-    }
-    
     @IBAction func copyButtonAction(_ sender: UIButton) {
         showProgressHUD()
         viewModel.copy { [weak self] (result) in
@@ -185,50 +133,12 @@ class WalletDepositViewController: BaseViewController {
         alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
             selectedIndexRow = index.row
             self?.viewModel.updateWalletCurrencyIndex(selectedIndexRow)
-            self?.numpadView.clearAction()
             self?.updateUI()
         }
         
         alert.addAction(title: "Ok", style: .cancel)
         
         alert.show()
-    }
-}
-
-extension WalletDepositViewController: NumpadViewProtocol {
-    var maxAmount: Double? {
-        return nil
-    }
-    
-    var textPlaceholder: String? {
-        return viewModel.labelPlaceholder
-    }
-    
-    var numbersLimit: Int? {
-        return -1
-    }
-    
-    var currency: CurrencyType? {
-        if let currency = viewModel.selectedWallet?.currency {
-            return CurrencyType(rawValue: currency.rawValue)
-        }
-        
-        return nil
-    }
-    
-    func changedActive(value: Bool) {
-        numpadView.isEnable = value
-    }
-    
-    var textLabel: UILabel {
-        return self.amountToDepositValueLabel
-    }
-     
-    func textLabelDidChange(value: Double?) {
-        guard let value = value else { return }
-        
-        numpadView.isEnable = true
-        amountToDepositValue = value
     }
 }
 

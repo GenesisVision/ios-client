@@ -324,12 +324,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsByIdGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -362,7 +362,7 @@ open class FundsAPI {
   "statistic" : {
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
     "profitPercent" : 5.637376656633329,
     "rebalancingCount" : 2,
@@ -372,7 +372,7 @@ open class FundsAPI {
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
     "investorsCount" : 7
   },
@@ -406,17 +406,17 @@ open class FundsAPI {
     "isFollowSignals" : true,
     "canClosePeriod" : true,
     "canReallocate" : true,
-    "pendingOutput" : 6.438423552598547,
+    "pendingOutput" : 3.5571952270680973,
     "hasNotifications" : true,
-    "pendingInput" : 9.018348186070783,
+    "pendingInput" : 6.438423552598547,
     "isOwnProgram" : true,
     "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
     "isFinishing" : true,
     "canMakeSignalProvider" : true,
-    "value" : 9.369310271410669,
-    "profit" : 6.683562403749608,
-    "withdrawPercent" : 9.965781217890562,
-    "invested" : 8.762042012749001,
+    "value" : 6.683562403749608,
+    "profit" : 8.762042012749001,
+    "withdrawPercent" : 9.369310271410669,
+    "invested" : 9.018348186070783,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -479,12 +479,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -525,21 +525,21 @@ open class FundsAPI {
      Funds list
      - GET /v1.0/funds
      - examples: [{contentType=application/json, example={
-  "total" : 3,
+  "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -553,18 +553,18 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -573,17 +573,17 @@ open class FundsAPI {
       "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.438423552598547,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 9.018348186070783,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 9.369310271410669,
-      "profit" : 6.683562403749608,
-      "withdrawPercent" : 9.965781217890562,
-      "invested" : 8.762042012749001,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -599,19 +599,19 @@ open class FundsAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 6,
+    "totalAssetsCount" : 7,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "profitPercent" : 1.1730742509559433,
-      "drawdownPercent" : 4.965218492984954,
+      "profitPercent" : 4.965218492984954,
+      "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
-      "investorsCount" : 5
+      "investorsCount" : 9
     },
     "color" : "color",
     "manager" : {
@@ -625,18 +625,18 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 7.457744773683766
+      "percent" : 1.1730742509559433
     } ],
     "description" : "description",
     "title" : "title",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 5.637376656633329
+      "share" : 2.3021358869347655
     },
     "personalDetails" : {
       "canCloseProgram" : true,
@@ -645,17 +645,17 @@ open class FundsAPI {
       "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 6.438423552598547,
+      "pendingOutput" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 9.018348186070783,
+      "pendingInput" : 6.438423552598547,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
       "canMakeSignalProvider" : true,
-      "value" : 9.369310271410669,
-      "profit" : 6.683562403749608,
-      "withdrawPercent" : 9.965781217890562,
-      "invested" : 8.762042012749001,
+      "value" : 6.683562403749608,
+      "profit" : 8.762042012749001,
+      "withdrawPercent" : 9.369310271410669,
+      "invested" : 9.018348186070783,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"

@@ -15,12 +15,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletAddressesByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -50,7 +50,8 @@ open class WalletAPI {
   "address" : "address",
   "description" : "description",
   "logo" : "logo",
-  "currency" : "Undefined"
+  "currency" : "BTC",
+  "isDepositEnabled" : true
 }}]
      
      - parameter currency: (path)  
@@ -96,13 +97,15 @@ open class WalletAPI {
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined"
+    "currency" : "BTC",
+    "isDepositEnabled" : true
   }, {
     "rateToGVT" : 0.8008281904610115,
     "address" : "address",
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined"
+    "currency" : "BTC",
+    "isDepositEnabled" : true
   } ]
 }}]
      
@@ -131,12 +134,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -196,15 +199,60 @@ open class WalletAPI {
     }
 
     /**
+     GenesisMarkets commission data
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletFeeGvtholdingGet(authorization: String, completion: @escaping ((_ data: UserCommissionData?,_ error: Error?) -> Void)) {
+        v10WalletFeeGvtholdingGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     GenesisMarkets commission data
+     - GET /v1.0/wallet/fee/gvtholding
+     - examples: [{contentType=application/json, example={
+  "regularTradingFee" : 1.4658129805029452,
+  "regularDiscount" : 5.962133916683182,
+  "gvtHolderDiscount" : 6.027456183070403,
+  "isPayingCommissionInGvt" : true,
+  "gvtHolderTradingFee" : 0.8008281904610115
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<UserCommissionData> 
+     */
+    open class func v10WalletFeeGvtholdingGetWithRequestBuilder(authorization: String) -> RequestBuilder<UserCommissionData> {
+        let path = "/v1.0/wallet/fee/gvtholding"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<UserCommissionData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -238,45 +286,51 @@ open class WalletAPI {
     "availableCcy" : 5.637376656633329,
     "pending" : 1.4658129805029452,
     "available" : 0.8008281904610115,
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "invested" : 6.027456183070403,
-    "currencyCcy" : "Undefined",
+    "currencyCcy" : "BTC",
     "pendingCcy" : 7.061401241503109,
     "investedCcy" : 2.3021358869347655
   },
   "payFeesWithGvt" : true,
   "wallets" : [ {
     "rateToGVT" : 3.616076749251911,
-    "totalCcy" : 7.457744773683766,
-    "address" : "address",
-    "availableCcy" : 1.0246457001441578,
-    "pending" : 7.386281948385884,
-    "available" : 2.027123023002322,
+    "totalCcy" : 1.1730742509559433,
+    "availableCcy" : 1.4894159098541704,
+    "pending" : 1.2315135367772556,
+    "depositAddress" : "depositAddress",
+    "available" : 4.145608029883936,
+    "withdrawalCommission" : 2.027123023002322,
+    "isWithdrawalEnabled" : true,
     "title" : "title",
-    "total" : 1.2315135367772556,
+    "isDepositEnabled" : true,
+    "total" : 1.0246457001441578,
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "invested" : 4.145608029883936,
-    "currencyCcy" : "Undefined",
-    "pendingCcy" : 6.84685269835264,
-    "investedCcy" : 1.4894159098541704
+    "invested" : 7.386281948385884,
+    "currencyCcy" : "BTC",
+    "pendingCcy" : 7.457744773683766,
+    "investedCcy" : 6.84685269835264
   }, {
     "rateToGVT" : 3.616076749251911,
-    "totalCcy" : 7.457744773683766,
-    "address" : "address",
-    "availableCcy" : 1.0246457001441578,
-    "pending" : 7.386281948385884,
-    "available" : 2.027123023002322,
+    "totalCcy" : 1.1730742509559433,
+    "availableCcy" : 1.4894159098541704,
+    "pending" : 1.2315135367772556,
+    "depositAddress" : "depositAddress",
+    "available" : 4.145608029883936,
+    "withdrawalCommission" : 2.027123023002322,
+    "isWithdrawalEnabled" : true,
     "title" : "title",
-    "total" : 1.2315135367772556,
+    "isDepositEnabled" : true,
+    "total" : 1.0246457001441578,
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "invested" : 4.145608029883936,
-    "currencyCcy" : "Undefined",
-    "pendingCcy" : 6.84685269835264,
-    "investedCcy" : 1.4894159098541704
+    "invested" : 7.386281948385884,
+    "currencyCcy" : "BTC",
+    "pendingCcy" : 7.457744773683766,
+    "investedCcy" : 6.84685269835264
   } ]
 }}]
      
@@ -304,48 +358,6 @@ open class WalletAPI {
     }
 
     /**
-     Get filters
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10WalletMultiFiltersGet(authorization: String, completion: @escaping ((_ data: MultiWalletFilters?,_ error: Error?) -> Void)) {
-        v10WalletMultiFiltersGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get filters
-     - GET /v1.0/wallet/multi/filters
-     - examples: [{contentType=application/json, example={
-  "multiWalletExternalTransactionType" : [ "multiWalletExternalTransactionType", "multiWalletExternalTransactionType" ],
-  "multiWalletTransactionType" : [ "multiWalletTransactionType", "multiWalletTransactionType" ]
-}}]
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<MultiWalletFilters> 
-     */
-    open class func v10WalletMultiFiltersGetWithRequestBuilder(authorization: String) -> RequestBuilder<MultiWalletFilters> {
-        let path = "/v1.0/wallet/multi/filters"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<MultiWalletFilters>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
      * enum for parameter type
      */
     public enum ModelType_v10WalletMultiTransactionsExternalGet: String { 
@@ -358,12 +370,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiTransactionsExternalGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -403,7 +415,7 @@ open class WalletAPI {
     "statusUrl" : "statusUrl",
     "logo" : "logo",
     "isEnableActions" : true,
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "All",
     "status" : "status"
@@ -413,7 +425,7 @@ open class WalletAPI {
     "statusUrl" : "statusUrl",
     "logo" : "logo",
     "isEnableActions" : true,
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "All",
     "status" : "status"
@@ -473,12 +485,12 @@ open class WalletAPI {
      * enum for parameter currency
      */
     public enum Currency_v10WalletMultiTransactionsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -519,9 +531,9 @@ open class WalletAPI {
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currencyTo" : "Undefined",
+    "currencyTo" : "BTC",
     "type" : "All",
-    "currencyFrom" : "Undefined",
+    "currencyFrom" : "BTC",
     "logoTo" : "logoTo",
     "status" : "Done"
   }, {
@@ -531,9 +543,9 @@ open class WalletAPI {
     "logoFrom" : "logoFrom",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currencyTo" : "Undefined",
+    "currencyTo" : "BTC",
     "type" : "All",
-    "currencyFrom" : "Undefined",
+    "currencyFrom" : "BTC",
     "logoTo" : "logoTo",
     "status" : "Done"
   } ]
@@ -686,7 +698,7 @@ open class WalletAPI {
   "convertingDetails" : {
     "rateValue" : 3.616076749251911,
     "amountTo" : 9.301444243932576,
-    "currencyTo" : "Undefined",
+    "currencyTo" : "BTC",
     "currencyToName" : "currencyToName",
     "currencyToLogo" : "currencyToLogo"
   },
@@ -694,11 +706,12 @@ open class WalletAPI {
   "externalTransactionDetails" : {
     "descriptionUrl" : "descriptionUrl",
     "description" : "description",
+    "isEnableActions" : true,
     "fromAddress" : "fromAddress"
   },
   "currencyName" : "currencyName",
   "gvCommissionPercent" : 4.145608029883936,
-  "currency" : "Undefined",
+  "currency" : "BTC",
   "currencyLogo" : "currencyLogo",
   "type" : "Investing",
   "gvCommission" : 2.027123023002322,
@@ -751,18 +764,19 @@ open class WalletAPI {
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
+        case payingFee = "PayingFee"
     }
 
     /**
      * enum for parameter wallet
      */
     public enum Wallet_v10WalletTransactionsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -809,7 +823,7 @@ open class WalletAPI {
     },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceCurrency" : "Undefined",
+    "sourceCurrency" : "BTC",
     "sourceProgramInfo" : {
       "title" : "title"
     },
@@ -828,7 +842,7 @@ open class WalletAPI {
     },
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "Undefined",
+    "destinationCurrency" : "BTC",
     "destinationBlockchainInfo" : {
       "hash" : "hash",
       "status" : "Undefined"
@@ -849,7 +863,7 @@ open class WalletAPI {
     },
     "amount" : 0.8008281904610115,
     "amountConverted" : 6.027456183070403,
-    "sourceCurrency" : "Undefined",
+    "sourceCurrency" : "BTC",
     "sourceProgramInfo" : {
       "title" : "title"
     },
@@ -868,7 +882,7 @@ open class WalletAPI {
     },
     "action" : "Transfer",
     "destinationType" : "Wallet",
-    "destinationCurrency" : "Undefined",
+    "destinationCurrency" : "BTC",
     "destinationBlockchainInfo" : {
       "hash" : "hash",
       "status" : "Undefined"
@@ -979,14 +993,14 @@ open class WalletAPI {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "commission" : 6.027456183070403,
     "availableToWithdrawal" : 5.962133916683182
   }, {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "commission" : 6.027456183070403,
     "availableToWithdrawal" : 5.962133916683182
   } ],

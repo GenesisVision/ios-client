@@ -16,6 +16,7 @@ final class ProgramTradesViewModel {
     var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var sortingDelegateManager: SortingDelegateManager!
+    var currencyType: CurrencyType!
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
@@ -47,11 +48,12 @@ final class ProgramTradesViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false) {
+    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, currencyType: CurrencyType) {
         self.router = router
         self.programId = programId
         self.isOpenTrades = isOpenTrades ?? false
         self.reloadDataProtocol = reloadDataProtocol
+        self.currencyType = currencyType
         
         title = self.isOpenTrades ? "Open positions" : "Trades"
         
@@ -197,7 +199,7 @@ extension ProgramTradesViewModel {
         let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
         
         if isOpenTrades {
-            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet, skip: skip, take: take, completion: { (tradesViewModel) in
+            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -206,7 +208,7 @@ extension ProgramTradesViewModel {
                 let totalCount = tradesViewModel?.total ?? 0
                 
                 tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
+                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 
@@ -214,7 +216,7 @@ extension ProgramTradesViewModel {
                 completionError(.success)
             }, errorCompletion: completionError)
         } else {
-            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { (tradesViewModel) in
+            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -223,7 +225,7 @@ extension ProgramTradesViewModel {
                 let totalCount = tradesViewModel?.total ?? 0
                 
                 tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel)
+                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 

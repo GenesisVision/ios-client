@@ -253,7 +253,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.addContentsView(errorBottomSheetView)
         errorBottomSheetView.bottomSheetController = self.bottomSheetController
         
-        bottomSheetController.present()
+        self.present(viewController: bottomSheetController)
     }
     
     func hideAll() {

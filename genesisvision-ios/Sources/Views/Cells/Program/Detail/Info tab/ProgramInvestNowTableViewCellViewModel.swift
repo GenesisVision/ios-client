@@ -17,7 +17,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
         cell.investButton.setEnabled(false)
         
-        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest, programDetailsFull?.availableInvestment != 0 {
+        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest, programDetailsFull?.availableInvestmentBase != 0 {
             cell.investButton.setEnabled(canInvest)
         }
         
@@ -33,22 +33,22 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Invest Now"
         cell.investButton.setTitle("Invest", for: .normal)
         
+        cell.entryFeeTitleLabel.text = "entry fee"
         if let entryFeeCurrent = programDetailsFull?.entryFeeCurrent, let entryFeeSelected = programDetailsFull?.entryFeeSelected {
             let entryFeeCurrentString = entryFeeCurrent.rounded(withType: .undefined).toString() + "%"
             let entryFeeSelectedString = " (" + entryFeeSelected.rounded(withType: .undefined).toString() + "%)"
             
-            cell.entryFeeTitleLabel.text = "entry fee"
             cell.entryFeeValueLabel.text = entryFeeCurrent == entryFeeSelected ? entryFeeCurrentString : entryFeeCurrentString + entryFeeSelectedString
         }
         
+        cell.successFeeTitleLabel.text = "success fee"
         if let successFee = programDetailsFull?.successFee {
-            cell.successFeeTitleLabel.text = "success fee"
             cell.successFeeValueLabel.text = successFee.rounded(withType: .undefined).toString() + "%"
         }
         
-        if let availableInvestment = programDetailsFull?.availableInvestment {
-            cell.investTitleLabel.text = "av. to invest"
-            cell.investValueLabel.text = availableInvestment.rounded(withType: .gvt, specialForGVT: true).toString() + " \(Constants.gvtString)"
+        cell.investTitleLabel.text = "av. to invest"
+        if let availableInvestment = programDetailsFull?.availableInvestmentBase, let currency = programDetailsFull?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            cell.investValueLabel.text = availableInvestment.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         }
     }
 }

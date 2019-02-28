@@ -11,18 +11,12 @@ import Foundation
 
 open class ProgramTag: Codable {
 
-    public enum Name: String, Codable { 
-        case crypto = "Crypto"
-        case forex = "Forex"
-        case highRisk = "HighRisk"
-        case signal = "Signal"
-    }
-    public var name: Name?
+    public var name: String?
     public var color: String?
 
 
     
-    public init(name: Name?, color: String?) {
+    public init(name: String?, color: String?) {
         self.name = name
         self.color = color
     }
@@ -43,7 +37,7 @@ open class ProgramTag: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        name = try container.decodeIfPresent(Name.self, forKey: "name")
+        name = try container.decodeIfPresent(String.self, forKey: "name")
         color = try container.decodeIfPresent(String.self, forKey: "color")
     }
 }

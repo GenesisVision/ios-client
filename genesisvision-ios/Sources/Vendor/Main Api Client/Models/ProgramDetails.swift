@@ -12,12 +12,12 @@ import Foundation
 open class ProgramDetails: Codable {
 
     public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -41,7 +41,10 @@ open class ProgramDetails: Codable {
     public var stopOutLevel: Double?
     public var periodStarts: Date?
     public var periodEnds: Date?
+    /** In GVT */
     public var availableInvestment: Double?
+    /** In account currency */
+    public var availableInvestmentBase: Double?
     /** Fields for dashboard */
     public var dashboardAssetsDetails: DashboardProgramDetails?
     public var statistic: ProgramDetailsListStatistic?
@@ -61,7 +64,7 @@ open class ProgramDetails: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, availableInvestmentBase: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -69,6 +72,7 @@ open class ProgramDetails: Codable {
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
         self.availableInvestment = availableInvestment
+        self.availableInvestmentBase = availableInvestmentBase
         self.dashboardAssetsDetails = dashboardAssetsDetails
         self.statistic = statistic
         self.rating = rating
@@ -99,6 +103,7 @@ open class ProgramDetails: Codable {
         try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
+        try container.encodeIfPresent(availableInvestmentBase, forKey: "availableInvestmentBase")
         try container.encodeIfPresent(dashboardAssetsDetails, forKey: "dashboardAssetsDetails")
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
@@ -127,6 +132,7 @@ open class ProgramDetails: Codable {
         periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
+        availableInvestmentBase = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentBase")
         dashboardAssetsDetails = try container.decodeIfPresent(DashboardProgramDetails.self, forKey: "dashboardAssetsDetails")
         statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")

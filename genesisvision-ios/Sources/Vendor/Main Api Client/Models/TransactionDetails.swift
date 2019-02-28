@@ -20,6 +20,7 @@ open class TransactionDetails: Codable {
         case open = "Open"
         case close = "Close"
         case profit = "Profit"
+        case platformFee = "PlatformFee"
     }
     public enum Status: String, Codable { 
         case done = "Done"
@@ -28,12 +29,12 @@ open class TransactionDetails: Codable {
         case error = "Error"
     }
     public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
