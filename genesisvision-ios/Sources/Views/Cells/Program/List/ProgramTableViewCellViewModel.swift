@@ -88,8 +88,8 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         
         
         cell.secondTitleLabel.text = "Equity"
-        if let balance = asset.statistic?.balanceGVT, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            cell.secondValueLabel.text = amount.rounded(withType: currency, specialForGVT: true).toString() + " " + currency.rawValue
+        if let balance = asset.statistic?.balanceBase, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+            cell.secondValueLabel.text = amount.rounded(withType: currency, short: true).toString() + " " + currency.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }
@@ -126,9 +126,11 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
-        if let profitValue = asset.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        }
+//        if let profitValue = asset.statistic?.profitValue {
+//            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+//        }
+        
+        cell.profitValueLabel.isHidden = true
         
         if let isInvested = asset.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested

@@ -171,7 +171,7 @@ class ProgramWithdrawViewController: BaseViewController {
     private func showConfirmVC() {
         bottomSheetController = BottomSheetController()
         bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 350.0
+        bottomSheetController.initializeHeight = 370.0
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         

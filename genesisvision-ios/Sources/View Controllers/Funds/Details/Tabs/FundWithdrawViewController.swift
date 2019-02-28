@@ -24,18 +24,12 @@ class FundWithdrawViewController: BaseViewController {
     }
     
     // MARK: - Labels
-    @IBOutlet weak var availableToWithdrawValueTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueTitleLabel: SubtitleLabel! {
         didSet {
             availableToWithdrawValueTitleLabel.text = "Current invested value"
-            availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel! {
-        didSet {
-            availableToWithdrawValueLabel.textColor = UIColor.primary
-            availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
-        }
-    }
+    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel!
     @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Amount to withdraw"

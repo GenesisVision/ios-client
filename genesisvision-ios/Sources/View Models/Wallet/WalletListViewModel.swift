@@ -109,6 +109,7 @@ extension WalletListViewModel {
         if let model = model(at: indexPath) as? WalletTableViewCellViewModel {
             let walletViewController = WalletViewController()
             walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet)
+            walletViewController.hidesBottomBarWhenPushed = true
             router.walletTabmanViewController?.push(viewController: walletViewController)
         }
     }

@@ -180,7 +180,7 @@ extension WalletTransactionListViewController: WalletTransactionViewProtocol {
             self?.hideAll()
             switch result {
             case .success:
-                break
+                self?.showBottomSheet(.success, title: String.Info.walletEmailSent)
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
@@ -194,6 +194,7 @@ extension WalletTransactionListViewController: WalletTransactionViewProtocol {
             self?.hideAll()
             switch result {
             case .success:
+                self?.showBottomSheet(.success, title: String.Info.withdrawalCanceled)
                 self?.viewModel.refresh { (result) in }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)

@@ -25,13 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rq6-wx-hWK" customClass="TopStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                    <rect key="frame" x="30" y="0.0" width="315" height="62"/>
+                    <rect key="frame" x="20" y="12" width="335" height="62"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pA8-jt-yXM">
-                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mvv-YS-1uM">
-                                    <rect key="frame" x="0.0" y="2" width="259" height="49"/>
+                                    <rect key="frame" x="0.0" y="2" width="279" height="49"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-fH-zC9" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
@@ -48,7 +48,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAn-Lb-sNP">
-                                    <rect key="frame" x="275" y="6.5" width="40" height="40"/>
+                                    <rect key="frame" x="295" y="6.5" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="GT0-76-gBt"/>
                                         <constraint firstAttribute="width" constant="40" id="e6S-wK-Taj"/>
@@ -64,7 +64,7 @@
                             </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4d-vy-my5">
-                            <rect key="frame" x="0.0" y="61" width="315" height="1"/>
+                            <rect key="frame" x="0.0" y="61" width="335" height="1"/>
                             <color key="backgroundColor" red="0.14509803921568626" green="0.19607843137254902" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="2zJ-k7-qvM"/>
@@ -80,25 +80,25 @@
                     </connections>
                 </stackView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljw-D8-f4c">
-                    <rect key="frame" x="30" y="70" width="315" height="2400"/>
+                    <rect key="frame" x="20" y="94" width="335" height="2376"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QOh-o9-cGm">
-                            <rect key="frame" x="0.0" y="0.0" width="315" height="2047.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="2047.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-sk-G97" userLabel="Platform fee" customClass="PlatformFeeStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="315" height="136.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="136.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XBK-NG-ZG2" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="66.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTo-NU-4uq" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YdR-GU-F1U">
-                                                    <rect key="frame" x="0.0" y="26.5" width="315" height="40"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="335" height="40"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hTD-gq-pOf">
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -108,7 +108,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Liv-6o-rpM" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="12" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="12" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -124,16 +124,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0wB-tj-XKD" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="86.5" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="86.5" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wre-e8-N3P" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="16"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTJ-Ke-RAV" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="24" width="315" height="26"/>
+                                                    <rect key="frame" x="0.0" y="24" width="335" height="26"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,19 +155,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Fut-D9-SAp" userLabel="Open/Close" customClass="OpenProgramStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="156.5" width="315" height="140"/>
+                                    <rect key="frame" x="0.0" y="156.5" width="335" height="140"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sAc-KH-SYT" customClass="AssetStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXv-6c-eX8" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8Mc-b1-CaX">
-                                                    <rect key="frame" x="0.0" y="22" width="315" height="48"/>
+                                                    <rect key="frame" x="0.0" y="22" width="335" height="48"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbA-QR-Cl3" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="54" height="48"/>
@@ -201,7 +201,7 @@
                                                             </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="urg-gr-fcd">
-                                                            <rect key="frame" x="66" y="7.5" width="249" height="33.5"/>
+                                                            <rect key="frame" x="66" y="7.5" width="269" height="33.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7q-b9-yAT" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26.5" height="16.5"/>
@@ -233,16 +233,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e5D-1F-C8j" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="90" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="90" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ht-2Y-lXi" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="16"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBy-hk-U4A" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="24" width="315" height="26"/>
+                                                    <rect key="frame" x="0.0" y="24" width="335" height="26"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -264,19 +264,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tND-zp-mxI" userLabel="Investment" customClass="InvestmentStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="316.5" width="315" height="420"/>
+                                    <rect key="frame" x="0.0" y="316.5" width="335" height="420"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KbU-yV-LEv" customClass="AssetStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-vb-zje" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="lut-XE-5sX">
-                                                    <rect key="frame" x="0.0" y="22" width="315" height="48"/>
+                                                    <rect key="frame" x="0.0" y="22" width="335" height="48"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eF-fd-MGL" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="54" height="48"/>
@@ -310,7 +310,7 @@
                                                             </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lio-xN-zvF">
-                                                            <rect key="frame" x="66" y="7.5" width="249" height="33.5"/>
+                                                            <rect key="frame" x="66" y="7.5" width="269" height="33.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyq-Fm-RQN" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26.5" height="16.5"/>
@@ -342,16 +342,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-cw-BVE" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="90" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="90" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isT-Ts-KE1" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="16"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfZ-yg-bMC" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="24" width="315" height="26"/>
+                                                    <rect key="frame" x="0.0" y="24" width="335" height="26"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -367,16 +367,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dDa-Hp-yIk" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="160" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="160" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBj-Tv-Hxr" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="18"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9L-5u-BGC" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26" width="315" height="24"/>
+                                                    <rect key="frame" x="0.0" y="26" width="335" height="24"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -392,16 +392,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PvA-Qa-FUk" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="230" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="230" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47j-bG-WI9" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="18"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9Y-86-Fds" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26" width="315" height="24"/>
+                                                    <rect key="frame" x="0.0" y="26" width="335" height="24"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -417,16 +417,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vOh-rz-Jvw" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="300" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="300" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVl-wq-PwX" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="18"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIZ-f3-7DR" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26" width="315" height="24"/>
+                                                    <rect key="frame" x="0.0" y="26" width="335" height="24"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -442,16 +442,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aO3-XV-kSh" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="370" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="370" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27o-j8-emh" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="18"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jse-K2-bu1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26" width="315" height="24"/>
+                                                    <rect key="frame" x="0.0" y="26" width="335" height="24"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -477,19 +477,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Teg-AH-fYi" userLabel="Withdrawal" customClass="WithdrawalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="756.5" width="315" height="140"/>
+                                    <rect key="frame" x="0.0" y="756.5" width="335" height="140"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="baH-LH-kcY" customClass="AssetStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFN-WH-TQ3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="13.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="25F-xh-15v">
-                                                    <rect key="frame" x="0.0" y="25.5" width="315" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="25.5" width="335" height="44.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oby-mJ-s58" customClass="ProfileImageView" customModule="Genesis_Vision" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="54" height="44.5"/>
@@ -523,7 +523,7 @@
                                                             </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hJe-W2-vdR">
-                                                            <rect key="frame" x="66" y="5.5" width="249" height="33.5"/>
+                                                            <rect key="frame" x="66" y="5.5" width="269" height="33.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wj9-4H-7Dt" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26.5" height="16.5"/>
@@ -555,16 +555,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6nq-XQ-MOl" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="90" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="90" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpP-WL-zhC" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uw-jO-bd1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26.5" width="315" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="335" height="23.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -586,19 +586,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TmR-vf-scl" userLabel="Converting" customClass="ConvertingStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="916.5" width="315" height="350"/>
+                                    <rect key="frame" x="0.0" y="916.5" width="335" height="350"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QNu-XX-1pY" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfF-mA-LqO" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="15.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="15.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2WD-f1-qRB">
-                                                    <rect key="frame" x="0.0" y="27.5" width="315" height="42.5"/>
+                                                    <rect key="frame" x="0.0" y="27.5" width="335" height="42.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0MK-Vr-WSv">
                                                             <rect key="frame" x="0.0" y="1" width="40" height="40"/>
@@ -608,7 +608,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZg-SE-gU1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="13" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="13" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -627,16 +627,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="096-8l-Zpd" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="90" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="90" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR7-Bo-iof" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="16.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zi-9h-TeY" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="28.5" width="315" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="28.5" width="335" height="21.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -652,16 +652,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="R6a-zN-Teb" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="160" width="315" height="70"/>
+                                            <rect key="frame" x="0.0" y="160" width="335" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li9-d4-2LD" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="15.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="15.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fF0-lQ-e9A">
-                                                    <rect key="frame" x="0.0" y="27.5" width="315" height="42.5"/>
+                                                    <rect key="frame" x="0.0" y="27.5" width="335" height="42.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e6v-KF-lDv">
                                                             <rect key="frame" x="0.0" y="1" width="40" height="40"/>
@@ -671,7 +671,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27J-8u-Fp7" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="13" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="13" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -690,16 +690,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vah-0b-lUt" customClass="DefaultStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="250" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="250" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DV-nZ-WTr" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="16.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sul-4F-cMv" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="28.5" width="315" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="28.5" width="335" height="21.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -715,10 +715,10 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NUe-NJ-ZHk" customClass="RateStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="320" width="315" height="30"/>
+                                            <rect key="frame" x="0.0" y="320" width="335" height="30"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cf-oL-0FI" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -742,19 +742,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Hx-fE-2Zd" userLabel="External Withdrawal" customClass="ExternalWithdrawalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="1286.5" width="315" height="384"/>
+                                    <rect key="frame" x="0.0" y="1286.5" width="335" height="384"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-0Y-oip" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="147"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="147"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xF-P3-vtN" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fPi-iL-hpN">
-                                                    <rect key="frame" x="0.0" y="34" width="315" height="61"/>
+                                                    <rect key="frame" x="0.0" y="34" width="335" height="61"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GtU-xT-2q8">
                                                             <rect key="frame" x="0.0" y="10.5" width="40" height="40"/>
@@ -764,7 +764,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLN-PX-iAd" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="22.5" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="22.5" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -773,7 +773,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4a-hA-VjW" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="107" width="315" height="40"/>
+                                                    <rect key="frame" x="0.0" y="107" width="335" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="d3V-DS-fOV"/>
                                                     </constraints>
@@ -793,16 +793,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="OaX-C0-Jbp" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="167" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="167" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-pd-Fmh" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMR-q8-qBW" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26.5" width="315" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="335" height="23.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -818,16 +818,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DKl-5U-Hir" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="237" width="315" height="147"/>
+                                            <rect key="frame" x="0.0" y="237" width="335" height="147"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJV-KO-I8C" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RjI-dV-DSJ">
-                                                    <rect key="frame" x="0.0" y="34" width="315" height="61"/>
+                                                    <rect key="frame" x="0.0" y="34" width="335" height="61"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rm3-d8-Ote">
                                                             <rect key="frame" x="0.0" y="10.5" width="40" height="40"/>
@@ -837,7 +837,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5E9-r6-MOV" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="22.5" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="22.5" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -846,7 +846,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okm-cn-1BS" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="107" width="315" height="40"/>
+                                                    <rect key="frame" x="0.0" y="107" width="335" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="1hr-fF-7gu"/>
                                                     </constraints>
@@ -874,19 +874,19 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pUU-tj-s4n" userLabel="External Deposit" customClass="ExternalDepositStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="1690.5" width="315" height="217"/>
+                                    <rect key="frame" x="0.0" y="1690.5" width="335" height="217"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JHR-Xb-x3R" customClass="ExternalStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="147"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="147"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmu-5j-T9e" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="amz-GE-Fx1">
-                                                    <rect key="frame" x="0.0" y="34" width="315" height="61"/>
+                                                    <rect key="frame" x="0.0" y="34" width="335" height="61"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-L9-yQ1">
                                                             <rect key="frame" x="0.0" y="10.5" width="40" height="40"/>
@@ -896,7 +896,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pye-oS-M5X" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                            <rect key="frame" x="52" y="22.5" width="263" height="16.5"/>
+                                                            <rect key="frame" x="52" y="22.5" width="283" height="16.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -905,7 +905,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zw9-JC-Crm" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="107" width="315" height="40"/>
+                                                    <rect key="frame" x="0.0" y="107" width="335" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Nlp-6D-WTt"/>
                                                     </constraints>
@@ -925,16 +925,16 @@
                                             </connections>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="3ky-4L-CWT" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="167" width="315" height="50"/>
+                                            <rect key="frame" x="0.0" y="167" width="335" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pD-fb-wZ1" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Lb-wT-zBD" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="26.5" width="315" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="335" height="23.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -956,16 +956,16 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rac-35-Usc" customClass="StatusStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="1927.5" width="315" height="50"/>
+                                    <rect key="frame" x="0.0" y="1927.5" width="335" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9z-nZ-IeD" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="10"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="10"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0uw-HG-xsv">
-                                            <rect key="frame" x="0.0" y="30" width="315" height="20"/>
+                                            <rect key="frame" x="0.0" y="30" width="335" height="20"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-Go-cKV">
                                                     <rect key="frame" x="0.0" y="0.0" width="54.5" height="20"/>
@@ -999,10 +999,10 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="m2U-6h-wyB" customClass="ActionsStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="1997.5" width="315" height="50"/>
+                                    <rect key="frame" x="0.0" y="1997.5" width="335" height="50"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-Fm-gpn" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="147.5" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="157.5" height="50"/>
                                             <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="fgy-dc-Ggo"/>
@@ -1014,7 +1014,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jc1-ZB-0Ua" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="167.5" y="0.0" width="147.5" height="50"/>
+                                            <rect key="frame" x="177.5" y="0.0" width="157.5" height="50"/>
                                             <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="BTJ-fz-l2t"/>
@@ -1048,12 +1048,12 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Ljw-D8-f4c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Ox3-zN-9O3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rq6-wx-hWK" secondAttribute="trailing" constant="30" id="br0-eu-Wmc"/>
-                <constraint firstItem="Ljw-D8-f4c" firstAttribute="top" secondItem="Rq6-wx-hWK" secondAttribute="bottom" constant="8" id="cOb-td-6fp"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ljw-D8-f4c" secondAttribute="trailing" constant="30" id="emC-cG-Vyi"/>
-                <constraint firstItem="Rq6-wx-hWK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="scM-jG-Ccs"/>
-                <constraint firstItem="Rq6-wx-hWK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="w3q-qH-IXY"/>
+                <constraint firstItem="Ljw-D8-f4c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Ox3-zN-9O3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rq6-wx-hWK" secondAttribute="trailing" constant="20" id="br0-eu-Wmc"/>
+                <constraint firstItem="Ljw-D8-f4c" firstAttribute="top" secondItem="Rq6-wx-hWK" secondAttribute="bottom" constant="20" id="cOb-td-6fp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ljw-D8-f4c" secondAttribute="trailing" constant="20" id="emC-cG-Vyi"/>
+                <constraint firstItem="Rq6-wx-hWK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="scM-jG-Ccs"/>
+                <constraint firstItem="Rq6-wx-hWK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="w3q-qH-IXY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ljw-D8-f4c" secondAttribute="bottom" id="z2t-Ob-JE7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
