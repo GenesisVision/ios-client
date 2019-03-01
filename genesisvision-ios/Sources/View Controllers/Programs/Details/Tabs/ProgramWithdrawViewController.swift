@@ -13,18 +13,12 @@ class ProgramWithdrawViewController: BaseViewController {
     var viewModel: ProgramWithdrawViewModel!
     
     // MARK: - Labels
-    @IBOutlet weak var availableToWithdrawValueTitleLabel: TitleLabel! {
+    @IBOutlet weak var availableToWithdrawValueTitleLabel: SubtitleLabel! {
         didSet {
             availableToWithdrawValueTitleLabel.text = "You invested in program"
-            availableToWithdrawValueTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel! {
-        didSet {
-            availableToWithdrawValueLabel.textColor = UIColor.primary
-            availableToWithdrawValueLabel.font = UIFont.getFont(.regular, size: 14.0)
-        }
-    }
+    @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel!
     @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Amount to withdraw"
