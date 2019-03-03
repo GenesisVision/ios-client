@@ -26,6 +26,7 @@ class FundRouter: Router {
         super.init(parentRouter: parentRouter, navigationController: navigationController)
         
         self.fundViewController = fundViewController
+        self.currentController = fundViewController
     }
     
     // MARK: - Public methods

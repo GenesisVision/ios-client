@@ -14,6 +14,8 @@ enum SettingsRouteType {
 
 class SettingsRouter: Router {
     
+    var settingsViewController: SettingsViewController?
+    
     // MARK: - Public methods
     func show(routeType: SettingsRouteType) {
         switch routeType {
@@ -62,13 +64,12 @@ class SettingsRouter: Router {
     
     private func enablePasscode(_ value: Bool) {
         let window = UIApplication.shared.windows[0] as UIWindow
-        guard let viewController = PasscodeViewController.storyboardInstance(.settings), let rootViewController = window.rootViewController else { return }
+        guard let viewController = PasscodeViewController.storyboardInstance(.settings), let rootViewController = window.rootViewController, let settingsViewController = settingsViewController else { return }
+        
         let router = Router(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = PasscodeViewModel(withRouter: router)
         
-        if let currentController = currentController as? PasscodeProtocol {
-            viewController.delegate = currentController
-        }
+        viewController.delegate = settingsViewController
         
         viewController.passcodeState = value ? .enable : .disable
         viewController.modalTransitionStyle = .crossDissolve

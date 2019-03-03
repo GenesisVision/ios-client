@@ -48,8 +48,6 @@
 		5E12B38F20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B38E20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift */; };
 		5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */; };
 		5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */; };
-		5E148931222870AF003FB659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14892D222870AF003FB659 /* Constants.swift */; };
-		5E148933222870AF003FB659 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14892F222870AF003FB659 /* AppConstants.swift */; };
 		5E14CDA221B57F5600388616 /* BasePageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */; };
 		5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */; };
 		5E14CDA821B5972100388616 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E14CDA721B5972100388616 /* RatingViewController.swift */; };
@@ -274,6 +272,9 @@
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
 		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
+		5E4A7E85222B9D0900A97968 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A7E81222B9D0900A97968 /* Constants.swift */; };
+		5E4A7E87222B9D0900A97968 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A7E83222B9D0900A97968 /* AppConstants.swift */; };
+		5E4A7E89222BA08400A97968 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E4A7E82222B9D0900A97968 /* GoogleService-Info.plist */; };
 		5E54883121412CF500B2D9FE /* PortfolioAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */; };
 		5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */; };
 		5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E54883321414FD100B2D9FE /* DateRangeView.xib */; };
@@ -729,10 +730,6 @@
 		5E12B38E20BEEC0600302730 /* AuthTwoFactorTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorTutorialViewController.swift; sourceTree = "<group>"; };
 		5E12B39020BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorConfirmateViewController.swift; sourceTree = "<group>"; };
 		5E12B39420BEF25E00302730 /* TwoFactorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorDataProvider.swift; sourceTree = "<group>"; };
-		5E14892D222870AF003FB659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5E14892E222870AF003FB659 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5E14892F222870AF003FB659 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
-		5E148930222870AF003FB659 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E14CDA121B57F5600388616 /* BasePageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5E14CDA421B5829300388616 /* RatingPageboyViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPageboyViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5E14CDA721B5972100388616 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
@@ -956,6 +953,10 @@
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestWithdrawConfirmView.xib; sourceTree = "<group>"; };
 		5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestWithdrawConfirmView.swift; sourceTree = "<group>"; };
+		5E4A7E81222B9D0900A97968 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5E4A7E82222B9D0900A97968 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5E4A7E83222B9D0900A97968 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		5E4A7E84222B9D0900A97968 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E54882F21412CF500B2D9FE /* PortfolioAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetTableViewCell.swift; sourceTree = "<group>"; };
 		5E54883021412CF500B2D9FE /* PortfolioAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioAssetTableViewCell.xib; sourceTree = "<group>"; };
 		5E54883321414FD100B2D9FE /* DateRangeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangeView.xib; sourceTree = "<group>"; };
@@ -1451,17 +1452,6 @@
 			path = "Two Factor";
 			sourceTree = "<group>";
 		};
-		5E14892C222870AF003FB659 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				5E14892D222870AF003FB659 /* Constants.swift */,
-				5E14892E222870AF003FB659 /* GoogleService-Info.plist */,
-				5E14892F222870AF003FB659 /* AppConstants.swift */,
-				5E148930222870AF003FB659 /* Info.plist */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		5E14CDA321B57F7300388616 /* PageboyDataSources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1749,6 +1739,17 @@
 				5EA274E02162F113008CAF77 /* ProgramProfitViewModel.swift */,
 			);
 			path = "Program Details";
+			sourceTree = "<group>";
+		};
+		5E4A7E80222B9D0900A97968 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5E4A7E81222B9D0900A97968 /* Constants.swift */,
+				5E4A7E82222B9D0900A97968 /* GoogleService-Info.plist */,
+				5E4A7E83222B9D0900A97968 /* AppConstants.swift */,
+				5E4A7E84222B9D0900A97968 /* Info.plist */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		5E616B3920F7672200B3459D /* Create Program */ = {
@@ -2936,7 +2937,7 @@
 		FCC9DD39200DFA5E008825EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5E14892C222870AF003FB659 /* Config */,
+				5E4A7E80222B9D0900A97968 /* Config */,
 				5E23926C205F67F000CB5AEC /* Fonts */,
 				FCC9DD3A200DFA5E008825EC /* Assets */,
 				FCC9DD40200DFA5E008825EC /* Storyboards */,
@@ -3259,6 +3260,9 @@
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -3297,6 +3301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E4A7E89222BA08400A97968 /* GoogleService-Info.plist in Resources */,
 				5EA274CB21628297008CAF77 /* DetailBalanceChartTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
 				5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */,
@@ -3726,7 +3731,7 @@
 				5E24C6EF2226B1AE00470154 /* SignalsList.swift in Sources */,
 				5EC7881A216D4787000C91E4 /* PortfolioSelectedChartAssetsDelegateManager.swift in Sources */,
 				5E6C0CF32109AA5500B7F844 /* ManagerTabmanViewModel.swift in Sources */,
-				5E148933222870AF003FB659 /* AppConstants.swift in Sources */,
+				5E4A7E87222B9D0900A97968 /* AppConstants.swift in Sources */,
 				5EF14D9E2181FC5500B3843A /* FundInvestRouter.swift in Sources */,
 				FCE823672016239C000061E8 /* RoundedImageView.swift in Sources */,
 				5E24C7342226B1AF00470154 /* OrderOpenSignalSlaveModel.swift in Sources */,
@@ -3772,7 +3777,7 @@
 				5E210DA02170FE75006BDF16 /* DashboardProgramListDelegateManager.swift in Sources */,
 				5EAD3504214FCA1C0057450C /* AllEnums.swift in Sources */,
 				5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */,
-				5E148931222870AF003FB659 /* Constants.swift in Sources */,
+				5E4A7E85222B9D0900A97968 /* Constants.swift in Sources */,
 				5E12B38320BEEB3400302730 /* AuthTwoFactorCreateViewModel.swift in Sources */,
 				FCA5705E2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift in Sources */,
 				5ED1ED442211B22600031AD4 /* WalletBalanceViewModel.swift in Sources */,

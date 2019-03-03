@@ -98,8 +98,6 @@ class Router {
         if rootTabBarController == nil {
             self.navController = navigationController != nil ? navigationController : parentRouter?.navigationController
         }
-        
-        self.currentController = topViewController()
     }
     
     // MARK: - Private methods
@@ -158,6 +156,7 @@ class Router {
         if let settingsViewController = SettingsViewController.storyboardInstance(.settings) {
             navigationController = BaseNavigationController(rootViewController: settingsViewController)
             let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
+            router.settingsViewController = settingsViewController
             settingsViewController.viewModel = SettingsViewModel(withRouter: router)
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysOriginal)
             viewControllers.append(navigationController)

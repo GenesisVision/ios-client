@@ -80,7 +80,7 @@ extension AppDelegate {
     }
     
     private func setup(_ application: UIApplication) {
-        FirebaseApp.configure(options: .init(googleAppID: ApiKeys.googleAppID, gcmSenderID: ApiKeys.gcmSenderID))
+        FirebaseApp.configure()
         SwaggerClientAPI.basePath = ApiKeys.basePath
         
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.restrictRotation)

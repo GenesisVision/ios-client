@@ -27,6 +27,7 @@ class ProgramRouter: Router {
         super.init(parentRouter: parentRouter, navigationController: navigationController)
         
         self.programViewController = programViewController
+        self.currentController = programViewController
     }
     
     // MARK: - Public methods
