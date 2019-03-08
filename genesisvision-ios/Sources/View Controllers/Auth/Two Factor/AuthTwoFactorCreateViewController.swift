@@ -12,6 +12,8 @@ class AuthTwoFactorCreateViewController: BaseViewController {
     // MARK: - View Model
     var viewModel: AuthTwoFactorCreateViewModel!
     
+    var oldBrightness: CGFloat = 0.0
+    
     // MARK: - Outlets
     @IBOutlet weak var topTitleLabel: SubtitleLabel! {
         didSet {
@@ -45,6 +47,19 @@ class AuthTwoFactorCreateViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        oldBrightness = UIScreen.main.brightness
+        UIScreen.main.brightness = CGFloat(1.0)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIScreen.main.brightness = oldBrightness
     }
     
     // MARK: - Private methods

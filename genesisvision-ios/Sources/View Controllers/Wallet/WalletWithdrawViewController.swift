@@ -166,10 +166,6 @@ class WalletWithdrawViewController: BaseViewController {
         bottomViewType = .none
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     // MARK: - Private methods
     private func setup() {
         navigationItem.title = viewModel.title

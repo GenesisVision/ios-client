@@ -20,6 +20,8 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
+    var oldBrightness: CGFloat = 0.0
+    
     // MARK: - Outlets
     @IBOutlet weak var amountToDepositTitleLabel: SubtitleLabel! {
         didSet {
@@ -83,6 +85,18 @@ class WalletDepositViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        oldBrightness = UIScreen.main.brightness
+        UIScreen.main.brightness = CGFloat(1.0)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIScreen.main.brightness = oldBrightness
     }
     
     // MARK: - Private methods
