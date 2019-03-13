@@ -52,8 +52,8 @@ final class WalletTransferViewModel {
             self.selectedCurrencyTo = selectedCurrency
         }
         
-        updateRate { (result) in
-            print(result)
+        updateRate { [weak self] (result) in
+            self?.walletProtocol?.didUpdateData()
         }
     }
     

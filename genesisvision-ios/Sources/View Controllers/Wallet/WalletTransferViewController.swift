@@ -155,6 +155,7 @@ class WalletTransferViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        showProgressHUD()
         updateUI()
     }
     
@@ -391,5 +392,11 @@ extension WalletTransferViewController: InvestWithdrawConfirmViewProtocol {
 extension WalletTransferViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
+    }
+}
+
+extension WalletTransferViewController: WalletProtocol {
+    func didUpdateData() {
+        hideAll()
     }
 }

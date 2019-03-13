@@ -49,6 +49,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let status = program.personalDetails?.status {
+            cell.statusButton.handleUserInteractionEnabled = false
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         }
@@ -81,9 +82,9 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         cell.secondTitleLabel.text = "current value"
-        if let value = program.personalDetails?.value {
-            let currency: CurrencyType = .gvt
-            cell.secondValueLabel.text = value.rounded(withType: currency, short: true).toString() + " " + currency.rawValue
+        if let value = program.personalDetails?.value, let currency = program.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            
+            cell.secondValueLabel.text = value.rounded(withType: currencyType, short: true).toString() + " " + currencyType.rawValue
         } else {
             cell.secondValueLabel.text = ""
         }
