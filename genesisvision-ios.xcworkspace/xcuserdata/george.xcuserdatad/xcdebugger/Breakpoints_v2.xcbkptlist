@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Common/Protocols/Protocols.swift"
-            timestampString = "574164123.692058"
+            filePath = "genesisvision-ios/Sources/View Controllers/Base/BaseTabBarController.swift"
+            timestampString = "577026529.135179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "didTapStatusButton()"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "sendFcmToken(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -38,7 +38,8 @@ class ProgramTableViewCell: PlateTableViewCell {
     // MARK: - Views
     @IBOutlet weak var assetLogoImageView: ProfileImageView!
     @IBOutlet weak var stackView: UIStackView!
-
+    @IBOutlet weak var reinvestStackView: UIStackView!
+    
     @IBOutlet weak var ratingPlaceHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var ratingLabel: RoundedLabel! {
@@ -172,6 +173,7 @@ class ProgramTableViewCell: PlateTableViewCell {
     @IBOutlet weak var reinvestLabel: TitleLabel! {
         didSet {
             reinvestLabel.font = UIFont.getFont(.semibold, size: 12.0)
+            reinvestLabel.text = "Reinvest profit"
         }
     }
     @IBOutlet weak var reinvestTooltip: TooltipButton! {

@@ -204,14 +204,8 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
         
-        ProfileDataProvider.addFCMToken(token: fcmToken) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-            }
-        }
+        UserDefaults.standard.set(fcmToken, forKey: UserDefaultKeys.fcmToken)
+        UserDefaults.standard.synchronize()
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {

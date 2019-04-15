@@ -116,15 +116,20 @@ class ProgramHeaderViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.3, animations: {
-            self.levelButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }, completion: { _ in
+        let levelButtonAnimatedBefore = UserDefaults.standard.bool(forKey: UserDefaultKeys.levelButtonAnimatedBefore)
+        if !levelButtonAnimatedBefore {
+            UserDefaults.standard.set(true, forKey: UserDefaultKeys.levelButtonAnimatedBefore)
+            
             UIView.animate(withDuration: 0.3, animations: {
-                self.levelButton.transform = CGAffineTransform.identity
+                self.levelButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             }, completion: { _ in
-                self.levelButton.layoutSubviews()
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.levelButton.transform = CGAffineTransform.identity
+                }, completion: { _ in
+                    self.levelButton.layoutSubviews()
+                })
             })
-        })
+        }
     }
     
     // MARK: - Public methods

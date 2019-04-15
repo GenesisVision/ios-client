@@ -25,6 +25,10 @@ class BaseTabBarController: UITabBarController {
         applyTheme()
         NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceive, object: nil)
+        
+        if let fcmToken = UserDefaults.standard.string(forKey: UserDefaultKeys.fcmToken) {
+            sendFcmToken(fcmToken)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +81,17 @@ class BaseTabBarController: UITabBarController {
     
     @objc private func themeChangedNotification(notification: Notification) {
         applyTheme()
+    }
+    
+    @objc private func sendFcmToken(_ fcmToken: String) {
+        ProfileDataProvider.addFCMToken(token: fcmToken) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+            }
+        }
     }
     
     private func applyTheme() {

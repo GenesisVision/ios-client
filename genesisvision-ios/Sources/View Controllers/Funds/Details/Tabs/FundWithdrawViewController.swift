@@ -30,6 +30,19 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     @IBOutlet weak var availableToWithdrawValueLabel: TitleLabel!
+    
+    @IBOutlet weak var selectedWalletFromTitleLabel: SubtitleLabel! {
+        didSet {
+            selectedWalletFromTitleLabel.text = "To"
+        }
+    }
+    @IBOutlet weak var selectedWalletFromButton: UIButton!
+    @IBOutlet weak var selectedWalletFromValueLabel: TitleLabel! {
+        didSet {
+            selectedWalletFromValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    
     @IBOutlet weak var amountToWithdrawTitleLabel: SubtitleLabel! {
         didSet {
             amountToWithdrawTitleLabel.text = "Amount to withdraw"
@@ -83,7 +96,7 @@ class FundWithdrawViewController: BaseViewController {
     @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.text = "The withdrawal amount can be changed depending on the exchange rate or the success of the Manager."
-            
+            disclaimerLabel.isHidden = true
             disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
             disclaimerLabel.textAlignment = .justified
         }
@@ -110,11 +123,7 @@ class FundWithdrawViewController: BaseViewController {
         }
     }
     
-    var availableToWithdrawValue: Double = 0.0 {
-        didSet {
-            self.availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + Constants.gvtString
-        }
-    }
+    var availableToWithdrawValue: Double = 0.0
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -149,27 +158,30 @@ class FundWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        if let availableToWithdraw = viewModel.fundWithdrawInfo?.availableToWithdraw {
-            self.availableToWithdrawValue = availableToWithdraw
-        }
-
+        guard let selectedWalletCurrency = viewModel.selectedWalletFrom?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
+        
+        //wallet
+        self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
+ 
+        let exitFee = viewModel.getExitFee()
+        
+        availableToWithdrawValue = viewModel.getAvailableToWithdraw()
+        availableToWithdrawValueLabel.text = availableToWithdrawValue.toString() + " " + currencyType.rawValue
+        
         let withdrawingValue = availableToWithdrawValue / 100 * amountToWithdrawValue
         
-        if let exitFee = viewModel.fundWithdrawInfo?.exitFee {
-            let exitFeeString = exitFee.rounded(withType: .undefined).toString()
-            
-            let exitFeeGVT = exitFee * withdrawingValue / 100
-            let exitFeeGVTString = exitFeeGVT.rounded(withType: .gvt).toString()
-            
-            let exitFeeValueLabelString = exitFeeString + "% (≈\(exitFeeGVTString) " + Constants.gvtString + ")"
-            self.exitFeeValueLabel.text = exitFeeValueLabelString
-            
-            let withdrawingAmountValue = (withdrawingValue - exitFeeGVT).rounded(withType: .gvt).toString()
-            self.withdrawingAmountValueLabel.text = "≈" + withdrawingAmountValue + " " + Constants.gvtString
-        }
+        self.amountToWithdrawCurrencyLabel.text = "≈" + withdrawingValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         
-        let amountToWithdrawValueCurrencyString = (withdrawingValue).rounded(withType: .gvt).toString()
-        self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + Constants.gvtString
+        let exitFeeString = exitFee.rounded(withType: .undefined).toString()
+        
+        let exitFeeCurrency = withdrawingValue / 100 * exitFee
+        let exitFeeCurrencyString = exitFeeCurrency.rounded(withType: currencyType).toString()
+        
+        let exitFeeValueLabelString = exitFeeString + "% (≈" + exitFeeCurrencyString + " " + currencyType.rawValue + ")"
+        self.exitFeeValueLabel.text = exitFeeValueLabelString
+        
+        let withdrawingAmountValue = (withdrawingValue - exitFeeCurrency).rounded(withType: currencyType).toString()
+        self.withdrawingAmountValueLabel.text = "≈" + withdrawingAmountValue + " " + currencyType.rawValue
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0 && amountToWithdrawValue <= 100
         
@@ -230,6 +242,38 @@ class FundWithdrawViewController: BaseViewController {
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self
         bottomSheetController.present()
+    }
+    
+    @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        
+        var selectedIndexRow = viewModel.selectedWalletFromCurrencyIndex
+        let values = viewModel.walletCurrencyValues()
+        
+        let pickerViewValues: [[String]] = [values.map { $0 }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
+            selectedIndexRow = index.row
+            self?.showProgressHUD()
+            self?.viewModel.updateWalletCurrencyFromIndex(selectedIndexRow, completion: { (result) in
+                self?.hideAll()
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.updateUI()
+                    }
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            })
+        }
+        
+        alert.addAction(title: "Ok", style: .cancel)
+        
+        alert.show()
     }
     
     // MARK: - Actions

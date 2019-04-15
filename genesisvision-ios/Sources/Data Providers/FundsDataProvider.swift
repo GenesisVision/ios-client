@@ -71,12 +71,12 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func getWithdrawInfo(fundId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getWithdrawInfo(fundId: String, currency: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: fundId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundWithdrawInfo, error) in
+        InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currency, authorization: authorization) { (fundWithdrawInfo, error) in
             DataProvider().responseHandler(fundWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -92,13 +92,13 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func withdraw(withPercent percent: Double, fundId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func withdraw(withPercent percent: Double, fundId: String?, currency: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawByPercentPost?, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let fundId = fundId,
             let uuid = UUID(uuidString: fundId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdWithdrawByPercentPost(id: uuid, percent: percent, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorFundsByIdWithdrawByPercentPost(id: uuid, percent: percent, authorization: authorization, currency: currency) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

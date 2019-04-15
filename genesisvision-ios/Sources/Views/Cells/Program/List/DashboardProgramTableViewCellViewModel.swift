@@ -49,6 +49,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
         }
         
         if let status = program.personalDetails?.status {
+            cell.reinvestStackView.isHidden = status == .ended
             cell.statusButton.handleUserInteractionEnabled = false
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
@@ -118,9 +119,7 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
-        if let profitValue = program.statistic?.profitValue {
-            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        }
+        cell.profitValueLabel.isHidden = true
         
         if let isInvested = program.personalDetails?.isInvested {
             cell.investedImageView.isHidden = !isInvested

@@ -120,15 +120,19 @@ extension ProgramTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
+        if let status = asset.status, status == .closed {
+            cell.reinvestStackView.isHidden = true
+            cell.dashboardBottomStackView.isHidden = false
+            cell.statusButton.handleUserInteractionEnabled = false
+            cell.statusButton.setTitle(status.rawValue, for: .normal)
+            cell.statusButton.layoutSubviews()
+        }
+        
         if let profitPercent = asset.statistic?.profitPercent {
             let sign = profitPercent > 0 ? "+" : ""
             cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
-        
-//        if let profitValue = asset.statistic?.profitValue {
-//            cell.profitValueLabel.text = profitValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-//        }
         
         cell.profitValueLabel.isHidden = true
         
@@ -138,7 +142,24 @@ extension ProgramTableViewCellViewModel: CellViewModel {
     }
     
     func setupTagsBottomView(on cell: ProgramTableViewCell) {
-        guard let tags = asset.tags, !tags.isEmpty else { return }
+        guard var tags = asset.tags, !tags.isEmpty else {
+            let tags = [ProgramTag(name: "Closed", color: "#787d82")]
+            cell.tagsBottomStackView.isHidden = false
+            
+            cell.firstTagLabel.isHidden = true
+            if let name = tags[0].name, let color = tags[0].color {
+                cell.firstTagLabel.isHidden = false
+                cell.firstTagLabel.text = name.uppercased()
+                cell.firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+                cell.firstTagLabel.textColor = UIColor.hexColor(color)
+            }
+            
+            return
+        }
+        
+        if let status = asset.status, status != .closed {
+            tags.insert(ProgramTag(name: "Closed", color: "#787d82"), at: 0)
+        }
         
         let tagsCount = tags.count
         cell.tagsBottomStackView.isHidden = false

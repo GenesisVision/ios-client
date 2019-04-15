@@ -21,10 +21,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     // MARK: - Private methods
     private func setup() {
         viewModel.programListDelegateManager.delegate = self
@@ -49,6 +45,7 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
+        tableView.contentInset.bottom = 60.0
         
         tableView.isScrollEnabled = false
         tableView.bounces = false

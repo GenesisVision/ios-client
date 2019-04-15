@@ -331,7 +331,7 @@ extension UIColor {
     
     struct Status {
         static var active: UIColor { return Common.white }
-        static var ended: UIColor { return Common.white.withAlphaComponent(0.5) }
+        static var ended: UIColor { return Common.darkTextSecondary }
         static var investing: UIColor { return Common.yellow }
         static var withdrawing: UIColor { return #colorLiteral(red: 0.4352941176, green: 0.4980392157, blue: 0.8901960784, alpha: 1) }                               //6F7FE3
         

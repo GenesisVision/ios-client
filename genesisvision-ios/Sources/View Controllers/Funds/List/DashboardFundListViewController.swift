@@ -49,7 +49,8 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
     
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-
+        tableView.contentInset.bottom = 60.0
+        
         tableView.isScrollEnabled = false
         tableView.bounces = true
         tableView.delegate = self.viewModel?.fundListDelegateManager
