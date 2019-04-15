@@ -25,6 +25,10 @@ class InvestNowTableViewCell: UITableViewCell {
     @IBOutlet weak var investValueLabel: TitleLabel!
     @IBOutlet weak var investTitleLabel: SubtitleLabel!
     
+    @IBOutlet weak var stopOutStackView: UIStackView!
+    @IBOutlet weak var stopOutValueLabel: TitleLabel!
+    @IBOutlet weak var stopOutTitleLabel: SubtitleLabel!
+    
     @IBOutlet weak var entryFeeStackView: UIStackView!
     @IBOutlet weak var entryFeeValueLabel: TitleLabel!
     @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel!

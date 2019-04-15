@@ -50,5 +50,10 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         if let availableInvestment = programDetailsFull?.availableInvestmentBase, let currency = programDetailsFull?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             cell.investValueLabel.text = availableInvestment.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
         }
+        
+        cell.stopOutTitleLabel.text = "stop out"
+        if let stopOutLevel = programDetailsFull?.stopOutLevel {
+            cell.stopOutValueLabel.text = stopOutLevel.rounded(withType: .undefined).toString() + "%"
+        }
     }
 }
