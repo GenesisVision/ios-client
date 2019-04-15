@@ -143,21 +143,10 @@ extension ProgramTableViewCellViewModel: CellViewModel {
     
     func setupTagsBottomView(on cell: ProgramTableViewCell) {
         guard var tags = asset.tags, !tags.isEmpty else {
-            let tags = [ProgramTag(name: "Closed", color: "#787d82")]
-            cell.tagsBottomStackView.isHidden = false
-            
-            cell.firstTagLabel.isHidden = true
-            if let name = tags[0].name, let color = tags[0].color {
-                cell.firstTagLabel.isHidden = false
-                cell.firstTagLabel.text = name.uppercased()
-                cell.firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
-                cell.firstTagLabel.textColor = UIColor.hexColor(color)
-            }
-            
             return
         }
         
-        if let status = asset.status, status != .closed {
+        if let status = asset.status, status == .closed {
             tags.insert(ProgramTag(name: "Closed", color: "#787d82"), at: 0)
         }
         

@@ -37,7 +37,7 @@ class ChartView: CombinedChartView {
     
     private var chartType: ChartType = .detail
     
-    private var dateRangeType: DateRangeType = .week
+    private var dateRangeType: DateRangeType = .month
     private var dateFrom: Date?
     private var dateTo: Date?
     
@@ -118,7 +118,7 @@ class ChartView: CombinedChartView {
         self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
         
-        self.dateRangeType = dateRangeModel?.dateRangeType ?? .week
+        self.dateRangeType = dateRangeModel?.dateRangeType ?? .month
         self.dateFrom = dateRangeModel?.dateFrom
         self.dateTo = dateRangeModel?.dateTo
 

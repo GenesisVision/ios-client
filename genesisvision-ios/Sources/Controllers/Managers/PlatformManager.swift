@@ -29,7 +29,7 @@ struct FilterConstants {
 class PlatformManager {
     static let shared = PlatformManager()
     
-    var dateRangeType: DateRangeType = .week
+    var dateRangeType: DateRangeType = .month
     var dateFrom: Date?
     var dateTo: Date?
     

@@ -19,7 +19,7 @@ class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?
     
-    var dateRangeType: DateRangeType = .week
+    var dateRangeType: DateRangeType = .month
     
     var dateFrom: Date? {
         didSet {
@@ -133,7 +133,7 @@ class DateRangeView: UIView {
     
     // MARK: - Public methods
     func reset() {
-        dateRangeType = .week
+        dateRangeType = .month
         changeDateRangeType()
     }
     // MARK: - Private methods
