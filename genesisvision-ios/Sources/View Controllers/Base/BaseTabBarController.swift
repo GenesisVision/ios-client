@@ -3,7 +3,7 @@
 //  genesisvision-ios
 //
 //  Created by George Shaginyan on 16.01.18.
-//  Copyright © 2018 Genesis Vision. All rights reserved.
+//  Copyright © 2018 Genesis Vison. All rights reserved.
 //
 
 import UIKit

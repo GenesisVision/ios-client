@@ -11,12 +11,18 @@ import Foundation
 
 open class TradesViewModel: Codable {
 
+    public enum TradesType: String, Codable { 
+        case positions = "Positions"
+        case orders = "Orders"
+    }
+    public var tradesType: TradesType?
     public var trades: [OrderModel]?
     public var total: Int?
 
 
     
-    public init(trades: [OrderModel]?, total: Int?) {
+    public init(tradesType: TradesType?, trades: [OrderModel]?, total: Int?) {
+        self.tradesType = tradesType
         self.trades = trades
         self.total = total
     }
@@ -28,6 +34,7 @@ open class TradesViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(tradesType, forKey: "tradesType")
         try container.encodeIfPresent(trades, forKey: "trades")
         try container.encodeIfPresent(total, forKey: "total")
     }
@@ -37,6 +44,7 @@ open class TradesViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        tradesType = try container.decodeIfPresent(TradesType.self, forKey: "tradesType")
         trades = try container.decodeIfPresent([OrderModel].self, forKey: "trades")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
     }

@@ -16,15 +16,17 @@ open class RegisterManagerViewModel: Codable {
     public var password: String
     public var confirmPassword: String?
     public var refCode: String?
+    public var isAuto: Bool?
 
 
     
-    public init(userName: String, email: String, password: String, confirmPassword: String?, refCode: String?) {
+    public init(userName: String, email: String, password: String, confirmPassword: String?, refCode: String?, isAuto: Bool?) {
         self.userName = userName
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
         self.refCode = refCode
+        self.isAuto = isAuto
     }
     
 
@@ -39,6 +41,7 @@ open class RegisterManagerViewModel: Codable {
         try container.encode(password, forKey: "password")
         try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
         try container.encodeIfPresent(refCode, forKey: "refCode")
+        try container.encodeIfPresent(isAuto, forKey: "isAuto")
     }
 
     // Decodable protocol methods
@@ -51,6 +54,7 @@ open class RegisterManagerViewModel: Codable {
         password = try container.decode(String.self, forKey: "password")
         confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
         refCode = try container.decodeIfPresent(String.self, forKey: "refCode")
+        isAuto = try container.decodeIfPresent(Bool.self, forKey: "isAuto")
     }
 }
 

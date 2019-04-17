@@ -507,6 +507,8 @@ open class FundsAPI {
      - parameter facetId: (query)  (optional)
      - parameter isFavorite: (query)  (optional)
      - parameter isEnabled: (query)  (optional)
+     - parameter hasInvestorsForAll: (query)  (optional)
+     - parameter hasInvestorsForClosed: (query)  (optional)
      - parameter ids: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
@@ -514,8 +516,8 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -683,6 +685,8 @@ open class FundsAPI {
      - parameter facetId: (query)  (optional)
      - parameter isFavorite: (query)  (optional)
      - parameter isEnabled: (query)  (optional)
+     - parameter hasInvestorsForAll: (query)  (optional)
+     - parameter hasInvestorsForClosed: (query)  (optional)
      - parameter ids: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
@@ -691,7 +695,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -707,6 +711,8 @@ open class FundsAPI {
             "FacetId": facetId, 
             "IsFavorite": isFavorite, 
             "IsEnabled": isEnabled, 
+            "HasInvestorsForAll": hasInvestorsForAll, 
+            "HasInvestorsForClosed": hasInvestorsForClosed, 
             "Ids": ids, 
             "ManagerId": managerId, 
             "ProgramManagerId": programManagerId, 

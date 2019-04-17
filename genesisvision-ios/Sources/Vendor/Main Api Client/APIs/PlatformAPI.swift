@@ -197,6 +197,60 @@ open class PlatformAPI {
     }
 
     /**
+     Platform captcha details.
+     
+     - parameter route: (query)  
+     - parameter client: (query)  (optional)
+     - parameter version: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10PlatformRiskcontrolGet(route: String, client: String? = nil, version: String? = nil, completion: @escaping ((_ data: CaptchaDetails?,_ error: Error?) -> Void)) {
+        v10PlatformRiskcontrolGetWithRequestBuilder(route: route, client: client, version: version).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Platform captcha details.
+     - GET /v1.0/platform/riskcontrol
+     - examples: [{contentType=application/json, example={
+  "route" : "route",
+  "captchaType" : "None",
+  "pow" : {
+    "difficulty" : 0,
+    "secureAlgorithm" : "Sha256",
+    "nonce" : "nonce"
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "geeTest" : { }
+}}]
+     
+     - parameter route: (query)  
+     - parameter client: (query)  (optional)
+     - parameter version: (query)  (optional)
+
+     - returns: RequestBuilder<CaptchaDetails> 
+     */
+    open class func v10PlatformRiskcontrolGetWithRequestBuilder(route: String, client: String? = nil, version: String? = nil) -> RequestBuilder<CaptchaDetails> {
+        let path = "/v1.0/platform/riskcontrol"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Route": route, 
+            "Client": client, 
+            "Version": version
+        ])
+        
+
+        let requestBuilder: RequestBuilder<CaptchaDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Platform statistic
      
      - parameter completion: completion handler to receive the data and the error objects

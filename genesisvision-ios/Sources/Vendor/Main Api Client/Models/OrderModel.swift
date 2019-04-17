@@ -35,10 +35,16 @@ open class OrderModel: Codable {
     public var price: Double?
     public var priceCurrent: Double?
     public var entry: Entry?
+    /** Volume in account currency. Only filled when trade have zero commission (for paying fees with GVT) */
+    public var baseVolume: Double?
+    /** Useful for spot markets profit calculation.  Huobi: sell - quote currency, buy - base currency */
+    public var commission: Double?
+    /** For signals */
+    public var masterLogin: String?
 
 
     
-    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, commission: Double?, masterLogin: String?) {
         self.id = id
         self.login = login
         self.ticket = ticket
@@ -50,6 +56,9 @@ open class OrderModel: Codable {
         self.price = price
         self.priceCurrent = priceCurrent
         self.entry = entry
+        self.baseVolume = baseVolume
+        self.commission = commission
+        self.masterLogin = masterLogin
     }
     
 
@@ -70,6 +79,9 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(price, forKey: "price")
         try container.encodeIfPresent(priceCurrent, forKey: "priceCurrent")
         try container.encodeIfPresent(entry, forKey: "entry")
+        try container.encodeIfPresent(baseVolume, forKey: "baseVolume")
+        try container.encodeIfPresent(commission, forKey: "commission")
+        try container.encodeIfPresent(masterLogin, forKey: "masterLogin")
     }
 
     // Decodable protocol methods
@@ -88,6 +100,9 @@ open class OrderModel: Codable {
         price = try container.decodeIfPresent(Double.self, forKey: "price")
         priceCurrent = try container.decodeIfPresent(Double.self, forKey: "priceCurrent")
         entry = try container.decodeIfPresent(Entry.self, forKey: "entry")
+        baseVolume = try container.decodeIfPresent(Double.self, forKey: "baseVolume")
+        commission = try container.decodeIfPresent(Double.self, forKey: "commission")
+        masterLogin = try container.decodeIfPresent(String.self, forKey: "masterLogin")
     }
 }
 

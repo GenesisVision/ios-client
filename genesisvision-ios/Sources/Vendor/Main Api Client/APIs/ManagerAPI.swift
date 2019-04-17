@@ -188,6 +188,7 @@ open class ManagerAPI {
         case entranceFee = "EntranceFee"
         case exitFee = "ExitFee"
         case programStopOut = "ProgramStopOut"
+        case programManagerTradingFeeAccrual = "ProgramManagerTradingFeeAccrual"
     }
 
     /**
@@ -232,6 +233,7 @@ open class ManagerAPI {
     "description" : "description",
     "title" : "title",
     "type" : "All",
+    "url" : "url",
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -246,6 +248,7 @@ open class ManagerAPI {
     "description" : "description",
     "title" : "title",
     "type" : "All",
+    "url" : "url",
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
@@ -1170,6 +1173,7 @@ open class ManagerAPI {
         case entranceFee = "EntranceFee"
         case exitFee = "ExitFee"
         case programStopOut = "ProgramStopOut"
+        case programManagerTradingFeeAccrual = "ProgramManagerTradingFeeAccrual"
     }
 
     /**
@@ -1282,6 +1286,7 @@ open class ManagerAPI {
       "description" : "description",
       "title" : "title",
       "type" : "All",
+      "url" : "url",
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
@@ -1296,6 +1301,7 @@ open class ManagerAPI {
       "description" : "description",
       "title" : "title",
       "type" : "All",
+      "url" : "url",
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
@@ -1380,6 +1386,99 @@ open class ManagerAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ManagerDashboard>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Confirm 2FA for program if required (for brokers like Huobi)
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+     - parameter code: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerPrograms2faConfirmPost(authorization: String, programId: UUID? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerPrograms2faConfirmPostWithRequestBuilder(authorization: authorization, programId: programId, code: code).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Confirm 2FA for program if required (for brokers like Huobi)
+     - POST /v1.0/manager/programs/2fa/confirm
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+     - parameter code: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ManagerPrograms2faConfirmPostWithRequestBuilder(authorization: String, programId: UUID? = nil, code: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/manager/programs/2fa/confirm"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "programId": programId, 
+            "code": code
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Get 2FA for program if needed
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerPrograms2faGetGet(authorization: String, programId: UUID? = nil, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
+        v10ManagerPrograms2faGetGetWithRequestBuilder(authorization: authorization, programId: programId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get 2FA for program if needed
+     - GET /v1.0/manager/programs/2fa/get
+     - examples: [{contentType=application/json, example={
+  "sharedKey" : "sharedKey",
+  "authenticatorUri" : "authenticatorUri"
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+
+     - returns: RequestBuilder<TwoFactorAuthenticator> 
+     */
+    open class func v10ManagerPrograms2faGetGetWithRequestBuilder(authorization: String, programId: UUID? = nil) -> RequestBuilder<TwoFactorAuthenticator> {
+        let path = "/v1.0/manager/programs/2fa/get"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "programId": programId
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<TwoFactorAuthenticator>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
@@ -1574,6 +1673,49 @@ open class ManagerAPI {
     }
 
     /**
+     Change program password
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerProgramsByIdPasswordChangePost(id: UUID, authorization: String, model: ProgramPwdUpdate? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerProgramsByIdPasswordChangePostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Change program password
+     - POST /v1.0/manager/programs/{id}/password/change
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ManagerProgramsByIdPasswordChangePostWithRequestBuilder(id: UUID, authorization: String, model: ProgramPwdUpdate? = nil) -> RequestBuilder<Void> {
+        var path = "/v1.0/manager/programs/{id}/password/change"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Close current period
      
      - parameter id: (path)  
@@ -1744,7 +1886,7 @@ open class ManagerAPI {
     }
 
     /**
-     [Obsolete] Withdraw from investment program in GVT
+     Withdraw from investment program in GVT
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -1759,7 +1901,7 @@ open class ManagerAPI {
 
 
     /**
-     [Obsolete] Withdraw from investment program in GVT
+     Withdraw from investment program in GVT
      - POST /v1.0/manager/programs/{id}/withdraw/{amount}
      
      - parameter id: (path)  
@@ -1908,9 +2050,9 @@ open class ManagerAPI {
      - parameter request: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerProgramsCreatePost(authorization: String, request: NewProgramRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func v10ManagerProgramsCreatePost(authorization: String, request: NewProgramRequest? = nil, completion: @escaping ((_ data: ManagerProgramCreateResult?,_ error: Error?) -> Void)) {
         v10ManagerProgramsCreatePostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+            completion(response?.body, error);
         }
     }
 
@@ -1918,13 +2060,21 @@ open class ManagerAPI {
     /**
      Create an investment program
      - POST /v1.0/manager/programs/create
+     - examples: [{contentType=application/json, example={
+  "twoFactor" : {
+    "sharedKey" : "sharedKey",
+    "authenticatorUri" : "authenticatorUri"
+  },
+  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "twoFactorRequired" : true
+}}]
      
      - parameter authorization: (header) JWT access token 
      - parameter request: (body)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<ManagerProgramCreateResult> 
      */
-    open class func v10ManagerProgramsCreatePostWithRequestBuilder(authorization: String, request: NewProgramRequest? = nil) -> RequestBuilder<Void> {
+    open class func v10ManagerProgramsCreatePostWithRequestBuilder(authorization: String, request: NewProgramRequest? = nil) -> RequestBuilder<ManagerProgramCreateResult> {
         let path = "/v1.0/manager/programs/create"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
@@ -1936,7 +2086,7 @@ open class ManagerAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<ManagerProgramCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
@@ -2071,6 +2221,7 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isFollowSignals" : true,
+      "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
@@ -2158,6 +2309,7 @@ open class ManagerAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isFollowSignals" : true,
+      "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
@@ -2421,6 +2573,55 @@ open class ManagerAPI {
      */
     open class func v10ManagerSignalCreatePostWithRequestBuilder(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
         let path = "/v1.0/manager/signal/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "ProgramId": programId, 
+            "SubscriptionFee": subscriptionFee, 
+            "SuccessFee": successFee
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Make manager's program signal provider
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+     - parameter subscriptionFee: (query)  (optional)
+     - parameter successFee: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerSignalEditPost(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerSignalEditPostWithRequestBuilder(authorization: authorization, programId: programId, subscriptionFee: subscriptionFee, successFee: successFee).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Make manager's program signal provider
+     - POST /v1.0/manager/signal/edit
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter programId: (query)  (optional)
+     - parameter subscriptionFee: (query)  (optional)
+     - parameter successFee: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ManagerSignalEditPostWithRequestBuilder(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/manager/signal/edit"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

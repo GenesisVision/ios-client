@@ -74,6 +74,7 @@ open class NotificationsAPI {
   "total" : 0,
   "notifications" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -85,6 +86,7 @@ open class NotificationsAPI {
     "assetType" : "Program"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -175,6 +177,7 @@ open class NotificationsAPI {
         case profileVerification = "ProfileVerification"
         case profile2FA = "Profile2FA"
         case profileSecurity = "ProfileSecurity"
+        case tradingAccountPwdUpdated = "TradingAccountPwdUpdated"
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
@@ -182,6 +185,7 @@ open class NotificationsAPI {
         case fundEndOfPeriod = "FundEndOfPeriod"
         case fundRebalancing = "FundRebalancing"
         case managerNewProgram = "ManagerNewProgram"
+        case signals = "Signals"
     }
 
     /**

@@ -31,7 +31,8 @@ open class WalletAPI {
     }
 
     /**
-
+     Get user addresses
+     
      - parameter currency: (path)  
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -44,6 +45,7 @@ open class WalletAPI {
 
 
     /**
+     Get user addresses
      - GET /v1.0/wallet/addresses/{currency}
      - examples: [{contentType=application/json, example={
   "rateToGVT" : 0.8008281904610115,
@@ -78,7 +80,8 @@ open class WalletAPI {
     }
 
     /**
-
+     Get user addresses
+     
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -90,6 +93,7 @@ open class WalletAPI {
 
 
     /**
+     Get user addresses
      - GET /v1.0/wallet/addresses
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
@@ -239,6 +243,83 @@ open class WalletAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<UserCommissionData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10WalletMultiByCurrencyAvailableGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Multi wallet available
+     
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10WalletMultiByCurrencyAvailableGet(currency: Currency_v10WalletMultiByCurrencyAvailableGet, authorization: String, completion: @escaping ((_ data: WalletMultiAvailable?,_ error: Error?) -> Void)) {
+        v10WalletMultiByCurrencyAvailableGetWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Multi wallet available
+     - GET /v1.0/wallet/multi/{currency}/available
+     - examples: [{contentType=application/json, example={
+  "wallets" : [ {
+    "rate" : 6.027456183070403,
+    "available" : 0.8008281904610115,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  }, {
+    "rate" : 6.027456183070403,
+    "available" : 0.8008281904610115,
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  } ]
+}}]
+     
+     - parameter currency: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<WalletMultiAvailable> 
+     */
+    open class func v10WalletMultiByCurrencyAvailableGetWithRequestBuilder(currency: Currency_v10WalletMultiByCurrencyAvailableGet, authorization: String) -> RequestBuilder<WalletMultiAvailable> {
+        var path = "/v1.0/wallet/multi/{currency}/available"
+        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<WalletMultiAvailable>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
@@ -762,10 +843,13 @@ open class WalletAPI {
         case programWithdrawal = "ProgramWithdrawal"
         case programRefundPartialExecution = "ProgramRefundPartialExecution"
         case programRefundClose = "ProgramRefundClose"
+        case programRefundStopOut = "ProgramRefundStopOut"
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
         case payingFee = "PayingFee"
+        case signalSlaveSubscribe = "SignalSlaveSubscribe"
+        case signalMasterReceiveSubscription = "SignalMasterReceiveSubscription"
     }
 
     /**

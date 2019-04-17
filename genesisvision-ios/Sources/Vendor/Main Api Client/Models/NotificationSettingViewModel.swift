@@ -20,6 +20,7 @@ open class NotificationSettingViewModel: Codable {
         case profileVerification = "ProfileVerification"
         case profile2FA = "Profile2FA"
         case profileSecurity = "ProfileSecurity"
+        case tradingAccountPwdUpdated = "TradingAccountPwdUpdated"
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
@@ -27,6 +28,7 @@ open class NotificationSettingViewModel: Codable {
         case fundEndOfPeriod = "FundEndOfPeriod"
         case fundRebalancing = "FundRebalancing"
         case managerNewProgram = "ManagerNewProgram"
+        case signals = "Signals"
     }
     public enum ConditionType: String, Codable { 
         case empty = "Empty"

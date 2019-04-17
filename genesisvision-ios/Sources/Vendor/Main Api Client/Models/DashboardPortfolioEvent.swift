@@ -74,6 +74,7 @@ open class DashboardPortfolioEvent: Codable {
     public var assetId: UUID?
     public var date: Date?
     public var title: String?
+    public var url: String?
     public var value: Double?
     public var valueTotal: Double?
     public var feeSuccessManager: Double?
@@ -90,10 +91,11 @@ open class DashboardPortfolioEvent: Codable {
 
 
     
-    public init(assetId: UUID?, date: Date?, title: String?, value: Double?, valueTotal: Double?, feeSuccessManager: Double?, feeSuccessManagerCurrency: FeeSuccessManagerCurrency?, feeSuccessPlatform: Double?, feeSuccessPlatformCurrency: FeeSuccessPlatformCurrency?, profitPercent: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?, assetType: AssetType?) {
+    public init(assetId: UUID?, date: Date?, title: String?, url: String?, value: Double?, valueTotal: Double?, feeSuccessManager: Double?, feeSuccessManagerCurrency: FeeSuccessManagerCurrency?, feeSuccessPlatform: Double?, feeSuccessPlatformCurrency: FeeSuccessPlatformCurrency?, profitPercent: Double?, currency: Currency?, type: ModelType?, logo: String?, color: String?, description: String?, assetType: AssetType?) {
         self.assetId = assetId
         self.date = date
         self.title = title
+        self.url = url
         self.value = value
         self.valueTotal = valueTotal
         self.feeSuccessManager = feeSuccessManager
@@ -119,6 +121,7 @@ open class DashboardPortfolioEvent: Codable {
         try container.encodeIfPresent(assetId, forKey: "assetId")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(valueTotal, forKey: "valueTotal")
         try container.encodeIfPresent(feeSuccessManager, forKey: "feeSuccessManager")
@@ -142,6 +145,7 @@ open class DashboardPortfolioEvent: Codable {
         assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         title = try container.decodeIfPresent(String.self, forKey: "title")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         valueTotal = try container.decodeIfPresent(Double.self, forKey: "valueTotal")
         feeSuccessManager = try container.decodeIfPresent(Double.self, forKey: "feeSuccessManager")

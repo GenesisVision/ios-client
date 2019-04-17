@@ -20,6 +20,7 @@ open class PersonalProgramDetailsFull: Codable {
     }
     public var isReinvest: Bool?
     public var gvtValue: Double?
+    public var showTwoFactorButton: Bool?
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
@@ -40,9 +41,10 @@ open class PersonalProgramDetailsFull: Codable {
 
 
     
-    public init(isReinvest: Bool?, gvtValue: Double?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
+    public init(isReinvest: Bool?, gvtValue: Double?, showTwoFactorButton: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
         self.isReinvest = isReinvest
         self.gvtValue = gvtValue
+        self.showTwoFactorButton = showTwoFactorButton
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -71,6 +73,7 @@ open class PersonalProgramDetailsFull: Codable {
 
         try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
         try container.encodeIfPresent(gvtValue, forKey: "gvtValue")
+        try container.encodeIfPresent(showTwoFactorButton, forKey: "showTwoFactorButton")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
@@ -97,6 +100,7 @@ open class PersonalProgramDetailsFull: Codable {
 
         isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
         gvtValue = try container.decodeIfPresent(Double.self, forKey: "gvtValue")
+        showTwoFactorButton = try container.decodeIfPresent(Bool.self, forKey: "showTwoFactorButton")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")

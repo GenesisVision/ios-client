@@ -21,6 +21,8 @@ open class WalletTransaction: Codable {
         case paymentTransaction = "PaymentTransaction"
         case blockchain = "Blockchain"
         case genesisVisionPlatform = "GenesisVisionPlatform"
+        case signalMasterSetting = "SignalMasterSetting"
+        case signalTradingAccount = "SignalTradingAccount"
     }
     public enum SourceCurrency: String, Codable { 
         case undefined = "Undefined"
@@ -45,10 +47,13 @@ open class WalletTransaction: Codable {
         case programWithdrawal = "ProgramWithdrawal"
         case programRefundPartialExecution = "ProgramRefundPartialExecution"
         case programRefundClose = "ProgramRefundClose"
+        case programRefundStopOut = "ProgramRefundStopOut"
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
         case payingFee = "PayingFee"
+        case signalSlaveSubscribe = "SignalSlaveSubscribe"
+        case signalMasterReceiveSubscription = "SignalMasterReceiveSubscription"
     }
     public enum DestinationType: String, Codable { 
         case wallet = "Wallet"
@@ -60,6 +65,8 @@ open class WalletTransaction: Codable {
         case paymentTransaction = "PaymentTransaction"
         case blockchain = "Blockchain"
         case genesisVisionPlatform = "GenesisVisionPlatform"
+        case signalMasterSetting = "SignalMasterSetting"
+        case signalTradingAccount = "SignalTradingAccount"
     }
     public enum DestinationCurrency: String, Codable { 
         case undefined = "Undefined"

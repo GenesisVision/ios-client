@@ -15,6 +15,7 @@ open class ErrorViewModel: Codable {
         case internalServerError = "InternalServerError"
         case validationError = "ValidationError"
         case requiresTwoFactor = "RequiresTwoFactor"
+        case wrongCaptcha = "WrongCaptcha"
     }
     public var errors: [ErrorMessage]?
     public var code: Code?

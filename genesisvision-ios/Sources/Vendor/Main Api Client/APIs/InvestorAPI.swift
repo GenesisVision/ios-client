@@ -808,6 +808,7 @@ open class InvestorAPI {
       "feeSuccessManager" : 1.1730742509559433,
       "title" : "title",
       "type" : "All",
+      "url" : "url",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
       "feeSuccessManagerCurrency" : "Undefined",
@@ -825,6 +826,7 @@ open class InvestorAPI {
       "feeSuccessManager" : 1.1730742509559433,
       "title" : "title",
       "type" : "All",
+      "url" : "url",
       "feeSuccessPlatform" : 4.965218492984954,
       "assetType" : "Program",
       "feeSuccessManagerCurrency" : "Undefined",
@@ -1080,6 +1082,7 @@ open class InvestorAPI {
     "feeSuccessManager" : 1.1730742509559433,
     "title" : "title",
     "type" : "All",
+    "url" : "url",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
     "feeSuccessManagerCurrency" : "Undefined",
@@ -1097,6 +1100,7 @@ open class InvestorAPI {
     "feeSuccessManager" : 1.1730742509559433,
     "title" : "title",
     "type" : "All",
+    "url" : "url",
     "feeSuccessPlatform" : 4.965218492984954,
     "assetType" : "Program",
     "feeSuccessManagerCurrency" : "Undefined",
@@ -1458,7 +1462,7 @@ open class InvestorAPI {
     }
 
     /**
-     [Obsolete] Withdraw from investment program in GVT
+     Withdraw from investment program in GVT
      
      - parameter id: (path)  
      - parameter amount: (path)  
@@ -1473,7 +1477,7 @@ open class InvestorAPI {
 
 
     /**
-     [Obsolete] Withdraw from investment program in GVT
+     Withdraw from investment program in GVT
      - POST /v1.0/investor/programs/{id}/withdraw/{amount}
      
      - parameter id: (path)  
@@ -1744,6 +1748,7 @@ open class InvestorAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isFollowSignals" : true,
+      "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,
@@ -1831,6 +1836,7 @@ open class InvestorAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isFollowSignals" : true,
+      "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
       "hasNotifications" : true,

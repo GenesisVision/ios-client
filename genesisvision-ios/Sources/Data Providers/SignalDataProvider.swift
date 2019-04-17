@@ -42,16 +42,16 @@ class SignalDataProvider: DataProvider {
         }
     }
     
-    static func getTradesOpen(with sorting: SignalAPI.Sorting_v10SignalTradesOpenGet?, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesOpenSignalSlaveViewModel: TradesOpenSignalSlaveViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTradesOpen(with sorting: SignalAPI.Sorting_v10SignalTradesOpenGet?, symbol: String? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        SignalAPI.v10SignalTradesOpenGet(authorization: authorization, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
+        SignalAPI.v10SignalTradesOpenGet(authorization: authorization, sorting: sorting, symbol: symbol, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getTrades(with dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: SignalAPI.Sorting_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesHistorySignalSlaveViewModel: TradesHistorySignalSlaveViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(with dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: SignalAPI.Sorting_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

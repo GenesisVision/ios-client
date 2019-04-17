@@ -17,16 +17,18 @@ open class LoginViewModel: Codable {
     public var twoFactorCode: String?
     public var recoveryCode: String?
     public var client: String?
+    public var captchaCheckResult: CaptchaCheckResult?
 
 
     
-    public init(email: String, password: String, rememberMe: Bool?, twoFactorCode: String?, recoveryCode: String?, client: String?) {
+    public init(email: String, password: String, rememberMe: Bool?, twoFactorCode: String?, recoveryCode: String?, client: String?, captchaCheckResult: CaptchaCheckResult?) {
         self.email = email
         self.password = password
         self.rememberMe = rememberMe
         self.twoFactorCode = twoFactorCode
         self.recoveryCode = recoveryCode
         self.client = client
+        self.captchaCheckResult = captchaCheckResult
     }
     
 
@@ -42,6 +44,7 @@ open class LoginViewModel: Codable {
         try container.encodeIfPresent(twoFactorCode, forKey: "twoFactorCode")
         try container.encodeIfPresent(recoveryCode, forKey: "recoveryCode")
         try container.encodeIfPresent(client, forKey: "client")
+        try container.encodeIfPresent(captchaCheckResult, forKey: "captchaCheckResult")
     }
 
     // Decodable protocol methods
@@ -55,6 +58,7 @@ open class LoginViewModel: Codable {
         twoFactorCode = try container.decodeIfPresent(String.self, forKey: "twoFactorCode")
         recoveryCode = try container.decodeIfPresent(String.self, forKey: "recoveryCode")
         client = try container.decodeIfPresent(String.self, forKey: "client")
+        captchaCheckResult = try container.decodeIfPresent(CaptchaCheckResult.self, forKey: "captchaCheckResult")
     }
 }
 

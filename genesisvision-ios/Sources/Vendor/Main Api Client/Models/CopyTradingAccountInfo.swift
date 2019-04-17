@@ -27,17 +27,21 @@ open class CopyTradingAccountInfo: Codable {
         case eur = "EUR"
     }
     public var currency: Currency?
+    public var currencyLogo: String?
     public var balance: Double?
     public var equity: Double?
     public var freeMargin: Double?
+    public var marginLevel: Double?
 
 
     
-    public init(currency: Currency?, balance: Double?, equity: Double?, freeMargin: Double?) {
+    public init(currency: Currency?, currencyLogo: String?, balance: Double?, equity: Double?, freeMargin: Double?, marginLevel: Double?) {
         self.currency = currency
+        self.currencyLogo = currencyLogo
         self.balance = balance
         self.equity = equity
         self.freeMargin = freeMargin
+        self.marginLevel = marginLevel
     }
     
 
@@ -48,9 +52,11 @@ open class CopyTradingAccountInfo: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(currency, forKey: "currency")
+        try container.encodeIfPresent(currencyLogo, forKey: "currencyLogo")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(equity, forKey: "equity")
         try container.encodeIfPresent(freeMargin, forKey: "freeMargin")
+        try container.encodeIfPresent(marginLevel, forKey: "marginLevel")
     }
 
     // Decodable protocol methods
@@ -59,9 +65,11 @@ open class CopyTradingAccountInfo: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
+        currencyLogo = try container.decodeIfPresent(String.self, forKey: "currencyLogo")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         equity = try container.decodeIfPresent(Double.self, forKey: "equity")
         freeMargin = try container.decodeIfPresent(Double.self, forKey: "freeMargin")
+        marginLevel = try container.decodeIfPresent(Double.self, forKey: "marginLevel")
     }
 }
 

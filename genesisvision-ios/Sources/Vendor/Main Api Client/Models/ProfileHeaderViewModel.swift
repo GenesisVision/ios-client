@@ -22,6 +22,10 @@ open class ProfileHeaderViewModel: Codable {
     public var userType: UserType?
     public var notificationsCount: Int?
     public var favoritesCount: Int?
+    public var kycConfirmed: Bool?
+    public var allowForex: Bool?
+    public var isTwoFactorEnabled: Bool?
+    public var isNewUser: Bool?
     public var totalBalanceGvt: Double?
     public var investedGvt: Double?
     public var availableGvt: Double?
@@ -29,14 +33,10 @@ open class ProfileHeaderViewModel: Codable {
     public var invested: Double?
     public var available: Double?
     public var pending: Double?
-    public var kycConfirmed: Bool?
-    public var allowForex: Bool?
-    public var isTwoFactorEnabled: Bool?
-    public var isNewUser: Bool?
 
 
     
-    public init(id: UUID?, name: String?, email: String?, avatar: String?, userType: UserType?, notificationsCount: Int?, favoritesCount: Int?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, totalBalance: Double?, invested: Double?, available: Double?, pending: Double?, kycConfirmed: Bool?, allowForex: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?) {
+    public init(id: UUID?, name: String?, email: String?, avatar: String?, userType: UserType?, notificationsCount: Int?, favoritesCount: Int?, kycConfirmed: Bool?, allowForex: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?, totalBalanceGvt: Double?, investedGvt: Double?, availableGvt: Double?, totalBalance: Double?, invested: Double?, available: Double?, pending: Double?) {
         self.id = id
         self.name = name
         self.email = email
@@ -44,6 +44,10 @@ open class ProfileHeaderViewModel: Codable {
         self.userType = userType
         self.notificationsCount = notificationsCount
         self.favoritesCount = favoritesCount
+        self.kycConfirmed = kycConfirmed
+        self.allowForex = allowForex
+        self.isTwoFactorEnabled = isTwoFactorEnabled
+        self.isNewUser = isNewUser
         self.totalBalanceGvt = totalBalanceGvt
         self.investedGvt = investedGvt
         self.availableGvt = availableGvt
@@ -51,10 +55,6 @@ open class ProfileHeaderViewModel: Codable {
         self.invested = invested
         self.available = available
         self.pending = pending
-        self.kycConfirmed = kycConfirmed
-        self.allowForex = allowForex
-        self.isTwoFactorEnabled = isTwoFactorEnabled
-        self.isNewUser = isNewUser
     }
     
 
@@ -71,6 +71,10 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(userType, forKey: "userType")
         try container.encodeIfPresent(notificationsCount, forKey: "notificationsCount")
         try container.encodeIfPresent(favoritesCount, forKey: "favoritesCount")
+        try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
+        try container.encodeIfPresent(allowForex, forKey: "allowForex")
+        try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
+        try container.encodeIfPresent(isNewUser, forKey: "isNewUser")
         try container.encodeIfPresent(totalBalanceGvt, forKey: "totalBalanceGvt")
         try container.encodeIfPresent(investedGvt, forKey: "investedGvt")
         try container.encodeIfPresent(availableGvt, forKey: "availableGvt")
@@ -78,10 +82,6 @@ open class ProfileHeaderViewModel: Codable {
         try container.encodeIfPresent(invested, forKey: "invested")
         try container.encodeIfPresent(available, forKey: "available")
         try container.encodeIfPresent(pending, forKey: "pending")
-        try container.encodeIfPresent(kycConfirmed, forKey: "kycConfirmed")
-        try container.encodeIfPresent(allowForex, forKey: "allowForex")
-        try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
-        try container.encodeIfPresent(isNewUser, forKey: "isNewUser")
     }
 
     // Decodable protocol methods
@@ -96,6 +96,10 @@ open class ProfileHeaderViewModel: Codable {
         userType = try container.decodeIfPresent(UserType.self, forKey: "userType")
         notificationsCount = try container.decodeIfPresent(Int.self, forKey: "notificationsCount")
         favoritesCount = try container.decodeIfPresent(Int.self, forKey: "favoritesCount")
+        kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
+        allowForex = try container.decodeIfPresent(Bool.self, forKey: "allowForex")
+        isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")
+        isNewUser = try container.decodeIfPresent(Bool.self, forKey: "isNewUser")
         totalBalanceGvt = try container.decodeIfPresent(Double.self, forKey: "totalBalanceGvt")
         investedGvt = try container.decodeIfPresent(Double.self, forKey: "investedGvt")
         availableGvt = try container.decodeIfPresent(Double.self, forKey: "availableGvt")
@@ -103,10 +107,6 @@ open class ProfileHeaderViewModel: Codable {
         invested = try container.decodeIfPresent(Double.self, forKey: "invested")
         available = try container.decodeIfPresent(Double.self, forKey: "available")
         pending = try container.decodeIfPresent(Double.self, forKey: "pending")
-        kycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "kycConfirmed")
-        allowForex = try container.decodeIfPresent(Bool.self, forKey: "allowForex")
-        isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")
-        isNewUser = try container.decodeIfPresent(Bool.self, forKey: "isNewUser")
     }
 }
 
