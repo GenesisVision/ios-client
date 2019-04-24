@@ -29,6 +29,7 @@ final class WalletDepositViewModel {
     private var qrImage: UIImage?
     
     var selectedCurrency: WalletData.Currency = .gvt
+    var walletCurrencyDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var walletMultiSummary: WalletMultiSummary?
     var selectedWallet: WalletData? {
@@ -38,8 +39,6 @@ final class WalletDepositViewModel {
             self.address = address
         }
     }
-    var selectedWalletCurrencyIndex: Int = 0
-    
     
     // MARK: - Init
     init(withRouter router: WalletDepositRouter, currency: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
@@ -52,8 +51,14 @@ final class WalletDepositViewModel {
     private func setup(currency: CurrencyType) {
         if let selectedCurrency = WalletData.Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
-            self.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
-            self.selectedWalletCurrencyIndex = walletMultiSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrency }) ?? 0
+            updateSelectedCurrency(selectedCurrency)
+        }
+    }
+    
+    private func updateSelectedCurrency(_ selectedCurrency: WalletData.Currency) {
+        self.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
+        if let wallets = walletMultiSummary?.wallets {
+            self.walletCurrencyDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
         }
     }
     
@@ -62,7 +67,6 @@ final class WalletDepositViewModel {
         guard let walletMultiSummary = walletMultiSummary,
             let wallets = walletMultiSummary.wallets else { return }
         selectedWallet = wallets[selectedIndex]
-        selectedWalletCurrencyIndex = selectedIndex
     }
     
     // MARK: - Picker View Values
@@ -96,3 +100,69 @@ final class WalletDepositViewModel {
     }
 }
 
+protocol WalletDepositCurrencyDelegateManagerProtocol: class {
+    func didSelectWallet(at indexPath: IndexPath)
+}
+
+final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Variables
+    weak var currencyDelegate: WalletDepositCurrencyDelegateManagerProtocol?
+    
+    var tableView: UITableView?
+    var wallets: [WalletData] = []
+    var selectedIndex: Int = 0
+    var selectedWallet: WalletData?
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [WalletCurrencyTableViewCellViewModel.self]
+    }
+    
+    // MARK: - Lifecycle
+    init(_ wallets: [WalletData]) {
+        super.init()
+        
+        self.wallets = wallets
+    }
+    
+    func updateSelectedIndex() {
+        self.selectedIndex = wallets.firstIndex(where: { return $0.currency == self.selectedWallet?.currency } ) ?? 0
+    }
+    
+    // MARK: - TableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        self.selectedWallet = wallets[indexPath.row]
+        
+        currencyDelegate?.didSelectWallet(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return wallets.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WalletCurrencyTableViewCell", for: indexPath) as? WalletCurrencyTableViewCell else {
+            let cell = UITableViewCell()
+            return cell
+        }
+        
+        let isSelected = indexPath.row == selectedIndex
+        let wallet = wallets[indexPath.row]
+        cell.configure(wallet, selected: isSelected)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.Cell.bg
+        }
+    }
+}

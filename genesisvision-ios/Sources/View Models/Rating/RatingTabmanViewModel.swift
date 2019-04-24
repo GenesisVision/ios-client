@@ -59,6 +59,6 @@ final class RatingTabmanViewModel: TabmanViewModel {
     }
     
     func showAboutLevels() {
-        router.showAboutLevels()
+        router.showAboutLevels(.gvt)
     }
 }

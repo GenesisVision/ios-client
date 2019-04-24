@@ -81,7 +81,7 @@ class AboutLevelView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(_ programDetailsRating: ProgramDetailsRating?, level: Int?) {
+    func configure(_ programDetailsRating: ProgramDetailsRating?, level: Int?, currency: PlatformAPI.Currency_v10PlatformLevelsGet) {
         guard let programDetailsRating = programDetailsRating, let level = level else { return }
         
         titleLabel.text = "Genesis Level \(level)"
@@ -93,13 +93,13 @@ class AboutLevelView: UIView {
         }
         
         showProgressHUD()
-        PlatformManager.shared.getProgramsLevelsInfo { [weak self] (programsLevelsInfo) in
+        PlatformManager.shared.getProgramsLevelsInfo(currency) { [weak self] (programsLevelsInfo) in
             self?.hideHUD()
             
             guard let levelsInfo = programsLevelsInfo, let levels = levelsInfo.levels else { return }
             
             if let levelInfo = levels.first(where: {$0.level == level}), let investmentLimit = levelInfo.investmentLimit {
-                self?.secondValueLabel.text = investmentLimit.toString() + " " + Constants.gvtString
+                self?.secondValueLabel.text = investmentLimit.toString() + " " + currency.rawValue
             } else {
                 self?.secondStackView.isHidden = true
             }

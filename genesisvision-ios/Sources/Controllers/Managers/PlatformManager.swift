@@ -59,12 +59,12 @@ class PlatformManager {
         }
     }
     
-    func getProgramsLevelsInfo(completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
+    func getProgramsLevelsInfo(_ currency: PlatformAPI.Currency_v10PlatformLevelsGet, completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
         if let programsLevelsInfo = programsLevelsInfo {
             completion(programsLevelsInfo)
         }
-        
-        BaseDataProvider.getProgramsLevelsInfo(completion: { [weak self] (viewModel) in
+
+        BaseDataProvider.getProgramsLevelsInfo(currency, completion: { [weak self] (viewModel) in
             self?.programsLevelsInfo = viewModel
             completion(viewModel)
         }) { (result) in

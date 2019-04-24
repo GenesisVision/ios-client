@@ -95,6 +95,9 @@
 		5E27EC48218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */; };
 		5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */; };
 		5E27EC4A218758AC00C6CF5C /* FundAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E27EC47218758AC00C6CF5C /* FundAssetTableViewCell.swift */; };
+		5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA546226F373100C6A88C /* WalletCurrencyTableViewCellViewModel.swift */; };
+		5E2BA54A226F373300C6A88C /* WalletCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA547226F373200C6A88C /* WalletCurrencyTableViewCell.swift */; };
+		5E2BA54B226F373300C6A88C /* WalletCurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2BA548226F373200C6A88C /* WalletCurrencyTableViewCell.xib */; };
 		5E33E3B420AB20B900A0B9DE /* ProgramTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramTabmanRouter.swift */; };
 		5E33E3B720AB218A00A0B9DE /* ProgramTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramTabmanViewModel.swift */; };
 		5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */; };
@@ -786,6 +789,9 @@
 		5E27EC45218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundAssetTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E27EC46218758AC00C6CF5C /* FundAssetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FundAssetTableViewCell.xib; sourceTree = "<group>"; };
 		5E27EC47218758AC00C6CF5C /* FundAssetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundAssetTableViewCell.swift; sourceTree = "<group>"; };
+		5E2BA546226F373100C6A88C /* WalletCurrencyTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCurrencyTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E2BA547226F373200C6A88C /* WalletCurrencyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		5E2BA548226F373200C6A88C /* WalletCurrencyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletCurrencyTableViewCell.xib; sourceTree = "<group>"; };
 		5E33E3B320AB20B900A0B9DE /* ProgramTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTabmanRouter.swift; sourceTree = "<group>"; };
 		5E33E3B620AB218A00A0B9DE /* ProgramTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -2835,6 +2841,9 @@
 		FCA57066202735A8001942F3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				5E2BA546226F373100C6A88C /* WalletCurrencyTableViewCellViewModel.swift */,
+				5E2BA547226F373200C6A88C /* WalletCurrencyTableViewCell.swift */,
+				5E2BA548226F373200C6A88C /* WalletCurrencyTableViewCell.xib */,
 				FCA5705D2027356C001942F3 /* WalletTransactionTableViewCellViewModel.swift */,
 				5EEFD84C2213BA87005E7E9F /* WalletExternalTransactionTableViewCellViewModel.swift */,
 				FCA5705920273560001942F3 /* WalletTransactionTableViewCell.swift */,
@@ -3372,6 +3381,7 @@
 				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Programs.storyboard in Resources */,
+				5E2BA54B226F373300C6A88C /* WalletCurrencyTableViewCell.xib in Resources */,
 				5ED645F621C06A0F0044AC1D /* AboutLevelView.xib in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
 				5E6308FA212C079900D15C71 /* PortfolioEventCollectionViewCell.xib in Resources */,
@@ -3723,6 +3733,7 @@
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				5E0ACEC5217FC4C500DC76AA /* FundsDataProvider.swift in Sources */,
+				5E2BA54A226F373300C6A88C /* WalletCurrencyTableViewCell.swift in Sources */,
 				5E36652220D948B700195CBE /* PasscodeViewController.swift in Sources */,
 				5EBBEAEC2100CE2D0034E4CB /* BrokersDataProvider.swift in Sources */,
 				5EB8E9D820723D7E00F46A8A /* ForgetPasswordRouter.swift in Sources */,
@@ -3978,6 +3989,7 @@
 				5E55BD58226624000024632F /* IOsAppVersion.swift in Sources */,
 				5E55BD65226624000024632F /* Enums.swift in Sources */,
 				5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */,
+				5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */,
 				5E55BD8A226624000024632F /* ProgramBalanceChartElement.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
 				5EAC11B020B81AD40057A2D2 /* ChangePasswordViewController.swift in Sources */,

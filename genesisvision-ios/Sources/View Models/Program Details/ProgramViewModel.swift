@@ -39,7 +39,11 @@ final class ProgramViewModel {
     }
     
     func showAboutLevels() {
-        router.show(routeType: .aboutLevels)
+        guard let rawValue = programDetailsFull?.currency?.rawValue, let currency = PlatformAPI.Currency_v10PlatformLevelsGet(rawValue: rawValue) else {
+            return router.show(routeType: .aboutLevels(currency: .gvt))
+        }
+        
+        router.show(routeType: .aboutLevels(currency: currency))
     }
     
     func fetch(completion: @escaping CompletionBlock) {

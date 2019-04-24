@@ -10,7 +10,7 @@ import UIKit.UINavigationController
 
 enum ProgramRouteType {
     case notificationSettings(assetId: String, title: String)
-    case aboutLevels
+    case aboutLevels(currency: PlatformAPI.Currency_v10PlatformLevelsGet)
 }
 
 class ProgramRouter: Router {
@@ -35,8 +35,8 @@ class ProgramRouter: Router {
         switch routeType {
         case .notificationSettings(let assetId, let title):
             showAssetNotificationsSettings(assetId, title: title, type: .program)
-        case .aboutLevels:
-            showAboutLevels()
+        case .aboutLevels(let currency):
+            showAboutLevels(currency)
         }
     }
 }

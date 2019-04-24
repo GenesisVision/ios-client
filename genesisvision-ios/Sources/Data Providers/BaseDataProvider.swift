@@ -16,8 +16,8 @@ class BaseDataProvider: DataProvider {
         }
     }
     
-    static func getProgramsLevelsInfo(completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        PlatformAPI.v10PlatformLevelsGet { (model, error) in
+    static func getProgramsLevelsInfo(_ currency: PlatformAPI.Currency_v10PlatformLevelsGet, completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        PlatformAPI.v10PlatformLevelsGet(currency: currency) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

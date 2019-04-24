@@ -304,7 +304,9 @@ extension ProgramViewController: ProgramHeaderViewControllerProtocol {
         let aboutLevelView = AboutLevelView.viewFromNib()
         aboutLevelView.delegate = self
         
-        aboutLevelView.configure(viewModel.programDetailsFull?.rating, level: viewModel.programDetailsFull?.level)
+        if let programDetailsFull = viewModel.programDetailsFull, let currency = programDetailsFull.currency, let selectedCurrency = PlatformAPI.Currency_v10PlatformLevelsGet(rawValue: currency.rawValue) {
+            aboutLevelView.configure(programDetailsFull.rating, level: programDetailsFull.level, currency: selectedCurrency)
+        }
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.lineViewIsHidden = true

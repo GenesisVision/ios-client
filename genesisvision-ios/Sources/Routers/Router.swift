@@ -356,8 +356,9 @@ extension Router {
         }
     }
     
-    func showAboutLevels() {
+    func showAboutLevels(_ currency: PlatformAPI.Currency_v10PlatformLevelsGet) {
         guard let viewController = AboutLevelsViewController.storyboardInstance(.program) else { return }
+        viewController.currency = currency
         navigationController?.pushViewController(viewController, animated: true)
     }
     

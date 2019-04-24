@@ -217,6 +217,10 @@ class WalletWithdrawViewController: BaseViewController {
             self.availableInWalletValue = availableToWithdrawal
         }
         
+        if let walletCurrencyDelegateManager = viewModel?.walletCurrencyDelegateManager {
+            walletCurrencyDelegateManager.currencyDelegate = self
+        }
+        
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableInWalletValue
         withdrawButton?.setEnabled(withdrawButtonEnabled)
     }
@@ -327,24 +331,32 @@ class WalletWithdrawViewController: BaseViewController {
     @IBAction func selectedWalletCurrencyButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        viewModel?.walletCurrencyDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
         
-        var selectedIndexRow = viewModel.selectedWalletCurrencyIndex
-        let values = viewModel.walletCurrencyValues()
+        bottomSheetController.addNavigationBar(selectedWalletCurrencyTitleLabel.text)
         
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.updateWalletCurrencyIndex(selectedIndexRow)
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.walletCurrencyDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
             
-            self?.updateUI()
-         }
+            guard let walletCurrencyDelegateManager = self?.viewModel.walletCurrencyDelegateManager else { return }
+            tableView.registerNibs(for: walletCurrencyDelegateManager.cellModelsForRegistration)
+            tableView.delegate = walletCurrencyDelegateManager
+            tableView.dataSource = walletCurrencyDelegateManager
+        }
         
-        alert.addAction(title: "Ok", style: .cancel)
+        bottomSheetController.present()
+    }
+}
+
+extension WalletWithdrawViewController: WalletCurrencyDelegateManagerProtocol {
+    func didSelectWallet(at indexPath: IndexPath) {
+        self.viewModel.updateWalletCurrencyIndex(indexPath.row)
+        self.updateUI()
         
-        alert.show()
+        bottomSheetController.dismiss()
     }
 }
 

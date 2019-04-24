@@ -19,10 +19,12 @@ final class WalletTransferViewModel {
     var selectedWalletFrom: WalletData?
     var selectedWalletFromCurrencyIndex: Int = 0
     var selectedCurrencyFrom: WalletData.Currency = .gvt
+    var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     //to
     var selectedWalletTo: WalletData?
     var selectedWalletToCurrencyIndex: Int = 0
     var selectedCurrencyTo: WalletData.Currency = .btc
+    var selectedWalletToDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
     
@@ -50,6 +52,11 @@ final class WalletTransferViewModel {
         
         if let selectedCurrency = WalletData.Currency(rawValue: currencyTo.rawValue) {
             self.selectedCurrencyTo = selectedCurrency
+        }
+        
+        if let wallets = walletMultiSummary?.wallets {
+            self.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
+            self.selectedWalletToDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
         }
         
         updateRate { [weak self] (result) in

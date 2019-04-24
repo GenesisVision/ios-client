@@ -287,57 +287,55 @@ class WalletTransferViewController: BaseViewController {
     @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        viewModel?.selectedWalletFromDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
         
-        var selectedIndexRow = viewModel.selectedWalletFromCurrencyIndex
-        let values = viewModel.walletCurrencyValues()
+        bottomSheetController.addNavigationBar(transferToWalletFromTitleLabel.text)
         
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.selectedWalletFromDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedWalletFromDelegateManager else { return }
+            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
+            tableView.delegate = selectedWalletFromDelegateManager
+            tableView.dataSource = selectedWalletFromDelegateManager
+        }
         
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.updateWalletCurrencyFromIndex(selectedIndexRow, completion: { (result) in
-                switch result {
-                case .success:
-                    self?.updateUI()
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                }
-            })
-         }
-        
-        alert.addAction(title: "Ok", style: .cancel)
-        
-        alert.show()
+        bottomSheetController.present()
     }
     
     @IBAction func selectedWalletCurrencyToButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        viewModel?.selectedWalletToDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
         
-        var selectedIndexRow = viewModel.selectedWalletToCurrencyIndex
-        let values = viewModel.walletCurrencyValues()
+        bottomSheetController.addNavigationBar(transferToWalletToTitleLabel.text)
         
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.viewModel.updateWalletCurrencyToIndex(selectedIndexRow, completion: { (result) in
-                switch result {
-                case .success:
-                    self?.updateUI()
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                }
-            })
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.selectedWalletToDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let selectedWalletToDelegateManager = self?.viewModel.selectedWalletToDelegateManager else { return }
+            tableView.registerNibs(for: selectedWalletToDelegateManager.cellModelsForRegistration)
+            tableView.delegate = selectedWalletToDelegateManager
+            tableView.dataSource = selectedWalletToDelegateManager
         }
         
-        alert.addAction(title: "Ok", style: .cancel)
+        bottomSheetController.present()
+    }
+}
+
+//TODO:!!!
+extension WalletTransferViewController: WalletDepositCurrencyDelegateManagerProtocol {
+    func didSelectWallet(at indexPath: IndexPath) {
+//        self.viewModel.updateWalletCurrencyIndex(indexPath.row)
+        self.updateUI()
         
-        alert.show()
+        bottomSheetController.dismiss()
     }
 }
 
