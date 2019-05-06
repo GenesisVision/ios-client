@@ -22,10 +22,11 @@ open class Broker: Codable {
     public var accountTypes: [BrokerAccountType]?
     public var isForex: Bool?
     public var isSignalsAvailable: Bool?
+    public var tags: [ProgramTag]?
 
 
     
-    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?, isForex: Bool?, isSignalsAvailable: Bool?) {
+    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?, isForex: Bool?, isSignalsAvailable: Bool?, tags: [ProgramTag]?) {
         self.name = name
         self.description = description
         self.logo = logo
@@ -37,6 +38,7 @@ open class Broker: Codable {
         self.accountTypes = accountTypes
         self.isForex = isForex
         self.isSignalsAvailable = isSignalsAvailable
+        self.tags = tags
     }
     
 
@@ -57,6 +59,7 @@ open class Broker: Codable {
         try container.encodeIfPresent(accountTypes, forKey: "accountTypes")
         try container.encodeIfPresent(isForex, forKey: "isForex")
         try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
+        try container.encodeIfPresent(tags, forKey: "tags")
     }
 
     // Decodable protocol methods
@@ -75,6 +78,7 @@ open class Broker: Codable {
         accountTypes = try container.decodeIfPresent([BrokerAccountType].self, forKey: "accountTypes")
         isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
         isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
+        tags = try container.decodeIfPresent([ProgramTag].self, forKey: "tags")
     }
 }
 

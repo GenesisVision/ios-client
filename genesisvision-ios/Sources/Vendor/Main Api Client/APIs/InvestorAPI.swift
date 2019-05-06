@@ -412,6 +412,17 @@ open class InvestorAPI {
     }
 
     /**
+     * enum for parameter actionStatus
+     */
+    public enum ActionStatus_v10InvestorFundsGet: String { 
+        case pending = "Pending"
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+
+    /**
      Dashboard funds list
      
      - parameter authorization: (header) JWT access token 
@@ -420,12 +431,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorFundsGet(authorization: String, sorting: Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10InvestorFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10InvestorFundsGet(authorization: String, sorting: Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorFundsGet? = nil, actionStatus: ActionStatus_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10InvestorFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -472,6 +484,7 @@ open class InvestorAPI {
     } ],
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
       "share" : 2.3021358869347655
@@ -544,6 +557,7 @@ open class InvestorAPI {
     } ],
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
       "share" : 2.3021358869347655
@@ -589,12 +603,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10InvestorFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10InvestorFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorFundsGet? = nil, actionStatus: ActionStatus_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/investor/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -606,6 +621,7 @@ open class InvestorAPI {
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "ActionStatus": actionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -1664,6 +1680,17 @@ open class InvestorAPI {
     }
 
     /**
+     * enum for parameter actionStatus
+     */
+    public enum ActionStatus_v10InvestorProgramsGet: String { 
+        case pending = "Pending"
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+
+    /**
      Dashboard program list
      
      - parameter authorization: (header) JWT access token 
@@ -1672,12 +1699,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorProgramsGet(authorization: String, sorting: Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10InvestorProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10InvestorProgramsGet(authorization: String, sorting: Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorProgramsGet? = nil, actionStatus: ActionStatus_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10InvestorProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1729,6 +1757,7 @@ open class InvestorAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -1747,7 +1776,9 @@ open class InvestorAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -1757,6 +1788,15 @@ open class InvestorAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -1817,6 +1857,7 @@ open class InvestorAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -1835,7 +1876,9 @@ open class InvestorAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -1845,6 +1888,15 @@ open class InvestorAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -1873,12 +1925,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10InvestorProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10InvestorProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorProgramsGet? = nil, actionStatus: ActionStatus_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/investor/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1890,6 +1943,7 @@ open class InvestorAPI {
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "ActionStatus": actionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -2074,6 +2128,17 @@ open class InvestorAPI {
     }
 
     /**
+     * enum for parameter actionStatus
+     */
+    public enum ActionStatus_v10InvestorSignalsGet: String { 
+        case pending = "Pending"
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+
+    /**
      Dashboard signal providers list
      
      - parameter authorization: (header) JWT access token 
@@ -2082,12 +2147,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10InvestorSignalsGet(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalsList?,_ error: Error?) -> Void)) {
-        v10InvestorSignalsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10InvestorSignalsGet(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, actionStatus: ActionStatus_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalsList?,_ error: Error?) -> Void)) {
+        v10InvestorSignalsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -2097,7 +2163,7 @@ open class InvestorAPI {
      Dashboard signal providers list
      - GET /v1.0/investor/signals
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 1,
   "programs" : [ {
     "statistic" : {
       "balanceBase" : {
@@ -2127,10 +2193,11 @@ open class InvestorAPI {
       "url" : "url",
       "username" : "username"
     },
-    "level" : 2,
-    "subscribers" : 4,
+    "level" : 7,
+    "subscribers" : 1,
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "tags" : [ {
       "color" : "color",
@@ -2140,9 +2207,17 @@ open class InvestorAPI {
       "name" : "name"
     } ],
     "personalDetails" : {
-      "investorTrades" : 3,
-      "subscribeDate" : "2000-01-23T04:56:07.000+00:00",
-      "investorProfit" : 9.301444243932576
+      "tradesCount" : 9,
+      "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      }
     },
     "logo" : "logo",
     "currency" : "Undefined",
@@ -2184,10 +2259,11 @@ open class InvestorAPI {
       "url" : "url",
       "username" : "username"
     },
-    "level" : 2,
-    "subscribers" : 4,
+    "level" : 7,
+    "subscribers" : 1,
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "tags" : [ {
       "color" : "color",
@@ -2197,9 +2273,17 @@ open class InvestorAPI {
       "name" : "name"
     } ],
     "personalDetails" : {
-      "investorTrades" : 3,
-      "subscribeDate" : "2000-01-23T04:56:07.000+00:00",
-      "investorProfit" : 9.301444243932576
+      "tradesCount" : 9,
+      "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      }
     },
     "logo" : "logo",
     "currency" : "Undefined",
@@ -2221,12 +2305,13 @@ open class InvestorAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<SignalsList> 
      */
-    open class func v10InvestorSignalsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalsList> {
+    open class func v10InvestorSignalsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10InvestorSignalsGet? = nil, actionStatus: ActionStatus_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalsList> {
         let path = "/v1.0/investor/signals"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -2238,6 +2323,7 @@ open class InvestorAPI {
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "ActionStatus": actionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])

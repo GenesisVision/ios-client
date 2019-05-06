@@ -21,6 +21,10 @@ open class TransactionDetails: Codable {
         case close = "Close"
         case profit = "Profit"
         case platformFee = "PlatformFee"
+        case subscribeSignal = "SubscribeSignal"
+        case receiveSignal = "ReceiveSignal"
+        case depositSignal = "DepositSignal"
+        case withdrawalSignal = "WithdrawalSignal"
     }
     public enum Status: String, Codable { 
         case done = "Done"

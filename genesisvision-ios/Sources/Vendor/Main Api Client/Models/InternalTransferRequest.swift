@@ -14,10 +14,12 @@ open class InternalTransferRequest: Codable {
     public enum SourceType: String, Codable { 
         case undefined = "Undefined"
         case wallet = "Wallet"
+        case copyTradingAccount = "CopyTradingAccount"
     }
     public enum DestinationType: String, Codable { 
         case undefined = "Undefined"
         case wallet = "Wallet"
+        case copyTradingAccount = "CopyTradingAccount"
     }
     public var sourceId: UUID?
     public var sourceType: SourceType?

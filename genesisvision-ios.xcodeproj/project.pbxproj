@@ -98,6 +98,10 @@
 		5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA546226F373100C6A88C /* WalletCurrencyTableViewCellViewModel.swift */; };
 		5E2BA54A226F373300C6A88C /* WalletCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA547226F373200C6A88C /* WalletCurrencyTableViewCell.swift */; };
 		5E2BA54B226F373300C6A88C /* WalletCurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2BA548226F373200C6A88C /* WalletCurrencyTableViewCell.xib */; };
+		5E2BA5502271E9B500C6A88C /* DetachFromSignalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA54C2271E9B000C6A88C /* DetachFromSignalProvider.swift */; };
+		5E2BA5512271E9B500C6A88C /* AttachToSignalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA54D2271E9B000C6A88C /* AttachToSignalProvider.swift */; };
+		5E2BA5522271E9B500C6A88C /* SignalSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA54E2271E9B000C6A88C /* SignalSubscription.swift */; };
+		5E2BA5532271E9B500C6A88C /* AssetEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BA54F2271E9B100C6A88C /* AssetEvent.swift */; };
 		5E33E3B420AB20B900A0B9DE /* ProgramTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B320AB20B900A0B9DE /* ProgramTabmanRouter.swift */; };
 		5E33E3B720AB218A00A0B9DE /* ProgramTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E33E3B620AB218A00A0B9DE /* ProgramTabmanViewModel.swift */; };
 		5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */; };
@@ -792,6 +796,10 @@
 		5E2BA546226F373100C6A88C /* WalletCurrencyTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCurrencyTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5E2BA547226F373200C6A88C /* WalletCurrencyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		5E2BA548226F373200C6A88C /* WalletCurrencyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletCurrencyTableViewCell.xib; sourceTree = "<group>"; };
+		5E2BA54C2271E9B000C6A88C /* DetachFromSignalProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetachFromSignalProvider.swift; sourceTree = "<group>"; };
+		5E2BA54D2271E9B000C6A88C /* AttachToSignalProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachToSignalProvider.swift; sourceTree = "<group>"; };
+		5E2BA54E2271E9B000C6A88C /* SignalSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalSubscription.swift; sourceTree = "<group>"; };
+		5E2BA54F2271E9B100C6A88C /* AssetEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetEvent.swift; sourceTree = "<group>"; };
 		5E33E3B320AB20B900A0B9DE /* ProgramTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTabmanRouter.swift; sourceTree = "<group>"; };
 		5E33E3B620AB218A00A0B9DE /* ProgramTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1550,6 +1558,10 @@
 		5E18CE1320C566F0008FE5B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5E2BA54F2271E9B100C6A88C /* AssetEvent.swift */,
+				5E2BA54D2271E9B000C6A88C /* AttachToSignalProvider.swift */,
+				5E2BA54C2271E9B000C6A88C /* DetachFromSignalProvider.swift */,
+				5E2BA54E2271E9B000C6A88C /* SignalSubscription.swift */,
 				5E55BDB8226625620024632F /* Broker.swift */,
 				5E55BDB7226625620024632F /* BrokerAccountType.swift */,
 				5E55BDB6226625620024632F /* BrokersInfo.swift */,
@@ -3565,6 +3577,7 @@
 				5E55BD32226624000024632F /* ProgramPeriodViewModel.swift in Sources */,
 				5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */,
 				5EEC1AC52175F82D007D77ED /* AllEventsViewModel.swift in Sources */,
+				5E2BA5502271E9B500C6A88C /* DetachFromSignalProvider.swift in Sources */,
 				5E55BD7A226624000024632F /* PlatformCurrency.swift in Sources */,
 				5E9FCF9D2199E3BC001FB114 /* NHRangeSlider.swift in Sources */,
 				5E55BD63226624000024632F /* FcmTokenViewModel.swift in Sources */,
@@ -3669,6 +3682,7 @@
 				5E1813872061D40600481646 /* RoundedLabel.swift in Sources */,
 				5EF14DA9218215B000B3843A /* FundTableViewCellViewModel.swift in Sources */,
 				5E55BD46226624000024632F /* WalletWithdrawalInfo.swift in Sources */,
+				5E2BA5522271E9B500C6A88C /* SignalSubscription.swift in Sources */,
 				5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */,
 				5EF14D9A2181FBCD00B3843A /* FundWithdrawViewModel.swift in Sources */,
 				5ED1ED422210F26000031AD4 /* WalletTabmanRouter.swift in Sources */,
@@ -3723,6 +3737,7 @@
 				5E17709B220D053F00669D84 /* WalletExternalTransactionListViewModel.swift in Sources */,
 				FCC9DD7C200E4CCF008825EC /* BaseViewController.swift in Sources */,
 				5E55BDBA226625630024632F /* BrokerAccountType.swift in Sources */,
+				5E2BA5532271E9B500C6A88C /* AssetEvent.swift in Sources */,
 				5E55BDA4226624000024632F /* ManagerPortfolioEvents.swift in Sources */,
 				5E55BC5E226623C60024632F /* PlatformAPI.swift in Sources */,
 				5EAD350A214FD2270057450C /* AssetsViewController.swift in Sources */,
@@ -3965,6 +3980,7 @@
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramInfoRouter.swift in Sources */,
+				5E2BA5512271E9B500C6A88C /* AttachToSignalProvider.swift in Sources */,
 				5EC78811216CDE34000C91E4 /* UICollectionView+ReusableCell.swift in Sources */,
 				5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */,
 				5E18CE0320C03E3A008FE5B5 /* AuthTwoFactorTabmanViewModel.swift in Sources */,

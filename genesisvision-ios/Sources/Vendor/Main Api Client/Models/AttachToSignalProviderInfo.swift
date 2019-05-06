@@ -42,6 +42,7 @@ open class AttachToSignalProviderInfo: Codable {
         case eur = "EUR"
     }
     public var hasSignalAccount: Bool?
+    public var hasActiveSubscription: Bool?
     public var subscriptionFee: Double?
     public var subscriptionFeeCurrency: SubscriptionFeeCurrency?
     public var minDeposit: Double?
@@ -49,8 +50,9 @@ open class AttachToSignalProviderInfo: Codable {
 
 
     
-    public init(hasSignalAccount: Bool?, subscriptionFee: Double?, subscriptionFeeCurrency: SubscriptionFeeCurrency?, minDeposit: Double?, minDepositCurrency: MinDepositCurrency?) {
+    public init(hasSignalAccount: Bool?, hasActiveSubscription: Bool?, subscriptionFee: Double?, subscriptionFeeCurrency: SubscriptionFeeCurrency?, minDeposit: Double?, minDepositCurrency: MinDepositCurrency?) {
         self.hasSignalAccount = hasSignalAccount
+        self.hasActiveSubscription = hasActiveSubscription
         self.subscriptionFee = subscriptionFee
         self.subscriptionFeeCurrency = subscriptionFeeCurrency
         self.minDeposit = minDeposit
@@ -65,6 +67,7 @@ open class AttachToSignalProviderInfo: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(hasSignalAccount, forKey: "hasSignalAccount")
+        try container.encodeIfPresent(hasActiveSubscription, forKey: "hasActiveSubscription")
         try container.encodeIfPresent(subscriptionFee, forKey: "subscriptionFee")
         try container.encodeIfPresent(subscriptionFeeCurrency, forKey: "subscriptionFeeCurrency")
         try container.encodeIfPresent(minDeposit, forKey: "minDeposit")
@@ -77,6 +80,7 @@ open class AttachToSignalProviderInfo: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         hasSignalAccount = try container.decodeIfPresent(Bool.self, forKey: "hasSignalAccount")
+        hasActiveSubscription = try container.decodeIfPresent(Bool.self, forKey: "hasActiveSubscription")
         subscriptionFee = try container.decodeIfPresent(Double.self, forKey: "subscriptionFee")
         subscriptionFeeCurrency = try container.decodeIfPresent(SubscriptionFeeCurrency.self, forKey: "subscriptionFeeCurrency")
         minDeposit = try container.decodeIfPresent(Double.self, forKey: "minDeposit")

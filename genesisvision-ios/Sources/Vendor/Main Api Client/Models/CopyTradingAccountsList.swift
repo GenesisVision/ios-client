@@ -12,11 +12,13 @@ import Foundation
 open class CopyTradingAccountsList: Codable {
 
     public var accounts: [CopyTradingAccountInfo]?
+    public var total: Int?
 
 
     
-    public init(accounts: [CopyTradingAccountInfo]?) {
+    public init(accounts: [CopyTradingAccountInfo]?, total: Int?) {
         self.accounts = accounts
+        self.total = total
     }
     
 
@@ -27,6 +29,7 @@ open class CopyTradingAccountsList: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(accounts, forKey: "accounts")
+        try container.encodeIfPresent(total, forKey: "total")
     }
 
     // Decodable protocol methods
@@ -35,6 +38,7 @@ open class CopyTradingAccountsList: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         accounts = try container.decodeIfPresent([CopyTradingAccountInfo].self, forKey: "accounts")
+        total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }
 

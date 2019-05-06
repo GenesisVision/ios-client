@@ -96,7 +96,7 @@ class ProgramInvestViewController: BaseViewController {
     }
     @IBOutlet weak var investmentAmountValueLabel: TitleLabel! {
         didSet {
-            if let currency = viewModel.selectedWalletFrom?.currency {
+            if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency {
                 investmentAmountValueLabel.text = "0 " + currency.rawValue
             }
         }
@@ -123,7 +123,7 @@ class ProgramInvestViewController: BaseViewController {
     
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
-            if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
                 self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
             }
         }
@@ -170,14 +170,18 @@ class ProgramInvestViewController: BaseViewController {
         self.availableInWalletFromValue = viewModel.getAvailableInWallet()
     
         //investment
-        if let walletCurrency = viewModel.selectedWalletFrom?.currency?.rawValue {
+        if let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue {
             self.amountToInvestCurrencyLabel.text = walletCurrency
         }
         
-        if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, programCurrency.rawValue != currency {
+        if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, programCurrency.rawValue != currency {
             self.investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
         } else {
             self.investmentAmountCurrencyLabel.text = ""
+        }
+        
+        if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
+            selectedWalletFromDelegateManager.currencyDelegate = self
         }
         
         self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
@@ -242,7 +246,7 @@ class ProgramInvestViewController: BaseViewController {
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
         var subtitle = ""
-        guard let currency = viewModel.selectedWalletFrom?.currency else { return }
+        guard let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency else { return }
         
         if let periodEnds = viewModel.programInvestInfo?.periodEnds?.defaultFormatString {
             subtitle = "Your request will be processed at the end of the reporting period \(periodEnds)."
@@ -275,33 +279,23 @@ class ProgramInvestViewController: BaseViewController {
     @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        viewModel?.selectedWalletFromDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
         
-        var selectedIndexRow = viewModel.selectedWalletFromCurrencyIndex
-        let values = viewModel.walletCurrencyValues()
+        bottomSheetController.addNavigationBar(selectedWalletFromTitleLabel.text)
         
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.showProgressHUD()
-            self?.viewModel.updateWalletCurrencyFromIndex(selectedIndexRow, completion: { (result) in
-                self?.hideAll()
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        self?.updateUI()
-                    }
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                }
-            })
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.selectedWalletFromDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedWalletFromDelegateManager else { return }
+            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
+            tableView.delegate = selectedWalletFromDelegateManager
+            tableView.dataSource = selectedWalletFromDelegateManager
         }
         
-        alert.addAction(title: "Ok", style: .cancel)
-        
-        alert.show()
+        bottomSheetController.present()
     }
     
     // MARK: - Actions
@@ -311,13 +305,32 @@ class ProgramInvestViewController: BaseViewController {
     
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
         let rate = viewModel.rate
-        if let currency = viewModel.selectedWalletFrom?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+        if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
             
             let minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(withType: currencyType)
             
             amountToInvestValueLabel.text = minValue.toString(withoutFormatter: true)
             amountToInvestValue = minValue
         }
+    }
+}
+
+extension ProgramInvestViewController: WalletDepositCurrencyDelegateManagerProtocol {
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
+        self.showProgressHUD()
+        self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+        
+        bottomSheetController.dismiss()
     }
 }
 

@@ -18,8 +18,8 @@ final class ProgramInvestViewModel {
     var programInvestInfo: ProgramInvestInfo?
 
     var walletMultiSummary: WalletMultiSummary?
-    var selectedWalletFrom: WalletData?
-    var selectedWalletFromCurrencyIndex: Int = 0
+    var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
+    
     var rate: Double = 0.0
     
     private weak var detailProtocol: DetailProtocol?
@@ -39,9 +39,9 @@ final class ProgramInvestViewModel {
         guard let walletMultiSummary = walletMultiSummary,
             let wallets = walletMultiSummary.wallets else { return }
 
-        selectedWalletFromCurrencyIndex = selectedIndex
+        self.selectedWalletFromDelegateManager?.selectedWallet = wallets[selectedIndex]
+        self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
         
-        selectedWalletFrom = wallets[selectedWalletFromCurrencyIndex]
         updateRate(completion: completion)
     }
     
@@ -54,7 +54,10 @@ final class ProgramInvestViewModel {
             AuthManager.getWallet(completion: { [weak self] (wallet) in
                 if let wallet = wallet, let wallets = wallet.wallets {
                     self?.walletMultiSummary = wallet
-                    self?.selectedWalletFrom = wallets[0]
+                    self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
+                    self?.selectedWalletFromDelegateManager?.walletId = 0
+                    self?.selectedWalletFromDelegateManager?.selectedIndex = 0
+                    self?.selectedWalletFromDelegateManager?.selectedWallet = wallets[0]
                 }
                 
                 ProgramsDataProvider.getInvestInfo(programId: programId, currencySecondary: currencySecondary, completion: { [weak self] (programInvestInfo) in
@@ -75,7 +78,7 @@ final class ProgramInvestViewModel {
     }
     
     func getMinInvestmentAmountText() -> String {
-        guard let programCurrency = programCurrency, let walletCurrency = selectedWalletFrom?.currency?.rawValue else { return "" }
+        guard let programCurrency = programCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else { return "" }
         
         let minInvestmentAmount = getMinInvestmentAmount()
         
@@ -97,7 +100,7 @@ final class ProgramInvestViewModel {
     }
     
     func getSelectedWalletTitle() -> String {
-        guard let title = selectedWalletFrom?.title, let currency = selectedWalletFrom?.currency?.rawValue else {
+        guard let title = self.selectedWalletFromDelegateManager?.selectedWallet?.title, let currency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else {
             return ""
         }
         
@@ -109,7 +112,7 @@ final class ProgramInvestViewModel {
     }
     
     func getAvailableInWallet() -> Double {
-        guard let available = selectedWalletFrom?.available else { return 0.0 }
+        guard let available = self.selectedWalletFromDelegateManager?.selectedWallet?.available else { return 0.0 }
         
         return available
     }
@@ -138,26 +141,10 @@ final class ProgramInvestViewModel {
     
     // MARK: - Private methods
     private func updateRate(completion: @escaping CompletionBlock) {
-        RateDataProvider.getRate(from: selectedWalletFrom?.currency?.rawValue ?? "", to: programCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
+        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue ?? "", to: programCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
             self?.rate = rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
-    }
-    
-    // MARK: - Picker View Values
-    func walletCurrencyValues() -> [String] {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else {
-                return []
-        }
-        
-        return wallets.map {
-            if let title = $0.title , let currency = $0.currency?.rawValue {
-                return title + " | " + currency
-            }
-            
-            return ""
-        }
     }
     
     // MARK: - Navigation
@@ -182,7 +169,7 @@ final class ProgramInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = selectedWalletFrom?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost(rawValue: walletCurrency)
         

@@ -56,7 +56,14 @@ open class BrokersAPI {
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
     } ],
-    "isSignalsAvailable" : true
+    "isSignalsAvailable" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   }, {
     "leverageMin" : 6,
     "leverageMax" : 1,
@@ -86,7 +93,14 @@ open class BrokersAPI {
       "leverages" : [ 5, 5 ],
       "currencies" : [ "currencies", "currencies" ]
     } ],
-    "isSignalsAvailable" : true
+    "isSignalsAvailable" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   } ]
 }}]
 

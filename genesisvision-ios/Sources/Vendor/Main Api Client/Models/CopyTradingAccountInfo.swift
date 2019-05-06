@@ -26,22 +26,28 @@ open class CopyTradingAccountInfo: Codable {
         case usd = "USD"
         case eur = "EUR"
     }
+    public var id: UUID?
     public var currency: Currency?
-    public var currencyLogo: String?
+    public var logo: String?
+    public var title: String?
     public var balance: Double?
     public var equity: Double?
     public var freeMargin: Double?
     public var marginLevel: Double?
+    public var available: Double?
 
 
     
-    public init(currency: Currency?, currencyLogo: String?, balance: Double?, equity: Double?, freeMargin: Double?, marginLevel: Double?) {
+    public init(id: UUID?, currency: Currency?, logo: String?, title: String?, balance: Double?, equity: Double?, freeMargin: Double?, marginLevel: Double?, available: Double?) {
+        self.id = id
         self.currency = currency
-        self.currencyLogo = currencyLogo
+        self.logo = logo
+        self.title = title
         self.balance = balance
         self.equity = equity
         self.freeMargin = freeMargin
         self.marginLevel = marginLevel
+        self.available = available
     }
     
 
@@ -51,12 +57,15 @@ open class CopyTradingAccountInfo: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(currencyLogo, forKey: "currencyLogo")
+        try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(equity, forKey: "equity")
         try container.encodeIfPresent(freeMargin, forKey: "freeMargin")
         try container.encodeIfPresent(marginLevel, forKey: "marginLevel")
+        try container.encodeIfPresent(available, forKey: "available")
     }
 
     // Decodable protocol methods
@@ -64,12 +73,15 @@ open class CopyTradingAccountInfo: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        currencyLogo = try container.decodeIfPresent(String.self, forKey: "currencyLogo")
+        logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        title = try container.decodeIfPresent(String.self, forKey: "title")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         equity = try container.decodeIfPresent(Double.self, forKey: "equity")
         freeMargin = try container.decodeIfPresent(Double.self, forKey: "freeMargin")
         marginLevel = try container.decodeIfPresent(Double.self, forKey: "marginLevel")
+        available = try container.decodeIfPresent(Double.self, forKey: "available")
     }
 }
 

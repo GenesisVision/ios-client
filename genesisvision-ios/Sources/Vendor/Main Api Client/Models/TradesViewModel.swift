@@ -11,18 +11,16 @@ import Foundation
 
 open class TradesViewModel: Codable {
 
-    public enum TradesType: String, Codable { 
-        case positions = "Positions"
-        case orders = "Orders"
-    }
-    public var tradesType: TradesType?
+    public var showSwaps: Bool?
+    public var showTickets: Bool?
     public var trades: [OrderModel]?
     public var total: Int?
 
 
     
-    public init(tradesType: TradesType?, trades: [OrderModel]?, total: Int?) {
-        self.tradesType = tradesType
+    public init(showSwaps: Bool?, showTickets: Bool?, trades: [OrderModel]?, total: Int?) {
+        self.showSwaps = showSwaps
+        self.showTickets = showTickets
         self.trades = trades
         self.total = total
     }
@@ -34,7 +32,8 @@ open class TradesViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(tradesType, forKey: "tradesType")
+        try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
+        try container.encodeIfPresent(showTickets, forKey: "showTickets")
         try container.encodeIfPresent(trades, forKey: "trades")
         try container.encodeIfPresent(total, forKey: "total")
     }
@@ -44,7 +43,8 @@ open class TradesViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        tradesType = try container.decodeIfPresent(TradesType.self, forKey: "tradesType")
+        showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
+        showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
         trades = try container.decodeIfPresent([OrderModel].self, forKey: "trades")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
     }

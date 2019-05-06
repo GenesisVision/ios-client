@@ -98,6 +98,8 @@ class WalletTransactionView: UIView {
             setupOpenCloseProgram(model)
         case .platformFee:
             setupPlatformFeeProgram(model)
+        case .depositSignal, .receiveSignal, .subscribeSignal, .withdrawalSignal:
+            break
         }
         
         if let status = model.status {

@@ -21,6 +21,9 @@ open class PersonalProgramDetailsFull: Codable {
     public var isReinvest: Bool?
     public var gvtValue: Double?
     public var showTwoFactorButton: Bool?
+    public var signalSubscription: SignalSubscription?
+    public var login: String?
+    public var notificationAvailableToInvestId: UUID?
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
@@ -41,10 +44,13 @@ open class PersonalProgramDetailsFull: Codable {
 
 
     
-    public init(isReinvest: Bool?, gvtValue: Double?, showTwoFactorButton: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
+    public init(isReinvest: Bool?, gvtValue: Double?, showTwoFactorButton: Bool?, signalSubscription: SignalSubscription?, login: String?, notificationAvailableToInvestId: UUID?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
         self.isReinvest = isReinvest
         self.gvtValue = gvtValue
         self.showTwoFactorButton = showTwoFactorButton
+        self.signalSubscription = signalSubscription
+        self.login = login
+        self.notificationAvailableToInvestId = notificationAvailableToInvestId
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -74,6 +80,9 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
         try container.encodeIfPresent(gvtValue, forKey: "gvtValue")
         try container.encodeIfPresent(showTwoFactorButton, forKey: "showTwoFactorButton")
+        try container.encodeIfPresent(signalSubscription, forKey: "signalSubscription")
+        try container.encodeIfPresent(login, forKey: "login")
+        try container.encodeIfPresent(notificationAvailableToInvestId, forKey: "notificationAvailableToInvestId")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
@@ -101,6 +110,9 @@ open class PersonalProgramDetailsFull: Codable {
         isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
         gvtValue = try container.decodeIfPresent(Double.self, forKey: "gvtValue")
         showTwoFactorButton = try container.decodeIfPresent(Bool.self, forKey: "showTwoFactorButton")
+        signalSubscription = try container.decodeIfPresent(SignalSubscription.self, forKey: "signalSubscription")
+        login = try container.decodeIfPresent(String.self, forKey: "login")
+        notificationAvailableToInvestId = try container.decodeIfPresent(UUID.self, forKey: "notificationAvailableToInvestId")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")

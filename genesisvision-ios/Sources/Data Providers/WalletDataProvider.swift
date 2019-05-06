@@ -80,10 +80,10 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func transfer(sourceId: UUID?, destinationId: UUID?, amount: Double?, completion: @escaping CompletionBlock) {
+    static func transfer(sourceId: UUID?, destinationId: UUID?, amount: Double?, transferAll: Bool? = false, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        let request = InternalTransferRequest(sourceId: sourceId, sourceType: InternalTransferRequest.SourceType.wallet, destinationId: destinationId, destinationType: InternalTransferRequest.DestinationType.wallet, amount: amount, transferAll: false)
+        let request = InternalTransferRequest(sourceId: sourceId, sourceType: InternalTransferRequest.SourceType.wallet, destinationId: destinationId, destinationType: InternalTransferRequest.DestinationType.wallet, amount: amount, transferAll: transferAll)
         
         WalletAPI.v10WalletTransferPost(authorization: authorization, request: request) { (error) in
             DataProvider().responseHandler(error, completion: completion)

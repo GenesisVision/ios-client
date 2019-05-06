@@ -341,11 +341,14 @@ open class ProgramsAPI {
   "entryFeeCurrent" : 5.637376656633329,
   "entryFeeSelected" : 5.962133916683182,
   "isReinvesting" : true,
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
   "personalProgramDetails" : {
     "canCloseProgram" : true,
     "canWithdraw" : true,
     "canInvest" : true,
+    "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isFollowSignals" : true,
+    "login" : "login",
     "showTwoFactorButton" : true,
     "canClosePeriod" : true,
     "pendingOutput" : 1.4894159098541704,
@@ -355,6 +358,15 @@ open class ProgramsAPI {
     "isReinvest" : true,
     "gvtValue" : 2.027123023002322,
     "isFinishing" : true,
+    "signalSubscription" : {
+      "mode" : "ByBalance",
+      "hasSignalAccount" : true,
+      "fixedCurrency" : "Undefined",
+      "fixedVolume" : 4.145608029883936,
+      "openTolerancePercent" : 2.027123023002322,
+      "hasActiveSubscription" : true,
+      "percent" : 3.616076749251911
+    },
     "canMakeSignalProvider" : true,
     "value" : 4.145608029883936,
     "profit" : 7.386281948385884,
@@ -517,12 +529,13 @@ open class ProgramsAPI {
      - parameter dateTo: (query)  (optional)
      - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
+     - parameter accountId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdTradesGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdTradesGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdTradesGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdTradesGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -532,17 +545,22 @@ open class ProgramsAPI {
      Trade history
      - GET /v1.0/programs/{id}/trades
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 3,
+  "showSwaps" : true,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "swap" : 9.301444243932576,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "price" : 1.4658129805029452,
-    "commission" : 2.3021358869347655,
+    "showOriginalCommission" : true,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
     "masterLogin" : "masterLogin",
@@ -550,21 +568,25 @@ open class ProgramsAPI {
     "direction" : "Buy"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "swap" : 9.301444243932576,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "price" : 1.4658129805029452,
-    "commission" : 2.3021358869347655,
+    "showOriginalCommission" : true,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
     "masterLogin" : "masterLogin",
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   } ],
-  "tradesType" : "Positions"
+  "showTickets" : true
 }}]
      
      - parameter id: (path)  
@@ -572,12 +594,13 @@ open class ProgramsAPI {
      - parameter dateTo: (query)  (optional)
      - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
+     - parameter accountId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func v10ProgramsByIdTradesGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func v10ProgramsByIdTradesGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
         var path = "/v1.0/programs/{id}/trades"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -589,6 +612,7 @@ open class ProgramsAPI {
             "DateTo": dateTo?.encodeToJSON(), 
             "Symbol": symbol, 
             "Sorting": sorting?.rawValue, 
+            "AccountId": accountId, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -627,12 +651,13 @@ open class ProgramsAPI {
      - parameter id: (path)  
      - parameter sorting: (query)  (optional)
      - parameter symbol: (query)  (optional)
+     - parameter accountId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdTradesOpenGet(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: id, sorting: sorting, symbol: symbol, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdTradesOpenGet(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: id, sorting: sorting, symbol: symbol, accountId: accountId, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -642,17 +667,22 @@ open class ProgramsAPI {
      Open positions
      - GET /v1.0/programs/{id}/trades/open
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 3,
+  "showSwaps" : true,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "swap" : 9.301444243932576,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "price" : 1.4658129805029452,
-    "commission" : 2.3021358869347655,
+    "showOriginalCommission" : true,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
     "masterLogin" : "masterLogin",
@@ -660,32 +690,37 @@ open class ProgramsAPI {
     "direction" : "Buy"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "swap" : 9.301444243932576,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
     "entry" : "In",
     "price" : 1.4658129805029452,
-    "commission" : 2.3021358869347655,
+    "showOriginalCommission" : true,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
     "masterLogin" : "masterLogin",
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   } ],
-  "tradesType" : "Positions"
+  "showTickets" : true
 }}]
      
      - parameter id: (path)  
      - parameter sorting: (query)  (optional)
      - parameter symbol: (query)  (optional)
+     - parameter accountId: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
         var path = "/v1.0/programs/{id}/trades/open"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -695,6 +730,7 @@ open class ProgramsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "Sorting": sorting?.rawValue, 
             "Symbol": symbol, 
+            "AccountId": accountId, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -770,11 +806,25 @@ open class ProgramsAPI {
     }
 
     /**
+     * enum for parameter status
+     */
+    public enum Status_v10ProgramsGet: String { 
+        case _none = "None"
+        case pending = "Pending"
+        case errorCreating = "ErrorCreating"
+        case active = "Active"
+        case closed = "Closed"
+        case archived = "Archived"
+        case closedDueToInactivity = "ClosedDueToInactivity"
+    }
+
+    /**
      Programs list
      
      - parameter authorization: (header)  (optional)
      - parameter levelMin: (query)  (optional)
      - parameter levelMax: (query)  (optional)
+     - parameter levelsSet: (query)  (optional)
      - parameter profitAvgMin: (query)  (optional)
      - parameter profitAvgMax: (query)  (optional)
      - parameter sorting: (query)  (optional)
@@ -795,12 +845,13 @@ open class ProgramsAPI {
      - parameter ids: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
+     - parameter status: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, isSignal: isSignal, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, isSignal: isSignal, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -852,6 +903,7 @@ open class ProgramsAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -870,7 +922,9 @@ open class ProgramsAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -880,6 +934,15 @@ open class ProgramsAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -940,6 +1003,7 @@ open class ProgramsAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -958,7 +1022,9 @@ open class ProgramsAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -968,6 +1034,15 @@ open class ProgramsAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -993,6 +1068,7 @@ open class ProgramsAPI {
      - parameter authorization: (header)  (optional)
      - parameter levelMin: (query)  (optional)
      - parameter levelMax: (query)  (optional)
+     - parameter levelsSet: (query)  (optional)
      - parameter profitAvgMin: (query)  (optional)
      - parameter profitAvgMax: (query)  (optional)
      - parameter sorting: (query)  (optional)
@@ -1013,12 +1089,13 @@ open class ProgramsAPI {
      - parameter ids: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
+     - parameter status: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1027,6 +1104,7 @@ open class ProgramsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "LevelMin": levelMin?.encodeToJSON(), 
             "LevelMax": levelMax?.encodeToJSON(), 
+            "LevelsSet": levelsSet, 
             "ProfitAvgMin": profitAvgMin, 
             "ProfitAvgMax": profitAvgMax, 
             "Sorting": sorting?.rawValue, 
@@ -1047,6 +1125,7 @@ open class ProgramsAPI {
             "Ids": ids, 
             "ManagerId": managerId, 
             "ProgramManagerId": programManagerId, 
+            "Status": status, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])

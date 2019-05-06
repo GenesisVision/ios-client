@@ -59,12 +59,13 @@ open class ProgramDetails: Codable {
     public var title: String?
     public var description: String?
     public var status: Status?
+    public var creationDate: Date?
     public var manager: ProfilePublic?
     public var chart: [ChartSimple]?
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, availableInvestmentBase: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, manager: ProfilePublic?, chart: [ChartSimple]?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, availableInvestmentBase: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -85,6 +86,7 @@ open class ProgramDetails: Codable {
         self.title = title
         self.description = description
         self.status = status
+        self.creationDate = creationDate
         self.manager = manager
         self.chart = chart
     }
@@ -116,6 +118,7 @@ open class ProgramDetails: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(creationDate, forKey: "creationDate")
         try container.encodeIfPresent(manager, forKey: "manager")
         try container.encodeIfPresent(chart, forKey: "chart")
     }
@@ -145,6 +148,7 @@ open class ProgramDetails: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
+        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
         manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
         chart = try container.decodeIfPresent([ChartSimple].self, forKey: "chart")
     }

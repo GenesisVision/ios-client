@@ -158,7 +158,11 @@ class FundWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let selectedWalletCurrency = viewModel.selectedWalletFrom?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
+        guard let selectedWalletCurrency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
+        
+        if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
+            selectedWalletFromDelegateManager.currencyDelegate = self
+        }
         
         //wallet
         self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
@@ -247,33 +251,23 @@ class FundWithdrawViewController: BaseViewController {
     @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
+        viewModel?.selectedWalletFromDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
         
-        var selectedIndexRow = viewModel.selectedWalletFromCurrencyIndex
-        let values = viewModel.walletCurrencyValues()
+        bottomSheetController.addNavigationBar(selectedWalletFromTitleLabel.text)
         
-        let pickerViewValues: [[String]] = [values.map { $0 }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndexRow)
-        
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { [weak self] vc, picker, index, values in
-            selectedIndexRow = index.row
-            self?.showProgressHUD()
-            self?.viewModel.updateWalletCurrencyFromIndex(selectedIndexRow, completion: { (result) in
-                self?.hideAll()
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        self?.updateUI()
-                    }
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                }
-            })
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.selectedWalletFromDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedWalletFromDelegateManager else { return }
+            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
+            tableView.delegate = selectedWalletFromDelegateManager
+            tableView.dataSource = selectedWalletFromDelegateManager
         }
         
-        alert.addAction(title: "Ok", style: .cancel)
-        
-        alert.show()
+        bottomSheetController.present()
     }
     
     // MARK: - Actions
@@ -284,6 +278,25 @@ class FundWithdrawViewController: BaseViewController {
     @IBAction func copyAllButtonAction(_ sender: UIButton) {
         amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
         amountToWithdrawValue = availableToWithdrawValue
+    }
+}
+
+extension FundWithdrawViewController: WalletDepositCurrencyDelegateManagerProtocol {
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
+        self.showProgressHUD()
+        self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+        
+        bottomSheetController.dismiss()
     }
 }
 

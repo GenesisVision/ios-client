@@ -23,7 +23,7 @@ class WalletTransferViewController: BaseViewController {
     
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
-            if let currency = viewModel.selectedWalletFrom?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 self.availableInWalletFromValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
             }
         }
@@ -31,7 +31,7 @@ class WalletTransferViewController: BaseViewController {
     
     var availableInWalletToValue: Double = 0.0 {
         didSet {
-            if let currency = viewModel.selectedWalletTo?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            if let currency = viewModel.selectedWalletToDelegateManager?.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 self.availableInWalletToValueLabel.text = availableInWalletToValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
             }
         }
@@ -167,7 +167,7 @@ class WalletTransferViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let selectedWalletFrom = viewModel.selectedWalletFrom, let selectedWalletTo = viewModel.selectedWalletTo else { return }
+        guard let selectedWalletFrom = viewModel.selectedWalletFromDelegateManager?.selectedWallet, let selectedWalletTo = viewModel.selectedWalletToDelegateManager?.selectedWallet else { return }
         
         if let title = selectedWalletFrom.title, let currency = selectedWalletFrom.currency?.rawValue {
             selectedWalletFromValueLabel.text = title + " | " + currency
@@ -181,12 +181,20 @@ class WalletTransferViewController: BaseViewController {
             amountToTransferToValueLabel.text = "≈" + value + " " + currencyType.rawValue
         }
         
-        if let available = viewModel.selectedWalletFrom?.available {
+        if let available = selectedWalletFrom.available {
             self.availableInWalletFromValue = available
         }
         
-        if let available = viewModel.selectedWalletTo?.available {
+        if let available = selectedWalletTo.available {
             self.availableInWalletToValue = available
+        }
+        
+        if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
+            selectedWalletFromDelegateManager.currencyDelegate = self
+        }
+        
+        if let selectedWalletToDelegateManager = viewModel?.selectedWalletToDelegateManager {
+            selectedWalletToDelegateManager.currencyDelegate = self
         }
         
         let transferButtonEnabled = amountToTransferValue > 0.0 && amountToTransferValue <= availableInWalletFromValue
@@ -329,11 +337,28 @@ class WalletTransferViewController: BaseViewController {
     }
 }
 
-//TODO:!!!
 extension WalletTransferViewController: WalletDepositCurrencyDelegateManagerProtocol {
-    func didSelectWallet(at indexPath: IndexPath) {
-//        self.viewModel.updateWalletCurrencyIndex(indexPath.row)
-        self.updateUI()
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
+        switch walletId {
+        case 1:
+            self.viewModel.updateWalletCurrencyToIndex(indexPath.row) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.updateUI()
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        default:
+            self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.updateUI()
+                case .failure(let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        }
         
         bottomSheetController.dismiss()
     }
@@ -353,7 +378,7 @@ extension WalletTransferViewController: NumpadViewProtocol {
     }
     
     var currency: CurrencyType? {
-        if let currency = viewModel.selectedWalletFrom?.currency {
+        if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency {
             return CurrencyType(rawValue: currency.rawValue)
         }
         

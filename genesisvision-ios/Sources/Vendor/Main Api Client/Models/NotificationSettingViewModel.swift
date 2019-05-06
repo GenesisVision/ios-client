@@ -34,6 +34,7 @@ open class NotificationSettingViewModel: Codable {
         case empty = "Empty"
         case profit = "Profit"
         case level = "Level"
+        case availableToInvest = "AvailableToInvest"
     }
     public var id: UUID?
     public var isEnabled: Bool?

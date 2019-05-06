@@ -69,22 +69,6 @@ final class WalletDepositViewModel {
         selectedWallet = wallets[selectedIndex]
     }
     
-    // MARK: - Picker View Values
-    func walletCurrencyValues() -> [String] {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else {
-                return []
-        }
-        
-        return wallets.map {
-            if let description = $0.title, let currency = $0.currency?.rawValue {
-                return description + " | " + currency
-            }
-            
-            return ""
-        }
-    }
-    
     func getAddress() -> String {
         return address
     }
@@ -101,7 +85,7 @@ final class WalletDepositViewModel {
 }
 
 protocol WalletDepositCurrencyDelegateManagerProtocol: class {
-    func didSelectWallet(at indexPath: IndexPath)
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int)
 }
 
 final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -112,6 +96,8 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
     var wallets: [WalletData] = []
     var selectedIndex: Int = 0
     var selectedWallet: WalletData?
+    
+    var walletId: Int = 0
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [WalletCurrencyTableViewCellViewModel.self]
@@ -134,7 +120,7 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
         
         self.selectedWallet = wallets[indexPath.row]
         
-        currencyDelegate?.didSelectWallet(at: indexPath)
+        currencyDelegate?.didSelectWallet(at: indexPath, walletId: walletId)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

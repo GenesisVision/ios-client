@@ -33,13 +33,23 @@ open class PlatformAPI {
       "externalTransactionType" : [ "externalTransactionType", "externalTransactionType" ]
     },
     "program" : {
+      "actionType" : [ "actionType", "actionType" ],
       "programTags" : [ {
         "color" : "color",
         "name" : "name"
       }, {
         "color" : "color",
         "name" : "name"
-      } ]
+      } ],
+      "managerNotificationType" : {
+        "funds" : [ "funds", "funds" ],
+        "programs" : [ "programs", "programs" ]
+      },
+      "customNotificationType" : [ "customNotificationType", "customNotificationType" ],
+      "investorNotificationType" : {
+        "funds" : [ "funds", "funds" ],
+        "programs" : [ "programs", "programs" ]
+      }
     }
   },
   "androidVersion" : {
@@ -59,13 +69,17 @@ open class PlatformAPI {
   "programsInfo" : {
     "managerProgramInvestment" : 0.8008281904610115,
     "managerProgramInvestmentUSD" : 6.027456183070403,
-    "managerProgramInvestmentUSDT" : 1.4658129805029452,
     "managerFundInvestment" : 9.301444243932576,
-    "managerProgramInvestmentETH" : 5.637376656633329,
     "managerMaxExitFee" : 3.616076749251911,
+    "managerMinSignalSubscriptionFee" : 4.145608029883936,
+    "managerProgramInvestmentUSDT" : 1.4658129805029452,
+    "managerProgramInvestmentETH" : 5.637376656633329,
+    "managerMaxSignalSubscriptionFee" : 2.027123023002322,
     "managerMaxSuccessFee" : 7.061401241503109,
-    "periods" : [ 2, 2 ],
+    "periods" : [ 1, 1 ],
     "managerProgramInvestmentBTC" : 5.962133916683182,
+    "managerMinSignalSuccessFee" : 1.2315135367772556,
+    "managerMaxSignalSuccessFee" : 7.386281948385884,
     "managerMaxEntryFee" : 2.3021358869347655
   },
   "programsFacets" : [ {
@@ -107,10 +121,10 @@ open class PlatformAPI {
     "url" : "url"
   } ],
   "platformCurrencies" : [ {
-    "rateToGvt" : 4.145608029883936,
+    "rateToGvt" : 1.4894159098541704,
     "name" : "name"
   }, {
-    "rateToGvt" : 4.145608029883936,
+    "rateToGvt" : 1.4894159098541704,
     "name" : "name"
   } ],
   "currencies" : [ "currencies", "currencies" ]
@@ -153,7 +167,7 @@ open class PlatformAPI {
     /**
      Investment programs levels
      
-     - parameter currency: (query)  (optional)
+     - parameter currency: (query)  (optional, default to 100)
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func v10PlatformLevelsGet(currency: Currency_v10PlatformLevelsGet? = nil, completion: @escaping ((_ data: ProgramsLevelsInfo?,_ error: Error?) -> Void)) {
@@ -176,7 +190,7 @@ open class PlatformAPI {
   } ]
 }}]
      
-     - parameter currency: (query)  (optional)
+     - parameter currency: (query)  (optional, default to 100)
 
      - returns: RequestBuilder<ProgramsLevelsInfo> 
      */

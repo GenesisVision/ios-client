@@ -34,12 +34,13 @@ open class FundDetailsFull: Codable {
     public var description: String?
     public var title: String?
     public var ipfsHash: String?
+    public var creationDate: Date?
     public var status: Status?
     public var manager: ProfilePublic?
 
 
     
-    public init(entryFee: Double?, exitFee: Double?, managementFee: Double?, currentAssets: [FundAssetPartWithIcon]?, statistic: FundStatistic?, personalFundDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, status: Status?, manager: ProfilePublic?) {
+    public init(entryFee: Double?, exitFee: Double?, managementFee: Double?, currentAssets: [FundAssetPartWithIcon]?, statistic: FundStatistic?, personalFundDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
         self.entryFee = entryFee
         self.exitFee = exitFee
         self.managementFee = managementFee
@@ -53,6 +54,7 @@ open class FundDetailsFull: Codable {
         self.description = description
         self.title = title
         self.ipfsHash = ipfsHash
+        self.creationDate = creationDate
         self.status = status
         self.manager = manager
     }
@@ -77,6 +79,7 @@ open class FundDetailsFull: Codable {
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
+        try container.encodeIfPresent(creationDate, forKey: "creationDate")
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(manager, forKey: "manager")
     }
@@ -99,6 +102,7 @@ open class FundDetailsFull: Codable {
         description = try container.decodeIfPresent(String.self, forKey: "description")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
+        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
     }

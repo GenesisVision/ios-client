@@ -50,6 +50,10 @@ open class MultiWalletTransaction: Codable {
         case open = "Open"
         case fee = "Fee"
         case profits = "Profits"
+        case subscribeSignal = "SubscribeSignal"
+        case receiveSignal = "ReceiveSignal"
+        case depositSignal = "DepositSignal"
+        case withdrawalSignal = "WithdrawalSignal"
     }
     public enum Status: String, Codable { 
         case done = "Done"

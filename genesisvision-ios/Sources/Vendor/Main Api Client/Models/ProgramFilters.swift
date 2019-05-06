@@ -12,11 +12,19 @@ import Foundation
 open class ProgramFilters: Codable {
 
     public var programTags: [ProgramTag]?
+    public var actionType: [String]?
+    public var customNotificationType: [String]?
+    public var managerNotificationType: AssetEvent?
+    public var investorNotificationType: AssetEvent?
 
 
     
-    public init(programTags: [ProgramTag]?) {
+    public init(programTags: [ProgramTag]?, actionType: [String]?, customNotificationType: [String]?, managerNotificationType: AssetEvent?, investorNotificationType: AssetEvent?) {
         self.programTags = programTags
+        self.actionType = actionType
+        self.customNotificationType = customNotificationType
+        self.managerNotificationType = managerNotificationType
+        self.investorNotificationType = investorNotificationType
     }
     
 
@@ -27,6 +35,10 @@ open class ProgramFilters: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(programTags, forKey: "programTags")
+        try container.encodeIfPresent(actionType, forKey: "actionType")
+        try container.encodeIfPresent(customNotificationType, forKey: "customNotificationType")
+        try container.encodeIfPresent(managerNotificationType, forKey: "managerNotificationType")
+        try container.encodeIfPresent(investorNotificationType, forKey: "investorNotificationType")
     }
 
     // Decodable protocol methods
@@ -35,6 +47,10 @@ open class ProgramFilters: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         programTags = try container.decodeIfPresent([ProgramTag].self, forKey: "programTags")
+        actionType = try container.decodeIfPresent([String].self, forKey: "actionType")
+        customNotificationType = try container.decodeIfPresent([String].self, forKey: "customNotificationType")
+        managerNotificationType = try container.decodeIfPresent(AssetEvent.self, forKey: "managerNotificationType")
+        investorNotificationType = try container.decodeIfPresent(AssetEvent.self, forKey: "investorNotificationType")
     }
 }
 

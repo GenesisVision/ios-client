@@ -67,6 +67,7 @@ open class SearchAPI {
       } ],
       "description" : "description",
       "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "url" : "url",
       "dashboardAssetsDetails" : {
         "share" : 2.3021358869347655
@@ -139,6 +140,7 @@ open class SearchAPI {
       } ],
       "description" : "description",
       "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "url" : "url",
       "dashboardAssetsDetails" : {
         "share" : 2.3021358869347655
@@ -220,6 +222,7 @@ open class SearchAPI {
       },
       "description" : "description",
       "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -238,7 +241,9 @@ open class SearchAPI {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "isFollowSignals" : true,
+        "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
         "pendingOutput" : 1.4894159098541704,
@@ -248,6 +253,15 @@ open class SearchAPI {
         "isReinvest" : true,
         "gvtValue" : 2.027123023002322,
         "isFinishing" : true,
+        "signalSubscription" : {
+          "mode" : "ByBalance",
+          "hasSignalAccount" : true,
+          "fixedCurrency" : "Undefined",
+          "fixedVolume" : 4.145608029883936,
+          "openTolerancePercent" : 2.027123023002322,
+          "hasActiveSubscription" : true,
+          "percent" : 3.616076749251911
+        },
         "canMakeSignalProvider" : true,
         "value" : 4.145608029883936,
         "profit" : 7.386281948385884,
@@ -308,6 +322,7 @@ open class SearchAPI {
       },
       "description" : "description",
       "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -326,7 +341,9 @@ open class SearchAPI {
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
+        "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "isFollowSignals" : true,
+        "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
         "pendingOutput" : 1.4894159098541704,
@@ -336,6 +353,15 @@ open class SearchAPI {
         "isReinvest" : true,
         "gvtValue" : 2.027123023002322,
         "isFinishing" : true,
+        "signalSubscription" : {
+          "mode" : "ByBalance",
+          "hasSignalAccount" : true,
+          "fixedCurrency" : "Undefined",
+          "fixedVolume" : 4.145608029883936,
+          "openTolerancePercent" : 2.027123023002322,
+          "hasActiveSubscription" : true,
+          "percent" : 3.616076749251911
+        },
         "canMakeSignalProvider" : true,
         "value" : 4.145608029883936,
         "profit" : 7.386281948385884,

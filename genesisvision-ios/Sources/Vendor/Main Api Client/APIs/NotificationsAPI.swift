@@ -195,6 +195,7 @@ open class NotificationsAPI {
         case empty = "Empty"
         case profit = "Profit"
         case level = "Level"
+        case availableToInvest = "AvailableToInvest"
     }
 
     /**

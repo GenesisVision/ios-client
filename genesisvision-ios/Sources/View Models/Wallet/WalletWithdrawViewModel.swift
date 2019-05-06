@@ -55,23 +55,6 @@ final class WalletWithdrawViewModel {
         selectedWallet = wallets[selectedIndex]
     }
     
-    
-    // MARK: - Picker View Values
-    func walletCurrencyValues() -> [String] {
-        guard let withdrawalSummary = withdrawalSummary,
-            let wallets = withdrawalSummary.wallets else {
-                return []
-        }
-
-        return wallets.map {
-            if let description = $0.description, let currency = $0.currency?.rawValue {
-                return description + " | " + currency
-            }
-            
-            return ""
-        }
-    }
-    
     func getInfo(completion: @escaping CompletionBlock) {
         WalletDataProvider.getWithdrawInfo(completion: { [weak self] (withdrawalSummary) in
             guard let withdrawalSummary = withdrawalSummary else {

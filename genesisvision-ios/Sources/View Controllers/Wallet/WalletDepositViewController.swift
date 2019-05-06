@@ -161,7 +161,7 @@ class WalletDepositViewController: BaseViewController {
 }
 
 extension WalletDepositViewController: WalletDepositCurrencyDelegateManagerProtocol {
-    func didSelectWallet(at indexPath: IndexPath) {
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.viewModel.updateWalletCurrencyIndex(indexPath.row)
         self.updateUI()
         

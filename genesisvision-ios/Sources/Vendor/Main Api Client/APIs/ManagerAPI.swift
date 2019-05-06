@@ -189,6 +189,7 @@ open class ManagerAPI {
         case exitFee = "ExitFee"
         case programStopOut = "ProgramStopOut"
         case programManagerTradingFeeAccrual = "ProgramManagerTradingFeeAccrual"
+        case programSignalSubscribe = "ProgramSignalSubscribe"
     }
 
     /**
@@ -869,6 +870,17 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter actionStatus
+     */
+    public enum ActionStatus_v10ManagerFundsGet: String { 
+        case pending = "Pending"
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+
+    /**
      Manager funds
      
      - parameter authorization: (header) JWT access token 
@@ -877,12 +889,13 @@ open class ManagerAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -929,6 +942,7 @@ open class ManagerAPI {
     } ],
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
       "share" : 2.3021358869347655
@@ -1001,6 +1015,7 @@ open class ManagerAPI {
     } ],
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
       "share" : 2.3021358869347655
@@ -1046,12 +1061,13 @@ open class ManagerAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/manager/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1063,6 +1079,7 @@ open class ManagerAPI {
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "ActionStatus": actionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -1174,6 +1191,7 @@ open class ManagerAPI {
         case exitFee = "ExitFee"
         case programStopOut = "ProgramStopOut"
         case programManagerTradingFeeAccrual = "ProgramManagerTradingFeeAccrual"
+        case programSignalSubscribe = "ProgramSignalSubscribe"
     }
 
     /**
@@ -2137,6 +2155,17 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter actionStatus
+     */
+    public enum ActionStatus_v10ManagerProgramsGet: String { 
+        case pending = "Pending"
+        case active = "Active"
+        case investing = "Investing"
+        case withdrawing = "Withdrawing"
+        case ended = "Ended"
+    }
+
+    /**
      Manager programs
      
      - parameter authorization: (header) JWT access token 
@@ -2145,12 +2174,13 @@ open class ManagerAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerProgramsGet(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ManagerProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ManagerProgramsGet(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ManagerProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -2202,6 +2232,7 @@ open class ManagerAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -2220,7 +2251,9 @@ open class ManagerAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -2230,6 +2263,15 @@ open class ManagerAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -2290,6 +2332,7 @@ open class ManagerAPI {
     },
     "description" : "description",
     "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
@@ -2308,7 +2351,9 @@ open class ManagerAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
+      "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isFollowSignals" : true,
+      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
       "pendingOutput" : 1.4894159098541704,
@@ -2318,6 +2363,15 @@ open class ManagerAPI {
       "isReinvest" : true,
       "gvtValue" : 2.027123023002322,
       "isFinishing" : true,
+      "signalSubscription" : {
+        "mode" : "ByBalance",
+        "hasSignalAccount" : true,
+        "fixedCurrency" : "Undefined",
+        "fixedVolume" : 4.145608029883936,
+        "openTolerancePercent" : 2.027123023002322,
+        "hasActiveSubscription" : true,
+        "percent" : 3.616076749251911
+      },
       "canMakeSignalProvider" : true,
       "value" : 4.145608029883936,
       "profit" : 7.386281948385884,
@@ -2346,12 +2400,13 @@ open class ManagerAPI {
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter actionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ManagerProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ManagerProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/manager/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -2363,6 +2418,7 @@ open class ManagerAPI {
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "ActionStatus": actionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -2381,10 +2437,11 @@ open class ManagerAPI {
      Get investment amount to create program
      
      - parameter authorization: (header) JWT access token 
+     - parameter brokerTradingAccount: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerProgramsInvestmentAmountGet(authorization: String, completion: @escaping ((_ data: ProgramMinimumDeposit?,_ error: Error?) -> Void)) {
-        v10ManagerProgramsInvestmentAmountGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func v10ManagerProgramsInvestmentAmountGet(authorization: String, brokerTradingAccount: UUID? = nil, completion: @escaping ((_ data: ProgramMinimumDeposit?,_ error: Error?) -> Void)) {
+        v10ManagerProgramsInvestmentAmountGetWithRequestBuilder(authorization: authorization, brokerTradingAccount: brokerTradingAccount).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -2400,16 +2457,20 @@ open class ManagerAPI {
 }}]
      
      - parameter authorization: (header) JWT access token 
+     - parameter brokerTradingAccount: (query)  (optional)
 
      - returns: RequestBuilder<ProgramMinimumDeposit> 
      */
-    open class func v10ManagerProgramsInvestmentAmountGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProgramMinimumDeposit> {
+    open class func v10ManagerProgramsInvestmentAmountGetWithRequestBuilder(authorization: String, brokerTradingAccount: UUID? = nil) -> RequestBuilder<ProgramMinimumDeposit> {
         let path = "/v1.0/manager/programs/investment/amount"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "brokerTradingAccount": brokerTradingAccount
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]

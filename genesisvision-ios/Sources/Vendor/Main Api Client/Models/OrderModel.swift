@@ -37,14 +37,19 @@ open class OrderModel: Codable {
     public var entry: Entry?
     /** Volume in account currency. Only filled when trade have zero commission (for paying fees with GVT) */
     public var baseVolume: Double?
-    /** Useful for spot markets profit calculation.  Huobi: sell - quote currency, buy - base currency */
+    /** Huobi: sell - quote currency (right), buy - base symbol currency (left) */
+    public var originalCommission: Double?
+    public var originalCommissionCurrency: String?
+    /** In account currency */
     public var commission: Double?
+    public var swap: Double?
+    public var showOriginalCommission: Bool?
     /** For signals */
     public var masterLogin: String?
 
 
     
-    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, commission: Double?, masterLogin: String?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, masterLogin: String?) {
         self.id = id
         self.login = login
         self.ticket = ticket
@@ -57,7 +62,11 @@ open class OrderModel: Codable {
         self.priceCurrent = priceCurrent
         self.entry = entry
         self.baseVolume = baseVolume
+        self.originalCommission = originalCommission
+        self.originalCommissionCurrency = originalCommissionCurrency
         self.commission = commission
+        self.swap = swap
+        self.showOriginalCommission = showOriginalCommission
         self.masterLogin = masterLogin
     }
     
@@ -80,7 +89,11 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(priceCurrent, forKey: "priceCurrent")
         try container.encodeIfPresent(entry, forKey: "entry")
         try container.encodeIfPresent(baseVolume, forKey: "baseVolume")
+        try container.encodeIfPresent(originalCommission, forKey: "originalCommission")
+        try container.encodeIfPresent(originalCommissionCurrency, forKey: "originalCommissionCurrency")
         try container.encodeIfPresent(commission, forKey: "commission")
+        try container.encodeIfPresent(swap, forKey: "swap")
+        try container.encodeIfPresent(showOriginalCommission, forKey: "showOriginalCommission")
         try container.encodeIfPresent(masterLogin, forKey: "masterLogin")
     }
 
@@ -101,7 +114,11 @@ open class OrderModel: Codable {
         priceCurrent = try container.decodeIfPresent(Double.self, forKey: "priceCurrent")
         entry = try container.decodeIfPresent(Entry.self, forKey: "entry")
         baseVolume = try container.decodeIfPresent(Double.self, forKey: "baseVolume")
+        originalCommission = try container.decodeIfPresent(Double.self, forKey: "originalCommission")
+        originalCommissionCurrency = try container.decodeIfPresent(String.self, forKey: "originalCommissionCurrency")
         commission = try container.decodeIfPresent(Double.self, forKey: "commission")
+        swap = try container.decodeIfPresent(Double.self, forKey: "swap")
+        showOriginalCommission = try container.decodeIfPresent(Bool.self, forKey: "showOriginalCommission")
         masterLogin = try container.decodeIfPresent(String.self, forKey: "masterLogin")
     }
 }

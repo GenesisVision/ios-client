@@ -11,16 +11,16 @@ import Foundation
 
 open class PersonalSignalDetailsFull: Codable {
 
-    public var subscribeDate: Date?
-    public var investorProfit: Double?
-    public var investorTrades: Int?
+    public var subscriptionDate: Date?
+    public var tradesCount: Int?
+    public var signalSubscription: SignalSubscription?
 
 
     
-    public init(subscribeDate: Date?, investorProfit: Double?, investorTrades: Int?) {
-        self.subscribeDate = subscribeDate
-        self.investorProfit = investorProfit
-        self.investorTrades = investorTrades
+    public init(subscriptionDate: Date?, tradesCount: Int?, signalSubscription: SignalSubscription?) {
+        self.subscriptionDate = subscriptionDate
+        self.tradesCount = tradesCount
+        self.signalSubscription = signalSubscription
     }
     
 
@@ -30,9 +30,9 @@ open class PersonalSignalDetailsFull: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(subscribeDate, forKey: "subscribeDate")
-        try container.encodeIfPresent(investorProfit, forKey: "investorProfit")
-        try container.encodeIfPresent(investorTrades, forKey: "investorTrades")
+        try container.encodeIfPresent(subscriptionDate, forKey: "subscriptionDate")
+        try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
+        try container.encodeIfPresent(signalSubscription, forKey: "signalSubscription")
     }
 
     // Decodable protocol methods
@@ -40,9 +40,9 @@ open class PersonalSignalDetailsFull: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        subscribeDate = try container.decodeIfPresent(Date.self, forKey: "subscribeDate")
-        investorProfit = try container.decodeIfPresent(Double.self, forKey: "investorProfit")
-        investorTrades = try container.decodeIfPresent(Int.self, forKey: "investorTrades")
+        subscriptionDate = try container.decodeIfPresent(Date.self, forKey: "subscriptionDate")
+        tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
+        signalSubscription = try container.decodeIfPresent(SignalSubscription.self, forKey: "signalSubscription")
     }
 }
 
