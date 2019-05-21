@@ -108,7 +108,7 @@ extension WalletBalanceViewModel {
     
     func transfer() {
         if let multiWallet = router.walletTabmanViewController?.viewModel?.multiWallet {
-            router.show(routeType: .transfer(currencyTypeFrom: .gvt, currencyTypeTo: .btc, walletMultiSummary: multiWallet))
+            router.show(routeType: .transfer(from: .gvt, to: .btc, walletMultiSummary: multiWallet))
         }
     }
 }

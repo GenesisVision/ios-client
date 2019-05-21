@@ -211,6 +211,10 @@ extension ListViewModelProtocol {
             if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
+        case .signal:
+            if let viewModels = viewModels as? [SignalTableViewCellViewModel], let i = viewModels.index(where: { $0.signal.id?.uuidString == assetId }) {
+                return viewModels[i]
+            }
         case .fund:
             if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
@@ -236,7 +240,17 @@ extension ListViewModelProtocol {
             guard let router = router as? Router else { return nil }
             
             return router.getProgramViewController(with: programId.uuidString)
-        
+        case .signal:
+            guard let model = model(at: indexPath) as? SignalTableViewCellViewModel else {
+                return nil
+            }
+            
+            let asset = model.signal
+            guard let programId = asset.id else { return nil}
+            guard let router = router as? Router else { return nil }
+            
+            return router.getProgramViewController(with: programId.uuidString)
+            
         case .fund:
                 guard let model = model(at: indexPath) as? FundTableViewCellViewModel else {
                     return nil
@@ -267,6 +281,8 @@ extension ListViewModelProtocol {
         switch assetType {
         case .program:
             return [FacetsTableViewCellViewModel.self, ProgramTableViewCellViewModel.self]
+        case .signal:
+            return [SignalTableViewCellViewModel.self]
         case .fund:
             return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
         case .manager:
@@ -328,6 +344,8 @@ extension ListViewModelProtocol {
         switch assetType {
         case .program:
             showProgramDetail(at: indexPath)
+        case .signal:
+            showSignalDetail(at: indexPath)
         case .fund:
             showFundDetail(at: indexPath)
         case .manager:
@@ -339,6 +357,15 @@ extension ListViewModelProtocol {
         guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
         
         let asset = model.asset
+        guard let assetId = asset.id else { return }
+        
+        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
+    }
+    
+    func showSignalDetail(at indexPath: IndexPath) {
+        guard let model = model(at: indexPath) as? SignalTableViewCellViewModel else { return }
+        
+        let asset = model.signal
         guard let assetId = asset.id else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))

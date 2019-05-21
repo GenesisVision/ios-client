@@ -130,6 +130,7 @@ extension DashboardViewModel {
     private func updateList() {
         router.programListViewController?.fetch()
         router.fundListViewController?.fetch()
+        router.signalListViewController?.fetch()
     }
     
     private func fetch(_ completion: @escaping CompletionBlock) {

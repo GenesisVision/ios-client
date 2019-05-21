@@ -15,9 +15,8 @@ struct InfoSignalsTableViewCellViewModel {
 
 extension InfoSignalsTableViewCellViewModel: CellViewModel {
     func setup(on cell: InfoSignalsTableViewCell) {
-        cell.followButton.setEnabled(false)
-        
         cell.titleLabel.text = "Signals"
+        cell.infoSignalsProtocol = infoSignalsProtocol
         
         if let personalProgramDetails = programDetailsFull?.personalProgramDetails, let isFollowSignals = personalProgramDetails.isFollowSignals {
             cell.editButton.isHidden = !isFollowSignals

@@ -220,3 +220,7 @@ protocol WalletListViewModelProtocol {
     func noDataImageName() -> String?
     func noDataButtonTitle() -> String
 }
+
+protocol WalletDepositCurrencyDelegateManagerProtocol: class {
+    func didSelectWallet(at indexPath: IndexPath, walletId: Int)
+}

@@ -14,7 +14,7 @@ struct WalletTableViewCellViewModel {
 
 extension WalletTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTableViewCell) {
-        cell.iconImageView.image = UIImage.eventPlaceholder
+        cell.iconImageView.image = UIImage.walletPlaceholder
         
         if let logo = wallet.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.iconImageView.kf.indicatorType = .activity

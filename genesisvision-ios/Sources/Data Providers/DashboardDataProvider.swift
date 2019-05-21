@@ -55,6 +55,23 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
+    static func getSignalList(with sorting: InvestorAPI.Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorSignalsGet? = nil, actionStatus: InvestorAPI.ActionStatus_v10InvestorSignalsGet? = nil, dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ signalList: SignalsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        InvestorAPI.v10InvestorSignalsGet(authorization: authorization,
+                                           sorting: sorting,
+                                           from: from,
+                                           to: to,
+                                           chartPointsCount: chartPointsCount,
+                                           currencySecondary: currencySecondary,
+                                           actionStatus: actionStatus,
+                                           dashboardActionStatus: dashboardActionStatus,
+                                           skip: skip,
+                                           take: take) { (signalList, error) in
+                                            DataProvider().responseHandler(signalList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getFundList(with sorting: InvestorAPI.Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

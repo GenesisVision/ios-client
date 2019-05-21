@@ -115,7 +115,7 @@ extension WalletListViewModel {
     }
     
     func transfer() {
-        router.show(routeType: .transfer(currencyTypeFrom: .gvt, currencyTypeTo: .btc, walletMultiSummary: wallet))
+        router.show(routeType: .transfer(from: .gvt, to: .btc, walletMultiSummary: wallet))
     }
 }
 

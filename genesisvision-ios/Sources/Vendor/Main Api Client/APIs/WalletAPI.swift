@@ -564,6 +564,7 @@ open class WalletAPI {
         case receiveSignal = "ReceiveSignal"
         case depositSignal = "DepositSignal"
         case withdrawalSignal = "WithdrawalSignal"
+        case platform = "Platform"
     }
 
     /**

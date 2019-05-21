@@ -14,6 +14,21 @@ struct WalletCopytradingAccountTableViewCellViewModel {
 
 extension WalletCopytradingAccountTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletCopytradingAccountTableViewCell) {
+        cell.iconImageView.image = UIImage.walletPlaceholder
+        
+        if let logo = copyTradingAccountInfo.logo, let fileUrl = getFileURL(fileName: logo) {
+            cell.iconImageView.kf.indicatorType = .activity
+            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+            cell.iconImageView.backgroundColor = .clear
+        } else {
+            cell.iconImageView.isHidden = true
+        }
+        
+        if let title = copyTradingAccountInfo.title {
+            cell.titleLabel.text = title
+        } else {
+            cell.titleLabel.text = ""
+        }
         
         if let amount = copyTradingAccountInfo.balance, let currency = copyTradingAccountInfo.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             cell.balanceLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue

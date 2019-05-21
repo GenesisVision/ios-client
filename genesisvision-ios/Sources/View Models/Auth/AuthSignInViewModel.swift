@@ -46,13 +46,13 @@ final class AuthSignInViewModel {
     
     func riskControl(email: String, password: String, completion: @escaping CompletionBlock) {
         BaseDataProvider.riskControl(with: email, version: getFullVersion(), completion: { [weak self] (model) in
-            guard let model = model, let captchaType = model.captchaType, let powId = model.id?.uuidString, let pow = model.pow, let nonce = pow.nonce, let difficulty = pow.difficulty else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model, let route = model.route, let captchaType = model.captchaType, let powId = model.id?.uuidString, let pow = model.pow, let nonce = pow.nonce, let difficulty = pow.difficulty else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             switch captchaType {
             case .pow:
                 captcha_hash(email, nonce: nonce, difficulty: difficulty, completion: { (result) in
                     let powResult = PowResult(_prefix: result)
-                    let captchaCheckResult = CaptchaCheckResult(id: powId, pow: powResult, geeTest: nil)
+                    let captchaCheckResult = CaptchaCheckResult(id: powId.lowercased(), pow: powResult, geeTest: nil)
                     self?.signIn(email: email, password: password, captchaCheckResult: captchaCheckResult, completion: completion)
                 })
             default:

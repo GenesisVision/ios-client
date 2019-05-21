@@ -89,7 +89,7 @@ class FundInvestViewController: BaseViewController {
     }
     @IBOutlet weak var investmentAmountValueLabel: TitleLabel! {
         didSet {
-            if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency {
+            if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency {
                 investmentAmountValueLabel.text = "0 " + currency.rawValue
             }
         }
@@ -108,7 +108,7 @@ class FundInvestViewController: BaseViewController {
     
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
-            if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
                 self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
             }
         }
@@ -154,11 +154,11 @@ class FundInvestViewController: BaseViewController {
         self.availableInWalletFromValue = viewModel.getAvailableInWallet()
         
         //investment
-        if let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue {
+        if let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue {
             self.amountToInvestCurrencyLabel.text = walletCurrency
         }
         
-        if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, fundCurrency.rawValue != currency {
+        if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, fundCurrency.rawValue != currency {
             self.investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
         } else {
             self.investmentAmountCurrencyLabel.text = ""
@@ -227,7 +227,7 @@ class FundInvestViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
-        guard let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency else { return }
+        guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }
         
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {
@@ -283,7 +283,7 @@ class FundInvestViewController: BaseViewController {
     }
     
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
-        if let currency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+        if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
             
             amountToInvestValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString(withoutFormatter: true)
             amountToInvestValue = availableInWalletFromValue

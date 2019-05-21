@@ -39,7 +39,7 @@ final class FundInvestViewModel {
         guard let walletMultiSummary = walletMultiSummary,
             let wallets = walletMultiSummary.wallets else { return }
         
-        self.selectedWalletFromDelegateManager?.selectedWallet = wallets[selectedIndex]
+        self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
         
         updateRate(completion: completion)
@@ -57,7 +57,7 @@ final class FundInvestViewModel {
                 self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
                 self?.selectedWalletFromDelegateManager?.walletId = 0
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
-                self?.selectedWalletFromDelegateManager?.selectedWallet = wallets[0]
+                self?.selectedWalletFromDelegateManager?.selected = wallets[0]
             }
             
             FundsDataProvider.getInvestInfo(fundId: fundId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
@@ -79,7 +79,7 @@ final class FundInvestViewModel {
     }
     
     func getMinInvestmentAmountText() -> String {
-        guard let fundCurrency = fundCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else { return "" }
+        guard let fundCurrency = fundCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return "" }
         
         let minInvestmentAmount = getMinInvestmentAmount()
         
@@ -101,7 +101,7 @@ final class FundInvestViewModel {
     }
     
     func getSelectedWalletTitle() -> String {
-        guard let title = self.selectedWalletFromDelegateManager?.selectedWallet?.title, let currency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else {
+        guard let title = self.selectedWalletFromDelegateManager?.selected?.title, let currency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else {
             return ""
         }
         
@@ -113,7 +113,7 @@ final class FundInvestViewModel {
     }
     
     func getAvailableInWallet() -> Double {
-        guard let available = self.selectedWalletFromDelegateManager?.selectedWallet?.available else { return 0.0 }
+        guard let available = self.selectedWalletFromDelegateManager?.selected?.available else { return 0.0 }
         
         return available
     }
@@ -136,7 +136,7 @@ final class FundInvestViewModel {
     
     // MARK: - Private methods
     private func updateRate(completion: @escaping CompletionBlock) {
-        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue ?? "", to: fundCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
+        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: fundCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
             self?.rate = rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
@@ -159,7 +159,7 @@ final class FundInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selectedWallet?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         let currency = InvestorAPI.Currency_v10InvestorFundsByIdInvestByAmountPost(rawValue: walletCurrency)
         

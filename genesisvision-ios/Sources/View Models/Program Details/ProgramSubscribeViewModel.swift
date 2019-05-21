@@ -1,16 +1,16 @@
 //
-//  ProgramInvestViewModel.swift
+//  ProgramSubscribeViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 21.02.18.
+//  Created by George Shaginyan on 02.05.19.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import Foundation
 
-final class ProgramInvestViewModel {
+final class ProgramSubscribeViewModel {
     // MARK: - Variables
-    var title: String = "Investment"
+    var title: String = "Signal"
     var programId: String?
     var programCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
@@ -22,16 +22,13 @@ final class ProgramInvestViewModel {
     
     var rate: Double = 0.0
     
-    private weak var detailProtocol: DetailProtocol?
-    
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType) {
         self.router = router
         self.programId = programId
         self.programCurrency = programCurrency
-        self.detailProtocol = detailProtocol
     }
     
     // MARK: - Public methods
@@ -148,31 +145,24 @@ final class ProgramInvestViewModel {
     }
     
     // MARK: - Navigation
-    func invest(with value: Double, completion: @escaping CompletionBlock) {
-        apiInvest(with: value, completion: completion)
+    func subscribe(with value: Double, completion: @escaping CompletionBlock) {
+        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost(rawValue: walletCurrency)
+        
+//        SignalDataProvider.subscribe(with: <#T##String#>, completion: <#T##CompletionBlock##CompletionBlock##(CompletionResult) -> Void#>)
+        ProgramsDataProvider.invest(withAmount: value, programId: programId, currency: currency, errorCompletion: completion)
     }
     
-    func showInvestmentRequestedVC(investedAmount: Double) {
-        detailProtocol?.didInvested()
-        router.show(routeType: .investmentRequested(investedAmount: investedAmount))
+    func showSubscribeRequestedVC(subscribeAmount: Double) {
+//        router.show(routeType: .investmentRequested(investedAmount: investedAmount))
     }
     
     func goToBack() {
-        detailProtocol?.didInvested()
         router.goToBack()
     }
     
     func close() {
         router.closeVC()
-    }
-    
-    // MARK: - Private methods
-    // MARK: - API
-    private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost(rawValue: walletCurrency)
-        
-        ProgramsDataProvider.invest(withAmount: value, programId: programId, currency: currency, errorCompletion: completion)
     }
 }

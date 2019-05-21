@@ -47,11 +47,11 @@ final class ProgramInfoViewModel {
                 }
             }
             
-//            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
-//                if !sections.contains(.signals) {
-//                    sections.insert(.signals, at: 1)
-//                }
-//            }
+            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
+                if !sections.contains(.signals) {
+                    sections.insert(.signals, at: 1)
+                }
+            }
         }
     }
     
@@ -180,6 +180,17 @@ extension ProgramInfoViewModel {
             }
         }
     }
+    
+    func subscribe(_ value: Bool) {
+        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        value
+            ? SignalDataProvider.unsubscribe(with: programId) { [weak self] (result) in
+                //TODO: check it
+                print(result)
+                self?.reloadDataProtocol?.didReloadData()
+                }
+            : router.show(routeType: .subscribe(programId: programId, programCurrency: programCurrency))
+    }
 }
 
 // MARK: - Fetch
@@ -292,15 +303,12 @@ extension ProgramInfoViewModel: InvestNowProtocol {
 extension ProgramInfoViewModel: InfoSignalsProtocol {
     
     func didTapFollowButton() {
-        if let programId = programDetailsFull?.id, let isFollowSignals = programDetailsFull?.personalProgramDetails?.isFollowSignals {
-            //TODO:
-            isFollowSignals
-                ? SignalDataProvider.unsubscribe(with: programId) { (result) in print(result) }
-                : SignalDataProvider.subscribe(with: programId) { (result) in print(result) }
+        if let isFollowSignals = programDetailsFull?.personalProgramDetails?.isFollowSignals {
+            subscribe(isFollowSignals)
         }
     }
     
     func didTapEditButton() {
-        //TODO:
+        subscribe(false)
     }
 }

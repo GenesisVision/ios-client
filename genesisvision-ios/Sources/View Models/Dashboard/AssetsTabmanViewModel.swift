@@ -28,12 +28,10 @@ class AssetsTabmanViewModel: TabmanViewModel {
         
         if router is DashboardRouter {
             items = [TabmanBar.Item(title: "Programs"),
-                     TabmanBar.Item(title: "Funds")]
-//            items = [TabmanBar.Item(title: "Programs"),
-//                     TabmanBar.Item(title: "Funds"),
-//                     TabmanBar.Item(title: "Copytrading"),
-//                     TabmanBar.Item(title: "Open trades"),
-//                     TabmanBar.Item(title: "Trades history")]
+                     TabmanBar.Item(title: "Funds"),
+                     TabmanBar.Item(title: "Copytrading"),
+                     TabmanBar.Item(title: "Open trades"),
+                     TabmanBar.Item(title: "Trades history")]
         } else {
             items = [TabmanBar.Item(title: "Programs"),
                      TabmanBar.Item(title: "Funds")]

@@ -11,12 +11,19 @@ import UIKit
 class WalletCopytradingAccountListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: WalletListViewModelProtocol!
+    var viewModel: WalletCopytradingAccountListViewModel!
     
-    // MARK: - Outlets
+    // MARK: - Views
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
+        }
+    }
+    
+    // MARK: - Buttons
+    @IBOutlet weak var transferButton: ActionButton! {
+        didSet {
+            transferButton.isHidden = true
         }
     }
     
@@ -34,14 +41,13 @@ class WalletCopytradingAccountListViewController: BaseViewControllerWithTableVie
     }
     
     private func setupUI() {
+        showInfiniteIndicator(value: false)
+        
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()
         if let imageName = viewModel.noDataImageName() {
             noDataImage = UIImage(named: imageName)
         }
-        
-        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        addCurrencyTitleButton(CurrencyDelegateManager())
         
         bottomViewType = .none
     }
@@ -58,9 +64,7 @@ class WalletCopytradingAccountListViewController: BaseViewControllerWithTableVie
     override func pullToRefresh() {
         super.pullToRefresh()
         
-        viewModel.refresh { (result) in
-            
-        }
+        viewModel.fetch()
     }
     
     private func reloadData() {
@@ -71,46 +75,20 @@ class WalletCopytradingAccountListViewController: BaseViewControllerWithTableVie
     }
     
     override func fetch() {
-        //        showProgressHUD()
-        viewModel.fetch { [weak self] (result) in
-            self?.hideAll()
-        }
-    }
-    
-    private func showTransaction(model: MultiWalletTransaction) {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 500
-        
-//        let view = WalletTransactionView.viewFromNib()
-//        view.configure(model)
-//        bottomSheetController.addContentsView(view)
-//        bottomSheetController.present()
-    }
-    
-    private func showExternalTransaction(model: MultiWalletExternalTransaction) {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 500
-        
-//        let view = WalletTransactionView.viewFromNib()
-//        view.configure(model)
-//        bottomSheetController.addContentsView(view)
-//        bottomSheetController.present()
+        showProgressHUD()
+        viewModel.fetch()
     }
 }
 
 extension WalletCopytradingAccountListViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView,     didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
         
-        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel {
-            showTransaction(model: model.walletTransaction)
-        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel {
-            showExternalTransaction(model: model.walletTransaction)
-        }
+        viewModel.showAccount(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,10 +97,6 @@ extension WalletCopytradingAccountListViewController: UITableViewDelegate, UITab
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     // MARK: - UITableViewDataSource
@@ -153,6 +127,3 @@ extension WalletCopytradingAccountListViewController: ReloadDataProtocol {
         reloadData()
     }
 }
-
-
-

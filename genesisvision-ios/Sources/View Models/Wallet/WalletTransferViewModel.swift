@@ -10,16 +10,15 @@ final class WalletTransferViewModel {
     // MARK: - Variables
     var title: String = "Transfer"
     var disclaimer = "The funds will be converted according to the current market price (Market order on Binance)."
+    var labelPlaceholder: String = "0"
+    
     private weak var walletProtocol: WalletProtocol?
     
-    var labelPlaceholder: String = "0"
     var walletMultiSummary: WalletMultiSummary?
     
     //from
-    var selectedCurrencyFrom: WalletData.Currency = .gvt
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     //to
-    var selectedCurrencyTo: WalletData.Currency = .btc
     var selectedWalletToDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
@@ -27,32 +26,25 @@ final class WalletTransferViewModel {
     private var router: WalletRouter!
     
     // MARK: - Init
-    init(withRouter router: WalletRouter, walletProtocol: WalletProtocol, currencyFrom: CurrencyType, currencyTo: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
+    init(withRouter router: WalletRouter, walletProtocol: WalletProtocol, walletMultiSummary: WalletMultiSummary?) {
         self.router = router
         self.walletProtocol = walletProtocol
         self.walletMultiSummary = walletMultiSummary
         
-        setup(currencyFrom: currencyFrom, currencyTo: currencyTo)
+        setup()
     }
     
-    private func setup(currencyFrom: CurrencyType, currencyTo: CurrencyType) {
-        if let wallets = walletMultiSummary?.wallets {
-            if let selectedCurrency = WalletData.Currency(rawValue: currencyFrom.rawValue) {
-                self.selectedCurrencyFrom = selectedCurrency
-            }
-            
-            if let selectedCurrency = WalletData.Currency(rawValue: currencyTo.rawValue) {
-                self.selectedCurrencyTo = selectedCurrency
-            }
-            
+    private func setup() {
+        if let wallets = walletMultiSummary?.wallets, wallets.count > 1 {
             self.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
             self.selectedWalletFromDelegateManager?.walletId = 0
-            self.selectedWalletFromDelegateManager?.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrencyFrom })
-            self.selectedWalletFromDelegateManager?.selectedIndex = walletMultiSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrencyFrom }) ?? 0
+            self.selectedWalletFromDelegateManager?.selected = walletMultiSummary?.wallets?[0]
+            self.selectedWalletFromDelegateManager?.selectedIndex = 0
+            
             self.selectedWalletToDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
             self.selectedWalletToDelegateManager?.walletId = 1
-            self.selectedWalletToDelegateManager?.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrencyTo })
-            self.selectedWalletToDelegateManager?.selectedIndex = walletMultiSummary?.wallets?.firstIndex(where: { $0.currency == selectedCurrencyTo }) ?? 0
+            self.selectedWalletToDelegateManager?.selected = walletMultiSummary?.wallets?[1]
+            self.selectedWalletToDelegateManager?.selectedIndex = 1
         }
         
         updateRate { [weak self] (result) in
@@ -62,7 +54,7 @@ final class WalletTransferViewModel {
     
     
     private func updateRate(completion: @escaping CompletionBlock) {
-        guard let from = selectedWalletFromDelegateManager?.selectedWallet, let to = selectedWalletToDelegateManager?.selectedWallet else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let from = selectedWalletFromDelegateManager?.selected, let to = selectedWalletToDelegateManager?.selected else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         RateDataProvider.getRate(from: from.currency?.rawValue ?? "", to: to.currency?.rawValue ?? "", completion: { [weak self] (rate) in
             self?.rate = rate ?? 0.0
@@ -84,7 +76,7 @@ final class WalletTransferViewModel {
             }
         }
         
-        selectedWalletFromDelegateManager?.selectedWallet = wallets[selectedWalletFromDelegateManager?.selectedIndex ?? 0]
+        selectedWalletFromDelegateManager?.selected = wallets[selectedWalletFromDelegateManager?.selectedIndex ?? 0]
         updateRate(completion: completion)
     }
     
@@ -101,13 +93,13 @@ final class WalletTransferViewModel {
             }
         }
         
-        selectedWalletToDelegateManager?.selectedWallet = wallets[selectedIndex]
+        selectedWalletToDelegateManager?.selected = wallets[selectedIndex]
         updateRate(completion: completion)
     }
     
     // MARK: - Navigation
     func transfer(with amount: Double, completion: @escaping CompletionBlock) {
-        guard let sourceId = selectedWalletFromDelegateManager?.selectedWallet?.id, let destinationId = selectedWalletToDelegateManager?.selectedWallet?.id else { return }
+        guard let sourceId = selectedWalletFromDelegateManager?.selected?.id, let destinationId = selectedWalletToDelegateManager?.selected?.id else { return }
         
         WalletDataProvider.transfer(sourceId: sourceId, destinationId: destinationId, amount: amount, completion: completion)
     }
@@ -117,4 +109,3 @@ final class WalletTransferViewModel {
         router.goToBack()
     }
 }
-

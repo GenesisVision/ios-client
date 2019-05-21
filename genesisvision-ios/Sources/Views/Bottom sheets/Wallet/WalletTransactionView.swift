@@ -100,6 +100,8 @@ class WalletTransactionView: UIView {
             setupPlatformFeeProgram(model)
         case .depositSignal, .receiveSignal, .subscribeSignal, .withdrawalSignal:
             break
+        case .platform:
+            break
         }
         
         if let status = model.status {

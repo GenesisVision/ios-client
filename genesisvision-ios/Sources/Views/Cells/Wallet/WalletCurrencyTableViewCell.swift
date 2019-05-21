@@ -87,4 +87,25 @@ class WalletCurrencyTableViewCell: UITableViewCell {
         
         selectedImageView.image = selected ? #imageLiteral(resourceName: "img_radio_selected_icon") : #imageLiteral(resourceName: "img_radio_unselected_icon")
     }
+    
+    func configure(_ account: CopyTradingAccountInfo? = nil, selected: Bool) {
+        if let title = account?.title {
+            titleLabel.isHidden = false
+            titleLabel.text = title
+        }
+        
+        if let currency = account?.currency {
+            subtitleLabel.isHidden = false
+            subtitleLabel.text = currency.rawValue
+        }
+        
+        logoImageView.image = UIImage.walletPlaceholder
+        
+        if let fileName = account?.logo, let fileUrl = getFileURL(fileName: fileName) {
+            logoImageView.kf.indicatorType = .activity
+            logoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+        }
+        
+        selectedImageView.image = selected ? #imageLiteral(resourceName: "img_radio_selected_icon") : #imageLiteral(resourceName: "img_radio_unselected_icon")
+    }
 }

@@ -1,26 +1,17 @@
 //
-//  NotificationListViewController.swift
+//  SignalOpenTradesViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 08/10/2018.
-//  Copyright © 2018 Genesis Vision. All rights reserved.
+//  Created by George on 02/05/2019.
+//  Copyright © 2019 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class NotificationListViewController: BaseViewControllerWithTableView {
+class SignalOpenTradesViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: NotificationListViewModel!
-    
-    // MARK: - Outlets
-    private var notificationsBarButtonItem: UIBarButtonItem!
-
-    @IBOutlet override var tableView: UITableView! {
-        didSet {
-            setupTableConfiguration()
-        }
-    }
+    var viewModel: SignalTradesViewModel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -28,39 +19,26 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         
         setup()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+
     
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-
+        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
-        tableView.allowsSelection = viewModel.allowsSelection
-        
         setupPullToRefresh(scrollView: tableView)
     }
     
     private func setup() {
-        navigationItem.title = viewModel.title
+        bottomViewType = .dateRange
+        noDataTitle = viewModel.noDataText()
+        setupTableConfiguration()
         
-        notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_settings"), style: .done, target: self, action: #selector(notificationsButtonAction))
-        navigationItem.rightBarButtonItem = notificationsBarButtonItem
-
         setupNavigationBar()
-        
-        showProgressHUD()
-        fetch()
-    }
-    
-    @objc func notificationsButtonAction() {
-        viewModel.showNotificationsSettings()
     }
     
     private func reloadData() {
@@ -88,9 +66,17 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         
         fetch()
     }
+    
+    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+//        viewModel.dateFrom = dateFrom
+//        viewModel.dateTo = dateTo
+//        
+//        showProgressHUD()
+//        fetch()
+    }
 }
 
-extension NotificationListViewController: UITableViewDelegate, UITableViewDataSource {
+extension SignalOpenTradesViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath) else {
@@ -102,12 +88,6 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        viewModel.didSelectNotitifaction(at: indexPath)
     }
     
     // MARK: - UITableViewDataSource
@@ -128,23 +108,10 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
         header.headerLabel.text = viewModel.titleForHeader(in: section)
         return header
     }
-
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath), viewModel.didHighlightRowAt(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.BaseView.bg
-        }
-    }
 }
 
-extension NotificationListViewController: ReloadDataProtocol {
+extension SignalOpenTradesViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
     }
 }
-

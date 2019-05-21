@@ -13,7 +13,7 @@ protocol SortingDelegate: class {
 }
 
 enum SortingType {
-    case programs, funds, dashboardPrograms, dashboardFunds, tradesOpen, trades
+    case programs, funds, dashboardPrograms, dashboardFunds, tradesOpen, trades, signalTradesOpen, signalTrades
 }
 
 class SortingManager: NSObject {
@@ -185,13 +185,60 @@ class SortingManager: NSObject {
         }
     }
     
+    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_v10SignalTradesOpenGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "date":
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        case "ticket":
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
+        case "symbol":
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+        case "direction":
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case "volume":
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case "price":
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        default:
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        }
+    }
+    
+    private func getSignalTradesSelectedSorting() -> SignalAPI.Sorting_v10SignalTradesGet {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "date":
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        case "ticket":
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
+        case "symbol":
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+        case "direction":
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case "volume":
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case "price":
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+            
+        default:
+            return highToLowValue ? .byDateDesc : .byDateAsc
+        }
+    }
+    
     private func setup() {
         switch sortingType {
         case .programs, .dashboardPrograms:
             sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title", "investors", "currency", "new"]
         case .funds, .dashboardFunds:
             sortingValues = ["profit", "balance", "investors", "drawdown", "title", "new"]
-        case .tradesOpen, .trades:
+        case .tradesOpen, .trades, .signalTrades, .signalTradesOpen:
             sortingValues = ["date", "ticket", "symbol", "direction", "volume", "price", "profit"]
         }
     }
@@ -227,6 +274,10 @@ class SortingManager: NSObject {
             return getTradesOpenSelectedSorting()
         case .trades:
             return getTradesSelectedSorting()
+        case .signalTradesOpen:
+            return getSignalTradesOpenSelectedSorting()
+        case .signalTrades:
+            return getSignalTradesSelectedSorting()
         }
     }
 }

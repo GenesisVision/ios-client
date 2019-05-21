@@ -24,6 +24,10 @@ class DashboardRouter: Router, ListRouterProtocol {
     
     var programListViewController: DashboardProgramListViewController?
     var fundListViewController: DashboardFundListViewController?
+    var signalListViewController: DashboardSignalListViewController?
+    var signalOpenTradesViewController: SignalOpenTradesViewController?
+    var signalTradesViewController: SignalTradesViewController?
+    
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {

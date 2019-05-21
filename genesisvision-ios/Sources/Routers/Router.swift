@@ -313,6 +313,8 @@ extension Router {
         switch assetType {
         case .program:
             showProgramDetails(with: assetId)
+        case .signal:
+            showProgramDetails(with: assetId)
         case .fund:
             showFundDetails(with: assetId)
         case .manager:
@@ -349,6 +351,8 @@ extension Router {
         switch assetType {
         case .program:
             showProgramList(with: filterModel)
+        case .signal:
+            break
         case .fund:
             showFundList(with: filterModel)
         case .manager:

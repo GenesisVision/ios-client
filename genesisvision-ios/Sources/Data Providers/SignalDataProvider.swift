@@ -18,26 +18,38 @@ class SignalDataProvider: DataProvider {
         }
     }
     
-    static func subscribe(with uuid: UUID, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+    static func getInfo(with programId: String, completion: @escaping (_ attachToSignalProviderInfo: AttachToSignalProviderInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdReinvestOnPost(id: uuid, authorization: authorization) { (error) in
+        SignalAPI.v10SignalAttachByIdInfoGet(id: uuid, authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func subscribe(with programId: String, model: AttachToSignalProvider? = nil, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalAPI.v10SignalAttachByIdPost(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    static func unsubscribe(with uuid: UUID, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+    static func unsubscribe(with programId: String, model: DetachFromSignalProvider? = nil, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdReinvestOffPost(id: uuid, authorization: authorization) { (error) in
+        SignalAPI.v10SignalDetachByIdPost(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    static func update(with uuid: UUID, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+    static func update(with programId: String, model: AttachToSignalProvider? = nil, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdReinvestOffPost(id: uuid, authorization: authorization) { (error) in
+        SignalAPI.v10SignalByIdUpdatePost(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
@@ -51,7 +63,7 @@ class SignalDataProvider: DataProvider {
         }
     }
     
-    static func getTrades(with dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: SignalAPI.Sorting_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(from dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: SignalAPI.Sorting_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -64,7 +76,7 @@ class SignalDataProvider: DataProvider {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorProgramsByIdReinvestOffPost(id: uuid, authorization: authorization) { (error) in
+        SignalAPI.v10SignalTradesByIdClosePost(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

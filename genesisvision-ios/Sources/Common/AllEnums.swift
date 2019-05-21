@@ -104,6 +104,7 @@ enum DataType {
 enum AssetType: String {
     case fund = "Fund"
     case program = "Program"
+    case signal = "Signal"
     case manager = "Manager"
 }
 

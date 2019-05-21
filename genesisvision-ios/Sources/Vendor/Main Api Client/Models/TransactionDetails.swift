@@ -25,6 +25,7 @@ open class TransactionDetails: Codable {
         case receiveSignal = "ReceiveSignal"
         case depositSignal = "DepositSignal"
         case withdrawalSignal = "WithdrawalSignal"
+        case platform = "Platform"
     }
     public enum Status: String, Codable { 
         case done = "Done"

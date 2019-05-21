@@ -285,6 +285,7 @@ open class ProgramsAPI {
   "stopOutLevel" : 7.061401241503109,
   "availableInvestment" : 2.027123023002322,
   "successFee" : 2.3021358869347655,
+  "isForex" : true,
   "rating" : {
     "rating" : 7,
     "canLevelUp" : true,

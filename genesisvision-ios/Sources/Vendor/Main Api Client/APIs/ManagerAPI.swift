@@ -881,6 +881,14 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter dashboardActionStatus
+     */
+    public enum DashboardActionStatus_v10ManagerFundsGet: String { 
+        case all = "All"
+        case active = "Active"
+    }
+
+    /**
      Manager funds
      
      - parameter authorization: (header) JWT access token 
@@ -890,12 +898,13 @@ open class ManagerAPI {
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter actionStatus: (query)  (optional)
+     - parameter dashboardActionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1062,12 +1071,13 @@ open class ManagerAPI {
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter actionStatus: (query)  (optional)
+     - parameter dashboardActionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/manager/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1080,6 +1090,7 @@ open class ManagerAPI {
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
             "ActionStatus": actionStatus?.rawValue, 
+            "DashboardActionStatus": dashboardActionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -2166,6 +2177,14 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter dashboardActionStatus
+     */
+    public enum DashboardActionStatus_v10ManagerProgramsGet: String { 
+        case all = "All"
+        case active = "Active"
+    }
+
+    /**
      Manager programs
      
      - parameter authorization: (header) JWT access token 
@@ -2175,12 +2194,13 @@ open class ManagerAPI {
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter actionStatus: (query)  (optional)
+     - parameter dashboardActionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerProgramsGet(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ManagerProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ManagerProgramsGet(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ManagerProgramsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -2401,12 +2421,13 @@ open class ManagerAPI {
      - parameter chartPointsCount: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
      - parameter actionStatus: (query)  (optional)
+     - parameter dashboardActionStatus: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ManagerProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ManagerProgramsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerProgramsGet? = nil, actionStatus: ActionStatus_v10ManagerProgramsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerProgramsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/manager/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -2419,6 +2440,7 @@ open class ManagerAPI {
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
             "CurrencySecondary": currencySecondary?.rawValue, 
             "ActionStatus": actionStatus?.rawValue, 
+            "DashboardActionStatus": dashboardActionStatus?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])

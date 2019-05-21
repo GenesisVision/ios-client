@@ -17,6 +17,7 @@ class AuthManager {
     
     static var authorizedToken: String? {
         get {
+//            return "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imdlb3JnZSsxQGdlbmVzaXMudmlzaW9uIiwiaWQiOiIwOTE4MDQzMC1jZDNiLTQ4NzAtOWEwZi0yODIwNTIxZGM2MTkiLCJzdGFtcCI6IjY2QTQzODhBMDIyMDU0RjI1QzQxMkYzQjA4RkU0RjVCMUU0NkZFMjU1NjM2MTg4RUVGOEQ3NUZCMjI3NjI3NDIiLCJjbGllbnQiOiJXZWIiLCJuYmYiOjE1NTc3MzQ1NTEsImV4cCI6MTU1ODMzOTM1MSwiaWF0IjoxNTU3NzM0NTUxLCJpc3MiOiJHZW5lc2lzVmlzaW9uLkNvcmUiLCJhdWQiOiJHZW5lc2lzVmlzaW9uLkNvcmUifQ.d_UaQXUEdaBSgbWRN8IMAr3yp4VYS3w8vFxcxnuIG0s"
             guard let token = UserDefaults.standard.string(forKey: UserDefaultKeys.authorizedToken) else { return nil }
             
             return "Bearer " + token

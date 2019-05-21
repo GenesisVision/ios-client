@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class WalletCopytradingAccountListViewModel: WalletListViewModelProtocol {
+final class WalletCopytradingAccountListViewModel {
     enum SectionType {
         case header
         case accounts
@@ -17,25 +17,20 @@ final class WalletCopytradingAccountListViewModel: WalletListViewModelProtocol {
     // MARK: - Variables
     var title: String = "Copytrading accounts"
     
-    var wallet: WalletData?
+    var accounts: [CopyTradingAccountInfo]?
     
     private var sections: [SectionType] = [.accounts]
     
     private var router: WalletRouter!
-    private var accounts = [WalletCopytradingAccountTableViewCellViewModel]()
+    private var viewModels = [WalletCopytradingAccountTableViewCellViewModel]()
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
-    var canFetchMoreResults = true
-    var dataType: DataType = .api
-    var skip = 0            //offset
-    var take = ApiKeys.take
-    var totalCount = 0      //total count of programs
-    
     // MARK: - Init
-    init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?, wallet: WalletData? = nil) {
+    init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
-        self.wallet = wallet
+        
+        setup()
     }
 }
 
@@ -60,7 +55,7 @@ extension WalletCopytradingAccountListViewModel {
         case .header:
             return 0
         case .accounts:
-            return accounts.count
+            return viewModels.count
         }
     }
     
@@ -78,7 +73,7 @@ extension WalletCopytradingAccountListViewModel {
         case .header:
             return 0.0
         case .accounts:
-            return 78.0
+            return 70.0
         }
     }
     
@@ -89,92 +84,26 @@ extension WalletCopytradingAccountListViewModel {
         case .header:
             return nil
         case .accounts:
-            return accounts[indexPath.row]
+            return viewModels[indexPath.row]
         }
     }
-}
-
-// MARK: - Fetch
-extension WalletCopytradingAccountListViewModel {
-    func fetch(completion: @escaping CompletionBlock) {
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            completion(.success)
-            }, completionError: completion)
-        
-    }
     
-    func fetchMore(at indexPath: IndexPath) -> Bool {
-        if numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row && canFetchMoreResults && accounts.count >= take {
-            fetchMore()
-        }
-        
-        return skip < totalCount
-    }
-    
-    func fetchMore() {
-        guard skip < totalCount else { return }
-        
-        canFetchMoreResults = false
-        fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.accounts ?? [WalletCopytradingAccountTableViewCellViewModel]()
-            
-            viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
-            })
-            
-            self?.updateFetchedData(totalCount: totalCount, allViewModels)
-            }, completionError: { (result) in
-                switch result {
-                case .success:
-                    break
-                case .failure(let errorType):
-                    ErrorHandler.handleError(with: errorType)
-                }
-        })
-    }
-    
-    func refresh(completion: @escaping CompletionBlock) {
-        skip = 0
-        
-        fetch({ [weak self] (totalCount, viewModels) in
-            self?.updateFetchedData(totalCount: totalCount, viewModels)
-            }, completionError: completion)
-    }
-    
-    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletCopytradingAccountTableViewCellViewModel]) {
-        self.accounts = viewModels
-        self.totalCount = totalCount
-        self.skip += self.take
-        self.canFetchMoreResults = true
-        self.reloadDataProtocol?.didReloadData()
-    }
-    
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletCopytradingAccountTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        
-        SignalDataProvider.getAccounts(completion: { (copyTradingAccountsViewModel) in
-            guard copyTradingAccountsViewModel != nil else {
-                return ErrorHandler.handleApiError(error: nil, completion: completionError)
-            }
-            var viewModels = [WalletCopytradingAccountTableViewCellViewModel]()
-            
-            let totalCount = copyTradingAccountsViewModel?.accounts?.count ?? 0
-            
-            copyTradingAccountsViewModel?.accounts?.forEach({ (copyTradingAccountInfo) in
-                let viewModel = WalletCopytradingAccountTableViewCellViewModel(copyTradingAccountInfo: copyTradingAccountInfo)
-                viewModels.append(viewModel)
-            })
-            
-            completionSuccess(totalCount, viewModels)
-            completionError(.success)
-        }, errorCompletion: completionError)
+    // MARK: - Private methods
+    private func setup() {
+        fetch()
     }
 }
-
 
 // MARK: - Navigation
 extension WalletCopytradingAccountListViewModel {
-    func showDetail(at indexPath: IndexPath) {
+    func showAccount(at indexPath: IndexPath) {
+        //TODO:
+//        if let model = model(at: indexPath) as? WalletTableViewCellViewModel {
+//            let walletViewController = WalletViewController()
+//            walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet)
+//            walletViewController.hidesBottomBarWhenPushed = true
+//            router.walletTabmanViewController?.push(viewController: walletViewController)
+//        }
     }
 }
 
@@ -195,6 +124,30 @@ extension WalletCopytradingAccountListViewModel {
     func noDataButtonTitle() -> String {
         let text = ""
         return text
+    }
+}
+
+// MARK: - Fetch
+extension WalletCopytradingAccountListViewModel {
+    func fetch() {
+        SignalDataProvider.getAccounts(completion: { [weak self] (copyTradingAccountsViewModel) in
+            guard copyTradingAccountsViewModel != nil else {
+                return
+            }
+            
+            var viewModels = [WalletCopytradingAccountTableViewCellViewModel]()
+            
+            copyTradingAccountsViewModel?.accounts?.forEach({ (copyTradingAccountInfo) in
+                let viewModel = WalletCopytradingAccountTableViewCellViewModel(copyTradingAccountInfo: copyTradingAccountInfo)
+                viewModels.append(viewModel)
+            })
+            
+            self?.accounts = copyTradingAccountsViewModel?.accounts
+            self?.viewModels = viewModels
+            self?.reloadDataProtocol?.didReloadData()
+            }, errorCompletion: { (result) in
+                print(result)
+        })
     }
 }
 

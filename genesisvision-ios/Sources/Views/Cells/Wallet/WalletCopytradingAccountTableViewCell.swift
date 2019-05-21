@@ -13,7 +13,6 @@ class WalletCopytradingAccountTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
-            iconImageView.isHidden = true
             iconImageView.roundCorners()
         }
     }

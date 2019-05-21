@@ -1,16 +1,16 @@
 //
-//  ProgramInvestViewController.swift
+//  ProgramSubscribeViewController.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 21.02.18.
-//  Copyright © 2018 Genesis Vision. All rights reserved.
+//  Created by George on 02/05/2019.
+//  Copyright © 2019 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class ProgramInvestViewController: BaseViewController {
+class ProgramSubscribeViewController: BaseViewController {
     
-    var viewModel: ProgramInvestViewModel!
+    var viewModel: ProgramSubscribeViewModel!
     
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
@@ -168,7 +168,7 @@ class ProgramInvestViewController: BaseViewController {
         //wallet
         self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
         self.availableInWalletFromValue = viewModel.getAvailableInWallet()
-    
+        
         //investment
         if let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue {
             self.amountToInvestCurrencyLabel.text = walletCurrency
@@ -193,19 +193,19 @@ class ProgramInvestViewController: BaseViewController {
         let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
         let entryFeeCurrencyString = entryFeeCurrency.rounded(withType: programCurrency).toString()
         let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
-
+        
         let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(programCurrency.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
-
+        
         let gvCommissionCurrency = gvCommission * amountToInvestValue * rate / 100
         let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: programCurrency).toString()
         let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
-
+        
         let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(programCurrency.rawValue))"
         self.gvCommissionValueLabel.text = gvCommissionValueLabelString
         let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency).rounded(withType: programCurrency).toString()
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
-    
+        
         self.availableToInvestValue = viewModel.getAvailableToInvest()
         
         let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
@@ -217,13 +217,13 @@ class ProgramInvestViewController: BaseViewController {
         viewModel.close()
     }
     
-    private func investMethod() {
+    private func subscribeMethod() {
         let rate = viewModel.rate
         let minInvestmentAmount = viewModel.getMinInvestmentAmount()
         guard amountToInvestValue * rate >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
-        viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
+        viewModel.subscribe(with: amountToInvestValue) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -254,7 +254,7 @@ class ProgramInvestViewController: BaseViewController {
         
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {
-             firstValue = amount + " " + currency.rawValue
+            firstValue = amount + " " + currency.rawValue
         }
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
@@ -315,7 +315,7 @@ class ProgramInvestViewController: BaseViewController {
     }
 }
 
-extension ProgramInvestViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension ProgramSubscribeViewController: WalletDepositCurrencyDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.showProgressHUD()
         self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in
@@ -334,7 +334,7 @@ extension ProgramInvestViewController: WalletDepositCurrencyDelegateManagerProto
     }
 }
 
-extension ProgramInvestViewController: NumpadViewProtocol {
+extension ProgramSubscribeViewController: NumpadViewProtocol {
     var maxAmount: Double? {
         return viewModel.getMaxAmount()
     }
@@ -367,13 +367,14 @@ extension ProgramInvestViewController: NumpadViewProtocol {
     }
 }
 
-extension ProgramInvestViewController: InvestWithdrawConfirmViewProtocol {
+extension ProgramSubscribeViewController: InvestWithdrawConfirmViewProtocol {
     func cancelButtonDidPress() {
         bottomSheetController.dismiss()
     }
     
     func confirmButtonDidPress() {
         bottomSheetController.dismiss()
-        investMethod()
+        subscribeMethod()
     }
 }
+

@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Wallet/WalletExternalTransactionListViewModel.swift"
-            timestampString = "577890408.5810519"
+            filePath = "genesisvision-ios/Sources/View Controllers/Auth/SignInViewController.swift"
+            timestampString = "579451208.96456"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "fetchTransactions(_:completionError:)"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "signInMethod()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Data Providers/WalletDataProvider.swift"
-            timestampString = "577985680.115172"
+            filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInfoViewModel.swift"
+            timestampString = "580060406.20751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "getMultiTransactions(from:to:type:currency:skip:take:completion:errorCompletion:)"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "didTapFollowButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -158,7 +158,7 @@ class FundWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let selectedWalletCurrency = viewModel.selectedWalletFromDelegateManager?.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
+        guard let selectedWalletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
         
         if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
             selectedWalletFromDelegateManager.currencyDelegate = self

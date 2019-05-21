@@ -210,7 +210,7 @@ func getSelectedCurrency() -> String {
         return selectedCurrency
     }
     
-    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.usd.rawValue
+    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.btc.rawValue
 }
 
 func updateSelectedCurrency(_ selectedCurrency: String) {

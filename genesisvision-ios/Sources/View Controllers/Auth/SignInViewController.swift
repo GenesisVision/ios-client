@@ -91,27 +91,27 @@ class SignInViewController: BaseViewController {
                     self?.viewModel.startAsAuthorized()
                 })
             case .failure(let errorType):
-                switch errorType {
-                case .requiresCaptcha:
-                    self?.showProgressHUD()
-                    
-                    self?.viewModel.riskControl(email: email, password: password, completion: { (result) in
-                        self?.hideAll()
-                        
-                        switch result {
-                        case .success:
-                            self?.showSuccessHUD(completion: { [weak self] (finish) in
-                                self?.viewModel.startAsAuthorized()
-                            })
-                        case .failure(let errorType):
-                            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                        }
-                    })
-                case .requiresTwoFactor:
-                    self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
-                default:
+//                switch errorType {
+//                case .requiresCaptcha:
+//                    self?.showProgressHUD()
+//
+//                    self?.viewModel.riskControl(email: email, password: password, completion: { (result) in
+//                        self?.hideAll()
+//
+//                        switch result {
+//                        case .success:
+//                            self?.showSuccessHUD(completion: { [weak self] (finish) in
+//                                self?.viewModel.startAsAuthorized()
+//                            })
+//                        case .failure(let errorType):
+//                            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+//                        }
+//                    })
+//                case .requiresTwoFactor:
+//                    self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
+//                default:
                     ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-                }
+//                }
             }
         })
     }

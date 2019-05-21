@@ -10,23 +10,23 @@ import UIKit
 import Foundation
 import CommonCrypto
 
-func captcha_hash(_ login: String, nonce: String, difficulty: Int, completion: (_ sha: String) -> Void) {
+func captcha_hash(_ route: String, nonce: String, difficulty: Int, completion: (_ sha: String) -> Void) {
     var prefix = 0
     
     let zerosCounts = Array(repeating: "0", count: difficulty)
-    let fCounts = Array(repeating: "F", count: 64 - difficulty)
+    let fCounts = Array(repeating: "f", count: 64 - difficulty)
     let diffSting = (zerosCounts as NSArray).componentsJoined(by: "") + (fCounts as NSArray).componentsJoined(by: "")
     
     let start = Date()
-    print(start)
     
     while true {
-        let sha = (prefix.toString() + nonce + login).sha256()
+        let sha = prefix.toString() + nonce + route
+        let shaHash = sha.sha256()
         
-        if sha < diffSting {
+        if shaHash.compare(diffSting, options: .literal) == .orderedAscending {
             let time = Date().timeIntervalSince(start)
             print("\(Int(time)) seconds")
-            return completion(sha)
+            return completion(prefix.toString())
         }
         
         prefix += 1

@@ -31,7 +31,7 @@ class BaseDataProvider: DataProvider {
     }
     
     static func riskControl(with route: String, client: String? = "iOS", version: String? = nil, completion: @escaping (_ data: CaptchaDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
+
         PlatformAPI.v10PlatformRiskcontrolGet(route: route, client: client, version: version) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

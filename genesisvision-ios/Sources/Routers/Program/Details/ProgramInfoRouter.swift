@@ -9,7 +9,7 @@
 import Foundation
 
 enum ProgramInfoRouteType {
-    case invest(programId: String, programCurrency: CurrencyType), withdraw(programId: String, programCurrency: CurrencyType), fullChart(programDetailsFull: ProgramDetailsFull), manager(managerId: String)
+    case invest(programId: String, programCurrency: CurrencyType), withdraw(programId: String, programCurrency: CurrencyType), fullChart(programDetailsFull: ProgramDetailsFull), manager(managerId: String), subscribe(programId: String, programCurrency: CurrencyType)
 }
 
 class ProgramInfoRouter: Router {
@@ -24,6 +24,8 @@ class ProgramInfoRouter: Router {
             fullChart(with: programDetailsFull)
         case .manager(let managerId):
             showAssetDetails(with: managerId, assetType: .manager)
+        case .subscribe(let programId, let programCurrency):
+            subscribe(with: programId, programCurrency: programCurrency)
         }
     }
     
@@ -56,6 +58,15 @@ class ProgramInfoRouter: Router {
         viewController.modalTransitionStyle = .crossDissolve
 
         navigationController?.present(viewController: viewController)
+    }
+    
+    func subscribe(with programId: String, programCurrency: CurrencyType) {
+        guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
+        
+        let router = ProgramInvestRouter(parentRouter: self)
+        let viewModel = ProgramSubscribeViewModel(withRouter: router, programId: programId, programCurrency: programCurrency)
+        viewController.viewModel = viewModel
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
