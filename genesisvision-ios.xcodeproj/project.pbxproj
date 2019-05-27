@@ -578,6 +578,9 @@
 		5EF16D6721E8C4B100FF55B8 /* SelectedChartAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF16D6621E8C4B100FF55B8 /* SelectedChartAssetsView.swift */; };
 		5EF16D6921E8C4B700FF55B8 /* SelectedChartAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF16D6821E8C4B700FF55B8 /* SelectedChartAssetsView.xib */; };
 		5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2256F206E486B00D2CB12 /* UIDevice.swift */; };
+		5EF78D98229C2A540003F3D3 /* SocialLinksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF78D95229C2A530003F3D3 /* SocialLinksViewModel.swift */; };
+		5EF78D99229C2A540003F3D3 /* SocialLinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF78D96229C2A530003F3D3 /* SocialLinkViewModel.swift */; };
+		5EF78D9A229C2A540003F3D3 /* UpdateSocialLinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF78D97229C2A540003F3D3 /* UpdateSocialLinkViewModel.swift */; };
 		5EFCC77021553D58001E1A56 /* DashboardProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFCC76F21553D58001E1A56 /* DashboardProgramListViewModel.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
 		5EFE7C422181E78700D385C8 /* FundBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3E2181E78500D385C8 /* FundBalanceViewController.swift */; };
@@ -1295,6 +1298,9 @@
 		5EF16D6621E8C4B100FF55B8 /* SelectedChartAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChartAssetsView.swift; sourceTree = "<group>"; };
 		5EF16D6821E8C4B700FF55B8 /* SelectedChartAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedChartAssetsView.xib; sourceTree = "<group>"; };
 		5EF2256F206E486B00D2CB12 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		5EF78D95229C2A530003F3D3 /* SocialLinksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLinksViewModel.swift; sourceTree = "<group>"; };
+		5EF78D96229C2A530003F3D3 /* SocialLinkViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLinkViewModel.swift; sourceTree = "<group>"; };
+		5EF78D97229C2A540003F3D3 /* UpdateSocialLinkViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSocialLinkViewModel.swift; sourceTree = "<group>"; };
 		5EFCC76F21553D58001E1A56 /* DashboardProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardProgramListViewModel.swift; sourceTree = "<group>"; };
 		5EFE7C3D2181E78500D385C8 /* FundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundViewController.swift; sourceTree = "<group>"; };
 		5EFE7C3E2181E78500D385C8 /* FundBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundBalanceViewController.swift; sourceTree = "<group>"; };
@@ -1585,6 +1591,9 @@
 		5E18CE1320C566F0008FE5B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5EF78D95229C2A530003F3D3 /* SocialLinksViewModel.swift */,
+				5EF78D96229C2A530003F3D3 /* SocialLinkViewModel.swift */,
+				5EF78D97229C2A540003F3D3 /* UpdateSocialLinkViewModel.swift */,
 				5E44E5B52289809000865A85 /* AmountWithCurrency.swift */,
 				5E44E5D42289809900865A85 /* AndroidAppVersion.swift */,
 				5E44E634228980A600865A85 /* AndroidVersion.swift */,
@@ -3601,6 +3610,7 @@
 				5EA8B9B321B432030074EA2C /* SearchViewController.swift in Sources */,
 				5E6308F9212C079900D15C71 /* PortfolioEventCollectionViewCell.swift in Sources */,
 				5ED738762194FA15001DA633 /* FilterTableViewCell.swift in Sources */,
+				5EF78D9A229C2A540003F3D3 /* UpdateSocialLinkViewModel.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				5E44E68E228980AA00865A85 /* ErrorMessage.swift in Sources */,
 				5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */,
@@ -3797,6 +3807,7 @@
 				5E44E6A1228980AB00865A85 /* ManagerFundWithdrawInfo.swift in Sources */,
 				5E44E697228980AA00865A85 /* WalletTransaction.swift in Sources */,
 				5E44E6C5228980AB00865A85 /* PersonalFundDetailsFull.swift in Sources */,
+				5EF78D99229C2A540003F3D3 /* SocialLinkViewModel.swift in Sources */,
 				5E44E68D228980AA00865A85 /* WalletsGrandTotal.swift in Sources */,
 				5E44E699228980AA00865A85 /* ProfileHeaderViewModel.swift in Sources */,
 				5E44E685228980AA00865A85 /* WalletMultiAvailable.swift in Sources */,
@@ -4064,6 +4075,7 @@
 				5EA1FE2E21A3105000308D81 /* FacetsTableViewCellViewModel.swift in Sources */,
 				5E44E6D0228980AB00865A85 /* ManagerProgramCreateResult.swift in Sources */,
 				5ED03F3820FF784A00AF5E07 /* FieldWithTextFieldTableViewCellViewModel.swift in Sources */,
+				5EF78D98229C2A540003F3D3 /* SocialLinksViewModel.swift in Sources */,
 				5E7717682153F5A1002624FC /* DashboardProgramListViewController.swift in Sources */,
 				5E27EC4A218758AC00C6CF5C /* FundAssetTableViewCell.swift in Sources */,
 				5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */,

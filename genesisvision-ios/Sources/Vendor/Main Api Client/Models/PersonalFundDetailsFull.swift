@@ -25,6 +25,7 @@ open class PersonalFundDetailsFull: Codable {
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
     public var canCloseProgram: Bool?
+    public var canCloseAsset: Bool?
     public var isFinishing: Bool?
     public var canInvest: Bool?
     public var canWithdraw: Bool?
@@ -36,12 +37,10 @@ open class PersonalFundDetailsFull: Codable {
     public var pendingInput: Double?
     public var pendingOutput: Double?
     public var status: Status?
-    public var isFollowSignals: Bool?
-    public var canMakeSignalProvider: Bool?
 
 
     
-    public init(withdrawPercent: Double?, canReallocate: Bool?, possibleReallocationTime: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?, isFollowSignals: Bool?, canMakeSignalProvider: Bool?) {
+    public init(withdrawPercent: Double?, canReallocate: Bool?, possibleReallocationTime: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
         self.withdrawPercent = withdrawPercent
         self.canReallocate = canReallocate
         self.possibleReallocationTime = possibleReallocationTime
@@ -49,6 +48,7 @@ open class PersonalFundDetailsFull: Codable {
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
         self.canCloseProgram = canCloseProgram
+        self.canCloseAsset = canCloseAsset
         self.isFinishing = isFinishing
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
@@ -60,8 +60,6 @@ open class PersonalFundDetailsFull: Codable {
         self.pendingInput = pendingInput
         self.pendingOutput = pendingOutput
         self.status = status
-        self.isFollowSignals = isFollowSignals
-        self.canMakeSignalProvider = canMakeSignalProvider
     }
     
 
@@ -78,6 +76,7 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
         try container.encodeIfPresent(canCloseProgram, forKey: "canCloseProgram")
+        try container.encodeIfPresent(canCloseAsset, forKey: "canCloseAsset")
         try container.encodeIfPresent(isFinishing, forKey: "isFinishing")
         try container.encodeIfPresent(canInvest, forKey: "canInvest")
         try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
@@ -89,8 +88,6 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
         try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
         try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(isFollowSignals, forKey: "isFollowSignals")
-        try container.encodeIfPresent(canMakeSignalProvider, forKey: "canMakeSignalProvider")
     }
 
     // Decodable protocol methods
@@ -105,6 +102,7 @@ open class PersonalFundDetailsFull: Codable {
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
         canCloseProgram = try container.decodeIfPresent(Bool.self, forKey: "canCloseProgram")
+        canCloseAsset = try container.decodeIfPresent(Bool.self, forKey: "canCloseAsset")
         isFinishing = try container.decodeIfPresent(Bool.self, forKey: "isFinishing")
         canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
         canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
@@ -116,8 +114,6 @@ open class PersonalFundDetailsFull: Codable {
         pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
         pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
-        isFollowSignals = try container.decodeIfPresent(Bool.self, forKey: "isFollowSignals")
-        canMakeSignalProvider = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProvider")
     }
 }
 

@@ -252,7 +252,7 @@ class WalletTransferViewController: BaseViewController {
     }
     
     private func showSuccessfulView() {
-        showBottomSheet(.success, title: "Conversion successful", subtitle: nil, initializeHeight: nil) { [weak self] (result) in
+        showBottomSheet(.success, title: "Conversion successful", subtitle: nil, initializeHeight: 250.0) { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.viewModel.goToBack()
                 self?.bottomSheetController.dismiss()

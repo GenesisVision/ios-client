@@ -14,12 +14,13 @@ open class SearchAPI {
     /**
      Program / fund / manager search
      
+     - parameter authorization: (header)  (optional)
      - parameter mask: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SearchGet(mask: String? = nil, take: Int? = nil, completion: @escaping ((_ data: SearchViewModel?,_ error: Error?) -> Void)) {
-        v10SearchGetWithRequestBuilder(mask: mask, take: take).execute { (response, error) -> Void in
+    open class func v10SearchGet(authorization: String? = nil, mask: String? = nil, take: Int? = nil, completion: @escaping ((_ data: SearchViewModel?,_ error: Error?) -> Void)) {
+        v10SearchGetWithRequestBuilder(authorization: authorization, mask: mask, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -36,13 +37,13 @@ open class SearchAPI {
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "profitPercent" : 4.965218492984954,
         "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "investorsCount" : 9
       },
@@ -73,10 +74,10 @@ open class SearchAPI {
         "share" : 2.3021358869347655
       },
       "personalDetails" : {
+        "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
-        "isFollowSignals" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
         "pendingOutput" : 3.5571952270680973,
@@ -85,7 +86,6 @@ open class SearchAPI {
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "canMakeSignalProvider" : true,
         "value" : 6.683562403749608,
         "profit" : 8.762042012749001,
         "withdrawPercent" : 9.369310271410669,
@@ -109,13 +109,13 @@ open class SearchAPI {
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "profitPercent" : 4.965218492984954,
         "drawdownPercent" : 5.025004791520295,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "investorsCount" : 9
       },
@@ -146,10 +146,10 @@ open class SearchAPI {
         "share" : 2.3021358869347655
       },
       "personalDetails" : {
+        "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
-        "isFollowSignals" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
         "pendingOutput" : 3.5571952270680973,
@@ -158,7 +158,6 @@ open class SearchAPI {
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "canMakeSignalProvider" : true,
         "value" : 6.683562403749608,
         "profit" : 8.762042012749001,
         "withdrawPercent" : 9.369310271410669,
@@ -186,12 +185,12 @@ open class SearchAPI {
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -199,7 +198,7 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "investorsCount" : 2
       },
@@ -238,11 +237,11 @@ open class SearchAPI {
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
+        "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
         "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "isFollowSignals" : true,
         "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
@@ -256,7 +255,7 @@ open class SearchAPI {
         "signalSubscription" : {
           "mode" : "ByBalance",
           "hasSignalAccount" : true,
-          "fixedCurrency" : "Undefined",
+          "fixedCurrency" : "BTC",
           "fixedVolume" : 4.145608029883936,
           "openTolerancePercent" : 2.027123023002322,
           "hasActiveSubscription" : true,
@@ -271,7 +270,7 @@ open class SearchAPI {
         "status" : "Pending"
       },
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
@@ -286,12 +285,12 @@ open class SearchAPI {
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -299,7 +298,7 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "Undefined"
+          "currency" : "BTC"
         },
         "investorsCount" : 2
       },
@@ -338,11 +337,11 @@ open class SearchAPI {
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
+        "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
         "canInvest" : true,
         "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "isFollowSignals" : true,
         "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
@@ -356,7 +355,7 @@ open class SearchAPI {
         "signalSubscription" : {
           "mode" : "ByBalance",
           "hasSignalAccount" : true,
-          "fixedCurrency" : "Undefined",
+          "fixedCurrency" : "BTC",
           "fixedVolume" : 4.145608029883936,
           "openTolerancePercent" : 2.027123023002322,
           "hasActiveSubscription" : true,
@@ -371,7 +370,7 @@ open class SearchAPI {
         "status" : "Pending"
       },
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
@@ -386,6 +385,19 @@ open class SearchAPI {
   "managers" : {
     "total" : 1,
     "managers" : [ {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "assets" : [ "assets", "assets" ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
@@ -394,6 +406,19 @@ open class SearchAPI {
       "url" : "url",
       "username" : "username"
     }, {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "assets" : [ "assets", "assets" ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
@@ -405,12 +430,13 @@ open class SearchAPI {
   }
 }}]
      
+     - parameter authorization: (header)  (optional)
      - parameter mask: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<SearchViewModel> 
      */
-    open class func v10SearchGetWithRequestBuilder(mask: String? = nil, take: Int? = nil) -> RequestBuilder<SearchViewModel> {
+    open class func v10SearchGetWithRequestBuilder(authorization: String? = nil, mask: String? = nil, take: Int? = nil) -> RequestBuilder<SearchViewModel> {
         let path = "/v1.0/search"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -421,10 +447,14 @@ open class SearchAPI {
             "take": take?.encodeToJSON()
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SearchViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }

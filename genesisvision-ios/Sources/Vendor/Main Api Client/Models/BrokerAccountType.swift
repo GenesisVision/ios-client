@@ -28,18 +28,20 @@ open class BrokerAccountType: Codable {
     public var type: ModelType?
     public var leverages: [Int]?
     public var currencies: [String]?
+    public var minimumDepositsAmount: [String:Double]?
     public var isForex: Bool?
     public var isSignalsAvailable: Bool?
 
 
     
-    public init(id: UUID?, name: String?, description: String?, type: ModelType?, leverages: [Int]?, currencies: [String]?, isForex: Bool?, isSignalsAvailable: Bool?) {
+    public init(id: UUID?, name: String?, description: String?, type: ModelType?, leverages: [Int]?, currencies: [String]?, minimumDepositsAmount: [String:Double]?, isForex: Bool?, isSignalsAvailable: Bool?) {
         self.id = id
         self.name = name
         self.description = description
         self.type = type
         self.leverages = leverages
         self.currencies = currencies
+        self.minimumDepositsAmount = minimumDepositsAmount
         self.isForex = isForex
         self.isSignalsAvailable = isSignalsAvailable
     }
@@ -57,6 +59,7 @@ open class BrokerAccountType: Codable {
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(leverages, forKey: "leverages")
         try container.encodeIfPresent(currencies, forKey: "currencies")
+        try container.encodeIfPresent(minimumDepositsAmount, forKey: "minimumDepositsAmount")
         try container.encodeIfPresent(isForex, forKey: "isForex")
         try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
     }
@@ -72,6 +75,7 @@ open class BrokerAccountType: Codable {
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         leverages = try container.decodeIfPresent([Int].self, forKey: "leverages")
         currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
+        minimumDepositsAmount = try container.decodeIfPresent([String:Double].self, forKey: "minimumDepositsAmount")
         isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
         isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
     }

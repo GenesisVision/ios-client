@@ -18,9 +18,9 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Signals"
         cell.infoSignalsProtocol = infoSignalsProtocol
         
-        if let personalProgramDetails = programDetailsFull?.personalProgramDetails, let isFollowSignals = personalProgramDetails.isFollowSignals {
-            cell.editButton.isHidden = !isFollowSignals
-            cell.followButton.setTitle(isFollowSignals ? "Unfollow trades" : "Follow trades", for: .normal)
+        if let personalProgramDetails = programDetailsFull?.personalProgramDetails, let hasActiveSubscription = personalProgramDetails.signalSubscription?.hasActiveSubscription {
+            cell.editButton.isHidden = !hasActiveSubscription
+            cell.followButton.setTitle(hasActiveSubscription ? "Unfollow trades" : "Follow trades", for: .normal)
         }
         
         if let signalSuccessFee = programDetailsFull?.signalSuccessFee {
@@ -28,8 +28,8 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
             cell.successFeeValueLabel.text = signalSuccessFee.rounded(withType: .undefined).toString() + "%"
         }
 
-        if let signalSubscriptionFee = programDetailsFull?.signalSubscriptionFee {
-            cell.subscriptionFeeTitleLabel.text = "subscription fee"
+        if let signalSubscriptionFee = programDetailsFull?.signalVolumeFee {
+            cell.subscriptionFeeTitleLabel.text = "volume fee"
             cell.subscriptionFeeValueLabel.text = signalSubscriptionFee.rounded(withType: .undefined).toString() + "%"
         }
         

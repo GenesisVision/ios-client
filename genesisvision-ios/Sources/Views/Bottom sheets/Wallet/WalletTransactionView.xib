@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,16 +31,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mvv-YS-1uM">
-                                    <rect key="frame" x="0.0" y="2" width="279" height="49"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="279" height="53"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-fH-zC9" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-fH-zC9" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nw2-GV-WlU" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="28.5" width="42" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nw2-GV-WlU" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="53" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                     <rect key="frame" x="20" y="94" width="335" height="2376"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QOh-o9-cGm">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="2047.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="2117.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-sk-G97" userLabel="Platform fee" customClass="PlatformFeeStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="136.5"/>
@@ -955,8 +955,41 @@
                                         <outlet property="toAmountStackView" destination="3ky-4L-CWT" id="Dek-hF-Mco"/>
                                     </connections>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rac-35-Usc" customClass="StatusStackView" customModule="Genesis_Vision" customModuleProvider="target">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Kl7-LV-qno" userLabel="Withdrawal" customClass="SignalDepositStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="1927.5" width="335" height="50"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gJO-RO-eF1" customClass="AmountStackView" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-wO-98C" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2S7-RN-TAL" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="26.5" width="335" height="23.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="C8V-Ur-8j0"/>
+                                            </constraints>
+                                            <connections>
+                                                <outlet property="subtitleLabel" destination="7xr-wO-98C" id="GjU-lQ-j3t"/>
+                                                <outlet property="titleLabel" destination="2S7-RN-TAL" id="RLX-gX-HX2"/>
+                                            </connections>
+                                        </stackView>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="amountStackView" destination="gJO-RO-eF1" id="UpB-62-TIW"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rac-35-Usc" customClass="StatusStackView" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="1997.5" width="335" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9z-nZ-IeD" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="10"/>
@@ -999,7 +1032,7 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="m2U-6h-wyB" customClass="ActionsStackView" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="1997.5" width="335" height="50"/>
+                                    <rect key="frame" x="0.0" y="2067.5" width="335" height="50"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCt-Fm-gpn" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="157.5" height="50"/>
@@ -1066,6 +1099,7 @@
                 <outlet property="openProgramStackView" destination="Fut-D9-SAp" id="EW3-ph-pON"/>
                 <outlet property="platformFeeStackView" destination="IZV-sk-G97" id="rN5-h1-cBj"/>
                 <outlet property="scrollView" destination="Ljw-D8-f4c" id="Qi3-Gm-eDq"/>
+                <outlet property="signalDepositStackView" destination="Kl7-LV-qno" id="ulC-dd-iyM"/>
                 <outlet property="statusStackView" destination="rac-35-Usc" id="3Is-6P-mCl"/>
                 <outlet property="topStackView" destination="Rq6-wx-hWK" id="Xkk-k7-t5b"/>
                 <outlet property="withdrawalStackView" destination="Teg-AH-fYi" id="suh-2J-KGU"/>

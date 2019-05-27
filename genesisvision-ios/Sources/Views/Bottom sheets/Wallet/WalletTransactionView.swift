@@ -66,6 +66,12 @@ class WalletTransactionView: UIView {
         }
     }
     
+    @IBOutlet weak var signalDepositStackView: SignalDepositStackView! {
+        didSet {
+            signalDepositStackView.isHidden = true
+        }
+    }
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,9 +104,9 @@ class WalletTransactionView: UIView {
             setupOpenCloseProgram(model)
         case .platformFee:
             setupPlatformFeeProgram(model)
-        case .depositSignal, .receiveSignal, .subscribeSignal, .withdrawalSignal:
-            break
-        case .platform:
+        case .depositSignal:
+            setupSignalDeposit(model)
+        case .platform, .receiveSignal, .subscribeSignal, .withdrawalSignal:
             break
         }
         
@@ -426,6 +432,16 @@ extension WalletTransactionView {
             }
         }
     }
+    
+    private func setupSignalDeposit(_ model: TransactionDetails) {
+        signalDepositStackView.isHidden = false
+        topStackView.subtitleLabel.text = "Deposit to signal account"
+        
+        signalDepositStackView.amountStackView.subtitleLabel.text = "Investment amount"
+        if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            signalDepositStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        }
+    }
 }
 
 class InvestmentStackView: UIStackView {
@@ -475,6 +491,11 @@ class PlatformFeeStackView: UIStackView {
     @IBOutlet weak var fromWalletStackView: ExternalStackView!
     @IBOutlet weak var amountStackView: AmountStackView!
 }
+
+class SignalDepositStackView: UIStackView {
+    @IBOutlet weak var amountStackView: AmountStackView!
+}
+
 
 class TopStackView: DefaultStackView {
     @IBOutlet weak var closeButton: UIButton!

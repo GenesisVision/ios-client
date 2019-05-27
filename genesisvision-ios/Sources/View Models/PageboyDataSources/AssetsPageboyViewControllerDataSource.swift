@@ -13,15 +13,17 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
     internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
         if let router = router as? DashboardRouter {
             
-            let currency: CurrencyType = CurrencyType(rawValue: getSelectedCurrency()) ?? .btc
-            
             let programListViewController = getDashboardPrograms(router)
             let fundListViewController = getDashboardFunds(router)
-            let signalListViewController = getSignalList(router)
-            let signalTradesViewController = getTrades(with: currency, router: router)
-            let signalOpenTradesViewController = getOpenTrades(with: currency, router: router)
             
-            controllers = [programListViewController, fundListViewController, signalListViewController, signalOpenTradesViewController, signalTradesViewController]
+            controllers = [programListViewController, fundListViewController]
+            
+//            let currency: CurrencyType = CurrencyType(rawValue: getSelectedCurrency()) ?? .btc
+//            let signalListViewController = getSignalList(router)
+//            let signalTradesViewController = getTrades(with: currency, router: router)
+//            let signalOpenTradesViewController = getOpenTrades(with: currency, router: router)
+            
+//            controllers = [programListViewController, fundListViewController, signalListViewController, signalOpenTradesViewController, signalTradesViewController]
         } else {
             guard let programListViewController = getPrograms(with: router, filterModel: filterModel, showFacets: showFacets), let fundListViewController = getFunds(with: router, filterModel: filterModel, showFacets: showFacets) else { return }
             

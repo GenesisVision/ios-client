@@ -47,11 +47,11 @@ final class ProgramInfoViewModel {
                 }
             }
             
-            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
-                if !sections.contains(.signals) {
-                    sections.insert(.signals, at: 1)
-                }
-            }
+//            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
+//                if !sections.contains(.signals) {
+//                    sections.insert(.signals, at: 1)
+//                }
+//            }
         }
     }
     
@@ -303,12 +303,12 @@ extension ProgramInfoViewModel: InvestNowProtocol {
 extension ProgramInfoViewModel: InfoSignalsProtocol {
     
     func didTapFollowButton() {
-        if let isFollowSignals = programDetailsFull?.personalProgramDetails?.isFollowSignals {
+        if let isFollowSignals = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription {
             subscribe(isFollowSignals)
         }
     }
     
     func didTapEditButton() {
-        subscribe(false)
+//        editSubscription(false)
     }
 }

@@ -72,18 +72,21 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getFundList(with sorting: InvestorAPI.Sorting_v10InvestorFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getFundList(_ filterModel: FilterModel? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
+        let from = filterModel?.dateRangeModel.dateFrom
+        let to = filterModel?.dateRangeModel.dateTo
+        
         InvestorAPI.v10InvestorFundsGet(authorization: authorization,
-                                        sorting: sorting,
+                                        sorting: nil,
                                         from: from,
                                         to: to,
-                                        chartPointsCount: chartPointsCount,
+                                        chartPointsCount: nil,
                                         currencySecondary: currencySecondary,
                                         skip: skip,
-                                        take: take) { (programList, error) in
-                                            DataProvider().responseHandler(programList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+                                        take: take) { (fundList, error) in
+                                            DataProvider().responseHandler(fundList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 }

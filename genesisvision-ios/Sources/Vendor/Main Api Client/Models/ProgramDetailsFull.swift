@@ -12,12 +12,12 @@ import Foundation
 open class ProgramDetailsFull: Codable {
 
     public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -48,7 +48,7 @@ open class ProgramDetailsFull: Codable {
     public var isReinvesting: Bool?
     public var isSignalProgram: Bool?
     public var signalSuccessFee: Double?
-    public var signalSubscriptionFee: Double?
+    public var signalVolumeFee: Double?
     public var isForex: Bool?
     /** In GVT */
     public var availableInvestment: Double?
@@ -72,7 +72,7 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, stopOutLevel: Double?, isReinvesting: Bool?, isSignalProgram: Bool?, signalSuccessFee: Double?, signalSubscriptionFee: Double?, isForex: Bool?, availableInvestment: Double?, availableInvestmentBase: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, stopOutLevel: Double?, isReinvesting: Bool?, isSignalProgram: Bool?, signalSuccessFee: Double?, signalVolumeFee: Double?, isForex: Bool?, availableInvestment: Double?, availableInvestmentBase: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
         self.periodDuration = periodDuration
@@ -86,7 +86,7 @@ open class ProgramDetailsFull: Codable {
         self.isReinvesting = isReinvesting
         self.isSignalProgram = isSignalProgram
         self.signalSuccessFee = signalSuccessFee
-        self.signalSubscriptionFee = signalSubscriptionFee
+        self.signalVolumeFee = signalVolumeFee
         self.isForex = isForex
         self.availableInvestment = availableInvestment
         self.availableInvestmentBase = availableInvestmentBase
@@ -126,7 +126,7 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(isReinvesting, forKey: "isReinvesting")
         try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
         try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
-        try container.encodeIfPresent(signalSubscriptionFee, forKey: "signalSubscriptionFee")
+        try container.encodeIfPresent(signalVolumeFee, forKey: "signalVolumeFee")
         try container.encodeIfPresent(isForex, forKey: "isForex")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(availableInvestmentBase, forKey: "availableInvestmentBase")
@@ -164,7 +164,7 @@ open class ProgramDetailsFull: Codable {
         isReinvesting = try container.decodeIfPresent(Bool.self, forKey: "isReinvesting")
         isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
         signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
-        signalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "signalSubscriptionFee")
+        signalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "signalVolumeFee")
         isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         availableInvestmentBase = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentBase")

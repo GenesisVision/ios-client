@@ -17,12 +17,12 @@ open class SignalSubscription: Codable {
         case fixed = "Fixed"
     }
     public enum FixedCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"

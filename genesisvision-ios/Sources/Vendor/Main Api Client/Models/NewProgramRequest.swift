@@ -12,12 +12,12 @@ import Foundation
 open class NewProgramRequest: Codable {
 
     public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -33,7 +33,7 @@ open class NewProgramRequest: Codable {
     public var leverage: Int?
     public var brokerAccountTypeId: UUID?
     public var signalSuccessFee: Double?
-    public var signalSubscriptionFee: Double?
+    public var signalVolumeFee: Double?
     public var isSignalProgram: Bool?
     public var title: String?
     public var description: String?
@@ -44,7 +44,7 @@ open class NewProgramRequest: Codable {
 
 
     
-    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, signalSuccessFee: Double?, signalSubscriptionFee: Double?, isSignalProgram: Bool?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
+    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, signalSuccessFee: Double?, signalVolumeFee: Double?, isSignalProgram: Bool?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
         self.currency = currency
         self.periodLength = periodLength
         self.successFee = successFee
@@ -52,7 +52,7 @@ open class NewProgramRequest: Codable {
         self.leverage = leverage
         self.brokerAccountTypeId = brokerAccountTypeId
         self.signalSuccessFee = signalSuccessFee
-        self.signalSubscriptionFee = signalSubscriptionFee
+        self.signalVolumeFee = signalVolumeFee
         self.isSignalProgram = isSignalProgram
         self.title = title
         self.description = description
@@ -76,7 +76,7 @@ open class NewProgramRequest: Codable {
         try container.encodeIfPresent(leverage, forKey: "leverage")
         try container.encodeIfPresent(brokerAccountTypeId, forKey: "brokerAccountTypeId")
         try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
-        try container.encodeIfPresent(signalSubscriptionFee, forKey: "signalSubscriptionFee")
+        try container.encodeIfPresent(signalVolumeFee, forKey: "signalVolumeFee")
         try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
@@ -98,7 +98,7 @@ open class NewProgramRequest: Codable {
         leverage = try container.decodeIfPresent(Int.self, forKey: "leverage")
         brokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "brokerAccountTypeId")
         signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
-        signalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "signalSubscriptionFee")
+        signalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "signalVolumeFee")
         isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")

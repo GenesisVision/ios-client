@@ -18,10 +18,11 @@ open class ManagerProfile: Codable {
     public var regDate: Date?
     public var assets: [String]?
     public var url: String?
+    public var socialLinks: [SocialLinkViewModel]?
 
 
     
-    public init(id: UUID?, username: String?, about: String?, avatar: String?, regDate: Date?, assets: [String]?, url: String?) {
+    public init(id: UUID?, username: String?, about: String?, avatar: String?, regDate: Date?, assets: [String]?, url: String?, socialLinks: [SocialLinkViewModel]?) {
         self.id = id
         self.username = username
         self.about = about
@@ -29,6 +30,7 @@ open class ManagerProfile: Codable {
         self.regDate = regDate
         self.assets = assets
         self.url = url
+        self.socialLinks = socialLinks
     }
     
 
@@ -45,6 +47,7 @@ open class ManagerProfile: Codable {
         try container.encodeIfPresent(regDate, forKey: "regDate")
         try container.encodeIfPresent(assets, forKey: "assets")
         try container.encodeIfPresent(url, forKey: "url")
+        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
     }
 
     // Decodable protocol methods
@@ -59,6 +62,7 @@ open class ManagerProfile: Codable {
         regDate = try container.decodeIfPresent(Date.self, forKey: "regDate")
         assets = try container.decodeIfPresent([String].self, forKey: "assets")
         url = try container.decodeIfPresent(String.self, forKey: "url")
+        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
     }
 }
 

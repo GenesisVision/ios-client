@@ -1,5 +1,5 @@
 //
-//  CopytradingViewController.swift
+//  DashboardSignalListViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 02/05/2019.

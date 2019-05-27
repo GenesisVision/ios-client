@@ -93,20 +93,6 @@ final class WalletAccountsTransferViewModel {
         return CurrencyType(rawValue: !walletToAccount ? walletCurrency.rawValue : accountCurrency.rawValue)
     }
     
-    func getFromCurreny() -> CurrencyType? {
-        let walletCurrency: WalletData.Currency = selectedWalletDelegateManager?.selected?.currency ?? .gvt
-        let accountCurrency: CopyTradingAccountInfo.Currency = selectedAccountDelegateManager?.selected?.currency ?? .gvt
-        
-        return CurrencyType(rawValue: walletToAccount ? walletCurrency.rawValue : accountCurrency.rawValue)
-    }
-    
-    func getToCurreny() -> CurrencyType? {
-        let walletCurrency: WalletData.Currency = selectedWalletDelegateManager?.selected?.currency ?? .gvt
-        let accountCurrency: CopyTradingAccountInfo.Currency = selectedAccountDelegateManager?.selected?.currency ?? .gvt
-        
-        return CurrencyType(rawValue: !walletToAccount ? walletCurrency.rawValue : accountCurrency.rawValue)
-    }
-    
     func updateWalletCurrencyFromIndex(_ selectedIndex: Int, completion: @escaping CompletionBlock) {
         guard let accounts = accounts, let wallets = wallets else { return }
         

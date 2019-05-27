@@ -167,38 +167,38 @@ class WalletAccountsTransferViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let selectedWalletFrom = viewModel.selectedFromDelegateManager?.selected, let selectedWalletTo = viewModel.selectedToDelegateManager?.selected else { return }
-        
-        if let title = selectedWalletFrom.title, let currency = selectedWalletFrom.currency?.rawValue {
-            selectedWalletFromValueLabel.text = title + " | " + currency
-            amountToTransferFromCurrencyLabel.text = currency
-        }
-        
-        if let to = selectedWalletTo.currency?.rawValue, let title = selectedWalletTo.title,  let currencyType = CurrencyType(rawValue: to) {
-            selectedWalletToValueLabel.text = title + " | " + to
-            
-            let value = (amountToTransferValue * viewModel.rate).rounded(withType: currencyType).toString()
-            amountToTransferToValueLabel.text = "≈" + value + " " + currencyType.rawValue
-        }
-        
-        if let available = selectedWalletFrom.available {
-            self.availableInWalletFromValue = available
-        }
-        
-        if let available = selectedWalletTo.available {
-            self.availableInWalletToValue = available
-        }
-        
-        if let selectedWalletFromDelegateManager = viewModel?.selectedFromDelegateManager {
-            selectedWalletFromDelegateManager.currencyDelegate = self
-        }
-        
-        if let selectedWalletToDelegateManager = viewModel?.selectedToDelegateManager {
-            selectedWalletToDelegateManager.currencyDelegate = self
-        }
-        
-        let transferButtonEnabled = amountToTransferValue > 0.0 && amountToTransferValue <= availableInWalletFromValue
-        transferButton?.setEnabled(transferButtonEnabled)
+//        guard let selectedWalletFrom = viewModel.selectedFromDelegateManager?.selected, let selectedWalletTo = viewModel.selectedToDelegateManager?.selected else { return }
+//
+//        if let title = selectedWalletFrom.title, let currency = selectedWalletFrom.currency?.rawValue {
+//            selectedWalletFromValueLabel.text = title + " | " + currency
+//            amountToTransferFromCurrencyLabel.text = currency
+//        }
+//
+//        if let to = selectedWalletTo.currency?.rawValue, let title = selectedWalletTo.title,  let currencyType = CurrencyType(rawValue: to) {
+//            selectedWalletToValueLabel.text = title + " | " + to
+//
+//            let value = (amountToTransferValue * viewModel.rate).rounded(withType: currencyType).toString()
+//            amountToTransferToValueLabel.text = "≈" + value + " " + currencyType.rawValue
+//        }
+//
+//        if let available = selectedWalletFrom.available {
+//            self.availableInWalletFromValue = available
+//        }
+//
+//        if let available = selectedWalletTo.available {
+//            self.availableInWalletToValue = available
+//        }
+//
+//        if let selectedWalletFromDelegateManager = viewModel?.selectedFromDelegateManager {
+//            selectedWalletFromDelegateManager.currencyDelegate = self
+//        }
+//
+//        if let selectedWalletToDelegateManager = viewModel?.selectedToDelegateManager {
+//            selectedWalletToDelegateManager.currencyDelegate = self
+//        }
+//
+//        let transferButtonEnabled = amountToTransferValue > 0.0 && amountToTransferValue <= availableInWalletFromValue
+//        transferButton?.setEnabled(transferButtonEnabled)
     }
     
     private func showConfirmVC() {
@@ -295,45 +295,45 @@ class WalletAccountsTransferViewController: BaseViewController {
     @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        viewModel?.selectedFromDelegateManager?.updateSelectedIndex()
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 275.0
-        
-        bottomSheetController.addNavigationBar(transferToWalletFromTitleLabel.text)
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            self?.viewModel.selectedFromDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedFromDelegateManager else { return }
-            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
-            tableView.delegate = selectedWalletFromDelegateManager
-            tableView.dataSource = selectedWalletFromDelegateManager
-        }
-        
-        bottomSheetController.present()
+//        viewModel?.selectedFromDelegateManager?.updateSelectedIndex()
+//        bottomSheetController = BottomSheetController()
+//        bottomSheetController.initializeHeight = 275.0
+//        
+//        bottomSheetController.addNavigationBar(transferToWalletFromTitleLabel.text)
+//        
+//        bottomSheetController.addTableView { [weak self] tableView in
+//            self?.viewModel.selectedFromDelegateManager?.tableView = tableView
+//            tableView.separatorStyle = .none
+//            
+//            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedFromDelegateManager else { return }
+//            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
+//            tableView.delegate = selectedWalletFromDelegateManager
+//            tableView.dataSource = selectedWalletFromDelegateManager
+//        }
+//        
+//        bottomSheetController.present()
     }
     
     @IBAction func selectedWalletCurrencyToButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        viewModel?.selectedToDelegateManager?.updateSelectedIndex()
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 275.0
+//        viewModel?.selectedToDelegateManager?.updateSelectedIndex()
+//        bottomSheetController = BottomSheetController()
+//        bottomSheetController.initializeHeight = 275.0
+//
+//        bottomSheetController.addNavigationBar(transferToWalletToTitleLabel.text)
+//
+//        bottomSheetController.addTableView { [weak self] tableView in
+//            self?.viewModel.selectedToDelegateManager?.tableView = tableView
+//            tableView.separatorStyle = .none
+//
+//            guard let selectedWalletToDelegateManager = self?.viewModel.selectedToDelegateManager else { return }
+//            tableView.registerNibs(for: selectedWalletToDelegateManager.cellModelsForRegistration)
+//            tableView.delegate = selectedWalletToDelegateManager
+//            tableView.dataSource = selectedWalletToDelegateManager
+//        }
         
-        bottomSheetController.addNavigationBar(transferToWalletToTitleLabel.text)
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            self?.viewModel.selectedToDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let selectedWalletToDelegateManager = self?.viewModel.selectedToDelegateManager else { return }
-            tableView.registerNibs(for: selectedWalletToDelegateManager.cellModelsForRegistration)
-            tableView.delegate = selectedWalletToDelegateManager
-            tableView.dataSource = selectedWalletToDelegateManager
-        }
-        
-        bottomSheetController.present()
+//        bottomSheetController.present()
     }
 }
 
@@ -378,9 +378,9 @@ extension WalletAccountsTransferViewController: NumpadViewProtocol {
     }
     
     var currency: CurrencyType? {
-        if let currency = viewModel.selectedFromDelegateManager?.selected?.currency {
-            return CurrencyType(rawValue: currency.rawValue)
-        }
+//        if let currency = viewModel.selectedFromDelegateManager?.selected?.currency {
+//            return CurrencyType(rawValue: currency.rawValue)
+//        }
         
         return nil
     }

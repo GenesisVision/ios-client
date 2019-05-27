@@ -45,6 +45,9 @@ open class BrokersAPI {
       "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
@@ -54,6 +57,9 @@ open class BrokersAPI {
       "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
       "currencies" : [ "currencies", "currencies" ]
     } ],
     "isSignalsAvailable" : true,
@@ -82,6 +88,9 @@ open class BrokersAPI {
       "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
@@ -91,6 +100,9 @@ open class BrokersAPI {
       "isSignalsAvailable" : true,
       "type" : "Undefined",
       "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
       "currencies" : [ "currencies", "currencies" ]
     } ],
     "isSignalsAvailable" : true,

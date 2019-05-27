@@ -11,28 +11,13 @@ import Foundation
 
 open class AttachToSignalProviderInfo: Codable {
 
-    public enum SubscriptionFeeCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
     public enum MinDepositCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -43,18 +28,16 @@ open class AttachToSignalProviderInfo: Codable {
     }
     public var hasSignalAccount: Bool?
     public var hasActiveSubscription: Bool?
-    public var subscriptionFee: Double?
-    public var subscriptionFeeCurrency: SubscriptionFeeCurrency?
+    public var volumeFee: Double?
     public var minDeposit: Double?
     public var minDepositCurrency: MinDepositCurrency?
 
 
     
-    public init(hasSignalAccount: Bool?, hasActiveSubscription: Bool?, subscriptionFee: Double?, subscriptionFeeCurrency: SubscriptionFeeCurrency?, minDeposit: Double?, minDepositCurrency: MinDepositCurrency?) {
+    public init(hasSignalAccount: Bool?, hasActiveSubscription: Bool?, volumeFee: Double?, minDeposit: Double?, minDepositCurrency: MinDepositCurrency?) {
         self.hasSignalAccount = hasSignalAccount
         self.hasActiveSubscription = hasActiveSubscription
-        self.subscriptionFee = subscriptionFee
-        self.subscriptionFeeCurrency = subscriptionFeeCurrency
+        self.volumeFee = volumeFee
         self.minDeposit = minDeposit
         self.minDepositCurrency = minDepositCurrency
     }
@@ -68,8 +51,7 @@ open class AttachToSignalProviderInfo: Codable {
 
         try container.encodeIfPresent(hasSignalAccount, forKey: "hasSignalAccount")
         try container.encodeIfPresent(hasActiveSubscription, forKey: "hasActiveSubscription")
-        try container.encodeIfPresent(subscriptionFee, forKey: "subscriptionFee")
-        try container.encodeIfPresent(subscriptionFeeCurrency, forKey: "subscriptionFeeCurrency")
+        try container.encodeIfPresent(volumeFee, forKey: "volumeFee")
         try container.encodeIfPresent(minDeposit, forKey: "minDeposit")
         try container.encodeIfPresent(minDepositCurrency, forKey: "minDepositCurrency")
     }
@@ -81,8 +63,7 @@ open class AttachToSignalProviderInfo: Codable {
 
         hasSignalAccount = try container.decodeIfPresent(Bool.self, forKey: "hasSignalAccount")
         hasActiveSubscription = try container.decodeIfPresent(Bool.self, forKey: "hasActiveSubscription")
-        subscriptionFee = try container.decodeIfPresent(Double.self, forKey: "subscriptionFee")
-        subscriptionFeeCurrency = try container.decodeIfPresent(SubscriptionFeeCurrency.self, forKey: "subscriptionFeeCurrency")
+        volumeFee = try container.decodeIfPresent(Double.self, forKey: "volumeFee")
         minDeposit = try container.decodeIfPresent(Double.self, forKey: "minDeposit")
         minDepositCurrency = try container.decodeIfPresent(MinDepositCurrency.self, forKey: "minDepositCurrency")
     }

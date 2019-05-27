@@ -15,9 +15,25 @@ open class ProgramTransactionDetails: Codable {
         case program = "Program"
         case fund = "Fund"
     }
+    public enum SuccessFeeCurrency: String, Codable { 
+        case btc = "BTC"
+        case eth = "ETH"
+        case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public var id: UUID?
     public var managerName: String?
     public var programType: ProgramType?
+    public var successFeeCurrency: SuccessFeeCurrency?
     public var logo: String?
     public var title: String?
     public var entryFee: Double?
@@ -31,10 +47,11 @@ open class ProgramTransactionDetails: Codable {
 
 
     
-    public init(id: UUID?, managerName: String?, programType: ProgramType?, logo: String?, title: String?, entryFee: Double?, entryFeePercent: Double?, successFee: Double?, successFeePercent: Double?, level: Int?, exitFee: Double?, exitFeePercent: Double?, color: String?) {
+    public init(id: UUID?, managerName: String?, programType: ProgramType?, successFeeCurrency: SuccessFeeCurrency?, logo: String?, title: String?, entryFee: Double?, entryFeePercent: Double?, successFee: Double?, successFeePercent: Double?, level: Int?, exitFee: Double?, exitFeePercent: Double?, color: String?) {
         self.id = id
         self.managerName = managerName
         self.programType = programType
+        self.successFeeCurrency = successFeeCurrency
         self.logo = logo
         self.title = title
         self.entryFee = entryFee
@@ -57,6 +74,7 @@ open class ProgramTransactionDetails: Codable {
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(managerName, forKey: "managerName")
         try container.encodeIfPresent(programType, forKey: "programType")
+        try container.encodeIfPresent(successFeeCurrency, forKey: "successFeeCurrency")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
@@ -77,6 +95,7 @@ open class ProgramTransactionDetails: Codable {
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         managerName = try container.decodeIfPresent(String.self, forKey: "managerName")
         programType = try container.decodeIfPresent(ProgramType.self, forKey: "programType")
+        successFeeCurrency = try container.decodeIfPresent(SuccessFeeCurrency.self, forKey: "successFeeCurrency")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")

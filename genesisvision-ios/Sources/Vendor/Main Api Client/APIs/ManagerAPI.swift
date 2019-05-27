@@ -98,6 +98,19 @@ open class ManagerAPI {
      - examples: [{contentType=application/json, example={
   "overview" : { },
   "managerProfile" : {
+    "socialLinks" : [ {
+      "name" : "name",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "value" : "value",
+      "url" : "url"
+    }, {
+      "name" : "name",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "value" : "value",
+      "url" : "url"
+    } ],
     "assets" : [ "assets", "assets" ],
     "about" : "about",
     "regDate" : "2000-01-23T04:56:07.000+00:00",
@@ -145,6 +158,19 @@ open class ManagerAPI {
      Manager profile
      - GET /v1.0/manager/{id}
      - examples: [{contentType=application/json, example={
+  "socialLinks" : [ {
+    "name" : "name",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "value" : "value",
+    "url" : "url"
+  }, {
+    "name" : "name",
+    "logo" : "logo",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "value" : "value",
+    "url" : "url"
+  } ],
   "assets" : [ "assets", "assets" ],
   "about" : "about",
   "regDate" : "2000-01-23T04:56:07.000+00:00",
@@ -238,7 +264,7 @@ open class ManagerAPI {
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "feeValue" : 5.962133916683182,
     "value" : 1.4658129805029452
   }, {
@@ -253,7 +279,7 @@ open class ManagerAPI {
     "profitPercent" : 5.637376656633329,
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "feeValue" : 5.962133916683182,
     "value" : 1.4658129805029452
   } ]
@@ -389,12 +415,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdInvestByAmountPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -457,12 +483,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdInvestInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -559,7 +585,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -576,7 +602,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -658,12 +684,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdWithdrawByPercentPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -726,12 +752,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerFundsByIdWithdrawInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -854,12 +880,12 @@ open class ManagerAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ManagerFundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -920,13 +946,13 @@ open class ManagerAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 9
     },
@@ -957,10 +983,10 @@ open class ManagerAPI {
       "share" : 2.3021358869347655
     },
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
       "pendingOutput" : 3.5571952270680973,
@@ -969,7 +995,6 @@ open class ManagerAPI {
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "canMakeSignalProvider" : true,
       "value" : 6.683562403749608,
       "profit" : 8.762042012749001,
       "withdrawPercent" : 9.369310271410669,
@@ -993,13 +1018,13 @@ open class ManagerAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 9
     },
@@ -1030,10 +1055,10 @@ open class ManagerAPI {
       "share" : 2.3021358869347655
     },
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
       "pendingOutput" : 3.5571952270680973,
@@ -1042,7 +1067,6 @@ open class ManagerAPI {
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "canMakeSignalProvider" : true,
       "value" : 6.683562403749608,
       "profit" : 8.762042012749001,
       "withdrawPercent" : 9.369310271410669,
@@ -1241,6 +1265,19 @@ open class ManagerAPI {
   "profile" : {
     "overview" : { },
     "managerProfile" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "assets" : [ "assets", "assets" ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1299,7 +1336,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1319,7 +1356,7 @@ open class ManagerAPI {
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "feeValue" : 5.962133916683182,
       "value" : 1.4658129805029452
     }, {
@@ -1334,7 +1371,7 @@ open class ManagerAPI {
       "profitPercent" : 5.637376656633329,
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logo" : "logo",
-      "currency" : "Undefined",
+      "currency" : "BTC",
       "feeValue" : 5.962133916683182,
       "value" : 1.4658129805029452
     } ]
@@ -1365,7 +1402,7 @@ open class ManagerAPI {
       "value" : 3.616076749251911
     } ],
     "balance" : 1.2315135367772556,
-    "programCurrency" : "Undefined",
+    "programCurrency" : "BTC",
     "rate" : 9.369310271410669,
     "totalProgramCurrencyProfit" : 9.301444243932576,
     "successTradesPercent" : 4.145608029883936,
@@ -1562,12 +1599,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdInvestByAmountPost: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1630,12 +1667,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdInvestInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -1819,7 +1856,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1836,7 +1873,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1962,12 +1999,12 @@ open class ManagerAPI {
      * enum for parameter currency
      */
     public enum Currency_v10ManagerProgramsByIdWithdrawInfoByCurrencyGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -2150,12 +2187,12 @@ open class ManagerAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ManagerProgramsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -2216,12 +2253,12 @@ open class ManagerAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2229,7 +2266,7 @@ open class ManagerAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -2268,11 +2305,11 @@ open class ManagerAPI {
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isFollowSignals" : true,
       "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
@@ -2286,7 +2323,7 @@ open class ManagerAPI {
       "signalSubscription" : {
         "mode" : "ByBalance",
         "hasSignalAccount" : true,
-        "fixedCurrency" : "Undefined",
+        "fixedCurrency" : "BTC",
         "fixedVolume" : 4.145608029883936,
         "openTolerancePercent" : 2.027123023002322,
         "hasActiveSubscription" : true,
@@ -2301,7 +2338,7 @@ open class ManagerAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2316,12 +2353,12 @@ open class ManagerAPI {
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -2329,7 +2366,7 @@ open class ManagerAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 2
     },
@@ -2368,11 +2405,11 @@ open class ManagerAPI {
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isFollowSignals" : true,
       "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
@@ -2386,7 +2423,7 @@ open class ManagerAPI {
       "signalSubscription" : {
         "mode" : "ByBalance",
         "hasSignalAccount" : true,
-        "fixedCurrency" : "Undefined",
+        "fixedCurrency" : "BTC",
         "fixedVolume" : 4.145608029883936,
         "openTolerancePercent" : 2.027123023002322,
         "hasActiveSubscription" : true,
@@ -2401,7 +2438,7 @@ open class ManagerAPI {
       "status" : "Pending"
     },
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2577,7 +2614,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -2594,7 +2631,7 @@ open class ManagerAPI {
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "value" : 6.704019297950036,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -2632,12 +2669,12 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter programId: (query)  (optional)
-     - parameter subscriptionFee: (query)  (optional)
+     - parameter volumeFee: (query)  (optional)
      - parameter successFee: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerSignalCreatePost(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ManagerSignalCreatePostWithRequestBuilder(authorization: authorization, programId: programId, subscriptionFee: subscriptionFee, successFee: successFee).execute { (response, error) -> Void in
+    open class func v10ManagerSignalCreatePost(authorization: String, programId: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerSignalCreatePostWithRequestBuilder(authorization: authorization, programId: programId, volumeFee: volumeFee, successFee: successFee).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -2649,12 +2686,12 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter programId: (query)  (optional)
-     - parameter subscriptionFee: (query)  (optional)
+     - parameter volumeFee: (query)  (optional)
      - parameter successFee: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10ManagerSignalCreatePostWithRequestBuilder(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
+    open class func v10ManagerSignalCreatePostWithRequestBuilder(authorization: String, programId: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
         let path = "/v1.0/manager/signal/create"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -2662,7 +2699,7 @@ open class ManagerAPI {
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "ProgramId": programId, 
-            "SubscriptionFee": subscriptionFee, 
+            "VolumeFee": volumeFee, 
             "SuccessFee": successFee
         ])
         
@@ -2681,12 +2718,12 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter programId: (query)  (optional)
-     - parameter subscriptionFee: (query)  (optional)
+     - parameter volumeFee: (query)  (optional)
      - parameter successFee: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerSignalEditPost(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ManagerSignalEditPostWithRequestBuilder(authorization: authorization, programId: programId, subscriptionFee: subscriptionFee, successFee: successFee).execute { (response, error) -> Void in
+    open class func v10ManagerSignalEditPost(authorization: String, programId: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ManagerSignalEditPostWithRequestBuilder(authorization: authorization, programId: programId, volumeFee: volumeFee, successFee: successFee).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -2698,12 +2735,12 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter programId: (query)  (optional)
-     - parameter subscriptionFee: (query)  (optional)
+     - parameter volumeFee: (query)  (optional)
      - parameter successFee: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10ManagerSignalEditPostWithRequestBuilder(authorization: String, programId: UUID? = nil, subscriptionFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
+    open class func v10ManagerSignalEditPostWithRequestBuilder(authorization: String, programId: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil) -> RequestBuilder<Void> {
         let path = "/v1.0/manager/signal/edit"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -2711,7 +2748,7 @@ open class ManagerAPI {
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "ProgramId": programId, 
-            "SubscriptionFee": subscriptionFee, 
+            "VolumeFee": volumeFee, 
             "SuccessFee": successFee
         ])
         

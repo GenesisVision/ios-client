@@ -20,15 +20,15 @@ open class ProgramsInfo: Codable {
     public var managerMaxSuccessFee: Double?
     public var managerFundInvestment: Double?
     public var managerMaxExitFee: Double?
-    public var managerMaxSignalSubscriptionFee: Double?
-    public var managerMinSignalSubscriptionFee: Double?
+    public var managerMaxSignalVolumeFee: Double?
+    public var managerMinSignalVolumeFee: Double?
     public var managerMaxSignalSuccessFee: Double?
     public var managerMinSignalSuccessFee: Double?
     public var periods: [Int]?
 
 
     
-    public init(managerProgramInvestment: Double?, managerProgramInvestmentUSD: Double?, managerProgramInvestmentUSDT: Double?, managerProgramInvestmentBTC: Double?, managerProgramInvestmentETH: Double?, managerMaxEntryFee: Double?, managerMaxSuccessFee: Double?, managerFundInvestment: Double?, managerMaxExitFee: Double?, managerMaxSignalSubscriptionFee: Double?, managerMinSignalSubscriptionFee: Double?, managerMaxSignalSuccessFee: Double?, managerMinSignalSuccessFee: Double?, periods: [Int]?) {
+    public init(managerProgramInvestment: Double?, managerProgramInvestmentUSD: Double?, managerProgramInvestmentUSDT: Double?, managerProgramInvestmentBTC: Double?, managerProgramInvestmentETH: Double?, managerMaxEntryFee: Double?, managerMaxSuccessFee: Double?, managerFundInvestment: Double?, managerMaxExitFee: Double?, managerMaxSignalVolumeFee: Double?, managerMinSignalVolumeFee: Double?, managerMaxSignalSuccessFee: Double?, managerMinSignalSuccessFee: Double?, periods: [Int]?) {
         self.managerProgramInvestment = managerProgramInvestment
         self.managerProgramInvestmentUSD = managerProgramInvestmentUSD
         self.managerProgramInvestmentUSDT = managerProgramInvestmentUSDT
@@ -38,8 +38,8 @@ open class ProgramsInfo: Codable {
         self.managerMaxSuccessFee = managerMaxSuccessFee
         self.managerFundInvestment = managerFundInvestment
         self.managerMaxExitFee = managerMaxExitFee
-        self.managerMaxSignalSubscriptionFee = managerMaxSignalSubscriptionFee
-        self.managerMinSignalSubscriptionFee = managerMinSignalSubscriptionFee
+        self.managerMaxSignalVolumeFee = managerMaxSignalVolumeFee
+        self.managerMinSignalVolumeFee = managerMinSignalVolumeFee
         self.managerMaxSignalSuccessFee = managerMaxSignalSuccessFee
         self.managerMinSignalSuccessFee = managerMinSignalSuccessFee
         self.periods = periods
@@ -61,8 +61,8 @@ open class ProgramsInfo: Codable {
         try container.encodeIfPresent(managerMaxSuccessFee, forKey: "managerMaxSuccessFee")
         try container.encodeIfPresent(managerFundInvestment, forKey: "managerFundInvestment")
         try container.encodeIfPresent(managerMaxExitFee, forKey: "managerMaxExitFee")
-        try container.encodeIfPresent(managerMaxSignalSubscriptionFee, forKey: "managerMaxSignalSubscriptionFee")
-        try container.encodeIfPresent(managerMinSignalSubscriptionFee, forKey: "managerMinSignalSubscriptionFee")
+        try container.encodeIfPresent(managerMaxSignalVolumeFee, forKey: "managerMaxSignalVolumeFee")
+        try container.encodeIfPresent(managerMinSignalVolumeFee, forKey: "managerMinSignalVolumeFee")
         try container.encodeIfPresent(managerMaxSignalSuccessFee, forKey: "managerMaxSignalSuccessFee")
         try container.encodeIfPresent(managerMinSignalSuccessFee, forKey: "managerMinSignalSuccessFee")
         try container.encodeIfPresent(periods, forKey: "periods")
@@ -82,8 +82,8 @@ open class ProgramsInfo: Codable {
         managerMaxSuccessFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxSuccessFee")
         managerFundInvestment = try container.decodeIfPresent(Double.self, forKey: "managerFundInvestment")
         managerMaxExitFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxExitFee")
-        managerMaxSignalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxSignalSubscriptionFee")
-        managerMinSignalSubscriptionFee = try container.decodeIfPresent(Double.self, forKey: "managerMinSignalSubscriptionFee")
+        managerMaxSignalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxSignalVolumeFee")
+        managerMinSignalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "managerMinSignalVolumeFee")
         managerMaxSignalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "managerMaxSignalSuccessFee")
         managerMinSignalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "managerMinSignalSuccessFee")
         periods = try container.decodeIfPresent([Int].self, forKey: "periods")

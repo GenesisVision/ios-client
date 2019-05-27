@@ -324,12 +324,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsByIdGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -362,7 +362,7 @@ open class FundsAPI {
   "statistic" : {
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
     "profitPercent" : 5.637376656633329,
     "rebalancingCount" : 2,
@@ -372,7 +372,7 @@ open class FundsAPI {
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "BTC"
     },
     "investorsCount" : 7
   },
@@ -401,10 +401,10 @@ open class FundsAPI {
     "percent" : 5.962133916683182
   } ],
   "personalFundDetails" : {
+    "canCloseAsset" : true,
     "canCloseProgram" : true,
     "canWithdraw" : true,
     "canInvest" : true,
-    "isFollowSignals" : true,
     "canClosePeriod" : true,
     "canReallocate" : true,
     "pendingOutput" : 3.5571952270680973,
@@ -413,7 +413,6 @@ open class FundsAPI {
     "isOwnProgram" : true,
     "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
     "isFinishing" : true,
-    "canMakeSignalProvider" : true,
     "value" : 6.683562403749608,
     "profit" : 8.762042012749001,
     "withdrawPercent" : 9.369310271410669,
@@ -480,12 +479,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -548,13 +547,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 9
     },
@@ -585,10 +584,10 @@ open class FundsAPI {
       "share" : 2.3021358869347655
     },
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
       "pendingOutput" : 3.5571952270680973,
@@ -597,7 +596,6 @@ open class FundsAPI {
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "canMakeSignalProvider" : true,
       "value" : 6.683562403749608,
       "profit" : 8.762042012749001,
       "withdrawPercent" : 9.369310271410669,
@@ -621,13 +619,13 @@ open class FundsAPI {
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "profitPercent" : 4.965218492984954,
       "drawdownPercent" : 5.025004791520295,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "Undefined"
+        "currency" : "BTC"
       },
       "investorsCount" : 9
     },
@@ -658,10 +656,10 @@ open class FundsAPI {
       "share" : 2.3021358869347655
     },
     "personalDetails" : {
+      "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "canInvest" : true,
-      "isFollowSignals" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
       "pendingOutput" : 3.5571952270680973,
@@ -670,7 +668,6 @@ open class FundsAPI {
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "canMakeSignalProvider" : true,
       "value" : 6.683562403749608,
       "profit" : 8.762042012749001,
       "withdrawPercent" : 9.369310271410669,

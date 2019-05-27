@@ -248,12 +248,8 @@ extension DashboardFundListViewModel {
     }
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        let dateFrom = filterModel.dateRangeModel.dateFrom
-        let dateTo = filterModel.dateRangeModel.dateTo
-        
-        let sorting = filterModel.sortingModel.selectedSorting
-        
-        DashboardDataProvider.getFundList(with: sorting as? InvestorAPI.Sorting_v10InvestorFundsGet, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { [weak self] (fundList) in
+
+        DashboardDataProvider.getFundList(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
             guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             var viewModels = [DashboardFundTableViewCellViewModel]()

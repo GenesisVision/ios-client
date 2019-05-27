@@ -34,7 +34,7 @@ open class SignalAPI {
     "balance" : 0.8008281904610115,
     "available" : 5.637376656633329,
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "equity" : 6.027456183070403,
@@ -44,7 +44,7 @@ open class SignalAPI {
     "balance" : 0.8008281904610115,
     "available" : 5.637376656633329,
     "logo" : "logo",
-    "currency" : "Undefined",
+    "currency" : "BTC",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "equity" : 6.027456183070403,
@@ -91,10 +91,9 @@ open class SignalAPI {
      Get subscribe to programs signals info
      - GET /v1.0/signal/attach/{id}/info
      - examples: [{contentType=application/json, example={
-  "minDepositCurrency" : "Undefined",
+  "minDepositCurrency" : "BTC",
   "hasSignalAccount" : true,
-  "subscriptionFee" : 0.8008281904610115,
-  "subscriptionFeeCurrency" : "Undefined",
+  "volumeFee" : 0.8008281904610115,
   "minDeposit" : 6.027456183070403,
   "hasActiveSubscription" : true
 }}]
@@ -256,10 +255,11 @@ open class SignalAPI {
      
      - parameter id: (path) Trade id 
      - parameter authorization: (header) JWT access token 
+     - parameter programId: (query) Provider program id (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalTradesByIdClosePost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalTradesByIdClosePostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10SignalTradesByIdClosePost(id: UUID, authorization: String, programId: UUID? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10SignalTradesByIdClosePostWithRequestBuilder(id: id, authorization: authorization, programId: programId).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -271,17 +271,21 @@ open class SignalAPI {
      
      - parameter id: (path) Trade id 
      - parameter authorization: (header) JWT access token 
+     - parameter programId: (query) Provider program id (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10SignalTradesByIdClosePostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func v10SignalTradesByIdClosePostWithRequestBuilder(id: UUID, authorization: String, programId: UUID? = nil) -> RequestBuilder<Void> {
         var path = "/v1.0/signal/trades/{id}/close"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "programId": programId
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
@@ -312,6 +316,10 @@ open class SignalAPI {
         case byPriceCurrentDesc = "ByPriceCurrentDesc"
         case byProfitAsc = "ByProfitAsc"
         case byProfitDesc = "ByProfitDesc"
+        case byCommissionAsc = "ByCommissionAsc"
+        case byCommissionDesc = "ByCommissionDesc"
+        case bySwapAsc = "BySwapAsc"
+        case bySwapDesc = "BySwapDesc"
     }
 
     /**
@@ -509,6 +517,10 @@ open class SignalAPI {
         case byPriceCurrentDesc = "ByPriceCurrentDesc"
         case byProfitAsc = "ByProfitAsc"
         case byProfitDesc = "ByProfitDesc"
+        case byCommissionAsc = "ByCommissionAsc"
+        case byCommissionDesc = "ByCommissionDesc"
+        case bySwapAsc = "BySwapAsc"
+        case bySwapDesc = "BySwapDesc"
     }
 
     /**

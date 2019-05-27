@@ -547,13 +547,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You invested in program" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXo-aN-ZUB" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="16.333333333333329" width="164.66666666666666" height="17.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="16.333333333333329" width="162.66666666666666" height="17.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htZ-7m-1Nk" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="172.66666666666663" y="0.0" width="181.33333333333337" height="50"/>
+                                                                <rect key="frame" x="170.66666666666663" y="0.0" width="183.33333333333337" height="50"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1835,7 +1835,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_program_level_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hhe-DH-fmz">
-                                        <rect key="frame" x="359" y="47.666666666666671" width="55" height="161.00000000000003"/>
+                                        <rect key="frame" x="359" y="47.666666666666657" width="55" height="161"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="161" id="LxM-9H-WQc"/>
                                             <constraint firstAttribute="width" constant="55" id="Yhy-wE-ejs"/>

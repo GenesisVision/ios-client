@@ -128,9 +128,21 @@ extension DashboardViewModel {
     }
     
     private func updateList() {
-        router.programListViewController?.fetch()
-        router.fundListViewController?.fetch()
-        router.signalListViewController?.fetch()
+        if let viewModel = router.programListViewController?.viewModel {
+            viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+            viewModel.filterModel.dateRangeModel.dateTo = dateTo
+            
+            router.programListViewController?.fetch()
+        }
+        
+        if let viewModel = router.fundListViewController?.viewModel {
+            viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+            viewModel.filterModel.dateRangeModel.dateTo = dateTo
+            
+            router.fundListViewController?.fetch()
+        }
+        
+//        router.signalListViewController?.fetch()
     }
     
     private func fetch(_ completion: @escaping CompletionBlock) {
