@@ -55,11 +55,17 @@ final class ProgramFacetsViewModel: ListViewModelProtocolWithFacets {
         }
         
         filterModel.isFavorite = filterModel.facetTitle == "Favorites"
-        let sortType = facet.sortType
         
-        if sortType != nil, sortType == .toLevelUp {
+        guard let sortType = facet.sortType else {
+            return router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+        }
+        
+        filterModel.sortingModel.sortType = sortType.rawValue
+        
+        switch sortType {
+        case .toLevelUp:
             router.show(routeType: .showRatingList(filterModel: filterModel))
-        } else {
+        default:
             router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
         }
     }
@@ -116,11 +122,17 @@ final class FundFacetsViewModel: ListViewModelProtocolWithFacets {
         }
         
         filterModel.isFavorite = filterModel.facetTitle == "Favorites"
-        let sortType = facet.sortType
+
+        guard let sortType = facet.sortType else {
+            return router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
+        }
         
-        if sortType != nil, sortType == .toLevelUp {
+        filterModel.sortingModel.sortType = sortType.rawValue
+        
+        switch sortType {
+        case .toLevelUp:
             router.show(routeType: .showRatingList(filterModel: filterModel))
-        } else {
+        default:
             router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
         }
     }

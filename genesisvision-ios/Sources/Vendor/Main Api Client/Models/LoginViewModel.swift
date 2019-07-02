@@ -11,23 +11,23 @@ import Foundation
 
 open class LoginViewModel: Codable {
 
-    public var email: String
     public var password: String
     public var rememberMe: Bool?
     public var twoFactorCode: String?
     public var recoveryCode: String?
     public var client: String?
+    public var email: String
     public var captchaCheckResult: CaptchaCheckResult?
 
 
     
-    public init(email: String, password: String, rememberMe: Bool?, twoFactorCode: String?, recoveryCode: String?, client: String?, captchaCheckResult: CaptchaCheckResult?) {
-        self.email = email
+    public init(password: String, rememberMe: Bool?, twoFactorCode: String?, recoveryCode: String?, client: String?, email: String, captchaCheckResult: CaptchaCheckResult?) {
         self.password = password
         self.rememberMe = rememberMe
         self.twoFactorCode = twoFactorCode
         self.recoveryCode = recoveryCode
         self.client = client
+        self.email = email
         self.captchaCheckResult = captchaCheckResult
     }
     
@@ -38,12 +38,12 @@ open class LoginViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(email, forKey: "email")
         try container.encode(password, forKey: "password")
         try container.encodeIfPresent(rememberMe, forKey: "rememberMe")
         try container.encodeIfPresent(twoFactorCode, forKey: "twoFactorCode")
         try container.encodeIfPresent(recoveryCode, forKey: "recoveryCode")
         try container.encodeIfPresent(client, forKey: "client")
+        try container.encode(email, forKey: "email")
         try container.encodeIfPresent(captchaCheckResult, forKey: "captchaCheckResult")
     }
 
@@ -52,12 +52,12 @@ open class LoginViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        email = try container.decode(String.self, forKey: "email")
         password = try container.decode(String.self, forKey: "password")
         rememberMe = try container.decodeIfPresent(Bool.self, forKey: "rememberMe")
         twoFactorCode = try container.decodeIfPresent(String.self, forKey: "twoFactorCode")
         recoveryCode = try container.decodeIfPresent(String.self, forKey: "recoveryCode")
         client = try container.decodeIfPresent(String.self, forKey: "client")
+        email = try container.decode(String.self, forKey: "email")
         captchaCheckResult = try container.decodeIfPresent(CaptchaCheckResult.self, forKey: "captchaCheckResult")
     }
 }

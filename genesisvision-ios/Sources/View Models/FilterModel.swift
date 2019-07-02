@@ -12,6 +12,7 @@ struct FilterSortingModel {
     var highToLowValue: Bool = true
     var selectedIndex: Int = 0
     var selectedSorting: Any?
+    var sortType: String?
     
     init() {
         highToLowValue = true
@@ -54,6 +55,8 @@ class FilterModel {
     
     var profitAvgMin: Double?
     var profitAvgMax: Double?
+    
+    var onlyActive: Bool = false
     
     init() {
         sortingModel = FilterSortingModel()

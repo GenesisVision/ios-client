@@ -21,14 +21,12 @@ open class UpdateSocialLinkViewModel: Codable {
         case weChat = "WeChat"
         case email = "Email"
     }
-    public var id: UUID?
     public var type: ModelType?
     public var value: String?
 
 
     
-    public init(id: UUID?, type: ModelType?, value: String?) {
-        self.id = id
+    public init(type: ModelType?, value: String?) {
         self.type = type
         self.value = value
     }
@@ -40,7 +38,6 @@ open class UpdateSocialLinkViewModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(type, forKey: "type")
         try container.encodeIfPresent(value, forKey: "value")
     }
@@ -50,7 +47,6 @@ open class UpdateSocialLinkViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
         value = try container.decodeIfPresent(String.self, forKey: "value")
     }

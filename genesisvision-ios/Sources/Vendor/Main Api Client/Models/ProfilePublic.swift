@@ -16,15 +16,17 @@ open class ProfilePublic: Codable {
     public var avatar: String?
     public var registrationDate: Date?
     public var url: String?
+    public var socialLinks: [SocialLinkViewModel]?
 
 
     
-    public init(id: UUID?, username: String?, avatar: String?, registrationDate: Date?, url: String?) {
+    public init(id: UUID?, username: String?, avatar: String?, registrationDate: Date?, url: String?, socialLinks: [SocialLinkViewModel]?) {
         self.id = id
         self.username = username
         self.avatar = avatar
         self.registrationDate = registrationDate
         self.url = url
+        self.socialLinks = socialLinks
     }
     
 
@@ -39,6 +41,7 @@ open class ProfilePublic: Codable {
         try container.encodeIfPresent(avatar, forKey: "avatar")
         try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
         try container.encodeIfPresent(url, forKey: "url")
+        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
     }
 
     // Decodable protocol methods
@@ -51,6 +54,7 @@ open class ProfilePublic: Codable {
         avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
         registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
         url = try container.decodeIfPresent(String.self, forKey: "url")
+        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
     }
 }
 

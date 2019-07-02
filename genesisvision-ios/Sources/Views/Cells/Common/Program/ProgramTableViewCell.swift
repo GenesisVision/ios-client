@@ -64,6 +64,7 @@ class ProgramTableViewCell: PlateTableViewCell {
             investedImageView.isHidden = true
         }
     }
+    
     // MARK: - Labels
     @IBOutlet weak var noDataLabel: SubtitleLabel!
     

@@ -32,7 +32,7 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/balance
      - examples: [{contentType=application/json, example={
   "programCurrencyBalance" : 0.8008281904610115,
-  "programCurrency" : "BTC",
+  "programCurrency" : "Undefined",
   "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "investorsFunds" : 5.962133916683182,
@@ -94,12 +94,12 @@ open class ProgramsAPI {
      - GET /v1.0/programs/{id}/charts/profit
      - examples: [{contentType=application/json, example={
   "profitFactor" : 7.386281948385884,
-  "profitChangePercent" : 1.4894159098541704,
-  "calmarRatio" : 1.1730742509559433,
-  "timeframeGvtProfit" : 9.965781217890562,
+  "profitChangePercent" : 6.84685269835264,
+  "calmarRatio" : 4.965218492984954,
+  "timeframeGvtProfit" : 9.369310271410669,
   "timeframeProgramCurrencyProfit" : 3.616076749251911,
   "trades" : 2,
-  "maxDrawdown" : 4.965218492984954,
+  "maxDrawdown" : 5.025004791520295,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -107,9 +107,10 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
+  "tradingVolume" : 1.2315135367772556,
   "investors" : 1,
-  "totalGvtProfit" : 5.025004791520295,
-  "sortinoRatio" : 7.457744773683766,
+  "totalGvtProfit" : 9.965781217890562,
+  "sortinoRatio" : 1.1730742509559433,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
@@ -117,9 +118,9 @@ open class ProgramsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "balance" : 1.2315135367772556,
-  "programCurrency" : "BTC",
-  "rate" : 9.369310271410669,
+  "balance" : 1.0246457001441578,
+  "programCurrency" : "Undefined",
+  "rate" : 6.683562403749608,
   "totalProgramCurrencyProfit" : 9.301444243932576,
   "successTradesPercent" : 4.145608029883936,
   "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -130,7 +131,7 @@ open class ProgramsAPI {
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00"
   } ],
-  "sharpeRatio" : 6.84685269835264,
+  "sharpeRatio" : 7.457744773683766,
   "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
 }}]
      
@@ -246,12 +247,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsByIdGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -280,58 +281,87 @@ open class ProgramsAPI {
      Program details
      - GET /v1.0/programs/{id}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 1.4658129805029452,
+  "entryFee" : 5.962133916683182,
+  "successFeeSelected" : 9.301444243932576,
   "color" : "color",
-  "stopOutLevel" : 7.061401241503109,
-  "availableInvestment" : 2.027123023002322,
-  "successFee" : 2.3021358869347655,
-  "isForex" : true,
+  "stopOutLevel" : 2.027123023002322,
+  "genesisRatio" : 1.1730742509559433,
+  "availableInvestment" : 9.965781217890562,
+  "successFee" : 7.061401241503109,
+  "availableInvestmentLimit" : 6.683562403749608,
   "rating" : {
-    "rating" : 7,
+    "rating" : 3,
     "canLevelUp" : true,
-    "topPercent" : 3.616076749251911,
-    "profit" : 9.301444243932576
+    "topPercent" : 4.145608029883936,
+    "profit" : 2.027123023002322
   },
   "description" : "description",
-  "signalVolumeFee" : 3.616076749251911,
+  "signalVolumeFee" : 1.0246457001441578,
   "title" : "title",
   "isSignalProgram" : true,
-  "availableInvestmentBase" : 4.145608029883936,
+  "availableInvestmentBase" : 9.369310271410669,
   "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+  "stopOutLevelSelected" : 4.145608029883936,
+  "leverageMax" : 6,
+  "investmentScale" : 4.965218492984954,
+  "successFeeCurrent" : 3.616076749251911,
+  "ageDays" : 7.457744773683766,
   "logo" : "logo",
-  "currency" : "BTC",
+  "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "periodDuration" : 6,
+  "brokerDetails" : {
+    "showSwaps" : true,
+    "isForex" : true,
+    "logo" : "logo",
+    "showTickets" : true
+  },
+  "levelProgress" : 6.027456183070403,
+  "leverageMin" : 1,
+  "periodDuration" : 1,
+  "stopOutLevelCurrent" : 7.386281948385884,
   "statistic" : {
-    "profitFactorPercent" : 9.965781217890562,
-    "investedAmount" : 1.1730742509559433,
-    "startCurrency" : "BTC",
+    "profitFactorPercent" : 6.704019297950036,
+    "investedAmount" : 6.778324963048013,
+    "startCurrency" : "Undefined",
     "tradesSuccessCount" : 5,
-    "drawdownPercent" : 1.4894159098541704,
+    "drawdownPercent" : 6.965117697638846,
     "balanceBase" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
-    "tradesCount" : 4,
+    "tradesCount" : 6,
     "hasNotifications" : true,
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
-    "profitPercent" : 1.2315135367772556,
-    "investedCurrency" : "BTC",
-    "sharpeRatioPercent" : 9.369310271410669,
-    "profitValue" : 1.0246457001441578,
-    "currentValue" : 7.386281948385884,
+    "profitPercent" : 6.438423552598547,
+    "investedCurrency" : "Undefined",
+    "sharpeRatioPercent" : 3.353193347011243,
+    "profitValue" : 3.5571952270680973,
+    "currentValue" : 9.018348186070783,
     "startDate" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 7.457744773683766,
+    "startBalance" : 2.8841621266687802,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
-    "investorsCount" : 6
+    "investorsCount" : 1
   },
   "manager" : {
+    "socialLinks" : [ {
+      "name" : "name",
+      "logo" : "logo",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url"
+    }, {
+      "name" : "name",
+      "logo" : "logo",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url"
+    } ],
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
@@ -339,44 +369,57 @@ open class ProgramsAPI {
     "username" : "username"
   },
   "level" : 0,
-  "entryFeeCurrent" : 5.637376656633329,
-  "entryFeeSelected" : 5.962133916683182,
+  "entryFeeCurrent" : 2.3021358869347655,
+  "entryFeeSelected" : 5.637376656633329,
   "isReinvesting" : true,
   "creationDate" : "2000-01-23T04:56:07.000+00:00",
   "personalProgramDetails" : {
     "canCloseAsset" : true,
     "canCloseProgram" : true,
     "canWithdraw" : true,
+    "login" : "login",
+    "hasNotifications" : true,
+    "canChangePassword" : true,
+    "gvtValue" : 7.386281948385884,
+    "isFinishing" : true,
+    "value" : 1.0246457001441578,
+    "profit" : 1.4894159098541704,
+    "pendingOutputIsWithdrawAll" : true,
     "canInvest" : true,
     "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "login" : "login",
     "showTwoFactorButton" : true,
     "canClosePeriod" : true,
-    "pendingOutput" : 1.4894159098541704,
-    "hasNotifications" : true,
-    "pendingInput" : 1.0246457001441578,
+    "pendingOutput" : 1.1730742509559433,
+    "pendingInput" : 7.457744773683766,
     "isOwnProgram" : true,
     "isReinvest" : true,
-    "gvtValue" : 2.027123023002322,
-    "isFinishing" : true,
+    "migration" : {
+      "brokerTradingAccountName" : "brokerTradingAccountName",
+      "newLeverage" : 1,
+      "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "dateCreate" : "2000-01-23T04:56:07.000+00:00",
+      "brokerName" : "brokerName",
+      "brokerLogo" : "brokerLogo"
+    },
     "signalSubscription" : {
       "mode" : "ByBalance",
+      "totalVolume" : 1.2315135367772556,
       "hasSignalAccount" : true,
-      "fixedCurrency" : "BTC",
+      "totalProfit" : 7.386281948385884,
+      "fixedCurrency" : "Undefined",
       "fixedVolume" : 4.145608029883936,
       "openTolerancePercent" : 2.027123023002322,
       "hasActiveSubscription" : true,
       "percent" : 3.616076749251911
     },
     "canMakeSignalProvider" : true,
-    "value" : 4.145608029883936,
-    "profit" : 7.386281948385884,
-    "invested" : 1.2315135367772556,
+    "invested" : 6.84685269835264,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
   },
   "url" : "url",
+  "totalAvailableInvestment" : 8.762042012749001,
   "tags" : [ {
     "color" : "color",
     "name" : "name"
@@ -386,7 +429,8 @@ open class ProgramsAPI {
   } ],
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "ipfsHash" : "ipfsHash",
-  "signalSuccessFee" : 9.301444243932576,
+  "signalSuccessFee" : 1.2315135367772556,
+  "volumeScale" : 5.025004791520295,
   "status" : "None"
 }}]
      
@@ -430,6 +474,7 @@ open class ProgramsAPI {
      Program periods
      
      - parameter id: (path)  
+     - parameter authorization: (header)  (optional)
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter numberMin: (query)  (optional)
@@ -439,8 +484,8 @@ open class ProgramsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdPeriodsGet(id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: Status_v10ProgramsByIdPeriodsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramPeriodsViewModel?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdPeriodsGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdPeriodsGet(id: String, authorization: String? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: Status_v10ProgramsByIdPeriodsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramPeriodsViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdPeriodsGetWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -450,23 +495,38 @@ open class ProgramsAPI {
      Program periods
      - GET /v1.0/programs/{id}/periods
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 9,
   "periods" : [ {
     "number" : 0,
+    "balance" : 1.4658129805029452,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "profit" : 6.027456183070403,
+    "investors" : 5,
+    "managerStatistic" : {
+      "deposit" : 5.637376656633329,
+      "commissionRebate" : 7.061401241503109,
+      "withdraw" : 2.3021358869347655
+    },
     "status" : "Planned"
   }, {
     "number" : 0,
+    "balance" : 1.4658129805029452,
     "dateTo" : "2000-01-23T04:56:07.000+00:00",
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "profit" : 6.027456183070403,
+    "investors" : 5,
+    "managerStatistic" : {
+      "deposit" : 5.637376656633329,
+      "commissionRebate" : 7.061401241503109,
+      "withdraw" : 2.3021358869347655
+    },
     "status" : "Planned"
   } ]
 }}]
      
      - parameter id: (path)  
+     - parameter authorization: (header)  (optional)
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter numberMin: (query)  (optional)
@@ -477,7 +537,7 @@ open class ProgramsAPI {
 
      - returns: RequestBuilder<ProgramPeriodsViewModel> 
      */
-    open class func v10ProgramsByIdPeriodsGetWithRequestBuilder(id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: Status_v10ProgramsByIdPeriodsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramPeriodsViewModel> {
+    open class func v10ProgramsByIdPeriodsGetWithRequestBuilder(id: String, authorization: String? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: Status_v10ProgramsByIdPeriodsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramPeriodsViewModel> {
         var path = "/v1.0/programs/{id}/periods"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -494,10 +554,106 @@ open class ProgramsAPI {
             "Take": take?.encodeToJSON()
         ])
         
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ProgramPeriodsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter status
+     */
+    public enum Status_v10ProgramsByIdSubscribersGet: String { 
+        case all = "All"
+        case active = "Active"
+    }
+
+    /**
+     Signal subscribers
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter status: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProgramsByIdSubscribersGet(id: UUID, authorization: String, status: Status_v10ProgramsByIdSubscribersGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalProviderSubscribers?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdSubscribersGetWithRequestBuilder(id: id, authorization: authorization, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Signal subscribers
+     - GET /v1.0/programs/{id}/subscribers
+     - examples: [{contentType=application/json, example={
+  "total" : 9,
+  "subscribers" : [ {
+    "unsubscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "totalSuccessFeeCurrency" : "Undefined",
+    "totalCommissionAmount" : 5.637376656633329,
+    "trades" : 6,
+    "totalCommissionCurrency" : "Undefined",
+    "totalVolumeFeeAmount" : 7.061401241503109,
+    "totalSuccessFeeAmount" : 2.3021358869347655,
+    "volume" : 5.962133916683182,
+    "number" : 0,
+    "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "totalVolumeFeeCurrency" : "Undefined",
+    "profit" : 1.4658129805029452,
+    "status" : "Active"
+  }, {
+    "unsubscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "totalSuccessFeeCurrency" : "Undefined",
+    "totalCommissionAmount" : 5.637376656633329,
+    "trades" : 6,
+    "totalCommissionCurrency" : "Undefined",
+    "totalVolumeFeeAmount" : 7.061401241503109,
+    "totalSuccessFeeAmount" : 2.3021358869347655,
+    "volume" : 5.962133916683182,
+    "number" : 0,
+    "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "totalVolumeFeeCurrency" : "Undefined",
+    "profit" : 1.4658129805029452,
+    "status" : "Active"
+  } ]
+}}]
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter status: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<SignalProviderSubscribers> 
+     */
+    open class func v10ProgramsByIdSubscribersGetWithRequestBuilder(id: UUID, authorization: String, status: Status_v10ProgramsByIdSubscribersGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalProviderSubscribers> {
+        var path = "/v1.0/programs/{id}/subscribers"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Status": status?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<SignalProviderSubscribers>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -527,6 +683,25 @@ open class ProgramsAPI {
     }
 
     /**
+     * enum for parameter accountCurrency
+     */
+    public enum AccountCurrency_v10ProgramsByIdTradesGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
      Trade history
      
      - parameter id: (path)  
@@ -535,12 +710,13 @@ open class ProgramsAPI {
      - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
+     - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdTradesGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdTradesGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdTradesGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdTradesGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -568,7 +744,15 @@ open class ProgramsAPI {
     "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
-    "masterLogin" : "masterLogin",
+    "signalData" : {
+      "masters" : [ {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      }, {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      } ]
+    },
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   }, {
@@ -587,7 +771,15 @@ open class ProgramsAPI {
     "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
-    "masterLogin" : "masterLogin",
+    "signalData" : {
+      "masters" : [ {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      }, {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      } ]
+    },
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   } ],
@@ -600,12 +792,13 @@ open class ProgramsAPI {
      - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
+     - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func v10ProgramsByIdTradesGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func v10ProgramsByIdTradesGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10ProgramsByIdTradesGet? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10ProgramsByIdTradesGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
         var path = "/v1.0/programs/{id}/trades"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -618,6 +811,7 @@ open class ProgramsAPI {
             "Symbol": symbol, 
             "Sorting": sorting?.rawValue, 
             "AccountId": accountId, 
+            "AccountCurrency": accountCurrency?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -655,18 +849,38 @@ open class ProgramsAPI {
     }
 
     /**
+     * enum for parameter accountCurrency
+     */
+    public enum AccountCurrency_v10ProgramsByIdTradesOpenGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
      Open positions
      
      - parameter id: (path)  
      - parameter sorting: (query)  (optional)
      - parameter symbol: (query)  (optional)
      - parameter accountId: (query)  (optional)
+     - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdTradesOpenGet(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: id, sorting: sorting, symbol: symbol, accountId: accountId, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdTradesOpenGet(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: id, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -694,7 +908,15 @@ open class ProgramsAPI {
     "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
-    "masterLogin" : "masterLogin",
+    "signalData" : {
+      "masters" : [ {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      }, {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      } ]
+    },
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   }, {
@@ -713,7 +935,15 @@ open class ProgramsAPI {
     "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 5.637376656633329,
-    "masterLogin" : "masterLogin",
+    "signalData" : {
+      "masters" : [ {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      }, {
+        "share" : 7.457744773683766,
+        "login" : "login"
+      } ]
+    },
     "profit" : 6.027456183070403,
     "direction" : "Buy"
   } ],
@@ -724,12 +954,13 @@ open class ProgramsAPI {
      - parameter sorting: (query)  (optional)
      - parameter symbol: (query)  (optional)
      - parameter accountId: (query)  (optional)
+     - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func v10ProgramsByIdTradesOpenGetWithRequestBuilder(id: UUID, sorting: Sorting_v10ProgramsByIdTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10ProgramsByIdTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
         var path = "/v1.0/programs/{id}/trades/open"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -740,12 +971,57 @@ open class ProgramsAPI {
             "Sorting": sorting?.rawValue, 
             "Symbol": symbol, 
             "AccountId": accountId, 
+            "AccountCurrency": accountCurrency?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
         
 
         let requestBuilder: RequestBuilder<TradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Export trades
+     
+     - parameter programId: (path)  
+     - parameter start: (query)  (optional)
+     - parameter end: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProgramsByProgramIdTradesExportGet(programId: UUID, start: Date? = nil, end: Date? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        v10ProgramsByProgramIdTradesExportGetWithRequestBuilder(programId: programId, start: start, end: end).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Export trades
+     - GET /v1.0/programs/{programId}/trades/export
+     - examples: [{contentType=application/json, example=""}]
+     
+     - parameter programId: (path)  
+     - parameter start: (query)  (optional)
+     - parameter end: (query)  (optional)
+
+     - returns: RequestBuilder<Data> 
+     */
+    open class func v10ProgramsByProgramIdTradesExportGetWithRequestBuilder(programId: UUID, start: Date? = nil, end: Date? = nil) -> RequestBuilder<Data> {
+        var path = "/v1.0/programs/{programId}/trades/export"
+        path = path.replacingOccurrences(of: "{programId}", with: "\(programId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "start": start?.encodeToJSON(), 
+            "end": end?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -774,18 +1050,20 @@ open class ProgramsAPI {
         case byBalanceDesc = "ByBalanceDesc"
         case byCurrDesc = "ByCurrDesc"
         case byCurrAsc = "ByCurrAsc"
+        case byLevelProgressDesc = "ByLevelProgressDesc"
+        case byLevelProgressAsc = "ByLevelProgressAsc"
     }
 
     /**
      * enum for parameter programCurrency
      */
     public enum ProgramCurrency_v10ProgramsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -799,12 +1077,12 @@ open class ProgramsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ProgramsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -870,18 +1148,36 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 4,
   "programs" : [ {
-    "periodDuration" : 6,
+    "color" : "color",
+    "stopOutLevel" : 5.962133916683182,
+    "availableInvestment" : 5.637376656633329,
+    "availableInvestmentLimit" : 7.061401241503109,
+    "rating" : {
+      "rating" : 3,
+      "canLevelUp" : true,
+      "topPercent" : 4.145608029883936,
+      "profit" : 2.027123023002322
+    },
+    "description" : "description",
+    "title" : "title",
+    "availableInvestmentBase" : 2.3021358869347655,
+    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "levelProgress" : 6.027456183070403,
+    "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -889,12 +1185,24 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
-    "color" : "color",
     "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
@@ -902,20 +1210,8 @@ open class ProgramsAPI {
       "username" : "username"
     },
     "level" : 0,
-    "stopOutLevel" : 1.4658129805029452,
-    "availableInvestment" : 5.962133916683182,
-    "rating" : {
-      "rating" : 7,
-      "canLevelUp" : true,
-      "topPercent" : 3.616076749251911,
-      "profit" : 9.301444243932576
-    },
-    "description" : "description",
-    "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
-    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -924,45 +1220,54 @@ open class ProgramsAPI {
       "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 2.3021358869347655
+      "share" : 9.301444243932576
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
+      "login" : "login",
+      "hasNotifications" : true,
+      "canChangePassword" : true,
+      "gvtValue" : 7.386281948385884,
+      "isFinishing" : true,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.4894159098541704,
-      "hasNotifications" : true,
-      "pendingInput" : 1.0246457001441578,
+      "pendingOutput" : 1.1730742509559433,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 2.027123023002322,
-      "isFinishing" : true,
+      "migration" : {
+        "brokerTradingAccountName" : "brokerTradingAccountName",
+        "newLeverage" : 1,
+        "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "dateCreate" : "2000-01-23T04:56:07.000+00:00",
+        "brokerName" : "brokerName",
+        "brokerLogo" : "brokerLogo"
+      },
       "signalSubscription" : {
         "mode" : "ByBalance",
+        "totalVolume" : 1.2315135367772556,
         "hasSignalAccount" : true,
-        "fixedCurrency" : "BTC",
+        "totalProfit" : 7.386281948385884,
+        "fixedCurrency" : "Undefined",
         "fixedVolume" : 4.145608029883936,
         "openTolerancePercent" : 2.027123023002322,
         "hasActiveSubscription" : true,
         "percent" : 3.616076749251911
       },
       "canMakeSignalProvider" : true,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "invested" : 1.2315135367772556,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
-    "logo" : "logo",
-    "currency" : "BTC",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911
@@ -972,16 +1277,34 @@ open class ProgramsAPI {
     } ],
     "status" : "None"
   }, {
-    "periodDuration" : 6,
+    "color" : "color",
+    "stopOutLevel" : 5.962133916683182,
+    "availableInvestment" : 5.637376656633329,
+    "availableInvestmentLimit" : 7.061401241503109,
+    "rating" : {
+      "rating" : 3,
+      "canLevelUp" : true,
+      "topPercent" : 4.145608029883936,
+      "profit" : 2.027123023002322
+    },
+    "description" : "description",
+    "title" : "title",
+    "availableInvestmentBase" : 2.3021358869347655,
+    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "levelProgress" : 6.027456183070403,
+    "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "tradesCount" : 7,
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "profitPercent" : 1.4658129805029452,
       "profitValue" : 5.962133916683182,
@@ -989,12 +1312,24 @@ open class ProgramsAPI {
       "currentValue" : 6.027456183070403,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
       "investorsCount" : 2
     },
-    "color" : "color",
     "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
@@ -1002,20 +1337,8 @@ open class ProgramsAPI {
       "username" : "username"
     },
     "level" : 0,
-    "stopOutLevel" : 1.4658129805029452,
-    "availableInvestment" : 5.962133916683182,
-    "rating" : {
-      "rating" : 7,
-      "canLevelUp" : true,
-      "topPercent" : 3.616076749251911,
-      "profit" : 9.301444243932576
-    },
-    "description" : "description",
-    "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "availableInvestmentBase" : 5.637376656633329,
     "url" : "url",
-    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1024,45 +1347,54 @@ open class ProgramsAPI {
       "name" : "name"
     } ],
     "dashboardAssetsDetails" : {
-      "share" : 2.3021358869347655
+      "share" : 9.301444243932576
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "personalDetails" : {
       "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
+      "login" : "login",
+      "hasNotifications" : true,
+      "canChangePassword" : true,
+      "gvtValue" : 7.386281948385884,
+      "isFinishing" : true,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "login" : "login",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.4894159098541704,
-      "hasNotifications" : true,
-      "pendingInput" : 1.0246457001441578,
+      "pendingOutput" : 1.1730742509559433,
+      "pendingInput" : 7.457744773683766,
       "isOwnProgram" : true,
       "isReinvest" : true,
-      "gvtValue" : 2.027123023002322,
-      "isFinishing" : true,
+      "migration" : {
+        "brokerTradingAccountName" : "brokerTradingAccountName",
+        "newLeverage" : 1,
+        "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "dateCreate" : "2000-01-23T04:56:07.000+00:00",
+        "brokerName" : "brokerName",
+        "brokerLogo" : "brokerLogo"
+      },
       "signalSubscription" : {
         "mode" : "ByBalance",
+        "totalVolume" : 1.2315135367772556,
         "hasSignalAccount" : true,
-        "fixedCurrency" : "BTC",
+        "totalProfit" : 7.386281948385884,
+        "fixedCurrency" : "Undefined",
         "fixedVolume" : 4.145608029883936,
         "openTolerancePercent" : 2.027123023002322,
         "hasActiveSubscription" : true,
         "percent" : 3.616076749251911
       },
       "canMakeSignalProvider" : true,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "invested" : 1.2315135367772556,
+      "invested" : 6.84685269835264,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
-    "logo" : "logo",
-    "currency" : "BTC",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 3.616076749251911

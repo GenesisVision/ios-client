@@ -286,7 +286,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
 
     @objc private func signOutMethod() {
-        showAlertWithTitle(title: nil, message: "Log out?", actionTitle: "Yes", cancelTitle: "Cancel", handler: { [weak self] in
+        showAlertWithTitle(title: String.Alerts.SignOut.title, message: String.Alerts.SignOut.message, actionTitle: String.Alerts.yesButtonText, cancelTitle: String.Alerts.cancelButtonText, handler: { [weak self] in
             self?.viewModel.signOut()
             }, cancelHandler: nil)
     }

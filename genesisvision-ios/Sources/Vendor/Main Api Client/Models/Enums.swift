@@ -13,12 +13,14 @@ open class Enums: Codable {
 
     public var multiWallet: MultiWalletFilters?
     public var program: ProgramFilters?
+    public var fund: FundFilters?
 
 
     
-    public init(multiWallet: MultiWalletFilters?, program: ProgramFilters?) {
+    public init(multiWallet: MultiWalletFilters?, program: ProgramFilters?, fund: FundFilters?) {
         self.multiWallet = multiWallet
         self.program = program
+        self.fund = fund
     }
     
 
@@ -30,6 +32,7 @@ open class Enums: Codable {
 
         try container.encodeIfPresent(multiWallet, forKey: "multiWallet")
         try container.encodeIfPresent(program, forKey: "program")
+        try container.encodeIfPresent(fund, forKey: "fund")
     }
 
     // Decodable protocol methods
@@ -39,6 +42,7 @@ open class Enums: Codable {
 
         multiWallet = try container.decodeIfPresent(MultiWalletFilters.self, forKey: "multiWallet")
         program = try container.decodeIfPresent(ProgramFilters.self, forKey: "program")
+        fund = try container.decodeIfPresent(FundFilters.self, forKey: "fund")
     }
 }
 

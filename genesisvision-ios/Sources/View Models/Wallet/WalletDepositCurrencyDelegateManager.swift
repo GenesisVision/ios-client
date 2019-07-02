@@ -8,7 +8,7 @@
 
 import UIKit.UITableView
 
-final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource, CurrencyDelegateManagerProtocol {
     // MARK: - Variables
     weak var currencyDelegate: WalletDepositCurrencyDelegateManagerProtocol?
     

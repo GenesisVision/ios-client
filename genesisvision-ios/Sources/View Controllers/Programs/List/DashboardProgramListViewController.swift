@@ -53,7 +53,9 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
-        setupPullToRefresh(scrollView: tableView)
+        if viewModel.canPullToRefresh {
+            setupPullToRefresh(scrollView: tableView)
+        }
     }
     
     private func reloadData() {

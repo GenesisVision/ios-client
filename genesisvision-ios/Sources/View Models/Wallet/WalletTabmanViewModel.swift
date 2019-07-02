@@ -11,52 +11,71 @@ import Tabman
 
 final class WalletTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
-    var dataSource: WalletPageboyViewControllerDataSource!
+    var dataSource: BasePageboyViewControllerDataSource!
     var wallet: WalletData?
+    var accounts: [CopyTradingAccountInfo]?
+    var account: CopyTradingAccountInfo?
     var multiWallet: WalletMultiSummary?
     
+    var walletType: WalletType = .all
     // MARK: - Init
-    init(withRouter router: Router, wallet: WalletData? = nil, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {
+    init(withRouter router: Router, wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil, walletType: WalletType) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
         self.wallet = wallet
+        self.account = account
+        self.walletType = walletType
         
         font = UIFont.getFont(.semibold, size: 16)
         
-        guard let wallet = wallet else {
-            title = "Wallets"
-
+        switch walletType {
+        case .wallet:
+            guard let wallet = wallet else { return }
+            
+            if let title = wallet.title {
+                self.title = title
+            }
+            
             items = [TabmanBar.Item(title: "Balance"),
-                     TabmanBar.Item(title: "My Wallets"),
                      TabmanBar.Item(title: "Transactions"),
                      TabmanBar.Item(title: "Deposits/Withdrawals")]
             
-//            items = [TabmanBar.Item(title: "Balance"),
-//                     TabmanBar.Item(title: "My Wallets"),
-//                     TabmanBar.Item(title: "Copytrading accounts"),
-//                     TabmanBar.Item(title: "Transactions"),
-//                     TabmanBar.Item(title: "Deposits/Withdrawals")]
+            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
+        case .account:
+            guard let account = account else { return }
             
-            dataSource = WalletPageboyViewControllerDataSource(router: router)
+            if let title = account.title {
+                self.title = title
+            }
             
-            return
+            items = [TabmanBar.Item(title: "Balance")]
+//                     TabmanBar.Item(title: "Open trades"),
+//                     TabmanBar.Item(title: "Trades history")]
+            
+            dataSource = WalletCopytradingPageboyViewControllerDataSource(router: router, account: account)
+        case .all:
+            self.title = "Wallets"
+
+            items = [TabmanBar.Item(title: "Balance"), TabmanBar.Item(title: "My Wallets")]
+
+            if signalEnable {
+                items?.append(TabmanBar.Item(title: "Copytrading accounts"))
+            }
+    
+            items?.append(contentsOf: [TabmanBar.Item(title: "Transactions"),
+                                       TabmanBar.Item(title: "Deposits/Withdrawals")])
+            
+            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: nil)
         }
-        
-        if let currencyValue = wallet.currency?.rawValue {
-            title = currencyValue
-        }
-        
-        items = [TabmanBar.Item(title: "Balance"),
-                 TabmanBar.Item(title: "Transactions"),
-                 TabmanBar.Item(title: "Deposits/Withdrawals")]
-        
-        dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
     }
     
     // MARK: - Public methods
     func reloadDetails() {
+        //TODO: 
         let controllers = dataSource.controllers
-        if let walletBalanceViewController = controllers[0] as? WalletBalanceViewController, let walletListViewController = controllers[1] as? WalletListViewController {
+        if walletType == .account, let walletBalanceViewController = controllers[0] as? WalletBalanceViewController {
+            walletBalanceViewController.viewModel.fetch()
+        } else if let walletBalanceViewController = controllers[0] as? WalletBalanceViewController, let walletListViewController = controllers[1] as? WalletListViewController {
             walletBalanceViewController.viewModel.fetch()
             walletListViewController.viewModel.fetch()
         }
@@ -81,15 +100,28 @@ class WalletPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
                 controllers.append(vc)
             }
             
-//            if wallet == nil, let vc = router.getCopytradingAccounts(wallet) {
-//                controllers.append(vc)
-//            }
+            if signalEnable, wallet == nil, let vc = router.getCopytradingAccounts(wallet) {
+                controllers.append(vc)
+            }
             
             if let vc = router.getInternalTransactions(wallet) {
                 controllers.append(vc)
             }
             
             if let vc = router.getExternalTransactions(wallet) {
+                controllers.append(vc)
+            }
+        }
+    }
+}
+
+class WalletCopytradingPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
+    var copyTradingAccountInfo: CopyTradingAccountInfo?
+    
+    // MARK: - Private methods
+    internal override func setup(router: Router, account: CopyTradingAccountInfo? = nil) {
+        if let router = router as? WalletRouter {
+            if let vc = router.getBalance(account: account) {
                 controllers.append(vc)
             }
         }

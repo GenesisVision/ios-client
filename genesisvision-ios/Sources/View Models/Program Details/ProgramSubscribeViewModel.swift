@@ -9,157 +9,203 @@
 import Foundation
 
 final class ProgramSubscribeViewModel {
+    
+    enum FollowType {
+        case follow
+        case unfollow
+    }
     // MARK: - Variables
-    var title: String = "Signal"
+    var title: String = ""
     var programId: String?
     var programCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
     
-    var programInvestInfo: ProgramInvestInfo?
-
-    var walletMultiSummary: WalletMultiSummary?
-    var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
+    var followType: FollowType = .follow
     
-    var rate: Double = 0.0
+    var attachToSignal: AttachToSignalProvider!
+    var reasonMode: DetachFromSignalProvider.Mode = ._none
     
-    private var router: ProgramInvestRouter!
+    var signalSubscription: SignalSubscription?
+    
+    private var router: ProgramInfoRouter!
+    private weak var detailProtocol: DetailProtocol?
+    
+    var usd: Double {
+        get {
+            guard let value = signalSubscription?.fixedVolume else { return 0.0 }
+            return value
+        }
+        set {
+            signalSubscription?.fixedVolume = newValue
+        }
+    }
+    
+    var volume: Double {
+        get {
+            guard let value = signalSubscription?.percent else { return 0.0 }
+            return value
+        }
+        set {
+            signalSubscription?.percent = newValue
+        }
+    }
+    
+    var tolerance: Double {
+        get {
+            guard let value = signalSubscription?.openTolerancePercent else { return 0.0 }
+            return value
+        }
+        set {
+            signalSubscription?.openTolerancePercent = newValue
+        }
+    }
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType) {
+    init(withRouter router: ProgramInfoRouter, programId: String, initialDepositCurrency: CurrencyType? = nil, initialDepositAmount: Double? = nil, signalSubscription: SignalSubscription? = nil, detailProtocol: DetailProtocol?, followType: FollowType) {
         self.router = router
         self.programId = programId
-        self.programCurrency = programCurrency
+        self.detailProtocol = detailProtocol
+        self.followType = followType
+        
+        self.signalSubscription = signalSubscription ?? SignalSubscription(hasSignalAccount: nil, hasActiveSubscription: nil, mode: .byBalance, percent: 10, openTolerancePercent: 0.5, fixedVolume: 100, fixedCurrency: .usd, totalProfit: nil, totalVolume: nil)
+        
+        self.attachToSignal = AttachToSignalProvider(mode: .byBalance,
+                                                     percent: signalSubscription?.percent,
+                                                     openTolerancePercent: signalSubscription?.openTolerancePercent,
+                                                     fixedVolume: signalSubscription?.fixedVolume,
+                                                     fixedCurrency: nil,
+                                                     initialDepositCurrency: nil,
+                                                     initialDepositAmount: initialDepositAmount)
+        
+        self.reasonMode = ._none
+        
+        if let initialDepositCurrency = initialDepositCurrency, let currency = AttachToSignalProvider.InitialDepositCurrency(rawValue: initialDepositCurrency.rawValue) {
+            self.attachToSignal.initialDepositCurrency = currency
+        }
     }
     
     // MARK: - Public methods
-    func updateWalletCurrencyFromIndex(_ selectedIndex: Int, completion: @escaping CompletionBlock) {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else { return }
+    func getSelectedDescription() -> String {
+        switch followType {
+        case .follow:
+            return getSelectedTypeDescription()
+        case .unfollow:
+            return getSelectedReasonDescription()
+        }
+    }
+    
+    func getSelected() -> String {
+        switch followType {
+        case .follow:
+            return getSelectedType()
+        case .unfollow:
+            return getSelectedReason()
+        }
+    }
+    
+    func getFixedCurrency() -> String {
+        guard let fixedCurrency = signalSubscription?.fixedCurrency else { return "" }
+        
+        return fixedCurrency.rawValue
+    }
+    
+    func getMode() -> SignalSubscription.Mode {
+        return signalSubscription?.mode ?? .byBalance
+    }
+    func changeMode(_ mode: SignalSubscription.Mode) {
+        signalSubscription?.mode = mode
+    }
 
-        self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
-        self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
-        
-        updateRate(completion: completion)
+    func getReason() -> DetachFromSignalProvider.Mode {
+        return reasonMode
     }
     
-    func getInfo(completion: @escaping CompletionBlock) {
-        guard let programId = programId,
-            let programCurrencyValue = programCurrency?.rawValue,
-            let currencySecondary = InvestorAPI.Currency_v10InvestorProgramsByIdInvestInfoByCurrencyGet(rawValue: programCurrencyValue)
-            else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-            AuthManager.getWallet(completion: { [weak self] (wallet) in
-                if let wallet = wallet, let wallets = wallet.wallets {
-                    self?.walletMultiSummary = wallet
-                    self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
-                    self?.selectedWalletFromDelegateManager?.walletId = 0
-                    self?.selectedWalletFromDelegateManager?.selectedIndex = 0
-                    self?.selectedWalletFromDelegateManager?.selected = wallets[0]
-                }
-                
-                ProgramsDataProvider.getInvestInfo(programId: programId, currencySecondary: currencySecondary, completion: { [weak self] (programInvestInfo) in
-                    guard let programInvestInfo = programInvestInfo else {
-                        return completion(.failure(errorType: .apiError(message: nil)))
-                    }
-                    
-                    self?.programInvestInfo = programInvestInfo
-                    self?.updateRate(completion: completion)
-                    }, errorCompletion: completion)
-            }, completionError: completion)
-    }
-    
-    func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
-        guard let programCurrency = programCurrency?.rawValue, let currencyType = CurrencyType(rawValue: programCurrency) else { return "" }
-        let value = amount * rate
-        return "≈" + value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-    }
-    
-    func getMinInvestmentAmountText() -> String {
-        guard let programCurrency = programCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return "" }
-        
-        let minInvestmentAmount = getMinInvestmentAmount()
-        
-        var text = "min " + minInvestmentAmount.rounded(withType: programCurrency).toString() + " " + programCurrency.rawValue
-        
-        if programCurrency.rawValue != walletCurrency, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) {
-            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(withType: walletCurrencyType).toString() + " " + walletCurrencyType.rawValue
-            text.append("≈\(minValueInWalletCurrency)")
-            return " (\(text))"
-        }
-        
-        return text
-    }
-    
-    func getMinInvestmentAmount() -> Double {
-        guard let minInvestmentAmount = programInvestInfo?.minInvestmentAmount else { return 0.0 }
-        
-        return minInvestmentAmount
-    }
-    
-    func getSelectedWalletTitle() -> String {
-        guard let title = self.selectedWalletFromDelegateManager?.selected?.title, let currency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else {
-            return ""
-        }
-        
-        return title + " | " + currency
-    }
-    
-    func getMaxAmount() -> Double {
-        return max(getAvailableInWallet(), getAvailableToInvest() / rate)
-    }
-    
-    func getAvailableInWallet() -> Double {
-        guard let available = self.selectedWalletFromDelegateManager?.selected?.available else { return 0.0 }
-        
-        return available
-    }
-    
-    func getAvailableToInvest() -> Double {
-        guard let available = programInvestInfo?.availableToInvestBase else { return 0.0 }
-        
-        return available
-    }
-    
-    func getGVCommision() -> Double {
-        guard let gvCommission = programInvestInfo?.gvCommission else { return 0.0 }
-        
-        return gvCommission
-    }
-    
-    func getEntryFee() -> Double {
-        guard let entryFee = programInvestInfo?.entryFee else { return 0.0 }
-        
-        return entryFee
-    }
-    
-    func getApproximateAmount(_ amount: Double) -> Double {
-        return amount * rate
+    func changeReason(_ mode: DetachFromSignalProvider.Mode) {
+        reasonMode = mode
     }
     
     // MARK: - Private methods
-    private func updateRate(completion: @escaping CompletionBlock) {
-        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: programCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
-            self?.rate = rate ?? 0.0
-            completion(.success)
-            }, errorCompletion: completion)
+    private func getSelectedType() -> String {
+        guard let mode = signalSubscription?.mode else { return "" }
+        
+        switch mode {
+        case .byBalance:
+            return "By balance"
+        case .percent:
+            return "Percentage"
+        case .fixed:
+            return "Fixed"
+        }
     }
+    
+    private func getSelectedTypeDescription() -> String {
+        guard let mode = signalSubscription?.mode else { return "" }
+        
+        switch mode {
+        case .byBalance:
+            return "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
+        case .percent:
+            return "Positions are opened according to the percentage of the volume of positions opened by the signal provider."
+        case .fixed:
+            return "Each new position is opened at a fixed amount."
+        }
+    }
+    
+    private func getSelectedReason() -> String {
+        switch reasonMode {
+        case ._none:
+            return "Manual closing"
+        case .closeAllImmediately:
+            return "Close all immediately"
+        case .providerCloseOnly:
+            return "Close only"
+        }
+    }
+    
+    private func getSelectedReasonDescription() -> String {
+        switch reasonMode {
+        case ._none:
+            return "An investor at any time can perform a manual closing of all of the open positions."
+        case .closeAllImmediately:
+            return "Instant closing of all open positions."
+        case .providerCloseOnly:
+            return "New trades do not open, open positions are closed as the manager closes them."
+        }
+    }
+
     
     // MARK: - Navigation
-    func subscribe(with value: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
+    func subscribe(completion: @escaping CompletionBlock) {
+        attachToSignal.fixedVolume = signalSubscription?.fixedVolume
+        attachToSignal.percent = signalSubscription?.percent
+        attachToSignal.openTolerancePercent = signalSubscription?.openTolerancePercent
+
+        if let fixedCurrency = signalSubscription?.fixedCurrency {
+            attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
+        }
+        if let mode = signalSubscription?.mode {
+            attachToSignal.mode = AttachToSignalProvider.Mode(rawValue: mode.rawValue)
+        }
         
-        let currency = InvestorAPI.Currency_v10InvestorProgramsByIdInvestByAmountPost(rawValue: walletCurrency)
+        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-//        SignalDataProvider.subscribe(with: <#T##String#>, completion: <#T##CompletionBlock##CompletionBlock##(CompletionResult) -> Void#>)
-        ProgramsDataProvider.invest(withAmount: value, programId: programId, currency: currency, errorCompletion: completion)
+        SignalDataProvider.subscribe(on: programId, model: attachToSignal, completion: completion)
     }
     
-    func showSubscribeRequestedVC(subscribeAmount: Double) {
-//        router.show(routeType: .investmentRequested(investedAmount: investedAmount))
+    func unsubscribe(completion: @escaping CompletionBlock) {
+        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+    
+        SignalDataProvider.unsubscribe(with: programId, mode: reasonMode, completion: completion)
     }
     
     func goToBack() {
-        router.goToBack()
+        detailProtocol?.didReload()
+        
+        if self.attachToSignal.initialDepositCurrency != nil {
+            router.goToSecond()
+        } else {
+            router.goToBack()
+        }
     }
     
     func close() {

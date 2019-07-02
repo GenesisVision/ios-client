@@ -12,128 +12,113 @@ class ProgramSubscribeViewController: BaseViewController {
     
     var viewModel: ProgramSubscribeViewModel!
     
-    // MARK: - Views
-    var confirmView: InvestWithdrawConfirmView!
-    
-    @IBOutlet weak var numpadView: NumpadView! {
-        didSet {
-            numpadView.isUserInteractionEnabled = true
-            numpadView.delegate = self
-            numpadView.type = .currency
-        }
-    }
-    
     // MARK: - Labels
-    @IBOutlet weak var availableToInvestTitleLabel: SubtitleLabel! {
+    //Type
+    @IBOutlet weak var typeTitleLabel: SubtitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Available to invest"
+            typeTitleLabel.text = "Type"
         }
     }
-    @IBOutlet weak var availableToInvestValueLabel: TitleLabel!
-    
-    @IBOutlet weak var selectedWalletFromTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var typeButton: UIButton!
+    @IBOutlet weak var typeValueLabel: TitleLabel! {
         didSet {
-            selectedWalletFromTitleLabel.text = "From"
+            typeValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet weak var selectedWalletFromButton: UIButton!
-    @IBOutlet weak var selectedWalletFromValueLabel: TitleLabel! {
+    @IBOutlet weak var typeDescriptionLabel: SubtitleLabel! {
         didSet {
-            selectedWalletFromValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+            typeDescriptionLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var availableInWalletTitleLabel: SubtitleLabel! {
+
+    @IBOutlet weak var subscriptionStackView: UIStackView! {
         didSet {
-            availableInWalletTitleLabel.text = "Available in wallet"
-        }
-    }
-    @IBOutlet weak var availableInWalletValueLabel: TitleLabel!
-    
-    @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel! {
-        didSet {
-            amountToInvestTitleLabel.text = "Amount to invest"
-        }
-    }
-    @IBOutlet weak var amountToInvestValueLabel: TitleLabel! {
-        didSet {
-            amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
-        }
-    }
-    @IBOutlet weak var amountToInvestCurrencyLabel: SubtitleLabel! {
-        didSet {
-            amountToInvestCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
+            subscriptionStackView.isHidden = true
         }
     }
     
-    @IBOutlet weak var copyMaxValueButton: UIButton! {
+    //usd
+    @IBOutlet weak var usdStackView: UIStackView! {
         didSet {
-            copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
-            copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+            usdStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var usdTitleLabel: SubtitleLabel! {
+        didSet {
+            usdTitleLabel.text = "USD equivalent*"
+        }
+    }
+    @IBOutlet weak var usdTextField: InputTextField! {
+        didSet {
+            usdTextField.delegate = self
+            usdTextField.addTarget(self, action: #selector(usdTextFieldDidChange), for: .editingChanged)
         }
     }
     
-    @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel! {
+    //TODO: approximate value with rate etc
+    @IBOutlet weak var usdCurrencyValueLabel: SubtitleLabel! {
         didSet {
-            entryFeeTitleLabel.text = "Entry fee"
-            entryFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            usdCurrencyValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet weak var entryFeeValueLabel: TitleLabel!
     
-    @IBOutlet weak var gvCommissionTitleLabel: SubtitleLabel! {
+    //Volume
+    @IBOutlet weak var volumeStackView: UIStackView! {
         didSet {
-            gvCommissionTitleLabel.text = "GV commission"
-            gvCommissionTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            volumeStackView.isHidden = true
         }
     }
-    @IBOutlet weak var gvCommissionValueLabel: TitleLabel!
+    @IBOutlet weak var volumeTextField: InputTextField! {
+        didSet {
+            volumeTextField.delegate = self
+            volumeTextField.addTarget(self, action: #selector(volumeTextFieldDidChange), for: .editingChanged)
+        }
+    }
     
-    @IBOutlet weak var investmentAmountTitleLabel: SubtitleLabel! {
+    //Tolerance
+    @IBOutlet weak var toleranceTitleLabel: SubtitleLabel! {
         didSet {
-            investmentAmountTitleLabel.text = "Investment amount"
-            investmentAmountTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            toleranceTitleLabel.text = "Tolerance percentage (%)"
         }
     }
-    @IBOutlet weak var investmentAmountValueLabel: TitleLabel! {
+    @IBOutlet weak var toleranceTextField: InputTextField! {
         didSet {
-            if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency {
-                investmentAmountValueLabel.text = "0 " + currency.rawValue
-            }
+            toleranceTextField.delegate = self
+            toleranceTextField.addTarget(self, action: #selector(toleranceTextFieldDidChange), for: .editingChanged)
         }
     }
-    @IBOutlet weak var investmentAmountCurrencyLabel: SubtitleLabel!
+    
+    //Max buttons
+    @IBOutlet weak var volumeMaxValueButton: UIButton! {
+        didSet {
+            volumeMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            volumeMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
+    
+    @IBOutlet weak var toleranceMaxValueButton: UIButton! {
+        didSet {
+            toleranceMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            toleranceMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
+    
+    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
+        didSet {
+            disclaimerLabel.isHidden = true
+            disclaimerLabel.text = "* The minimum order size on Binance is 10 USDT"
+            disclaimerLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     
     // MARK: - Buttons
-    @IBOutlet weak var investButton: ActionButton!
-    
-    // MARK: - Variables
-    var availableToInvestValue: Double = 0.0 {
-        didSet {
-            if let programCurrency = viewModel.programCurrency {
-                self.availableToInvestValueLabel.text = availableToInvestValue.rounded(withType: programCurrency).toString() + " " + programCurrency.rawValue
-            }
-        }
-    }
-    
-    var amountToInvestValue: Double = 0.0 {
-        didSet {
-            updateUI()
-        }
-    }
-    
-    var availableInWalletFromValue: Double = 0.0 {
-        didSet {
-            if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-                self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-            }
-        }
-    }
+    @IBOutlet weak var subscribeButton: ActionButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = viewModel.title
+        navigationItem.title = viewModel.followType == .follow ? "Follow trades" : "Unfollow trades"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,86 +129,138 @@ class ProgramSubscribeViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        investButton.setEnabled(false)
+        subscriptionStackView.isHidden = viewModel.followType == .unfollow
+        subscribeButton.setTitle(viewModel.followType == .follow ? "Subscribe" : "Submit", for: .normal)
+        subscribeButton.configure(with: viewModel.followType == .follow ? .normal : .darkClear)
         
-        showProgressHUD()
-        viewModel.getInfo { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.updateUI()
-                }
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
+        updateUI()
     }
     
     
     private func updateUI() {
-        guard let programCurrency = viewModel.programCurrency else { return }
+        self.typeValueLabel.text = viewModel.getSelected()
+        self.typeDescriptionLabel.text = viewModel.getSelectedDescription()
         
-        //wallet
-        self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
-        self.availableInWalletFromValue = viewModel.getAvailableInWallet()
-        
-        //investment
-        if let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue {
-            self.amountToInvestCurrencyLabel.text = walletCurrency
+        if viewModel.followType == .follow {
+            self.volumeTextField.text = viewModel.volume.toString()
+            self.toleranceTextField.text = viewModel.tolerance.toString()
+            self.usdTextField.text = viewModel.usd.toString()
         }
         
-        if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, programCurrency.rawValue != currency {
-            self.investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
-        } else {
-            self.investmentAmountCurrencyLabel.text = ""
-        }
+        //TODO: approximate value
+//        self.usdCurrencyValueLabel.text = viewModel.getFixedCurrency()
         
-        if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
-            selectedWalletFromDelegateManager.currencyDelegate = self
-        }
-        
-        self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
-        
-        let rate = viewModel.rate
-        let entryFee = viewModel.getEntryFee()
-        let gvCommission = viewModel.getGVCommision()
-        
-        let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
-        let entryFeeCurrencyString = entryFeeCurrency.rounded(withType: programCurrency).toString()
-        let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
-        
-        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(programCurrency.rawValue))"
-        self.entryFeeValueLabel.text = entryFeeValueLabelString
-        
-        let gvCommissionCurrency = gvCommission * amountToInvestValue * rate / 100
-        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: programCurrency).toString()
-        let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
-        
-        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(programCurrency.rawValue))"
-        self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency).rounded(withType: programCurrency).toString()
-        self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
-        
-        self.availableToInvestValue = viewModel.getAvailableToInvest()
-        
-        let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
-        
-        investButton.setEnabled(investButtonEnabled)
+        self.updatedMode()
     }
     
-    @objc private func closeButtonAction() {
-        viewModel.close()
-    }
-    
-    private func subscribeMethod() {
-        let rate = viewModel.rate
-        let minInvestmentAmount = viewModel.getMinInvestmentAmount()
-        guard amountToInvestValue * rate >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
-        
+    private func subscribeMethod(completion: @escaping CompletionBlock) {
         showProgressHUD()
-        viewModel.subscribe(with: amountToInvestValue) { [weak self] (result) in
+        
+        switch viewModel.followType {
+        case .follow:
+            viewModel.subscribe(completion: completion)
+        case .unfollow:
+            viewModel.unsubscribe(completion: completion)
+        }
+    }
+    
+    private func updatedMode() {
+        typeValueLabel.text = viewModel.getSelected()
+        
+        guard viewModel.followType == .follow else { return }
+        
+        usdStackView.isHidden = true
+        volumeStackView.isHidden = true
+        disclaimerLabel.isHidden = true
+        
+        switch viewModel.getMode() {
+        case .byBalance:
+            usdStackView.isHidden = true
+            volumeStackView.isHidden = true
+        case .percent:
+            volumeStackView.isHidden = false
+        case .fixed:
+            usdStackView.isHidden = false
+            disclaimerLabel.isHidden = false
+        }
+    }
+    
+    @objc private func usdTextFieldDidChange(_ textField: UITextField) {
+        //TODO: add USD value
+    }
+
+    @objc private func volumeTextFieldDidChange(_ textField: UITextField) {
+        //TODO: add %
+    }
+    
+    @objc private func toleranceTextFieldDidChange(_ textField: UITextField) {
+        //TODO: add %
+    }
+    
+    private func showFollowTypes() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        
+        let firstAction = UIAlertAction(title: "By balance", style: .default) { [weak self] (action) in
+            self?.viewModel.changeMode(.byBalance)
+            self?.updateUI()
+        }
+        alert.addAction(firstAction)
+        
+        let secondAction = UIAlertAction(title: "Percentage", style: .default) { [weak self] (action) in
+            self?.viewModel.changeMode(.percent)
+            self?.updateUI()
+        }
+        alert.addAction(secondAction)
+        
+        let thirdAction = UIAlertAction(title: "Fixed", style: .default) { [weak self] (action) in
+            self?.viewModel.changeMode(.fixed)
+            self?.updateUI()
+        }
+        alert.addAction(thirdAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showUnfollowTypes() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.Cell.headerBg
+        
+        let firstAction = UIAlertAction(title: "Manual closing", style: .default) { [weak self] (action) in
+            self?.viewModel.changeReason(._none)
+            self?.updateUI()
+        }
+        alert.addAction(firstAction)
+        
+        let secondAction = UIAlertAction(title: "Close only", style: .default) { [weak self] (action) in
+            self?.viewModel.changeReason(.providerCloseOnly)
+            self?.updateUI()
+        }
+        alert.addAction(secondAction)
+        
+        let thirdAction = UIAlertAction(title: "Close all immediately", style: .default) { [weak self] (action) in
+            self?.viewModel.changeReason(.closeAllImmediately)
+            self?.updateUI()
+        }
+        alert.addAction(thirdAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Actions
+    @IBAction func changeTypeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        switch viewModel.followType {
+        case .follow:
+            showFollowTypes()
+        case .unfollow:
+            showUnfollowTypes()
+        }
+    }
+    
+    @IBAction func subscribeButtonAction(_ sender: UIButton) {
+        subscribeMethod { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -236,145 +273,37 @@ class ProgramSubscribeViewController: BaseViewController {
             }
         }
     }
-    
-    private func showConfirmVC() {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.tintColor = UIColor.Cell.bg
-        bottomSheetController.containerViewBackgroundColor = UIColor.Background.gray
-        bottomSheetController.initializeHeight = 500.0
         
-        confirmView = InvestWithdrawConfirmView.viewFromNib()
-        
-        var subtitle = ""
-        guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }
-        
-        if let periodEnds = viewModel.programInvestInfo?.periodEnds?.defaultFormatString {
-            subtitle = "Your request will be processed at the end of the reporting period \(periodEnds)."
-        }
-        
-        var firstValue: String?
-        if let amount = amountToInvestValueLabel.text {
-            firstValue = amount + " " + currency.rawValue
-        }
-        
-        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
-                                                          subtitle: subtitle,
-                                                          programLogo: nil,
-                                                          programTitle: nil,
-                                                          managerName: nil,
-                                                          firstTitle: amountToInvestTitleLabel.text,
-                                                          firstValue: firstValue,
-                                                          secondTitle: entryFeeTitleLabel.text,
-                                                          secondValue: entryFeeValueLabel.text,
-                                                          thirdTitle: gvCommissionTitleLabel.text,
-                                                          thirdValue: gvCommissionValueLabel.text,
-                                                          fourthTitle: investmentAmountTitleLabel.text,
-                                                          fourthValue: investmentAmountValueLabel.text)
-        confirmView.configure(model: confirmViewModel)
-        bottomSheetController.addContentsView(confirmView)
-        confirmView.delegate = self
-        bottomSheetController.present()
+    @IBAction func volumeMaxButtonAction(_ sender: UIButton) {
+        let maxValue = 999.0
+        viewModel.volume = maxValue
+        volumeTextField.text = viewModel.volume.toString()
     }
     
-    @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        
-        viewModel?.selectedWalletFromDelegateManager?.updateSelectedIndex()
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 275.0
-        
-        bottomSheetController.addNavigationBar(selectedWalletFromTitleLabel.text)
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            self?.viewModel.selectedWalletFromDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let selectedWalletFromDelegateManager = self?.viewModel.selectedWalletFromDelegateManager else { return }
-            tableView.registerNibs(for: selectedWalletFromDelegateManager.cellModelsForRegistration)
-            tableView.delegate = selectedWalletFromDelegateManager
-            tableView.dataSource = selectedWalletFromDelegateManager
-        }
-        
-        bottomSheetController.present()
-    }
-    
-    // MARK: - Actions
-    @IBAction func investButtonAction(_ sender: UIButton) {
-        showConfirmVC()
-    }
-    
-    @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
-        let rate = viewModel.rate
-        if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            
-            let minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(withType: currencyType)
-            
-            amountToInvestValueLabel.text = minValue.toString(withoutFormatter: true)
-            amountToInvestValue = minValue
-        }
+    @IBAction func toleranceMaxButtonAction(_ sender: UIButton) {
+        let maxValue = 20.0
+        viewModel.tolerance = maxValue
+        toleranceTextField.text = viewModel.tolerance.toString()
     }
 }
 
-extension ProgramSubscribeViewController: WalletDepositCurrencyDelegateManagerProtocol {
-    func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
-        self.showProgressHUD()
-        self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in
-            self?.hideAll()
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.updateUI()
-                }
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-            }
+extension ProgramSubscribeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        guard let newValue = textField.text?.doubleValue else { return }
+        
+        switch textField {
+        case usdTextField:
+            viewModel.usd = newValue
+        case volumeTextField:
+            viewModel.volume = newValue
+        case toleranceTextField:
+            viewModel.tolerance = newValue
+        default:
+            break
         }
-        
-        bottomSheetController.dismiss()
     }
 }
-
-extension ProgramSubscribeViewController: NumpadViewProtocol {
-    var maxAmount: Double? {
-        return viewModel.getMaxAmount()
-    }
-    
-    var textPlaceholder: String? {
-        return viewModel.labelPlaceholder
-    }
-    
-    var numbersLimit: Int? {
-        return -1
-    }
-    
-    var currency: CurrencyType? {
-        return viewModel.programCurrency
-    }
-    
-    func changedActive(value: Bool) {
-        numpadView.isEnable = value
-    }
-    
-    var textLabel: UILabel {
-        return self.amountToInvestValueLabel
-    }
-    
-    func textLabelDidChange(value: Double?) {
-        guard let value = value else { return }
-        
-        numpadView.isEnable = true
-        amountToInvestValue = value
-    }
-}
-
-extension ProgramSubscribeViewController: InvestWithdrawConfirmViewProtocol {
-    func cancelButtonDidPress() {
-        bottomSheetController.dismiss()
-    }
-    
-    func confirmButtonDidPress() {
-        bottomSheetController.dismiss()
-        subscribeMethod()
-    }
-}
-

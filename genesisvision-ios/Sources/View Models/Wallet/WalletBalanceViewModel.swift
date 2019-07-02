@@ -21,46 +21,59 @@ class WalletBalanceViewModel {
     var router: WalletRouter!
     
     var wallet: WalletData?
+    var account: CopyTradingAccountInfo?
+    
+    var walletType: WalletType
     
     weak var reloadDataProtocol: ReloadDataProtocol?
     
     var viewModels = [WalletBalanceTableViewCellViewModel]()
     
-    init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?, wallet: WalletData? = nil) {
+    init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?, wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil) {
+        if let wallet = wallet {
+            self.walletType = .wallet
+            self.wallet = wallet
+        } else if let account = account {
+            self.walletType = .account
+            self.account = account
+        } else {
+            self.walletType = .all
+        }
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
-        self.wallet = wallet
     }
     
     func fetch() {
         guard let currency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) else { return }
         
-        guard let wallet = wallet else {
+        switch walletType {
+        case .wallet:
+            self.viewModels = [WalletBalanceTableViewCellViewModel.init(type: .total, grandTotal: nil, selectedWallet: wallet, account: nil),
+                               WalletBalanceTableViewCellViewModel.init(type: .available, grandTotal: nil, selectedWallet: wallet, account: nil),
+                               WalletBalanceTableViewCellViewModel.init(type: .invested, grandTotal: nil, selectedWallet: wallet, account: nil),
+                               WalletBalanceTableViewCellViewModel.init(type: .pending, grandTotal: nil, selectedWallet: wallet, account: nil)]
+            self.reloadDataProtocol?.didReloadData()
+        case .account:
+            self.viewModels = [WalletBalanceTableViewCellViewModel.init(type: .total, grandTotal: nil, selectedWallet: nil, account: account),
+                               WalletBalanceTableViewCellViewModel.init(type: .available, grandTotal: nil, selectedWallet: nil, account: account)]
+            self.reloadDataProtocol?.didReloadData()
+        default:
             AuthManager.getWallet(with: currency, completion: { [weak self] (wallet) in
                 if let walletTabmanViewModel = self?.router.walletTabmanViewController?.viewModel {
                     walletTabmanViewModel.multiWallet = wallet
                 }
                 
                 guard let grandTotal = wallet?.grandTotal else { return }
-                self?.viewModels = [WalletBalanceTableViewCellViewModel(type: .total, grandTotal: grandTotal, selectedWallet: nil),
-                                               WalletBalanceTableViewCellViewModel(type: .available, grandTotal: grandTotal, selectedWallet: nil),
-                                               WalletBalanceTableViewCellViewModel(type: .invested, grandTotal: grandTotal, selectedWallet: nil),
-                                               WalletBalanceTableViewCellViewModel(type: .pending, grandTotal: grandTotal, selectedWallet: nil)]
+                self?.viewModels = [WalletBalanceTableViewCellViewModel(type: .total, grandTotal: grandTotal, selectedWallet: nil, account: nil),
+                                    WalletBalanceTableViewCellViewModel(type: .available, grandTotal: grandTotal, selectedWallet: nil, account: nil),
+                                    WalletBalanceTableViewCellViewModel(type: .invested, grandTotal: grandTotal, selectedWallet: nil, account: nil),
+                                    WalletBalanceTableViewCellViewModel(type: .pending, grandTotal: grandTotal, selectedWallet: nil, account: nil)]
                 
                 self?.reloadDataProtocol?.didReloadData()
             }) { (result) in
                 print("ERROR")
             }
-            
-            return
         }
-        
-        self.viewModels = [WalletBalanceTableViewCellViewModel.init(type: .total, grandTotal: nil, selectedWallet: wallet),
-                            WalletBalanceTableViewCellViewModel.init(type: .available, grandTotal: nil, selectedWallet: wallet),
-                            WalletBalanceTableViewCellViewModel.init(type: .invested, grandTotal: nil, selectedWallet: wallet),
-                            WalletBalanceTableViewCellViewModel.init(type: .pending, grandTotal: nil, selectedWallet: wallet)]
-        
-        self.reloadDataProtocol?.didReloadData()
     }
 }
 
@@ -95,14 +108,32 @@ extension WalletBalanceViewModel {
 // MARK: - Navigation
 extension WalletBalanceViewModel {
     func withdraw() {
-        if let currency = wallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            router.show(routeType: .withdraw(currencyType: currencyType))
+        switch walletType {
+        case .wallet:
+            if let currency = wallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+                router.show(routeType: .withdraw(currencyType: currencyType))
+            }
+        case .account:
+            if let multiWallet = router.walletTabmanViewController?.viewModel?.multiWallet, let accounts = router.walletTabmanViewController?.viewModel?.accounts, let account = account, let currency = account.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+                router.show(routeType: .withdrawAccount(currencyType: currencyType, accounts: accounts, walletMultiSummary: multiWallet))
+            }
+        default:
+            break
         }
     }
     
     func deposit() {
-        if let currency = wallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let multiWallet = router.walletTabmanViewController?.viewModel?.multiWallet {
-            router.show(routeType: .deposit(currencyType: currencyType, walletMultiSummary: multiWallet))
+        switch walletType {
+        case .wallet:
+            if let currency = wallet?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let multiWallet = router.walletTabmanViewController?.viewModel?.multiWallet {
+                router.show(routeType: .deposit(currencyType: currencyType, walletMultiSummary: multiWallet))
+            }
+        case .account:
+            if let multiWallet = router.walletTabmanViewController?.viewModel?.multiWallet, let accounts = router.walletTabmanViewController?.viewModel?.accounts, let account = account, let currency = account.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+                router.show(routeType: .depositAccount(currencyType: currencyType, accounts: accounts, walletMultiSummary: multiWallet))
+            }
+        default:
+            break
         }
     }
     

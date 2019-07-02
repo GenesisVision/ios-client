@@ -15,11 +15,15 @@ open class InternalTransferRequest: Codable {
         case undefined = "Undefined"
         case wallet = "Wallet"
         case copyTradingAccount = "CopyTradingAccount"
+        case genesisVisionPlatform = "GenesisVisionPlatform"
+        case signalProviderSettings = "SignalProviderSettings"
     }
     public enum DestinationType: String, Codable { 
         case undefined = "Undefined"
         case wallet = "Wallet"
         case copyTradingAccount = "CopyTradingAccount"
+        case genesisVisionPlatform = "GenesisVisionPlatform"
+        case signalProviderSettings = "SignalProviderSettings"
     }
     public var sourceId: UUID?
     public var sourceType: SourceType?

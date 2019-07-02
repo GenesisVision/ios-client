@@ -45,6 +45,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
+        viewModel.programListDelegateManager.delegate = self
         registerForPreviewing()
         
         setupUI()
@@ -70,8 +71,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = signInButtonEnable ? 82.0 : 0.0
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate = self.viewModel?.programListDelegateManager
+        tableView.dataSource = self.viewModel?.programListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
@@ -128,62 +129,19 @@ extension ProgramListViewController {
     }
 }
 
-extension ProgramListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard viewModel.modelsCount() >= indexPath.row else {
-            return
-        }
-        
-        viewModel.showDetail(at: indexPath)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
-            return TableViewCell()
-        }
-
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+extension ProgramListViewController: DelegateManagerProtocol {
+    func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if viewModel.filterModel.levelUpData != nil {
-            return 60.0
-        }
-        
-        return 0
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDidScroll(scrollView)
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let levelUpData = viewModel.filterModel.levelUpData {
-            let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
-            header.configure(levelUpData)
-            
-            ratingTableHeaderView = header
-            
-            return ratingTableHeaderView
-        }
-        
-        return nil
-    }
-    
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
+    func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewWillBeginDragging(scrollView)
     }
 }
-
 
 // MARK: - UIViewControllerPreviewingDelegate
 extension ProgramListViewController: UIViewControllerPreviewingDelegate {

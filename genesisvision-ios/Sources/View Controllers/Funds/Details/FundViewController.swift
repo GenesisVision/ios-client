@@ -271,15 +271,7 @@ extension FundViewController: FavoriteStateChangeProtocol {
 }
 
 extension FundViewController: DetailProtocol {
-    func didRequestCanceled(_ last: Bool) {
-        fetch()
-    }
-    
-    func didWithdrawn() {
-        fetch()
-    }
-    
-    func didInvested() {
+    func didReload() {
         fetch()
     }
 }

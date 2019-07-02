@@ -58,7 +58,12 @@ extension String {
     struct Alerts {
         static var cancelButtonText: String = "Cancel".localized
         static var okButtonText: String = "Ok".localized
+        static var yesButtonText: String = "Yes".localized
         
+        struct SignOut {
+            static let title: String = ""
+            static let message: String = "Log out?"
+        }
         struct NewVersionUpdate {
             static var alertTitle: String = "New version is available".localized
             static var alertMessage: String = "Please update to version ".localized
@@ -89,19 +94,25 @@ extension String {
             static var settingsButtonText: String = "Settings".localized
         }
         
+        struct SignalTrade {
+            struct Close {
+                static let title: String = "Closing the trade".localized
+                static let message: String = "Are you sure you want to close this trade?".localized
+            }
+        }
         struct ErrorMessages {
-            static let noInternetConnection = "No Internet Connection".localized
-            static let noDataText = "not enough data\n for the chart".localized
+            static let noInternetConnection: String = "No Internet Connection".localized
+            static let noDataText: String = "not enough data\n for the chart".localized
             
             struct MailErrorAlert {
-                static let title = "Could not send e-mail".localized
-                static let message = "Your device could not send e-mail. Please check e-mail configuration and try again.".localized
-                static let cancelButtonText = String.Alerts.okButtonText
+                static let title: String = "Could not send e-mail".localized
+                static let message: String = "Your device could not send e-mail. Please check e-mail configuration and try again.".localized
+                static let cancelButtonText: String = String.Alerts.okButtonText
             }
         }
         
-        static var noAvailableTokens = "There are currently no tokens available. Please check this program later - someone can withdraw their funds from this program.".localized
-        static var comingSoon = "Coming soon".localized
+        static var noAvailableTokens: String = "There are currently no tokens available. Please check this program later - someone can withdraw their funds from this program.".localized
+        static var comingSoon: String = "Coming soon".localized
         
     }
 }

@@ -51,7 +51,7 @@ class WalletListViewController: BaseViewControllerWithTableView {
         
         bottomViewType = .none
         
-        if viewModel.wallet != nil {
+        if viewModel.walletType == .wallet {
             transferButton.isHidden = false
             tableView.contentInset.bottom = 82.0
         }

@@ -12,6 +12,7 @@ struct WalletBalanceTableViewCellViewModel {
     let type: WalletBalanceType
     let grandTotal: WalletsGrandTotal?
     let selectedWallet: WalletData?
+    let account: CopyTradingAccountInfo?
 }
 
 extension WalletBalanceTableViewCellViewModel: CellViewModel {
@@ -20,6 +21,22 @@ extension WalletBalanceTableViewCellViewModel: CellViewModel {
         
         var balanceString = ""
         var percent: Double? = nil
+        
+        if let selectedWallet = account, let accountCurrency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: accountCurrency.rawValue) {
+            switch type {
+            case .total:
+                if let balanceValue = selectedWallet.balance {
+                    balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                }
+            case .available:
+                if let totalBalanceValue = selectedWallet.balance, let balanceValue = selectedWallet.available {
+                    balanceString = balanceValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                    percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
+                }
+            default:
+                break
+            }
+        }
         
         if let selectedWallet = selectedWallet, let walletCurrency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: walletCurrency.rawValue) {
             switch type {

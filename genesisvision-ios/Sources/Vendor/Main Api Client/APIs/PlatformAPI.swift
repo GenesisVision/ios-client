@@ -12,6 +12,38 @@ import Alamofire
 
 open class PlatformAPI {
     /**
+     Server date
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10PlatformDatePost(completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        v10PlatformDatePostWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Server date
+     - POST /v1.0/platform/date
+     - examples: [{contentType=application/json, example=""}]
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func v10PlatformDatePostWithRequestBuilder() -> RequestBuilder<String> {
+        let path = "/v1.0/platform/date"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Platform info
      
      - parameter completion: completion handler to receive the data and the error objects
@@ -28,6 +60,23 @@ open class PlatformAPI {
      - GET /v1.0/platform/info
      - examples: [{contentType=application/json, example={
   "enums" : {
+    "fund" : {
+      "assets" : [ {
+        "color" : "color",
+        "name" : "name",
+        "icon" : "icon",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset"
+      }, {
+        "color" : "color",
+        "name" : "name",
+        "icon" : "icon",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset"
+      } ]
+    },
     "multiWallet" : {
       "transactionType" : [ "transactionType", "transactionType" ],
       "externalTransactionType" : [ "externalTransactionType", "externalTransactionType" ]
@@ -149,12 +198,12 @@ open class PlatformAPI {
      * enum for parameter currency
      */
     public enum Currency_v10PlatformLevelsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -206,6 +255,77 @@ open class PlatformAPI {
         
 
         let requestBuilder: RequestBuilder<ProgramsLevelsInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10PlatformLevelsParametersGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
+     Investment programs levels parameters
+     
+     - parameter currency: (query)  (optional, default to 104)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10PlatformLevelsParametersGet(currency: Currency_v10PlatformLevelsParametersGet? = nil, completion: @escaping ((_ data: LevelsParamsInfo?,_ error: Error?) -> Void)) {
+        v10PlatformLevelsParametersGetWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Investment programs levels parameters
+     - GET /v1.0/platform/levels/parameters
+     - examples: [{contentType=application/json, example={
+  "genesisRatioMin" : 5.962133916683182,
+  "investmentScaleHighRisk" : 1.2315135367772556,
+  "maxAvailableToInvest" : 6.027456183070403,
+  "volumeScaleMax" : 9.301444243932576,
+  "investmentScaleMax" : 7.386281948385884,
+  "genesisRatioMax" : 5.637376656633329,
+  "ageByVolumeMax" : 2.027123023002322,
+  "unverifiedAvailableToInvest" : 1.4658129805029452,
+  "programAgeMax" : 3.616076749251911,
+  "minAvailableToInvest" : 0.8008281904610115,
+  "volumeScaleMin" : 7.061401241503109,
+  "investmentScaleMin" : 4.145608029883936,
+  "genesisRatioHighRisk" : 2.3021358869347655
+}}]
+     
+     - parameter currency: (query)  (optional, default to 104)
+
+     - returns: RequestBuilder<LevelsParamsInfo> 
+     */
+    open class func v10PlatformLevelsParametersGetWithRequestBuilder(currency: Currency_v10PlatformLevelsParametersGet? = nil) -> RequestBuilder<LevelsParamsInfo> {
+        let path = "/v1.0/platform/levels/parameters"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "currency": currency?.rawValue
+        ])
+        
+
+        let requestBuilder: RequestBuilder<LevelsParamsInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

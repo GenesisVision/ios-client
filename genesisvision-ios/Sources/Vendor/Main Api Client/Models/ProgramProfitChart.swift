@@ -12,12 +12,12 @@ import Foundation
 open class ProgramProfitChart: Codable {
 
     public enum ProgramCurrency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -36,6 +36,7 @@ open class ProgramProfitChart: Codable {
     public var periods: [PeriodDate]?
     public var lastPeriodStarts: Date?
     public var lastPeriodEnds: Date?
+    public var tradingVolume: Double?
     public var equityChart: [ChartSimple]?
     public var balance: Double?
     public var investors: Int?
@@ -50,7 +51,7 @@ open class ProgramProfitChart: Codable {
 
 
     
-    public init(totalProgramCurrencyProfit: Double?, timeframeProgramCurrencyProfit: Double?, programCurrency: ProgramCurrency?, trades: Int?, successTradesPercent: Double?, profitFactor: Double?, pnLChart: [ChartSimple]?, periods: [PeriodDate]?, lastPeriodStarts: Date?, lastPeriodEnds: Date?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, profitChangePercent: Double?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, rate: Double?) {
+    public init(totalProgramCurrencyProfit: Double?, timeframeProgramCurrencyProfit: Double?, programCurrency: ProgramCurrency?, trades: Int?, successTradesPercent: Double?, profitFactor: Double?, pnLChart: [ChartSimple]?, periods: [PeriodDate]?, lastPeriodStarts: Date?, lastPeriodEnds: Date?, tradingVolume: Double?, equityChart: [ChartSimple]?, balance: Double?, investors: Int?, profitChangePercent: Double?, sharpeRatio: Double?, sortinoRatio: Double?, calmarRatio: Double?, maxDrawdown: Double?, totalGvtProfit: Double?, timeframeGvtProfit: Double?, rate: Double?) {
         self.totalProgramCurrencyProfit = totalProgramCurrencyProfit
         self.timeframeProgramCurrencyProfit = timeframeProgramCurrencyProfit
         self.programCurrency = programCurrency
@@ -61,6 +62,7 @@ open class ProgramProfitChart: Codable {
         self.periods = periods
         self.lastPeriodStarts = lastPeriodStarts
         self.lastPeriodEnds = lastPeriodEnds
+        self.tradingVolume = tradingVolume
         self.equityChart = equityChart
         self.balance = balance
         self.investors = investors
@@ -91,6 +93,7 @@ open class ProgramProfitChart: Codable {
         try container.encodeIfPresent(periods, forKey: "periods")
         try container.encodeIfPresent(lastPeriodStarts, forKey: "lastPeriodStarts")
         try container.encodeIfPresent(lastPeriodEnds, forKey: "lastPeriodEnds")
+        try container.encodeIfPresent(tradingVolume, forKey: "tradingVolume")
         try container.encodeIfPresent(equityChart, forKey: "equityChart")
         try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(investors, forKey: "investors")
@@ -119,6 +122,7 @@ open class ProgramProfitChart: Codable {
         periods = try container.decodeIfPresent([PeriodDate].self, forKey: "periods")
         lastPeriodStarts = try container.decodeIfPresent(Date.self, forKey: "lastPeriodStarts")
         lastPeriodEnds = try container.decodeIfPresent(Date.self, forKey: "lastPeriodEnds")
+        tradingVolume = try container.decodeIfPresent(Double.self, forKey: "tradingVolume")
         equityChart = try container.decodeIfPresent([ChartSimple].self, forKey: "equityChart")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
         investors = try container.decodeIfPresent(Int.self, forKey: "investors")

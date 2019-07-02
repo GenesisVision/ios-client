@@ -153,12 +153,12 @@ final class ProgramInvestViewModel {
     }
     
     func showInvestmentRequestedVC(investedAmount: Double) {
-        detailProtocol?.didInvested()
+        detailProtocol?.didReload()
         router.show(routeType: .investmentRequested(investedAmount: investedAmount))
     }
     
     func goToBack() {
-        detailProtocol?.didInvested()
+        detailProtocol?.didReload()
         router.goToBack()
     }
     

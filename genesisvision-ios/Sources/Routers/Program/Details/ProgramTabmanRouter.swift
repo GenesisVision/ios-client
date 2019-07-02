@@ -9,12 +9,14 @@
 class ProgramTabmanRouter: TabmanRouter {
     // MARK: - Variables
     var programInfoViewController: ProgramInfoViewController?
+    var programViewController: ProgramViewController?
     
     // MARK: - Public methods
     func getInfo(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
         let viewController = ProgramInfoViewController()
         
         let router = ProgramInfoRouter(parentRouter: self)
+        router.programViewController = programViewController
         router.currentController = viewController
         let viewModel = ProgramInfoViewModel(withRouter: router, programDetailsFull: programDetailsFull, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel

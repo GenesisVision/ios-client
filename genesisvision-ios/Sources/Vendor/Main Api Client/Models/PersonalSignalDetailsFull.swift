@@ -11,22 +11,30 @@ import Foundation
 
 open class PersonalSignalDetailsFull: Codable {
 
+    public enum Status: String, Codable { 
+        case active = "Active"
+        case ended = "Ended"
+    }
     public var subscriptionDate: Date?
     public var tradesCount: Int?
     public var signalSubscription: SignalSubscription?
     public var profit: Double?
+    public var volume: Double?
     public var isFavorite: Bool?
     public var isInvested: Bool?
+    public var status: Status?
 
 
     
-    public init(subscriptionDate: Date?, tradesCount: Int?, signalSubscription: SignalSubscription?, profit: Double?, isFavorite: Bool?, isInvested: Bool?) {
+    public init(subscriptionDate: Date?, tradesCount: Int?, signalSubscription: SignalSubscription?, profit: Double?, volume: Double?, isFavorite: Bool?, isInvested: Bool?, status: Status?) {
         self.subscriptionDate = subscriptionDate
         self.tradesCount = tradesCount
         self.signalSubscription = signalSubscription
         self.profit = profit
+        self.volume = volume
         self.isFavorite = isFavorite
         self.isInvested = isInvested
+        self.status = status
     }
     
 
@@ -40,8 +48,10 @@ open class PersonalSignalDetailsFull: Codable {
         try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
         try container.encodeIfPresent(signalSubscription, forKey: "signalSubscription")
         try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(volume, forKey: "volume")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
+        try container.encodeIfPresent(status, forKey: "status")
     }
 
     // Decodable protocol methods
@@ -53,8 +63,10 @@ open class PersonalSignalDetailsFull: Codable {
         tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
         signalSubscription = try container.decodeIfPresent(SignalSubscription.self, forKey: "signalSubscription")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
+        volume = try container.decodeIfPresent(Double.self, forKey: "volume")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
+        status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }
 

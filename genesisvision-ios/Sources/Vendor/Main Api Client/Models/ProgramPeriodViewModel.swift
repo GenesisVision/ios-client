@@ -21,15 +21,21 @@ open class ProgramPeriodViewModel: Codable {
     public var status: Status?
     public var number: Int?
     public var profit: Double?
+    public var balance: Double?
+    public var investors: Int?
+    public var managerStatistic: FinancialStatistic?
 
 
     
-    public init(dateFrom: Date?, dateTo: Date?, status: Status?, number: Int?, profit: Double?) {
+    public init(dateFrom: Date?, dateTo: Date?, status: Status?, number: Int?, profit: Double?, balance: Double?, investors: Int?, managerStatistic: FinancialStatistic?) {
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.status = status
         self.number = number
         self.profit = profit
+        self.balance = balance
+        self.investors = investors
+        self.managerStatistic = managerStatistic
     }
     
 
@@ -44,6 +50,9 @@ open class ProgramPeriodViewModel: Codable {
         try container.encodeIfPresent(status, forKey: "status")
         try container.encodeIfPresent(number, forKey: "number")
         try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(balance, forKey: "balance")
+        try container.encodeIfPresent(investors, forKey: "investors")
+        try container.encodeIfPresent(managerStatistic, forKey: "managerStatistic")
     }
 
     // Decodable protocol methods
@@ -56,6 +65,9 @@ open class ProgramPeriodViewModel: Codable {
         status = try container.decodeIfPresent(Status.self, forKey: "status")
         number = try container.decodeIfPresent(Int.self, forKey: "number")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        investors = try container.decodeIfPresent(Int.self, forKey: "investors")
+        managerStatistic = try container.decodeIfPresent(FinancialStatistic.self, forKey: "managerStatistic")
     }
 }
 

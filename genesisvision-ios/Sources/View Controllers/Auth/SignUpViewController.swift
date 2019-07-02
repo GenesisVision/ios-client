@@ -147,7 +147,7 @@ class SignUpViewController: BaseViewController {
         password = password.trimmingCharacters(in: .whitespaces)
         confirmPassword = confirmPassword.trimmingCharacters(in: .whitespaces)
         
-        viewModel.signUp(username: username, email: email, password: password, confirmPassword: confirmPassword) { [weak self] (result) in
+        viewModel.riskControl(username: username, email: email, password: password, confirmPassword: confirmPassword) { [weak self] (result) in
             self?.hideAll()
             
             switch result {

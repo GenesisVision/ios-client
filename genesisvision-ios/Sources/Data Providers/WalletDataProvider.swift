@@ -18,14 +18,6 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func getTransactions(with assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, assetType: WalletAPI.AssetType_v10WalletTransactionsGet? = nil, txAction: WalletAPI.TxAction_v10WalletTransactionsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ transactions: WalletTransactionsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
-        
-        WalletAPI.v10WalletTransactionsGet(authorization: authorization, assetId: assetId, from: from, to: to, assetType: assetType, txAction: txAction, skip: skip, take: take) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
     static func getTransactionDetails(with id: UUID, completion: @escaping (_ transactions: TransactionDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(nil) }
         
@@ -80,10 +72,10 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    static func transfer(sourceId: UUID?, destinationId: UUID?, amount: Double?, transferAll: Bool? = false, completion: @escaping CompletionBlock) {
+    static func transfer(sourceId: UUID?, sourceType: InternalTransferRequest.SourceType = .wallet, destinationId: UUID?, destinationType: InternalTransferRequest.DestinationType = .wallet, amount: Double?, transferAll: Bool? = false, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        let request = InternalTransferRequest(sourceId: sourceId, sourceType: InternalTransferRequest.SourceType.wallet, destinationId: destinationId, destinationType: InternalTransferRequest.DestinationType.wallet, amount: amount, transferAll: transferAll)
+        let request = InternalTransferRequest(sourceId: sourceId, sourceType: sourceType, destinationId: destinationId, destinationType: destinationType, amount: amount, transferAll: transferAll)
         
         WalletAPI.v10WalletTransferPost(authorization: authorization, request: request) { (error) in
             DataProvider().responseHandler(error, completion: completion)

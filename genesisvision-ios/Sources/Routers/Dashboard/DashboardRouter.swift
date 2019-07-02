@@ -24,7 +24,7 @@ class DashboardRouter: Router, ListRouterProtocol {
     
     var programListViewController: DashboardProgramListViewController?
     var fundListViewController: DashboardFundListViewController?
-    var signalListViewController: DashboardSignalListViewController?
+    var signalListViewController: SignalListViewController?
     var signalOpenTradesViewController: SignalOpenTradesViewController?
     var signalTradesViewController: SignalTradesViewController?
     

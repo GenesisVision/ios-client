@@ -31,6 +31,7 @@ open class FundFacet: Codable {
         case weeklyTop = "WeeklyTop"
         case popular = "Popular"
         case toLevelUp = "ToLevelUp"
+        case mostReliable = "MostReliable"
     }
     public enum Timeframe: String, Codable { 
         case day = "Day"

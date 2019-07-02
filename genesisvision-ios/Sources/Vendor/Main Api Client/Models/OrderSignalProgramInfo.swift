@@ -15,14 +15,22 @@ open class OrderSignalProgramInfo: Codable {
     public var program: OrderProgramData?
     public var programId: UUID?
     public var volume: Double?
+    public var priceOpenAvg: Double?
+    public var profit: Double?
+    public var firstOrderDate: Date?
+    public var fees: [OrderSignalFee]?
 
 
     
-    public init(manager: ProfilePublic?, program: OrderProgramData?, programId: UUID?, volume: Double?) {
+    public init(manager: ProfilePublic?, program: OrderProgramData?, programId: UUID?, volume: Double?, priceOpenAvg: Double?, profit: Double?, firstOrderDate: Date?, fees: [OrderSignalFee]?) {
         self.manager = manager
         self.program = program
         self.programId = programId
         self.volume = volume
+        self.priceOpenAvg = priceOpenAvg
+        self.profit = profit
+        self.firstOrderDate = firstOrderDate
+        self.fees = fees
     }
     
 
@@ -36,6 +44,10 @@ open class OrderSignalProgramInfo: Codable {
         try container.encodeIfPresent(program, forKey: "program")
         try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(volume, forKey: "volume")
+        try container.encodeIfPresent(priceOpenAvg, forKey: "priceOpenAvg")
+        try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(firstOrderDate, forKey: "firstOrderDate")
+        try container.encodeIfPresent(fees, forKey: "fees")
     }
 
     // Decodable protocol methods
@@ -47,6 +59,10 @@ open class OrderSignalProgramInfo: Codable {
         program = try container.decodeIfPresent(OrderProgramData.self, forKey: "program")
         programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         volume = try container.decodeIfPresent(Double.self, forKey: "volume")
+        priceOpenAvg = try container.decodeIfPresent(Double.self, forKey: "priceOpenAvg")
+        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
+        firstOrderDate = try container.decodeIfPresent(Date.self, forKey: "firstOrderDate")
+        fees = try container.decodeIfPresent([OrderSignalFee].self, forKey: "fees")
     }
 }
 

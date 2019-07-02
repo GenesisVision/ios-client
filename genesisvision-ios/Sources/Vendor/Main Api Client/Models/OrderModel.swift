@@ -45,11 +45,11 @@ open class OrderModel: Codable {
     public var swap: Double?
     public var showOriginalCommission: Bool?
     /** For signals */
-    public var masterLogin: String?
+    public var signalData: OrderModelSignalData?
 
 
     
-    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, masterLogin: String?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?) {
         self.id = id
         self.login = login
         self.ticket = ticket
@@ -67,7 +67,7 @@ open class OrderModel: Codable {
         self.commission = commission
         self.swap = swap
         self.showOriginalCommission = showOriginalCommission
-        self.masterLogin = masterLogin
+        self.signalData = signalData
     }
     
 
@@ -94,7 +94,7 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(commission, forKey: "commission")
         try container.encodeIfPresent(swap, forKey: "swap")
         try container.encodeIfPresent(showOriginalCommission, forKey: "showOriginalCommission")
-        try container.encodeIfPresent(masterLogin, forKey: "masterLogin")
+        try container.encodeIfPresent(signalData, forKey: "signalData")
     }
 
     // Decodable protocol methods
@@ -119,7 +119,7 @@ open class OrderModel: Codable {
         commission = try container.decodeIfPresent(Double.self, forKey: "commission")
         swap = try container.decodeIfPresent(Double.self, forKey: "swap")
         showOriginalCommission = try container.decodeIfPresent(Bool.self, forKey: "showOriginalCommission")
-        masterLogin = try container.decodeIfPresent(String.self, forKey: "masterLogin")
+        signalData = try container.decodeIfPresent(OrderModelSignalData.self, forKey: "signalData")
     }
 }
 

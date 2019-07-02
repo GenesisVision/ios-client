@@ -12,12 +12,12 @@ import Foundation
 open class ProgramDetails: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -37,6 +37,7 @@ open class ProgramDetails: Codable {
     }
     public var currency: Currency?
     public var level: Int?
+    public var levelProgress: Double?
     public var periodDuration: Int?
     public var stopOutLevel: Double?
     public var periodStarts: Date?
@@ -45,6 +46,7 @@ open class ProgramDetails: Codable {
     public var availableInvestment: Double?
     /** In account currency */
     public var availableInvestmentBase: Double?
+    public var availableInvestmentLimit: Double?
     /** Fields for dashboard */
     public var dashboardAssetsDetails: DashboardProgramDetails?
     public var statistic: ProgramDetailsListStatistic?
@@ -65,15 +67,17 @@ open class ProgramDetails: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, availableInvestmentBase: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
+    public init(currency: Currency?, level: Int?, levelProgress: Double?, periodDuration: Int?, stopOutLevel: Double?, periodStarts: Date?, periodEnds: Date?, availableInvestment: Double?, availableInvestmentBase: Double?, availableInvestmentLimit: Double?, dashboardAssetsDetails: DashboardProgramDetails?, statistic: ProgramDetailsListStatistic?, rating: ProgramDetailsRating?, personalDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.currency = currency
         self.level = level
+        self.levelProgress = levelProgress
         self.periodDuration = periodDuration
         self.stopOutLevel = stopOutLevel
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
         self.availableInvestment = availableInvestment
         self.availableInvestmentBase = availableInvestmentBase
+        self.availableInvestmentLimit = availableInvestmentLimit
         self.dashboardAssetsDetails = dashboardAssetsDetails
         self.statistic = statistic
         self.rating = rating
@@ -100,12 +104,14 @@ open class ProgramDetails: Codable {
 
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(availableInvestmentBase, forKey: "availableInvestmentBase")
+        try container.encodeIfPresent(availableInvestmentLimit, forKey: "availableInvestmentLimit")
         try container.encodeIfPresent(dashboardAssetsDetails, forKey: "dashboardAssetsDetails")
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
@@ -130,12 +136,14 @@ open class ProgramDetails: Codable {
 
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         availableInvestmentBase = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentBase")
+        availableInvestmentLimit = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentLimit")
         dashboardAssetsDetails = try container.decodeIfPresent(DashboardProgramDetails.self, forKey: "dashboardAssetsDetails")
         statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")

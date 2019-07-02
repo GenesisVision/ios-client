@@ -53,5 +53,12 @@ extension Date {
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }
+    
+    var dateAndFullTimeFormatString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM hh:mm:ss a"
+        dateFormatter.locale = Bundle.main.locale
+        return dateFormatter.string(from: self)
+    }
 }
 

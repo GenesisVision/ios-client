@@ -14,9 +14,11 @@ final class ProgramInfoViewModel {
         case signals
         case yourInvestment
         case investNow
+        case subscriptionDetail
     }
     enum RowType {
         case manager
+        case statistics
         case strategy
         case period
     }
@@ -37,6 +39,8 @@ final class ProgramInfoViewModel {
     private var equityChart: [ChartSimple]?
     public private(set) var programDetailsFull: ProgramDetailsFull? {
         didSet {
+            sections = [.details, .investNow]
+            
             if let availableInvestment = programDetailsFull?.availableInvestmentBase {
                 self.availableInvestment = availableInvestment
             }
@@ -47,25 +51,36 @@ final class ProgramInfoViewModel {
                 }
             }
             
-//            if let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
-//                if !sections.contains(.signals) {
-//                    sections.insert(.signals, at: 1)
-//                }
-//            }
+            if signalEnable, let hasActiveSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription, hasActiveSubscription {
+                if !sections.contains(.subscriptionDetail) {
+                    sections.insert(.subscriptionDetail, at: 1)
+                }
+            }
+            
+            if signalEnable, let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
+                if !sections.contains(.signals) {
+                    sections.insert(.signals, at: 1)
+                }
+            }
         }
     }
     
     var availableInvestment: Double = 0.0
     
     private var sections: [SectionType] = [.details, .investNow]
-    private var rows: [RowType] = [.manager, .strategy, .period]
+    private var rows: [RowType] = [.manager, .statistics, .strategy, .period]
     
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailManagerTableViewCellViewModel.self, DefaultTableViewCellViewModel.self, ProgramPeriodTableViewCellViewModel.self, ProgramInvestNowTableViewCellViewModel.self, ProgramYourInvestmentTableViewCellViewModel.self,
-            InfoSignalsTableViewCellViewModel.self]
+        return [DetailManagerTableViewCellViewModel.self,
+                DetailStatisticsTableViewCellViewModel.self,
+                DefaultTableViewCellViewModel.self,
+                ProgramPeriodTableViewCellViewModel.self,
+                ProgramInvestNowTableViewCellViewModel.self,
+                ProgramYourInvestmentTableViewCellViewModel.self,
+                InfoSignalsTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -181,15 +196,23 @@ extension ProgramInfoViewModel {
         }
     }
     
-    func subscribe(_ value: Bool) {
-        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+    private func subscribe(_ value: Bool, initialDepositCurrency: CurrencyType? = nil, initialDepositAmount: Double? = nil) {
+        guard let programId = programId else { return }
+        
         value
-            ? SignalDataProvider.unsubscribe(with: programId) { [weak self] (result) in
-                //TODO: check it
-                print(result)
-                self?.reloadDataProtocol?.didReloadData()
-                }
-            : router.show(routeType: .subscribe(programId: programId, programCurrency: programCurrency))
+            ? router.show(routeType: .unsubscribe(programId: programId))
+            : router.show(routeType: .subscribe(programId: programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount))
+    }
+    
+    private func editSubscription() {
+        guard let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription else { return }
+        router.show(routeType: .editSubscribe(programId: programId, signalSubscription: signalSubscription))
+    }
+
+    func createAccount(completion: @escaping CreateAccountCompletionBlock) {
+        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        
+        router.show(routeType: .createAccount(programId: programId, programCurrency: programCurrency, completion: completion))
     }
 }
 
@@ -214,6 +237,8 @@ extension ProgramInfoViewModel {
             case .manager:
                 guard let manager = programDetailsFull?.manager else { return nil }
                 return DetailManagerTableViewCellViewModel(manager: manager)
+            case .statistics:
+                return DetailStatisticsTableViewCellViewModel(programDetailsFull: programDetailsFull)
             case .strategy:
                 return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programDetailsFull?.description)
             case .period:
@@ -224,7 +249,9 @@ extension ProgramInfoViewModel {
         case .investNow:
             return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
         case .signals:
-            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, infoSignalsProtocol: self)
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, type: .signal, infoSignalsProtocol: self)
+        case .subscriptionDetail:
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, type: .subscription, infoSignalsProtocol: self)
         }
     }
     
@@ -301,14 +328,17 @@ extension ProgramInfoViewModel: InvestNowProtocol {
 }
 
 extension ProgramInfoViewModel: InfoSignalsProtocol {
-    
     func didTapFollowButton() {
-        if let isFollowSignals = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription {
+        if let hasSignalAccount = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasSignalAccount, !hasSignalAccount {
+            createAccount { [weak self] (selectedCurrencyType, depositAmount) in
+                self?.subscribe(true, initialDepositCurrency: selectedCurrencyType, initialDepositAmount: depositAmount)
+            }
+        } else if let isFollowSignals = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription {
             subscribe(isFollowSignals)
         }
     }
     
     func didTapEditButton() {
-//        editSubscription(false)
+        editSubscription()
     }
 }

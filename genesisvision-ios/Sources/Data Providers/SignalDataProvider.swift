@@ -27,7 +27,7 @@ class SignalDataProvider: DataProvider {
         }
     }
     
-    static func subscribe(with programId: String, model: AttachToSignalProvider? = nil, completion: @escaping CompletionBlock) {
+    static func subscribe(on programId: String, model: AttachToSignalProvider, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
@@ -36,10 +36,10 @@ class SignalDataProvider: DataProvider {
         }
     }
     
-    static func unsubscribe(with programId: String, model: DetachFromSignalProvider? = nil, completion: @escaping CompletionBlock) {
+    static func unsubscribe(with programId: String, mode: DetachFromSignalProvider.Mode?, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
+        let model = DetachFromSignalProvider(mode: mode)
         SignalAPI.v10SignalDetachByIdPost(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }

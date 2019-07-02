@@ -25,12 +25,12 @@ open class WalletTransaction: Codable {
         case signalTradingAccount = "SignalTradingAccount"
     }
     public enum SourceCurrency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -51,9 +51,9 @@ open class WalletTransaction: Codable {
         case programRequestInvest = "ProgramRequestInvest"
         case programRequestWithdrawal = "ProgramRequestWithdrawal"
         case programRequestCancel = "ProgramRequestCancel"
-        case payingFee = "PayingFee"
-        case signalSlaveSubscribe = "SignalSlaveSubscribe"
-        case signalMasterReceiveSubscription = "SignalMasterReceiveSubscription"
+        case payingTradingFee = "PayingTradingFee"
+        case signalSubscriberPayingFee = "SignalSubscriberPayingFee"
+        case signalProviderReceiveFee = "SignalProviderReceiveFee"
     }
     public enum DestinationType: String, Codable { 
         case wallet = "Wallet"
@@ -69,12 +69,12 @@ open class WalletTransaction: Codable {
         case signalTradingAccount = "SignalTradingAccount"
     }
     public enum DestinationCurrency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"

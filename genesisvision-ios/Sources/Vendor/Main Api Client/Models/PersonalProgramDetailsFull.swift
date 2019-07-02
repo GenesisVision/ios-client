@@ -25,6 +25,8 @@ open class PersonalProgramDetailsFull: Codable {
     public var login: String?
     public var notificationAvailableToInvestId: UUID?
     public var canMakeSignalProvider: Bool?
+    public var canChangePassword: Bool?
+    public var migration: MigrationRequest?
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
@@ -40,11 +42,12 @@ open class PersonalProgramDetailsFull: Codable {
     public var invested: Double?
     public var pendingInput: Double?
     public var pendingOutput: Double?
+    public var pendingOutputIsWithdrawAll: Bool?
     public var status: Status?
 
 
     
-    public init(isReinvest: Bool?, gvtValue: Double?, showTwoFactorButton: Bool?, signalSubscription: SignalSubscription?, login: String?, notificationAvailableToInvestId: UUID?, canMakeSignalProvider: Bool?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
+    public init(isReinvest: Bool?, gvtValue: Double?, showTwoFactorButton: Bool?, signalSubscription: SignalSubscription?, login: String?, notificationAvailableToInvestId: UUID?, canMakeSignalProvider: Bool?, canChangePassword: Bool?, migration: MigrationRequest?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, pendingOutputIsWithdrawAll: Bool?, status: Status?) {
         self.isReinvest = isReinvest
         self.gvtValue = gvtValue
         self.showTwoFactorButton = showTwoFactorButton
@@ -52,6 +55,8 @@ open class PersonalProgramDetailsFull: Codable {
         self.login = login
         self.notificationAvailableToInvestId = notificationAvailableToInvestId
         self.canMakeSignalProvider = canMakeSignalProvider
+        self.canChangePassword = canChangePassword
+        self.migration = migration
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -67,6 +72,7 @@ open class PersonalProgramDetailsFull: Codable {
         self.invested = invested
         self.pendingInput = pendingInput
         self.pendingOutput = pendingOutput
+        self.pendingOutputIsWithdrawAll = pendingOutputIsWithdrawAll
         self.status = status
     }
     
@@ -84,6 +90,8 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(login, forKey: "login")
         try container.encodeIfPresent(notificationAvailableToInvestId, forKey: "notificationAvailableToInvestId")
         try container.encodeIfPresent(canMakeSignalProvider, forKey: "canMakeSignalProvider")
+        try container.encodeIfPresent(canChangePassword, forKey: "canChangePassword")
+        try container.encodeIfPresent(migration, forKey: "migration")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
@@ -99,6 +107,7 @@ open class PersonalProgramDetailsFull: Codable {
         try container.encodeIfPresent(invested, forKey: "invested")
         try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
         try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
+        try container.encodeIfPresent(pendingOutputIsWithdrawAll, forKey: "pendingOutputIsWithdrawAll")
         try container.encodeIfPresent(status, forKey: "status")
     }
 
@@ -114,6 +123,8 @@ open class PersonalProgramDetailsFull: Codable {
         login = try container.decodeIfPresent(String.self, forKey: "login")
         notificationAvailableToInvestId = try container.decodeIfPresent(UUID.self, forKey: "notificationAvailableToInvestId")
         canMakeSignalProvider = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProvider")
+        canChangePassword = try container.decodeIfPresent(Bool.self, forKey: "canChangePassword")
+        migration = try container.decodeIfPresent(MigrationRequest.self, forKey: "migration")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")
@@ -129,6 +140,7 @@ open class PersonalProgramDetailsFull: Codable {
         invested = try container.decodeIfPresent(Double.self, forKey: "invested")
         pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
         pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
+        pendingOutputIsWithdrawAll = try container.decodeIfPresent(Bool.self, forKey: "pendingOutputIsWithdrawAll")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }

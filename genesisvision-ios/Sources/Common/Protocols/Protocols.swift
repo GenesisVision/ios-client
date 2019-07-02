@@ -54,7 +54,11 @@ protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    
+}
+
+protocol CurrencyDelegateManagerProtocol: UITableViewDelegate, UITableViewDataSource {
+    var tableView: UITableView? { get set }
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
 }
 
 protocol WalletProtocol: class {
@@ -63,6 +67,10 @@ protocol WalletProtocol: class {
 
 protocol ReloadDataProtocol: class {
     func didReloadData()
+}
+
+protocol DetailProtocol: class {
+    func didReload()
 }
 
 protocol FavoriteStateChangeProtocol: class {

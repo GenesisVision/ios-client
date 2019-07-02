@@ -142,7 +142,17 @@ extension DashboardViewModel {
             router.fundListViewController?.fetch()
         }
         
-//        router.signalListViewController?.fetch()
+        if signalEnable {
+            router.signalListViewController?.fetch()
+        }
+        
+        if signalEnable {
+            router.signalOpenTradesViewController?.fetch()
+        }
+        
+        if signalEnable {
+            router.signalTradesViewController?.fetch()
+        }
     }
     
     private func fetch(_ completion: @escaping CompletionBlock) {

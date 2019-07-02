@@ -12,6 +12,7 @@ import Foundation
 open class ManagerSimpleProgram: Codable {
 
     public var level: Int?
+    public var levelProgress: Double?
     public var id: UUID?
     public var title: String?
     public var color: String?
@@ -20,8 +21,9 @@ open class ManagerSimpleProgram: Codable {
 
 
     
-    public init(level: Int?, id: UUID?, title: String?, color: String?, logo: String?, url: String?) {
+    public init(level: Int?, levelProgress: Double?, id: UUID?, title: String?, color: String?, logo: String?, url: String?) {
         self.level = level
+        self.levelProgress = levelProgress
         self.id = id
         self.title = title
         self.color = color
@@ -37,6 +39,7 @@ open class ManagerSimpleProgram: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
         try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(color, forKey: "color")
@@ -50,6 +53,7 @@ open class ManagerSimpleProgram: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         color = try container.decodeIfPresent(String.self, forKey: "color")

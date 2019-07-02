@@ -12,12 +12,12 @@ import Foundation
 open class ProgramDetailsFull: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -37,6 +37,7 @@ open class ProgramDetailsFull: Codable {
     }
     public var currency: Currency?
     public var level: Int?
+    public var levelProgress: Double?
     public var periodDuration: Int?
     public var periodStarts: Date?
     public var periodEnds: Date?
@@ -44,16 +45,28 @@ open class ProgramDetailsFull: Codable {
     public var entryFeeSelected: Double?
     public var entryFeeCurrent: Double?
     public var successFee: Double?
+    public var successFeeSelected: Double?
+    public var successFeeCurrent: Double?
     public var stopOutLevel: Double?
+    public var stopOutLevelSelected: Double?
+    public var stopOutLevelCurrent: Double?
     public var isReinvesting: Bool?
     public var isSignalProgram: Bool?
     public var signalSuccessFee: Double?
     public var signalVolumeFee: Double?
-    public var isForex: Bool?
+    public var leverageMin: Int?
+    public var leverageMax: Int?
+    public var ageDays: Double?
+    public var genesisRatio: Double?
+    public var investmentScale: Double?
+    public var volumeScale: Double?
     /** In GVT */
     public var availableInvestment: Double?
     /** In account currency */
     public var availableInvestmentBase: Double?
+    public var availableInvestmentLimit: Double?
+    public var totalAvailableInvestment: Double?
+    public var brokerDetails: BrokerDetails?
     public var statistic: ProgramStatistic?
     public var rating: ProgramDetailsRating?
     /** Fields for authorized user */
@@ -72,9 +85,10 @@ open class ProgramDetailsFull: Codable {
 
 
     
-    public init(currency: Currency?, level: Int?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, stopOutLevel: Double?, isReinvesting: Bool?, isSignalProgram: Bool?, signalSuccessFee: Double?, signalVolumeFee: Double?, isForex: Bool?, availableInvestment: Double?, availableInvestmentBase: Double?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
+    public init(currency: Currency?, level: Int?, levelProgress: Double?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, entryFee: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFee: Double?, successFeeSelected: Double?, successFeeCurrent: Double?, stopOutLevel: Double?, stopOutLevelSelected: Double?, stopOutLevelCurrent: Double?, isReinvesting: Bool?, isSignalProgram: Bool?, signalSuccessFee: Double?, signalVolumeFee: Double?, leverageMin: Int?, leverageMax: Int?, ageDays: Double?, genesisRatio: Double?, investmentScale: Double?, volumeScale: Double?, availableInvestment: Double?, availableInvestmentBase: Double?, availableInvestmentLimit: Double?, totalAvailableInvestment: Double?, brokerDetails: BrokerDetails?, statistic: ProgramStatistic?, rating: ProgramDetailsRating?, personalProgramDetails: PersonalProgramDetailsFull?, tags: [ProgramTag]?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
         self.currency = currency
         self.level = level
+        self.levelProgress = levelProgress
         self.periodDuration = periodDuration
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
@@ -82,14 +96,26 @@ open class ProgramDetailsFull: Codable {
         self.entryFeeSelected = entryFeeSelected
         self.entryFeeCurrent = entryFeeCurrent
         self.successFee = successFee
+        self.successFeeSelected = successFeeSelected
+        self.successFeeCurrent = successFeeCurrent
         self.stopOutLevel = stopOutLevel
+        self.stopOutLevelSelected = stopOutLevelSelected
+        self.stopOutLevelCurrent = stopOutLevelCurrent
         self.isReinvesting = isReinvesting
         self.isSignalProgram = isSignalProgram
         self.signalSuccessFee = signalSuccessFee
         self.signalVolumeFee = signalVolumeFee
-        self.isForex = isForex
+        self.leverageMin = leverageMin
+        self.leverageMax = leverageMax
+        self.ageDays = ageDays
+        self.genesisRatio = genesisRatio
+        self.investmentScale = investmentScale
+        self.volumeScale = volumeScale
         self.availableInvestment = availableInvestment
         self.availableInvestmentBase = availableInvestmentBase
+        self.availableInvestmentLimit = availableInvestmentLimit
+        self.totalAvailableInvestment = totalAvailableInvestment
+        self.brokerDetails = brokerDetails
         self.statistic = statistic
         self.rating = rating
         self.personalProgramDetails = personalProgramDetails
@@ -115,6 +141,7 @@ open class ProgramDetailsFull: Codable {
 
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
         try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
         try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
@@ -122,14 +149,26 @@ open class ProgramDetailsFull: Codable {
         try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
         try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
         try container.encodeIfPresent(successFee, forKey: "successFee")
+        try container.encodeIfPresent(successFeeSelected, forKey: "successFeeSelected")
+        try container.encodeIfPresent(successFeeCurrent, forKey: "successFeeCurrent")
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
+        try container.encodeIfPresent(stopOutLevelSelected, forKey: "stopOutLevelSelected")
+        try container.encodeIfPresent(stopOutLevelCurrent, forKey: "stopOutLevelCurrent")
         try container.encodeIfPresent(isReinvesting, forKey: "isReinvesting")
         try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
         try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
         try container.encodeIfPresent(signalVolumeFee, forKey: "signalVolumeFee")
-        try container.encodeIfPresent(isForex, forKey: "isForex")
+        try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
+        try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
+        try container.encodeIfPresent(ageDays, forKey: "ageDays")
+        try container.encodeIfPresent(genesisRatio, forKey: "genesisRatio")
+        try container.encodeIfPresent(investmentScale, forKey: "investmentScale")
+        try container.encodeIfPresent(volumeScale, forKey: "volumeScale")
         try container.encodeIfPresent(availableInvestment, forKey: "availableInvestment")
         try container.encodeIfPresent(availableInvestmentBase, forKey: "availableInvestmentBase")
+        try container.encodeIfPresent(availableInvestmentLimit, forKey: "availableInvestmentLimit")
+        try container.encodeIfPresent(totalAvailableInvestment, forKey: "totalAvailableInvestment")
+        try container.encodeIfPresent(brokerDetails, forKey: "brokerDetails")
         try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(rating, forKey: "rating")
         try container.encodeIfPresent(personalProgramDetails, forKey: "personalProgramDetails")
@@ -153,6 +192,7 @@ open class ProgramDetailsFull: Codable {
 
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
         periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
         periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
@@ -160,14 +200,26 @@ open class ProgramDetailsFull: Codable {
         entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
         entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
+        successFeeSelected = try container.decodeIfPresent(Double.self, forKey: "successFeeSelected")
+        successFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "successFeeCurrent")
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
+        stopOutLevelSelected = try container.decodeIfPresent(Double.self, forKey: "stopOutLevelSelected")
+        stopOutLevelCurrent = try container.decodeIfPresent(Double.self, forKey: "stopOutLevelCurrent")
         isReinvesting = try container.decodeIfPresent(Bool.self, forKey: "isReinvesting")
         isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
         signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
         signalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "signalVolumeFee")
-        isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
+        leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
+        leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
+        ageDays = try container.decodeIfPresent(Double.self, forKey: "ageDays")
+        genesisRatio = try container.decodeIfPresent(Double.self, forKey: "genesisRatio")
+        investmentScale = try container.decodeIfPresent(Double.self, forKey: "investmentScale")
+        volumeScale = try container.decodeIfPresent(Double.self, forKey: "volumeScale")
         availableInvestment = try container.decodeIfPresent(Double.self, forKey: "availableInvestment")
         availableInvestmentBase = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentBase")
+        availableInvestmentLimit = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentLimit")
+        totalAvailableInvestment = try container.decodeIfPresent(Double.self, forKey: "totalAvailableInvestment")
+        brokerDetails = try container.decodeIfPresent(BrokerDetails.self, forKey: "brokerDetails")
         statistic = try container.decodeIfPresent(ProgramStatistic.self, forKey: "statistic")
         rating = try container.decodeIfPresent(ProgramDetailsRating.self, forKey: "rating")
         personalProgramDetails = try container.decodeIfPresent(PersonalProgramDetailsFull.self, forKey: "personalProgramDetails")

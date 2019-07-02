@@ -22,13 +22,11 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     // MARK: - Buttons
     @IBOutlet weak var addFundsButton: ActionButton! {
         didSet {
-            addFundsButton.isHidden = true
             addFundsButton.backgroundColor = UIColor.primary.withAlphaComponent(0.1)
         }
     }
     @IBOutlet weak var withdrawButton: ActionButton! {
         didSet {
-            withdrawButton.isHidden = true
             withdrawButton.configure(with: .darkClear)
         }
     }
@@ -62,14 +60,18 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
 
         bottomViewType = .none
         
-        if viewModel.wallet != nil {
-            addFundsButton.isHidden = false
-            withdrawButton.isHidden = false
+        switch viewModel.walletType {
+        case .wallet:
             tableView.contentInset.bottom = 82.0
+            
+            addFundsButton.setEnabled(viewModel.wallet?.isDepositEnabled ?? false)
+            withdrawButton.setEnabled(viewModel.wallet?.isWithdrawalEnabled ?? false)
+        case .account:
+            tableView.contentInset.bottom = 82.0
+        default:
+            addFundsButton.isHidden = true
+            withdrawButton.isHidden = true
         }
-        
-        addFundsButton.setEnabled(viewModel.wallet?.isDepositEnabled ?? false)
-        withdrawButton.setEnabled(viewModel.wallet?.isWithdrawalEnabled ?? false)
     }
     
     @objc private func withdrawButtonAction() {

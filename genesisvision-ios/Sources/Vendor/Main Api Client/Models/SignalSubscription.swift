@@ -17,12 +17,12 @@ open class SignalSubscription: Codable {
         case fixed = "Fixed"
     }
     public enum FixedCurrency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -38,10 +38,12 @@ open class SignalSubscription: Codable {
     public var openTolerancePercent: Double?
     public var fixedVolume: Double?
     public var fixedCurrency: FixedCurrency?
+    public var totalProfit: Double?
+    public var totalVolume: Double?
 
 
     
-    public init(hasSignalAccount: Bool?, hasActiveSubscription: Bool?, mode: Mode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?) {
+    public init(hasSignalAccount: Bool?, hasActiveSubscription: Bool?, mode: Mode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?, totalProfit: Double?, totalVolume: Double?) {
         self.hasSignalAccount = hasSignalAccount
         self.hasActiveSubscription = hasActiveSubscription
         self.mode = mode
@@ -49,6 +51,8 @@ open class SignalSubscription: Codable {
         self.openTolerancePercent = openTolerancePercent
         self.fixedVolume = fixedVolume
         self.fixedCurrency = fixedCurrency
+        self.totalProfit = totalProfit
+        self.totalVolume = totalVolume
     }
     
 
@@ -65,6 +69,8 @@ open class SignalSubscription: Codable {
         try container.encodeIfPresent(openTolerancePercent, forKey: "openTolerancePercent")
         try container.encodeIfPresent(fixedVolume, forKey: "fixedVolume")
         try container.encodeIfPresent(fixedCurrency, forKey: "fixedCurrency")
+        try container.encodeIfPresent(totalProfit, forKey: "totalProfit")
+        try container.encodeIfPresent(totalVolume, forKey: "totalVolume")
     }
 
     // Decodable protocol methods
@@ -79,6 +85,8 @@ open class SignalSubscription: Codable {
         openTolerancePercent = try container.decodeIfPresent(Double.self, forKey: "openTolerancePercent")
         fixedVolume = try container.decodeIfPresent(Double.self, forKey: "fixedVolume")
         fixedCurrency = try container.decodeIfPresent(FixedCurrency.self, forKey: "fixedCurrency")
+        totalProfit = try container.decodeIfPresent(Double.self, forKey: "totalProfit")
+        totalVolume = try container.decodeIfPresent(Double.self, forKey: "totalVolume")
     }
 }
 

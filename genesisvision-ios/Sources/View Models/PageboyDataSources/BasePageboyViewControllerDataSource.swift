@@ -30,6 +30,12 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
         setup(router: router, wallet: wallet)
     }
     
+    init(router: Router, account: CopyTradingAccountInfo? = nil) {
+        super.init()
+        
+        setup(router: router, account: account)
+    }
+    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return controllers.count
     }
@@ -47,5 +53,8 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     }
     
     internal func setup(router: Router, wallet: WalletData? = nil) {
+    }
+    
+    internal func setup(router: Router, account: CopyTradingAccountInfo? = nil) {
     }
 }

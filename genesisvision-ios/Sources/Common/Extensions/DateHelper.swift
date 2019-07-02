@@ -57,7 +57,7 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    func dateAndTimetoString(_ format: String = "yyyy-MM-dd HH:mm") -> String {
+    func dateAndTimeToString(_ format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.dateFormat = format

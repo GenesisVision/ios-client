@@ -14,8 +14,9 @@ final class SignalTradesViewModel {
     
     var router: DashboardRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private weak var signalTradesProtocol: SignalTradesProtocol?
+    
     var sortingDelegateManager: SortingDelegateManager!
-    var currencyType: CurrencyType!
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
@@ -47,11 +48,11 @@ final class SignalTradesViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: DashboardRouter, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, currencyType: CurrencyType) {
+    init(withRouter router: DashboardRouter, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, signalTradesProtocol: SignalTradesProtocol? = nil) {
         self.router = router
         self.isOpenTrades = isOpenTrades ?? false
         self.reloadDataProtocol = reloadDataProtocol
-        self.currencyType = currencyType
+        self.signalTradesProtocol = signalTradesProtocol
         
         title = self.isOpenTrades ? "Open trades" : "Trades history"
         
@@ -61,6 +62,14 @@ final class SignalTradesViewModel {
     
     func hideHeader(value: Bool = true) {
 
+    }
+    
+    func close(_ tradeId: String) {
+        SignalDataProvider.close(with: tradeId) { [weak self] (result) in
+            self?.refresh(completion: { (result) in
+                
+            })
+        }
     }
 }
 
@@ -190,43 +199,35 @@ extension SignalTradesViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
+    private func saveTrades(_ tradesViewModel: TradesSignalViewModel?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+        
+        guard tradesViewModel != nil else {
+            return ErrorHandler.handleApiError(error: nil, completion: completionError)
+        }
+        var viewModels = [SignalTradesTableViewCellViewModel]()
+        
+        let totalCount = tradesViewModel?.total ?? 0
+        
+        tradesViewModel?.trades?.forEach({ (orderModel) in
+            let viewModel = SignalTradesTableViewCellViewModel(orderModel: orderModel, isOpenTrades: self.isOpenTrades, delegate: self.signalTradesProtocol)
+            viewModels.append(viewModel)
+        })
+        
+        completionSuccess(totalCount, viewModels)
+        completionError(.success)
+    }
+    
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
         let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
         
         if isOpenTrades {
-            SignalDataProvider.getTradesOpen(with: sorting as? SignalAPI.Sorting_v10SignalTradesOpenGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
-                guard tradesViewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
-                }
-                var viewModels = [SignalTradesTableViewCellViewModel]()
-                
-                let totalCount = tradesViewModel?.total ?? 0
-                
-                tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = SignalTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
-                    viewModels.append(viewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
+            SignalDataProvider.getTradesOpen(with: nil, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+                self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
                 }, errorCompletion: completionError)
         } else {
             SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_v10SignalTradesGet, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
-                guard tradesViewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completionError)
-                }
-                var viewModels = [SignalTradesTableViewCellViewModel]()
-                
-                let totalCount = tradesViewModel?.total ?? 0
-                
-                tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = SignalTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
-                    viewModels.append(viewModel)
-                })
-                
-                completionSuccess(totalCount, viewModels)
-                completionError(.success)
+                self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
             }, errorCompletion: completionError)
         }
     }

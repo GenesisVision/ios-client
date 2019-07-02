@@ -12,12 +12,12 @@ import Foundation
 open class NewProgramRequest: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -35,6 +35,7 @@ open class NewProgramRequest: Codable {
     public var signalSuccessFee: Double?
     public var signalVolumeFee: Double?
     public var isSignalProgram: Bool?
+    public var investmentLimit: Double?
     public var title: String?
     public var description: String?
     public var logo: String?
@@ -44,7 +45,7 @@ open class NewProgramRequest: Codable {
 
 
     
-    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, signalSuccessFee: Double?, signalVolumeFee: Double?, isSignalProgram: Bool?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
+    public init(currency: Currency?, periodLength: Int?, successFee: Double?, stopOutLevel: Double?, leverage: Int?, brokerAccountTypeId: UUID?, signalSuccessFee: Double?, signalVolumeFee: Double?, isSignalProgram: Bool?, investmentLimit: Double?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
         self.currency = currency
         self.periodLength = periodLength
         self.successFee = successFee
@@ -54,6 +55,7 @@ open class NewProgramRequest: Codable {
         self.signalSuccessFee = signalSuccessFee
         self.signalVolumeFee = signalVolumeFee
         self.isSignalProgram = isSignalProgram
+        self.investmentLimit = investmentLimit
         self.title = title
         self.description = description
         self.logo = logo
@@ -78,6 +80,7 @@ open class NewProgramRequest: Codable {
         try container.encodeIfPresent(signalSuccessFee, forKey: "signalSuccessFee")
         try container.encodeIfPresent(signalVolumeFee, forKey: "signalVolumeFee")
         try container.encodeIfPresent(isSignalProgram, forKey: "isSignalProgram")
+        try container.encodeIfPresent(investmentLimit, forKey: "investmentLimit")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -100,6 +103,7 @@ open class NewProgramRequest: Codable {
         signalSuccessFee = try container.decodeIfPresent(Double.self, forKey: "signalSuccessFee")
         signalVolumeFee = try container.decodeIfPresent(Double.self, forKey: "signalVolumeFee")
         isSignalProgram = try container.decodeIfPresent(Bool.self, forKey: "isSignalProgram")
+        investmentLimit = try container.decodeIfPresent(Double.self, forKey: "investmentLimit")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

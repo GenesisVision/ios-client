@@ -94,8 +94,10 @@ class WalletTransactionView: UIView {
             setupExternalDeposit(model)
         case .externalWithdrawal:
             setupExternalWithdrawal(model)
-        case .investing, .profit:
-            setupInvestingAndProfit(model)
+        case .investing:
+            setupInvesting(model)
+        case .profit:
+            setupProfit(model)
         case .withdrawal:
             setupWithdrawal(model)
         case .converting:
@@ -106,7 +108,10 @@ class WalletTransactionView: UIView {
             setupPlatformFeeProgram(model)
         case .depositSignal:
             setupSignalDeposit(model)
-        case .platform, .receiveSignal, .subscribeSignal, .withdrawalSignal:
+        case .subscribeSignal:
+            setupSignalSubscribe(model)
+        case .platform, .receiveSignal, .withdrawalSignal:
+            //TODO:
             break
         }
         
@@ -273,7 +278,7 @@ extension WalletTransactionView {
             }
         }
     }
-    private func setupInvestingAndProfit(_ model: TransactionDetails) {
+    private func setupInvesting(_ model: TransactionDetails) {
         investmentStackView.isHidden = false
         investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
         
@@ -303,7 +308,61 @@ extension WalletTransactionView {
                 investmentStackView.assetStackView.subtitleLabel.text = managerName
             }
             
-            if programType == .program, let successFee = model.programDetails?.successFee, let successFeePercent = model.programDetails?.successFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            investmentStackView.successFeeStackView.isHidden = true
+            investmentStackView.exitFeeStackView.isHidden = true
+            
+            investmentStackView.entryFeeStackView.subtitleLabel.text = "Entry fee"
+            if let entryFee = model.programDetails?.entryFee, let entryFeePercent = model.programDetails?.entryFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+
+                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (" + entryFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+            } else {
+                investmentStackView.entryFeeStackView.isHidden = true
+            }
+            investmentStackView.gvCommissionStackView.subtitleLabel.text = "GV Commission"
+            if let gvCommission = model.gvCommission, let gvCommissionCurrency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: gvCommissionCurrency.rawValue) {
+                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+            } else {
+                investmentStackView.gvCommissionStackView.isHidden = true
+            }
+            investmentStackView.amountStackView.subtitleLabel.text = "Investment amount"
+            if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                investmentStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            } else {
+                investmentStackView.amountStackView.isHidden = true
+            }
+        }
+    }
+    private func setupProfit(_ model: TransactionDetails) {
+        investmentStackView.isHidden = false
+        investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
+        
+        if let details = model.programDetails, let currency = model.currency, let programType = details.programType {
+            investmentStackView.assetStackView.headerLabel.text = programType == .program ? "Program" : "Fund"
+            topStackView.subtitleLabel.text = programType == .program ? "Profit program" : "Profit fund"
+            
+            if programType == .program, let level = details.level {
+                investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+            } else {
+                investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
+            }
+            
+            if let color = details.color {
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
+            }
+            if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
+            }
+            
+            if let title = details.title {
+                investmentStackView.assetStackView.titleLabel.text = title
+            }
+            if let managerName = model.programDetails?.managerName {
+                investmentStackView.assetStackView.subtitleLabel.text = managerName
+            }
+            
+            if programType == .program, let currency = model.gvCommissionCurrency, let successFee = model.programDetails?.successFee, let successFeePercent = model.programDetails?.successFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 investmentStackView.successFeeStackView.subtitleLabel.text = "Success fee"
                 investmentStackView.successFeeStackView.titleLabel.text = "\(successFeePercent)% (" + successFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
@@ -317,15 +376,10 @@ extension WalletTransactionView {
                 investmentStackView.exitFeeStackView.isHidden = true
             }
             
-            investmentStackView.entryFeeStackView.subtitleLabel.text = "Entry fee"
-            if let entryFee = model.programDetails?.entryFee, let entryFeePercent = model.programDetails?.entryFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            investmentStackView.entryFeeStackView.isHidden = true
 
-                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (" + entryFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
-            } else {
-                investmentStackView.entryFeeStackView.isHidden = true
-            }
             investmentStackView.gvCommissionStackView.subtitleLabel.text = "GV Commission"
-            if let gvCommission = model.gvCommission, let gvCommissionCurrency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: gvCommissionCurrency.rawValue) {
+            if let gvCommission = model.gvCommission, let currency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.gvCommissionStackView.isHidden = true
@@ -440,6 +494,77 @@ extension WalletTransactionView {
         signalDepositStackView.amountStackView.subtitleLabel.text = "Investment amount"
         if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
             signalDepositStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        }
+    }
+    
+    private func setupSignalSubscribe(_ model: TransactionDetails) {
+        investmentStackView.isHidden = false
+        investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
+        
+        if let details = model.programDetails, let currency = model.currency {
+            if let programType = details.programType {
+                investmentStackView.assetStackView.headerLabel.text = "To the signal provider"
+                
+                topStackView.subtitleLabel.text = "Signal fee payment"
+                
+                if programType == .program, let level = details.level {
+                    investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                } else {
+                    investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
+                }
+            }
+            
+            if let color = details.color {
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
+            }
+            if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
+            }
+            
+            if let title = details.title {
+                investmentStackView.assetStackView.titleLabel.text = title
+            }
+            
+            if let managerName = model.programDetails?.managerName {
+                investmentStackView.assetStackView.subtitleLabel.text = managerName
+            }
+            
+            investmentStackView.amountStackView.subtitleLabel.text = "Amount"
+            if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                investmentStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            } else {
+                investmentStackView.amountStackView.isHidden = true
+            }
+            
+            investmentStackView.entryFeeStackView.isHidden = true
+            investmentStackView.successFeeStackView.isHidden = true
+            investmentStackView.gvCommissionStackView.isHidden = true
+            investmentStackView.exitFeeStackView.isHidden = true
+
+            if let fees = model.signalFees {
+                if fees.count > 0, let value = fees[0].value, let title = fees[0].title, let currency = fees[0].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                    investmentStackView.entryFeeStackView.isHidden = false
+                    investmentStackView.entryFeeStackView.subtitleLabel.text = title
+                    investmentStackView.entryFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                }
+                if fees.count > 1, let value = fees[1].value, let title = fees[1].title, let currency = fees[1].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                    investmentStackView.successFeeStackView.isHidden = false
+                    investmentStackView.successFeeStackView.subtitleLabel.text = title
+                    investmentStackView.successFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                }
+                if fees.count > 2, let value = fees[2].value, let title = fees[2].title, let currency = fees[2].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                    investmentStackView.gvCommissionStackView.isHidden = false
+                    investmentStackView.gvCommissionStackView.subtitleLabel.text = title
+                    investmentStackView.gvCommissionStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                }
+                if fees.count > 3, let value = fees[3].value, let title = fees[3].title, let currency = fees[3].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                    investmentStackView.exitFeeStackView.isHidden = false
+                    investmentStackView.exitFeeStackView.subtitleLabel.text = title
+                    investmentStackView.exitFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                }
+            }
         }
     }
 }
@@ -568,6 +693,7 @@ class RateStackView: UIStackView {
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.font = UIFont.getFont(.regular, size: 17.0)
+            titleLabel.textColor = UIColor.Cell.subtitle
         }
     }
 }

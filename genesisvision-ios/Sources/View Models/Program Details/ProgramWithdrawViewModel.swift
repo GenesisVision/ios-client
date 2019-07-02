@@ -52,7 +52,7 @@ final class ProgramWithdrawViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didWithdrawn()
+        detailProtocol?.didReload()
         router.goToBack()
     }
     

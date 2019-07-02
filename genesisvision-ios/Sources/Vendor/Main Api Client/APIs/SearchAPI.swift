@@ -33,22 +33,35 @@ open class SearchAPI {
   "funds" : {
     "total" : 6,
     "funds" : [ {
-      "totalAssetsCount" : 7,
+      "totalAssetsCount" : 5,
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
-        "profitPercent" : 4.965218492984954,
-        "drawdownPercent" : 5.025004791520295,
+        "profitPercent" : 9.369310271410669,
+        "drawdownPercent" : 6.683562403749608,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
-        "investorsCount" : 9
+        "investorsCount" : 8
       },
       "color" : "color",
       "manager" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "avatar" : "avatar",
@@ -59,37 +72,38 @@ open class SearchAPI {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.1730742509559433
+        "percent" : 9.965781217890562
       }, {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.1730742509559433
+        "percent" : 9.965781217890562
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 2.3021358869347655
+        "share" : 9.301444243932576
       },
       "personalDetails" : {
         "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
+        "pendingOutputIsWithdrawAll" : true,
         "canInvest" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
-        "pendingOutput" : 3.5571952270680973,
+        "pendingOutput" : 2.8841621266687802,
         "hasNotifications" : true,
-        "pendingInput" : 6.438423552598547,
+        "pendingInput" : 1.284659006116532,
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "value" : 6.683562403749608,
-        "profit" : 8.762042012749001,
-        "withdrawPercent" : 9.369310271410669,
-        "invested" : 9.018348186070783,
+        "value" : 6.438423552598547,
+        "profit" : 3.5571952270680973,
+        "withdrawPercent" : 9.018348186070783,
+        "invested" : 6.965117697638846,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -105,22 +119,35 @@ open class SearchAPI {
       } ],
       "status" : "None"
     }, {
-      "totalAssetsCount" : 7,
+      "totalAssetsCount" : 5,
       "statistic" : {
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
-        "profitPercent" : 4.965218492984954,
-        "drawdownPercent" : 5.025004791520295,
+        "profitPercent" : 9.369310271410669,
+        "drawdownPercent" : 6.683562403749608,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
-        "investorsCount" : 9
+        "investorsCount" : 8
       },
       "color" : "color",
       "manager" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "avatar" : "avatar",
@@ -131,37 +158,38 @@ open class SearchAPI {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.1730742509559433
+        "percent" : 9.965781217890562
       }, {
         "name" : "name",
         "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.1730742509559433
+        "percent" : 9.965781217890562
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "url" : "url",
       "dashboardAssetsDetails" : {
-        "share" : 2.3021358869347655
+        "share" : 9.301444243932576
       },
       "personalDetails" : {
         "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
+        "pendingOutputIsWithdrawAll" : true,
         "canInvest" : true,
         "canClosePeriod" : true,
         "canReallocate" : true,
-        "pendingOutput" : 3.5571952270680973,
+        "pendingOutput" : 2.8841621266687802,
         "hasNotifications" : true,
-        "pendingInput" : 6.438423552598547,
+        "pendingInput" : 1.284659006116532,
         "isOwnProgram" : true,
         "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
         "isFinishing" : true,
-        "value" : 6.683562403749608,
-        "profit" : 8.762042012749001,
-        "withdrawPercent" : 9.369310271410669,
-        "invested" : 9.018348186070783,
+        "value" : 6.438423552598547,
+        "profit" : 3.5571952270680973,
+        "withdrawPercent" : 9.018348186070783,
+        "invested" : 6.965117697638846,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
@@ -179,18 +207,36 @@ open class SearchAPI {
     } ]
   },
   "programs" : {
-    "total" : 6,
+    "total" : 4,
     "programs" : [ {
-      "periodDuration" : 6,
+      "color" : "color",
+      "stopOutLevel" : 5.962133916683182,
+      "availableInvestment" : 5.637376656633329,
+      "availableInvestmentLimit" : 7.061401241503109,
+      "rating" : {
+        "rating" : 3,
+        "canLevelUp" : true,
+        "topPercent" : 4.145608029883936,
+        "profit" : 2.027123023002322
+      },
+      "description" : "description",
+      "title" : "title",
+      "availableInvestmentBase" : 2.3021358869347655,
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "logo" : "logo",
+      "currency" : "Undefined",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "periodDuration" : 1,
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -198,12 +244,24 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 2
       },
-      "color" : "color",
       "manager" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "avatar" : "avatar",
@@ -211,20 +269,8 @@ open class SearchAPI {
         "username" : "username"
       },
       "level" : 0,
-      "stopOutLevel" : 1.4658129805029452,
-      "availableInvestment" : 5.962133916683182,
-      "rating" : {
-        "rating" : 7,
-        "canLevelUp" : true,
-        "topPercent" : 3.616076749251911,
-        "profit" : 9.301444243932576
-      },
-      "description" : "description",
-      "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
-      "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
         "color" : "color",
         "name" : "name"
@@ -233,45 +279,54 @@ open class SearchAPI {
         "name" : "name"
       } ],
       "dashboardAssetsDetails" : {
-        "share" : 2.3021358869347655
+        "share" : 9.301444243932576
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
+        "login" : "login",
+        "hasNotifications" : true,
+        "canChangePassword" : true,
+        "gvtValue" : 7.386281948385884,
+        "isFinishing" : true,
+        "value" : 1.0246457001441578,
+        "profit" : 1.4894159098541704,
+        "pendingOutputIsWithdrawAll" : true,
         "canInvest" : true,
         "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
-        "pendingOutput" : 1.4894159098541704,
-        "hasNotifications" : true,
-        "pendingInput" : 1.0246457001441578,
+        "pendingOutput" : 1.1730742509559433,
+        "pendingInput" : 7.457744773683766,
         "isOwnProgram" : true,
         "isReinvest" : true,
-        "gvtValue" : 2.027123023002322,
-        "isFinishing" : true,
+        "migration" : {
+          "brokerTradingAccountName" : "brokerTradingAccountName",
+          "newLeverage" : 1,
+          "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "dateCreate" : "2000-01-23T04:56:07.000+00:00",
+          "brokerName" : "brokerName",
+          "brokerLogo" : "brokerLogo"
+        },
         "signalSubscription" : {
           "mode" : "ByBalance",
+          "totalVolume" : 1.2315135367772556,
           "hasSignalAccount" : true,
-          "fixedCurrency" : "BTC",
+          "totalProfit" : 7.386281948385884,
+          "fixedCurrency" : "Undefined",
           "fixedVolume" : 4.145608029883936,
           "openTolerancePercent" : 2.027123023002322,
           "hasActiveSubscription" : true,
           "percent" : 3.616076749251911
         },
         "canMakeSignalProvider" : true,
-        "value" : 4.145608029883936,
-        "profit" : 7.386281948385884,
-        "invested" : 1.2315135367772556,
+        "invested" : 6.84685269835264,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
       },
-      "logo" : "logo",
-      "currency" : "BTC",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911
@@ -281,16 +336,34 @@ open class SearchAPI {
       } ],
       "status" : "None"
     }, {
-      "periodDuration" : 6,
+      "color" : "color",
+      "stopOutLevel" : 5.962133916683182,
+      "availableInvestment" : 5.637376656633329,
+      "availableInvestmentLimit" : 7.061401241503109,
+      "rating" : {
+        "rating" : 3,
+        "canLevelUp" : true,
+        "topPercent" : 4.145608029883936,
+        "profit" : 2.027123023002322
+      },
+      "description" : "description",
+      "title" : "title",
+      "availableInvestmentBase" : 2.3021358869347655,
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "logo" : "logo",
+      "currency" : "Undefined",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "periodDuration" : 1,
       "statistic" : {
         "balanceBase" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "tradesCount" : 7,
         "balanceGVT" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "profitPercent" : 1.4658129805029452,
         "profitValue" : 5.962133916683182,
@@ -298,12 +371,24 @@ open class SearchAPI {
         "currentValue" : 6.027456183070403,
         "balanceSecondary" : {
           "amount" : 0.8008281904610115,
-          "currency" : "BTC"
+          "currency" : "Undefined"
         },
         "investorsCount" : 2
       },
-      "color" : "color",
       "manager" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "logo" : "logo",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url"
+        } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "avatar" : "avatar",
@@ -311,20 +396,8 @@ open class SearchAPI {
         "username" : "username"
       },
       "level" : 0,
-      "stopOutLevel" : 1.4658129805029452,
-      "availableInvestment" : 5.962133916683182,
-      "rating" : {
-        "rating" : 7,
-        "canLevelUp" : true,
-        "topPercent" : 3.616076749251911,
-        "profit" : 9.301444243932576
-      },
-      "description" : "description",
-      "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
-      "availableInvestmentBase" : 5.637376656633329,
       "url" : "url",
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
         "color" : "color",
         "name" : "name"
@@ -333,45 +406,54 @@ open class SearchAPI {
         "name" : "name"
       } ],
       "dashboardAssetsDetails" : {
-        "share" : 2.3021358869347655
+        "share" : 9.301444243932576
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "canCloseAsset" : true,
         "canCloseProgram" : true,
         "canWithdraw" : true,
+        "login" : "login",
+        "hasNotifications" : true,
+        "canChangePassword" : true,
+        "gvtValue" : 7.386281948385884,
+        "isFinishing" : true,
+        "value" : 1.0246457001441578,
+        "profit" : 1.4894159098541704,
+        "pendingOutputIsWithdrawAll" : true,
         "canInvest" : true,
         "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "login" : "login",
         "showTwoFactorButton" : true,
         "canClosePeriod" : true,
-        "pendingOutput" : 1.4894159098541704,
-        "hasNotifications" : true,
-        "pendingInput" : 1.0246457001441578,
+        "pendingOutput" : 1.1730742509559433,
+        "pendingInput" : 7.457744773683766,
         "isOwnProgram" : true,
         "isReinvest" : true,
-        "gvtValue" : 2.027123023002322,
-        "isFinishing" : true,
+        "migration" : {
+          "brokerTradingAccountName" : "brokerTradingAccountName",
+          "newLeverage" : 1,
+          "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "dateCreate" : "2000-01-23T04:56:07.000+00:00",
+          "brokerName" : "brokerName",
+          "brokerLogo" : "brokerLogo"
+        },
         "signalSubscription" : {
           "mode" : "ByBalance",
+          "totalVolume" : 1.2315135367772556,
           "hasSignalAccount" : true,
-          "fixedCurrency" : "BTC",
+          "totalProfit" : 7.386281948385884,
+          "fixedCurrency" : "Undefined",
           "fixedVolume" : 4.145608029883936,
           "openTolerancePercent" : 2.027123023002322,
           "hasActiveSubscription" : true,
           "percent" : 3.616076749251911
         },
         "canMakeSignalProvider" : true,
-        "value" : 4.145608029883936,
-        "profit" : 7.386281948385884,
-        "invested" : 1.2315135367772556,
+        "invested" : 6.84685269835264,
         "isFavorite" : true,
         "isInvested" : true,
         "status" : "Pending"
       },
-      "logo" : "logo",
-      "currency" : "BTC",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 3.616076749251911
@@ -383,18 +465,18 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 1,
+    "total" : 6,
     "managers" : [ {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Undefined",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Undefined",
         "value" : "value",
         "url" : "url"
       } ],
@@ -409,13 +491,13 @@ open class SearchAPI {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Undefined",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "Undefined",
         "value" : "value",
         "url" : "url"
       } ],

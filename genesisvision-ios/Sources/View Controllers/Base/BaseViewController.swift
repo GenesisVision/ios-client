@@ -399,7 +399,7 @@ extension BaseViewController: DateRangeViewProtocol {
     }
 }
 
-extension BaseViewController: CurrencyDelegateManagerProtocol {
+extension BaseViewController: CurrencyDelegateManagerDelegate {
     func didSelectCurrency(at indexPath: IndexPath) {
         updateCurrencyButtonTitle()
         pullToRefresh()

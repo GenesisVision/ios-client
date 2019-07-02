@@ -101,6 +101,11 @@ enum DataType {
     case fake
 }
 
+enum WalletTransferType {
+    case fromWallet
+    case fromAccount
+}
+
 enum AssetType: String {
     case fund = "Fund"
     case program = "Program"
@@ -113,6 +118,12 @@ enum WalletBalanceType: String {
     case available = "Available"
     case invested = "Invested"
     case pending = "Pending"
+}
+
+enum WalletType {
+    case all
+    case wallet
+    case account
 }
 
 // MARK: - CompletionsResult

@@ -181,6 +181,7 @@ open class NotificationsAPI {
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
+        case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
         case fundNewsAndUpdates = "FundNewsAndUpdates"
         case fundEndOfPeriod = "FundEndOfPeriod"
         case fundRebalancing = "FundRebalancing"
@@ -405,6 +406,7 @@ open class NotificationsAPI {
     } ],
     "title" : "title",
     "url" : "url",
+    "levelProgress" : 1.4658129805029452,
     "settingsCustom" : [ {
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
@@ -446,6 +448,7 @@ open class NotificationsAPI {
     } ],
     "title" : "title",
     "url" : "url",
+    "levelProgress" : 1.4658129805029452,
     "settingsCustom" : [ {
       "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isEnabled" : true,
@@ -704,6 +707,7 @@ open class NotificationsAPI {
   } ],
   "title" : "title",
   "url" : "url",
+  "levelProgress" : 1.4658129805029452,
   "settingsCustom" : [ {
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,

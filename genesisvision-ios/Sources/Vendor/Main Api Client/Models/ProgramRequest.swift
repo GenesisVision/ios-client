@@ -12,12 +12,12 @@ import Foundation
 open class ProgramRequest: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -44,6 +44,7 @@ open class ProgramRequest: Codable {
     public var date: Date?
     public var value: Double?
     public var valueGvt: Double?
+    public var withdrawAll: Bool?
     public var feeEntry: Double?
     public var feeExit: Double?
     public var currency: Currency?
@@ -59,12 +60,13 @@ open class ProgramRequest: Codable {
 
 
     
-    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, valueGvt: Double?, feeEntry: Double?, feeExit: Double?, currency: Currency?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
+    public init(id: UUID?, programId: UUID?, date: Date?, value: Double?, valueGvt: Double?, withdrawAll: Bool?, feeEntry: Double?, feeExit: Double?, currency: Currency?, fundWithdrawPercent: Double?, type: ModelType?, status: Status?, logo: String?, title: String?, color: String?, canCancelRequest: Bool?, programType: ProgramType?) {
         self.id = id
         self.programId = programId
         self.date = date
         self.value = value
         self.valueGvt = valueGvt
+        self.withdrawAll = withdrawAll
         self.feeEntry = feeEntry
         self.feeExit = feeExit
         self.currency = currency
@@ -90,6 +92,7 @@ open class ProgramRequest: Codable {
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(valueGvt, forKey: "valueGvt")
+        try container.encodeIfPresent(withdrawAll, forKey: "withdrawAll")
         try container.encodeIfPresent(feeEntry, forKey: "feeEntry")
         try container.encodeIfPresent(feeExit, forKey: "feeExit")
         try container.encodeIfPresent(currency, forKey: "currency")
@@ -113,6 +116,7 @@ open class ProgramRequest: Codable {
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         value = try container.decodeIfPresent(Double.self, forKey: "value")
         valueGvt = try container.decodeIfPresent(Double.self, forKey: "valueGvt")
+        withdrawAll = try container.decodeIfPresent(Bool.self, forKey: "withdrawAll")
         feeEntry = try container.decodeIfPresent(Double.self, forKey: "feeEntry")
         feeExit = try container.decodeIfPresent(Double.self, forKey: "feeExit")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")

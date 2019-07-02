@@ -32,6 +32,8 @@ open class ProgramFacet: Codable {
         case byBalanceDesc = "ByBalanceDesc"
         case byCurrDesc = "ByCurrDesc"
         case byCurrAsc = "ByCurrAsc"
+        case byLevelProgressDesc = "ByLevelProgressDesc"
+        case byLevelProgressAsc = "ByLevelProgressAsc"
     }
     public enum SortType: String, Codable { 
         case new = "New"
@@ -39,6 +41,7 @@ open class ProgramFacet: Codable {
         case weeklyTop = "WeeklyTop"
         case popular = "Popular"
         case toLevelUp = "ToLevelUp"
+        case mostReliable = "MostReliable"
     }
     public enum Timeframe: String, Codable { 
         case day = "Day"

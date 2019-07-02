@@ -61,7 +61,7 @@ class ForgotPasswordViewController: BaseViewController {
         
         email = email.trimmingCharacters(in: .whitespaces)
         
-        viewModel.forgotPassword(email: email) { [weak self] (result) in
+        viewModel.riskControl(email: email) { [weak self] (result) in
             self?.hideAll()
             
             switch result {

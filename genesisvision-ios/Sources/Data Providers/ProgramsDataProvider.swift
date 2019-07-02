@@ -24,6 +24,7 @@ class ProgramsDataProvider: DataProvider {
         
         let mask = filterModel?.mask
         let isFavorite = filterModel?.isFavorite
+        
         let facetId = filterModel?.facetId
         let managerId = filterModel?.managerId
         let chartPointsCount = filterModel?.chartPointsCount

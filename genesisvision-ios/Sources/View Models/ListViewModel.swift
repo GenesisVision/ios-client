@@ -17,6 +17,8 @@ final class ListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType
     
+    var programListDelegateManager: ListDelegateManager<ListViewModel>!
+    
     // MARK: - Variables
     var title: String = ""
 
@@ -47,6 +49,8 @@ final class ListViewModel: ListViewModelProtocol {
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets
         self.assetType = assetType
+        
+        programListDelegateManager = ListDelegateManager(with: self)
         
         state = isLogin() ? .list : .listWithSignIn
 

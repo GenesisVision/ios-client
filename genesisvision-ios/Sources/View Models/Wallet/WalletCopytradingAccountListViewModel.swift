@@ -17,7 +17,11 @@ final class WalletCopytradingAccountListViewModel {
     // MARK: - Variables
     var title: String = "Copytrading accounts"
     
-    var accounts: [CopyTradingAccountInfo]?
+    var accounts: [CopyTradingAccountInfo]? {
+        didSet {
+            router.walletTabmanViewController?.viewModel?.accounts = accounts
+        }
+    }
     
     private var sections: [SectionType] = [.accounts]
     
@@ -97,13 +101,12 @@ extension WalletCopytradingAccountListViewModel {
 // MARK: - Navigation
 extension WalletCopytradingAccountListViewModel {
     func showAccount(at indexPath: IndexPath) {
-        //TODO:
-//        if let model = model(at: indexPath) as? WalletTableViewCellViewModel {
-//            let walletViewController = WalletViewController()
-//            walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet)
-//            walletViewController.hidesBottomBarWhenPushed = true
-//            router.walletTabmanViewController?.push(viewController: walletViewController)
-//        }
+        if let model = model(at: indexPath) as? WalletCopytradingAccountTableViewCellViewModel {
+            let walletViewController = WalletViewController()
+            walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, account: model.copyTradingAccountInfo, walletType: .account)
+            walletViewController.hidesBottomBarWhenPushed = true
+            router.walletTabmanViewController?.push(viewController: walletViewController)
+        }
     }
 }
 

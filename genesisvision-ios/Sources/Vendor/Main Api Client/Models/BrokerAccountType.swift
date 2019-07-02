@@ -19,8 +19,8 @@ open class BrokerAccountType: Codable {
         case ctrader = "cTrader"
         case rumus = "Rumus"
         case metastock = "Metastock"
-        case idex = "IDEX"
         case huobi = "Huobi"
+        case exante = "Exante"
     }
     public var id: UUID?
     public var name: String?

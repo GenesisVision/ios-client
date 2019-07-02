@@ -14,9 +14,8 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType = .fund
     
-    var fundListDelegateManager: DashboardFundListDelegateManager!
+    var fundListDelegateManager: ListDelegateManager<DashboardFundListViewModel>!
     
-    var activeFunds: Bool = true
     var highToLowValue: Bool = false
     
     var sections: [SectionType] = [.assetList]
@@ -26,7 +25,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
-    var canPullToRefresh = true
+    var canPullToRefresh = false
     var canFetchMoreResults = true
     var skip = 0
     var take = ApiKeys.take
@@ -42,12 +41,11 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
         didSet {
             guard let viewModels = viewModels as? [DashboardFundTableViewCellViewModel] else { return }
             
-            self.activeViewModels = viewModels.filter { $0.fund.status != .archived }
-            self.archiveViewModels = viewModels.filter { $0.fund.status == .archived }
+            self.allViewModels = viewModels
         }
     }
-    var activeViewModels = [DashboardFundTableViewCellViewModel]()
-    var archiveViewModels = [DashboardFundTableViewCellViewModel]()
+    var allViewModels = [DashboardFundTableViewCellViewModel]()
+    
     var facetsViewModels: [CellViewAnyModel]?
     
     // MARK: - Init
@@ -55,7 +53,7 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = router.fundListViewController
         
-        fundListDelegateManager = DashboardFundListDelegateManager(with: self)
+        fundListDelegateManager = ListDelegateManager(with: self)
 
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
     }
@@ -105,7 +103,7 @@ extension DashboardFundListViewModel {
     }
     
     func modelsCount() -> Int {
-        return activeFunds ? activeViewModels.count : archiveViewModels.count
+        return allViewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -183,13 +181,13 @@ extension DashboardFundListViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [DashboardFundTableViewCellViewModel]()
+            var models = self?.viewModels ?? [DashboardFundTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
+                models.append(viewModel)
             })
             
-            self?.updateFetchedData(totalCount: totalCount, allViewModels as! [DashboardFundTableViewCellViewModel])
+            self?.updateFetchedData(totalCount: totalCount, models as! [DashboardFundTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -210,18 +208,12 @@ extension DashboardFundListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        return activeFunds ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
+        return allViewModels[indexPath.row]
     }
     
     func model(at fundId: String) -> CellViewAnyModel? {
-        if activeFunds {
-            if let i = activeViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
-                return activeViewModels[i]
-            }
-        } else {
-            if let i = archiveViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
-                return archiveViewModels[i]
-            }
+        if let i = allViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
+            return allViewModels[i]
         }
         
         return nil

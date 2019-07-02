@@ -12,11 +12,13 @@ import Foundation
 open class ForgotPasswordViewModel: Codable {
 
     public var email: String
+    public var captchaCheckResult: CaptchaCheckResult?
 
 
     
-    public init(email: String) {
+    public init(email: String, captchaCheckResult: CaptchaCheckResult?) {
         self.email = email
+        self.captchaCheckResult = captchaCheckResult
     }
     
 
@@ -27,6 +29,7 @@ open class ForgotPasswordViewModel: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(email, forKey: "email")
+        try container.encodeIfPresent(captchaCheckResult, forKey: "captchaCheckResult")
     }
 
     // Decodable protocol methods
@@ -35,6 +38,7 @@ open class ForgotPasswordViewModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         email = try container.decode(String.self, forKey: "email")
+        captchaCheckResult = try container.decodeIfPresent(CaptchaCheckResult.self, forKey: "captchaCheckResult")
     }
 }
 

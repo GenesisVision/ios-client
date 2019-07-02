@@ -26,17 +26,13 @@ class AssetsTabmanViewModel: TabmanViewModel {
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
         
-        if router is DashboardRouter {
-            items = [TabmanBar.Item(title: "Programs"),
-                     TabmanBar.Item(title: "Funds")]
-//            items = [TabmanBar.Item(title: "Programs"),
-//                     TabmanBar.Item(title: "Funds"),
-//                     TabmanBar.Item(title: "Copytrading"),
-//                     TabmanBar.Item(title: "Open trades"),
-//                     TabmanBar.Item(title: "Trades history")]
-        } else {
-            items = [TabmanBar.Item(title: "Programs"),
-                     TabmanBar.Item(title: "Funds")]
+        items = [TabmanBar.Item(title: "Programs"),
+                 TabmanBar.Item(title: "Funds")]
+        
+        if signalEnable, router is DashboardRouter {
+            items?.append(contentsOf: [TabmanBar.Item(title: "Copytrading"),
+                                       TabmanBar.Item(title: "Open trades"),
+                                       TabmanBar.Item(title: "Trades history")])
         }
         
         dataSource = AssetsPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)

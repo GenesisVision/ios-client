@@ -12,12 +12,12 @@ import Foundation
 open class SignalDetails: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -39,6 +39,7 @@ open class SignalDetails: Codable {
     public var personalDetails: PersonalSignalDetailsFull?
     public var currency: Currency?
     public var level: Int?
+    public var levelProgress: Double?
     public var tags: [ProgramTag]?
     public var subscribers: Int?
     public var id: UUID?
@@ -54,11 +55,12 @@ open class SignalDetails: Codable {
 
 
     
-    public init(statistic: ProgramDetailsListStatistic?, personalDetails: PersonalSignalDetailsFull?, currency: Currency?, level: Int?, tags: [ProgramTag]?, subscribers: Int?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
+    public init(statistic: ProgramDetailsListStatistic?, personalDetails: PersonalSignalDetailsFull?, currency: Currency?, level: Int?, levelProgress: Double?, tags: [ProgramTag]?, subscribers: Int?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.statistic = statistic
         self.personalDetails = personalDetails
         self.currency = currency
         self.level = level
+        self.levelProgress = levelProgress
         self.tags = tags
         self.subscribers = subscribers
         self.id = id
@@ -84,6 +86,7 @@ open class SignalDetails: Codable {
         try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
         try container.encodeIfPresent(tags, forKey: "tags")
         try container.encodeIfPresent(subscribers, forKey: "subscribers")
         try container.encodeIfPresent(id, forKey: "id")
@@ -107,6 +110,7 @@ open class SignalDetails: Codable {
         personalDetails = try container.decodeIfPresent(PersonalSignalDetailsFull.self, forKey: "personalDetails")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
         tags = try container.decodeIfPresent([ProgramTag].self, forKey: "tags")
         subscribers = try container.decodeIfPresent(Int.self, forKey: "subscribers")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")

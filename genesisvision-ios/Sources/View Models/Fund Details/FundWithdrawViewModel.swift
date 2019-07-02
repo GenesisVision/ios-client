@@ -131,7 +131,7 @@ final class FundWithdrawViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didWithdrawn()
+        detailProtocol?.didReload()
         router.goToBack()
     }
     

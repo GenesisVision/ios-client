@@ -36,11 +36,12 @@ open class PersonalFundDetailsFull: Codable {
     public var invested: Double?
     public var pendingInput: Double?
     public var pendingOutput: Double?
+    public var pendingOutputIsWithdrawAll: Bool?
     public var status: Status?
 
 
     
-    public init(withdrawPercent: Double?, canReallocate: Bool?, possibleReallocationTime: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, status: Status?) {
+    public init(withdrawPercent: Double?, canReallocate: Bool?, possibleReallocationTime: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, pendingOutputIsWithdrawAll: Bool?, status: Status?) {
         self.withdrawPercent = withdrawPercent
         self.canReallocate = canReallocate
         self.possibleReallocationTime = possibleReallocationTime
@@ -59,6 +60,7 @@ open class PersonalFundDetailsFull: Codable {
         self.invested = invested
         self.pendingInput = pendingInput
         self.pendingOutput = pendingOutput
+        self.pendingOutputIsWithdrawAll = pendingOutputIsWithdrawAll
         self.status = status
     }
     
@@ -87,6 +89,7 @@ open class PersonalFundDetailsFull: Codable {
         try container.encodeIfPresent(invested, forKey: "invested")
         try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
         try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
+        try container.encodeIfPresent(pendingOutputIsWithdrawAll, forKey: "pendingOutputIsWithdrawAll")
         try container.encodeIfPresent(status, forKey: "status")
     }
 
@@ -113,6 +116,7 @@ open class PersonalFundDetailsFull: Codable {
         invested = try container.decodeIfPresent(Double.self, forKey: "invested")
         pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
         pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
+        pendingOutputIsWithdrawAll = try container.decodeIfPresent(Bool.self, forKey: "pendingOutputIsWithdrawAll")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
     }
 }

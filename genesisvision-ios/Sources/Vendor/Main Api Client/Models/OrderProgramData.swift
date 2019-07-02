@@ -13,15 +13,17 @@ open class OrderProgramData: Codable {
 
     public var title: String?
     public var level: Int?
+    public var levelProgress: Double?
     public var color: String?
     public var url: String?
     public var logo: String?
 
 
     
-    public init(title: String?, level: Int?, color: String?, url: String?, logo: String?) {
+    public init(title: String?, level: Int?, levelProgress: Double?, color: String?, url: String?, logo: String?) {
         self.title = title
         self.level = level
+        self.levelProgress = levelProgress
         self.color = color
         self.url = url
         self.logo = logo
@@ -36,6 +38,7 @@ open class OrderProgramData: Codable {
 
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(level, forKey: "level")
+        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
         try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
@@ -48,6 +51,7 @@ open class OrderProgramData: Codable {
 
         title = try container.decodeIfPresent(String.self, forKey: "title")
         level = try container.decodeIfPresent(Int.self, forKey: "level")
+        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
         color = try container.decodeIfPresent(String.self, forKey: "color")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")

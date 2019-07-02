@@ -12,12 +12,12 @@ import Foundation
 open class ManagerPortfolioEvent: Codable {
 
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -41,6 +41,7 @@ open class ManagerPortfolioEvent: Codable {
         case programStopOut = "ProgramStopOut"
         case programManagerTradingFeeAccrual = "ProgramManagerTradingFeeAccrual"
         case programSignalSubscribe = "ProgramSignalSubscribe"
+        case programBrokerChanged = "ProgramBrokerChanged"
     }
     public enum ProgramType: String, Codable { 
         case program = "Program"

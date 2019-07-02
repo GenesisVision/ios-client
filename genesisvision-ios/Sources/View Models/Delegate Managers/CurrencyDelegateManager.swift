@@ -8,14 +8,14 @@
 
 import UIKit.UITableView
 
-protocol CurrencyDelegateManagerProtocol: class {
+protocol CurrencyDelegateManagerDelegate: class {
     func didSelectCurrency(at indexPath: IndexPath)
 }
 
 final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Variables
     
-    weak var currencyDelegate: CurrencyDelegateManagerProtocol?
+    weak var currencyDelegate: CurrencyDelegateManagerDelegate?
     
     var tableView: UITableView?
     var currencies: [PlatformCurrency] = []

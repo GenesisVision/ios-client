@@ -148,7 +148,7 @@ final class FundInvestViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didInvested()
+        detailProtocol?.didReload()
         router.goToBack()
     }
     

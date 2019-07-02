@@ -76,6 +76,7 @@ class ProgramViewController: BaseViewController {
             tabmanViewController.programInfoViewControllerProtocol = self
             
             let router = ProgramTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
+            router.programViewController = self
             let viewModel = ProgramTabmanViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
             viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
@@ -272,15 +273,7 @@ extension ProgramViewController: FavoriteStateChangeProtocol {
 }
 
 extension ProgramViewController: DetailProtocol {
-    func didRequestCanceled(_ last: Bool) {
-        fetch()
-    }
-    
-    func didWithdrawn() {
-        fetch()
-    }
-    
-    func didInvested() {
+    func didReload() {
         fetch()
     }
 }

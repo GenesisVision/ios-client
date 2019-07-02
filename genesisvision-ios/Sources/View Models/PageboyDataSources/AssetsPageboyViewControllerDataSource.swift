@@ -18,12 +18,15 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
             
             controllers = [programListViewController, fundListViewController]
             
-//            let currency: CurrencyType = CurrencyType(rawValue: getSelectedCurrency()) ?? .btc
-//            let signalListViewController = getSignalList(router)
-//            let signalTradesViewController = getTrades(with: currency, router: router)
-//            let signalOpenTradesViewController = getOpenTrades(with: currency, router: router)
-            
-//            controllers = [programListViewController, fundListViewController, signalListViewController, signalOpenTradesViewController, signalTradesViewController]
+            if signalEnable {
+                controllers = [programListViewController, fundListViewController]
+                
+                let signalListViewController = getSignalList(router)
+                let signalTradesViewController = getTrades(with: router)
+                let signalOpenTradesViewController = getOpenTrades(with: router)
+                
+                controllers.append(contentsOf: [signalListViewController, signalOpenTradesViewController, signalTradesViewController])
+            }
         } else {
             guard let programListViewController = getPrograms(with: router, filterModel: filterModel, showFacets: showFacets), let fundListViewController = getFunds(with: router, filterModel: filterModel, showFacets: showFacets) else { return }
             
@@ -74,31 +77,31 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         return viewController
     }
     
-    func getSignalList(_ router: DashboardRouter) -> DashboardSignalListViewController {
-        let viewController = DashboardSignalListViewController()
+    func getSignalList(_ router: DashboardRouter) -> SignalListViewController {
+        let viewController = SignalListViewController()
         viewController.tableViewStyle = .plain
         router.signalListViewController = viewController
-        let dashboardSignalListViewModel = DashboardSignalListViewModel(withRouter: router)
+        let dashboardSignalListViewModel = SignalListViewModel(withRouter: router)
         viewController.viewModel = dashboardSignalListViewModel
         
         return viewController
     }
     
-    func getTrades(with currencyType: CurrencyType, router: DashboardRouter) -> SignalTradesViewController {
+    func getTrades(with router: DashboardRouter) -> SignalTradesViewController {
         let viewController = SignalTradesViewController()
         viewController.tableViewStyle = .plain
         router.signalTradesViewController = viewController
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false, currencyType: currencyType)
+        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getOpenTrades(with currencyType: CurrencyType, router: DashboardRouter) -> SignalOpenTradesViewController {
+    func getOpenTrades(with router: DashboardRouter) -> SignalOpenTradesViewController {
         let viewController = SignalOpenTradesViewController()
         viewController.tableViewStyle = .plain
         router.signalOpenTradesViewController = viewController
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, currencyType: currencyType)
+        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController)
         viewController.viewModel = viewModel
         
         return viewController

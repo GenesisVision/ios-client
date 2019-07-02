@@ -305,13 +305,13 @@ open class ProfileAPI {
   "socialLinks" : [ {
     "name" : "name",
     "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Undefined",
     "value" : "value",
     "url" : "url"
   }, {
     "name" : "name",
     "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Undefined",
     "value" : "value",
     "url" : "url"
   } ]

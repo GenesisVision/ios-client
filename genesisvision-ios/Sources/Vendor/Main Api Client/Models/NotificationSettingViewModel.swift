@@ -24,6 +24,7 @@ open class NotificationSettingViewModel: Codable {
         case programNewsAndUpdates = "ProgramNewsAndUpdates"
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
+        case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
         case fundNewsAndUpdates = "FundNewsAndUpdates"
         case fundEndOfPeriod = "FundEndOfPeriod"
         case fundRebalancing = "FundRebalancing"

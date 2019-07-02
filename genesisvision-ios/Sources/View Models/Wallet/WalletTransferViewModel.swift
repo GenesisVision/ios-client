@@ -48,6 +48,7 @@ final class WalletTransferViewModel {
         }
         
         updateRate { [weak self] (result) in
+            //TODO:
             self?.walletProtocol?.didUpdateData()
         }
     }

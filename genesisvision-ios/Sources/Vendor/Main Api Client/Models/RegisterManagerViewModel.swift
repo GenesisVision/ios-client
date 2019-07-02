@@ -12,21 +12,23 @@ import Foundation
 open class RegisterManagerViewModel: Codable {
 
     public var userName: String
-    public var email: String
     public var password: String
     public var confirmPassword: String?
     public var refCode: String?
     public var isAuto: Bool?
+    public var email: String
+    public var captchaCheckResult: CaptchaCheckResult?
 
 
     
-    public init(userName: String, email: String, password: String, confirmPassword: String?, refCode: String?, isAuto: Bool?) {
+    public init(userName: String, password: String, confirmPassword: String?, refCode: String?, isAuto: Bool?, email: String, captchaCheckResult: CaptchaCheckResult?) {
         self.userName = userName
-        self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
         self.refCode = refCode
         self.isAuto = isAuto
+        self.email = email
+        self.captchaCheckResult = captchaCheckResult
     }
     
 
@@ -37,11 +39,12 @@ open class RegisterManagerViewModel: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(userName, forKey: "userName")
-        try container.encode(email, forKey: "email")
         try container.encode(password, forKey: "password")
         try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
         try container.encodeIfPresent(refCode, forKey: "refCode")
         try container.encodeIfPresent(isAuto, forKey: "isAuto")
+        try container.encode(email, forKey: "email")
+        try container.encodeIfPresent(captchaCheckResult, forKey: "captchaCheckResult")
     }
 
     // Decodable protocol methods
@@ -50,11 +53,12 @@ open class RegisterManagerViewModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         userName = try container.decode(String.self, forKey: "userName")
-        email = try container.decode(String.self, forKey: "email")
         password = try container.decode(String.self, forKey: "password")
         confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
         refCode = try container.decodeIfPresent(String.self, forKey: "refCode")
         isAuto = try container.decodeIfPresent(Bool.self, forKey: "isAuto")
+        email = try container.decode(String.self, forKey: "email")
+        captchaCheckResult = try container.decodeIfPresent(CaptchaCheckResult.self, forKey: "captchaCheckResult")
     }
 }
 

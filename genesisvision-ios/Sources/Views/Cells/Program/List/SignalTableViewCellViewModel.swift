@@ -16,24 +16,9 @@ struct SignalTableViewCellViewModel {
 }
 
 extension SignalTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProgramTableViewCell) {
-        cell.dashboardBottomStackView.isHidden = true
-        cell.chartView.isHidden = true
-        cell.noDataLabel.isHidden = false
-        cell.viewForChartView.isHidden = cell.chartView.isHidden
+    func setup(on cell: SignalTableViewCell) {
         cell.delegate = delegate
-        
-        cell.noDataLabel.text = String.Alerts.ErrorMessages.noDataText
-        cell.reinvestStackView.isHidden = true
-        
-        if let chart = signal.chart {
-            cell.chartView.isHidden = false
-            cell.viewForChartView.isHidden = cell.chartView.isHidden
-            cell.noDataLabel.isHidden = true
-            cell.chartView.setup(chartType: .default, lineChartData: chart, dateRangeModel: delegate?.filterDateRangeModel)
-        }
-        
-        cell.stackView.spacing = cell.chartView.isHidden ? 24 : 8
+        cell.stackView.spacing = 24
         
         if let title = signal.title {
             cell.titleLabel.text = title
@@ -57,7 +42,6 @@ extension SignalTableViewCellViewModel: CellViewModel {
         
         cell.firstTitleLabel.text = "trades"
         if let tradesCount = signal.personalDetails?.tradesCount {
-            cell.periodLeftProgressView.isHidden = true
             cell.firstValueLabel.text = tradesCount.toString()
         } else {
             cell.firstValueLabel.text = ""
@@ -72,7 +56,7 @@ extension SignalTableViewCellViewModel: CellViewModel {
         
         cell.thirdTitleLabel.text = "start date"
         if let subscriptionDate = signal.personalDetails?.subscriptionDate {
-            cell.thirdValueLabel.text = subscriptionDate.dateAndTimetoString()
+            cell.thirdValueLabel.text = subscriptionDate.dateAndTimeToString()
         } else {
             cell.thirdValueLabel.text = ""
         }
@@ -95,7 +79,11 @@ extension SignalTableViewCellViewModel: CellViewModel {
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
-        cell.profitValueLabel.isHidden = true
+        if let status = signal.personalDetails?.status {
+            cell.statusButton.handleUserInteractionEnabled = false
+            cell.statusButton.setTitle(status.rawValue, for: .normal)
+            cell.statusButton.layoutSubviews()
+        }
     }
 }
 

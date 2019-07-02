@@ -188,11 +188,11 @@ open class FundsAPI {
      Fund profit chart
      - GET /v1.0/funds/{id}/charts/profit
      - examples: [{contentType=application/json, example={
-  "profitChangePercent" : 1.284659006116532,
-  "calmarRatio" : 6.878052220127876,
-  "timeframeGvtProfit" : 3.353193347011243,
-  "timeframeUsdProfit" : 8.762042012749001,
-  "maxDrawdown" : 5.944895607614016,
+  "profitChangePercent" : 2.8841621266687802,
+  "calmarRatio" : 5.944895607614016,
+  "timeframeGvtProfit" : 3.0937452626664474,
+  "timeframeUsdProfit" : 9.018348186070783,
+  "maxDrawdown" : 6.704019297950036,
   "creationDate" : "2000-01-23T04:56:07.000+00:00",
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -201,15 +201,15 @@ open class FundsAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "value" : 3.616076749251911
   } ],
-  "investors" : 6,
-  "totalGvtProfit" : 6.704019297950036,
-  "sortinoRatio" : 6.778324963048013,
-  "rebalances" : 9,
-  "profitPercent" : 6.438423552598547,
-  "balance" : 3.5571952270680973,
-  "rate" : 3.0937452626664474,
-  "totalUsdProfit" : 6.683562403749608,
-  "sharpeRatio" : 2.8841621266687802
+  "investors" : 1,
+  "totalGvtProfit" : 3.353193347011243,
+  "sortinoRatio" : 6.878052220127876,
+  "rebalances" : 6,
+  "profitPercent" : 3.5571952270680973,
+  "balance" : 6.965117697638846,
+  "rate" : 7.143538047012306,
+  "totalUsdProfit" : 8.762042012749001,
+  "sharpeRatio" : 6.778324963048013
 }}]
      
      - parameter id: (path)  
@@ -324,12 +324,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsByIdGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -362,7 +362,7 @@ open class FundsAPI {
   "statistic" : {
     "balanceGVT" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "profitPercent" : 5.637376656633329,
     "rebalancingCount" : 2,
@@ -372,12 +372,25 @@ open class FundsAPI {
     "startBalance" : 9.301444243932576,
     "balanceSecondary" : {
       "amount" : 0.8008281904610115,
-      "currency" : "BTC"
+      "currency" : "Undefined"
     },
     "investorsCount" : 7
   },
   "color" : "color",
   "manager" : {
+    "socialLinks" : [ {
+      "name" : "name",
+      "logo" : "logo",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url"
+    }, {
+      "name" : "name",
+      "logo" : "logo",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url"
+    } ],
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "avatar" : "avatar",
@@ -404,19 +417,20 @@ open class FundsAPI {
     "canCloseAsset" : true,
     "canCloseProgram" : true,
     "canWithdraw" : true,
+    "pendingOutputIsWithdrawAll" : true,
     "canInvest" : true,
     "canClosePeriod" : true,
     "canReallocate" : true,
-    "pendingOutput" : 3.5571952270680973,
+    "pendingOutput" : 2.8841621266687802,
     "hasNotifications" : true,
-    "pendingInput" : 6.438423552598547,
+    "pendingInput" : 1.284659006116532,
     "isOwnProgram" : true,
     "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
     "isFinishing" : true,
-    "value" : 6.683562403749608,
-    "profit" : 8.762042012749001,
-    "withdrawPercent" : 9.369310271410669,
-    "invested" : 9.018348186070783,
+    "value" : 6.438423552598547,
+    "profit" : 3.5571952270680973,
+    "withdrawPercent" : 9.018348186070783,
+    "invested" : 6.965117697638846,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -458,6 +472,55 @@ open class FundsAPI {
     }
 
     /**
+     Get history of asset part update requests.
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10FundsByIdReallocationsGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10FundsByIdReallocationsGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Get history of asset part update requests.
+     - GET /v1.0/funds/{id}/reallocations
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10FundsByIdReallocationsGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Void> {
+        var path = "/v1.0/funds/{id}/reallocations"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "DateFrom": dateFrom?.encodeToJSON(), 
+            "DateTo": dateTo?.encodeToJSON(), 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      * enum for parameter sorting
      */
     public enum Sorting_v10FundsGet: String { 
@@ -479,12 +542,12 @@ open class FundsAPI {
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10FundsGet: String { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -513,6 +576,7 @@ open class FundsAPI {
      - parameter authorization: (header)  (optional)
      - parameter sorting: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter assets: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -530,8 +594,8 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, assets: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, assets: assets, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -543,22 +607,35 @@ open class FundsAPI {
      - examples: [{contentType=application/json, example={
   "total" : 6,
   "funds" : [ {
-    "totalAssetsCount" : 7,
+    "totalAssetsCount" : 5,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
-      "profitPercent" : 4.965218492984954,
-      "drawdownPercent" : 5.025004791520295,
+      "profitPercent" : 9.369310271410669,
+      "drawdownPercent" : 6.683562403749608,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 8
     },
     "color" : "color",
     "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
@@ -569,37 +646,38 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.1730742509559433
+      "percent" : 9.965781217890562
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.1730742509559433
+      "percent" : 9.965781217890562
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 2.3021358869347655
+      "share" : 9.301444243932576
     },
     "personalDetails" : {
       "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
+      "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 3.5571952270680973,
+      "pendingOutput" : 2.8841621266687802,
       "hasNotifications" : true,
-      "pendingInput" : 6.438423552598547,
+      "pendingInput" : 1.284659006116532,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.683562403749608,
-      "profit" : 8.762042012749001,
-      "withdrawPercent" : 9.369310271410669,
-      "invested" : 9.018348186070783,
+      "value" : 6.438423552598547,
+      "profit" : 3.5571952270680973,
+      "withdrawPercent" : 9.018348186070783,
+      "invested" : 6.965117697638846,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -615,22 +693,35 @@ open class FundsAPI {
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 7,
+    "totalAssetsCount" : 5,
     "statistic" : {
       "balanceGVT" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
-      "profitPercent" : 4.965218492984954,
-      "drawdownPercent" : 5.025004791520295,
+      "profitPercent" : 9.369310271410669,
+      "drawdownPercent" : 6.683562403749608,
       "balanceSecondary" : {
         "amount" : 0.8008281904610115,
-        "currency" : "BTC"
+        "currency" : "Undefined"
       },
-      "investorsCount" : 9
+      "investorsCount" : 8
     },
     "color" : "color",
     "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url"
+      } ],
       "registrationDate" : "2000-01-23T04:56:07.000+00:00",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "avatar" : "avatar",
@@ -641,37 +732,38 @@ open class FundsAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.1730742509559433
+      "percent" : 9.965781217890562
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.1730742509559433
+      "percent" : 9.965781217890562
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "url" : "url",
     "dashboardAssetsDetails" : {
-      "share" : 2.3021358869347655
+      "share" : 9.301444243932576
     },
     "personalDetails" : {
       "canCloseAsset" : true,
       "canCloseProgram" : true,
       "canWithdraw" : true,
+      "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 3.5571952270680973,
+      "pendingOutput" : 2.8841621266687802,
       "hasNotifications" : true,
-      "pendingInput" : 6.438423552598547,
+      "pendingInput" : 1.284659006116532,
       "isOwnProgram" : true,
       "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
       "isFinishing" : true,
-      "value" : 6.683562403749608,
-      "profit" : 8.762042012749001,
-      "withdrawPercent" : 9.369310271410669,
-      "invested" : 9.018348186070783,
+      "value" : 6.438423552598547,
+      "profit" : 3.5571952270680973,
+      "withdrawPercent" : 9.018348186070783,
+      "invested" : 6.965117697638846,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -692,6 +784,7 @@ open class FundsAPI {
      - parameter authorization: (header)  (optional)
      - parameter sorting: (query)  (optional)
      - parameter currencySecondary: (query)  (optional)
+     - parameter assets: (query)  (optional)
      - parameter statisticDateFrom: (query)  (optional)
      - parameter statisticDateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -710,7 +803,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, assets: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -719,6 +812,7 @@ open class FundsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "Sorting": sorting?.rawValue, 
             "CurrencySecondary": currencySecondary?.rawValue, 
+            "Assets": assets, 
             "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
             "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 

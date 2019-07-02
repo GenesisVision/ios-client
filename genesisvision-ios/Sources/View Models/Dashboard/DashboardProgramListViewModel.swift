@@ -14,19 +14,16 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType = .program
     
-    var programListDelegateManager: DashboardProgramListDelegateManager!
-    
-    var activePrograms = true
+    var programListDelegateManager: ListDelegateManager<DashboardProgramListViewModel>!
     
     var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
     
-    
     var filterModel: FilterModel = FilterModel()
     
     weak var reloadDataProtocol: ReloadDataProtocol?
-    var canPullToRefresh = true
+    var canPullToRefresh = false
     var canFetchMoreResults = true
     var skip = 0
     var take = ApiKeys.take
@@ -42,12 +39,10 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
         didSet {
             guard let viewModels = viewModels as? [DashboardProgramTableViewCellViewModel] else { return }
             
-            self.activeViewModels = viewModels.filter { $0.program.status != .archived }
-            self.archiveViewModels = viewModels.filter { $0.program.status == .archived }
+            self.allViewModels = viewModels
         }
     }
-    var activeViewModels = [DashboardProgramTableViewCellViewModel]()
-    var archiveViewModels = [DashboardProgramTableViewCellViewModel]()
+    var allViewModels = [DashboardProgramTableViewCellViewModel]()
     
     var facetsViewModels: [CellViewAnyModel]?
     
@@ -56,7 +51,7 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = router.programListViewController
         
-        programListDelegateManager = DashboardProgramListDelegateManager(with: self)
+        programListDelegateManager = ListDelegateManager(with: self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
     }
@@ -128,7 +123,7 @@ extension DashboardProgramListViewModel {
     }
     
     func modelsCount() -> Int {
-        return activePrograms ? activeViewModels.count : archiveViewModels.count
+        return allViewModels.count
     }
     
     func numberOfSections() -> Int {
@@ -207,13 +202,13 @@ extension DashboardProgramListViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [DashboardProgramTableViewCellViewModel]()
+            var models = self?.viewModels ?? [DashboardProgramTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
-                allViewModels.append(viewModel)
+                models.append(viewModel)
             })
             
-            self?.updateFetchedData(totalCount: totalCount, allViewModels as! [DashboardProgramTableViewCellViewModel])
+            self?.updateFetchedData(totalCount: totalCount, models as! [DashboardProgramTableViewCellViewModel])
             }, completionError: { (result) in
                 switch result {
                 case .success:
@@ -234,18 +229,12 @@ extension DashboardProgramListViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        return activePrograms ? activeViewModels[indexPath.row] : archiveViewModels[indexPath.row]
+        return allViewModels[indexPath.row]
     }
     
     func model(at assetId: String) -> CellViewAnyModel? {
-        if activePrograms {
-            if let i = activeViewModels.index(where: { $0.program.id?.uuidString == assetId }) {
-                return activeViewModels[i]
-            }
-        } else {
-            if let i = archiveViewModels.index(where: { $0.program.id?.uuidString == assetId }) {
-                return archiveViewModels[i]
-            }
+        if let i = allViewModels.index(where: { $0.program.id?.uuidString == assetId }) {
+            return allViewModels[i]
         }
         
         return nil
@@ -276,6 +265,8 @@ extension DashboardProgramListViewModel {
         let dateFrom = filterModel.dateRangeModel.dateFrom
         let dateTo = filterModel.dateRangeModel.dateTo
         
+        let onlyActive = filterModel.onlyActive
+        
         let sorting = filterModel.sortingModel.selectedSorting
         
         let chartPointsCount = filterModel.chartPointsCount
@@ -285,7 +276,7 @@ extension DashboardProgramListViewModel {
             currencySecondary = newCurrency
         }
 
-        DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, skip: skip, take: take, completion: { [weak self] (programsList) in
+        DashboardDataProvider.getProgramList(with: sorting as? InvestorAPI.Sorting_v10InvestorProgramsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, onlyActive: onlyActive, skip: skip, take: take, completion: { [weak self] (programsList) in
             guard let programsList = programsList else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             var viewModels = [DashboardProgramTableViewCellViewModel]()

@@ -20,6 +20,12 @@ class InfoSignalsTableViewCell: UITableViewCell {
             titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
         }
     }
+    //Signal details
+    @IBOutlet weak var signalStackView: UIStackView! {
+        didSet {
+            signalStackView.isHidden = true
+        }
+    }
     
     @IBOutlet weak var subscriptionFeeStackView: UIStackView!
     @IBOutlet weak var subscriptionFeeValueLabel: TitleLabel!
@@ -28,6 +34,38 @@ class InfoSignalsTableViewCell: UITableViewCell {
     @IBOutlet weak var successFeeStackView: UIStackView!
     @IBOutlet weak var successFeeValueLabel: TitleLabel!
     @IBOutlet weak var successFeeTitleLabel: SubtitleLabel!
+    
+    //Subscription details
+    @IBOutlet weak var subscriptionStackView: UIStackView! {
+        didSet {
+            subscriptionStackView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var valueStackView: UIStackView!
+    @IBOutlet weak var valueValueLabel: TitleLabel! {
+        didSet {
+            valueValueLabel.textColor = UIColor.primary
+        }
+    }
+    @IBOutlet weak var valueTitleLabel: SubtitleLabel!
+    
+    @IBOutlet weak var profitStackView: UIStackView!
+    @IBOutlet weak var profitValueLabel: TitleLabel!
+    @IBOutlet weak var profitTitleLabel: SubtitleLabel!
+    
+    @IBOutlet weak var statusStackView: UIStackView!
+    @IBOutlet weak var statusValueLabel: TitleLabel!
+    @IBOutlet weak var statusTitleLabel: SubtitleLabel!
+    
+    @IBOutlet weak var typeStackView: UIStackView!
+    @IBOutlet weak var typeValueLabel: TitleLabel! {
+        didSet {
+            typeValueLabel.textColor = UIColor.primary
+        }
+    }
+    @IBOutlet weak var typeTitleLabel: SubtitleLabel!
+    
     
     @IBOutlet weak var followButton: ActionButton! {
         didSet {

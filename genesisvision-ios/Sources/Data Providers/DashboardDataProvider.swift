@@ -40,8 +40,14 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getProgramList(with sorting: InvestorAPI.Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorProgramsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProgramList(with sorting: InvestorAPI.Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorProgramsGet? = nil, onlyActive: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        var dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorProgramsGet = .all
+        
+        if let onlyActive = onlyActive {
+            dashboardActionStatus = onlyActive ? .active : .all
+        }
         
         InvestorAPI.v10InvestorProgramsGet(authorization: authorization,
                                            sorting: sorting,
@@ -49,6 +55,7 @@ class DashboardDataProvider: DataProvider {
                                            to: to,
                                            chartPointsCount: chartPointsCount,
                                            currencySecondary: currencySecondary,
+                                           dashboardActionStatus: dashboardActionStatus,
                                            skip: skip,
                                            take: take) { (programList, error) in
                                             DataProvider().responseHandler(programList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
@@ -78,12 +85,19 @@ class DashboardDataProvider: DataProvider {
         let from = filterModel?.dateRangeModel.dateFrom
         let to = filterModel?.dateRangeModel.dateTo
         
+        var dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorFundsGet = .all
+        
+        if let onlyActive = filterModel?.onlyActive {
+            dashboardActionStatus = onlyActive ? .active : .all
+        }
+        
         InvestorAPI.v10InvestorFundsGet(authorization: authorization,
                                         sorting: nil,
                                         from: from,
                                         to: to,
                                         chartPointsCount: nil,
                                         currencySecondary: currencySecondary,
+                                        dashboardActionStatus: dashboardActionStatus,
                                         skip: skip,
                                         take: take) { (fundList, error) in
                                             DataProvider().responseHandler(fundList, error: error, successCompletion: completion, errorCompletion: errorCompletion)

@@ -20,6 +20,7 @@ final class WalletListViewModel {
     var wallet: WalletMultiSummary? {
         didSet {
             if let wallet = wallet, let wallets = wallet.wallets {
+                walletType = .wallet
                 viewModels.removeAll()
                 wallets.forEach { (wallet) in
                     viewModels.append(WalletTableViewCellViewModel.init(wallet: wallet))
@@ -29,6 +30,8 @@ final class WalletListViewModel {
     }
     
     private var sections: [SectionType] = [.wallets]
+    
+    var walletType: WalletType = .all
     
     private var router: WalletRouter!
     private var viewModels = [WalletTableViewCellViewModel]()
@@ -108,7 +111,7 @@ extension WalletListViewModel {
     func showWallet(at indexPath: IndexPath) {
         if let model = model(at: indexPath) as? WalletTableViewCellViewModel {
             let walletViewController = WalletViewController()
-            walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet)
+            walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet, walletType: .wallet)
             walletViewController.hidesBottomBarWhenPushed = true
             router.walletTabmanViewController?.push(viewController: walletViewController)
         }

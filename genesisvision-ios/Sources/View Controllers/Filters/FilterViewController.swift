@@ -181,6 +181,8 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             showSort()
         case .dateRange:
             showDateRange()
+        case .onlyActive:
+            break
         }
     }
     

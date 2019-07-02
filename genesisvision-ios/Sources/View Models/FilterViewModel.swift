@@ -31,6 +31,7 @@ final class FilterViewModel {
         case currency
         case sort
         case dateRange
+        case onlyActive
     }
     
     // MARK: - Variables
@@ -50,6 +51,7 @@ final class FilterViewModel {
     var currencyDelegateManager: FilterCurrencyDelegateManager?
     var levelsFilterView: LevelsFilterView?
     var dateRangeView: DateRangeView?
+    var onlyActive: Bool?
     
     private weak var filterViewModelProtocol: FilterViewModelProtocol?
     
@@ -65,6 +67,8 @@ final class FilterViewModel {
         switch filterType {
         case .programs:
             rows = [.levels, .currency, .sort, .dateRange]
+        case .dashboardFunds, .dashboardPrograms:
+            rows = [.sort, .dateRange, .onlyActive]
         default:
             rows = [.sort, .dateRange]
         }
@@ -117,6 +121,7 @@ final class FilterViewModel {
         sortingDelegateManager?.reset()
         levelsFilterView?.reset()
         dateRangeView?.reset()
+        onlyActive = false
         
         for (idx, row) in rows.enumerated() {
             switch row {
@@ -135,6 +140,8 @@ final class FilterViewModel {
                 if let detail = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
                     viewModels[idx].detail = detail
                 }
+            case .onlyActive:
+                viewModels[idx].switchOn = onlyActive
             }
         }
     }
@@ -164,6 +171,10 @@ final class FilterViewModel {
             filterModel.dateRangeModel.dateRangeType = dateRangeView.dateRangeType
         }
         
+        if let onlyActive = onlyActive {
+            filterModel.onlyActive = onlyActive
+        }
+        
         listViewModel?.refresh(completion: completion)
     }
     
@@ -183,6 +194,8 @@ final class FilterViewModel {
                 setupDateRangeManager(filterModel)
             case .sort:
                 setupSortingManager(filterModel, sortingType: sortingType)
+            case .onlyActive:
+                onlyActive = filterModel.onlyActive
             }
         }
     }
@@ -223,12 +236,12 @@ final class FilterViewModel {
         for row in rows {
             switch row {
             case .levels:
-                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Levels", detail: nil, detailImage: nil)
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Levels", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 tableViewCellViewModel?.detail = levelsFilterView?.getSelectedLevels()
                 
                 viewModels.append(tableViewCellViewModel!)
             case .currency:
-                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Currency", detail: nil, detailImage: nil)
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Currency", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 
                 if let selectedValue = currencyDelegateManager?.getSelectedCurrencyValue() {
                     tableViewCellViewModel?.detail = selectedValue
@@ -236,7 +249,7 @@ final class FilterViewModel {
                 
                 viewModels.append(tableViewCellViewModel!)
             case .dateRange:
-                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Date Range", detail: nil, detailImage: nil)
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Date Range", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 
                 if let selectedValue = getSelectedDate() {
                     tableViewCellViewModel?.detail = selectedValue
@@ -246,10 +259,14 @@ final class FilterViewModel {
             case .sort:
                 guard let highToLowValue = sortingDelegateManager?.sortingManager?.highToLowValue else { return }
                 
-                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil, detailImage: highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon"))
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil, detailImage: highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon"), switchOn: nil, style: .detail, delegate: nil)
                 if let selectedValue = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
                     tableViewCellViewModel?.detail = selectedValue
                 }
+                viewModels.append(tableViewCellViewModel!)
+            case .onlyActive:
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Only active", detail: nil, detailImage: nil, switchOn: onlyActive, style: .switcher, delegate: self)
+                
                 viewModels.append(tableViewCellViewModel!)
             }
         }
@@ -432,5 +449,11 @@ extension FilterViewModel: DateRangeViewProtocol {
         }
         
         filterViewModelProtocol?.didFilterReloadCell(idx)
+    }
+}
+
+extension FilterViewModel: FilterTableViewCellProtocol {
+    func didChangeSwitch(value: Bool) {
+        onlyActive = value
     }
 }

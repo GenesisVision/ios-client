@@ -46,7 +46,7 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
         
-        if viewModel.wallet == nil {
+        if viewModel.walletType == .all {
             moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_more_icon"), style: .done, target: self, action: #selector(moreBarButtonAction))
             navigationItem.rightBarButtonItem = moreBarButtonItem
             
@@ -109,7 +109,7 @@ extension WalletViewController {
     }
 }
 
-extension WalletViewController: CurrencyDelegateManagerProtocol {
+extension WalletViewController: CurrencyDelegateManagerDelegate {
     func didSelectCurrency(at indexPath: IndexPath) {
         updateCurrencyButtonTitle()
         viewModel.reloadDetails()

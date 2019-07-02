@@ -34,12 +34,12 @@ open class TransactionDetails: Codable {
         case error = "Error"
     }
     public enum Currency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -49,12 +49,12 @@ open class TransactionDetails: Codable {
         case eur = "EUR"
     }
     public enum GvCommissionCurrency: String, Codable { 
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
         case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
         case ada = "ADA"
+        case usdt = "USDT"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
@@ -68,6 +68,7 @@ open class TransactionDetails: Codable {
     public var convertingDetails: ConvertingDetails?
     public var externalTransactionDetails: ExternalTransactionDetails?
     public var status: Status?
+    public var signalFees: [SignalFee]?
     public var currency: Currency?
     public var currencyName: String?
     public var currencyLogo: String?
@@ -78,12 +79,13 @@ open class TransactionDetails: Codable {
 
 
     
-    public init(type: ModelType?, programDetails: ProgramTransactionDetails?, convertingDetails: ConvertingDetails?, externalTransactionDetails: ExternalTransactionDetails?, status: Status?, currency: Currency?, currencyName: String?, currencyLogo: String?, gvCommission: Double?, gvCommissionCurrency: GvCommissionCurrency?, gvCommissionPercent: Double?, amount: Double?) {
+    public init(type: ModelType?, programDetails: ProgramTransactionDetails?, convertingDetails: ConvertingDetails?, externalTransactionDetails: ExternalTransactionDetails?, status: Status?, signalFees: [SignalFee]?, currency: Currency?, currencyName: String?, currencyLogo: String?, gvCommission: Double?, gvCommissionCurrency: GvCommissionCurrency?, gvCommissionPercent: Double?, amount: Double?) {
         self.type = type
         self.programDetails = programDetails
         self.convertingDetails = convertingDetails
         self.externalTransactionDetails = externalTransactionDetails
         self.status = status
+        self.signalFees = signalFees
         self.currency = currency
         self.currencyName = currencyName
         self.currencyLogo = currencyLogo
@@ -105,6 +107,7 @@ open class TransactionDetails: Codable {
         try container.encodeIfPresent(convertingDetails, forKey: "convertingDetails")
         try container.encodeIfPresent(externalTransactionDetails, forKey: "externalTransactionDetails")
         try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(signalFees, forKey: "signalFees")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(currencyName, forKey: "currencyName")
         try container.encodeIfPresent(currencyLogo, forKey: "currencyLogo")
@@ -124,6 +127,7 @@ open class TransactionDetails: Codable {
         convertingDetails = try container.decodeIfPresent(ConvertingDetails.self, forKey: "convertingDetails")
         externalTransactionDetails = try container.decodeIfPresent(ExternalTransactionDetails.self, forKey: "externalTransactionDetails")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
+        signalFees = try container.decodeIfPresent([SignalFee].self, forKey: "signalFees")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         currencyName = try container.decodeIfPresent(String.self, forKey: "currencyName")
         currencyLogo = try container.decodeIfPresent(String.self, forKey: "currencyLogo")

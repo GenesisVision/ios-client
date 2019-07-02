@@ -9,21 +9,21 @@
 class AuthDataProvider: DataProvider {
     // MARK: - Public methods
     static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = "iOS", captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(email: email, password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client, captchaCheckResult: captchaCheckResult)
+        let loginViewModel = LoginViewModel(password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client, email: email, captchaCheckResult: captchaCheckResult)
         
         isInvestorApp
             ? investorSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)
             : managerSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)
     }
     
-    static func signUp(username: String, email: String, password: String, confirmPassword: String, completion: @escaping CompletionBlock) {
+    static func signUp(username: String, email: String, password: String, confirmPassword: String, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         isInvestorApp
-            ? investorSignUp(with: email, password: password, confirmPassword: confirmPassword, completion: completion)
-            : managerSignUp(with: username, email: email, password: password, confirmPassword: confirmPassword, completion: completion)
+            ? investorSignUp(with: email, password: password, confirmPassword: confirmPassword, captchaCheckResult: captchaCheckResult, completion: completion)
+            : managerSignUp(with: username, email: email, password: password, confirmPassword: confirmPassword, captchaCheckResult: captchaCheckResult, completion: completion)
     }
     
-    static func forgotPassword(email: String, completion: @escaping CompletionBlock) {
-        let forgotPasswordViewModel = ForgotPasswordViewModel(email: email)
+    static func forgotPassword(email: String, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
+        let forgotPasswordViewModel = ForgotPasswordViewModel(email: email, captchaCheckResult: captchaCheckResult)
         
         isInvestorApp
             ? investorForgotPassword(with: forgotPasswordViewModel, completion: completion)
@@ -77,17 +77,17 @@ class AuthDataProvider: DataProvider {
     }
     
     // MARK: - Sign Up
-    private static func investorSignUp(with email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, completion: @escaping CompletionBlock) {
+    private static func investorSignUp(with email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         
-        let registerInvestorViewModel = RegisterInvestorViewModel(email: email, password: password, confirmPassword: confirmPassword, refCode: refCode, isAuto: isAuto)
-    
+        let registerInvestorViewModel = RegisterInvestorViewModel(password: password, confirmPassword: confirmPassword, refCode: refCode, isAuto: isAuto, email: email, captchaCheckResult: captchaCheckResult)
+
         AuthAPI.v10AuthSignupInvestorPost(model: registerInvestorViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, completion: @escaping CompletionBlock) {
-        let registerManagerViewModel = RegisterManagerViewModel(userName: username, email: email, password: password, confirmPassword: confirmPassword, refCode: refCode, isAuto: isAuto)
+    private static func managerSignUp(with username: String, email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
+        let registerManagerViewModel = RegisterManagerViewModel(userName: username, password: password, confirmPassword: confirmPassword, refCode: refCode, isAuto: isAuto, email: email, captchaCheckResult: captchaCheckResult)
         
         AuthAPI.v10AuthSignupManagerPost(model: registerManagerViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
@@ -95,13 +95,13 @@ class AuthDataProvider: DataProvider {
     }
     
     // MARK: - Forgot Password
-    private static func investorForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, completion: @escaping CompletionBlock) {
+    private static func investorForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         AuthAPI.v10AuthPasswordForgotInvestorPost(model: forgotPasswordViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    private static func managerForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, completion: @escaping CompletionBlock) {
+    private static func managerForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         AuthAPI.v10AuthPasswordForgotManagerPost(model: forgotPasswordViewModel) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }

@@ -20,10 +20,19 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        view.endEditing(true)
+    }
+    
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-        tableView.allowsSelection = false
+//        tableView.allowsSelection = false
+        tableView.isScrollEnabled = false
+        tableView.bounces = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
@@ -33,7 +42,7 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        bottomViewType = .dateRange
+        bottomViewType = .none
         noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         
@@ -89,9 +98,30 @@ extension SignalTradesViewController: UITableViewDelegate, UITableViewDataSource
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        super.scrollViewWillBeginDragging(scrollView)
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if translation.y > 0 {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        } else {
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
+        let numberOfRows = viewModel?.numberOfRows(in: section) ?? 0
+        tableView.isScrollEnabled = numberOfRows > 0
+        return numberOfRows
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,6 +136,25 @@ extension SignalTradesViewController: UITableViewDelegate, UITableViewDataSource
         let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
         header.headerLabel.text = viewModel.titleForHeader(in: section)
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
+            cell.alpha = 0.8
+            cell.transform = cell.transform.scaledBy(x: 0.96, y: 0.96)
+        }, completion: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
+            cell.alpha = 1
+            cell.transform = .identity
+        }, completion: nil)
     }
 }
 
