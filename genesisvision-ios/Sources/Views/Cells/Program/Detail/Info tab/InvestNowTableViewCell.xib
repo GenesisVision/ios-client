@@ -165,7 +165,7 @@
                 <outlet property="entryFeeTooltip" destination="YCJ-kf-EU1" id="hBB-wn-WNZ"/>
                 <outlet property="entryFeeValueLabel" destination="dYQ-Ch-qJE" id="6CM-R2-4UJ"/>
                 <outlet property="investButton" destination="GrT-YF-Trs" id="4bl-pn-fBD"/>
-                <outlet property="investStackView" destination="7hJ-jm-49X" id="Mqb-Ki-6oM"/>
+                <outlet property="investStackView" destination="wTe-am-DOk" id="1bi-yc-3HT"/>
                 <outlet property="investTitleLabel" destination="DDX-1s-uOu" id="ubC-YA-V4n"/>
                 <outlet property="investValueLabel" destination="1Ce-8c-cVW" id="boN-AM-uVc"/>
                 <outlet property="stopOutStackView" destination="9Ol-xV-aP8" id="hGR-04-GIa"/>

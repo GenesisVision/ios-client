@@ -154,6 +154,8 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
       if let _defaultDeviceInput = defaultDeviceInput {
         session.addInput(_defaultDeviceInput)
       }
+    @unknown default:
+        fatalError()
     }
 
     // Add metadata output
@@ -320,6 +322,8 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
       return .portrait
     case .portraitUpsideDown:
       return .portraitUpsideDown
+    @unknown default:
+        fatalError()
     }
   }
 

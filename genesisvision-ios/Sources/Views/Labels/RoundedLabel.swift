@@ -47,7 +47,7 @@ class RoundedLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))
+        super.drawText(in: rect.inset(by: edgeInsets))
     }
     
     override var intrinsicContentSize: CGSize {

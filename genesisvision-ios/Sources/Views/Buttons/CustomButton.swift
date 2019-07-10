@@ -46,7 +46,7 @@ import UIKit.UIButton
     
     func refreshColor(color: UIColor) {
         let image = createImage(color: color)
-        setBackgroundImage(image, for: UIControlState.normal)
+        setBackgroundImage(image, for: UIControl.State.normal)
         clipsToBounds = true
     }
     
@@ -61,7 +61,7 @@ import UIKit.UIButton
 
 class DateRangeButton: UIButton {
     
-    override var buttonType: UIButtonType {
+    override var buttonType: UIButton.ButtonType {
         return .system
     }
     
@@ -106,7 +106,7 @@ class DateRangeButton: UIButton {
 
 class LevelFilterButton: UIButton {
     
-    override var buttonType: UIButtonType {
+    override var buttonType: UIButton.ButtonType {
         return .system
     }
     
@@ -222,8 +222,8 @@ class ActionButton: UIButton {
             
             let spacing: CGFloat = semanticContentAttribute == .forceRightToLeft ? -4.0 : 4.0
             
-            imageEdgeInsets = UIEdgeInsetsMake(0, -spacing, 0, spacing)
-            titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, -spacing)
+            imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -spacing, bottom: 0, right: spacing)
+            titleEdgeInsets = UIEdgeInsets.init(top: 0, left: spacing, bottom: 0, right: -spacing)
             contentEdgeInsets = UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20)
         }
         
@@ -290,8 +290,8 @@ class StatusButton: UIButton {
             spacing = semanticContentAttribute == .forceRightToLeft ? -4.0 : 4.0
         }
         
-        imageEdgeInsets = UIEdgeInsetsMake(0, -spacing, 0, spacing)
-        titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, -spacing)
+        imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -spacing, bottom: 0, right: spacing)
+        titleEdgeInsets = UIEdgeInsets.init(top: 0, left: spacing, bottom: 0, right: -spacing)
         contentEdgeInsets = contentEdge
         
         roundCorners()

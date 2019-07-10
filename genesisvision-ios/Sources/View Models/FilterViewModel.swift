@@ -68,11 +68,11 @@ final class FilterViewModel {
         self.filterType = filterType
         switch filterType {
         case .programs:
-            rows = [.levels, .currency, .sort, .tags, .dateRange]
+            rows = [.levels, .currency, .sort, .dateRange, .tags]
+        case .funds:
+            rows = [.sort, .dateRange, .tags]
         case .dashboardFunds, .dashboardPrograms:
             rows = [.sort, .dateRange, .onlyActive]
-        default:
-            rows = [.sort, .dateRange]
         }
         
         self.router = router
@@ -245,8 +245,7 @@ final class FilterViewModel {
     }
     
     private func setupTagsManager(_ filterModel: FilterModel) {
-        let tagsManager = TagsManager()
-        tagsDelegateManager = TagsDelegateManager(tagsManager)
+        tagsDelegateManager = TagsDelegateManager(filterType)
         tagsDelegateManager?.delegate = self
         tagsDelegateManager?.manager?.selectedIdxs = filterModel.tagsModel.selectedIdxs
     }
@@ -320,7 +319,7 @@ final class FilterViewModel {
 
 extension FilterViewModel: LevelsFilterViewProtocol {
     func applyButtonDidPress() {
-        let index = rows.index { $0 == .levels }
+        let index = rows.firstIndex { $0 == .levels }
         guard let idx = index else { return }
         
         viewModels[idx].detail = levelsFilterView?.getSelectedLevels()
@@ -343,7 +342,7 @@ extension FilterViewModel: LevelsFilterViewProtocol {
         if let text = self.levelsFilterView?.minTextField.text, let min = Int(text) {
             minValue = min
         }
-        let selectedIndex = values.index{ $0 == "\(minValue)" } ?? 0
+        let selectedIndex = values.firstIndex{ $0 == "\(minValue)" } ?? 0
         
         let pickerViewValues: [[String]] = [values.map { $0 }]
         
@@ -382,7 +381,7 @@ extension FilterViewModel: LevelsFilterViewProtocol {
         if let text = self.levelsFilterView?.maxTextField.text, let max = Int(text) {
             maxValue = max
         }
-        let selectedIndex = values.index{ $0 == "\(maxValue)" } ?? 0
+        let selectedIndex = values.firstIndex{ $0 == "\(maxValue)" } ?? 0
         
         let pickerViewValues: [[String]] = [values.map { $0 }]
         let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: selectedIndex)
@@ -398,7 +397,7 @@ extension FilterViewModel: LevelsFilterViewProtocol {
 
 extension FilterViewModel: FilterCurrencyDelegateManagerProtocol {
     func didSelectFilterCurrency(at indexPath: IndexPath) {
-        let index = rows.index { $0 == .currency }
+        let index = rows.firstIndex { $0 == .currency }
         guard let idx = index else { return }
         
         if let detail =
@@ -412,7 +411,7 @@ extension FilterViewModel: FilterCurrencyDelegateManagerProtocol {
 
 extension FilterViewModel: SortingDelegate {
     func didSelectSorting() {
-        let index = rows.index { $0 == .sort }
+        let index = rows.firstIndex { $0 == .sort }
         guard let idx = index else { return }
         
         if let manager = sortingDelegateManager?.manager {
@@ -429,7 +428,7 @@ extension FilterViewModel: SortingDelegate {
 
 extension FilterViewModel: TagsDelegate {
     func didSelectTag() {
-        let index = rows.index { $0 == .tags }
+        let index = rows.firstIndex { $0 == .tags }
         guard let idx = index else { return }
         
         if let manager = tagsDelegateManager?.manager {
@@ -483,7 +482,7 @@ extension FilterViewModel: DateRangeViewProtocol {
     }
     
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?) {
-        let index = rows.index { $0 == .dateRange }
+        let index = rows.firstIndex { $0 == .dateRange }
         guard let idx = index else { return }
         
         if let selectedDate = getSelectedDate() {

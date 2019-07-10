@@ -139,7 +139,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         setupUI()
     }
@@ -147,12 +147,12 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .twoFactorChange, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     func setupSecurity() {
@@ -353,12 +353,12 @@ extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let fieldType = viewModel.rowType(at: indexPath) else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
         switch fieldType {
         case .profile:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         case .biometricID:
             return viewModel.enableBiometricCell ? 60.0 : 0.0
         default:

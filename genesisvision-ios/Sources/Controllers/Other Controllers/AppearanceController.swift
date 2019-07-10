@@ -134,11 +134,11 @@ struct AppearanceController {
     static func setupNavigationBar(with type: NavBarType = .gray) {
         let colors = UIColor.NavBar.colorScheme(with: type)
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18)]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: colors.textColor,
+                                                            NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 18)]
         
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colors.textColor]
         }
         
         UINavigationBar.appearance().tintColor = colors.textColor
@@ -146,17 +146,17 @@ struct AppearanceController {
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
         
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .focused)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 14)], for: .highlighted)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 14)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 14)], for: .focused)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 14)], for: .highlighted)
     }
     
     // TabBar
     private static func setupTabBar() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.unselected,
-                                                          NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.TabBar.tint,
-                                                          NSAttributedStringKey.font: UIFont.getFont(.bold, size: 8)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.TabBar.unselected,
+                                                          NSAttributedString.Key.font: UIFont.getFont(.bold, size: 8)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.TabBar.tint,
+                                                          NSAttributedString.Key.font: UIFont.getFont(.bold, size: 8)], for: .selected)
 
         UITabBar.appearance().tintColor = UIColor.TabBar.tint
         UITabBar.appearance().backgroundColor = UIColor.TabBar.bg

@@ -220,19 +220,19 @@ extension ListViewModelProtocol {
     func model(at assetId: String) -> CellViewAnyModel? {
         switch assetType {
         case .program:
-            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .signal:
-            if let viewModels = viewModels as? [SignalTableViewCellViewModel], let i = viewModels.index(where: { $0.signal.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [SignalTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.signal.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .fund:
-            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.index(where: { $0.asset.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .manager:
-            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.index(where: { $0.manager.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.manager.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         }

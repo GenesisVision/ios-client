@@ -212,7 +212,7 @@ extension DashboardFundListViewModel {
     }
     
     func model(at fundId: String) -> CellViewAnyModel? {
-        if let i = allViewModels.index(where: { $0.fund.id?.uuidString == fundId }) {
+        if let i = allViewModels.firstIndex(where: { $0.fund.id?.uuidString == fundId }) {
             return allViewModels[i]
         }
         

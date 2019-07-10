@@ -11,6 +11,12 @@ import UIKit
 class TagTableViewCell: UITableViewCell {
     
     // MARK: - Variables
+    @IBOutlet weak var logoImageView: UIImageView! {
+        didSet {
+            logoImageView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.isHidden = true
@@ -35,9 +41,29 @@ class TagTableViewCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func configure(tag: ProgramTag? = nil, selected: Bool) {
+    func configure(_ selected: Bool, tag: ProgramTag? = nil) {
+        logoImageView.isHidden = true
         
         if let title = tag?.name {
+            titleLabel.isHidden = false
+            titleLabel.text = title
+        }
+        
+        selectedImageView.image = selected ? #imageLiteral(resourceName: "img_radio_selected_icon") : #imageLiteral(resourceName: "img_radio_unselected_icon")
+    }
+    
+    func configure(_ selected: Bool, asset: PlatformAsset? = nil) {
+        if let logo = asset?.icon, let fileUrl = getFileURL(fileName: logo) {
+            logoImageView.isHidden = false
+            
+            let placeholder = UIImage.fundPlaceholder
+            logoImageView.image = placeholder
+            logoImageView.kf.indicatorType = .activity
+            logoImageView.kf.setImage(with: fileUrl, placeholder: placeholder)
+            logoImageView.backgroundColor = .clear
+        }
+        
+        if let title = asset?.asset {
             titleLabel.isHidden = false
             titleLabel.text = title
         }

@@ -35,14 +35,14 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     
     var placeholderColor: UIColor? {
         didSet {
-            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor: placeholderColor ?? UIColor.TextField.placeholder])
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor ?? UIColor.TextField.placeholder])
         }
     }
     
     func setBottomLine(borderColor: UIColor? = UIColor.TextField.line) {
         layoutIfNeeded()
         
-        borderStyle = UITextBorderStyle.none
+        borderStyle = UITextField.BorderStyle.none
         backgroundColor = UIColor.clear
         
         borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - bottomlineHeight, width: Double(self.frame.width), height: bottomlineHeight)
@@ -89,7 +89,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
             return
         }
         
-        leftViewMode = UITextFieldViewMode.always
+        leftViewMode = UITextField.ViewMode.always
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 16.0, height: 16.0))
         imageView.image = image
         imageView.contentMode = .center
@@ -114,15 +114,15 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
 
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     
     override func layoutSubviews() {

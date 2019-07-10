@@ -62,14 +62,14 @@ class CircularProgressView: UIView {
     }()
 
     private func drawBackgroundLayer() {
-        backgroundLayer.lineCap = kCALineCapRound
+        backgroundLayer.lineCap = CAShapeLayerLineCap.round
         backgroundLayer.lineWidth = lineWidth
         backgroundLayer.fillColor = nil
         self.layer.addSublayer(backgroundLayer)
     }
 
     private func drawForegroundLayer() {
-        foregroundLayer.lineCap = kCALineCapRound
+        foregroundLayer.lineCap = CAShapeLayerLineCap.round
         foregroundLayer.lineWidth = lineWidth
         foregroundLayer.fillColor = nil
         foregroundLayer.strokeEnd = 0.0

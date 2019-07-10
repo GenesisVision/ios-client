@@ -61,7 +61,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.returnKeyType = .done
         searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.setImage(#imageLiteral(resourceName: "img_search_icon"), for: UISearchBarIcon.search, state: .normal)
+        searchController.searchBar.setImage(#imageLiteral(resourceName: "img_search_icon"), for: UISearchBar.Icon.search, state: .normal)
         searchController.searchBar.isTranslucent = true
         searchController.searchBar.searchBarStyle = .minimal
         

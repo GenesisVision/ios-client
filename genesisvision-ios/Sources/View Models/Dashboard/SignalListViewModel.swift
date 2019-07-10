@@ -235,7 +235,7 @@ extension SignalListViewModel {
     }
     
     func model(at assetId: String) -> CellViewAnyModel? {
-        if let i = allViewModels.index(where: { $0.signal.id?.uuidString == assetId }) {
+        if let i = allViewModels.firstIndex(where: { $0.signal.id?.uuidString == assetId }) {
             return allViewModels[i]
         }
         

@@ -47,7 +47,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     private func setupViews() {
         tableView.separatorStyle = .none
         
-        fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
         fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
         fetchMoreActivityIndicator.color = UIColor.primary
         fetchMoreActivityIndicator.startAnimating()
@@ -136,8 +136,8 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = noDataTitle ?? ""
         
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Font.nodata,
-                          NSAttributedStringKey.font : UIFont.getFont(.regular, size: 14)]
+        let attributes = [NSAttributedString.Key.foregroundColor : UIColor.Font.nodata,
+                          NSAttributedString.Key.font : UIFont.getFont(.regular, size: 14)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -167,9 +167,9 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
         return true
     }
     
-    func buttonBackgroundImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> UIImage! {
-        let capInsets = UIEdgeInsetsMake(22.0, 22.0, 22.0, 22.0)
-        let rectInsets = UIEdgeInsetsMake(0, -20, 0.0, -20)
+    func buttonBackgroundImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> UIImage! {
+        let capInsets = UIEdgeInsets.init(top: 22.0, left: 22.0, bottom: 22.0, right: 22.0)
+        let rectInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0.0, right: -20)
         var image: UIImage = #imageLiteral(resourceName: "img_button")
         
         if state == .highlighted {
@@ -179,10 +179,10 @@ extension BaseViewControllerWithTableView: DZNEmptyDataSetDelegate, DZNEmptyData
         return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch).withAlignmentRectInsets(rectInsets)
     }
     
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
         let text = noDataButtonTitle ?? ""
-        let attributes = [NSAttributedStringKey.foregroundColor : UIColor.Cell.title,
-                          NSAttributedStringKey.font : UIFont.getFont(.regular, size: 14)]
+        let attributes = [NSAttributedString.Key.foregroundColor : UIColor.Cell.title,
+                          NSAttributedString.Key.font : UIFont.getFont(.regular, size: 14)]
         
         return NSAttributedString(string: text, attributes: attributes)
     }

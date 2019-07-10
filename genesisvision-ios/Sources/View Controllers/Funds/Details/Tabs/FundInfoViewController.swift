@@ -35,7 +35,7 @@ class FundInfoViewController: BaseViewControllerWithTableView {
         setup()
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         setupNavigationBar()
     }
     

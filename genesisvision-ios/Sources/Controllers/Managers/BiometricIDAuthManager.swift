@@ -75,6 +75,8 @@ class BiometricIDAuthManager {
                 return .touchID
             case .faceID:
                 return .faceID
+            @unknown default:
+                fatalError()
             }
         } else {
             return canEvaluatePolicy() ? .touchID : .none

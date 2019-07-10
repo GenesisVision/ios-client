@@ -57,10 +57,14 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
     }
     
     private func showCommissions(_ orderModel: OrderSignalModel) {
-        guard let fees = orderModel.totalCommissionByType else { return }
-        let feesHeight = 50 * fees.count
+        var feesHeight = 0.0
+        
+        if let fees = orderModel.totalCommissionByType, !fees.isEmpty {
+            feesHeight = Double((fees.count + 1) * 40)
+        }
+        
         bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = CGFloat(150 + feesHeight)
+        bottomSheetController.initializeHeight = CGFloat(150.0 + feesHeight)
         bottomSheetController.lineViewIsHidden = true
         
         let view = CommissionsView.viewFromNib()

@@ -13,12 +13,12 @@ func getFileURL(fileName: String) -> URL? {
     return URL(string: ApiKeys.filePath + fileName)
 }
 
-func impactFeedback(style: UIImpactFeedbackStyle = .light) {
+func impactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.impactOccurred()
 }
 
-func notificationFeedback(style: UINotificationFeedbackType = .success) {
+func notificationFeedback(style: UINotificationFeedbackGenerator.FeedbackType = .success) {
     let generator = UINotificationFeedbackGenerator()
     generator.notificationOccurred(style)
 }
@@ -87,7 +87,7 @@ func addLine(to view: UIView, start p0: CGPoint, end p1: CGPoint, style: LineSty
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.lineWidth = 1.0
     shapeLayer.name = Keys.addedLineLayer
-    shapeLayer.lineJoin = kCALineJoinRound
+    shapeLayer.lineJoin = CAShapeLayerLineJoin.round
     
     if style == .dashed {
         shapeLayer.lineDashPattern = [2, 6]

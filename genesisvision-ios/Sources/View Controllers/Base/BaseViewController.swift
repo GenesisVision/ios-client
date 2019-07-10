@@ -302,7 +302,7 @@ extension BaseViewController: UIViewControllerWithPullToRefresh {
     
     func setupPullToRefresh(title: String? = nil, scrollView: UIScrollView) {
         let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        let attributes = [NSAttributedString.Key.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()
         if let title = title {
@@ -475,8 +475,8 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
         mailComposerVC.navigationBar.isTranslucent = false
         mailComposerVC.navigationBar.barTintColor = colors.backgroundColor
         mailComposerVC.navigationBar.tintColor = colors.tintColor
-        mailComposerVC.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: colors.textColor,
-                                                            NSAttributedStringKey.font: UIFont.getFont(.bold, size: 18)]
+        mailComposerVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colors.textColor,
+                                                            NSAttributedString.Key.font: UIFont.getFont(.bold, size: 18)]
         return mailComposerVC
     }
     

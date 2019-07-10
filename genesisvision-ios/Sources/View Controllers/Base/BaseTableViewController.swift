@@ -70,7 +70,7 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     func setupViews() {
         tableView.separatorStyle = .none
         
-        fetchMoreActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
         fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
         fetchMoreActivityIndicator.color = UIColor.primary
         fetchMoreActivityIndicator.startAnimating()
@@ -94,7 +94,7 @@ extension BaseTableViewController: UIViewControllerWithPullToRefresh {
     
     func setupPullToRefresh(title: String? = nil, scrollView: UIScrollView) {
         let tintColor = UIColor.primary
-        let attributes = [NSAttributedStringKey.foregroundColor : tintColor]
+        let attributes = [NSAttributedString.Key.foregroundColor : tintColor]
         
         refreshControl = UIRefreshControl()
         if let title = title {

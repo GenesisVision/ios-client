@@ -65,7 +65,7 @@ class DashboardViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        view.bringSubview(toFront: selectedChartAssetsView)
+        view.bringSubviewToFront(selectedChartAssetsView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

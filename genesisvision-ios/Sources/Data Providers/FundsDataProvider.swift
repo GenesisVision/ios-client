@@ -16,11 +16,11 @@ class FundsDataProvider: DataProvider {
         
         let sorting = filterModel?.sortingModel.selectedSorting as? FundsAPI.Sorting_v10FundsGet ?? FundsAPI.Sorting_v10FundsGet.byProfitDesc
         
+        let assets = filterModel?.tagsModel.selectedTags
         let mask = filterModel?.mask
         let isFavorite = filterModel?.isFavorite
         let facetId = filterModel?.facetId
         let managerId = filterModel?.managerId
-//        let chartPointsCount = filterModel?.chartPointsCount
         
         var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
         if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
@@ -29,7 +29,7 @@ class FundsDataProvider: DataProvider {
         
         let authorization = AuthManager.authorizedToken
 
-        FundsAPI.v10FundsGet(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: nil, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        FundsAPI.v10FundsGet(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, assets: assets, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: nil, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

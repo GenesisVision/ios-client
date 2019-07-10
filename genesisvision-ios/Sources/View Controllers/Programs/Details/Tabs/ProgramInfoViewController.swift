@@ -38,7 +38,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         super.viewWillDisappear(animated)
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         setupNavigationBar()
     }
     

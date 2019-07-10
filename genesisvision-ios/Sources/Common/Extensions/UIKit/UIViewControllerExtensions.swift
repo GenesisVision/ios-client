@@ -52,7 +52,7 @@ extension UIViewController {
         let alert = UIAlertController(title: String.Alerts.PrivacySettings.alertTitle, message: message, preferredStyle: .alert)
         alert.view.tintColor = UIColor.Cell.headerBg
         alert.addAction(UIAlertAction(title: String.Alerts.PrivacySettings.settingsButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
-            self?.openUrl(with: UIApplicationOpenSettingsURLString)
+            self?.openUrl(with: UIApplication.openSettingsURLString)
         }))
         alert.addAction(UIAlertAction(title: String.Alerts.cancelButtonText, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -110,7 +110,7 @@ extension UIViewController {
     func openUrl(with urlAddress: String) {
         if let url = URL(string: urlAddress), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 UIApplication.shared.openURL(url)
             }
@@ -243,4 +243,9 @@ extension UIViewController {
     func errorHandle(with errorMessageType: ErrorMessageType, hud: Bool = false) {
         
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

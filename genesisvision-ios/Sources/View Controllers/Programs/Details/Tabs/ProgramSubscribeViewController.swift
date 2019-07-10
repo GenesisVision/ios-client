@@ -292,7 +292,7 @@ extension ProgramSubscribeViewController: UITextFieldDelegate {
         return false
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         guard let newValue = textField.text?.doubleValue else { return }
         
         switch textField {

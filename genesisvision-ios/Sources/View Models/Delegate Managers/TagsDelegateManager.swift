@@ -12,40 +12,20 @@ protocol TagsDelegate: class {
     func didSelectTag()
 }
 
-class TagsManager: NSObject {
-    
-    var selectedIdxs: [Int] = []
-    
-    var values: [ProgramTag]?
-    
-    override init() {
-        super.init()
-        
-        setup()
-    }
-    
-    private func setup() {
-        PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
-            guard let tags = platformInfo?.enums?.program?.programTags else { return }
-            self?.values = tags
-        }
-    }
-    
-    // MARK: - Public methods
+protocol FilterTagsManager: class {
+    var selectedIdxs: [Int] { get set }
+
+    func isSelected(_ idx: Int) -> Bool
+    func getSelectedValues() -> String
+    func getSelectedTagValues() -> [String]
+    func changeTag(at index: Int)
+    func numberOfRowsInSection(_ section: Int) -> Int
+    func reset()
+}
+
+extension FilterTagsManager {
     func isSelected(_ idx: Int) -> Bool {
         return selectedIdxs.contains(idx)
-    }
-    
-    func getSelectedValues() -> String {
-        let result = selectedIdxs.compactMap { values?[$0].name ?? "" }
-
-        return result.joined(separator: ", ")
-    }
-    
-    func getSelectedTagValues() -> [String] {
-        let result = selectedIdxs.compactMap { values?[$0].name ?? "" }
-        
-        return result
     }
     
     func reset() {
@@ -61,21 +41,105 @@ class TagsManager: NSObject {
     }
 }
 
+class ProgramTagManager: NSObject, FilterTagsManager {
+    var values: [ProgramTag]?
+    var selectedIdxs: [Int] = []
+    
+    override init() {
+        super.init()
+        
+        setup()
+    }
+    
+    private func setup() {
+        PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
+            
+            guard let values = platformInfo?.enums?.program?.programTags else { return }
+            
+            self?.values = values
+        }
+    }
+    
+    // MARK: - Public methods
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        let count = values?.count
+        return count ?? 0
+    }
+    
+    func getSelectedValues() -> String {
+        let result = selectedIdxs.compactMap { values?[$0].name ?? "" }
+        
+        return result.joined(separator: ", ")
+    }
+    
+    func getSelectedTagValues() -> [String] {
+        let result = selectedIdxs.compactMap { values?[$0].name ?? "" }
+        
+        return result
+    }
+
+}
+
+class PlatformAssetManager: NSObject, FilterTagsManager {
+    var values: [PlatformAsset]?
+    var selectedIdxs: [Int] = []
+    
+    override init() {
+        super.init()
+        
+        setup()
+    }
+    
+    private func setup() {
+        PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
+            
+            guard let values = platformInfo?.enums?.fund?.assets else { return }
+            
+            self?.values = values
+        }
+    }
+    
+    // MARK: - Public methods
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        let count = values?.count
+        return count ?? 0
+    }
+    
+    func getSelectedValues() -> String {
+        let result = selectedIdxs.compactMap { values?[$0].name ?? "" }
+        
+        return result.joined(separator: ", ")
+    }
+    
+    func getSelectedTagValues() -> [String] {
+        let result = selectedIdxs.compactMap { values?[$0].asset ?? "" }
+        
+        return result
+    }
+}
+
 final class TagsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: TagsDelegate?
     
-    var manager: TagsManager?
+    var manager: FilterTagsManager?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [TagTableViewCellViewModel.self]
     }
     
     // MARK: - Init
-    init(_ manager: TagsManager) {
+    init(_ filterType: FilterType) {
         super.init()
         
-        self.manager = manager
+        switch filterType {
+        case .programs:
+            self.manager = ProgramTagManager()
+        case .funds:
+            self.manager = PlatformAssetManager()
+        default:
+            break
+        }
     }
     
     func reset() {
@@ -92,16 +156,21 @@ final class TagsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manager?.values?.count ?? 0
+        return manager?.numberOfRowsInSection(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagTableViewCell", for: indexPath) as? TagTableViewCell, let tag = manager?.values?[indexPath.row], let isSelected = manager?.isSelected(indexPath.row) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagTableViewCell", for: indexPath) as? TagTableViewCell, let isSelected = manager?.isSelected(indexPath.row) else {
             let cell = UITableViewCell()
             return cell
         }
         
-        cell.configure(tag: tag, selected: isSelected)
+        
+        if let manager = manager as? ProgramTagManager, let value = manager.values?[indexPath.row] {
+            cell.configure(isSelected, tag: value)
+        } else if let manager = manager as? PlatformAssetManager, let value = manager.values?[indexPath.row] {
+            cell.configure(isSelected, asset: value)
+        }
         
         return cell
     }

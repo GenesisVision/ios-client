@@ -19,34 +19,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81y-ua-NA4" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="252" height="40.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-8N-ZTx">
-                        <rect key="frame" x="276" y="16.5" width="24" height="24"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ptO-RG-RVk">
+                        <rect key="frame" x="16" y="8" width="288" height="40.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XzT-tw-wCK">
+                                <rect key="frame" x="0.0" y="8.5" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="VTR-Qk-xpc"/>
+                                    <constraint firstAttribute="width" secondItem="XzT-tw-wCK" secondAttribute="height" multiplier="1:1" id="aQx-Ua-2Gd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81y-ua-NA4" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="32" y="10" width="224" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-8N-ZTx">
+                                <rect key="frame" x="264" y="8.5" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="18B-ck-Lff"/>
+                                    <constraint firstAttribute="width" secondItem="Tgu-8N-ZTx" secondAttribute="height" multiplier="1:1" id="sxW-KD-21e"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="18B-ck-Lff"/>
-                            <constraint firstAttribute="width" secondItem="Tgu-8N-ZTx" secondAttribute="height" multiplier="1:1" id="sxW-KD-21e"/>
+                            <constraint firstItem="XzT-tw-wCK" firstAttribute="width" secondItem="XzT-tw-wCK" secondAttribute="height" multiplier="1:1" id="NZt-sl-lYE"/>
                         </constraints>
-                    </imageView>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="81y-ua-NA4" secondAttribute="bottom" constant="8" id="9RI-hB-bXf"/>
-                    <constraint firstItem="Tgu-8N-ZTx" firstAttribute="centerY" secondItem="81y-ua-NA4" secondAttribute="centerY" id="CBX-Ha-HqB"/>
-                    <constraint firstItem="81y-ua-NA4" firstAttribute="leading" secondItem="ovr-sH-oRe" secondAttribute="leadingMargin" id="Ezw-Mx-Zg4"/>
-                    <constraint firstItem="81y-ua-NA4" firstAttribute="top" secondItem="ovr-sH-oRe" secondAttribute="top" constant="8" id="Lyw-T6-zsA"/>
-                    <constraint firstItem="81y-ua-NA4" firstAttribute="centerY" secondItem="ovr-sH-oRe" secondAttribute="centerY" id="Ojk-sn-vFh"/>
-                    <constraint firstItem="Tgu-8N-ZTx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ovr-sH-oRe" secondAttribute="top" constant="14" id="YqX-kZ-86L"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Tgu-8N-ZTx" secondAttribute="bottom" constant="14" id="rb0-Y2-ncu"/>
-                    <constraint firstAttribute="trailing" secondItem="Tgu-8N-ZTx" secondAttribute="trailing" constant="20" id="v98-44-aFu"/>
-                    <constraint firstItem="Tgu-8N-ZTx" firstAttribute="leading" secondItem="81y-ua-NA4" secondAttribute="trailing" constant="8" id="vls-bw-rid"/>
+                    <constraint firstItem="ptO-RG-RVk" firstAttribute="top" secondItem="ovr-sH-oRe" secondAttribute="top" constant="8" id="EJZ-bp-3lt"/>
+                    <constraint firstAttribute="bottom" secondItem="ptO-RG-RVk" secondAttribute="bottom" constant="8" id="M1R-3k-m3Z"/>
+                    <constraint firstItem="ptO-RG-RVk" firstAttribute="leading" secondItem="ovr-sH-oRe" secondAttribute="leading" constant="16" id="UTL-hV-sVP"/>
+                    <constraint firstAttribute="trailing" secondItem="ptO-RG-RVk" secondAttribute="trailing" constant="16" id="eOu-ZN-maS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="QIW-25-2QF"/>
             <connections>
+                <outlet property="logoImageView" destination="XzT-tw-wCK" id="2lX-Ly-aJm"/>
                 <outlet property="selectedImageView" destination="Tgu-8N-ZTx" id="V3d-jO-Jpi"/>
                 <outlet property="titleLabel" destination="81y-ua-NA4" id="Uc1-ok-Kzg"/>
             </connections>

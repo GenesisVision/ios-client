@@ -17,7 +17,7 @@ protocol ImagePickerPresentable: class {
 
 extension ImagePickerPresentable where Self: UIViewController {
     
-    fileprivate func pickerControllerActionFor(for type: UIImagePickerControllerSourceType, title: String) -> UIAlertAction? {
+    fileprivate func pickerControllerActionFor(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
         guard UIImagePickerController.isSourceTypeAvailable(type) else {
             return nil
         }
@@ -31,7 +31,7 @@ extension ImagePickerPresentable where Self: UIViewController {
             pickerController.navigationBar.barStyle = .black
             pickerController.navigationBar.barTintColor = UIColor.BaseView.bg
             pickerController.navigationBar.tintColor = UIColor.Cell.title
-            pickerController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Cell.title, NSAttributedStringKey.font: UIFont.getFont(.semibold, size: 18.0)]
+            pickerController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.Cell.title, NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 18.0)]
             
             self.present(pickerController, animated: true)
         }
@@ -94,15 +94,18 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
         self.picker(picker: picker, pickedImage: nil, pickedImageURL: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         var data: Data?
         let fileName = "avatar.jpg"
         var selectedImage: UIImage?
         
         if #available(iOS 11.0, *) {
-            if let refURL = info[UIImagePickerControllerImageURL] as! URL? {
-                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-                    data = UIImageJPEGRepresentation(image, 0.5)
+            if let refURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! URL? {
+                if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
+                    data = image.jpegData(compressionQuality: 0.5)
                     selectedImage = image
                 } else {
                     do {
@@ -115,14 +118,14 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
                         selectedImage = UIImage(data: data)
                     }
                 }
-            } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-                data = UIImageJPEGRepresentation(image, 0.5)
+            } else if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
+                data = image.jpegData(compressionQuality: 0.5)
                 selectedImage = image
             }
         } else {
-            if let refURL = info[UIImagePickerControllerReferenceURL] as! URL? {
-                if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-                    data = UIImageJPEGRepresentation(image, 0.5)
+            if let refURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as! URL? {
+                if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
+                    data = image.jpegData(compressionQuality: 0.5)
                     selectedImage = image
                 } else {
                     do {
@@ -135,8 +138,8 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
                         selectedImage = UIImage(data: data)
                     }
                 }
-            } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-                data = UIImageJPEGRepresentation(image, 0.5)
+            } else if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
+                data = image.jpegData(compressionQuality: 0.5)
                 selectedImage = image
             }
         }
@@ -155,4 +158,14 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
 
 extension ImagePickerHelper: UINavigationControllerDelegate {
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

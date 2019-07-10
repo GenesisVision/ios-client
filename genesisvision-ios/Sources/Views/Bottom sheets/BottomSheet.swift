@@ -274,8 +274,8 @@ open class BottomSheet {
                 btn.isSelected = buttonSelected
                 
                 let spacing = CGFloat(4)
-                btn.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing, 0, spacing)
-                btn.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, -spacing)
+                btn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -spacing, bottom: 0, right: spacing)
+                btn.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: spacing, bottom: 0, right: -spacing)
                 
                 btn.setTitle(buttonSelected ? buttonSelectedTitle : buttonTitle, for: .normal)
                 btn.tintColor = tintColor
@@ -749,10 +749,10 @@ private extension BottomSheetController {
         guard isNeedLayout else { return }
         isNeedLayout = false
         if let bar = bar {
-            containerView.bringSubview(toFront: bar)
+            containerView.bringSubviewToFront(bar)
         }
 
-        containerView.bringSubview(toFront: lineView)
+        containerView.bringSubviewToFront(lineView)
         
         configureGesture()
         scrollView?.setContentOffset(CGPoint(x: 0, y: -(scrollView?.scrollIndicatorInsets.top ?? 0)), animated: false)

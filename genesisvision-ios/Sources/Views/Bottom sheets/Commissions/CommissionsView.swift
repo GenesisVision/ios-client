@@ -17,12 +17,10 @@ class CommissionsView: UIView {
         }
     }
     
-    @IBOutlet weak var commissionsStackView: UIStackView!
-    
-    @IBOutlet weak var firstTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var commissionsStackView: UIStackView! 
+    @IBOutlet weak var totalCommissionsStackView: UIStackView! {
         didSet {
-            firstTitleLabel.font = UIFont.getFont(.regular, size: 12.0)
-            firstTitleLabel.text = "Trading commission"
+            totalCommissionsStackView.isHidden = true
         }
     }
     
@@ -34,12 +32,12 @@ class CommissionsView: UIView {
     }
     @IBOutlet weak var totalValueLabel: TitleLabel! {
         didSet {
-            totalValueLabel.font = UIFont.getFont(.semibold, size: 14.0)
+            totalValueLabel.font = UIFont.getFont(.semibold, size: 16.0)
         }
     }
     @IBOutlet weak var totalCurrencyLabel: SubtitleLabel! {
         didSet {
-            totalCurrencyLabel.font = UIFont.getFont(.regular, size: 14.0)
+            totalCurrencyLabel.font = UIFont.getFont(.regular, size: 16.0)
         }
     }
     
@@ -53,17 +51,14 @@ class CommissionsView: UIView {
     // MARK: - Public Methods
     func configure(_ orderModel: OrderSignalModel) {
         titleLabel.text = "Commissions"
-        if let totalCommission = orderModel.totalCommission, let currency = orderModel.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            totalValueLabel.text = totalCommission.rounded(withType: currencyType).toString()
-            totalCurrencyLabel.text = currencyType.rawValue
+        
+        if let amount = orderModel.originalCommission, let currency = orderModel.originalCommissionCurrency, let currencyType = CurrencyType(rawValue: currency) {
+            addStackViews(commisionTitle: "Trading fee", amount: amount, currencyType: currencyType)
         }
         
-        if let totalCommissionByType = orderModel.totalCommissionByType {
+        if let totalCommissionByType = orderModel.totalCommissionByType, !totalCommissionByType.isEmpty {
             totalCommissionByType.forEach { (commission) in
                 guard let currency = commission.currency, let currencyType = CurrencyType(rawValue: currency.rawValue), let type = commission.type, let amount = commission.amount else { return }
-                
-                let commisionTitleLabel = SubtitleLabel()
-                commisionTitleLabel.font = UIFont.getFont(.regular, size: 16.0)
                 
                 var commisionTitle = ""
                 switch type {
@@ -95,34 +90,49 @@ class CommissionsView: UIView {
                     break
                 }
                 
-                commisionTitleLabel.text = commisionTitle
-                let valueLabel = TitleLabel()
-                valueLabel.font = UIFont.getFont(.semibold, size: 16.0)
-                valueLabel.text = amount.rounded(withType: currencyType).toString()
-                let currencyLabel = SubtitleLabel()
-                currencyLabel.font = UIFont.getFont(.regular, size: 16.0)
-                currencyLabel.text = currencyType.rawValue
-                
-                let hStack = UIStackView(arrangedSubviews: [valueLabel, currencyLabel])
-                hStack.axis = .horizontal
-                hStack.spacing = 8.0
-                hStack.alignment = .fill
-                hStack.distribution = .fillProportionally
-                
-                let vStack = UIStackView(arrangedSubviews: [hStack])
-                vStack.axis = .vertical
-                vStack.spacing = 0.0
-                vStack.alignment = .leading
-                vStack.distribution = .fill
-                
-                let commissionStack = UIStackView(arrangedSubviews: [commisionTitleLabel, vStack])
-                commissionStack.axis = .horizontal
-                commissionStack.spacing = 8.0
-                commissionStack.alignment = .center
-                commissionStack.distribution = .equalSpacing
+                addStackViews(commisionTitle: commisionTitle, amount: amount, currencyType: currencyType)
+            }
             
-                commissionsStackView.addArrangedSubview(commissionStack)
+            if let totalCommission = orderModel.totalCommission, let currency = orderModel.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+                totalCommissionsStackView.isHidden = false
+                totalValueLabel.text = totalCommission.rounded(withType: currencyType).toString()
+                totalCurrencyLabel.text = currencyType.rawValue
             }
         }
     }
+    
+    
+    func addStackViews(commisionTitle: String, amount: Double, currencyType: CurrencyType) {
+        let commisionTitleLabel = SubtitleLabel()
+        commisionTitleLabel.font = UIFont.getFont(.regular, size: 16.0)
+        
+        commisionTitleLabel.text = commisionTitle
+        let valueLabel = TitleLabel()
+        valueLabel.font = UIFont.getFont(.semibold, size: 16.0)
+        valueLabel.text = amount.rounded(withType: currencyType).toString()
+        let currencyLabel = SubtitleLabel()
+        currencyLabel.font = UIFont.getFont(.regular, size: 16.0)
+        currencyLabel.text = currencyType.rawValue
+        
+        let hStack = UIStackView(arrangedSubviews: [valueLabel, currencyLabel])
+        hStack.axis = .horizontal
+        hStack.spacing = 8.0
+        hStack.alignment = .fill
+        hStack.distribution = .fillProportionally
+        
+        let vStack = UIStackView(arrangedSubviews: [hStack])
+        vStack.axis = .vertical
+        vStack.spacing = 0.0
+        vStack.alignment = .leading
+        vStack.distribution = .fill
+        
+        let commissionStack = UIStackView(arrangedSubviews: [commisionTitleLabel, vStack])
+        commissionStack.axis = .horizontal
+        commissionStack.spacing = 8.0
+        commissionStack.alignment = .center
+        commissionStack.distribution = .equalSpacing
+        
+        commissionsStackView.addArrangedSubview(commissionStack)
+    }
+
 }

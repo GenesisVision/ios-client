@@ -142,7 +142,7 @@ final class ProfileViewModel {
     }
 
     func update(birthdate: Date?) {
-        if let idx = editableFields.index(where: { $0.type == .birthday }) {
+        if let idx = editableFields.firstIndex(where: { $0.type == .birthday }) {
             guard let birthdate = birthdate else {
                 editableFields[idx].text = ""
                 return
@@ -154,7 +154,7 @@ final class ProfileViewModel {
     }
     
     func update(gender: Bool?) {
-        if let idx = editableFields.index(where: { $0.type == .gender }) {
+        if let idx = editableFields.firstIndex(where: { $0.type == .gender }) {
             guard let gender = gender else {
                 editableFields[idx].text = ""
                 return

@@ -40,9 +40,9 @@ class ProgramDetailFullChartViewController: BaseViewController {
             segmentedControl.underlineSelected = true
             segmentedControl.height = 21
             
-            let textAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.Font.light]
-            let textHighlightAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.primary]
-            let textSelectAttributes = [NSAttributedStringKey.font: UIFont.getFont(.regular, size: 16), NSAttributedStringKey.foregroundColor: UIColor.primary]
+            let textAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.Font.light]
+            let textHighlightAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.primary]
+            let textSelectAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.primary]
             
             segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
             segmentedControl.setTitleTextAttributes(textHighlightAttributes, for: .highlighted)

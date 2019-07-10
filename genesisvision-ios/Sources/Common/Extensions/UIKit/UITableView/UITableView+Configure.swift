@@ -25,7 +25,7 @@ struct TableViewConfiguration {
         bottomInset: CGFloat? = 0.0,
         bottomIndicatorInset: CGFloat? = nil,
         estimatedRowHeight: CGFloat = 0,
-        rowHeight: CGFloat = UITableViewAutomaticDimension,
+        rowHeight: CGFloat = UITableView.automaticDimension,
         backgroundColor: UIColor = UIColor.BaseView.bg,
         separatorInsetLeft: CGFloat = 16.0,
         separatorInsetRight: CGFloat = 16.0,
@@ -52,7 +52,7 @@ private var defaultConfiguration: TableViewConfiguration {
         topInset: 0,
         bottomInset: 0,
         estimatedRowHeight: 140,
-        rowHeight: UITableViewAutomaticDimension,
+        rowHeight: UITableView.automaticDimension,
         separatorInsetLeft: 16.0,
         separatorInsetRight: 16.0
     )
